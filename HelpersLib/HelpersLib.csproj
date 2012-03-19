@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HelpersLib</RootNamespace>
+    <AssemblyName>HelpersLib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiKeys\ApiKeysConfig.cs" />
+    <Compile Include="ApiKeys\ApiKeysUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApiKeys\ApiKeysUI.Designer.cs">
+      <DependentUpon>ApiKeysUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApiKeys\ZKeys.cs" />
+    <Compile Include="CaptureHelpers.cs" />
+    <Compile Include="CLI\CLICommand.cs" />
+    <Compile Include="CLI\CLICommandAction.cs" />
+    <Compile Include="CLI\CLIHelper.cs" />
+    <Compile Include="CLI\CLIManager.cs" />
+    <Compile Include="CLI\CLIManagerRegex.cs" />
+    <Compile Include="CLI\CLIParser.cs" />
+    <Compile Include="ComponentModelStrings.cs" />
+    <Compile Include="Cryptography\AESEncryption.cs" />
+    <Compile Include="Cryptography\CryptInfo.cs" />
+    <Compile Include="Cryptography\CryptKeys.cs" />
+    <Compile Include="Cryptography\CryptMethod.cs" />
+    <Compile Include="Extensions\GraphicsExtensions.cs" />
+    <Compile Include="Extensions\GraphicsPathExtensions.cs" />
+    <Compile Include="ImageQuantization\GrayscaleQuantizer.cs" />
+    <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
+    <Compile Include="ImageQuantization\PaletteQuantizer.cs" />
+    <Compile Include="ImageQuantization\Quantizer.cs" />
+    <Compile Include="Translator.cs" />
+    <Compile Include="TranslatorHelper.cs" />
+    <Compile Include="UpdateChecker\DownloaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateChecker\DownloaderForm.Designer.cs">
+      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="UserControls\BlackStyle\MyButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\BlackStyle\MyCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\BlackStyle\MyLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\BlackStyle\MyProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Wizards\ClipboardContentViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\ClipboardContentViewer.Designer.cs">
+      <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CloneManager.cs" />
+    <Compile Include="Wizards\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyInputForm.Designer.cs">
+      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyManager.cs" />
+    <Compile Include="Hotkey\HotkeyManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyManagerControl.Designer.cs">
+      <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeySelectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeySelectionControl.Designer.cs">
+      <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeySetting.cs" />
+    <Compile Include="IClone.cs" />
+    <Compile Include="Hotkey\KeyInfo.cs" />
+    <Compile Include="Native\NativeEnums.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\NativeMethods_Helpers.cs" />
+    <Compile Include="Native\NativeStructs.cs" />
+    <Compile Include="Printer\PrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Printer\PrintForm.Designer.cs">
+      <DependentUpon>PrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Printer\PrintHelper.cs" />
+    <Compile Include="Printer\PrintSettings.cs" />
+    <Compile Include="Printer\PrintTextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Printer\PrintTextForm.Designer.cs">
+      <DependentUpon>PrintTextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Printer\PrintTextHelper.cs" />
+    <Compile Include="RegistryHelper.cs" />
+    <Compile Include="SettingsHelper.cs" />
+    <Compile Include="SingleInstanceApplication\ApplicationInstanceManager.cs" />
+    <Compile Include="SingleInstanceApplication\InstanceProxy.cs" />
+    <Compile Include="DebugHelper.cs" />
+    <Compile Include="UpdateChecker\UpdateCheckerLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpdateChecker\UpdateCheckerLabel.Designer.cs">
+      <DependentUpon>UpdateCheckerLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ToolStripRadioButtonMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\ImageViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\MyListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="FastDateTime.cs" />
+    <Compile Include="Hotkey\HotkeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Hotkey\HotkeyInfo.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="NameParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\XMLExtensions.cs" />
+    <Compile Include="UserControls\MyPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MyPictureBox.Designer.cs">
+      <DependentUpon>MyPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateChecker\UpdateChecker.cs" />
+    <Compile Include="UpdateChecker\UpdateInfo.cs" />
+    <Compile Include="UpdateChecker\UpdaterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateChecker\UpdaterForm.designer.cs">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\OptionsCoreUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\OptionsCoreUI.Designer.cs">
+      <DependentUpon>OptionsCoreUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SerializationHelper.cs" />
+    <Compile Include="XMLSettingsBase.cs" />
+    <Compile Include="ZLinks.cs" />
+    <EmbeddedResource Include="ApiKeys\ApiKeysUI.resx">
+      <DependentUpon>ApiKeysUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
+      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ClipboardContentViewer.resx">
+      <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeyInputForm.resx">
+      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeyManagerControl.resx">
+      <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeySelectionControl.resx">
+      <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Printer\PrintForm.resx">
+      <DependentUpon>PrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Printer\PrintTextForm.resx">
+      <DependentUpon>PrintTextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UpdateChecker\UpdateCheckerLabel.resx">
+      <DependentUpon>UpdateCheckerLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MyPictureBox.resx">
+      <DependentUpon>MyPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateChecker\UpdaterForm.resx">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\OptionsCoreUI.resx">
+      <DependentUpon>OptionsCoreUI.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\explorer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
