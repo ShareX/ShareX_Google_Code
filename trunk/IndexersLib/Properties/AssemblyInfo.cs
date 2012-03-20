@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZSS.IndexersLib")]
-[assembly: AssemblyDescription("Directory Indexer for FTP Servers")]
+[assembly: AssemblyTitle("IndexersLib")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ZSS.IndexersLib")]
-[assembly: AssemblyCopyright("Copyright © McoreD 2005-2009")]
+[assembly: AssemblyCompany("ShareX Developers")]
+[assembly: AssemblyProduct("IndexersLib")]
+[assembly: AssemblyCopyright("Copyright (C) 2012 ShareX Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

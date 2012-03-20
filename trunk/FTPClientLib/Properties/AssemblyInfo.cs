@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZScreen FTP Client")]
+[assembly: AssemblyTitle("FTPClientLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ZScreen FTP Client")]
-[assembly: AssemblyCopyright("Copyright © 2006 - 2012 ZScreen Developers")]
+[assembly: AssemblyCompany("ShareX Developers")]
+[assembly: AssemblyProduct("FTPClientLib")]
+[assembly: AssemblyCopyright("Copyright (C) 2012 ShareX Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Licenses\ShareXLicense.txt" />
-    <Content Include="Licenses\ZScreenLicense.txt" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,9 +88,6 @@
     <Compile Include="RegionAreaManager.cs" />
     <Compile Include="StringLineReader.cs" />
     <Compile Include="TextInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Licenses\ZUploaderLicense.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">

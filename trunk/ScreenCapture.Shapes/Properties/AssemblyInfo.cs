@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ShareX Developers")]
 [assembly: AssemblyProduct("ScreenCapture.Shapes")]
-[assembly: AssemblyCopyright("Copyright (C) 2008-2012 ShareX Developers")]
+[assembly: AssemblyCopyright("Copyright (C) 2012 ShareX Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
