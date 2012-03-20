@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("UploadersLib")]
 [assembly: AssemblyDescription("Dynamic Link Library for image/text/file hosting services")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ZScreen")]
+[assembly: AssemblyCompany("ShareX Developers")]
 [assembly: AssemblyProduct("UploadersLib")]
-[assembly: AssemblyCopyright("Copyright (C) 2008-2012 ShareX Developers")]
+[assembly: AssemblyCopyright("Copyright (C) 2012 ShareX Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

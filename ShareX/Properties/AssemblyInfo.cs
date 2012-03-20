@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ShareX")]
-[assembly: AssemblyDescription("A program that allows you to upload images, texts or files")]
+[assembly: AssemblyDescription("A program that allows to you take screenshots and share any file type")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ShareX Developers")]
 [assembly: AssemblyProduct("ShareX")]
