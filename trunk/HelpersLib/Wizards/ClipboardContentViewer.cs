@@ -1,7 +1,7 @@
 ﻿#region License Information (GPL v3)
 
 /*
-    ShareX - A program that allows to you take screenshots and share any file type
+    ShareX - A program that allows you to take screenshots and share any file type
     Copyright (C) 2012 ShareX Developers
 
     This program is free software; you can redistribute it and/or
@@ -33,6 +33,7 @@ namespace HelpersLib
     public partial class ClipboardContentViewer : Form
     {
         public bool IsClipboardEmpty { get; private set; }
+
         public bool DontShowThisWindow { get; private set; }
 
         public ClipboardContentViewer()

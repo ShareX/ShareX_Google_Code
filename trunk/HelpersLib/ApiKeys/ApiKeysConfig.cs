@@ -1,7 +1,7 @@
 ﻿#region License Information (GPL v3)
 
 /*
-    ShareX - A program that allows to you take screenshots and share any file type
+    ShareX - A program that allows you to take screenshots and share any file type
     Copyright (C) 2012 ShareX Developers
 
     This program is free software; you can redistribute it and/or
@@ -36,23 +36,28 @@ namespace HelpersLib
 
         [Category("TinyPic"), DefaultValue(ZKeys.TinyPicID), Description("TinyPic ID")]
         public string TinyPicID { get; set; }
+
         [Category("TinyPic"), DefaultValue(ZKeys.TinyPicKey), Description("TinyPic Key")]
         public string TinyPicKey { get; set; }
 
         [Category("Imgur"), DefaultValue(ZKeys.ImgurAnonymousKey), Description("Imgur Anonymous Key")]
         public string ImgurAnonymousKey { get; set; }
+
         [Category("Imgur"), DefaultValue(ZKeys.ImgurConsumerKey), Description("Imgur Consumer Key")]
         public string ImgurConsumerKey { get; set; }
+
         [Category("Imgur"), DefaultValue(ZKeys.ImgurConsumerSecret), Description("Imgur Consumer Secret")]
         public string ImgurConsumerSecret { get; set; }
 
         [Category("Flickr"), DefaultValue(ZKeys.FlickrKey), Description("Flickr Key")]
         public string FlickrKey { get; set; }
+
         [Category("Flickr"), DefaultValue(ZKeys.FlickrSecret), Description("Flickr Secret")]
         public string FlickrSecret { get; set; }
 
         [Category("Photobucket"), DefaultValue(ZKeys.PhotobucketConsumerKey), Description("Photobucket Consumer Key")]
         public string PhotobucketConsumerKey { get; set; }
+
         [Category("Photobucket"), DefaultValue(ZKeys.PhotobucketConsumerSecret), Description("Photobucket Consumer Secret")]
         public string PhotobucketConsumerSecret { get; set; }
 
@@ -61,6 +66,7 @@ namespace HelpersLib
 
         [Category("ImageBam"), DefaultValue(ZKeys.ImageBamKey), Description("ImageBam Key")]
         public string ImageBamKey { get; set; }
+
         [Category("ImageBam"), DefaultValue(ZKeys.ImageBamSecret), Description("ImageBam Secret")]
         public string ImageBamSecret { get; set; }
 
@@ -73,6 +79,7 @@ namespace HelpersLib
 
         [Category("Dropbox"), DefaultValue(ZKeys.DropboxConsumerKey), Description("Dropbox Consumer Key")]
         public string DropboxConsumerKey { get; set; }
+
         [Category("Dropbox"), DefaultValue(ZKeys.DropboxConsumerSecret), Description("Dropbox Consumer Secret")]
         public string DropboxConsumerSecret { get; set; }
 
@@ -81,6 +88,7 @@ namespace HelpersLib
 
         [Category("Minus"), DefaultValue(ZKeys.MinusConsumerKey), Description("Minus Consumer Secret")]
         public string MinusConsumerKey { get; set; }
+
         [Category("Minus"), DefaultValue(ZKeys.MinusConsumerSecret), Description("Minus Consumer Secret")]
         public string MinusConsumerSecret { get; set; }
 
@@ -106,15 +114,19 @@ namespace HelpersLib
 
         [Category("bit.ly"), DefaultValue(ZKeys.BitlyLogin), Description("bit.ly Consumer Secret")]
         public string BitlyLogin { get; set; }
+
         [Category("bit.ly"), DefaultValue(ZKeys.BitlyKey), Description("bit.ly Consumer Secret")]
         public string BitlyKey { get; set; }
+
         [Category("bit.ly"), DefaultValue(ZKeys.BitlyConsumerKey), Description("bit.ly Consumer Secret")]
         public string BitlyConsumerKey { get; set; }
+
         [Category("bit.ly"), DefaultValue(ZKeys.BitlyConsumerSecret), Description("bit.ly Consumer Secret")]
         public string BitlyConsumerSecret { get; set; }
 
         [Category("Google"), DefaultValue(ZKeys.GoogleConsumerKey), Description("Google Consumer Key")]
         public string GoogleConsumerKey { get; set; }
+
         [Category("Google"), DefaultValue(ZKeys.GoogleConsumerSecret), Description("Google Consumer Secret")]
         public string GoogleConsumerSecret { get; set; }
 
@@ -130,6 +142,7 @@ namespace HelpersLib
 
         [Category("Twitter"), DefaultValue(ZKeys.TwitterConsumerKey), Description("Twitter Consumer Secret")]
         public string TwitterConsumerKey { get; set; }
+
         [Category("Twitter"), DefaultValue(ZKeys.TwitterConsumerSecret), Description("Twitter Consumer Secret")]
         public string TwitterConsumerSecret { get; set; }
 

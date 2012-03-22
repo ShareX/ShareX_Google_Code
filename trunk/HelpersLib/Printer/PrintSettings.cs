@@ -1,7 +1,7 @@
 ﻿#region License Information (GPL v3)
 
 /*
-    ShareX - A program that allows to you take screenshots and share any file type
+    ShareX - A program that allows you to take screenshots and share any file type
     Copyright (C) 2012 ShareX Developers
 
     This program is free software; you can redistribute it and/or
@@ -28,10 +28,15 @@ namespace HelpersLib
     public class PrintSettings
     {
         public int Margin { get; set; }
+
         public bool AutoRotateImage { get; set; }
+
         public bool AutoScaleImage { get; set; }
+
         public bool AllowEnlargeImage { get; set; }
+
         public bool CenterImage { get; set; }
+
         public XFont TextFont { get; set; }
 
         public PrintSettings()
