@@ -118,17 +118,11 @@ namespace ShareX
         #endregion Paths
 
         public static Settings Settings { get; private set; }
-
         public static UploadersConfig UploadersConfig { get; private set; }
-
         public static bool IsMultiInstance { get; private set; }
-
         public static bool IsPortable { get; private set; }
-
         public static bool IsSilentRun { get; private set; }
-
         public static Stopwatch StartTimer { get; private set; }
-
         public static Logger MyLogger { get; private set; }
 
         public static string Title
@@ -158,7 +152,6 @@ namespace ShareX
         }
 
         public static MainForm mainForm;
-
         public static ManualResetEvent SettingsResetEvent;
         public static ManualResetEvent UploaderSettingsResetEvent;
 
@@ -174,48 +167,62 @@ namespace ShareX
                 return;
             }
 
-            IsSilentRun = CLIHelper.CheckArgs(args, "s", "silent");
+            Mutex mutex = null;
 
-            if (CLIHelper.CheckArgs(args, "p", "portable") && !Directory.Exists(PortablePersonalPath))
+            try
             {
-                Directory.CreateDirectory(PortablePersonalPath);
+                mutex = new Mutex(false, @"Global\82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC"); // Required for installer
+
+                IsSilentRun = CLIHelper.CheckArgs(args, "s", "silent");
+
+                if (CLIHelper.CheckArgs(args, "p", "portable") && !Directory.Exists(PortablePersonalPath))
+                {
+                    Directory.CreateDirectory(PortablePersonalPath);
+                }
+
+                IsPortable = Directory.Exists(PortablePersonalPath);
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                MyLogger = new Logger();
+                DebugHelper.MyLogger = MyLogger;
+                MyLogger.WriteLine("{0} {1} r{2} started", Application.ProductName, Application.ProductVersion, AppRevision);
+                MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
+                MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
+                MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);
+                MyLogger.WriteLine("IsSilentRun: " + IsSilentRun);
+                MyLogger.WriteLine("IsPortable: " + IsPortable);
+
+                SettingsResetEvent = new ManualResetEvent(false);
+                UploaderSettingsResetEvent = new ManualResetEvent(false);
+                ThreadPool.QueueUserWorkItem(state => LoadSettings());
+
+                MyLogger.WriteLine("new MainForm() started");
+                mainForm = new MainForm();
+                MyLogger.WriteLine("new MainForm() finished");
+
+                if (Settings == null)
+                {
+                    SettingsResetEvent.WaitOne();
+                }
+
+                Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                Application.Run(mainForm);
+
+                Settings.Save();
+
+                MyLogger.WriteLine("ShareX closing");
+                MyLogger.SaveLog(LogFilePath);
             }
-
-            IsPortable = Directory.Exists(PortablePersonalPath);
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            MyLogger = new Logger();
-            DebugHelper.MyLogger = MyLogger;
-            MyLogger.WriteLine("{0} {1} r{2} started", Application.ProductName, Application.ProductVersion, AppRevision);
-            MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
-            MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
-            MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);
-            MyLogger.WriteLine("IsSilentRun: " + IsSilentRun);
-            MyLogger.WriteLine("IsPortable: " + IsPortable);
-
-            SettingsResetEvent = new ManualResetEvent(false);
-            UploaderSettingsResetEvent = new ManualResetEvent(false);
-            ThreadPool.QueueUserWorkItem(state => LoadSettings());
-
-            MyLogger.WriteLine("new MainForm() started");
-            mainForm = new MainForm();
-            MyLogger.WriteLine("new MainForm() finished");
-
-            if (Settings == null)
+            finally
             {
-                SettingsResetEvent.WaitOne();
+                if (mutex != null)
+                {
+                    mutex.Close();
+                }
             }
-
-            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-            Application.Run(mainForm);
-
-            Settings.Save();
-
-            MyLogger.WriteLine("ShareX closing");
-            MyLogger.SaveLog(LogFilePath);
         }
 
         public static void LoadSettings()
