@@ -1,7 +1,7 @@
 ﻿#region License Information (GPL v3)
 
 /*
-    ShareX - A program that allows to you take screenshots and share any file type
+    ShareX - A program that allows you to take screenshots and share any file type
     Copyright (C) 2012 ShareX Developers
 
     This program is free software; you can redistribute it and/or
@@ -250,6 +250,26 @@ namespace CodeWorks
             {
                 string[] files = e.Data.GetData(DataFormats.FileDrop, false) as string[];
                 txtFolderPath.Text = files[0];
+            }
+        }
+
+        private void btnOrderLines_Click(object sender, EventArgs e)
+        {
+            string clipboard = Clipboard.GetText();
+            clipboard = clipboard.Trim();
+            string[] lines = new StringLineReader(clipboard).ReadAllLines();
+            Array.Sort(lines);
+            string result = string.Join("\r\n", lines);
+
+            tbDefaultText.Text = clipboard;
+            tbNewText.Text = result;
+        }
+
+        private void btnCopyToClipboard_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbNewText.Text))
+            {
+                Clipboard.SetText(tbNewText.Text);
             }
         }
     }

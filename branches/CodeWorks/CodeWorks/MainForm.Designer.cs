@@ -43,6 +43,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblFileCount = new System.Windows.Forms.Label();
             this.btnFindRegionAreas = new System.Windows.Forms.Button();
+            this.btnOrderLines = new System.Windows.Forms.Button();
+            this.btnCopyToClipboard = new System.Windows.Forms.Button();
             this.scTextBoxes.Panel1.SuspendLayout();
             this.scTextBoxes.Panel2.SuspendLayout();
             this.scTextBoxes.SuspendLayout();
@@ -151,6 +153,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCopyToClipboard);
             this.groupBox2.Controls.Add(this.tbNewText);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -220,12 +223,33 @@
             this.btnFindRegionAreas.UseVisualStyleBackColor = true;
             this.btnFindRegionAreas.Click += new System.EventHandler(this.btnFindRegionAreas_Click);
             // 
+            // btnOrderLines
+            // 
+            this.btnOrderLines.Location = new System.Drawing.Point(912, 40);
+            this.btnOrderLines.Name = "btnOrderLines";
+            this.btnOrderLines.Size = new System.Drawing.Size(128, 24);
+            this.btnOrderLines.TabIndex = 11;
+            this.btnOrderLines.Text = "Clipboard lines A-Z";
+            this.btnOrderLines.UseVisualStyleBackColor = true;
+            this.btnOrderLines.Click += new System.EventHandler(this.btnOrderLines_Click);
+            // 
+            // btnCopyToClipboard
+            // 
+            this.btnCopyToClipboard.Location = new System.Drawing.Point(384, 312);
+            this.btnCopyToClipboard.Name = "btnCopyToClipboard";
+            this.btnCopyToClipboard.Size = new System.Drawing.Size(115, 23);
+            this.btnCopyToClipboard.TabIndex = 2;
+            this.btnCopyToClipboard.Text = "Copy to clipboard";
+            this.btnCopyToClipboard.UseVisualStyleBackColor = true;
+            this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 785);
+            this.Controls.Add(this.btnOrderLines);
             this.Controls.Add(this.btnFindRegionAreas);
             this.Controls.Add(this.lblFileCount);
             this.Controls.Add(this.label1);
@@ -271,6 +295,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblFileCount;
         private System.Windows.Forms.Button btnFindRegionAreas;
+        private System.Windows.Forms.Button btnOrderLines;
+        private System.Windows.Forms.Button btnCopyToClipboard;
     }
 }
 

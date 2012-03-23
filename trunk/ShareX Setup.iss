@@ -1,18 +1,20 @@
 #define MyAppName "ShareX"
-#define ExePath "ShareX\bin\Release\ShareX.exe"
-#define MyAppVersion GetStringFileInfo(ExePath, "Assembly Version")
-#define MyAppPublisher "ZScreen Developers"
+#define MyAppFile "ShareX.exe"
+#define MyAppPath "ShareX\bin\Release\ShareX.exe"
+#define MyAppVersion GetStringFileInfo(MyAppPath, "Assembly Version")
+#define MyAppPublisher "ShareX Developers"
 #define MyAppURL "http://code.google.com/p/sharex"
 
 [Setup]
 AllowNoIcons=true
-AppMutex=Global\0167D1A0-6054-42f5-BA2A-243648899A6B
-AppId={#MyAppName}
+AppCopyright=Copyright (C) 2012 {#MyAppPublisher}
+AppId=67D44592-7907-43B5-B091-2B0A00DFD28F
+AppMutex=Global\67D44592-7907-43B5-B091-2B0A00DFD28F
 AppName={#MyAppName}
-AppPublisher={#MyAppName}
-AppPublisherURL=http://code.google.com/p/sharex
-AppSupportURL=http://code.google.com/p/sharex/issues/list
-AppUpdatesURL=http://code.google.com/p/sharex/downloads/list
+AppPublisher={#MyAppPublisher}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}/issues/list
+AppUpdatesURL={#MyAppURL}/downloads/list
 AppVerName={#MyAppName} {#MyAppVersion}
 AppVersion={#MyAppVersion}
 ArchitecturesAllowed=x86 x64 ia64
@@ -22,22 +24,22 @@ CreateAppDir=true
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DirExistsWarning=no
-InfoBeforeFile=ShareX\Docs\VersionHistory.txt
+InfoBeforeFile={#MyAppName}\Docs\VersionHistory.txt
 InternalCompressLevel=ultra64
 LanguageDetectionMethod=uilanguage
 MinVersion=4.90.3000,5.0.2195sp3
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-setup
 OutputDir=Output\
-PrivilegesRequired=none
+PrivilegesRequired=admin
 ShowLanguageDialog=auto
 ShowUndisplayableLanguages=false
 SignedUninstaller=false
 SolidCompression=true
 Uninstallable=true
-UninstallDisplayIcon={app}\{#MyAppName}.exe
+UninstallDisplayIcon={app}\{#MyAppFile}
 UsePreviousAppDir=yes
 UsePreviousGroup=yes
-VersionInfoCompany={#MyAppName}
+VersionInfoCompany={#MyAppPublisher}
 VersionInfoTextVersion={#MyAppVersion}
 VersionInfoVersion={#MyAppVersion}
 
@@ -45,26 +47,32 @@ VersionInfoVersion={#MyAppVersion}
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
-Name: "CreateDesktopIcon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "CreateDesktopIcon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional shortcuts:"
+Name: "CreateQuickLaunchIcon"; Description: "Create a quick launch shortcut"; GroupDescription: "Additional shortcuts:"; Flags: unchecked
+Name: "CreateSendToIcon"; Description: "Create a send to shortcut"; GroupDescription: "Additional shortcuts:"; Flags: unchecked
+Name: "CreateStartupIcon"; Description: "Run {#MyAppName} on Windows startup"; GroupDescription: "Other tasks:"; Flags: unchecked
 
 [Files]
-Source: ShareX\bin\Release\*.exe; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
-Source: ShareX\bin\Release\*.pdb; DestDir: {app}; Flags: ignoreversion
-Source: ShareX\bin\Release\*.dll; DestDir: {app}; Flags: ignoreversion
-Source: ShareX\bin\Release\*.wav; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\bin\Release\*.pdb"; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\bin\Release\*.dll"; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\bin\Release\*.wav"; DestDir: {app}; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppName}.exe"
-Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppName}.exe"; Check: not DesktopIconExists; Tasks: CreateDesktopIcon
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; WorkingDir: {app}
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}; Check: not DesktopIconExists; Tasks: CreateDesktopIcon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}; Tasks: CreateQuickLaunchIcon
+Name: "{sendto}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}; Tasks: CreateSendToIcon
+Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}; Tasks: CreateStartupIcon
 
 [Run]
-Filename: "{app}\{#MyAppName}.exe"; Description: {cm:LaunchProgram,ShareX}; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppFile}"; Description: {cm:LaunchProgram,{#MyAppName}}; Flags: nowait postinstall skipifsilent
 
-[Registry]
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "{#MyAppName}"; Flags: uninsdeletevalue
-Root: "HKCU"; Subkey: "Software\Classes\*\shell\{#MyAppName}"; Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Folder\shell\{#MyAppName}"; Flags: uninsdeletekey
+;[Registry]
+;Root: "HKCU"; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "{#MyAppName}"; Flags: uninsdeletevalue
+;Root: "HKCU"; Subkey: "Software\Classes\*\shell\{#MyAppName}"; Flags: uninsdeletekey
+;Root: "HKCU"; Subkey: "Software\Classes\Folder\shell\{#MyAppName}"; Flags: uninsdeletekey
 
 [Code]
 function DesktopIconExists(): Boolean;

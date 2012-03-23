@@ -1,7 +1,7 @@
 ﻿#region License Information (GPL v3)
 
 /*
-    ShareX - A program that allows to you take screenshots and share any file type
+    ShareX - A program that allows you to take screenshots and share any file type
     Copyright (C) 2012 ShareX Developers
 
     This program is free software; you can redistribute it and/or
@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.Collections.Generic;
 using System.Text;
 
 namespace CodeWorks
@@ -49,7 +50,7 @@ namespace CodeWorks
                 builder.Append(ch);
                 Position++;
 
-                if (ch == '\r' || ch == '\n')
+                if (ch == '\r' || ch == '\n' || Position == Length)
                 {
                     if (ch == '\r' && Position < Length && Text[Position] == '\n')
                     {
@@ -61,6 +62,21 @@ namespace CodeWorks
             }
 
             return null;
+        }
+
+        public string[] ReadAllLines(bool autoTrim = true)
+        {
+            List<string> lines = new List<string>();
+
+            string line;
+
+            while ((line = ReadLine()) != null)
+            {
+                if (autoTrim) line = line.Trim();
+                lines.Add(line);
+            }
+
+            return lines.ToArray();
         }
 
         public void Reset()
