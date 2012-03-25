@@ -42,6 +42,7 @@ namespace HelpersLib
         public const string ImageBamKey = "P9MMWVORXYCVM9LL";
         public const string ImageBamSecret = "8NHVT2W777DEHZBV54A4CIT23XJFTL1D";
         public const string TwitsnapsKey = "694aaea3bc8f28479c383cbcc094fb55";
+        public const string TwitPicKey = "816528c0152003a64e45402370805a5a"; // ShareX
 
         // File Uploaders
         public const string DropboxConsumerKey = "0te7j9ype9lrdfn";

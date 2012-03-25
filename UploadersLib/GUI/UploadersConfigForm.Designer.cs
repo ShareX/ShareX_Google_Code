@@ -90,10 +90,6 @@
             this.txtPhotobucketVerificationCode = new System.Windows.Forms.TextBox();
             this.lblPhotobucketAccountStatus = new System.Windows.Forms.Label();
             this.tpTwitPic = new System.Windows.Forms.TabPage();
-            this.lblTwitPicPassword = new System.Windows.Forms.Label();
-            this.lblTwitPicUsername = new System.Windows.Forms.Label();
-            this.txtTwitPicPassword = new System.Windows.Forms.TextBox();
-            this.txtTwitPicUsername = new System.Windows.Forms.TextBox();
             this.chkTwitPicShowFull = new System.Windows.Forms.CheckBox();
             this.cboTwitPicThumbnailMode = new System.Windows.Forms.ComboBox();
             this.lblTwitPicThumbnailMode = new System.Windows.Forms.Label();
@@ -257,6 +253,7 @@
             this.cboSharedFolderImages = new System.Windows.Forms.ComboBox();
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.lblTwitPicTip = new System.Windows.Forms.Label();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -959,10 +956,7 @@
             // 
             // tpTwitPic
             // 
-            this.tpTwitPic.Controls.Add(this.lblTwitPicPassword);
-            this.tpTwitPic.Controls.Add(this.lblTwitPicUsername);
-            this.tpTwitPic.Controls.Add(this.txtTwitPicPassword);
-            this.tpTwitPic.Controls.Add(this.txtTwitPicUsername);
+            this.tpTwitPic.Controls.Add(this.lblTwitPicTip);
             this.tpTwitPic.Controls.Add(this.chkTwitPicShowFull);
             this.tpTwitPic.Controls.Add(this.cboTwitPicThumbnailMode);
             this.tpTwitPic.Controls.Add(this.lblTwitPicThumbnailMode);
@@ -974,45 +968,10 @@
             this.tpTwitPic.Text = "TwitPic";
             this.tpTwitPic.UseVisualStyleBackColor = true;
             // 
-            // lblTwitPicPassword
-            // 
-            this.lblTwitPicPassword.AutoSize = true;
-            this.lblTwitPicPassword.Location = new System.Drawing.Point(24, 56);
-            this.lblTwitPicPassword.Name = "lblTwitPicPassword";
-            this.lblTwitPicPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblTwitPicPassword.TabIndex = 2;
-            this.lblTwitPicPassword.Text = "Password:";
-            // 
-            // lblTwitPicUsername
-            // 
-            this.lblTwitPicUsername.AutoSize = true;
-            this.lblTwitPicUsername.Location = new System.Drawing.Point(24, 24);
-            this.lblTwitPicUsername.Name = "lblTwitPicUsername";
-            this.lblTwitPicUsername.Size = new System.Drawing.Size(58, 13);
-            this.lblTwitPicUsername.TabIndex = 0;
-            this.lblTwitPicUsername.Text = "Username:";
-            // 
-            // txtTwitPicPassword
-            // 
-            this.txtTwitPicPassword.Location = new System.Drawing.Point(88, 52);
-            this.txtTwitPicPassword.Name = "txtTwitPicPassword";
-            this.txtTwitPicPassword.PasswordChar = '*';
-            this.txtTwitPicPassword.Size = new System.Drawing.Size(160, 20);
-            this.txtTwitPicPassword.TabIndex = 3;
-            this.txtTwitPicPassword.TextChanged += new System.EventHandler(this.txtTwitPicPassword_TextChanged);
-            // 
-            // txtTwitPicUsername
-            // 
-            this.txtTwitPicUsername.Location = new System.Drawing.Point(88, 20);
-            this.txtTwitPicUsername.Name = "txtTwitPicUsername";
-            this.txtTwitPicUsername.Size = new System.Drawing.Size(160, 20);
-            this.txtTwitPicUsername.TabIndex = 1;
-            this.txtTwitPicUsername.TextChanged += new System.EventHandler(this.txtTwitPicUsername_TextChanged);
-            // 
             // chkTwitPicShowFull
             // 
             this.chkTwitPicShowFull.AutoSize = true;
-            this.chkTwitPicShowFull.Location = new System.Drawing.Point(24, 112);
+            this.chkTwitPicShowFull.Location = new System.Drawing.Point(24, 104);
             this.chkTwitPicShowFull.Name = "chkTwitPicShowFull";
             this.chkTwitPicShowFull.Size = new System.Drawing.Size(94, 17);
             this.chkTwitPicShowFull.TabIndex = 6;
@@ -1024,7 +983,7 @@
             // 
             this.cboTwitPicThumbnailMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTwitPicThumbnailMode.FormattingEnabled = true;
-            this.cboTwitPicThumbnailMode.Location = new System.Drawing.Point(112, 81);
+            this.cboTwitPicThumbnailMode.Location = new System.Drawing.Point(112, 68);
             this.cboTwitPicThumbnailMode.Name = "cboTwitPicThumbnailMode";
             this.cboTwitPicThumbnailMode.Size = new System.Drawing.Size(144, 21);
             this.cboTwitPicThumbnailMode.TabIndex = 5;
@@ -1033,7 +992,7 @@
             // lblTwitPicThumbnailMode
             // 
             this.lblTwitPicThumbnailMode.AutoSize = true;
-            this.lblTwitPicThumbnailMode.Location = new System.Drawing.Point(24, 88);
+            this.lblTwitPicThumbnailMode.Location = new System.Drawing.Point(24, 72);
             this.lblTwitPicThumbnailMode.Name = "lblTwitPicThumbnailMode";
             this.lblTwitPicThumbnailMode.Size = new System.Drawing.Size(82, 13);
             this.lblTwitPicThumbnailMode.TabIndex = 4;
@@ -2712,6 +2671,16 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
+            // lblTwitPicTip
+            // 
+            this.lblTwitPicTip.AutoSize = true;
+            this.lblTwitPicTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblTwitPicTip.Location = new System.Drawing.Point(16, 16);
+            this.lblTwitPicTip.Name = "lblTwitPicTip";
+            this.lblTwitPicTip.Size = new System.Drawing.Size(343, 40);
+            this.lblTwitPicTip.TabIndex = 7;
+            this.lblTwitPicTip.Text = "TwitPic using Twitter settings for authentication.\r\nOther Services -> Twitter";
+            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2939,10 +2908,6 @@
         private System.Windows.Forms.Label lblTwitPicThumbnailMode;
         private System.Windows.Forms.Button btnDropboxShowFiles;
         private System.Windows.Forms.Label lblDropboxStatus;
-        private System.Windows.Forms.Label lblTwitPicPassword;
-        private System.Windows.Forms.Label lblTwitPicUsername;
-        private System.Windows.Forms.TextBox txtTwitPicPassword;
-        private System.Windows.Forms.TextBox txtTwitPicUsername;
         private System.Windows.Forms.Label lblYFrogPassword;
         private System.Windows.Forms.Label lblYFrogUsername;
         private System.Windows.Forms.TextBox txtYFrogPassword;
@@ -3035,5 +3000,6 @@
         private System.Windows.Forms.Button btnBoxRefreshFolders;
         private System.Windows.Forms.TreeView tvBoxFolders;
         private System.Windows.Forms.CheckBox cbDropboxAutoCreateShareableLink;
+        private System.Windows.Forms.Label lblTwitPicTip;
     }
 }
