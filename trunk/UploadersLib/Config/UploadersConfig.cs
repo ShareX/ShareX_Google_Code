@@ -88,9 +88,7 @@ namespace UploadersLib
 
         // TwitPic
 
-        public string TwitPicUsername = string.Empty;
-        public string TwitPicPassword = string.Empty;
-        public bool TwitPicShowFull = true;
+        public bool TwitPicShowFull = false;
         public TwitPicThumbnailType TwitPicThumbnailMode = TwitPicThumbnailType.Thumb;
 
         // YFrog
@@ -251,8 +249,6 @@ namespace UploadersLib
                 acc.Password = bEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
             }
 
-            this.TwitPicPassword = bEncrypt ? crypt.Encrypt(this.TwitPicPassword) : crypt.Decrypt(this.TwitPicPassword);
-
             this.EmailPassword = bEncrypt ? crypt.Encrypt(this.EmailPassword) : crypt.Decrypt(this.EmailPassword);
         }
 
@@ -284,7 +280,6 @@ namespace UploadersLib
                 case ImageDestination.Photobucket:
                     return PhotobucketAccountInfo != null && PhotobucketOAuthInfo != null;
                 case ImageDestination.Twitpic:
-                    return !string.IsNullOrEmpty(TwitPicPassword);
                 case ImageDestination.Twitsnaps:
                     return TwitterOAuthInfoList.Count > 0;
                 case ImageDestination.UploadScreenshot:

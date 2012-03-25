@@ -73,6 +73,9 @@ namespace HelpersLib
         [Category("TwitSnaps"), DefaultValue(ZKeys.TwitsnapsKey), Description("TwitSnaps Key")]
         public string TwitsnapsKey { get; set; }
 
+        [Category("TwitPic"), DefaultValue(ZKeys.TwitPicKey), Description("TwitPic Key")]
+        public string TwitPicKey { get; set; }
+
         #endregion Image Uploaders
 
         #region File Uploaders

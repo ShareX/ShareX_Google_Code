@@ -270,16 +270,6 @@ namespace UploadersLib
 
         #region TwitPic
 
-        private void txtTwitPicUsername_TextChanged(object sender, EventArgs e)
-        {
-            Config.TwitPicUsername = txtTwitPicUsername.Text;
-        }
-
-        private void txtTwitPicPassword_TextChanged(object sender, EventArgs e)
-        {
-            Config.TwitPicPassword = txtTwitPicPassword.Text;
-        }
-
         private void cboTwitPicThumbnailMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Config.TwitPicThumbnailMode = (TwitPicThumbnailType)cboTwitPicThumbnailMode.SelectedIndex;

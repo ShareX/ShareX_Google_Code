@@ -176,8 +176,6 @@ namespace UploadersLib
 
             // TwitPic
 
-            txtTwitPicUsername.Text = Config.TwitPicUsername;
-            txtTwitPicPassword.Text = Config.TwitPicPassword;
             chkTwitPicShowFull.Checked = Config.TwitPicShowFull;
 
             if (cboTwitPicThumbnailMode.Items.Count == 0)

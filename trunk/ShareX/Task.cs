@@ -258,19 +258,23 @@ namespace ShareX
                     imageUploader = new UploadScreenshot(ZKeys.UploadScreenshotKey);
                     break;
                 case ImageDestination.Twitpic:
-                    TwitPicOptions twitPicOptions = new TwitPicOptions();
-                    twitPicOptions.Username = Program.UploadersConfig.TwitPicUsername;
-                    twitPicOptions.Password = Program.UploadersConfig.TwitPicPassword;
-                    twitPicOptions.TwitPicThumbnailMode = Program.UploadersConfig.TwitPicThumbnailMode;
-                    twitPicOptions.ShowFull = Program.UploadersConfig.TwitPicShowFull;
-                    imageUploader = new TwitPicUploader(twitPicOptions);
+                    int indexTwitpic = Program.UploadersConfig.TwitterSelectedAccount;
+
+                    if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitpic))
+                    {
+                        imageUploader = new TwitPicUploader(ZKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                        {
+                            TwitPicThumbnailMode = Program.UploadersConfig.TwitPicThumbnailMode,
+                            ShowFull = Program.UploadersConfig.TwitPicShowFull
+                        };
+                    }
                     break;
                 case ImageDestination.Twitsnaps:
-                    int index = Program.UploadersConfig.TwitterSelectedAccount;
+                    int indexTwitsnaps = Program.UploadersConfig.TwitterSelectedAccount;
 
-                    if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(index))
+                    if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitsnaps))
                     {
-                        imageUploader = new TwitSnapsUploader(ZKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[index]);
+                        imageUploader = new TwitSnapsUploader(ZKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
                     }
                     break;
                 case ImageDestination.yFrog:

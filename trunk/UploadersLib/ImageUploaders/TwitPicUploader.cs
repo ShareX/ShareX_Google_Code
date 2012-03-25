@@ -28,18 +28,11 @@ using System.ComponentModel;
 using System.IO;
 using System.Xml.Linq;
 using HelpersLib;
+using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.ImageUploaders
 {
-    public enum TwitPicThumbnailType
-    {
-        [Description("Mini Thumbnail")]
-        Mini,
-        [Description("Normal Thumbnail")]
-        Thumb
-    }
-
     public enum TwitPicUploadType
     {
         [Description("Upload Image")]
@@ -48,21 +41,25 @@ namespace UploadersLib.ImageUploaders
         UPLOAD_IMAGE_AND_TWITTER
     }
 
-    public class TwitPicOptions : AccountInfo
+    public enum TwitPicThumbnailType
     {
-        public TwitPicUploadType TwitPicUploadType { get; set; }
-
-        public bool ShowFull { get; set; }
-
-        public TwitPicThumbnailType TwitPicThumbnailMode { get; set; }
+        [Description("Mini Thumbnail")]
+        Mini,
+        [Description("Normal Thumbnail")]
+        Thumb
     }
 
     public sealed class TwitPicUploader : ImageUploader
     {
-        private TwitPicOptions Options;
+        public string APIKey { get; private set; }
+        public OAuthInfo AuthInfo { get; private set; }
 
-        private const string UploadLink = "http://twitpic.com/api/upload";
-        private const string UploadAndPostLink = "http://twitpic.com/api/uploadAndPost";
+        public TwitPicUploadType TwitPicUploadType { get; set; }
+        public bool ShowFull { get; set; }
+        public TwitPicThumbnailType TwitPicThumbnailMode { get; set; }
+
+        private const string UploadLink = "http://api.twitpic.com/1/upload.json";
+        private const string UploadAndPostLink = "http://api.twitpic.com/1/uploadAndPost.json";
 
         public override string Host
         {
@@ -72,85 +69,80 @@ namespace UploadersLib.ImageUploaders
             }
         }
 
-        public TwitPicUploader(TwitPicOptions options)
+        public TwitPicUploader(string key, OAuthInfo oauth)
         {
-            this.Options = options;
+            APIKey = key;
+            AuthInfo = oauth;
+            TwitPicUploadType = TwitPicUploadType.UPLOAD_IMAGE_ONLY;
+            ShowFull = false;
+            TwitPicThumbnailMode = TwitPicThumbnailType.Thumb;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            switch (this.Options.TwitPicUploadType)
+            switch (TwitPicUploadType)
             {
                 case TwitPicUploadType.UPLOAD_IMAGE_ONLY:
-                    return Upload(stream, fileName, "");
+                    return Upload(stream, fileName, UploadLink);
                 case TwitPicUploadType.UPLOAD_IMAGE_AND_TWITTER:
                     using (TwitterMsg msgBox = new TwitterMsg("Update Twitter Status"))
                     {
                         msgBox.ShowDialog();
-                        return Upload(stream, fileName, msgBox.Message);
+                        return Upload(stream, fileName, UploadAndPostLink, msgBox.Message);
                     }
             }
+
             return null;
         }
 
-        private UploadResult Upload(Stream stream, string fileName, string msg)
+        private UploadResult Upload(Stream stream, string fileName, string url, string msg = "")
         {
-            string url;
-
-            Dictionary<string, string> arguments = new Dictionary<string, string>();
-
-            arguments.Add("username", this.Options.Username);
-            arguments.Add("password", this.Options.Password);
-
-            if (!string.IsNullOrEmpty(msg))
+            if (AuthInfo == null || string.IsNullOrEmpty(AuthInfo.UserToken) || string.IsNullOrEmpty(AuthInfo.UserSecret))
             {
-                arguments.Add("message", msg);
-                url = UploadAndPostLink;
-            }
-            else
-            {
-                url = UploadLink;
+                Errors.Add("Login is required.");
+                return null;
             }
 
-            string source = UploadData(stream, url, fileName, "media", arguments);
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("key", APIKey);
+            args.Add("consumer_token", AuthInfo.ConsumerKey);
+            args.Add("consumer_secret", AuthInfo.ConsumerSecret);
+            args.Add("oauth_token", AuthInfo.UserToken);
+            args.Add("oauth_secret", AuthInfo.UserSecret);
+            args.Add("message", msg);
 
-            return ParseResult(source);
-        }
+            string source = UploadData(stream, url, fileName, "media", args);
 
-        private UploadResult ParseResult(string source)
-        {
             UploadResult ur = new UploadResult(source);
 
-            if (!string.IsNullOrEmpty(source))
-            {
-                XDocument xdoc = XDocument.Parse(source);
-                XElement xele = xdoc.Element("rsp");
+            TwitPicResponse response = JsonConvert.DeserializeObject<TwitPicResponse>(source);
 
-                if (xele != null)
-                {
-                    switch (xele.GetAttributeFirstValue("status", "stat"))
-                    {
-                        case "ok":
-                            string statusid, userid, mediaid, mediaurl;
-                            statusid = xele.GetElementValue("statusid");
-                            userid = xele.GetElementValue("userid");
-                            mediaid = xele.GetElementValue("mediaid");
-                            mediaurl = xele.GetElementValue("mediaurl");
-                            if (this.Options.ShowFull) mediaurl = mediaurl + "/full";
-                            ur.URL = mediaurl;
-                            ur.ThumbnailURL = string.Format("http://twitpic.com/show/{0}/{1}", this.Options.TwitPicThumbnailMode.ToString().ToLowerInvariant(), mediaid);
-                            break;
-                        case "fail":
-                            string code, msg;
-                            code = xele.Element("err").Attribute("code").Value;
-                            msg = xele.Element("err").Attribute("msg").Value;
-                            Errors.Add(msg);
-                            break;
-                    }
-                }
+            if (response != null)
+            {
+                ur.URL = response.URL;
+                if (ShowFull) ur.URL += "/full";
+                ur.ThumbnailURL = string.Format("http://twitpic.com/show/{0}/{1}.{2}", TwitPicThumbnailMode.ToString().ToLowerInvariant(), response.ID, response.Type);
             }
 
             return ur;
+        }
+
+        public class TwitPicResponse
+        {
+            public string ID { get; set; }
+            public string Text { get; set; }
+            public string URL { get; set; }
+            public string Width { get; set; }
+            public string Height { get; set; }
+            public string Size { get; set; }
+            public string Type { get; set; }
+            public string Timestamp { get; set; }
+
+            public class User
+            {
+                public string ID { get; set; }
+                public string Screen_Name { get; set; }
+            }
         }
     }
 }

@@ -108,8 +108,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(195, 52);
             this.label1.TabIndex = 6;
-            this.label1.Text = "FTP Library: http://www.starksoft.com\r\nIcons: http://p.yusukekamiyamane.com\r\nJson" +
-    ".NET: http://json.codeplex.com\r\nSSH.NET: http://sshnet.codeplex.com";
+            this.label1.Text = "FTP Library: http://www.starksoft.com\r\nJson.NET: http://json.codeplex.com\r\nSSH.NE" +
+    "T: http://sshnet.codeplex.com\r\nIcons: http://p.yusukekamiyamane.com";
             // 
             // lblBugs
             // 
