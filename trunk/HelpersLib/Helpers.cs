@@ -245,25 +245,6 @@ namespace HelpersLib
             return Regex.Match(input, String.Format("(?<={0}>).+?(?=</{0})", tag)).Value;
         }
 
-        public static string GetMD5(byte[] data)
-        {
-            byte[] bytes = new MD5CryptoServiceProvider().ComputeHash(data);
-
-            StringBuilder sb = new StringBuilder();
-
-            foreach (byte b in bytes)
-            {
-                sb.Append(b.ToString("x2"));
-            }
-
-            return sb.ToString().ToLower();
-        }
-
-        public static string GetMD5(string text)
-        {
-            return GetMD5(Encoding.UTF8.GetBytes(text));
-        }
-
         public static string CombineURL(string url1, string url2)
         {
             bool url1Empty = string.IsNullOrEmpty(url1);

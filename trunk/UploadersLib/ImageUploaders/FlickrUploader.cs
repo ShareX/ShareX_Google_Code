@@ -186,7 +186,7 @@ namespace UploadersLib.ImageUploaders
 
         private string GetAPISig(Dictionary<string, string> args)
         {
-            return ZAppHelper.GetMD5(args.OrderBy(x => x.Key).Aggregate(API_Secret, (x, x2) => x + x2.Key + x2.Value));
+            return TranslatorHelper.TextToHash(args.OrderBy(x => x.Key).Aggregate(API_Secret, (x, x2) => x + x2.Key + x2.Value), HashType.MD5);
         }
 
         private XElement ParseResponse(string response, string field)
