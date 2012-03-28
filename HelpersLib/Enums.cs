@@ -151,8 +151,8 @@ namespace HelpersLib
         Top, Right, Bottom, Left
     }
 
-    public enum CryptoType
+    public enum HashType
     {
-        MD5, SHA1
+        MD5, SHA1, SHA256, SHA384, SHA512, RIPEMD160
     }
 }

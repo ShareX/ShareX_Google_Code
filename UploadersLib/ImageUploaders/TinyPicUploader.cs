@@ -83,7 +83,7 @@ namespace UploadersLib.ImageUploaders
 
                 arguments.Add("action", action);
                 arguments.Add("tpid", tpid);
-                arguments.Add("sig", ZAppHelper.GetMD5(action + tpid + tpk));
+                arguments.Add("sig", TranslatorHelper.TextToHash(action + tpid + tpk, HashType.MD5));
                 arguments.Add("responsetype", "XML");
                 arguments.Add("upk", upk);
                 arguments.Add("type", "image");
@@ -109,7 +109,7 @@ namespace UploadersLib.ImageUploaders
             {
                 { "action", action },
                 { "tpid", tpid },
-                { "sig", ZAppHelper.GetMD5(action + tpid + tpk) },
+                { "sig", TranslatorHelper.TextToHash(action + tpid + tpk, HashType.MD5) },
                 { "email", email },
                 { "pass", password }
             };
@@ -131,7 +131,7 @@ namespace UploadersLib.ImageUploaders
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("action", action);
             args.Add("tpid", tpid);
-            args.Add("sig", ZAppHelper.GetMD5(action + tpid + tpk));
+            args.Add("sig", TranslatorHelper.TextToHash(action + tpid + tpk, HashType.MD5));
             args.Add("responsetype", "XML");
 
             string response = SendGetRequest(URLAPI, args);
