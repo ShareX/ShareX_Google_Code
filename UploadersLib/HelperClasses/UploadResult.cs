@@ -120,7 +120,7 @@ namespace UploadersLib.HelperClasses
 
         public string GetFullImageForumsUrl(string url)
         {
-            if (!string.IsNullOrEmpty(url) && ZAppHelper.IsImageFile(url))
+            if (!string.IsNullOrEmpty(url) && Helpers.IsImageFile(url))
             {
                 return string.Format("[IMG]{0}[/IMG]", url);
             }
@@ -129,7 +129,7 @@ namespace UploadersLib.HelperClasses
 
         public string GetFullImageHTML(string url)
         {
-            if (!string.IsNullOrEmpty(url) && ZAppHelper.IsImageFile(url))
+            if (!string.IsNullOrEmpty(url) && Helpers.IsImageFile(url))
             {
                 return string.Format("<img src=\"{0}\"/>", url);
             }
@@ -138,7 +138,7 @@ namespace UploadersLib.HelperClasses
 
         public string GetFullImageWiki(string url)
         {
-            if (!string.IsNullOrEmpty(url) && ZAppHelper.IsImageFile(url))
+            if (!string.IsNullOrEmpty(url) && Helpers.IsImageFile(url))
             {
                 return string.Format("[{0}]", url);
             }

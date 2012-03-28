@@ -172,7 +172,7 @@ namespace UploadersLib.ImageUploaders
 
         public string GetPhotosLink(string userID)
         {
-            return ZAppHelper.CombineURL("http://www.flickr.com/photos", userID);
+            return Helpers.CombineURL("http://www.flickr.com/photos", userID);
         }
 
         public string GetPhotosLink()
@@ -248,8 +248,8 @@ namespace UploadersLib.ImageUploaders
                 if (null != xele)
                 {
                     string photoid = xele.Value;
-                    string url = ZAppHelper.CombineURL(GetPhotosLink(), photoid);
-                    ur.URL = ZAppHelper.CombineURL(url, "sizes/o");
+                    string url = Helpers.CombineURL(GetPhotosLink(), photoid);
+                    ur.URL = Helpers.CombineURL(url, "sizes/o");
                 }
             }
 

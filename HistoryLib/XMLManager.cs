@@ -88,7 +88,7 @@ namespace HistoryLib
 
                     if (rootNode.Name == "HistoryItems")
                     {
-                        historyItem.ID = ZAppHelper.GetRandomAlphanumeric(12);
+                        historyItem.ID = Helpers.GetRandomAlphanumeric(12);
 
                         XmlNode historyItemNode = rootNode.PrependElement("HistoryItem");
 

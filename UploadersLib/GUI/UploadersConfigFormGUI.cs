@@ -619,7 +619,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.TwitterOAuthInfoList[Config.TwitterSelectedAccount] = acc;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                     ucTwitterAccounts.SettingsGrid.SelectedObject = acc;
                 }
             }

@@ -227,8 +227,8 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.mon2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(dt.Month))
                 .Replace(ReplacementVariables.mon.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month))
                 .Replace(ReplacementVariables.y.ToPrefixString(), dt.Year.ToString())
-                .Replace(ReplacementVariables.mo.ToPrefixString(), ZAppHelper.AddZeroes(dt.Month))
-                .Replace(ReplacementVariables.d.ToPrefixString(), ZAppHelper.AddZeroes(dt.Day));
+                .Replace(ReplacementVariables.mo.ToPrefixString(), Helpers.AddZeroes(dt.Month))
+                .Replace(ReplacementVariables.d.ToPrefixString(), Helpers.AddZeroes(dt.Day));
 
             #endregion y, mo, mon, mon2, d
 
@@ -240,17 +240,17 @@ namespace HelpersLib
 
                 if (sb.ToString().Contains(ReplacementVariables.pm.ToPrefixString()))
                 {
-                    hour = ZAppHelper.HourTo12(dt.Hour);
+                    hour = Helpers.HourTo12(dt.Hour);
                 }
                 else
                 {
-                    hour = ZAppHelper.AddZeroes(dt.Hour);
+                    hour = Helpers.AddZeroes(dt.Hour);
                 }
 
                 sb.Replace(ReplacementVariables.h.ToPrefixString(), hour)
-                     .Replace(ReplacementVariables.mi.ToPrefixString(), ZAppHelper.AddZeroes(dt.Minute))
-                     .Replace(ReplacementVariables.s.ToPrefixString(), ZAppHelper.AddZeroes(dt.Second))
-                     .Replace(ReplacementVariables.ms.ToPrefixString(), ZAppHelper.AddZeroes(dt.Millisecond, 3))
+                     .Replace(ReplacementVariables.mi.ToPrefixString(), Helpers.AddZeroes(dt.Minute))
+                     .Replace(ReplacementVariables.s.ToPrefixString(), Helpers.AddZeroes(dt.Second))
+                     .Replace(ReplacementVariables.ms.ToPrefixString(), Helpers.AddZeroes(dt.Millisecond, 3))
                      .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                      .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                      .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
@@ -260,7 +260,7 @@ namespace HelpersLib
                     AutoIncrementNumber++;
                 }
 
-                sb.Replace(ReplacementVariables.i.ToPrefixString(), ZAppHelper.AddZeroes(AutoIncrementNumber, 4));
+                sb.Replace(ReplacementVariables.i.ToPrefixString(), Helpers.AddZeroes(AutoIncrementNumber, 4));
             }
 
             #endregion h, mi, s, ms, w, w2, pm, i (If not SaveFolder)
@@ -287,16 +287,16 @@ namespace HelpersLib
             string result = sb.ToString();
 
             string rn = ReplacementVariables.rn.ToPrefixString();
-            while (result.ReplaceFirst(rn, ZAppHelper.GetRandomChar(ZAppHelper.Numbers).ToString(), out result)) ;
+            while (result.ReplaceFirst(rn, Helpers.GetRandomChar(Helpers.Numbers).ToString(), out result)) ;
 
             string ra = ReplacementVariables.ra.ToPrefixString();
-            while (result.ReplaceFirst(ra, ZAppHelper.GetRandomChar(ZAppHelper.Alphanumeric).ToString(), out result)) ;
+            while (result.ReplaceFirst(ra, Helpers.GetRandomChar(Helpers.Alphanumeric).ToString(), out result)) ;
 
             #endregion rn, ra
 
             if (Type != NameParserType.Watermark & Type != NameParserType.Clipboard)
             {
-                result = ZAppHelper.NormalizeString(result, Type != NameParserType.SaveFolder, IsFolderPath);
+                result = Helpers.NormalizeString(result, Type != NameParserType.SaveFolder, IsFolderPath);
             }
 
             if (MaxNameLength > 0 && (Type == NameParserType.ActiveWindow || Type == NameParserType.EntireScreen) &&

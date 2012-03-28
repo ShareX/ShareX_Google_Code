@@ -89,7 +89,7 @@ namespace UploadersLib.FileUploaders
 
         private string GetRemotePath(string fileName)
         {
-            fileName = ZAppHelper.ReplaceIllegalChars(fileName, '_');
+            fileName = Helpers.ReplaceIllegalChars(fileName, '_');
 
             while (fileName.IndexOf("__") != -1)
             {

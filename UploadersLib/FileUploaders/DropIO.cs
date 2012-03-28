@@ -65,7 +65,7 @@ namespace UploadersLib.FileUploaders
 
             try
             {
-                DropName = "ZScreen_" + ZAppHelper.GetRandomAlphanumeric(10);
+                DropName = "ZScreen_" + Helpers.GetRandomAlphanumeric(10);
                 DropDescription = string.Empty;
                 Drop drop = CreateDrop(DropName, DropDescription, false, false, false);
 

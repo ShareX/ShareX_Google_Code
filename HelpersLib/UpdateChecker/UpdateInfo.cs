@@ -55,7 +55,7 @@ namespace UpdateCheckerLib
             get
             {
                 return ApplicationVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) &&
-                    (ZAppHelper.CheckVersion(LatestVersion, ApplicationVersion));
+                    (Helpers.CheckVersion(LatestVersion, ApplicationVersion));
             }
         }
 

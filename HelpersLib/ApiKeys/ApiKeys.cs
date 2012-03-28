@@ -25,7 +25,7 @@
 
 namespace HelpersLib
 {
-    public static class ZKeys
+    public static class ApiKeys
     {
         // Image Uploaders
         public const string ImageShackKey = "78EHNOPS04e77bc6df1cc0c5fc2e92e11c7b4a1a";

@@ -83,25 +83,25 @@ namespace ShareX
             this.Icon = // Resources.ShareX;
             niTray.Icon = Resources.ShareX;
 
-            foreach (string imageUploader in ZAppHelper.GetEnumDescriptions<ImageDestination>())
+            foreach (string imageUploader in Helpers.GetEnumDescriptions<ImageDestination>())
             {
                 tsmiImageUploaders.DropDownItems.Add(new ToolStripMenuItem(imageUploader));
             }
             tsmiImageUploaders.DropDownItemClicked += new ToolStripItemClickedEventHandler(tsddbImageUploaders_DropDownItemClicked);
 
-            foreach (string fileUploader in ZAppHelper.GetEnumDescriptions<FileDestination>())
+            foreach (string fileUploader in Helpers.GetEnumDescriptions<FileDestination>())
             {
                 tsmiFileUploaders.DropDownItems.Add(new ToolStripMenuItem(fileUploader));
             }
             tsmiFileUploaders.DropDownItemClicked += new ToolStripItemClickedEventHandler(tsddbFileUploaders_DropDownItemClicked);
 
-            foreach (string textUploader in ZAppHelper.GetEnumDescriptions<TextDestination>())
+            foreach (string textUploader in Helpers.GetEnumDescriptions<TextDestination>())
             {
                 tsmiTextUploaders.DropDownItems.Add(new ToolStripMenuItem(textUploader));
             }
             tsmiTextUploaders.DropDownItemClicked += new ToolStripItemClickedEventHandler(tsddbTextUploaders_DropDownItemClicked);
 
-            foreach (string urlShortener in ZAppHelper.GetEnumDescriptions<UrlShortenerType>())
+            foreach (string urlShortener in Helpers.GetEnumDescriptions<UrlShortenerType>())
             {
                 tsmiURLShorteners.DropDownItems.Add(new ToolStripMenuItem(urlShortener));
             }
@@ -128,7 +128,7 @@ namespace ShareX
         {
             niTray.Visible = Program.Settings.ShowTray;
 
-            if (ZAppHelper.GetEnumLength<ImageDestination>() <= Program.Settings.SelectedImageUploaderDestination)
+            if (Helpers.GetEnumLength<ImageDestination>() <= Program.Settings.SelectedImageUploaderDestination)
             {
                 Program.Settings.SelectedImageUploaderDestination = 0;
             }
@@ -136,7 +136,7 @@ namespace ShareX
             ((ToolStripMenuItem)tsmiImageUploaders.DropDownItems[Program.Settings.SelectedImageUploaderDestination]).Checked = true;
             UploadManager.ImageUploader = (ImageDestination)Program.Settings.SelectedImageUploaderDestination;
 
-            if (ZAppHelper.GetEnumLength<FileDestination>() <= Program.Settings.SelectedFileUploaderDestination)
+            if (Helpers.GetEnumLength<FileDestination>() <= Program.Settings.SelectedFileUploaderDestination)
             {
                 Program.Settings.SelectedFileUploaderDestination = 0;
             }
@@ -144,7 +144,7 @@ namespace ShareX
             ((ToolStripMenuItem)tsmiFileUploaders.DropDownItems[Program.Settings.SelectedFileUploaderDestination]).Checked = true;
             UploadManager.FileUploader = (FileDestination)Program.Settings.SelectedFileUploaderDestination;
 
-            if (ZAppHelper.GetEnumLength<TextDestination>() <= Program.Settings.SelectedTextUploaderDestination)
+            if (Helpers.GetEnumLength<TextDestination>() <= Program.Settings.SelectedTextUploaderDestination)
             {
                 Program.Settings.SelectedTextUploaderDestination = 0;
             }
@@ -152,7 +152,7 @@ namespace ShareX
             ((ToolStripMenuItem)tsmiTextUploaders.DropDownItems[Program.Settings.SelectedTextUploaderDestination]).Checked = true;
             UploadManager.TextUploader = (TextDestination)Program.Settings.SelectedTextUploaderDestination;
 
-            if (ZAppHelper.GetEnumLength<UrlShortenerType>() <= Program.Settings.SelectedURLShortenerDestination)
+            if (Helpers.GetEnumLength<UrlShortenerType>() <= Program.Settings.SelectedURLShortenerDestination)
             {
                 Program.Settings.SelectedURLShortenerDestination = 0;
             }
@@ -240,7 +240,7 @@ namespace ShareX
 
         private void CheckUpdate()
         {
-            UpdateChecker updateChecker = new UpdateChecker(ZLinks.URL_UPDATE, Application.ProductName, new Version(Program.AssemblyVersion),
+            UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, new Version(Program.AssemblyVersion),
                 ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
             updateChecker.CheckUpdate();
 
@@ -292,7 +292,7 @@ namespace ShareX
 
             if (result != null && !string.IsNullOrEmpty(result.URL))
             {
-                ZAppHelper.LoadBrowserAsync(result.URL);
+                Helpers.LoadBrowserAsync(result.URL);
             }
         }
 
@@ -309,7 +309,7 @@ namespace ShareX
 
                     if (!string.IsNullOrEmpty(urls))
                     {
-                        ZAppHelper.CopyTextSafely(urls);
+                        Helpers.CopyTextSafely(urls);
                     }
                 }
             }
@@ -321,7 +321,7 @@ namespace ShareX
 
             if (result != null && !string.IsNullOrEmpty(result.ShortenedURL))
             {
-                ZAppHelper.CopyTextSafely(result.ShortenedURL);
+                Helpers.CopyTextSafely(result.ShortenedURL);
             }
         }
 
@@ -331,7 +331,7 @@ namespace ShareX
 
             if (result != null && !string.IsNullOrEmpty(result.ThumbnailURL))
             {
-                ZAppHelper.CopyTextSafely(result.ThumbnailURL);
+                Helpers.CopyTextSafely(result.ThumbnailURL);
             }
         }
 
@@ -341,7 +341,7 @@ namespace ShareX
 
             if (result != null && !string.IsNullOrEmpty(result.DeletionURL))
             {
-                ZAppHelper.CopyTextSafely(result.DeletionURL);
+                Helpers.CopyTextSafely(result.DeletionURL);
             }
         }
 
@@ -365,7 +365,7 @@ namespace ShareX
             if (!string.IsNullOrEmpty(errors))
             {
                 Exception e = new Exception("Upload errors: " + errors);
-                new ErrorForm(Application.ProductName, e, Program.MyLogger, Program.LogFilePath, ZLinks.URL_ISSUES).ShowDialog();
+                new ErrorForm(Application.ProductName, e, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
             }
         }
 
@@ -375,7 +375,7 @@ namespace ShareX
 
             if (!string.IsNullOrEmpty(errors))
             {
-                ZAppHelper.CopyTextSafely(errors);
+                Helpers.CopyTextSafely(errors);
             }
         }
 
@@ -586,7 +586,7 @@ namespace ShareX
 
         private void tsbDonate_Click(object sender, EventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(ZLinks.URL_DONATE_ZU);
+            Helpers.LoadBrowserAsync(Links.URL_DONATE_ZU);
         }
 
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)
@@ -677,7 +677,7 @@ namespace ShareX
 
             if (!string.IsNullOrEmpty(url))
             {
-                ZAppHelper.LoadBrowserAsync(url);
+                Helpers.LoadBrowserAsync(url);
             }
         }
 

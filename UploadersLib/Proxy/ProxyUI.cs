@@ -37,7 +37,7 @@ namespace UploadersLib.HelperClasses
         public ProxyUI()
         {
             InitializeComponent();
-            WebProxy proxy = ZAppHelper.GetDefaultWebProxy();
+            WebProxy proxy = Helpers.GetDefaultWebProxy();
             Proxy = new ProxyInfo(Environment.UserName, "", proxy.Address.Host, proxy.Address.Port);
         }
 

@@ -58,7 +58,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.ImgurOAuthInfo = oauth;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                 }
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace UploadersLib
                 string url = flickr.GetAuthLink(FlickrPermission.Write);
                 if (!string.IsNullOrEmpty(url))
                 {
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                     btnFlickrCompleteAuth.Enabled = true;
                 }
             }
@@ -173,7 +173,7 @@ namespace UploadersLib
                     string url = flickr.GetPhotosLink(userID);
                     if (!string.IsNullOrEmpty(url))
                     {
-                        ZAppHelper.LoadBrowserAsync(url);
+                        Helpers.LoadBrowserAsync(url);
                     }
                 }
             }
@@ -194,7 +194,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.PhotobucketOAuthInfo = oauth;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                 }
             }
             catch (Exception ex)
@@ -351,7 +351,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.DropboxOAuthInfo = oauth;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                     btnDropboxCompleteAuth.Enabled = true;
                 }
             }
@@ -439,7 +439,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.BoxTicket = box.Ticket;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                     btnBoxCompleteAuth.Enabled = true;
                 }
             }
@@ -872,7 +872,7 @@ namespace UploadersLib
                 if (!string.IsNullOrEmpty(url))
                 {
                     Config.GoogleURLShortenerOAuthInfo = oauth;
-                    ZAppHelper.LoadBrowserAsync(url);
+                    Helpers.LoadBrowserAsync(url);
                     btnGoogleURLShortenerAuthComplete.Enabled = true;
                 }
             }

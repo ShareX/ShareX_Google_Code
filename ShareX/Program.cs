@@ -250,7 +250,7 @@ namespace ShareX
 
         private static void OnError(Exception e)
         {
-            new ErrorForm(Application.ProductName, e, MyLogger, LogFilePath, ZLinks.URL_ISSUES).ShowDialog();
+            new ErrorForm(Application.ProductName, e, MyLogger, LogFilePath, Links.URL_ISSUES).ShowDialog();
         }
 
         private static void SingleInstanceCallback(object sender, InstanceCallbackEventArgs args)

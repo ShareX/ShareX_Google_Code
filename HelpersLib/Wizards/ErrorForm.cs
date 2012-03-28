@@ -71,7 +71,7 @@ namespace HelpersLib
 
             if (!string.IsNullOrEmpty(text))
             {
-                ZAppHelper.CopyTextSafely(text);
+                Helpers.CopyTextSafely(text);
             }
         }
 
@@ -87,7 +87,7 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(BugReportPath))
             {
-                ZAppHelper.LoadBrowserAsync(BugReportPath);
+                Helpers.LoadBrowserAsync(BugReportPath);
             }
         }
 

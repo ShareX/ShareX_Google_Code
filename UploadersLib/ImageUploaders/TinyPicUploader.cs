@@ -93,8 +93,8 @@ namespace UploadersLib.ImageUploaders
 
                 if (!string.IsNullOrEmpty(ur.Source) && CheckResponse(ur.Source))
                 {
-                    ur.URL = ZAppHelper.GetXMLValue(ur.Source, "fullsize");
-                    ur.ThumbnailURL = ZAppHelper.GetXMLValue(ur.Source, "thumbnail");
+                    ur.URL = Helpers.GetXMLValue(ur.Source, "fullsize");
+                    ur.ThumbnailURL = Helpers.GetXMLValue(ur.Source, "thumbnail");
                 }
             }
 
@@ -118,7 +118,7 @@ namespace UploadersLib.ImageUploaders
 
             if (!string.IsNullOrEmpty(response))
             {
-                string result = ZAppHelper.GetXMLValue(response, "shuk");
+                string result = Helpers.GetXMLValue(response, "shuk");
 
                 return HttpUtility.HtmlEncode(result);
             }
@@ -138,7 +138,7 @@ namespace UploadersLib.ImageUploaders
 
             if (!string.IsNullOrEmpty(response) && CheckResponse(response))
             {
-                string upk = ZAppHelper.GetXMLValue(response, "uploadkey");
+                string upk = Helpers.GetXMLValue(response, "uploadkey");
 
                 if (string.IsNullOrEmpty(upk))
                 {
