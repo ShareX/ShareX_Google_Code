@@ -68,7 +68,7 @@ namespace ShareX
                     EDataType type;
                     EDataType destination = EDataType.Default;
 
-                    if (ZAppHelper.IsImageFile(path))
+                    if (Helpers.IsImageFile(path))
                     {
                         type = EDataType.Image;
 
@@ -77,7 +77,7 @@ namespace ShareX
                             destination = EDataType.File;
                         }
                     }
-                    else if (ZAppHelper.IsTextFile(path))
+                    else if (Helpers.IsTextFile(path))
                     {
                         type = EDataType.Text;
 
@@ -141,7 +141,7 @@ namespace ShareX
             {
                 string text = Clipboard.GetText();
 
-                if (Program.Settings.ClipboardUploadAutoDetectURL && ZAppHelper.IsValidURL(text))
+                if (Program.Settings.ClipboardUploadAutoDetectURL && Helpers.IsValidURL(text))
                 {
                     ShortenURL(text.Trim());
                 }
@@ -399,7 +399,7 @@ namespace ShareX
 
                             if (Program.Settings.ClipboardAutoCopy)
                             {
-                                ZAppHelper.CopyTextSafely(url);
+                                Helpers.CopyTextSafely(url);
                             }
 
                             if (Program.Settings.SaveHistory)

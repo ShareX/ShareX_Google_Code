@@ -41,7 +41,7 @@ namespace ShareX
             lblProductName.Text = Program.Title;
             lblCopyright.Text = AssemblyCopyright;
 
-            UpdateChecker updateChecker = new UpdateChecker(ZLinks.URL_UPDATE, Application.ProductName, new Version(Program.AssemblyVersion),
+            UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, new Version(Program.AssemblyVersion),
                 ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
             uclUpdate.CheckUpdate(updateChecker);
         }
@@ -67,22 +67,22 @@ namespace ShareX
 
         private void lblZScreen_Click(object sender, EventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(ZLinks.URL_WEBSITE);
+            Helpers.LoadBrowserAsync(Links.URL_WEBSITE);
         }
 
         private void lblBugs_Click(object sender, EventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(ZLinks.URL_ISSUES);
+            Helpers.LoadBrowserAsync(Links.URL_ISSUES);
         }
 
         private void pbBerkURL_Click(object sender, EventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(ZLinks.URL_BERK);
+            Helpers.LoadBrowserAsync(Links.URL_BERK);
         }
 
         private void pbMikeURL_Click(object sender, EventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(ZLinks.URL_MIKE);
+            Helpers.LoadBrowserAsync(Links.URL_MIKE);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

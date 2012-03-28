@@ -107,7 +107,7 @@ namespace HelpersLib
 
             this.BackColor = Color.White;
             this.BackgroundImage = screenshot;
-            this.Bounds = ZAppHelper.GetScreenBounds();
+            this.Bounds = Helpers.GetScreenBounds();
             this.Cursor = Cursors.Hand;
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.None;

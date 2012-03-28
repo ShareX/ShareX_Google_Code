@@ -71,7 +71,7 @@ namespace UpdateCheckerLib
 
         private void TxtVerLinkClicked(object sender, LinkClickedEventArgs e)
         {
-            ZAppHelper.LoadBrowserAsync(e.LinkText);
+            Helpers.LoadBrowserAsync(e.LinkText);
         }
 
         private void NewVersionWindow_Paint(object sender, PaintEventArgs e)

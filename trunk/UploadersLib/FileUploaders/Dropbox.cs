@@ -146,7 +146,7 @@ namespace UploadersLib.FileUploaders
 
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = OAuthManager.GenerateQuery(ZAppHelper.CombineURL(URLMetaData, path), null, HttpMethod.Get, AuthInfo);
+                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLMetaData, path), null, HttpMethod.Get, AuthInfo);
 
                 string response = SendGetRequest(url);
 
@@ -171,7 +171,7 @@ namespace UploadersLib.FileUploaders
         {
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = OAuthManager.GenerateQuery(ZAppHelper.CombineURL(URLShares, path, fileName), null, HttpMethod.Get, AuthInfo);
+                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLShares, path, fileName), null, HttpMethod.Get, AuthInfo);
 
                 string response = SendGetRequest(url);
 
@@ -193,7 +193,7 @@ namespace UploadersLib.FileUploaders
                 return null;
             }
 
-            string url = ZAppHelper.CombineURL(URLFiles, UploadPath);
+            string url = Helpers.CombineURL(URLFiles, UploadPath);
 
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("file", fileName);
@@ -229,7 +229,7 @@ namespace UploadersLib.FileUploaders
         {
             if (!string.IsNullOrEmpty(uploadPath) && uploadPath.StartsWith("Public/", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrEmpty(fileName))
             {
-                return ZAppHelper.CombineURL(URLDownload, userID.ToString(), uploadPath.Substring(7), HttpUtility.UrlPathEncode(fileName));
+                return Helpers.CombineURL(URLDownload, userID.ToString(), uploadPath.Substring(7), HttpUtility.UrlPathEncode(fileName));
             }
 
             return "Upload path is private. Use \"Public\" folder to get public URL.";

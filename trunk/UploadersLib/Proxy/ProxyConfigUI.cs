@@ -59,7 +59,7 @@ namespace UploadersLib
 
         private void ProxyAccountsAddButton_Click(object sender, EventArgs e)
         {
-            WebProxy proxy = ZAppHelper.GetDefaultWebProxy();
+            WebProxy proxy = Helpers.GetDefaultWebProxy();
             ProxyAdd(new ProxyInfo(Environment.UserName, "", proxy.Address.Host, proxy.Address.Port));
             cboProxyConfig.SelectedIndex = (int)EProxyConfigType.ManualProxy;
         }

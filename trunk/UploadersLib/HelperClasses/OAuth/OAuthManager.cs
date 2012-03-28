@@ -112,7 +112,7 @@ namespace UploadersLib.HelperClasses
 
                 if (!string.IsNullOrEmpty(callback))
                 {
-                    url += string.Format("&{0}={1}", ParameterCallback, ZAppHelper.URLEncode(callback));
+                    url += string.Format("&{0}={1}", ParameterCallback, Helpers.URLEncode(callback));
                 }
 
                 if (args[ParameterTokenSecret] != null)
@@ -147,8 +147,8 @@ namespace UploadersLib.HelperClasses
         {
             StringBuilder signatureBase = new StringBuilder();
             signatureBase.AppendFormat("{0}&", httpMethod.ToString().ToUpperInvariant());
-            signatureBase.AppendFormat("{0}&", ZAppHelper.URLEncode(normalizedUrl));
-            signatureBase.AppendFormat("{0}", ZAppHelper.URLEncode(normalizedParameters));
+            signatureBase.AppendFormat("{0}&", Helpers.URLEncode(normalizedUrl));
+            signatureBase.AppendFormat("{0}", Helpers.URLEncode(normalizedParameters));
             return signatureBase.ToString();
         }
 
@@ -166,7 +166,7 @@ namespace UploadersLib.HelperClasses
 
                 string signature = Convert.ToBase64String(hashBytes);
 
-                return ZAppHelper.URLEncode(signature);
+                return Helpers.URLEncode(signature);
             }
         }
 
@@ -178,7 +178,7 @@ namespace UploadersLib.HelperClasses
 
         private static string GenerateNonce()
         {
-            return ZAppHelper.GetRandomAlphanumeric(12);
+            return Helpers.GetRandomAlphanumeric(12);
         }
 
         private static string NormalizeUrl(string url)
@@ -204,7 +204,7 @@ namespace UploadersLib.HelperClasses
 
         private static string NormalizeParameters(Dictionary<string, string> parameters)
         {
-            return string.Join("&", parameters.OrderBy(x => x.Key).ThenBy(x => x.Value).Select(x => x.Key + "=" + ZAppHelper.URLEncode(x.Value)).ToArray());
+            return string.Join("&", parameters.OrderBy(x => x.Key).ThenBy(x => x.Value).Select(x => x.Key + "=" + Helpers.URLEncode(x.Value)).ToArray());
         }
     }
 }

@@ -620,7 +620,7 @@ namespace ShareX
                 Program.Settings.ProxySettings.UserName = Environment.UserName;
             }
 
-            WebProxy proxy = ZAppHelper.GetDefaultWebProxy();
+            WebProxy proxy = Helpers.GetDefaultWebProxy();
             if (proxy != null && proxy.Address != null)
             {
                 if (string.IsNullOrEmpty(Program.Settings.ProxySettings.Host))

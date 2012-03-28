@@ -232,37 +232,37 @@ namespace ShareX
             switch (UploadManager.ImageUploader)
             {
                 case ImageDestination.ImageShack:
-                    imageUploader = new ImageShackUploader(ZKeys.ImageShackKey, Program.UploadersConfig.ImageShackAccountType,
+                    imageUploader = new ImageShackUploader(ApiKeys.ImageShackKey, Program.UploadersConfig.ImageShackAccountType,
                         Program.UploadersConfig.ImageShackRegistrationCode)
                     {
                         IsPublic = Program.UploadersConfig.ImageShackShowImagesInPublic
                     };
                     break;
                 case ImageDestination.TinyPic:
-                    imageUploader = new TinyPicUploader(ZKeys.TinyPicID, ZKeys.TinyPicKey, Program.UploadersConfig.TinyPicAccountType,
+                    imageUploader = new TinyPicUploader(ApiKeys.TinyPicID, ApiKeys.TinyPicKey, Program.UploadersConfig.TinyPicAccountType,
                         Program.UploadersConfig.TinyPicRegistrationCode);
                     break;
                 case ImageDestination.Imgur:
-                    imageUploader = new Imgur(Program.UploadersConfig.ImgurAccountType, ZKeys.ImgurAnonymousKey, Program.UploadersConfig.ImgurOAuthInfo)
+                    imageUploader = new Imgur(Program.UploadersConfig.ImgurAccountType, ApiKeys.ImgurAnonymousKey, Program.UploadersConfig.ImgurOAuthInfo)
                     {
                         ThumbnailType = Program.UploadersConfig.ImgurThumbnailType
                     };
                     break;
                 case ImageDestination.Flickr:
-                    imageUploader = new FlickrUploader(ZKeys.FlickrKey, ZKeys.FlickrSecret, Program.UploadersConfig.FlickrAuthInfo, Program.UploadersConfig.FlickrSettings);
+                    imageUploader = new FlickrUploader(ApiKeys.FlickrKey, ApiKeys.FlickrSecret, Program.UploadersConfig.FlickrAuthInfo, Program.UploadersConfig.FlickrSettings);
                     break;
                 case ImageDestination.Photobucket:
                     imageUploader = new Photobucket(Program.UploadersConfig.PhotobucketOAuthInfo, Program.UploadersConfig.PhotobucketAccountInfo);
                     break;
                 case ImageDestination.UploadScreenshot:
-                    imageUploader = new UploadScreenshot(ZKeys.UploadScreenshotKey);
+                    imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
                     break;
                 case ImageDestination.Twitpic:
                     int indexTwitpic = Program.UploadersConfig.TwitterSelectedAccount;
 
                     if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitpic))
                     {
-                        imageUploader = new TwitPicUploader(ZKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
+                        imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
                         {
                             TwitPicThumbnailMode = Program.UploadersConfig.TwitPicThumbnailMode,
                             ShowFull = Program.UploadersConfig.TwitPicShowFull
@@ -274,11 +274,11 @@ namespace ShareX
 
                     if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitsnaps))
                     {
-                        imageUploader = new TwitSnapsUploader(ZKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
+                        imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
                     }
                     break;
                 case ImageDestination.yFrog:
-                    YfrogOptions yFrogOptions = new YfrogOptions(ZKeys.ImageShackKey);
+                    YfrogOptions yFrogOptions = new YfrogOptions(ApiKeys.ImageShackKey);
                     yFrogOptions.Username = Program.UploadersConfig.YFrogUsername;
                     yFrogOptions.Password = Program.UploadersConfig.YFrogPassword;
                     yFrogOptions.Source = Application.ProductName;
@@ -302,10 +302,10 @@ namespace ShareX
             switch (UploadManager.TextUploader)
             {
                 case TextDestination.Pastebin:
-                    textUploader = new PastebinUploader(ZKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
+                    textUploader = new PastebinUploader(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new PastebinCaUploader(ZKeys.PastebinCaKey);
+                    textUploader = new PastebinCaUploader(ApiKeys.PastebinCaKey);
                     break;
                 case TextDestination.Paste2:
                     textUploader = new Paste2Uploader();
@@ -344,22 +344,22 @@ namespace ShareX
                         Program.UploadersConfig.RapidShareFolderID);
                     break;
                 case FileDestination.SendSpace:
-                    fileUploader = new SendSpace(ZKeys.SendSpaceKey);
+                    fileUploader = new SendSpace(ApiKeys.SendSpaceKey);
                     switch (Program.UploadersConfig.SendSpaceAccountType)
                     {
                         case AccountType.Anonymous:
-                            SendSpaceManager.PrepareUploadInfo(ZKeys.SendSpaceKey);
+                            SendSpaceManager.PrepareUploadInfo(ApiKeys.SendSpaceKey);
                             break;
                         case AccountType.User:
-                            SendSpaceManager.PrepareUploadInfo(ZKeys.SendSpaceKey, Program.UploadersConfig.SendSpaceUsername, Program.UploadersConfig.SendSpacePassword);
+                            SendSpaceManager.PrepareUploadInfo(ApiKeys.SendSpaceKey, Program.UploadersConfig.SendSpaceUsername, Program.UploadersConfig.SendSpacePassword);
                             break;
                     }
                     break;
                 case FileDestination.Minus:
-                    fileUploader = new Minus(Program.UploadersConfig.MinusConfig, new OAuthInfo(ZKeys.MinusConsumerKey, ZKeys.MinusConsumerSecret));
+                    fileUploader = new Minus(Program.UploadersConfig.MinusConfig, new OAuthInfo(ApiKeys.MinusConsumerKey, ApiKeys.MinusConsumerSecret));
                     break;
                 case FileDestination.Box:
-                    fileUploader = new Box(ZKeys.BoxKey)
+                    fileUploader = new Box(ApiKeys.BoxKey)
                     {
                         AuthToken = Program.UploadersConfig.BoxAuthToken,
                         FolderID = Program.UploadersConfig.BoxFolderID,
@@ -426,17 +426,17 @@ namespace ShareX
             switch (UploadManager.URLShortener)
             {
                 case UrlShortenerType.BITLY:
-                    urlShortener = new BitlyURLShortener(ZKeys.BitlyLogin, ZKeys.BitlyKey);
+                    urlShortener = new BitlyURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);
                     break;
                 case UrlShortenerType.Google:
-                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, ZKeys.GoogleApiKey,
+                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, ApiKeys.GoogleApiKey,
                         Program.UploadersConfig.GoogleURLShortenerOAuthInfo);
                     break;
                 case UrlShortenerType.ISGD:
                     urlShortener = new IsgdURLShortener();
                     break;
                 case UrlShortenerType.Jmp:
-                    urlShortener = new JmpURLShortener(ZKeys.BitlyLogin, ZKeys.BitlyKey);
+                    urlShortener = new JmpURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);
                     break;
                 /*case UrlShortenerType.THREELY:
                     urlShortener = new ThreelyURLShortener(Program.ThreelyKey);

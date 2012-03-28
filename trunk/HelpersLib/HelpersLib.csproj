@@ -83,7 +83,7 @@
     <Compile Include="ApiKeys\ApiKeysUI.Designer.cs">
       <DependentUpon>ApiKeysUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApiKeys\ZKeys.cs" />
+    <Compile Include="ApiKeys\ApiKeys.cs" />
     <Compile Include="CaptureHelpers.cs" />
     <Compile Include="CLI\CLICommand.cs" />
     <Compile Include="CLI\CLICommandAction.cs" />
@@ -234,7 +234,7 @@
     </Compile>
     <Compile Include="SerializationHelper.cs" />
     <Compile Include="XMLSettingsBase.cs" />
-    <Compile Include="ZLinks.cs" />
+    <Compile Include="Links.cs" />
     <EmbeddedResource Include="ApiKeys\ApiKeysUI.resx">
       <DependentUpon>ApiKeysUI.cs</DependentUpon>
     </EmbeddedResource>

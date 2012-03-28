@@ -42,7 +42,7 @@ using Microsoft.Win32;
 
 namespace HelpersLib
 {
-    public static class ZAppHelper
+    public static class Helpers
     {
         public static readonly Random Random = new Random();
 
