@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -32,6 +33,73 @@ namespace HelpersLib
 {
     public static class TranslatorHelper
     {
+        #region Text to ...
+
+        public static string[] TextToBinary(string text)
+        {
+            string[] result = new string[text.Length];
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                result[i] = ByteToBinary((byte)text[i]);
+            }
+
+            return result;
+        }
+
+        public static string[] TextToHexadecimal(string text)
+        {
+            return BytesToHexadecimal(Encoding.UTF8.GetBytes(text));
+        }
+
+        public static byte[] TextToASCII(string text)
+        {
+            return Encoding.ASCII.GetBytes(text);
+        }
+
+        public static string TextToBase64(string text)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            return Convert.ToBase64String(bytes);
+        }
+
+        public static string TextToHash(string text, HashType hashType, bool uppercase = false)
+        {
+            using (HashAlgorithm hash = GetHashAlgorithm(hashType))
+            {
+                byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+                string[] hex = BytesToHexadecimal(bytes);
+                string result = string.Concat(hex);
+                if (uppercase) result = result.ToUpperInvariant();
+                return result;
+            }
+        }
+
+        #endregion Text to ...
+
+        #region Binary to ...
+
+        public static byte BinaryToByte(string binary)
+        {
+            return Convert.ToByte(binary, 2);
+        }
+
+        public static string BinaryToText(string binary)
+        {
+            binary = Regex.Replace(binary, @"[^01]", "");
+
+            MemoryStream stream = new MemoryStream();
+
+            for (int i = 0; i + 8 <= binary.Length; i += 8)
+            {
+                stream.WriteByte(TranslatorHelper.BinaryToByte(binary.Substring(i, 8)));
+            }
+
+            return Encoding.UTF8.GetString(stream.ToArray());
+        }
+
+        #endregion Binary to ...
+
         #region Byte to ...
 
         public static string ByteToBinary(byte b)
@@ -70,72 +138,6 @@ namespace HelpersLib
 
         #endregion Byte to ...
 
-        #region Text to ...
-
-        public static string[] TextToBinary(string text)
-        {
-            string[] result = new string[text.Length];
-
-            for (int i = 0; i < text.Length; i++)
-            {
-                result[i] = ByteToBinary((byte)text[i]);
-            }
-
-            return result;
-        }
-
-        public static string[] TextToHexadecimal(string text)
-        {
-            return BytesToHexadecimal(Encoding.UTF8.GetBytes(text));
-        }
-
-        public static byte[] TextToASCII(string text)
-        {
-            return Encoding.ASCII.GetBytes(text);
-        }
-
-        public static string TextToBase64(string text)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(text);
-            return Convert.ToBase64String(bytes);
-        }
-
-        public static string TextToHash(string text, HashType hashType)
-        {
-            using (HashAlgorithm hash = GetHashAlgorithm(hashType))
-            {
-                byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(text));
-                string[] hex = BytesToHexadecimal(bytes);
-                return string.Concat(hex);
-            }
-        }
-
-        #endregion Text to ...
-
-        #region Binary to ...
-
-        public static byte BinaryToByte(string binary)
-        {
-            return Convert.ToByte(binary, 2);
-        }
-
-        public static string BinaryToText(string binary)
-        {
-            binary = Regex.Replace(binary, @"[^01]", "");
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i + 8 <= binary.Length; i += 8)
-            {
-                char c = (char)TranslatorHelper.BinaryToByte(binary.Substring(i, 8));
-                sb.Append(c);
-            }
-
-            return sb.ToString();
-        }
-
-        #endregion Binary to ...
-
         #region Hexadecimal to ...
 
         public static byte HexadecimalToByte(string hex)
@@ -147,15 +149,14 @@ namespace HelpersLib
         {
             hex = Regex.Replace(hex, @"[^0-9a-fA-F]", "");
 
-            StringBuilder sb = new StringBuilder();
+            MemoryStream stream = new MemoryStream();
 
             for (int i = 0; i + 2 <= hex.Length; i += 2)
             {
-                char c = (char)TranslatorHelper.HexadecimalToByte(hex.Substring(i, 2));
-                sb.Append(c);
+                stream.WriteByte(TranslatorHelper.HexadecimalToByte(hex.Substring(i, 2)));
             }
 
-            return sb.ToString();
+            return Encoding.UTF8.GetString(stream.ToArray());
         }
 
         #endregion Hexadecimal to ...
@@ -176,18 +177,18 @@ namespace HelpersLib
         {
             string[] numbers = Regex.Split(ascii, @"\D+");
 
-            StringBuilder sb = new StringBuilder();
+            MemoryStream stream = new MemoryStream();
 
             for (int i = 0; i < numbers.Length; i++)
             {
-                int number;
-                if (int.TryParse(numbers[i], out number))
+                byte b;
+                if (byte.TryParse(numbers[i], out b))
                 {
-                    sb.Append((char)number);
+                    stream.WriteByte(b);
                 }
             }
 
-            return sb.ToString();
+            return Encoding.ASCII.GetString(stream.ToArray());
         }
 
         #endregion ASCII to ...
