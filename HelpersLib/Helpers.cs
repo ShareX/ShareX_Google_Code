@@ -188,6 +188,11 @@ namespace HelpersLib
             return GetRandomString(Alphanumeric, length);
         }
 
+        public static string GetAllCharacters()
+        {
+            return Encoding.UTF8.GetString(Enumerable.Range(1, 255).Select(i => (byte)i).ToArray());
+        }
+
         public static string ReplaceIllegalChars(string filename, char replace)
         {
             StringBuilder sb = new StringBuilder();

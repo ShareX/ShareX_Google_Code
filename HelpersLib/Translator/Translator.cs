@@ -38,7 +38,7 @@ namespace HelpersLib
 
         // http://en.wikipedia.org/wiki/Hexadecimal
         public string[] Hexadecimal { get; private set; }
-        public string HexadecimalText { get { return Hexadecimal.Join(); } }
+        public string HexadecimalText { get { return Hexadecimal.Join().ToUpperInvariant(); } }
 
         // http://en.wikipedia.org/wiki/ASCII
         public byte[] ASCII { get; private set; }
@@ -70,12 +70,12 @@ namespace HelpersLib
                 Hexadecimal = TranslatorHelper.TextToHexadecimal(text);
                 ASCII = TranslatorHelper.TextToASCII(text);
                 Base64 = TranslatorHelper.TextToBase64(text);
-                MD5 = TranslatorHelper.TextToHash(text, HashType.MD5);
-                SHA1 = TranslatorHelper.TextToHash(text, HashType.SHA1);
-                SHA256 = TranslatorHelper.TextToHash(text, HashType.SHA256);
-                SHA384 = TranslatorHelper.TextToHash(text, HashType.SHA384);
-                SHA512 = TranslatorHelper.TextToHash(text, HashType.SHA512);
-                RIPEMD160 = TranslatorHelper.TextToHash(text, HashType.RIPEMD160);
+                MD5 = TranslatorHelper.TextToHash(text, HashType.MD5, true);
+                SHA1 = TranslatorHelper.TextToHash(text, HashType.SHA1, true);
+                SHA256 = TranslatorHelper.TextToHash(text, HashType.SHA256, true);
+                SHA384 = TranslatorHelper.TextToHash(text, HashType.SHA384, true);
+                SHA512 = TranslatorHelper.TextToHash(text, HashType.SHA512, true);
+                RIPEMD160 = TranslatorHelper.TextToHash(text, HashType.RIPEMD160, true);
             }
         }
 
@@ -101,6 +101,23 @@ namespace HelpersLib
         {
             string result = TranslatorHelper.Base64ToText(base64);
             return DecodeReturn(result);
+        }
+
+        public static bool Test()
+        {
+            bool result = true;
+            Translator translator = new Translator();
+            string text = Helpers.GetAllCharacters();
+            translator.EncodeText(text);
+            translator.DecodeBinary(translator.BinaryText);
+            result &= translator.Text == text;
+            translator.DecodeHex(translator.HexadecimalText);
+            result &= translator.Text == text;
+            //translator.DecodeASCII(translator.ASCIIText);
+            //result &= translator.Text == text;
+            translator.DecodeBase64(translator.Base64);
+            result &= translator.Text == text;
+            return result;
         }
 
         private bool DecodeReturn(string result)
