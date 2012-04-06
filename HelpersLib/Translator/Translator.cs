@@ -61,7 +61,7 @@ namespace HelpersLib
         // http://en.wikipedia.org/wiki/RIPEMD
         public string RIPEMD160 { get; private set; }
 
-        public void EncodeText(string text)
+        public bool EncodeText(string text)
         {
             if (!string.IsNullOrEmpty(text))
             {
@@ -76,31 +76,34 @@ namespace HelpersLib
                 SHA384 = TranslatorHelper.TextToHash(text, HashType.SHA384, true);
                 SHA512 = TranslatorHelper.TextToHash(text, HashType.SHA512, true);
                 RIPEMD160 = TranslatorHelper.TextToHash(text, HashType.RIPEMD160, true);
+                return true;
             }
+
+            return false;
         }
 
         public bool DecodeBinary(string binary)
         {
             string result = TranslatorHelper.BinaryToText(binary);
-            return DecodeReturn(result);
+            return EncodeText(result);
         }
 
         public bool DecodeHex(string hex)
         {
             string result = TranslatorHelper.HexadecimalToText(hex);
-            return DecodeReturn(result);
+            return EncodeText(result);
         }
 
         public bool DecodeASCII(string ascii)
         {
             string result = TranslatorHelper.ASCIIToText(ascii);
-            return DecodeReturn(result);
+            return EncodeText(result);
         }
 
         public bool DecodeBase64(string base64)
         {
             string result = TranslatorHelper.Base64ToText(base64);
-            return DecodeReturn(result);
+            return EncodeText(result);
         }
 
         public static bool Test()
@@ -118,17 +121,6 @@ namespace HelpersLib
             translator.DecodeBase64(translator.Base64);
             result &= translator.Text == text;
             return result;
-        }
-
-        private bool DecodeReturn(string result)
-        {
-            if (!string.IsNullOrEmpty(result))
-            {
-                EncodeText(result);
-                return true;
-            }
-
-            return false;
         }
 
         public string HashToString()

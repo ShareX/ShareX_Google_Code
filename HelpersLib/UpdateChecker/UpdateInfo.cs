@@ -32,22 +32,16 @@ namespace UpdateCheckerLib
     public class UpdateInfo
     {
         public Version ApplicationVersion { get; set; }
-
         public Version LatestVersion { get; set; }
-
         public string URL { get; set; }
-
         public DateTime Date { get; set; }
-
         public string Summary { get; set; }
-
         public ReleaseChannelType ReleaseChannel { get; private set; }
-
         public UpdateStatus Status { get; set; }
 
         public UpdateInfo(ReleaseChannelType channel)
         {
-            this.ReleaseChannel = channel;
+            ReleaseChannel = channel;
         }
 
         public bool IsUpdateRequired
@@ -61,7 +55,7 @@ namespace UpdateCheckerLib
 
         public override string ToString()
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format("{0} is your current version", ApplicationVersion));
             sb.AppendLine(string.Format("{0} is the latest {1}", LatestVersion, ReleaseChannel.GetDescription()));
             sb.AppendLine(string.Format("{1} was last updated on {0}", Date.ToLongDateString(), ReleaseChannel.GetDescription()));

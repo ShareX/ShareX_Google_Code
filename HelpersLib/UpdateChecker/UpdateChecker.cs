@@ -55,15 +55,10 @@ namespace UpdateCheckerLib
     public class UpdateChecker
     {
         public string URL { get; private set; }
-
         public string ApplicationName { get; private set; }
-
         public Version ApplicationVersion { get; private set; }
-
         public ReleaseChannelType ReleaseChannel { get; private set; }
-
         public UpdateInfo UpdateInfo { get; private set; }
-
         public IWebProxy Proxy { get; set; }
 
         public UpdateChecker(string url, string applicationName, Version applicationVersion, ReleaseChannelType channel, IWebProxy proxy, NewVersionWindowOptions nvwo = null)
