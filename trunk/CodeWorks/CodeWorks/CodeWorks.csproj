@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="RegionArea.cs" />
     <Compile Include="RegionAreaManager.cs" />
-    <Compile Include="StringLineReader.cs" />
     <Compile Include="TextInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +113,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HelpersLib\HelpersLib.csproj">
+      <Project>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</Project>
+      <Name>HelpersLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

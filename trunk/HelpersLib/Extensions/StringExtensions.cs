@@ -58,6 +58,19 @@ namespace HelpersLib
             return str;
         }
 
+        public static string Between(this string text, string first, string last, bool isFirstMatchForEnd = false, bool includeFirstAndLast = false)
+        {
+            int start = text.IndexOf(first);
+            if (start < 0) return null;
+            if (!includeFirstAndLast) start += first.Length;
+            text = text.Substring(start);
+
+            int end = isFirstMatchForEnd ? text.IndexOf(last) : text.LastIndexOf(last);
+            if (end < 0) return null;
+            if (includeFirstAndLast) end += last.Length;
+            return text.Remove(end);
+        }
+
         public static string ReplaceWith(this string str, string search, string replace,
             int occurrence = 0, StringComparison comparison = StringComparison.InvariantCultureIgnoreCase)
         {

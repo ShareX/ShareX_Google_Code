@@ -26,7 +26,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CodeWorks
+namespace HelpersLib
 {
     public class StringLineReader
     {

@@ -193,10 +193,13 @@ namespace HelpersLib
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < array.Length; i++)
+            if (array != null)
             {
-                if (sb.Length > 0 && !string.IsNullOrEmpty(separator)) sb.Append(separator);
-                sb.Append(array[i].ToString());
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (sb.Length > 0 && !string.IsNullOrEmpty(separator)) sb.Append(separator);
+                    sb.Append(array[i].ToString());
+                }
             }
 
             return sb.ToString();
