@@ -442,11 +442,11 @@ namespace ShareX
 
                     if (isWorking)
                     {
-                        icon = Resources.ShareX;
+                        icon = Resources.ShareXSmallBusyIcon;
                     }
                     else
                     {
-                        icon = Resources.ShareX;
+                        icon = Resources.ShareXSmallIcon;
                     }
 
                     Program.mainForm.niTray.Icon = icon;

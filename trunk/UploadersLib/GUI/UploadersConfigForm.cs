@@ -686,16 +686,7 @@ namespace UploadersLib
 
             if (!string.IsNullOrEmpty(regexp))
             {
-                if (regexp.StartsWith("!tag"))
-                {
-                    lvCustomUploaderRegexps.Items.Add(String.Format("(?<={0}>).*(?=</{0})",
-                        regexp.Substring(4, regexp.Length - 4).Trim()));
-                }
-                else
-                {
-                    lvCustomUploaderRegexps.Items.Add(regexp);
-                }
-
+                lvCustomUploaderRegexps.Items.Add(regexp);
                 txtCustomUploaderRegexp.Text = string.Empty;
                 txtCustomUploaderRegexp.Focus();
             }
@@ -717,6 +708,18 @@ namespace UploadersLib
             {
                 lvCustomUploaderRegexps.SelectedItems[0].Text = regexp;
             }
+        }
+
+        private void lvCustomUploaderRegexps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string regex = string.Empty;
+
+            if (lvCustomUploaderRegexps.SelectedItems.Count > 0)
+            {
+                regex = lvCustomUploaderRegexps.SelectedItems[0].Text;
+            }
+
+            txtCustomUploaderRegexp.Text = regex;
         }
 
         private void btnCustomUploaderArgAdd_Click(object sender, EventArgs e)
@@ -751,6 +754,21 @@ namespace UploadersLib
                 lvCustomUploaderArguments.SelectedItems[0].Text = name;
                 lvCustomUploaderArguments.SelectedItems[0].SubItems[1].Text = value;
             }
+        }
+
+        private void lvCustomUploaderArguments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = string.Empty;
+            string value = string.Empty;
+
+            if (lvCustomUploaderArguments.SelectedItems.Count > 0)
+            {
+                name = lvCustomUploaderArguments.SelectedItems[0].Text;
+                value =  lvCustomUploaderArguments.SelectedItems[0].SubItems[1].Text;
+            }
+
+            txtCustomUploaderArgName.Text = name;
+            txtCustomUploaderArgValue.Text = value;
         }
 
         private void btnCustomUploaderImport_Click(object sender, EventArgs e)

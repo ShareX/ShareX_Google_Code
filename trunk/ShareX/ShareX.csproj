@@ -207,10 +207,6 @@
     <None Include="Resources\Ellipse.png" />
     <None Include="Resources\Triangle.png" />
     <None Include="Resources\camera.png" />
-    <None Include="Resources\ZUploader.ico" />
-    <None Include="Resources\ZUploaderLogo.png" />
-    <None Include="Resources\ZUploaderSmallBusyIcon.ico" />
-    <None Include="Resources\ZUploaderSmallIcon.ico" />
     <None Include="Resources\navigation-090-button.png" />
     <None Include="Resources\cross-button.png" />
     <None Include="Resources\tick-button.png" />
@@ -254,6 +250,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShareXSmallIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShareXSmallBusyIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
