@@ -204,5 +204,12 @@ namespace HelpersLib
 
             return sb.ToString();
         }
+
+        public static Icon ToIcon(this Bitmap bmp)
+        {
+            IntPtr hicon = bmp.GetHicon();
+            Icon icon = Icon.FromHandle(hicon);
+            return icon;
+        }
     }
 }
