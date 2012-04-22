@@ -23,15 +23,33 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace HelpersLib
 {
-    public static class Links
+    public class Token
     {
-        public const string URL_WEBSITE = "http://code.google.com/p/sharex";
-        public const string URL_ISSUES = "http://code.google.com/p/sharex/issues/entry";
-        public const string URL_UPDATE = "http://zscreen.googlecode.com/svn/trunk/Update.xml";
-        public const string URL_BERK = "http://code.google.com/u/flexy123";
-        public const string URL_MIKE = "http://code.google.com/u/mcored";
-        public const string URL_DONATE_ZU = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mcored%40gmail%2ecom&lc=US&item_name=ShareX&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest";
+        public TokenType Type { get; set; }
+        public string Text { get; set; }
+        public int Position { get; set; }
+
+        public Token()
+        {
+        }
+
+        public Token(TokenType type, string text, int startPosition)
+        {
+            Type = type;
+            Text = text;
+            Position = startPosition;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Type: {0}, Position: {1}, Text: {2}", Type, Position, Text);
+        }
     }
 }

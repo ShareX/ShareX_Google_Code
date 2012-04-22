@@ -443,7 +443,7 @@ namespace ShareX
 
                     if (Tasks.Any(x => x.IsWorking))
                     {
-                        double averageProgress = Tasks.Average(x => x.Info.Progress.Percentage);
+                        double averageProgress = Tasks.Where(x => x.Info != null && x.Info.Progress != null).Average(x => x.Info.Progress.Percentage);
                         int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
                         icon = trayIcons[index];
                     }

@@ -28,7 +28,7 @@ namespace HelpersLib
     public static class ApiKeys
     {
         // Image Uploaders
-        public const string ImageShackKey = "78EHNOPS04e77bc6df1cc0c5fc2e92e11c7b4a1a";
+        public const string ImageShackKey = "14DKLRTWf5d90ddf9b18551445e3aa2a9d75ef1a";
         public const string TinyPicID = "e2aabb8d555322fa";
         public const string TinyPicKey = "00a68ed73ddd54da52dc2d5803fa35ee";
         public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";
