@@ -120,6 +120,7 @@ namespace ShareX
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
+            chkCaptureAnnotateImage.Checked = Program.Settings.CaptureAnnotateImage;
             cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
             cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
@@ -513,6 +514,32 @@ namespace ShareX
             Program.Settings.CaptureShadow = cbCaptureShadow.Checked;
         }
 
+        private void chkCaptureAnnotateImage_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CaptureAnnotateImage = chkCaptureAnnotateImage.Checked;
+        }
+
+        private void txtSaveImageSubFolderPatternPreview_TextChanged(object sender, EventArgs e)
+        {
+            string dir = txtSaveImageSubFolderPatternPreview.Text;
+            string subFolderName = Path.Combine("Screenshots", new NameParser(NameParserType.SaveFolder).Convert(Program.Settings.SaveImageSubFolderPattern));
+
+            if (dir.Length > subFolderName.Length)
+                dir = dir.TrimEnd(subFolderName.ToCharArray());
+
+            if (Directory.Exists(dir))
+                Program.Settings.ScreenshotsPath = dir;
+        }
+
+        private void btnBrowseScreenshotsDir_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(txtSaveImageSubFolderPatternPreview.Text))
+            {
+                Directory.CreateDirectory(txtSaveImageSubFolderPatternPreview.Text);
+            }
+            Process.Start(txtSaveImageSubFolderPatternPreview.Text);
+        }
+
         private void cbCaptureCopyImage_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureCopyImage = cbCaptureCopyImage.Checked;
@@ -526,7 +553,7 @@ namespace ShareX
         private void txtSaveImageSubFolderPattern_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.SaveImageSubFolderPattern = txtSaveImageSubFolderPattern.Text;
-            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
+            txtSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
         }
 
         private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)

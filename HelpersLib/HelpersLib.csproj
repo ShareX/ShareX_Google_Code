@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiKeys\ApiKeys.cs" />
     <Compile Include="ApiKeys\ApiKeysConfig.cs" />
     <Compile Include="ApiKeys\ApiKeysUI.cs">
       <SubType>Form</SubType>
@@ -63,7 +64,6 @@
     <Compile Include="ApiKeys\ApiKeysUI.Designer.cs">
       <DependentUpon>ApiKeysUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApiKeys\ApiKeys.cs" />
     <Compile Include="CaptureHelpers.cs" />
     <Compile Include="CLI\CLICommand.cs" />
     <Compile Include="CLI\CLICommandAction.cs" />
