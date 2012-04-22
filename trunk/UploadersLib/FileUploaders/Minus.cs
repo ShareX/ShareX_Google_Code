@@ -254,7 +254,8 @@ namespace UploadersLib.FileUploaders
 
                 if (minusFile != null)
                 {
-                    result.URL = minusFile.url_rawfile;
+                    result.ShortenedURL = string.Format("http://i.min.us/i{0}.jpg", minusFile.id);
+                    result.URL = string.Format("http://minus.com/i{0}.jpg", minusFile.id);
                     result.ThumbnailURL = minusFile.url_thumbnail;
                 }
             }

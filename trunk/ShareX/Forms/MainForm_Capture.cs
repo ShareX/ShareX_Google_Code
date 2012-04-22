@@ -116,10 +116,44 @@ namespace ShareX
             }
         }
 
+        private void EditImage(ref Image img)
+        {
+            string LANGUAGE_PATH = Path.Combine(Application.StartupPath, @"Languages");
+            if (!Directory.Exists(LANGUAGE_PATH))
+                Directory.CreateDirectory(LANGUAGE_PATH);
+            Greenshot.MainForm.Start(new string[0]);
+
+            GreenshotPlugin.Core.CoreConfiguration coreConfiguration = Greenshot.IniFile.IniConfig.GetIniSection<GreenshotPlugin.Core.CoreConfiguration>();
+            coreConfiguration.OutputFileFilenamePattern = "${title}";
+            coreConfiguration.OutputFilePath = Program.ScreenshotsPath;
+
+            Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture();
+            capture.Image = img;
+            ImageData imageData = TaskHelper.PrepareImageAndFilename(img);
+            capture.CaptureDetails.Filename = Path.Combine(Program.ScreenshotsPath, imageData.Filename);
+            capture.CaptureDetails.Title =
+                Path.GetFileNameWithoutExtension(capture.CaptureDetails.Filename);
+            capture.CaptureDetails.AddMetaData("file", capture.CaptureDetails.Filename);
+            capture.CaptureDetails.AddMetaData("source", "file");
+
+            var surface = new Greenshot.Drawing.Surface(capture);
+            var editor = new Greenshot.ImageEditorForm(surface, Program.Settings.CaptureSaveImage) { Icon = this.Icon };
+
+            editor.SetImagePath(capture.CaptureDetails.Filename);
+            editor.Visible = false;
+            editor.ShowDialog();
+            img = editor.GetImageForExport();
+        }
+
         private void AfterCapture(Image img)
         {
             if (img != null)
             {
+                if (Program.Settings.CaptureAnnotateImage)
+                {
+                    EditImage(ref img);
+                }
+
                 if (Program.Settings.CaptureCopyImage)
                 {
                     Clipboard.SetImage(img);

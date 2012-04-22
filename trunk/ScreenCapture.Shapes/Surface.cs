@@ -60,6 +60,7 @@ namespace ScreenCapture
 
         public Surface(Image backgroundImage = null)
         {
+            this.Cursor = Cursors.Cross;
             ScreenRectangle = CaptureHelpers.GetScreenBounds();
             ScreenRectangle0Based = CaptureHelpers.FixScreenCoordinates(ScreenRectangle);
 

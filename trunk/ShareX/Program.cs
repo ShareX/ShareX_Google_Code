@@ -109,7 +109,12 @@ namespace ShareX
         {
             get
             {
-                string parentFolderPath = Path.Combine(PersonalPath, "Screenshots");
+                string path = PersonalPath;
+                if (Settings != null && Directory.Exists(Settings.ScreenshotsPath))
+                {
+                    path = Settings.ScreenshotsPath;
+                }
+                string parentFolderPath = Path.Combine(path, "Screenshots");
                 string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(Settings.SaveImageSubFolderPattern);
                 return Path.Combine(parentFolderPath, subFolderName);
             }
