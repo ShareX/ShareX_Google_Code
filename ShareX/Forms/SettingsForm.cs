@@ -148,6 +148,9 @@ namespace ShareX
             // Debug
             txtDebugLog.Text = Program.MyLogger.Messages.ToString();
             txtDebugLog.ScrollToCaret();
+
+            // Advanced
+            pgSettings.SelectedObject = Program.Settings;
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
