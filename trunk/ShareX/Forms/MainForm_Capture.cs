@@ -149,22 +149,37 @@ namespace ShareX
         {
             if (img != null)
             {
-                if (Program.Settings.CaptureAnnotateImage)
+                WizardAfterCaptureConfig configAfterCapture = new WizardAfterCaptureConfig
+                {
+                    AnnotateImage = Program.Settings.CaptureAnnotateImage,
+                    CopyImageToClipboard = Program.Settings.CaptureCopyImage,
+                    SaveImageToFile = Program.Settings.CaptureSaveImage,
+                    UploadImageToHost = Program.Settings.CaptureUploadImage
+                };
+
+                if (Program.Settings.DynamicOutputs)
+                {
+                    WizardAfterCapture dlg = new WizardAfterCapture(configAfterCapture);
+                    dlg.ShowDialog();
+                    configAfterCapture = dlg.Config;
+                }
+
+                if (configAfterCapture.AnnotateImage.Value)
                 {
                     EditImage(ref img);
                 }
 
-                if (Program.Settings.CaptureCopyImage)
+                if (configAfterCapture.CopyImageToClipboard.Value)
                 {
                     Clipboard.SetImage(img);
                 }
 
-                if (Program.Settings.CaptureSaveImage)
+                if (configAfterCapture.SaveImageToFile.Value)
                 {
                     ImageData imageData = TaskHelper.PrepareImageAndFilename(img);
                     imageData.WriteToFile(Program.ScreenshotsPath);
 
-                    if (Program.Settings.CaptureUploadImage)
+                    if (configAfterCapture.UploadImageToHost.Value)
                     {
                         UploadManager.UploadImageStream(imageData.ImageStream, imageData.Filename);
                     }
@@ -173,7 +188,7 @@ namespace ShareX
                         imageData.Dispose();
                     }
                 }
-                else if (Program.Settings.CaptureUploadImage)
+                else if (configAfterCapture.UploadImageToHost.Value)
                 {
                     UploadManager.UploadImage(img);
                 }

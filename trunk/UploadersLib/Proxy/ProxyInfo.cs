@@ -29,7 +29,7 @@ namespace UploadersLib.HelperClasses
 {
     public class ProxyInfo
     {
-        [Category("Settings"), DefaultValue("username")]
+        [Category("Settings"), DefaultValue("")]
         public string UserName { get; set; }
 
         [Category("Settings"), PasswordPropertyText(true), DefaultValue("password")]

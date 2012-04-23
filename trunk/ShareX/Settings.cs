@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.ComponentModel;
 using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
@@ -52,6 +53,9 @@ namespace ShareX
         public bool ClipboardAutoCopy = true;
         public bool URLShortenAfterUpload = false;
         public bool AutoPlaySound = true;
+
+        [Category("Settings"), DefaultValue(false), Description("Dynamically choose actions after capture")]
+        public bool DynamicOutputs { get; set; }
 
         // Hotkeys
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
@@ -129,5 +133,24 @@ namespace ShareX
         public ProxyInfo ProxySettings = new ProxyInfo();
 
         #endregion Settings Form
+
+        #region Methods
+
+        public static void ApplyDefaultValues(object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr == null) continue;
+                prop.SetValue(self, attr.Value);
+            }
+        }
+
+        public Settings()
+        {
+            ApplyDefaultValues(this);
+        }
+
+        #endregion Methods
     }
 }
