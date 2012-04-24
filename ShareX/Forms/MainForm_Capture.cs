@@ -118,10 +118,8 @@ namespace ShareX
 
         private void EditImage(ref Image img)
         {
-            string LANGUAGE_PATH = Path.Combine(Application.StartupPath, @"Languages");
-            if (!Directory.Exists(LANGUAGE_PATH))
-                Directory.CreateDirectory(LANGUAGE_PATH);
-            Greenshot.MainForm.Start(new string[0]);
+            if (Greenshot.MainForm.instance == null)
+                Greenshot.MainForm.Start(new string[0]);
 
             GreenshotPlugin.Core.CoreConfiguration coreConfiguration = Greenshot.IniFile.IniConfig.GetIniSection<GreenshotPlugin.Core.CoreConfiguration>();
             coreConfiguration.OutputFileFilenamePattern = "${title}";
