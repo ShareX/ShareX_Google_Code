@@ -7,12 +7,12 @@
     <Grid FlowDirection="LeftToRight"  >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="93*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <CheckBox Content="Annotate image" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" Name="chkAnnotateImage" VerticalAlignment="Top" />
-        <CheckBox Content="Copy image to clipboard" Height="16" HorizontalAlignment="Left" Margin="10,36,0,0" Name="chkCopyImageToClipboard" VerticalAlignment="Top"  Grid.ColumnSpan="2" />
+        <CheckBox Content="Copy image to clipboard" Height="16" HorizontalAlignment="Left" Margin="10,36,0,0" Name="chkCopyImageToClipboard" VerticalAlignment="Top" />
         <CheckBox Content="Save image to file" Height="16" HorizontalAlignment="Left" Margin="10,62,0,0" Name="chkSaveImageToFile" VerticalAlignment="Top" />
-        <CheckBox Content="Upload image to host" Height="16" HorizontalAlignment="Left" Margin="10,88,0,0" Name="chkUploadImageToHost" VerticalAlignment="Top"  Grid.ColumnSpan="2" />
-        <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="80,100,0,12" Name="btnOK" Width="75" Background="{x:Null}" Click="btnOK_Click" Grid.Column="1" IsDefault="True" />
+        <CheckBox Content="Upload image to host" Height="16" HorizontalAlignment="Left" Margin="10,88,0,0" Name="chkUploadImageToHost" VerticalAlignment="Top" />
+        <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="33,100,0,12" Name="btnOK" Width="75" Background="{x:Null}" Click="btnOK_Click" Grid.Column="1" IsDefault="True" />
     </Grid>
 </Window>
