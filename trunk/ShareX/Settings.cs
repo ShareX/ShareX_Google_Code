@@ -81,7 +81,7 @@ namespace ShareX
         public int BufferSizePower = 3;
 
         // Image - Location
-        public string ScreenshotsPath = string.Empty;
+        public string ScreenshotsPath = Program.ScreenshotsRootPath;
 
         // Image - Quality
         public EImageFormat ImageFormat = EImageFormat.PNG;

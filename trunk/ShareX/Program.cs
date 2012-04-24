@@ -105,7 +105,7 @@ namespace ShareX
             }
         }
 
-        public static string ScreenshotsPath
+        public static string ScreenshotsRootPath
         {
             get
             {
@@ -114,9 +114,16 @@ namespace ShareX
                 {
                     path = Settings.ScreenshotsPath;
                 }
-                string parentFolderPath = Path.Combine(path, "Screenshots");
+                return Path.Combine(path, "Screenshots");
+            }
+        }
+
+        public static string ScreenshotsPath
+        {
+            get
+            {
                 string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(Settings.SaveImageSubFolderPattern);
-                return Path.Combine(parentFolderPath, subFolderName);
+                return Path.Combine(ScreenshotsRootPath, subFolderName);
             }
         }
 

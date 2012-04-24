@@ -110,7 +110,7 @@
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
             this.gbCaptureAfter = new System.Windows.Forms.GroupBox();
             this.btnBrowseScreenshotsDir = new System.Windows.Forms.Button();
-            this.txtSaveImageSubFolderPatternPreview = new System.Windows.Forms.TextBox();
+            this.txtScreenshotsPath = new System.Windows.Forms.TextBox();
             this.chkCaptureAnnotateImage = new System.Windows.Forms.CheckBox();
             this.txtSaveImageSubFolderPattern = new System.Windows.Forms.TextBox();
             this.lblSaveImageSubFolderPattern = new System.Windows.Forms.Label();
@@ -144,6 +144,7 @@
             this.txtDebugLog = new System.Windows.Forms.TextBox();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgSettings = new System.Windows.Forms.PropertyGrid();
+            this.txtSaveImageSubFolderPatternPreview = new System.Windows.Forms.TextBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpUpload.SuspendLayout();
@@ -1162,8 +1163,9 @@
             // 
             // gbCaptureAfter
             // 
-            this.gbCaptureAfter.Controls.Add(this.btnBrowseScreenshotsDir);
             this.gbCaptureAfter.Controls.Add(this.txtSaveImageSubFolderPatternPreview);
+            this.gbCaptureAfter.Controls.Add(this.btnBrowseScreenshotsDir);
+            this.gbCaptureAfter.Controls.Add(this.txtScreenshotsPath);
             this.gbCaptureAfter.Controls.Add(this.chkCaptureAnnotateImage);
             this.gbCaptureAfter.Controls.Add(this.txtSaveImageSubFolderPattern);
             this.gbCaptureAfter.Controls.Add(this.lblSaveImageSubFolderPattern);
@@ -1189,15 +1191,15 @@
             this.btnBrowseScreenshotsDir.UseVisualStyleBackColor = true;
             this.btnBrowseScreenshotsDir.Click += new System.EventHandler(this.btnBrowseScreenshotsDir_Click);
             // 
-            // txtSaveImageSubFolderPatternPreview
+            // txtScreenshotsPath
             // 
-            this.txtSaveImageSubFolderPatternPreview.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtSaveImageSubFolderPatternPreview.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.txtSaveImageSubFolderPatternPreview.Location = new System.Drawing.Point(16, 96);
-            this.txtSaveImageSubFolderPatternPreview.Name = "txtSaveImageSubFolderPatternPreview";
-            this.txtSaveImageSubFolderPatternPreview.Size = new System.Drawing.Size(408, 20);
-            this.txtSaveImageSubFolderPatternPreview.TabIndex = 5;
-            this.txtSaveImageSubFolderPatternPreview.TextChanged += new System.EventHandler(this.txtSaveImageSubFolderPatternPreview_TextChanged);
+            this.txtScreenshotsPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtScreenshotsPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
+            this.txtScreenshotsPath.Location = new System.Drawing.Point(16, 96);
+            this.txtScreenshotsPath.Name = "txtScreenshotsPath";
+            this.txtScreenshotsPath.Size = new System.Drawing.Size(328, 20);
+            this.txtScreenshotsPath.TabIndex = 5;
+            this.txtScreenshotsPath.TextChanged += new System.EventHandler(this.txtSaveImageSubFolderPatternPreview_TextChanged);
             // 
             // chkCaptureAnnotateImage
             // 
@@ -1212,16 +1214,16 @@
             // 
             // txtSaveImageSubFolderPattern
             // 
-            this.txtSaveImageSubFolderPattern.Location = new System.Drawing.Point(264, 72);
+            this.txtSaveImageSubFolderPattern.Location = new System.Drawing.Point(344, 72);
             this.txtSaveImageSubFolderPattern.Name = "txtSaveImageSubFolderPattern";
-            this.txtSaveImageSubFolderPattern.Size = new System.Drawing.Size(160, 20);
+            this.txtSaveImageSubFolderPattern.Size = new System.Drawing.Size(80, 20);
             this.txtSaveImageSubFolderPattern.TabIndex = 4;
             this.txtSaveImageSubFolderPattern.TextChanged += new System.EventHandler(this.txtSaveImageSubFolderPattern_TextChanged);
             // 
             // lblSaveImageSubFolderPattern
             // 
             this.lblSaveImageSubFolderPattern.AutoSize = true;
-            this.lblSaveImageSubFolderPattern.Location = new System.Drawing.Point(168, 76);
+            this.lblSaveImageSubFolderPattern.Location = new System.Drawing.Point(248, 76);
             this.lblSaveImageSubFolderPattern.Name = "lblSaveImageSubFolderPattern";
             this.lblSaveImageSubFolderPattern.Size = new System.Drawing.Size(94, 13);
             this.lblSaveImageSubFolderPattern.TabIndex = 3;
@@ -1600,6 +1602,14 @@
             this.pgSettings.Size = new System.Drawing.Size(524, 360);
             this.pgSettings.TabIndex = 0;
             // 
+            // txtSaveImageSubFolderPatternPreview
+            // 
+            this.txtSaveImageSubFolderPatternPreview.Location = new System.Drawing.Point(344, 96);
+            this.txtSaveImageSubFolderPatternPreview.Name = "txtSaveImageSubFolderPatternPreview";
+            this.txtSaveImageSubFolderPatternPreview.ReadOnly = true;
+            this.txtSaveImageSubFolderPatternPreview.Size = new System.Drawing.Size(80, 20);
+            this.txtSaveImageSubFolderPatternPreview.TabIndex = 8;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1612,6 +1622,7 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.Shown += new System.EventHandler(this.SettingsForm_Shown);
             this.Resize += new System.EventHandler(this.SettingsForm_Resize);
             this.tcSettings.ResumeLayout(false);
@@ -1775,9 +1786,10 @@
         private System.Windows.Forms.CheckBox cbCaptureShadow;
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
         private System.Windows.Forms.CheckBox chkCaptureAnnotateImage;
-        private System.Windows.Forms.TextBox txtSaveImageSubFolderPatternPreview;
+        private System.Windows.Forms.TextBox txtScreenshotsPath;
         private System.Windows.Forms.Button btnBrowseScreenshotsDir;
         private System.Windows.Forms.TabPage tpAdvanced;
         private System.Windows.Forms.PropertyGrid pgSettings;
+        private System.Windows.Forms.TextBox txtSaveImageSubFolderPatternPreview;
     }
 }
