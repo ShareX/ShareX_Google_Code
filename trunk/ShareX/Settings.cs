@@ -54,11 +54,6 @@ namespace ShareX
         public bool URLShortenAfterUpload = false;
         public bool AutoPlaySound = true;
 
-        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show after capture wizard. Dynamically choose actions after capture")]
-        public bool ShowAfterCaptureWizard { get; set; }
-        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show clipboard options after host upload is completed. Dynamically choose which link format to be copied to the clipboad.")]
-        public bool ShowClipboardOptionsWizard { get; set; }
-
         // Hotkeys
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
 
@@ -133,6 +128,14 @@ namespace ShareX
 
         // Proxy
         public ProxyInfo ProxySettings = new ProxyInfo();
+
+        // Advanced
+        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show after capture wizard. Dynamically choose actions after capture")]
+        public bool ShowAfterCaptureWizard { get; set; }
+        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show clipboard options after host upload is completed. Dynamically choose which link format to be copied to the clipboad.")]
+        public bool ShowClipboardOptionsWizard { get; set; }
+        [Category(ComponentModelStrings.InputsClipboard), DefaultValue(false), Description("When a folder path is in the clipboard, upload the folder index instead of the folder path as part of Clipboard Upload.")]
+        public bool IndexFolderWhenPossible { get; set; }
 
         #endregion Settings Form
 

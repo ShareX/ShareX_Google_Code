@@ -26,7 +26,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using ZSS.IndexersLib;
+using IndexersLib;
 
 public class TreeDir
 {

@@ -26,7 +26,7 @@
 using System.IO;
 using System.Text;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public static class Xhtml
     {

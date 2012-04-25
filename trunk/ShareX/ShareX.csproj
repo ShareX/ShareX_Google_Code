@@ -188,6 +188,10 @@
       <Project>{E7DE6237-AEA2-498B-8F56-9B392472C490}</Project>
       <Name>HistoryLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IndexersLib\IndexersLib.csproj">
+      <Project>{47CD5EEF-C12D-4CEA-B88A-3AFAEC6DDAD8}</Project>
+      <Name>IndexersLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScreenCapture.Shapes\ScreenCapture.Shapes.csproj">
       <Project>{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}</Project>
       <Name>ScreenCapture.Shapes</Name>

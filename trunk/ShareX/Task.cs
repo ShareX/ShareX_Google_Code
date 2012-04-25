@@ -113,8 +113,18 @@ namespace ShareX
         {
             Task task = new Task(EDataType.Text, TaskJob.TextUpload);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-            task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + ".txt";
-            task.tempText = text;
+
+            if (Program.Settings.IndexFolderWhenPossible && Directory.Exists(text))
+            {
+                bool html = destination == EDataType.File;
+                task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + (html ? ".html" : ".log");
+                task.tempText = IndexersLib.QuickIndexer.Index(text, html);
+            }
+            else
+            {
+                task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + ".txt";
+                task.tempText = text;
+            }
             return task;
         }
 
