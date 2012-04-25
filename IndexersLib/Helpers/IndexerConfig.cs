@@ -29,9 +29,9 @@ using System.Drawing.Design;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using ZSS.IndexersLib.Helpers;
+using IndexersLib.Helpers;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public class IndexerConfig
     {
@@ -70,6 +70,7 @@ namespace ZSS.IndexersLib
 
         // Zip Operations
         public bool ZipAfterIndexed = false;
+
         public bool ZipAndDeleteFile = false;
         public bool ZipMergedFile = false;
         public bool ZipFilesInEachDir = true;
@@ -78,6 +79,7 @@ namespace ZSS.IndexersLib
         // Filter
         [Category("General / Filter"), DefaultValue(false), Description("File files and folders according to filtering rules")]
         public bool EnabledFiltering = true;
+
         [Category("General / Filter"), DefaultValue(false), Description("Ignore protected Operating System files and folders when indexing")]
         public bool HideProtectedOperatingSystemFilesFolders { get; set; }
         [Category("General / Filter"), DefaultValue(false), Description("Ignore hidden files when indexing")]
@@ -98,8 +100,10 @@ namespace ZSS.IndexersLib
         // Misc
         [Category("Engines / Tree.NET / XHTML"), Description("Merged XHTML Title")]
         public string MergedHtmlTitle = string.Empty;
+
         [Category("Engines / Tree.NET / XHTML"), Description("Server information e.g. ftp://domain:port")]
         public string ServerInfo = string.Empty;
+
         [Category("Engines / Tree.NET / XHTML"), DefaultValue(true), Description("To show your readers that you have taken the care to create an interoperable Web page, you may display this icon on any page that validates")]
         public bool ShowValidXhtmlIcons { get; set; }
 
@@ -120,6 +124,7 @@ namespace ZSS.IndexersLib
         public int FolderExpandLevel { get; set; }
         [Category("Engines / Tree.NET"), DefaultValue(false), Description("Collapse folders")]
         public bool CollapseFolders { get; set; }
+
         [Category("Engines / Tree.NET"), Description("Path for an image logo")]
         public string LogoPath = string.Empty; // { get; set; }
 
@@ -172,6 +177,7 @@ namespace ZSS.IndexersLib
 
         [Category("Engines / General"), DefaultValue(false), Description("Merge index file")]
         public bool MergeFiles = false;
+
         [Category("Engines / General"), Description("Output directory for merge index file")]
         [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string OutputDir { get; set; }

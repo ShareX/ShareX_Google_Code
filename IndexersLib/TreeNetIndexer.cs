@@ -31,7 +31,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public class TreeNetIndexer : Indexer
     {

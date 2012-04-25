@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public class AppSettings
     {
@@ -43,6 +43,7 @@ namespace ZSS.IndexersLib
 
         // General Configuration > Appearance
         private bool m_MinimizeToTray = true;
+
         private bool m_TrayIcon = true;
         private bool m_CloseToTray;
         private bool m_TrayOnLoad;
@@ -64,6 +65,7 @@ namespace ZSS.IndexersLib
         public bool OnSunday = true;
 
         public string ScheduleTime = "03:00:00";
+
         [XmlIgnore()]
         public bool IsScheduledForToday;
 

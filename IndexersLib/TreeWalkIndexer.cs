@@ -27,7 +27,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public class TreeWalkIndexer : Indexer
     {

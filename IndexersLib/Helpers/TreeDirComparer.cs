@@ -25,7 +25,7 @@
 
 using System.Collections.Generic;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     public class TreeDirComparer : IComparer<TreeDir>
     {

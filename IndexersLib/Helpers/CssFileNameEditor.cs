@@ -27,7 +27,7 @@ using System;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace ZSS.IndexersLib.Helpers
+namespace IndexersLib.Helpers
 {
     internal class CssFileNameEditor : FileNameEditor
     {

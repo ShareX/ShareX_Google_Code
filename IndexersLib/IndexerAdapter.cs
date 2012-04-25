@@ -31,7 +31,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace ZSS.IndexersLib
+namespace IndexersLib
 {
     //*******************************
     //* Reads .tgc files and returns
