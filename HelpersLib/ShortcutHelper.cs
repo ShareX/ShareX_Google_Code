@@ -36,7 +36,7 @@ namespace HelpersLib
 {
     public static class ShortcutHelper
     {
-        public static bool Create(string targetPath, string shortcutPath)
+        public static bool Create(string targetPath, string shortcutPath, string arguments = "")
         {
             if (!string.IsNullOrEmpty(targetPath) && !string.IsNullOrEmpty(shortcutPath) && File.Exists(targetPath))
             {
@@ -48,6 +48,7 @@ namespace HelpersLib
                     if (string.IsNullOrEmpty(shortcut.TargetPath) || !shortcut.TargetPath.Equals(targetPath, StringComparison.InvariantCultureIgnoreCase))
                     {
                         shortcut.TargetPath = targetPath;
+                        shortcut.Arguments = arguments;
                         shortcut.Save();
                     }
 
@@ -73,13 +74,13 @@ namespace HelpersLib
             return false;
         }
 
-        public static bool SetShortcut(bool create, Environment.SpecialFolder specialFolder)
+        public static bool SetShortcut(bool create, Environment.SpecialFolder specialFolder, string arguments = "")
         {
             string shortcutPath = GetShortcutPath(specialFolder);
 
             if (create)
             {
-                return Create(Application.ExecutablePath, shortcutPath);
+                return Create(Application.ExecutablePath, shortcutPath, arguments);
             }
             else
             {

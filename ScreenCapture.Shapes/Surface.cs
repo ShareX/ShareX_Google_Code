@@ -38,13 +38,9 @@ namespace ScreenCapture
     public class Surface : Form
     {
         public Image SurfaceImage { get; set; }
-
         public SurfaceOptions Config { get; set; }
-
         public int FPS { get; private set; }
-
         public Rectangle ScreenRectangle { get; private set; }
-
         public Rectangle ScreenRectangle0Based { get; private set; }
 
         protected List<DrawableObject> DrawableObjects { get; set; }
@@ -57,6 +53,7 @@ namespace ScreenCapture
         protected Brush shadowBrush, lightBrush, nodeBackgroundBrush;
         protected Font textFont;
         protected Stopwatch timer;
+        protected string debugText;
 
         public Surface(Image backgroundImage = null)
         {
@@ -311,6 +308,11 @@ namespace ScreenCapture
         private void DrawInfo(Graphics g)
         {
             string text = string.Format("FPS: {0}\nBounds: {1}", FPS, Bounds);
+
+            if (!string.IsNullOrEmpty(debugText))
+            {
+                text += "\n" + debugText;
+            }
 
             SizeF textSize = g.MeasureString(text, textFont);
 

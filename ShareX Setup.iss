@@ -55,7 +55,7 @@ Name: "CreateStartupIcon"; Description: "Run {#MyAppName} on Windows startup"; G
 
 [Files]
 Source: "ShareX\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
-Source: "ShareX\bin\Release\*.pdb"; DestDir: {app}; Flags: ignoreversion
+;Source: "ShareX\bin\Release\*.pdb"; DestDir: {app}; Flags: ignoreversion
 Source: "ShareX\bin\Release\*.dll"; DestDir: {app}; Flags: ignoreversion
 Source: "ShareX\bin\Release\*.wav"; DestDir: {app}; Flags: ignoreversion
 
