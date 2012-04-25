@@ -23,7 +23,7 @@
 
 #endregion License Information (GPL v3)
 
-namespace HelpersLib
+namespace UploadersLib
 {
     public static class ApiKeys
     {
@@ -34,15 +34,15 @@ namespace HelpersLib
         public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";
         public const string ImgurConsumerKey = "89dec1eceb03e7028647445fdde8af2204e87fd58";
         public const string ImgurConsumerSecret = "77e4e25ba8bf9c3ce2a9b9a09092d3d0";
-        public const string FlickrKey = "009382d913746758f23d0ba9906b9fde";
-        public const string FlickrSecret = "7a147b763b1c7ebc";
+        public const string FlickrKey = "a568bc8fb851eb79e08c99866a26d338";
+        public const string FlickrSecret = "1ae3466cd1922d7f";
         public const string PhotobucketConsumerKey = "149828681";
         public const string PhotobucketConsumerSecret = "d2638b653e88315aac528087e9db54e3";
         public const string UploadScreenshotKey = "2807828f379860848433221358";
         public const string ImageBamKey = "P9MMWVORXYCVM9LL";
         public const string ImageBamSecret = "8NHVT2W777DEHZBV54A4CIT23XJFTL1D";
         public const string TwitsnapsKey = "694aaea3bc8f28479c383cbcc094fb55";
-        public const string TwitPicKey = "816528c0152003a64e45402370805a5a"; // ShareX
+        public const string TwitPicKey = "816528c0152003a64e45402370805a5a";
 
         // File Uploaders
         public const string DropboxConsumerKey = "0te7j9ype9lrdfn";

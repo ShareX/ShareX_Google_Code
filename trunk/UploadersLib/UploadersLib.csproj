@@ -98,6 +98,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiKeys\ApiKeys.cs" />
+    <Compile Include="ApiKeys\ApiKeysConfig.cs" />
+    <Compile Include="ApiKeys\ApiKeysUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApiKeys\ApiKeysUI.Designer.cs">
+      <DependentUpon>ApiKeysUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="DestConfig.cs" />
     <Compile Include="FileUploaders\Box.cs" />
     <Compile Include="FileUploaders\Email.cs" />
@@ -261,6 +269,9 @@
     <Compile Include="URLShorteners\TurlURLShortener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ApiKeys\ApiKeysUI.resx">
+      <DependentUpon>ApiKeysUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\AccountTypeControl.resx">
       <DependentUpon>AccountTypeControl.cs</DependentUpon>
     </EmbeddedResource>

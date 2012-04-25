@@ -35,7 +35,7 @@ namespace ShareX.HelperClasses
 
         public string Filename { get; set; }
 
-        public bool WriteToFile(string folderPath)
+        public string WriteToFile(string folderPath)
         {
             if (ImageStream != null && !string.IsNullOrEmpty(Filename) && !string.IsNullOrEmpty(folderPath))
             {
@@ -45,10 +45,11 @@ namespace ShareX.HelperClasses
                 }
 
                 string path = Path.Combine(folderPath, Filename);
-                return ImageStream.WriteToFile(path);
+                ImageStream.WriteToFile(path);
+                return path;
             }
 
-            return false;
+            return string.Empty;
         }
 
         public void Dispose()

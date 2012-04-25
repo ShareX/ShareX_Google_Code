@@ -46,8 +46,11 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
+
         public event TaskEventHandler UploadPreparing;
+
         public event TaskEventHandler UploadProgressChanged;
+
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
@@ -75,11 +78,12 @@ namespace ShareX
             Info.UploadDestination = dataType;
         }
 
-        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, EDataType destination = EDataType.Default)
+        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string filePath, EDataType destination = EDataType.Default)
         {
             Task task = new Task(dataType, TaskJob.DataUpload);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-            task.Info.FileName = fileName;
+            task.Info.FileName = Path.GetFileName(filePath);
+            task.Info.FilePath = filePath;
             task.data = stream;
             return task;
         }

@@ -59,6 +59,19 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Greenshot, Version=1.0.0.3051, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Greenshot.dll</HintPath>
+    </Reference>
+    <Reference Include="GreenshotPlugin, Version=0.9.0.3051, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\GreenshotPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -74,6 +87,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\MainForm_Capture.cs">
@@ -118,6 +134,18 @@
     <Compile Include="HelperClasses\TaskHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\WindowAfterCapture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WindowAfterCapture.Designer.cs">
+      <DependentUpon>WindowAfterCapture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WindowAfterUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WindowAfterUpload.Designer.cs">
+      <DependentUpon>WindowAfterUpload.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +176,12 @@
     <Compile Include="UploadProgress.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UploadInfo.cs" />
+    <EmbeddedResource Include="Forms\WindowAfterCapture.resx">
+      <DependentUpon>WindowAfterCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WindowAfterUpload.resx">
+      <DependentUpon>WindowAfterUpload.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HistoryLib\HistoryLib.csproj">
@@ -234,6 +268,20 @@
   <ItemGroup>
     <None Include="Resources\ShareXSmallBusyIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Languages\help-en-US.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-en-US.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Loading.gif" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release "$(SolutionDir)Tools\sgen.exe" /a:"$(TargetDir)ShareX.exe" /f /t:"ShareX.Settings" /v

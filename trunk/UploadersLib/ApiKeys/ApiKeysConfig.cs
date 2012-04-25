@@ -25,7 +25,7 @@
 
 using System.ComponentModel;
 
-namespace HelpersLib
+namespace UploadersLib
 {
     public class UploadersAPIKeys
     {
