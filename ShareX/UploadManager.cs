@@ -209,13 +209,12 @@ namespace ShareX
             }
         }
 
-        public static void UploadImageStream(Stream stream, string filePath)
+        public static void UploadImageStream(Stream stream, string filename)
         {
-            if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filePath))
+            if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filename))
             {
                 EDataType destination = ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image;
-                Task task = Task.CreateDataUploaderTask(EDataType.Image, stream, filePath, destination);
-
+                Task task = Task.CreateDataUploaderTask(EDataType.Image, stream, filename, destination);
                 StartUpload(task);
             }
         }
@@ -410,12 +409,6 @@ namespace ShareX
                             {
                                 Program.mainForm.niTray.Tag = url;
                                 Program.mainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
-                            }
-
-                            if (Program.Settings.ShowClipboardOptionsWizard)
-                            {
-                                WindowAfterUpload dlg = new WindowAfterUpload(info) { Icon = Resources.ShareXSmallIcon };
-                                dlg.Show();
                             }
                         }
 

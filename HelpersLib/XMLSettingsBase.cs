@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using System.ComponentModel;
 using System.Threading;
 using System.Xml.Serialization;
 
@@ -32,7 +31,6 @@ namespace HelpersLib
     public abstract class XMLSettingsBase<T> where T : XMLSettingsBase<T>, new()
     {
         [XmlIgnore]
-        [Category("Settings / Paths")]
         public string FilePath { get; private set; }
 
         public virtual bool Save(string filePath)

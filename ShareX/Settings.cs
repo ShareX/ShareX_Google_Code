@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using System.ComponentModel;
 using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
@@ -48,7 +47,6 @@ namespace ShareX
 
         // General
         public bool ShowTray = true;
-
         public bool AutoCheckUpdate = true;
         public bool ClipboardAutoCopy = true;
         public bool URLShortenAfterUpload = false;
@@ -56,7 +54,6 @@ namespace ShareX
 
         // Hotkeys
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
-
         public HotkeySetting HotkeyFileUpload = new HotkeySetting(Keys.Shift | Keys.PageUp);
         public HotkeySetting HotkeyPrintScreen = new HotkeySetting(Keys.PrintScreen);
         public HotkeySetting HotkeyActiveWindow = new HotkeySetting(Keys.Alt | Keys.PrintScreen);
@@ -72,17 +69,12 @@ namespace ShareX
 
         // Upload
         public bool UseCustomUploadersConfigPath = false;
-
         public string CustomUploadersConfigPath = string.Empty;
         public int UploadLimit = 5;
         public int BufferSizePower = 3;
 
-        // Image - Location
-        public string ScreenshotsPath2 = Program.ScreenshotsRootPath;
-
         // Image - Quality
         public EImageFormat ImageFormat = EImageFormat.PNG;
-
         public int ImageJPEGQuality = 90;
         public GIFQuality ImageGIFQuality = GIFQuality.Default;
         public int ImageSizeLimit = 512;
@@ -90,7 +82,6 @@ namespace ShareX
 
         // Image - Resize
         public bool ImageAutoResize = false;
-
         public bool ImageKeepAspectRatio = false;
         public bool ImageUseSmoothScaling = true;
         public ImageScaleType ImageScaleType = ImageScaleType.Percentage;
@@ -103,16 +94,13 @@ namespace ShareX
 
         // Clipboard upload
         public bool ClipboardUploadAutoDetectURL = true;
-
         // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s";
 
         // Capture
         public bool ShowCursor = false;
-
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
-        public bool CaptureAnnotateImage = false;
         public bool CaptureCopyImage = false;
         public bool CaptureSaveImage = false;
         public string SaveImageSubFolderPattern = "%y-%mo";
@@ -121,7 +109,6 @@ namespace ShareX
 
         // History
         public bool SaveHistory = true;
-
         public bool UseCustomHistoryPath = false;
         public string CustomHistoryPath = string.Empty;
         public int HistoryMaxItemCount = -1;
@@ -129,33 +116,6 @@ namespace ShareX
         // Proxy
         public ProxyInfo ProxySettings = new ProxyInfo();
 
-        // Advanced
-        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show after capture wizard. Dynamically choose actions after capture")]
-        public bool ShowAfterCaptureWizard { get; set; }
-        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show clipboard options after host upload is completed. Dynamically choose which link format to be copied to the clipboad.")]
-        public bool ShowClipboardOptionsWizard { get; set; }
-        [Category(ComponentModelStrings.InputsClipboard), DefaultValue(false), Description("When a folder path is in the clipboard, upload the folder index instead of the folder path as part of Clipboard Upload.")]
-        public bool IndexFolderWhenPossible { get; set; }
-
         #endregion Settings Form
-
-        #region Methods
-
-        public static void ApplyDefaultValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr == null) continue;
-                prop.SetValue(self, attr.Value);
-            }
-        }
-
-        public Settings()
-        {
-            ApplyDefaultValues(this);
-        }
-
-        #endregion Methods
     }
 }

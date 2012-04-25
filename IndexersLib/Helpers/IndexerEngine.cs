@@ -29,7 +29,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace IndexersLib
+namespace ZSS.IndexersLib
 {
     public class Indexer
     {

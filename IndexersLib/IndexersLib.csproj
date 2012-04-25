@@ -74,7 +74,6 @@
     <Compile Include="Helpers\FilterHelper.cs" />
     <Compile Include="Helpers\IndexerConfig.cs" />
     <Compile Include="Global\Xhtml.cs" />
-    <Compile Include="QuickIndexer.cs" />
     <Compile Include="TreeNetIndexer.cs" />
     <Compile Include="TreeWalkIndexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

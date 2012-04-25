@@ -25,7 +25,7 @@
 
 using System.ComponentModel;
 
-namespace IndexersLib
+namespace ZSS.IndexersLib
 {
     public enum InitializationMode
     {
