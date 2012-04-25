@@ -25,7 +25,7 @@
 
 using System.IO;
 
-namespace IndexersLib.Helpers
+namespace ZSS.IndexersLib.Helpers
 {
     public class FileAttributesEx
     {

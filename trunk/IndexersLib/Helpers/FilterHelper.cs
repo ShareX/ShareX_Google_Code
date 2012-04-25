@@ -25,9 +25,9 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using IndexersLib.Helpers;
+using ZSS.IndexersLib.Helpers;
 
-namespace IndexersLib
+namespace ZSS.IndexersLib
 {
     public class FilterHelper
     {

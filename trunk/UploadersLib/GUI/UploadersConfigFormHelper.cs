@@ -103,9 +103,9 @@ namespace UploadersLib
 
         public void FlickrAuthOpen()
         {
-            FlickrUploader flickr = new FlickrUploader(APIKeys.FlickrKey, APIKeys.FlickrSecret);
             try
             {
+                FlickrUploader flickr = new FlickrUploader(APIKeys.FlickrKey, APIKeys.FlickrSecret);
                 btnFlickrOpenAuthorize.Tag = flickr.GetFrob();
                 string url = flickr.GetAuthLink(FlickrPermission.Write);
                 if (!string.IsNullOrEmpty(url))
@@ -116,11 +116,7 @@ namespace UploadersLib
             }
             catch (Exception ex)
             {
-                StringBuilder sbMsg = new StringBuilder();
-                sbMsg.AppendLine(flickr.ToErrorString());
-                sbMsg.AppendLine();
-                sbMsg.AppendLine(ex.ToString());
-                MessageBox.Show(sbMsg.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

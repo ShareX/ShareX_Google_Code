@@ -46,11 +46,8 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
-
         public event TaskEventHandler UploadPreparing;
-
         public event TaskEventHandler UploadProgressChanged;
-
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
@@ -78,12 +75,11 @@ namespace ShareX
             Info.UploadDestination = dataType;
         }
 
-        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string filePath, EDataType destination = EDataType.Default)
+        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, EDataType destination = EDataType.Default)
         {
             Task task = new Task(dataType, TaskJob.DataUpload);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-            task.Info.FileName = Path.GetFileName(filePath);
-            task.Info.FilePath = filePath;
+            task.Info.FileName = fileName;
             task.data = stream;
             return task;
         }
@@ -113,18 +109,8 @@ namespace ShareX
         {
             Task task = new Task(EDataType.Text, TaskJob.TextUpload);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-
-            if (Program.Settings.IndexFolderWhenPossible && Directory.Exists(text))
-            {
-                bool html = destination == EDataType.File;
-                task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + (html ? ".html" : ".log");
-                task.tempText = IndexersLib.QuickIndexer.Index(text, html);
-            }
-            else
-            {
-                task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + ".txt";
-                task.tempText = text;
-            }
+            task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + ".txt";
+            task.tempText = text;
             return task;
         }
 
