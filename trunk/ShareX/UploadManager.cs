@@ -410,6 +410,12 @@ namespace ShareX
                                 Program.mainForm.niTray.Tag = url;
                                 Program.mainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
                             }
+
+                            if (Program.Settings.ShowClipboardOptionsWizard)
+                            {
+                                WizardClipboardOptions dlg = new WizardClipboardOptions(info);
+                                dlg.Show();
+                            }
                         }
 
                         if (Program.Settings.AutoPlaySound)

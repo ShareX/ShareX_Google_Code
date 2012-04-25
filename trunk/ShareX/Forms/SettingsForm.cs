@@ -159,7 +159,7 @@ namespace ShareX
             string dir = txtScreenshotsPath.Text;
 
             if (Directory.Exists(dir))
-                Program.Settings.ScreenshotsPath = dir;
+                Program.Settings.ScreenshotsPath2 = dir;
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
@@ -670,10 +670,6 @@ namespace ShareX
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             BeforeClose();
-        }
-
-        private void txtSaveImageSubFolderPatternPreview_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }

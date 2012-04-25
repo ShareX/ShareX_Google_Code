@@ -155,7 +155,7 @@ namespace ShareX
                     UploadImageToHost = Program.Settings.CaptureUploadImage
                 };
 
-                if (Program.Settings.DynamicOutputs)
+                if (Program.Settings.ShowAfterCaptureWizard)
                 {
                     WizardAfterCapture dlg = new WizardAfterCapture(configAfterCapture);
                     dlg.ShowDialog();

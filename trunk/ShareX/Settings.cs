@@ -54,8 +54,10 @@ namespace ShareX
         public bool URLShortenAfterUpload = false;
         public bool AutoPlaySound = true;
 
-        [Category("Settings"), DefaultValue(false), Description("Dynamically choose actions after capture")]
-        public bool DynamicOutputs { get; set; }
+        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show after capture wizard. Dynamically choose actions after capture")]
+        public bool ShowAfterCaptureWizard { get; set; }
+        [Category(ComponentModelStrings.SettingsInteraction), DefaultValue(false), Description("Show clipboard options after host upload is completed. Dynamically choose which link format to be copied to the clipboad.")]
+        public bool ShowClipboardOptionsWizard { get; set; }
 
         // Hotkeys
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
@@ -81,7 +83,7 @@ namespace ShareX
         public int BufferSizePower = 3;
 
         // Image - Location
-        public string ScreenshotsPath = Program.ScreenshotsRootPath;
+        public string ScreenshotsPath2 = Program.ScreenshotsRootPath;
 
         // Image - Quality
         public EImageFormat ImageFormat = EImageFormat.PNG;

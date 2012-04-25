@@ -1199,7 +1199,6 @@
             this.txtScreenshotsPath.Name = "txtScreenshotsPath";
             this.txtScreenshotsPath.Size = new System.Drawing.Size(328, 20);
             this.txtScreenshotsPath.TabIndex = 5;
-            this.txtScreenshotsPath.TextChanged += new System.EventHandler(this.txtSaveImageSubFolderPatternPreview_TextChanged);
             // 
             // chkCaptureAnnotateImage
             // 
