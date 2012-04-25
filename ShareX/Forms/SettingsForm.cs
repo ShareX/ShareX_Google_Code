@@ -56,8 +56,8 @@ namespace ShareX
 
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;
-            cbStartWithWindows.Checked = RegistryHelper.CheckStartWithWindows();
-            cbShellContextMenu.Checked = RegistryHelper.CheckShellContextMenu();
+            cbStartWithWindows.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.Startup); //RegistryHelper.CheckStartWithWindows();
+            cbShellContextMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo); //RegistryHelper.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
             cbClipboardAutoCopy.Checked = Program.Settings.ClipboardAutoCopy;
             cbURLShortenAfterUpload.Checked = Program.Settings.URLShortenAfterUpload;
@@ -250,7 +250,8 @@ namespace ShareX
         {
             if (loaded)
             {
-                RegistryHelper.SetStartWithWindows(cbStartWithWindows.Checked);
+                //RegistryHelper.SetStartWithWindows(cbStartWithWindows.Checked);
+                ShortcutHelper.SetShortcut(cbStartWithWindows.Checked, Environment.SpecialFolder.Startup);
             }
         }
 
@@ -258,7 +259,8 @@ namespace ShareX
         {
             if (loaded)
             {
-                RegistryHelper.SetShellContextMenu(cbShellContextMenu.Checked);
+                //RegistryHelper.SetShellContextMenu(cbShellContextMenu.Checked);
+                ShortcutHelper.SetShortcut(cbShellContextMenu.Checked, Environment.SpecialFolder.SendTo);
             }
         }
 
