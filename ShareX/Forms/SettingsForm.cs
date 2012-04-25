@@ -120,11 +120,9 @@ namespace ShareX
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
-            chkCaptureAnnotateImage.Checked = Program.Settings.CaptureAnnotateImage;
             cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
             cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
-            txtScreenshotsPath.Text = Program.ScreenshotsRootPath;
             cbCaptureUploadImage.Checked = Program.Settings.CaptureUploadImage;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
@@ -149,17 +147,6 @@ namespace ShareX
             // Debug
             txtDebugLog.Text = Program.MyLogger.Messages.ToString();
             txtDebugLog.ScrollToCaret();
-
-            // Advanced
-            pgSettings.SelectedObject = Program.Settings;
-        }
-
-        private void BeforeClose()
-        {
-            string dir = txtScreenshotsPath.Text;
-
-            if (Directory.Exists(dir))
-                Program.Settings.ScreenshotsPath2 = dir;
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
@@ -526,21 +513,6 @@ namespace ShareX
             Program.Settings.CaptureShadow = cbCaptureShadow.Checked;
         }
 
-        private void chkCaptureAnnotateImage_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureAnnotateImage = chkCaptureAnnotateImage.Checked;
-        }
-
-        private void btnBrowseScreenshotsDir_Click(object sender, EventArgs e)
-        {
-            string dir = Path.Combine(txtScreenshotsPath.Text, txtSaveImageSubFolderPatternPreview.Text);
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            Process.Start(dir);
-        }
-
         private void cbCaptureCopyImage_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureCopyImage = cbCaptureCopyImage.Checked;
@@ -554,8 +526,7 @@ namespace ShareX
         private void txtSaveImageSubFolderPattern_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.SaveImageSubFolderPattern = txtSaveImageSubFolderPattern.Text;
-            string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(txtSaveImageSubFolderPattern.Text);
-            txtSaveImageSubFolderPatternPreview.Text = subFolderName;
+            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
         }
 
         private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)
@@ -666,10 +637,5 @@ namespace ShareX
         }
 
         #endregion Proxy
-
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            BeforeClose();
-        }
     }
 }
