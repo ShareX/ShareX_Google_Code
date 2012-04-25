@@ -1,8 +1,4 @@
-﻿Version 6.0.0 - 2012-09-28
-
-6.0.0 Merged most popular functionality of ZScreen and rebranded as ShareX
-
-Version 5.5.0 - 2012-03-07
+﻿Version 5.5.0 - 2012-03-07
 
 5.5.0 Added Email as file uploader
 5.4.1 Clipboard upload auto detects URL and shortens it

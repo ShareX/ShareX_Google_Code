@@ -51,6 +51,5 @@ namespace HelpersLib
         public const string ScreenshotsReflection = "Inputs / Screenshots / Effects / Reflection";
         public const string ScreenshotsRegion = "Inputs / Screenshots / Capture / Region";
         public const string SoundSettings = "Outputs / Sound Settings";
-        public const string SettingsInteraction = "Settings / Interaction";
     }
 }

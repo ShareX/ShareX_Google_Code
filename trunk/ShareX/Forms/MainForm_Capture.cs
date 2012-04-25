@@ -116,68 +116,21 @@ namespace ShareX
             }
         }
 
-        private void EditImage(ref Image img)
-        {
-            if (Greenshot.MainForm.instance == null)
-                Greenshot.MainForm.Start(new string[0]);
-
-            GreenshotPlugin.Core.CoreConfiguration coreConfiguration = Greenshot.IniFile.IniConfig.GetIniSection<GreenshotPlugin.Core.CoreConfiguration>();
-            coreConfiguration.OutputFileFilenamePattern = "${title}";
-            coreConfiguration.OutputFilePath = Program.ScreenshotsPath;
-
-            Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture();
-            capture.Image = img;
-            ImageData imageData = TaskHelper.PrepareImageAndFilename(img);
-            capture.CaptureDetails.Filename = Path.Combine(Program.ScreenshotsPath, imageData.Filename);
-            capture.CaptureDetails.Title =
-                Path.GetFileNameWithoutExtension(capture.CaptureDetails.Filename);
-            capture.CaptureDetails.AddMetaData("file", capture.CaptureDetails.Filename);
-            capture.CaptureDetails.AddMetaData("source", "file");
-
-            var surface = new Greenshot.Drawing.Surface(capture);
-            var editor = new Greenshot.ImageEditorForm(surface, Program.Settings.CaptureSaveImage) { Icon = this.Icon };
-
-            editor.SetImagePath(capture.CaptureDetails.Filename);
-            editor.Visible = false;
-            editor.ShowDialog();
-            img = editor.GetImageForExport();
-        }
-
         private void AfterCapture(Image img)
         {
             if (img != null)
             {
-                WizardAfterCaptureConfig configAfterCapture = new WizardAfterCaptureConfig
-                {
-                    AnnotateImage = Program.Settings.CaptureAnnotateImage,
-                    CopyImageToClipboard = Program.Settings.CaptureCopyImage,
-                    SaveImageToFile = Program.Settings.CaptureSaveImage,
-                    UploadImageToHost = Program.Settings.CaptureUploadImage
-                };
-
-                if (Program.Settings.ShowAfterCaptureWizard)
-                {
-                    WizardAfterCapture dlg = new WizardAfterCapture(configAfterCapture);
-                    dlg.ShowDialog();
-                    configAfterCapture = dlg.Config;
-                }
-
-                if (configAfterCapture.AnnotateImage.Value)
-                {
-                    EditImage(ref img);
-                }
-
-                if (configAfterCapture.CopyImageToClipboard.Value)
+                if (Program.Settings.CaptureCopyImage)
                 {
                     Clipboard.SetImage(img);
                 }
 
-                if (configAfterCapture.SaveImageToFile.Value)
+                if (Program.Settings.CaptureSaveImage)
                 {
                     ImageData imageData = TaskHelper.PrepareImageAndFilename(img);
                     imageData.WriteToFile(Program.ScreenshotsPath);
 
-                    if (configAfterCapture.UploadImageToHost.Value)
+                    if (Program.Settings.CaptureUploadImage)
                     {
                         UploadManager.UploadImageStream(imageData.ImageStream, imageData.Filename);
                     }
@@ -186,7 +139,7 @@ namespace ShareX
                         imageData.Dispose();
                     }
                 }
-                else if (configAfterCapture.UploadImageToHost.Value)
+                else if (Program.Settings.CaptureUploadImage)
                 {
                     UploadManager.UploadImage(img);
                 }
