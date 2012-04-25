@@ -58,6 +58,8 @@ Source: "ShareX\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flag
 Source: "ShareX\bin\Release\*.pdb"; DestDir: {app}; Flags: ignoreversion
 Source: "ShareX\bin\Release\*.dll"; DestDir: {app}; Flags: ignoreversion
 Source: "ShareX\bin\Release\*.wav"; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\bin\Release\*.xml"; DestDir: {app}; Flags: ignoreversion recursesubdirs
+Source: "ShareX\bin\Release\*.html"; DestDir: {app}; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: {app}

@@ -105,13 +105,27 @@ namespace ShareX
             }
         }
 
+        public static string ScreenshotsRootPath
+        {
+            get
+            {
+                if (Settings != null && Directory.Exists(Settings.ScreenshotsPath2))
+                {
+                    return Settings.ScreenshotsPath2;
+                }
+                else
+                {
+                    return Path.Combine(PersonalPath, "Screenshots");
+                }
+            }
+        }
+
         public static string ScreenshotsPath
         {
             get
             {
-                string parentFolderPath = Path.Combine(PersonalPath, "Screenshots");
                 string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(Settings.SaveImageSubFolderPattern);
-                return Path.Combine(parentFolderPath, subFolderName);
+                return Path.Combine(ScreenshotsRootPath, subFolderName);
             }
         }
 
