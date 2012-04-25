@@ -34,7 +34,6 @@ namespace ScreenCapture
     public class AreaManager
     {
         public List<Rectangle> Areas { get; private set; }
-
         public int SelectedAreaIndex { get; private set; }
 
         public List<Rectangle> GetValidAreas
@@ -86,17 +85,11 @@ namespace ScreenCapture
         }
 
         public ResizeManager ResizeManager { get; private set; }
-
         public bool IsCreating { get; private set; }
-
         public bool IsMoving { get; private set; }
-
         public bool IsResizing { get { return ResizeManager.IsResizing; } }
-
         public List<Rectangle> Windows { get; set; }
-
         public bool WindowCaptureMode { get; set; }
-
         public int MinimumSize { get; set; }
 
         private RectangleRegion surface;

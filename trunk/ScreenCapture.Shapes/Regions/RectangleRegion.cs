@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using HelpersLib;
 
 namespace ScreenCapture
@@ -130,11 +131,76 @@ namespace ScreenCapture
                             new PointF(area.X + 5, area.Y + 5), textFont, Color.White, Color.Black);
                     }
                 }
+
+                g.ResetClip();
             }
             else
             {
                 g.FillRectangle(shadowBrush, 0, 0, Width, Height);
             }
+
+            DrawMagnifyingGlass(g);
+        }
+
+        private void DrawMagnifyingGlass(Graphics g)
+        {
+            Point mousePos = InputManager.MousePosition0Based;
+            int offset = 20;
+            int size = 110;
+
+            using (Bitmap magnifier = MagnifyingGlass(SurfaceImage, mousePos))
+            {
+                Point magnifyingGlassPosition;
+
+                if (InputManager.MousePosition == AreaManager.CurrentArea.Location)
+                {
+                    magnifyingGlassPosition = new Point(mousePos.X - size - offset, mousePos.Y - size - offset);
+                }
+                else
+                {
+                    magnifyingGlassPosition = new Point(mousePos.X + offset, mousePos.Y + offset);
+                }
+
+                g.DrawImage(magnifier, magnifyingGlassPosition);
+            }
+        }
+
+        private Bitmap MagnifyingGlass(Image img, Point point)
+        {
+            Bitmap bmp = new Bitmap(110, 110);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+
+                g.DrawImage(SurfaceImage, new Rectangle(Point.Empty, new Size(110, 110)), new Rectangle(point.X - 5, point.Y - 5, 11, 11), GraphicsUnit.Pixel);
+
+                g.PixelOffsetMode = PixelOffsetMode.None;
+
+                using (SolidBrush crosshair = new SolidBrush(Color.FromArgb(100, Color.Red)))
+                {
+                    g.FillRectangle(crosshair, new Rectangle(0, 50, 110, 10));
+                    g.FillRectangle(crosshair, new Rectangle(50, 0, 10, 110));
+                }
+
+                using (Pen borderPen = new Pen(Color.FromArgb(100, Color.Black)))
+                {
+                    for (int x = 0; x < 11; x++)
+                    {
+                        g.DrawLine(borderPen, new Point(x * 10, 0), new Point(x * 10, 110));
+                    }
+
+                    for (int y = 0; y < 11; y++)
+                    {
+                        g.DrawLine(borderPen, new Point(0, y * 10), new Point(110, y * 10));
+                    }
+                }
+
+                g.DrawRectangle(Pens.Black, 0, 0, bmp.Width - 1, bmp.Height - 1);
+            }
+
+            return bmp;
         }
 
         public void UpdateRegionPath()

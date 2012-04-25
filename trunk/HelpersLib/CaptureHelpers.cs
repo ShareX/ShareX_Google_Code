@@ -116,14 +116,14 @@ namespace HelpersLib
 
             if (width < 0)
             {
-                x += width;
-                width = -width;
+                width = x - x2 + 1;
+                x = x2;
             }
 
             if (height < 0)
             {
-                y += height;
-                height = -height;
+                height = y - y2 + 1;
+                y = y2;
             }
 
             return new Rectangle(x, y, width, height);

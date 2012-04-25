@@ -32,11 +32,8 @@ namespace ScreenCapture
     public unsafe class UnsafeBitmap : IDisposable
     {
         public ColorBgra* Pointer { get; private set; }
-
         public bool IsLocked { get; private set; }
-
         public int Width { get; private set; }
-
         public int Height { get; private set; }
 
         public int PixelCount
@@ -82,17 +79,17 @@ namespace ScreenCapture
 
         public static bool operator ==(UnsafeBitmap bmp1, UnsafeBitmap bmp2)
         {
-            return Compare(bmp1, bmp2);
+            return object.ReferenceEquals(bmp1, bmp2) || bmp1.Equals(bmp2);
         }
 
         public static bool operator !=(UnsafeBitmap bmp1, UnsafeBitmap bmp2)
         {
-            return !Compare(bmp1, bmp2);
+            return !(bmp1 == bmp2);
         }
 
         public override bool Equals(object obj)
         {
-            return obj != null && obj is UnsafeBitmap && (UnsafeBitmap)obj == this;
+            return obj != null && obj is UnsafeBitmap && Compare((UnsafeBitmap)obj, this);
         }
 
         public override int GetHashCode()
@@ -106,8 +103,8 @@ namespace ScreenCapture
 
             if (pixelCount != bmp2.PixelCount) return false;
 
-            if (!bmp1.IsLocked) bmp1.Lock(ImageLockMode.ReadOnly);
-            if (!bmp2.IsLocked) bmp2.Lock(ImageLockMode.ReadOnly);
+            bmp1.Lock(ImageLockMode.ReadOnly);
+            bmp2.Lock(ImageLockMode.ReadOnly);
 
             ColorBgra* pointer1 = bmp1.Pointer;
             ColorBgra* pointer2 = bmp2.Pointer;
@@ -121,6 +118,34 @@ namespace ScreenCapture
             }
 
             return true;
+        }
+
+        public static Bitmap Zoom(UnsafeBitmap unsafeBitmap, Point position, int horizontalPixelCount, int verticalPixelCount, int zoomSize)
+        {
+            unsafeBitmap.Lock(ImageLockMode.ReadOnly);
+
+            Bitmap result = new Bitmap(horizontalPixelCount * zoomSize, verticalPixelCount * zoomSize);
+
+            using (UnsafeBitmap unsafeResult = new UnsafeBitmap(result, true, ImageLockMode.WriteOnly))
+            {
+                for (int y = 0; y < verticalPixelCount; y++)
+                {
+                    for (int x = 0; x < horizontalPixelCount; x++)
+                    {
+                        ColorBgra color = unsafeBitmap.GetPixel(position.X + x, position.Y + y);
+
+                        for (int y2 = y * zoomSize; y2 < y * zoomSize + zoomSize; y2++)
+                        {
+                            for (int x2 = x * zoomSize; x2 < x * zoomSize + zoomSize; x2++)
+                            {
+                                unsafeResult.SetPixel(x2, y2, color);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
 
         public ColorBgra GetPixel(int i)
