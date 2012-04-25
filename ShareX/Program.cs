@@ -109,12 +109,14 @@ namespace ShareX
         {
             get
             {
-                string path = PersonalPath;
-                if (Settings != null && Directory.Exists(Settings.ScreenshotsPath))
+                if (Settings != null && Directory.Exists(Settings.ScreenshotsPath2))
                 {
-                    path = Settings.ScreenshotsPath;
+                    return Settings.ScreenshotsPath2;
                 }
-                return Path.Combine(path, "Screenshots");
+                else
+                {
+                    return Path.Combine(PersonalPath, "Screenshots");
+                }
             }
         }
 

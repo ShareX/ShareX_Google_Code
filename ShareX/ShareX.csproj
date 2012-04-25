@@ -160,6 +160,9 @@
     <Compile Include="HelperClasses\TaskHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\WizardClipboardOptions.xaml.cs">
+      <DependentUpon>WizardClipboardOptions.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +293,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Forms\WizardAfterCapture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\WizardClipboardOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
