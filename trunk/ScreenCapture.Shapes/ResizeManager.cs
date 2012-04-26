@@ -52,16 +52,12 @@ namespace ScreenCapture
         }
 
         public bool IsResizing { get; private set; }
-
         public int MaxMoveSpeed { get; set; }
-
         public int MinMoveSpeed { get; set; }
-
         public bool IsBottomRightResizing { get; set; }
 
         private Surface surface;
         private AreaManager areaManager;
-
         private NodeObject[] nodes;
         private Rectangle tempRect;
 
@@ -169,16 +165,72 @@ namespace ScreenCapture
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    if (e.Shift) { MoveCurrentArea(-speed, 0); } else { ResizeCurrentArea(-speed, 0, IsBottomRightResizing); }
+                    if (areaManager.IsCreating)
+                    {
+                        Cursor.Position = new Point(Cursor.Position.X - speed, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            MoveCurrentArea(-speed, 0);
+                        }
+                        else
+                        {
+                            ResizeCurrentArea(-speed, 0, IsBottomRightResizing);
+                        }
+                    }
                     break;
                 case Keys.Right:
-                    if (e.Shift) { MoveCurrentArea(speed, 0); } else { ResizeCurrentArea(speed, 0, IsBottomRightResizing); }
+                    if (areaManager.IsCreating)
+                    {
+                        Cursor.Position = new Point(Cursor.Position.X + speed, Cursor.Position.Y);
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            MoveCurrentArea(speed, 0);
+                        }
+                        else
+                        {
+                            ResizeCurrentArea(speed, 0, IsBottomRightResizing);
+                        }
+                    }
                     break;
                 case Keys.Up:
-                    if (e.Shift) { MoveCurrentArea(0, -speed); } else { ResizeCurrentArea(0, -speed, IsBottomRightResizing); }
+                    if (areaManager.IsCreating)
+                    {
+                        Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y - speed);
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            MoveCurrentArea(0, -speed);
+                        }
+                        else
+                        {
+                            ResizeCurrentArea(0, -speed, IsBottomRightResizing);
+                        }
+                    }
                     break;
                 case Keys.Down:
-                    if (e.Shift) { MoveCurrentArea(0, speed); } else { ResizeCurrentArea(0, speed, IsBottomRightResizing); }
+                    if (areaManager.IsCreating)
+                    {
+                        Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + speed);
+                    }
+                    else
+                    {
+                        if (e.Shift)
+                        {
+                            MoveCurrentArea(0, speed);
+                        }
+                        else
+                        {
+                            ResizeCurrentArea(0, speed, IsBottomRightResizing);
+                        }
+                    }
                     break;
                 case Keys.Tab:
                     IsBottomRightResizing = !IsBottomRightResizing;
