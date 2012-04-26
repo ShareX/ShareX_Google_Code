@@ -29,9 +29,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using HelpersLib;
+using ScreenCapture.Shapes.Properties;
 
 namespace ScreenCapture
 {
@@ -61,6 +63,11 @@ namespace ScreenCapture
             ScreenRectangle0Based = CaptureHelpers.FixScreenCoordinates(ScreenRectangle);
 
             InitializeComponent();
+
+            using (MemoryStream cursorStream = new MemoryStream(Resources.Crosshair))
+            {
+                Cursor = new Cursor(cursorStream);
+            }
 
             SurfaceImage = backgroundImage;
             Prepare();
