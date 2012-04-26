@@ -23,10 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 using HelpersLib;
 
 namespace ScreenCapture
@@ -35,10 +37,33 @@ namespace ScreenCapture
     {
         public AreaManager AreaManager { get; private set; }
 
+        private int magnifierPixelSize = 10;
+        private int magnifierPixelCount = 11;
+
         public RectangleRegion(Image backgroundImage = null)
             : base(backgroundImage)
         {
             AreaManager = new AreaManager(this);
+            KeyDown += new KeyEventHandler(RectangleRegion_KeyDown);
+        }
+
+        private void RectangleRegion_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Add:
+                    if (magnifierPixelSize < 30) magnifierPixelSize++;
+                    break;
+                case Keys.Subtract:
+                    if (magnifierPixelSize > 3) magnifierPixelSize--;
+                    break;
+                case Keys.Control | Keys.Add:
+                    if (magnifierPixelCount < 35) magnifierPixelCount += 2;
+                    break;
+                case Keys.Control | Keys.Subtract:
+                    if (magnifierPixelCount > 3) magnifierPixelCount -= 2;
+                    break;
+            }
         }
 
         public override void Prepare()
@@ -80,10 +105,12 @@ namespace ScreenCapture
                     g.ResetClip();
                 }
 
-                /*foreach (WindowInfo wi in AreaManager.Windows)
+                /*
+                foreach (WindowInfo wi in AreaManager.Windows)
                 {
                     g.DrawRectangleProper(Pens.Yellow, Rectangle.Intersect(ScreenRectangle0Based, wi.Rectangle0Based));
-                }*/
+                }
+                */
 
                 borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
                 borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
@@ -148,7 +175,7 @@ namespace ScreenCapture
             int offset = 20;
             int size = 110;
 
-            using (Bitmap magnifier = MagnifyingGlass(SurfaceImage, mousePos))
+            using (Bitmap magnifier = Magnifier(SurfaceImage, mousePos, magnifierPixelCount, magnifierPixelCount, magnifierPixelSize))
             {
                 Point magnifyingGlassPosition;
 
@@ -165,39 +192,50 @@ namespace ScreenCapture
             }
         }
 
-        private Bitmap MagnifyingGlass(Image img, Point point)
+        private Bitmap Magnifier(Image img, Point position, int horizontalPixelCount, int verticalPixelCount, int pixelSize)
         {
-            Bitmap bmp = new Bitmap(110, 110);
+            if (horizontalPixelCount % 2 == 0 || verticalPixelCount % 2 == 0)
+            {
+                throw new Exception("Pixel count must be odd.");
+            }
+
+            int width = horizontalPixelCount * pixelSize;
+            int height = verticalPixelCount * pixelSize;
+            Bitmap bmp = new Bitmap(width, height);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.PixelOffsetMode = PixelOffsetMode.Half;
 
-                g.DrawImage(SurfaceImage, new Rectangle(Point.Empty, new Size(110, 110)), new Rectangle(point.X - 5, point.Y - 5, 11, 11), GraphicsUnit.Pixel);
+                g.DrawImage(SurfaceImage, new Rectangle(Point.Empty, new Size(width, height)),
+                    new Rectangle(position.X - horizontalPixelCount / 2, position.Y - verticalPixelCount / 2, horizontalPixelCount, verticalPixelCount), GraphicsUnit.Pixel);
 
                 g.PixelOffsetMode = PixelOffsetMode.None;
 
-                using (SolidBrush crosshair = new SolidBrush(Color.FromArgb(100, Color.Red)))
+                using (SolidBrush crosshairBrush = new SolidBrush(Color.FromArgb(100, Color.Red)))
                 {
-                    g.FillRectangle(crosshair, new Rectangle(0, 50, 110, 10));
-                    g.FillRectangle(crosshair, new Rectangle(50, 0, 10, 110));
+                    g.FillRectangle(crosshairBrush, new Rectangle(0, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Left
+                    g.FillRectangle(crosshairBrush, new Rectangle((width + pixelSize) / 2, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Right
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, 0, pixelSize, (height - pixelSize) / 2)); // Top
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, (height + pixelSize) / 2, pixelSize, (height - pixelSize) / 2)); // Bottom
                 }
 
                 using (Pen borderPen = new Pen(Color.FromArgb(100, Color.Black)))
                 {
-                    for (int x = 0; x < 11; x++)
+                    for (int x = 1; x < horizontalPixelCount; x++)
                     {
-                        g.DrawLine(borderPen, new Point(x * 10, 0), new Point(x * 10, 110));
+                        g.DrawLine(borderPen, new Point(x * pixelSize, 0), new Point(x * pixelSize, height));
                     }
 
-                    for (int y = 0; y < 11; y++)
+                    for (int y = 1; y < verticalPixelCount; y++)
                     {
-                        g.DrawLine(borderPen, new Point(0, y * 10), new Point(110, y * 10));
+                        g.DrawLine(borderPen, new Point(0, y * pixelSize), new Point(width, y * pixelSize));
                     }
                 }
 
-                g.DrawRectangle(Pens.Black, 0, 0, bmp.Width - 1, bmp.Height - 1);
+                g.DrawRectangle(Pens.Black, 0, 0, width - 1, height - 1);
+                g.DrawRectangle(Pens.Black, (width - pixelSize) / 2, (height - pixelSize) / 2, pixelSize, pixelSize);
             }
 
             return bmp;
