@@ -34,30 +34,22 @@ namespace UploadersLib.ImageUploaders
 {
     public sealed class Photobucket : ImageUploader, IOAuth
     {
-        public override string Host
-        {
-            get
-            {
-                return "Photobucket";
-            }
-        }
-
         private const string URLRequestToken = "http://api.photobucket.com/login/request";
         private const string URLAuthorize = "http://photobucket.com/apilogin/login";
         private const string URLAccessToken = "http://api.photobucket.com/login/access";
 
-        public PhotobucketAccountInfo AccountInfo = new PhotobucketAccountInfo();
-
         public OAuthInfo AuthInfo { get; set; }
+        public PhotobucketAccountInfo AccountInfo { get; set; }
 
         public Photobucket(OAuthInfo oauth)
         {
             AuthInfo = oauth;
+            AccountInfo = new PhotobucketAccountInfo();
         }
 
         public Photobucket(OAuthInfo oauth, PhotobucketAccountInfo accountInfo)
-            : this(oauth)
         {
+            AuthInfo = oauth;
             AccountInfo = accountInfo;
         }
 

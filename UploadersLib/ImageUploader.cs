@@ -31,8 +31,6 @@ namespace UploadersLib
 {
     public abstract class ImageUploader : FileUploader
     {
-        public abstract string Host { get; }
-
         public UploadResult Upload(Image image, string fileName)
         {
             using (MemoryStream stream = new MemoryStream())

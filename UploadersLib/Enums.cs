@@ -47,8 +47,8 @@ namespace UploadersLib
         Twitsnaps,
         [Description("yfrog.com")]
         yFrog,
-        //[Description("MediaWiki")]
-        //MediaWiki,
+        [Description("imm.io")]
+        Immio,
         [Description("File Uploader")]
         FileUploader
     }

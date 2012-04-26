@@ -249,78 +249,54 @@ namespace UploadersLib.FileUploaders
     public class DropboxUserLogin
     {
         public string Token { get; set; }
-
         public string Secret { get; set; }
     }
 
     public class DropboxAccountInfo
     {
         public string Referral_link { get; set; }
-
         public string Display_name { get; set; }
-
         public long Uid { get; set; }
-
         public string Country { get; set; }
-
         public DropboxQuotaInfo Quota_info { get; set; }
-
         public string Email { get; set; }
     }
 
     public class DropboxQuotaInfo
     {
         public long Shared { get; set; }
-
         public long Quota { get; set; }
-
         public long Normal { get; set; }
     }
 
     public class DropboxDirectoryInfo
     {
         public string Hash { get; set; }
-
         public bool Thumb_exists { get; set; }
-
         public long Bytes { get; set; }
-
         public string Path { get; set; }
-
         public bool Is_dir { get; set; }
-
         public string Size { get; set; }
-
         public string Root { get; set; }
-
         public DropboxContentInfo[] Contents { get; set; }
-
         public string Icon { get; set; }
     }
 
     public class DropboxContentInfo
     {
         public long Revision { get; set; }
-
         public bool Thumb_exists { get; set; }
-
         public long Bytes { get; set; }
-
         public string Modified { get; set; }
-
         public string Path { get; set; }
-
         public bool Is_dir { get; set; }
-
         public string Icon { get; set; }
-
         public string Size { get; set; }
     }
 
     public class DropboxShares
     {
         public string URL { get; set; }
-
         public string Expires { get; set; }
     }
 }

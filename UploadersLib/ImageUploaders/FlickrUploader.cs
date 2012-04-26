@@ -45,14 +45,6 @@ namespace UploadersLib.ImageUploaders
         public FlickrSettings Settings = new FlickrSettings();
         public string Frob;
 
-        public override string Host
-        {
-            get
-            {
-                return ImageDestination.Flickr.GetDescription();
-            }
-        }
-
         public FlickrUploader(string key, string secret)
         {
             API_Key = key;

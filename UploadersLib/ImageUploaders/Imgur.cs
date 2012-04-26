@@ -50,20 +50,9 @@ namespace UploadersLib.ImageUploaders
         private const string URLAccessToken = "https://api.imgur.com/oauth/access_token";
 
         public AccountType UploadMethod { get; set; }
-
         public string AnonymousKey { get; set; }
-
         public OAuthInfo AuthInfo { get; set; }
-
         public ImgurThumbnailType ThumbnailType { get; set; }
-
-        public override string Host
-        {
-            get
-            {
-                return ImageDestination.Imgur.GetDescription();
-            }
-        }
 
         public Imgur(AccountType uploadMethod, string anonymousKey, OAuthInfo oauth)
         {

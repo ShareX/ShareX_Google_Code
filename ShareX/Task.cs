@@ -51,11 +51,8 @@ namespace ShareX
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
-
         public TaskStatus Status { get; private set; }
-
         public bool IsWorking { get { return Status == TaskStatus.Preparing || Status == TaskStatus.Uploading; } }
-
         public bool IsStopped { get; private set; }
 
         private Stream data;
@@ -283,6 +280,9 @@ namespace ShareX
                     yFrogOptions.Password = Program.UploadersConfig.YFrogPassword;
                     yFrogOptions.Source = Application.ProductName;
                     imageUploader = new YfrogUploader(yFrogOptions);
+                    break;
+                case ImageDestination.Immio:
+                    imageUploader = new ImmioUploader();
                     break;
             }
 
