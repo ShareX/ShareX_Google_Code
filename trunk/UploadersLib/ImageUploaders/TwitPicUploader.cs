@@ -61,14 +61,6 @@ namespace UploadersLib.ImageUploaders
         private const string UploadLink = "http://api.twitpic.com/1/upload.json";
         private const string UploadAndPostLink = "http://api.twitpic.com/1/uploadAndPost.json";
 
-        public override string Host
-        {
-            get
-            {
-                return ImageDestination.Twitpic.GetDescription();
-            }
-        }
-
         public TwitPicUploader(string key, OAuthInfo oauth)
         {
             APIKey = key;

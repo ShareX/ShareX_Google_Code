@@ -23,50 +23,45 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using HelpersLib;
+using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.ImageUploaders
 {
-    public sealed class ImageShackUploader : ImageUploader
+    public sealed class ImmioUploader : ImageUploader
     {
-        public AccountType AccountType { get; private set; }
-        public bool IsPublic { get; set; }
-
-        private string DeveloperKey { get; set; }
-        private string RegistrationCode { get; set; }
-
-        public ImageShackUploader(string developerKey, AccountType accountType = AccountType.Anonymous, string registrationCode = null)
-        {
-            DeveloperKey = developerKey;
-            AccountType = accountType;
-            RegistrationCode = registrationCode;
-        }
-
         public override UploadResult Upload(Stream stream, string fileName)
         {
             UploadResult ur = new UploadResult();
-
-            Dictionary<string, string> arguments = new Dictionary<string, string>();
-            arguments.Add("key", DeveloperKey);
-            arguments.Add("public", IsPublic ? "yes" : "no");
-
-            if (AccountType == AccountType.User && !string.IsNullOrEmpty(RegistrationCode))
-            {
-                arguments.Add("cookie", RegistrationCode);
-            }
-
-            ur.Source = UploadData(stream, "http://www.imageshack.us/upload_api.php", fileName, "fileupload", arguments);
-
-            if (!string.IsNullOrEmpty(ur.Source))
-            {
-                ur.URL = Helpers.GetXMLValue(ur.Source, "image_link");
-                ur.ThumbnailURL = Helpers.GetXMLValue(ur.Source, "thumb_link");
-            }
-
+            ur.Source = UploadData(stream, "http://imm.io/store/", fileName, "image");
+            ImmioResponse response = JsonConvert.DeserializeObject<ImmioResponse>(ur.Source);
+            if (response != null) ur.URL = response.Payload.Uri;
             return ur;
+        }
+
+        private class ImmioResponse
+        {
+            public bool Success { get; set; }
+            public ImmioPayload Payload { get; set; }
+        }
+
+        private class ImmioPayload
+        {
+            public string Uid { get; set; }
+            public string Uri { get; set; }
+            public string Link { get; set; }
+            public string Name { get; set; }
+            public string Format { get; set; }
+            public string Ext { get; set; }
+            public int Width { get; set; }
+            public int Height { get; set; }
+            public string Size { get; set; }
         }
     }
 }

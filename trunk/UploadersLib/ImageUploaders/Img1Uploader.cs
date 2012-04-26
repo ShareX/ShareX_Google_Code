@@ -32,14 +32,6 @@ namespace UploadersLib.ImageUploaders
     {
         private const string uploadURL = "http://img1.us/?app";
 
-        public override string Host
-        {
-            get
-            {
-                return "Img1";
-            }
-        }
-
         public override UploadResult Upload(Stream stream, string fileName)
         {
             UploadResult ur = new UploadResult();

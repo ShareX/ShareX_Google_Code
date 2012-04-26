@@ -35,22 +35,11 @@ namespace UploadersLib.ImageUploaders
     public sealed class TinyPicUploader : ImageUploader
     {
         public AccountType AccountType { get; private set; }
-
         public string TinyPicID { get; set; }
-
         public string TinyPicKey { get; set; }
-
         public string Shuk { get; set; }
 
         private const string URLAPI = "http://api.tinypic.com/api.php";
-
-        public override string Host
-        {
-            get
-            {
-                return ImageDestination.TinyPic.GetDescription();
-            }
-        }
 
         public TinyPicUploader(string id, string key, AccountType accountType = AccountType.Anonymous, string shuk = null)
         {
