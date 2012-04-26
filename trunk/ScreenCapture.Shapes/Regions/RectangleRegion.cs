@@ -172,23 +172,25 @@ namespace ScreenCapture
         private void DrawMagnifyingGlass(Graphics g)
         {
             Point mousePos = InputManager.MousePosition0Based;
-            int offset = 20;
-            int size = 110;
+            int offset = 25;
 
             using (Bitmap magnifier = Magnifier(SurfaceImage, mousePos, magnifierPixelCount, magnifierPixelCount, magnifierPixelSize))
             {
-                Point magnifyingGlassPosition;
+                int x = mousePos.X + offset;
 
-                if (InputManager.MousePosition == AreaManager.CurrentArea.Location)
+                if (x + magnifier.Width > ScreenRectangle0Based.Width)
                 {
-                    magnifyingGlassPosition = new Point(mousePos.X - size - offset, mousePos.Y - size - offset);
-                }
-                else
-                {
-                    magnifyingGlassPosition = new Point(mousePos.X + offset, mousePos.Y + offset);
+                    x = mousePos.X - offset - magnifier.Width;
                 }
 
-                g.DrawImage(magnifier, magnifyingGlassPosition);
+                int y = mousePos.Y + offset;
+
+                if (y + magnifier.Height > ScreenRectangle0Based.Height)
+                {
+                    y = mousePos.Y - offset - magnifier.Height;
+                }
+
+                g.DrawImage(magnifier, new Point(x, y));
             }
         }
 
