@@ -165,7 +165,7 @@ namespace ScreenCapture
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    if (areaManager.IsCreating)
+                    if (!areaManager.IsCurrentAreaValid || areaManager.IsCreating)
                     {
                         Cursor.Position = new Point(Cursor.Position.X - speed, Cursor.Position.Y);
                     }
@@ -182,7 +182,7 @@ namespace ScreenCapture
                     }
                     break;
                 case Keys.Right:
-                    if (areaManager.IsCreating)
+                    if (!areaManager.IsCurrentAreaValid || areaManager.IsCreating)
                     {
                         Cursor.Position = new Point(Cursor.Position.X + speed, Cursor.Position.Y);
                     }
@@ -199,7 +199,7 @@ namespace ScreenCapture
                     }
                     break;
                 case Keys.Up:
-                    if (areaManager.IsCreating)
+                    if (!areaManager.IsCurrentAreaValid || areaManager.IsCreating)
                     {
                         Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y - speed);
                     }
@@ -216,7 +216,7 @@ namespace ScreenCapture
                     }
                     break;
                 case Keys.Down:
-                    if (areaManager.IsCreating)
+                    if (!areaManager.IsCurrentAreaValid || areaManager.IsCreating)
                     {
                         Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + speed);
                     }
