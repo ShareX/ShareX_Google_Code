@@ -26,14 +26,13 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace HelpersLib
 {
-    public enum SerializationType
-    {
-        Binary, Xml
-    }
+    public enum SerializationType { Binary, Xml, Json }
 
     public static class SettingsHelper
     {
@@ -59,6 +58,13 @@ namespace HelpersLib
                                 case SerializationType.Xml:
                                     Type t = obj.GetType();
                                     new XmlSerializer(t).Serialize(ms, obj);
+                                    break;
+                                case SerializationType.Json:
+                                    StreamWriter streamWriter = new StreamWriter(ms);
+                                    JsonWriter jsonWriter = new JsonTextWriter(streamWriter);
+                                    jsonWriter.Formatting = Formatting.Indented;
+                                    new JsonSerializer().Serialize(jsonWriter, obj);
+                                    jsonWriter.Flush();
                                     break;
                             }
 
@@ -119,6 +125,13 @@ namespace HelpersLib
                                     default:
                                     case SerializationType.Xml:
                                         settings = (T)new XmlSerializer(typeof(T)).Deserialize(fs);
+                                        break;
+                                    case SerializationType.Json:
+                                        using (StreamReader streamReader = new StreamReader(fs))
+                                        using (JsonReader jsonReader = new JsonTextReader(streamReader))
+                                        {
+                                            settings = new JsonSerializer().Deserialize<T>(jsonReader);
+                                        }
                                         break;
                                 }
 

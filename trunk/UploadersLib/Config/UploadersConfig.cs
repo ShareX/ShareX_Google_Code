@@ -36,7 +36,7 @@ using UploadersLib.TextUploaders;
 
 namespace UploadersLib
 {
-    public class UploadersConfig : XMLSettingsBase<UploadersConfig>
+    public class UploadersConfig : SettingsBase<UploadersConfig>
     {
         public UploadersConfig()
         {
@@ -112,6 +112,7 @@ namespace UploadersLib
         public int FTPSelectedText = 0;
         public int FTPSelectedFile = 0;
         public int FTPThumbnailWidthLimit = 150;
+
         // If image size smaller than thumbnail size then not make thumbnail
         public bool FTPThumbnailCheckSize = true;
 

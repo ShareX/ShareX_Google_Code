@@ -23,19 +23,26 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace HelpersLib
 {
-    public abstract class XMLSettingsBase<T> where T : XMLSettingsBase<T>, new()
+    public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
     {
-        [XmlIgnore]
+        public static SerializationType SerializationType = SerializationType.Json;
+
+        [XmlIgnore, JsonIgnore]
         public string FilePath { get; private set; }
 
         public virtual bool Save(string filePath)
         {
-            return SettingsHelper.Save(this, filePath, SerializationType.Xml);
+            return SettingsHelper.Save(this, filePath, SerializationType);
         }
 
         public void Save()
@@ -55,7 +62,7 @@ namespace HelpersLib
 
         public static T Load(string filePath)
         {
-            T setting = SettingsHelper.Load<T>(filePath, SerializationType.Xml);
+            T setting = SettingsHelper.Load<T>(filePath, SerializationType);
             setting.FilePath = filePath;
             return setting;
         }
