@@ -40,7 +40,6 @@
             this.cbURLShortenAfterUpload = new System.Windows.Forms.CheckBox();
             this.lblOpenZUploaderPath = new System.Windows.Forms.Label();
             this.btnOpenZUploaderPath = new System.Windows.Forms.Button();
-            this.lblGeneralInfo = new System.Windows.Forms.Label();
             this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.btnLoadUploadersConfig = new System.Windows.Forms.Button();
@@ -54,7 +53,6 @@
             this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
-            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
@@ -140,6 +138,8 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
+            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpUpload.SuspendLayout();
@@ -188,9 +188,9 @@
             this.cbAutoPlaySound.AutoSize = true;
             this.cbAutoPlaySound.Location = new System.Drawing.Point(16, 176);
             this.cbAutoPlaySound.Name = "cbAutoPlaySound";
-            this.cbAutoPlaySound.Size = new System.Drawing.Size(327, 17);
+            this.cbAutoPlaySound.Size = new System.Drawing.Size(199, 17);
             this.cbAutoPlaySound.TabIndex = 6;
-            this.cbAutoPlaySound.Text = "Play sound when capture is made and after upload is completed";
+            this.cbAutoPlaySound.Text = "Play sound after upload is completed";
             this.cbAutoPlaySound.UseVisualStyleBackColor = true;
             this.cbAutoPlaySound.CheckedChanged += new System.EventHandler(this.cbAutoPlaySound_CheckedChanged);
             // 
@@ -224,6 +224,7 @@
             // 
             // tpGeneral
             // 
+            this.tpGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
             this.tpGeneral.Controls.Add(this.cbCheckUpdates);
             this.tpGeneral.Controls.Add(this.lblGeneralSeparator);
             this.tpGeneral.Controls.Add(this.cbStartWithWindows);
@@ -231,7 +232,6 @@
             this.tpGeneral.Controls.Add(this.cbURLShortenAfterUpload);
             this.tpGeneral.Controls.Add(this.lblOpenZUploaderPath);
             this.tpGeneral.Controls.Add(this.btnOpenZUploaderPath);
-            this.tpGeneral.Controls.Add(this.lblGeneralInfo);
             this.tpGeneral.Controls.Add(this.cbShellContextMenu);
             this.tpGeneral.Controls.Add(this.cbClipboardAutoCopy);
             this.tpGeneral.Controls.Add(this.cbAutoPlaySound);
@@ -268,9 +268,9 @@
             this.cbStartWithWindows.AutoSize = true;
             this.cbStartWithWindows.Location = new System.Drawing.Point(16, 40);
             this.cbStartWithWindows.Name = "cbStartWithWindows";
-            this.cbStartWithWindows.Size = new System.Drawing.Size(170, 17);
+            this.cbStartWithWindows.Size = new System.Drawing.Size(183, 17);
             this.cbStartWithWindows.TabIndex = 1;
-            this.cbStartWithWindows.Text = "Start ShareX with Windows";
+            this.cbStartWithWindows.Text = "Start ShareX on Windows startup";
             this.cbStartWithWindows.UseVisualStyleBackColor = true;
             this.cbStartWithWindows.CheckedChanged += new System.EventHandler(this.cbStartWithWindows_CheckedChanged);
             // 
@@ -279,9 +279,9 @@
             this.cbShowTray.AutoSize = true;
             this.cbShowTray.Location = new System.Drawing.Point(16, 16);
             this.cbShowTray.Name = "cbShowTray";
-            this.cbShowTray.Size = new System.Drawing.Size(149, 17);
+            this.cbShowTray.Size = new System.Drawing.Size(96, 17);
             this.cbShowTray.TabIndex = 0;
-            this.cbShowTray.Text = "Show ShareX tray icon";
+            this.cbShowTray.Text = "Show tray icon";
             this.cbShowTray.UseVisualStyleBackColor = true;
             this.cbShowTray.CheckedChanged += new System.EventHandler(this.cbShowTray_CheckedChanged);
             // 
@@ -299,7 +299,7 @@
             // lblOpenZUploaderPath
             // 
             this.lblOpenZUploaderPath.AutoSize = true;
-            this.lblOpenZUploaderPath.Location = new System.Drawing.Point(16, 248);
+            this.lblOpenZUploaderPath.Location = new System.Drawing.Point(200, 237);
             this.lblOpenZUploaderPath.Name = "lblOpenZUploaderPath";
             this.lblOpenZUploaderPath.Size = new System.Drawing.Size(257, 13);
             this.lblOpenZUploaderPath.TabIndex = 8;
@@ -307,7 +307,7 @@
             // 
             // btnOpenZUploaderPath
             // 
-            this.btnOpenZUploaderPath.Location = new System.Drawing.Point(16, 216);
+            this.btnOpenZUploaderPath.Location = new System.Drawing.Point(16, 232);
             this.btnOpenZUploaderPath.Name = "btnOpenZUploaderPath";
             this.btnOpenZUploaderPath.Size = new System.Drawing.Size(176, 23);
             this.btnOpenZUploaderPath.TabIndex = 7;
@@ -315,27 +315,14 @@
             this.btnOpenZUploaderPath.UseVisualStyleBackColor = true;
             this.btnOpenZUploaderPath.Click += new System.EventHandler(this.btnOpenZUploaderPath_Click);
             // 
-            // lblGeneralInfo
-            // 
-            this.lblGeneralInfo.BackColor = System.Drawing.Color.DimGray;
-            this.lblGeneralInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGeneralInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblGeneralInfo.ForeColor = System.Drawing.Color.White;
-            this.lblGeneralInfo.Location = new System.Drawing.Point(3, 298);
-            this.lblGeneralInfo.Name = "lblGeneralInfo";
-            this.lblGeneralInfo.Size = new System.Drawing.Size(516, 29);
-            this.lblGeneralInfo.TabIndex = 9;
-            this.lblGeneralInfo.Text = "Shell context menu is Windows Explorer right click menu for files and folders.";
-            this.lblGeneralInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cbShellContextMenu
             // 
             this.cbShellContextMenu.AutoSize = true;
             this.cbShellContextMenu.Location = new System.Drawing.Point(16, 64);
             this.cbShellContextMenu.Name = "cbShellContextMenu";
-            this.cbShellContextMenu.Size = new System.Drawing.Size(285, 17);
+            this.cbShellContextMenu.Size = new System.Drawing.Size(181, 17);
             this.cbShellContextMenu.TabIndex = 2;
-            this.cbShellContextMenu.Text = "Show \"Upload using ShareX\" in Shell context menu";
+            this.cbShellContextMenu.Text = "Show ShareX in \"Send to\" menu";
             this.cbShellContextMenu.UseVisualStyleBackColor = true;
             this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
             // 
@@ -471,15 +458,6 @@
             this.tpHotkeys.TabIndex = 2;
             this.tpHotkeys.Text = "Hotkeys";
             this.tpHotkeys.UseVisualStyleBackColor = true;
-            // 
-            // hmHotkeys
-            // 
-            this.hmHotkeys.AutoScroll = true;
-            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
-            this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
-            this.hmHotkeys.TabIndex = 0;
             // 
             // tpImage
             // 
@@ -1549,6 +1527,26 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbPlaySoundAfterCapture
+            // 
+            this.cbPlaySoundAfterCapture.AutoSize = true;
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 200);
+            this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
+            this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(185, 17);
+            this.cbPlaySoundAfterCapture.TabIndex = 11;
+            this.cbPlaySoundAfterCapture.Text = "Play sound when capture is made";
+            this.cbPlaySoundAfterCapture.UseVisualStyleBackColor = true;
+            this.cbPlaySoundAfterCapture.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterCapture_CheckedChanged);
+            // 
+            // hmHotkeys
+            // 
+            this.hmHotkeys.AutoScroll = true;
+            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
+            this.hmHotkeys.Name = "hmHotkeys";
+            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
+            this.hmHotkeys.TabIndex = 0;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1640,7 +1638,6 @@
         private System.Windows.Forms.Label lblHistoryMaxItemCount;
         private System.Windows.Forms.NumericUpDown nudHistoryMaxItemCount;
         private System.Windows.Forms.Label lblHistoryInfo;
-        private System.Windows.Forms.Label lblGeneralInfo;
         private System.Windows.Forms.TabPage tpDebug;
         private System.Windows.Forms.TextBox txtDebugLog;
         private System.Windows.Forms.Button btnNameFormatPatternHelp;
@@ -1724,5 +1721,6 @@
         private System.Windows.Forms.CheckBox cbCheckUpdates;
         private System.Windows.Forms.CheckBox cbCaptureShadow;
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
+        private System.Windows.Forms.CheckBox cbPlaySoundAfterCapture;
     }
 }

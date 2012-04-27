@@ -91,7 +91,7 @@ namespace ShareX
                 Screenshot.CaptureShadow = Program.Settings.CaptureShadow;
                 img = capture();
 
-                if (img != null && Program.Settings.AutoPlaySound)
+                if (img != null && Program.Settings.PlaySoundAfterCapture)
                 {
                     string soundPath = Path.Combine(Application.StartupPath, "Camera.wav");
 

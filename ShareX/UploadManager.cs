@@ -376,7 +376,7 @@ namespace ShareX
                         lvi.SubItems[8].Text = string.Empty;
                         lvi.ImageIndex = 1;
 
-                        if (Program.Settings.AutoPlaySound)
+                        if (Program.Settings.PlaySoundAfterUpload)
                         {
                             SystemSounds.Asterisk.Play();
                         }
@@ -412,7 +412,7 @@ namespace ShareX
                             }
                         }
 
-                        if (Program.Settings.AutoPlaySound)
+                        if (Program.Settings.PlaySoundAfterUpload)
                         {
                             SystemSounds.Exclamation.Play();
                         }
@@ -439,12 +439,14 @@ namespace ShareX
                         CacheProgressIcon();
                     }
 
+                    IEnumerable<Task> tasks = Tasks.Where(x => x != null);
                     Icon icon = null;
 
-                    if (Tasks.Any(x => x.IsWorking))
+                    if (tasks.Any(x => x.IsWorking))
                     {
-                        double averageProgress = Tasks.Where(x => x.Info != null && x.Info.Progress != null).Average(x => x.Info.Progress.Percentage);
+                        double averageProgress = tasks.Where(x => x.Info != null && x.Info.Progress != null).Average(x => x.Info.Progress.Percentage);
                         int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
+                        index = index.Between(trayIcons);
                         icon = trayIcons[index];
                     }
                     else

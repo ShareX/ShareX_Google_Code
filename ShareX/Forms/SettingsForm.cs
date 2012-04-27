@@ -61,7 +61,8 @@ namespace ShareX
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
             cbClipboardAutoCopy.Checked = Program.Settings.ClipboardAutoCopy;
             cbURLShortenAfterUpload.Checked = Program.Settings.URLShortenAfterUpload;
-            cbAutoPlaySound.Checked = Program.Settings.AutoPlaySound;
+            cbAutoPlaySound.Checked = Program.Settings.PlaySoundAfterUpload;
+            cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
 
             // Upload
             cbUseCustomUploadersConfigPath.Checked = Program.Settings.UseCustomUploadersConfigPath;
@@ -281,7 +282,12 @@ namespace ShareX
 
         private void cbAutoPlaySound_CheckedChanged(object sender, EventArgs e)
         {
-            Program.Settings.AutoPlaySound = cbAutoPlaySound.Checked;
+            Program.Settings.PlaySoundAfterUpload = cbAutoPlaySound.Checked;
+        }
+
+        private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.PlaySoundAfterCapture = cbPlaySoundAfterCapture.Checked;
         }
 
         private void btnOpenZUploaderPath_Click(object sender, EventArgs e)

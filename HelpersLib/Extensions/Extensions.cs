@@ -58,7 +58,6 @@ namespace HelpersLib
         {
             ulong keysVal = Convert.ToUInt64(keys);
             ulong flagVal = Convert.ToUInt64(flag);
-
             return (keysVal & flagVal) == flagVal;
         }
 
@@ -67,6 +66,11 @@ namespace HelpersLib
             if (num <= min) return min;
             if (num >= max) return max;
             return num;
+        }
+
+        public static int Between(this int num, Array array)
+        {
+            return num.Between(0, array.Length - 1);
         }
 
         public static int BetweenOrDefault(this int num, int min, int max, int defaultValue = 0)
