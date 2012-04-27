@@ -31,7 +31,7 @@ using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
-    public class Settings : XMLSettingsBase<Settings>
+    public class Settings : SettingsBase<Settings>
     {
         #region Main Form
 
@@ -47,7 +47,6 @@ namespace ShareX
 
         // General
         public bool ShowTray = true;
-
         public bool AutoCheckUpdate = true;
         public bool ClipboardAutoCopy = true;
         public bool URLShortenAfterUpload = false;
@@ -56,7 +55,6 @@ namespace ShareX
 
         // Hotkeys
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
-
         public HotkeySetting HotkeyFileUpload = new HotkeySetting(Keys.Shift | Keys.PageUp);
         public HotkeySetting HotkeyPrintScreen = new HotkeySetting(Keys.PrintScreen);
         public HotkeySetting HotkeyActiveWindow = new HotkeySetting(Keys.Alt | Keys.PrintScreen);
@@ -72,14 +70,12 @@ namespace ShareX
 
         // Upload
         public bool UseCustomUploadersConfigPath = false;
-
         public string CustomUploadersConfigPath = string.Empty;
         public int UploadLimit = 5;
         public int BufferSizePower = 3;
 
         // Image - Quality
         public EImageFormat ImageFormat = EImageFormat.PNG;
-
         public int ImageJPEGQuality = 90;
         public GIFQuality ImageGIFQuality = GIFQuality.Default;
         public int ImageSizeLimit = 512;
@@ -87,7 +83,6 @@ namespace ShareX
 
         // Image - Resize
         public bool ImageAutoResize = false;
-
         public bool ImageKeepAspectRatio = false;
         public bool ImageUseSmoothScaling = true;
         public ImageScaleType ImageScaleType = ImageScaleType.Percentage;
@@ -106,7 +101,6 @@ namespace ShareX
 
         // Capture
         public bool ShowCursor = false;
-
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
         public bool CaptureCopyImage = false;
@@ -117,7 +111,6 @@ namespace ShareX
 
         // History
         public bool SaveHistory = true;
-
         public bool UseCustomHistoryPath = false;
         public string CustomHistoryPath = string.Empty;
         public int HistoryMaxItemCount = -1;

@@ -42,6 +42,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.4\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -85,6 +88,7 @@
     <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
     <Compile Include="ImageQuantization\PaletteQuantizer.cs" />
     <Compile Include="ImageQuantization\Quantizer.cs" />
+    <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />
     <Compile Include="Tokenizer\Token.cs" />
@@ -220,7 +224,6 @@
       <DependentUpon>OptionsCoreUI.cs</DependentUpon>
     </Compile>
     <Compile Include="SerializationHelper.cs" />
-    <Compile Include="XMLSettingsBase.cs" />
     <Compile Include="Links.cs" />
     <EmbeddedResource Include="ApiKeys\ApiKeysUI.resx">
       <DependentUpon>ApiKeysUI.cs</DependentUpon>
@@ -274,6 +277,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\explorer.png" />
   </ItemGroup>
   <ItemGroup>

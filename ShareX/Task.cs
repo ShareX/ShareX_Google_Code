@@ -257,7 +257,7 @@ namespace ShareX
                 case ImageDestination.Twitpic:
                     int indexTwitpic = Program.UploadersConfig.TwitterSelectedAccount;
 
-                    if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitpic))
+                    if (Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
                     {
                         imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
                         {
@@ -269,7 +269,7 @@ namespace ShareX
                 case ImageDestination.Twitsnaps:
                     int indexTwitsnaps = Program.UploadersConfig.TwitterSelectedAccount;
 
-                    if (Program.UploadersConfig.TwitterOAuthInfoList.HasValidIndex(indexTwitsnaps))
+                    if (Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitsnaps))
                     {
                         imageUploader = new TwitSnapsUploader(ApiKeys.TwitsnapsKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitsnaps]);
                     }
@@ -367,7 +367,7 @@ namespace ShareX
                     };
                     break;
                 case FileDestination.CustomUploader:
-                    if (Program.UploadersConfig.CustomUploadersList.HasValidIndex(Program.UploadersConfig.CustomUploaderSelected))
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomUploaderSelected))
                     {
                         fileUploader = new CustomUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomUploaderSelected]);
                     }
@@ -375,7 +375,7 @@ namespace ShareX
                 case FileDestination.FTP:
                     int index = Program.UploadersConfig.GetFtpIndex(Info.DataType);
 
-                    if (Program.UploadersConfig.FTPAccountList2.HasValidIndex(index))
+                    if (Program.UploadersConfig.FTPAccountList2.IsValidIndex(index))
                     {
                         fileUploader = new FTPUploader(Program.UploadersConfig.FTPAccountList2[index]);
                     }

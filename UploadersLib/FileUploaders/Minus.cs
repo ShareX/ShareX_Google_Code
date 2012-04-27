@@ -29,6 +29,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Xml.Serialization;
+using HelpersLib;
 using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
@@ -281,28 +283,19 @@ namespace UploadersLib.FileUploaders
     public class MinusAuthToken
     {
         public string access_token { get; set; }
-
         public string token_type { get; set; }
-
         public string expire_in { get; set; }
-
         public string refresh_token { get; set; }
-
         public string scope { get; set; }
     }
 
     public abstract class MinusListResponse
     {
         public int page { get; set; }
-
         public string next { get; set; }
-
         public int per_page { get; set; }
-
         public int total { get; set; }
-
         public int pages { get; set; }
-
         public string previous { get; set; }
     }
 
@@ -335,9 +328,7 @@ namespace UploadersLib.FileUploaders
         {
             get
             {
-                if (FolderID < 0) FolderID = 0;
-                if (FolderID >= FolderList.Count) FolderID = 0;
-                return FolderList[FolderID];
+                return FolderList.ReturnIfValidIndex(FolderID);
             }
         }
     }
@@ -345,102 +336,66 @@ namespace UploadersLib.FileUploaders
     public class MinusUser
     {
         public string username { get; set; }
-
         public string display_name { get; set; }
-
         public string description { get; set; }
-
         public string email { get; set; }
-
         public string slug { get; set; }
-
         public string fb_profile_link { get; set; }
-
         public string fb_username { get; set; }
-
         public string twitter_screen_name { get; set; }
-
         public int visits { get; set; }
-
         public int karma { get; set; }
-
         public int shared { get; set; }
-
         public string folders { get; set; }
-
         public string url { get; set; }
-
         public string avatar { get; set; }
-
         public long storage_used { get; set; }
-
         public long storage_quota { get; set; }
 
         public override string ToString()
         {
-            return this.username;
+            return username;
         }
     }
 
     public class MinusFolder
     {
         public string id { get; set; }
-
         public string thumbnail_url { get; set; }
-
         public string name { get; set; }
-
         public bool is_public { get; set; }
-
         public int view_count { get; set; }
-
         public string creator { get; set; }
-
         public int file_count { get; set; }
-
         public DateTime date_last_updated { get; set; }
-
         public string files { get; set; }
-
         public string url { get; set; }
 
         public override string ToString()
         {
-            return this.name;
+            return name;
         }
     }
 
     public class MinusFile
     {
         public string id { get; set; }
-
         public string name { get; set; }
-
         public string title { get; set; }
-
         public string caption { get; set; }
-
         public int width { get; set; }
-
         public int height { get; set; }
-
         public int filesize { get; set; }
-
         public string mimetype { get; set; }
-
         public string folder { get; set; }
-
         public string url { get; set; }
-
         public DateTime uploaded { get; set; }
-
         public string url_rawfile { get; set; }
-
         public string url_thumbnail { get; set; }
 
         public override string ToString()
         {
-            return this.url_rawfile;
+            return url_rawfile;
         }
     }
 }
