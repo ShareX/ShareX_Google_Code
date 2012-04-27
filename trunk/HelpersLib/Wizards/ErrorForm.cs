@@ -33,13 +33,9 @@ namespace HelpersLib
     public partial class ErrorForm : Form
     {
         public string ApplicationName { get; private set; }
-
         public Exception Error { get; private set; }
-
         public Logger Logger { get; private set; }
-
         public string LogPath { get; private set; }
-
         public string BugReportPath { get; private set; }
 
         public ErrorForm(string productName, Exception error, Logger logger, string logPath, string bugReportPath)
