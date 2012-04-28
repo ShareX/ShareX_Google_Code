@@ -63,11 +63,6 @@ namespace HelpersLib
             return num;
         }
 
-        public static int Between(this int num, Array array)
-        {
-            return num.Between(0, array.Length - 1);
-        }
-
         public static int BetweenOrDefault(this int num, int min, int max, int defaultValue = 0)
         {
             if (num >= min && num <= max) return num;
