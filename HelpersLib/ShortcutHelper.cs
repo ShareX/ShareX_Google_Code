@@ -36,21 +36,18 @@ namespace HelpersLib
 {
     public static class ShortcutHelper
     {
-        public static bool Create(string targetPath, string shortcutPath, string arguments = "")
+        public static bool Create(string shortcutPath, string targetPath, string arguments = "")
         {
-            if (!string.IsNullOrEmpty(targetPath) && !string.IsNullOrEmpty(shortcutPath) && File.Exists(targetPath))
+            if (!string.IsNullOrEmpty(shortcutPath) && !string.IsNullOrEmpty(targetPath) && File.Exists(targetPath))
             {
                 try
                 {
                     IWshShell wsh = new WshShellClass();
                     IWshShortcut shortcut = (IWshShortcut)wsh.CreateShortcut(shortcutPath);
-
-                    if (string.IsNullOrEmpty(shortcut.TargetPath) || !shortcut.TargetPath.Equals(targetPath, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        shortcut.TargetPath = targetPath;
-                        shortcut.Arguments = arguments;
-                        shortcut.Save();
-                    }
+                    shortcut.TargetPath = targetPath;
+                    shortcut.Arguments = arguments;
+                    shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);
+                    shortcut.Save();
 
                     return true;
                 }
@@ -80,7 +77,7 @@ namespace HelpersLib
 
             if (create)
             {
-                return Create(Application.ExecutablePath, shortcutPath, arguments);
+                return Create(shortcutPath, Application.ExecutablePath, arguments);
             }
             else
             {
@@ -91,7 +88,7 @@ namespace HelpersLib
         public static bool CheckShortcut(Environment.SpecialFolder specialFolder)
         {
             string shortcutPath = GetShortcutPath(specialFolder);
-            return File.Exists(shortcutPath); // TODO: Check properly.
+            return File.Exists(shortcutPath);
         }
 
         private static string GetShortcutPath(Environment.SpecialFolder specialFolder)
