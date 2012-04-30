@@ -37,6 +37,8 @@ namespace ScreenCapture
     {
         public AreaManager AreaManager { get; private set; }
 
+        private bool drawCrosshair = true;
+        private bool drawMagnifier = true;
         private int magnifierPixelSize = 10;
         private int magnifierPixelCount = 11;
 
@@ -92,6 +94,11 @@ namespace ScreenCapture
 
         protected override void Draw(Graphics g)
         {
+            if (drawCrosshair)
+            {
+                DrawCrosshair(g);
+            }
+
             List<Rectangle> areas = AreaManager.GetValidAreas;
 
             if (areas.Count > 0 || !AreaManager.CurrentHoverArea.IsEmpty)
@@ -166,10 +173,23 @@ namespace ScreenCapture
                 g.FillRectangle(shadowBrush, 0, 0, Width, Height);
             }
 
-            DrawMagnifyingGlass(g);
+            if (drawMagnifier)
+            {
+                DrawMagnifier(g);
+            }
         }
 
-        private void DrawMagnifyingGlass(Graphics g)
+        private void DrawCrosshair(Graphics g)
+        {
+            Point mousePos = InputManager.MousePosition0Based;
+            using (Pen crosshairPen = new Pen(Color.FromArgb(100, Color.Black)))
+            {
+                g.DrawLine(crosshairPen, new Point(mousePos.X, 0), new Point(mousePos.X, ScreenRectangle0Based.Height - 1));
+                g.DrawLine(crosshairPen, new Point(0, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y));
+            }
+        }
+
+        private void DrawMagnifier(Graphics g)
         {
             Point mousePos = InputManager.MousePosition0Based;
             int offset = 25;
