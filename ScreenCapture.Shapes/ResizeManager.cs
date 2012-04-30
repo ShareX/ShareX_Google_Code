@@ -240,7 +240,7 @@ namespace ScreenCapture
 
         public bool IsCursorOnNode()
         {
-            return nodes.Any(node => node.IsMouseHover);
+            return Visible && nodes.Any(node => node.IsMouseHover);
         }
 
         public void Show()

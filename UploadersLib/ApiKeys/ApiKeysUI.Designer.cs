@@ -1,4 +1,4 @@
-﻿namespace HelpersLib
+﻿namespace UploadersLib
 {
     partial class ApiKeysUI
     {
