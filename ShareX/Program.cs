@@ -43,11 +43,10 @@ namespace ShareX
 
         private static readonly string DefaultPersonalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);
         private static readonly string PortablePersonalPath = Path.Combine(Application.StartupPath, ApplicationName);
-
         private static readonly string SettingsFileName = ApplicationName + "Settings.json";
-        private static readonly string HistoryFileName = "UploadersHistory.xml";
         private static readonly string UploadersConfigFileName = "UploadersConfig.json";
-        private static readonly string LogFileName = ApplicationName + "Log-{0}-{1}.txt";
+        private static readonly string HistoryFileName = "UploadersHistory.xml";
+        private static readonly string LogFileName = ApplicationName + "-Log-{0}-{1}.txt";
 
         public static string PersonalPath
         {
@@ -70,19 +69,6 @@ namespace ShareX
             }
         }
 
-        public static string HistoryFilePath
-        {
-            get
-            {
-                if (Settings != null && Settings.UseCustomHistoryPath && !string.IsNullOrEmpty(Settings.CustomHistoryPath))
-                {
-                    return Settings.CustomHistoryPath;
-                }
-
-                return Path.Combine(PersonalPath, HistoryFileName);
-            }
-        }
-
         public static string UploadersConfigFilePath
         {
             get
@@ -96,12 +82,46 @@ namespace ShareX
             }
         }
 
+        public static string HistoryFilePath
+        {
+            get
+            {
+                if (Settings != null && Settings.UseCustomHistoryPath && !string.IsNullOrEmpty(Settings.CustomHistoryPath))
+                {
+                    return Settings.CustomHistoryPath;
+                }
+
+                return Path.Combine(PersonalPath, HistoryFileName);
+            }
+        }
+
+        private static string LogParentFolder
+        {
+            get
+            {
+                return Path.Combine(PersonalPath, "Logs"); ;
+            }
+        }
+
         public static string LogFilePath
         {
             get
             {
                 DateTime now = FastDateTime.Now;
-                return Path.Combine(PersonalPath, string.Format(LogFileName, now.Year, now.Month));
+                return Path.Combine(LogParentFolder, string.Format(LogFileName, now.Year, now.Month));
+            }
+        }
+
+        private static string ScreenshotsParentFolder
+        {
+            get
+            {
+                if (Settings != null && Settings.UseCustomScreenshotsPath && !string.IsNullOrEmpty(Settings.CustomScreenshotsPath))
+                {
+                    return Settings.CustomScreenshotsPath;
+                }
+
+                return Path.Combine(PersonalPath, "Screenshots");
             }
         }
 
@@ -109,9 +129,8 @@ namespace ShareX
         {
             get
             {
-                string parentFolderPath = Path.Combine(PersonalPath, "Screenshots");
                 string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(Settings.SaveImageSubFolderPattern);
-                return Path.Combine(parentFolderPath, subFolderName);
+                return Path.Combine(ScreenshotsParentFolder, subFolderName);
             }
         }
 

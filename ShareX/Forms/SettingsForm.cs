@@ -63,10 +63,18 @@ namespace ShareX
             cbURLShortenAfterUpload.Checked = Program.Settings.URLShortenAfterUpload;
             cbAutoPlaySound.Checked = Program.Settings.PlaySoundAfterUpload;
             cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
+            cbHistorySave.Checked = Program.Settings.SaveHistory;
 
-            // Upload
+            // Paths
             cbUseCustomUploadersConfigPath.Checked = Program.Settings.UseCustomUploadersConfigPath;
             txtCustomUploadersConfigPath.Text = Program.Settings.CustomUploadersConfigPath;
+            cbUseCustomHistoryPath.Checked = Program.Settings.UseCustomHistoryPath;
+            txtCustomHistoryPath.Text = Program.Settings.CustomHistoryPath;
+            cbUseCustomScreenshotsPath.Checked = Program.Settings.UseCustomScreenshotsPath;
+            txtCustomScreenshotsPath.Text = Program.Settings.CustomScreenshotsPath;
+            txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
+
+            // Upload
             nudUploadLimit.Value = Program.Settings.UploadLimit;
 
             for (int i = 0; i < MaxBufferSizePower; i++)
@@ -75,6 +83,9 @@ namespace ShareX
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
+            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
+            txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
+            CreateCodesMenu();
 
             // Image - Quality
             cbImageFormat.SelectedIndex = (int)Program.Settings.ImageFormat;
@@ -111,11 +122,6 @@ namespace ShareX
             nudImageScaleSpecificWidth.Value = Program.Settings.ImageScaleSpecificWidth;
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
-            // Clipboard upload
-            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
-            txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
-            CreateCodesMenu();
-
             // Capture
             cbShowCursor.Checked = Program.Settings.ShowCursor;
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
@@ -123,7 +129,6 @@ namespace ShareX
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
             cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
             cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
-            txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
             cbCaptureUploadImage.Checked = Program.Settings.CaptureUploadImage;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
@@ -135,12 +140,6 @@ namespace ShareX
             nudFixedShapeSizeHeight.Value = Program.Settings.SurfaceOptions.FixedSize.Height;
             cbShapeIncludeControls.Checked = Program.Settings.SurfaceOptions.IncludeControls;
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
-
-            // History
-            cbHistorySave.Checked = Program.Settings.SaveHistory;
-            cbUseCustomHistoryPath.Checked = Program.Settings.UseCustomHistoryPath;
-            txtCustomHistoryPath.Text = Program.Settings.CustomHistoryPath;
-            nudHistoryMaxItemCount.Value = Program.Settings.HistoryMaxItemCount;
 
             // Proxy
             pgProxy.SelectedObject = Program.Settings.ProxySettings;
@@ -197,7 +196,7 @@ namespace ShareX
             }
         }
 
-        private bool ChooseFolder(string title, TextBox tb)
+        private bool ChooseFile(string title, TextBox tb)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -228,6 +227,33 @@ namespace ShareX
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     tb.Text = ofd.FileName;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool ChooseFolder(string title, TextBox tb)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                fbd.Description = title;
+
+                string path = tb.Text;
+
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                {
+                    fbd.SelectedPath = path;
+                }
+                else
+                {
+                    fbd.SelectedPath = Program.PersonalPath;
+                }
+
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    tb.Text = fbd.SelectedPath;
                     return true;
                 }
             }
@@ -290,6 +316,15 @@ namespace ShareX
             Program.Settings.PlaySoundAfterCapture = cbPlaySoundAfterCapture.Checked;
         }
 
+        private void cbHistorySave_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.SaveHistory = cbHistorySave.Checked;
+        }
+
+        #endregion General
+
+        #region Paths
+
         private void btnOpenZUploaderPath_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Program.PersonalPath) && Directory.Exists(Program.PersonalPath))
@@ -297,10 +332,6 @@ namespace ShareX
                 Process.Start(Program.PersonalPath);
             }
         }
-
-        #endregion General
-
-        #region Upload
 
         private void cbUseCustomUploadersConfigPath_CheckedChanged(object sender, EventArgs e)
         {
@@ -314,7 +345,7 @@ namespace ShareX
 
         private void btnBrowseCustomUploadersConfigPath_Click(object sender, EventArgs e)
         {
-            ChooseFolder("ShareX - Choose uploaders config file path", txtCustomUploadersConfigPath);
+            ChooseFile("ShareX - Choose uploaders config file path", txtCustomUploadersConfigPath);
             Program.Settings.CustomUploadersConfigPath = txtCustomUploadersConfigPath.Text;
             Program.LoadUploadersConfig();
         }
@@ -323,6 +354,48 @@ namespace ShareX
         {
             Program.LoadUploadersConfig();
         }
+
+        private void cbUseCustomHistoryPath_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.UseCustomHistoryPath = cbUseCustomHistoryPath.Checked;
+        }
+
+        private void txtCustomHistoryPath_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CustomHistoryPath = txtCustomHistoryPath.Text;
+        }
+
+        private void btnBrowseCustomHistoryPath_Click(object sender, EventArgs e)
+        {
+            ChooseFile("ShareX - Choose history file path", txtCustomHistoryPath);
+        }
+
+        private void cbUseCustomScreenshotsPath_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.UseCustomScreenshotsPath = cbUseCustomScreenshotsPath.Checked;
+            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
+        }
+
+        private void txtCustomScreenshotsPath_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CustomScreenshotsPath = txtCustomScreenshotsPath.Text;
+            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
+        }
+
+        private void btnBrowseCustomScreenshotsPath_Click(object sender, EventArgs e)
+        {
+            ChooseFolder("Choose screenshots folder path", txtCustomScreenshotsPath);
+        }
+
+        private void txtSaveImageSubFolderPattern_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.SaveImageSubFolderPattern = txtSaveImageSubFolderPattern.Text;
+            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
+        }
+
+        #endregion Paths
+
+        #region Upload
 
         private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
         {
@@ -334,6 +407,22 @@ namespace ShareX
             Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
             string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
             lblBufferSizeInfo.Text = string.Format("x {0} KiB = {1} KiB", 1.024, bufferSize);
+        }
+
+        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
+        }
+
+        private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
+            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser().Convert(Program.Settings.NameFormatPattern);
+        }
+
+        private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
+        {
+            codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
         }
 
         #endregion Upload
@@ -480,26 +569,6 @@ namespace ShareX
 
         #endregion Image
 
-        #region Clipboard upload
-
-        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
-        }
-
-        private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser().Convert(Program.Settings.NameFormatPattern);
-        }
-
-        private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
-        {
-            codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
-        }
-
-        #endregion Clipboard upload
-
         #region Capture
 
         #region Capture / General
@@ -529,12 +598,6 @@ namespace ShareX
         private void cbCaptureSaveImage_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureSaveImage = cbCaptureSaveImage.Checked;
-        }
-
-        private void txtSaveImageSubFolderPattern_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SaveImageSubFolderPattern = txtSaveImageSubFolderPattern.Text;
-            lblSaveImageSubFolderPatternPreview.Text = Program.ScreenshotsPath;
         }
 
         private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)
@@ -589,35 +652,6 @@ namespace ShareX
         #endregion Capture / Shape capture
 
         #endregion Capture
-
-        #region History
-
-        private void cbHistorySave_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SaveHistory = cbHistorySave.Checked;
-        }
-
-        private void cbUseCustomHistoryPath_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UseCustomHistoryPath = cbUseCustomHistoryPath.Checked;
-        }
-
-        private void txtCustomHistoryPath_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CustomHistoryPath = txtCustomHistoryPath.Text;
-        }
-
-        private void btnBrowseCustomHistoryPath_Click(object sender, EventArgs e)
-        {
-            ChooseFolder("ShareX - Choose history file path", txtCustomHistoryPath);
-        }
-
-        private void nudHistoryMaxItemCount_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.HistoryMaxItemCount = (int)nudHistoryMaxItemCount.Value;
-        }
-
-        #endregion History
 
         #region Proxy
 

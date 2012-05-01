@@ -569,7 +569,7 @@ namespace ShareX
 
         private void tsbHistory_Click(object sender, EventArgs e)
         {
-            new HistoryForm(Program.HistoryFilePath, Program.Settings.HistoryMaxItemCount, "ShareX - History").ShowDialog();
+            new HistoryForm(Program.HistoryFilePath, -1, "ShareX - History").ShowDialog();
         }
 
         private void tsbSettings_Click(object sender, EventArgs e)

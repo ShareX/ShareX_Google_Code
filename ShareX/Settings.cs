@@ -45,15 +45,32 @@ namespace ShareX
 
         #region Settings Form
 
-        // General
+        #region General
+
         public bool ShowTray = true;
         public bool AutoCheckUpdate = true;
         public bool ClipboardAutoCopy = true;
         public bool URLShortenAfterUpload = false;
         public bool PlaySoundAfterUpload = true;
         public bool PlaySoundAfterCapture = true;
+        public bool SaveHistory = true;
 
-        // Hotkeys
+        #endregion General
+
+        #region Paths
+
+        public bool UseCustomUploadersConfigPath = false;
+        public string CustomUploadersConfigPath = string.Empty;
+        public bool UseCustomHistoryPath = false;
+        public string CustomHistoryPath = string.Empty;
+        public bool UseCustomScreenshotsPath = false;
+        public string CustomScreenshotsPath = string.Empty;
+        public string SaveImageSubFolderPattern = "%y-%mo";
+
+        #endregion Paths
+
+        #region Hotkeys
+
         public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
         public HotkeySetting HotkeyFileUpload = new HotkeySetting(Keys.Shift | Keys.PageUp);
         public HotkeySetting HotkeyPrintScreen = new HotkeySetting(Keys.PrintScreen);
@@ -68,20 +85,29 @@ namespace ShareX
         public HotkeySetting HotkeyPolygonRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.P);
         public HotkeySetting HotkeyFreeHandRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.F);
 
-        // Upload
-        public bool UseCustomUploadersConfigPath = false;
-        public string CustomUploadersConfigPath = string.Empty;
+        #endregion Hotkeys
+
+        #region Upload
+
         public int UploadLimit = 5;
         public int BufferSizePower = 3;
+        public bool ClipboardUploadAutoDetectURL = true;
+        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
 
-        // Image - Quality
+        #endregion Upload
+
+        #region Image / Quality
+
         public EImageFormat ImageFormat = EImageFormat.PNG;
         public int ImageJPEGQuality = 90;
         public GIFQuality ImageGIFQuality = GIFQuality.Default;
         public int ImageSizeLimit = 512;
         public EImageFormat ImageFormat2 = EImageFormat.JPEG;
 
-        // Image - Resize
+        #endregion Image / Quality
+
+        #region Image / Resize
+
         public bool ImageAutoResize = false;
         public bool ImageKeepAspectRatio = false;
         public bool ImageUseSmoothScaling = true;
@@ -93,30 +119,25 @@ namespace ShareX
         public int ImageScaleSpecificWidth = 100;
         public int ImageScaleSpecificHeight = 100;
 
-        // Clipboard upload
-        public bool ClipboardUploadAutoDetectURL = true;
+        #endregion Image / Resize
 
-        // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
-        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s";
+        #region Capture
 
-        // Capture
         public bool ShowCursor = false;
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
         public bool CaptureCopyImage = false;
         public bool CaptureSaveImage = false;
-        public string SaveImageSubFolderPattern = "%y-%mo";
         public bool CaptureUploadImage = true;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
-        // History
-        public bool SaveHistory = true;
-        public bool UseCustomHistoryPath = false;
-        public string CustomHistoryPath = string.Empty;
-        public int HistoryMaxItemCount = -1;
+        #endregion Capture
 
-        // Proxy
+        #region Proxy
+
         public ProxyInfo ProxySettings = new ProxyInfo();
+
+        #endregion Proxy
 
         #endregion Settings Form
     }
