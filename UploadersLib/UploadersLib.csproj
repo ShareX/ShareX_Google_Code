@@ -187,18 +187,10 @@
     <Compile Include="HelperClasses\AccountInfo.cs" />
     <Compile Include="HelperClasses\Argument.cs" />
     <Compile Include="HelperClasses\KeyFileNameEditor.cs" />
-    <Compile Include="HelperClasses\MediaWiki.cs" />
-    <Compile Include="HelperClasses\MediaWikiHistory.cs" />
-    <Compile Include="HelperClasses\MediaWikiAccount.cs" />
     <Compile Include="HelperClasses\JSONHelper.cs" />
     <Compile Include="HelperClasses\OAuth\IOAuth.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthManager.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthInfo.cs" />
-    <Compile Include="HelperClasses\UploadHelper\HttpUploadHelper.cs" />
-    <Compile Include="HelperClasses\UploadHelper\MimePart.cs" />
-    <Compile Include="HelperClasses\UploadHelper\StreamMimePart.cs" />
-    <Compile Include="HelperClasses\UploadHelper\StringMimePart.cs" />
-    <Compile Include="HelperClasses\UploadHelper\UploadFile.cs" />
     <Compile Include="HelperClasses\UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
       <SubType>Form</SubType>
@@ -232,7 +224,6 @@
     <Compile Include="HelperClasses\TCPClient.cs" />
     <Compile Include="ImageUploader.cs" />
     <Compile Include="FileUploaders\CustomUploader.cs" />
-    <Compile Include="ImageUploaders\MediaWikiUploader.cs" />
     <Compile Include="ImageUploaders\FlickrUploader.cs" />
     <Compile Include="FileUploaders\FTPUploader.cs" />
     <Compile Include="ImageUploaders\ImageBin.cs" />

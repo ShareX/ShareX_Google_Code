@@ -24,10 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using File = System.IO.File;

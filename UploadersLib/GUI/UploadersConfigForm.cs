@@ -764,7 +764,7 @@ namespace UploadersLib
             if (lvCustomUploaderArguments.SelectedItems.Count > 0)
             {
                 name = lvCustomUploaderArguments.SelectedItems[0].Text;
-                value =  lvCustomUploaderArguments.SelectedItems[0].SubItems[1].Text;
+                value = lvCustomUploaderArguments.SelectedItems[0].SubItems[1].Text;
             }
 
             txtCustomUploaderArgName.Text = name;
