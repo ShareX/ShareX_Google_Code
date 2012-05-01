@@ -29,7 +29,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Xml.Serialization;
 using HelpersLib;
 using Newtonsoft.Json;
 using UploadersLib.HelperClasses;

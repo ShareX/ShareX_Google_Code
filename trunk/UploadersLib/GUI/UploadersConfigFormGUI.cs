@@ -48,7 +48,6 @@ namespace UploadersLib
             imageUploadersImageList.Images.Add("TwitPic", Resources.TwitPic);
             imageUploadersImageList.Images.Add("TwitSnaps", Resources.TwitSnaps);
             imageUploadersImageList.Images.Add("YFrog", Resources.YFrog);
-            imageUploadersImageList.Images.Add("MediaWiki", Resources.MediaWiki);
             tcImageUploaders.ImageList = imageUploadersImageList;
 
             ImageList fileUploadersImageList = new ImageList();
@@ -91,7 +90,6 @@ namespace UploadersLib
             tpTwitPic.ImageKey = "TwitPic";
             tpTwitSnaps.ImageKey = "TwitSnaps";
             tpYFrog.ImageKey = "YFrog";
-            tpMediaWiki.ImageKey = "MediaWiki";
             tpDropbox.ImageKey = "Dropbox";
             tpBox.ImageKey = "Box";
             tpMinus.ImageKey = "Minus";
@@ -189,21 +187,6 @@ namespace UploadersLib
 
             txtYFrogUsername.Text = Config.YFrogUsername;
             txtYFrogPassword.Text = Config.YFrogPassword;
-
-            // MediaWiki
-
-            if (Config.MediaWikiAccountList == null || Config.MediaWikiAccountList.Count == 0)
-            {
-                MediaWikiSetup(new List<MediaWikiAccount>());
-            }
-            else
-            {
-                MediaWikiSetup(Config.MediaWikiAccountList);
-                if (ucMediaWikiAccounts.AccountsList.Items.Count > 0)
-                {
-                    ucMediaWikiAccounts.AccountsList.SelectedIndex = Config.MediaWikiAccountSelected;
-                }
-            }
 
             #endregion Image uploaders
 
@@ -347,13 +330,6 @@ namespace UploadersLib
 
         private void CreateUserControlEvents()
         {
-            // MediaWiki
-
-            ucMediaWikiAccounts.btnAdd.Click += new EventHandler(MediawikiAccountAddButton_Click);
-            ucMediaWikiAccounts.btnRemove.Click += new EventHandler(MediawikiAccountRemoveButton_Click);
-            ucMediaWikiAccounts.btnTest.Click += new EventHandler(MediawikiAccountTestButton_Click);
-            ucMediaWikiAccounts.AccountsList.SelectedIndexChanged += new EventHandler(MediaWikiAccountsList_SelectedIndexChanged);
-
             // FTP
 
             ucFTPAccounts.btnAdd.Click += new EventHandler(FTPAccountAddButton_Click);
@@ -382,72 +358,6 @@ namespace UploadersLib
             ucTwitterAccounts.SettingsGrid.PropertySort = PropertySort.NoSort;
             ucTwitterAccounts.AccountsList.SelectedIndexChanged += new EventHandler(TwitterAccountList_SelectedIndexChanged);
         }
-
-        #region MediaWiki
-
-        private void MediawikiAccountAddButton_Click(object sender, EventArgs e)
-        {
-            MediaWikiAccount acc = new MediaWikiAccount("New Account");
-            Config.MediaWikiAccountList.Add(acc);
-            ucMediaWikiAccounts.AccountsList.Items.Add(acc);
-            ucMediaWikiAccounts.AccountsList.SelectedIndex = ucMediaWikiAccounts.AccountsList.Items.Count - 1;
-        }
-
-        private void MediawikiAccountRemoveButton_Click(object sender, EventArgs e)
-        {
-            int sel = ucMediaWikiAccounts.AccountsList.SelectedIndex;
-            if (ucMediaWikiAccounts.RemoveItem(sel))
-            {
-                Config.MediaWikiAccountList.RemoveAt(sel);
-            }
-        }
-
-        private void MediaWikiAccountsList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int sel = ucMediaWikiAccounts.AccountsList.SelectedIndex;
-            Config.MediaWikiAccountSelected = sel;
-            if (Config.MediaWikiAccountList != null && sel != -1 && sel < Config.MediaWikiAccountList.Count && Config.MediaWikiAccountList[sel] != null)
-            {
-                MediaWikiAccount acc = Config.MediaWikiAccountList[sel];
-                ucMediaWikiAccounts.SettingsGrid.SelectedObject = acc;
-            }
-        }
-
-        private void MediawikiAccountTestButton_Click(object sender, EventArgs e)
-        {
-            string text = ucMediaWikiAccounts.btnTest.Text;
-            ucMediaWikiAccounts.btnTest.Text = "Testing...";
-            ucMediaWikiAccounts.btnTest.Enabled = false;
-            MediaWikiAccount acc = GetSelectedMediaWiki();
-            if (acc != null)
-            {
-                TestMediaWikiAccount(acc,
-                    // callback for success
-                    delegate()
-                    {
-                        // invoke on UI thread
-                        Invoke((Action)delegate()
-                        {
-                            ucMediaWikiAccounts.btnTest.Enabled = true;
-                            ucMediaWikiAccounts.btnTest.Text = text;
-                            MessageBox.Show("Login successful!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        });
-                    },
-                    // callback for failure
-                    delegate(string message)
-                    {
-                        // invoke on UI thread
-                        Invoke((Action)delegate()
-                        {
-                            ucMediaWikiAccounts.btnTest.Enabled = true;
-                            ucMediaWikiAccounts.btnTest.Text = text;
-                            MessageBox.Show(message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        });
-                    });
-            }
-        }
-
-        #endregion MediaWiki
 
         #region Localhost
 

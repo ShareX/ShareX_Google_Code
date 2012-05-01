@@ -96,11 +96,6 @@ namespace UploadersLib
         public string YFrogUsername = string.Empty;
         public string YFrogPassword = string.Empty;
 
-        // MediaWiki
-
-        public List<MediaWikiAccount> MediaWikiAccountList = new List<MediaWikiAccount>();
-        public int MediaWikiAccountSelected = 0;
-
         #endregion Image uploaders
 
         #region File uploaders

@@ -48,6 +48,7 @@ namespace CodeWorks
         {
             InitializeComponent();
             licenseText = Resources.ShareXLicense;
+            txtFolderPath.Text = Path.GetFullPath(@"..\..\..\..\..");
         }
 
         private void btnFindRegionAreas_Click(object sender, EventArgs e)

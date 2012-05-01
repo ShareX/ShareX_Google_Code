@@ -26,8 +26,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Xml.Linq;
-using HelpersLib;
 using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
