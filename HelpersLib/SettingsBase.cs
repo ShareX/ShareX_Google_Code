@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.ComponentModel;
 using System.Threading;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
@@ -33,7 +34,7 @@ namespace HelpersLib
     {
         public static SerializationType SerializationType = SerializationType.Json;
 
-        [XmlIgnore, JsonIgnore]
+        [Browsable(false), XmlIgnore, JsonIgnore]
         public string FilePath { get; private set; }
 
         public virtual bool Save(string filePath)
