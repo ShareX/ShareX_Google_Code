@@ -32,7 +32,7 @@ namespace UploadersLib.HelperClasses
         [Category("Settings"), DefaultValue("")]
         public string UserName { get; set; }
 
-        [Category("Settings"), PasswordPropertyText(true), DefaultValue("password")]
+        [Category("Settings"), PasswordPropertyText(true), DefaultValue("")]
         public string Password { get; set; }
 
         [Category("Settings"), DefaultValue("")]

@@ -135,6 +135,8 @@
             this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
             this.cbFixedShapeSize = new System.Windows.Forms.CheckBox();
             this.tpProxy = new System.Windows.Forms.TabPage();
+            this.cboProxyType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblProxyHost = new System.Windows.Forms.Label();
             this.txtProxyHost = new System.Windows.Forms.TextBox();
             this.nudProxyPort = new System.Windows.Forms.NumericUpDown();
@@ -1466,6 +1468,8 @@
             // 
             // tpProxy
             // 
+            this.tpProxy.Controls.Add(this.cboProxyType);
+            this.tpProxy.Controls.Add(this.label1);
             this.tpProxy.Controls.Add(this.lblProxyHost);
             this.tpProxy.Controls.Add(this.txtProxyHost);
             this.tpProxy.Controls.Add(this.nudProxyPort);
@@ -1482,6 +1486,26 @@
             this.tpProxy.TabIndex = 6;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
+            // 
+            // cboProxyType
+            // 
+            this.cboProxyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProxyType.FormattingEnabled = true;
+            this.cboProxyType.Location = new System.Drawing.Point(88, 108);
+            this.cboProxyType.Name = "cboProxyType";
+            this.cboProxyType.Size = new System.Drawing.Size(304, 21);
+            this.cboProxyType.TabIndex = 9;
+            this.cboProxyType.SelectedIndexChanged += new System.EventHandler(this.cboProxyType_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 112);
+            this.label1.Name = "label1";
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Type";
             // 
             // lblProxyHost
             // 
@@ -1574,10 +1598,10 @@
             // btnAutofillProxy
             // 
             this.btnAutofillProxy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutofillProxy.Location = new System.Drawing.Point(16, 112);
+            this.btnAutofillProxy.Location = new System.Drawing.Point(16, 152);
             this.btnAutofillProxy.Name = "btnAutofillProxy";
             this.btnAutofillProxy.Size = new System.Drawing.Size(75, 23);
-            this.btnAutofillProxy.TabIndex = 8;
+            this.btnAutofillProxy.TabIndex = 10;
             this.btnAutofillProxy.Text = "Autofill";
             this.btnAutofillProxy.UseVisualStyleBackColor = true;
             this.btnAutofillProxy.Click += new System.EventHandler(this.btnAutofillProxy_Click);
@@ -1785,5 +1809,7 @@
         private System.Windows.Forms.TextBox txtProxyPassword;
         private System.Windows.Forms.Label lblProxyUsername;
         private System.Windows.Forms.TextBox txtProxyUsername;
+        private System.Windows.Forms.ComboBox cboProxyType;
+        private System.Windows.Forms.Label label1;
     }
 }
