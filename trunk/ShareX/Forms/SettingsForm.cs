@@ -144,8 +144,8 @@ namespace ShareX
             // Proxy
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
             txtProxyHost.Text = Program.Settings.ProxySettings.Host;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
 
             // Debug
             txtDebugLog.Text = Program.MyLogger.Messages.ToString();
@@ -658,6 +658,26 @@ namespace ShareX
 
         #region Proxy
 
+        private void txtProxyUsername_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.UserName = txtProxyUsername.Text;
+        }
+
+        private void txtProxyPassword_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Password = txtProxyPassword.Text;
+        }
+
+        private void txtProxyHost_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Host = txtProxyHost.Text;
+        }
+
+        private void nudProxyPort_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Port = (int)nudProxyPort.Value;
+        }
+
         private void btnAutofillProxy_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Program.Settings.ProxySettings.UserName))
@@ -672,6 +692,7 @@ namespace ShareX
                 {
                     Program.Settings.ProxySettings.Host = proxy.Address.Host;
                 }
+
                 if (Program.Settings.ProxySettings.Port == 0)
                 {
                     Program.Settings.ProxySettings.Port = proxy.Address.Port;
@@ -685,25 +706,5 @@ namespace ShareX
         }
 
         #endregion Proxy
-
-        private void txtProxyUsername_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.UserName = txtProxyUsername.Text;
-        }
-
-        private void txtProxyPassword_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Password = txtProxyPassword.Text;
-        }
-
-        private void nudProxyPort_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Port = (int)nudProxyPort.Value;
-        }
-
-        private void txtProxyHost_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ProxySettings.Host = txtProxyHost.Text;
-        }
     }
 }

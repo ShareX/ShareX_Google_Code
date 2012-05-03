@@ -185,6 +185,17 @@ namespace UploadersLib.FileUploaders
             return null;
         }
 
+        public bool DownloadFile(string path, Stream downloadStream)
+        {
+            if (OAuthInfo.CheckOAuth(AuthInfo))
+            {
+                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLFiles, path), null, HttpMethod.Get, AuthInfo);
+                return SendGetRequest(downloadStream, url, null);
+            }
+
+            return false;
+        }
+
         public override UploadResult Upload(Stream stream, string fileName)
         {
             if (AuthInfo == null || string.IsNullOrEmpty(AuthInfo.UserToken) || string.IsNullOrEmpty(AuthInfo.UserSecret))

@@ -153,6 +153,16 @@ namespace HelpersLib
             return AddZeroes(hour);
         }
 
+        public const string Alphabet = "abcdefghijklmnopqrstuvwxyz";
+        public const string AlphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string Numbers = "0123456789";
+        public const string Alphanumeric = Alphabet + AlphabetCapital + Numbers;
+
+        public static char GetRandomChar(string chars)
+        {
+            return chars[Random.Next(chars.Length)];
+        }
+
         public static string GetRandomString(string chars, int length)
         {
             StringBuilder sb = new StringBuilder();
@@ -165,26 +175,19 @@ namespace HelpersLib
             return sb.ToString();
         }
 
-        public static char GetRandomChar(string chars)
-        {
-            return chars[Random.Next(chars.Length)];
-        }
-
-        public const string Alphabet = "abcdefghijklmnopqrstuvwxyz";
-        public const string AlphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public const string Numbers = "0123456789";
-        public const string Alphanumeric = Alphabet + AlphabetCapital + Numbers;
-
-        /// <summary>0123456789</summary>
         public static string GetRandomNumber(int length)
         {
             return GetRandomString(Numbers, length);
         }
 
-        /// <summary>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</summary>
         public static string GetRandomAlphanumeric(int length)
         {
             return GetRandomString(Alphanumeric, length);
+        }
+
+        public static string GetRandomKey(int length = 5, int count = 3, char separator = '-')
+        {
+            return Enumerable.Range(1, (length + 1) * count - 1).Aggregate("", (x, index) => x += index % (length + 1) == 0 ? separator : GetRandomChar(Alphanumeric));
         }
 
         public static string GetAllCharacters()

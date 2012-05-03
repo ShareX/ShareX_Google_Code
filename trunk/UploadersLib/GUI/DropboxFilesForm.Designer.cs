@@ -28,16 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.tsbSelectFolder = new System.Windows.Forms.ToolStripButton();
+            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
+            this.cmsDropbox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDownloadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.lvDropboxFiles = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.tsbSelectFolder = new System.Windows.Forms.ToolStripButton();
-            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu.SuspendLayout();
             this.tlpMain.SuspendLayout();
+            this.cmsDropbox.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tsMenu
+            // 
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSelectFolder});
+            this.tsMenu.Location = new System.Drawing.Point(2, 2);
+            this.tsMenu.Margin = new System.Windows.Forms.Padding(2);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(555, 22);
+            this.tsMenu.TabIndex = 1;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // tsbSelectFolder
+            // 
+            this.tsbSelectFolder.Image = global::UploadersLib.Properties.Resources.folder;
+            this.tsbSelectFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectFolder.Name = "tsbSelectFolder";
+            this.tsbSelectFolder.Size = new System.Drawing.Size(160, 19);
+            this.tsbSelectFolder.Text = "Select current folder path";
+            this.tsbSelectFolder.Click += new System.EventHandler(this.tsbSelectFolder_Click);
+            // 
+            // tlpMain
+            // 
+            this.tlpMain.ColumnCount = 1;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.Controls.Add(this.tsMenu, 0, 0);
+            this.tlpMain.Controls.Add(this.lvDropboxFiles, 0, 1);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Location = new System.Drawing.Point(0, 0);
+            this.tlpMain.Name = "tlpMain";
+            this.tlpMain.RowCount = 2;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMain.Size = new System.Drawing.Size(559, 491);
+            this.tlpMain.TabIndex = 3;
+            // 
+            // cmsDropbox
+            // 
+            this.cmsDropbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDownloadFile});
+            this.cmsDropbox.Name = "cmsDropbox";
+            this.cmsDropbox.ShowImageMargin = false;
+            this.cmsDropbox.Size = new System.Drawing.Size(123, 26);
+            // 
+            // tsmiDownloadFile
+            // 
+            this.tsmiDownloadFile.Name = "tsmiDownloadFile";
+            this.tsmiDownloadFile.Size = new System.Drawing.Size(122, 22);
+            this.tsmiDownloadFile.Text = "Download file";
+            this.tsmiDownloadFile.Click += new System.EventHandler(this.tsmiDownloadFile_Click);
             // 
             // lvDropboxFiles
             // 
@@ -46,6 +101,7 @@
             this.chFilename,
             this.chSize,
             this.chModified});
+            this.lvDropboxFiles.ContextMenuStrip = this.cmsDropbox;
             this.lvDropboxFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDropboxFiles.FullRowSelect = true;
             this.lvDropboxFiles.GridLines = true;
@@ -72,42 +128,6 @@
             this.chModified.Text = "Modified";
             this.chModified.Width = 200;
             // 
-            // tsMenu
-            // 
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSelectFolder});
-            this.tsMenu.Location = new System.Drawing.Point(2, 2);
-            this.tsMenu.Margin = new System.Windows.Forms.Padding(2);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(555, 22);
-            this.tsMenu.TabIndex = 1;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // tsbSelectFolder
-            // 
-            this.tsbSelectFolder.Image = global::UploadersLib.Properties.Resources.folder;
-            this.tsbSelectFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSelectFolder.Name = "tsbSelectFolder";
-            this.tsbSelectFolder.Size = new System.Drawing.Size(150, 19);
-            this.tsbSelectFolder.Text = "Select current folder path";
-            this.tsbSelectFolder.Click += new System.EventHandler(this.tsbSelectFolder_Click);
-            // 
-            // tlpMain
-            // 
-            this.tlpMain.ColumnCount = 1;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Controls.Add(this.tsMenu, 0, 0);
-            this.tlpMain.Controls.Add(this.lvDropboxFiles, 0, 1);
-            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMain.Location = new System.Drawing.Point(0, 0);
-            this.tlpMain.Name = "tlpMain";
-            this.tlpMain.RowCount = 2;
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(559, 491);
-            this.tlpMain.TabIndex = 3;
-            // 
             // DropboxFilesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,6 +141,7 @@
             this.tsMenu.PerformLayout();
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
+            this.cmsDropbox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -134,5 +155,7 @@
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton tsbSelectFolder;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
+        private System.Windows.Forms.ContextMenuStrip cmsDropbox;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDownloadFile;
     }
 }
