@@ -70,6 +70,7 @@
             this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
+            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
@@ -134,18 +135,17 @@
             this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
             this.cbFixedShapeSize = new System.Windows.Forms.CheckBox();
             this.tpProxy = new System.Windows.Forms.TabPage();
+            this.lblProxyHost = new System.Windows.Forms.Label();
+            this.txtProxyHost = new System.Windows.Forms.TextBox();
+            this.nudProxyPort = new System.Windows.Forms.NumericUpDown();
+            this.lblProxyPort = new System.Windows.Forms.Label();
+            this.lblProxyPassword = new System.Windows.Forms.Label();
+            this.txtProxyPassword = new System.Windows.Forms.TextBox();
+            this.lblProxyUsername = new System.Windows.Forms.Label();
+            this.txtProxyUsername = new System.Windows.Forms.TextBox();
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.txtProxyUsername = new System.Windows.Forms.TextBox();
-            this.lblProxyUsername = new System.Windows.Forms.Label();
-            this.lblProxyPassword = new System.Windows.Forms.Label();
-            this.txtProxyPassword = new System.Windows.Forms.TextBox();
-            this.lblProxyPort = new System.Windows.Forms.Label();
-            this.nudProxyPort = new System.Windows.Forms.NumericUpDown();
-            this.lblProxyHost = new System.Windows.Forms.Label();
-            this.txtProxyHost = new System.Windows.Forms.TextBox();
-            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -174,8 +174,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
             this.tpProxy.SuspendLayout();
-            this.tpDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
+            this.tpDebug.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbClipboardAutoCopy
@@ -640,6 +640,15 @@
             this.tpHotkeys.TabIndex = 3;
             this.tpHotkeys.Text = "Hotkeys";
             this.tpHotkeys.UseVisualStyleBackColor = true;
+            // 
+            // hmHotkeys
+            // 
+            this.hmHotkeys.AutoScroll = true;
+            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
+            this.hmHotkeys.Name = "hmHotkeys";
+            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
+            this.hmHotkeys.TabIndex = 0;
             // 
             // tpImage
             // 
@@ -1474,10 +1483,98 @@
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
             // 
+            // lblProxyHost
+            // 
+            this.lblProxyHost.AutoSize = true;
+            this.lblProxyHost.Location = new System.Drawing.Point(16, 80);
+            this.lblProxyHost.Name = "lblProxyHost";
+            this.lblProxyHost.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProxyHost.Size = new System.Drawing.Size(29, 13);
+            this.lblProxyHost.TabIndex = 4;
+            this.lblProxyHost.Text = "Host";
+            // 
+            // txtProxyHost
+            // 
+            this.txtProxyHost.Location = new System.Drawing.Point(88, 76);
+            this.txtProxyHost.Name = "txtProxyHost";
+            this.txtProxyHost.Size = new System.Drawing.Size(304, 20);
+            this.txtProxyHost.TabIndex = 5;
+            this.txtProxyHost.TextChanged += new System.EventHandler(this.txtProxyHost_TextChanged);
+            // 
+            // nudProxyPort
+            // 
+            this.nudProxyPort.Location = new System.Drawing.Point(432, 76);
+            this.nudProxyPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.nudProxyPort.Minimum = new decimal(new int[] {
+            21,
+            0,
+            0,
+            0});
+            this.nudProxyPort.Name = "nudProxyPort";
+            this.nudProxyPort.Size = new System.Drawing.Size(72, 20);
+            this.nudProxyPort.TabIndex = 7;
+            this.nudProxyPort.Value = new decimal(new int[] {
+            21,
+            0,
+            0,
+            0});
+            this.nudProxyPort.ValueChanged += new System.EventHandler(this.nudProxyPort_ValueChanged);
+            // 
+            // lblProxyPort
+            // 
+            this.lblProxyPort.AutoSize = true;
+            this.lblProxyPort.Location = new System.Drawing.Point(400, 80);
+            this.lblProxyPort.Name = "lblProxyPort";
+            this.lblProxyPort.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProxyPort.Size = new System.Drawing.Size(26, 13);
+            this.lblProxyPort.TabIndex = 6;
+            this.lblProxyPort.Text = "Port";
+            // 
+            // lblProxyPassword
+            // 
+            this.lblProxyPassword.AutoSize = true;
+            this.lblProxyPassword.Location = new System.Drawing.Point(16, 48);
+            this.lblProxyPassword.Name = "lblProxyPassword";
+            this.lblProxyPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProxyPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblProxyPassword.TabIndex = 2;
+            this.lblProxyPassword.Text = "Password";
+            // 
+            // txtProxyPassword
+            // 
+            this.txtProxyPassword.Location = new System.Drawing.Point(88, 44);
+            this.txtProxyPassword.Name = "txtProxyPassword";
+            this.txtProxyPassword.PasswordChar = '●';
+            this.txtProxyPassword.Size = new System.Drawing.Size(416, 20);
+            this.txtProxyPassword.TabIndex = 3;
+            this.txtProxyPassword.TextChanged += new System.EventHandler(this.txtProxyPassword_TextChanged);
+            // 
+            // lblProxyUsername
+            // 
+            this.lblProxyUsername.AutoSize = true;
+            this.lblProxyUsername.Location = new System.Drawing.Point(16, 16);
+            this.lblProxyUsername.Name = "lblProxyUsername";
+            this.lblProxyUsername.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblProxyUsername.Size = new System.Drawing.Size(58, 13);
+            this.lblProxyUsername.TabIndex = 0;
+            this.lblProxyUsername.Text = "User name";
+            // 
+            // txtProxyUsername
+            // 
+            this.txtProxyUsername.Location = new System.Drawing.Point(88, 12);
+            this.txtProxyUsername.Name = "txtProxyUsername";
+            this.txtProxyUsername.Size = new System.Drawing.Size(416, 20);
+            this.txtProxyUsername.TabIndex = 1;
+            this.txtProxyUsername.TextChanged += new System.EventHandler(this.txtProxyUsername_TextChanged);
+            // 
             // btnAutofillProxy
             // 
             this.btnAutofillProxy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutofillProxy.Location = new System.Drawing.Point(432, 288);
+            this.btnAutofillProxy.Location = new System.Drawing.Point(16, 112);
             this.btnAutofillProxy.Name = "btnAutofillProxy";
             this.btnAutofillProxy.Size = new System.Drawing.Size(75, 23);
             this.btnAutofillProxy.TabIndex = 8;
@@ -1506,99 +1603,6 @@
             this.txtDebugLog.Size = new System.Drawing.Size(516, 324);
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
-            // 
-            // txtProxyUsername
-            // 
-            this.txtProxyUsername.Location = new System.Drawing.Point(88, 20);
-            this.txtProxyUsername.Name = "txtProxyUsername";
-            this.txtProxyUsername.Size = new System.Drawing.Size(416, 20);
-            this.txtProxyUsername.TabIndex = 1;
-            this.txtProxyUsername.TextChanged += new System.EventHandler(this.txtProxyUsername_TextChanged);
-            // 
-            // lblProxyUsername
-            // 
-            this.lblProxyUsername.Location = new System.Drawing.Point(18, 20);
-            this.lblProxyUsername.Name = "lblProxyUsername";
-            this.lblProxyUsername.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyUsername.Size = new System.Drawing.Size(61, 20);
-            this.lblProxyUsername.TabIndex = 0;
-            this.lblProxyUsername.Text = "User name";
-            // 
-            // lblProxyPassword
-            // 
-            this.lblProxyPassword.Location = new System.Drawing.Point(18, 50);
-            this.lblProxyPassword.Name = "lblProxyPassword";
-            this.lblProxyPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyPassword.Size = new System.Drawing.Size(61, 20);
-            this.lblProxyPassword.TabIndex = 2;
-            this.lblProxyPassword.Text = "Password";
-            // 
-            // txtProxyPassword
-            // 
-            this.txtProxyPassword.Location = new System.Drawing.Point(88, 50);
-            this.txtProxyPassword.Name = "txtProxyPassword";
-            this.txtProxyPassword.PasswordChar = '●';
-            this.txtProxyPassword.Size = new System.Drawing.Size(416, 20);
-            this.txtProxyPassword.TabIndex = 3;
-            this.txtProxyPassword.TextChanged += new System.EventHandler(this.txtProxyPassword_TextChanged);
-            // 
-            // lblProxyPort
-            // 
-            this.lblProxyPort.Location = new System.Drawing.Point(392, 80);
-            this.lblProxyPort.Name = "lblProxyPort";
-            this.lblProxyPort.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyPort.Size = new System.Drawing.Size(31, 20);
-            this.lblProxyPort.TabIndex = 6;
-            this.lblProxyPort.Text = "Port";
-            // 
-            // nudProxyPort
-            // 
-            this.nudProxyPort.Location = new System.Drawing.Point(432, 80);
-            this.nudProxyPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nudProxyPort.Minimum = new decimal(new int[] {
-            21,
-            0,
-            0,
-            0});
-            this.nudProxyPort.Name = "nudProxyPort";
-            this.nudProxyPort.Size = new System.Drawing.Size(72, 20);
-            this.nudProxyPort.TabIndex = 7;
-            this.nudProxyPort.Value = new decimal(new int[] {
-            21,
-            0,
-            0,
-            0});
-            this.nudProxyPort.ValueChanged += new System.EventHandler(this.nudProxyPort_ValueChanged);
-            // 
-            // lblProxyHost
-            // 
-            this.lblProxyHost.Location = new System.Drawing.Point(18, 80);
-            this.lblProxyHost.Name = "lblProxyHost";
-            this.lblProxyHost.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyHost.Size = new System.Drawing.Size(61, 20);
-            this.lblProxyHost.TabIndex = 4;
-            this.lblProxyHost.Text = "Host";
-            // 
-            // txtProxyHost
-            // 
-            this.txtProxyHost.Location = new System.Drawing.Point(88, 80);
-            this.txtProxyHost.Name = "txtProxyHost";
-            this.txtProxyHost.Size = new System.Drawing.Size(304, 20);
-            this.txtProxyHost.TabIndex = 5;
-            this.txtProxyHost.TextChanged += new System.EventHandler(this.txtProxyHost_TextChanged);
-            // 
-            // hmHotkeys
-            // 
-            this.hmHotkeys.AutoScroll = true;
-            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
-            this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
-            this.hmHotkeys.TabIndex = 0;
             // 
             // SettingsForm
             // 
@@ -1654,9 +1658,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).EndInit();
             this.tpProxy.ResumeLayout(false);
             this.tpProxy.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.ResumeLayout(false);
 
         }

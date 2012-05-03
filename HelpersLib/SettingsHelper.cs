@@ -49,23 +49,7 @@ namespace HelpersLib
                     {
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            switch (type)
-                            {
-                                case SerializationType.Binary:
-                                    new BinaryFormatter().Serialize(ms, obj);
-                                    break;
-                                case SerializationType.Xml:
-                                    Type t = obj.GetType();
-                                    new XmlSerializer(t).Serialize(ms, obj);
-                                    break;
-                                case SerializationType.Json:
-                                    StreamWriter streamWriter = new StreamWriter(ms);
-                                    JsonWriter jsonWriter = new JsonTextWriter(streamWriter);
-                                    jsonWriter.Formatting = Formatting.Indented;
-                                    new JsonSerializer().Serialize(jsonWriter, obj);
-                                    jsonWriter.Flush();
-                                    break;
-                            }
+                            Save(obj, ms, type);
 
                             if (createBackup && File.Exists(filePath))
                             {
@@ -100,6 +84,27 @@ namespace HelpersLib
             return isSuccess;
         }
 
+        public static void Save(object obj, Stream stream, SerializationType type)
+        {
+            switch (type)
+            {
+                case SerializationType.Binary:
+                    new BinaryFormatter().Serialize(stream, obj);
+                    break;
+                case SerializationType.Xml:
+                    Type t = obj.GetType();
+                    new XmlSerializer(t).Serialize(stream, obj);
+                    break;
+                case SerializationType.Json:
+                    StreamWriter streamWriter = new StreamWriter(stream);
+                    JsonWriter jsonWriter = new JsonTextWriter(streamWriter);
+                    jsonWriter.Formatting = Formatting.Indented;
+                    new JsonSerializer().Serialize(jsonWriter, obj);
+                    jsonWriter.Flush();
+                    break;
+            }
+        }
+
         public static T Load<T>(string path, SerializationType type, bool checkBackup = true) where T : new()
         {
             if (!string.IsNullOrEmpty(path))
@@ -114,25 +119,7 @@ namespace HelpersLib
                         {
                             if (fs.Length > 0)
                             {
-                                T settings;
-
-                                switch (type)
-                                {
-                                    case SerializationType.Binary:
-                                        settings = (T)new BinaryFormatter().Deserialize(fs);
-                                        break;
-                                    default:
-                                    case SerializationType.Xml:
-                                        settings = (T)new XmlSerializer(typeof(T)).Deserialize(fs);
-                                        break;
-                                    case SerializationType.Json:
-                                        using (StreamReader streamReader = new StreamReader(fs))
-                                        using (JsonReader jsonReader = new JsonTextReader(streamReader))
-                                        {
-                                            settings = new JsonSerializer().Deserialize<T>(jsonReader);
-                                        }
-                                        break;
-                                }
+                                T settings = Load<T>(fs, type);
 
                                 DebugHelper.WriteLine("Settings load finished: " + path);
 
@@ -155,6 +142,31 @@ namespace HelpersLib
             DebugHelper.WriteLine("Settings not found. Loading new instance.");
 
             return new T();
+        }
+
+        public static T Load<T>(Stream stream, SerializationType type)
+        {
+            T settings;
+
+            switch (type)
+            {
+                case SerializationType.Binary:
+                    settings = (T)new BinaryFormatter().Deserialize(stream);
+                    break;
+                default:
+                case SerializationType.Xml:
+                    settings = (T)new XmlSerializer(typeof(T)).Deserialize(stream);
+                    break;
+                case SerializationType.Json:
+                    using (StreamReader streamReader = new StreamReader(stream))
+                    using (JsonReader jsonReader = new JsonTextReader(streamReader))
+                    {
+                        settings = new JsonSerializer().Deserialize<T>(jsonReader);
+                    }
+                    break;
+            }
+
+            return settings;
         }
     }
 }

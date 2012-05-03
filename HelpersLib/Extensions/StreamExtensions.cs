@@ -35,7 +35,10 @@ namespace HelpersLib
 
         public static void CopyStreamTo(this Stream fromStream, Stream toStream, int bufferSize = DefaultBufferSize)
         {
-            fromStream.Position = 0;
+            if (fromStream.CanSeek)
+            {
+                fromStream.Position = 0;
+            }
 
             byte[] buffer = new byte[bufferSize];
             int bytesRead;

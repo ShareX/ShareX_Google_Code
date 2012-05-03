@@ -255,6 +255,20 @@ namespace UploadersLib
             }
         }
 
+        protected bool SendGetRequest(Stream responseStream, string url, Dictionary<string, string> arguments = null)
+        {
+            using (HttpWebResponse response = GetResponseUsingGet(url, arguments))
+            {
+                if (response != null)
+                {
+                    response.GetResponseStream().CopyStreamTo(responseStream, BufferSize);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private HttpWebResponse GetResponseUsingGet(string url, Dictionary<string, string> arguments = null)
         {
             IsUploading = true;

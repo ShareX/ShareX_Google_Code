@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.ComponentModel;
+using System.IO;
 using System.Threading;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
@@ -57,10 +58,21 @@ namespace HelpersLib
             SaveAsync(FilePath);
         }
 
+        public virtual void Save(Stream stream)
+        {
+            SettingsHelper.Save(this, stream, SerializationType);
+        }
+
         public static T Load(string filePath)
         {
             T setting = SettingsHelper.Load<T>(filePath, SerializationType);
             setting.FilePath = filePath;
+            return setting;
+        }
+
+        public static T Load(Stream stream)
+        {
+            T setting = SettingsHelper.Load<T>(stream, SerializationType);
             return setting;
         }
     }

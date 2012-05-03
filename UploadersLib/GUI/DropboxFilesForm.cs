@@ -34,6 +34,7 @@ namespace UploadersLib.Forms
     public partial class DropboxFilesForm : Form
     {
         public string CurrentFolderPath { get; private set; }
+        public string DownloadFolderPath { get; set; }
 
         private Dropbox dropbox;
         private ImageListManager ilm;
@@ -41,8 +42,10 @@ namespace UploadersLib.Forms
         public DropboxFilesForm(OAuthInfo oauth, string path = null)
         {
             InitializeComponent();
+
             dropbox = new Dropbox(oauth);
             ilm = new ImageListManager(lvDropboxFiles);
+            DownloadFolderPath = "Dropbox";
 
             if (path != null)
             {
@@ -127,6 +130,30 @@ namespace UploadersLib.Forms
         private void tsbSelectFolder_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void tsmiDownloadFile_Click(object sender, System.EventArgs e)
+        {
+            if (lvDropboxFiles.SelectedItems.Count > 0)
+            {
+                DropboxContentInfo content = lvDropboxFiles.SelectedItems[0].Tag as DropboxContentInfo;
+
+                if (content != null && !content.Is_dir)
+                {
+                    using (SaveFileDialog sfd = new SaveFileDialog())
+                    {
+                        sfd.FileName = Path.GetFileName(content.Path);
+
+                        if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
+                        {
+                            using (FileStream fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write, FileShare.Read))
+                            {
+                                dropbox.DownloadFile(content.Path, fileStream);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
