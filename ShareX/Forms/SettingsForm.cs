@@ -142,7 +142,10 @@ namespace ShareX
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
 
             // Proxy
-            pgProxy.SelectedObject = Program.Settings.ProxySettings;
+            txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
+            txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
+            txtProxyHost.Text = Program.Settings.ProxySettings.Host;
 
             // Debug
             txtDebugLog.Text = Program.MyLogger.Messages.ToString();
@@ -675,9 +678,32 @@ namespace ShareX
                 }
             }
 
-            pgProxy.SelectedObject = Program.Settings.ProxySettings;
+            txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
+            txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
+            txtProxyHost.Text = Program.Settings.ProxySettings.Host;
         }
 
         #endregion Proxy
+
+        private void txtProxyUsername_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.UserName = txtProxyUsername.Text;
+        }
+
+        private void txtProxyPassword_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Password = txtProxyPassword.Text;
+        }
+
+        private void nudProxyPort_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Port = (int)nudProxyPort.Value;
+        }
+
+        private void txtProxyHost_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Host = txtProxyHost.Text;
+        }
     }
 }
