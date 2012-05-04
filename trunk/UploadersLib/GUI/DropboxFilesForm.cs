@@ -34,7 +34,6 @@ namespace UploadersLib.Forms
     public partial class DropboxFilesForm : Form
     {
         public string CurrentFolderPath { get; private set; }
-        public string DownloadFolderPath { get; set; }
 
         private Dropbox dropbox;
         private ImageListManager ilm;
@@ -45,7 +44,6 @@ namespace UploadersLib.Forms
 
             dropbox = new Dropbox(oauth);
             ilm = new ImageListManager(lvDropboxFiles);
-            DownloadFolderPath = "Dropbox";
 
             if (path != null)
             {
