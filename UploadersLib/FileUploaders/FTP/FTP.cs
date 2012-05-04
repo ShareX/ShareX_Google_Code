@@ -51,36 +51,35 @@ namespace UploadersLib
             Account = account;
             Client = new FtpClient();
 
-            switch (account.Protocol)
+            if (account.Protocol == FTPProtocol.FTP || account.FtpsSecurityProtocol == FtpSecurityProtocol.None)
             {
-                case FTPProtocol.FTPS:
-                    if (File.Exists(account.FtpsCertLocation))
-                    {
-                        Client.SecurityProtocol = account.FtpsSecurityProtocol;
-                        Client.SecurityCertificates.Add(X509Certificate.CreateFromSignedFile(account.FtpsCertLocation));
-                    }
-                    else
-                    {
-                        throw new Exception("Can't find ftps certificate (" + account.FtpsCertLocation + ")");
-                    }
-                    break;
-                default:
-                    Client.SecurityProtocol = FtpSecurityProtocol.None;
-                    break;
+                Client.SecurityProtocol = FtpSecurityProtocol.None;
+            }
+            else
+            {
+                Client.SecurityProtocol = account.FtpsSecurityProtocol;
+
+                if (!string.IsNullOrEmpty(account.FtpsCertLocation) && File.Exists(account.FtpsCertLocation))
+                {
+                    Client.SecurityCertificates.Add(X509Certificate.CreateFromSignedFile(account.FtpsCertLocation));
+                }
+                else
+                {
+                    Client.ValidateServerCertificate += (sender, e) => e.IsCertificateValid = true;
+                }
             }
 
             Client.Host = account.Host;
             Client.Port = account.Port;
             Client.DataTransferMode = account.IsActive ? TransferMode.Active : TransferMode.Passive;
 
-            if (null != Uploader.ProxySettings)
+            if (Uploader.ProxySettings != null)
             {
                 IProxyClient proxy = Uploader.ProxySettings.GetProxyClient();
+
+                if (proxy != null)
                 {
-                    if (proxy != null)
-                    {
-                        Client.Proxy = proxy;
-                    }
+                    Client.Proxy = proxy;
                 }
             }
 
