@@ -47,6 +47,7 @@ namespace UploadersLib.FileUploaders
         public bool IsInstantiated { get; set; }
 
         public event Uploader.ProgressEventHandler ProgressChanged;
+
         private ProgressManager progress;
 
         private SftpClient client;
@@ -180,7 +181,7 @@ namespace UploadersLib.FileUploaders
             }
         }
 
-        public void UploadData(Stream stream, string fileName)
+        public void UploadData(Stream stream, string filePath)
         {
             Connect();
 
@@ -191,7 +192,7 @@ namespace UploadersLib.FileUploaders
             object s = new object();
             AsyncCallback ac = new AsyncCallback(CallBack);
 
-            var result = client.BeginUploadFile(stream, fileName, ac, s);
+            var result = client.BeginUploadFile(stream, Path.GetFileName(filePath), ac, s);
             SftpUploadAsyncResult sftpresult = result as SftpUploadAsyncResult;
 
             while (!sftpresult.IsCompleted)
