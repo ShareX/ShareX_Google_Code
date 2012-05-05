@@ -122,7 +122,7 @@ namespace HelpersLib
             }
             catch (Exception ex)
             {
-                DebugHelper.WriteException(ex);
+                log4netHelper.Log.Error(ex);
                 return CipherText;
             }
         }

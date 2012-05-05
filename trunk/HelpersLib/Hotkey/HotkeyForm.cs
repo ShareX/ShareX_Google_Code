@@ -42,6 +42,7 @@ namespace HelpersLib
         public int HotkeyRepeatLimit { get; set; }
 
         public delegate void HotkeyEventHandler(KeyEventArgs e);
+
         public event HotkeyEventHandler HotkeyPress;
 
         private Stopwatch repeatLimitTimer;
@@ -82,7 +83,7 @@ namespace HelpersLib
             if (!NativeMethods.RegisterHotKey(Handle, (int)id, (uint)keyInfo.ModifiersEnum, (uint)keyInfo.KeyCode))
             {
                 NativeMethods.GlobalDeleteAtom(id);
-                DebugHelper.WriteLine("Unable to register hotkey: {0}\r\nError code: {1}", keyInfo, Marshal.GetLastWin32Error());
+                log4netHelper.Log.ErrorFormat("Unable to register hotkey: {0}\r\nError code: {1}", keyInfo, Marshal.GetLastWin32Error());
                 return HotkeyStatus.Failed;
             }
 

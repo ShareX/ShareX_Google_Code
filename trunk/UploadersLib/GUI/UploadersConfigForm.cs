@@ -47,7 +47,7 @@ namespace UploadersLib
             CreateUserControlEvents();
             LoadSettings(uploadersConfig);
             APIKeys = uploadersAPIKeys;
-            Text = string.Format("Outputs Configuration - {0}", uploadersConfig.FilePath);
+            Text = "Outputs Configuration" + (string.IsNullOrEmpty(uploadersConfig.FilePath) ? string.Empty : " - " + uploadersConfig.FilePath);
         }
 
         private void UploadersConfigForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -101,6 +101,11 @@ namespace UploadersLib
             Helpers.LoadBrowserAsync("http://my.imageshack.us/v_images.php");
         }
 
+        private void cbImageShackIsPublic_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ImageShackShowImagesInPublic = cbImageShackIsPublic.Checked;
+        }
+
         #endregion ImageShack
 
         #region TinyPic
@@ -146,7 +151,7 @@ namespace UploadersLib
                 }
                 catch (Exception ex)
                 {
-                    DebugHelper.WriteException(ex);
+                    log4netHelper.Log.ErrorFormat(ex.ToString());
                 }
             }
         }

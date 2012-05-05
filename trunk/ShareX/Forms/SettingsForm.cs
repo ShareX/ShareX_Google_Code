@@ -150,8 +150,7 @@ namespace ShareX
             cboProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
 
             // Debug
-            txtDebugLog.Text = Program.MyLogger.Messages.ToString();
-            txtDebugLog.ScrollToCaret();
+            log4netHelper.ConfigureListView(myListViewLog);
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
