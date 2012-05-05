@@ -61,7 +61,7 @@ namespace UploadersLib.OtherServices
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.ErrorFormat(e.ToString());
+                    DebugHelper.WriteException(e);
                 }
             }
 
@@ -96,7 +96,7 @@ namespace UploadersLib.OtherServices
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.ErrorFormat(e.ToString());
+                    DebugHelper.WriteException(e);
                 }
             }
 

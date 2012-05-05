@@ -103,7 +103,7 @@ namespace ShareX
             }
             catch (Exception ex)
             {
-                log4netHelper.Log.Error(ex.ToString());
+                DebugHelper.WriteException(ex);
             }
             finally
             {
@@ -245,7 +245,7 @@ namespace ShareX
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.Error(e.ToString());
+                    DebugHelper.WriteException(e);
                 }
 
                 tsi.Tag = window;

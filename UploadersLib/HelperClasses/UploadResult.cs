@@ -202,7 +202,7 @@ namespace UploadersLib.HelperClasses
                 }
                 catch (Exception ex)
                 {
-                    log4netHelper.Log.ErrorFormat(ex.ToString());
+                    DebugHelper.WriteException(ex);
                 }
             }
             return string.Empty;

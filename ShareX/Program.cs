@@ -142,7 +142,7 @@ namespace ShareX
         public static bool IsPortable { get; private set; }
         public static bool IsSilentRun { get; private set; }
         public static Stopwatch StartTimer { get; private set; }
-        private static log4net.ILog log = null;
+        public static Logger MyLogger { get; private set; }
 
         public static string Title
         {
@@ -203,23 +203,23 @@ namespace ShareX
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-                log4netHelper.Init_log4net(LogFilePath);
 
-                log.InfoFormat("{0} {1} r{2} started", Application.ProductName, Application.ProductVersion, AppRevision);
-                log.InfoFormat("Operating system: " + Environment.OSVersion.VersionString);
-                log.InfoFormat("CommandLine: " + Environment.CommandLine);
-                log.InfoFormat("IsMultiInstance: " + IsMultiInstance);
-                log.InfoFormat("IsSilentRun: " + IsSilentRun);
-                log.InfoFormat("IsPortable: " + IsPortable);
+                MyLogger = new Logger();
+                DebugHelper.MyLogger = MyLogger;
+                MyLogger.WriteLine("{0} {1} r{2} started", Application.ProductName, Application.ProductVersion, AppRevision);
+                MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
+                MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
+                MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);
+                MyLogger.WriteLine("IsSilentRun: " + IsSilentRun);
+                MyLogger.WriteLine("IsPortable: " + IsPortable);
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
                 ThreadPool.QueueUserWorkItem(state => LoadSettings());
 
-                log.InfoFormat("new FormsHelper.mainForm() started");
+                MyLogger.WriteLine("new MainForm() started");
                 mainForm = new MainForm();
-                log.InfoFormat("new FormsHelper.mainForm() finished");
+                MyLogger.WriteLine("new MainForm() finished");
 
                 if (Settings == null)
                 {
@@ -232,7 +232,8 @@ namespace ShareX
 
                 Settings.Save();
 
-                log.Info("ShareX closing");
+                MyLogger.WriteLine("ShareX closing");
+                MyLogger.SaveLog(LogFilePath);
             }
             finally
             {
@@ -268,7 +269,7 @@ namespace ShareX
 
         private static void OnError(Exception e)
         {
-            new ErrorForm(Application.ProductName, e, LogFilePath, Links.URL_ISSUES).ShowDialog();
+            new ErrorForm(Application.ProductName, e, MyLogger, LogFilePath, Links.URL_ISSUES).ShowDialog();
         }
 
         private static void SingleInstanceCallback(object sender, InstanceCallbackEventArgs args)

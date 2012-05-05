@@ -63,7 +63,7 @@ namespace HelpersLib
             }
             catch (Exception e)
             {
-                log4netHelper.Log.Error(e);
+                DebugHelper.WriteException(e);
             }
             finally
             {
@@ -130,7 +130,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.Error("Settings load failed", e);
+                    DebugHelper.WriteException(e, "Settings load failed");
                 }
             }
 

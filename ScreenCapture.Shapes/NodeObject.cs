@@ -46,8 +46,6 @@ namespace ScreenCapture
 
         public float NodeSize { get; set; }
 
-        public float LineSize { get; set; }
-
         private Pen borderPen;
         private Brush backgroundBrush;
 
@@ -56,16 +54,13 @@ namespace ScreenCapture
             this.borderPen = borderPen;
             this.backgroundBrush = backgroundBrush;
             NodeSize = 13;
-            LineSize = 20;
             Position = new PointF(x, y);
         }
 
         public override void Draw(Graphics g)
         {
-            g.FillEllipse(backgroundBrush, Rectangle.X, Rectangle.Y, Rectangle.Width - 1, Rectangle.Height - 1);
-            g.DrawLine(borderPen, Rectangle.X + NodeSize / 2 - LineSize, Rectangle.Y + NodeSize / 2, Rectangle.X + NodeSize / 2 + LineSize, Rectangle.Y + NodeSize / 2);
-            g.DrawLine(borderPen, Rectangle.X + NodeSize / 2, Rectangle.Y + NodeSize / 2 - LineSize, Rectangle.X + NodeSize / 2, Rectangle.Y + NodeSize / 2 + LineSize);
-            g.DrawEllipse(borderPen, Rectangle.X, Rectangle.Y, Rectangle.Width - 1, Rectangle.Height - 1);
+            g.DrawRectangle(Pens.White, Rectangle.X + 1, Rectangle.Y + 1, Rectangle.Width - 3, Rectangle.Height - 3);
+            g.DrawRectangle(Pens.Black, Rectangle.X, Rectangle.Y, Rectangle.Width - 1, Rectangle.Height - 1);
         }
     }
 }

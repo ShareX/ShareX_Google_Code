@@ -147,11 +147,7 @@
             this.txtProxyUsername = new System.Windows.Forms.TextBox();
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
-            this.myListViewLog = new HelpersLib.MyListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtDebugLog = new System.Windows.Forms.TextBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1612,7 +1608,7 @@
             // 
             // tpDebug
             // 
-            this.tpDebug.Controls.Add(this.myListViewLog);
+            this.tpDebug.Controls.Add(this.txtDebugLog);
             this.tpDebug.Location = new System.Drawing.Point(4, 22);
             this.tpDebug.Name = "tpDebug";
             this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
@@ -1621,40 +1617,16 @@
             this.tpDebug.Text = "Debug";
             this.tpDebug.UseVisualStyleBackColor = true;
             // 
-            // myListViewLog
+            // txtDebugLog
             // 
-            this.myListViewLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.myListViewLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.myListViewLog.FullRowSelect = true;
-            this.myListViewLog.Location = new System.Drawing.Point(3, 3);
-            this.myListViewLog.Name = "myListViewLog";
-            this.myListViewLog.Size = new System.Drawing.Size(516, 324);
-            this.myListViewLog.TabIndex = 0;
-            this.myListViewLog.UseCompatibleStateImageBehavior = false;
-            this.myListViewLog.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Time Stamp";
-            this.columnHeader1.Width = 120;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Level";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Location";
-            this.columnHeader3.Width = 120;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Message";
-            this.columnHeader4.Width = 210;
+            this.txtDebugLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDebugLog.Location = new System.Drawing.Point(3, 3);
+            this.txtDebugLog.Multiline = true;
+            this.txtDebugLog.Name = "txtDebugLog";
+            this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtDebugLog.Size = new System.Drawing.Size(516, 324);
+            this.txtDebugLog.TabIndex = 0;
+            this.txtDebugLog.WordWrap = false;
             // 
             // SettingsForm
             // 
@@ -1663,6 +1635,7 @@
             this.ClientSize = new System.Drawing.Size(536, 362);
             this.Controls.Add(this.tcSettings);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(552, 400);
             this.MinimumSize = new System.Drawing.Size(552, 400);
             this.Name = "SettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3);
@@ -1711,6 +1684,7 @@
             this.tpProxy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
+            this.tpDebug.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1741,6 +1715,7 @@
         private System.Windows.Forms.Label lblUseImageFormat2AfterHint;
         private System.Windows.Forms.Label lblImageJPEGQualityHint;
         private System.Windows.Forms.TabPage tpDebug;
+        private System.Windows.Forms.TextBox txtDebugLog;
         private System.Windows.Forms.Button btnNameFormatPatternHelp;
         private System.Windows.Forms.TextBox txtNameFormatPattern;
         private System.Windows.Forms.Label lblNameFormatPattern;
@@ -1836,10 +1811,5 @@
         private System.Windows.Forms.TextBox txtProxyUsername;
         private System.Windows.Forms.ComboBox cboProxyType;
         private System.Windows.Forms.Label label1;
-        private HelpersLib.MyListView myListViewLog;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

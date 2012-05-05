@@ -77,11 +77,11 @@ namespace UploadersLib.FileUploaders
             {
                 if (sendSpace.Errors.Count > 0)
                 {
-                    log4netHelper.Log.ErrorFormat(sendSpace.ToErrorString());
+                    DebugHelper.WriteException(new Exception(sendSpace.ToErrorString()));
                 }
                 else
                 {
-                    log4netHelper.Log.ErrorFormat(e.ToString());
+                    DebugHelper.WriteException(e);
                 }
             }
 

@@ -295,7 +295,7 @@ namespace ShareX
         {
             if (ListViewControl != null)
             {
-                log4netHelper.Log.InfoFormat("Upload in queue. ID: {0}, Job: {1}, Type: {2}, Host: {3}", info.ID, info.Job, info.UploadDestination, info.UploaderHost);
+                Program.MyLogger.WriteLine("Upload in queue. ID: {0}, Job: {1}, Type: {2}, Host: {3}", info.ID, info.Job, info.UploadDestination, info.UploaderHost);
 
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = info.FileName;
@@ -317,7 +317,7 @@ namespace ShareX
 
         private static void task_UploadPreparing(UploadInfo info)
         {
-            log4netHelper.Log.InfoFormat("Upload preparing. ID: {0}", info.ID);
+            Program.MyLogger.WriteLine("Upload preparing. ID: {0}", info.ID);
             ChangeListViewItemStatus(info);
         }
 
@@ -325,7 +325,7 @@ namespace ShareX
         {
             string status = string.Format("Upload started. ID: {0}, Filename: {1}", info.ID, info.FileName);
             if (!string.IsNullOrEmpty(info.FilePath)) status += ", Filepath: " + info.FilePath;
-            log4netHelper.Log.Info(status);
+            Program.MyLogger.WriteLine(status);
 
             ListViewItem lvi = ListViewControl.Items[info.ID];
             lvi.Text = info.FileName;
@@ -368,7 +368,7 @@ namespace ShareX
                     {
                         string errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
 
-                        log4netHelper.Log.ErrorFormat("Upload failed. ID: {0}, Filename: {1}, Errors:\r\n{2}", info.ID, info.FileName, errors);
+                        Program.MyLogger.WriteLine("Upload failed. ID: {0}, Filename: {1}, Errors:\r\n{2}", info.ID, info.FileName, errors);
 
                         lvi.SubItems[1].Text = "Error";
                         lvi.SubItems[8].Text = string.Empty;
@@ -381,7 +381,7 @@ namespace ShareX
                     }
                     else
                     {
-                        log4netHelper.Log.InfoFormat("Upload completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms", info.ID, info.FileName,
+                        Program.MyLogger.WriteLine("Upload completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms", info.ID, info.FileName,
                             info.Result.URL, (int)info.UploadDuration.TotalMilliseconds);
 
                         lvi.SubItems[1].Text = info.Status;

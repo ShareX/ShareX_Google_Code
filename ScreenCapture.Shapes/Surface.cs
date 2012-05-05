@@ -76,7 +76,7 @@ namespace ScreenCapture
             Config = new SurfaceOptions();
             timer = new Stopwatch();
 
-            borderPen = new Pen(Color.DarkBlue);
+            borderPen = new Pen(Color.Black);
             borderDotPen = new Pen(Color.Black, 1);
             borderDotPen.DashPattern = new float[] { 5, 5 };
             borderDotPen2 = new Pen(Color.White, 1);

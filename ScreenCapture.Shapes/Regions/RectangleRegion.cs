@@ -38,8 +38,8 @@ namespace ScreenCapture
 
         private bool drawCrosshair = true;
         private bool drawMagnifier = true;
+        private int magnifierPixelCount = 15;
         private int magnifierPixelSize = 10;
-        private int magnifierPixelCount = 11;
 
         public RectangleRegion(Image backgroundImage = null)
             : base(backgroundImage)
@@ -53,16 +53,16 @@ namespace ScreenCapture
             switch (e.KeyData)
             {
                 case Keys.Add:
-                    if (magnifierPixelSize < 30) magnifierPixelSize++;
-                    break;
-                case Keys.Subtract:
-                    if (magnifierPixelSize > 3) magnifierPixelSize--;
-                    break;
-                case Keys.Control | Keys.Add:
                     if (magnifierPixelCount < 35) magnifierPixelCount += 2;
                     break;
-                case Keys.Control | Keys.Subtract:
+                case Keys.Subtract:
                     if (magnifierPixelCount > 3) magnifierPixelCount -= 2;
+                    break;
+                case Keys.Control | Keys.Add:
+                    if (magnifierPixelSize < 30) magnifierPixelSize++;
+                    break;
+                case Keys.Control | Keys.Subtract:
+                    if (magnifierPixelSize > 3) magnifierPixelSize--;
                     break;
             }
         }
@@ -149,9 +149,7 @@ namespace ScreenCapture
                 {
                     g.DrawRectangleProper(borderDotPen, AreaManager.CurrentArea);
                     g.DrawRectangleProper(borderDotPen2, AreaManager.CurrentArea);
-                    g.ExcludeClip(AreaManager.CurrentArea);
                     DrawObjects(g);
-                    g.ResetClip();
                 }
 
                 foreach (Rectangle area in areas)
