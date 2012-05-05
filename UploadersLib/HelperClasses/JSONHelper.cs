@@ -47,7 +47,7 @@ namespace UploadersLib.HelperClasses
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e);
+                    log4netHelper.Log.ErrorFormat(e.ToString());
                 }
             }
 
@@ -69,7 +69,7 @@ namespace UploadersLib.HelperClasses
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e);
+                    log4netHelper.Log.ErrorFormat(e.ToString());
                 }
             }
 

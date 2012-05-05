@@ -75,7 +75,7 @@ namespace HelpersLib.CLI
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.Error(e);
             }
 
             return result;

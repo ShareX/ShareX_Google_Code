@@ -30,7 +30,7 @@ namespace HelpersLib
 {
     public static class DebugHelper
     {
-        public static Logger MyLogger { private get; set; }
+        private static Logger MyLogger { get; set; }
 
         public static void WriteLine(string message)
         {
@@ -44,12 +44,12 @@ namespace HelpersLib
             }
         }
 
-        public static void WriteLine(string format, params object[] args)
+        private static void WriteLine(string format, params object[] args)
         {
             WriteLine(string.Format(format, args));
         }
 
-        public static void WriteException(Exception e, string message = "Exception")
+        private static void WriteException(Exception e, string message = "Exception")
         {
             if (MyLogger != null)
             {

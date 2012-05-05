@@ -52,7 +52,7 @@ namespace HistoryLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.ErrorFormat(e.ToString());
             }
 
             return false;
@@ -66,7 +66,7 @@ namespace HistoryLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.ErrorFormat(e.ToString());
             }
 
             return new List<HistoryItem>();

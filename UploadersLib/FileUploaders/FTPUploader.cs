@@ -75,7 +75,7 @@ namespace UploadersLib.FileUploaders
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.ErrorFormat(e.ToString());
                 Errors.Add(e.Message);
             }
 

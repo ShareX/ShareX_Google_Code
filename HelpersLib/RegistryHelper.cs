@@ -52,7 +52,7 @@ namespace HelpersLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.Error(e);
             }
 
             return false;
@@ -79,7 +79,7 @@ namespace HelpersLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.Error(e);
             }
         }
 
@@ -91,7 +91,7 @@ namespace HelpersLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.Error(e);
             }
 
             return false;
@@ -112,7 +112,7 @@ namespace HelpersLib
             }
             catch (Exception e)
             {
-                DebugHelper.WriteException(e);
+                log4netHelper.Log.ErrorFormat(e.ToString());
             }
         }
 

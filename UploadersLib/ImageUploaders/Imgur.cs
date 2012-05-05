@@ -42,6 +42,8 @@ namespace UploadersLib.ImageUploaders
 
     public sealed class Imgur : ImageUploader, IOAuth
     {
+        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const string URLAnonymousUpload = "https://api.imgur.com/2/upload.xml";
         private const string URLUserUpload = "https://api.imgur.com/2/account/images.xml";
 
@@ -150,9 +152,11 @@ namespace UploadersLib.ImageUploaders
                     }
 
                     ur.DeletionURL = xe.GetElementValue("delete_page");
+                    log.DebugFormat("Delete URL: {0}", xe.GetElementValue("delete_page"));
                 }
                 else if ((xe = xd.GetElement("error")) != null)
                 {
+                    log.Error("Imgur error message: " + xe.GetElementValue("message"));
                     Errors.Add("Imgur error message: " + xe.GetElementValue("message"));
                 }
             }

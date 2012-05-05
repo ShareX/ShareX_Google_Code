@@ -34,22 +34,20 @@ namespace HelpersLib
     {
         public string ApplicationName { get; private set; }
         public Exception Error { get; private set; }
-        public Logger Logger { get; private set; }
         public string LogPath { get; private set; }
         public string BugReportPath { get; private set; }
 
-        public ErrorForm(string productName, Exception error, Logger logger, string logPath, string bugReportPath)
+        public ErrorForm(string productName, Exception error, string logPath, string bugReportPath)
         {
             InitializeComponent();
 
             ApplicationName = productName;
             Error = error;
-            Logger = logger;
             LogPath = logPath;
             BugReportPath = bugReportPath;
 
             Text = string.Format("{0} - Error", ApplicationName);
-            Logger.WriteException(Error, "Unhandled exception");
+            log4netHelper.Log.Error("Unhandled exception: {0}", Error);
 
             if (Error != null)
             {
@@ -89,13 +87,13 @@ namespace HelpersLib
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            Logger.WriteLine("{0} continue.", ProductName);
+            log4netHelper.Log.ErrorFormat("{0} continue.", ProductName);
             Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Logger.WriteLine("{0} closing. Reason: Unhandled exception", ProductName);
+            log4netHelper.Log.ErrorFormat("{0} closing. Reason: Unhandled exception", ProductName);
             Application.Exit();
         }
 
