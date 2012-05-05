@@ -50,7 +50,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.Error(e);
+                    DebugHelper.WriteException(e);
                 }
             }
 

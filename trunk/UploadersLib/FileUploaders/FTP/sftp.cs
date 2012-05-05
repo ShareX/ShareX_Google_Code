@@ -201,9 +201,9 @@ namespace UploadersLib.FileUploaders
                 {
                     OnTransferProgressChanged(sftpresult);
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(500);
             }
-            client.EndUploadFile(sftpresult);
+
             Disconnect();
         }
 

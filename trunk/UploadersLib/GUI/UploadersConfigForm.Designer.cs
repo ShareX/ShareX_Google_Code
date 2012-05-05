@@ -396,7 +396,6 @@
             this.cbImageShackIsPublic.TabIndex = 5;
             this.cbImageShackIsPublic.Text = "Show images uploaded to ImageShack in your public profile";
             this.cbImageShackIsPublic.UseVisualStyleBackColor = true;
-            this.cbImageShackIsPublic.CheckedChanged += new System.EventHandler(this.cbImageShackIsPublic_CheckedChanged);
             // 
             // btnImageShackOpenMyImages
             // 
@@ -972,7 +971,7 @@
             this.lblTwitPicTip.Location = new System.Drawing.Point(16, 16);
             this.lblTwitPicTip.Name = "lblTwitPicTip";
             this.lblTwitPicTip.Size = new System.Drawing.Size(343, 40);
-            this.lblTwitPicTip.TabIndex = 0;
+            this.lblTwitPicTip.TabIndex = 7;
             this.lblTwitPicTip.Text = "TwitPic using Twitter settings for authentication.\r\nOther Services -> Twitter";
             // 
             // chkTwitPicShowFull
@@ -981,7 +980,7 @@
             this.chkTwitPicShowFull.Location = new System.Drawing.Point(24, 104);
             this.chkTwitPicShowFull.Name = "chkTwitPicShowFull";
             this.chkTwitPicShowFull.Size = new System.Drawing.Size(94, 17);
-            this.chkTwitPicShowFull.TabIndex = 3;
+            this.chkTwitPicShowFull.TabIndex = 6;
             this.chkTwitPicShowFull.Text = "Show full URL";
             this.chkTwitPicShowFull.UseVisualStyleBackColor = true;
             this.chkTwitPicShowFull.CheckedChanged += new System.EventHandler(this.chkTwitPicShowFull_CheckedChanged);
@@ -993,7 +992,7 @@
             this.cboTwitPicThumbnailMode.Location = new System.Drawing.Point(112, 68);
             this.cboTwitPicThumbnailMode.Name = "cboTwitPicThumbnailMode";
             this.cboTwitPicThumbnailMode.Size = new System.Drawing.Size(144, 21);
-            this.cboTwitPicThumbnailMode.TabIndex = 2;
+            this.cboTwitPicThumbnailMode.TabIndex = 5;
             this.cboTwitPicThumbnailMode.SelectedIndexChanged += new System.EventHandler(this.cboTwitPicThumbnailMode_SelectedIndexChanged);
             // 
             // lblTwitPicThumbnailMode
@@ -1002,7 +1001,7 @@
             this.lblTwitPicThumbnailMode.Location = new System.Drawing.Point(24, 72);
             this.lblTwitPicThumbnailMode.Name = "lblTwitPicThumbnailMode";
             this.lblTwitPicThumbnailMode.Size = new System.Drawing.Size(82, 13);
-            this.lblTwitPicThumbnailMode.TabIndex = 1;
+            this.lblTwitPicThumbnailMode.TabIndex = 4;
             this.lblTwitPicThumbnailMode.Text = "Thumbnail type:";
             // 
             // tpTwitSnaps
@@ -1286,7 +1285,7 @@
             this.tpBox.Name = "tpBox";
             this.tpBox.Padding = new System.Windows.Forms.Padding(3);
             this.tpBox.Size = new System.Drawing.Size(804, 474);
-            this.tpBox.TabIndex = 1;
+            this.tpBox.TabIndex = 6;
             this.tpBox.Text = "Box";
             this.tpBox.UseVisualStyleBackColor = true;
             // 
@@ -1295,7 +1294,7 @@
             this.txtBoxFolderID.Location = new System.Drawing.Point(128, 52);
             this.txtBoxFolderID.Name = "txtBoxFolderID";
             this.txtBoxFolderID.Size = new System.Drawing.Size(88, 20);
-            this.txtBoxFolderID.TabIndex = 3;
+            this.txtBoxFolderID.TabIndex = 12;
             this.txtBoxFolderID.TextChanged += new System.EventHandler(this.txtBoxFolderID_TextChanged);
             // 
             // lblBoxFolderID
@@ -1304,7 +1303,7 @@
             this.lblBoxFolderID.Location = new System.Drawing.Point(16, 56);
             this.lblBoxFolderID.Name = "lblBoxFolderID";
             this.lblBoxFolderID.Size = new System.Drawing.Size(103, 13);
-            this.lblBoxFolderID.TabIndex = 2;
+            this.lblBoxFolderID.TabIndex = 11;
             this.lblBoxFolderID.Text = "Folder ID for upload:";
             // 
             // btnBoxRefreshFolders
@@ -1312,7 +1311,7 @@
             this.btnBoxRefreshFolders.Location = new System.Drawing.Point(16, 80);
             this.btnBoxRefreshFolders.Name = "btnBoxRefreshFolders";
             this.btnBoxRefreshFolders.Size = new System.Drawing.Size(128, 23);
-            this.btnBoxRefreshFolders.TabIndex = 4;
+            this.btnBoxRefreshFolders.TabIndex = 10;
             this.btnBoxRefreshFolders.Text = "Refresh folders list";
             this.btnBoxRefreshFolders.UseVisualStyleBackColor = true;
             this.btnBoxRefreshFolders.Click += new System.EventHandler(this.btnBoxRefreshFolders_Click);
@@ -1322,7 +1321,7 @@
             this.tvBoxFolders.Location = new System.Drawing.Point(16, 112);
             this.tvBoxFolders.Name = "tvBoxFolders";
             this.tvBoxFolders.Size = new System.Drawing.Size(440, 312);
-            this.tvBoxFolders.TabIndex = 5;
+            this.tvBoxFolders.TabIndex = 9;
             this.tvBoxFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvBoxFolders_AfterSelect);
             // 
             // btnBoxCompleteAuth
@@ -1355,7 +1354,7 @@
             this.tpMinus.Name = "tpMinus";
             this.tpMinus.Padding = new System.Windows.Forms.Padding(3);
             this.tpMinus.Size = new System.Drawing.Size(804, 474);
-            this.tpMinus.TabIndex = 2;
+            this.tpMinus.TabIndex = 1;
             this.tpMinus.Text = "Minus";
             this.tpMinus.UseVisualStyleBackColor = true;
             // 
@@ -1511,7 +1510,7 @@
             this.tpFTP.Name = "tpFTP";
             this.tpFTP.Padding = new System.Windows.Forms.Padding(3);
             this.tpFTP.Size = new System.Drawing.Size(804, 474);
-            this.tpFTP.TabIndex = 3;
+            this.tpFTP.TabIndex = 2;
             this.tpFTP.Text = "FTP";
             this.tpFTP.UseVisualStyleBackColor = true;
             // 
@@ -1709,7 +1708,7 @@
             this.tpRapidShare.Name = "tpRapidShare";
             this.tpRapidShare.Padding = new System.Windows.Forms.Padding(3);
             this.tpRapidShare.Size = new System.Drawing.Size(804, 474);
-            this.tpRapidShare.TabIndex = 4;
+            this.tpRapidShare.TabIndex = 3;
             this.tpRapidShare.Text = "RapidShare";
             this.tpRapidShare.UseVisualStyleBackColor = true;
             // 
@@ -1718,7 +1717,7 @@
             this.txtRapidShareFolderID.Location = new System.Drawing.Point(128, 84);
             this.txtRapidShareFolderID.Name = "txtRapidShareFolderID";
             this.txtRapidShareFolderID.Size = new System.Drawing.Size(88, 20);
-            this.txtRapidShareFolderID.TabIndex = 5;
+            this.txtRapidShareFolderID.TabIndex = 8;
             this.txtRapidShareFolderID.TextChanged += new System.EventHandler(this.txtRapidShareFolderID_TextChanged);
             // 
             // lblRapidShareFolderID
@@ -1727,7 +1726,7 @@
             this.lblRapidShareFolderID.Location = new System.Drawing.Point(16, 88);
             this.lblRapidShareFolderID.Name = "lblRapidShareFolderID";
             this.lblRapidShareFolderID.Size = new System.Drawing.Size(103, 13);
-            this.lblRapidShareFolderID.TabIndex = 4;
+            this.lblRapidShareFolderID.TabIndex = 7;
             this.lblRapidShareFolderID.Text = "Folder ID for upload:";
             // 
             // btnRapidShareRefreshFolders
@@ -1745,7 +1744,7 @@
             this.tvRapidShareFolders.Location = new System.Drawing.Point(16, 144);
             this.tvRapidShareFolders.Name = "tvRapidShareFolders";
             this.tvRapidShareFolders.Size = new System.Drawing.Size(440, 312);
-            this.tvRapidShareFolders.TabIndex = 7;
+            this.tvRapidShareFolders.TabIndex = 5;
             this.tvRapidShareFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvRapidShareFolders_AfterSelect);
             // 
             // lblRapidSharePassword
@@ -1754,7 +1753,7 @@
             this.lblRapidSharePassword.Location = new System.Drawing.Point(16, 56);
             this.lblRapidSharePassword.Name = "lblRapidSharePassword";
             this.lblRapidSharePassword.Size = new System.Drawing.Size(56, 13);
-            this.lblRapidSharePassword.TabIndex = 2;
+            this.lblRapidSharePassword.TabIndex = 3;
             this.lblRapidSharePassword.Text = "Password:";
             // 
             // lblRapidSharePremiumUsername
@@ -1763,7 +1762,7 @@
             this.lblRapidSharePremiumUsername.Location = new System.Drawing.Point(16, 24);
             this.lblRapidSharePremiumUsername.Name = "lblRapidSharePremiumUsername";
             this.lblRapidSharePremiumUsername.Size = new System.Drawing.Size(58, 13);
-            this.lblRapidSharePremiumUsername.TabIndex = 0;
+            this.lblRapidSharePremiumUsername.TabIndex = 1;
             this.lblRapidSharePremiumUsername.Text = "Username:";
             // 
             // txtRapidSharePassword
@@ -1772,7 +1771,7 @@
             this.txtRapidSharePassword.Name = "txtRapidSharePassword";
             this.txtRapidSharePassword.PasswordChar = '*';
             this.txtRapidSharePassword.Size = new System.Drawing.Size(136, 20);
-            this.txtRapidSharePassword.TabIndex = 3;
+            this.txtRapidSharePassword.TabIndex = 4;
             this.txtRapidSharePassword.TextChanged += new System.EventHandler(this.txtRapidSharePassword_TextChanged);
             // 
             // txtRapidShareUsername
@@ -1780,7 +1779,7 @@
             this.txtRapidShareUsername.Location = new System.Drawing.Point(80, 20);
             this.txtRapidShareUsername.Name = "txtRapidShareUsername";
             this.txtRapidShareUsername.Size = new System.Drawing.Size(136, 20);
-            this.txtRapidShareUsername.TabIndex = 1;
+            this.txtRapidShareUsername.TabIndex = 2;
             this.txtRapidShareUsername.TextChanged += new System.EventHandler(this.txtRapidShareUsername_TextChanged);
             // 
             // tpSendSpace
@@ -1795,7 +1794,7 @@
             this.tpSendSpace.Name = "tpSendSpace";
             this.tpSendSpace.Padding = new System.Windows.Forms.Padding(3);
             this.tpSendSpace.Size = new System.Drawing.Size(804, 474);
-            this.tpSendSpace.TabIndex = 5;
+            this.tpSendSpace.TabIndex = 4;
             this.tpSendSpace.Text = "SendSpace";
             this.tpSendSpace.UseVisualStyleBackColor = true;
             // 
@@ -1872,7 +1871,7 @@
             this.tpCustomUploaders.Name = "tpCustomUploaders";
             this.tpCustomUploaders.Padding = new System.Windows.Forms.Padding(3);
             this.tpCustomUploaders.Size = new System.Drawing.Size(804, 474);
-            this.tpCustomUploaders.TabIndex = 6;
+            this.tpCustomUploaders.TabIndex = 5;
             this.tpCustomUploaders.Text = "Custom uploader";
             this.tpCustomUploaders.UseVisualStyleBackColor = true;
             // 
@@ -2398,7 +2397,7 @@
             this.chkEmailConfirm.Location = new System.Drawing.Point(224, 104);
             this.chkEmailConfirm.Name = "chkEmailConfirm";
             this.chkEmailConfirm.Size = new System.Drawing.Size(134, 17);
-            this.chkEmailConfirm.TabIndex = 9;
+            this.chkEmailConfirm.TabIndex = 10;
             this.chkEmailConfirm.Text = "Confirm before sending";
             this.chkEmailConfirm.UseVisualStyleBackColor = true;
             this.chkEmailConfirm.CheckedChanged += new System.EventHandler(this.chkEmailConfirm_CheckedChanged);
@@ -2409,7 +2408,7 @@
             this.cbEmailRememberLastTo.Location = new System.Drawing.Point(24, 104);
             this.cbEmailRememberLastTo.Name = "cbEmailRememberLastTo";
             this.cbEmailRememberLastTo.Size = new System.Drawing.Size(179, 17);
-            this.cbEmailRememberLastTo.TabIndex = 8;
+            this.cbEmailRememberLastTo.TabIndex = 9;
             this.cbEmailRememberLastTo.Text = "Remember last recipient address";
             this.cbEmailRememberLastTo.UseVisualStyleBackColor = true;
             this.cbEmailRememberLastTo.CheckedChanged += new System.EventHandler(this.cbRememberLastToEmail_CheckedChanged);
@@ -2420,7 +2419,7 @@
             this.txtEmailDefaultBody.Multiline = true;
             this.txtEmailDefaultBody.Name = "txtEmailDefaultBody";
             this.txtEmailDefaultBody.Size = new System.Drawing.Size(400, 128);
-            this.txtEmailDefaultBody.TabIndex = 13;
+            this.txtEmailDefaultBody.TabIndex = 14;
             this.txtEmailDefaultBody.TextChanged += new System.EventHandler(this.txtDefaultBody_TextChanged);
             // 
             // lblEmailDefaultBody
@@ -2429,7 +2428,7 @@
             this.lblEmailDefaultBody.Location = new System.Drawing.Point(24, 182);
             this.lblEmailDefaultBody.Name = "lblEmailDefaultBody";
             this.lblEmailDefaultBody.Size = new System.Drawing.Size(89, 13);
-            this.lblEmailDefaultBody.TabIndex = 12;
+            this.lblEmailDefaultBody.TabIndex = 13;
             this.lblEmailDefaultBody.Text = "Default message:";
             // 
             // txtEmailDefaultSubject
@@ -2437,7 +2436,7 @@
             this.txtEmailDefaultSubject.Location = new System.Drawing.Point(24, 152);
             this.txtEmailDefaultSubject.Name = "txtEmailDefaultSubject";
             this.txtEmailDefaultSubject.Size = new System.Drawing.Size(400, 20);
-            this.txtEmailDefaultSubject.TabIndex = 11;
+            this.txtEmailDefaultSubject.TabIndex = 12;
             this.txtEmailDefaultSubject.TextChanged += new System.EventHandler(this.txtDefaultSubject_TextChanged);
             // 
             // lblEmailDefaultSubject
@@ -2446,7 +2445,7 @@
             this.lblEmailDefaultSubject.Location = new System.Drawing.Point(24, 134);
             this.lblEmailDefaultSubject.Name = "lblEmailDefaultSubject";
             this.lblEmailDefaultSubject.Size = new System.Drawing.Size(81, 13);
-            this.lblEmailDefaultSubject.TabIndex = 10;
+            this.lblEmailDefaultSubject.TabIndex = 11;
             this.lblEmailDefaultSubject.Text = "Default subject:";
             // 
             // txtEmailPassword
@@ -2455,7 +2454,7 @@
             this.txtEmailPassword.Name = "txtEmailPassword";
             this.txtEmailPassword.PasswordChar = '*';
             this.txtEmailPassword.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailPassword.TabIndex = 7;
+            this.txtEmailPassword.TabIndex = 8;
             this.txtEmailPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // lblEmailPassword
@@ -2464,7 +2463,7 @@
             this.lblEmailPassword.Location = new System.Drawing.Point(24, 72);
             this.lblEmailPassword.Name = "lblEmailPassword";
             this.lblEmailPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblEmailPassword.TabIndex = 6;
+            this.lblEmailPassword.TabIndex = 7;
             this.lblEmailPassword.Text = "Password:";
             // 
             // txtEmailFrom
@@ -2472,7 +2471,7 @@
             this.txtEmailFrom.Location = new System.Drawing.Point(104, 44);
             this.txtEmailFrom.Name = "txtEmailFrom";
             this.txtEmailFrom.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailFrom.TabIndex = 5;
+            this.txtEmailFrom.TabIndex = 6;
             this.txtEmailFrom.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // lblEmailFrom
@@ -2481,7 +2480,7 @@
             this.lblEmailFrom.Location = new System.Drawing.Point(24, 48);
             this.lblEmailFrom.Name = "lblEmailFrom";
             this.lblEmailFrom.Size = new System.Drawing.Size(35, 13);
-            this.lblEmailFrom.TabIndex = 4;
+            this.lblEmailFrom.TabIndex = 5;
             this.lblEmailFrom.Text = "Email:";
             // 
             // nudEmailSmtpPort
@@ -2494,7 +2493,7 @@
             0});
             this.nudEmailSmtpPort.Name = "nudEmailSmtpPort";
             this.nudEmailSmtpPort.Size = new System.Drawing.Size(64, 20);
-            this.nudEmailSmtpPort.TabIndex = 3;
+            this.nudEmailSmtpPort.TabIndex = 4;
             this.nudEmailSmtpPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudEmailSmtpPort.Value = new decimal(new int[] {
             65535,
@@ -2509,7 +2508,7 @@
             this.lblEmailSmtpPort.Location = new System.Drawing.Point(312, 24);
             this.lblEmailSmtpPort.Name = "lblEmailSmtpPort";
             this.lblEmailSmtpPort.Size = new System.Drawing.Size(29, 13);
-            this.lblEmailSmtpPort.TabIndex = 2;
+            this.lblEmailSmtpPort.TabIndex = 1;
             this.lblEmailSmtpPort.Text = "Port:";
             // 
             // txtEmailSmtpServer
@@ -2517,7 +2516,7 @@
             this.txtEmailSmtpServer.Location = new System.Drawing.Point(104, 20);
             this.txtEmailSmtpServer.Name = "txtEmailSmtpServer";
             this.txtEmailSmtpServer.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailSmtpServer.TabIndex = 1;
+            this.txtEmailSmtpServer.TabIndex = 3;
             this.txtEmailSmtpServer.TextChanged += new System.EventHandler(this.txtSmtpServer_TextChanged);
             // 
             // lblEmailSmtpServer

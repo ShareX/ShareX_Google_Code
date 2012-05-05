@@ -124,7 +124,7 @@ namespace UpdateCheckerLib
                                     }
                                     catch (Exception ex)
                                     {
-                                        log4netHelper.Log.Error(ex);
+                                        DebugHelper.WriteException(ex);
                                     }
                                 }
                             }
@@ -138,9 +138,9 @@ namespace UpdateCheckerLib
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                log4netHelper.Log.ErrorFormat(e.ToString());
+                DebugHelper.WriteException(ex);
             }
 
             UpdateInfo.Status = UpdateStatus.UpdateCheckFailed;

@@ -42,9 +42,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.4\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -83,22 +80,6 @@
     <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
     <Compile Include="ImageQuantization\PaletteQuantizer.cs" />
     <Compile Include="ImageQuantization\Quantizer.cs" />
-    <Compile Include="log4netHelpers\LevelTextStyle.cs" />
-    <Compile Include="log4netHelpers\ListViewAppender.cs" />
-    <Compile Include="log4netHelpers\log4netHelper.cs" />
-    <Compile Include="log4netHelpers\log4netViewer_ListView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="log4netHelpers\log4netViewer_ListView.Designer.cs">
-      <DependentUpon>log4netViewer_ListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="log4netHelpers\log4netViewer_RichTextBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="log4netHelpers\log4netViewer_RichTextBox.Designer.cs">
-      <DependentUpon>log4netViewer_RichTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="log4netHelpers\RichTextBoxAppender.cs" />
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />
@@ -236,12 +217,6 @@
     </Compile>
     <Compile Include="SerializationHelper.cs" />
     <Compile Include="Links.cs" />
-    <EmbeddedResource Include="log4netHelpers\log4netViewer_ListView.resx">
-      <DependentUpon>log4netViewer_ListView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="log4netHelpers\log4netViewer_RichTextBox.resx">
-      <DependentUpon>log4netViewer_RichTextBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
       <DependentUpon>DownloaderForm.cs</DependentUpon>
     </EmbeddedResource>

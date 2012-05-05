@@ -279,7 +279,7 @@ namespace UploadersLib
                 }
                 catch (Exception e)
                 {
-                    log4netHelper.Log.ErrorFormat(e.ToString());
+                    DebugHelper.WriteException(e);
                 }
             }
         }

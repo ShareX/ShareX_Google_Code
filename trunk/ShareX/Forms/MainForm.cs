@@ -40,7 +40,6 @@ namespace ShareX
 {
     public partial class MainForm : HotkeyForm
     {
-        private static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public bool IsReady { get; private set; }
 
         public HotkeyManager HotkeyManager { get; private set; }
@@ -66,7 +65,7 @@ namespace ShareX
 
             IsReady = true;
 
-            log.Info(string.Format("Startup time: {0} ms", Program.StartTimer.ElapsedMilliseconds));
+            Program.MyLogger.WriteLine("Startup time: {0}ms", Program.StartTimer.ElapsedMilliseconds);
 
             UseCommandLineArgs(Environment.GetCommandLineArgs());
         }
@@ -366,7 +365,7 @@ namespace ShareX
             if (!string.IsNullOrEmpty(errors))
             {
                 Exception e = new Exception("Upload errors: " + errors);
-                new ErrorForm(Application.ProductName, e, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
+                new ErrorForm(Application.ProductName, e, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
             }
         }
 
