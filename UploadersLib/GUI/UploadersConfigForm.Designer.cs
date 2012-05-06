@@ -396,6 +396,7 @@
             this.cbImageShackIsPublic.TabIndex = 5;
             this.cbImageShackIsPublic.Text = "Show images uploaded to ImageShack in your public profile";
             this.cbImageShackIsPublic.UseVisualStyleBackColor = true;
+            this.cbImageShackIsPublic.CheckedChanged += new System.EventHandler(this.cbImageShackIsPublic_CheckedChanged);
             // 
             // btnImageShackOpenMyImages
             // 
