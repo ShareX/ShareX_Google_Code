@@ -120,29 +120,24 @@ namespace ShareX
         {
             if (img != null)
             {
+                TaskImageJob imageJob = TaskImageJob.None;
+
                 if (Program.Settings.CaptureCopyImage)
                 {
-                    Clipboard.SetImage(img);
+                    imageJob |= TaskImageJob.CopyImageToClipboard;
                 }
 
                 if (Program.Settings.CaptureSaveImage)
                 {
-                    ImageData imageData = TaskHelper.PrepareImageAndFilename(img);
-                    imageData.WriteToFile(Program.ScreenshotsPath);
+                    imageJob |= TaskImageJob.SaveImageToFile;
+                }
 
-                    if (Program.Settings.CaptureUploadImage)
-                    {
-                        UploadManager.UploadImageStream(imageData.ImageStream, imageData.Filename);
-                    }
-                    else
-                    {
-                        imageData.Dispose();
-                    }
-                }
-                else if (Program.Settings.CaptureUploadImage)
+                if (Program.Settings.CaptureUploadImage)
                 {
-                    UploadManager.UploadImage(img);
+                    imageJob |= TaskImageJob.UploadImageToHost;
                 }
+
+                UploadManager.DoImageWork(img, imageJob);
             }
         }
 
@@ -345,6 +340,11 @@ namespace ShareX
         private void tsmiTrayRoundedRectangle_Click(object sender, EventArgs e)
         {
             CaptureRegion(new RoundedRectangleRegion(), false);
+        }
+
+        private void tsmiTrayEllipse_Click(object sender, EventArgs e)
+        {
+            CaptureRegion(new EllipseRegion(), false);
         }
 
         private void tsmiTrayTriangle_Click(object sender, EventArgs e)
