@@ -104,7 +104,7 @@ namespace ScreenCapture
             {
                 UpdateRegionPath();
 
-                using (Region region = new Region(regionFillPath))
+                using (Region region = new Region(regionDrawPath))
                 {
                     g.ExcludeClip(region);
                     g.FillRectangle(shadowBrush, 0, 0, Width, Height);

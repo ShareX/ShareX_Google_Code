@@ -127,6 +127,8 @@ namespace ShareX
             {
                 OnUploadPreparing();
 
+                DoFormJob();
+
                 bw = new BackgroundWorker();
                 bw.WorkerReportsProgress = true;
                 bw.DoWork += new DoWorkEventHandler(UploadThread);
@@ -152,41 +154,48 @@ namespace ShareX
 
         private void UploadThread(object sender, DoWorkEventArgs e)
         {
-            CheckJob();
+            DoThreadJob();
 
-            if (Program.UploadersConfig == null)
+            if (Info.Job != TaskJob.ImageUpload || Info.ImageJob.HasFlag(TaskImageJob.UploadImageToHost))
             {
-                Program.UploaderSettingsResetEvent.WaitOne();
-            }
-
-            Status = TaskStatus.Uploading;
-            Info.Status = "Uploading";
-            Info.StartTime = DateTime.UtcNow;
-            bw.ReportProgress((int)TaskProgress.ReportStarted);
-
-            try
-            {
-                switch (Info.UploadDestination)
+                if (Program.UploadersConfig == null)
                 {
-                    case EDataType.Image:
-                        Info.Result = UploadImage(data, Info.FileName);
-                        break;
-                    case EDataType.File:
-                        Info.Result = UploadFile(data, Info.FileName);
-                        break;
-                    case EDataType.Text:
-                        Info.Result = UploadText(data);
-                        break;
+                    Program.UploaderSettingsResetEvent.WaitOne();
+                }
+
+                Status = TaskStatus.Uploading;
+                Info.Status = "Uploading";
+                Info.StartTime = DateTime.UtcNow;
+                bw.ReportProgress((int)TaskProgress.ReportStarted);
+
+                try
+                {
+                    switch (Info.UploadDestination)
+                    {
+                        case EDataType.Image:
+                            Info.Result = UploadImage(data, Info.FileName);
+                            break;
+                        case EDataType.File:
+                            Info.Result = UploadFile(data, Info.FileName);
+                            break;
+                        case EDataType.Text:
+                            Info.Result = UploadText(data);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    uploader.Errors.Add(ex.ToString());
+                }
+                finally
+                {
+                    if (Info.Result == null) Info.Result = new UploadResult();
+                    if (uploader != null) Info.Result.Errors = uploader.Errors;
                 }
             }
-            catch (Exception ex)
+            else
             {
-                uploader.Errors.Add(ex.ToString());
-            }
-            finally
-            {
-                if (Info.Result == null) Info.Result = new UploadResult();
-                if (uploader != null) Info.Result.Errors = uploader.Errors;
+                Info.Result.IsURLExpected = false;
             }
 
             if (!IsStopped && Info.Result != null && Info.Result.IsURLExpected && !Info.Result.IsError)
@@ -204,7 +213,15 @@ namespace ShareX
             Info.UploadTime = DateTime.UtcNow;
         }
 
-        private void CheckJob()
+        private void DoFormJob()
+        {
+            if (Info.Job == TaskJob.ImageUpload && tempImage != null && Info.ImageJob.HasFlag(TaskImageJob.CopyImageToClipboard))
+            {
+                Clipboard.SetImage(tempImage);
+            }
+        }
+
+        private void DoThreadJob()
         {
             if (Info.Job == TaskJob.ImageUpload && tempImage != null)
             {
@@ -213,6 +230,11 @@ namespace ShareX
                     ImageData imageData = TaskHelper.PrepareImageAndFilename(tempImage);
                     data = imageData.ImageStream;
                     Info.FileName = imageData.Filename;
+
+                    if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
+                    {
+                        imageData.WriteToFile(Program.ScreenshotsPath);
+                    }
                 }
             }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))

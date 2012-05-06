@@ -189,10 +189,16 @@ namespace ShareX
 
         public static void UploadImage(Image img)
         {
+            DoImageWork(img, TaskImageJob.UploadImageToHost);
+        }
+
+        public static void DoImageWork(Image img, TaskImageJob imageJob)
+        {
             if (img != null)
             {
                 EDataType destination = ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image;
                 Task task = Task.CreateImageUploaderTask(img, destination);
+                task.Info.ImageJob = imageJob;
                 StartUpload(task);
             }
         }
@@ -384,6 +390,7 @@ namespace ShareX
                         Program.MyLogger.WriteLine("Upload completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms", info.ID, info.FileName,
                             info.Result.URL, (int)info.UploadDuration.TotalMilliseconds);
 
+                        lvi.Text = info.FileName;
                         lvi.SubItems[1].Text = info.Status;
                         lvi.ImageIndex = 2;
 

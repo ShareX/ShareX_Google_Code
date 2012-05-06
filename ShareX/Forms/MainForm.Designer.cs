@@ -128,6 +128,7 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayEllipse = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -246,7 +247,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(899, 33);
+            this.tsMain.Size = new System.Drawing.Size(841, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -615,7 +616,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(176, 214);
+            this.cmsTray.Size = new System.Drawing.Size(176, 236);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -641,6 +642,7 @@ namespace ShareX
             this.tsmiTrayWindowRectangle,
             this.tsmiTrayRectangle,
             this.tsmiTrayRoundedRectangle,
+            this.tsmiTrayEllipse,
             this.tsmiTrayTriangle,
             this.tsmiTrayDiamond,
             this.tsmiTrayPolygon,
@@ -780,6 +782,14 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
+            // tsmiTrayEllipse
+            // 
+            this.tsmiTrayEllipse.Image = global::ShareX.Properties.Resources.Ellipse;
+            this.tsmiTrayEllipse.Name = "tsmiTrayEllipse";
+            this.tsmiTrayEllipse.Size = new System.Drawing.Size(186, 22);
+            this.tsmiTrayEllipse.Text = "Ellipse";
+            this.tsmiTrayEllipse.Click += new System.EventHandler(this.tsmiTrayEllipse_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -886,5 +896,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayPolygon;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayFreeHand;
         private System.Windows.Forms.ToolStripMenuItem tsmiConfiguration;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayEllipse;
     }
 }

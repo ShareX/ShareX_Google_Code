@@ -35,11 +35,9 @@ namespace ShareX
     public class UploadInfo
     {
         public int ID { get; set; }
-
         public string Status { get; set; }
-
         public TaskJob Job { get; set; }
-
+        public TaskImageJob ImageJob { get; set; }
         public ProgressManager Progress { get; set; }
 
         private string filePath;
@@ -58,7 +56,6 @@ namespace ShareX
         }
 
         public string FileName { get; set; }
-
         public EDataType DataType { get; set; }
 
         private EDataType uploadDestination;
@@ -92,9 +89,7 @@ namespace ShareX
         }
 
         public string UploaderHost { get; private set; }
-
         public DateTime StartTime { get; set; }
-
         public DateTime UploadTime { get; set; }
 
         public TimeSpan UploadDuration
@@ -107,6 +102,7 @@ namespace ShareX
         public UploadInfo()
         {
             Result = new UploadResult();
+            ImageJob = TaskImageJob.UploadImageToHost;
         }
 
         public HistoryItem GetHistoryItem()
