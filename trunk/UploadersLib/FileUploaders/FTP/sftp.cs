@@ -95,7 +95,10 @@ namespace UploadersLib.FileUploaders
         public void Disconnect()
         {
             if (IsConnected)
+            {
                 client.Disconnect();
+                client.Dispose();
+            }
         }
 
         public static void CallBack(IAsyncResult ia)
