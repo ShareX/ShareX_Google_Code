@@ -79,6 +79,11 @@ namespace UploadersLib
             Config.ImageShackUsername = txtImageShackUsername.Text;
         }
 
+        private void cbImageShackIsPublic_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ImageShackShowImagesInPublic = cbImageShackIsPublic.Checked;
+        }
+
         private void btnImageShackOpenRegistrationCode_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync("http://profile.imageshack.us/prefs/");
