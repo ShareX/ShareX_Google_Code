@@ -75,28 +75,28 @@ namespace ScreenCapture
             if (!isAreaCreated && InputManager.IsMouseDown(MouseButtons.Left))
             {
                 lastNode.Visible = true;
-                lastNode.IsDragging = true;
                 isAreaCreated = true;
             }
 
-            if (lastNode.Visible && lastNode.IsDragging)
+            if (lastNode.Visible && InputManager.IsMouseDown(MouseButtons.Left))
             {
-                lastNode.Position = InputManager.MousePosition0Based;
-
-                if (InputManager.IsMouseMoved)
+                if (points.Count == 0 || points.Last() != InputManager.MousePosition0Based)
                 {
                     points.Add(InputManager.MousePosition0Based);
 
                     if (points.Count > 1)
                     {
-                        regionFillPath.AddLine(InputManager.PreviousMousePosition0Based, InputManager.MousePosition0Based);
+                        regionFillPath.AddLine(points.Last(1), points.Last());
                     }
+
+                    lastNode.Position = InputManager.MousePosition0Based;
                 }
             }
 
             if (points.Count > 2)
             {
                 RectangleF rect = regionFillPath.GetBounds();
+
                 currentArea = new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width + 1, (int)rect.Height + 1);
             }
         }
@@ -105,6 +105,11 @@ namespace ScreenCapture
         {
             if (points.Count > 2)
             {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+
+                borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
+                borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
+
                 using (Region region = new Region(regionFillPath))
                 {
                     g.ExcludeClip(region);
@@ -112,8 +117,10 @@ namespace ScreenCapture
                     g.ResetClip();
                 }
 
-                g.DrawPath(borderPen, regionFillPath);
-                g.DrawLine(borderPen, points[0], points[points.Count - 1]);
+                g.DrawPath(borderDotPen, regionFillPath);
+                g.DrawPath(borderDotPen2, regionFillPath);
+                g.DrawLine(borderDotPen, points[points.Count - 1], points[0]);
+                g.DrawLine(borderDotPen2, points[points.Count - 1], points[0]);
                 g.DrawRectangleProper(borderPen, currentArea);
             }
             else

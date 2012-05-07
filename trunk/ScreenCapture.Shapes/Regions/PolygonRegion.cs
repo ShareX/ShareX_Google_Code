@@ -111,6 +111,11 @@ namespace ScreenCapture
 
         protected override void Draw(Graphics g)
         {
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
+            borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
+
             regionFillPath = new GraphicsPath();
 
             for (int i = 0; i < nodes.Count - 1; i++)
@@ -138,7 +143,8 @@ namespace ScreenCapture
 
             if (nodes.Count > 1)
             {
-                g.DrawPath(borderPen, regionFillPath);
+                g.DrawPath(borderDotPen, regionFillPath);
+                g.DrawPath(borderDotPen2, regionFillPath);
             }
 
             base.Draw(g);

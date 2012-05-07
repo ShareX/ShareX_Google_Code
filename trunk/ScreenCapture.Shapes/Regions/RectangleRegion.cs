@@ -111,13 +111,6 @@ namespace ScreenCapture
                     g.ResetClip();
                 }
 
-                /*
-                foreach (WindowInfo wi in AreaManager.Windows)
-                {
-                    g.DrawRectangleProper(Pens.Yellow, Rectangle.Intersect(ScreenRectangle0Based, wi.Rectangle0Based));
-                }
-                */
-
                 borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
                 borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
 
