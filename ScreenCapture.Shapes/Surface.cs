@@ -44,6 +44,7 @@ namespace ScreenCapture
         public int FPS { get; private set; }
         public Rectangle ScreenRectangle { get; private set; }
         public Rectangle ScreenRectangle0Based { get; private set; }
+        public string DebugText { get; set; }
 
         protected List<DrawableObject> DrawableObjects { get; set; }
 
@@ -55,7 +56,6 @@ namespace ScreenCapture
         protected Brush shadowBrush, lightBrush, nodeBackgroundBrush;
         protected Font textFont;
         protected Stopwatch timer;
-        protected string debugText;
 
         public Surface(Image backgroundImage = null)
         {
@@ -316,9 +316,9 @@ namespace ScreenCapture
         {
             string text = string.Format("FPS: {0}\nBounds: {1}", FPS, Bounds);
 
-            if (!string.IsNullOrEmpty(debugText))
+            if (!string.IsNullOrEmpty(DebugText))
             {
-                text += "\n" + debugText;
+                text += "\n" + DebugText;
             }
 
             SizeF textSize = g.MeasureString(text, textFont);
