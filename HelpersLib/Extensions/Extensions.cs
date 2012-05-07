@@ -56,6 +56,16 @@ namespace HelpersLib
             return (keysVal & flagVal) == flagVal;
         }
 
+        public static bool HasFlagAny(this Enum keys, params Enum[] flags)
+        {
+            return flags.Any(x => keys.HasFlag(x));
+        }
+
+        public static bool HasFlagAll(this Enum keys, params Enum[] flags)
+        {
+            return flags.All(x => keys.HasFlag(x));
+        }
+
         public static int Between(this int num, int min, int max)
         {
             if (num <= min) return min;
@@ -168,6 +178,18 @@ namespace HelpersLib
         public static T ReturnIfValidIndex<T>(this List<T> list, int index)
         {
             if (list.IsValidIndex(index)) return list[index];
+            return default(T);
+        }
+
+        public static T Last<T>(this T[] array, int index = 0)
+        {
+            if (array.Length > index) return array[array.Length - index - 1];
+            return default(T);
+        }
+
+        public static T Last<T>(this List<T> list, int index = 0)
+        {
+            if (list.Count > index) return list[list.Count - index - 1];
             return default(T);
         }
 

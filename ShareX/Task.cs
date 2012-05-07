@@ -223,7 +223,7 @@ namespace ShareX
 
         private void DoThreadJob()
         {
-            if (Info.Job == TaskJob.ImageUpload && tempImage != null)
+            if (Info.Job == TaskJob.ImageUpload && tempImage != null && Info.ImageJob.HasFlagAny(TaskImageJob.UploadImageToHost, TaskImageJob.SaveImageToFile))
             {
                 using (tempImage)
                 {
