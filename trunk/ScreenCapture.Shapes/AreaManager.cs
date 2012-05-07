@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -95,6 +96,7 @@ namespace ScreenCapture
         private RectangleRegion surface;
         private Point currentPosition;
         private Point positionOnClick;
+        private bool proportionalResizing;
 
         public AreaManager(RectangleRegion surface)
         {
@@ -108,6 +110,24 @@ namespace ScreenCapture
 
             surface.MouseDown += new MouseEventHandler(surface_MouseDown);
             surface.MouseUp += new MouseEventHandler(surface_MouseUp);
+            surface.KeyDown += new KeyEventHandler(surface_KeyDown);
+            surface.KeyUp += new KeyEventHandler(surface_KeyUp);
+        }
+
+        private void surface_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ShiftKey)
+            {
+                proportionalResizing = true;
+            }
+        }
+
+        private void surface_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ShiftKey)
+            {
+                proportionalResizing = false;
+            }
         }
 
         public void Update()
@@ -123,7 +143,15 @@ namespace ScreenCapture
             if (IsCreating && !CurrentArea.IsEmpty)
             {
                 currentPosition = InputManager.MousePosition0Based;
-                CurrentArea = CaptureHelpers.CreateRectangle(positionOnClick, currentPosition);
+
+                Point newPosition = currentPosition;
+
+                if (proportionalResizing)
+                {
+                    newPosition = CaptureHelpers.ProportionalPosition(positionOnClick, currentPosition);
+                }
+
+                CurrentArea = CaptureHelpers.CreateRectangle(positionOnClick, newPosition);
             }
 
             CheckHover();

@@ -111,16 +111,23 @@ namespace HelpersLib
 
         public static Rectangle CreateRectangle(int x, int y, int x2, int y2)
         {
-            int width = x2 - x + 1;
-            int height = y2 - y + 1;
+            int width, height;
 
-            if (width < 0)
+            if (x <= x2)
+            {
+                width = x2 - x + 1;
+            }
+            else
             {
                 width = x - x2 + 1;
                 x = x2;
             }
 
-            if (height < 0)
+            if (y <= y2)
+            {
+                height = y2 - y + 1;
+            }
+            else
             {
                 height = y - y2 + 1;
                 y = y2;
@@ -136,15 +143,63 @@ namespace HelpersLib
 
         public static Rectangle FixRectangle(int x, int y, int width, int height)
         {
-            if (width < 0) x += width;
-            if (height < 0) y += height;
+            if (width < 0)
+            {
+                x += width;
+                width = -width;
+            }
 
-            return new Rectangle(x, y, Math.Abs(width), Math.Abs(height));
+            if (height < 0)
+            {
+                y += height;
+                height = -height;
+            }
+
+            return new Rectangle(x, y, width, height);
         }
 
         public static Rectangle FixRectangle(Rectangle rect)
         {
             return FixRectangle(rect.X, rect.Y, rect.Width, rect.Height);
+        }
+
+        public static Point ProportionalPosition(Point pos, Point pos2)
+        {
+            Point newPosition = Point.Empty;
+            int min;
+
+            if (pos.X < pos2.X)
+            {
+                if (pos.Y < pos2.Y)
+                {
+                    min = Math.Min(pos2.X - pos.X, pos2.Y - pos.Y);
+                    newPosition.X = pos.X + min;
+                    newPosition.Y = pos.Y + min;
+                }
+                else
+                {
+                    min = Math.Min(pos2.X - pos.X, pos.Y - pos2.Y);
+                    newPosition.X = pos.X + min;
+                    newPosition.Y = pos.Y - min;
+                }
+            }
+            else
+            {
+                if (pos.Y > pos2.Y)
+                {
+                    min = Math.Min(pos.X - pos2.X, pos.Y - pos2.Y);
+                    newPosition.X = pos.X - min;
+                    newPosition.Y = pos.Y - min;
+                }
+                else
+                {
+                    min = Math.Min(pos.X - pos2.X, pos2.Y - pos.Y);
+                    newPosition.X = pos.X - min;
+                    newPosition.Y = pos.Y + min;
+                }
+            }
+
+            return newPosition;
         }
 
         public static Rectangle GetWindowRectangle(IntPtr handle, bool maximizeFix = true)
