@@ -195,7 +195,7 @@ namespace HelpersLib
 
             #region t (If ActiveWindow or Watermark)
 
-            if (Type == NameParserType.ActiveWindow || Type == NameParserType.Watermark || Type == NameParserType.Clipboard)
+            if (!string.IsNullOrEmpty(WindowText))
             {
                 sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
             }
