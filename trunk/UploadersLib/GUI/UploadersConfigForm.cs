@@ -47,7 +47,7 @@ namespace UploadersLib
             CreateUserControlEvents();
             LoadSettings(uploadersConfig);
             APIKeys = uploadersAPIKeys;
-            Text = string.Format("Outputs Configuration - {0}", uploadersConfig.FilePath);
+            Text = "Outputs Configuration" + (string.IsNullOrEmpty(uploadersConfig.FilePath) ? string.Empty : " - " + uploadersConfig.FilePath);
         }
 
         private void UploadersConfigForm_FormClosed(object sender, FormClosedEventArgs e)

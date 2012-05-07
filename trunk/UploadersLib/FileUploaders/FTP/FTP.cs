@@ -49,7 +49,7 @@ namespace UploadersLib
         public FTP(FTPAccount account)
         {
             Account = account;
-            Client = new FtpClient();
+            Client = new FtpClient(account.Host, account.Port);
 
             if (account.Protocol == FTPProtocol.FTP || account.FtpsSecurityProtocol == FtpSecurityProtocol.None)
             {
@@ -69,8 +69,6 @@ namespace UploadersLib
                 }
             }
 
-            Client.Host = account.Host;
-            Client.Port = account.Port;
             Client.DataTransferMode = account.IsActive ? TransferMode.Active : TransferMode.Passive;
 
             if (Uploader.ProxySettings != null)
