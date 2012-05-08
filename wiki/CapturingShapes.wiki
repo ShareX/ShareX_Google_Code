@@ -1,0 +1,5 @@
+#summary All you need to know about capturing Shapes using ShareX
+#labels Phase-Support
+
+= Introduction =
+By default when you press *Ctrl+PrintScreen* ShareX you will be able to draw a rectangle by holding your primary mouse button, dragging it diagonally down and releasing it. You now have a rectangle appeared on the screen but unlike ZScreen, the rectangle will not disappeared. What happened? Keep reading. 
