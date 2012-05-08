@@ -435,6 +435,8 @@ namespace ShareX
 
         public static void UpdateTrayIcon()
         {
+            return; // TODO: Tray animation
+
             if (Program.mainForm.niTray.Visible)
             {
                 lock (uploadManagerLock)
