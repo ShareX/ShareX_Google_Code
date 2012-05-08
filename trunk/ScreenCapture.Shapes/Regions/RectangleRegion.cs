@@ -233,7 +233,7 @@ namespace ScreenCapture
                     g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, (height + pixelSize) / 2, pixelSize, (height - pixelSize) / 2)); // Bottom
                 }
 
-                using (Pen borderPen = new Pen(Color.FromArgb(100, Color.Black)))
+                using (Pen borderPen = new Pen(Color.FromArgb(75, Color.Black)))
                 {
                     for (int x = 1; x < horizontalPixelCount; x++)
                     {
