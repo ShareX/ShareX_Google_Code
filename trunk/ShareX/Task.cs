@@ -46,8 +46,11 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
+
         public event TaskEventHandler UploadPreparing;
+
         public event TaskEventHandler UploadProgressChanged;
+
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
@@ -233,7 +236,7 @@ namespace ShareX
 
                     if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
                     {
-                        imageData.WriteToFile(Program.ScreenshotsPath);
+                        Info.FilePath = imageData.WriteToFile(Program.ScreenshotsPath);
                     }
                 }
             }
