@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaptureHelpers.cs" />
+    <Compile Include="ClipboardHelper.cs" />
     <Compile Include="CLI\CLICommand.cs" />
     <Compile Include="CLI\CLICommandAction.cs" />
     <Compile Include="CLI\CLIHelper.cs" />
