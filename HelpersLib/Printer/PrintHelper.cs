@@ -35,11 +35,8 @@ namespace HelpersLib
     public class PrintHelper
     {
         public PrintType PrintType { get; private set; }
-
         public Image Image { get; private set; }
-
         public string Text { get; private set; }
-
         public PrintSettings Settings { get; set; }
 
         public bool Printable

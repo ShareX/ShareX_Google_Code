@@ -49,8 +49,6 @@ namespace UploadersLib
         yFrog,
         [Description("imm.io")]
         Immio,
-        [Description("Printer")]
-        Printer,
         [Description("File Uploader")]
         FileUploader
     }
@@ -65,8 +63,6 @@ namespace UploadersLib
         Paste2,
         [Description("slexy.org")]
         Slexy,
-        [Description("Printer")]
-        Printer,
         [Description("File Uploader")]
         FileUploader
     }

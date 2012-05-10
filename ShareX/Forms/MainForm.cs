@@ -80,8 +80,8 @@ namespace ShareX
             InitializeComponent();
 
             this.Text = Program.Title;
-            this.Icon = Resources.ShareXSmallIcon;
-            niTray.Icon = Resources.ShareXSmallIcon;
+            this.Icon = Resources.sharex_16px_6;
+            niTray.Icon = Resources.sharex_16px_6;
 
             tsmiImageUploaders.DropDownItems.AddRange(Helpers.GetEnumDescriptions<ImageDestination>().Select(x => new ToolStripMenuItem(x)).ToArray());
             tsmiImageUploaders.DropDownItemClicked += new ToolStripItemClickedEventHandler(tsddbImageUploaders_DropDownItemClicked);

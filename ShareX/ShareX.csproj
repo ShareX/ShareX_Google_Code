@@ -232,6 +232,27 @@
   <ItemGroup>
     <None Include="Resources\ShareXSmallBusyIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-0.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sharex-16px-6.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
