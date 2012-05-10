@@ -38,8 +38,8 @@ namespace UploadersLib.ImageUploaders
 
             Dictionary<string, string> arguments = new Dictionary<string, string>();
             arguments.Add("t", "file");
-            arguments.Add("name", "ZScreen");
-            arguments.Add("tags", "zscreen");
+            arguments.Add("name", "ShareX");
+            arguments.Add("tags", "ShareX");
             arguments.Add("description", "test");
             arguments.Add("adult", "t");
             arguments.Add("sfile", "Upload");

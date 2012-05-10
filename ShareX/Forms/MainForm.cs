@@ -554,7 +554,7 @@ namespace ShareX
 
         private void tsbDonate_Click(object sender, EventArgs e)
         {
-            Helpers.LoadBrowserAsync(Links.URL_DONATE_ZU);
+            Helpers.LoadBrowserAsync(Links.URL_DONATE);
         }
 
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)

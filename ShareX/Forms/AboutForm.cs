@@ -65,7 +65,7 @@ namespace ShareX
             }
         }
 
-        private void lblZScreen_Click(object sender, EventArgs e)
+        private void lblProjectPage_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_WEBSITE);
         }

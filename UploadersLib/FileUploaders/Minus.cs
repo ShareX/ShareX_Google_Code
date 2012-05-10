@@ -29,6 +29,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using HelpersLib;
 using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
@@ -184,7 +185,7 @@ namespace UploadersLib.FileUploaders
             else
             {
                 Thread.Sleep(1000);
-                MinusFolder mf = CreateFolder("ZScreen", true);
+                MinusFolder mf = CreateFolder(Application.ProductName, true);
                 if (mf != null)
                 {
                     Config.FolderList.Add(mf);

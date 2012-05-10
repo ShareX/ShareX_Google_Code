@@ -116,6 +116,7 @@ namespace ShareX
             this.tsmiTrayWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayRoundedRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayEllipse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayTriangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayDiamond = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayPolygon = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +129,6 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayEllipse = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -247,7 +247,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(841, 33);
+            this.tsMain.Size = new System.Drawing.Size(899, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -692,6 +692,14 @@ namespace ShareX
             this.tsmiTrayRoundedRectangle.Text = "Rounded Rectangle";
             this.tsmiTrayRoundedRectangle.Click += new System.EventHandler(this.tsmiTrayRoundedRectangle_Click);
             // 
+            // tsmiTrayEllipse
+            // 
+            this.tsmiTrayEllipse.Image = global::ShareX.Properties.Resources.Ellipse;
+            this.tsmiTrayEllipse.Name = "tsmiTrayEllipse";
+            this.tsmiTrayEllipse.Size = new System.Drawing.Size(186, 22);
+            this.tsmiTrayEllipse.Text = "Ellipse";
+            this.tsmiTrayEllipse.Click += new System.EventHandler(this.tsmiTrayEllipse_Click);
+            // 
             // tsmiTrayTriangle
             // 
             this.tsmiTrayTriangle.Image = global::ShareX.Properties.Resources.Triangle;
@@ -781,14 +789,6 @@ namespace ShareX
             this.tsmiTrayExit.Size = new System.Drawing.Size(175, 22);
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
-            // 
-            // tsmiTrayEllipse
-            // 
-            this.tsmiTrayEllipse.Image = global::ShareX.Properties.Resources.Ellipse;
-            this.tsmiTrayEllipse.Name = "tsmiTrayEllipse";
-            this.tsmiTrayEllipse.Size = new System.Drawing.Size(186, 22);
-            this.tsmiTrayEllipse.Text = "Ellipse";
-            this.tsmiTrayEllipse.Click += new System.EventHandler(this.tsmiTrayEllipse_Click);
             // 
             // MainForm
             // 

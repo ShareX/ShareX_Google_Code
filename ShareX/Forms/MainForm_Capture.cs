@@ -42,26 +42,26 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            HotkeyManager = new HotkeyManager(this, ZAppType.ShareX);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.ClipboardUpload, Program.Settings.HotkeyClipboardUpload, UploadManager.ClipboardUpload);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.FileUpload, Program.Settings.HotkeyFileUpload, UploadManager.UploadFile);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.PrintScreen, Program.Settings.HotkeyPrintScreen, () => CaptureScreen(false), tsmiFullscreen);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.ActiveWindow, Program.Settings.HotkeyActiveWindow, () => CaptureActiveWindow(false));
-            HotkeyManager.AddHotkey(ZUploaderHotkey.ActiveMonitor, Program.Settings.HotkeyActiveMonitor, () => CaptureActiveMonitor(false));
-            HotkeyManager.AddHotkey(ZUploaderHotkey.WindowRectangle, Program.Settings.HotkeyWindowRectangle, () => WindowRectangleCapture(false), tsmiWindowRectangle);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.RectangleRegion, Program.Settings.HotkeyRectangleRegion,
+            HotkeyManager = new HotkeyManager(this);
+            HotkeyManager.AddHotkey(EHotkey.ClipboardUpload, Program.Settings.HotkeyClipboardUpload, UploadManager.ClipboardUpload);
+            HotkeyManager.AddHotkey(EHotkey.FileUpload, Program.Settings.HotkeyFileUpload, UploadManager.UploadFile);
+            HotkeyManager.AddHotkey(EHotkey.PrintScreen, Program.Settings.HotkeyPrintScreen, () => CaptureScreen(false), tsmiFullscreen);
+            HotkeyManager.AddHotkey(EHotkey.ActiveWindow, Program.Settings.HotkeyActiveWindow, () => CaptureActiveWindow(false));
+            HotkeyManager.AddHotkey(EHotkey.ActiveMonitor, Program.Settings.HotkeyActiveMonitor, () => CaptureActiveMonitor(false));
+            HotkeyManager.AddHotkey(EHotkey.WindowRectangle, Program.Settings.HotkeyWindowRectangle, () => WindowRectangleCapture(false), tsmiWindowRectangle);
+            HotkeyManager.AddHotkey(EHotkey.RectangleRegion, Program.Settings.HotkeyRectangleRegion,
                 () => CaptureRegion(new RectangleRegion(), false), tsmiRectangle);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.RoundedRectangleRegion, Program.Settings.HotkeyRoundedRectangleRegion,
+            HotkeyManager.AddHotkey(EHotkey.RoundedRectangleRegion, Program.Settings.HotkeyRoundedRectangleRegion,
                 () => CaptureRegion(new RoundedRectangleRegion(), false), tsmiRoundedRectangle);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.EllipseRegion, Program.Settings.HotkeyEllipseRegion,
+            HotkeyManager.AddHotkey(EHotkey.EllipseRegion, Program.Settings.HotkeyEllipseRegion,
                 () => CaptureRegion(new EllipseRegion(), false), tsmiEllipse);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.TriangleRegion, Program.Settings.HotkeyTriangleRegion,
+            HotkeyManager.AddHotkey(EHotkey.TriangleRegion, Program.Settings.HotkeyTriangleRegion,
                 () => CaptureRegion(new TriangleRegion(), false), tsmiTriangle);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.DiamondRegion, Program.Settings.HotkeyDiamondRegion,
+            HotkeyManager.AddHotkey(EHotkey.DiamondRegion, Program.Settings.HotkeyDiamondRegion,
                 () => CaptureRegion(new DiamondRegion(), false), tsmiDiamond);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion,
+            HotkeyManager.AddHotkey(EHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion,
                 () => CaptureRegion(new PolygonRegion(), false), tsmiPolygon);
-            HotkeyManager.AddHotkey(ZUploaderHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion,
+            HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion,
                 () => CaptureRegion(new FreeHandRegion(), false), tsmiFreeHand);
 
             string failedHotkeys;
