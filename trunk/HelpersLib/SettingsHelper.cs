@@ -28,6 +28,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HelpersLib
 {
@@ -99,7 +100,9 @@ namespace HelpersLib
                     StreamWriter streamWriter = new StreamWriter(stream);
                     JsonWriter jsonWriter = new JsonTextWriter(streamWriter);
                     jsonWriter.Formatting = Formatting.Indented;
-                    new JsonSerializer().Serialize(jsonWriter, obj);
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Converters.Add(new StringEnumConverter());
+                    serializer.Serialize(jsonWriter, obj);
                     jsonWriter.Flush();
                     break;
             }
@@ -161,7 +164,10 @@ namespace HelpersLib
                     using (StreamReader streamReader = new StreamReader(stream))
                     using (JsonReader jsonReader = new JsonTextReader(streamReader))
                     {
-                        settings = new JsonSerializer().Deserialize<T>(jsonReader);
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Converters.Add(new StringEnumConverter());
+                        serializer.Error += (sender, e) => e.ErrorContext.Handled = true;
+                        settings = serializer.Deserialize<T>(jsonReader);
                     }
                     break;
             }

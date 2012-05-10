@@ -576,16 +576,6 @@ namespace ShareX
             Dispose();
         }
 
-        private bool OnImageJobRequired(TaskImageJob imageJob, object input = null)
-        {
-            if (ImageJobRequired != null)
-            {
-                return ImageJobRequired(Info, imageJob, input);
-            }
-
-            return false;
-        }
-
         public void Dispose()
         {
             if (data != null) data.Dispose();

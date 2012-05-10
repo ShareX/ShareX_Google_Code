@@ -325,6 +325,12 @@ namespace HelpersLib
             return descriptions.ToArray();
         }
 
+        public static int GetEnumMemberIndex<T>(T element) where T : struct
+        {
+            T[] values = (T[])Enum.GetValues(typeof(T));
+            return Array.IndexOf(values, element);
+        }
+
         public const string UnreservedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~";
 
         public static string URLEncode(string text)
