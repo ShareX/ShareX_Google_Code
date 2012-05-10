@@ -32,8 +32,8 @@ namespace UploadersLib
         public const string TinyPicID = "e2aabb8d555322fa";
         public const string TinyPicKey = "00a68ed73ddd54da52dc2d5803fa35ee";
         public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";
-        public const string ImgurConsumerKey = "89dec1eceb03e7028647445fdde8af2204e87fd58";
-        public const string ImgurConsumerSecret = "77e4e25ba8bf9c3ce2a9b9a09092d3d0";
+        public const string ImgurConsumerKey = "7daf4350229dc1fd8a9d5f8a2302094004fab40cf";
+        public const string ImgurConsumerSecret = "6324137e9489cc561f76c372cc5efcd3";
         public const string FlickrKey = "a568bc8fb851eb79e08c99866a26d338";
         public const string FlickrSecret = "1ae3466cd1922d7f";
         public const string PhotobucketConsumerKey = "149828681";
