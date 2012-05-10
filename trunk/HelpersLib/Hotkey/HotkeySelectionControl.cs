@@ -35,22 +35,11 @@ namespace HelpersLib.Hotkey
 
         public HotkeySetting Setting { get; set; }
 
-        public HotkeySelectionControl(HotkeySetting setting, ZAppType host)
+        public HotkeySelectionControl(HotkeySetting setting)
         {
             InitializeComponent();
             Setting = setting;
-            switch (host)
-            {
-                case ZAppType.ZScreen:
-                    lblHotkeyDescription.Text = ((ZScreenHotkey)Setting.Tag).GetDescription();
-                    break;
-                case ZAppType.JBird:
-                    lblHotkeyDescription.Text = ((JBirdHotkey)Setting.Tag).GetDescription();
-                    break;
-                default:
-                    lblHotkeyDescription.Text = ((ZUploaderHotkey)Setting.Tag).GetDescription();
-                    break;
-            }
+            lblHotkeyDescription.Text = ((EHotkey)Setting.Tag).GetDescription();
             btnSetHotkey.Text = new KeyInfo(Setting.Hotkey).ToString();
             UpdateHotkeyStatus();
         }

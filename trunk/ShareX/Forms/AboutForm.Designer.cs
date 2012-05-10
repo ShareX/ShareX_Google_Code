@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lblProductName = new System.Windows.Forms.Label();
-            this.lblZScreen = new System.Windows.Forms.Label();
+            this.lblProjectPage = new System.Windows.Forms.Label();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.lblCredits = new System.Windows.Forms.Label();
             this.lblBugs = new System.Windows.Forms.Label();
@@ -61,19 +61,19 @@
             this.lblProductName.Text = "ShareX 1.0.0.0";
             this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblZScreen
+            // lblProjectPage
             // 
-            this.lblZScreen.AutoSize = true;
-            this.lblZScreen.BackColor = System.Drawing.Color.Transparent;
-            this.lblZScreen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblZScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblZScreen.ForeColor = System.Drawing.Color.Black;
-            this.lblZScreen.Location = new System.Drawing.Point(256, 64);
-            this.lblZScreen.Name = "lblZScreen";
-            this.lblZScreen.Size = new System.Drawing.Size(67, 13);
-            this.lblZScreen.TabIndex = 2;
-            this.lblZScreen.Text = "Project page";
-            this.lblZScreen.Click += new System.EventHandler(this.lblZScreen_Click);
+            this.lblProjectPage.AutoSize = true;
+            this.lblProjectPage.BackColor = System.Drawing.Color.Transparent;
+            this.lblProjectPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblProjectPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblProjectPage.ForeColor = System.Drawing.Color.Black;
+            this.lblProjectPage.Location = new System.Drawing.Point(256, 64);
+            this.lblProjectPage.Name = "lblProjectPage";
+            this.lblProjectPage.Size = new System.Drawing.Size(67, 13);
+            this.lblProjectPage.TabIndex = 2;
+            this.lblProjectPage.Text = "Project page";
+            this.lblProjectPage.Click += new System.EventHandler(this.lblProjectPage_Click);
             // 
             // lblCopyright
             // 
@@ -217,7 +217,7 @@
             this.Controls.Add(this.lblBugs);
             this.Controls.Add(this.lblCredits);
             this.Controls.Add(this.lblCopyright);
-            this.Controls.Add(this.lblZScreen);
+            this.Controls.Add(this.lblProjectPage);
             this.Controls.Add(this.lblProductName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -238,7 +238,7 @@
         #endregion Windows Form Designer generated code
 
         private System.Windows.Forms.Label lblProductName;
-        private System.Windows.Forms.Label lblZScreen;
+        private System.Windows.Forms.Label lblProjectPage;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblCredits;
         private System.Windows.Forms.Label lblBugs;

@@ -209,12 +209,6 @@
     <Compile Include="UpdateChecker\UpdaterForm.designer.cs">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\OptionsCoreUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Wizards\OptionsCoreUI.Designer.cs">
-      <DependentUpon>OptionsCoreUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="SerializationHelper.cs" />
     <Compile Include="Links.cs" />
     <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
@@ -260,9 +254,6 @@
     <EmbeddedResource Include="UpdateChecker\UpdaterForm.resx">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\OptionsCoreUI.resx">
-      <DependentUpon>OptionsCoreUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

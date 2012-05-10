@@ -136,11 +136,6 @@ namespace HelpersLib
         Nothing
     }
 
-    public enum ZAppType
-    {
-        ZScreen, ShareX, JBird
-    }
-
     public enum HotkeyStatus
     {
         Registered, Failed, NotConfigured

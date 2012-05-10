@@ -31,7 +31,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib.Hotkey
 {
-    public enum ZUploaderHotkey
+    public enum EHotkey
     {
         [Description("Clipboard Upload")]
         ClipboardUpload,
@@ -61,66 +61,18 @@ namespace HelpersLib.Hotkey
         FreeHandRegion
     }
 
-    public enum ZScreenHotkey
-    {
-        [Description("Capture Entire Screen")]
-        EntireScreen,
-        [Description("Capture Active Monitor")]
-        ActiveMonitor,
-        [Description("Capture Active Window")]
-        ActiveWindow,
-        [Description("Capture Rectangular Region")]
-        RectangleRegion,
-        [Description("Capture Last Rectangular Region")]
-        RectangleRegionLast,
-        [Description("Capture Selected Window")]
-        SelectedWindow,
-        [Description("Capture Shape")]
-        FreehandRegion,
-        [Description("Clipboard Upload")]
-        ClipboardUpload,
-        [Description("Auto Capture")]
-        AutoCapture,
-        [Description("Drop Window")]
-        DropWindow,
-        [Description("Color Picker")]
-        ScreenColorPicker,
-        [Description("Twitter Client")]
-        TwitterClient,
-        [Description("Capture Rectangular Region to Clipboard")]
-        RectangleRegionClipboard
-    }
-
-    public enum JBirdHotkey
-    {
-        [Description("")]
-        Workflow
-    }
-
     public class HotkeyManager
     {
-        public ZAppType Host = ZAppType.ShareX;
         public List<HotkeySetting> Settings = new List<HotkeySetting>();
 
         private HotkeyForm hotkeyForm;
 
-        public HotkeyManager(HotkeyForm hotkeyForm, ZAppType host)
+        public HotkeyManager(HotkeyForm hotkeyForm)
         {
             this.hotkeyForm = hotkeyForm;
-            this.Host = host;
         }
 
-        public void AddHotkey(ZUploaderHotkey hotkeyEnum, HotkeySetting hotkeySetting, Action action, ToolStripMenuItem menuItem = null)
-        {
-            AddHotkey((int)hotkeyEnum, hotkeyEnum.GetDescription(), hotkeySetting, action, menuItem);
-        }
-
-        public void AddHotkey(ZScreenHotkey hotkeyEnum, HotkeySetting hotkeySetting, Action action, ToolStripMenuItem menuItem = null)
-        {
-            AddHotkey((int)hotkeyEnum, hotkeyEnum.GetDescription(), hotkeySetting, action, menuItem);
-        }
-
-        public void AddHotkey(JBirdHotkey hotkeyEnum, HotkeySetting hotkeySetting, Action action, ToolStripMenuItem menuItem = null)
+        public void AddHotkey(EHotkey hotkeyEnum, HotkeySetting hotkeySetting, Action action, ToolStripMenuItem menuItem = null)
         {
             AddHotkey((int)hotkeyEnum, hotkeyEnum.GetDescription(), hotkeySetting, action, menuItem);
         }

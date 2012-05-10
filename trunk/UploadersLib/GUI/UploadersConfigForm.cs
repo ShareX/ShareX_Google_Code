@@ -486,7 +486,7 @@ namespace UploadersLib
 
         private void btnFtpHelp_Click(object sender, EventArgs e)
         {
-            Helpers.LoadBrowserAsync("http://code.google.com/p/zscreen/wiki/FTPAccounts");
+            Helpers.LoadBrowserAsync("http://code.google.com/p/sharex/wiki/FTPAccounts");
         }
 
         private void btnFTPImport_Click(object sender, EventArgs e)
@@ -783,7 +783,7 @@ namespace UploadersLib
                 Config.CustomUploadersList = new List<CustomUploaderInfo>();
             }
 
-            using (OpenFileDialog dlg = new OpenFileDialog { Filter = "ZScreen Image Uploaders(*.zihs)|*.zihs" })
+            using (OpenFileDialog dlg = new OpenFileDialog { Filter = "Custom Image Uploaders(*.ciu)|*.ciu" })
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
@@ -799,7 +799,7 @@ namespace UploadersLib
                 using (SaveFileDialog dlg = new SaveFileDialog
                 {
                     FileName = string.Format("{0}-{1}-uploaders", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")),
-                    Filter = "ZScreen Image Uploaders(*.zihs)|*.zihs"
+                    Filter = "Custom Image Uploaders(*.ciu)|*.ciu"
                 })
                 {
                     if (dlg.ShowDialog() == DialogResult.OK)

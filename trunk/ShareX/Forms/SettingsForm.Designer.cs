@@ -43,7 +43,7 @@
             this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.tpPaths = new System.Windows.Forms.TabPage();
             this.btnBrowseCustomScreenshotsPath = new System.Windows.Forms.Button();
-            this.btnOpenZUploaderPath = new System.Windows.Forms.Button();
+            this.btnOpenPersonalFolder = new System.Windows.Forms.Button();
             this.btnLoadUploadersConfig = new System.Windows.Forms.Button();
             this.txtCustomHistoryPath = new System.Windows.Forms.TextBox();
             this.txtCustomScreenshotsPath = new System.Windows.Forms.TextBox();
@@ -118,6 +118,7 @@
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
             this.gbCaptureAfter = new System.Windows.Forms.GroupBox();
+            this.cbCaptureSaveImageWithDialog = new System.Windows.Forms.CheckBox();
             this.cbCaptureUploadImage = new System.Windows.Forms.CheckBox();
             this.cbCaptureSaveImage = new System.Windows.Forms.CheckBox();
             this.cbCaptureCopyImage = new System.Windows.Forms.CheckBox();
@@ -148,7 +149,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbCaptureSaveImageWithDialog = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -338,7 +338,7 @@
             // tpPaths
             // 
             this.tpPaths.Controls.Add(this.btnBrowseCustomScreenshotsPath);
-            this.tpPaths.Controls.Add(this.btnOpenZUploaderPath);
+            this.tpPaths.Controls.Add(this.btnOpenPersonalFolder);
             this.tpPaths.Controls.Add(this.btnLoadUploadersConfig);
             this.tpPaths.Controls.Add(this.txtCustomHistoryPath);
             this.tpPaths.Controls.Add(this.txtCustomScreenshotsPath);
@@ -369,15 +369,15 @@
             this.btnBrowseCustomScreenshotsPath.UseVisualStyleBackColor = true;
             this.btnBrowseCustomScreenshotsPath.Click += new System.EventHandler(this.btnBrowseCustomScreenshotsPath_Click);
             // 
-            // btnOpenZUploaderPath
+            // btnOpenPersonalFolder
             // 
-            this.btnOpenZUploaderPath.Location = new System.Drawing.Point(16, 16);
-            this.btnOpenZUploaderPath.Name = "btnOpenZUploaderPath";
-            this.btnOpenZUploaderPath.Size = new System.Drawing.Size(176, 23);
-            this.btnOpenZUploaderPath.TabIndex = 0;
-            this.btnOpenZUploaderPath.Text = "Open ShareX personal folder";
-            this.btnOpenZUploaderPath.UseVisualStyleBackColor = true;
-            this.btnOpenZUploaderPath.Click += new System.EventHandler(this.btnOpenZUploaderPath_Click);
+            this.btnOpenPersonalFolder.Location = new System.Drawing.Point(16, 16);
+            this.btnOpenPersonalFolder.Name = "btnOpenPersonalFolder";
+            this.btnOpenPersonalFolder.Size = new System.Drawing.Size(176, 23);
+            this.btnOpenPersonalFolder.TabIndex = 0;
+            this.btnOpenPersonalFolder.Text = "Open ShareX personal folder";
+            this.btnOpenPersonalFolder.UseVisualStyleBackColor = true;
+            this.btnOpenPersonalFolder.Click += new System.EventHandler(this.btnOpenPersonalFolder_Click);
             // 
             // btnLoadUploadersConfig
             // 
@@ -1262,6 +1262,17 @@
             this.gbCaptureAfter.TabStop = false;
             this.gbCaptureAfter.Text = "After capture tasks";
             // 
+            // cbCaptureSaveImageWithDialog
+            // 
+            this.cbCaptureSaveImageWithDialog.AutoSize = true;
+            this.cbCaptureSaveImageWithDialog.Location = new System.Drawing.Point(16, 72);
+            this.cbCaptureSaveImageWithDialog.Name = "cbCaptureSaveImageWithDialog";
+            this.cbCaptureSaveImageWithDialog.Size = new System.Drawing.Size(163, 17);
+            this.cbCaptureSaveImageWithDialog.TabIndex = 3;
+            this.cbCaptureSaveImageWithDialog.Text = "Save image to file with dialog";
+            this.cbCaptureSaveImageWithDialog.UseVisualStyleBackColor = true;
+            this.cbCaptureSaveImageWithDialog.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImageWithDialog_CheckedChanged);
+            // 
             // cbCaptureUploadImage
             // 
             this.cbCaptureUploadImage.AutoSize = true;
@@ -1630,17 +1641,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbCaptureSaveImageWithDialog
-            // 
-            this.cbCaptureSaveImageWithDialog.AutoSize = true;
-            this.cbCaptureSaveImageWithDialog.Location = new System.Drawing.Point(16, 72);
-            this.cbCaptureSaveImageWithDialog.Name = "cbCaptureSaveImageWithDialog";
-            this.cbCaptureSaveImageWithDialog.Size = new System.Drawing.Size(163, 17);
-            this.cbCaptureSaveImageWithDialog.TabIndex = 3;
-            this.cbCaptureSaveImageWithDialog.Text = "Save image to file with dialog";
-            this.cbCaptureSaveImageWithDialog.UseVisualStyleBackColor = true;
-            this.cbCaptureSaveImageWithDialog.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImageWithDialog_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1737,7 +1737,7 @@
         private System.Windows.Forms.ComboBox cbBufferSize;
         private System.Windows.Forms.Label lblBufferSize;
         private System.Windows.Forms.Label lblBufferSizeInfo;
-        private System.Windows.Forms.Button btnOpenZUploaderPath;
+        private System.Windows.Forms.Button btnOpenPersonalFolder;
         private System.Windows.Forms.Label lblUploadLimitHint;
         private System.Windows.Forms.NumericUpDown nudUploadLimit;
         private System.Windows.Forms.Label lblUploadLimit;

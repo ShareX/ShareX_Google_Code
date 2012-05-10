@@ -331,7 +331,7 @@ namespace ShareX
 
         #region Paths
 
-        private void btnOpenZUploaderPath_Click(object sender, EventArgs e)
+        private void btnOpenPersonalFolder_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Program.PersonalPath) && Directory.Exists(Program.PersonalPath))
             {

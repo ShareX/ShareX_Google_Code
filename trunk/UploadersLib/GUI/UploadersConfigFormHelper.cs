@@ -925,7 +925,7 @@ namespace UploadersLib
             {
                 try
                 {
-                    using (Stream stream = Resources.ZScreen_256.GetStream())
+                    using (Stream stream = Resources.ShareXLogo.GetStream())
                     {
                         CustomUploader cu = new CustomUploader(cui);
                         ur = cu.Upload(stream, "Test.png");
