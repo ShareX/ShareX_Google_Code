@@ -2,7 +2,7 @@
 
 * Proportional resizing of shapes while holding shift key
 * Added shortcut to "Send To" without using registry
-* Cursor can be moved using arrow keys during a shapes capture while holding the primary mouse button
+* Cursor can be moved using arrow keys during a shapes capture
 * Screen-wide crosshair support during shapes capture
 * Magnifier support during shapes capture
 * Added imm.io Image Uploader
