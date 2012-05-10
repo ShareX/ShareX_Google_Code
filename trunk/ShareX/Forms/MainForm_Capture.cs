@@ -33,7 +33,6 @@ using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using ScreenCapture;
-using ShareX.HelperClasses;
 
 namespace ShareX
 {

@@ -43,7 +43,7 @@ namespace ShareX.HelperClasses
         private Stopwatch smoothTimer = new Stopwatch();
         private int smoothTime;
         private long speedTest;
-        private List<double> averageSpeed = new List<double>(10);
+        private List<double> averageSpeed = new List<double>(11);
 
         public ProgressManager(long length, int smoothTime = 250)
         {
@@ -77,12 +77,12 @@ namespace ShareX.HelperClasses
 
             if (smoothTimer.ElapsedMilliseconds > smoothTime)
             {
-                if (averageSpeed.Count == 10)
+                averageSpeed.Add((double)speedTest / smoothTimer.ElapsedMilliseconds);
+
+                if (averageSpeed.Count > 10)
                 {
                     averageSpeed.RemoveAt(0);
                 }
-
-                averageSpeed.Add((double)speedTest / smoothTimer.ElapsedMilliseconds);
 
                 Speed = averageSpeed.Average();
                 Elapsed = startTimer.Elapsed;

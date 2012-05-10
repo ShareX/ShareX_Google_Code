@@ -53,6 +53,8 @@ namespace ShareX
         static UploadManager()
         {
             Tasks = new List<Task>();
+            trayIcons = new Icon[] { Resources.sharex_16px_0, Resources.sharex_16px_1, Resources.sharex_16px_2, Resources.sharex_16px_3,
+                Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6 };
         }
 
         public static void UploadFile(string path)
@@ -435,64 +437,25 @@ namespace ShareX
 
         public static void UpdateTrayIcon()
         {
-            return; // TODO: Tray animation
-
             if (Program.mainForm.niTray.Visible)
             {
-                lock (uploadManagerLock)
+                IEnumerable<Task> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null && x.Info.Progress != null);
+                Icon icon = null;
+
+                if (workingTasks.Count() > 0)
                 {
-                    if (trayIcons == null)
-                    {
-                        CacheProgressIcon();
-                    }
-
-                    IEnumerable<Task> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null && x.Info.Progress != null);
-                    Icon icon = null;
-
-                    if (workingTasks.Count() > 0)
-                    {
-                        double averageProgress = workingTasks.Average(x => x.Info.Progress.Percentage);
-                        int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
-                        icon = trayIcons.ReturnIfValidIndex(index) ?? trayIcons[0];
-                    }
-                    else
-                    {
-                        icon = trayIcons[0];
-                    }
-
-                    if (Program.mainForm.niTray.Icon != icon)
-                    {
-                        Program.mainForm.niTray.Icon = icon;
-                    }
+                    double averageProgress = workingTasks.Average(x => x.Info.Progress.Percentage);
+                    int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
+                    icon = trayIcons.ReturnIfValidIndex(index) ?? trayIcons.Last();
                 }
-            }
-        }
-
-        private static void CacheProgressIcon()
-        {
-            trayIcons = new Icon[16];
-            trayIcons[0] = Resources.ShareXSmallIcon;
-            trayIcons[15] = Resources.ShareXSmallBusyIcon;
-
-            Rectangle rBackground = new Rectangle(0, 0, 16, 16);
-
-            using (Bitmap smallIcon = Resources.ShareXSmallIcon.ToBitmap())
-            using (Bitmap smallBusyIcon = Resources.ShareXSmallBusyIcon.ToBitmap())
-            {
-                for (int i = 1; i < 15; i++)
+                else
                 {
-                    Rectangle rForeground = new Rectangle(0, 0, i + 1, 16);
+                    icon = trayIcons.Last();
+                }
 
-                    using (Bitmap bmp = new Bitmap(16, 16))
-                    {
-                        using (Graphics g = Graphics.FromImage(bmp))
-                        {
-                            g.DrawImage(smallIcon, rBackground);
-                            g.DrawImage(smallBusyIcon, rForeground, rForeground, GraphicsUnit.Pixel);
-                        }
-
-                        trayIcons[i] = bmp.ToIcon();
-                    }
+                if (Program.mainForm.niTray.Icon != icon)
+                {
+                    Program.mainForm.niTray.Icon = icon;
                 }
             }
         }
