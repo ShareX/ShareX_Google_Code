@@ -27,6 +27,9 @@ namespace HelpersLib
 {
     public static class ComponentModelStrings
     {
+        public const string ActivitiesAfterCapture = "After Capture";
+        public const string ActivitiesCapture = "Capture";
+        public const string ActivitiesUpload = "Upload";
         public const string App = "Application";
         public const string AppPasswords = "Application / Passwords";
         public const string AppPaths = "Application / Paths";
@@ -34,10 +37,10 @@ namespace HelpersLib
         public const string AppPathsUploaders = "Application / Paths / Uploaders";
         public const string AppPathsWorkflow = "Application / Paths / Workflow";
         public const string FileNaming = "Outputs / File / Naming";
-        public const string InputsDropWindow = "Inputs / Drop Window";
         public const string InputsAnimatedImages = "Inputs / File Upload / Animated Images";
         public const string InputsAutoCapture = "Inputs / Screenshots / Capture / Auto Capture";
         public const string InputsClipboard = "Inputs / Clipboard Upload";
+        public const string InputsDropWindow = "Inputs / Drop Window";
         public const string InputsURLShorteners = "Inputs / Links";
         public const string InputsWatchFolder = "Inputs / Watch Folder";
         public const string Outputs = "Outputs";
@@ -50,6 +53,7 @@ namespace HelpersLib
         public const string ScreenshotsBorder = "Inputs / Screenshots / Effects / Border";
         public const string ScreenshotsReflection = "Inputs / Screenshots / Effects / Reflection";
         public const string ScreenshotsRegion = "Inputs / Screenshots / Capture / Region";
+        public const string SettingsInteraction = "Settings / Interaction";
         public const string SoundSettings = "Outputs / Sound Settings";
     }
 }
