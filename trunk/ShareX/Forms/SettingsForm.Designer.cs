@@ -148,6 +148,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbCaptureSaveImageWithDialog = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1242,32 +1243,33 @@
             this.cbCaptureShadow.AutoSize = true;
             this.cbCaptureShadow.Location = new System.Drawing.Point(16, 64);
             this.cbCaptureShadow.Name = "cbCaptureShadow";
-            this.cbCaptureShadow.Size = new System.Drawing.Size(279, 17);
+            this.cbCaptureShadow.Size = new System.Drawing.Size(274, 17);
             this.cbCaptureShadow.TabIndex = 2;
-            this.cbCaptureShadow.Text = "Capture window with shadow (Transparency required)";
+            this.cbCaptureShadow.Text = "Capture window with shadow (requires transparency)";
             this.cbCaptureShadow.UseVisualStyleBackColor = true;
             this.cbCaptureShadow.CheckedChanged += new System.EventHandler(this.cbCaptureShadow_CheckedChanged);
             // 
             // gbCaptureAfter
             // 
+            this.gbCaptureAfter.Controls.Add(this.cbCaptureSaveImageWithDialog);
             this.gbCaptureAfter.Controls.Add(this.cbCaptureUploadImage);
             this.gbCaptureAfter.Controls.Add(this.cbCaptureSaveImage);
             this.gbCaptureAfter.Controls.Add(this.cbCaptureCopyImage);
             this.gbCaptureAfter.Location = new System.Drawing.Point(16, 96);
             this.gbCaptureAfter.Name = "gbCaptureAfter";
-            this.gbCaptureAfter.Size = new System.Drawing.Size(472, 104);
+            this.gbCaptureAfter.Size = new System.Drawing.Size(472, 128);
             this.gbCaptureAfter.TabIndex = 3;
             this.gbCaptureAfter.TabStop = false;
-            this.gbCaptureAfter.Text = "After capture";
+            this.gbCaptureAfter.Text = "After capture tasks";
             // 
             // cbCaptureUploadImage
             // 
             this.cbCaptureUploadImage.AutoSize = true;
-            this.cbCaptureUploadImage.Location = new System.Drawing.Point(16, 72);
+            this.cbCaptureUploadImage.Location = new System.Drawing.Point(16, 96);
             this.cbCaptureUploadImage.Name = "cbCaptureUploadImage";
-            this.cbCaptureUploadImage.Size = new System.Drawing.Size(126, 17);
+            this.cbCaptureUploadImage.Size = new System.Drawing.Size(161, 17);
             this.cbCaptureUploadImage.TabIndex = 2;
-            this.cbCaptureUploadImage.Text = "Upload image to host";
+            this.cbCaptureUploadImage.Text = "Upload image to remote host";
             this.cbCaptureUploadImage.UseVisualStyleBackColor = true;
             this.cbCaptureUploadImage.CheckedChanged += new System.EventHandler(this.cbCaptureUploadImage_CheckedChanged);
             // 
@@ -1628,6 +1630,17 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbCaptureSaveImageWithDialog
+            // 
+            this.cbCaptureSaveImageWithDialog.AutoSize = true;
+            this.cbCaptureSaveImageWithDialog.Location = new System.Drawing.Point(16, 72);
+            this.cbCaptureSaveImageWithDialog.Name = "cbCaptureSaveImageWithDialog";
+            this.cbCaptureSaveImageWithDialog.Size = new System.Drawing.Size(163, 17);
+            this.cbCaptureSaveImageWithDialog.TabIndex = 3;
+            this.cbCaptureSaveImageWithDialog.Text = "Save image to file with dialog";
+            this.cbCaptureSaveImageWithDialog.UseVisualStyleBackColor = true;
+            this.cbCaptureSaveImageWithDialog.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImageWithDialog_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1811,5 +1824,6 @@
         private System.Windows.Forms.TextBox txtProxyUsername;
         private System.Windows.Forms.ComboBox cboProxyType;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbCaptureSaveImageWithDialog;
     }
 }

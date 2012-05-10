@@ -128,6 +128,7 @@ namespace ShareX
         public bool CaptureShadow = true;
         public bool CaptureCopyImage = false;
         public bool CaptureSaveImage = false;
+        public bool CaptureSaveImageWithDialog = false;
         public bool CaptureUploadImage = true;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 

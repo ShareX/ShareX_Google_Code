@@ -132,6 +132,11 @@ namespace ShareX
                     imageJob |= TaskImageJob.SaveImageToFile;
                 }
 
+                if (Program.Settings.CaptureSaveImageWithDialog)
+                {
+                    imageJob |= TaskImageJob.SaveImageToFileWithDialog;
+                }
+
                 if (Program.Settings.CaptureUploadImage)
                 {
                     imageJob |= TaskImageJob.UploadImageToHost;

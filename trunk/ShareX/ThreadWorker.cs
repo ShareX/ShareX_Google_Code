@@ -24,39 +24,55 @@
 #endregion License Information (GPL v3)
 
 using System;
-using System.IO;
-using HelpersLib;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 
-namespace ShareX.HelperClasses
+namespace ShareX
 {
-    public class ImageData : IDisposable
+    public class ThreadWorker
     {
-        public MemoryStream ImageStream { get; set; }
-        public string Filename { get; set; }
+        public event Action DoWork;
+        public event Action Completed;
 
-        public string WriteToFolder(string folderPath)
+        private SynchronizationContext context;
+        private Thread thread;
+
+        public ThreadWorker()
         {
-            if (!string.IsNullOrEmpty(Filename) && !string.IsNullOrEmpty(folderPath))
-            {
-                return WriteToFile(Path.Combine(folderPath, Filename));
-            }
+            context = SynchronizationContext.Current;
 
-            return string.Empty;
+            if (context == null)
+            {
+                context = new SynchronizationContext();
+            }
         }
 
-        public string WriteToFile(string filePath)
+        public void Start()
         {
-            if (ImageStream != null && !string.IsNullOrEmpty(filePath) && ImageStream.WriteToFile(filePath))
+            if (thread == null)
             {
-                return filePath;
+                thread = new Thread(WorkThread);
+                thread.SetApartmentState(ApartmentState.STA);
+                thread.Start();
             }
-
-            return string.Empty;
         }
 
-        public void Dispose()
+        private void WorkThread()
         {
-            ImageStream.Dispose();
+            DoWork();
+            InvokeAsync(Completed);
+        }
+
+        public void Invoke(Action action)
+        {
+            context.Send(state => action(), null);
+        }
+
+        public void InvokeAsync(Action action)
+        {
+            context.Post(state => action(), null);
         }
     }
 }

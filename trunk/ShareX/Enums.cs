@@ -42,8 +42,9 @@ namespace ShareX
     {
         None = 0,
         CopyImageToClipboard = 1,
-        SaveImageToFile = 2,
-        UploadImageToHost = 4
+        SaveImageToFile = 1 << 1,
+        SaveImageToFileWithDialog = 1 << 2,
+        UploadImageToHost = 1 << 3
     }
 
     public enum ImageScaleType
