@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using HelpersLib;
 using ShareX.HelperClasses;
@@ -46,11 +47,8 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
-
         public event TaskEventHandler UploadPreparing;
-
         public event TaskEventHandler UploadProgressChanged;
-
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
@@ -61,7 +59,7 @@ namespace ShareX
         private Stream data;
         private Image tempImage;
         private string tempText;
-        private BackgroundWorker bw;
+        private ThreadWorker threadWorker;
         private Uploader uploader;
 
         #region Constructors
@@ -130,14 +128,10 @@ namespace ShareX
             {
                 OnUploadPreparing();
 
-                DoFormJob();
-
-                bw = new BackgroundWorker();
-                bw.WorkerReportsProgress = true;
-                bw.DoWork += new DoWorkEventHandler(UploadThread);
-                bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
-                bw.RunWorkerAsync();
+                threadWorker = new ThreadWorker();
+                threadWorker.DoWork += ThreadDoWork;
+                threadWorker.Completed += ThreadCompleted;
+                threadWorker.Start();
             }
         }
 
@@ -155,7 +149,7 @@ namespace ShareX
             }
         }
 
-        private void UploadThread(object sender, DoWorkEventArgs e)
+        private void ThreadDoWork()
         {
             DoThreadJob();
 
@@ -169,7 +163,7 @@ namespace ShareX
                 Status = TaskStatus.Uploading;
                 Info.Status = "Uploading";
                 Info.StartTime = DateTime.UtcNow;
-                bw.ReportProgress((int)TaskProgress.ReportStarted);
+                threadWorker.InvokeAsync(OnUploadStarted);
 
                 try
                 {
@@ -216,27 +210,47 @@ namespace ShareX
             Info.UploadTime = DateTime.UtcNow;
         }
 
-        private void DoFormJob()
-        {
-            if (Info.Job == TaskJob.ImageUpload && tempImage != null && Info.ImageJob.HasFlag(TaskImageJob.CopyImageToClipboard))
-            {
-                Clipboard.SetImage(tempImage);
-            }
-        }
-
         private void DoThreadJob()
         {
-            if (Info.Job == TaskJob.ImageUpload && tempImage != null && Info.ImageJob.HasFlagAny(TaskImageJob.UploadImageToHost, TaskImageJob.SaveImageToFile))
+            if (Info.Job == TaskJob.ImageUpload && tempImage != null)
             {
-                using (tempImage)
+                if (Info.ImageJob.HasFlag(TaskImageJob.CopyImageToClipboard))
                 {
-                    ImageData imageData = TaskHelper.PrepareImageAndFilename(tempImage);
-                    data = imageData.ImageStream;
-                    Info.FileName = imageData.Filename;
+                    Clipboard.SetImage(tempImage);
+                    DebugHelper.WriteLine("CopyImageToClipboard");
+                }
 
-                    if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
+                if (Info.ImageJob.HasFlagAny(TaskImageJob.UploadImageToHost, TaskImageJob.SaveImageToFile, TaskImageJob.SaveImageToFileWithDialog))
+                {
+                    using (tempImage)
                     {
-                        Info.FilePath = imageData.WriteToFile(Program.ScreenshotsPath);
+                        ImageData imageData = TaskHelper.PrepareImageAndFilename(tempImage);
+                        data = imageData.ImageStream;
+                        Info.FileName = imageData.Filename;
+
+                        if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
+                        {
+                            Info.FilePath = imageData.WriteToFolder(Program.ScreenshotsPath);
+                            DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
+                        }
+
+                        if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFileWithDialog))
+                        {
+                            using (SaveFileDialog sfd = new SaveFileDialog())
+                            {
+                                sfd.InitialDirectory = Program.ScreenshotsPath;
+                                sfd.FileName = Info.FileName;
+                                sfd.DefaultExt = Path.GetExtension(Info.FileName).Substring(1);
+                                sfd.Filter = string.Format("*{0}|*{0}|All files (*.*)|*.*", Path.GetExtension(Info.FileName));
+                                sfd.Title = "Choose a folder to save " + Path.GetFileName(Info.FileName);
+
+                                if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
+                                {
+                                    Info.FilePath = imageData.WriteToFile(sfd.FileName);
+                                    DebugHelper.WriteLine("SaveImageToFileWithDialog: " + Info.FilePath);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -483,25 +497,7 @@ namespace ShareX
             return null;
         }
 
-        private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            switch ((TaskProgress)e.ProgressPercentage)
-            {
-                case TaskProgress.ReportStarted:
-                    OnUploadStarted();
-                    break;
-                case TaskProgress.ReportProgress:
-                    ProgressManager progress = e.UserState as ProgressManager;
-                    if (progress != null)
-                    {
-                        Info.Progress = progress;
-                        OnUploadProgressChanged();
-                    }
-                    break;
-            }
-        }
-
-        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void ThreadCompleted()
         {
             OnUploadCompleted();
         }
@@ -510,7 +506,16 @@ namespace ShareX
         {
             uploader = currentUploader;
             uploader.BufferSize = (int)Math.Pow(2, Program.Settings.BufferSizePower) * 1024;
-            uploader.ProgressChanged += (x) => bw.ReportProgress((int)TaskProgress.ReportProgress, x);
+            uploader.ProgressChanged += new Uploader.ProgressEventHandler(uploader_ProgressChanged);
+        }
+
+        private void uploader_ProgressChanged(ProgressManager progress)
+        {
+            if (progress != null)
+            {
+                Info.Progress = progress;
+                threadWorker.InvokeAsync(OnUploadProgressChanged);
+            }
         }
 
         private void OnUploadPreparing()
@@ -571,11 +576,20 @@ namespace ShareX
             Dispose();
         }
 
+        private bool OnImageJobRequired(TaskImageJob imageJob, object input = null)
+        {
+            if (ImageJobRequired != null)
+            {
+                return ImageJobRequired(Info, imageJob, input);
+            }
+
+            return false;
+        }
+
         public void Dispose()
         {
             if (data != null) data.Dispose();
             if (tempImage != null) tempImage.Dispose();
-            if (bw != null) bw.Dispose();
         }
     }
 }

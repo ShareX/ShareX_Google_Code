@@ -80,8 +80,8 @@ namespace ShareX
             InitializeComponent();
 
             this.Text = Program.Title;
-            this.Icon = Resources.ShareX;
-            niTray.Icon = Resources.ShareX;
+            this.Icon = Resources.ShareXSmallIcon;
+            niTray.Icon = Resources.ShareXSmallIcon;
 
             foreach (string imageUploader in Helpers.GetEnumDescriptions<ImageDestination>())
             {

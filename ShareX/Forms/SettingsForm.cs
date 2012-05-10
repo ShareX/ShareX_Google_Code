@@ -129,6 +129,7 @@ namespace ShareX
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
             cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
             cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
+            cbCaptureSaveImageWithDialog.Checked = Program.Settings.CaptureSaveImageWithDialog;
             cbCaptureUploadImage.Checked = Program.Settings.CaptureUploadImage;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
@@ -603,6 +604,11 @@ namespace ShareX
         private void cbCaptureSaveImage_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureSaveImage = cbCaptureSaveImage.Checked;
+        }
+
+        private void cbCaptureSaveImageWithDialog_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CaptureSaveImageWithDialog = cbCaptureSaveImageWithDialog.Checked;
         }
 
         private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)

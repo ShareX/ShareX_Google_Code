@@ -52,7 +52,7 @@ namespace ScreenCapture
             return windows;
         }
 
-        public List<Rectangle> GetWindowsRectangleList()
+        public List<Rectangle> GetWindowsRectangleList() // TODO: Remove not visible windows behind windows
         {
             return GetWindowsList().Select(x => x.Rectangle).ToList();
         }

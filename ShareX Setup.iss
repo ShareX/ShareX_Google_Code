@@ -78,5 +78,5 @@ Filename: "{app}\{#MyAppFile}"; Description: {cm:LaunchProgram,{#MyAppName}}; Fl
 [Code]
 function DesktopIconExists(): Boolean;
 begin
-  Result := FileExists(ExpandConstant('{commondesktop}\{#MyAppName}.lnk'));
+  Result := FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'));
 end;
