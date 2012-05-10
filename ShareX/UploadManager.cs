@@ -348,7 +348,12 @@ namespace ShareX
                 ListViewItem lvi = ListViewControl.Items[info.ID];
                 lvi.SubItems[2].Text = string.Format("{0:N0}%  {1:N0} KiB / {2:N0} KiB", info.Progress.Percentage,
                     info.Progress.Position / 1024, info.Progress.Length / 1024);
-                lvi.SubItems[3].Text = string.Format("{0:N0} kB/s", info.Progress.Speed);
+
+                if (info.Progress.Speed > 0)
+                {
+                    lvi.SubItems[3].Text = string.Format("{0:N0} kB/s", info.Progress.Speed);
+                }
+
                 lvi.SubItems[4].Text = ProperTimeSpan(info.Progress.Elapsed);
                 lvi.SubItems[5].Text = ProperTimeSpan(info.Progress.Remaining);
                 UpdateTrayIcon();

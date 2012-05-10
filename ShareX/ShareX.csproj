@@ -141,9 +141,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Task.cs" />
-    <Compile Include="ThreadWorker.cs" />
+    <Compile Include="HelperClasses\ThreadWorker.cs" />
     <Compile Include="UploadManager.cs" />
-    <Compile Include="UploadProgress.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UploadInfo.cs" />
   </ItemGroup>
@@ -172,7 +171,6 @@
   <ItemGroup>
     <None Include="Resources\ShareX.ico" />
     <None Include="Resources\ShareXLogo.png" />
-    <None Include="app.config" />
     <None Include="Resources\Window.png" />
     <None Include="Resources\RoundedRectangle.png" />
     <None Include="Resources\Rectangle.png" />
