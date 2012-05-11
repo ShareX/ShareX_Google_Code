@@ -30,7 +30,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using HelpersLib;
-using ShareX.HelperClasses;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib
 {

@@ -32,7 +32,7 @@ using HelpersLib;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 using Renci.SshNet.Sftp;
-using ShareX.HelperClasses;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
 {

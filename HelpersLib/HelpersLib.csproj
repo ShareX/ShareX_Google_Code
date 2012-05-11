@@ -76,6 +76,7 @@
     <Compile Include="Cryptography\CryptMethod.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="Extensions\GraphicsPathExtensions.cs" />
+    <Compile Include="FixedSizedQueue.cs" />
     <Compile Include="ImageQuantization\GrayscaleQuantizer.cs" />
     <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
     <Compile Include="ImageQuantization\PaletteQuantizer.cs" />

@@ -30,9 +30,9 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using HelpersLib;
-using ShareX.HelperClasses;
 using Starksoft.Net.Ftp;
 using Starksoft.Net.Proxy;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib
 {

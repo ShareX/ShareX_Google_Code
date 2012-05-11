@@ -34,7 +34,6 @@ using System.Text;
 using System.Web;
 using System.Windows.Forms;
 using HelpersLib;
-using ShareX.HelperClasses;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib
