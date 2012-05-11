@@ -622,7 +622,7 @@
             this.lblBufferSizeInfo.Name = "lblBufferSizeInfo";
             this.lblBufferSizeInfo.Size = new System.Drawing.Size(23, 13);
             this.lblBufferSizeInfo.TabIndex = 5;
-            this.lblBufferSizeInfo.Text = "KiB";
+            this.lblBufferSizeInfo.Text = "KB";
             // 
             // cbBufferSize
             // 
@@ -713,7 +713,7 @@
             this.lblUseImageFormat2AfterHint.Name = "lblUseImageFormat2AfterHint";
             this.lblUseImageFormat2AfterHint.Size = new System.Drawing.Size(124, 13);
             this.lblUseImageFormat2AfterHint.TabIndex = 9;
-            this.lblUseImageFormat2AfterHint.Text = "KiB  0 - 5000 (0 disables)";
+            this.lblUseImageFormat2AfterHint.Text = "KB  0 - 5000 (0 disables)";
             // 
             // cbImageFormat
             // 

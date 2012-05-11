@@ -346,26 +346,18 @@ namespace ShareX
             if (ListViewControl != null)
             {
                 ListViewItem lvi = ListViewControl.Items[info.ID];
-                lvi.SubItems[2].Text = string.Format("{0:N0}%  {1:N0} KiB / {2:N0} KiB", info.Progress.Percentage,
-                    info.Progress.Position / 1024, info.Progress.Length / 1024);
+                lvi.SubItems[1].Text = string.Format("{0:0.0}%", info.Progress.Percentage);
+                lvi.SubItems[2].Text = string.Format("{0} / {1}", Helpers.ProperFileSize(info.Progress.Position), Helpers.ProperFileSize(info.Progress.Length));
 
                 if (info.Progress.Speed > 0)
                 {
-                    lvi.SubItems[3].Text = string.Format("{0:N0} kB/s", info.Progress.Speed);
+                    lvi.SubItems[3].Text = string.Format("{0:0.0} kB/s", info.Progress.Speed / 1000);
                 }
 
-                lvi.SubItems[4].Text = ProperTimeSpan(info.Progress.Elapsed);
-                lvi.SubItems[5].Text = ProperTimeSpan(info.Progress.Remaining);
+                lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);
+                lvi.SubItems[5].Text = Helpers.ProperTimeSpan(info.Progress.Remaining);
                 UpdateTrayIcon();
             }
-        }
-
-        private static string ProperTimeSpan(TimeSpan ts)
-        {
-            string time = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
-            int hours = (int)ts.TotalHours;
-            if (hours > 0) time = hours + ":" + time;
-            return time;
         }
 
         private static void task_UploadCompleted(UploadInfo info)

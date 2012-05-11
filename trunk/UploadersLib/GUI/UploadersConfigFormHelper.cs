@@ -505,7 +505,7 @@ namespace UploadersLib
 
         public bool CheckFTPAccounts()
         {
-            return Config.FTPAccountList2.IsValidIndex(Config.FTPSelectedImage);
+            return Config.FTPAccountList.IsValidIndex(Config.FTPSelectedImage);
         }
 
         public void TestFTPAccountAsync(FTPAccount acc)
@@ -532,7 +532,7 @@ namespace UploadersLib
 
         private void FTPAccountsExport()
         {
-            if (Config.FTPAccountList2 != null)
+            if (Config.FTPAccountList != null)
             {
                 SaveFileDialog dlg = new SaveFileDialog
                 {
@@ -541,7 +541,7 @@ namespace UploadersLib
                 };
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    FTPAccountManager fam = new FTPAccountManager(Config.FTPAccountList2);
+                    FTPAccountManager fam = new FTPAccountManager(Config.FTPAccountList);
                     fam.Save(dlg.FileName);
                 }
             }
@@ -684,7 +684,7 @@ namespace UploadersLib
             FTPAccount acc = null;
             if (CheckFTPAccounts())
             {
-                acc = Config.FTPAccountList2[Config.FTPSelectedImage];
+                acc = Config.FTPAccountList[Config.FTPSelectedImage];
             }
             return acc;
         }

@@ -412,5 +412,22 @@ namespace HelpersLib
 
             return false;
         }
+
+        public static string ProperFileSize(long size)
+        {
+            string[] suf = { "B", "kB", "MB", "GB", "TB", "PB" };
+            int place = Convert.ToInt32(Math.Floor(Math.Log(size, 1000)));
+            double num = size / Math.Pow(1000, place);
+            string format = place == 0 ? "0" : "0.00";
+            return num.ToString(format) + " " + suf[place];
+        }
+
+        public static string ProperTimeSpan(TimeSpan ts)
+        {
+            string time = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+            int hours = (int)ts.TotalHours;
+            if (hours > 0) time = hours + ":" + time;
+            return time;
+        }
     }
 }

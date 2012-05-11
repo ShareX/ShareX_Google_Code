@@ -412,9 +412,9 @@ namespace ShareX
                 case FileDestination.FTP:
                     int index = Program.UploadersConfig.GetFtpIndex(Info.DataType);
 
-                    if (Program.UploadersConfig.FTPAccountList2.IsValidIndex(index))
+                    if (Program.UploadersConfig.FTPAccountList.IsValidIndex(index))
                     {
-                        fileUploader = new FTPUploader(Program.UploadersConfig.FTPAccountList2[index]);
+                        fileUploader = new FTPUploader(Program.UploadersConfig.FTPAccountList[index]);
                     }
                     break;
                 case FileDestination.Email:

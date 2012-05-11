@@ -99,7 +99,7 @@ namespace HelpersLib
         {
             pbProgress.Value = (int)Math.Round(fileDownloader.DownloadPercentage);
             lblProgress.Text = String.Format(CultureInfo.CurrentCulture,
-                "Progress: {0:0.##}%\nDownload speed: {1:0.##} KiB/s\nFile size: {2:n0} / {3:n0} KiB",
+                "Progress: {0:0.##}%\nDownload speed: {1:0.##} kB/s\nFile size: {2:n0} / {3:n0} KB",
                 fileDownloader.DownloadPercentage, fileDownloader.DownloadSpeed / 1024, fileDownloader.DownloadedSize / 1024,
                 fileDownloader.FileSize / 1024);
         }

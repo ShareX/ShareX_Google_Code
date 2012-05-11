@@ -102,7 +102,7 @@ namespace UploadersLib
 
         // FTP
 
-        public List<FTPAccount> FTPAccountList2 = new List<FTPAccount>();
+        public List<FTPAccount> FTPAccountList = new List<FTPAccount>();
         public int FTPSelectedImage = 0;
         public int FTPSelectedText = 0;
         public int FTPSelectedFile = 0;
@@ -216,7 +216,7 @@ namespace UploadersLib
                 case FileDestination.CustomUploader:
                     return CustomUploadersList != null && CustomUploadersList.Count > 0;
                 case FileDestination.FTP:
-                    return FTPAccountList2 != null && FTPAccountList2.Count > 0;
+                    return FTPAccountList != null && FTPAccountList.Count > 0;
             }
 
             return false;
@@ -234,7 +234,7 @@ namespace UploadersLib
 
             this.SendSpacePassword = bEncrypt ? crypt.Encrypt(this.SendSpacePassword) : crypt.Decrypt(this.SendSpacePassword);
 
-            foreach (FTPAccount acc in this.FTPAccountList2)
+            foreach (FTPAccount acc in this.FTPAccountList)
             {
                 acc.Password = bEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
                 acc.Passphrase = bEncrypt ? crypt.Encrypt(acc.Passphrase) : crypt.Decrypt(acc.Passphrase);
