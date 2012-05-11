@@ -29,7 +29,9 @@ namespace HelpersLib
     {
         public const string ActivitiesAfterCapture = "After Capture";
         public const string ActivitiesCapture = "Capture";
-        public const string ActivitiesUpload = "Upload";
+        public const string ActivitiesUploadersImages = "Image Uploaders";
+        public const string ActivitiesUploadersText = "Text Uploaders";
+        public const string ActivitiesUploadersFiles = "File Uploaders";
         public const string App = "Application";
         public const string AppPasswords = "Application / Passwords";
         public const string AppPaths = "Application / Paths";
