@@ -387,7 +387,7 @@ namespace UploadersLib
 
                 requestStream.Write(buffer, 0, bytesRead);
 
-                if (progress.ChangeProgress(bytesRead))
+                if (progress.UpdateProgress(bytesRead))
                 {
                     OnProgressChanged(progress);
                 }

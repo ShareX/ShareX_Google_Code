@@ -42,41 +42,24 @@ namespace UploadersLib.HelperClasses
 
         private Stopwatch startTimer = new Stopwatch();
         private Stopwatch smoothTimer = new Stopwatch();
-        private int smoothTime;
+        private int smoothTime = 250;
         private long speedTest;
         private FixedSizedQueue<double> averageSpeed = new FixedSizedQueue<double>(10);
 
-        public ProgressManager(long length, int smoothTime = 250)
+        public ProgressManager(long length)
         {
             Length = length;
-            this.smoothTime = smoothTime;
             startTimer.Start();
             smoothTimer.Start();
         }
 
-        public bool ChangeProgress(int bytesRead, bool cumulative = false)
+        public bool UpdateProgress(int bytesRead)
         {
-            if (!cumulative)
-            {
-                Position += bytesRead;
-            }
-            else
-            {
-                Position = bytesRead;
-            }
-
+            Position += bytesRead;
             Percentage = (double)Position / Length * 100;
             speedTest += bytesRead;
 
-            if (Position >= Length)
-            {
-                Elapsed = startTimer.Elapsed;
-                Remaining = TimeSpan.Zero;
-
-                return true;
-            }
-
-            if (smoothTimer.ElapsedMilliseconds > smoothTime)
+            if (Position >= Length || smoothTimer.ElapsedMilliseconds > smoothTime)
             {
                 averageSpeed.Enqueue((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
 
