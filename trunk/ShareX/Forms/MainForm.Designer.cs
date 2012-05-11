@@ -247,7 +247,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(899, 33);
+            this.tsMain.Size = new System.Drawing.Size(841, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -557,12 +557,11 @@ namespace ShareX
             // chStatus
             // 
             this.chStatus.Text = "Status";
-            this.chStatus.Width = 75;
             // 
             // chProgress
             // 
             this.chProgress.Text = "Progress";
-            this.chProgress.Width = 149;
+            this.chProgress.Width = 120;
             // 
             // chSpeed
             // 
@@ -592,7 +591,7 @@ namespace ShareX
             // chURL
             // 
             this.chURL.Text = "URL";
-            this.chURL.Width = 225;
+            this.chURL.Width = 247;
             // 
             // niTray
             // 

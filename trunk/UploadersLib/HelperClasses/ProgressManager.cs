@@ -27,8 +27,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using HelpersLib;
 
-namespace ShareX.HelperClasses
+namespace UploadersLib.HelperClasses
 {
     public class ProgressManager
     {
@@ -43,7 +44,7 @@ namespace ShareX.HelperClasses
         private Stopwatch smoothTimer = new Stopwatch();
         private int smoothTime;
         private long speedTest;
-        private List<double> averageSpeed = new List<double>(10);
+        private FixedSizedQueue<double> averageSpeed = new FixedSizedQueue<double>(10);
 
         public ProgressManager(long length, int smoothTime = 250)
         {
@@ -77,14 +78,7 @@ namespace ShareX.HelperClasses
 
             if (smoothTimer.ElapsedMilliseconds > smoothTime)
             {
-                smoothTimer.Stop();
-
-                if (averageSpeed.Count == 10)
-                {
-                    averageSpeed.RemoveAt(0);
-                }
-
-                averageSpeed.Add((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
+                averageSpeed.Enqueue((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
 
                 Speed = averageSpeed.Average();
                 Elapsed = startTimer.Elapsed;
