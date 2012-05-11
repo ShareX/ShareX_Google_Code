@@ -33,7 +33,7 @@ namespace ShareX.HelperClasses
     public class ProgressManager
     {
         public long Length { get; private set; }
-        public long Position { get; set; }
+        public long Position { get; private set; }
         public double Percentage { get; private set; }
         public double Speed { get; private set; }
         public TimeSpan Elapsed { get; private set; }
@@ -43,7 +43,7 @@ namespace ShareX.HelperClasses
         private Stopwatch smoothTimer = new Stopwatch();
         private int smoothTime;
         private long speedTest;
-        private List<double> averageSpeed = new List<double>(11);
+        private List<double> averageSpeed = new List<double>(10);
 
         public ProgressManager(long length, int smoothTime = 250)
         {
@@ -77,16 +77,18 @@ namespace ShareX.HelperClasses
 
             if (smoothTimer.ElapsedMilliseconds > smoothTime)
             {
-                averageSpeed.Add((double)speedTest / smoothTimer.ElapsedMilliseconds);
+                smoothTimer.Stop();
 
-                if (averageSpeed.Count > 10)
+                if (averageSpeed.Count == 10)
                 {
                     averageSpeed.RemoveAt(0);
                 }
 
+                averageSpeed.Add((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
+
                 Speed = averageSpeed.Average();
                 Elapsed = startTimer.Elapsed;
-                Remaining = TimeSpan.FromMilliseconds((Length - Position) / Speed);
+                Remaining = TimeSpan.FromSeconds((Length - Position) / Speed);
 
                 speedTest = 0;
                 smoothTimer.Reset();

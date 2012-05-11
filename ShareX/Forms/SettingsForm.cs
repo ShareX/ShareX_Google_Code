@@ -412,7 +412,7 @@ namespace ShareX
         {
             Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
             string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
-            lblBufferSizeInfo.Text = string.Format("x {0} KiB = {1} KiB", 1.024, bufferSize);
+            lblBufferSizeInfo.Text = string.Format("x {0} KB = {1} KB", 1.024, bufferSize);
         }
 
         private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)

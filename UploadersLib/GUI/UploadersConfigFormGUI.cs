@@ -216,13 +216,13 @@ namespace UploadersLib
 
             // FTP
 
-            if (Config.FTPAccountList2 == null || Config.FTPAccountList2.Count == 0)
+            if (Config.FTPAccountList == null || Config.FTPAccountList.Count == 0)
             {
                 FTPSetup(new List<FTPAccount>());
             }
             else
             {
-                FTPSetup(Config.FTPAccountList2);
+                FTPSetup(Config.FTPAccountList);
                 if (ucFTPAccounts.AccountsList.Items.Count > 0)
                 {
                     ucFTPAccounts.AccountsList.SelectedIndex = 0;
@@ -442,10 +442,10 @@ namespace UploadersLib
                 cboFtpText.Items.Clear();
                 cboFtpFiles.Items.Clear();
 
-                Config.FTPAccountList2 = new List<FTPAccount>();
-                Config.FTPAccountList2.AddRange(accs);
+                Config.FTPAccountList = new List<FTPAccount>();
+                Config.FTPAccountList.AddRange(accs);
 
-                foreach (FTPAccount acc in Config.FTPAccountList2)
+                foreach (FTPAccount acc in Config.FTPAccountList)
                 {
                     ucFTPAccounts.AccountsList.Items.Add(acc);
                     cboFtpImages.Items.Add(acc);
@@ -466,10 +466,10 @@ namespace UploadersLib
         private void FTPAccountAddButton_Click(object sender, EventArgs e)
         {
             FTPAccount acc = new FTPAccount("New Account");
-            Config.FTPAccountList2.Add(acc);
+            Config.FTPAccountList.Add(acc);
             ucFTPAccounts.AccountsList.Items.Add(acc);
             ucFTPAccounts.AccountsList.SelectedIndex = ucFTPAccounts.AccountsList.Items.Count - 1;
-            FTPSetup(Config.FTPAccountList2);
+            FTPSetup(Config.FTPAccountList);
         }
 
         private void FTPAccountRemoveButton_Click(object sender, EventArgs e)
@@ -477,41 +477,41 @@ namespace UploadersLib
             int sel = ucFTPAccounts.AccountsList.SelectedIndex;
             if (ucFTPAccounts.RemoveItem(sel))
             {
-                Config.FTPAccountList2.RemoveAt(sel);
+                Config.FTPAccountList.RemoveAt(sel);
             }
-            FTPSetup(Config.FTPAccountList2);
+            FTPSetup(Config.FTPAccountList);
         }
 
         private void FTPAccountTestButton_Click(object sender, EventArgs e)
         {
             if (CheckFTPAccounts())
             {
-                TestFTPAccount((FTPAccount)Config.FTPAccountList2[ucFTPAccounts.AccountsList.SelectedIndex], false);
+                TestFTPAccount((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex], false);
             }
         }
 
         private void FTPAccountCloneButton_Click(object sender, EventArgs e)
         {
             FTPAccount src = ucFTPAccounts.AccountsList.Items[ucFTPAccounts.AccountsList.SelectedIndex] as FTPAccount;
-            Config.FTPAccountList2.Add(src.Clone());
+            Config.FTPAccountList.Add(src.Clone());
             ucFTPAccounts.AccountsList.SelectedIndex = ucFTPAccounts.AccountsList.Items.Count - 1;
-            FTPSetup(Config.FTPAccountList2);
+            FTPSetup(Config.FTPAccountList);
         }
 
         private void FTPAccountsList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int sel = ucFTPAccounts.AccountsList.SelectedIndex;
 
-            if (Config.FTPAccountList2.IsValidIndex(sel))
+            if (Config.FTPAccountList.IsValidIndex(sel))
             {
-                FTPAccount acc = Config.FTPAccountList2[sel];
+                FTPAccount acc = Config.FTPAccountList[sel];
                 ucFTPAccounts.SettingsGrid.SelectedObject = acc;
             }
         }
 
         private void FtpAccountSettingsGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            FTPSetup(Config.FTPAccountList2);
+            FTPSetup(Config.FTPAccountList);
         }
 
         #endregion FTP
