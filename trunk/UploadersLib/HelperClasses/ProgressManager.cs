@@ -59,7 +59,15 @@ namespace UploadersLib.HelperClasses
             Percentage = (double)Position / Length * 100;
             speedTest += bytesRead;
 
-            if (Position >= Length || smoothTimer.ElapsedMilliseconds > smoothTime)
+            if (Position >= Length)
+            {
+                Elapsed = startTimer.Elapsed;
+                Remaining = TimeSpan.Zero;
+
+                return true;
+            }
+
+            if (smoothTimer.ElapsedMilliseconds > smoothTime)
             {
                 averageSpeed.Enqueue((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
 
