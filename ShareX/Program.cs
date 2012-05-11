@@ -37,7 +37,8 @@ namespace ShareX
 {
     internal static class Program
     {
-        private static readonly string ApplicationName = Application.ProductName;
+        public static readonly string ApplicationName = Application.ProductName;
+        public static readonly Version AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
         #region Paths
 
@@ -148,25 +149,10 @@ namespace ShareX
         {
             get
             {
-                string title = string.Format("{0} {1} r{2}", ApplicationName, Application.ProductVersion, AppRevision);
+                string title = string.Format("{0} {1}.{2}.{3} r{4}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor,
+                    AssemblyVersion.Build, AssemblyVersion.Revision);
                 if (IsPortable) title += " Portable";
                 return title;
-            }
-        }
-
-        public static string AppRevision
-        {
-            get
-            {
-                return AssemblyVersion.Split('.')[3];
-            }
-        }
-
-        public static string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
@@ -206,7 +192,7 @@ namespace ShareX
 
                 MyLogger = new Logger();
                 DebugHelper.MyLogger = MyLogger;
-                MyLogger.WriteLine("{0} {1} r{2} started", Application.ProductName, Application.ProductVersion, AppRevision);
+                MyLogger.WriteLine("{0} started", Title);
                 MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
                 MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
                 MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);

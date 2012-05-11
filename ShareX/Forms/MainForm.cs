@@ -212,7 +212,7 @@ namespace ShareX
 
         private void CheckUpdate()
         {
-            UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, new Version(Program.AssemblyVersion),
+            UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,
                 ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
             updateChecker.CheckUpdate();
 
