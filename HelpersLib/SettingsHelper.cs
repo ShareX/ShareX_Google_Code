@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
@@ -54,7 +55,9 @@ namespace HelpersLib
 
                             if (createBackup && File.Exists(filePath))
                             {
-                                File.Copy(filePath, filePath + ".bak", true);
+                                File.Copy(filePath, filePath + string.Format(".{0}.bak",
+                                    CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
+                                    CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
                             }
 
                             isSuccess = ms.WriteToFile(filePath);
