@@ -23,7 +23,9 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Xml.Serialization;
@@ -40,6 +42,7 @@ namespace HelpersLib
 
         public virtual bool Save(string filePath)
         {
+            FilePath = FilePath;
             return SettingsHelper.Save(this, filePath, SerializationType);
         }
 
@@ -61,6 +64,20 @@ namespace HelpersLib
         public virtual void Save(Stream stream)
         {
             SettingsHelper.Save(this, stream, SerializationType);
+        }
+
+        public void Backup(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
+                                                                         CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
+            }
+        }
+
+        public void BackupAsync()
+        {
+            ThreadPool.QueueUserWorkItem(state => Backup(FilePath));
         }
 
         public static T Load(string filePath)
