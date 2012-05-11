@@ -96,7 +96,7 @@ namespace UploadersLib
                     while ((bytesRead = stream.Read(buffer, 0, BufferSize)) > 0)
                     {
                         requestStream.Write(buffer, 0, bytesRead);
-                        progress.ChangeProgress(bytesRead);
+                        progress.UpdateProgress(bytesRead);
                         OnProgressChanged(progress);
                     }
                 }
@@ -165,7 +165,7 @@ namespace UploadersLib
                     while ((bytesRead = upload.Stream.Read(buffer, 0, BufferSize)) > 0)
                     {
                         requestStream.Write(buffer, 0, bytesRead);
-                        progress.ChangeProgress(bytesRead);
+                        progress.UpdateProgress(bytesRead);
                         upload.BackgroundWorker.ReportProgress((int)progress.Percentage, progress);
                     }
                 }
@@ -221,7 +221,7 @@ namespace UploadersLib
                     while ((bytesRead = stream.Read(buffer, 0, BufferSize)) > 0)
                     {
                         fileStream.Write(buffer, 0, bytesRead);
-                        progress.ChangeProgress(bytesRead);
+                        progress.UpdateProgress(bytesRead);
                         OnProgressChanged(progress);
                     }
                 }

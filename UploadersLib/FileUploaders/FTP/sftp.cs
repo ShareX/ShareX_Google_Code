@@ -179,7 +179,8 @@ namespace UploadersLib.FileUploaders
         {
             if (ProgressChanged != null)
             {
-                progress.ChangeProgress((int)e.UploadedBytes, true);
+                int bytesRead = (int)((long)e.UploadedBytes - progress.Position);
+                progress.UpdateProgress(bytesRead);
                 ProgressChanged(progress);
             }
         }

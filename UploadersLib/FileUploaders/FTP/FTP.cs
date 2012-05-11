@@ -89,7 +89,7 @@ namespace UploadersLib
         {
             if (ProgressChanged != null)
             {
-                progress.ChangeProgress(e.BytesTransferred);
+                progress.UpdateProgress(e.BytesTransferred);
                 ProgressChanged(progress);
             }
         }
