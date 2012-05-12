@@ -25,6 +25,7 @@
 
 using System;
 using System.IO;
+using System.Threading;
 using HelpersLib;
 using UploadersLib.HelperClasses;
 
@@ -50,24 +51,20 @@ namespace UploadersLib.FileUploaders
 
             try
             {
+                IsUploading = true;
+
                 using (ftpClient = new FTP(Account))
                 {
                     ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
-                    IsUploading = true;
                     ftpClient.UploadData(stream, path);
                 }
-            }
-            catch (Exception e)
-            {
-                DebugHelper.WriteException(e);
-                Errors.Add(e.Message);
             }
             finally
             {
                 IsUploading = false;
             }
 
-            if (Errors.Count == 0)
+            if (!stopUpload && Errors.Count == 0)
             {
                 result.URL = Account.GetUriPath(fileName);
             }
@@ -77,10 +74,11 @@ namespace UploadersLib.FileUploaders
 
         public override void StopUpload()
         {
-            if (IsUploading && ftpClient != null)
+            if (IsUploading && !stopUpload && ftpClient != null)
             {
                 stopUpload = true;
-                ftpClient.StopUpload();
+
+                ThreadPool.QueueUserWorkItem(state => ftpClient.StopUpload());
             }
         }
 
