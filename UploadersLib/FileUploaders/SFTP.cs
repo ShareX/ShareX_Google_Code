@@ -189,6 +189,7 @@ namespace UploadersLib.FileUploaders
 
                 try
                 {
+                    IsUploading = true;
                     UploadStream(stream, filePath);
                 }
                 catch (SftpPathNotFoundException)
@@ -196,10 +197,14 @@ namespace UploadersLib.FileUploaders
                     CreateDirectory(folderPath);
                     UploadStream(stream, filePath);
                 }
+                finally
+                {
+                    IsUploading = false;
+                }
 
                 Disconnect();
 
-                if (Errors.Count == 0)
+                if (!stopUpload && Errors.Count == 0)
                 {
                     result.URL = Account.GetUriPath(fileName);
                 }

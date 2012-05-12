@@ -178,9 +178,13 @@ namespace ShareX
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    uploader.Errors.Add(ex.ToString());
+                    if (!IsStopped)
+                    {
+                        DebugHelper.WriteException(e);
+                        uploader.Errors.Add(e.ToString());
+                    }
                 }
                 finally
                 {
