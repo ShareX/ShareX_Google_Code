@@ -33,12 +33,39 @@ namespace UploadersLib.HelperClasses
 {
     public class ProgressManager
     {
-        public long Length { get; private set; }
         public long Position { get; private set; }
-        public double Percentage { get; private set; }
+        public long Length { get; private set; }
+
+        public double Percentage
+        {
+            get
+            {
+                return (double)Position / Length * 100;
+            }
+        }
+
         public double Speed { get; private set; }
-        public TimeSpan Elapsed { get; private set; }
-        public TimeSpan Remaining { get; private set; }
+
+        public TimeSpan Elapsed
+        {
+            get
+            {
+                return startTimer.Elapsed;
+            }
+        }
+
+        public TimeSpan Remaining
+        {
+            get
+            {
+                if (Speed > 0)
+                {
+                    return TimeSpan.FromSeconds((Length - Position) / Speed);
+                }
+
+                return TimeSpan.Zero;
+            }
+        }
 
         private Stopwatch startTimer = new Stopwatch();
         private Stopwatch smoothTimer = new Stopwatch();
@@ -56,13 +83,11 @@ namespace UploadersLib.HelperClasses
         public bool UpdateProgress(int bytesRead)
         {
             Position += bytesRead;
-            Percentage = (double)Position / Length * 100;
             speedTest += bytesRead;
 
             if (Position >= Length)
             {
-                Elapsed = startTimer.Elapsed;
-                Remaining = TimeSpan.Zero;
+                startTimer.Stop();
 
                 return true;
             }
@@ -72,8 +97,6 @@ namespace UploadersLib.HelperClasses
                 averageSpeed.Enqueue((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
 
                 Speed = averageSpeed.Average();
-                Elapsed = startTimer.Elapsed;
-                Remaining = TimeSpan.FromSeconds((Length - Position) / Speed);
 
                 speedTest = 0;
                 smoothTimer.Reset();

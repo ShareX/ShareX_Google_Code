@@ -144,6 +144,18 @@ namespace UploadersLib
 
             return result;
         }
+
+        public static string FixFilename(string fileName)
+        {
+            fileName = Helpers.ReplaceIllegalChars(fileName, '_');
+
+            while (fileName.IndexOf("__") != -1)
+            {
+                fileName = fileName.Replace("__", "_");
+            }
+
+            return fileName;
+        }
     }
 
     public static class FTPLineParser

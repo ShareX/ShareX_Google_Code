@@ -113,7 +113,7 @@ namespace UploadersLib
 
         public bool Connect()
         {
-            return Connect(Account.UserName, Account.Password);
+            return Connect(Account.Username, Account.Password);
         }
 
         public void Disconnect()

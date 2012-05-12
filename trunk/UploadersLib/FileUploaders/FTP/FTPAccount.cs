@@ -47,7 +47,7 @@ namespace UploadersLib
         public int Port { get; set; }
 
         [Category("FTP")]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Category("FTP"), PasswordPropertyText(true)]
         public string Password { get; set; }
@@ -124,7 +124,7 @@ namespace UploadersLib
             Name = "New Account";
             Host = "host";
             Port = 21;
-            UserName = "username";
+            Username = "username";
             Password = "password";
             ServerProtocol = ServerProtocol.Ftp;
             SubFolderPath = string.Empty;
@@ -146,6 +146,11 @@ namespace UploadersLib
         {
             NameParser parser = new NameParser { Host = this.Host, IsFolderPath = true };
             return parser.Convert(this.SubFolderPath);
+        }
+
+        public string GetSubFolderPath(string fileName)
+        {
+            return FTPHelpers.CombineURL(GetSubFolderPath(), fileName);
         }
 
         public string GetHttpHomePath()
@@ -205,7 +210,7 @@ namespace UploadersLib
             {
                 switch (BrowserProtocol)
                 {
-                    case UploadersLib.BrowserProtocol.ServerProtocol:
+                    case BrowserProtocol.ServerProtocol:
                         path = FTPHelpers.CombineURL(FTPAddress, lFolderPath, fileName);
                         break;
                     default:
@@ -219,14 +224,14 @@ namespace UploadersLib
 
         public string GetFtpPath(string fileName)
         {
-            string ftpAddress = this.FTPAddress;
+            string ftpAddress = FTPAddress;
 
             if (string.IsNullOrEmpty(ftpAddress))
             {
                 return string.Empty;
             }
 
-            return FTPHelpers.CombineURL(ftpAddress, this.GetSubFolderPath(), fileName);
+            return FTPHelpers.CombineURL(ftpAddress, GetSubFolderPath(fileName));
         }
 
         public override string ToString()

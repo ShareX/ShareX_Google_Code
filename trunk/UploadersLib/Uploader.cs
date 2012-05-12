@@ -373,7 +373,7 @@ namespace UploadersLib
             return request;
         }
 
-        private bool TransferData(Stream dataStream, Stream requestStream)
+        protected bool TransferData(Stream dataStream, Stream requestStream)
         {
             dataStream.Position = 0;
             ProgressManager progress = new ProgressManager(dataStream.Length);
