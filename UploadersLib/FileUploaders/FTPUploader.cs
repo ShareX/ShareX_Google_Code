@@ -34,6 +34,9 @@ namespace UploadersLib.FileUploaders
     {
         public FTPAccount FTPAccount;
 
+        private FTP ftpClient;
+        private SFTP sftpClient;
+
         public FTPUploader(FTPAccount account)
         {
             FTPAccount = account;
@@ -51,7 +54,7 @@ namespace UploadersLib.FileUploaders
 
                 if (FTPAccount.Protocol == FTPProtocol.SFTP)
                 {
-                    using (SFTP sftpClient = new SFTP(FTPAccount))
+                    using (sftpClient = new SFTP(FTPAccount))
                     {
                         if (!sftpClient.IsInstantiated)
                         {
@@ -60,15 +63,17 @@ namespace UploadersLib.FileUploaders
                         else
                         {
                             sftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                            IsUploading = true;
                             sftpClient.UploadData(stream, remotePath);
                         }
                     }
                 }
                 else // FTP or FTPS
                 {
-                    using (FTP ftpClient = new FTP(FTPAccount))
+                    using (ftpClient = new FTP(FTPAccount))
                     {
                         ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                        IsUploading = true;
                         ftpClient.UploadData(stream, remotePath);
                     }
                 }
@@ -78,6 +83,10 @@ namespace UploadersLib.FileUploaders
                 DebugHelper.WriteException(e);
                 Errors.Add(e.Message);
             }
+            finally
+            {
+                IsUploading = false;
+            }
 
             if (Errors.Count == 0)
             {
@@ -85,6 +94,15 @@ namespace UploadersLib.FileUploaders
             }
 
             return result;
+        }
+
+        public override void StopUpload()
+        {
+            if (IsUploading && ftpClient != null)
+            {
+                stopUpload = true;
+                ftpClient.StopUpload();
+            }
         }
 
         private string GetRemotePath(string fileName)

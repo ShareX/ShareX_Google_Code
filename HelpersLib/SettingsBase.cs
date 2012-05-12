@@ -66,20 +66,6 @@ namespace HelpersLib
             SettingsHelper.Save(this, stream, SerializationType);
         }
 
-        public void Backup(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
-                                                                         CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
-            }
-        }
-
-        public void BackupAsync()
-        {
-            ThreadPool.QueueUserWorkItem(state => Backup(FilePath));
-        }
-
         public static T Load(string filePath)
         {
             T setting = SettingsHelper.Load<T>(filePath, SerializationType);
@@ -91,6 +77,20 @@ namespace HelpersLib
         {
             T setting = SettingsHelper.Load<T>(stream, SerializationType);
             return setting;
+        }
+
+        public void Backup(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
+                    CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
+            }
+        }
+
+        public void BackupAsync()
+        {
+            ThreadPool.QueueUserWorkItem(state => Backup(FilePath));
         }
     }
 }

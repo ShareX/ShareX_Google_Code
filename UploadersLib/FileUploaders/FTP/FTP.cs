@@ -133,12 +133,16 @@ namespace UploadersLib
                 {
                     Client.PutFile(stream, remotePath, FileAction.Create);
                 }
-                catch (Exception ftpResponse)
+                catch (Exception e)
                 {
-                    if (ftpResponse.InnerException.Message.Contains("No such file or directory"))
+                    if (e.InnerException.Message.Contains("No such file or directory"))
                     {
                         Client.MakeDirectory(remotePath);
                         Client.PutFile(stream, remotePath, FileAction.Create);
+                    }
+                    else
+                    {
+                        throw e;
                     }
                 }
             }
@@ -198,6 +202,14 @@ namespace UploadersLib
                         UploadFiles(filesList.ToArray(), path);
                     }
                 }
+            }
+        }
+
+        public void StopUpload()
+        {
+            if (Client != null && Client.IsConnected)
+            {
+                Client.Abort();
             }
         }
 
