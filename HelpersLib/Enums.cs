@@ -99,6 +99,11 @@ namespace HelpersLib
         Default, File, Image, Text, URL
     }
 
+    public enum EInputType
+    {
+        Clipboard, FileSystem, Screenshot
+    }
+
     public enum GIFQuality
     {
         Default, Bit8, Bit4, Grayscale

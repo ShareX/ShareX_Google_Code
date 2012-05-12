@@ -42,7 +42,7 @@ namespace HelpersLib
 
         public virtual bool Save(string filePath)
         {
-            FilePath = FilePath;
+            FilePath = filePath;
             return SettingsHelper.Save(this, filePath, SerializationType);
         }
 
