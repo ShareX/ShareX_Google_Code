@@ -47,12 +47,12 @@ namespace UploadersLib
         public static ProxySettings ProxySettings = new ProxySettings();
 
         public List<string> Errors { get; private set; }
-        public bool IsUploading { get; private set; }
+        public bool IsUploading { get; protected set; }
         public int BufferSize { get; set; }
         public string UserAgent { get; set; }
         public CookieCollection LastResponseCookies { get; private set; }
 
-        private bool stopUpload;
+        protected bool stopUpload;
 
         public Uploader()
         {
@@ -80,7 +80,7 @@ namespace UploadersLib
             return string.Join("\r\n", Errors.ToArray());
         }
 
-        public void StopUpload()
+        public virtual void StopUpload()
         {
             if (IsUploading)
             {
