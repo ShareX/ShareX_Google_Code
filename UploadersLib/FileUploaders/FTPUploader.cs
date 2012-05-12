@@ -30,52 +30,31 @@ using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
 {
-    public sealed class FTPUploader : FileUploader
+    public class FTPUploader : FileUploader
     {
-        public FTPAccount FTPAccount;
+        public FTPAccount Account;
 
         private FTP ftpClient;
-        private SFTP sftpClient;
 
         public FTPUploader(FTPAccount account)
         {
-            FTPAccount = account;
+            Account = account;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
             UploadResult result = new UploadResult();
 
-            string remotePath = GetRemotePath(fileName);
+            fileName = FTPHelpers.FixFilename(fileName);
+            string path = Account.GetSubFolderPath(fileName);
 
             try
             {
-                stream.Position = 0;
-
-                if (FTPAccount.Protocol == FTPProtocol.SFTP)
+                using (ftpClient = new FTP(Account))
                 {
-                    using (sftpClient = new SFTP(FTPAccount))
-                    {
-                        if (!sftpClient.IsInstantiated)
-                        {
-                            Errors.Add("An SFTP client couldn't be instantiated, not enough information.\r\nCould be a missing key file.");
-                        }
-                        else
-                        {
-                            sftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
-                            IsUploading = true;
-                            sftpClient.UploadData(stream, remotePath);
-                        }
-                    }
-                }
-                else // FTP or FTPS
-                {
-                    using (ftpClient = new FTP(FTPAccount))
-                    {
-                        ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
-                        IsUploading = true;
-                        ftpClient.UploadData(stream, remotePath);
-                    }
+                    ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                    IsUploading = true;
+                    ftpClient.UploadData(stream, path);
                 }
             }
             catch (Exception e)
@@ -90,7 +69,7 @@ namespace UploadersLib.FileUploaders
 
             if (Errors.Count == 0)
             {
-                result.URL = FTPAccount.GetUriPath(fileName);
+                result.URL = Account.GetUriPath(fileName);
             }
 
             return result;
@@ -105,7 +84,7 @@ namespace UploadersLib.FileUploaders
             }
         }
 
-        private string GetRemotePath(string fileName)
+        protected string GetRemotePath(string fileName)
         {
             fileName = Helpers.ReplaceIllegalChars(fileName, '_');
 
@@ -114,7 +93,7 @@ namespace UploadersLib.FileUploaders
                 fileName = fileName.Replace("__", "_");
             }
 
-            return FTPHelpers.CombineURL(FTPAccount.GetSubFolderPath(), fileName);
+            return FTPHelpers.CombineURL(Account.GetSubFolderPath(), fileName);
         }
     }
 }

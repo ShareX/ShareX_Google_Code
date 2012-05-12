@@ -414,7 +414,16 @@ namespace ShareX
 
                     if (Program.UploadersConfig.FTPAccountList.IsValidIndex(index))
                     {
-                        fileUploader = new FTPUploader(Program.UploadersConfig.FTPAccountList[index]);
+                        FTPAccount account = Program.UploadersConfig.FTPAccountList[index];
+
+                        if (account.Protocol == FTPProtocol.SFTP)
+                        {
+                            fileUploader = new SFTP(account);
+                        }
+                        else
+                        {
+                            fileUploader = new FTPUploader(account);
+                        }
                     }
                     break;
                 case FileDestination.Email:

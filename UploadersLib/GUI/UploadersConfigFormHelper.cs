@@ -564,27 +564,30 @@ namespace UploadersLib
             switch (account.Protocol)
             {
                 case FTPProtocol.SFTP:
-                    SFTP sftp = new SFTP(account);
-                    if (!sftp.IsInstantiated)
+                    using (SFTP sftp = new SFTP(account))
                     {
-                        msg = "An SFTP client couldn't be instantiated, not enough information.\nCould be a missing key file.";
-                    }
-                    else if (sftp.Connect())
-                    {
-                        List<string> createddirs = new List<string>();
-                        if (!sftp.DirectoryExists(sfp))
+                        if (!sftp.IsValidAccount)
                         {
-                            createddirs = sftp.CreateMultipleDirectorys(FTPHelpers.GetPaths(sfp));
+                            msg = "An SFTP client couldn't be instantiated, not enough information.\r\nCould be a missing key file.";
                         }
-                        if (sftp.IsConnected)
+                        else if (sftp.Connect())
                         {
-                            msg = (createddirs.Count == 0) ? "Connected!" : "Conected!\nCreated folders;\n";
-                            for (int x = 0; x <= createddirs.Count - 1; x++)
+                            List<string> createddirs = new List<string>();
+
+                            if (!sftp.DirectoryExists(sfp))
                             {
-                                msg += createddirs[x] + "\n";
+                                createddirs = sftp.CreateMultiDirectory(sfp);
                             }
-                            msg += " \n\nPing results:\n " + SendPing(account.Host, 3);
-                            sftp.Disconnect();
+
+                            if (sftp.IsConnected)
+                            {
+                                msg = (createddirs.Count == 0) ? "Connected!" : "Connected!\r\nCreated folders:\r\n";
+                                for (int x = 0; x <= createddirs.Count - 1; x++)
+                                {
+                                    msg += createddirs[x] + "\r\n";
+                                }
+                                msg += "\r\n\r\nPing results:\r\n " + SendPing(account.Host, 3);
+                            }
                         }
                     }
                     break;

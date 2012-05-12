@@ -107,7 +107,7 @@
     <Compile Include="DestConfig.cs" />
     <Compile Include="FileUploaders\Box.cs" />
     <Compile Include="FileUploaders\Email.cs" />
-    <Compile Include="FileUploaders\FTP\SFTP.cs" />
+    <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="GUI\AccountTypeControl.cs">
       <SubType>UserControl</SubType>
@@ -177,7 +177,7 @@
     <Compile Include="FileUploaders\FTP\FTPAccountManager.cs" />
     <Compile Include="FileUploaders\FTP\FTPAdapter.cs" />
     <Compile Include="FileUploaders\FTP\FTPHelpers.cs" />
-    <Compile Include="FileUploaders\FTP\FTP.cs" />
+    <Compile Include="FileUploaders\FTP.cs" />
     <Compile Include="FileUploaders\RapidShare.cs" />
     <Compile Include="FileUploaders\SendSpace.cs" />
     <Compile Include="FileUploaders\SendSpaceManager.cs" />
