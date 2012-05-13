@@ -45,8 +45,11 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
+
         public event TaskEventHandler UploadPreparing;
+
         public event TaskEventHandler UploadProgressChanged;
+
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
@@ -428,6 +431,13 @@ namespace ShareX
                         {
                             fileUploader = new FTPUploader(account);
                         }
+                    }
+                    break;
+                case FileDestination.SharedFolder:
+                    int idLocalhost = Program.UploadersConfig.GetLocalhostIndex(Info.DataType);
+                    if (Program.UploadersConfig.LocalhostAccountList.IsValidIndex(idLocalhost))
+                    {
+                        fileUploader = new SharedFolderUploader(Program.UploadersConfig.LocalhostAccountList[idLocalhost]);
                     }
                     break;
                 case FileDestination.Email:

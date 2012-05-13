@@ -302,6 +302,19 @@ namespace UploadersLib
             }
         }
 
+        public int GetLocalhostIndex(EDataType dataType)
+        {
+            switch (dataType)
+            {
+                case EDataType.Image:
+                    return LocalhostSelectedImages;
+                case EDataType.Text:
+                    return LocalhostSelectedText;
+                default:
+                    return LocalhostSelectedFiles;
+            }
+        }
+
         #endregion Helper Methods
 
         #region I/O Methods
