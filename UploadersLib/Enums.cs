@@ -83,6 +83,8 @@ namespace UploadersLib
         CustomUploader,
         [Description("FTP Server")]
         FTP,
+        [Description("Shared Folder or Web Server")]
+        SharedFolder,
         [Description("Email")]
         Email
     }
