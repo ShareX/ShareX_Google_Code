@@ -456,15 +456,6 @@ namespace UploadersLib
             }
         }
 
-        #region Other Services
-
-        private void btnTwitterLogin_Click(object sender, EventArgs e)
-        {
-            TwitterLogin();
-        }
-
-        #endregion Other Services
-
         #endregion Minus
 
         #region FTP
@@ -869,6 +860,11 @@ namespace UploadersLib
         #endregion URL Shorteners
 
         #region Other Services
+
+        private void btnTwitterLogin_Click(object sender, EventArgs e)
+        {
+            TwitterLogin();
+        }
 
         private void cboSharedFolderImages_SelectedIndexChanged(object sender, EventArgs e)
         {
