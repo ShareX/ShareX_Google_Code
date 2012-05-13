@@ -27,11 +27,12 @@ namespace HelpersLib
 {
     public static class ComponentModelStrings
     {
-        public const string ActivitiesAfterCapture = "After Capture";
-        public const string ActivitiesCapture = "Capture";
-        public const string ActivitiesUploadersImages = "Image Uploaders";
-        public const string ActivitiesUploadersText = "Text Uploaders";
-        public const string ActivitiesUploadersFiles = "File Uploaders";
+        public const string ActivitiesAfterCapture = "2 - After Capture";
+        public const string ActivitiesCapture = "1 - Capture";
+        public const string ActivitiesUploadersImages = "3a - Upload Image";
+        public const string ActivitiesUploadersText = "3b - Upload Text";
+        public const string ActivitiesUploadersFiles = "3c - Upload File";
+        public const string ActivitiesUploadersLinks = "4 - Shorten URL";
         public const string App = "Application";
         public const string AppPasswords = "Application / Passwords";
         public const string AppPaths = "Application / Paths";

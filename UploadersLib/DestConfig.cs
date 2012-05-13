@@ -41,6 +41,22 @@ namespace UploadersLib
         public List<FileDestination> FileUploaders = new List<FileDestination>();
         public List<UrlShortenerType> LinkUploaders = new List<UrlShortenerType>();
 
+        public bool IsEmptyAny
+        {
+            get
+            {
+                return FileUploaders.Count == 0 || TextUploaders.Count == 0 || ImageUploaders.Count == 0;
+            }
+        }
+
+        public bool IsEmptyAll
+        {
+            get
+            {
+                return FileUploaders.Count == 0 && TextUploaders.Count == 0 && ImageUploaders.Count == 0;
+            }
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
