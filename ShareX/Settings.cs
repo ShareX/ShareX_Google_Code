@@ -79,12 +79,12 @@ namespace ShareX
         public HotkeySetting HotkeyActiveMonitor = new HotkeySetting(Keys.Control | Keys.Alt | Keys.PrintScreen);
         public HotkeySetting HotkeyWindowRectangle = new HotkeySetting(Keys.Shift | Keys.PrintScreen);
         public HotkeySetting HotkeyRectangleRegion = new HotkeySetting(Keys.Control | Keys.PrintScreen);
-        public HotkeySetting HotkeyRoundedRectangleRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.R);
-        public HotkeySetting HotkeyEllipseRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.E);
-        public HotkeySetting HotkeyTriangleRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.T);
-        public HotkeySetting HotkeyDiamondRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.D);
-        public HotkeySetting HotkeyPolygonRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.P);
-        public HotkeySetting HotkeyFreeHandRegion = new HotkeySetting(Keys.Control | Keys.Shift | Keys.F);
+        public HotkeySetting HotkeyRoundedRectangleRegion = new HotkeySetting();
+        public HotkeySetting HotkeyEllipseRegion = new HotkeySetting();
+        public HotkeySetting HotkeyTriangleRegion = new HotkeySetting();
+        public HotkeySetting HotkeyDiamondRegion = new HotkeySetting();
+        public HotkeySetting HotkeyPolygonRegion = new HotkeySetting();
+        public HotkeySetting HotkeyFreeHandRegion = new HotkeySetting();
 
         #endregion Hotkeys
 
