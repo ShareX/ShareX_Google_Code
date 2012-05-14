@@ -566,7 +566,7 @@ namespace ShareX
             // chSpeed
             // 
             this.chSpeed.Text = "Speed";
-            this.chSpeed.Width = 65;
+            this.chSpeed.Width = 70;
             // 
             // chElapsed
             // 

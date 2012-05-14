@@ -59,7 +59,7 @@ namespace UploadersLib.FileUploaders
             {
                 message.Subject = subject;
                 message.Body = body;
-                stream.Position = 0;
+
                 Attachment attachment = new Attachment(stream, fileName);
                 message.Attachments.Add(attachment);
 
