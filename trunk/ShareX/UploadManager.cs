@@ -116,9 +116,11 @@ namespace ShareX
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                ofd.Multiselect = true;
+
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    UploadFile(ofd.FileName);
+                    UploadFile(ofd.FileNames);
                 }
             }
         }
@@ -351,7 +353,7 @@ namespace ShareX
 
                 if (info.Progress.Speed > 0)
                 {
-                    lvi.SubItems[3].Text = string.Format("{0:0.0} kB/s", info.Progress.Speed / 1000);
+                    lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, false, "/s");
                 }
 
                 lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);

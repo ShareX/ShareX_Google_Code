@@ -92,8 +92,6 @@ namespace ShareX.HelperClasses
                 imageFormat = Program.Settings.ImageFormat;
             }
 
-            stream.Position = 0;
-
             return stream;
         }
 
