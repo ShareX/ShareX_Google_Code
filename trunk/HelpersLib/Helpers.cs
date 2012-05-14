@@ -413,7 +413,7 @@ namespace HelpersLib
             return false;
         }
 
-        public static string GetUniqueFilename(string folder, string filename)
+        public static string GetUniqueFilePath(string folder, string filename)
         {
             string filepath = Path.Combine(folder, filename);
 
@@ -447,13 +447,23 @@ namespace HelpersLib
             return filepath;
         }
 
-        public static string ProperFileSize(long size)
+        /// <summary>
+        /// Method to give file size with units e.g. 35 KiB or 40 kB/s
+        /// </summary>
+        /// <param name="size">Size in Bytes</param>
+        /// <param name="binary">Whether or not units should be binary or in decimal format</param>
+        /// <param name="perUnit">Per second symbol e.g. /s</param>
+        /// <returns>file size with units</returns>
+        public static string ProperFileSize(long size, bool binary = false, string perUnit = "")
         {
-            string[] suf = { "B", "kB", "MB", "GB", "TB", "PB" };
-            int place = Convert.ToInt32(Math.Floor(Math.Log(size, 1000)));
-            double num = size / Math.Pow(1000, place);
+            string[] suf_decimal = { "B", "kB", "MB", "GB", "TB", "PB" };
+            string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
+            int bytes = binary ? 1024 : 1000;
+
+            int place = Convert.ToInt32(Math.Floor(Math.Log(size, bytes)));
+            double num = size / Math.Pow(bytes, place);
             string format = place == 0 ? "0" : "0.00";
-            return num.ToString(format) + " " + suf[place];
+            return num.ToString(format) + " " + (binary ? suf_binary[place] : suf_decimal[place]) + perUnit;
         }
 
         public static string ProperTimeSpan(TimeSpan ts)
