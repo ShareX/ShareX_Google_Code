@@ -128,6 +128,7 @@ namespace UploadersLib
         {
             if (Connect())
             {
+                if (stream.Position != 0) stream.Position = 0;
                 progress = new ProgressManager(stream.Length);
                 try
                 {
