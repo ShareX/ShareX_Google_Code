@@ -107,7 +107,7 @@ namespace HelpersLib
 
     public enum EInputType
     {
-        Clipboard, FileSystem, Screenshot
+        None, Clipboard, FileSystem, Screenshot
     }
 
     public enum GIFQuality
