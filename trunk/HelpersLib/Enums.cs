@@ -92,7 +92,7 @@ namespace HelpersLib
     public enum VideoFileExtensions
     {
         [Description("MPEG-4 Video File")]
-        mp4, m4v,
+        mp4, m4v
     }
 
     public enum EncryptionStrength
