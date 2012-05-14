@@ -108,7 +108,7 @@ namespace UploadersLib.FileUploaders
             foreach (MinusScope scope in Enum.GetValues(typeof(MinusScope)))
             {
                 string url = string.Format("{0}/oauth/token?grant_type=refresh_token&client_id={1}&client_secret={2}&scope={3}&refresh_token={4}",
-                       URL_API,
+                       URL_HOST,
                        AuthInfo.ConsumerKey,
                        AuthInfo.ConsumerSecret,
                        scope.ToString(),

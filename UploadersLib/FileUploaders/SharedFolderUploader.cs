@@ -34,18 +34,18 @@ namespace UploadersLib.FileUploaders
 {
     public class SharedFolderUploader : FileUploader
     {
-        LocalhostAccount Account;
+        private LocalhostAccount account;
 
         public SharedFolderUploader(LocalhostAccount account)
         {
-            this.Account = account;
+            this.account = account;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
             UploadResult result = new UploadResult();
 
-            string filePath = Account.GetLocalhostPath(fileName);
+            string filePath = account.GetLocalhostPath(fileName);
             string destDir = Path.GetDirectoryName(filePath);
             if (!Directory.Exists(destDir))
                 Directory.CreateDirectory(destDir);
@@ -55,7 +55,7 @@ namespace UploadersLib.FileUploaders
                 if (TransferData(stream, fs))
                 {
                     result.LocalFilePath = filePath;
-                    result.URL = Account.GetUriPath(Path.GetFileName(fileName));
+                    result.URL = account.GetUriPath(Path.GetFileName(fileName));
                 }
             }
 

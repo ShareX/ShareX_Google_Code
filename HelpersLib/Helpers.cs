@@ -413,6 +413,30 @@ namespace HelpersLib
             return false;
         }
 
+        /// <summary>
+        /// Returns a unique file name.
+        /// </summary>
+        /// <param name="dir">Target directory path</param>
+        /// <param name="fileName">image.jpg</param>
+        /// <returns>image(1).jpg if image.jpg already exists</returns>
+        public static string GetUniqueFilename(string dir, string fileName)
+        {
+            string filePath = Path.Combine(dir, fileName);
+
+            if (!File.Exists(filePath))
+                return filePath;
+
+            string fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
+            string ext = Path.GetExtension(filePath);
+            int num = 1;
+
+            while (File.Exists(filePath))
+            {
+                filePath = Path.Combine(dir, string.Format("{0}({1}){2}", fileNameWithoutExt, (num++).ToString(), ext));
+            }
+            return filePath;
+        }
+
         public static string ProperFileSize(long size)
         {
             string[] suf = { "B", "kB", "MB", "GB", "TB", "PB" };
