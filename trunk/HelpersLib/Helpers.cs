@@ -454,7 +454,7 @@ namespace HelpersLib
         /// <param name="binary">Whether or not units should be binary or in decimal format</param>
         /// <param name="perUnit">Per second symbol e.g. /s</param>
         /// <returns>file size with units</returns>
-        public static string ProperFileSize(long size, bool binary = false, string perUnit = "")
+        public static string ProperFileSize(long size, string perUnit = "", bool binary = false)
         {
             string[] suf_decimal = { "B", "kB", "MB", "GB", "TB", "PB" };
             string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
