@@ -375,6 +375,11 @@ namespace UploadersLib
 
         protected bool TransferData(Stream dataStream, Stream requestStream)
         {
+            if (dataStream.CanSeek)
+            {
+                dataStream.Position = 0;
+            }
+
             ProgressManager progress = new ProgressManager(dataStream.Length);
             int length = (int)Math.Min(BufferSize, dataStream.Length);
             byte[] buffer = new byte[length];

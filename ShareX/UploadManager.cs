@@ -353,7 +353,7 @@ namespace ShareX
 
                 if (info.Progress.Speed > 0)
                 {
-                    lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, false, "/s");
+                    lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, "/s");
                 }
 
                 lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);
