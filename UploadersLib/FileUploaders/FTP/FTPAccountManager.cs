@@ -44,12 +44,12 @@ namespace UploadersLib
 
         public void Save(string filePath)
         {
-            SettingsHelper.Save(this, filePath, SerializationType.Xml);
+            SettingsHelper.Save(this, filePath, SerializationType.Json);
         }
 
         public static FTPAccountManager Read(string filePath)
         {
-            return SettingsHelper.Load<FTPAccountManager>(filePath, SerializationType.Xml);
+            return SettingsHelper.Load<FTPAccountManager>(filePath, SerializationType.Json);
         }
     }
 }
