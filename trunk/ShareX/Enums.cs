@@ -34,7 +34,7 @@ namespace ShareX
 
     public enum TaskJob
     {
-        DataUpload, FileUpload, ImageUpload, TextUpload, ShortenURL
+        DataUpload, FileUpload, ImageJob, TextUpload, ShortenURL
     }
 
     [Flags]

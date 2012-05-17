@@ -34,7 +34,7 @@ namespace HelpersLib
         private PrintHelper printHelper;
         private PrintSettings printSettings;
 
-        public PrintForm(Image img, ref PrintSettings settings)
+        public PrintForm(Image img, PrintSettings settings)
         {
             InitializeComponent();
             printHelper = new PrintHelper(img);
