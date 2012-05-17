@@ -45,17 +45,15 @@ namespace ShareX
         public delegate void TaskEventHandler(UploadInfo info);
 
         public event TaskEventHandler UploadStarted;
-
         public event TaskEventHandler UploadPreparing;
-
         public event TaskEventHandler UploadProgressChanged;
-
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
         public TaskStatus Status { get; private set; }
         public bool IsWorking { get { return Status == TaskStatus.Preparing || Status == TaskStatus.Uploading; } }
         public bool IsStopped { get; private set; }
+        public bool IsUploadJob { get { return Info.Job != TaskJob.ImageJob || Info.ImageJob.HasFlag(TaskImageJob.UploadImageToHost); } }
 
         private Stream data;
         private Image tempImage;
@@ -96,7 +94,7 @@ namespace ShareX
         // Image image -> MemoryStream data (in thread)
         public static Task CreateImageUploaderTask(Image image, EDataType destination = EDataType.Default)
         {
-            Task task = new Task(EDataType.Image, TaskJob.ImageUpload);
+            Task task = new Task(EDataType.Image, TaskJob.ImageJob);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
             task.Info.FileName = "Require image encoding...";
             task.tempImage = image;
@@ -154,7 +152,7 @@ namespace ShareX
         {
             DoThreadJob();
 
-            if (Info.Job != TaskJob.ImageUpload || Info.ImageJob.HasFlag(TaskImageJob.UploadImageToHost))
+            if (IsUploadJob)
             {
                 if (Program.UploadersConfig == null)
                 {
@@ -168,11 +166,6 @@ namespace ShareX
 
                 try
                 {
-                    if (data.CanSeek)
-                    {
-                        data.Position = 0;
-                    }
-
                     switch (Info.UploadDestination)
                     {
                         case EDataType.Image:
@@ -222,7 +215,7 @@ namespace ShareX
 
         private void DoThreadJob()
         {
-            if (Info.Job == TaskJob.ImageUpload && tempImage != null)
+            if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
                 if (Info.ImageJob.HasFlag(TaskImageJob.CopyImageToClipboard))
                 {
@@ -268,6 +261,11 @@ namespace ShareX
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
                 data = new MemoryStream(byteArray);
+            }
+
+            if (IsUploadJob && data != null && data.CanSeek)
+            {
+                data.Position = 0;
             }
         }
 
@@ -550,7 +548,7 @@ namespace ShareX
 
             switch (Info.Job)
             {
-                case TaskJob.ImageUpload:
+                case TaskJob.ImageJob:
                 case TaskJob.TextUpload:
                     Info.Status = "Preparing";
                     break;
