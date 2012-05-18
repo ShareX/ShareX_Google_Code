@@ -85,7 +85,7 @@ namespace ScreenCapture
             shadowBrush = new SolidBrush(Color.FromArgb(75, Color.Black));
             lightBrush = new SolidBrush(Color.FromArgb(10, Color.Black));
             nodeBackgroundBrush = new SolidBrush(Color.White);
-            textFont = new Font("Arial", 12, FontStyle.Bold);
+            textFont = new Font("Arial", 17, FontStyle.Bold);
 
             Shown += new EventHandler(Surface_Shown);
             KeyUp += new KeyEventHandler(Surface_KeyUp);
