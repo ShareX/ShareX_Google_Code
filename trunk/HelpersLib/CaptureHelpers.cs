@@ -455,19 +455,23 @@ namespace HelpersLib
             return bmp;
         }
 
-        public static void DrawTextWithOutline(Graphics g, string text, PointF position, Font font, Color textColor, Color shadowColor, int shadowOffset = 1)
+        public static void DrawTextWithOutline(Graphics g, string text, PointF position, Font font, Color textColor, Color borderColor, int shadowOffset = 1)
         {
-            using (Brush shadowBrush = new SolidBrush(shadowColor))
-            {
-                g.DrawString(text, font, shadowBrush, position.X - shadowOffset, position.Y - shadowOffset);
-                g.DrawString(text, font, shadowBrush, position.X + shadowOffset, position.Y - shadowOffset);
-                g.DrawString(text, font, shadowBrush, position.X + shadowOffset, position.Y + shadowOffset);
-                g.DrawString(text, font, shadowBrush, position.X - shadowOffset, position.Y + shadowOffset);
-            }
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
-            using (Brush textBrush = new SolidBrush(textColor))
+            using (GraphicsPath gp = new GraphicsPath())
             {
-                g.DrawString(text, font, textBrush, position.X, position.Y);
+                gp.AddString(text, font.FontFamily, (int)font.Style, font.Size, position, new StringFormat());
+
+                using (Pen borderPen = new Pen(borderColor, 2) { LineJoin = LineJoin.Round })
+                {
+                    g.DrawPath(borderPen, gp);
+                }
+
+                using (Brush textBrush = new SolidBrush(textColor))
+                {
+                    g.FillPath(textBrush, gp);
+                }
             }
         }
 
