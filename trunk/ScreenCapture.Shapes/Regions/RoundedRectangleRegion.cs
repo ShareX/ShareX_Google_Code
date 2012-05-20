@@ -43,16 +43,16 @@ namespace ScreenCapture
             Radius = 25;
             RadiusIncrement = 3;
 
-            MouseWheel += new MouseEventHandler(RoundedRectangleRegion_MouseWheel);
+            KeyDown += new KeyEventHandler(RoundedRectangleRegion_KeyDown);
         }
 
-        private void RoundedRectangleRegion_MouseWheel(object sender, MouseEventArgs e)
+        private void RoundedRectangleRegion_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Delta > 0)
+            if (e.KeyData == Keys.Add)
             {
                 Radius += RadiusIncrement;
             }
-            else if (e.Delta < 0)
+            else if (e.KeyData == Keys.Subtract)
             {
                 Radius = Math.Max(0, Radius - RadiusIncrement);
             }

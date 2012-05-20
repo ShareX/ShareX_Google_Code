@@ -39,12 +39,12 @@ namespace ScreenCapture
         {
             Angle = TriangleAngle.Top;
 
-            MouseWheel += new MouseEventHandler(TriangleRegion_MouseWheel);
+            KeyDown += new KeyEventHandler(TriangleRegion_KeyDown);
         }
 
-        private void TriangleRegion_MouseWheel(object sender, MouseEventArgs e)
+        private void TriangleRegion_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Delta > 0)
+            if (e.KeyData == Keys.Add)
             {
                 if (Angle == TriangleAngle.Left)
                 {
@@ -55,7 +55,7 @@ namespace ScreenCapture
                     Angle++;
                 }
             }
-            else if (e.Delta < 0)
+            else if (e.KeyData == Keys.Subtract)
             {
                 if (Angle == TriangleAngle.Top)
                 {

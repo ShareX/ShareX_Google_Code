@@ -45,25 +45,33 @@ namespace ScreenCapture
             : base(backgroundImage)
         {
             AreaManager = new AreaManager(this);
-            KeyDown += new KeyEventHandler(RectangleRegion_KeyDown);
+
+            MouseWheel += new MouseEventHandler(RectangleRegion_MouseWheel);
         }
 
-        private void RectangleRegion_KeyDown(object sender, KeyEventArgs e)
+        private void RectangleRegion_MouseWheel(object sender, MouseEventArgs e)
         {
-            switch (e.KeyData)
+            if (e.Delta > 0)
             {
-                case Keys.Add:
-                    if (magnifierPixelCount < 35) magnifierPixelCount += 2;
-                    break;
-                case Keys.Subtract:
-                    if (magnifierPixelCount > 3) magnifierPixelCount -= 2;
-                    break;
-                case Keys.Control | Keys.Add:
+                if (ModifierKeys.HasFlag(Keys.Control))
+                {
                     if (magnifierPixelSize < 30) magnifierPixelSize++;
-                    break;
-                case Keys.Control | Keys.Subtract:
+                }
+                else
+                {
+                    if (magnifierPixelCount < 35) magnifierPixelCount += 2;
+                }
+            }
+            else if (e.Delta < 0)
+            {
+                if (ModifierKeys.HasFlag(Keys.Control))
+                {
                     if (magnifierPixelSize > 3) magnifierPixelSize--;
-                    break;
+                }
+                else
+                {
+                    if (magnifierPixelCount > 3) magnifierPixelCount -= 2;
+                }
             }
         }
 
@@ -213,7 +221,7 @@ namespace ScreenCapture
 
             int width = horizontalPixelCount * pixelSize;
             int height = verticalPixelCount * pixelSize;
-            Bitmap bmp = new Bitmap(width, height);
+            Bitmap bmp = new Bitmap(width + 1, height + 1);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -227,10 +235,10 @@ namespace ScreenCapture
 
                 using (SolidBrush crosshairBrush = new SolidBrush(Color.FromArgb(100, Color.Red)))
                 {
-                    g.FillRectangle(crosshairBrush, new Rectangle(0, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Left
-                    g.FillRectangle(crosshairBrush, new Rectangle((width + pixelSize) / 2, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Right
-                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, 0, pixelSize, (height - pixelSize) / 2)); // Top
-                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, (height + pixelSize) / 2, pixelSize, (height - pixelSize) / 2)); // Bottom
+                    g.FillRectangle(crosshairBrush, new Rectangle(0, (height - pixelSize) / 2 + 1, (width - pixelSize) / 2, pixelSize - 1)); // Left
+                    g.FillRectangle(crosshairBrush, new Rectangle((width + pixelSize) / 2, (height - pixelSize) / 2 + 1, (width - pixelSize) / 2, pixelSize - 1)); // Right
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2 + 1, 0, pixelSize - 1, (height - pixelSize) / 2)); // Top
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2 + 1, (height + pixelSize) / 2, pixelSize - 1, (height - pixelSize) / 2)); // Bottom
                 }
 
                 using (Pen borderPen = new Pen(Color.FromArgb(75, Color.Black)))
@@ -246,7 +254,7 @@ namespace ScreenCapture
                     }
                 }
 
-                g.DrawRectangle(Pens.Black, 0, 0, width - 1, height - 1);
+                g.DrawRectangle(Pens.Black, 0, 0, width, height);
                 g.DrawRectangle(Pens.Black, (width - pixelSize) / 2, (height - pixelSize) / 2, pixelSize, pixelSize);
             }
 
