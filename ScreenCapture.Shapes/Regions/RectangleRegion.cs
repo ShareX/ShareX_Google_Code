@@ -38,6 +38,7 @@ namespace ScreenCapture
 
         private bool drawCrosshair = true;
         private bool drawMagnifier = true;
+        private bool showInfo = true;
         private int magnifierPixelCount = 15;
         private int magnifierPixelSize = 10;
 
@@ -46,7 +47,24 @@ namespace ScreenCapture
         {
             AreaManager = new AreaManager(this);
 
+            KeyDown += new KeyEventHandler(RectangleRegion_KeyDown);
             MouseWheel += new MouseEventHandler(RectangleRegion_MouseWheel);
+        }
+
+        private void RectangleRegion_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.H:
+                    showInfo = !showInfo;
+                    break;
+                case Keys.C:
+                    drawCrosshair = !drawCrosshair;
+                    break;
+                case Keys.M:
+                    drawMagnifier = !drawMagnifier;
+                    break;
+            }
         }
 
         private void RectangleRegion_MouseWheel(object sender, MouseEventArgs e)
@@ -128,9 +146,13 @@ namespace ScreenCapture
                 {
                     Rectangle totalArea = AreaManager.CombineAreas();
                     g.DrawCrossRectangle(borderPen, totalArea, 15);
-                    CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
-                        totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
-                    g.SmoothingMode = SmoothingMode.HighSpeed;
+
+                    if (showInfo)
+                    {
+                        CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
+                            totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
+                        g.SmoothingMode = SmoothingMode.HighSpeed;
+                    }
                 }
 
                 if (AreaManager.IsCurrentHoverAreaValid)
@@ -154,16 +176,19 @@ namespace ScreenCapture
                     DrawObjects(g);
                 }
 
-                foreach (Rectangle area in areas)
+                if (showInfo)
                 {
-                    if (area.IsValid())
+                    foreach (Rectangle area in areas)
                     {
-                        CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1}\nW:{2} H:{3}", area.X, area.Y, area.Width, area.Height),
-                            new PointF(area.X + 5, area.Y + 5), textFont, Color.White, Color.Black);
+                        if (area.IsValid())
+                        {
+                            CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1}\nW:{2} H:{3}", area.X, area.Y, area.Width, area.Height),
+                                new PointF(area.X + 5, area.Y + 5), textFont, Color.White, Color.Black);
+                        }
                     }
-                }
 
-                g.SmoothingMode = SmoothingMode.HighSpeed;
+                    g.SmoothingMode = SmoothingMode.HighSpeed;
+                }
             }
             else
             {
@@ -179,11 +204,14 @@ namespace ScreenCapture
         private void DrawCrosshair(Graphics g)
         {
             Point mousePos = InputManager.MousePosition0Based;
+            int offset = 2;
 
             using (Pen crosshairPen = new Pen(Color.FromArgb(100, Color.Black)))
             {
-                g.DrawLine(crosshairPen, new Point(mousePos.X, 0), new Point(mousePos.X, ScreenRectangle0Based.Height - 1));
-                g.DrawLine(crosshairPen, new Point(0, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y));
+                g.DrawLine(crosshairPen, new Point(0, mousePos.Y), new Point(mousePos.X - offset, mousePos.Y)); // Left
+                g.DrawLine(crosshairPen, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
+                g.DrawLine(crosshairPen, new Point(mousePos.X, 0), new Point(mousePos.X, mousePos.Y - offset)); // Top
+                g.DrawLine(crosshairPen, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
             }
         }
 
@@ -235,10 +263,10 @@ namespace ScreenCapture
 
                 using (SolidBrush crosshairBrush = new SolidBrush(Color.FromArgb(100, Color.Red)))
                 {
-                    g.FillRectangle(crosshairBrush, new Rectangle(0, (height - pixelSize) / 2 + 1, (width - pixelSize) / 2, pixelSize - 1)); // Left
-                    g.FillRectangle(crosshairBrush, new Rectangle((width + pixelSize) / 2, (height - pixelSize) / 2 + 1, (width - pixelSize) / 2, pixelSize - 1)); // Right
-                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2 + 1, 0, pixelSize - 1, (height - pixelSize) / 2)); // Top
-                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2 + 1, (height + pixelSize) / 2, pixelSize - 1, (height - pixelSize) / 2)); // Bottom
+                    g.FillRectangle(crosshairBrush, new Rectangle(0, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Left
+                    g.FillRectangle(crosshairBrush, new Rectangle((width + pixelSize) / 2, (height - pixelSize) / 2, (width - pixelSize) / 2, pixelSize)); // Right
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, 0, pixelSize, (height - pixelSize) / 2)); // Top
+                    g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, (height + pixelSize) / 2, pixelSize, (height - pixelSize) / 2)); // Bottom
                 }
 
                 using (Pen borderPen = new Pen(Color.FromArgb(75, Color.Black)))
