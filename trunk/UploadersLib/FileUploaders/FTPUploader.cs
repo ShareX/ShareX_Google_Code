@@ -59,6 +59,18 @@ namespace UploadersLib.FileUploaders
                     ftpClient.UploadData(stream, path);
                 }
             }
+            catch (Exception ex)
+            {
+                ftpClient.MakeMultiDirectory(Account.GetSubFolderPath());
+
+                using (ftpClient = new FTP(Account))
+                {
+                    ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                    ftpClient.UploadData(stream, path);
+                }
+
+                DebugHelper.WriteException(ex);
+            }
             finally
             {
                 IsUploading = false;
