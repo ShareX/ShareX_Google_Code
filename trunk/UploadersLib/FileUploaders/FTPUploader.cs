@@ -49,31 +49,19 @@ namespace UploadersLib.FileUploaders
             fileName = FTPHelpers.FixFilename(fileName);
             string path = Account.GetSubFolderPath(fileName);
 
-            try
+            using (ftpClient = new FTP(Account))
             {
-                IsUploading = true;
+                ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
 
-                using (ftpClient = new FTP(Account))
+                try
                 {
-                    ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                    IsUploading = true;
                     ftpClient.UploadData(stream, path);
                 }
-            }
-            catch (Exception ex)
-            {
-                ftpClient.MakeMultiDirectory(Account.GetSubFolderPath());
-
-                using (ftpClient = new FTP(Account))
+                finally
                 {
-                    ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
-                    ftpClient.UploadData(stream, path);
+                    IsUploading = false;
                 }
-
-                DebugHelper.WriteException(ex);
-            }
-            finally
-            {
-                IsUploading = false;
             }
 
             if (!stopUpload && Errors.Count == 0)

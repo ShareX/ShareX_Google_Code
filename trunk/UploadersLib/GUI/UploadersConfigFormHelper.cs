@@ -561,86 +561,63 @@ namespace UploadersLib
         {
             string msg = string.Empty;
             string sfp = account.GetSubFolderPath();
+
             switch (account.Protocol)
             {
                 case FTPProtocol.SFTP:
-                    using (SFTP sftp = new SFTP(account))
+                    try
                     {
-                        if (!sftp.IsValidAccount)
+                        using (SFTP sftp = new SFTP(account))
                         {
-                            msg = "An SFTP client couldn't be instantiated, not enough information.\r\nCould be a missing key file.";
-                        }
-                        else if (sftp.Connect())
-                        {
-                            List<string> createddirs = new List<string>();
-
-                            if (!sftp.DirectoryExists(sfp))
+                            if (!sftp.IsValidAccount)
                             {
-                                createddirs = sftp.CreateMultiDirectory(sfp);
+                                msg = "An SFTP client couldn't be instantiated, not enough information.\r\nCould be a missing key file.";
                             }
-
-                            if (sftp.IsConnected)
+                            else if (sftp.Connect())
                             {
-                                msg = (createddirs.Count == 0) ? "Connected!" : "Connected!\r\nCreated folders:\r\n";
-                                for (int x = 0; x <= createddirs.Count - 1; x++)
+                                List<string> createddirs = new List<string>();
+
+                                if (!sftp.DirectoryExists(sfp))
                                 {
-                                    msg += createddirs[x] + "\r\n";
+                                    createddirs = sftp.CreateMultiDirectory(sfp);
                                 }
-                                msg += "\r\n\r\nPing results:\r\n " + SendPing(account.Host, 3);
+
+                                if (sftp.IsConnected)
+                                {
+                                    msg = (createddirs.Count == 0) ? "Connected!" : "Connected!\r\nCreated folders:\r\n";
+                                    for (int x = 0; x <= createddirs.Count - 1; x++)
+                                    {
+                                        msg += createddirs[x] + "\r\n";
+                                    }
+                                    msg += "\r\n\r\nPing results:\r\n " + SendPing(account.Host, 3);
+                                }
                             }
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        msg = e.Message;
                     }
                     break;
                 default:
-                    using (FTP ftpClient = new FTP(account))
+                    try
                     {
-                        try
+                        using (FTP ftpClient = new FTP(account))
                         {
-                            //DateTime time = DateTime.Now;
-                            ftpClient.Test(sfp);
-                            msg = "Success!";
-                        }
-                        catch (Exception e)
-                        {
-                            if (e.Message.StartsWith("Could not change working directory to"))
+                            if (ftpClient.ChangeDirectory(sfp, true))
                             {
-                                try
-                                {
-                                    ftpClient.MakeMultiDirectory(sfp);
-                                    ftpClient.Test(sfp);
-                                    msg = "Success!\nAuto created folders: " + sfp;
-                                }
-                                catch (Exception e2)
-                                {
-                                    msg = e2.Message;
-                                }
-                            }
-                            else
-                            {
-                                msg = e.Message;
+                                msg = "Connected!\r\n\r\nPing results:\r\n" + SendPing(account.Host, 3);
                             }
                         }
                     }
-
-                    if (!string.IsNullOrEmpty(msg))
+                    catch (Exception e)
                     {
-                        string ping = SendPing(account.Host, 3);
-                        if (!string.IsNullOrEmpty(ping))
-                        {
-                            msg += "\n\nPing results:\n" + ping;
-                        }
-
-                        if (silent)
-                        {
-                            // Engine.MyLogger.WriteLine(string.Format("Tested {0} sub-folder path in {1}", sfp, account.ToString()));
-                        }
-                        else
-                        {
-                            //MessageBox.Show(msg, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        msg = e.Message;
                     }
+
                     break;
             }
+
             if (silent)
             {
                 DebugHelper.WriteLine(string.Format("Tested {0} sub-folder path in {1}", sfp, account.ToString()));

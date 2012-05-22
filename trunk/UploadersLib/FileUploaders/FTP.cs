@@ -138,7 +138,7 @@ namespace UploadersLib
                 {
                     if (e.InnerException.Message.Contains("No such file or directory"))
                     {
-                        Client.MakeDirectory(remotePath);
+                        MakeMultiDirectory(FTPHelpers.GetDirectoryName(remotePath));
                         Client.PutFile(stream, remotePath, FileAction.Create);
                     }
                     else
@@ -257,42 +257,51 @@ namespace UploadersLib
             return Client.GetDirList(remotePath);
         }
 
-        public bool Test(string remotePath)
+        public bool ChangeDirectory(string remotePath, bool autoCreateDirectory = false)
         {
             if (Connect())
             {
                 remotePath = FTPHelpers.AddSlash(remotePath, FTPHelpers.SlashType.Prefix);
+
                 try
                 {
                     Client.ChangeDirectory(remotePath);
+                    return true;
                 }
-                catch (Exception ftpResponse)
+                catch (Exception e)
                 {
-                    if (ftpResponse.InnerException.Message.Contains("No such file or directory"))
+                    if (autoCreateDirectory && e.Message.StartsWith("Could not change working directory to"))
                     {
-                        Client.MakeDirectory(remotePath);
+                        MakeMultiDirectory(remotePath);
                         Client.ChangeDirectory(remotePath);
+                        return true;
+                    }
+                    else
+                    {
+                        throw e;
                     }
                 }
-
-                return true;
             }
+
             return false;
         }
 
-        public void MakeDirectory(string remotePath)
+        public bool MakeDirectory(string remotePath)
         {
             if (Connect())
             {
                 try
                 {
                     Client.MakeDirectory(remotePath);
+                    return true;
                 }
                 catch (Exception e)
                 {
                     DebugHelper.WriteException(e);
                 }
             }
+
+            return false;
         }
 
         public void MakeMultiDirectory(string remotePath)
@@ -301,7 +310,10 @@ namespace UploadersLib
 
             foreach (string path in paths)
             {
-                MakeDirectory(path);
+                if (MakeDirectory(path))
+                {
+                    DebugHelper.WriteLine("FTP MakeDirectory: " + path);
+                }
             }
         }
 
