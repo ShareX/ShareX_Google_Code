@@ -119,6 +119,10 @@ namespace ScreenCapture
             {
                 proportionalResizing = true;
             }
+            else if (e.KeyCode == Keys.Q)
+            {
+                surface.Config.QuickCrop = !surface.Config.QuickCrop;
+            }
         }
 
         private void surface_KeyUp(object sender, KeyEventArgs e)
