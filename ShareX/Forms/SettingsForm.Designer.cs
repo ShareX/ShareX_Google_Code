@@ -217,7 +217,7 @@
             this.tcSettings.Location = new System.Drawing.Point(3, 3);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(530, 396);
+            this.tcSettings.Size = new System.Drawing.Size(530, 356);
             this.tcSettings.TabIndex = 0;
             // 
             // tpGeneral
@@ -517,7 +517,7 @@
             this.gbClipboardUpload.Controls.Add(this.lblNameFormatPattern);
             this.gbClipboardUpload.Location = new System.Drawing.Point(16, 80);
             this.gbClipboardUpload.Name = "gbClipboardUpload";
-            this.gbClipboardUpload.Size = new System.Drawing.Size(496, 136);
+            this.gbClipboardUpload.Size = new System.Drawing.Size(488, 136);
             this.gbClipboardUpload.TabIndex = 6;
             this.gbClipboardUpload.TabStop = false;
             this.gbClipboardUpload.Text = "Clipboard upload";
@@ -659,7 +659,7 @@
             this.tpImage.Location = new System.Drawing.Point(4, 22);
             this.tpImage.Name = "tpImage";
             this.tpImage.Padding = new System.Windows.Forms.Padding(5);
-            this.tpImage.Size = new System.Drawing.Size(522, 370);
+            this.tpImage.Size = new System.Drawing.Size(522, 330);
             this.tpImage.TabIndex = 4;
             this.tpImage.Text = "Image";
             this.tpImage.UseVisualStyleBackColor = true;
@@ -672,7 +672,7 @@
             this.tcImage.Location = new System.Drawing.Point(5, 5);
             this.tcImage.Name = "tcImage";
             this.tcImage.SelectedIndex = 0;
-            this.tcImage.Size = new System.Drawing.Size(512, 360);
+            this.tcImage.Size = new System.Drawing.Size(512, 320);
             this.tcImage.TabIndex = 0;
             // 
             // tpQuality
@@ -692,7 +692,7 @@
             this.tpQuality.Location = new System.Drawing.Point(4, 22);
             this.tpQuality.Name = "tpQuality";
             this.tpQuality.Padding = new System.Windows.Forms.Padding(3);
-            this.tpQuality.Size = new System.Drawing.Size(504, 334);
+            this.tpQuality.Size = new System.Drawing.Size(504, 294);
             this.tpQuality.TabIndex = 0;
             this.tpQuality.Text = "Quality";
             this.tpQuality.UseVisualStyleBackColor = true;
@@ -849,7 +849,7 @@
             this.tpResize.Location = new System.Drawing.Point(4, 22);
             this.tpResize.Name = "tpResize";
             this.tpResize.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResize.Size = new System.Drawing.Size(512, 298);
+            this.tpResize.Size = new System.Drawing.Size(504, 294);
             this.tpResize.TabIndex = 1;
             this.tpResize.Text = "Resize";
             this.tpResize.UseVisualStyleBackColor = true;
@@ -1208,7 +1208,7 @@
             this.tpCapture.Location = new System.Drawing.Point(4, 22);
             this.tpCapture.Name = "tpCapture";
             this.tpCapture.Padding = new System.Windows.Forms.Padding(5);
-            this.tpCapture.Size = new System.Drawing.Size(530, 334);
+            this.tpCapture.Size = new System.Drawing.Size(522, 330);
             this.tpCapture.TabIndex = 5;
             this.tpCapture.Text = "Capture";
             this.tpCapture.UseVisualStyleBackColor = true;
@@ -1221,7 +1221,7 @@
             this.tcCapture.Location = new System.Drawing.Point(5, 5);
             this.tcCapture.Name = "tcCapture";
             this.tcCapture.SelectedIndex = 0;
-            this.tcCapture.Size = new System.Drawing.Size(520, 324);
+            this.tcCapture.Size = new System.Drawing.Size(512, 320);
             this.tcCapture.TabIndex = 0;
             // 
             // tpCaptureGeneral
@@ -1233,7 +1233,7 @@
             this.tpCaptureGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureGeneral.Name = "tpCaptureGeneral";
             this.tpCaptureGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCaptureGeneral.Size = new System.Drawing.Size(512, 298);
+            this.tpCaptureGeneral.Size = new System.Drawing.Size(504, 294);
             this.tpCaptureGeneral.TabIndex = 0;
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
@@ -1343,7 +1343,7 @@
             this.tpCaptureShape.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureShape.Name = "tpCaptureShape";
             this.tpCaptureShape.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCaptureShape.Size = new System.Drawing.Size(512, 298);
+            this.tpCaptureShape.Size = new System.Drawing.Size(504, 294);
             this.tpCaptureShape.TabIndex = 1;
             this.tpCaptureShape.Text = "Shape capture";
             this.tpCaptureShape.UseVisualStyleBackColor = true;
@@ -1495,7 +1495,7 @@
             this.tpProxy.Location = new System.Drawing.Point(4, 22);
             this.tpProxy.Name = "tpProxy";
             this.tpProxy.Padding = new System.Windows.Forms.Padding(5);
-            this.tpProxy.Size = new System.Drawing.Size(530, 334);
+            this.tpProxy.Size = new System.Drawing.Size(522, 330);
             this.tpProxy.TabIndex = 6;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
@@ -1610,8 +1610,7 @@
             // 
             // btnAutofillProxy
             // 
-            this.btnAutofillProxy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutofillProxy.Location = new System.Drawing.Point(24, 156);
+            this.btnAutofillProxy.Location = new System.Drawing.Point(16, 144);
             this.btnAutofillProxy.Name = "btnAutofillProxy";
             this.btnAutofillProxy.Size = new System.Drawing.Size(75, 23);
             this.btnAutofillProxy.TabIndex = 10;
@@ -1625,7 +1624,7 @@
             this.tpDebug.Location = new System.Drawing.Point(4, 22);
             this.tpDebug.Name = "tpDebug";
             this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDebug.Size = new System.Drawing.Size(530, 334);
+            this.tpDebug.Size = new System.Drawing.Size(522, 330);
             this.tpDebug.TabIndex = 7;
             this.tpDebug.Text = "Debug";
             this.tpDebug.UseVisualStyleBackColor = true;
@@ -1637,7 +1636,7 @@
             this.txtDebugLog.Multiline = true;
             this.txtDebugLog.Name = "txtDebugLog";
             this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebugLog.Size = new System.Drawing.Size(524, 328);
+            this.txtDebugLog.Size = new System.Drawing.Size(516, 324);
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
@@ -1645,10 +1644,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 402);
+            this.ClientSize = new System.Drawing.Size(536, 362);
             this.Controls.Add(this.tcSettings);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(552, 440);
+            this.MinimumSize = new System.Drawing.Size(552, 400);
             this.Name = "SettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
