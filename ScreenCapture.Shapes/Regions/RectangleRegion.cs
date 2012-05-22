@@ -55,7 +55,7 @@ namespace ScreenCapture
         {
             switch (e.KeyData)
             {
-                case Keys.H:
+                case Keys.I:
                     showInfo = !showInfo;
                     break;
                 case Keys.C:
