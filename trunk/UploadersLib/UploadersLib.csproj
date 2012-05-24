@@ -323,7 +323,6 @@
     <Content Include="Favicons\Google.ico" />
     <Content Include="Favicons\ImageShack.ico" />
     <Content Include="Favicons\Imgur.ico" />
-    <Content Include="Favicons\MediaWiki.ico" />
     <None Include="Favicons\Minus.ico" />
     <Content Include="Favicons\Pastebin.ico" />
     <Content Include="Favicons\Photobucket.ico" />
