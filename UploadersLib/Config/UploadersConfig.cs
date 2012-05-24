@@ -40,7 +40,7 @@ namespace UploadersLib
     {
         public UploadersConfig()
         {
-            PasswordsEncryptionStrength2 = EncryptionStrength.High;
+            PasswordsEncryptionStrength = EncryptionStrength.High;
         }
 
         #region General
@@ -49,7 +49,7 @@ namespace UploadersLib
         public bool PasswordsSecureUsingEncryption { get; set; }
 
         [Browsable(false), Category(ComponentModelStrings.AppPasswords), DefaultValue(EncryptionStrength.High), Description("Strength can be Low = 128, Medium = 192, or High = 256")]
-        public EncryptionStrength PasswordsEncryptionStrength2 { get; set; }
+        public EncryptionStrength PasswordsEncryptionStrength { get; set; }
 
         #endregion General
 
@@ -269,7 +269,7 @@ namespace UploadersLib
         {
             DebugHelper.WriteLine((bEncrypt ? "Encrypting " : "Decrypting") + " passwords.");
 
-            CryptKeys crypt = new CryptKeys() { KeySize = this.PasswordsEncryptionStrength2 };
+            CryptKeys crypt = new CryptKeys() { KeySize = this.PasswordsEncryptionStrength };
 
             this.TinyPicPassword = bEncrypt ? crypt.Encrypt(this.TinyPicPassword) : crypt.Decrypt(this.TinyPicPassword);
 
@@ -320,6 +320,13 @@ namespace UploadersLib
         #endregion Helper Methods
 
         #region I/O Methods
+
+        public static UploadersConfig Load(string filePath)
+        {
+            UploadersConfig config = SettingsBase<UploadersConfig>.Load(filePath);
+            if (config.PasswordsSecureUsingEncryption) config.CryptPasswords(false);
+            return config;
+        }
 
         public override bool Save(string filePath)
         {
