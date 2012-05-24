@@ -36,9 +36,6 @@ namespace ScreenCapture
     {
         public AreaManager AreaManager { get; private set; }
 
-        private bool drawCrosshair = true;
-        private bool drawMagnifier = true;
-        private bool showInfo = true;
         private int magnifierPixelCount = 15;
         private int magnifierPixelSize = 10;
 
@@ -46,7 +43,6 @@ namespace ScreenCapture
             : base(backgroundImage)
         {
             AreaManager = new AreaManager(this);
-
             KeyDown += new KeyEventHandler(RectangleRegion_KeyDown);
             MouseWheel += new MouseEventHandler(RectangleRegion_MouseWheel);
         }
@@ -56,13 +52,13 @@ namespace ScreenCapture
             switch (e.KeyData)
             {
                 case Keys.I:
-                    showInfo = !showInfo;
+                    Config.ShowInfo = !Config.ShowInfo;
                     break;
                 case Keys.C:
-                    drawCrosshair = !drawCrosshair;
+                    Config.ShowCrosshair = !Config.ShowCrosshair;
                     break;
                 case Keys.M:
-                    drawMagnifier = !drawMagnifier;
+                    Config.ShowMagnifier = !Config.ShowMagnifier;
                     break;
             }
         }
@@ -119,7 +115,7 @@ namespace ScreenCapture
 
         protected override void Draw(Graphics g)
         {
-            if (drawCrosshair)
+            if (Config.ShowCrosshair)
             {
                 DrawCrosshair(g);
             }
@@ -147,7 +143,7 @@ namespace ScreenCapture
                     Rectangle totalArea = AreaManager.CombineAreas();
                     g.DrawCrossRectangle(borderPen, totalArea, 15);
 
-                    if (showInfo)
+                    if (Config.ShowInfo)
                     {
                         CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
                             totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
@@ -176,7 +172,7 @@ namespace ScreenCapture
                     DrawObjects(g);
                 }
 
-                if (showInfo)
+                if (Config.ShowInfo)
                 {
                     foreach (Rectangle area in areas)
                     {
@@ -195,7 +191,7 @@ namespace ScreenCapture
                 g.FillRectangle(shadowBrush, 0, 0, Width, Height);
             }
 
-            if (drawMagnifier)
+            if (Config.ShowMagnifier)
             {
                 DrawMagnifier(g);
             }
