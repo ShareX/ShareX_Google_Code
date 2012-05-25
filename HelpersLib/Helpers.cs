@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -472,6 +473,14 @@ namespace HelpersLib
             int hours = (int)ts.TotalHours;
             if (hours > 0) time = hours + ":" + time;
             return time;
+        }
+
+        public static void AsyncJob(Action thread, Action threadCompleted)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += (sender, e) => thread();
+            bw.RunWorkerCompleted += (sender, e) => threadCompleted();
+            bw.RunWorkerAsync();
         }
     }
 }

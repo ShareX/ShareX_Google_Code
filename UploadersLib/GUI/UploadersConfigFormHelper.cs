@@ -901,7 +901,7 @@ namespace UploadersLib
         {
             UploadResult ur = null;
 
-            AsyncHelper.AsyncJob(() =>
+            Helpers.AsyncJob(() =>
             {
                 try
                 {

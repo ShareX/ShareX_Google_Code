@@ -82,6 +82,7 @@
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />
+    <Compile Include="ThreadWorker.cs" />
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />
     <Compile Include="Translator\HashCheck.cs" />
@@ -113,7 +114,6 @@
     <Compile Include="Wizards\ClipboardContentViewer.Designer.cs">
       <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CloneManager.cs" />
     <Compile Include="Wizards\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>

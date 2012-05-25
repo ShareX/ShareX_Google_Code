@@ -219,36 +219,48 @@ namespace ShareX
             CaptureRegion(rectangleRegion, autoHideForm);
         }
 
-        private void PrepareWindowsMenu(ToolStripMenuItem tsmi, EventHandler handler)
+        private void PrepareWindowsMenuAsync(ToolStripMenuItem tsmi, EventHandler handler)
         {
             tsmi.DropDownItems.Clear();
 
-            WindowsList windowsList = new WindowsList();
-            List<WindowInfo> windows = windowsList.GetVisibleWindowsList();
+            List<WindowInfo> windows = null;
 
-            foreach (WindowInfo window in windows)
+            Helpers.AsyncJob(() =>
             {
-                string title = window.Text.Truncate(50);
-                ToolStripItem tsi = tsmi.DropDownItems.Add(title);
-                tsi.Click += handler;
-
-                try
+                WindowsList windowsList = new WindowsList();
+                windows = windowsList.GetVisibleWindowsList();
+            },
+            () =>
+            {
+                if (windows != null)
                 {
-                    using (Icon icon = window.Icon)
+                    foreach (WindowInfo window in windows)
                     {
-                        if (icon != null)
-                        {
-                            tsi.Image = icon.ToBitmap();
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    DebugHelper.WriteException(e);
-                }
+                        string title = window.Text.Truncate(50);
+                        ToolStripItem tsi = tsmi.DropDownItems.Add(title);
+                        tsi.Click += handler;
 
-                tsi.Tag = window;
-            }
+                        try
+                        {
+                            using (Icon icon = window.Icon)
+                            {
+                                if (icon != null)
+                                {
+                                    tsi.Image = icon.ToBitmap();
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            DebugHelper.WriteException(e);
+                        }
+
+                        tsi.Tag = window;
+                    }
+
+                    tsmi.Invalidate();
+                }
+            });
         }
 
         #region Menu events
@@ -260,7 +272,7 @@ namespace ShareX
 
         private void tsddbCapture_DropDownOpening(object sender, EventArgs e)
         {
-            PrepareWindowsMenu(tsmiWindow, tsmiWindowItems_Click);
+            PrepareWindowsMenuAsync(tsmiWindow, tsmiWindowItems_Click);
         }
 
         private void tsmiWindowItems_Click(object sender, EventArgs e)
@@ -321,7 +333,7 @@ namespace ShareX
 
         private void tsmiCapture_DropDownOpening(object sender, EventArgs e)
         {
-            PrepareWindowsMenu(tsmiTrayWindow, tsmiTrayWindowItems_Click);
+            PrepareWindowsMenuAsync(tsmiTrayWindow, tsmiTrayWindowItems_Click);
         }
 
         private void tsmiTrayWindowItems_Click(object sender, EventArgs e)
