@@ -360,6 +360,9 @@ namespace ShareX
                 case TextDestination.Slexy:
                     textUploader = new SlexyUploader();
                     break;
+                case TextDestination.Pastee:
+                    textUploader = new Pastee();
+                    break;
             }
 
             if (textUploader != null)
