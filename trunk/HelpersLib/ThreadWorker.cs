@@ -26,7 +26,7 @@
 using System;
 using System.Threading;
 
-namespace ShareX
+namespace HelpersLib
 {
     public class ThreadWorker
     {
@@ -46,12 +46,12 @@ namespace ShareX
             }
         }
 
-        public void Start()
+        public void Start(ApartmentState state = ApartmentState.MTA)
         {
             if (thread == null)
             {
                 thread = new Thread(WorkThread);
-                thread.SetApartmentState(ApartmentState.STA);
+                thread.SetApartmentState(state);
                 thread.Start();
             }
         }

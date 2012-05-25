@@ -26,6 +26,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using HelpersLib;
 using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
 
@@ -57,7 +58,7 @@ namespace UploadersLib.Forms
 
             DropboxDirectoryInfo directory = null;
 
-            AsyncHelper.AsyncJob(() =>
+            Helpers.AsyncJob(() =>
             {
                 directory = dropbox.GetFilesList(path);
             },

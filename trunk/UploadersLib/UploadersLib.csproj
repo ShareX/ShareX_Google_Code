@@ -163,7 +163,6 @@
     <Compile Include="GUI\GoogleTranslateGUIHelper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperClasses\AsyncHelper.cs" />
     <Compile Include="HelperClasses\CertFileNameEditor.cs" />
     <Compile Include="HelperClasses\ImageListManager.cs" />
     <Compile Include="FileUploader.cs" />

@@ -141,7 +141,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Task.cs" />
-    <Compile Include="HelperClasses\ThreadWorker.cs" />
     <Compile Include="UploadManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UploadInfo.cs" />
