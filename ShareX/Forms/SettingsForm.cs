@@ -61,8 +61,9 @@ namespace ShareX
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
             cbClipboardAutoCopy.Checked = Program.Settings.ClipboardAutoCopy;
             cbURLShortenAfterUpload.Checked = Program.Settings.URLShortenAfterUpload;
-            cbAutoPlaySound.Checked = Program.Settings.PlaySoundAfterUpload;
             cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
+            cbPlaySoundAfterUpload.Checked = Program.Settings.PlaySoundAfterUpload;
+            cbTrayBalloonTipAfterUpload.Checked = Program.Settings.TrayBalloonTipAfterUpload;
             cbHistorySave.Checked = Program.Settings.SaveHistory;
 
             // Paths
@@ -312,14 +313,19 @@ namespace ShareX
             Program.Settings.URLShortenAfterUpload = cbURLShortenAfterUpload.Checked;
         }
 
-        private void cbAutoPlaySound_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.PlaySoundAfterUpload = cbAutoPlaySound.Checked;
-        }
-
         private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.PlaySoundAfterCapture = cbPlaySoundAfterCapture.Checked;
+        }
+
+        private void cbPlaySoundAfterUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.PlaySoundAfterUpload = cbPlaySoundAfterUpload.Checked;
+        }
+
+        private void cbTrayBalloonTipAfterUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.TrayBalloonTipAfterUpload = cbTrayBalloonTipAfterUpload.Checked;
         }
 
         private void cbHistorySave_CheckedChanged(object sender, EventArgs e)
