@@ -380,6 +380,11 @@ namespace ShareX
                         lvi.SubItems[1].Text = "Error";
                         lvi.SubItems[8].Text = string.Empty;
                         lvi.ImageIndex = 1;
+
+                        if (Program.Settings.PlaySoundAfterUpload)
+                        {
+                            SystemSounds.Asterisk.Play();
+                        }
                     }
                     else
                     {
@@ -412,11 +417,11 @@ namespace ShareX
                                 Program.mainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
                             }
                         }
-                    }
 
-                    if (Program.Settings.PlaySoundAfterUpload)
-                    {
-                        SystemSounds.Asterisk.Play();
+                        if (Program.Settings.PlaySoundAfterUpload)
+                        {
+                            SystemSounds.Exclamation.Play();
+                        }
                     }
 
                     lvi.EnsureVisible();
