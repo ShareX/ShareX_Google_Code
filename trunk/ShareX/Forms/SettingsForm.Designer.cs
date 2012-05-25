@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.cbClipboardAutoCopy = new System.Windows.Forms.CheckBox();
-            this.cbAutoPlaySound = new System.Windows.Forms.CheckBox();
+            this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
             this.lblGeneralSeparator2 = new System.Windows.Forms.Label();
             this.cbHistorySave = new System.Windows.Forms.CheckBox();
             this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
@@ -192,16 +193,16 @@
             this.cbClipboardAutoCopy.UseVisualStyleBackColor = true;
             this.cbClipboardAutoCopy.CheckedChanged += new System.EventHandler(this.cbClipboardAutoCopy_CheckedChanged);
             // 
-            // cbAutoPlaySound
+            // cbPlaySoundAfterUpload
             // 
-            this.cbAutoPlaySound.AutoSize = true;
-            this.cbAutoPlaySound.Location = new System.Drawing.Point(16, 184);
-            this.cbAutoPlaySound.Name = "cbAutoPlaySound";
-            this.cbAutoPlaySound.Size = new System.Drawing.Size(199, 17);
-            this.cbAutoPlaySound.TabIndex = 7;
-            this.cbAutoPlaySound.Text = "Play sound after upload is completed";
-            this.cbAutoPlaySound.UseVisualStyleBackColor = true;
-            this.cbAutoPlaySound.CheckedChanged += new System.EventHandler(this.cbAutoPlaySound_CheckedChanged);
+            this.cbPlaySoundAfterUpload.AutoSize = true;
+            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 208);
+            this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
+            this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(199, 17);
+            this.cbPlaySoundAfterUpload.TabIndex = 7;
+            this.cbPlaySoundAfterUpload.Text = "Play sound after upload is completed";
+            this.cbPlaySoundAfterUpload.UseVisualStyleBackColor = true;
+            this.cbPlaySoundAfterUpload.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterUpload_CheckedChanged);
             // 
             // tcSettings
             // 
@@ -222,6 +223,7 @@
             // 
             // tpGeneral
             // 
+            this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
             this.tpGeneral.Controls.Add(this.lblGeneralSeparator2);
             this.tpGeneral.Controls.Add(this.cbHistorySave);
             this.tpGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
@@ -232,7 +234,7 @@
             this.tpGeneral.Controls.Add(this.cbURLShortenAfterUpload);
             this.tpGeneral.Controls.Add(this.cbShellContextMenu);
             this.tpGeneral.Controls.Add(this.cbClipboardAutoCopy);
-            this.tpGeneral.Controls.Add(this.cbAutoPlaySound);
+            this.tpGeneral.Controls.Add(this.cbPlaySoundAfterUpload);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -241,10 +243,21 @@
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbTrayBalloonTipAfterUpload
+            // 
+            this.cbTrayBalloonTipAfterUpload.AutoSize = true;
+            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 232);
+            this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
+            this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(245, 17);
+            this.cbTrayBalloonTipAfterUpload.TabIndex = 11;
+            this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after upload is completed";
+            this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
+            this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
+            // 
             // lblGeneralSeparator2
             // 
             this.lblGeneralSeparator2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblGeneralSeparator2.Location = new System.Drawing.Point(16, 240);
+            this.lblGeneralSeparator2.Location = new System.Drawing.Point(16, 264);
             this.lblGeneralSeparator2.Name = "lblGeneralSeparator2";
             this.lblGeneralSeparator2.Size = new System.Drawing.Size(475, 2);
             this.lblGeneralSeparator2.TabIndex = 9;
@@ -253,7 +266,7 @@
             // cbHistorySave
             // 
             this.cbHistorySave.AutoSize = true;
-            this.cbHistorySave.Location = new System.Drawing.Point(16, 256);
+            this.cbHistorySave.Location = new System.Drawing.Point(16, 280);
             this.cbHistorySave.Name = "cbHistorySave";
             this.cbHistorySave.Size = new System.Drawing.Size(118, 17);
             this.cbHistorySave.TabIndex = 10;
@@ -264,11 +277,11 @@
             // cbPlaySoundAfterCapture
             // 
             this.cbPlaySoundAfterCapture.AutoSize = true;
-            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 208);
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 184);
             this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
-            this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(185, 17);
+            this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
             this.cbPlaySoundAfterCapture.TabIndex = 8;
-            this.cbPlaySoundAfterCapture.Text = "Play sound when capture is made";
+            this.cbPlaySoundAfterCapture.Text = "Play sound after capture is made";
             this.cbPlaySoundAfterCapture.UseVisualStyleBackColor = true;
             this.cbPlaySoundAfterCapture.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterCapture_CheckedChanged);
             // 
@@ -1703,7 +1716,7 @@
         #endregion Windows Form Designer generated code
 
         private System.Windows.Forms.CheckBox cbClipboardAutoCopy;
-        private System.Windows.Forms.CheckBox cbAutoPlaySound;
+        private System.Windows.Forms.CheckBox cbPlaySoundAfterUpload;
         private System.Windows.Forms.TabControl tcSettings;
         private System.Windows.Forms.TabPage tpGeneral;
         private System.Windows.Forms.TabPage tpProxy;
@@ -1823,5 +1836,6 @@
         private System.Windows.Forms.ComboBox cboProxyType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbCaptureSaveImageWithDialog;
+        private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
     }
 }
