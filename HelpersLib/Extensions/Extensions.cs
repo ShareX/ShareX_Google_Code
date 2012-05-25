@@ -73,11 +73,6 @@ namespace HelpersLib
             return flags.All(x => keys.HasFlag(x));
         }
 
-        public static int Mid(this int number, int min, int max)
-        {
-            return Math.Min(Math.Max(number, min), max);
-        }
-
         public static int Between(this int num, int min, int max)
         {
             if (num <= min) return min;

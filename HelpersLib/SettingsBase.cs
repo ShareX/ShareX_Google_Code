@@ -88,9 +88,9 @@ namespace HelpersLib
             }
         }
 
-        public void BackupAsync()
+        public void BackupAsync(string filePath)
         {
-            ThreadPool.QueueUserWorkItem(state => Backup(FilePath));
+            ThreadPool.QueueUserWorkItem(state => Backup(filePath));
         }
     }
 }
