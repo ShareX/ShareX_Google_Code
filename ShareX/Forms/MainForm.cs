@@ -56,7 +56,10 @@ namespace ShareX
         {
             LoadSettings();
 
-            InitHotkeys();
+            if (Program.IsHotkeysAllowed)
+            {
+                InitHotkeys();
+            }
 
             if (Program.Settings.AutoCheckUpdate)
             {
