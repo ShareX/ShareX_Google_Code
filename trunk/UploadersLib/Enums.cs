@@ -63,6 +63,8 @@ namespace UploadersLib
         Paste2,
         [Description("slexy.org")]
         Slexy,
+        [Description("pastee.org")]
+        Pastee,
         [Description("File Uploader")]
         FileUploader
     }

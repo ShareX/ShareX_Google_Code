@@ -243,6 +243,7 @@
     <Compile Include="TextUploaders\Paste2Uploader.cs" />
     <Compile Include="TextUploaders\PastebinCaUploader.cs" />
     <Compile Include="TextUploaders\PastebinUploader.cs" />
+    <Compile Include="TextUploaders\Pastee.cs" />
     <Compile Include="TextUploaders\SlexyUploader.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="URLShortener.cs" />
