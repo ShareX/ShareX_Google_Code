@@ -46,7 +46,16 @@ namespace ShareX
         {
             InitializeComponent();
             LoadSettings();
-            hmHotkeys.PrepareHotkeys(Program.mainForm.HotkeyManager);
+
+            if (Program.IsHotkeysAllowed && Program.mainForm.HotkeyManager != null)
+            {
+                hmHotkeys.PrepareHotkeys(Program.mainForm.HotkeyManager);
+            }
+            else
+            {
+                tcSettings.TabPages.Remove(tpHotkeys);
+            }
+
             loaded = true;
         }
 

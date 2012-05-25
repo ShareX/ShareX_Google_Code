@@ -142,6 +142,7 @@ namespace ShareX
         public static bool IsMultiInstance { get; private set; }
         public static bool IsPortable { get; private set; }
         public static bool IsSilentRun { get; private set; }
+        public static bool IsHotkeysAllowed { get; private set; }
         public static Stopwatch StartTimer { get; private set; }
         public static Logger MyLogger { get; private set; }
 
@@ -187,6 +188,8 @@ namespace ShareX
 
                 IsPortable = Directory.Exists(PortablePersonalPath);
 
+                IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
@@ -198,6 +201,7 @@ namespace ShareX
                 MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);
                 MyLogger.WriteLine("IsSilentRun: " + IsSilentRun);
                 MyLogger.WriteLine("IsPortable: " + IsPortable);
+                MyLogger.WriteLine("IsHotkeysEnabled: " + IsHotkeysAllowed);
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
