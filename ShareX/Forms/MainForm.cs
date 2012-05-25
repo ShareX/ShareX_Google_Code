@@ -109,10 +109,10 @@ namespace ShareX
 
             UploadManager.ListViewControl = lvUploads;
 
-#if DEBUG
-            // Test button: Left click uploads test image. Right click opens capture test window.
-            tsbDebug.Visible = true;
-#endif
+            if (Program.IsDebug)
+            {
+                tsbDebug.Visible = true;
+            }
         }
 
         private void LoadSettings()
@@ -448,16 +448,19 @@ namespace ShareX
             UploadManager.UploadFile();
         }
 
-        private void tsbDebug_MouseUp(object sender, MouseEventArgs e)
+        private void tsmiTestImageUpload_Click(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                UploadManager.UploadImage(Resources.ShareXLogo);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
-            }
+            UploadManager.UploadImage(Resources.ShareXLogo);
+        }
+
+        private void tsmiTestTextUpload_Click(object sender, EventArgs e)
+        {
+            UploadManager.UploadText(Program.ApplicationName + " text upload test");
+        }
+
+        private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
+        {
+            new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
         }
 
         private void tsddbImageUploaders_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
