@@ -34,6 +34,8 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -481,6 +483,17 @@ namespace HelpersLib
             bw.DoWork += (sender, e) => thread();
             bw.RunWorkerCompleted += (sender, e) => threadCompleted();
             bw.RunWorkerAsync();
+        }
+
+        public static object Clone(object obj)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter(null, new StreamingContext(StreamingContextStates.Clone));
+                binaryFormatter.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                return binaryFormatter.Deserialize(ms);
+            }
         }
     }
 }

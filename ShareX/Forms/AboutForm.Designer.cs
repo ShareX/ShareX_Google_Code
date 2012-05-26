@@ -54,7 +54,7 @@
             this.lblProductName.BackColor = System.Drawing.Color.Transparent;
             this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblProductName.ForeColor = System.Drawing.Color.Black;
-            this.lblProductName.Location = new System.Drawing.Point(256, 8);
+            this.lblProductName.Location = new System.Drawing.Point(16, 8);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(134, 24);
             this.lblProductName.TabIndex = 0;
@@ -68,7 +68,7 @@
             this.lblProjectPage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblProjectPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblProjectPage.ForeColor = System.Drawing.Color.Black;
-            this.lblProjectPage.Location = new System.Drawing.Point(256, 64);
+            this.lblProjectPage.Location = new System.Drawing.Point(16, 64);
             this.lblProjectPage.Name = "lblProjectPage";
             this.lblProjectPage.Size = new System.Drawing.Size(67, 13);
             this.lblProjectPage.TabIndex = 2;
@@ -80,7 +80,7 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyright.Location = new System.Drawing.Point(256, 224);
+            this.lblCopyright.Location = new System.Drawing.Point(16, 224);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(51, 13);
             this.lblCopyright.TabIndex = 7;
@@ -92,7 +92,7 @@
             this.lblCredits.AutoSize = true;
             this.lblCredits.BackColor = System.Drawing.Color.Transparent;
             this.lblCredits.ForeColor = System.Drawing.Color.Black;
-            this.lblCredits.Location = new System.Drawing.Point(256, 144);
+            this.lblCredits.Location = new System.Drawing.Point(16, 144);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new System.Drawing.Size(195, 65);
             this.lblCredits.TabIndex = 6;
@@ -107,7 +107,7 @@
             this.lblBugs.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblBugs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblBugs.ForeColor = System.Drawing.Color.Black;
-            this.lblBugs.Location = new System.Drawing.Point(328, 64);
+            this.lblBugs.Location = new System.Drawing.Point(88, 64);
             this.lblBugs.Name = "lblBugs";
             this.lblBugs.Size = new System.Drawing.Size(100, 13);
             this.lblBugs.TabIndex = 3;
@@ -119,7 +119,7 @@
             this.lblBerk.AutoSize = true;
             this.lblBerk.BackColor = System.Drawing.Color.Transparent;
             this.lblBerk.ForeColor = System.Drawing.Color.Black;
-            this.lblBerk.Location = new System.Drawing.Point(312, 92);
+            this.lblBerk.Location = new System.Drawing.Point(67, 92);
             this.lblBerk.Name = "lblBerk";
             this.lblBerk.Size = new System.Drawing.Size(108, 13);
             this.lblBerk.TabIndex = 4;
@@ -129,7 +129,7 @@
             // 
             this.pbTR.BackColor = System.Drawing.Color.Transparent;
             this.pbTR.Image = global::ShareX.Properties.Resources.tr;
-            this.pbTR.Location = new System.Drawing.Point(264, 90);
+            this.pbTR.Location = new System.Drawing.Point(19, 90);
             this.pbTR.Name = "pbTR";
             this.pbTR.Size = new System.Drawing.Size(16, 16);
             this.pbTR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -141,7 +141,7 @@
             this.pbBerkURL.BackColor = System.Drawing.Color.Transparent;
             this.pbBerkURL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbBerkURL.Image = global::ShareX.Properties.Resources.application_browser;
-            this.pbBerkURL.Location = new System.Drawing.Point(288, 90);
+            this.pbBerkURL.Location = new System.Drawing.Point(43, 90);
             this.pbBerkURL.Name = "pbBerkURL";
             this.pbBerkURL.Size = new System.Drawing.Size(16, 16);
             this.pbBerkURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -154,7 +154,7 @@
             this.pbMikeURL.BackColor = System.Drawing.Color.Transparent;
             this.pbMikeURL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbMikeURL.Image = global::ShareX.Properties.Resources.application_browser;
-            this.pbMikeURL.Location = new System.Drawing.Point(288, 112);
+            this.pbMikeURL.Location = new System.Drawing.Point(43, 112);
             this.pbMikeURL.Name = "pbMikeURL";
             this.pbMikeURL.Size = new System.Drawing.Size(16, 16);
             this.pbMikeURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -166,7 +166,7 @@
             // 
             this.pbAU.BackColor = System.Drawing.Color.Transparent;
             this.pbAU.Image = global::ShareX.Properties.Resources.au;
-            this.pbAU.Location = new System.Drawing.Point(264, 112);
+            this.pbAU.Location = new System.Drawing.Point(19, 112);
             this.pbAU.Name = "pbAU";
             this.pbAU.Size = new System.Drawing.Size(16, 16);
             this.pbAU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -178,7 +178,7 @@
             this.lblMike.AutoSize = true;
             this.lblMike.BackColor = System.Drawing.Color.Transparent;
             this.lblMike.ForeColor = System.Drawing.Color.Black;
-            this.lblMike.Location = new System.Drawing.Point(312, 114);
+            this.lblMike.Location = new System.Drawing.Point(67, 114);
             this.lblMike.Name = "lblMike";
             this.lblMike.Size = new System.Drawing.Size(164, 13);
             this.lblMike.TabIndex = 5;
@@ -187,7 +187,7 @@
             // pbLogo
             // 
             this.pbLogo.Image = global::ShareX.Properties.Resources.ShareXLogo;
-            this.pbLogo.Location = new System.Drawing.Point(8, 8);
+            this.pbLogo.Location = new System.Drawing.Point(240, 8);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(240, 240);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -196,7 +196,7 @@
             // 
             // uclUpdate
             // 
-            this.uclUpdate.Location = new System.Drawing.Point(256, 35);
+            this.uclUpdate.Location = new System.Drawing.Point(16, 35);
             this.uclUpdate.Name = "uclUpdate";
             this.uclUpdate.Size = new System.Drawing.Size(224, 24);
             this.uclUpdate.TabIndex = 1;

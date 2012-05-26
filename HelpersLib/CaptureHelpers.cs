@@ -80,6 +80,12 @@ namespace HelpersLib
             return Screen.FromPoint(GetMousePosition()).Bounds;
         }
 
+        public static Rectangle GetScreenBounds0Based()
+        {
+            Rectangle rect = GetScreenBounds();
+            return new Rectangle(0, 0, rect.Width, rect.Height);
+        }
+
         /// <summary>For multi monitor</summary>
         public static Point FixScreenCoordinates(Point point)
         {

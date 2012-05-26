@@ -48,14 +48,15 @@ namespace ScreenCapture
 
         protected List<DrawableObject> DrawableObjects { get; set; }
 
-        private TextureBrush backgroundBrush;
-        private int frameCount;
-
+        protected TextureBrush backgroundBrush;
         protected GraphicsPath regionFillPath, regionDrawPath;
         protected Pen borderPen, borderDotPen, borderDotPen2;
         protected Brush shadowBrush, lightBrush, nodeBackgroundBrush;
         protected Font textFont;
         protected Stopwatch timer;
+        protected int frameCount;
+
+        public static GraphicsPath LastRegionFillPath, LastRegionDrawPath;
 
         public Surface(Image backgroundImage = null)
         {
@@ -166,58 +167,7 @@ namespace ScreenCapture
 
         public virtual Image GetRegionImage()
         {
-            if (regionFillPath != null)
-            {
-                Image img;
-
-                Rectangle regionArea = Rectangle.Round(regionFillPath.GetBounds());
-                Rectangle newRegionArea = Rectangle.Intersect(regionArea, ScreenRectangle0Based);
-
-                using (GraphicsPath gp = (GraphicsPath)regionFillPath.Clone())
-                {
-                    MoveGraphicsPath(gp, -Math.Max(0, regionArea.X), -Math.Max(0, regionArea.Y));
-                    img = CaptureHelpers.CropImage(SurfaceImage, newRegionArea, gp);
-
-                    if (Config.DrawBorder)
-                    {
-                        GraphicsPath gpOutline;
-
-                        if (regionDrawPath != null)
-                        {
-                            gpOutline = regionDrawPath;
-                        }
-                        else
-                        {
-                            gpOutline = regionFillPath;
-                        }
-
-                        using (GraphicsPath gp2 = (GraphicsPath)gpOutline.Clone())
-                        {
-                            MoveGraphicsPath(gp2, -Math.Max(0, regionArea.X), -Math.Max(0, regionArea.Y));
-                            img = CaptureHelpers.DrawOutline(img, gp2);
-                        }
-                    }
-                }
-
-                if (Config.DrawChecker)
-                {
-                    img = CaptureHelpers.DrawCheckers(img);
-                }
-
-                return img;
-            }
-
-            return null;
-        }
-
-        private void MoveGraphicsPath(GraphicsPath gp, int x, int y)
-        {
-            using (Matrix matrix = new Matrix())
-            {
-                gp.CloseFigure();
-                matrix.Translate(x, y);
-                gp.Transform(matrix);
-            }
+            return ShapeCaptureHelpers.GetRegionImage(SurfaceImage, regionFillPath, regionDrawPath, Config);
         }
 
         public void Close(bool isOK)
@@ -390,8 +340,6 @@ namespace ScreenCapture
             }
 
             if (backgroundBrush != null) backgroundBrush.Dispose();
-            if (regionFillPath != null) regionFillPath.Dispose();
-            if (regionDrawPath != null) regionDrawPath.Dispose();
             if (borderPen != null) borderPen.Dispose();
             if (borderDotPen != null) borderDotPen.Dispose();
             if (borderDotPen2 != null) borderDotPen2.Dispose();
@@ -399,6 +347,19 @@ namespace ScreenCapture
             if (lightBrush != null) lightBrush.Dispose();
             if (nodeBackgroundBrush != null) nodeBackgroundBrush.Dispose();
             if (textFont != null) textFont.Dispose();
+
+            if (regionFillPath != null)
+            {
+                if (LastRegionFillPath != null) LastRegionFillPath.Dispose();
+                LastRegionFillPath = regionFillPath;
+                if (LastRegionDrawPath != null) LastRegionDrawPath.Dispose();
+                LastRegionDrawPath = regionDrawPath;
+            }
+            else
+            {
+                if (regionFillPath != null) regionFillPath.Dispose();
+                if (regionDrawPath != null) regionDrawPath.Dispose();
+            }
 
             base.Dispose(disposing);
         }

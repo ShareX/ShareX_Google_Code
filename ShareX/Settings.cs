@@ -73,19 +73,20 @@ namespace ShareX
 
         #region Hotkeys
 
-        public HotkeySetting HotkeyClipboardUpload = new HotkeySetting(Keys.Control | Keys.PageUp);
-        public HotkeySetting HotkeyFileUpload = new HotkeySetting(Keys.Shift | Keys.PageUp);
-        public HotkeySetting HotkeyPrintScreen = new HotkeySetting(Keys.PrintScreen);
-        public HotkeySetting HotkeyActiveWindow = new HotkeySetting(Keys.Alt | Keys.PrintScreen);
-        public HotkeySetting HotkeyActiveMonitor = new HotkeySetting(Keys.Control | Keys.Alt | Keys.PrintScreen);
-        public HotkeySetting HotkeyWindowRectangle = new HotkeySetting(Keys.Shift | Keys.PrintScreen);
-        public HotkeySetting HotkeyRectangleRegion = new HotkeySetting(Keys.Control | Keys.PrintScreen);
-        public HotkeySetting HotkeyRoundedRectangleRegion = new HotkeySetting();
-        public HotkeySetting HotkeyEllipseRegion = new HotkeySetting();
-        public HotkeySetting HotkeyTriangleRegion = new HotkeySetting();
-        public HotkeySetting HotkeyDiamondRegion = new HotkeySetting();
-        public HotkeySetting HotkeyPolygonRegion = new HotkeySetting();
-        public HotkeySetting HotkeyFreeHandRegion = new HotkeySetting();
+        public HotkeySetting HotkeyClipboardUpload = Keys.Control | Keys.PageUp;
+        public HotkeySetting HotkeyFileUpload = Keys.Shift | Keys.PageUp;
+        public HotkeySetting HotkeyPrintScreen = Keys.PrintScreen;
+        public HotkeySetting HotkeyActiveWindow = Keys.Alt | Keys.PrintScreen;
+        public HotkeySetting HotkeyActiveMonitor = Keys.Control | Keys.Alt | Keys.PrintScreen;
+        public HotkeySetting HotkeyWindowRectangle = Keys.Shift | Keys.PrintScreen;
+        public HotkeySetting HotkeyRectangleRegion = Keys.Control | Keys.PrintScreen;
+        public HotkeySetting HotkeyRoundedRectangleRegion = Keys.None;
+        public HotkeySetting HotkeyEllipseRegion = Keys.None;
+        public HotkeySetting HotkeyTriangleRegion = Keys.None;
+        public HotkeySetting HotkeyDiamondRegion = Keys.None;
+        public HotkeySetting HotkeyPolygonRegion = Keys.None;
+        public HotkeySetting HotkeyFreeHandRegion = Keys.None;
+        public HotkeySetting HotkeyLastRegion = Keys.None;
 
         #endregion Hotkeys
 

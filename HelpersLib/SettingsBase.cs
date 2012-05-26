@@ -97,7 +97,7 @@ namespace HelpersLib
         {
             try
             {
-                return (T)CloneManager.Clone(this);
+                return (T)Helpers.Clone(this);
             }
             catch (Exception ex)
             {
