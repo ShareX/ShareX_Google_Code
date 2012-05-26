@@ -125,6 +125,7 @@ namespace ShareX
             this.tsmiTrayDiamond = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayFreeHand = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,7 +134,6 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -252,7 +252,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(841, 33);
+            this.tsMain.Size = new System.Drawing.Size(899, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -414,6 +414,7 @@ namespace ShareX
             this.tsmiLastRegion.Name = "tsmiLastRegion";
             this.tsmiLastRegion.Size = new System.Drawing.Size(186, 22);
             this.tsmiLastRegion.Text = "Last Region";
+            this.tsmiLastRegion.Click += new System.EventHandler(this.tsmiLastRegion_Click);
             // 
             // tsddbDestinations
             // 
@@ -652,7 +653,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(176, 236);
+            this.cmsTray.Size = new System.Drawing.Size(176, 214);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -769,6 +770,14 @@ namespace ShareX
             this.tsmiTrayFreeHand.Text = "Free Hand";
             this.tsmiTrayFreeHand.Click += new System.EventHandler(this.tsmiTrayFreeHand_Click);
             // 
+            // tsmiTrayLastRegion
+            // 
+            this.tsmiTrayLastRegion.Image = global::ShareX.Properties.Resources.Rectangle;
+            this.tsmiTrayLastRegion.Name = "tsmiTrayLastRegion";
+            this.tsmiTrayLastRegion.Size = new System.Drawing.Size(186, 22);
+            this.tsmiTrayLastRegion.Text = "Last Region";
+            this.tsmiTrayLastRegion.Click += new System.EventHandler(this.tsmiTrayLastRegion_Click);
+            // 
             // tsmiConfiguration
             // 
             this.tsmiConfiguration.Image = global::ShareX.Properties.Resources.gear;
@@ -826,14 +835,6 @@ namespace ShareX
             this.tsmiTrayExit.Size = new System.Drawing.Size(175, 22);
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
-            // 
-            // tsmiTrayLastRegion
-            // 
-            this.tsmiTrayLastRegion.Image = global::ShareX.Properties.Resources.Rectangle;
-            this.tsmiTrayLastRegion.Name = "tsmiTrayLastRegion";
-            this.tsmiTrayLastRegion.Size = new System.Drawing.Size(186, 22);
-            this.tsmiTrayLastRegion.Text = "Last Region";
-            this.tsmiTrayLastRegion.Click += new System.EventHandler(this.tsmiTrayLastRegion_Click);
             // 
             // MainForm
             // 

@@ -225,6 +225,10 @@ namespace ShareX
                     }
                 }, autoHideForm);
             }
+            else
+            {
+                CaptureRegion(new RectangleRegion(), autoHideForm);
+            }
         }
 
         private void WindowRectangleCapture(bool autoHideForm = true)
