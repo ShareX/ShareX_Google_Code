@@ -321,13 +321,6 @@ namespace UploadersLib
 
         #region I/O Methods
 
-        public static UploadersConfig Load(string filePath)
-        {
-            UploadersConfig config = SettingsBase<UploadersConfig>.Load(filePath);
-            if (config.PasswordsSecureUsingEncryption) config.CryptPasswords(false);
-            return config;
-        }
-
         public override bool Save(string filePath)
         {
             bool result;
