@@ -31,36 +31,6 @@ using System.Windows.Forms;
 
 namespace HelpersLib.Hotkey
 {
-    public enum EHotkey
-    {
-        [Description("Clipboard Upload")]
-        ClipboardUpload,
-        [Description("File Upload")]
-        FileUpload,
-        [Description("Fullscreen")]
-        PrintScreen,
-        [Description("Active Window")]
-        ActiveWindow,
-        [Description("Active Monitor")]
-        ActiveMonitor,
-        [Description("Window && Rectangle")]
-        WindowRectangle,
-        [Description("Rectangle Region")]
-        RectangleRegion,
-        [Description("Rounded Rectangle Region")]
-        RoundedRectangleRegion,
-        [Description("Ellipse Region")]
-        EllipseRegion,
-        [Description("Triangle Region")]
-        TriangleRegion,
-        [Description("Diamond Region")]
-        DiamondRegion,
-        [Description("Polygon Region")]
-        PolygonRegion,
-        [Description("Freehand Region")]
-        FreeHandRegion
-    }
-
     public class HotkeyManager
     {
         public List<HotkeySetting> Settings = new List<HotkeySetting>();

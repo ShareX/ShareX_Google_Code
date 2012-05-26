@@ -63,6 +63,7 @@ namespace ShareX
                 () => CaptureRegion(new PolygonRegion(), false), tsmiPolygon);
             HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion,
                 () => CaptureRegion(new FreeHandRegion(), false), tsmiFreeHand);
+            HotkeyManager.AddHotkey(EHotkey.LastRegion, Program.Settings.HotkeyLastRegion, () => CaptureLastRegion(false), tsmiLastRegion);
 
             string failedHotkeys;
 
@@ -212,6 +213,20 @@ namespace ShareX
             }, autoHideForm);
         }
 
+        private void CaptureLastRegion(bool autoHideForm = true)
+        {
+            if (Surface.LastRegionFillPath != null)
+            {
+                Capture(() =>
+                {
+                    using (Image screenshot = Screenshot.CaptureFullscreen())
+                    {
+                        return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, Program.Settings.SurfaceOptions);
+                    }
+                }, autoHideForm);
+            }
+        }
+
         private void WindowRectangleCapture(bool autoHideForm = true)
         {
             RectangleRegion rectangleRegion = new RectangleRegion();
@@ -322,6 +337,11 @@ namespace ShareX
             CaptureRegion(new FreeHandRegion());
         }
 
+        private void tsmiLastRegion_Click(object sender, EventArgs e)
+        {
+            CaptureLastRegion();
+        }
+
         #endregion Menu events
 
         #region Tray events
@@ -381,6 +401,11 @@ namespace ShareX
         private void tsmiTrayFreeHand_Click(object sender, EventArgs e)
         {
             CaptureRegion(new FreeHandRegion(), false);
+        }
+
+        private void tsmiTrayLastRegion_Click(object sender, EventArgs e)
+        {
+            CaptureLastRegion(false);
         }
 
         #endregion Tray events

@@ -67,7 +67,6 @@
     <Compile Include="CLI\CLIManager.cs" />
     <Compile Include="CLI\CLIManagerRegex.cs" />
     <Compile Include="CLI\CLIParser.cs" />
-    <Compile Include="CloneManager.cs" />
     <Compile Include="ComponentModelStrings.cs" />
     <Compile Include="Cryptography\AESEncryption.cs" />
     <Compile Include="Cryptography\CryptInfo.cs" />

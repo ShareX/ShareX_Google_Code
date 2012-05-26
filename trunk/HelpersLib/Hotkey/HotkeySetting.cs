@@ -78,6 +78,11 @@ namespace HelpersLib.Hotkey
             }
         }
 
+        public static implicit operator HotkeySetting(Keys hotkey)
+        {
+            return new HotkeySetting(hotkey);
+        }
+
         public override string ToString()
         {
             return new KeyInfo(Hotkey).ToString();

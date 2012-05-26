@@ -83,6 +83,7 @@ namespace ShareX
             this.tsmiDiamond = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFreeHand = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddbDestinations = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiImageUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTextUploaders = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,6 +133,7 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -318,7 +320,8 @@ namespace ShareX
             this.tsmiTriangle,
             this.tsmiDiamond,
             this.tsmiPolygon,
-            this.tsmiFreeHand});
+            this.tsmiFreeHand,
+            this.tsmiLastRegion});
             this.tsddbCapture.Image = global::ShareX.Properties.Resources.camera;
             this.tsddbCapture.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddbCapture.Name = "tsddbCapture";
@@ -404,6 +407,13 @@ namespace ShareX
             this.tsmiFreeHand.Size = new System.Drawing.Size(186, 22);
             this.tsmiFreeHand.Text = "Free Hand";
             this.tsmiFreeHand.Click += new System.EventHandler(this.tsmiFreeHand_Click);
+            // 
+            // tsmiLastRegion
+            // 
+            this.tsmiLastRegion.Image = global::ShareX.Properties.Resources.Rectangle;
+            this.tsmiLastRegion.Name = "tsmiLastRegion";
+            this.tsmiLastRegion.Size = new System.Drawing.Size(186, 22);
+            this.tsmiLastRegion.Text = "Last Region";
             // 
             // tsddbDestinations
             // 
@@ -642,7 +652,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(176, 214);
+            this.cmsTray.Size = new System.Drawing.Size(176, 236);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -672,7 +682,8 @@ namespace ShareX
             this.tsmiTrayTriangle,
             this.tsmiTrayDiamond,
             this.tsmiTrayPolygon,
-            this.tsmiTrayFreeHand});
+            this.tsmiTrayFreeHand,
+            this.tsmiTrayLastRegion});
             this.tsmiCapture.Image = global::ShareX.Properties.Resources.camera;
             this.tsmiCapture.Name = "tsmiCapture";
             this.tsmiCapture.Size = new System.Drawing.Size(175, 22);
@@ -816,6 +827,14 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
+            // tsmiTrayLastRegion
+            // 
+            this.tsmiTrayLastRegion.Image = global::ShareX.Properties.Resources.Rectangle;
+            this.tsmiTrayLastRegion.Name = "tsmiTrayLastRegion";
+            this.tsmiTrayLastRegion.Size = new System.Drawing.Size(186, 22);
+            this.tsmiTrayLastRegion.Text = "Last Region";
+            this.tsmiTrayLastRegion.Click += new System.EventHandler(this.tsmiTrayLastRegion_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -926,5 +945,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTestImageUpload;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestTextUpload;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestShapeCapture;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLastRegion;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayLastRegion;
     }
 }
