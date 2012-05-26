@@ -92,5 +92,18 @@ namespace HelpersLib
         {
             ThreadPool.QueueUserWorkItem(state => Backup(filePath));
         }
+
+        public T Clone()
+        {
+            try
+            {
+                return (T)CloneManager.Clone(this);
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex, "Error cloning.");
+                return new T();
+            }
+        }
     }
 }
