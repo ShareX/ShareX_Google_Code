@@ -675,6 +675,11 @@ namespace ShareX
             Program.Settings.SurfaceOptions.ForceWindowCapture = cbShapeForceWindowCapture.Checked;
         }
 
+        private void btnOpenCapturingShapesWiki_Click(object sender, EventArgs e)
+        {
+            Helpers.LoadBrowserAsync(Links.URL_WIKI_CapturingShapes);
+        }
+
         #endregion Capture / Shape capture
 
         #endregion Capture
