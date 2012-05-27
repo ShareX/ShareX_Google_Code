@@ -34,6 +34,7 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.cmsDropbox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiDownloadFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyPublicLink = new System.Windows.Forms.ToolStripMenuItem();
             this.lvDropboxFiles = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -82,17 +83,26 @@
             // cmsDropbox
             // 
             this.cmsDropbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCopyPublicLink,
             this.tsmiDownloadFile});
             this.cmsDropbox.Name = "cmsDropbox";
             this.cmsDropbox.ShowImageMargin = false;
-            this.cmsDropbox.Size = new System.Drawing.Size(123, 26);
+            this.cmsDropbox.Size = new System.Drawing.Size(136, 48);
+            this.cmsDropbox.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDropbox_Opening);
             // 
             // tsmiDownloadFile
             // 
             this.tsmiDownloadFile.Name = "tsmiDownloadFile";
-            this.tsmiDownloadFile.Size = new System.Drawing.Size(122, 22);
-            this.tsmiDownloadFile.Text = "Download file";
+            this.tsmiDownloadFile.Size = new System.Drawing.Size(135, 22);
+            this.tsmiDownloadFile.Text = "Download...";
             this.tsmiDownloadFile.Click += new System.EventHandler(this.tsmiDownloadFile_Click);
+            // 
+            // tsmiCopyPublicLink
+            // 
+            this.tsmiCopyPublicLink.Name = "tsmiCopyPublicLink";
+            this.tsmiCopyPublicLink.Size = new System.Drawing.Size(135, 22);
+            this.tsmiCopyPublicLink.Text = "Copy public link";
+            this.tsmiCopyPublicLink.Click += new System.EventHandler(this.tsmiCopyPublicLink_Click);
             // 
             // lvDropboxFiles
             // 
@@ -111,6 +121,7 @@
             this.lvDropboxFiles.TabIndex = 0;
             this.lvDropboxFiles.UseCompatibleStateImageBehavior = false;
             this.lvDropboxFiles.View = System.Windows.Forms.View.Details;
+            this.lvDropboxFiles.SelectedIndexChanged += new System.EventHandler(this.lvDropboxFiles_SelectedIndexChanged);
             this.lvDropboxFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvDropboxFiles_MouseDoubleClick);
             // 
             // chFilename
@@ -135,7 +146,6 @@
             this.ClientSize = new System.Drawing.Size(559, 491);
             this.Controls.Add(this.tlpMain);
             this.Name = "DropboxFilesForm";
-            this.ShowIcon = false;
             this.Text = "Dropbox";
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
@@ -157,5 +167,6 @@
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.ContextMenuStrip cmsDropbox;
         private System.Windows.Forms.ToolStripMenuItem tsmiDownloadFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopyPublicLink;
     }
 }

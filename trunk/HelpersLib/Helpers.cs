@@ -86,7 +86,7 @@ namespace HelpersLib
                         Clipboard.SetText(text);
                     }
                 }
-                catch (ExternalException)
+                catch
                 {
                     return false;
                 }
