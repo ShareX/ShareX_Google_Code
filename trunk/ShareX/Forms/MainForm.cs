@@ -528,6 +528,11 @@ namespace ShareX
             UploadManager.UploadImage(Resources.ShareXLogo, TaskImageJob.UploadImageToHost, EDataType.File);
         }
 
+        private void tsmiTestURLShortener_Click(object sender, EventArgs e)
+        {
+            UploadManager.ShortenURL(Links.URL_WEBSITE);
+        }
+
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
             new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
