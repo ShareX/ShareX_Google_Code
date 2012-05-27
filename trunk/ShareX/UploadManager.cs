@@ -193,14 +193,18 @@ namespace ShareX
 
         public static void UploadImage(Image img)
         {
-            DoImageWork(img, TaskImageJob.UploadImageToHost);
+            UploadImage(img, TaskImageJob.UploadImageToHost);
         }
 
-        public static void DoImageWork(Image img, TaskImageJob imageJob)
+        public static void UploadImage(Image img, TaskImageJob imageJob)
         {
-            if (img != null)
+            UploadImage(img, imageJob, ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image);
+        }
+
+        public static void UploadImage(Image img, TaskImageJob imageJob, EDataType destination)
+        {
+            if (img != null && imageJob != TaskImageJob.None)
             {
-                EDataType destination = ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image;
                 Task task = Task.CreateImageUploaderTask(img, destination);
                 task.Info.ImageJob = imageJob;
                 StartUpload(task);

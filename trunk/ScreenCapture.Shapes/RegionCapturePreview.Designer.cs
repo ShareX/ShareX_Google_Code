@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegionCapturePreview));
             this.tsRegionTools = new System.Windows.Forms.ToolStrip();
             this.tsbFullscreen = new System.Windows.Forms.ToolStripButton();
+            this.tsbWindowRectangle = new System.Windows.Forms.ToolStripButton();
             this.tsbRectangle = new System.Windows.Forms.ToolStripButton();
             this.tsbRoundedRectangle = new System.Windows.Forms.ToolStripButton();
             this.tsbEllipse = new System.Windows.Forms.ToolStripButton();
@@ -38,27 +39,20 @@
             this.tsbDiamond = new System.Windows.Forms.ToolStripButton();
             this.tsbPolygon = new System.Windows.Forms.ToolStripButton();
             this.tsbFreeHand = new System.Windows.Forms.ToolStripButton();
+            this.tsbLastRegion = new System.Windows.Forms.ToolStripButton();
             this.pbResult = new System.Windows.Forms.PictureBox();
-            this.cbDrawChecker = new System.Windows.Forms.CheckBox();
-            this.cbDrawBorder = new System.Windows.Forms.CheckBox();
             this.pImage = new System.Windows.Forms.Panel();
-            this.cbIsFixedSize = new System.Windows.Forms.CheckBox();
-            this.nudFixedWidth = new System.Windows.Forms.NumericUpDown();
-            this.nudFixedHeight = new System.Windows.Forms.NumericUpDown();
-            this.cbQuickCrop = new System.Windows.Forms.CheckBox();
+            this.pgSurfaceConfig = new System.Windows.Forms.PropertyGrid();
             this.btnClipboardCopy = new System.Windows.Forms.Button();
-            this.tsbWindowRectangle = new System.Windows.Forms.ToolStripButton();
             this.tsRegionTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbResult)).BeginInit();
             this.pImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // tsRegionTools
             // 
             this.tsRegionTools.AutoSize = false;
-            this.tsRegionTools.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tsRegionTools.Dock = System.Windows.Forms.DockStyle.None;
             this.tsRegionTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbFullscreen,
             this.tsbWindowRectangle,
@@ -68,13 +62,14 @@
             this.tsbTriangle,
             this.tsbDiamond,
             this.tsbPolygon,
-            this.tsbFreeHand});
+            this.tsbFreeHand,
+            this.tsbLastRegion});
             this.tsRegionTools.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
-            this.tsRegionTools.Location = new System.Drawing.Point(0, 0);
+            this.tsRegionTools.Location = new System.Drawing.Point(8, 8);
             this.tsRegionTools.Name = "tsRegionTools";
             this.tsRegionTools.Padding = new System.Windows.Forms.Padding(10, 10, 1, 0);
             this.tsRegionTools.ShowItemToolTips = false;
-            this.tsRegionTools.Size = new System.Drawing.Size(168, 649);
+            this.tsRegionTools.Size = new System.Drawing.Size(168, 248);
             this.tsRegionTools.TabIndex = 0;
             this.tsRegionTools.Text = "toolStrip1";
             // 
@@ -86,6 +81,15 @@
             this.tsbFullscreen.Size = new System.Drawing.Size(80, 20);
             this.tsbFullscreen.Text = "Fullscreen";
             this.tsbFullscreen.Click += new System.EventHandler(this.tsbFullscreen_Click);
+            // 
+            // tsbWindowRectangle
+            // 
+            this.tsbWindowRectangle.Image = ((System.Drawing.Image)(resources.GetObject("tsbWindowRectangle.Image")));
+            this.tsbWindowRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbWindowRectangle.Name = "tsbWindowRectangle";
+            this.tsbWindowRectangle.Size = new System.Drawing.Size(139, 20);
+            this.tsbWindowRectangle.Text = "Window && Rectangle";
+            this.tsbWindowRectangle.Click += new System.EventHandler(this.tsbWindowRectangle_Click);
             // 
             // tsbRectangle
             // 
@@ -150,39 +154,24 @@
             this.tsbFreeHand.Text = "Free Hand";
             this.tsbFreeHand.Click += new System.EventHandler(this.tsbFreeHand_Click);
             // 
+            // tsbLastRegion
+            // 
+            this.tsbLastRegion.Image = ((System.Drawing.Image)(resources.GetObject("tsbLastRegion.Image")));
+            this.tsbLastRegion.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLastRegion.Name = "tsbLastRegion";
+            this.tsbLastRegion.Size = new System.Drawing.Size(88, 20);
+            this.tsbLastRegion.Text = "Last Region";
+            this.tsbLastRegion.Click += new System.EventHandler(this.tsbLastRegion_Click);
+            // 
             // pbResult
             // 
-            this.pbResult.BackColor = System.Drawing.Color.Gray;
+            this.pbResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbResult.Location = new System.Drawing.Point(0, 0);
             this.pbResult.Name = "pbResult";
-            this.pbResult.Size = new System.Drawing.Size(936, 608);
+            this.pbResult.Size = new System.Drawing.Size(500, 500);
             this.pbResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbResult.TabIndex = 1;
             this.pbResult.TabStop = false;
-            // 
-            // cbDrawChecker
-            // 
-            this.cbDrawChecker.AutoSize = true;
-            this.cbDrawChecker.ForeColor = System.Drawing.Color.White;
-            this.cbDrawChecker.Location = new System.Drawing.Point(264, 8);
-            this.cbDrawChecker.Name = "cbDrawChecker";
-            this.cbDrawChecker.Size = new System.Drawing.Size(165, 17);
-            this.cbDrawChecker.TabIndex = 2;
-            this.cbDrawChecker.Text = "Draw checkered background";
-            this.cbDrawChecker.UseVisualStyleBackColor = true;
-            this.cbDrawChecker.CheckedChanged += new System.EventHandler(this.cbDrawChecker_CheckedChanged);
-            // 
-            // cbDrawBorder
-            // 
-            this.cbDrawBorder.AutoSize = true;
-            this.cbDrawBorder.ForeColor = System.Drawing.Color.White;
-            this.cbDrawBorder.Location = new System.Drawing.Point(176, 8);
-            this.cbDrawBorder.Name = "cbDrawBorder";
-            this.cbDrawBorder.Size = new System.Drawing.Size(84, 17);
-            this.cbDrawBorder.TabIndex = 3;
-            this.cbDrawBorder.Text = "Draw border";
-            this.cbDrawBorder.UseVisualStyleBackColor = true;
-            this.cbDrawBorder.CheckedChanged += new System.EventHandler(this.cbDrawBorder_CheckedChanged);
             // 
             // pImage
             // 
@@ -191,109 +180,37 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pImage.AutoScroll = true;
             this.pImage.Controls.Add(this.pbResult);
-            this.pImage.Location = new System.Drawing.Point(176, 32);
+            this.pImage.Location = new System.Drawing.Point(304, 8);
             this.pImage.Name = "pImage";
-            this.pImage.Size = new System.Drawing.Size(936, 608);
+            this.pImage.Size = new System.Drawing.Size(536, 632);
             this.pImage.TabIndex = 4;
             // 
-            // cbIsFixedSize
+            // pgSurfaceConfig
             // 
-            this.cbIsFixedSize.AutoSize = true;
-            this.cbIsFixedSize.ForeColor = System.Drawing.Color.White;
-            this.cbIsFixedSize.Location = new System.Drawing.Point(432, 8);
-            this.cbIsFixedSize.Name = "cbIsFixedSize";
-            this.cbIsFixedSize.Size = new System.Drawing.Size(86, 17);
-            this.cbIsFixedSize.TabIndex = 5;
-            this.cbIsFixedSize.Text = "Is fixed size?";
-            this.cbIsFixedSize.UseVisualStyleBackColor = true;
-            this.cbIsFixedSize.CheckedChanged += new System.EventHandler(this.cbIsFixedSize_CheckedChanged);
-            // 
-            // nudFixedWidth
-            // 
-            this.nudFixedWidth.Location = new System.Drawing.Point(520, 6);
-            this.nudFixedWidth.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.nudFixedWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFixedWidth.Name = "nudFixedWidth";
-            this.nudFixedWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedWidth.TabIndex = 6;
-            this.nudFixedWidth.Value = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.nudFixedWidth.ValueChanged += new System.EventHandler(this.nudFixedWidth_ValueChanged);
-            // 
-            // nudFixedHeight
-            // 
-            this.nudFixedHeight.Location = new System.Drawing.Point(584, 6);
-            this.nudFixedHeight.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.nudFixedHeight.Name = "nudFixedHeight";
-            this.nudFixedHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedHeight.TabIndex = 7;
-            this.nudFixedHeight.Value = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
-            this.nudFixedHeight.ValueChanged += new System.EventHandler(this.nudFixedHeight_ValueChanged);
-            // 
-            // cbQuickCrop
-            // 
-            this.cbQuickCrop.AutoSize = true;
-            this.cbQuickCrop.ForeColor = System.Drawing.Color.White;
-            this.cbQuickCrop.Location = new System.Drawing.Point(648, 8);
-            this.cbQuickCrop.Name = "cbQuickCrop";
-            this.cbQuickCrop.Size = new System.Drawing.Size(78, 17);
-            this.cbQuickCrop.TabIndex = 2;
-            this.cbQuickCrop.Text = "Quick crop";
-            this.cbQuickCrop.UseVisualStyleBackColor = true;
-            this.cbQuickCrop.CheckedChanged += new System.EventHandler(this.cbQuickCrop_CheckedChanged);
+            this.pgSurfaceConfig.Location = new System.Drawing.Point(8, 264);
+            this.pgSurfaceConfig.Name = "pgSurfaceConfig";
+            this.pgSurfaceConfig.Size = new System.Drawing.Size(288, 376);
+            this.pgSurfaceConfig.TabIndex = 2;
+            this.pgSurfaceConfig.ToolbarVisible = false;
             // 
             // btnClipboardCopy
             // 
-            this.btnClipboardCopy.Location = new System.Drawing.Point(728, 5);
+            this.btnClipboardCopy.Location = new System.Drawing.Point(184, 8);
             this.btnClipboardCopy.Name = "btnClipboardCopy";
-            this.btnClipboardCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnClipboardCopy.Size = new System.Drawing.Size(112, 40);
             this.btnClipboardCopy.TabIndex = 2;
-            this.btnClipboardCopy.Text = "Copy";
+            this.btnClipboardCopy.Text = "Copy image to clipboard";
             this.btnClipboardCopy.UseVisualStyleBackColor = true;
             this.btnClipboardCopy.Click += new System.EventHandler(this.btnClipboardCopy_Click);
-            // 
-            // tsbWindowRectangle
-            // 
-            this.tsbWindowRectangle.Image = ((System.Drawing.Image)(resources.GetObject("tsbWindowRectangle.Image")));
-            this.tsbWindowRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbWindowRectangle.Name = "tsbWindowRectangle";
-            this.tsbWindowRectangle.Size = new System.Drawing.Size(139, 20);
-            this.tsbWindowRectangle.Text = "Window && Rectangle";
-            this.tsbWindowRectangle.Click += new System.EventHandler(this.tsbWindowRectangle_Click);
             // 
             // RegionCapturePreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1123, 649);
+            this.ClientSize = new System.Drawing.Size(849, 649);
             this.Controls.Add(this.btnClipboardCopy);
-            this.Controls.Add(this.cbQuickCrop);
-            this.Controls.Add(this.nudFixedHeight);
-            this.Controls.Add(this.nudFixedWidth);
-            this.Controls.Add(this.cbIsFixedSize);
             this.Controls.Add(this.pImage);
-            this.Controls.Add(this.cbDrawBorder);
-            this.Controls.Add(this.cbDrawChecker);
+            this.Controls.Add(this.pgSurfaceConfig);
             this.Controls.Add(this.tsRegionTools);
             this.Name = "RegionCapturePreview";
             this.Text = "Region Capture";
@@ -303,10 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbResult)).EndInit();
             this.pImage.ResumeLayout(false);
             this.pImage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedHeight)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -320,16 +234,12 @@
         private System.Windows.Forms.ToolStripButton tsbTriangle;
         private System.Windows.Forms.ToolStripButton tsbPolygon;
         private System.Windows.Forms.PictureBox pbResult;
-        private System.Windows.Forms.CheckBox cbDrawChecker;
         private System.Windows.Forms.ToolStripButton tsbDiamond;
         private System.Windows.Forms.ToolStripButton tsbFullscreen;
-        private System.Windows.Forms.CheckBox cbDrawBorder;
         private System.Windows.Forms.Panel pImage;
-        private System.Windows.Forms.CheckBox cbIsFixedSize;
-        private System.Windows.Forms.NumericUpDown nudFixedWidth;
-        private System.Windows.Forms.NumericUpDown nudFixedHeight;
-        private System.Windows.Forms.CheckBox cbQuickCrop;
         private System.Windows.Forms.Button btnClipboardCopy;
         private System.Windows.Forms.ToolStripButton tsbWindowRectangle;
+        private System.Windows.Forms.ToolStripButton tsbLastRegion;
+        private System.Windows.Forms.PropertyGrid pgSurfaceConfig;
     }
 }

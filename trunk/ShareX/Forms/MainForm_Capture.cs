@@ -33,6 +33,7 @@ using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using ScreenCapture;
+using ShareX.Properties;
 
 namespace ShareX
 {
@@ -93,12 +94,7 @@ namespace ShareX
 
                 if (img != null && Program.Settings.PlaySoundAfterCapture)
                 {
-                    string soundPath = Path.Combine(Application.StartupPath, "Camera.wav");
-
-                    if (File.Exists(soundPath))
-                    {
-                        new SoundPlayer(soundPath).Play();
-                    }
+                    Helpers.PlaySoundAsync(Resources.CameraSound);
                 }
             }
             catch (Exception ex)
@@ -142,7 +138,7 @@ namespace ShareX
                     imageJob |= TaskImageJob.UploadImageToHost;
                 }
 
-                UploadManager.DoImageWork(img, imageJob);
+                UploadManager.UploadImage(img, imageJob);
             }
         }
 

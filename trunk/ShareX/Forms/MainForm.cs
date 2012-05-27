@@ -98,6 +98,8 @@ namespace ShareX
             tsmiURLShorteners.DropDownItems.AddRange(Helpers.GetEnumDescriptions<UrlShortenerType>().Select(x => new ToolStripMenuItem(x)).ToArray());
             tsmiURLShorteners.DropDownItemClicked += new ToolStripItemClickedEventHandler(tsddbURLShorteners_DropDownItemClicked);
 
+            tsbDebug.Visible = Program.IsDebug;
+
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
             il.Images.Add(Properties.Resources.navigation_090_button);
@@ -108,11 +110,6 @@ namespace ShareX
             lvUploads.FillLastColumn();
 
             UploadManager.ListViewControl = lvUploads;
-
-            if (Program.IsDebug)
-            {
-                tsbDebug.Visible = true;
-            }
         }
 
         private void LoadSettings()
@@ -142,8 +139,8 @@ namespace ShareX
 
         private void UpdateControls()
         {
-            tsbCopy.Enabled = tsbOpen.Enabled = copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible =
-                copyShortenedURLToolStripMenuItem.Visible = copyThumbnailURLToolStripMenuItem.Visible = copyDeletionURLToolStripMenuItem.Visible =
+            copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = copyShortenedURLToolStripMenuItem.Visible =
+                copyThumbnailURLToolStripMenuItem.Visible = copyDeletionURLToolStripMenuItem.Visible =
                 showErrorsToolStripMenuItem.Visible = copyErrorsToolStripMenuItem.Visible = showResponseToolStripMenuItem.Visible =
                 uploadFileToolStripMenuItem.Visible = stopUploadToolStripMenuItem.Visible = false;
 
@@ -157,7 +154,7 @@ namespace ShareX
                 {
                     if (!string.IsNullOrEmpty(result.URL))
                     {
-                        tsbCopy.Enabled = tsbOpen.Enabled = copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = true;
+                        copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = true;
 
                         if (itemsCount > 1)
                         {
@@ -448,21 +445,6 @@ namespace ShareX
             UploadManager.UploadFile();
         }
 
-        private void tsmiTestImageUpload_Click(object sender, EventArgs e)
-        {
-            UploadManager.UploadImage(Resources.ShareXLogo);
-        }
-
-        private void tsmiTestTextUpload_Click(object sender, EventArgs e)
-        {
-            UploadManager.UploadText(Program.ApplicationName + " text upload test");
-        }
-
-        private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
-        {
-            new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
-        }
-
         private void tsddbImageUploaders_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             for (int i = 0; i < tsmiImageUploaders.DropDownItems.Count; i++)
@@ -531,14 +513,24 @@ namespace ShareX
             uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
         }
 
-        private void tsbCopy_Click(object sender, EventArgs e)
+        private void tsmiTestImageUpload_Click(object sender, EventArgs e)
         {
-            CopyURL();
+            UploadManager.UploadImage(Resources.ShareXLogo);
         }
 
-        private void tsbOpen_Click(object sender, EventArgs e)
+        private void tsmiTestTextUpload_Click(object sender, EventArgs e)
         {
-            OpenURL();
+            UploadManager.UploadText(Program.ApplicationName + " text upload test");
+        }
+
+        private void tsmiTestFileUpload_Click(object sender, EventArgs e)
+        {
+            UploadManager.UploadImage(Resources.ShareXLogo, TaskImageJob.UploadImageToHost, EDataType.File);
+        }
+
+        private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
+        {
+            new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
         }
 
         private void tsbHistory_Click(object sender, EventArgs e)
