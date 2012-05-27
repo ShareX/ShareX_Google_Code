@@ -167,7 +167,7 @@ namespace ShareX
         {
             StartTimer = Stopwatch.StartNew();
 
-            IsMultiInstance = CLIHelper.CheckArgs(args, "m", "multi");
+            IsMultiInstance = CLIHelper.CheckArgs(args, "multi", "m");
 
             if (!IsMultiInstance && !ApplicationInstanceManager.CreateSingleInstance(SingleInstanceCallback))
             {
@@ -180,16 +180,15 @@ namespace ShareX
             {
                 mutex = new Mutex(false, @"Global\82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC"); // Required for installer
 
-                IsSilentRun = CLIHelper.CheckArgs(args, "s", "silent");
+                IsSilentRun = CLIHelper.CheckArgs(args, "silent", "s");
+                IsPortable = CLIHelper.CheckArgs(args, "portable", "p");
 
-                if (CLIHelper.CheckArgs(args, "p", "portable") && !Directory.Exists(PortablePersonalPath))
+                if (IsPortable && !Directory.Exists(PortablePersonalPath))
                 {
                     Directory.CreateDirectory(PortablePersonalPath);
                 }
 
-                IsPortable = Directory.Exists(PortablePersonalPath);
-
-                IsDebug = CLIHelper.CheckArgs(args, "d", "debug");
+                IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
                 IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
 
                 Application.EnableVisualStyles();
