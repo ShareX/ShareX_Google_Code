@@ -189,6 +189,7 @@
             // 
             this.pgSurfaceConfig.Location = new System.Drawing.Point(8, 264);
             this.pgSurfaceConfig.Name = "pgSurfaceConfig";
+            this.pgSurfaceConfig.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.pgSurfaceConfig.Size = new System.Drawing.Size(288, 376);
             this.pgSurfaceConfig.TabIndex = 2;
             this.pgSurfaceConfig.ToolbarVisible = false;

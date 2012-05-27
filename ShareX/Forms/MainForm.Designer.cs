@@ -133,6 +133,7 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -440,6 +441,7 @@ namespace ShareX
             this.tsmiTestImageUpload,
             this.tsmiTestTextUpload,
             this.tsmiTestFileUpload,
+            this.tsmiTestURLShortener,
             this.tsmiTestShapeCapture});
             this.tsbDebug.Image = global::ShareX.Properties.Resources.block;
             this.tsbDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -819,6 +821,14 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
+            // tsmiTestURLShortener
+            // 
+            this.tsmiTestURLShortener.Image = global::ShareX.Properties.Resources.edit_scale;
+            this.tsmiTestURLShortener.Name = "tsmiTestURLShortener";
+            this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestURLShortener.Text = "Test URL shortener";
+            this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -929,5 +939,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiLastRegion;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayLastRegion;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestFileUpload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
     }
 }
