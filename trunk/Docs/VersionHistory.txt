@@ -1,5 +1,7 @@
 ﻿Version 6.0.0 - 2012-06-15
 
+* Added pastee.org Text Uploader support
+* Ability to capture Last region
 * Proportional resizing of shapes while holding shift key
 * Added shortcut to "Send To" without using registry
 * Cursor can be moved using arrow keys during a shapes capture

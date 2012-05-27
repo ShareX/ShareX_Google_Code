@@ -126,6 +126,7 @@
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
             this.tpCaptureShape = new System.Windows.Forms.TabPage();
+            this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
             this.cbShapeForceWindowCapture = new System.Windows.Forms.CheckBox();
             this.cbShapeIncludeControls = new System.Windows.Forms.CheckBox();
             this.lblFixedShapeSizeHeight = new System.Windows.Forms.Label();
@@ -150,7 +151,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -200,7 +200,7 @@
             this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 208);
             this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
             this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(199, 17);
-            this.cbPlaySoundAfterUpload.TabIndex = 7;
+            this.cbPlaySoundAfterUpload.TabIndex = 8;
             this.cbPlaySoundAfterUpload.Text = "Play sound after upload is completed";
             this.cbPlaySoundAfterUpload.UseVisualStyleBackColor = true;
             this.cbPlaySoundAfterUpload.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterUpload_CheckedChanged);
@@ -250,7 +250,7 @@
             this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 232);
             this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
             this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(245, 17);
-            this.cbTrayBalloonTipAfterUpload.TabIndex = 11;
+            this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
             this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after upload is completed";
             this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
             this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
@@ -261,7 +261,7 @@
             this.lblGeneralSeparator2.Location = new System.Drawing.Point(16, 264);
             this.lblGeneralSeparator2.Name = "lblGeneralSeparator2";
             this.lblGeneralSeparator2.Size = new System.Drawing.Size(475, 2);
-            this.lblGeneralSeparator2.TabIndex = 9;
+            this.lblGeneralSeparator2.TabIndex = 10;
             this.lblGeneralSeparator2.Text = "label2";
             // 
             // cbHistorySave
@@ -270,7 +270,7 @@
             this.cbHistorySave.Location = new System.Drawing.Point(16, 280);
             this.cbHistorySave.Name = "cbHistorySave";
             this.cbHistorySave.Size = new System.Drawing.Size(118, 17);
-            this.cbHistorySave.TabIndex = 10;
+            this.cbHistorySave.TabIndex = 11;
             this.cbHistorySave.Text = "Enable history save";
             this.cbHistorySave.UseVisualStyleBackColor = true;
             this.cbHistorySave.CheckedChanged += new System.EventHandler(this.cbHistorySave_CheckedChanged);
@@ -281,7 +281,7 @@
             this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 184);
             this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
             this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
-            this.cbPlaySoundAfterCapture.TabIndex = 8;
+            this.cbPlaySoundAfterCapture.TabIndex = 7;
             this.cbPlaySoundAfterCapture.Text = "Play sound after capture is made";
             this.cbPlaySoundAfterCapture.UseVisualStyleBackColor = true;
             this.cbPlaySoundAfterCapture.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterCapture_CheckedChanged);
@@ -1282,7 +1282,7 @@
             this.cbCaptureSaveImageWithDialog.Location = new System.Drawing.Point(16, 72);
             this.cbCaptureSaveImageWithDialog.Name = "cbCaptureSaveImageWithDialog";
             this.cbCaptureSaveImageWithDialog.Size = new System.Drawing.Size(163, 17);
-            this.cbCaptureSaveImageWithDialog.TabIndex = 3;
+            this.cbCaptureSaveImageWithDialog.TabIndex = 2;
             this.cbCaptureSaveImageWithDialog.Text = "Save image to file with dialog";
             this.cbCaptureSaveImageWithDialog.UseVisualStyleBackColor = true;
             this.cbCaptureSaveImageWithDialog.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImageWithDialog_CheckedChanged);
@@ -1293,7 +1293,7 @@
             this.cbCaptureUploadImage.Location = new System.Drawing.Point(16, 96);
             this.cbCaptureUploadImage.Name = "cbCaptureUploadImage";
             this.cbCaptureUploadImage.Size = new System.Drawing.Size(161, 17);
-            this.cbCaptureUploadImage.TabIndex = 2;
+            this.cbCaptureUploadImage.TabIndex = 3;
             this.cbCaptureUploadImage.Text = "Upload image to remote host";
             this.cbCaptureUploadImage.UseVisualStyleBackColor = true;
             this.cbCaptureUploadImage.CheckedChanged += new System.EventHandler(this.cbCaptureUploadImage_CheckedChanged);
@@ -1363,13 +1363,23 @@
             this.tpCaptureShape.Text = "Shape capture";
             this.tpCaptureShape.UseVisualStyleBackColor = true;
             // 
+            // btnOpenCapturingShapesWiki
+            // 
+            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(408, 8);
+            this.btnOpenCapturingShapesWiki.Name = "btnOpenCapturingShapesWiki";
+            this.btnOpenCapturingShapesWiki.Size = new System.Drawing.Size(88, 24);
+            this.btnOpenCapturingShapesWiki.TabIndex = 0;
+            this.btnOpenCapturingShapesWiki.Text = "Tips && tricks...";
+            this.btnOpenCapturingShapesWiki.UseVisualStyleBackColor = true;
+            this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
+            // 
             // cbShapeForceWindowCapture
             // 
             this.cbShapeForceWindowCapture.AutoSize = true;
             this.cbShapeForceWindowCapture.Location = new System.Drawing.Point(16, 176);
             this.cbShapeForceWindowCapture.Name = "cbShapeForceWindowCapture";
             this.cbShapeForceWindowCapture.Size = new System.Drawing.Size(287, 17);
-            this.cbShapeForceWindowCapture.TabIndex = 9;
+            this.cbShapeForceWindowCapture.TabIndex = 10;
             this.cbShapeForceWindowCapture.Text = "Use window capture mode for all rectangle type shapes";
             this.cbShapeForceWindowCapture.UseVisualStyleBackColor = true;
             this.cbShapeForceWindowCapture.CheckedChanged += new System.EventHandler(this.cbShapeForceWindowCapture_CheckedChanged);
@@ -1380,7 +1390,7 @@
             this.cbShapeIncludeControls.Location = new System.Drawing.Point(16, 152);
             this.cbShapeIncludeControls.Name = "cbShapeIncludeControls";
             this.cbShapeIncludeControls.Size = new System.Drawing.Size(329, 17);
-            this.cbShapeIncludeControls.TabIndex = 8;
+            this.cbShapeIncludeControls.TabIndex = 9;
             this.cbShapeIncludeControls.Text = "Allow capturing controls in window capture (buttons, panels etc.)";
             this.cbShapeIncludeControls.UseVisualStyleBackColor = true;
             this.cbShapeIncludeControls.CheckedChanged += new System.EventHandler(this.cbShapeIncludeControls_CheckedChanged);
@@ -1391,7 +1401,7 @@
             this.lblFixedShapeSizeHeight.Location = new System.Drawing.Point(160, 120);
             this.lblFixedShapeSizeHeight.Name = "lblFixedShapeSizeHeight";
             this.lblFixedShapeSizeHeight.Size = new System.Drawing.Size(41, 13);
-            this.lblFixedShapeSizeHeight.TabIndex = 6;
+            this.lblFixedShapeSizeHeight.TabIndex = 7;
             this.lblFixedShapeSizeHeight.Text = "Height:";
             // 
             // cbDrawBorder
@@ -1400,7 +1410,7 @@
             this.cbDrawBorder.Location = new System.Drawing.Point(16, 16);
             this.cbDrawBorder.Name = "cbDrawBorder";
             this.cbDrawBorder.Size = new System.Drawing.Size(170, 17);
-            this.cbDrawBorder.TabIndex = 0;
+            this.cbDrawBorder.TabIndex = 1;
             this.cbDrawBorder.Text = "Draw border around the shape";
             this.cbDrawBorder.UseVisualStyleBackColor = true;
             this.cbDrawBorder.CheckedChanged += new System.EventHandler(this.cbDrawBorder_CheckedChanged);
@@ -1411,7 +1421,7 @@
             this.lblFixedShapeSizeWidth.Location = new System.Drawing.Point(44, 120);
             this.lblFixedShapeSizeWidth.Name = "lblFixedShapeSizeWidth";
             this.lblFixedShapeSizeWidth.Size = new System.Drawing.Size(38, 13);
-            this.lblFixedShapeSizeWidth.TabIndex = 4;
+            this.lblFixedShapeSizeWidth.TabIndex = 5;
             this.lblFixedShapeSizeWidth.Text = "Width:";
             // 
             // cbQuickCrop
@@ -1420,7 +1430,7 @@
             this.cbQuickCrop.Location = new System.Drawing.Point(16, 64);
             this.cbQuickCrop.Name = "cbQuickCrop";
             this.cbQuickCrop.Size = new System.Drawing.Size(455, 17);
-            this.cbQuickCrop.TabIndex = 2;
+            this.cbQuickCrop.TabIndex = 3;
             this.cbQuickCrop.Text = "Complete capture as soon as the mouse button is released, except when capturing p" +
     "olygon";
             this.cbQuickCrop.UseVisualStyleBackColor = true;
@@ -1441,7 +1451,7 @@
             0});
             this.nudFixedShapeSizeHeight.Name = "nudFixedShapeSizeHeight";
             this.nudFixedShapeSizeHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedShapeSizeHeight.TabIndex = 7;
+            this.nudFixedShapeSizeHeight.TabIndex = 8;
             this.nudFixedShapeSizeHeight.Value = new decimal(new int[] {
             1,
             0,
@@ -1455,7 +1465,7 @@
             this.cbDrawCheckerboard.Location = new System.Drawing.Point(16, 40);
             this.cbDrawCheckerboard.Name = "cbDrawCheckerboard";
             this.cbDrawCheckerboard.Size = new System.Drawing.Size(287, 17);
-            this.cbDrawCheckerboard.TabIndex = 1;
+            this.cbDrawCheckerboard.TabIndex = 2;
             this.cbDrawCheckerboard.Text = "Draw checkerboard pattern replacing transparent areas";
             this.cbDrawCheckerboard.UseVisualStyleBackColor = true;
             this.cbDrawCheckerboard.CheckedChanged += new System.EventHandler(this.cbDrawCheckerboard_CheckedChanged);
@@ -1475,7 +1485,7 @@
             0});
             this.nudFixedShapeSizeWidth.Name = "nudFixedShapeSizeWidth";
             this.nudFixedShapeSizeWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedShapeSizeWidth.TabIndex = 5;
+            this.nudFixedShapeSizeWidth.TabIndex = 6;
             this.nudFixedShapeSizeWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -1489,7 +1499,7 @@
             this.cbFixedShapeSize.Location = new System.Drawing.Point(16, 88);
             this.cbFixedShapeSize.Name = "cbFixedShapeSize";
             this.cbFixedShapeSize.Size = new System.Drawing.Size(107, 17);
-            this.cbFixedShapeSize.TabIndex = 3;
+            this.cbFixedShapeSize.TabIndex = 4;
             this.cbFixedShapeSize.Text = "Fixed shape size:";
             this.cbFixedShapeSize.UseVisualStyleBackColor = true;
             this.cbFixedShapeSize.CheckedChanged += new System.EventHandler(this.cbFixedShapeSize_CheckedChanged);
@@ -1654,16 +1664,6 @@
             this.txtDebugLog.Size = new System.Drawing.Size(516, 324);
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
-            // 
-            // btnOpenCapturingShapesWiki
-            // 
-            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(16, 208);
-            this.btnOpenCapturingShapesWiki.Name = "btnOpenCapturingShapesWiki";
-            this.btnOpenCapturingShapesWiki.Size = new System.Drawing.Size(88, 24);
-            this.btnOpenCapturingShapesWiki.TabIndex = 10;
-            this.btnOpenCapturingShapesWiki.Text = "Hotkeys...";
-            this.btnOpenCapturingShapesWiki.UseVisualStyleBackColor = true;
-            this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
             // 
             // SettingsForm
             // 
