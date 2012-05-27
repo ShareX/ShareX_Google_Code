@@ -123,13 +123,18 @@ namespace ScreenCapture
 
         private void Surface_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            switch (e.KeyCode)
             {
-                Close(false);
-            }
-            else if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
-            {
-                Close(true);
+                case Keys.Escape:
+                    Close(false);
+                    break;
+                case Keys.Space:
+                case Keys.Enter:
+                    Close(true);
+                    break;
+                case Keys.Q:
+                    Config.QuickCrop = !Config.QuickCrop;
+                    break;
             }
         }
 
