@@ -23,12 +23,15 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using HelpersLib;
 using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
+using UploadersLib.Properties;
 
 namespace UploadersLib.Forms
 {
@@ -37,13 +40,17 @@ namespace UploadersLib.Forms
         public string CurrentFolderPath { get; private set; }
 
         private Dropbox dropbox;
+        private DropboxAccountInfo dropboxAccountInfo;
         private ImageListManager ilm;
+        private bool isSelectedFile, isSelectedPublic;
 
-        public DropboxFilesForm(OAuthInfo oauth, string path = null)
+        public DropboxFilesForm(OAuthInfo oauth, string path, DropboxAccountInfo accountInfo)
         {
             InitializeComponent();
+            Icon = Resources.Dropbox;
 
             dropbox = new Dropbox(oauth);
+            dropboxAccountInfo = accountInfo;
             ilm = new ImageListManager(lvDropboxFiles);
 
             if (path != null)
@@ -79,8 +86,12 @@ namespace UploadersLib.Forms
                     {
                         string filename = Path.GetFileName(content.Path);
                         lvi = new ListViewItem(filename);
-                        lvi.SubItems.Add(content.Size);
-                        lvi.SubItems.Add(content.Modified);
+                        lvi.SubItems.Add(content.Is_dir ? "" : content.Size);
+                        DateTime modified;
+                        if (DateTime.TryParse(content.Modified, out modified))
+                        {
+                            lvi.SubItems.Add(modified.ToString());
+                        }
                         lvi.ImageKey = ilm.AddImage(content.Icon);
                         lvi.Tag = content;
                         lvDropboxFiles.Items.Add(lvi);
@@ -115,7 +126,7 @@ namespace UploadersLib.Forms
 
         private void lvDropboxFiles_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (lvDropboxFiles.SelectedItems.Count > 0)
+            if (e.Button == MouseButtons.Left && lvDropboxFiles.SelectedItems.Count > 0)
             {
                 DropboxContentInfo content = lvDropboxFiles.SelectedItems[0].Tag as DropboxContentInfo;
 
@@ -129,6 +140,20 @@ namespace UploadersLib.Forms
         private void tsbSelectFolder_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void tsmiCopyPublicLink_Click(object sender, EventArgs e)
+        {
+            if (lvDropboxFiles.SelectedItems.Count > 0)
+            {
+                DropboxContentInfo content = lvDropboxFiles.SelectedItems[0].Tag as DropboxContentInfo;
+
+                if (content != null && !content.Is_dir && content.Path.StartsWith("/Public/", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    string url = Dropbox.GetDropboxURL(dropboxAccountInfo.Uid, content.Path);
+                    Helpers.CopyTextSafely(url);
+                }
+            }
         }
 
         private void tsmiDownloadFile_Click(object sender, System.EventArgs e)
@@ -152,6 +177,31 @@ namespace UploadersLib.Forms
                         }
                     }
                 }
+            }
+        }
+
+        private void lvDropboxFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvDropboxFiles.SelectedItems.Count > 0)
+            {
+                DropboxContentInfo content = lvDropboxFiles.SelectedItems[0].Tag as DropboxContentInfo;
+
+                if (content != null)
+                {
+                    isSelectedFile = !content.Is_dir;
+                    isSelectedPublic = content.Path.StartsWith("/Public/", StringComparison.InvariantCultureIgnoreCase);
+                }
+            }
+
+            tsmiCopyPublicLink.Visible = isSelectedFile && isSelectedPublic;
+            tsmiDownloadFile.Visible = isSelectedFile;
+        }
+
+        private void cmsDropbox_Opening(object sender, CancelEventArgs e)
+        {
+            if (!isSelectedFile)
+            {
+                e.Cancel = true;
             }
         }
     }

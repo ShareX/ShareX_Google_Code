@@ -238,9 +238,16 @@ namespace UploadersLib.FileUploaders
 
         public static string GetDropboxURL(long userID, string uploadPath, string fileName)
         {
-            if (!string.IsNullOrEmpty(uploadPath) && uploadPath.StartsWith("Public/", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrEmpty(fileName))
+            return GetDropboxURL(userID, Helpers.CombineURL(uploadPath, HttpUtility.UrlPathEncode(fileName)));
+        }
+
+        public static string GetDropboxURL(long userID, string uploadPath)
+        {
+            uploadPath = uploadPath.Trim('/');
+
+            if (!string.IsNullOrEmpty(uploadPath) && uploadPath.StartsWith("Public/", StringComparison.InvariantCultureIgnoreCase))
             {
-                return Helpers.CombineURL(URLDownload, userID.ToString(), uploadPath.Substring(7), HttpUtility.UrlPathEncode(fileName));
+                return Helpers.CombineURL(URLDownload, userID.ToString(), uploadPath.Substring(7));
             }
 
             return "Upload path is private. Use \"Public\" folder to get public URL.";
