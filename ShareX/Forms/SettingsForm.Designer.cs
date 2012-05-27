@@ -150,6 +150,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1343,6 +1344,7 @@
             // 
             // tpCaptureShape
             // 
+            this.tpCaptureShape.Controls.Add(this.btnOpenCapturingShapesWiki);
             this.tpCaptureShape.Controls.Add(this.cbShapeForceWindowCapture);
             this.tpCaptureShape.Controls.Add(this.cbShapeIncludeControls);
             this.tpCaptureShape.Controls.Add(this.lblFixedShapeSizeHeight);
@@ -1653,6 +1655,16 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // btnOpenCapturingShapesWiki
+            // 
+            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(16, 208);
+            this.btnOpenCapturingShapesWiki.Name = "btnOpenCapturingShapesWiki";
+            this.btnOpenCapturingShapesWiki.Size = new System.Drawing.Size(88, 24);
+            this.btnOpenCapturingShapesWiki.TabIndex = 10;
+            this.btnOpenCapturingShapesWiki.Text = "Hotkeys...";
+            this.btnOpenCapturingShapesWiki.UseVisualStyleBackColor = true;
+            this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1837,5 +1849,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbCaptureSaveImageWithDialog;
         private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
+        private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
     }
 }
