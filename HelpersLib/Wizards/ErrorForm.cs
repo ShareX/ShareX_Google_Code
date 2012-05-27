@@ -33,29 +33,29 @@ namespace HelpersLib
     public partial class ErrorForm : Form
     {
         public string ApplicationName { get; private set; }
-        public Exception Error { get; private set; }
         public Logger Logger { get; private set; }
         public string LogPath { get; private set; }
         public string BugReportPath { get; private set; }
 
         public ErrorForm(string productName, Exception error, Logger logger, string logPath, string bugReportPath)
+            : this(productName, error.Message, error.ToString(), logger, logPath, bugReportPath)
+        {
+        }
+
+        public ErrorForm(string productName, string errorMessage, string errorString, Logger logger, string logPath, string bugReportPath)
         {
             InitializeComponent();
 
             ApplicationName = productName;
-            Error = error;
             Logger = logger;
             LogPath = logPath;
             BugReportPath = bugReportPath;
 
             Text = string.Format("{0} - Error", ApplicationName);
-            Logger.WriteException(Error, "Unhandled exception");
+            Logger.WriteException(errorString, "Unhandled exception");
 
-            if (Error != null)
-            {
-                lblErrorMessage.Text = Error.Message;
-                txtException.Text = Error.ToString();
-            }
+            lblErrorMessage.Text = errorMessage;
+            txtException.Text = errorString;
 
             btnOpenLogFile.Visible = !string.IsNullOrEmpty(LogPath) && File.Exists(LogPath);
             btnSendBugReport.Visible = !string.IsNullOrEmpty(BugReportPath);
