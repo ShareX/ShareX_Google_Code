@@ -62,14 +62,14 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap address_book_blue {
             get {
-                object obj = ResourceManager.GetObject("address-book-blue", resourceCulture);
+                object obj = ResourceManager.GetObject("address_book_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         public static System.Drawing.Bitmap application_block {
             get {
-                object obj = ResourceManager.GetObject("application-block", resourceCulture);
+                object obj = ResourceManager.GetObject("application_block", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,7 +83,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap application_form {
             get {
-                object obj = ResourceManager.GetObject("application-form", resourceCulture);
+                object obj = ResourceManager.GetObject("application_form", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -109,9 +109,15 @@ namespace ShareX.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap clipboard__plus {
+        public static System.IO.UnmanagedMemoryStream CameraSound {
             get {
-                object obj = ResourceManager.GetObject("clipboard--plus", resourceCulture);
+                return ResourceManager.GetStream("CameraSound", resourceCulture);
+            }
+        }
+        
+        public static System.Drawing.Bitmap clipboard_plus {
+            get {
+                object obj = ResourceManager.GetObject("clipboard_plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -130,30 +136,30 @@ namespace ShareX.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap document__arrow {
+        public static System.Drawing.Bitmap document_arrow {
             get {
-                object obj = ResourceManager.GetObject("document--arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("document_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         public static System.Drawing.Bitmap document_copy {
             get {
-                object obj = ResourceManager.GetObject("document-copy", resourceCulture);
+                object obj = ResourceManager.GetObject("document_copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         public static System.Drawing.Bitmap drive_globe {
             get {
-                object obj = ResourceManager.GetObject("drive-globe", resourceCulture);
+                object obj = ResourceManager.GetObject("drive_globe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         public static System.Drawing.Bitmap edit_scale {
             get {
-                object obj = ResourceManager.GetObject("edit-scale", resourceCulture);
+                object obj = ResourceManager.GetObject("edit_scale", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,9 +171,9 @@ namespace ShareX.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap folder__plus {
+        public static System.Drawing.Bitmap folder_plus {
             get {
-                object obj = ResourceManager.GetObject("folder--plus", resourceCulture);
+                object obj = ResourceManager.GetObject("folder_plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -329,13 +335,6 @@ namespace ShareX.Properties {
         public static System.Drawing.Bitmap Triangle {
             get {
                 object obj = ResourceManager.GetObject("Triangle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap us {
-            get {
-                object obj = ResourceManager.GetObject("us", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

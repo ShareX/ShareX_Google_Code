@@ -39,31 +39,31 @@ namespace ScreenCapture
         [Category("Shapes"), DefaultValue(true), Description("Show shape dimensions.")]
         public bool ShowInfo { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("Draw border around the shape.")]
+        [Category("Shapes"), DefaultValue(false), Description("Draw border around the shape.")]
         public bool DrawBorder { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("Draw checkerboard pattern replacing transparent areas.")]
+        [Category("Shapes"), DefaultValue(false), Description("Draw checkerboard pattern replacing transparent areas.")]
         public bool DrawChecker { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("Complete capture as soon as the mouse button is released, except when capturing polygon.")]
+        [Category("Shapes"), DefaultValue(false), Description("Complete capture as soon as the mouse button is released, except when capturing polygon.")]
         public bool QuickCrop { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
+        [Category("Shapes"), DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
         public bool ForceWindowCapture { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("If window capture mode enabled this setting will also allow to capture window controls.")]
+        [Category("Shapes"), DefaultValue(false), Description("If window capture mode enabled this setting will also allow to capture window controls.")]
         public bool IncludeControls { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(1), Description("Number of pixels to move shape at each arrow key stroke.")]
+        [Category("Shapes"), DefaultValue(1), Description("Number of pixels to move shape at each arrow key stroke.")]
         public int MinMoveSpeed { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(5), Description("Number of pixels to move shape at each arrow key stroke while pressing Ctrl key.")]
+        [Category("Shapes"), DefaultValue(5), Description("Number of pixels to move shape at each arrow key stroke while pressing Ctrl key.")]
         public int MaxMoveSpeed { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(false), Description("Fixed shape size.")]
+        [Category("Shapes"), DefaultValue(false), Description("Fixed shape size.")]
         public bool IsFixedSize { get; set; }
 
-        [Category("Shapes"), Browsable(false), DefaultValue(typeof(Size), "250, 250"), Description("Fixed shape size.")]
+        [Category("Shapes"), DefaultValue(typeof(Size), "250, 250"), Description("Fixed shape size.")]
         public Size FixedSize { get; set; }
 
         public SurfaceOptions()

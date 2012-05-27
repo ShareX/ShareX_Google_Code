@@ -188,13 +188,9 @@
     <None Include="Resources\document--arrow.png" />
     <None Include="Resources\application-form.png" />
     <None Include="Resources\address-book-blue.png" />
-    <EmbeddedResource Include="Camera.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="Resources\navigation-000-button.png" />
     <None Include="Resources\tr.png" />
     <None Include="Resources\au.png" />
-    <None Include="Resources\us.png" />
     <None Include="Resources\application-block.png" />
     <None Include="Resources\edit-scale.png" />
     <None Include="Resources\drive-globe.png" />
@@ -224,12 +220,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ShareXSmallIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShareXSmallBusyIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\sharex-16px-0.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +239,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sharex-16px-6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Camera.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

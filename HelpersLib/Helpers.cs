@@ -31,6 +31,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -494,6 +495,18 @@ namespace HelpersLib
                 ms.Seek(0, SeekOrigin.Begin);
                 return binaryFormatter.Deserialize(ms);
             }
+        }
+
+        public static void PlaySoundAsync(Stream stream)
+        {
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                using (stream)
+                using (SoundPlayer soundPlayer = new SoundPlayer(stream))
+                {
+                    soundPlayer.PlaySync();
+                }
+            });
         }
     }
 }
