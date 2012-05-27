@@ -78,9 +78,14 @@ namespace HelpersLib
             WriteLine(string.Format(format, args));
         }
 
-        public void WriteException(Exception exception, string message = "Exception")
+        public void WriteException(string exception, string message = "Exception")
         {
             WriteLine(string.Format(ExceptionFormat, message, exception));
+        }
+
+        public void WriteException(Exception exception, string message = "Exception")
+        {
+            WriteException(exception.ToString(), message);
         }
 
         public LoggerTimer StartTimer(string startMessage = null)
