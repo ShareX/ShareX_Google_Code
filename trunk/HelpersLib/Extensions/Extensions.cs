@@ -40,15 +40,23 @@ namespace HelpersLib
         public static string GetDescription(this Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+            if (fi != null)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+            }
+            return value.ToString();
         }
 
         public static string GetCategory(this Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
-            CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Category : value.ToString();
+            if (fi != null)
+            {
+                CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
+                return (attributes.Length > 0) ? attributes[0].Category : value.ToString();
+            }
+            return value.ToString();
         }
 
         public static string[] GetEnumDescriptions(this Type type)

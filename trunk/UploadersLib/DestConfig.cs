@@ -25,11 +25,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using HelpersLib;
 
 namespace UploadersLib
 {
+    [Serializable]
     public class DestConfig
     {
         public List<OutputEnum> Outputs = new List<OutputEnum>();
@@ -41,6 +43,10 @@ namespace UploadersLib
         public List<FileDestination> FileUploaders = new List<FileDestination>();
         public List<UrlShortenerType> LinkUploaders = new List<UrlShortenerType>();
 
+        [Category(ComponentModelStrings.ActivitiesUploadersText), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
+        public string TextFormat { get; set; }
+
+        [Browsable(false)]
         public bool IsEmptyAny
         {
             get
@@ -49,6 +55,7 @@ namespace UploadersLib
             }
         }
 
+        [Browsable(false)]
         public bool IsEmptyAll
         {
             get
