@@ -41,6 +41,7 @@ namespace UploadersLib
         public UploadersConfig()
         {
             PasswordsEncryptionStrength = EncryptionStrength.High;
+            TestPassword = "password";
         }
 
         #region General
@@ -50,6 +51,9 @@ namespace UploadersLib
 
         [Browsable(false), Category(ComponentModelStrings.AppPasswords), DefaultValue(EncryptionStrength.High), Description("Strength can be Low = 128, Medium = 192, or High = 256")]
         public EncryptionStrength PasswordsEncryptionStrength { get; set; }
+
+        [Browsable(false), Category(ComponentModelStrings.AppPasswords), DefaultValue("password"), Description("If this SamplePassword displayed as 'password' then configuration is not encrypted.")]
+        public string TestPassword { get; set; }
 
         #endregion General
 
@@ -265,30 +269,40 @@ namespace UploadersLib
             return false;
         }
 
-        public void CryptPasswords(bool bEncrypt)
+        public void CryptPasswords(bool doEncrypt)
         {
-            DebugHelper.WriteLine((bEncrypt ? "Encrypting " : "Decrypting") + " passwords.");
+            bool isEncrypted = TestPassword != "password";
+
+            if (doEncrypt && isEncrypted || !doEncrypt && !isEncrypted)
+            {
+                // ensure encrupted passwords are not encrypted again or decrypted passwords are not decrypted again
+                return;
+            }
+
+            DebugHelper.WriteLine((doEncrypt ? "Encrypting " : "Decrypting") + " passwords.");
 
             CryptKeys crypt = new CryptKeys() { KeySize = this.PasswordsEncryptionStrength };
 
-            this.TinyPicPassword = bEncrypt ? crypt.Encrypt(this.TinyPicPassword) : crypt.Decrypt(this.TinyPicPassword);
+            this.TestPassword = doEncrypt ? crypt.Encrypt(TestPassword) : crypt.Decrypt(TestPassword);
 
-            this.RapidSharePassword = bEncrypt ? crypt.Encrypt(this.RapidSharePassword) : crypt.Decrypt(this.RapidSharePassword);
+            this.TinyPicPassword = doEncrypt ? crypt.Encrypt(this.TinyPicPassword) : crypt.Decrypt(this.TinyPicPassword);
 
-            this.SendSpacePassword = bEncrypt ? crypt.Encrypt(this.SendSpacePassword) : crypt.Decrypt(this.SendSpacePassword);
+            this.RapidSharePassword = doEncrypt ? crypt.Encrypt(this.RapidSharePassword) : crypt.Decrypt(this.RapidSharePassword);
+
+            this.SendSpacePassword = doEncrypt ? crypt.Encrypt(this.SendSpacePassword) : crypt.Decrypt(this.SendSpacePassword);
 
             foreach (FTPAccount acc in this.FTPAccountList)
             {
-                acc.Password = bEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
-                acc.Passphrase = bEncrypt ? crypt.Encrypt(acc.Passphrase) : crypt.Decrypt(acc.Passphrase);
+                acc.Password = doEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
+                acc.Passphrase = doEncrypt ? crypt.Encrypt(acc.Passphrase) : crypt.Decrypt(acc.Passphrase);
             }
 
             foreach (LocalhostAccount acc in this.LocalhostAccountList)
             {
-                acc.Password = bEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
+                acc.Password = doEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
             }
 
-            this.EmailPassword = bEncrypt ? crypt.Encrypt(this.EmailPassword) : crypt.Decrypt(this.EmailPassword);
+            this.EmailPassword = doEncrypt ? crypt.Encrypt(this.EmailPassword) : crypt.Decrypt(this.EmailPassword);
         }
 
         public int GetFtpIndex(EDataType dataType)

@@ -30,7 +30,7 @@ namespace HelpersLib
         public const string ActivitiesAfterCapture = "2 - After Capture";
         public const string ActivitiesAfterCaptureEffects = "2a - Image Effects";
         public const string ActivitiesCapture = "1 - Capture";
-        public const string ActivitiesUploaders = "3 - Upload";
+        public const string ActivitiesUploaders = "3 - Publish";
         public const string ActivitiesUploadersImages = "3a - Upload Image";
         public const string ActivitiesUploadersText = "3b - Upload Text";
         public const string ActivitiesUploadersFiles = "3c - Upload File";
