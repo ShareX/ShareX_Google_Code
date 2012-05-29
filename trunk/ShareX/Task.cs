@@ -224,7 +224,7 @@ namespace ShareX
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
-                if (Info.ImageJob.HasFlagAny(TaskImageJob.UploadImageToHost, TaskImageJob.SaveImageToFile, TaskImageJob.SaveImageToFileWithDialog))
+                if (Info.ImageJob.HasFlagAny(TaskImageJob.SaveImageToFile, TaskImageJob.SaveImageToFileWithDialog, TaskImageJob.UploadImageToHost))
                 {
                     using (tempImage)
                     {
@@ -254,6 +254,15 @@ namespace ShareX
                                     DebugHelper.WriteLine("SaveImageToFileWithDialog: " + Info.FilePath);
                                 }
                             }
+                        }
+
+                        if (Info.ImageJob.HasFlag(TaskImageJob.PerformActions) && !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
+                        {
+                            if (data != null) data.Dispose();
+
+                            // TODO: PerformActions
+
+                            data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                         }
                     }
                 }

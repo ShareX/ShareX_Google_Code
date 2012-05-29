@@ -48,6 +48,16 @@ namespace HelpersLib
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
+
+                if (img.Width > pbClipboard.ClientSize.Width || img.Height > pbClipboard.ClientSize.Height)
+                {
+                    pbClipboard.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    pbClipboard.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+
                 pbClipboard.Image = img;
                 lblQuestion.Text = string.Format("Content type: Bitmap (Image), Size: {0}x{1}", img.Width, img.Height);
                 pbClipboard.Visible = true;

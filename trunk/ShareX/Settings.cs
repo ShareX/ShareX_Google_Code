@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.Collections.Generic;
 using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
@@ -90,15 +91,6 @@ namespace ShareX
 
         #endregion Hotkeys
 
-        #region Upload
-
-        public int UploadLimit = 5;
-        public int BufferSizePower = 3;
-        public bool ClipboardUploadAutoDetectURL = true;
-        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
-
-        #endregion Upload
-
         #region Image / Quality
 
         public EImageFormat ImageFormat = EImageFormat.PNG;
@@ -132,10 +124,26 @@ namespace ShareX
         public bool CaptureCopyImage = false;
         public bool CaptureSaveImage = false;
         public bool CaptureSaveImageWithDialog = false;
+        public bool CapturePerformActions = false;
         public bool CaptureUploadImage = true;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
         #endregion Capture
+
+        #region Actions
+
+        public List<FileAction> FileActions = new List<FileAction>();
+
+        #endregion Actions
+
+        #region Upload
+
+        public int UploadLimit = 5;
+        public int BufferSizePower = 3;
+        public bool ClipboardUploadAutoDetectURL = true;
+        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
+
+        #endregion Upload
 
         #region Proxy
 
