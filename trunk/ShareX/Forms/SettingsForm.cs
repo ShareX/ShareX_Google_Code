@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -141,9 +142,17 @@ namespace ShareX
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
 
             // Actions
-            foreach (FileAction fileAction in Program.Settings.FileActions)
+
+            if (Program.Settings.FileActions == null)
             {
-                AddFileAction(fileAction);
+                Program.Settings.FileActions = new List<FileAction>();
+            }
+            else
+            {
+                foreach (FileAction fileAction in Program.Settings.FileActions)
+                {
+                    AddFileAction(fileAction);
+                }
             }
 
             // Upload
