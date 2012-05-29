@@ -26,6 +26,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -260,7 +261,10 @@ namespace ShareX
                         {
                             if (data != null) data.Dispose();
 
-                            // TODO: PerformActions
+                            foreach (FileAction fileAction in Program.Settings.FileActions.Where(x => x.IsActive))
+                            {
+                                fileAction.Run(Info.FilePath);
+                            }
 
                             data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                         }

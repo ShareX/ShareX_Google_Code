@@ -25,48 +25,50 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using HelpersLib;
 
 namespace ShareX
 {
-    public class FileAction
+    public partial class FileActionForm : Form
     {
-        public bool IsActive { get; set; }
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public string Args { get; set; }
+        public FileAction FileAction { get; private set; }
 
-        public void Run(string filePath)
+        public FileActionForm()
+            : this(new FileAction())
         {
-            if (!string.IsNullOrEmpty(Path))
-            {
-                filePath = '"' + filePath.Trim('"') + '"';
+        }
 
-                using (Process process = new Process())
-                {
-                    ProcessStartInfo psi = new ProcessStartInfo(Path);
+        public FileActionForm(FileAction fileAction)
+        {
+            FileAction = fileAction;
+            InitializeComponent();
+            txtName.Text = fileAction.Name ?? "";
+            txtPath.Text = fileAction.Path ?? "";
+            txtArguments.Text = fileAction.Args ?? "";
+        }
 
-                    if (string.IsNullOrEmpty(Args))
-                    {
-                        psi.Arguments = filePath;
-                    }
-                    else
-                    {
-                        psi.Arguments = Args.Replace("%filepath%", filePath);
-                    }
+        private void btnPathBrowse_Click(object sender, EventArgs e)
+        {
+            Helpers.BrowseFile("ShareX - Choose file path", txtPath);
+        }
 
-                    process.StartInfo = psi;
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            FileAction.Name = txtName.Text;
+            FileAction.Path = txtPath.Text;
+            FileAction.Args = txtArguments.Text;
+            DialogResult = DialogResult.OK;
+        }
 
-                    DebugHelper.WriteLine(string.Format("Running {0} with arguments: {1}", Path, psi.Arguments));
-
-                    process.Start();
-                    process.WaitForExit();
-                }
-            }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
