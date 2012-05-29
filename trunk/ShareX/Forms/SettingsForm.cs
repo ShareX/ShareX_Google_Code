@@ -143,11 +143,7 @@ namespace ShareX
             // Actions
             foreach (FileAction fileAction in Program.Settings.FileActions)
             {
-                ListViewItem lvi = new ListViewItem(fileAction.Name);
-                lvi.Checked = fileAction.IsActive;
-                lvi.SubItems.Add(fileAction.Path);
-                lvi.SubItems.Add(fileAction.Args);
-                lvActions.Items.Add(lvi);
+                AddFileAction(fileAction);
             }
 
             // Upload
@@ -187,6 +183,16 @@ namespace ShareX
             this.Refresh();
         }
 
+        private void AddFileAction(FileAction fileAction)
+        {
+            ListViewItem lvi = new ListViewItem(fileAction.Name ?? "");
+            lvi.Tag = fileAction;
+            lvi.Checked = fileAction.IsActive;
+            lvi.SubItems.Add(fileAction.Path ?? "");
+            lvi.SubItems.Add(fileAction.Args ?? "");
+            lvActions.Items.Add(lvi);
+        }
+
         private void CreateCodesMenu()
         {
             codesMenu = new ContextMenuStrip
@@ -221,71 +227,6 @@ namespace ShareX
                 tsi.Click += (sender, e) => txtNameFormatPattern.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
                 codesMenu.Items.Add(tsi);
             }
-        }
-
-        private bool ChooseFile(string title, TextBox tb)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Title = title;
-
-                try
-                {
-                    string path = tb.Text;
-
-                    if (!string.IsNullOrEmpty(path))
-                    {
-                        path = Path.GetDirectoryName(path);
-
-                        if (Directory.Exists(path))
-                        {
-                            ofd.InitialDirectory = path;
-                        }
-                    }
-                }
-                finally
-                {
-                    if (string.IsNullOrEmpty(ofd.InitialDirectory))
-                    {
-                        ofd.InitialDirectory = Program.PersonalPath;
-                    }
-                }
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    tb.Text = ofd.FileName;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool ChooseFolder(string title, TextBox tb)
-        {
-            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
-            {
-                fbd.Description = title;
-
-                string path = tb.Text;
-
-                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-                {
-                    fbd.SelectedPath = path;
-                }
-                else
-                {
-                    fbd.SelectedPath = Program.PersonalPath;
-                }
-
-                if (fbd.ShowDialog() == DialogResult.OK)
-                {
-                    tb.Text = fbd.SelectedPath;
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         #region General
@@ -377,7 +318,7 @@ namespace ShareX
 
         private void btnBrowseCustomUploadersConfigPath_Click(object sender, EventArgs e)
         {
-            ChooseFile("ShareX - Choose uploaders config file path", txtCustomUploadersConfigPath);
+            Helpers.BrowseFile("ShareX - Choose uploaders config file path", txtCustomUploadersConfigPath, Program.PersonalPath);
             Program.Settings.CustomUploadersConfigPath = txtCustomUploadersConfigPath.Text;
             Program.LoadUploadersConfig();
         }
@@ -399,7 +340,7 @@ namespace ShareX
 
         private void btnBrowseCustomHistoryPath_Click(object sender, EventArgs e)
         {
-            ChooseFile("ShareX - Choose history file path", txtCustomHistoryPath);
+            Helpers.BrowseFile("ShareX - Choose history file path", txtCustomHistoryPath, Program.PersonalPath);
         }
 
         private void cbUseCustomScreenshotsPath_CheckedChanged(object sender, EventArgs e)
@@ -416,7 +357,7 @@ namespace ShareX
 
         private void btnBrowseCustomScreenshotsPath_Click(object sender, EventArgs e)
         {
-            ChooseFolder("Choose screenshots folder path", txtCustomScreenshotsPath);
+            Helpers.BrowseFolder("Choose screenshots folder path", txtCustomScreenshotsPath, Program.PersonalPath);
         }
 
         private void txtSaveImageSubFolderPattern_TextChanged(object sender, EventArgs e)
@@ -426,38 +367,6 @@ namespace ShareX
         }
 
         #endregion Paths
-
-        #region Upload
-
-        private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
-        }
-
-        private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
-            string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
-            lblBufferSizeInfo.Text = string.Format("x {0} kB = {1} kB", 1.024, bufferSize);
-        }
-
-        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
-        }
-
-        private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser().Convert(Program.Settings.NameFormatPattern);
-        }
-
-        private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
-        {
-            codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
-        }
-
-        #endregion Upload
 
         #region Image
 
@@ -699,6 +608,93 @@ namespace ShareX
         #endregion Capture / Shape capture
 
         #endregion Capture
+
+        #region Actions
+
+        private void btnActionsAdd_Click(object sender, EventArgs e)
+        {
+            using (FileActionForm form = new FileActionForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    FileAction fileAction = form.FileAction;
+                    fileAction.IsActive = true;
+                    Program.Settings.FileActions.Add(fileAction);
+                    AddFileAction(fileAction);
+                }
+            }
+        }
+
+        private void btnActionsEdit_Click(object sender, EventArgs e)
+        {
+            if (lvActions.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvActions.SelectedItems[0];
+                FileAction fileAction = lvi.Tag as FileAction;
+
+                using (FileActionForm form = new FileActionForm(fileAction))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        lvi.Text = fileAction.Name ?? "";
+                        lvi.SubItems[1].Text = fileAction.Path ?? "";
+                        lvi.SubItems[2].Text = fileAction.Args ?? "";
+                    }
+                }
+            }
+        }
+
+        private void btnActionsRemove_Click(object sender, EventArgs e)
+        {
+            if (lvActions.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvActions.SelectedItems[0];
+                FileAction fileAction = lvi.Tag as FileAction;
+
+                Program.Settings.FileActions.Remove(fileAction);
+                lvActions.Items.Remove(lvi);
+            }
+        }
+
+        private void lvActions_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            FileAction fileAction = e.Item.Tag as FileAction;
+            fileAction.IsActive = e.Item.Checked;
+        }
+
+        #endregion Actions
+
+        #region Upload
+
+        private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
+        }
+
+        private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
+            string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
+            lblBufferSizeInfo.Text = string.Format("x {0} kB = {1} kB", 1.024, bufferSize);
+        }
+
+        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
+        }
+
+        private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
+            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser().Convert(Program.Settings.NameFormatPattern);
+        }
+
+        private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
+        {
+            codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
+        }
+
+        #endregion Upload
 
         #region Proxy
 

@@ -508,5 +508,70 @@ namespace HelpersLib
                 }
             });
         }
+
+        public static bool BrowseFile(string title, TextBox tb, string initialDirectory = "")
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = title;
+
+                try
+                {
+                    string path = tb.Text;
+
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        path = Path.GetDirectoryName(path);
+
+                        if (Directory.Exists(path))
+                        {
+                            ofd.InitialDirectory = path;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (string.IsNullOrEmpty(ofd.InitialDirectory) && !string.IsNullOrEmpty(initialDirectory))
+                    {
+                        ofd.InitialDirectory = initialDirectory;
+                    }
+                }
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    tb.Text = ofd.FileName;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool BrowseFolder(string title, TextBox tb, string initialDirectory = "")
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                fbd.Description = title;
+
+                string path = tb.Text;
+
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                {
+                    fbd.SelectedPath = path;
+                }
+                else if (!string.IsNullOrEmpty(initialDirectory))
+                {
+                    fbd.SelectedPath = initialDirectory;
+                }
+
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    tb.Text = fbd.SelectedPath;
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

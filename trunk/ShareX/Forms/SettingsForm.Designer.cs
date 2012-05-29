@@ -126,7 +126,10 @@
             this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
             this.cbFixedShapeSize = new System.Windows.Forms.CheckBox();
             this.tpActions = new System.Windows.Forms.TabPage();
-            this.lvActions = new System.Windows.Forms.ListView();
+            this.btnActionsEdit = new System.Windows.Forms.Button();
+            this.btnActionsRemove = new System.Windows.Forms.Button();
+            this.btnActionsAdd = new System.Windows.Forms.Button();
+            this.lvActions = new HelpersLib.MyListView();
             this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -157,9 +160,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.btnActionsAdd = new System.Windows.Forms.Button();
-            this.btnActionsRemove = new System.Windows.Forms.Button();
-            this.btnActionsEdit = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1399,6 +1399,36 @@
             this.tpActions.Text = "Actions";
             this.tpActions.UseVisualStyleBackColor = true;
             // 
+            // btnActionsEdit
+            // 
+            this.btnActionsEdit.Location = new System.Drawing.Point(96, 16);
+            this.btnActionsEdit.Name = "btnActionsEdit";
+            this.btnActionsEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnActionsEdit.TabIndex = 4;
+            this.btnActionsEdit.Text = "Edit";
+            this.btnActionsEdit.UseVisualStyleBackColor = true;
+            this.btnActionsEdit.Click += new System.EventHandler(this.btnActionsEdit_Click);
+            // 
+            // btnActionsRemove
+            // 
+            this.btnActionsRemove.Location = new System.Drawing.Point(176, 16);
+            this.btnActionsRemove.Name = "btnActionsRemove";
+            this.btnActionsRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnActionsRemove.TabIndex = 3;
+            this.btnActionsRemove.Text = "Remove";
+            this.btnActionsRemove.UseVisualStyleBackColor = true;
+            this.btnActionsRemove.Click += new System.EventHandler(this.btnActionsRemove_Click);
+            // 
+            // btnActionsAdd
+            // 
+            this.btnActionsAdd.Location = new System.Drawing.Point(16, 16);
+            this.btnActionsAdd.Name = "btnActionsAdd";
+            this.btnActionsAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnActionsAdd.TabIndex = 2;
+            this.btnActionsAdd.Text = "Add";
+            this.btnActionsAdd.UseVisualStyleBackColor = true;
+            this.btnActionsAdd.Click += new System.EventHandler(this.btnActionsAdd_Click);
+            // 
             // lvActions
             // 
             this.lvActions.CheckBoxes = true;
@@ -1406,27 +1436,30 @@
             this.chActionsName,
             this.chActionsPath,
             this.chActionsArgs});
+            this.lvActions.FullRowSelect = true;
             this.lvActions.Location = new System.Drawing.Point(16, 48);
+            this.lvActions.MultiSelect = false;
             this.lvActions.Name = "lvActions";
             this.lvActions.Size = new System.Drawing.Size(488, 264);
             this.lvActions.TabIndex = 1;
             this.lvActions.UseCompatibleStateImageBehavior = false;
             this.lvActions.View = System.Windows.Forms.View.Details;
+            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
             // 
             // chActionsName
             // 
             this.chActionsName.Text = "Name";
-            this.chActionsName.Width = 87;
+            this.chActionsName.Width = 100;
             // 
             // chActionsPath
             // 
             this.chActionsPath.Text = "Path";
-            this.chActionsPath.Width = 182;
+            this.chActionsPath.Width = 250;
             // 
             // chActionsArgs
             // 
             this.chActionsArgs.Text = "Args";
-            this.chActionsArgs.Width = 147;
+            this.chActionsArgs.Width = 134;
             // 
             // tpUpload
             // 
@@ -1731,33 +1764,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // btnActionsAdd
-            // 
-            this.btnActionsAdd.Location = new System.Drawing.Point(16, 16);
-            this.btnActionsAdd.Name = "btnActionsAdd";
-            this.btnActionsAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnActionsAdd.TabIndex = 2;
-            this.btnActionsAdd.Text = "Add";
-            this.btnActionsAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnActionsRemove
-            // 
-            this.btnActionsRemove.Location = new System.Drawing.Point(176, 16);
-            this.btnActionsRemove.Name = "btnActionsRemove";
-            this.btnActionsRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnActionsRemove.TabIndex = 3;
-            this.btnActionsRemove.Text = "Remove";
-            this.btnActionsRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnActionsEdit
-            // 
-            this.btnActionsEdit.Location = new System.Drawing.Point(96, 16);
-            this.btnActionsEdit.Name = "btnActionsEdit";
-            this.btnActionsEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnActionsEdit.TabIndex = 4;
-            this.btnActionsEdit.Text = "Edit";
-            this.btnActionsEdit.UseVisualStyleBackColor = true;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1945,7 +1951,7 @@
         private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
         private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
         private System.Windows.Forms.TabPage tpActions;
-        private System.Windows.Forms.ListView lvActions;
+        private HelpersLib.MyListView lvActions;
         private System.Windows.Forms.ColumnHeader chActionsName;
         private System.Windows.Forms.ColumnHeader chActionsPath;
         private System.Windows.Forms.ColumnHeader chActionsArgs;
