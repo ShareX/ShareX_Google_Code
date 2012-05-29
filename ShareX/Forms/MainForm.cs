@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -112,31 +113,6 @@ namespace ShareX
             UploadManager.ListViewControl = lvUploads;
         }
 
-        private void LoadSettings()
-        {
-            niTray.Visible = Program.Settings.ShowTray;
-
-            int imageUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.ImageUploaderDestination);
-            ((ToolStripMenuItem)tsmiImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
-            UploadManager.ImageUploader = Program.Settings.ImageUploaderDestination;
-
-            int textUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.TextUploaderDestination);
-            ((ToolStripMenuItem)tsmiTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
-            UploadManager.TextUploader = Program.Settings.TextUploaderDestination;
-
-            int fileUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.FileUploaderDestination);
-            ((ToolStripMenuItem)tsmiFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
-            UploadManager.FileUploader = Program.Settings.FileUploaderDestination;
-
-            int urlShortenerIndex = Helpers.GetEnumMemberIndex(Program.Settings.URLShortenerDestination);
-            ((ToolStripMenuItem)tsmiURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
-            UploadManager.URLShortener = Program.Settings.URLShortenerDestination;
-
-            UpdateUploaderMenuNames();
-
-            UploadManager.UpdateProxySettings();
-        }
-
         private void UpdateControls()
         {
             copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = copyShortenedURLToolStripMenuItem.Visible =
@@ -199,6 +175,37 @@ namespace ShareX
             else
             {
                 uploadFileToolStripMenuItem.Visible = true;
+            }
+        }
+
+        private void LoadSettings()
+        {
+            niTray.Visible = Program.Settings.ShowTray;
+
+            int imageUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.ImageUploaderDestination);
+            ((ToolStripMenuItem)tsmiImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
+            UploadManager.ImageUploader = Program.Settings.ImageUploaderDestination;
+
+            int textUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.TextUploaderDestination);
+            ((ToolStripMenuItem)tsmiTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
+            UploadManager.TextUploader = Program.Settings.TextUploaderDestination;
+
+            int fileUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.FileUploaderDestination);
+            ((ToolStripMenuItem)tsmiFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
+            UploadManager.FileUploader = Program.Settings.FileUploaderDestination;
+
+            int urlShortenerIndex = Helpers.GetEnumMemberIndex(Program.Settings.URLShortenerDestination);
+            ((ToolStripMenuItem)tsmiURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
+            UploadManager.URLShortener = Program.Settings.URLShortenerDestination;
+
+            UpdateUploaderMenuNames();
+
+            UploadManager.UpdateProxySettings();
+
+            if (Program.Settings.FileActions == null)
+            {
+                Program.Settings.FileActions = new List<FileAction>();
+                Program.Settings.FileActions.Add(new FileAction { Name = "Paint", Path = "mspaint" });
             }
         }
 

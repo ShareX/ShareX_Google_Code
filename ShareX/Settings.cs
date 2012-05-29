@@ -132,7 +132,7 @@ namespace ShareX
 
         #region Actions
 
-        public List<FileAction> FileActions = new List<FileAction> { new FileAction { Name = "Paint", Path = "mspaint" } };
+        public List<FileAction> FileActions;
 
         #endregion Actions
 
