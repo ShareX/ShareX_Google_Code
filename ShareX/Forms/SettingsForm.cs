@@ -84,19 +84,6 @@ namespace ShareX
             txtCustomScreenshotsPath.Text = Program.Settings.CustomScreenshotsPath;
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
 
-            // Upload
-            nudUploadLimit.Value = Program.Settings.UploadLimit;
-
-            for (int i = 0; i < MaxBufferSizePower; i++)
-            {
-                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0"));
-            }
-
-            cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
-            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
-            txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
-            CreateCodesMenu();
-
             // Image - Quality
             cbImageFormat.SelectedIndex = (int)Program.Settings.ImageFormat;
             nudImageJPEGQuality.Value = Program.Settings.ImageJPEGQuality;
@@ -140,6 +127,7 @@ namespace ShareX
             cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
             cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
             cbCaptureSaveImageWithDialog.Checked = Program.Settings.CaptureSaveImageWithDialog;
+            cbCapturePerformActions.Checked = Program.Settings.CapturePerformActions;
             cbCaptureUploadImage.Checked = Program.Settings.CaptureUploadImage;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
@@ -151,6 +139,29 @@ namespace ShareX
             nudFixedShapeSizeHeight.Value = Program.Settings.SurfaceOptions.FixedSize.Height;
             cbShapeIncludeControls.Checked = Program.Settings.SurfaceOptions.IncludeControls;
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
+
+            // Actions
+            foreach (FileAction fileAction in Program.Settings.FileActions)
+            {
+                ListViewItem lvi = new ListViewItem(fileAction.Name);
+                lvi.Checked = fileAction.IsActive;
+                lvi.SubItems.Add(fileAction.Path);
+                lvi.SubItems.Add(fileAction.Args);
+                lvActions.Items.Add(lvi);
+            }
+
+            // Upload
+            nudUploadLimit.Value = Program.Settings.UploadLimit;
+
+            for (int i = 0; i < MaxBufferSizePower; i++)
+            {
+                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0"));
+            }
+
+            cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
+            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
+            txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
+            CreateCodesMenu();
 
             // Proxy
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
@@ -624,6 +635,11 @@ namespace ShareX
         private void cbCaptureSaveImageWithDialog_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureSaveImageWithDialog = cbCaptureSaveImageWithDialog.Checked;
+        }
+
+        private void cbCapturePerformActions_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CapturePerformActions = cbCapturePerformActions.Checked;
         }
 
         private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)

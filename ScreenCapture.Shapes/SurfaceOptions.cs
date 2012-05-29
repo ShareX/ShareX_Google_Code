@@ -30,10 +30,10 @@ namespace ScreenCapture
 {
     public class SurfaceOptions
     {
-        [DefaultValue(true), Description("Show shape dimensions.")]
+        [DefaultValue(true), Description("Show coordinate and size information.")]
         public bool ShowInfo { get; set; }
 
-        [DefaultValue(true), Description("Show crosshair.")]
+        [DefaultValue(true), Description("Show screen wide crosshair.")]
         public bool ShowCrosshair { get; set; }
 
         [DefaultValue(true), Description("Show magnifier.")]
