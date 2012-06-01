@@ -2668,6 +2668,7 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Outputs Configuration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UploadersConfigForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UploadersConfigForm_FormClosed);
             this.Resize += new System.EventHandler(this.UploadersConfigForm_Resize);
             this.tcUploaders.ResumeLayout(false);

@@ -882,5 +882,10 @@ namespace UploadersLib
         }
 
         #endregion Other Services
+
+        private void UploadersConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = !ValidateSettings();
+        }
     }
 }
