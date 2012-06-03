@@ -427,11 +427,11 @@ namespace ShareX
         {
             if (Program.Settings.IsPreviewCollapsed)
             {
-                btnSplitterControl.Image = Resources.application_dock;
+                btnSplitterControl.Image = Resources.application_dock_180;
             }
             else
             {
-                btnSplitterControl.Image = Resources.application_dock_180;
+                btnSplitterControl.Image = Resources.application_dock;
             }
 
             scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
