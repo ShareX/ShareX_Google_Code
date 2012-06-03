@@ -207,7 +207,7 @@ namespace ShareX
 
         private void AddDefaultExternalPrograms()
         {
-            if (Program.Settings.ExternalPrograms != null)
+            if (Program.Settings.ExternalPrograms == null)
             {
                 Program.Settings.ExternalPrograms = new List<ExternalProgram>();
                 AddExternalProgram("Paint", "mspaint.exe");

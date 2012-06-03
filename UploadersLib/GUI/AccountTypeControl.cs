@@ -34,6 +34,7 @@ namespace UploadersLib.GUI
     public partial class AccountTypeControl : UserControl
     {
         public delegate void AccountTypeChangedEventHandler(AccountType accountType);
+
         public event AccountTypeChangedEventHandler AccountTypeChanged;
 
         public AccountType SelectedAccountType

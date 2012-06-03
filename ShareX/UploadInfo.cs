@@ -27,7 +27,6 @@ using System;
 using System.IO;
 using HelpersLib;
 using HistoryLib;
-using ShareX.HelperClasses;
 using UploadersLib.HelperClasses;
 
 namespace ShareX

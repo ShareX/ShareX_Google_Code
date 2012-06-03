@@ -26,8 +26,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Media;
 using System.Threading;
 using System.Windows.Forms;
 using HelpersLib;
