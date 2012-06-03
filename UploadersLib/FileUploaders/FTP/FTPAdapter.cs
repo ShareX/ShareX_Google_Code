@@ -52,11 +52,9 @@ namespace UploadersLib
     public class FTPAdapter
     {
         public event ProgressEventHandler ProgressChanged;
-
         public delegate void ProgressEventHandler(ProgressManager progress);
 
         public event StringEventHandler FTPOutput;
-
         public delegate void StringEventHandler(string text);
 
         public FTPOptions Options;

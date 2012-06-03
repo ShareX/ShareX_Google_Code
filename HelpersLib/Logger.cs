@@ -33,7 +33,6 @@ namespace HelpersLib
     public class Logger
     {
         public delegate void MessageAddedEventHandler(string message);
-
         public event MessageAddedEventHandler MessageAdded;
 
         public StringBuilder Messages { get; private set; }
