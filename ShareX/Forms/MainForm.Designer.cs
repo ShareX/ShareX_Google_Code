@@ -100,7 +100,6 @@ namespace ShareX
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.tscMain = new System.Windows.Forms.ToolStripContainer();
-            this.btnSplitterControl = new HelpersLib.NoFocusBorderButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lvUploads = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -113,6 +112,7 @@ namespace ShareX
             this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pbPreview = new System.Windows.Forms.PictureBox();
+            this.btnSplitterControl = new HelpersLib.NoFocusBorderButton();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTrayClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
@@ -544,7 +544,6 @@ namespace ShareX
             // 
             // tscMain.ContentPanel
             // 
-            this.tscMain.ContentPanel.Controls.Add(this.btnSplitterControl);
             this.tscMain.ContentPanel.Controls.Add(this.scMain);
             this.tscMain.ContentPanel.Padding = new System.Windows.Forms.Padding(3);
             this.tscMain.ContentPanel.Size = new System.Drawing.Size(894, 329);
@@ -561,24 +560,10 @@ namespace ShareX
             // 
             this.tscMain.TopToolStripPanel.Controls.Add(this.tsMain);
             // 
-            // btnSplitterControl
-            // 
-            this.btnSplitterControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSplitterControl.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSplitterControl.FlatAppearance.BorderSize = 0;
-            this.btnSplitterControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplitterControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSplitterControl.Image = global::ShareX.Properties.Resources.application_dock_180;
-            this.btnSplitterControl.Location = new System.Drawing.Point(864, 144);
-            this.btnSplitterControl.Name = "btnSplitterControl";
-            this.btnSplitterControl.Size = new System.Drawing.Size(32, 32);
-            this.btnSplitterControl.TabIndex = 1;
-            this.btnSplitterControl.UseVisualStyleBackColor = true;
-            this.btnSplitterControl.Click += new System.EventHandler(this.btnSplitterControl_Click);
-            // 
             // scMain
             // 
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.scMain.Location = new System.Drawing.Point(3, 3);
             this.scMain.Name = "scMain";
             // 
@@ -675,6 +660,21 @@ namespace ShareX
             this.pbPreview.Size = new System.Drawing.Size(96, 100);
             this.pbPreview.TabIndex = 0;
             this.pbPreview.TabStop = false;
+            // 
+            // btnSplitterControl
+            // 
+            this.btnSplitterControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSplitterControl.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.btnSplitterControl.FlatAppearance.BorderSize = 0;
+            this.btnSplitterControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplitterControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSplitterControl.Image = global::ShareX.Properties.Resources.application_dock_180;
+            this.btnSplitterControl.Location = new System.Drawing.Point(859, 2);
+            this.btnSplitterControl.Name = "btnSplitterControl";
+            this.btnSplitterControl.Size = new System.Drawing.Size(32, 32);
+            this.btnSplitterControl.TabIndex = 1;
+            this.btnSplitterControl.UseVisualStyleBackColor = true;
+            this.btnSplitterControl.Click += new System.EventHandler(this.btnSplitterControl_Click);
             // 
             // niTray
             // 
@@ -887,6 +887,7 @@ namespace ShareX
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(894, 362);
+            this.Controls.Add(this.btnSplitterControl);
             this.Controls.Add(this.tscMain);
             this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(910, 400);
