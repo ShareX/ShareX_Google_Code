@@ -42,6 +42,7 @@ namespace ShareX
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;
         public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
         public bool ShowClipboardContentViewer = true;
+        public bool IsPreviewCollapsed = true;
 
         #endregion Main Form
 
@@ -122,7 +123,7 @@ namespace ShareX
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
         public bool CaptureCopyImage = false;
-        public bool CaptureSaveImage = false;
+        public bool CaptureSaveImage = true;
         public bool CaptureSaveImageWithDialog = false;
         public bool CapturePerformActions = false;
         public bool CaptureUploadImage = true;
