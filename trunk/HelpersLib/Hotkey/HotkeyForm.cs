@@ -42,7 +42,6 @@ namespace HelpersLib
         public int HotkeyRepeatLimit { get; set; }
 
         public delegate void HotkeyEventHandler(KeyEventArgs e);
-
         public event HotkeyEventHandler HotkeyPress;
 
         private Stopwatch repeatLimitTimer;

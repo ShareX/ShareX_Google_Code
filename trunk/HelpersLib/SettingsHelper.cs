@@ -44,9 +44,9 @@ namespace HelpersLib
 
             try
             {
-                lock (obj)
+                if (!string.IsNullOrEmpty(filePath))
                 {
-                    if (!string.IsNullOrEmpty(filePath))
+                    lock (obj)
                     {
                         using (MemoryStream ms = new MemoryStream())
                         {
@@ -135,11 +135,11 @@ namespace HelpersLib
                 {
                     DebugHelper.WriteException(e, "Settings load failed");
                 }
-            }
 
-            if (checkBackup)
-            {
-                return Load<T>(path + ".bak", type, false);
+                if (checkBackup)
+                {
+                    return Load<T>(path + ".bak", type, false);
+                }
             }
 
             DebugHelper.WriteLine("Settings not found. Loading new instance.");

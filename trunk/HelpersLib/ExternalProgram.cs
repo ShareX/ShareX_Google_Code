@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Diagnostics;
 
 namespace HelpersLib
@@ -53,25 +54,32 @@ namespace HelpersLib
             {
                 filePath = '"' + filePath.Trim('"') + '"';
 
-                using (Process process = new Process())
+                try
                 {
-                    ProcessStartInfo psi = new ProcessStartInfo(Path);
-
-                    if (string.IsNullOrEmpty(Args))
+                    using (Process process = new Process())
                     {
-                        psi.Arguments = filePath;
+                        ProcessStartInfo psi = new ProcessStartInfo(Path);
+
+                        if (string.IsNullOrEmpty(Args))
+                        {
+                            psi.Arguments = filePath;
+                        }
+                        else
+                        {
+                            psi.Arguments = Args.Replace("%filepath%", filePath);
+                        }
+
+                        process.StartInfo = psi;
+
+                        DebugHelper.WriteLine(string.Format("Running {0} with arguments: {1}", Path, psi.Arguments));
+
+                        process.Start();
+                        process.WaitForExit();
                     }
-                    else
-                    {
-                        psi.Arguments = Args.Replace("%filepath%", filePath);
-                    }
-
-                    process.StartInfo = psi;
-
-                    DebugHelper.WriteLine(string.Format("Running {0} with arguments: {1}", Path, psi.Arguments));
-
-                    process.Start();
-                    process.WaitForExit();
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e);
                 }
             }
         }

@@ -66,7 +66,12 @@ namespace ShareX
         {
             get
             {
-                return Path.Combine(PersonalPath, SettingsFileName);
+                if (!IsSandbox)
+                {
+                    return Path.Combine(PersonalPath, SettingsFileName);
+                }
+
+                return null;
             }
         }
 
@@ -74,12 +79,17 @@ namespace ShareX
         {
             get
             {
-                if (Settings != null && Settings.UseCustomUploadersConfigPath && !string.IsNullOrEmpty(Settings.CustomUploadersConfigPath))
+                if (!IsSandbox)
                 {
-                    return Settings.CustomUploadersConfigPath;
+                    if (Settings != null && Settings.UseCustomUploadersConfigPath && !string.IsNullOrEmpty(Settings.CustomUploadersConfigPath))
+                    {
+                        return Settings.CustomUploadersConfigPath;
+                    }
+
+                    return Path.Combine(PersonalPath, UploadersConfigFileName);
                 }
 
-                return Path.Combine(PersonalPath, UploadersConfigFileName);
+                return null;
             }
         }
 
@@ -144,6 +154,7 @@ namespace ShareX
         public static bool IsSilentRun { get; private set; }
         public static bool IsDebug { get; private set; }
         public static bool IsHotkeysAllowed { get; private set; }
+        public static bool IsSandbox { get; private set; }
         public static Stopwatch StartTimer { get; private set; }
         public static Logger MyLogger { get; private set; }
 
@@ -190,6 +201,7 @@ namespace ShareX
 
                 IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
                 IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
+                IsSandbox = CLIHelper.CheckArgs(args, "sandbox");
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -199,11 +211,6 @@ namespace ShareX
                 MyLogger.WriteLine("{0} started", Title);
                 MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
                 MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
-                MyLogger.WriteLine("IsMultiInstance: " + IsMultiInstance);
-                MyLogger.WriteLine("IsSilentRun: " + IsSilentRun);
-                MyLogger.WriteLine("IsPortable: " + IsPortable);
-                MyLogger.WriteLine("IsDebug: " + IsDebug);
-                MyLogger.WriteLine("IsHotkeysEnabled: " + IsHotkeysAllowed);
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
