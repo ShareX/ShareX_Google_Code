@@ -591,8 +591,9 @@ namespace ShareX
             this.scMain.Panel2.Controls.Add(this.pbPreview);
             this.scMain.Panel2Collapsed = true;
             this.scMain.Size = new System.Drawing.Size(888, 323);
-            this.scMain.SplitterDistance = 468;
+            this.scMain.SplitterDistance = 500;
             this.scMain.TabIndex = 1;
+            this.scMain.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scMain_SplitterMoved);
             // 
             // lvUploads
             // 
