@@ -33,21 +33,13 @@ namespace UploadersLib.HelperClasses
     public class UploadResult
     {
         public string Host { get; set; }
-
         public string LocalFilePath { get; set; }
-
         public string URL { get; set; }
-
         public string ThumbnailURL { get; set; }
-
         public string DeletionURL { get; set; }
-
         public string ShortenedURL { get; set; }
-
         public string Source { get; set; }
-
         public List<string> Errors { get; set; }
-
         public bool IsURLExpected { get; set; }
 
         public bool IsError

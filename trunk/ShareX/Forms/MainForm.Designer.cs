@@ -92,6 +92,7 @@ namespace ShareX
             this.tsmiTestImageUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestTextUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestFileUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tssMain1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbHistory = new System.Windows.Forms.ToolStripButton();
@@ -99,6 +100,8 @@ namespace ShareX
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.tscMain = new System.Windows.Forms.ToolStripContainer();
+            this.btnSplitterControl = new HelpersLib.NoFocusBorderButton();
+            this.scMain = new System.Windows.Forms.SplitContainer();
             this.lvUploads = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -109,6 +112,7 @@ namespace ShareX
             this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pbPreview = new System.Windows.Forms.PictureBox();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTrayClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,12 +137,15 @@ namespace ShareX
             this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
             this.tscMain.TopToolStripPanel.SuspendLayout();
             this.tscMain.SuspendLayout();
+            this.scMain.Panel1.SuspendLayout();
+            this.scMain.Panel2.SuspendLayout();
+            this.scMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.cmsTray.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -249,7 +256,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(820, 33);
+            this.tsMain.Size = new System.Drawing.Size(789, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -473,6 +480,14 @@ namespace ShareX
             this.tsmiTestFileUpload.Text = "Test file upload";
             this.tsmiTestFileUpload.Click += new System.EventHandler(this.tsmiTestFileUpload_Click);
             // 
+            // tsmiTestURLShortener
+            // 
+            this.tsmiTestURLShortener.Image = global::ShareX.Properties.Resources.edit_scale;
+            this.tsmiTestURLShortener.Name = "tsmiTestURLShortener";
+            this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestURLShortener.Text = "Test URL shortener";
+            this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
+            // 
             // tsmiTestShapeCapture
             // 
             this.tsmiTestShapeCapture.Image = global::ShareX.Properties.Resources.camera;
@@ -529,21 +544,55 @@ namespace ShareX
             // 
             // tscMain.ContentPanel
             // 
-            this.tscMain.ContentPanel.Controls.Add(this.lvUploads);
+            this.tscMain.ContentPanel.Controls.Add(this.btnSplitterControl);
+            this.tscMain.ContentPanel.Controls.Add(this.scMain);
             this.tscMain.ContentPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.tscMain.ContentPanel.Size = new System.Drawing.Size(902, 333);
+            this.tscMain.ContentPanel.Size = new System.Drawing.Size(894, 329);
             this.tscMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tscMain.LeftToolStripPanelVisible = false;
             this.tscMain.Location = new System.Drawing.Point(0, 0);
             this.tscMain.Name = "tscMain";
             this.tscMain.RightToolStripPanelVisible = false;
-            this.tscMain.Size = new System.Drawing.Size(902, 366);
+            this.tscMain.Size = new System.Drawing.Size(894, 362);
             this.tscMain.TabIndex = 0;
             this.tscMain.Text = "toolStripContainer1";
             // 
             // tscMain.TopToolStripPanel
             // 
             this.tscMain.TopToolStripPanel.Controls.Add(this.tsMain);
+            // 
+            // btnSplitterControl
+            // 
+            this.btnSplitterControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSplitterControl.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSplitterControl.FlatAppearance.BorderSize = 0;
+            this.btnSplitterControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplitterControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSplitterControl.Image = global::ShareX.Properties.Resources.application_dock_180;
+            this.btnSplitterControl.Location = new System.Drawing.Point(864, 144);
+            this.btnSplitterControl.Name = "btnSplitterControl";
+            this.btnSplitterControl.Size = new System.Drawing.Size(32, 32);
+            this.btnSplitterControl.TabIndex = 1;
+            this.btnSplitterControl.UseVisualStyleBackColor = true;
+            this.btnSplitterControl.Click += new System.EventHandler(this.btnSplitterControl_Click);
+            // 
+            // scMain
+            // 
+            this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scMain.Location = new System.Drawing.Point(3, 3);
+            this.scMain.Name = "scMain";
+            // 
+            // scMain.Panel1
+            // 
+            this.scMain.Panel1.Controls.Add(this.lvUploads);
+            // 
+            // scMain.Panel2
+            // 
+            this.scMain.Panel2.Controls.Add(this.pbPreview);
+            this.scMain.Panel2Collapsed = true;
+            this.scMain.Size = new System.Drawing.Size(888, 323);
+            this.scMain.SplitterDistance = 468;
+            this.scMain.TabIndex = 1;
             // 
             // lvUploads
             // 
@@ -561,10 +610,10 @@ namespace ShareX
             this.lvUploads.FullRowSelect = true;
             this.lvUploads.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvUploads.HideSelection = false;
-            this.lvUploads.Location = new System.Drawing.Point(3, 3);
+            this.lvUploads.Location = new System.Drawing.Point(0, 0);
             this.lvUploads.Name = "lvUploads";
             this.lvUploads.ShowItemToolTips = true;
-            this.lvUploads.Size = new System.Drawing.Size(896, 327);
+            this.lvUploads.Size = new System.Drawing.Size(888, 323);
             this.lvUploads.TabIndex = 0;
             this.lvUploads.UseCompatibleStateImageBehavior = false;
             this.lvUploads.View = System.Windows.Forms.View.Details;
@@ -614,7 +663,17 @@ namespace ShareX
             // chURL
             // 
             this.chURL.Text = "URL";
-            this.chURL.Width = 247;
+            this.chURL.Width = 234;
+            // 
+            // pbPreview
+            // 
+            this.pbPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPreview.Location = new System.Drawing.Point(0, 0);
+            this.pbPreview.Name = "pbPreview";
+            this.pbPreview.Size = new System.Drawing.Size(96, 100);
+            this.pbPreview.TabIndex = 0;
+            this.pbPreview.TabStop = false;
             // 
             // niTray
             // 
@@ -821,20 +880,12 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
-            // tsmiTestURLShortener
-            // 
-            this.tsmiTestURLShortener.Image = global::ShareX.Properties.Resources.edit_scale;
-            this.tsmiTestURLShortener.Name = "tsmiTestURLShortener";
-            this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestURLShortener.Text = "Test URL shortener";
-            this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(902, 366);
+            this.ClientSize = new System.Drawing.Size(894, 362);
             this.Controls.Add(this.tscMain);
             this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(910, 400);
@@ -854,6 +905,10 @@ namespace ShareX
             this.tscMain.TopToolStripPanel.PerformLayout();
             this.tscMain.ResumeLayout(false);
             this.tscMain.PerformLayout();
+            this.scMain.Panel1.ResumeLayout(false);
+            this.scMain.Panel2.ResumeLayout(false);
+            this.scMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.cmsTray.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -940,5 +995,8 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayLastRegion;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestFileUpload;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
+        private System.Windows.Forms.SplitContainer scMain;
+        private System.Windows.Forms.PictureBox pbPreview;
+        private HelpersLib.NoFocusBorderButton btnSplitterControl;
     }
 }

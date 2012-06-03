@@ -81,6 +81,20 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap application_dock {
+            get {
+                object obj = ResourceManager.GetObject("application_dock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap application_dock_180 {
+            get {
+                object obj = ResourceManager.GetObject("application_dock_180", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap application_form {
             get {
                 object obj = ResourceManager.GetObject("application_form", resourceCulture);

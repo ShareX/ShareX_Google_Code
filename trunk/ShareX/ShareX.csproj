@@ -252,6 +252,12 @@
   <ItemGroup>
     <None Include="Resources\Camera.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application-dock-180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application-dock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

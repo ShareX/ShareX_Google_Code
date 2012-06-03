@@ -104,6 +104,9 @@
     <Compile Include="UserControls\BlackStyle\MyProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserControls\NoFocusBorderButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Wizards\ClipboardContentViewer.cs">
       <SubType>Form</SubType>
     </Compile>

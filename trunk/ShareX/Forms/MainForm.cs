@@ -25,6 +25,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -201,6 +203,8 @@ namespace ShareX
             UpdateUploaderMenuNames();
 
             UploadManager.UpdateProxySettings();
+
+            UpdatePreviewSplitter();
 
             AddDefaultExternalPrograms();
         }
@@ -386,6 +390,46 @@ namespace ShareX
                 form.Icon = this.Icon;
                 form.Show();
             }
+        }
+
+        private void ShowPreview(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                try
+                {
+                    Image img = Image.FromFile(filePath);
+
+                    if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
+                    {
+                        pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    else
+                    {
+                        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
+                    }
+
+                    pbPreview.Image = img;
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e);
+                }
+            }
+        }
+
+        private void UpdatePreviewSplitter()
+        {
+            if (Program.Settings.IsPreviewCollapsed)
+            {
+                btnSplitterControl.Image = Resources.application_dock;
+            }
+            else
+            {
+                btnSplitterControl.Image = Resources.application_dock_180;
+            }
+
+            scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
         }
 
         public void ShowActivate()
@@ -589,6 +633,16 @@ namespace ShareX
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateControls();
+
+            if (!scMain.Panel2Collapsed)
+            {
+                UploadResult result = GetCurrentUploadResult();
+
+                if (result != null)
+                {
+                    ShowPreview(result.LocalFilePath);
+                }
+            }
         }
 
         private void lvUploads_MouseUp(object sender, MouseEventArgs e)
@@ -659,6 +713,12 @@ namespace ShareX
         private void lvUploads_DoubleClick(object sender, EventArgs e)
         {
             OpenURL();
+        }
+
+        private void btnSplitterControl_Click(object sender, EventArgs e)
+        {
+            Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
+            UpdatePreviewSplitter();
         }
 
         #region Tray events
