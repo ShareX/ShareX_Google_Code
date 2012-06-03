@@ -29,6 +29,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -572,6 +573,20 @@ namespace HelpersLib
             }
 
             return false;
+        }
+
+        public static void Backup(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
+                    CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
+            }
+        }
+
+        public static void BackupAsync(string filePath)
+        {
+            ThreadPool.QueueUserWorkItem(state => Backup(filePath));
         }
     }
 }

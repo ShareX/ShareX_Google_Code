@@ -278,7 +278,7 @@ namespace UploadersLib.FileUploaders
         [Description("Delete/Modify all existing files and folders")]
         modify_all,
         [Description("Modify user preferences")]
-        modify_user,
+        modify_user
     }
 
     public class MinusAuthToken
@@ -325,6 +325,7 @@ namespace UploadersLib.FileUploaders
             return Tokens.FirstOrDefault(mat => scope.ToString() == mat.scope);
         }
 
+        [JsonIgnore]
         public MinusFolder MinusFolderActive
         {
             get

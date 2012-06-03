@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -31,18 +32,18 @@ namespace HelpersLib
 {
     public static class RegistryHelper
     {
-        private static string WindowsStartupRun = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private static string ApplicationPath = string.Format("\"{0}\"", Application.ExecutablePath);
-        private static string StartupPath = ApplicationPath + " -silent";
+        private static readonly string WindowsStartupRun = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        private static readonly string ApplicationPath = string.Format("\"{0}\"", Application.ExecutablePath);
+        private static readonly string StartupPath = ApplicationPath + " -silent";
 
-        private static string ShellExtMenuFiles = @"Software\Classes\*\shell\" + Application.ProductName;
-        private static string ShellExtMenuFilesCmd = ShellExtMenuFiles + @"\command";
+        private static readonly string ShellExtMenuFiles = @"Software\Classes\*\shell\" + Application.ProductName;
+        private static readonly string ShellExtMenuFilesCmd = ShellExtMenuFiles + @"\command";
 
-        private static string ShellExtMenuFolders = @"Software\Classes\Folder\shell\" + Application.ProductName;
-        private static string ShellExtMenuFoldersCmd = ShellExtMenuFolders + @"\command";
+        private static readonly string ShellExtMenuFolders = @"Software\Classes\Folder\shell\" + Application.ProductName;
+        private static readonly string ShellExtMenuFoldersCmd = ShellExtMenuFolders + @"\command";
 
-        private static string ShellExtDesc = "Upload using " + Application.ProductName;
-        private static string ShellExtPath = string.Format("{0} \"%1\"", ApplicationPath);
+        private static readonly string ShellExtDesc = "Upload using " + Application.ProductName;
+        private static readonly string ShellExtPath = string.Format("{0} \"%1\"", ApplicationPath);
 
         public static bool CheckStartWithWindows()
         {
@@ -130,6 +131,54 @@ namespace HelpersLib
             RemoveRegistryKey(ShellExtMenuFiles);
             RemoveRegistryKey(ShellExtMenuFoldersCmd);
             RemoveRegistryKey(ShellExtMenuFolders);
+        }
+
+        public static ExternalProgram FindProgram(string name, string filename)
+        {
+            // First method: HKEY_CLASSES_ROOT\Applications\{filename}\shell\{command}\command
+
+            string[] commands = new string[] { "open", "edit" };
+
+            foreach (string command in commands)
+            {
+                string path = string.Format(@"HKEY_CLASSES_ROOT\Applications\{0}\shell\{1}\command", filename, command);
+                string value = Registry.GetValue(path, null, null) as string;
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    string filePath = value.ParseQuoteString();
+
+                    if (File.Exists(filePath))
+                    {
+                        DebugHelper.WriteLine("Found program with first method: " + filePath);
+                        return new ExternalProgram(name, filePath);
+                    }
+                }
+            }
+
+            // Second method: Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
+
+            using (RegistryKey programs = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache"))
+            {
+                if (programs != null)
+                {
+                    foreach (string filePath in programs.GetValueNames())
+                    {
+                        if (!string.IsNullOrEmpty(filePath) && programs.GetValueKind(filePath) == RegistryValueKind.String)
+                        {
+                            string programName = programs.GetValue(filePath, null) as string;
+
+                            if (!string.IsNullOrEmpty(programName) && programName.Equals(name, StringComparison.InvariantCultureIgnoreCase) && File.Exists(filePath))
+                            {
+                                DebugHelper.WriteLine("Found program with second method: " + filePath);
+                                return new ExternalProgram(name, filePath);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
         private static void CreateRegistryKey(string path, string value, string name = null)

@@ -35,7 +35,7 @@ namespace HelpersLib
 {
     public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
     {
-        public static SerializationType SerializationType = SerializationType.Json;
+        public static readonly SerializationType SerializationType = SerializationType.Json;
 
         [Browsable(false), XmlIgnore, JsonIgnore]
         public string FilePath { get; private set; }
@@ -77,33 +77,6 @@ namespace HelpersLib
         {
             T setting = SettingsHelper.Load<T>(stream, SerializationType);
             return setting;
-        }
-
-        public void Backup(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
-                    CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
-            }
-        }
-
-        public void BackupAsync(string filePath)
-        {
-            ThreadPool.QueueUserWorkItem(state => Backup(filePath));
-        }
-
-        public T Clone()
-        {
-            try
-            {
-                return (T)Helpers.Clone(this);
-            }
-            catch (Exception ex)
-            {
-                DebugHelper.WriteException(ex, "Error cloning.");
-                return new T();
-            }
         }
     }
 }

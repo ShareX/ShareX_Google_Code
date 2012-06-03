@@ -38,25 +38,6 @@ namespace UploadersLib
 {
     public class UploadersConfig : SettingsBase<UploadersConfig>
     {
-        public UploadersConfig()
-        {
-            PasswordsEncryptionStrength = EncryptionStrength.High;
-            TestPassword = "password";
-        }
-
-        #region General
-
-        [Category(ComponentModelStrings.AppPasswords), DefaultValue(false), Description("Encrypt passwords using AES")]
-        public bool PasswordsSecureUsingEncryption { get; set; }
-
-        [Browsable(false), Category(ComponentModelStrings.AppPasswords), DefaultValue(EncryptionStrength.High), Description("Strength can be Low = 128, Medium = 192, or High = 256")]
-        public EncryptionStrength PasswordsEncryptionStrength { get; set; }
-
-        [Browsable(false), Category(ComponentModelStrings.AppPasswords), DefaultValue("password"), Description("If this SamplePassword displayed as 'password' then configuration is not encrypted.")]
-        public string TestPassword { get; set; }
-
-        #endregion General
-
         #region Image uploaders
 
         // ImageShack
@@ -269,42 +250,6 @@ namespace UploadersLib
             return false;
         }
 
-        public void CryptPasswords(bool doEncrypt)
-        {
-            bool isEncrypted = TestPassword != "password";
-
-            if (doEncrypt && isEncrypted || !doEncrypt && !isEncrypted)
-            {
-                // ensure encrupted passwords are not encrypted again or decrypted passwords are not decrypted again
-                return;
-            }
-
-            DebugHelper.WriteLine((doEncrypt ? "Encrypting " : "Decrypting") + " passwords.");
-
-            CryptKeys crypt = new CryptKeys() { KeySize = this.PasswordsEncryptionStrength };
-
-            this.TestPassword = doEncrypt ? crypt.Encrypt(TestPassword) : crypt.Decrypt(TestPassword);
-
-            this.TinyPicPassword = doEncrypt ? crypt.Encrypt(this.TinyPicPassword) : crypt.Decrypt(this.TinyPicPassword);
-
-            this.RapidSharePassword = doEncrypt ? crypt.Encrypt(this.RapidSharePassword) : crypt.Decrypt(this.RapidSharePassword);
-
-            this.SendSpacePassword = doEncrypt ? crypt.Encrypt(this.SendSpacePassword) : crypt.Decrypt(this.SendSpacePassword);
-
-            foreach (FTPAccount acc in this.FTPAccountList)
-            {
-                acc.Password = doEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
-                acc.Passphrase = doEncrypt ? crypt.Encrypt(acc.Passphrase) : crypt.Decrypt(acc.Passphrase);
-            }
-
-            foreach (LocalhostAccount acc in this.LocalhostAccountList)
-            {
-                acc.Password = doEncrypt ? crypt.Encrypt(acc.Password) : crypt.Decrypt(acc.Password);
-            }
-
-            this.EmailPassword = doEncrypt ? crypt.Encrypt(this.EmailPassword) : crypt.Decrypt(this.EmailPassword);
-        }
-
         public int GetFtpIndex(EDataType dataType)
         {
             switch (dataType)
@@ -332,25 +277,5 @@ namespace UploadersLib
         }
 
         #endregion Helper Methods
-
-        #region I/O Methods
-
-        public static new UploadersConfig Load(string filePath)
-        {
-            UploadersConfig config = SettingsBase<UploadersConfig>.Load(filePath);
-            if (config.PasswordsSecureUsingEncryption) config.CryptPasswords(false);
-            return config;
-        }
-
-        public override bool Save(string filePath)
-        {
-            bool result;
-            if (PasswordsSecureUsingEncryption) CryptPasswords(true);
-            result = base.Save(filePath);
-            if (PasswordsSecureUsingEncryption) CryptPasswords(false);
-            return result;
-        }
-
-        #endregion I/O Methods
     }
 }

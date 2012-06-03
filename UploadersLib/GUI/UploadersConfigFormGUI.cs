@@ -328,28 +328,6 @@ namespace UploadersLib
             #endregion Other Services
         }
 
-        public bool ValidateSettings()
-        {
-            if (atcImageShackAccountType.SelectedAccountType == AccountType.User && string.IsNullOrEmpty(txtImageShackRegistrationCode.Text))
-            {
-                MessageBox.Show("ImageShack account type is set to User; however, the registration code is empty.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (atcTinyPicAccountType.SelectedAccountType == AccountType.User && (string.IsNullOrEmpty(txtTinyPicUsername.Text) || string.IsNullOrEmpty(txtTinyPicPassword.Text)))
-            {
-                MessageBox.Show("TinyPic account type is set to User; however, the username or password is empty.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            if (atcImgurAccountType.SelectedAccountType == AccountType.User && string.IsNullOrEmpty(txtImgurVerificationCode.Text))
-            {
-                MessageBox.Show("Imgur account type is set to User; however, the verification code is empty.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            return true;
-        }
-
         private void CreateUserControlEvents()
         {
             // FTP
