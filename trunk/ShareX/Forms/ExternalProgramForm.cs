@@ -35,16 +35,16 @@ using HelpersLib;
 
 namespace ShareX
 {
-    public partial class FileActionForm : Form
+    public partial class ExternalProgramForm : Form
     {
-        public FileAction FileAction { get; private set; }
+        public ExternalProgram FileAction { get; private set; }
 
-        public FileActionForm()
-            : this(new FileAction())
+        public ExternalProgramForm()
+            : this(new ExternalProgram())
         {
         }
 
-        public FileActionForm(FileAction fileAction)
+        public ExternalProgramForm(ExternalProgram fileAction)
         {
             FileAction = fileAction;
             InitializeComponent();

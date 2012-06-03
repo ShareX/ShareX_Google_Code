@@ -132,7 +132,7 @@ namespace ShareX
 
         #region Actions
 
-        public List<FileAction> FileActions;
+        public List<ExternalProgram> ExternalPrograms;
 
         #endregion Actions
 

@@ -142,14 +142,13 @@ namespace ShareX
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
 
             // Actions
-
-            if (Program.Settings.FileActions == null)
+            if (Program.Settings.ExternalPrograms == null)
             {
-                Program.Settings.FileActions = new List<FileAction>();
+                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
             }
             else
             {
-                foreach (FileAction fileAction in Program.Settings.FileActions)
+                foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
                 {
                     AddFileAction(fileAction);
                 }
@@ -192,7 +191,7 @@ namespace ShareX
             this.Refresh();
         }
 
-        private void AddFileAction(FileAction fileAction)
+        private void AddFileAction(ExternalProgram fileAction)
         {
             ListViewItem lvi = new ListViewItem(fileAction.Name ?? "");
             lvi.Tag = fileAction;
@@ -622,13 +621,13 @@ namespace ShareX
 
         private void btnActionsAdd_Click(object sender, EventArgs e)
         {
-            using (FileActionForm form = new FileActionForm())
+            using (ExternalProgramForm form = new ExternalProgramForm())
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    FileAction fileAction = form.FileAction;
+                    ExternalProgram fileAction = form.FileAction;
                     fileAction.IsActive = true;
-                    Program.Settings.FileActions.Add(fileAction);
+                    Program.Settings.ExternalPrograms.Add(fileAction);
                     AddFileAction(fileAction);
                 }
             }
@@ -639,9 +638,9 @@ namespace ShareX
             if (lvActions.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvActions.SelectedItems[0];
-                FileAction fileAction = lvi.Tag as FileAction;
+                ExternalProgram fileAction = lvi.Tag as ExternalProgram;
 
-                using (FileActionForm form = new FileActionForm(fileAction))
+                using (ExternalProgramForm form = new ExternalProgramForm(fileAction))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
@@ -658,16 +657,16 @@ namespace ShareX
             if (lvActions.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvActions.SelectedItems[0];
-                FileAction fileAction = lvi.Tag as FileAction;
+                ExternalProgram fileAction = lvi.Tag as ExternalProgram;
 
-                Program.Settings.FileActions.Remove(fileAction);
+                Program.Settings.ExternalPrograms.Remove(fileAction);
                 lvActions.Items.Remove(lvi);
             }
         }
 
         private void lvActions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            FileAction fileAction = e.Item.Tag as FileAction;
+            ExternalProgram fileAction = e.Item.Tag as ExternalProgram;
             fileAction.IsActive = e.Item.Checked;
         }
 

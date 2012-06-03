@@ -139,6 +139,8 @@ namespace HelpersLib
 
         public static string ParseQuoteString(this string str)
         {
+            str = str.Trim();
+
             int firstQuote = str.IndexOf('"');
 
             if (firstQuote >= 0)

@@ -31,14 +31,27 @@ using System.Linq;
 using System.Text;
 using HelpersLib;
 
-namespace ShareX
+namespace HelpersLib
 {
-    public class FileAction
+    public class ExternalProgram
     {
         public bool IsActive { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public string Args { get; set; }
+
+        public ExternalProgram()
+        {
+            IsActive = false;
+            Args = "%filepath%";
+        }
+
+        public ExternalProgram(string name, string path)
+            : this()
+        {
+            Name = name;
+            Path = path;
+        }
 
         public void Run(string filePath)
         {

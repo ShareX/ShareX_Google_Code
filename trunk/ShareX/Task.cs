@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -258,10 +257,10 @@ namespace ShareX
                             }
                         }
 
-                        if (Info.ImageJob.HasFlag(TaskImageJob.PerformActions) && Program.Settings.FileActions != null &&
+                        if (Info.ImageJob.HasFlag(TaskImageJob.PerformActions) && Program.Settings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
-                            var actions = Program.Settings.FileActions.Where(x => x.IsActive);
+                            var actions = Program.Settings.ExternalPrograms.Where(x => x.IsActive);
 
                             if (actions.Count() > 0)
                             {
@@ -270,7 +269,7 @@ namespace ShareX
                                     data.Dispose();
                                 }
 
-                                foreach (FileAction fileAction in actions)
+                                foreach (ExternalProgram fileAction in actions)
                                 {
                                     fileAction.Run(Info.FilePath);
                                 }

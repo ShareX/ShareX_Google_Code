@@ -202,10 +202,29 @@ namespace ShareX
 
             UploadManager.UpdateProxySettings();
 
-            if (Program.Settings.FileActions == null)
+            AddDefaultExternalPrograms();
+        }
+
+        private void AddDefaultExternalPrograms()
+        {
+            if (Program.Settings.ExternalPrograms != null)
             {
-                Program.Settings.FileActions = new List<FileAction>();
-                Program.Settings.FileActions.Add(new FileAction { Name = "Paint", Path = "mspaint" });
+                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
+                AddExternalProgram("Paint", "mspaint.exe");
+                AddExternalProgram("Paint.NET", "PaintDotNet.exe");
+                AddExternalProgram("Adobe Photoshop", "Photoshop.exe");
+                AddExternalProgram("IrfanView", "i_view32.exe");
+                AddExternalProgram("XnView", "xnview.exe");
+            }
+        }
+
+        private void AddExternalProgram(string name, string filename)
+        {
+            ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
+
+            if (externalProgram != null)
+            {
+                Program.Settings.ExternalPrograms.Add(externalProgram);
             }
         }
 
@@ -419,6 +438,7 @@ namespace ShareX
             {
                 e.Cancel = true;
                 Hide();
+                Program.Settings.SaveAsync();
             }
         }
 

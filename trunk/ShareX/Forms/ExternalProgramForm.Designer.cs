@@ -1,6 +1,6 @@
 ﻿namespace ShareX
 {
-    partial class FileActionForm
+    partial class ExternalProgramForm
     {
         /// <summary>
         /// Required designer variable.
@@ -131,9 +131,10 @@
             this.Controls.Add(this.lblArgs);
             this.Controls.Add(this.lblPath);
             this.Controls.Add(this.lblName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FileActionForm";
-            this.ShowIcon = false;
-            this.Text = "Action";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "External program";
             this.ResumeLayout(false);
             this.PerformLayout();
 
