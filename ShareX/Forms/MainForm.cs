@@ -204,6 +204,11 @@ namespace ShareX
 
             UploadManager.UpdateProxySettings();
 
+            if (Program.Settings.PreviewSplitterDistance > 0)
+            {
+                scMain.SplitterDistance = Program.Settings.PreviewSplitterDistance;
+            }
+
             UpdatePreviewSplitter();
 
             AddDefaultExternalPrograms();
@@ -719,6 +724,11 @@ namespace ShareX
         {
             Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
             UpdatePreviewSplitter();
+        }
+
+        private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            Program.Settings.PreviewSplitterDistance = scMain.SplitterDistance;
         }
 
         #region Tray events

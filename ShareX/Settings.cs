@@ -43,6 +43,7 @@ namespace ShareX
         public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
         public bool ShowClipboardContentViewer = true;
         public bool IsPreviewCollapsed = true;
+        public int PreviewSplitterDistance = 0;
 
         #endregion Main Form
 
