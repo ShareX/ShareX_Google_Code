@@ -117,7 +117,7 @@ namespace ShareX
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTrayClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayFileUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCapture = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,12 +129,18 @@ namespace ShareX
             this.tsmiTrayPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayFreeHand = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayLastRegion = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayDestinations = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayImageUploaders = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayTextUploaders = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayFileUploaders = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayURLShorteners = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssTrayDestinations1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiTrayUploadersConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHistory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTraySettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploads.SuspendLayout();
@@ -405,41 +411,41 @@ namespace ShareX
             // 
             this.tsmiImageUploaders.Image = global::ShareX.Properties.Resources.image;
             this.tsmiImageUploaders.Name = "tsmiImageUploaders";
-            this.tsmiImageUploaders.Size = new System.Drawing.Size(162, 22);
+            this.tsmiImageUploaders.Size = new System.Drawing.Size(173, 22);
             this.tsmiImageUploaders.Text = "Image uploaders";
             // 
             // tsmiTextUploaders
             // 
             this.tsmiTextUploaders.Image = global::ShareX.Properties.Resources.notebook;
             this.tsmiTextUploaders.Name = "tsmiTextUploaders";
-            this.tsmiTextUploaders.Size = new System.Drawing.Size(162, 22);
+            this.tsmiTextUploaders.Size = new System.Drawing.Size(173, 22);
             this.tsmiTextUploaders.Text = "Text uploaders";
             // 
             // tsmiFileUploaders
             // 
             this.tsmiFileUploaders.Image = ((System.Drawing.Image)(resources.GetObject("tsmiFileUploaders.Image")));
             this.tsmiFileUploaders.Name = "tsmiFileUploaders";
-            this.tsmiFileUploaders.Size = new System.Drawing.Size(162, 22);
+            this.tsmiFileUploaders.Size = new System.Drawing.Size(173, 22);
             this.tsmiFileUploaders.Text = "File uploaders";
             // 
             // tsmiURLShorteners
             // 
             this.tsmiURLShorteners.Image = ((System.Drawing.Image)(resources.GetObject("tsmiURLShorteners.Image")));
             this.tsmiURLShorteners.Name = "tsmiURLShorteners";
-            this.tsmiURLShorteners.Size = new System.Drawing.Size(162, 22);
+            this.tsmiURLShorteners.Size = new System.Drawing.Size(173, 22);
             this.tsmiURLShorteners.Text = "URL shorteners";
             // 
             // tssDestinations1
             // 
             this.tssDestinations1.Name = "tssDestinations1";
-            this.tssDestinations1.Size = new System.Drawing.Size(159, 6);
+            this.tssDestinations1.Size = new System.Drawing.Size(170, 6);
             // 
             // tsmiUploadersConfig
             // 
             this.tsmiUploadersConfig.Image = global::ShareX.Properties.Resources.gear;
             this.tsmiUploadersConfig.Name = "tsmiUploadersConfig";
-            this.tsmiUploadersConfig.Size = new System.Drawing.Size(162, 22);
-            this.tsmiUploadersConfig.Text = "Configuration...";
+            this.tsmiUploadersConfig.Size = new System.Drawing.Size(173, 22);
+            this.tsmiUploadersConfig.Text = "Uploaders config...";
             this.tsmiUploadersConfig.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
             // 
             // tsbDebug
@@ -688,17 +694,17 @@ namespace ShareX
             this.cmsTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTrayClipboardUpload,
             this.tsmiTrayFileUpload,
-            this.tsmiCapture,
-            this.tsmiConfiguration,
+            this.tsmiTrayCapture,
+            this.tsmiTrayDestinations,
             this.tssTray1,
-            this.tsmiHistory,
-            this.tsmiSettings,
-            this.tsmiAbout,
-            this.tsmiDonate,
+            this.tsmiTrayHistory,
+            this.tsmiTraySettings,
+            this.tsmiTrayAbout,
+            this.tsmiTrayDonate,
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(176, 214);
+            this.cmsTray.Size = new System.Drawing.Size(176, 236);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -716,9 +722,9 @@ namespace ShareX
             this.tsmiTrayFileUpload.Text = "File upload...";
             this.tsmiTrayFileUpload.Click += new System.EventHandler(this.tsbFileUpload_Click);
             // 
-            // tsmiCapture
+            // tsmiTrayCapture
             // 
-            this.tsmiCapture.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTrayCapture.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTrayFullscreen,
             this.tsmiTrayWindow,
             this.tsmiTrayWindowRectangle,
@@ -730,11 +736,11 @@ namespace ShareX
             this.tsmiTrayPolygon,
             this.tsmiTrayFreeHand,
             this.tsmiTrayLastRegion});
-            this.tsmiCapture.Image = global::ShareX.Properties.Resources.camera;
-            this.tsmiCapture.Name = "tsmiCapture";
-            this.tsmiCapture.Size = new System.Drawing.Size(175, 22);
-            this.tsmiCapture.Text = "Capture";
-            this.tsmiCapture.DropDownOpening += new System.EventHandler(this.tsmiCapture_DropDownOpening);
+            this.tsmiTrayCapture.Image = global::ShareX.Properties.Resources.camera;
+            this.tsmiTrayCapture.Name = "tsmiTrayCapture";
+            this.tsmiTrayCapture.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTrayCapture.Text = "Capture";
+            this.tsmiTrayCapture.DropDownOpening += new System.EventHandler(this.tsmiCapture_DropDownOpening);
             // 
             // tsmiTrayFullscreen
             // 
@@ -823,50 +829,97 @@ namespace ShareX
             this.tsmiTrayLastRegion.Text = "Last Region";
             this.tsmiTrayLastRegion.Click += new System.EventHandler(this.tsmiTrayLastRegion_Click);
             // 
-            // tsmiConfiguration
+            // tsmiTrayDestinations
             // 
-            this.tsmiConfiguration.Image = global::ShareX.Properties.Resources.gear;
-            this.tsmiConfiguration.Name = "tsmiConfiguration";
-            this.tsmiConfiguration.Size = new System.Drawing.Size(175, 22);
-            this.tsmiConfiguration.Text = "Uploaders config...";
-            this.tsmiConfiguration.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
+            this.tsmiTrayDestinations.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTrayImageUploaders,
+            this.tsmiTrayTextUploaders,
+            this.tsmiTrayFileUploaders,
+            this.tsmiTrayURLShorteners,
+            this.tssTrayDestinations1,
+            this.tsmiTrayUploadersConfig});
+            this.tsmiTrayDestinations.Image = global::ShareX.Properties.Resources.drive_globe;
+            this.tsmiTrayDestinations.Name = "tsmiTrayDestinations";
+            this.tsmiTrayDestinations.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTrayDestinations.Text = "Destinations";
+            // 
+            // tsmiTrayImageUploaders
+            // 
+            this.tsmiTrayImageUploaders.Image = global::ShareX.Properties.Resources.image;
+            this.tsmiTrayImageUploaders.Name = "tsmiTrayImageUploaders";
+            this.tsmiTrayImageUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTrayImageUploaders.Text = "Image uploaders";
+            // 
+            // tsmiTrayTextUploaders
+            // 
+            this.tsmiTrayTextUploaders.Image = global::ShareX.Properties.Resources.notebook;
+            this.tsmiTrayTextUploaders.Name = "tsmiTrayTextUploaders";
+            this.tsmiTrayTextUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTrayTextUploaders.Text = "Text uploaders";
+            // 
+            // tsmiTrayFileUploaders
+            // 
+            this.tsmiTrayFileUploaders.Image = global::ShareX.Properties.Resources.application_block;
+            this.tsmiTrayFileUploaders.Name = "tsmiTrayFileUploaders";
+            this.tsmiTrayFileUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTrayFileUploaders.Text = "File uploaders";
+            // 
+            // tsmiTrayURLShorteners
+            // 
+            this.tsmiTrayURLShorteners.Image = global::ShareX.Properties.Resources.edit_scale;
+            this.tsmiTrayURLShorteners.Name = "tsmiTrayURLShorteners";
+            this.tsmiTrayURLShorteners.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTrayURLShorteners.Text = "URL shorteners";
+            // 
+            // tssTrayDestinations1
+            // 
+            this.tssTrayDestinations1.Name = "tssTrayDestinations1";
+            this.tssTrayDestinations1.Size = new System.Drawing.Size(170, 6);
+            // 
+            // tsmiTrayUploadersConfig
+            // 
+            this.tsmiTrayUploadersConfig.Image = global::ShareX.Properties.Resources.gear;
+            this.tsmiTrayUploadersConfig.Name = "tsmiTrayUploadersConfig";
+            this.tsmiTrayUploadersConfig.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTrayUploadersConfig.Text = "Uploaders config...";
+            this.tsmiTrayUploadersConfig.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
             // 
             // tssTray1
             // 
             this.tssTray1.Name = "tssTray1";
             this.tssTray1.Size = new System.Drawing.Size(172, 6);
             // 
-            // tsmiHistory
+            // tsmiTrayHistory
             // 
-            this.tsmiHistory.Image = ((System.Drawing.Image)(resources.GetObject("tsmiHistory.Image")));
-            this.tsmiHistory.Name = "tsmiHistory";
-            this.tsmiHistory.Size = new System.Drawing.Size(175, 22);
-            this.tsmiHistory.Text = "History...";
-            this.tsmiHistory.Click += new System.EventHandler(this.tsbHistory_Click);
+            this.tsmiTrayHistory.Image = ((System.Drawing.Image)(resources.GetObject("tsmiTrayHistory.Image")));
+            this.tsmiTrayHistory.Name = "tsmiTrayHistory";
+            this.tsmiTrayHistory.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTrayHistory.Text = "History...";
+            this.tsmiTrayHistory.Click += new System.EventHandler(this.tsbHistory_Click);
             // 
-            // tsmiSettings
+            // tsmiTraySettings
             // 
-            this.tsmiSettings.Image = ((System.Drawing.Image)(resources.GetObject("tsmiSettings.Image")));
-            this.tsmiSettings.Name = "tsmiSettings";
-            this.tsmiSettings.Size = new System.Drawing.Size(175, 22);
-            this.tsmiSettings.Text = "Settings...";
-            this.tsmiSettings.Click += new System.EventHandler(this.tsbSettings_Click);
+            this.tsmiTraySettings.Image = ((System.Drawing.Image)(resources.GetObject("tsmiTraySettings.Image")));
+            this.tsmiTraySettings.Name = "tsmiTraySettings";
+            this.tsmiTraySettings.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTraySettings.Text = "Settings...";
+            this.tsmiTraySettings.Click += new System.EventHandler(this.tsbSettings_Click);
             // 
-            // tsmiAbout
+            // tsmiTrayAbout
             // 
-            this.tsmiAbout.Image = global::ShareX.Properties.Resources.application_browser;
-            this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(175, 22);
-            this.tsmiAbout.Text = "About...";
-            this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
+            this.tsmiTrayAbout.Image = global::ShareX.Properties.Resources.application_browser;
+            this.tsmiTrayAbout.Name = "tsmiTrayAbout";
+            this.tsmiTrayAbout.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTrayAbout.Text = "About...";
+            this.tsmiTrayAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
-            // tsmiDonate
+            // tsmiTrayDonate
             // 
-            this.tsmiDonate.Image = global::ShareX.Properties.Resources.present;
-            this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(175, 22);
-            this.tsmiDonate.Text = "Donate...";
-            this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
+            this.tsmiTrayDonate.Image = global::ShareX.Properties.Resources.present;
+            this.tsmiTrayDonate.Name = "tsmiTrayDonate";
+            this.tsmiTrayDonate.Size = new System.Drawing.Size(175, 22);
+            this.tsmiTrayDonate.Text = "Donate...";
+            this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
             // tssTray2
             // 
@@ -972,12 +1025,12 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiFreeHand;
         private System.Windows.Forms.ToolStripMenuItem tsmiWindow;
         private System.Windows.Forms.ToolStripMenuItem tsmiWindowRectangle;
-        private System.Windows.Forms.ToolStripMenuItem tsmiHistory;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDonate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayHistory;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTraySettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayAbout;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripSeparator tssTray2;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCapture;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayCapture;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayFullscreen;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayWindow;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayWindowRectangle;
@@ -987,7 +1040,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDiamond;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayPolygon;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayFreeHand;
-        private System.Windows.Forms.ToolStripMenuItem tsmiConfiguration;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayEllipse;
         private System.Windows.Forms.ToolStripDropDownButton tsbDebug;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestImageUpload;
@@ -1000,5 +1052,12 @@ namespace ShareX
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.PictureBox pbPreview;
         private HelpersLib.NoFocusBorderButton btnSplitterControl;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayDestinations;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageUploaders;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayTextUploaders;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayFileUploaders;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayURLShorteners;
+        private System.Windows.Forms.ToolStripSeparator tssTrayDestinations1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayUploadersConfig;
     }
 }
