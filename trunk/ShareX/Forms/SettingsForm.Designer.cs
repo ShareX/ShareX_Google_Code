@@ -134,7 +134,6 @@
             this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpUpload = new System.Windows.Forms.TabPage();
-            this.gbClipboardUpload = new System.Windows.Forms.GroupBox();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.btnNameFormatPatternHelp = new System.Windows.Forms.Button();
             this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
@@ -186,7 +185,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
             this.tpActions.SuspendLayout();
             this.tpUpload.SuspendLayout();
-            this.gbClipboardUpload.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
@@ -1463,9 +1461,13 @@
             // 
             // tpUpload
             // 
-            this.tpUpload.Controls.Add(this.gbClipboardUpload);
+            this.tpUpload.Controls.Add(this.cbClipboardUploadAutoDetectURL);
+            this.tpUpload.Controls.Add(this.btnNameFormatPatternHelp);
             this.tpUpload.Controls.Add(this.lblUploadLimitHint);
+            this.tpUpload.Controls.Add(this.lblNameFormatPatternPreview);
             this.tpUpload.Controls.Add(this.nudUploadLimit);
+            this.tpUpload.Controls.Add(this.txtNameFormatPattern);
+            this.tpUpload.Controls.Add(this.lblNameFormatPattern);
             this.tpUpload.Controls.Add(this.lblUploadLimit);
             this.tpUpload.Controls.Add(this.lblBufferSize);
             this.tpUpload.Controls.Add(this.lblBufferSizeInfo);
@@ -1477,24 +1479,10 @@
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
             // 
-            // gbClipboardUpload
-            // 
-            this.gbClipboardUpload.Controls.Add(this.cbClipboardUploadAutoDetectURL);
-            this.gbClipboardUpload.Controls.Add(this.btnNameFormatPatternHelp);
-            this.gbClipboardUpload.Controls.Add(this.lblNameFormatPatternPreview);
-            this.gbClipboardUpload.Controls.Add(this.txtNameFormatPattern);
-            this.gbClipboardUpload.Controls.Add(this.lblNameFormatPattern);
-            this.gbClipboardUpload.Location = new System.Drawing.Point(16, 80);
-            this.gbClipboardUpload.Name = "gbClipboardUpload";
-            this.gbClipboardUpload.Size = new System.Drawing.Size(488, 136);
-            this.gbClipboardUpload.TabIndex = 6;
-            this.gbClipboardUpload.TabStop = false;
-            this.gbClipboardUpload.Text = "Clipboard upload";
-            // 
             // cbClipboardUploadAutoDetectURL
             // 
             this.cbClipboardUploadAutoDetectURL.AutoSize = true;
-            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(16, 24);
+            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(16, 80);
             this.cbClipboardUploadAutoDetectURL.Name = "cbClipboardUploadAutoDetectURL";
             this.cbClipboardUploadAutoDetectURL.Size = new System.Drawing.Size(401, 17);
             this.cbClipboardUploadAutoDetectURL.TabIndex = 0;
@@ -1504,7 +1492,7 @@
             // 
             // btnNameFormatPatternHelp
             // 
-            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(440, 79);
+            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(440, 136);
             this.btnNameFormatPatternHelp.Name = "btnNameFormatPatternHelp";
             this.btnNameFormatPatternHelp.Size = new System.Drawing.Size(24, 23);
             this.btnNameFormatPatternHelp.TabIndex = 3;
@@ -1515,7 +1503,7 @@
             // lblNameFormatPatternPreview
             // 
             this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 112);
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 169);
             this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
             this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreview.TabIndex = 4;
@@ -1523,7 +1511,7 @@
             // 
             // txtNameFormatPattern
             // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 80);
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 137);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
             this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
             this.txtNameFormatPattern.TabIndex = 2;
@@ -1532,11 +1520,11 @@
             // lblNameFormatPattern
             // 
             this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 56);
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 113);
             this.lblNameFormatPattern.Name = "lblNameFormatPattern";
-            this.lblNameFormatPattern.Size = new System.Drawing.Size(362, 13);
+            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
             this.lblNameFormatPattern.TabIndex = 1;
-            this.lblNameFormatPattern.Text = "Clipboard upload name pattern for image and text (Not image file or text file):";
+            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
             // 
             // lblUploadLimitHint
             // 
@@ -1813,8 +1801,6 @@
             this.tpActions.ResumeLayout(false);
             this.tpUpload.ResumeLayout(false);
             this.tpUpload.PerformLayout();
-            this.gbClipboardUpload.ResumeLayout(false);
-            this.gbClipboardUpload.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
             this.tpProxy.ResumeLayout(false);
             this.tpProxy.PerformLayout();
@@ -1936,7 +1922,6 @@
         private System.Windows.Forms.TabPage tpPaths;
         private System.Windows.Forms.Button btnBrowseCustomScreenshotsPath;
         private System.Windows.Forms.TextBox txtCustomScreenshotsPath;
-        private System.Windows.Forms.GroupBox gbClipboardUpload;
         private System.Windows.Forms.Label lblProxyHost;
         private System.Windows.Forms.TextBox txtProxyHost;
         private System.Windows.Forms.NumericUpDown nudProxyPort;

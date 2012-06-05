@@ -140,7 +140,7 @@ namespace ShareX
         {
             get
             {
-                string subFolderName = new NameParser(NameParserType.SaveFolder).Convert(Settings.SaveImageSubFolderPattern);
+                string subFolderName = new NameParser(NameParserType.FolderPath).Convert(Settings.SaveImageSubFolderPattern);
                 return Path.Combine(ScreenshotsParentFolder, subFolderName);
             }
         }

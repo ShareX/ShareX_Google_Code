@@ -103,62 +103,32 @@ namespace HelpersLib
     public enum NameParserType
     {
         Text,
-        EntireScreen,
-        ActiveWindow,
-        Watermark,
-        SaveFolder,
-        Clipboard
+        FileName,
+        FolderPath,
+        FilePath,
+        URL
     }
 
     public class NameParser : IDisposable
     {
-        public NameParserType Type { get; set; }
-
+        public NameParserType Type { get; private set; }
         public int AutoIncrementNumber { get; set; }
-
         public bool IsFolderPath { get; set; }
-
         public bool IsPreview { get; set; }
-
         public string Host { get; set; }
-
         public Image Picture { get; set; }
-
         public DateTime CustomDate { get; set; }
-
         public string CustomProductName { get; set; }
-
         public int MaxNameLength { get; set; }
-
         public string Link { get; set; }
-
         public string FileSize { get; set; }
-
         public string FileName { get; set; }
-
         public string WindowText { get; set; }
-
-        public NameParser()
-        {
-            Type = NameParserType.Text;
-        }
+        public bool AllowNewLine { get; set; }
 
         public NameParser(NameParserType nameParserType)
         {
             Type = nameParserType;
-        }
-
-        public string RemovePrefixes(string host)
-        {
-            string[] lPrefixes = new string[] { "http://", "https://" };
-            foreach (string prefix in lPrefixes)
-            {
-                if (host.StartsWith(prefix))
-                {
-                    host = host.Remove(0, prefix.Length);
-                }
-            }
-            return host;
         }
 
         public string Convert(string pattern)
@@ -170,15 +140,9 @@ namespace HelpersLib
 
             StringBuilder sb = new StringBuilder(pattern);
 
-            #region Link, FileName, FileSize
-
             sb.Replace(ReplacementVariables.link.ToPrefixString(), Link);
             sb.Replace(ReplacementVariables.name.ToPrefixString(), FileName);
             sb.Replace(ReplacementVariables.size.ToPrefixString(), FileSize);
-
-            #endregion Link, FileName, FileSize
-
-            #region width, height (If Picture exist)
 
             string width = string.Empty, height = string.Empty;
 
@@ -191,27 +155,15 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
 
-            #endregion width, height (If Picture exist)
-
-            #region t (If ActiveWindow or Watermark)
-
             if (!string.IsNullOrEmpty(WindowText))
             {
                 sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
             }
 
-            #endregion t (If ActiveWindow or Watermark)
-
-            #region host (If Host exist "FTP")
-
             if (!string.IsNullOrEmpty(Host))
             {
                 sb.Replace("%host", Host);
             }
-
-            #endregion host (If Host exist "FTP")
-
-            #region y, mo, mon, mon2, d
 
             DateTime dt;
 
@@ -230,42 +182,31 @@ namespace HelpersLib
                 .Replace(ReplacementVariables.mo.ToPrefixString(), Helpers.AddZeroes(dt.Month))
                 .Replace(ReplacementVariables.d.ToPrefixString(), Helpers.AddZeroes(dt.Day));
 
-            #endregion y, mo, mon, mon2, d
+            string hour;
 
-            #region h, mi, s, ms, w, w2, pm, i (If not SaveFolder)
-
-            if (Type != NameParserType.SaveFolder)
+            if (sb.ToString().Contains(ReplacementVariables.pm.ToPrefixString()))
             {
-                string hour;
-
-                if (sb.ToString().Contains(ReplacementVariables.pm.ToPrefixString()))
-                {
-                    hour = Helpers.HourTo12(dt.Hour);
-                }
-                else
-                {
-                    hour = Helpers.AddZeroes(dt.Hour);
-                }
-
-                sb.Replace(ReplacementVariables.h.ToPrefixString(), hour)
-                     .Replace(ReplacementVariables.mi.ToPrefixString(), Helpers.AddZeroes(dt.Minute))
-                     .Replace(ReplacementVariables.s.ToPrefixString(), Helpers.AddZeroes(dt.Second))
-                     .Replace(ReplacementVariables.ms.ToPrefixString(), Helpers.AddZeroes(dt.Millisecond, 3))
-                     .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
-                     .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
-                     .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
-
-                if (!IsPreview && sb.ToString().Contains("%i"))
-                {
-                    AutoIncrementNumber++;
-                }
-
-                sb.Replace(ReplacementVariables.i.ToPrefixString(), Helpers.AddZeroes(AutoIncrementNumber, 4));
+                hour = Helpers.HourTo12(dt.Hour);
+            }
+            else
+            {
+                hour = Helpers.AddZeroes(dt.Hour);
             }
 
-            #endregion h, mi, s, ms, w, w2, pm, i (If not SaveFolder)
+            sb.Replace(ReplacementVariables.h.ToPrefixString(), hour)
+                 .Replace(ReplacementVariables.mi.ToPrefixString(), Helpers.AddZeroes(dt.Minute))
+                 .Replace(ReplacementVariables.s.ToPrefixString(), Helpers.AddZeroes(dt.Second))
+                 .Replace(ReplacementVariables.ms.ToPrefixString(), Helpers.AddZeroes(dt.Millisecond, 3))
+                 .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
+                 .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
+                 .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
 
-            #region un, uln, cn, app, ver, n
+            if (!IsPreview && sb.ToString().Contains("%i"))
+            {
+                AutoIncrementNumber++;
+            }
+
+            sb.Replace(ReplacementVariables.i.ToPrefixString(), Helpers.AddZeroes(AutoIncrementNumber, 4));
 
             sb.Replace(ReplacementVariables.un.ToPrefixString(), Environment.UserName);
             sb.Replace(ReplacementVariables.uln.ToPrefixString(), Environment.UserDomainName);
@@ -275,14 +216,10 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.app.ToPrefixString(), productName);
             sb.Replace(ReplacementVariables.ver.ToPrefixString(), Application.ProductVersion);
 
-            if (Type == NameParserType.Watermark)
+            if (Type == NameParserType.Text && AllowNewLine)
             {
                 sb.Replace(ReplacementVariables.n.ToPrefixString(), "\n");
             }
-
-            #endregion un, uln, cn, app, ver, n
-
-            #region rn, ra
 
             string result = sb.ToString();
 
@@ -292,15 +229,24 @@ namespace HelpersLib
             string ra = ReplacementVariables.ra.ToPrefixString();
             while (result.ReplaceFirst(ra, Helpers.GetRandomChar(Helpers.Alphanumeric).ToString(), out result)) ;
 
-            #endregion rn, ra
-
-            if (Type != NameParserType.Watermark & Type != NameParserType.Clipboard)
+            if (Type == NameParserType.FolderPath)
             {
-                result = Helpers.NormalizeString(result, Type != NameParserType.SaveFolder, IsFolderPath);
+                result = Helpers.GetValidFolderPath(result);
+            }
+            else if (Type == NameParserType.FileName)
+            {
+                result = Helpers.GetValidFileName(result);
+            }
+            else if (Type == NameParserType.FilePath)
+            {
+                result = Helpers.GetValidFilePath(result);
+            }
+            else if (Type == NameParserType.URL)
+            {
+                result = Helpers.GetValidURL(result);
             }
 
-            if (MaxNameLength > 0 && (Type == NameParserType.ActiveWindow || Type == NameParserType.EntireScreen) &&
-                result.Length > MaxNameLength)
+            if (MaxNameLength > 0 && result.Length > MaxNameLength)
             {
                 result = result.Substring(0, MaxNameLength);
             }

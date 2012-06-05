@@ -199,56 +199,30 @@ namespace HelpersLib
             return Encoding.UTF8.GetString(Enumerable.Range(1, 255).Select(i => (byte)i).ToArray());
         }
 
-        public static string ReplaceIllegalChars(string filename, char replace)
+        public static string GetValidFileName(string fileName)
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char c in filename)
-            {
-                if (IsCharValid(c))
-                {
-                    sb.Append(c);
-                }
-                else
-                {
-                    sb.Append(replace);
-                }
-            }
-
-            return sb.ToString();
+            char[] invalidFileNameChars = Path.GetInvalidFileNameChars();
+            return new string(fileName.Where(c => !invalidFileNameChars.Contains(c)).ToArray());
         }
 
-        /// <summary>Valid chars: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()-._!</summary>
-        public static bool IsCharValid(char c)
+        public static string GetValidFolderPath(string folderPath)
         {
-            string chars = Alphanumeric + "()-._!";
-
-            return chars.Any(c2 => c == c2);
+            char[] invalidPathChars = Path.GetInvalidPathChars();
+            return new string(folderPath.Where(c => !invalidPathChars.Contains(c)).ToArray());
         }
 
-        public static string NormalizeString(string text, bool convertSpace = true, bool isFolderPath = false)
+        public static string GetValidFilePath(string filePath)
         {
-            StringBuilder result = new StringBuilder();
+            string folderPath = Path.GetDirectoryName(filePath);
+            string fileName = Path.GetFileName(filePath);
+            return GetValidFolderPath(folderPath) + Path.DirectorySeparatorChar + GetValidFileName(fileName);
+        }
 
-            foreach (char c in text)
-            {
-                // @, ?, = is for HttpHomePath we use in FTP Account
-                if (IsCharValid(c) || (isFolderPath && (c == Path.DirectorySeparatorChar || c == '/' || c == '.' || c == '@' || c == '?' || c == '=')))
-                {
-                    result.Append(c);
-                }
-                else if (c == ' ')
-                {
-                    result.Append('_');
-                }
-            }
-
-            while (result.Length > 0 && result[0] == '.')
-            {
-                result.Remove(0, 1);
-            }
-
-            return result.ToString();
+        public static string GetValidURL(string url, bool replaceSpace = true)
+        {
+            if (replaceSpace) url = url.Replace(' ', '_');
+            string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=";
+            return new string(url.Where(c => validChars.Contains(c)).ToArray());
         }
 
         public static string GetXMLValue(string input, string tag)

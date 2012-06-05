@@ -694,7 +694,7 @@ namespace ShareX
         private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser().Convert(Program.Settings.NameFormatPattern);
+            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser(NameParserType.URL).Convert(Program.Settings.NameFormatPattern);
         }
 
         private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
