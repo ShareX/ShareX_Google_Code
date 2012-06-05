@@ -61,7 +61,7 @@ namespace UploadersLib
         [Category("FTP"), Description("Choose an appropriate protocol to be accessed by the browser"), DefaultValue(BrowserProtocol.Http)]
         public BrowserProtocol BrowserProtocol { get; set; }
 
-        [Category("FTP"), Description("HTTP Home Path, %host = Host e.g. google.com\nURL = HttpHomePath (+ SubFolderPath, if HttpHomePath does not start with @) + FileName\nURL = Host + SubFolderPath + FileName (if HttpHomePath is empty)"), DefaultValue("")]
+        [Category("FTP"), Description("URL = HttpHomePath + SubFolderPath + FileName\r\nIf HttpHomePath is empty: URL = Host + SubFolderPath + FileName\r\n%host = Host, @ = Ignore auto SubFolderPath"), DefaultValue("")]
         public string HttpHomePath { get; set; }
 
         [Category("FTP"), Description("Don't add file extension to URL"), DefaultValue(false)]

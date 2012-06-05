@@ -319,7 +319,7 @@ namespace ShareX
                 lvi.SubItems.Add(string.Empty);
                 lvi.SubItems.Add(string.Empty);
                 lvi.SubItems.Add(info.DataType.ToString());
-                lvi.SubItems.Add(info.UploaderHost);
+                lvi.SubItems.Add(info.IsUploadJob ? info.UploaderHost : string.Empty);
                 lvi.SubItems.Add(string.Empty);
                 lvi.BackColor = info.ID % 2 == 0 ? Color.White : Color.WhiteSmoke;
                 lvi.ImageIndex = 3;

@@ -55,7 +55,6 @@ namespace ShareX
         public TaskStatus Status { get; private set; }
         public bool IsWorking { get { return Status == TaskStatus.Preparing || Status == TaskStatus.Uploading; } }
         public bool IsStopped { get; private set; }
-        public bool IsUploadJob { get { return Info.Job != TaskJob.ImageJob || Info.ImageJob.HasFlag(TaskImageJob.UploadImageToHost); } }
 
         private Stream data;
         private Image tempImage;
@@ -98,7 +97,6 @@ namespace ShareX
         {
             Task task = new Task(EDataType.Image, TaskJob.ImageJob);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-            task.Info.FileName = "Require image encoding...";
             task.tempImage = image;
             return task;
         }
@@ -154,7 +152,7 @@ namespace ShareX
         {
             DoThreadJob();
 
-            if (IsUploadJob)
+            if (Info.IsUploadJob)
             {
                 if (Program.UploadersConfig == null)
                 {
@@ -287,7 +285,7 @@ namespace ShareX
                 data = new MemoryStream(byteArray);
             }
 
-            if (IsUploadJob && data != null && data.CanSeek)
+            if (Info.IsUploadJob && data != null && data.CanSeek)
             {
                 data.Position = 0;
             }
