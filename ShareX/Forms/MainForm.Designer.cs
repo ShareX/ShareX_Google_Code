@@ -666,6 +666,7 @@ namespace ShareX
             this.pbPreview.Size = new System.Drawing.Size(96, 100);
             this.pbPreview.TabIndex = 0;
             this.pbPreview.TabStop = false;
+            this.pbPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPreview_MouseClick);
             // 
             // btnSplitterControl
             // 

@@ -37,6 +37,15 @@ namespace ShareX
         public string Status { get; set; }
         public TaskJob Job { get; set; }
         public TaskImageJob ImageJob { get; set; }
+
+        public bool IsUploadJob
+        {
+            get
+            {
+                return Job != TaskJob.ImageJob || ImageJob.HasFlag(TaskImageJob.UploadImageToHost);
+            }
+        }
+
         public ProgressManager Progress { get; set; }
 
         private string filePath;

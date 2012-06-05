@@ -432,32 +432,6 @@ namespace ShareX
             }
         }
 
-        private void ShowPreview(string filePath)
-        {
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-            {
-                try
-                {
-                    Image img = Image.FromFile(filePath);
-
-                    if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
-                    {
-                        pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
-                    }
-                    else
-                    {
-                        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
-                    }
-
-                    pbPreview.Image = img;
-                }
-                catch (Exception e)
-                {
-                    DebugHelper.WriteException(e);
-                }
-            }
-        }
-
         private void UpdatePreviewSplitter()
         {
             if (Program.Settings.IsPreviewCollapsed)
@@ -486,6 +460,36 @@ namespace ShareX
 
             BringToFront();
             Activate();
+        }
+
+        private void ShowPreview(UploadResult result)
+        {
+            if (result != null && !string.IsNullOrEmpty(result.LocalFilePath) && File.Exists(result.LocalFilePath))
+            {
+                try
+                {
+                    Image img = Image.FromFile(result.LocalFilePath);
+
+                    if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
+                    {
+                        pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    else
+                    {
+                        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
+                    }
+
+                    pbPreview.Image = img;
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e);
+                }
+            }
+            else
+            {
+                pbPreview.Image = null;
+            }
         }
 
         #region Form events
@@ -677,11 +681,7 @@ namespace ShareX
             if (!scMain.Panel2Collapsed)
             {
                 UploadResult result = GetCurrentUploadResult();
-
-                if (result != null)
-                {
-                    ShowPreview(result.LocalFilePath);
-                }
+                ShowPreview(result);
             }
         }
 
@@ -764,6 +764,17 @@ namespace ShareX
         private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
         {
             Program.Settings.PreviewSplitterDistance = scMain.SplitterDistance;
+        }
+
+        private void pbPreview_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && pbPreview.Image != null)
+            {
+                using (ImageViewer viewer = new ImageViewer(pbPreview.Image))
+                {
+                    viewer.ShowDialog();
+                }
+            }
         }
 
         #region Tray events

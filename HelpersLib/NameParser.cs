@@ -113,7 +113,6 @@ namespace HelpersLib
     {
         public NameParserType Type { get; private set; }
         public int AutoIncrementNumber { get; set; }
-        public bool IsFolderPath { get; set; }
         public bool IsPreview { get; set; }
         public string Host { get; set; }
         public Image Picture { get; set; }
@@ -121,8 +120,8 @@ namespace HelpersLib
         public string CustomProductName { get; set; }
         public int MaxNameLength { get; set; }
         public string Link { get; set; }
-        public string FileSize { get; set; }
         public string FileName { get; set; }
+        public string FileSize { get; set; }
         public string WindowText { get; set; }
         public bool AllowNewLine { get; set; }
 
@@ -143,6 +142,7 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.link.ToPrefixString(), Link);
             sb.Replace(ReplacementVariables.name.ToPrefixString(), FileName);
             sb.Replace(ReplacementVariables.size.ToPrefixString(), FileSize);
+            sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
 
             string width = string.Empty, height = string.Empty;
 
@@ -155,15 +155,7 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
 
-            if (!string.IsNullOrEmpty(WindowText))
-            {
-                sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
-            }
-
-            if (!string.IsNullOrEmpty(Host))
-            {
-                sb.Replace("%host", Host);
-            }
+            sb.Replace("%host", Host);
 
             DateTime dt;
 
