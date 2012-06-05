@@ -107,14 +107,14 @@ namespace UploadersLib
 
         public string GetSubFolderPath()
         {
-            NameParser parser = new NameParser { Host = this.LocalhostRoot, IsFolderPath = true };
+            NameParser parser = new NameParser(NameParserType.URL) { Host = this.LocalhostRoot };
             return parser.Convert(this.SubFolderPath);
         }
 
         public string GetHttpHomePath()
         {
-            NameParser parser = new NameParser { Host = this.LocalhostRoot, IsFolderPath = true };
-            HttpHomePath = parser.RemovePrefixes(HttpHomePath);
+            NameParser parser = new NameParser(NameParserType.URL) { Host = this.LocalhostRoot };
+            HttpHomePath = FTPHelpers.RemovePrefixes(HttpHomePath);
             return parser.Convert(HttpHomePath);
         }
 
@@ -158,7 +158,7 @@ namespace UploadersLib
             {
                 httppath = lHttpHomePath.Replace("%host", this.LocalhostRoot).TrimStart('@');
             }
-            path = FTPHelpers.CombineURL(this.Port == 80 ? httppath : string.Format("{0}:{1}", httppath, this.Port), lFolderPath, fileName);
+            path = Helpers.CombineURL(this.Port == 80 ? httppath : string.Format("{0}:{1}", httppath, this.Port), lFolderPath, fileName);
 
             if (!path.StartsWith(RemoteProtocol.GetDescription()))
             {
@@ -186,7 +186,7 @@ namespace UploadersLib
                 return string.Empty;
             }
 
-            return FTPHelpers.CombineURL(LocalhostAddress, this.GetSubFolderPath(), fileName);
+            return Helpers.CombineURL(LocalhostAddress, this.GetSubFolderPath(), fileName);
         }
 
         public static void ApplyDefaultValues(object self)

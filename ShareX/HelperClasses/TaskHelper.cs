@@ -118,7 +118,7 @@ namespace ShareX.HelperClasses
                     break;
             }
 
-            NameParser parser = new NameParser { Picture = img };
+            NameParser parser = new NameParser(NameParserType.FileName) { Picture = img };
 
             return string.Format("{0}.{1}", parser.Convert(Program.Settings.NameFormatPattern), ext);
         }

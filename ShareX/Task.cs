@@ -108,7 +108,7 @@ namespace ShareX
         {
             Task task = new Task(EDataType.Text, TaskJob.TextUpload);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
-            task.Info.FileName = new NameParser().Convert(Program.Settings.NameFormatPattern) + ".txt";
+            task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".txt";
             task.tempText = text;
             return task;
         }
@@ -406,7 +406,7 @@ namespace ShareX
             switch (UploadManager.FileUploader)
             {
                 case FileDestination.Dropbox:
-                    NameParser parser = new NameParser { IsFolderPath = true };
+                    NameParser parser = new NameParser(NameParserType.URL);
                     string uploadPath = parser.Convert(Dropbox.TidyUploadPath(Program.UploadersConfig.DropboxUploadPath));
                     fileUploader = new Dropbox(Program.UploadersConfig.DropboxOAuthInfo, uploadPath, Program.UploadersConfig.DropboxAccountInfo)
                     {

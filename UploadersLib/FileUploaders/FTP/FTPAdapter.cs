@@ -264,11 +264,11 @@ namespace UploadersLib
             {
                 if (file.IsDirectory)
                 {
-                    RemoveDirectory(FTPHelpers.CombineURL(url, file.Name));
+                    RemoveDirectory(Helpers.CombineURL(url, file.Name));
                 }
                 else
                 {
-                    DeleteFile(FTPHelpers.CombineURL(url, file.Name));
+                    DeleteFile(Helpers.CombineURL(url, file.Name));
                 }
             }
 
@@ -396,8 +396,8 @@ namespace UploadersLib
             {
                 if (!string.IsNullOrEmpty(dir))
                 {
-                    path = FTPHelpers.CombineURL(path, dir);
-                    MakeDirectory(FTPHelpers.CombineURL(Options.Account.FTPAddress, path));
+                    path = Helpers.CombineURL(path, dir);
+                    MakeDirectory(Helpers.CombineURL(Options.Account.FTPAddress, path));
                 }
             }
 

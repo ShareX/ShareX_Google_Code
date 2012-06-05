@@ -144,19 +144,19 @@ namespace UploadersLib
 
         public string GetSubFolderPath()
         {
-            NameParser parser = new NameParser { Host = this.Host, IsFolderPath = true };
+            NameParser parser = new NameParser(NameParserType.URL) { Host = this.Host };
             return parser.Convert(this.SubFolderPath);
         }
 
         public string GetSubFolderPath(string fileName)
         {
-            return FTPHelpers.CombineURL(GetSubFolderPath(), fileName);
+            return Helpers.CombineURL(GetSubFolderPath(), fileName);
         }
 
         public string GetHttpHomePath()
         {
-            NameParser parser = new NameParser { Host = this.Host, IsFolderPath = true };
-            HttpHomePath = parser.RemovePrefixes(HttpHomePath);
+            NameParser parser = new NameParser(NameParserType.URL) { Host = this.Host };
+            HttpHomePath = FTPHelpers.RemovePrefixes(HttpHomePath);
             return parser.Convert(HttpHomePath);
         }
 
@@ -198,12 +198,12 @@ namespace UploadersLib
 
             if (string.IsNullOrEmpty(lHttpHomePath))
             {
-                path = FTPHelpers.CombineURL(host, lFolderPath, fileName);
+                path = Helpers.CombineURL(host, lFolderPath, fileName);
             }
             else
             {
                 string httppath = lHttpHomePath.Replace("%host", host).TrimStart('@');
-                path = FTPHelpers.CombineURL(httppath, lFolderPath, fileName);
+                path = Helpers.CombineURL(httppath, lFolderPath, fileName);
             }
 
             if (!path.StartsWith(BrowserProtocol.GetDescription()))
@@ -211,7 +211,7 @@ namespace UploadersLib
                 switch (BrowserProtocol)
                 {
                     case BrowserProtocol.ServerProtocol:
-                        path = FTPHelpers.CombineURL(FTPAddress, lFolderPath, fileName);
+                        path = Helpers.CombineURL(FTPAddress, lFolderPath, fileName);
                         break;
                     default:
                         path = BrowserProtocol.GetDescription() + path;
@@ -231,7 +231,7 @@ namespace UploadersLib
                 return string.Empty;
             }
 
-            return FTPHelpers.CombineURL(ftpAddress, GetSubFolderPath(fileName));
+            return Helpers.CombineURL(ftpAddress, GetSubFolderPath(fileName));
         }
 
         public override string ToString()

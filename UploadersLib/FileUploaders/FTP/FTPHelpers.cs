@@ -33,41 +33,6 @@ namespace UploadersLib
 {
     public static class FTPHelpers
     {
-        public static string CombineURL(string url1, string url2)
-        {
-            if (string.IsNullOrEmpty(url1) || string.IsNullOrEmpty(url2))
-            {
-                if (!string.IsNullOrEmpty(url1))
-                {
-                    return url1;
-                }
-
-                if (!string.IsNullOrEmpty(url2))
-                {
-                    return url2;
-                }
-
-                return string.Empty;
-            }
-
-            if (url1.EndsWith("/"))
-            {
-                url1 = url1.Substring(0, url1.Length - 1);
-            }
-
-            if (url2.StartsWith("/"))
-            {
-                url2 = url2.Remove(0, 1);
-            }
-
-            return url1 + "/" + url2;
-        }
-
-        public static string CombineURL(params string[] urls)
-        {
-            return urls.Aggregate((current, arg) => CombineURL(current, arg));
-        }
-
         public enum SlashType
         {
             Prefix, Suffix
@@ -145,16 +110,19 @@ namespace UploadersLib
             return result;
         }
 
-        public static string FixFilename(string fileName)
+        public static string RemovePrefixes(string host)
         {
-            fileName = Helpers.ReplaceIllegalChars(fileName, '_');
+            string[] prefixes = new string[] { "http://", "https://" };
 
-            while (fileName.IndexOf("__") != -1)
+            foreach (string prefix in prefixes)
             {
-                fileName = fileName.Replace("__", "_");
+                if (host.StartsWith(prefix))
+                {
+                    host = host.Remove(0, prefix.Length);
+                }
             }
 
-            return fileName;
+            return host;
         }
     }
 
