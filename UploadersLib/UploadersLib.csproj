@@ -185,7 +185,7 @@
     <Compile Include="HelperClasses\OAuth\IOAuth.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthManager.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthInfo.cs" />
-    <Compile Include="HelperClasses\UploadResult.cs" />
+    <Compile Include="UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
       <SubType>Form</SubType>
     </Compile>

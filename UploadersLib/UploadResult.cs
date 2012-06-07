@@ -24,22 +24,50 @@
 #endregion License Information (GPL v3)
 
 using System;
-using System.Xml;
+using System.Collections.Generic;
+using System.IO;
+using HelpersLib;
 
-namespace HistoryLib
+namespace UploadersLib.HelperClasses
 {
-    public class HistoryItem
+    public class UploadResult
     {
-        public string ID { get; set; }
-        public string Filename { get; set; }
-        public string Filepath { get; set; }
-        public DateTime DateTimeUtc { get; set; }
-        public string Type { get; set; }
-        public string Host { get; set; }
+        public string LocalFilePath { get; set; }
         public string URL { get; set; }
         public string ThumbnailURL { get; set; }
         public string DeletionURL { get; set; }
         public string ShortenedURL { get; set; }
-        public XmlNode Node { get; set; }
+
+        public string Source { get; set; }
+        public List<string> Errors { get; set; }
+        public bool IsURLExpected { get; set; }
+
+        public bool IsError
+        {
+            get { return Errors != null && Errors.Count > 0; }
+        }
+
+        public UploadResult()
+        {
+            Errors = new List<string>();
+            IsURLExpected = true;
+        }
+
+        public UploadResult(string source, string url = null)
+            : this()
+        {
+            Source = source;
+            URL = url;
+        }
+
+        public string ErrorsToString()
+        {
+            if (IsError)
+            {
+                return string.Join(Environment.NewLine, Errors.ToArray());
+            }
+
+            return null;
+        }
     }
 }

@@ -109,8 +109,8 @@ namespace ShareX
 
         public UploadInfo()
         {
-            Result = new UploadResult();
             ImageJob = TaskImageJob.UploadImageToHost;
+            Result = new UploadResult();
         }
 
         public HistoryItem GetHistoryItem()

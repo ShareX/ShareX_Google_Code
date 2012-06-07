@@ -143,6 +143,7 @@ namespace ShareX
             this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblImagePreview = new System.Windows.Forms.Label();
             this.cmsUploads.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
@@ -579,8 +580,8 @@ namespace ShareX
             // 
             // scMain.Panel2
             // 
+            this.scMain.Panel2.Controls.Add(this.lblImagePreview);
             this.scMain.Panel2.Controls.Add(this.pbPreview);
-            this.scMain.Panel2Collapsed = true;
             this.scMain.Size = new System.Drawing.Size(888, 323);
             this.scMain.SplitterDistance = 500;
             this.scMain.TabIndex = 1;
@@ -605,7 +606,7 @@ namespace ShareX
             this.lvUploads.Location = new System.Drawing.Point(0, 0);
             this.lvUploads.Name = "lvUploads";
             this.lvUploads.ShowItemToolTips = true;
-            this.lvUploads.Size = new System.Drawing.Size(888, 323);
+            this.lvUploads.Size = new System.Drawing.Size(500, 323);
             this.lvUploads.TabIndex = 0;
             this.lvUploads.UseCompatibleStateImageBehavior = false;
             this.lvUploads.View = System.Windows.Forms.View.Details;
@@ -663,7 +664,7 @@ namespace ShareX
             this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbPreview.Location = new System.Drawing.Point(0, 0);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(96, 100);
+            this.pbPreview.Size = new System.Drawing.Size(384, 323);
             this.pbPreview.TabIndex = 0;
             this.pbPreview.TabStop = false;
             this.pbPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPreview_MouseClick);
@@ -935,6 +936,15 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
+            // lblImagePreview
+            // 
+            this.lblImagePreview.AutoSize = true;
+            this.lblImagePreview.Location = new System.Drawing.Point(8, 8);
+            this.lblImagePreview.Name = "lblImagePreview";
+            this.lblImagePreview.Size = new System.Drawing.Size(76, 13);
+            this.lblImagePreview.TabIndex = 1;
+            this.lblImagePreview.Text = "Image preview";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -963,6 +973,7 @@ namespace ShareX
             this.tscMain.PerformLayout();
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
+            this.scMain.Panel2.PerformLayout();
             this.scMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.cmsTray.ResumeLayout(false);
@@ -1060,5 +1071,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayURLShorteners;
         private System.Windows.Forms.ToolStripSeparator tssTrayDestinations1;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayUploadersConfig;
+        private System.Windows.Forms.Label lblImagePreview;
     }
 }
