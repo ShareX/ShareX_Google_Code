@@ -34,26 +34,15 @@ namespace HistoryLib
     {
         public HistoryItem HistoryItem { get; private set; }
 
-        public int HistoryItemCount { get; private set; }
-
         public bool IsURLExist { get; private set; }
-
         public bool IsShortenedURLExist { get; private set; }
-
         public bool IsThumbnailURLExist { get; private set; }
-
         public bool IsDeletionURLExist { get; private set; }
-
         public bool IsImageURL { get; private set; }
-
         public bool IsTextURL { get; private set; }
-
         public bool IsFilePathValid { get; private set; }
-
         public bool IsFileExist { get; private set; }
-
         public bool IsImageFile { get; private set; }
-
         public bool IsTextFile { get; private set; }
 
         private ListView lv;
@@ -95,9 +84,7 @@ namespace HistoryLib
 
         private HistoryItem GetSelectedHistoryItem()
         {
-            HistoryItemCount = lv.SelectedItems.Count;
-
-            if (HistoryItemCount > 0)
+            if (lv.SelectedItems.Count > 0)
             {
                 return lv.SelectedItems[0].Tag as HistoryItem;
             }

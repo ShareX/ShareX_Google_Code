@@ -156,11 +156,11 @@ namespace ShareX
 
             if (itemsCount > 0)
             {
-                UploadResult result = lvUploads.SelectedItems[0].Tag as UploadResult;
+                UploadInfo info = lvUploads.SelectedItems[0].Tag as UploadInfo;
 
-                if (result != null)
+                if (info != null)
                 {
-                    if (!string.IsNullOrEmpty(result.URL))
+                    if (!string.IsNullOrEmpty(info.Result.URL))
                     {
                         copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = true;
 
@@ -174,28 +174,28 @@ namespace ShareX
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(result.ThumbnailURL))
+                    if (!string.IsNullOrEmpty(info.Result.ThumbnailURL))
                     {
                         copyThumbnailURLToolStripMenuItem.Visible = true;
                     }
 
-                    if (!string.IsNullOrEmpty(result.DeletionURL))
+                    if (!string.IsNullOrEmpty(info.Result.DeletionURL))
                     {
                         copyDeletionURLToolStripMenuItem.Visible = true;
                     }
 
-                    if (!string.IsNullOrEmpty(result.ShortenedURL))
+                    if (!string.IsNullOrEmpty(info.Result.ShortenedURL))
                     {
                         copyShortenedURLToolStripMenuItem.Visible = true;
                     }
 
-                    if (result.IsError)
+                    if (info.Result.IsError)
                     {
                         showErrorsToolStripMenuItem.Visible = true;
                         copyErrorsToolStripMenuItem.Visible = true;
                     }
 
-                    if (!string.IsNullOrEmpty(result.Source))
+                    if (!string.IsNullOrEmpty(info.Result.Source))
                     {
                         showResponseToolStripMenuItem.Visible = true;
                     }
@@ -316,25 +316,25 @@ namespace ShareX
             }
         }
 
-        private UploadResult GetCurrentUploadResult()
+        private UploadInfo GetCurrentUploadInfo()
         {
-            UploadResult result = null;
+            UploadInfo info = null;
 
             if (lvUploads.SelectedItems.Count > 0)
             {
-                result = lvUploads.SelectedItems[0].Tag as UploadResult;
+                info = lvUploads.SelectedItems[0].Tag as UploadInfo;
             }
 
-            return result;
+            return info;
         }
 
         private void OpenURL()
         {
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && !string.IsNullOrEmpty(result.URL))
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.URL))
             {
-                Helpers.LoadBrowserAsync(result.URL);
+                Helpers.LoadBrowserAsync(info.Result.URL);
             }
         }
 
@@ -342,8 +342,8 @@ namespace ShareX
         {
             if (lvUploads.SelectedItems.Count > 0)
             {
-                string[] array = lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadResult).
-                    Where(x => x != null && !string.IsNullOrEmpty(x.URL)).Select(x => x.URL).ToArray();
+                string[] array = lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadInfo).
+                    Where(x => x != null && x.Result != null && !string.IsNullOrEmpty(x.Result.URL)).Select(x => x.Result.URL).ToArray();
 
                 if (array != null && array.Length > 0)
                 {
@@ -359,42 +359,42 @@ namespace ShareX
 
         private void CopyShortenedURL()
         {
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && !string.IsNullOrEmpty(result.ShortenedURL))
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.ShortenedURL))
             {
-                Helpers.CopyTextSafely(result.ShortenedURL);
+                Helpers.CopyTextSafely(info.Result.ShortenedURL);
             }
         }
 
         private void CopyThumbnailURL()
         {
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && !string.IsNullOrEmpty(result.ThumbnailURL))
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.ThumbnailURL))
             {
-                Helpers.CopyTextSafely(result.ThumbnailURL);
+                Helpers.CopyTextSafely(info.Result.ThumbnailURL);
             }
         }
 
         private void CopyDeletionURL()
         {
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && !string.IsNullOrEmpty(result.DeletionURL))
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.DeletionURL))
             {
-                Helpers.CopyTextSafely(result.DeletionURL);
+                Helpers.CopyTextSafely(info.Result.DeletionURL);
             }
         }
 
         private string GetErrors()
         {
             string errors = string.Empty;
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && result.IsError)
+            if (info != null && info.Result != null && info.Result.IsError)
             {
-                errors = string.Join("\r\n\r\n", result.Errors.ToArray());
+                errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
             }
 
             return errors;
@@ -422,11 +422,11 @@ namespace ShareX
 
         private void ShowResponse()
         {
-            UploadResult result = GetCurrentUploadResult();
+            UploadInfo info = GetCurrentUploadInfo();
 
-            if (result != null && !string.IsNullOrEmpty(result.Source))
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.Source))
             {
-                ResponseForm form = new ResponseForm(result.Source);
+                ResponseForm form = new ResponseForm(info.Result.Source);
                 form.Icon = this.Icon;
                 form.Show();
             }
@@ -462,13 +462,13 @@ namespace ShareX
             Activate();
         }
 
-        private void ShowPreview(UploadResult result)
+        private void ShowPreview(UploadInfo info)
         {
-            if (result != null && !string.IsNullOrEmpty(result.LocalFilePath) && File.Exists(result.LocalFilePath))
+            if (info != null && !string.IsNullOrEmpty(info.FilePath) && File.Exists(info.FilePath))
             {
                 try
                 {
-                    Image img = Image.FromFile(result.LocalFilePath);
+                    Image img = Image.FromFile(info.FilePath);
 
                     if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
                     {
@@ -480,6 +480,7 @@ namespace ShareX
                     }
 
                     pbPreview.Image = img;
+                    lblImagePreview.Visible = false;
                 }
                 catch (Exception e)
                 {
@@ -489,6 +490,7 @@ namespace ShareX
             else
             {
                 pbPreview.Image = null;
+                lblImagePreview.Visible = true;
             }
         }
 
@@ -680,8 +682,8 @@ namespace ShareX
 
             if (!scMain.Panel2Collapsed)
             {
-                UploadResult result = GetCurrentUploadResult();
-                ShowPreview(result);
+                UploadInfo info = GetCurrentUploadInfo();
+                ShowPreview(info);
             }
         }
 

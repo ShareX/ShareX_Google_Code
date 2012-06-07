@@ -312,6 +312,7 @@ namespace ShareX
                 Program.MyLogger.WriteLine("Upload in queue. ID: {0}, Job: {1}, Type: {2}, Host: {3}", info.ID, info.Job, info.UploadDestination, info.UploaderHost);
 
                 ListViewItem lvi = new ListViewItem();
+                lvi.Tag = info;
                 lvi.Text = info.FileName;
                 lvi.SubItems.Add("In queue");
                 lvi.SubItems.Add(string.Empty);
@@ -373,7 +374,6 @@ namespace ShareX
                 if (ListViewControl != null && info != null && info.Result != null)
                 {
                     ListViewItem lvi = ListViewControl.Items[info.ID];
-                    lvi.Tag = info.Result;
 
                     if (info.Result.IsError)
                     {

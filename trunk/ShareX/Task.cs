@@ -191,7 +191,6 @@ namespace ShareX
                 {
                     if (Info.Result == null) Info.Result = new UploadResult();
                     if (uploader != null) Info.Result.Errors = uploader.Errors;
-                    Info.Result.LocalFilePath = Info.FilePath;
                 }
             }
             else
