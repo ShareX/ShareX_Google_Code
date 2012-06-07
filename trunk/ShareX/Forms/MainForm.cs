@@ -151,7 +151,7 @@ namespace ShareX
         {
             tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = false;
 
-            if (uim.SelectedItemCount > 0)
+            if (lvUploads.SelectedIndices.Count > 0)
             {
                 int index = lvUploads.SelectedIndices[0];
 
@@ -161,45 +161,67 @@ namespace ShareX
                 }
                 else
                 {
-                    cmsUploadInfo.SuspendLayout();
+                    if (uim.RefreshInfo())
+                    {
+                        cmsUploadInfo.SuspendLayout();
 
-                    // Open
-                    tsmiOpen.Visible = true;
+                        if (uim.SelectedItemCount > 1)
+                        {
+                            tsmiCopyURL.Text = string.Format("URLs ({0})", uim.SelectedItemCount);
+                        }
+                        else
+                        {
+                            tsmiCopyURL.Text = "URL";
+                        }
 
-                    tsmiOpenURL.Enabled = uim.IsURLExist;
-                    tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
-                    tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                    tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
+                        // Open
+                        tsmiOpen.Visible = true;
 
-                    tsmiOpenFile.Enabled = uim.IsFileExist;
-                    tsmiOpenFolder.Enabled = uim.IsFileExist;
+                        tsmiOpenURL.Enabled = uim.IsURLExist;
+                        tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
+                        tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                        tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
 
-                    // Copy
-                    tsmiCopy.Visible = true;
+                        tsmiOpenFile.Enabled = uim.IsFileExist;
+                        tsmiOpenFolder.Enabled = uim.IsFileExist;
 
-                    tsmiCopyURL.Enabled = uim.IsURLExist;
-                    tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
-                    tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                    tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
+                        // Copy
+                        tsmiCopy.Visible = true;
 
-                    tsmiCopyFile.Enabled = uim.IsFileExist;
-                    tsmiCopyImage.Enabled = uim.IsImageFile;
-                    tsmiCopyText.Enabled = uim.IsTextFile;
+                        tsmiCopyURL.Enabled = uim.IsURLExist;
+                        tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
+                        tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                        tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
 
-                    tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
-                    tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
-                    tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+                        tsmiCopyFile.Enabled = uim.IsFileExist;
+                        tsmiCopyImage.Enabled = uim.IsImageFile;
+                        tsmiCopyText.Enabled = uim.IsTextFile;
 
-                    tsmiCopyForumLink.Enabled = uim.IsURLExist;
-                    tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
-                    tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+                        tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
+                        tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
+                        tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
 
-                    tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
-                    tsmiCopyFileName.Enabled = uim.IsFilePathValid;
-                    tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
-                    tsmiCopyFolder.Enabled = uim.IsFilePathValid;
+                        tsmiCopyForumLink.Enabled = uim.IsURLExist;
+                        tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
+                        tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
 
-                    cmsUploadInfo.ResumeLayout();
+                        tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
+                        tsmiCopyFileName.Enabled = uim.IsFilePathValid;
+                        tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
+                        tsmiCopyFolder.Enabled = uim.IsFilePathValid;
+
+                        cmsUploadInfo.ResumeLayout();
+
+                        if (!scMain.Panel2Collapsed && uim.IsImageFile)
+                        {
+                            ShowPreview(uim.Info.FilePath);
+                        }
+                        else
+                        {
+                            pbPreview.Image = null;
+                            lblImagePreview.Visible = true;
+                        }
+                    }
                 }
             }
             else
@@ -356,35 +378,27 @@ namespace ShareX
             Activate();
         }
 
-        private void ShowPreview(UploadInfo info)
+        private void ShowPreview(string filePath)
         {
-            if (info != null && !string.IsNullOrEmpty(info.FilePath) && File.Exists(info.FilePath))
+            try
             {
-                try
-                {
-                    Image img = Image.FromFile(info.FilePath);
+                Image img = Image.FromFile(filePath);
 
-                    if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
-                    {
-                        pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
-                    }
-                    else
-                    {
-                        pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
-                    }
-
-                    pbPreview.Image = img;
-                    lblImagePreview.Visible = false;
-                }
-                catch (Exception e)
+                if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
                 {
-                    DebugHelper.WriteException(e);
+                    pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
                 }
+                else
+                {
+                    pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+
+                pbPreview.Image = img;
+                lblImagePreview.Visible = false;
             }
-            else
+            catch (Exception e)
             {
-                pbPreview.Image = null;
-                lblImagePreview.Visible = true;
+                DebugHelper.WriteException(e);
             }
         }
 
@@ -573,12 +587,6 @@ namespace ShareX
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateControls();
-
-            if (!scMain.Panel2Collapsed)
-            {
-                UploadInfo info = GetCurrentUploadInfo();
-                ShowPreview(info);
-            }
         }
 
         private void lvUploads_MouseUp(object sender, MouseEventArgs e)
@@ -658,6 +666,121 @@ namespace ShareX
                     UploadManager.Tasks[index].Stop();
                 }
             }
+        }
+
+        private void tsmiOpenURL_Click(object sender, EventArgs e)
+        {
+            uim.OpenURL();
+        }
+
+        private void tsmiOpenShortenedURL_Click(object sender, EventArgs e)
+        {
+            uim.OpenShortenedURL();
+        }
+
+        private void tsmiOpenThumbnailURL_Click(object sender, EventArgs e)
+        {
+            uim.OpenThumbnailURL();
+        }
+
+        private void tsmiOpenDeletionURL_Click(object sender, EventArgs e)
+        {
+            uim.OpenDeletionURL();
+        }
+
+        private void tsmiOpenFile_Click(object sender, EventArgs e)
+        {
+            uim.OpenFile();
+        }
+
+        private void tsmiOpenFolder_Click(object sender, EventArgs e)
+        {
+            uim.OpenFolder();
+        }
+
+        private void tsmiCopyURL_Click(object sender, EventArgs e)
+        {
+            uim.CopyURL();
+        }
+
+        private void tsmiCopyShortenedURL_Click(object sender, EventArgs e)
+        {
+            uim.CopyShortenedURL();
+        }
+
+        private void tsmiCopyThumbnailURL_Click(object sender, EventArgs e)
+        {
+            uim.CopyThumbnailURL();
+        }
+
+        private void tsmiCopyDeletionURL_Click(object sender, EventArgs e)
+        {
+            uim.CopyDeletionURL();
+        }
+
+        private void tsmiCopyFile_Click(object sender, EventArgs e)
+        {
+            uim.CopyFile();
+        }
+
+        private void tsmiCopyImage_Click(object sender, EventArgs e)
+        {
+            uim.CopyImage();
+        }
+
+        private void tsmiCopyText_Click(object sender, EventArgs e)
+        {
+            uim.CopyText();
+        }
+
+        private void tsmiCopyHTMLLink_Click(object sender, EventArgs e)
+        {
+            uim.CopyHTMLLink();
+        }
+
+        private void tsmiCopyHTMLImage_Click(object sender, EventArgs e)
+        {
+            uim.CopyHTMLImage();
+        }
+
+        private void tsmiCopyHTMLLinkedImage_Click(object sender, EventArgs e)
+        {
+            uim.CopyHTMLLinkedImage();
+        }
+
+        private void tsmiCopyForumLink_Click(object sender, EventArgs e)
+        {
+            uim.CopyForumLink();
+        }
+
+        private void tsmiCopyForumImage_Click(object sender, EventArgs e)
+        {
+            uim.CopyForumImage();
+        }
+
+        private void tsmiCopyForumLinkedImage_Click(object sender, EventArgs e)
+        {
+            uim.CopyForumLinkedImage();
+        }
+
+        private void tsmiCopyFilePath_Click(object sender, EventArgs e)
+        {
+            uim.CopyFilePath();
+        }
+
+        private void tsmiCopyFileName_Click(object sender, EventArgs e)
+        {
+            uim.CopyFileName();
+        }
+
+        private void tsmiCopyFileNameWithExtension_Click(object sender, EventArgs e)
+        {
+            uim.CopyFileNameWithExtension();
+        }
+
+        private void tsmiCopyFolder_Click(object sender, EventArgs e)
+        {
+            uim.CopyFolder();
         }
 
         #endregion UploadInfoMenu events
