@@ -56,20 +56,27 @@ namespace ShareX
             lv = listView;
         }
 
-        public void RefreshInfo()
+        public bool RefreshInfo()
         {
             Info = GetSelectedUploadInfo();
 
-            IsURLExist = !string.IsNullOrEmpty(Info.Result.URL);
-            IsShortenedURLExist = !string.IsNullOrEmpty(Info.Result.ShortenedURL);
-            IsThumbnailURLExist = !string.IsNullOrEmpty(Info.Result.ThumbnailURL);
-            IsDeletionURLExist = !string.IsNullOrEmpty(Info.Result.DeletionURL);
-            IsImageURL = IsURLExist && Helpers.IsImageFile(Info.Result.URL);
-            IsTextURL = IsURLExist && Helpers.IsTextFile(Info.Result.URL);
-            IsFilePathValid = !string.IsNullOrEmpty(Info.FilePath) && Path.HasExtension(Info.FilePath);
-            IsFileExist = IsFilePathValid && File.Exists(Info.FilePath);
-            IsImageFile = IsFileExist && Helpers.IsImageFile(Info.FilePath);
-            IsTextFile = IsFileExist && Helpers.IsTextFile(Info.FilePath);
+            if (Info != null)
+            {
+                IsURLExist = !string.IsNullOrEmpty(Info.Result.URL);
+                IsShortenedURLExist = !string.IsNullOrEmpty(Info.Result.ShortenedURL);
+                IsThumbnailURLExist = !string.IsNullOrEmpty(Info.Result.ThumbnailURL);
+                IsDeletionURLExist = !string.IsNullOrEmpty(Info.Result.DeletionURL);
+                IsImageURL = IsURLExist && Helpers.IsImageFile(Info.Result.URL);
+                IsTextURL = IsURLExist && Helpers.IsTextFile(Info.Result.URL);
+                IsFilePathValid = !string.IsNullOrEmpty(Info.FilePath) && Path.HasExtension(Info.FilePath);
+                IsFileExist = IsFilePathValid && File.Exists(Info.FilePath);
+                IsImageFile = IsFileExist && Helpers.IsImageFile(Info.FilePath);
+                IsTextFile = IsFileExist && Helpers.IsTextFile(Info.FilePath);
+
+                return true;
+            }
+
+            return false;
         }
 
         private UploadInfo GetSelectedUploadInfo()
