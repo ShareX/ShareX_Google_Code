@@ -117,11 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="cmsUploads.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="tsMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>135, 17</value>
+    <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tsmiFileUploaders.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -152,19 +149,19 @@
   <data name="tsddbDestinations.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK8SURBVDhPnZPfS5NRGMffVVfdeGF/QjAiE8TRohozlhji
-        RTTJJJEItYk3heSWpgu3tGmlLfwxtKYJkhtqW2nJ/IG65nBu6LZyrs0tdDOnjiaiopNv56yrEhN6Xz5w
-        OM/385zn8PIyzN8PwDqm+M47qlisY9UE3lPomu4xpLYv/+cGWEfKp0Un61yWBmtoVe307dp8P3Y73Rur
-        iQ1uC60xzL+a5Ov5bOm4rWUgsGPZBGrHgvi4sAm61geWdhLkJhtDMgdOwbr+qula82Q4v8eLQt08it7N
-        o1jnxf0PPry0b+ImqdHMwddIfTKSr3VGk59bcKHZgfNKK271hlH4aQMc2Ti4UnOUIZl9DYRCISczM/PO
-        8UsSN79+ZO9MjQXJL2bAqbMhUToCYfcOztU6wW827dEMzVIn1igjI+OESCQSRyIR5Mi7IVAYwW9yI7Xl
-        G660ElRzSK13ILdvC9kdPlx90ImZGT/y8kRi6jLp6emnlEpl29raGt70m5Fc3I2s9gXkdoVwW0vQhJDd
-        4oXctoWz4l48VRswNeWBXF7TRl0mLS0tRaPRDNMGbrcbJa2D4JQbkNPmxz3dzxg3VC5clBlQ8EwPg8Ec
-        a9DY+HqYuoxAIMgym82e5eVl2O12EjDgYUMXLj/SIUHSj9PiPqSU9+Cuoh1q9Vvo9SMwm13Qagc81GV4
-        PF5RMBhENBrF9vYW1tcjWFkJIRBYhN/vg9frJcwT/IQFwhJhBUbjF1CX4XK5xeFwGHNzLjidDthsVnLC
-        BMbGRjE0NBSbyGAYJAwTRgnG2DWsVg+oyyQlJZUEAgHodDpUV1dBJquEVFqBsrJSSCQSiMWUUkIFoZJQ
-        hQLyGo0OUJdhs9ller3e93tUD2Znv5LPNA2LZRImk4kEjYTPhAnCJMEam0Cl6vBRl4mPjxfExcU9/h+o
-        e8jfeXj5F4MDBT/OuErcAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK7SURBVDhPnZPfS5NRGMffVVfdeGF/QjAiE8SRUY0ZSwzx
+        IppkkkiE2sSbQnJL04Vb2rTSFv4YWtMEyQ21rbRi6kjXHM4N3VbOtbmFvgunjiaiopNv56yrEhN6Xz5w
+        OM/385zn8PIyzN8PwDmi/M4/rFxs5NSzbyl0TfcYUtuT/3MDnENV0+LjjR5bsz28onEHdhwBdqfHu76S
+        3Oy10RrD/KtJkUHAlY072ofYbdsG0DAWwvuFDdC1gWW3kxQWB0My+07Bufqi9UrbZKSo348S/TxK38yj
+        TO/H3XcBPHdu4Dqp0cz+18h4ZCrSuWOpT2041+bCWZUdNwYiKPmwDp58HDyZNcaQzJ4GIpGIl5OTc+vo
+        BalX0GTaPVVvQ+qzGfAaHUiWmSDq28aZBjcEbeO7NEOz1Ik3ys7OPiYWiyXRaBT5ij4IlWYIWr3IaP+G
+        Sx0E9RwymlwoGNxEXncAl+/1YGYmiMJCsYS6TFZW1gmVStW5urqKV0NWpJb1IbdrAQW9YdzUEbRh5LX7
+        oXBs4rRkAI81RkxN+aBQ1HdSl8nMzEzXarWjtIHX60V5xzB4VUbkdwZxR/8zzjW1B+flRhQ/McBotMYb
+        tLS8HKUuIxQKc61Wq29paQlOp5MEjLjf3IuLD/RIkg7hpGQQ6VX9uK3sgkbzGgaDCVarBzrdRx91GT6f
+        XxoKhRCLxbC1tYm1tSiWl8Ng2UUEgwH4/X7CPCFIWCD8ICzDbP4C6jJpaWllkUgEc3MeuN0uOBx2csIE
+        xsY+YWRkJD6R0ThMGCV8Ipjj17DbfaAuk5KSUs6yLPR6PerqaiGX10Amq0ZlZQWkUikkEkoFoZpQQ6hF
+        MXnNZheoy3C53EqDwRD4PaoPs7NfyWeahs02CYvFQoJmwmfCBGGSYI9PoFZ3B6jLJCYmChMSEh7+D9Q9
+        4O88uPwLVmAFMYYTe4YAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsmiTestFileUpload.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -211,10 +208,10 @@
 </value>
   </data>
   <metadata name="niTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>223, 17</value>
+    <value>105, 17</value>
   </metadata>
   <metadata name="cmsTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>308, 17</value>
+    <value>190, 17</value>
   </metadata>
   <data name="tsmiTrayHistory.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -245,6 +242,9 @@
         6IqiKG9sfzwenwQdumKxWG7MZvP7OdC99C9e7v8C9uZgFu61PpEAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="cmsUploadInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>286, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>50</value>
   </metadata>

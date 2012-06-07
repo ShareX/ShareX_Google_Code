@@ -64,7 +64,7 @@ namespace UploadersLib.HelperClasses
         {
             if (IsError)
             {
-                return string.Join(Environment.NewLine, Errors.ToArray());
+                return string.Join(Environment.NewLine + Environment.NewLine, Errors.ToArray());
             }
 
             return null;

@@ -48,6 +48,7 @@ namespace ShareX
         public HotkeyManager HotkeyManager { get; private set; }
 
         private bool trayClose;
+        private UploadInfoManager uim;
 
         public MainForm()
         {
@@ -109,6 +110,7 @@ namespace ShareX
             lvUploads.FillLastColumn();
 
             UploadManager.ListViewControl = lvUploads;
+            uim = new UploadInfoManager(lvUploads);
         }
 
         private void AddEnumItems<T>(Action<int> selectedIndex, params ToolStripMenuItem[] parents)
@@ -147,66 +149,62 @@ namespace ShareX
 
         private void UpdateControls()
         {
-            copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = copyShortenedURLToolStripMenuItem.Visible =
-                copyThumbnailURLToolStripMenuItem.Visible = copyDeletionURLToolStripMenuItem.Visible =
-                showErrorsToolStripMenuItem.Visible = copyErrorsToolStripMenuItem.Visible = showResponseToolStripMenuItem.Visible =
-                uploadFileToolStripMenuItem.Visible = stopUploadToolStripMenuItem.Visible = false;
+            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = false;
 
-            int itemsCount = lvUploads.SelectedItems.Count;
-
-            if (itemsCount > 0)
+            if (uim.SelectedItemCount > 0)
             {
-                UploadInfo info = lvUploads.SelectedItems[0].Tag as UploadInfo;
-
-                if (info != null)
-                {
-                    if (!string.IsNullOrEmpty(info.Result.URL))
-                    {
-                        copyURLToolStripMenuItem.Visible = openURLToolStripMenuItem.Visible = true;
-
-                        if (itemsCount > 1)
-                        {
-                            copyURLToolStripMenuItem.Text = string.Format("Copy URLs ({0})", itemsCount);
-                        }
-                        else
-                        {
-                            copyURLToolStripMenuItem.Text = "Copy URL";
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(info.Result.ThumbnailURL))
-                    {
-                        copyThumbnailURLToolStripMenuItem.Visible = true;
-                    }
-
-                    if (!string.IsNullOrEmpty(info.Result.DeletionURL))
-                    {
-                        copyDeletionURLToolStripMenuItem.Visible = true;
-                    }
-
-                    if (!string.IsNullOrEmpty(info.Result.ShortenedURL))
-                    {
-                        copyShortenedURLToolStripMenuItem.Visible = true;
-                    }
-
-                    if (info.Result.IsError)
-                    {
-                        showErrorsToolStripMenuItem.Visible = true;
-                        copyErrorsToolStripMenuItem.Visible = true;
-                    }
-
-                    if (!string.IsNullOrEmpty(info.Result.Source))
-                    {
-                        showResponseToolStripMenuItem.Visible = true;
-                    }
-                }
-
                 int index = lvUploads.SelectedIndices[0];
-                stopUploadToolStripMenuItem.Visible = UploadManager.Tasks[index].Status != TaskStatus.Completed;
+
+                if (UploadManager.Tasks[index].IsWorking)
+                {
+                    tsmiStopUpload.Visible = true;
+                }
+                else
+                {
+                    cmsUploadInfo.SuspendLayout();
+
+                    // Open
+                    tsmiOpen.Visible = true;
+
+                    tsmiOpenURL.Enabled = uim.IsURLExist;
+                    tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
+                    tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                    tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
+
+                    tsmiOpenFile.Enabled = uim.IsFileExist;
+                    tsmiOpenFolder.Enabled = uim.IsFileExist;
+
+                    // Copy
+                    tsmiCopy.Visible = true;
+
+                    tsmiCopyURL.Enabled = uim.IsURLExist;
+                    tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
+                    tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                    tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
+
+                    tsmiCopyFile.Enabled = uim.IsFileExist;
+                    tsmiCopyImage.Enabled = uim.IsImageFile;
+                    tsmiCopyText.Enabled = uim.IsTextFile;
+
+                    tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
+                    tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
+                    tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+
+                    tsmiCopyForumLink.Enabled = uim.IsURLExist;
+                    tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
+                    tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+
+                    tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
+                    tsmiCopyFileName.Enabled = uim.IsFilePathValid;
+                    tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
+                    tsmiCopyFolder.Enabled = uim.IsFilePathValid;
+
+                    cmsUploadInfo.ResumeLayout();
+                }
             }
             else
             {
-                uploadFileToolStripMenuItem.Visible = true;
+                tsmiUploadFile.Visible = true;
             }
         }
 
@@ -326,110 +324,6 @@ namespace ShareX
             }
 
             return info;
-        }
-
-        private void OpenURL()
-        {
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.URL))
-            {
-                Helpers.LoadBrowserAsync(info.Result.URL);
-            }
-        }
-
-        private void CopyURL()
-        {
-            if (lvUploads.SelectedItems.Count > 0)
-            {
-                string[] array = lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadInfo).
-                    Where(x => x != null && x.Result != null && !string.IsNullOrEmpty(x.Result.URL)).Select(x => x.Result.URL).ToArray();
-
-                if (array != null && array.Length > 0)
-                {
-                    string urls = string.Join("\r\n", array);
-
-                    if (!string.IsNullOrEmpty(urls))
-                    {
-                        Helpers.CopyTextSafely(urls);
-                    }
-                }
-            }
-        }
-
-        private void CopyShortenedURL()
-        {
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.ShortenedURL))
-            {
-                Helpers.CopyTextSafely(info.Result.ShortenedURL);
-            }
-        }
-
-        private void CopyThumbnailURL()
-        {
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.ThumbnailURL))
-            {
-                Helpers.CopyTextSafely(info.Result.ThumbnailURL);
-            }
-        }
-
-        private void CopyDeletionURL()
-        {
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.DeletionURL))
-            {
-                Helpers.CopyTextSafely(info.Result.DeletionURL);
-            }
-        }
-
-        private string GetErrors()
-        {
-            string errors = string.Empty;
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && info.Result.IsError)
-            {
-                errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
-            }
-
-            return errors;
-        }
-
-        private void ShowErrors()
-        {
-            string errors = GetErrors();
-
-            if (!string.IsNullOrEmpty(errors))
-            {
-                new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
-            }
-        }
-
-        private void CopyErrors()
-        {
-            string errors = GetErrors();
-
-            if (!string.IsNullOrEmpty(errors))
-            {
-                Helpers.CopyTextSafely(errors);
-            }
-        }
-
-        private void ShowResponse()
-        {
-            UploadInfo info = GetCurrentUploadInfo();
-
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(info.Result.Source))
-            {
-                ResponseForm form = new ResponseForm(info.Result.Source);
-                form.Icon = this.Icon;
-                form.Show();
-            }
         }
 
         private void UpdatePreviewSplitter()
@@ -692,69 +586,13 @@ namespace ShareX
             if (e.Button == MouseButtons.Right)
             {
                 UpdateControls();
-                cmsUploads.Show(lvUploads, e.X + 1, e.Y + 1);
-            }
-        }
-
-        private void openURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenURL();
-        }
-
-        private void copyURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyURL();
-        }
-
-        private void copyShortenedURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyShortenedURL();
-        }
-
-        private void copyThumbnailURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyThumbnailURL();
-        }
-
-        private void copyDeletionURLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyDeletionURL();
-        }
-
-        private void showErrorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowErrors();
-        }
-
-        private void copyErrorsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CopyErrors();
-        }
-
-        private void showResponseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowResponse();
-        }
-
-        private void uploadFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UploadManager.UploadFile();
-        }
-
-        private void stopUploadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (lvUploads.SelectedIndices.Count > 0)
-            {
-                foreach (int index in lvUploads.SelectedIndices)
-                {
-                    UploadManager.Tasks[index].Stop();
-                }
+                cmsUploadInfo.Show(lvUploads, e.X + 1, e.Y + 1);
             }
         }
 
         private void lvUploads_DoubleClick(object sender, EventArgs e)
         {
-            OpenURL();
+            // TODO:  OpenURL();
         }
 
         private void btnSplitterControl_Click(object sender, EventArgs e)
@@ -803,6 +641,26 @@ namespace ShareX
         }
 
         #endregion Tray events
+
+        #region UploadInfoMenu events
+
+        private void tsmiUploadFile_Click(object sender, EventArgs e)
+        {
+            UploadManager.UploadFile();
+        }
+
+        private void tsmiStopUpload_Click(object sender, EventArgs e)
+        {
+            if (lvUploads.SelectedIndices.Count > 0)
+            {
+                foreach (int index in lvUploads.SelectedIndices)
+                {
+                    UploadManager.Tasks[index].Stop();
+                }
+            }
+        }
+
+        #endregion UploadInfoMenu events
 
         #endregion Form events
     }
