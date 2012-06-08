@@ -226,16 +226,6 @@ namespace ShareX
             if (Info != null && IsFilePathValid) Helpers.CopyTextSafely(Path.GetDirectoryName(Info.FilePath));
         }
 
-        public void DeleteLocalFile()
-        {
-            RefreshInfo();
-            if (Info != null && IsFileExist && MessageBox.Show("Do you want to delete this file?\n" + Info.FilePath,
-                "Delete Local File", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                File.Delete(Info.FilePath);
-            }
-        }
-
         public void ShowErrors()
         {
             string errors = Info.Result.ErrorsToString();
@@ -243,16 +233,6 @@ namespace ShareX
             if (!string.IsNullOrEmpty(errors))
             {
                 new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
-            }
-        }
-
-        public void CopyErrors()
-        {
-            string errors = Info.Result.ErrorsToString();
-
-            if (!string.IsNullOrEmpty(errors))
-            {
-                Helpers.CopyTextSafely(errors);
             }
         }
 

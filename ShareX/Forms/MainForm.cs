@@ -149,7 +149,9 @@ namespace ShareX
 
         private void UpdateControls()
         {
-            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = false;
+            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = tsmiShowErrors.Visible = tsmiShowResponse.Visible = false;
+            pbPreview.Reset();
+            uim.RefreshInfo();
 
             if (lvUploads.SelectedIndices.Count > 0)
             {
@@ -161,68 +163,73 @@ namespace ShareX
                 }
                 else
                 {
-                    if (uim.RefreshInfo())
+                    if (uim.Info != null)
                     {
-                        cmsUploadInfo.SuspendLayout();
-
-                        if (uim.SelectedItemCount > 1)
+                        if (uim.Info.Result.IsError)
                         {
-                            tsmiCopyURL.Text = string.Format("URLs ({0})", uim.SelectedItemCount);
+                            tsmiShowErrors.Visible = tsmiShowResponse.Visible = true;
                         }
                         else
                         {
-                            tsmiCopyURL.Text = "URL";
-                        }
+                            cmsUploadInfo.SuspendLayout();
 
-                        // Open
-                        tsmiOpen.Visible = true;
-
-                        tsmiOpenURL.Enabled = uim.IsURLExist;
-                        tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
-                        tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                        tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
-
-                        tsmiOpenFile.Enabled = uim.IsFileExist;
-                        tsmiOpenFolder.Enabled = uim.IsFileExist;
-
-                        // Copy
-                        tsmiCopy.Visible = true;
-
-                        tsmiCopyURL.Enabled = uim.IsURLExist;
-                        tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
-                        tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                        tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
-
-                        tsmiCopyFile.Enabled = uim.IsFileExist;
-                        tsmiCopyImage.Enabled = uim.IsImageFile;
-                        tsmiCopyText.Enabled = uim.IsTextFile;
-
-                        tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
-                        tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
-                        tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
-
-                        tsmiCopyForumLink.Enabled = uim.IsURLExist;
-                        tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
-                        tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
-
-                        tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
-                        tsmiCopyFileName.Enabled = uim.IsFilePathValid;
-                        tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
-                        tsmiCopyFolder.Enabled = uim.IsFilePathValid;
-
-                        cmsUploadInfo.ResumeLayout();
-
-                        if (!scMain.Panel2Collapsed)
-                        {
-                            pbPreview.Reset();
-
-                            if (uim.IsImageFile)
+                            if (uim.SelectedItemCount > 1)
                             {
-                                pbPreview.LoadImageFromFile(uim.Info.FilePath);
+                                tsmiCopyURL.Text = string.Format("URLs ({0})", uim.SelectedItemCount);
                             }
-                            else if (uim.IsImageURL)
+                            else
                             {
-                                pbPreview.LoadImageFromURL(uim.Info.Result.URL);
+                                tsmiCopyURL.Text = "URL";
+                            }
+
+                            // Open
+                            tsmiOpen.Visible = true;
+
+                            tsmiOpenURL.Enabled = uim.IsURLExist;
+                            tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
+                            tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                            tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
+
+                            tsmiOpenFile.Enabled = uim.IsFileExist;
+                            tsmiOpenFolder.Enabled = uim.IsFileExist;
+
+                            // Copy
+                            tsmiCopy.Visible = true;
+
+                            tsmiCopyURL.Enabled = uim.IsURLExist;
+                            tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
+                            tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
+                            tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
+
+                            tsmiCopyFile.Enabled = uim.IsFileExist;
+                            tsmiCopyImage.Enabled = uim.IsImageFile;
+                            tsmiCopyText.Enabled = uim.IsTextFile;
+
+                            tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
+                            tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
+                            tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+
+                            tsmiCopyForumLink.Enabled = uim.IsURLExist;
+                            tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
+                            tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+
+                            tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
+                            tsmiCopyFileName.Enabled = uim.IsFilePathValid;
+                            tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
+                            tsmiCopyFolder.Enabled = uim.IsFilePathValid;
+
+                            cmsUploadInfo.ResumeLayout();
+
+                            if (!scMain.Panel2Collapsed)
+                            {
+                                if (uim.IsImageFile)
+                                {
+                                    pbPreview.LoadImageFromFile(uim.Info.FilePath);
+                                }
+                                else if (uim.IsImageURL)
+                                {
+                                    pbPreview.LoadImageFromURL(uim.Info.Result.URL);
+                                }
                             }
                         }
                     }
@@ -231,7 +238,6 @@ namespace ShareX
             else
             {
                 tsmiUploadFile.Visible = true;
-                pbPreview.Reset();
             }
         }
 
@@ -581,13 +587,14 @@ namespace ShareX
 
         private void lvUploads_DoubleClick(object sender, EventArgs e)
         {
-            // TODO:  OpenURL();
+            uim.OpenURL();
         }
 
         private void btnSplitterControl_Click(object sender, EventArgs e)
         {
             Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
             UpdatePreviewSplitter();
+            UpdateControls();
         }
 
         private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
@@ -751,6 +758,16 @@ namespace ShareX
         private void tsmiCopyFolder_Click(object sender, EventArgs e)
         {
             uim.CopyFolder();
+        }
+
+        private void tsmiShowErrors_Click(object sender, EventArgs e)
+        {
+            uim.ShowErrors();
+        }
+
+        private void tsmiShowResponse_Click(object sender, EventArgs e)
+        {
+            uim.ShowResponse();
         }
 
         #endregion UploadInfoMenu events

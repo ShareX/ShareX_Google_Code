@@ -165,6 +165,8 @@ namespace ShareX
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
             this.tscMain.TopToolStripPanel.SuspendLayout();
@@ -872,22 +874,24 @@ namespace ShareX
             this.tsmiUploadFile,
             this.tsmiStopUpload,
             this.tsmiOpen,
-            this.tsmiCopy});
+            this.tsmiCopy,
+            this.tsmiShowErrors,
+            this.tsmiShowResponse});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(116, 92);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(129, 158);
             // 
             // tsmiUploadFile
             // 
             this.tsmiUploadFile.Name = "tsmiUploadFile";
-            this.tsmiUploadFile.Size = new System.Drawing.Size(115, 22);
+            this.tsmiUploadFile.Size = new System.Drawing.Size(128, 22);
             this.tsmiUploadFile.Text = "Upload file...";
             this.tsmiUploadFile.Click += new System.EventHandler(this.tsmiUploadFile_Click);
             // 
             // tsmiStopUpload
             // 
             this.tsmiStopUpload.Name = "tsmiStopUpload";
-            this.tsmiStopUpload.Size = new System.Drawing.Size(115, 22);
+            this.tsmiStopUpload.Size = new System.Drawing.Size(128, 22);
             this.tsmiStopUpload.Text = "Stop upload";
             this.tsmiStopUpload.Click += new System.EventHandler(this.tsmiStopUpload_Click);
             // 
@@ -902,7 +906,7 @@ namespace ShareX
             this.tsmiOpenFile,
             this.tsmiOpenFolder});
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(115, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(128, 22);
             this.tsmiOpen.Text = "Open";
             // 
             // tsmiOpenURL
@@ -977,7 +981,7 @@ namespace ShareX
             this.tsmiCopyFileNameWithExtension,
             this.tsmiCopyFolder});
             this.tsmiCopy.Name = "tsmiCopy";
-            this.tsmiCopy.Size = new System.Drawing.Size(115, 22);
+            this.tsmiCopy.Size = new System.Drawing.Size(128, 22);
             this.tsmiCopy.Text = "Copy";
             // 
             // tsmiCopyURL
@@ -1118,6 +1122,20 @@ namespace ShareX
             this.tsmiCopyFolder.Size = new System.Drawing.Size(233, 22);
             this.tsmiCopyFolder.Text = "Folder";
             this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
+            // 
+            // tsmiShowErrors
+            // 
+            this.tsmiShowErrors.Name = "tsmiShowErrors";
+            this.tsmiShowErrors.Size = new System.Drawing.Size(128, 22);
+            this.tsmiShowErrors.Text = "Show errors";
+            this.tsmiShowErrors.Click += new System.EventHandler(this.tsmiShowErrors_Click);
+            // 
+            // tsmiShowResponse
+            // 
+            this.tsmiShowResponse.Name = "tsmiShowResponse";
+            this.tsmiShowResponse.Size = new System.Drawing.Size(128, 22);
+            this.tsmiShowResponse.Text = "Show response";
+            this.tsmiShowResponse.Click += new System.EventHandler(this.tsmiShowResponse_Click);
             // 
             // MainForm
             // 
@@ -1265,5 +1283,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiUploadFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiStopUpload;
         private HelpersLib.MyPictureBox pbPreview;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowErrors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowResponse;
     }
 }
