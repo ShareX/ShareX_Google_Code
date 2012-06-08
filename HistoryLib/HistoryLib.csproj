@@ -79,7 +79,6 @@
     <EmbeddedResource Include="HistoryItemInfoForm.resx">
       <DependentUpon>HistoryItemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Loading.gif" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="History.ico" />

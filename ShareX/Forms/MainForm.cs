@@ -212,14 +212,18 @@ namespace ShareX
 
                         cmsUploadInfo.ResumeLayout();
 
-                        if (!scMain.Panel2Collapsed && uim.IsImageFile)
+                        if (!scMain.Panel2Collapsed)
                         {
-                            ShowPreview(uim.Info.FilePath);
-                        }
-                        else
-                        {
-                            pbPreview.Image = null;
-                            lblImagePreview.Visible = true;
+                            pbPreview.Reset();
+
+                            if (uim.IsImageFile)
+                            {
+                                pbPreview.LoadImageFromFile(uim.Info.FilePath);
+                            }
+                            else if (uim.IsImageURL)
+                            {
+                                pbPreview.LoadImageFromURL(uim.Info.Result.URL);
+                            }
                         }
                     }
                 }
@@ -227,6 +231,7 @@ namespace ShareX
             else
             {
                 tsmiUploadFile.Visible = true;
+                pbPreview.Reset();
             }
         }
 
@@ -376,30 +381,6 @@ namespace ShareX
 
             BringToFront();
             Activate();
-        }
-
-        private void ShowPreview(string filePath)
-        {
-            try
-            {
-                Image img = Image.FromFile(filePath);
-
-                if (img.Width > pbPreview.ClientSize.Width || img.Height > pbPreview.ClientSize.Height)
-                {
-                    pbPreview.SizeMode = PictureBoxSizeMode.Zoom;
-                }
-                else
-                {
-                    pbPreview.SizeMode = PictureBoxSizeMode.CenterImage;
-                }
-
-                pbPreview.Image = img;
-                lblImagePreview.Visible = false;
-            }
-            catch (Exception e)
-            {
-                DebugHelper.WriteException(e);
-            }
         }
 
         #region Form events
@@ -612,17 +593,6 @@ namespace ShareX
         private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
         {
             Program.Settings.PreviewSplitterDistance = scMain.SplitterDistance;
-        }
-
-        private void pbPreview_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && pbPreview.Image != null)
-            {
-                using (ImageViewer viewer = new ImageViewer(pbPreview.Image))
-                {
-                    viewer.ShowDialog();
-                }
-            }
         }
 
         #region Tray events
