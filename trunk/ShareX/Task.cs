@@ -31,7 +31,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using HelpersLib;
-using ShareX.HelperClasses;
 using UploadersLib;
 using UploadersLib.FileUploaders;
 using UploadersLib.GUI;
@@ -104,6 +103,7 @@ namespace ShareX
         {
             Task task = new Task(EDataType.Image, TaskJob.ImageJob);
             if (destination != EDataType.Default) task.Info.UploadDestination = destination;
+            task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".bmp";
             task.tempImage = image;
             return task;
         }
@@ -234,13 +234,14 @@ namespace ShareX
                 {
                     using (tempImage)
                     {
-                        ImageData imageData = TaskHelper.PrepareImageAndFilename(tempImage);
+                        ImageData imageData = TaskHelper.PrepareImage(tempImage);
                         data = imageData.ImageStream;
-                        Info.FileName = imageData.Filename;
+                        Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
                         if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
                         {
-                            Info.FilePath = imageData.WriteToFolder(Program.ScreenshotsPath);
+                            Info.FilePath = Path.Combine(Program.ScreenshotsPath, Info.FileName);
+                            imageData.Write(Info.FilePath);
                             DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
                         }
 
@@ -256,7 +257,8 @@ namespace ShareX
 
                                 if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
                                 {
-                                    Info.FilePath = imageData.WriteToFile(sfd.FileName);
+                                    Info.FilePath = sfd.FileName;
+                                    imageData.Write(Info.FilePath);
                                     DebugHelper.WriteLine("SaveImageToFileWithDialog: " + Info.FilePath);
                                 }
                             }
