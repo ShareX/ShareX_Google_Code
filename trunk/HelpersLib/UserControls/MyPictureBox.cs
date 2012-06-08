@@ -27,21 +27,22 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using HelpersLib.Properties;
 
 namespace HelpersLib
 {
     public partial class MyPictureBox : UserControl
     {
-        public bool DisableViewer { get; set; }
-
-        public Image LoadingImage
+        public new string Text
         {
-            set { pbMain.InitialImage = value; }
-        }
-
-        public PictureBoxSizeMode SizeMode
-        {
-            set { pbMain.SizeMode = value; }
+            get
+            {
+                return lblStatus.Text;
+            }
+            set
+            {
+                lblStatus.Text = value;
+            }
         }
 
         private bool isReady;
@@ -50,30 +51,35 @@ namespace HelpersLib
         public MyPictureBox()
         {
             InitializeComponent();
-            pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
+            pbMain.InitialImage = Resources.Loading;
             pbMain.LoadProgressChanged += new ProgressChangedEventHandler(pbMain_LoadProgressChanged);
+            pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
         }
 
-        public void LoadImage(Image img, PictureBoxSizeMode sizeMode = PictureBoxSizeMode.Zoom)
+        public void LoadImage(Image img)
         {
-            pbMain.SizeMode = sizeMode;
             pbMain.Image = (Image)img.Clone();
+            AutoSetSizeMode();
             isReady = true;
         }
 
-        public void LoadImage(string imagePath, string imageURL)
+        public void LoadImageFromFile(string filePath)
         {
-            if (!string.IsNullOrEmpty(imagePath) && Helpers.IsImageFile(imagePath) && File.Exists(imagePath))
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
-                lblStatus.Text = "Loading local image...";
+                Text = "Loading local image...";
                 isLoadLocal = true;
-                LoadImage(imagePath);
+                LoadImage(filePath);
             }
-            else if (!string.IsNullOrEmpty(imageURL) && Helpers.IsImageFile(imageURL))
+        }
+
+        public void LoadImageFromURL(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
             {
-                lblStatus.Text = "Downloading image from URL...";
+                Text = "Downloading image from URL...";
                 isLoadLocal = false;
-                LoadImage(imageURL);
+                LoadImage(url);
             }
         }
 
@@ -81,17 +87,8 @@ namespace HelpersLib
         {
             isReady = false;
             lblStatus.Visible = true;
-            this.Cursor = Cursors.Default;
+            Cursor = Cursors.Default;
             pbMain.LoadAsync(path);
-        }
-
-        public void SetNote(string text)
-        {
-            if (!string.IsNullOrEmpty(text))
-            {
-                lblStatus.Text = text;
-                lblStatus.Visible = true;
-            }
         }
 
         public void Reset()
@@ -101,9 +98,10 @@ namespace HelpersLib
 
         private void pbMain_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            isReady = true;
+            AutoSetSizeMode();
             lblStatus.Visible = false;
-            this.Cursor = Cursors.Hand;
+            Cursor = Cursors.Hand;
+            isReady = true;
         }
 
         private void pbMain_LoadProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -120,12 +118,24 @@ namespace HelpersLib
             }
 
             status += e.ProgressPercentage + "%";
-            lblStatus.Text = status;
+            Text = status;
+        }
+
+        private void AutoSetSizeMode()
+        {
+            if (pbMain.Image.Width > pbMain.ClientSize.Width || pbMain.Image.Height > pbMain.ClientSize.Height)
+            {
+                pbMain.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                pbMain.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
         }
 
         private void pbMain_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!DisableViewer && e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
+            if (e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
             {
                 using (ImageViewer viewer = new ImageViewer(pbMain.Image))
                 {

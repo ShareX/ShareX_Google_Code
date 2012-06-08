@@ -58,15 +58,7 @@ namespace HistoryLib
             cbFilenameFilterCulture.SelectedIndex = 1; // Invariant culture
             cbTypeFilterSelection.SelectedIndex = 0; // Image
             cbFilenameFilterCulture.Items[0] = string.Format("Current culture ({0})", CultureInfo.CurrentCulture.Parent.EnglishName);
-            pbThumbnail.LoadingImage = LoadImageFromResources("Loading.gif");
             lvHistory.FillLastColumn();
-        }
-
-        private Image LoadImageFromResources(string imageName)
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Stream stream = assembly.GetManifestResourceStream("HistoryLib.Images." + imageName);
-            return Image.FromStream(stream);
         }
 
         private void RefreshHistoryItems()
@@ -301,9 +293,13 @@ namespace HistoryLib
         {
             pbThumbnail.Reset();
 
-            if (him.IsImageURL || File.Exists(him.HistoryItem.Filepath))
+            if (him.IsImageFile)
             {
-                pbThumbnail.LoadImage(him.HistoryItem.Filepath, him.HistoryItem.URL);
+                pbThumbnail.LoadImageFromFile(him.HistoryItem.Filepath);
+            }
+            else if (him.IsImageURL)
+            {
+                pbThumbnail.LoadImageFromURL(him.HistoryItem.URL);
             }
         }
 

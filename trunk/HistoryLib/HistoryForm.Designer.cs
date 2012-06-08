@@ -730,7 +730,6 @@
             // 
             this.pbThumbnail.BackColor = System.Drawing.Color.White;
             this.pbThumbnail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbThumbnail.DisableViewer = false;
             this.pbThumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbThumbnail.Location = new System.Drawing.Point(485, 3);
             this.pbThumbnail.Name = "pbThumbnail";

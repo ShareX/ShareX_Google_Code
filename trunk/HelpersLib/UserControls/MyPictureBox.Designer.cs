@@ -37,7 +37,6 @@
             // 
             this.pbMain.BackColor = System.Drawing.Color.White;
             this.pbMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbMain.Image = global::HelpersLib.Properties.Resources.explorer;
             this.pbMain.Location = new System.Drawing.Point(0, 0);
             this.pbMain.Name = "pbMain";
             this.pbMain.Size = new System.Drawing.Size(150, 150);
@@ -55,9 +54,8 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(150, 24);
             this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Test";
+            this.lblStatus.Text = "Image preview";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStatus.Visible = false;
             // 
             // MyPictureBox
             // 
