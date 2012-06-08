@@ -27,24 +27,14 @@ using System;
 using System.IO;
 using HelpersLib;
 
-namespace ShareX.HelperClasses
+namespace ShareX
 {
     public class ImageData : IDisposable
     {
         public MemoryStream ImageStream { get; set; }
-        public string Filename { get; set; }
+        public EImageFormat ImageFormat { get; set; }
 
-        public string WriteToFolder(string folderPath)
-        {
-            if (!string.IsNullOrEmpty(Filename) && !string.IsNullOrEmpty(folderPath))
-            {
-                return WriteToFile(Path.Combine(folderPath, Filename));
-            }
-
-            return string.Empty;
-        }
-
-        public string WriteToFile(string filePath)
+        public string Write(string filePath)
         {
             if (ImageStream != null && !string.IsNullOrEmpty(filePath) && ImageStream.WriteToFile(filePath))
             {

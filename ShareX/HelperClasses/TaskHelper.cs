@@ -27,11 +27,36 @@ using System.Drawing;
 using System.IO;
 using HelpersLib;
 
-namespace ShareX.HelperClasses
+namespace ShareX
 {
     public static class TaskHelper
     {
-        public static Image ResizeImage(Image img, ImageScaleType scaleType)
+        public static ImageData PrepareImage(Image img)
+        {
+            ImageData imageData = new ImageData();
+
+            if (Program.Settings.ImageAutoResize)
+            {
+                img = ResizeImage(img, Program.Settings.ImageScaleType);
+            }
+
+            imageData.ImageStream = img.SaveImage(Program.Settings.ImageFormat);
+
+            int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
+            if (Program.Settings.ImageFormat != Program.Settings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
+            {
+                imageData.ImageStream = img.SaveImage(Program.Settings.ImageFormat2);
+                imageData.ImageFormat = Program.Settings.ImageFormat2;
+            }
+            else
+            {
+                imageData.ImageFormat = Program.Settings.ImageFormat;
+            }
+
+            return imageData;
+        }
+
+        private static Image ResizeImage(Image img, ImageScaleType scaleType)
         {
             float width = 0, height = 0;
 
@@ -61,66 +86,6 @@ namespace ShareX.HelperClasses
             }
 
             return img;
-        }
-
-        public static ImageData PrepareImageAndFilename(Image img)
-        {
-            ImageData imageData = new ImageData();
-            EImageFormat imageFormat;
-            imageData.ImageStream = TaskHelper.PrepareImage(img, out imageFormat);
-            imageData.Filename = TaskHelper.PrepareFilename(imageFormat, img);
-            return imageData;
-        }
-
-        private static MemoryStream PrepareImage(Image img, out EImageFormat imageFormat)
-        {
-            if (Program.Settings.ImageAutoResize)
-            {
-                img = ResizeImage(img, Program.Settings.ImageScaleType);
-            }
-
-            MemoryStream stream = img.SaveImage(Program.Settings.ImageFormat);
-
-            int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
-            if (Program.Settings.ImageFormat != Program.Settings.ImageFormat2 && sizeLimit > 0 && stream.Length > sizeLimit)
-            {
-                stream = img.SaveImage(Program.Settings.ImageFormat2);
-                imageFormat = Program.Settings.ImageFormat2;
-            }
-            else
-            {
-                imageFormat = Program.Settings.ImageFormat;
-            }
-
-            return stream;
-        }
-
-        private static string PrepareFilename(EImageFormat imageFormat, Image img)
-        {
-            string ext = "png";
-
-            switch (imageFormat)
-            {
-                case EImageFormat.PNG:
-                    ext = "png";
-                    break;
-                case EImageFormat.JPEG:
-                    ext = "jpg";
-                    break;
-                case EImageFormat.GIF:
-                    ext = "gif";
-                    break;
-                case EImageFormat.BMP:
-                    ext = "bmp";
-                    break;
-                case EImageFormat.TIFF:
-                    ext = "tif";
-                    break;
-            }
-
-            NameParser parser = new NameParser(NameParserType.FileName) { Picture = img };
-
-            return string.Format("{0}.{1}", parser.Convert(Program.Settings.NameFormatPattern), ext);
         }
     }
 }

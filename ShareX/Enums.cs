@@ -24,12 +24,22 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.ComponentModel;
 
 namespace ShareX
 {
     public enum EImageFormat
     {
-        PNG, JPEG, GIF, BMP, TIFF
+        [Description("png")]
+        PNG,
+        [Description("jpg")]
+        JPEG,
+        [Description("gif")]
+        GIF,
+        [Description("bmp")]
+        BMP,
+        [Description("tif")]
+        TIFF
     }
 
     public enum TaskJob
