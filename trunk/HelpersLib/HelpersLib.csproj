@@ -72,6 +72,18 @@
     <Compile Include="Extensions\GraphicsPathExtensions.cs" />
     <Compile Include="ExternalProgram.cs" />
     <Compile Include="FixedSizedQueue.cs" />
+    <Compile Include="Forms\ClipboardContentViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClipboardContentViewer.Designer.cs">
+      <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageQuantization\GrayscaleQuantizer.cs" />
     <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
     <Compile Include="ImageQuantization\PaletteQuantizer.cs" />
@@ -106,18 +118,6 @@
     </Compile>
     <Compile Include="UserControls\NoFocusBorderButton.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Wizards\ClipboardContentViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Wizards\ClipboardContentViewer.Designer.cs">
-      <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\ErrorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Wizards\ErrorForm.Designer.cs">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Hotkey\HotkeyInputForm.cs">
       <SubType>Form</SubType>
@@ -174,7 +174,7 @@
     <Compile Include="UserControls\ToolStripRadioButtonMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControls\ImageViewer.cs">
+    <Compile Include="Forms\ImageViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserControls\MyListView.cs">
@@ -210,14 +210,14 @@
     </Compile>
     <Compile Include="SerializationHelper.cs" />
     <Compile Include="Links.cs" />
-    <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
-      <DependentUpon>DownloaderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\ClipboardContentViewer.resx">
+    <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
       <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\ErrorForm.resx">
+    <EmbeddedResource Include="Forms\ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
+      <DependentUpon>DownloaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hotkey\HotkeyInputForm.resx">
       <DependentUpon>HotkeyInputForm.cs</DependentUpon>

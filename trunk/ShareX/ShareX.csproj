@@ -259,6 +259,10 @@
   <ItemGroup>
     <None Include="Resources\application-dock.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Docs\license.txt" />
+    <Content Include="Docs\VersionHistory.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
