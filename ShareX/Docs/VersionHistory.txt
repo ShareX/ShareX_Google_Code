@@ -1,12 +1,15 @@
-﻿Version 6.0.0 - 2012-06-15
+﻿Version 6.0.0 - 2012-06-10
 
+* Improved right click menu to include more open/copy options
+* Added support to preview image in the main window
+* Added support to run External Programs
 * Added pastee.org Text Uploader support
 * Ability to capture Last region
 * Proportional resizing of shapes while holding shift key
 * Added shortcut to "Send To" without using registry
 * Cursor can be moved using arrow keys during a shapes capture
 * Screen-wide crosshair support during shapes capture
-* Magnifier support during shapes capture, resizeable with numpad plus/minus keys (hold shift to increase box size)
+* Magnifier support during shapes capture, resizeable with mouse wheel (hold shift to increase box size)
 * Added imm.io Image Uploader
 * Rebranded as ShareX
 
