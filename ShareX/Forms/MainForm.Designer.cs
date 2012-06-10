@@ -515,6 +515,7 @@ namespace ShareX
             // scMain.Panel2
             // 
             this.scMain.Panel2.Controls.Add(this.pbPreview);
+            this.scMain.Panel2Collapsed = true;
             this.scMain.Size = new System.Drawing.Size(888, 323);
             this.scMain.SplitterDistance = 500;
             this.scMain.TabIndex = 1;
@@ -539,7 +540,7 @@ namespace ShareX
             this.lvUploads.Location = new System.Drawing.Point(0, 0);
             this.lvUploads.Name = "lvUploads";
             this.lvUploads.ShowItemToolTips = true;
-            this.lvUploads.Size = new System.Drawing.Size(500, 323);
+            this.lvUploads.Size = new System.Drawing.Size(888, 323);
             this.lvUploads.TabIndex = 0;
             this.lvUploads.UseCompatibleStateImageBehavior = false;
             this.lvUploads.View = System.Windows.Forms.View.Details;
