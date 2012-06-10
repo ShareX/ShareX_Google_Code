@@ -31,32 +31,32 @@ namespace UpdateCheckerLib
 {
     public class UpdateInfo
     {
-        public Version ApplicationVersion { get; set; }
+        public Version CurrentVersion { get; set; }
         public Version LatestVersion { get; set; }
         public string URL { get; set; }
         public DateTime Date { get; set; }
         public string Summary { get; set; }
-        public ReleaseChannelType ReleaseChannel { get; private set; }
+
+        public ReleaseChannelType ReleaseChannel { get; set; }
         public UpdateStatus Status { get; set; }
 
-        public UpdateInfo(ReleaseChannelType channel)
+        public UpdateInfo(ReleaseChannelType releaseChannel = ReleaseChannelType.Stable)
         {
-            ReleaseChannel = channel;
+            ReleaseChannel = releaseChannel;
         }
 
         public bool IsUpdateRequired
         {
             get
             {
-                return ApplicationVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) &&
-                    (Helpers.CheckVersion(LatestVersion, ApplicationVersion));
+                return CurrentVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) && Helpers.CheckVersion(LatestVersion, CurrentVersion);
             }
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("{0} is your current version", ApplicationVersion));
+            sb.AppendLine(string.Format("{0} is your current version", CurrentVersion));
             sb.AppendLine(string.Format("{0} is the latest {1}", LatestVersion, ReleaseChannel.GetDescription()));
             sb.AppendLine(string.Format("{1} was last updated on {0}", Date.ToLongDateString(), ReleaseChannel.GetDescription()));
             return sb.ToString();
