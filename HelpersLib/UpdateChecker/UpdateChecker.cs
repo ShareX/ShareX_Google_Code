@@ -47,6 +47,7 @@ namespace UpdateCheckerLib
 
     public enum UpdateStatus
     {
+        None,
         UpdateCheckFailed,
         UpdateRequired,
         UpToDate
@@ -58,10 +59,11 @@ namespace UpdateCheckerLib
         public string ApplicationName { get; private set; }
         public Version ApplicationVersion { get; private set; }
         public ReleaseChannelType ReleaseChannel { get; private set; }
+        public IWebProxy Proxy { get; private set; }
         public UpdateInfo UpdateInfo { get; private set; }
-        public IWebProxy Proxy { get; set; }
 
-        public UpdateChecker(string url, string applicationName, Version applicationVersion, ReleaseChannelType channel, IWebProxy proxy, NewVersionWindowOptions nvwo = null)
+        public UpdateChecker(string url, string applicationName, Version applicationVersion,
+            ReleaseChannelType channel = ReleaseChannelType.Stable, IWebProxy proxy = null)
         {
             URL = url;
             ApplicationName = applicationName;
@@ -73,7 +75,7 @@ namespace UpdateCheckerLib
         public bool CheckUpdate()
         {
             UpdateInfo = new UpdateInfo(ReleaseChannel);
-            UpdateInfo.ApplicationVersion = ApplicationVersion;
+            UpdateInfo.CurrentVersion = ApplicationVersion;
 
             try
             {
@@ -108,7 +110,17 @@ namespace UpdateCheckerLib
                         {
                             UpdateInfo.LatestVersion = new Version(xe.GetValue("Version"));
                             UpdateInfo.URL = xe.GetValue("URL");
-                            UpdateInfo.Date = DateTime.Parse(xe.GetValue("Date"), CultureInfo.InvariantCulture);
+
+                            string date = xe.GetValue("Date");
+                            if (!string.IsNullOrEmpty(date))
+                            {
+                                DateTime dateTime;
+                                if (DateTime.TryParse(date, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                                {
+                                    UpdateInfo.Date = dateTime;
+                                }
+                            }
+
                             UpdateInfo.Summary = xe.GetValue("Summary");
 
                             if (UpdateInfo.IsUpdateRequired)
