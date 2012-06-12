@@ -1,0 +1,2 @@
+﻿HistoryManager 
+	Implement "<History>\r\n" + File.ReadText(history) + "\r\n</History>"
