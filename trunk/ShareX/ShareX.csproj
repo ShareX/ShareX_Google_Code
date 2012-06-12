@@ -261,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\license.txt" />
+    <Content Include="Docs\Todo.txt" />
     <Content Include="Docs\VersionHistory.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
