@@ -619,6 +619,11 @@ namespace ShareX
             }
         }
 
+        private void tsmiScreenshotsFolder_Click(object sender, EventArgs e)
+        {
+            Helpers.OpenFolder(Program.ScreenshotsPath);
+        }
+
         private void tsmiTrayExit_Click(object sender, EventArgs e)
         {
             trayClose = true;

@@ -333,20 +333,27 @@ namespace HelpersLib
             return result.ToString();
         }
 
-        public static void OpenFolder(string directory)
+        public static void OpenFolder(string folderPath)
         {
-            Process.Start("explorer.exe", directory);
+            if (Directory.Exists(folderPath))
+            {
+                Process.Start("explorer.exe", folderPath);
+            }
         }
 
         public static void OpenFolderWithFile(string filePath)
         {
-            OpenFolder(string.Format("/select,\"{0}\"", filePath));
+            if (File.Exists(filePath))
+            {
+                Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filePath));
+            }
         }
 
         public static WebProxy GetDefaultWebProxy()
         {
             try
             {
+                // TODO: This is ugly, need better solution
                 return ((WebProxy)typeof(WebProxy).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
                     null, new Type[] { typeof(bool) }, null).Invoke(new object[] { true }));
             }
