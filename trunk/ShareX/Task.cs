@@ -57,11 +57,12 @@ namespace ShareX
         {
             get
             {
-                return Status != TaskStatus.Completed && Status != TaskStatus.Stopped;
+                return Status == TaskStatus.Preparing || Status == TaskStatus.Working;
             }
         }
 
-        private bool isStopped;
+        public bool IsStopped { get; private set; }
+
         private Stream data;
         private Image tempImage;
         private string tempText;
@@ -130,7 +131,7 @@ namespace ShareX
 
         public void Start()
         {
-            if (Status == TaskStatus.InQueue && !isStopped)
+            if (Status == TaskStatus.InQueue && !IsStopped)
             {
                 OnUploadPreparing();
 
@@ -143,13 +144,13 @@ namespace ShareX
 
         public void Stop()
         {
-            isStopped = true;
+            IsStopped = true;
 
             if (Status == TaskStatus.InQueue)
             {
                 OnUploadCompleted();
             }
-            else if (Status == TaskStatus.Uploading && uploader != null)
+            else if (Status == TaskStatus.Working && uploader != null)
             {
                 uploader.StopUpload();
             }
@@ -166,7 +167,7 @@ namespace ShareX
                     Program.UploaderSettingsResetEvent.WaitOne();
                 }
 
-                Status = TaskStatus.Uploading;
+                Status = TaskStatus.Working;
                 Info.Status = "Uploading";
                 Info.StartTime = DateTime.UtcNow;
                 threadWorker.InvokeAsync(OnUploadStarted);
@@ -188,7 +189,7 @@ namespace ShareX
                 }
                 catch (Exception e)
                 {
-                    if (!isStopped)
+                    if (!IsStopped)
                     {
                         DebugHelper.WriteException(e);
                         uploader.Errors.Add(e.ToString());
@@ -205,7 +206,7 @@ namespace ShareX
                 Info.Result.IsURLExpected = false;
             }
 
-            if (!isStopped && Info.Result != null && Info.Result.IsURLExpected && !Info.Result.IsError)
+            if (!IsStopped && Info.Result != null && Info.Result.IsURLExpected && !Info.Result.IsError)
             {
                 if (string.IsNullOrEmpty(Info.Result.URL))
                 {
@@ -500,7 +501,7 @@ namespace ShareX
                         }
                         else
                         {
-                            isStopped = true;
+                            IsStopped = true;
                         }
                     }
                     break;
@@ -547,7 +548,6 @@ namespace ShareX
 
             if (urlShortener != null)
             {
-                Status = TaskStatus.URLShortening;
                 return urlShortener.ShortenURL(url);
             }
 
@@ -614,14 +614,14 @@ namespace ShareX
 
         private void OnUploadCompleted()
         {
-            if (!isStopped)
+            Status = TaskStatus.Completed;
+
+            if (!IsStopped)
             {
-                Status = TaskStatus.Completed;
                 Info.Status = "Done";
             }
             else
             {
-                Status = TaskStatus.Stopped;
                 Info.Status = "Stopped";
             }
 
