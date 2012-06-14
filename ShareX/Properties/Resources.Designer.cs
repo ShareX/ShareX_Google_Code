@@ -187,7 +187,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap folder_open_image {
             get {
-                object obj = ResourceManager.GetObject("folder-open-image", resourceCulture);
+                object obj = ResourceManager.GetObject("folder_open_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

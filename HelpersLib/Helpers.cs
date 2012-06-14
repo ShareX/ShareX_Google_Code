@@ -51,9 +51,9 @@ namespace HelpersLib
 
         private static readonly object ClipboardLock = new object();
 
-        private static bool IsValidFile(string path, Type enumType)
+        private static bool IsValidFile(string filePath, Type enumType)
         {
-            string ext = Path.GetExtension(path);
+            string ext = Path.GetExtension(filePath);
 
             if (!string.IsNullOrEmpty(ext) && ext.Length > 1)
             {
@@ -64,14 +64,28 @@ namespace HelpersLib
             return false;
         }
 
-        public static bool IsImageFile(string path)
+        public static bool IsImageFile(string filePath)
         {
-            return IsValidFile(path, typeof(ImageFileExtensions));
+            return IsValidFile(filePath, typeof(ImageFileExtensions));
         }
 
-        public static bool IsTextFile(string path)
+        public static bool IsTextFile(string filePath)
         {
-            return IsValidFile(path, typeof(TextFileExtensions));
+            return IsValidFile(filePath, typeof(TextFileExtensions));
+        }
+
+        public static EDataType FindDataType(string filePath)
+        {
+            if (Helpers.IsImageFile(filePath))
+            {
+                return EDataType.Image;
+            }
+            else if (Helpers.IsTextFile(filePath))
+            {
+                return EDataType.Text;
+            }
+
+            return EDataType.File;
         }
 
         public static bool CopyTextSafely(string text)

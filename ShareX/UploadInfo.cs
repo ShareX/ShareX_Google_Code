@@ -27,6 +27,7 @@ using System;
 using System.IO;
 using HelpersLib;
 using HistoryLib;
+using UploadersLib;
 using UploadersLib.HelperClasses;
 
 namespace ShareX
@@ -66,37 +67,45 @@ namespace ShareX
         public string FileName { get; set; }
         public EDataType DataType { get; set; }
 
-        private EDataType uploadDestination;
-
         public EDataType UploadDestination
         {
             get
             {
-                return uploadDestination;
-            }
-            set
-            {
-                uploadDestination = value;
-
-                switch (uploadDestination)
+                if ((DataType == EDataType.Image && ImageDestination == ImageDestination.FileUploader) ||
+                    (DataType == EDataType.Text && TextDestination == TextDestination.FileUploader))
                 {
-                    case EDataType.File:
-                        UploaderHost = UploadManager.FileUploader.GetDescription();
-                        break;
-                    case EDataType.Image:
-                        UploaderHost = UploadManager.ImageUploader.GetDescription();
-                        break;
-                    case EDataType.Text:
-                        UploaderHost = UploadManager.TextUploader.GetDescription();
-                        break;
-                    case EDataType.URL:
-                        UploaderHost = UploadManager.URLShortener.GetDescription();
-                        break;
+                    return EDataType.File;
                 }
+
+                return DataType;
             }
         }
 
-        public string UploaderHost { get; private set; }
+        public ImageDestination ImageDestination { get; set; }
+        public TextDestination TextDestination { get; set; }
+        public FileDestination FileDestination { get; set; }
+        public UrlShortenerType URLShortenerDestination { get; set; }
+
+        public string UploaderHost
+        {
+            get
+            {
+                switch (UploadDestination)
+                {
+                    case EDataType.Image:
+                        return ImageDestination.GetDescription();
+                    case EDataType.Text:
+                        return TextDestination.GetDescription();
+                    case EDataType.File:
+                        return FileDestination.GetDescription();
+                    case EDataType.URL:
+                        return URLShortenerDestination.GetDescription();
+                }
+
+                return string.Empty;
+            }
+        }
+
         public DateTime StartTime { get; set; }
         public DateTime UploadTime { get; set; }
 
@@ -110,7 +119,16 @@ namespace ShareX
         public UploadInfo()
         {
             ImageJob = TaskImageJob.UploadImageToHost;
+            GetCurrentDestinations();
             Result = new UploadResult();
+        }
+
+        private void GetCurrentDestinations()
+        {
+            ImageDestination = Program.Settings.ImageUploaderDestination;
+            TextDestination = Program.Settings.TextUploaderDestination;
+            FileDestination = Program.Settings.FileUploaderDestination;
+            URLShortenerDestination = Program.Settings.URLShortenerDestination;
         }
 
         public HistoryItem GetHistoryItem()
