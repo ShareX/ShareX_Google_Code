@@ -40,10 +40,6 @@ namespace ShareX
 {
     public static class UploadManager
     {
-        public static ImageDestination ImageUploader { get; set; }
-        public static TextDestination TextUploader { get; set; }
-        public static FileDestination FileUploader { get; set; }
-        public static UrlShortenerType URLShortener { get; set; }
         public static MyListView ListViewControl { get; set; }
         public static List<Task> Tasks { get; private set; }
 
@@ -57,44 +53,18 @@ namespace ShareX
                 Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6 };
         }
 
-        public static void UploadFile(string path)
+        public static void UploadFile(string filePath)
         {
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(filePath))
             {
-                if (File.Exists(path))
+                if (File.Exists(filePath))
                 {
-                    EDataType type;
-                    EDataType destination = EDataType.Default;
-
-                    if (Helpers.IsImageFile(path))
-                    {
-                        type = EDataType.Image;
-
-                        if (ImageUploader == ImageDestination.FileUploader)
-                        {
-                            destination = EDataType.File;
-                        }
-                    }
-                    else if (Helpers.IsTextFile(path))
-                    {
-                        type = EDataType.Text;
-
-                        if (TextUploader == TextDestination.FileUploader)
-                        {
-                            destination = EDataType.File;
-                        }
-                    }
-                    else
-                    {
-                        type = EDataType.File;
-                    }
-
-                    Task task = Task.CreateFileUploaderTask(type, path, destination);
-                    StartUpload(task);
+                    Task task = Task.CreateFileUploaderTask(filePath);
+                    StartTask(task);
                 }
-                else if (Directory.Exists(path))
+                else if (Directory.Exists(filePath))
                 {
-                    string[] files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+                    string[] files = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
                     UploadFile(files);
                 }
             }
@@ -191,23 +161,22 @@ namespace ShareX
             }
         }
 
-        public static void UploadImage(Image img)
-        {
-            UploadImage(img, TaskImageJob.UploadImageToHost);
-        }
-
-        public static void UploadImage(Image img, TaskImageJob imageJob)
-        {
-            UploadImage(img, imageJob, ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image);
-        }
-
-        public static void UploadImage(Image img, TaskImageJob imageJob, EDataType destination)
+        public static void UploadImage(Image img, TaskImageJob imageJob = TaskImageJob.UploadImageToHost)
         {
             if (img != null && imageJob != TaskImageJob.None)
             {
-                Task task = Task.CreateImageUploaderTask(img, destination);
-                task.Info.ImageJob = imageJob;
-                StartUpload(task);
+                Task task = Task.CreateImageUploaderTask(img, imageJob);
+                StartTask(task);
+            }
+        }
+
+        public static void UploadImage(Image img, ImageDestination imageDestination)
+        {
+            if (img != null)
+            {
+                Task task = Task.CreateImageUploaderTask(img);
+                task.Info.ImageDestination = imageDestination;
+                StartTask(task);
             }
         }
 
@@ -215,9 +184,8 @@ namespace ShareX
         {
             if (!string.IsNullOrEmpty(text))
             {
-                EDataType destination = TextUploader == TextDestination.FileUploader ? EDataType.File : EDataType.Text;
-                Task task = Task.CreateTextUploaderTask(text, destination);
-                StartUpload(task);
+                Task task = Task.CreateTextUploaderTask(text);
+                StartTask(task);
             }
         }
 
@@ -225,9 +193,8 @@ namespace ShareX
         {
             if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filename))
             {
-                EDataType destination = ImageUploader == ImageDestination.FileUploader ? EDataType.File : EDataType.Image;
-                Task task = Task.CreateDataUploaderTask(EDataType.Image, stream, filename, destination);
-                StartUpload(task);
+                Task task = Task.CreateDataUploaderTask(EDataType.Image, stream, filename);
+                StartTask(task);
             }
         }
 
@@ -236,11 +203,11 @@ namespace ShareX
             if (!string.IsNullOrEmpty(url))
             {
                 Task task = Task.CreateURLShortenerTask(url);
-                StartUpload(task);
+                StartTask(task);
             }
         }
 
-        private static void StartUpload(Task task)
+        private static void StartTask(Task task)
         {
             Tasks.Add(task);
             task.Info.ID = Tasks.Count - 1;

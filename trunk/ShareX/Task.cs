@@ -51,6 +51,7 @@ namespace ShareX
         public event TaskEventHandler UploadCompleted;
 
         public UploadInfo Info { get; private set; }
+
         public TaskStatus Status { get; private set; }
 
         public bool IsWorking
@@ -71,49 +72,43 @@ namespace ShareX
 
         #region Constructors
 
-        private Task(EDataType dataType, TaskJob job)
+        private Task(TaskJob job, EDataType dataType)
         {
             Status = TaskStatus.InQueue;
             Info = new UploadInfo();
             Info.Job = job;
             Info.DataType = dataType;
-            Info.UploadDestination = dataType;
         }
 
-        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, EDataType destination = EDataType.Default)
+        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
         {
-            Task task = new Task(dataType, TaskJob.DataUpload);
-            if (destination != EDataType.Default) task.Info.UploadDestination = destination;
+            Task task = new Task(TaskJob.DataUpload, dataType);
             task.Info.FileName = fileName;
             task.data = stream;
             return task;
         }
 
-        // string filePath -> FileStream data
-        public static Task CreateFileUploaderTask(EDataType dataType, string filePath, EDataType destination = EDataType.Default)
+        public static Task CreateFileUploaderTask(string filePath)
         {
-            Task task = new Task(dataType, TaskJob.FileUpload);
-            if (destination != EDataType.Default) task.Info.UploadDestination = destination;
+            EDataType dataType = Helpers.FindDataType(filePath);
+            Task task = new Task(TaskJob.FileUpload, dataType);
             task.Info.FilePath = filePath;
             task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return task;
         }
 
-        // Image image -> MemoryStream data (in thread)
-        public static Task CreateImageUploaderTask(Image image, EDataType destination = EDataType.Default)
+        public static Task CreateImageUploaderTask(Image image, TaskImageJob imageJob = TaskImageJob.UploadImageToHost)
         {
-            Task task = new Task(EDataType.Image, TaskJob.ImageJob);
-            if (destination != EDataType.Default) task.Info.UploadDestination = destination;
+            Task task = new Task(TaskJob.ImageJob, EDataType.Image);
+            task.Info.ImageJob = imageJob;
             task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".bmp";
             task.tempImage = image;
             return task;
         }
 
-        // string text -> MemoryStream data (in thread)
-        public static Task CreateTextUploaderTask(string text, EDataType destination = EDataType.Default)
+        public static Task CreateTextUploaderTask(string text)
         {
-            Task task = new Task(EDataType.Text, TaskJob.TextUpload);
-            if (destination != EDataType.Default) task.Info.UploadDestination = destination;
+            Task task = new Task(TaskJob.TextUpload, EDataType.Text);
             task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".txt";
             task.tempText = text;
             return task;
@@ -121,7 +116,7 @@ namespace ShareX
 
         public static Task CreateURLShortenerTask(string url)
         {
-            Task task = new Task(EDataType.URL, TaskJob.ShortenURL);
+            Task task = new Task(TaskJob.ShortenURL, EDataType.URL);
             task.Info.FileName = "URL shorten";
             task.Info.Result.URL = url;
             return task;
@@ -304,7 +299,7 @@ namespace ShareX
         {
             ImageUploader imageUploader = null;
 
-            switch (UploadManager.ImageUploader)
+            switch (Info.ImageDestination)
             {
                 case ImageDestination.ImageShack:
                     imageUploader = new ImageShackUploader(ApiKeys.ImageShackKey, Program.UploadersConfig.ImageShackAccountType,
@@ -377,7 +372,7 @@ namespace ShareX
         {
             TextUploader textUploader = null;
 
-            switch (UploadManager.TextUploader)
+            switch (Info.TextDestination)
             {
                 case TextDestination.Pastebin:
                     textUploader = new PastebinUploader(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
@@ -410,7 +405,7 @@ namespace ShareX
         {
             FileUploader fileUploader = null;
 
-            switch (UploadManager.FileUploader)
+            switch (Info.FileDestination)
             {
                 case FileDestination.Dropbox:
                     NameParser parser = new NameParser(NameParserType.URL);
@@ -520,7 +515,7 @@ namespace ShareX
         {
             URLShortener urlShortener = null;
 
-            switch (UploadManager.URLShortener)
+            switch (Info.URLShortenerDestination)
             {
                 case UrlShortenerType.BITLY:
                     urlShortener = new BitlyURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);

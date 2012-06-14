@@ -89,14 +89,10 @@ namespace ShareX
             this.Text = Program.Title;
             this.Icon = Resources.ShareX;
 
-            AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = UploadManager.ImageUploader = (ImageDestination)x,
-                tsmiImageUploaders, tsmiTrayImageUploaders);
-            AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = UploadManager.TextUploader = (TextDestination)x,
-                tsmiTextUploaders, tsmiTrayTextUploaders);
-            AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = UploadManager.FileUploader = (FileDestination)x,
-                tsmiFileUploaders, tsmiTrayFileUploaders);
-            AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = UploadManager.URLShortener = (UrlShortenerType)x,
-                tsmiURLShorteners, tsmiTrayURLShorteners);
+            AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = (ImageDestination)x, tsmiImageUploaders, tsmiTrayImageUploaders);
+            AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = (TextDestination)x, tsmiTextUploaders, tsmiTrayTextUploaders);
+            AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = (FileDestination)x, tsmiFileUploaders, tsmiTrayFileUploaders);
+            AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = (UrlShortenerType)x, tsmiURLShorteners, tsmiTrayURLShorteners);
 
             tsbDebug.Visible = Program.IsDebug;
 
@@ -249,22 +245,18 @@ namespace ShareX
             int imageUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.ImageUploaderDestination);
             ((ToolStripMenuItem)tsmiImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
             ((ToolStripMenuItem)tsmiTrayImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
-            UploadManager.ImageUploader = Program.Settings.ImageUploaderDestination;
 
             int textUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.TextUploaderDestination);
             ((ToolStripMenuItem)tsmiTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
             ((ToolStripMenuItem)tsmiTrayTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
-            UploadManager.TextUploader = Program.Settings.TextUploaderDestination;
 
             int fileUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.FileUploaderDestination);
             ((ToolStripMenuItem)tsmiFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
             ((ToolStripMenuItem)tsmiTrayFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
-            UploadManager.FileUploader = Program.Settings.FileUploaderDestination;
 
             int urlShortenerIndex = Helpers.GetEnumMemberIndex(Program.Settings.URLShortenerDestination);
             ((ToolStripMenuItem)tsmiURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
             ((ToolStripMenuItem)tsmiTrayURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
-            UploadManager.URLShortener = Program.Settings.URLShortenerDestination;
 
             UpdateUploaderMenuNames();
 
@@ -305,10 +297,10 @@ namespace ShareX
 
         private void UpdateUploaderMenuNames()
         {
-            tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + UploadManager.ImageUploader.GetDescription();
-            tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + UploadManager.TextUploader.GetDescription();
-            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + UploadManager.FileUploader.GetDescription();
-            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + UploadManager.URLShortener.GetDescription();
+            tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + Program.Settings.ImageUploaderDestination.GetDescription();
+            tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + Program.Settings.TextUploaderDestination.GetDescription();
+            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.Settings.FileUploaderDestination.GetDescription();
+            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.URLShortenerDestination.GetDescription();
         }
 
         private void CheckUpdate()
@@ -456,62 +448,6 @@ namespace ShareX
             UploadManager.UploadFile();
         }
 
-        private void tsddbImageUploaders_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            for (int i = 0; i < tsmiImageUploaders.DropDownItems.Count; i++)
-            {
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)tsmiImageUploaders.DropDownItems[i];
-                if (tsmi.Checked = (tsmi == e.ClickedItem))
-                {
-                    Program.Settings.ImageUploaderDestination = UploadManager.ImageUploader = (ImageDestination)i;
-                }
-            }
-
-            UpdateUploaderMenuNames();
-        }
-
-        private void tsddbFileUploaders_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            for (int i = 0; i < tsmiFileUploaders.DropDownItems.Count; i++)
-            {
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)tsmiFileUploaders.DropDownItems[i];
-                if (tsmi.Checked = (tsmi == e.ClickedItem))
-                {
-                    Program.Settings.FileUploaderDestination = UploadManager.FileUploader = (FileDestination)i;
-                }
-            }
-
-            UpdateUploaderMenuNames();
-        }
-
-        private void tsddbTextUploaders_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            for (int i = 0; i < tsmiTextUploaders.DropDownItems.Count; i++)
-            {
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)tsmiTextUploaders.DropDownItems[i];
-                if (tsmi.Checked = (tsmi == e.ClickedItem))
-                {
-                    Program.Settings.TextUploaderDestination = UploadManager.TextUploader = (TextDestination)i;
-                }
-            }
-
-            UpdateUploaderMenuNames();
-        }
-
-        private void tsddbURLShorteners_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            for (int i = 0; i < tsmiURLShorteners.DropDownItems.Count; i++)
-            {
-                ToolStripMenuItem tsmi = (ToolStripMenuItem)tsmiURLShorteners.DropDownItems[i];
-                if (tsmi.Checked = (tsmi == e.ClickedItem))
-                {
-                    Program.Settings.URLShortenerDestination = UploadManager.URLShortener = (UrlShortenerType)i;
-                }
-            }
-
-            UpdateUploaderMenuNames();
-        }
-
         private void tsddbUploadersConfig_Click(object sender, EventArgs e)
         {
             if (Program.UploadersConfig == null)
@@ -536,7 +472,7 @@ namespace ShareX
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadImage(Resources.ShareXLogo, TaskImageJob.UploadImageToHost, EDataType.File);
+            UploadManager.UploadImage(Resources.ShareXLogo, ImageDestination.FileUploader);
         }
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
