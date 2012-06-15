@@ -169,7 +169,7 @@ namespace HistoryLib
 
             HistoryItem hi;
 
-            for (int i = 0; i < historyItems.Length; i++)
+            for (int i = historyItems.Length - 1; i >= 0; i--)
             {
                 hi = historyItems[i];
                 ListViewItem lvi = new ListViewItem(hi.DateTimeUtc.ToLocalTime().ToString());
@@ -283,9 +283,6 @@ namespace HistoryLib
             tsmiCopyFileNameWithExtension.Enabled = him.IsFilePathValid;
             tsmiCopyFolder.Enabled = him.IsFilePathValid;
 
-            // Delete
-            tsmiDeleteLocalFile.Enabled = him.IsFileExist;
-
             cmsHistory.ResumeLayout();
         }
 
@@ -315,20 +312,6 @@ namespace HistoryLib
 
             // PictureBox
             pbThumbnail.Reset();
-        }
-
-        private void RemoveSelectedHistoryItem()
-        {
-            if (lvHistory.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvHistory.SelectedItems[0];
-                HistoryItem hi = lvi.Tag as HistoryItem;
-
-                if (hi != null)
-                {
-                    history.RemoveHistoryItem(hi);
-                }
-            }
         }
 
         #region Form events
@@ -514,34 +497,6 @@ namespace HistoryLib
         private void tsmiCopyFolder_Click(object sender, EventArgs e)
         {
             him.CopyFolder();
-        }
-
-        private void tsmiDeleteFromHistory_Click(object sender, EventArgs e)
-        {
-            while (lvHistory.SelectedItems.Count > 0)
-            {
-                RemoveSelectedHistoryItem();
-                lvHistory.Items.Remove(lvHistory.SelectedItems[0]);
-            }
-        }
-
-        private void tsmiDeleteLocalFile_Click(object sender, EventArgs e)
-        {
-            while (lvHistory.SelectedItems.Count > 0)
-            {
-                him.DeleteLocalFile();
-                lvHistory.SelectedItems[0].Selected = false;
-            }
-        }
-
-        private void tsmiDeleteFromHistoryAndLocalFile_Click(object sender, EventArgs e)
-        {
-            while (lvHistory.SelectedItems.Count > 0)
-            {
-                RemoveSelectedHistoryItem();
-                him.DeleteLocalFile();
-                lvHistory.Items.Remove(lvHistory.SelectedItems[0]);
-            }
         }
 
         private void tsmiMoreInfo_Click(object sender, EventArgs e)

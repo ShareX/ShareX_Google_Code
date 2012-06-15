@@ -68,6 +68,7 @@
     <Compile Include="HistoryItemManager.cs" />
     <Compile Include="HistoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLManagerOld.cs" />
     <Compile Include="XMLManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -379,6 +379,7 @@ namespace ShareX
 
                             if (Program.Settings.SaveHistory)
                             {
+                                HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
                                 HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                             }
 

@@ -62,10 +62,6 @@
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteFromHistory = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteLocalFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteFromHistoryAndLocalFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoreInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.dtpFilterFrom = new System.Windows.Forms.DateTimePicker();
             this.cbDateFilter = new System.Windows.Forms.CheckBox();
@@ -117,11 +113,10 @@
             this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOpen,
             this.tsmiCopy,
-            this.tsmiDelete,
             this.tsmiMoreInfo});
             this.cmsHistory.Name = "cmsHistory";
             this.cmsHistory.ShowImageMargin = false;
-            this.cmsHistory.Size = new System.Drawing.Size(128, 114);
+            this.cmsHistory.Size = new System.Drawing.Size(128, 92);
             // 
             // tsmiOpen
             // 
@@ -350,37 +345,6 @@
             this.tsmiCopyFolder.Size = new System.Drawing.Size(233, 22);
             this.tsmiCopyFolder.Text = "Folder";
             this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
-            // 
-            // tsmiDelete
-            // 
-            this.tsmiDelete.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDeleteFromHistory,
-            this.tsmiDeleteLocalFile,
-            this.tsmiDeleteFromHistoryAndLocalFile});
-            this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(127, 22);
-            this.tsmiDelete.Text = "Delete";
-            // 
-            // tsmiDeleteFromHistory
-            // 
-            this.tsmiDeleteFromHistory.Name = "tsmiDeleteFromHistory";
-            this.tsmiDeleteFromHistory.Size = new System.Drawing.Size(220, 22);
-            this.tsmiDeleteFromHistory.Text = "From history";
-            this.tsmiDeleteFromHistory.Click += new System.EventHandler(this.tsmiDeleteFromHistory_Click);
-            // 
-            // tsmiDeleteLocalFile
-            // 
-            this.tsmiDeleteLocalFile.Name = "tsmiDeleteLocalFile";
-            this.tsmiDeleteLocalFile.Size = new System.Drawing.Size(220, 22);
-            this.tsmiDeleteLocalFile.Text = "Local file...";
-            this.tsmiDeleteLocalFile.Click += new System.EventHandler(this.tsmiDeleteLocalFile_Click);
-            // 
-            // tsmiDeleteFromHistoryAndLocalFile
-            // 
-            this.tsmiDeleteFromHistoryAndLocalFile.Name = "tsmiDeleteFromHistoryAndLocalFile";
-            this.tsmiDeleteFromHistoryAndLocalFile.Size = new System.Drawing.Size(220, 22);
-            this.tsmiDeleteFromHistoryAndLocalFile.Text = "From history and local file...";
-            this.tsmiDeleteFromHistoryAndLocalFile.Click += new System.EventHandler(this.tsmiDeleteFromHistoryAndLocalFile_Click);
             // 
             // tsmiMoreInfo
             // 
@@ -807,16 +771,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyFileNameWithExtension;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyText;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteFromHistory;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLocalFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenURL;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenThumbnailURL;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenDeletionURL;
         private System.Windows.Forms.ToolStripSeparator tssOpen1;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFolder;
-        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteFromHistoryAndLocalFile;
         private System.Windows.Forms.DateTimePicker dtpFilterFrom;
         private System.Windows.Forms.CheckBox cbDateFilter;
         private System.Windows.Forms.Label label1;

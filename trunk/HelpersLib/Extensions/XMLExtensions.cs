@@ -253,5 +253,13 @@ namespace HelpersLib
 
             return null;
         }
+
+        public static void WriteElementIfNotEmpty(this XmlTextWriter writer, string name, string value)
+        {
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(value))
+            {
+                writer.WriteElementString(name, value);
+            }
+        }
     }
 }
