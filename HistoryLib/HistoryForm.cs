@@ -74,7 +74,7 @@ namespace HistoryLib
 
         private HistoryItem[] GetHistoryItems()
         {
-            IEnumerable<HistoryItem> historyItems = history.GetHistoryItems();
+            IEnumerable<HistoryItem> historyItems = history.GetHistoryItems().OrderByDescending(x => x.DateTimeUtc);
 
             if (MaxItemCount > -1)
             {
@@ -164,26 +164,24 @@ namespace HistoryLib
         {
             UpdateItemCount(historyItems);
 
-            lvHistory.SuspendLayout();
             lvHistory.Items.Clear();
 
-            HistoryItem hi;
+            ListViewItem[] listViewItems = new ListViewItem[historyItems.Length];
 
-            for (int i = historyItems.Length - 1; i >= 0; i--)
+            for (int i = 0; i < historyItems.Length; i++)
             {
-                hi = historyItems[i];
-                ListViewItem lvi = new ListViewItem(hi.DateTimeUtc.ToLocalTime().ToString());
+                HistoryItem hi = historyItems[i];
+                ListViewItem lvi = listViewItems[i] = new ListViewItem(hi.DateTimeUtc.ToLocalTime().ToString());
                 lvi.SubItems.Add(hi.Filename);
                 lvi.SubItems.Add(hi.Type);
                 lvi.SubItems.Add(hi.Host);
                 lvi.SubItems.Add(hi.URL);
                 lvi.Tag = hi;
-                lvHistory.Items.Add(lvi);
             }
 
+            lvHistory.Items.AddRange(listViewItems);
             lvHistory.FillLastColumn();
             lvHistory.Focus();
-            lvHistory.ResumeLayout(true);
         }
 
         private void UpdateItemCount(HistoryItem[] historyItems)
