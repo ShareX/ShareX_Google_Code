@@ -46,7 +46,6 @@ namespace ShareX
         private static readonly string PortablePersonalPath = Path.Combine(Application.StartupPath, ApplicationName);
         private static readonly string SettingsFileName = ApplicationName + "Settings.json";
         private static readonly string UploadersConfigFileName = "UploadersConfig.json";
-        private static readonly string HistoryFileName = "UploadersHistory.xml";
         private static readonly string LogFileName = ApplicationName + "-Log-{0}-{1}.txt";
 
         public static string PersonalPath
@@ -102,7 +101,20 @@ namespace ShareX
                     return Settings.CustomHistoryPath;
                 }
 
-                return Path.Combine(PersonalPath, HistoryFileName);
+                return Path.Combine(PersonalPath, "History.xml");
+            }
+        }
+
+        public static string OldHistoryFilePath
+        {
+            get
+            {
+                if (Settings != null && Settings.UseCustomHistoryPath && !string.IsNullOrEmpty(Settings.CustomHistoryPath))
+                {
+                    return Settings.CustomHistoryPath;
+                }
+
+                return Path.Combine(PersonalPath, "UploadersHistory.xml");
             }
         }
 

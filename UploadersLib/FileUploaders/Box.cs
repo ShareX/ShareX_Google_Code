@@ -162,7 +162,6 @@ namespace UploadersLib.FileUploaders
 
                     if (xeTree != null)
                     {
-                        // TODO: Parse files too
                         return ParseFolder(xeTree.Element("folder"));
                     }
                 }

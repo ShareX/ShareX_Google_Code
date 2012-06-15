@@ -487,6 +487,7 @@ namespace ShareX
 
         private void tsbHistory_Click(object sender, EventArgs e)
         {
+            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
             new HistoryForm(Program.HistoryFilePath, -1, "ShareX - History").ShowDialog();
         }
 
