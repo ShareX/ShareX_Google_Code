@@ -62,7 +62,9 @@ namespace HistoryLib
                     using (StreamReader streamReader = new StreamReader(xmlPath, Encoding.UTF8))
                     using (XmlReader reader = XmlReader.Create(streamReader, settings))
                     {
-                        while (reader.Read())
+                        reader.MoveToContent();
+
+                        while (!reader.EOF)
                         {
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "HistoryItem")
                             {
@@ -73,6 +75,10 @@ namespace HistoryLib
                                     HistoryItem hi = ParseHistoryItem(element);
                                     historyItemList.Add(hi);
                                 }
+                            }
+                            else
+                            {
+                                reader.Read();
                             }
                         }
                     }

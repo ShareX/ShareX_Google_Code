@@ -138,7 +138,7 @@ namespace ShareX
                 Filename = FileName,
                 Filepath = FilePath,
                 DateTimeUtc = UploadTime,
-                Type = UploadDestination.ToString(),
+                Type = DataType.ToString(),
                 Host = UploaderHost,
                 URL = Result.URL,
                 ThumbnailURL = Result.ThumbnailURL,
