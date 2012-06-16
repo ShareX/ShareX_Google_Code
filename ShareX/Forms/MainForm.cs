@@ -89,7 +89,8 @@ namespace ShareX
             this.Text = Program.Title;
             this.Icon = Resources.ShareX;
 
-            AddMultiEnumItems<TaskImageJob>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap((TaskImageJob)x), tsddbAfterCaptureTasks);
+            AddMultiEnumItems<TaskImageJob>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap((TaskImageJob)x),
+                tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
             AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = (ImageDestination)x, tsmiImageUploaders, tsmiTrayImageUploaders);
             AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = (TextDestination)x, tsmiTextUploaders, tsmiTrayTextUploaders);
             AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = (FileDestination)x, tsmiFileUploaders, tsmiTrayFileUploaders);
@@ -294,7 +295,7 @@ namespace ShareX
             niTray.Icon = Resources.sharex_16px_6;
             niTray.Visible = Program.Settings.ShowTray;
 
-            SetMultiEnumChecked(Program.Settings.AfterCaptureTasks, tsddbAfterCaptureTasks);
+            SetMultiEnumChecked(Program.Settings.AfterCaptureTasks, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
             SetEnumChecked(Program.Settings.ImageUploaderDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
             SetEnumChecked(Program.Settings.TextUploaderDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
             SetEnumChecked(Program.Settings.FileUploaderDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
