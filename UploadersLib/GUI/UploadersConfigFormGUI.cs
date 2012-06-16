@@ -131,7 +131,7 @@ namespace UploadersLib
 
             if (cbImgurThumbnailType.Items.Count == 0)
             {
-                cbImgurThumbnailType.Items.AddRange(typeof(ImgurThumbnailType).GetEnumDescriptions());
+                cbImgurThumbnailType.Items.AddRange(Helpers.GetEnumDescriptions<ImgurThumbnailType>());
             }
 
             cbImgurThumbnailType.SelectedIndex = (int)Config.ImgurThumbnailType;
@@ -178,7 +178,7 @@ namespace UploadersLib
 
             if (cboTwitPicThumbnailMode.Items.Count == 0)
             {
-                cboTwitPicThumbnailMode.Items.AddRange(typeof(TwitPicThumbnailType).GetEnumDescriptions());
+                cboTwitPicThumbnailMode.Items.AddRange(Helpers.GetEnumDescriptions<TwitPicThumbnailType>());
             }
 
             cboTwitPicThumbnailMode.SelectedIndex = (int)Config.TwitPicThumbnailMode;

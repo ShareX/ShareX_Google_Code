@@ -37,50 +37,6 @@ namespace HelpersLib
 {
     public static class Extensions
     {
-        public static string GetDescription(this Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            if (fi != null)
-            {
-                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-                return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
-            }
-            return value.ToString();
-        }
-
-        public static string GetCategory(this Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            if (fi != null)
-            {
-                CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
-                return (attributes.Length > 0) ? attributes[0].Category : value.ToString();
-            }
-            return value.ToString();
-        }
-
-        public static string[] GetEnumDescriptions(this Type type)
-        {
-            return Enum.GetValues(type).OfType<Enum>().Select(x => x.GetDescription()).ToArray();
-        }
-
-        public static bool HasFlag(this Enum keys, Enum flag)
-        {
-            ulong keysVal = Convert.ToUInt64(keys);
-            ulong flagVal = Convert.ToUInt64(flag);
-            return (keysVal & flagVal) == flagVal;
-        }
-
-        public static bool HasFlagAny(this Enum keys, params Enum[] flags)
-        {
-            return flags.Any(x => keys.HasFlag(x));
-        }
-
-        public static bool HasFlagAll(this Enum keys, params Enum[] flags)
-        {
-            return flags.All(x => keys.HasFlag(x));
-        }
-
         public static int Between(this int num, int min, int max)
         {
             if (num <= min) return min;

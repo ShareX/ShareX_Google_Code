@@ -167,6 +167,7 @@ namespace ShareX
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsddbAfterCaptureTasks = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsMain.SuspendLayout();
             this.tscMain.ContentPanel.SuspendLayout();
             this.tscMain.TopToolStripPanel.SuspendLayout();
@@ -186,6 +187,7 @@ namespace ShareX
             this.tsbClipboardUpload,
             this.tsbFileUpload,
             this.tsddbCapture,
+            this.tsddbAfterCaptureTasks,
             this.tsddbDestinations,
             this.tsbDebug,
             this.tssMain1,
@@ -197,7 +199,7 @@ namespace ShareX
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(4, 6, 4, 4);
             this.tsMain.ShowItemToolTips = false;
-            this.tsMain.Size = new System.Drawing.Size(789, 33);
+            this.tsMain.Size = new System.Drawing.Size(891, 33);
             this.tsMain.TabIndex = 0;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -1147,6 +1149,14 @@ namespace ShareX
             this.tsmiShowResponse.Text = "Show response";
             this.tsmiShowResponse.Click += new System.EventHandler(this.tsmiShowResponse_Click);
             // 
+            // tsddbAfterCaptureTasks
+            // 
+            this.tsddbAfterCaptureTasks.Image = global::ShareX.Properties.Resources.image_export;
+            this.tsddbAfterCaptureTasks.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddbAfterCaptureTasks.Name = "tsddbAfterCaptureTasks";
+            this.tsddbAfterCaptureTasks.Size = new System.Drawing.Size(105, 20);
+            this.tsddbAfterCaptureTasks.Text = "After capture";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1296,5 +1306,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiShowErrors;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowResponse;
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenshotsFolder;
+        private System.Windows.Forms.ToolStripDropDownButton tsddbAfterCaptureTasks;
     }
 }
