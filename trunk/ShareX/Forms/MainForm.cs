@@ -109,16 +109,15 @@ namespace ShareX
             uim = new UploadInfoManager(lvUploads);
         }
 
-        private void AddEnumItems<T>(Action<int> selectedIndex, params ToolStripMenuItem[] parents)
+        private void AddEnumItems<T>(Action<int> selectedIndex, params ToolStripDropDownItem[] parents)
         {
-            int enumLength = Helpers.GetEnumLength<T>();
+            string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Select(x => x.GetDescription()).ToArray();
 
-            foreach (ToolStripMenuItem parent in parents)
+            foreach (ToolStripDropDownItem parent in parents)
             {
-                for (int i = 0; i < enumLength; i++)
+                for (int i = 0; i < enums.Length; i++)
                 {
-                    string description = ((Enum)Enum.ToObject(typeof(T), i)).GetDescription();
-                    ToolStripMenuItem tsmi = new ToolStripMenuItem(description);
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(enums[i]);
 
                     int index = i;
 
@@ -126,7 +125,7 @@ namespace ShareX
                     {
                         foreach (ToolStripMenuItem parent2 in parents)
                         {
-                            for (int i2 = 0; i2 < enumLength; i2++)
+                            for (int i2 = 0; i2 < enums.Length; i2++)
                             {
                                 ToolStripMenuItem tsmi2 = (ToolStripMenuItem)parent2.DropDownItems[i2];
                                 tsmi2.Checked = index == i2;
@@ -297,9 +296,16 @@ namespace ShareX
 
         private void UpdateUploaderMenuNames()
         {
-            tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + Program.Settings.ImageUploaderDestination.GetDescription();
-            tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + Program.Settings.TextUploaderDestination.GetDescription();
+            string imageUploader = Program.Settings.ImageUploaderDestination == ImageDestination.FileUploader ?
+                Program.Settings.FileUploaderDestination.GetDescription() : Program.Settings.ImageUploaderDestination.GetDescription();
+            tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + imageUploader;
+
+            string textUploader = Program.Settings.TextUploaderDestination == TextDestination.FileUploader ?
+                Program.Settings.FileUploaderDestination.GetDescription() : Program.Settings.TextUploaderDestination.GetDescription();
+            tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + textUploader;
+
             tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.Settings.FileUploaderDestination.GetDescription();
+
             tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.URLShortenerDestination.GetDescription();
         }
 

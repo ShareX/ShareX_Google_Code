@@ -51,11 +51,18 @@ namespace ShareX
     public enum TaskImageJob
     {
         None = 0,
+        [Description("Copy image to clipboard")]
         CopyImageToClipboard = 1,
-        SaveImageToFile = 1 << 1,
-        SaveImageToFileWithDialog = 1 << 2,
-        PerformActions = 1 << 3,
-        UploadImageToHost = 1 << 4
+        [Description("Send image to printer")]
+        SendImageToPrint = 1 << 1,
+        [Description("Save image to file")]
+        SaveImageToFile = 1 << 2,
+        [Description("Save image to file with dialog")]
+        SaveImageToFileWithDialog = 1 << 3,
+        [Description("Perform actions")]
+        PerformActions = 1 << 4,
+        [Description("Upload image to host")]
+        UploadImageToHost = 1 << 5
     }
 
     public enum ImageScaleType

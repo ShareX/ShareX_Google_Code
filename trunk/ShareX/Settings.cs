@@ -37,6 +37,7 @@ namespace ShareX
     {
         #region Main Form
 
+        public TaskImageJob AfterCaptureTasks = TaskImageJob.SaveImageToFile | TaskImageJob.UploadImageToHost;
         public ImageDestination ImageUploaderDestination = ImageDestination.Imgur;
         public TextDestination TextUploaderDestination = TextDestination.Pastebin;
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;
@@ -123,11 +124,6 @@ namespace ShareX
         public bool ShowCursor = false;
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
-        public bool CaptureCopyImage = false;
-        public bool CaptureSaveImage = true;
-        public bool CaptureSaveImageWithDialog = false;
-        public bool CapturePerformActions = false;
-        public bool CaptureUploadImage = true;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
         #endregion Capture

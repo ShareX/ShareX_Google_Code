@@ -125,11 +125,6 @@ namespace ShareX
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
-            cbCaptureCopyImage.Checked = Program.Settings.CaptureCopyImage;
-            cbCaptureSaveImage.Checked = Program.Settings.CaptureSaveImage;
-            cbCaptureSaveImageWithDialog.Checked = Program.Settings.CaptureSaveImageWithDialog;
-            cbCapturePerformActions.Checked = Program.Settings.CapturePerformActions;
-            cbCaptureUploadImage.Checked = Program.Settings.CaptureUploadImage;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
             cbDrawBorder.Checked = Program.Settings.SurfaceOptions.DrawBorder;
@@ -537,31 +532,6 @@ namespace ShareX
         private void cbCaptureShadow_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureShadow = cbCaptureShadow.Checked;
-        }
-
-        private void cbCaptureCopyImage_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureCopyImage = cbCaptureCopyImage.Checked;
-        }
-
-        private void cbCaptureSaveImage_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureSaveImage = cbCaptureSaveImage.Checked;
-        }
-
-        private void cbCaptureSaveImageWithDialog_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureSaveImageWithDialog = cbCaptureSaveImageWithDialog.Checked;
-        }
-
-        private void cbCapturePerformActions_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CapturePerformActions = cbCapturePerformActions.Checked;
-        }
-
-        private void cbCaptureUploadImage_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureUploadImage = cbCaptureUploadImage.Checked;
         }
 
         #endregion Capture / General

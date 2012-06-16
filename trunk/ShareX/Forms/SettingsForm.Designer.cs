@@ -105,12 +105,6 @@
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
-            this.gbCaptureAfter = new System.Windows.Forms.GroupBox();
-            this.cbCapturePerformActions = new System.Windows.Forms.CheckBox();
-            this.cbCaptureSaveImageWithDialog = new System.Windows.Forms.CheckBox();
-            this.cbCaptureUploadImage = new System.Windows.Forms.CheckBox();
-            this.cbCaptureSaveImage = new System.Windows.Forms.CheckBox();
-            this.cbCaptureCopyImage = new System.Windows.Forms.CheckBox();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
             this.tpCaptureShape = new System.Windows.Forms.TabPage();
@@ -136,11 +130,11 @@
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.btnNameFormatPatternHelp = new System.Windows.Forms.Button();
+            this.lblUploadLimitHint = new System.Windows.Forms.Label();
             this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
+            this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
             this.lblNameFormatPattern = new System.Windows.Forms.Label();
-            this.lblUploadLimitHint = new System.Windows.Forms.Label();
-            this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.lblBufferSize = new System.Windows.Forms.Label();
             this.lblBufferSizeInfo = new System.Windows.Forms.Label();
@@ -179,7 +173,6 @@
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
-            this.gbCaptureAfter.SuspendLayout();
             this.tpCaptureShape.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
@@ -1108,7 +1101,6 @@
             // tpCaptureGeneral
             // 
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureShadow);
-            this.tpCaptureGeneral.Controls.Add(this.gbCaptureAfter);
             this.tpCaptureGeneral.Controls.Add(this.cbShowCursor);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureTransparent);
             this.tpCaptureGeneral.Location = new System.Drawing.Point(4, 22);
@@ -1129,75 +1121,6 @@
             this.cbCaptureShadow.Text = "Capture window with shadow (requires transparency)";
             this.cbCaptureShadow.UseVisualStyleBackColor = true;
             this.cbCaptureShadow.CheckedChanged += new System.EventHandler(this.cbCaptureShadow_CheckedChanged);
-            // 
-            // gbCaptureAfter
-            // 
-            this.gbCaptureAfter.Controls.Add(this.cbCapturePerformActions);
-            this.gbCaptureAfter.Controls.Add(this.cbCaptureSaveImageWithDialog);
-            this.gbCaptureAfter.Controls.Add(this.cbCaptureUploadImage);
-            this.gbCaptureAfter.Controls.Add(this.cbCaptureSaveImage);
-            this.gbCaptureAfter.Controls.Add(this.cbCaptureCopyImage);
-            this.gbCaptureAfter.Location = new System.Drawing.Point(16, 96);
-            this.gbCaptureAfter.Name = "gbCaptureAfter";
-            this.gbCaptureAfter.Size = new System.Drawing.Size(472, 152);
-            this.gbCaptureAfter.TabIndex = 3;
-            this.gbCaptureAfter.TabStop = false;
-            this.gbCaptureAfter.Text = "After capture tasks";
-            // 
-            // cbCapturePerformActions
-            // 
-            this.cbCapturePerformActions.AutoSize = true;
-            this.cbCapturePerformActions.Location = new System.Drawing.Point(16, 96);
-            this.cbCapturePerformActions.Name = "cbCapturePerformActions";
-            this.cbCapturePerformActions.Size = new System.Drawing.Size(236, 17);
-            this.cbCapturePerformActions.TabIndex = 4;
-            this.cbCapturePerformActions.Text = "Perform actions (image must be saved to file)";
-            this.cbCapturePerformActions.UseVisualStyleBackColor = true;
-            this.cbCapturePerformActions.CheckedChanged += new System.EventHandler(this.cbCapturePerformActions_CheckedChanged);
-            // 
-            // cbCaptureSaveImageWithDialog
-            // 
-            this.cbCaptureSaveImageWithDialog.AutoSize = true;
-            this.cbCaptureSaveImageWithDialog.Location = new System.Drawing.Point(16, 72);
-            this.cbCaptureSaveImageWithDialog.Name = "cbCaptureSaveImageWithDialog";
-            this.cbCaptureSaveImageWithDialog.Size = new System.Drawing.Size(163, 17);
-            this.cbCaptureSaveImageWithDialog.TabIndex = 2;
-            this.cbCaptureSaveImageWithDialog.Text = "Save image to file with dialog";
-            this.cbCaptureSaveImageWithDialog.UseVisualStyleBackColor = true;
-            this.cbCaptureSaveImageWithDialog.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImageWithDialog_CheckedChanged);
-            // 
-            // cbCaptureUploadImage
-            // 
-            this.cbCaptureUploadImage.AutoSize = true;
-            this.cbCaptureUploadImage.Location = new System.Drawing.Point(16, 120);
-            this.cbCaptureUploadImage.Name = "cbCaptureUploadImage";
-            this.cbCaptureUploadImage.Size = new System.Drawing.Size(161, 17);
-            this.cbCaptureUploadImage.TabIndex = 3;
-            this.cbCaptureUploadImage.Text = "Upload image to remote host";
-            this.cbCaptureUploadImage.UseVisualStyleBackColor = true;
-            this.cbCaptureUploadImage.CheckedChanged += new System.EventHandler(this.cbCaptureUploadImage_CheckedChanged);
-            // 
-            // cbCaptureSaveImage
-            // 
-            this.cbCaptureSaveImage.AutoSize = true;
-            this.cbCaptureSaveImage.Location = new System.Drawing.Point(16, 48);
-            this.cbCaptureSaveImage.Name = "cbCaptureSaveImage";
-            this.cbCaptureSaveImage.Size = new System.Drawing.Size(110, 17);
-            this.cbCaptureSaveImage.TabIndex = 1;
-            this.cbCaptureSaveImage.Text = "Save image to file";
-            this.cbCaptureSaveImage.UseVisualStyleBackColor = true;
-            this.cbCaptureSaveImage.CheckedChanged += new System.EventHandler(this.cbCaptureSaveImage_CheckedChanged);
-            // 
-            // cbCaptureCopyImage
-            // 
-            this.cbCaptureCopyImage.AutoSize = true;
-            this.cbCaptureCopyImage.Location = new System.Drawing.Point(16, 24);
-            this.cbCaptureCopyImage.Name = "cbCaptureCopyImage";
-            this.cbCaptureCopyImage.Size = new System.Drawing.Size(139, 17);
-            this.cbCaptureCopyImage.TabIndex = 0;
-            this.cbCaptureCopyImage.Text = "Copy image to clipboard\r\n";
-            this.cbCaptureCopyImage.UseVisualStyleBackColor = true;
-            this.cbCaptureCopyImage.CheckedChanged += new System.EventHandler(this.cbCaptureCopyImage_CheckedChanged);
             // 
             // cbShowCursor
             // 
@@ -1500,32 +1423,6 @@
             this.btnNameFormatPatternHelp.UseVisualStyleBackColor = true;
             this.btnNameFormatPatternHelp.Click += new System.EventHandler(this.btnNameFormatPatternHelp_Click);
             // 
-            // lblNameFormatPatternPreview
-            // 
-            this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 169);
-            this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
-            this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
-            this.lblNameFormatPatternPreview.TabIndex = 4;
-            this.lblNameFormatPatternPreview.Text = "Preview:";
-            // 
-            // txtNameFormatPattern
-            // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 137);
-            this.txtNameFormatPattern.Name = "txtNameFormatPattern";
-            this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
-            this.txtNameFormatPattern.TabIndex = 2;
-            this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
-            // 
-            // lblNameFormatPattern
-            // 
-            this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 113);
-            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
-            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
-            this.lblNameFormatPattern.TabIndex = 1;
-            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
-            // 
             // lblUploadLimitHint
             // 
             this.lblUploadLimitHint.AutoSize = true;
@@ -1534,6 +1431,15 @@
             this.lblUploadLimitHint.Size = new System.Drawing.Size(90, 13);
             this.lblUploadLimitHint.TabIndex = 2;
             this.lblUploadLimitHint.Text = "0 - 25 (0 disables)";
+            // 
+            // lblNameFormatPatternPreview
+            // 
+            this.lblNameFormatPatternPreview.AutoSize = true;
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 169);
+            this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
+            this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
+            this.lblNameFormatPatternPreview.TabIndex = 4;
+            this.lblNameFormatPatternPreview.Text = "Preview:";
             // 
             // nudUploadLimit
             // 
@@ -1553,6 +1459,23 @@
             0,
             0});
             this.nudUploadLimit.ValueChanged += new System.EventHandler(this.nudUploadLimit_ValueChanged);
+            // 
+            // txtNameFormatPattern
+            // 
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 137);
+            this.txtNameFormatPattern.Name = "txtNameFormatPattern";
+            this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
+            this.txtNameFormatPattern.TabIndex = 2;
+            this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
+            // 
+            // lblNameFormatPattern
+            // 
+            this.lblNameFormatPattern.AutoSize = true;
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 113);
+            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
+            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
+            this.lblNameFormatPattern.TabIndex = 1;
+            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
             // 
             // lblUploadLimit
             // 
@@ -1792,8 +1715,6 @@
             this.tcCapture.ResumeLayout(false);
             this.tpCaptureGeneral.ResumeLayout(false);
             this.tpCaptureGeneral.PerformLayout();
-            this.gbCaptureAfter.ResumeLayout(false);
-            this.gbCaptureAfter.PerformLayout();
             this.tpCaptureShape.ResumeLayout(false);
             this.tpCaptureShape.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).EndInit();
@@ -1875,10 +1796,6 @@
         private System.Windows.Forms.TabControl tcCapture;
         private System.Windows.Forms.TabPage tpCaptureGeneral;
         private System.Windows.Forms.TabPage tpCaptureShape;
-        private System.Windows.Forms.GroupBox gbCaptureAfter;
-        private System.Windows.Forms.CheckBox cbCaptureUploadImage;
-        private System.Windows.Forms.CheckBox cbCaptureSaveImage;
-        private System.Windows.Forms.CheckBox cbCaptureCopyImage;
         private System.Windows.Forms.CheckBox cbShapeIncludeControls;
         private System.Windows.Forms.CheckBox cbShapeForceWindowCapture;
         private System.Windows.Forms.TabControl tcImage;
@@ -1932,7 +1849,6 @@
         private System.Windows.Forms.TextBox txtProxyUsername;
         private System.Windows.Forms.ComboBox cboProxyType;
         private System.Windows.Forms.Label lblProxyType;
-        private System.Windows.Forms.CheckBox cbCaptureSaveImageWithDialog;
         private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
         private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
         private System.Windows.Forms.TabPage tpActions;
@@ -1940,7 +1856,6 @@
         private System.Windows.Forms.ColumnHeader chActionsName;
         private System.Windows.Forms.ColumnHeader chActionsPath;
         private System.Windows.Forms.ColumnHeader chActionsArgs;
-        private System.Windows.Forms.CheckBox cbCapturePerformActions;
         private System.Windows.Forms.Button btnActionsEdit;
         private System.Windows.Forms.Button btnActionsRemove;
         private System.Windows.Forms.Button btnActionsAdd;
