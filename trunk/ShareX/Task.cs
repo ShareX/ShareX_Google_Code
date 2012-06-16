@@ -226,6 +226,11 @@ namespace ShareX
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
+                if (Info.ImageJob.HasFlag(TaskImageJob.SendImageToPrinter))
+                {
+                    new PrintForm(tempImage, new PrintSettings()).ShowDialog();
+                }
+
                 if (Info.ImageJob.HasFlagAny(TaskImageJob.SaveImageToFile, TaskImageJob.SaveImageToFileWithDialog, TaskImageJob.UploadImageToHost))
                 {
                     using (tempImage)
