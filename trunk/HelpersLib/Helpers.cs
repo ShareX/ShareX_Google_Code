@@ -294,33 +294,20 @@ namespace HelpersLib
             return "application/octet-stream";
         }
 
+        public static string[] GetEnumDescriptions<T>()
+        {
+            return Enum.GetValues(typeof(T)).OfType<Enum>().Select(x => x.GetDescription()).ToArray();
+        }
+
         public static int GetEnumLength<T>()
         {
             return Enum.GetValues(typeof(T)).Length;
         }
 
-        public static string[] GetEnumDescriptions<T>()
-        {
-            List<string> descriptions = new List<string>();
-            Type enumType = typeof(T);
-
-            if (enumType.BaseType != typeof(Enum))
-            {
-                throw new ArgumentException("T must be of type System.Enum");
-            }
-
-            foreach (int value in Enum.GetValues(enumType))
-            {
-                descriptions.Add(((Enum)Enum.ToObject(enumType, value)).GetDescription());
-            }
-
-            return descriptions.ToArray();
-        }
-
-        public static int GetEnumMemberIndex<T>(T element) where T : struct
+        public static int GetEnumMemberIndex<T>(T value)
         {
             T[] values = (T[])Enum.GetValues(typeof(T));
-            return Array.IndexOf(values, element);
+            return Array.IndexOf(values, value);
         }
 
         public const string UnreservedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~";

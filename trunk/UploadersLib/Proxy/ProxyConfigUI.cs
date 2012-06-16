@@ -115,7 +115,7 @@ namespace UploadersLib
             // Proxy
             if (cboProxyConfig.Items.Count == 0)
             {
-                cboProxyConfig.Items.AddRange(typeof(EProxyConfigType).GetEnumDescriptions());
+                cboProxyConfig.Items.AddRange(Helpers.GetEnumDescriptions<EProxyConfigType>());
             }
             cboProxyConfig.SelectedIndex = (int)config.ProxyConfigType;
 

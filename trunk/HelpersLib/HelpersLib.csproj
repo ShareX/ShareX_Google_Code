@@ -68,6 +68,7 @@
     <Compile Include="CLI\CLIManagerRegex.cs" />
     <Compile Include="CLI\CLIParser.cs" />
     <Compile Include="ComponentModelStrings.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="Extensions\GraphicsPathExtensions.cs" />
     <Compile Include="ExternalProgram.cs" />

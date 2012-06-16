@@ -89,6 +89,7 @@ namespace ShareX
             this.Text = Program.Title;
             this.Icon = Resources.ShareX;
 
+            AddMultiEnumItems<TaskImageJob>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap((TaskImageJob)x), tsddbAfterCaptureTasks);
             AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = (ImageDestination)x, tsmiImageUploaders, tsmiTrayImageUploaders);
             AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = (TextDestination)x, tsmiTextUploaders, tsmiTrayTextUploaders);
             AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = (FileDestination)x, tsmiFileUploaders, tsmiTrayFileUploaders);
@@ -111,7 +112,7 @@ namespace ShareX
 
         private void AddEnumItems<T>(Action<int> selectedIndex, params ToolStripDropDownItem[] parents)
         {
-            string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Select(x => x.GetDescription()).ToArray();
+            string[] enums = Helpers.GetEnumDescriptions<T>();
 
             foreach (ToolStripDropDownItem parent in parents)
             {
@@ -123,7 +124,7 @@ namespace ShareX
 
                     tsmi.Click += (sender, e) =>
                     {
-                        foreach (ToolStripMenuItem parent2 in parents)
+                        foreach (ToolStripDropDownItem parent2 in parents)
                         {
                             for (int i2 = 0; i2 < enums.Length; i2++)
                             {
@@ -138,6 +139,58 @@ namespace ShareX
                     };
 
                     parent.DropDownItems.Add(tsmi);
+                }
+            }
+        }
+
+        private void SetEnumChecked<T>(T value, params ToolStripDropDownItem[] parents)
+        {
+            int index = Helpers.GetEnumMemberIndex(value);
+
+            foreach (ToolStripDropDownItem parent in parents)
+            {
+                ((ToolStripMenuItem)parent.DropDownItems[index]).Checked = true;
+            }
+        }
+
+        private void AddMultiEnumItems<T>(Action<int> selectedIndex, params ToolStripDropDownItem[] parents)
+        {
+            string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Skip(1).Select(x => x.GetDescription()).ToArray();
+
+            foreach (ToolStripDropDownItem parent in parents)
+            {
+                for (int i = 0; i < enums.Length; i++)
+                {
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(enums[i]);
+
+                    int index = i;
+
+                    tsmi.Click += (sender, e) =>
+                    {
+                        foreach (ToolStripDropDownItem parent2 in parents)
+                        {
+                            ToolStripMenuItem tsmi2 = (ToolStripMenuItem)parent2.DropDownItems[index];
+                            tsmi2.Checked = !tsmi2.Checked;
+                        }
+
+                        selectedIndex(1 << index);
+
+                        UpdateUploaderMenuNames();
+                    };
+
+                    parent.DropDownItems.Add(tsmi);
+                }
+            }
+        }
+
+        private void SetMultiEnumChecked(Enum value, params ToolStripDropDownItem[] parents)
+        {
+            for (int i = 0; i < parents[0].DropDownItems.Count; i++)
+            {
+                foreach (ToolStripDropDownItem parent in parents)
+                {
+                    ToolStripMenuItem tsmi = (ToolStripMenuItem)parent.DropDownItems[i];
+                    tsmi.Checked = value.HasFlag(1 << i);
                 }
             }
         }
@@ -241,21 +294,11 @@ namespace ShareX
             niTray.Icon = Resources.sharex_16px_6;
             niTray.Visible = Program.Settings.ShowTray;
 
-            int imageUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.ImageUploaderDestination);
-            ((ToolStripMenuItem)tsmiImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
-            ((ToolStripMenuItem)tsmiTrayImageUploaders.DropDownItems[imageUploaderIndex]).Checked = true;
-
-            int textUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.TextUploaderDestination);
-            ((ToolStripMenuItem)tsmiTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
-            ((ToolStripMenuItem)tsmiTrayTextUploaders.DropDownItems[textUploaderIndex]).Checked = true;
-
-            int fileUploaderIndex = Helpers.GetEnumMemberIndex(Program.Settings.FileUploaderDestination);
-            ((ToolStripMenuItem)tsmiFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
-            ((ToolStripMenuItem)tsmiTrayFileUploaders.DropDownItems[fileUploaderIndex]).Checked = true;
-
-            int urlShortenerIndex = Helpers.GetEnumMemberIndex(Program.Settings.URLShortenerDestination);
-            ((ToolStripMenuItem)tsmiURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
-            ((ToolStripMenuItem)tsmiTrayURLShorteners.DropDownItems[urlShortenerIndex]).Checked = true;
+            SetMultiEnumChecked(Program.Settings.AfterCaptureTasks, tsddbAfterCaptureTasks);
+            SetEnumChecked(Program.Settings.ImageUploaderDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
+            SetEnumChecked(Program.Settings.TextUploaderDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
+            SetEnumChecked(Program.Settings.FileUploaderDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
+            SetEnumChecked(Program.Settings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
 
             UpdateUploaderMenuNames();
 

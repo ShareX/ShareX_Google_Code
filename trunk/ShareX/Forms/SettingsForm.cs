@@ -33,6 +33,7 @@ using System.Net;
 using System.Windows.Forms;
 using HelpersLib;
 using ScreenCapture;
+using UploadersLib;
 
 namespace ShareX
 {
@@ -167,7 +168,7 @@ namespace ShareX
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
             txtProxyHost.Text = Program.Settings.ProxySettings.Host;
             nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-            cboProxyType.Items.AddRange(Extensions.GetEnumDescriptions(typeof(UploadersLib.Proxy)));
+            cboProxyType.Items.AddRange(Helpers.GetEnumDescriptions<Proxy>());
             cboProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
 
             // Debug
