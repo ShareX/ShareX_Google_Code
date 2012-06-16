@@ -114,34 +114,7 @@ namespace ShareX
         {
             if (img != null)
             {
-                TaskImageJob imageJob = TaskImageJob.None;
-
-                if (Program.Settings.CaptureCopyImage)
-                {
-                    imageJob |= TaskImageJob.CopyImageToClipboard;
-                }
-
-                if (Program.Settings.CaptureSaveImage)
-                {
-                    imageJob |= TaskImageJob.SaveImageToFile;
-                }
-
-                if (Program.Settings.CaptureSaveImageWithDialog)
-                {
-                    imageJob |= TaskImageJob.SaveImageToFileWithDialog;
-                }
-
-                if (Program.Settings.CapturePerformActions)
-                {
-                    imageJob |= TaskImageJob.PerformActions;
-                }
-
-                if (Program.Settings.CaptureUploadImage)
-                {
-                    imageJob |= TaskImageJob.UploadImageToHost;
-                }
-
-                UploadManager.UploadImage(img, imageJob);
+                UploadManager.UploadImage(img, Program.Settings.AfterCaptureTasks);
             }
         }
 

@@ -227,6 +227,13 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap image_export {
+            get {
+                object obj = ResourceManager.GetObject("image_export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap navigation_000_button {
             get {
                 object obj = ResourceManager.GetObject("navigation_000_button", resourceCulture);
