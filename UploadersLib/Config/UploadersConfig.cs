@@ -166,7 +166,6 @@ namespace UploadersLib
         public List<OAuthInfo> TwitterOAuthInfoList = new List<OAuthInfo>();
         public int TwitterSelectedAccount = 0;
         public TwitterClientSettings TwitterClientConfig = new TwitterClientSettings();
-        public bool TwitterEnabled = false;
 
         #endregion Other services
 

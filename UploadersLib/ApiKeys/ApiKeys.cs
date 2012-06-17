@@ -68,8 +68,8 @@ namespace UploadersLib
         public const string ThreelyKey = "em5893833";
 
         // Other Services
-        public const string TwitterConsumerKey = "Jzzcm6ytcyml14sQIvqvmA";
-        public const string TwitterConsumerSecret = "aJYZ9W1gJnGMgSqhRYrvoUyUc14FssVJOFAqHjriU";
+        public const string TwitterConsumerKey = "Dw9iuniatwgsk4nwOcKGNg";
+        public const string TwitterConsumerSecret = "q2fGaWzuHbbRwQPast1lYZjFnpuiI6axTYWwTytj8";
         public const string GoogleApiKey = "AIzaSyCcYJvYPvS3UE0JqqsSNpjPjN1NPBmMbmE";
         public const string PicnikKey = "3aacd2de4563b8817de708b29b5bdd0e";
     }

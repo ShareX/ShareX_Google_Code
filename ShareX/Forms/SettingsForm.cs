@@ -72,6 +72,7 @@ namespace ShareX
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
             cbClipboardAutoCopy.Checked = Program.Settings.ClipboardAutoCopy;
             cbURLShortenAfterUpload.Checked = Program.Settings.URLShortenAfterUpload;
+            cbShareURLAfterUpload.Checked = Program.Settings.ShareURLAfterUpload;
             cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
             cbPlaySoundAfterUpload.Checked = Program.Settings.PlaySoundAfterUpload;
             cbTrayBalloonTipAfterUpload.Checked = Program.Settings.TrayBalloonTipAfterUpload;
@@ -276,6 +277,11 @@ namespace ShareX
         private void cbURLShortenAfterUpload_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.URLShortenAfterUpload = cbURLShortenAfterUpload.Checked;
+        }
+
+        private void cbShareURLAfterUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ShareURLAfterUpload = cbShareURLAfterUpload.Checked;
         }
 
         private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)

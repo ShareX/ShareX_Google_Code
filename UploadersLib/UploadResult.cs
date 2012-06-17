@@ -32,11 +32,11 @@ namespace UploadersLib.HelperClasses
 {
     public class UploadResult
     {
-        public string LocalFilePath { get; set; }
         public string URL { get; set; }
         public string ThumbnailURL { get; set; }
         public string DeletionURL { get; set; }
         public string ShortenedURL { get; set; }
+        public string LocalFilePath { get; set; }
 
         public string Source { get; set; }
         public List<string> Errors { get; set; }
@@ -58,6 +58,16 @@ namespace UploadersLib.HelperClasses
         {
             Source = source;
             URL = url;
+        }
+
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(ShortenedURL))
+            {
+                return ShortenedURL;
+            }
+
+            return URL;
         }
 
         public string ErrorsToString()

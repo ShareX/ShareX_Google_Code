@@ -57,6 +57,7 @@ namespace ShareX
         public bool AutoCheckUpdate = true;
         public bool ClipboardAutoCopy = true;
         public bool URLShortenAfterUpload = false;
+        public bool ShareURLAfterUpload = false;
         public bool PlaySoundAfterCapture = true;
         public bool PlaySoundAfterUpload = true;
         public bool TrayBalloonTipAfterUpload = true;
