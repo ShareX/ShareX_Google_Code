@@ -33,7 +33,6 @@
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
-            this.lblGeneralSeparator2 = new System.Windows.Forms.Label();
             this.cbHistorySave = new System.Windows.Forms.CheckBox();
             this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
             this.cbCheckUpdates = new System.Windows.Forms.CheckBox();
@@ -153,6 +152,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbShareURLAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -198,7 +198,7 @@
             // cbPlaySoundAfterUpload
             // 
             this.cbPlaySoundAfterUpload.AutoSize = true;
-            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 208);
+            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 232);
             this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
             this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(199, 17);
             this.cbPlaySoundAfterUpload.TabIndex = 8;
@@ -226,8 +226,8 @@
             // 
             // tpGeneral
             // 
+            this.tpGeneral.Controls.Add(this.cbShareURLAfterUpload);
             this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
-            this.tpGeneral.Controls.Add(this.lblGeneralSeparator2);
             this.tpGeneral.Controls.Add(this.cbHistorySave);
             this.tpGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
             this.tpGeneral.Controls.Add(this.cbCheckUpdates);
@@ -249,7 +249,7 @@
             // cbTrayBalloonTipAfterUpload
             // 
             this.cbTrayBalloonTipAfterUpload.AutoSize = true;
-            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 232);
+            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 256);
             this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
             this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(245, 17);
             this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
@@ -257,30 +257,21 @@
             this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
             this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
             // 
-            // lblGeneralSeparator2
-            // 
-            this.lblGeneralSeparator2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblGeneralSeparator2.Location = new System.Drawing.Point(16, 264);
-            this.lblGeneralSeparator2.Name = "lblGeneralSeparator2";
-            this.lblGeneralSeparator2.Size = new System.Drawing.Size(475, 2);
-            this.lblGeneralSeparator2.TabIndex = 10;
-            this.lblGeneralSeparator2.Text = "label2";
-            // 
             // cbHistorySave
             // 
             this.cbHistorySave.AutoSize = true;
             this.cbHistorySave.Location = new System.Drawing.Point(16, 280);
             this.cbHistorySave.Name = "cbHistorySave";
-            this.cbHistorySave.Size = new System.Drawing.Size(118, 17);
+            this.cbHistorySave.Size = new System.Drawing.Size(189, 17);
             this.cbHistorySave.TabIndex = 11;
-            this.cbHistorySave.Text = "Enable history save";
+            this.cbHistorySave.Text = "Save successful uploads to history";
             this.cbHistorySave.UseVisualStyleBackColor = true;
             this.cbHistorySave.CheckedChanged += new System.EventHandler(this.cbHistorySave_CheckedChanged);
             // 
             // cbPlaySoundAfterCapture
             // 
             this.cbPlaySoundAfterCapture.AutoSize = true;
-            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 184);
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 208);
             this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
             this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
             this.cbPlaySoundAfterCapture.TabIndex = 7;
@@ -1675,6 +1666,17 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbShareURLAfterUpload
+            // 
+            this.cbShareURLAfterUpload.AutoSize = true;
+            this.cbShareURLAfterUpload.Location = new System.Drawing.Point(16, 184);
+            this.cbShareURLAfterUpload.Name = "cbShareURLAfterUpload";
+            this.cbShareURLAfterUpload.Size = new System.Drawing.Size(334, 17);
+            this.cbShareURLAfterUpload.TabIndex = 12;
+            this.cbShareURLAfterUpload.Text = "Share URL to social networking service after upload is completed";
+            this.cbShareURLAfterUpload.UseVisualStyleBackColor = true;
+            this.cbShareURLAfterUpload.CheckedChanged += new System.EventHandler(this.cbShareURLAfterUpload_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1835,7 +1837,6 @@
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
         private System.Windows.Forms.CheckBox cbPlaySoundAfterCapture;
         private System.Windows.Forms.CheckBox cbUseCustomScreenshotsPath;
-        private System.Windows.Forms.Label lblGeneralSeparator2;
         private System.Windows.Forms.TabPage tpPaths;
         private System.Windows.Forms.Button btnBrowseCustomScreenshotsPath;
         private System.Windows.Forms.TextBox txtCustomScreenshotsPath;
@@ -1859,5 +1860,6 @@
         private System.Windows.Forms.Button btnActionsEdit;
         private System.Windows.Forms.Button btnActionsRemove;
         private System.Windows.Forms.Button btnActionsAdd;
+        private System.Windows.Forms.CheckBox cbShareURLAfterUpload;
     }
 }

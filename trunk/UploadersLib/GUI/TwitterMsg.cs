@@ -29,6 +29,7 @@ using System.Linq;
 using System.Windows.Forms;
 using UploadersLib.HelperClasses;
 using UploadersLib.OtherServices;
+using UploadersLib.Properties;
 using UploadersLib.SocialServices;
 
 namespace UploadersLib
@@ -37,10 +38,19 @@ namespace UploadersLib
     {
         public string ActiveAccountName { get; set; }
 
-        public string Message { get; set; }
+        public string Message
+        {
+            get
+            {
+                return txtTweet.Text;
+            }
+            set
+            {
+                txtTweet.Text = value;
+            }
+        }
 
         public OAuthInfo AuthInfo { get; set; }
-
         public TwitterClientSettings Config { get; set; }
 
         public TwitterMsg(OAuthInfo oauth, string title)
@@ -48,11 +58,12 @@ namespace UploadersLib
             InitializeComponent();
             AuthInfo = oauth;
             Text = title;
+            Icon = Resources.Twitter;
             Config = new TwitterClientSettings();
         }
 
         public TwitterMsg(OAuthInfo oauth)
-            : this(oauth, "Update Twitter Status...") { }
+            : this(oauth, "Update Twitter status") { }
 
         public TwitterMsg(string title)
             : this(null, title) { }
@@ -61,7 +72,6 @@ namespace UploadersLib
         {
             if (!string.IsNullOrEmpty(txtTweet.Text))
             {
-                Message = txtTweet.Text;
                 DialogResult = DialogResult.OK;
 
                 if (AuthInfo != null && !string.IsNullOrEmpty(Message))
@@ -99,7 +109,7 @@ namespace UploadersLib
 
         private void lbUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (null != lbUsers.SelectedItem)
+            if (lbUsers.SelectedItem != null)
             {
                 txtTweet.Text = txtTweet.Text.Insert(txtTweet.SelectionStart, "@" + lbUsers.SelectedItem.ToString() + " ");
                 txtTweet.SelectionStart = txtTweet.Text.Length;

@@ -218,7 +218,7 @@
             this.btnGoogleURLShortenerAuthOpen = new System.Windows.Forms.Button();
             this.lblGooglAccountStatus = new System.Windows.Forms.Label();
             this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.tpOtherServices = new System.Windows.Forms.TabPage();
+            this.tpSocialNetworkingServices = new System.Windows.Forms.TabPage();
             this.tcOtherServices = new System.Windows.Forms.TabControl();
             this.tpTwitter = new System.Windows.Forms.TabPage();
             this.btnTwitterLogin = new System.Windows.Forms.Button();
@@ -292,7 +292,7 @@
             this.tcURLShorteners.SuspendLayout();
             this.tpGoogleURLShortener.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tpOtherServices.SuspendLayout();
+            this.tpSocialNetworkingServices.SuspendLayout();
             this.tcOtherServices.SuspendLayout();
             this.tpTwitter.SuspendLayout();
             this.tbOutputs.SuspendLayout();
@@ -310,7 +310,7 @@
             this.tcUploaders.Controls.Add(this.tpTextUploaders);
             this.tcUploaders.Controls.Add(this.tpFileUploaders);
             this.tcUploaders.Controls.Add(this.tpURLShorteners);
-            this.tcUploaders.Controls.Add(this.tpOtherServices);
+            this.tcUploaders.Controls.Add(this.tpSocialNetworkingServices);
             this.tcUploaders.Controls.Add(this.tbOutputs);
             this.tcUploaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcUploaders.Location = new System.Drawing.Point(3, 3);
@@ -2219,7 +2219,7 @@
             this.tpURLShorteners.Padding = new System.Windows.Forms.Padding(3);
             this.tpURLShorteners.Size = new System.Drawing.Size(818, 506);
             this.tpURLShorteners.TabIndex = 3;
-            this.tpURLShorteners.Text = "URL Shorteners";
+            this.tpURLShorteners.Text = "URL shorteners";
             this.tpURLShorteners.UseVisualStyleBackColor = true;
             // 
             // tcURLShorteners
@@ -2295,16 +2295,16 @@
             this.atcGoogleURLShortenerAccountType.TabIndex = 0;
             this.atcGoogleURLShortenerAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcGoogleURLShortenerAccountType_AccountTypeChanged);
             // 
-            // tpOtherServices
+            // tpSocialNetworkingServices
             // 
-            this.tpOtherServices.Controls.Add(this.tcOtherServices);
-            this.tpOtherServices.Location = new System.Drawing.Point(4, 22);
-            this.tpOtherServices.Name = "tpOtherServices";
-            this.tpOtherServices.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOtherServices.Size = new System.Drawing.Size(818, 506);
-            this.tpOtherServices.TabIndex = 4;
-            this.tpOtherServices.Text = "Other Services";
-            this.tpOtherServices.UseVisualStyleBackColor = true;
+            this.tpSocialNetworkingServices.Controls.Add(this.tcOtherServices);
+            this.tpSocialNetworkingServices.Location = new System.Drawing.Point(4, 22);
+            this.tpSocialNetworkingServices.Name = "tpSocialNetworkingServices";
+            this.tpSocialNetworkingServices.Padding = new System.Windows.Forms.Padding(3);
+            this.tpSocialNetworkingServices.Size = new System.Drawing.Size(818, 506);
+            this.tpSocialNetworkingServices.TabIndex = 4;
+            this.tpSocialNetworkingServices.Text = "Social networking services";
+            this.tpSocialNetworkingServices.UseVisualStyleBackColor = true;
             // 
             // tcOtherServices
             // 
@@ -2733,7 +2733,7 @@
             this.tpGoogleURLShortener.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tpOtherServices.ResumeLayout(false);
+            this.tpSocialNetworkingServices.ResumeLayout(false);
             this.tcOtherServices.ResumeLayout(false);
             this.tpTwitter.ResumeLayout(false);
             this.tbOutputs.ResumeLayout(false);
@@ -2754,7 +2754,7 @@
         private System.Windows.Forms.TabPage tpImageUploaders;
         private System.Windows.Forms.TabPage tpTextUploaders;
         private System.Windows.Forms.TabPage tpURLShorteners;
-        private System.Windows.Forms.TabPage tpOtherServices;
+        private System.Windows.Forms.TabPage tpSocialNetworkingServices;
         private System.Windows.Forms.TabControl tcImageUploaders;
         private System.Windows.Forms.TabPage tpImageShack;
         private System.Windows.Forms.TabPage tpTinyPic;

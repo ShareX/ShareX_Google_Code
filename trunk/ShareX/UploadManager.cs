@@ -368,7 +368,7 @@ namespace ShareX
 
                         if (!string.IsNullOrEmpty(info.Result.URL))
                         {
-                            string url = string.IsNullOrEmpty(info.Result.ShortenedURL) ? info.Result.URL : info.Result.ShortenedURL;
+                            string url = info.Result.ToString();
 
                             lvi.SubItems[8].Text = url;
 

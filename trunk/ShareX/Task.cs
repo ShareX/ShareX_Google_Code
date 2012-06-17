@@ -207,9 +207,9 @@ namespace ShareX
                 {
                     Info.Result.Errors.Add("URL is empty.");
                 }
-                else if (Program.Settings.URLShortenAfterUpload || Info.Job == TaskJob.ShortenURL)
+                else
                 {
-                    Info.Result.ShortenedURL = ShortenURL(Info.Result.URL);
+                    DoURLJobs();
                 }
             }
 
@@ -297,6 +297,29 @@ namespace ShareX
             if (Info.IsUploadJob && data != null && data.CanSeek)
             {
                 data.Position = 0;
+            }
+        }
+
+        private void DoURLJobs()
+        {
+            if (Program.Settings.URLShortenAfterUpload || Info.Job == TaskJob.ShortenURL)
+            {
+                Info.Result.ShortenedURL = ShortenURL(Info.Result.URL);
+            }
+
+            if (Program.Settings.ShareURLAfterUpload)
+            {
+                OAuthInfo twitterOAuth = Program.UploadersConfig.TwitterOAuthInfoList.ReturnIfValidIndex(Program.UploadersConfig.TwitterSelectedAccount);
+
+                if (twitterOAuth != null)
+                {
+                    using (TwitterMsg twitter = new TwitterMsg(twitterOAuth))
+                    {
+                        twitter.Message = Info.Result.ToString();
+                        twitter.Config = Program.UploadersConfig.TwitterClientConfig;
+                        twitter.ShowDialog();
+                    }
+                }
             }
         }
 
@@ -456,10 +479,10 @@ namespace ShareX
                 case FileDestination.FTP:
                     int index = Program.UploadersConfig.GetFtpIndex(Info.DataType);
 
-                    if (Program.UploadersConfig.FTPAccountList.IsValidIndex(index))
-                    {
-                        FTPAccount account = Program.UploadersConfig.FTPAccountList[index];
+                    FTPAccount account = Program.UploadersConfig.FTPAccountList.ReturnIfValidIndex(index);
 
+                    if (account != null)
+                    {
                         if (account.Protocol == FTPProtocol.SFTP)
                         {
                             fileUploader = new SFTP(account);
