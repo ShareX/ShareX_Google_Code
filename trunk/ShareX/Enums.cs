@@ -53,11 +53,11 @@ namespace ShareX
         None = 0,
         [Description("Copy image to clipboard")]
         CopyImageToClipboard = 1,
-        [Description("Send image to printer")]
+        [Description("Print image")]
         SendImageToPrinter = 1 << 1,
         [Description("Save image to file")]
         SaveImageToFile = 1 << 2,
-        [Description("Save image to file with dialog")]
+        [Description("Save image to file as...")]
         SaveImageToFileWithDialog = 1 << 3,
         [Description("Perform actions")]
         PerformActions = 1 << 4,

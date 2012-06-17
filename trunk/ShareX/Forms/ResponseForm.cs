@@ -48,5 +48,10 @@ namespace ShareX
                 isOpened = true;
             }
         }
+
+        private void ResponseForm_Resize(object sender, System.EventArgs e)
+        {
+            Refresh();
+        }
     }
 }

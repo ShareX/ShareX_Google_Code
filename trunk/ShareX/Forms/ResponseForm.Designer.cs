@@ -68,7 +68,7 @@
             this.tpString.Padding = new System.Windows.Forms.Padding(3);
             this.tpString.Size = new System.Drawing.Size(752, 443);
             this.tpString.TabIndex = 0;
-            this.tpString.Text = "String";
+            this.tpString.Text = "Text";
             this.tpString.UseVisualStyleBackColor = true;
             // 
             // tpWebBrowser
@@ -88,6 +88,7 @@
             this.wbResponse.Location = new System.Drawing.Point(3, 3);
             this.wbResponse.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbResponse.Name = "wbResponse";
+            this.wbResponse.ScriptErrorsSuppressed = true;
             this.wbResponse.Size = new System.Drawing.Size(746, 437);
             this.wbResponse.TabIndex = 0;
             // 
@@ -102,6 +103,7 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Response";
+            this.Resize += new System.EventHandler(this.ResponseForm_Resize);
             this.tcResponse.ResumeLayout(false);
             this.tpString.ResumeLayout(false);
             this.tpString.PerformLayout();

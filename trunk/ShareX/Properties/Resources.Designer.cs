@@ -220,6 +220,13 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap globe_share {
+            get {
+                object obj = ResourceManager.GetObject("globe-share", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);

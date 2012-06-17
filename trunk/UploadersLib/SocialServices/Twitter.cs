@@ -29,7 +29,7 @@ using System.Xml.Linq;
 using HelpersLib;
 using UploadersLib.HelperClasses;
 
-namespace UploadersLib.OtherServices
+namespace UploadersLib.SocialServices
 {
     public class Twitter : Uploader, IOAuth
     {
@@ -95,9 +95,7 @@ namespace UploadersLib.OtherServices
     public class TweetStatus
     {
         public long ID { get; set; }
-
         public string Text { get; set; }
-
         public string InReplyToScreenName { get; set; }
     }
 }

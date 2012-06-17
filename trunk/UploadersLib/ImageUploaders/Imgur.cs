@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -133,27 +134,34 @@ namespace UploadersLib.ImageUploaders
 
             if (!string.IsNullOrEmpty(source))
             {
-                XDocument xd = XDocument.Parse(source);
-                XElement xe;
-
-                if ((xe = xd.GetNode("upload|images/links")) != null)
+                try
                 {
-                    ur.URL = xe.GetElementValue("original");
+                    XDocument xd = XDocument.Parse(source);
+                    XElement xe;
 
-                    if (ThumbnailType == ImgurThumbnailType.Large_Thumbnail)
+                    if ((xe = xd.GetNode("upload|images/links")) != null)
                     {
-                        ur.ThumbnailURL = xe.GetElementValue("large_thumbnail");
-                    }
-                    else
-                    {
-                        ur.ThumbnailURL = xe.GetElementValue("small_square");
-                    }
+                        ur.URL = xe.GetElementValue("original");
 
-                    ur.DeletionURL = xe.GetElementValue("delete_page");
+                        if (ThumbnailType == ImgurThumbnailType.Large_Thumbnail)
+                        {
+                            ur.ThumbnailURL = xe.GetElementValue("large_thumbnail");
+                        }
+                        else
+                        {
+                            ur.ThumbnailURL = xe.GetElementValue("small_square");
+                        }
+
+                        ur.DeletionURL = xe.GetElementValue("delete_page");
+                    }
+                    else if ((xe = xd.GetElement("error")) != null)
+                    {
+                        Errors.Add("Imgur error message: " + xe.GetElementValue("message"));
+                    }
                 }
-                else if ((xe = xd.GetElement("error")) != null)
+                catch (Exception e)
                 {
-                    Errors.Add("Imgur error message: " + xe.GetElementValue("message"));
+                    Errors.Add(e.ToString());
                 }
             }
 
