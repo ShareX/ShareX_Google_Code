@@ -95,6 +95,7 @@ namespace ShareX
             AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = (TextDestination)x, tsmiTextUploaders, tsmiTrayTextUploaders);
             AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = (FileDestination)x, tsmiFileUploaders, tsmiTrayFileUploaders);
             AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = (UrlShortenerType)x, tsmiURLShorteners, tsmiTrayURLShorteners);
+            AddEnumItems<SocialNetworkingService>(x => Program.Settings.SocialServiceDestination = (SocialNetworkingService)x, tsmiSocialServices, tsmiTraySocialServices);
 
             tsbDebug.Visible = Program.IsDebug;
 
@@ -300,6 +301,7 @@ namespace ShareX
             SetEnumChecked(Program.Settings.TextUploaderDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
             SetEnumChecked(Program.Settings.FileUploaderDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
             SetEnumChecked(Program.Settings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
+            SetEnumChecked(Program.Settings.SocialServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
 
             UpdateUploaderMenuNames();
 
@@ -351,6 +353,8 @@ namespace ShareX
             tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.Settings.FileUploaderDestination.GetDescription();
 
             tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.URLShortenerDestination.GetDescription();
+
+            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking services: " + Program.Settings.SocialServiceDestination.GetDescription();
         }
 
         private void CheckUpdate()

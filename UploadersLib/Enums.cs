@@ -107,6 +107,14 @@ namespace UploadersLib
         TURL
     }
 
+    public enum SocialNetworkingService
+    {
+        [Description("twitter.com")]
+        Twitter
+        //[Description("Google+")]
+        //Google
+    }
+
     public enum HttpMethod
     {
         [Description("GET")]

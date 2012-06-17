@@ -85,6 +85,7 @@ namespace ShareX
         public TextDestination TextDestination { get; set; }
         public FileDestination FileDestination { get; set; }
         public UrlShortenerType URLShortenerDestination { get; set; }
+        public SocialNetworkingService SocialNetworkingServiceDestination { get; set; }
 
         public string UploaderHost
         {
@@ -129,6 +130,7 @@ namespace ShareX
             TextDestination = Program.Settings.TextUploaderDestination;
             FileDestination = Program.Settings.FileUploaderDestination;
             URLShortenerDestination = Program.Settings.URLShortenerDestination;
+            SocialNetworkingServiceDestination = Program.Settings.SocialServiceDestination;
         }
 
         public HistoryItem GetHistoryItem()
