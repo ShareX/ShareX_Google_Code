@@ -97,10 +97,10 @@ namespace ShareX
             return task;
         }
 
-        public static Task CreateImageUploaderTask(Image image, TaskImageJob imageJob = TaskImageJob.UploadImageToHost)
+        public static Task CreateImageUploaderTask(Image image, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
         {
             Task task = new Task(TaskJob.ImageJob, EDataType.Image);
-            task.Info.ImageJob = imageJob;
+            task.Info.AfterCaptureJob = imageJob;
             task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".bmp";
             task.tempImage = image;
             return task;
@@ -220,18 +220,18 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.ImageJob.HasFlag(TaskImageJob.CopyImageToClipboard))
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
                     Clipboard.SetImage(tempImage);
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
-                if (Info.ImageJob.HasFlag(TaskImageJob.SendImageToPrinter))
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
                 {
                     new PrintForm(tempImage, new PrintSettings()).ShowDialog();
                 }
 
-                if (Info.ImageJob.HasFlagAny(TaskImageJob.SaveImageToFile, TaskImageJob.SaveImageToFileWithDialog, TaskImageJob.UploadImageToHost))
+                if (Info.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog, AfterCaptureTasks.UploadImageToHost))
                 {
                     using (tempImage)
                     {
@@ -239,14 +239,14 @@ namespace ShareX
                         data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
-                        if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFile))
+                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
                         {
                             Info.FilePath = Path.Combine(Program.ScreenshotsPath, Info.FileName);
                             imageData.Write(Info.FilePath);
                             DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
                         }
 
-                        if (Info.ImageJob.HasFlag(TaskImageJob.SaveImageToFileWithDialog))
+                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFileWithDialog))
                         {
                             using (SaveFileDialog sfd = new SaveFileDialog())
                             {
@@ -265,7 +265,7 @@ namespace ShareX
                             }
                         }
 
-                        if (Info.ImageJob.HasFlag(TaskImageJob.PerformActions) && Program.Settings.ExternalPrograms != null &&
+                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
                             var actions = Program.Settings.ExternalPrograms.Where(x => x.IsActive);
@@ -302,12 +302,12 @@ namespace ShareX
 
         private void DoURLJobs()
         {
-            if (Program.Settings.URLShortenAfterUpload || Info.Job == TaskJob.ShortenURL)
+            if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
             {
                 Info.Result.ShortenedURL = ShortenURL(Info.Result.URL);
             }
 
-            if (Program.Settings.ShareURLAfterUpload)
+            if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
             {
                 OAuthInfo twitterOAuth = Program.UploadersConfig.TwitterOAuthInfoList.ReturnIfValidIndex(Program.UploadersConfig.TwitterSelectedAccount);
 

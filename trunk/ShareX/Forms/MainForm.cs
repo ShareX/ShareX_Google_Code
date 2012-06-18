@@ -89,13 +89,15 @@ namespace ShareX
             this.Text = Program.Title;
             this.Icon = Resources.ShareX;
 
-            AddMultiEnumItems<TaskImageJob>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap((TaskImageJob)x),
+            AddMultiEnumItems<AfterCaptureTasks>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = (ImageDestination)x, tsmiImageUploaders, tsmiTrayImageUploaders);
-            AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = (TextDestination)x, tsmiTextUploaders, tsmiTrayTextUploaders);
-            AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = (FileDestination)x, tsmiFileUploaders, tsmiTrayFileUploaders);
-            AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = (UrlShortenerType)x, tsmiURLShorteners, tsmiTrayURLShorteners);
-            AddEnumItems<SocialNetworkingService>(x => Program.Settings.SocialServiceDestination = (SocialNetworkingService)x, tsmiSocialServices, tsmiTraySocialServices);
+            AddMultiEnumItems<AfterUploadTasks>(x => Program.Settings.AfterUploadTasks = Program.Settings.AfterUploadTasks.Swap(x),
+                tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
+            AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = x, tsmiImageUploaders, tsmiTrayImageUploaders);
+            AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = x, tsmiTextUploaders, tsmiTrayTextUploaders);
+            AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
+            AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
+            AddEnumItems<SocialNetworkingService>(x => Program.Settings.SocialServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
 
             tsbDebug.Visible = Program.IsDebug;
 
@@ -112,7 +114,7 @@ namespace ShareX
             uim = new UploadInfoManager(lvUploads);
         }
 
-        private void AddEnumItems<T>(Action<int> selectedIndex, params ToolStripDropDownItem[] parents)
+        private void AddEnumItems<T>(Action<T> selectedEnum, params ToolStripDropDownItem[] parents)
         {
             string[] enums = Helpers.GetEnumDescriptions<T>();
 
@@ -135,7 +137,7 @@ namespace ShareX
                             }
                         }
 
-                        selectedIndex(index);
+                        selectedEnum((T)Enum.ToObject(typeof(T), index));
 
                         UpdateUploaderMenuNames();
                     };
@@ -155,7 +157,7 @@ namespace ShareX
             }
         }
 
-        private void AddMultiEnumItems<T>(Action<int> selectedIndex, params ToolStripDropDownItem[] parents)
+        private void AddMultiEnumItems<T>(Action<T> selectedEnum, params ToolStripDropDownItem[] parents)
         {
             string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Skip(1).Select(x => x.GetDescription()).ToArray();
 
@@ -175,7 +177,7 @@ namespace ShareX
                             tsmi2.Checked = !tsmi2.Checked;
                         }
 
-                        selectedIndex(1 << index);
+                        selectedEnum((T)Enum.ToObject(typeof(T), 1 << index));
 
                         UpdateUploaderMenuNames();
                     };
@@ -297,6 +299,7 @@ namespace ShareX
             niTray.Visible = Program.Settings.ShowTray;
 
             SetMultiEnumChecked(Program.Settings.AfterCaptureTasks, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
+            SetMultiEnumChecked(Program.Settings.AfterUploadTasks, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
             SetEnumChecked(Program.Settings.ImageUploaderDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
             SetEnumChecked(Program.Settings.TextUploaderDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
             SetEnumChecked(Program.Settings.FileUploaderDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
@@ -539,6 +542,11 @@ namespace ShareX
             new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
         }
 
+        private void tsbScreenshotsFolder_Click(object sender, EventArgs e)
+        {
+            Helpers.OpenFolder(Program.ScreenshotsPath);
+        }
+
         private void tsbHistory_Click(object sender, EventArgs e)
         {
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
@@ -608,11 +616,6 @@ namespace ShareX
             {
                 Helpers.LoadBrowserAsync(url);
             }
-        }
-
-        private void tsmiScreenshotsFolder_Click(object sender, EventArgs e)
-        {
-            Helpers.OpenFolder(Program.ScreenshotsPath);
         }
 
         private void tsmiTrayExit_Click(object sender, EventArgs e)

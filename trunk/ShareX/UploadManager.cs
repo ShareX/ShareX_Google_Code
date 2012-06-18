@@ -161,9 +161,9 @@ namespace ShareX
             }
         }
 
-        public static void UploadImage(Image img, TaskImageJob imageJob = TaskImageJob.UploadImageToHost)
+        public static void UploadImage(Image img, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
         {
-            if (img != null && imageJob != TaskImageJob.None)
+            if (img != null && imageJob != AfterCaptureTasks.None)
             {
                 Task task = Task.CreateImageUploaderTask(img, imageJob);
                 StartTask(task);
@@ -372,7 +372,7 @@ namespace ShareX
 
                             lvi.SubItems[8].Text = url;
 
-                            if (Program.Settings.ClipboardAutoCopy)
+                            if (info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
                             {
                                 Helpers.CopyTextSafely(url);
                             }

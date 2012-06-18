@@ -37,13 +37,14 @@ namespace ShareX
         public int ID { get; set; }
         public string Status { get; set; }
         public TaskJob Job { get; set; }
-        public TaskImageJob ImageJob { get; set; }
+        public AfterCaptureTasks AfterCaptureJob { get; set; }
+        public AfterUploadTasks AfterUploadJob { get; set; }
 
         public bool IsUploadJob
         {
             get
             {
-                return Job != TaskJob.ImageJob || ImageJob.HasFlag(TaskImageJob.UploadImageToHost);
+                return Job != TaskJob.ImageJob || AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost);
             }
         }
 
@@ -119,13 +120,14 @@ namespace ShareX
 
         public UploadInfo()
         {
-            ImageJob = TaskImageJob.UploadImageToHost;
-            GetCurrentDestinations();
+            AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
+            GetDefaultSettings();
             Result = new UploadResult();
         }
 
-        private void GetCurrentDestinations()
+        private void GetDefaultSettings()
         {
+            AfterUploadJob = Program.Settings.AfterUploadTasks;
             ImageDestination = Program.Settings.ImageUploaderDestination;
             TextDestination = Program.Settings.TextUploaderDestination;
             FileDestination = Program.Settings.FileUploaderDestination;
