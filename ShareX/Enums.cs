@@ -48,7 +48,7 @@ namespace ShareX
     }
 
     [Flags]
-    public enum TaskImageJob
+    public enum AfterCaptureTasks
     {
         None = 0,
         [Description("Copy image to clipboard")]
@@ -63,6 +63,18 @@ namespace ShareX
         PerformActions = 1 << 4,
         [Description("Upload image to host")]
         UploadImageToHost = 1 << 5
+    }
+
+    [Flags]
+    public enum AfterUploadTasks
+    {
+        None = 0,
+        [Description("Use URL Shortener")]
+        UseURLShortener = 1,
+        [Description("Share URL to social networking service")]
+        ShareURLToSocialNetworkingService = 1 << 1,
+        [Description("Copy URL to clipboard")]
+        CopyURLToClipboard = 1 << 2
     }
 
     public enum ImageScaleType

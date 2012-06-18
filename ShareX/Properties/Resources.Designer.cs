@@ -374,6 +374,13 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap upload_cloud {
+            get {
+                object obj = ResourceManager.GetObject("upload-cloud", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap Window {
             get {
                 object obj = ResourceManager.GetObject("Window", resourceCulture);

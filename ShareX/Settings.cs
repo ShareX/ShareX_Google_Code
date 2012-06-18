@@ -37,7 +37,8 @@ namespace ShareX
     {
         #region Main Form
 
-        public TaskImageJob AfterCaptureTasks = TaskImageJob.SaveImageToFile | TaskImageJob.UploadImageToHost;
+        public AfterCaptureTasks AfterCaptureTasks = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
+        public AfterUploadTasks AfterUploadTasks = AfterUploadTasks.None;
         public ImageDestination ImageUploaderDestination = ImageDestination.Imgur;
         public TextDestination TextUploaderDestination = TextDestination.Pastebin;
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;
@@ -55,9 +56,6 @@ namespace ShareX
 
         public bool ShowTray = true;
         public bool AutoCheckUpdate = true;
-        public bool ClipboardAutoCopy = true;
-        public bool URLShortenAfterUpload = false;
-        public bool ShareURLAfterUpload = false;
         public bool PlaySoundAfterCapture = true;
         public bool PlaySoundAfterUpload = true;
         public bool TrayBalloonTipAfterUpload = true;
