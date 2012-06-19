@@ -81,20 +81,6 @@ namespace ShareX.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap application_dock {
-            get {
-                object obj = ResourceManager.GetObject("application_dock", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap application_dock_180 {
-            get {
-                object obj = ResourceManager.GetObject("application_dock_180", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         public static System.Drawing.Bitmap application_form {
             get {
                 object obj = ResourceManager.GetObject("application_form", resourceCulture);
@@ -222,7 +208,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap globe_share {
             get {
-                object obj = ResourceManager.GetObject("globe-share", resourceCulture);
+                object obj = ResourceManager.GetObject("globe_share", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,7 +362,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap upload_cloud {
             get {
-                object obj = ResourceManager.GetObject("upload-cloud", resourceCulture);
+                object obj = ResourceManager.GetObject("upload_cloud", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -38,7 +38,7 @@ namespace ShareX
         #region Main Form
 
         public AfterCaptureTasks AfterCaptureTasks = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
-        public AfterUploadTasks AfterUploadTasks = AfterUploadTasks.None;
+        public AfterUploadTasks AfterUploadTasks = AfterUploadTasks.CopyURLToClipboard;
         public ImageDestination ImageUploaderDestination = ImageDestination.Imgur;
         public TextDestination TextUploaderDestination = TextDestination.Pastebin;
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;

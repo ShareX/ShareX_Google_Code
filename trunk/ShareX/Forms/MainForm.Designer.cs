@@ -103,7 +103,6 @@ namespace ShareX
             this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnSplitterControl = new HelpersLib.NoFocusBorderButton();
             this.pbPreview = new HelpersLib.MyPictureBox();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -174,6 +173,8 @@ namespace ShareX
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -543,7 +544,6 @@ namespace ShareX
             // 
             // scMain.Panel1
             // 
-            this.scMain.Panel1.Controls.Add(this.btnSplitterControl);
             this.scMain.Panel1.Controls.Add(this.lblSplitter);
             this.scMain.Panel1.Controls.Add(this.lvUploads);
             // 
@@ -636,21 +636,6 @@ namespace ShareX
             // 
             this.chURL.Text = "URL";
             this.chURL.Width = 234;
-            // 
-            // btnSplitterControl
-            // 
-            this.btnSplitterControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSplitterControl.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnSplitterControl.FlatAppearance.BorderSize = 0;
-            this.btnSplitterControl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplitterControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSplitterControl.Image = global::ShareX.Properties.Resources.application_dock_180;
-            this.btnSplitterControl.Location = new System.Drawing.Point(744, 304);
-            this.btnSplitterControl.Name = "btnSplitterControl";
-            this.btnSplitterControl.Size = new System.Drawing.Size(32, 32);
-            this.btnSplitterControl.TabIndex = 1;
-            this.btnSplitterControl.UseVisualStyleBackColor = true;
-            this.btnSplitterControl.Click += new System.EventHandler(this.btnSplitterControl_Click);
             // 
             // pbPreview
             // 
@@ -955,22 +940,24 @@ namespace ShareX
             this.tsmiOpen,
             this.tsmiCopy,
             this.tsmiShowErrors,
-            this.tsmiShowResponse});
+            this.tsmiShowResponse,
+            this.tssUploadInfo1,
+            this.tsmiShowPreview});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(129, 136);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(164, 186);
             // 
             // tsmiUploadFile
             // 
             this.tsmiUploadFile.Name = "tsmiUploadFile";
-            this.tsmiUploadFile.Size = new System.Drawing.Size(128, 22);
+            this.tsmiUploadFile.Size = new System.Drawing.Size(163, 22);
             this.tsmiUploadFile.Text = "Upload file...";
             this.tsmiUploadFile.Click += new System.EventHandler(this.tsmiUploadFile_Click);
             // 
             // tsmiStopUpload
             // 
             this.tsmiStopUpload.Name = "tsmiStopUpload";
-            this.tsmiStopUpload.Size = new System.Drawing.Size(128, 22);
+            this.tsmiStopUpload.Size = new System.Drawing.Size(163, 22);
             this.tsmiStopUpload.Text = "Stop upload";
             this.tsmiStopUpload.Click += new System.EventHandler(this.tsmiStopUpload_Click);
             // 
@@ -985,7 +972,7 @@ namespace ShareX
             this.tsmiOpenFile,
             this.tsmiOpenFolder});
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(128, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(163, 22);
             this.tsmiOpen.Text = "Open";
             // 
             // tsmiOpenURL
@@ -1060,7 +1047,7 @@ namespace ShareX
             this.tsmiCopyFileNameWithExtension,
             this.tsmiCopyFolder});
             this.tsmiCopy.Name = "tsmiCopy";
-            this.tsmiCopy.Size = new System.Drawing.Size(128, 22);
+            this.tsmiCopy.Size = new System.Drawing.Size(163, 22);
             this.tsmiCopy.Text = "Copy";
             // 
             // tsmiCopyURL
@@ -1205,16 +1192,28 @@ namespace ShareX
             // tsmiShowErrors
             // 
             this.tsmiShowErrors.Name = "tsmiShowErrors";
-            this.tsmiShowErrors.Size = new System.Drawing.Size(128, 22);
+            this.tsmiShowErrors.Size = new System.Drawing.Size(163, 22);
             this.tsmiShowErrors.Text = "Show errors";
             this.tsmiShowErrors.Click += new System.EventHandler(this.tsmiShowErrors_Click);
             // 
             // tsmiShowResponse
             // 
             this.tsmiShowResponse.Name = "tsmiShowResponse";
-            this.tsmiShowResponse.Size = new System.Drawing.Size(128, 22);
+            this.tsmiShowResponse.Size = new System.Drawing.Size(163, 22);
             this.tsmiShowResponse.Text = "Show response";
             this.tsmiShowResponse.Click += new System.EventHandler(this.tsmiShowResponse_Click);
+            // 
+            // tssUploadInfo1
+            // 
+            this.tssUploadInfo1.Name = "tssUploadInfo1";
+            this.tssUploadInfo1.Size = new System.Drawing.Size(160, 6);
+            // 
+            // tsmiShowPreview
+            // 
+            this.tsmiShowPreview.Name = "tsmiShowPreview";
+            this.tsmiShowPreview.Size = new System.Drawing.Size(163, 22);
+            this.tsmiShowPreview.Text = "Show preview section";
+            this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
             // MainForm
             // 
@@ -1314,7 +1313,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTestFileUpload;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
         private System.Windows.Forms.SplitContainer scMain;
-        private HelpersLib.NoFocusBorderButton btnSplitterControl;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDestinations;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageUploaders;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayTextUploaders;
@@ -1367,5 +1365,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripButton tsbScreenshotsFolder;
         private System.Windows.Forms.Label lblSplitter;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayAfterUploadTasks;
+        private System.Windows.Forms.ToolStripSeparator tssUploadInfo1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowPreview;
     }
 }

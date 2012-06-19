@@ -71,7 +71,7 @@ namespace ShareX
         None = 0,
         [Description("Use URL Shortener")]
         UseURLShortener = 1,
-        [Description("Share URL to social networking service")]
+        [Description("Post URL to social networking service")]
         ShareURLToSocialNetworkingService = 1 << 1,
         [Description("Copy URL to clipboard")]
         CopyURLToClipboard = 1 << 2
