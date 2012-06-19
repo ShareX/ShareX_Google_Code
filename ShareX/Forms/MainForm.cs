@@ -412,11 +412,11 @@ namespace ShareX
         {
             if (Program.Settings.IsPreviewCollapsed)
             {
-                btnSplitterControl.Image = Resources.application_dock_180;
+                tsmiShowPreview.Text = "Show preview section";
             }
             else
             {
-                btnSplitterControl.Image = Resources.application_dock;
+                tsmiShowPreview.Text = "Hide preview section";
             }
 
             scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
@@ -587,13 +587,6 @@ namespace ShareX
         private void lvUploads_DoubleClick(object sender, EventArgs e)
         {
             uim.OpenURL();
-        }
-
-        private void btnSplitterControl_Click(object sender, EventArgs e)
-        {
-            Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
-            UpdatePreviewSplitter();
-            UpdateControls();
         }
 
         private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
@@ -767,6 +760,13 @@ namespace ShareX
         private void tsmiShowResponse_Click(object sender, EventArgs e)
         {
             uim.ShowResponse();
+        }
+
+        private void tsmiShowPreview_Click(object sender, EventArgs e)
+        {
+            Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
+            UpdatePreviewSplitter();
+            UpdateControls();
         }
 
         #endregion UploadInfoMenu events
