@@ -375,6 +375,7 @@ namespace ShareX
             this.tsddbDestinations.Name = "tsddbDestinations";
             this.tsddbDestinations.Size = new System.Drawing.Size(147, 20);
             this.tsddbDestinations.Text = "Destinations";
+            this.tsddbDestinations.DropDownOpened += new System.EventHandler(this.tsddbDestinations_DropDownOpened);
             // 
             // tsmiImageUploaders
             // 
@@ -421,7 +422,7 @@ namespace ShareX
             this.tsmiUploadersConfig.Image = global::ShareX.Properties.Resources.gear;
             this.tsmiUploadersConfig.Name = "tsmiUploadersConfig";
             this.tsmiUploadersConfig.Size = new System.Drawing.Size(212, 22);
-            this.tsmiUploadersConfig.Text = "Uploaders config...";
+            this.tsmiUploadersConfig.Text = "Outputs configuration...";
             this.tsmiUploadersConfig.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
             // 
             // tsbDebug
@@ -825,6 +826,7 @@ namespace ShareX
             this.tsmiTrayDestinations.Name = "tsmiTrayDestinations";
             this.tsmiTrayDestinations.Size = new System.Drawing.Size(180, 22);
             this.tsmiTrayDestinations.Text = "Destinations";
+            this.tsmiTrayDestinations.DropDownOpened += new System.EventHandler(this.tsddbDestinations_DropDownOpened);
             // 
             // tsmiTrayImageUploaders
             // 
@@ -871,7 +873,7 @@ namespace ShareX
             this.tsmiTrayUploadersConfig.Image = global::ShareX.Properties.Resources.gear;
             this.tsmiTrayUploadersConfig.Name = "tsmiTrayUploadersConfig";
             this.tsmiTrayUploadersConfig.Size = new System.Drawing.Size(212, 22);
-            this.tsmiTrayUploadersConfig.Text = "Uploaders config...";
+            this.tsmiTrayUploadersConfig.Text = "Outputs configuration...";
             this.tsmiTrayUploadersConfig.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
             // 
             // tssTray1

@@ -160,12 +160,12 @@ namespace UploadersLib.FileUploaders
         }
 
         /// <summary>
-        /// Creates and returns a shareable link to files or folders.
-        /// Note: Links created by the /shares API call expire after thirty days.
+        /// Creates and returns a Dropbox link to files or folders users can use to view a preview of the file in a web browser.
         /// </summary>
         /// <returns>
-        /// A shareable link to the file or folder. The link can be used publicly and directs to a preview page of the file.
-        /// Also returns the link's expiration date in Dropbox's usual date format.
+        /// A Dropbox link to the given path. The link can be used publicly and directs to a preview page of the file.
+        /// For compatibility reasons, it returns the link's expiration date in Dropbox's usual date format.
+        /// All links are currently set to expire far enough in the future so that expiration is effectively not an issue.
         /// </returns>
         public DropboxShares CreateShareableLink(string path, string fileName = "")
         {

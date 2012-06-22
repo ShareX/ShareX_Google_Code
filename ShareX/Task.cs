@@ -358,7 +358,7 @@ namespace ShareX
                 case ImageDestination.Twitpic:
                     int indexTwitpic = Program.UploadersConfig.TwitterSelectedAccount;
 
-                    if (Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
+                    if (Program.UploadersConfig.TwitterOAuthInfoList != null && Program.UploadersConfig.TwitterOAuthInfoList.IsValidIndex(indexTwitpic))
                     {
                         imageUploader = new TwitPicUploader(ApiKeys.TwitPicKey, Program.UploadersConfig.TwitterOAuthInfoList[indexTwitpic])
                         {
@@ -477,7 +477,7 @@ namespace ShareX
                     }
                     break;
                 case FileDestination.FTP:
-                    int index = Program.UploadersConfig.GetFtpIndex(Info.DataType);
+                    int index = Program.UploadersConfig.GetFTPIndex(Info.DataType);
 
                     FTPAccount account = Program.UploadersConfig.FTPAccountList.ReturnIfValidIndex(index);
 

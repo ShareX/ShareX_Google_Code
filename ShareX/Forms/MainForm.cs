@@ -114,6 +114,18 @@ namespace ShareX
             uim = new UploadInfoManager(lvUploads);
         }
 
+        private void UpdateDestinationStates()
+        {
+            if (Program.UploadersConfig != null)
+            {
+                EnableDisableToolStripMenuItems<ImageDestination>(tsmiImageUploaders, tsmiTrayImageUploaders);
+                EnableDisableToolStripMenuItems<TextDestination>(tsmiTextUploaders, tsmiTrayTextUploaders);
+                EnableDisableToolStripMenuItems<FileDestination>(tsmiFileUploaders, tsmiTrayFileUploaders);
+                EnableDisableToolStripMenuItems<UrlShortenerType>(tsmiURLShorteners, tsmiTrayURLShorteners);
+                EnableDisableToolStripMenuItems<SocialNetworkingService>(tsmiSocialServices, tsmiTraySocialServices);
+            }
+        }
+
         private void AddEnumItems<T>(Action<T> selectedEnum, params ToolStripDropDownItem[] parents)
         {
             string[] enums = Helpers.GetEnumDescriptions<T>();
@@ -195,6 +207,17 @@ namespace ShareX
                 {
                     ToolStripMenuItem tsmi = (ToolStripMenuItem)parent.DropDownItems[i];
                     tsmi.Checked = value.HasFlag(1 << i);
+                }
+            }
+        }
+
+        private void EnableDisableToolStripMenuItems<T>(params ToolStripDropDownItem[] parents)
+        {
+            foreach (ToolStripDropDownItem parent in parents)
+            {
+                for (int i = 0; i < parent.DropDownItems.Count; i++)
+                {
+                    parent.DropDownItems[i].Enabled = Program.UploadersConfig.IsActive<T>(i);
                 }
             }
         }
@@ -505,6 +528,11 @@ namespace ShareX
             UploadManager.UploadFile();
         }
 
+        private void tsddbDestinations_DropDownOpened(object sender, EventArgs e)
+        {
+            UpdateDestinationStates();
+        }
+
         private void tsddbUploadersConfig_Click(object sender, EventArgs e)
         {
             if (Program.UploadersConfig == null)
@@ -598,7 +626,10 @@ namespace ShareX
 
         private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ShowActivate();
+            if (e.Button == MouseButtons.Left)
+            {
+                ShowActivate();
+            }
         }
 
         private void niTray_BalloonTipClicked(object sender, EventArgs e)
