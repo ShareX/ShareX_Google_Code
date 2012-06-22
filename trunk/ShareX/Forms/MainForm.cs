@@ -224,7 +224,10 @@ namespace ShareX
 
         private void UpdateControls()
         {
-            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = tsmiShowErrors.Visible = tsmiShowResponse.Visible = false;
+            cmsUploadInfo.SuspendLayout();
+
+            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible =
+                tsmiShowErrors.Visible = tsmiShowResponse.Visible = tsmiUploadSelectedFile.Visible = false;
             pbPreview.Reset();
             uim.RefreshInfo();
 
@@ -246,8 +249,6 @@ namespace ShareX
                         }
                         else
                         {
-                            cmsUploadInfo.SuspendLayout();
-
                             if (uim.SelectedItemCount > 1)
                             {
                                 tsmiCopyURL.Text = string.Format("URLs ({0})", uim.SelectedItemCount);
@@ -293,8 +294,6 @@ namespace ShareX
                             tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
                             tsmiCopyFolder.Enabled = uim.IsFilePathValid;
 
-                            cmsUploadInfo.ResumeLayout();
-
                             if (!scMain.Panel2Collapsed)
                             {
                                 if (uim.IsImageFile)
@@ -307,6 +306,8 @@ namespace ShareX
                                 }
                             }
                         }
+
+                        tsmiUploadSelectedFile.Visible = uim.IsFileExist;
                     }
                 }
             }
@@ -314,6 +315,8 @@ namespace ShareX
             {
                 tsmiUploadFile.Visible = true;
             }
+
+            cmsUploadInfo.ResumeLayout();
         }
 
         private void LoadSettings()
@@ -791,6 +794,11 @@ namespace ShareX
         private void tsmiShowResponse_Click(object sender, EventArgs e)
         {
             uim.ShowResponse();
+        }
+
+        private void tsmiUploadSelectedFile_Click(object sender, EventArgs e)
+        {
+            uim.Upload();
         }
 
         private void tsmiShowPreview_Click(object sender, EventArgs e)

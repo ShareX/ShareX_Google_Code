@@ -243,5 +243,10 @@ namespace ShareX
                 new ResponseForm(Info.Result.Source).ShowDialog();
             }
         }
+
+        public void Upload()
+        {
+            if (Info != null && IsFileExist) UploadManager.UploadFile(Info.FilePath);
+        }
     }
 }

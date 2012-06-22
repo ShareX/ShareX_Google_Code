@@ -175,6 +175,7 @@ namespace ShareX
             this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUploadSelectedFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -943,11 +944,12 @@ namespace ShareX
             this.tsmiCopy,
             this.tsmiShowErrors,
             this.tsmiShowResponse,
+            this.tsmiUploadSelectedFile,
             this.tssUploadInfo1,
             this.tsmiShowPreview});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(164, 186);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(164, 208);
             // 
             // tsmiUploadFile
             // 
@@ -1217,6 +1219,13 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
+            // tsmiUploadSelectedFile
+            // 
+            this.tsmiUploadSelectedFile.Name = "tsmiUploadSelectedFile";
+            this.tsmiUploadSelectedFile.Size = new System.Drawing.Size(163, 22);
+            this.tsmiUploadSelectedFile.Text = "Upload";
+            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1369,5 +1378,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayAfterUploadTasks;
         private System.Windows.Forms.ToolStripSeparator tssUploadInfo1;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowPreview;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUploadSelectedFile;
     }
 }
