@@ -27,6 +27,7 @@ using System.ComponentModel;
 
 namespace UploadersLib
 {
+    [Description("Image uploaders")]
     public enum ImageDestination
     {
         [Description("imageshack.us")]
@@ -53,6 +54,7 @@ namespace UploadersLib
         FileUploader
     }
 
+    [Description("Text uploaders")]
     public enum TextDestination
     {
         [Description("pastebin.com")]
@@ -69,6 +71,7 @@ namespace UploadersLib
         FileUploader
     }
 
+    [Description("File uploaders")]
     public enum FileDestination
     {
         [Description("dropbox.com")]
@@ -91,6 +94,7 @@ namespace UploadersLib
         Email
     }
 
+    [Description("URL shorteners")]
     public enum UrlShortenerType
     {
         [Description("goo.gl")]
@@ -107,6 +111,7 @@ namespace UploadersLib
         TURL
     }
 
+    [Description("Social networking services")]
     public enum SocialNetworkingService
     {
         [Description("twitter.com")]
