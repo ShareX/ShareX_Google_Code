@@ -153,6 +153,8 @@ namespace ShareX
 
         private void ThreadDoWork()
         {
+            Info.StartTime = DateTime.UtcNow;
+
             DoThreadJob();
 
             if (Info.IsUploadJob)
@@ -164,7 +166,6 @@ namespace ShareX
 
                 Status = TaskStatus.Working;
                 Info.Status = "Uploading";
-                Info.StartTime = DateTime.UtcNow;
                 threadWorker.InvokeAsync(OnUploadStarted);
 
                 try

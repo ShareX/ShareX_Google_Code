@@ -95,19 +95,22 @@ namespace HelpersLib
         {
             string text = string.Empty;
 
-            if (Control)
+            if (KeyCode != Keys.None)
             {
-                text += "Control + ";
-            }
+                if (Control)
+                {
+                    text += "Control + ";
+                }
 
-            if (Shift)
-            {
-                text += "Shift + ";
-            }
+                if (Shift)
+                {
+                    text += "Shift + ";
+                }
 
-            if (Alt)
-            {
-                text += "Alt + ";
+                if (Alt)
+                {
+                    text += "Alt + ";
+                }
             }
 
             if (KeyCode == Keys.PageDown)
