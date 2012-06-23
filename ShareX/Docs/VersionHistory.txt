@@ -1,4 +1,11 @@
-﻿Version 6.0.0 - 2012-06-10
+﻿ShareX 6.1 - 2012-06-24
+
+* Added support for sharing via social networking services initially with Twitter
+* After capture tasks and After upload tasks are configurable from the main window or tray menu
+* Reconfigured main window to have the main menu strip vertically
+* History storage optimizations
+
+ShareX 6.0 - 2012-06-09
 
 * Improved right click menu to include more open/copy options
 * Added support to preview image in the main window
@@ -13,7 +20,7 @@
 * Added imm.io Image Uploader
 * Rebranded as ShareX
 
-Version 5.5.0 - 2012-03-07
+ZUploader 5.5 - 2012-03-07
 
 5.5.0 Added Email as file uploader
 5.4.1 Clipboard upload auto detects URL and shortens it
@@ -23,80 +30,50 @@ Version 5.5.0 - 2012-03-07
 5.2.1 Improved tray menu
 5.2.0 New updater with automatic downloader
 5.1.0 Added image resize settings
-
-Version 5.0.0 - 2012-01-10
-
 5.0.0 Added Window & Control capture support to shape captures
 4.9.0 Added new post-capture option: save screenshots to file
 4.8.0 Added Box file uploader support
-
-Version 4.7.2 - 2011-10-31
-
 4.7.2 Supported image/text/file based FTP destinations
 4.7.1 Added camera sound when capture is made
-4.7.0 Added Transparent window capture 
-
-Version 4.6.0 - 2011-10-07
-
+4.7.0 Added Transparent window capture
 4.6.0 Added Hotkeys support
 4.5.0 Added support to capture window from a list of windows
-
-Version 4.4.0 - 2011-09-27
-
 4.4.0 Added support to capture shapes to Clipboard
 4.3.0 Added Minus uploader support
 4.2.0 Added Photobucket uploader support
 4.1.1 Added user account support for Goo.gl URL Shortener service
 4.1.0 Added tray icon support
 4.0.0 Added Capture menu to capture rectangle, rounded rectangle, ellipse, triangle, diamond, polygon and freehand shapes
-
-Version 3.12 - 2011-05-28
-
 3.12 Plugin system to perform Crop Shot and Entire Screen capture
 3.11 New Uploaders Configuration window to setup user accounts
 3.10 Added Clipboard Content Viewer to confirm uploading using Clipboard
-3.09 Added URL Shortener support
+3.9 Added URL Shortener support
+3.8 Added ClipboardUpload hotkey (Ctrl + Page up)
+3.7 Added upload queue system to limit simultaneous uploads
+3.6 Added buffer size setting to improve upload speed
+3.5 Added support to copy multiple URLs in history form
+3.4 Text file detection improved for detecting popular programming code files
+3.3 Image and text encoding operations moved to upload thread to prevent the main window from freezing
+3.2 Drag & drop bitmap / text support
+3.1 Startup time improved by using precompiled xml serialization dll (SGEN) and threads
+3.0 Improved uploading speed and memory allocation especially for big uploads, many bug fixes
+2.8 Added auto naming settings for clipboard upload
+2.6 Added debug tab to settings form which also saves debug messages automatically to "ZUploaderPersonalPath/Log_(Month)_(Year).txt"
+2.5 Added "Show response" button to right click menu to see upload response (Useful for debugging)
+2.4 Added new CLI command (-clipboardupload)
+2.3 Portable support
+2.2 Added image viewer to history form
+2.1 Added filters to history form
+2.0 History support using SQLite as database
+1.5 Image settings for changing image related settings such as image format, quality etc.
+1.4 Single instance support for better shell extension uploading (Useful for CLI uploads)
+1.3 Added "Stop upload" button to right click menu
+1.2 Added support for Shell Extension "Upload using ShareX"
+1.1 Reconfigured UI, Added proxy support
 
-Version 3.8 - 2011-01-02
+ZUploader 1.0 - 2010-03-27
 
-3.8 - Added ClipboardUpload hotkey (Ctrl + Page up)
-3.7 - Added upload queue system to limit simultaneous uploads
-
-Version 3.6 - 2010-12-15
-
-3.6 - Added buffer size setting to improve upload speed {Jaex}
-3.5 - Added support to copy multiple URLs in history form {Jaex}
-3.4 - Text file detection improved for detecting popular programming code files {Jaex}
-3.3 - Image and text encoding operations moved to upload thread to prevent the main window from freezing {Jaex}
-3.2 - Drag & drop bitmap / text support {Jaex}
-3.1 - Startup time improved by using precompiled xml serialization dll (SGEN) and threads {Jaex}
-
-3.0 - Improved uploading speed and memory allocation especially for big uploads, many bug fixes {Jaex}
-2.8 - Added auto naming settings for clipboard upload {Jaex}
-2.7 - Added new file uploader: filez.muffinz.eu {semas123}
-2.6 - Added debug tab to settings form which also saves debug messages automatically to "ZUploaderPersonalPath/Log_(Month)_(Year).txt" {Jaex}
-2.5 - Added "Show response" button to right click menu to see upload response (Useful for debugging) {Jaex}
-2.4 - Added new CLI command (-clipboardupload) {Jaex}
-2.3 - Portable support {Jaex}
-2.2 - Added image viewer to history form {Jaex}
-2.1 - Added filters to history form {Jaex}
-
-2.0 - History support using SQLite as database {Jaex}
-1.5 - Image settings for changing image related settings such as image format, quality etc. {Jaex}
-1.4 - Single instance support for better shell extension uploading (Useful for CLI uploads) {Jaex}
-1.3 - Added "Stop upload" button to right click menu {Jaex}
-
-Version 1.2 - 2010-05-13
-
-1.2 - Added support for Shell Extension "Upload using ShareX" {Jaex}
-
-Version 1.1 - 2010-04-06
-
-1.1 - Reconfigured UI {Jaex}, Added proxy support {McoreD}
-
-Version 1.0 - 2010-03-28
-
-1.0 - Initial version {Jaex}
+1.0 Initial version of ZUploader
 
 Jaex = http://code.google.com/u/flexy123
 McoreD = http://code.google.com/u/mcored
