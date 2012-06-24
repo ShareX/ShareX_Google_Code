@@ -4,6 +4,8 @@
 * After capture tasks and After upload tasks are configurable from the main window or tray menu
 * Reconfigured main window to have the main menu strip vertically
 * History storage optimizations
+* Ability to retry upload via main window context menu
+* Added printer support
 
 ShareX 6.0 - 2012-06-09
 
