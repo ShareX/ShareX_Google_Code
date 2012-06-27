@@ -91,13 +91,9 @@ namespace UpdateCheckerLib
     public class NewVersionWindowOptions
     {
         public Icon MyIcon { get; set; }
-
         public Image MyImage { get; set; }
-
         public string Question { get; set; }
-
         public string ProjectName { get; set; }
-
         public UpdateInfo UpdateInfo { get; set; }
     }
 }
