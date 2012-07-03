@@ -75,10 +75,15 @@ namespace ScreenCapture
             surface.Config = SurfaceConfig;
             surface.SurfaceImage = screenshot;
             surface.Prepare();
+            surface.ShowDialog();
 
-            if (surface.ShowDialog() == DialogResult.OK)
+            if (surface.Result == SurfaceResult.Region)
             {
                 Result = surface.GetRegionImage();
+            }
+            else if (surface.Result == SurfaceResult.Fullscreen)
+            {
+                Result = screenshot;
             }
 
             surface.Dispose();

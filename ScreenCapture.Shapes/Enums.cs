@@ -25,6 +25,11 @@
 
 namespace ScreenCapture
 {
+    public enum SurfaceResult
+    {
+        None, Close, Region, Fullscreen
+    }
+
     public enum NodePosition
     {
         TopLeft, Top, TopRight, Right, BottomRight, Bottom, BottomLeft, Left

@@ -173,10 +173,16 @@ namespace ShareX
                 surface.Config = Program.Settings.SurfaceOptions;
                 surface.SurfaceImage = screenshot;
                 surface.Prepare();
+                surface.ShowDialog();
 
-                if (surface.ShowDialog() == DialogResult.OK)
+                if (surface.Result == SurfaceResult.Region)
                 {
                     img = surface.GetRegionImage();
+                    screenshot.Dispose();
+                }
+                else if (surface.Result == SurfaceResult.Fullscreen)
+                {
+                    img = screenshot;
                 }
 
                 surface.Dispose();

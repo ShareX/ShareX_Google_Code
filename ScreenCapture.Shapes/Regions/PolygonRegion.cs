@@ -84,7 +84,7 @@ namespace ScreenCapture
                 }
                 else
                 {
-                    Close(false);
+                    Close(SurfaceResult.Close);
                 }
             }
         }

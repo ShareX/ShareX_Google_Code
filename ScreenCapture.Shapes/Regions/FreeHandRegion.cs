@@ -63,13 +63,13 @@ namespace ScreenCapture
                 }
                 else
                 {
-                    Close(false);
+                    Close(SurfaceResult.Close);
                 }
             }
 
             if (Config.QuickCrop && isAreaCreated && InputManager.IsMouseReleased(MouseButtons.Left))
             {
-                Close(true);
+                Close(SurfaceResult.Region);
             }
 
             if (!isAreaCreated && InputManager.IsMouseDown(MouseButtons.Left))
