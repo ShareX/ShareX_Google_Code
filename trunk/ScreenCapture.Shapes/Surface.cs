@@ -45,6 +45,7 @@ namespace ScreenCapture
         public Rectangle ScreenRectangle { get; private set; }
         public Rectangle ScreenRectangle0Based { get; private set; }
         public string DebugText { get; set; }
+        public SurfaceResult Result { get; private set; }
 
         protected List<DrawableObject> DrawableObjects { get; set; }
 
@@ -126,11 +127,13 @@ namespace ScreenCapture
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    Close(false);
+                    Close(SurfaceResult.Close);
                     break;
                 case Keys.Space:
+                    Close(SurfaceResult.Fullscreen);
+                    break;
                 case Keys.Enter:
-                    Close(true);
+                    Close(SurfaceResult.Region);
                     break;
                 case Keys.Q:
                     Config.QuickCrop = !Config.QuickCrop;
@@ -142,7 +145,7 @@ namespace ScreenCapture
         {
             if (e.Button == MouseButtons.Left)
             {
-                Close(true);
+                Close(SurfaceResult.Region);
             }
         }
 
@@ -175,16 +178,10 @@ namespace ScreenCapture
             return ShapeCaptureHelpers.GetRegionImage(SurfaceImage, regionFillPath, regionDrawPath, Config);
         }
 
-        public void Close(bool isOK)
+        public void Close(SurfaceResult result)
         {
-            if (isOK)
-            {
-                DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                DialogResult = DialogResult.Cancel;
-            }
+            Result = result;
+            Close();
         }
 
         protected virtual new void Update()

@@ -237,7 +237,7 @@ namespace ScreenCapture
                     else if (surface.Config.QuickCrop)
                     {
                         surface.UpdateRegionPath();
-                        surface.Close(true);
+                        surface.Close(SurfaceResult.Region);
                     }
                     else
                     {
@@ -253,7 +253,7 @@ namespace ScreenCapture
                     if (surface.Config.QuickCrop)
                     {
                         surface.UpdateRegionPath();
-                        surface.Close(true);
+                        surface.Close(SurfaceResult.Region);
                     }
                     else
                     {
@@ -272,7 +272,7 @@ namespace ScreenCapture
                 }
                 else
                 {
-                    surface.Close(false);
+                    surface.Close(SurfaceResult.Close);
                 }
             }
         }
