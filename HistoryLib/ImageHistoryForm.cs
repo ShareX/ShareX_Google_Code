@@ -116,9 +116,49 @@ namespace HistoryLib
 
         private void ilvImages_ItemDoubleClick(object sender, ItemClickEventArgs e)
         {
-            him.ShowImage();
+            him.ShowImagePreview();
         }
 
         #endregion Form events
+
+        private void tsmiThumbnailSize75_Click(object sender, EventArgs e)
+        {
+            ilvImages.ThumbnailSize = new Size(75, 75);
+        }
+
+        private void tsmiThumbnailSize100_Click(object sender, EventArgs e)
+        {
+            ilvImages.ThumbnailSize = new Size(100, 100);
+        }
+
+        private void tsmiThumbnailSize150_Click(object sender, EventArgs e)
+        {
+            ilvImages.ThumbnailSize = new Size(150, 150);
+        }
+
+        private void tsmiThumbnailSize200_Click(object sender, EventArgs e)
+        {
+            ilvImages.ThumbnailSize = new Size(200, 200);
+        }
+
+        private void tsmiThumbnailSize250_Click(object sender, EventArgs e)
+        {
+            ilvImages.ThumbnailSize = new Size(250, 250);
+        }
+
+        private void tsmiViewModeThumbnails_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Thumbnails;
+        }
+
+        private void tsmiViewModeGallery_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Gallery;
+        }
+
+        private void tsmiViewModePane_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Pane;
+        }
     }
 }

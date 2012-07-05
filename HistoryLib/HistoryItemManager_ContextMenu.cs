@@ -65,7 +65,9 @@ namespace HistoryLib
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyFileName;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyFileNameWithExtension;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyFolder;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMoreInfo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowImagePreview;
+        private System.Windows.Forms.ToolStripMenuItem tsmiShowMoreInfo;
 
         private void InitializeComponent()
         {
@@ -100,7 +102,9 @@ namespace HistoryLib
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoreInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowImagePreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowMoreInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsHistory.SuspendLayout();
 
             //
@@ -109,7 +113,7 @@ namespace HistoryLib
             this.cmsHistory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOpen,
             this.tsmiCopy,
-            this.tsmiMoreInfo});
+            this.tsmiShow});
             this.cmsHistory.Name = "cmsHistory";
             this.cmsHistory.ShowImageMargin = false;
             this.cmsHistory.Size = new System.Drawing.Size(128, 92);
@@ -241,7 +245,7 @@ namespace HistoryLib
             //
             this.tsmiCopyFile.Name = "tsmiCopyFile";
             this.tsmiCopyFile.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFile.Text = "File (data)";
+            this.tsmiCopyFile.Text = "File";
             this.tsmiCopyFile.Click += new System.EventHandler(this.tsmiCopyFile_Click);
             //
             // tsmiCopyImage
@@ -343,12 +347,28 @@ namespace HistoryLib
             this.tsmiCopyFolder.Text = "Folder";
             this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
             //
-            // tsmiMoreInfo
+            // tsmiShow
             //
-            this.tsmiMoreInfo.Name = "tsmiMoreInfo";
-            this.tsmiMoreInfo.Size = new System.Drawing.Size(127, 22);
-            this.tsmiMoreInfo.Text = "More info";
-            this.tsmiMoreInfo.Click += new System.EventHandler(this.tsmiMoreInfo_Click);
+            this.tsmiShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiShowImagePreview,
+            this.tsmiShowMoreInfo});
+            this.tsmiShow.Name = "tsmiShow";
+            this.tsmiShow.Size = new System.Drawing.Size(127, 22);
+            this.tsmiShow.Text = "Show";
+            //
+            // tsmiShowImagePreview
+            //
+            this.tsmiShowImagePreview.Name = "tsmiShowImagePreview";
+            this.tsmiShowImagePreview.Size = new System.Drawing.Size(127, 22);
+            this.tsmiShowImagePreview.Text = "Image preview";
+            this.tsmiShowImagePreview.Click += new EventHandler(tsmiShowImagePreview_Click);
+            //
+            // tsmiShowMoreInfo
+            //
+            this.tsmiShowMoreInfo.Name = "tsmiShowMoreInfo";
+            this.tsmiShowMoreInfo.Size = new System.Drawing.Size(127, 22);
+            this.tsmiShowMoreInfo.Text = "More info";
+            this.tsmiShowMoreInfo.Click += new System.EventHandler(this.tsmiShowMoreInfo_Click);
 
             this.cmsHistory.ResumeLayout(false);
         }
@@ -401,6 +421,9 @@ namespace HistoryLib
             tsmiCopyFileName.Enabled = IsFilePathValid;
             tsmiCopyFileNameWithExtension.Enabled = IsFilePathValid;
             tsmiCopyFolder.Enabled = IsFilePathValid;
+
+            // Show
+            tsmiShowImagePreview.Enabled = IsImageFile;
 
             cmsHistory.ResumeLayout();
         }
@@ -520,9 +543,14 @@ namespace HistoryLib
             CopyFolder();
         }
 
-        private void tsmiMoreInfo_Click(object sender, EventArgs e)
+        private void tsmiShowImagePreview_Click(object sender, EventArgs e)
         {
-            MoreInfo();
+            ShowImagePreview();
+        }
+
+        private void tsmiShowMoreInfo_Click(object sender, EventArgs e)
+        {
+            ShowMoreInfo();
         }
     }
 }
