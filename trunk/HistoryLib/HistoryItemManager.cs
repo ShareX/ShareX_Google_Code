@@ -246,14 +246,14 @@ namespace HistoryLib
             if (HistoryItem != null && IsFilePathValid) Helpers.CopyTextSafely(Path.GetDirectoryName(HistoryItem.Filepath));
         }
 
-        public void ShowImage()
+        public void ShowImagePreview()
         {
             if (HistoryItem != null && IsImageFile) ImageViewer.ShowImage(HistoryItem.Filepath);
         }
 
-        public void MoreInfo()
+        public void ShowMoreInfo()
         {
-            new HistoryItemInfoForm(this).Show();
+            new HistoryItemInfoForm(HistoryItem).Show();
         }
     }
 }
