@@ -584,7 +584,21 @@ namespace ShareX
         private void tsbHistory_Click(object sender, EventArgs e)
         {
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-            new HistoryForm(Program.HistoryFilePath, -1, "ShareX - History: " + Program.HistoryFilePath).ShowDialog();
+            using (HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath, "ShareX - History: " + Program.HistoryFilePath))
+            {
+                historyForm.Icon = Icon;
+                historyForm.ShowDialog();
+            }
+        }
+
+        private void tsbImageHistory_Click(object sender, EventArgs e)
+        {
+            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
+            using (ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath, "ShareX - History: " + Program.HistoryFilePath))
+            {
+                imageHistoryForm.Icon = Icon;
+                imageHistoryForm.ShowDialog();
+            }
         }
 
         private void tsbSettings_Click(object sender, EventArgs e)

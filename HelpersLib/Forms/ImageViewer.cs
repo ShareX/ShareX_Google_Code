@@ -25,6 +25,7 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -43,6 +44,25 @@ namespace HelpersLib
         {
             this.screenshot = (Image)image.Clone();
             InitializeComponent();
+        }
+
+        public static void ShowImage(Image img)
+        {
+            using (ImageViewer viewer = new ImageViewer(img))
+            {
+                viewer.ShowDialog();
+            }
+        }
+
+        public static void ShowImage(string filepath)
+        {
+            if (!string.IsNullOrEmpty(filepath) && File.Exists(filepath))
+            {
+                using (Image img = Image.FromFile(filepath))
+                {
+                    ShowImage(img);
+                }
+            }
         }
 
         private void ShowScreenshot_Load(object sender, EventArgs e)

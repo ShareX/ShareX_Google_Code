@@ -88,6 +88,13 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap application_icon_large {
+            get {
+                object obj = ResourceManager.GetObject("application-icon-large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap au {
             get {
                 object obj = ResourceManager.GetObject("au", resourceCulture);

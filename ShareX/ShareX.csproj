@@ -257,6 +257,7 @@
     <Content Include="Docs\license.txt" />
     <Content Include="Docs\Todo.txt" />
     <Content Include="Docs\VersionHistory.txt" />
+    <None Include="Resources\application-icon-large.png" />
     <None Include="Resources\upload-cloud.png" />
     <None Include="Resources\globe-share.png" />
     <None Include="Resources\image-export.png" />

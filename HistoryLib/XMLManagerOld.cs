@@ -42,9 +42,9 @@ namespace HistoryLib
             xmlPath = xmlFilePath;
         }
 
-        public List<HistoryItem> Load()
+        public List<HistoryItemOld> Load()
         {
-            List<HistoryItem> historyItemList = new List<HistoryItem>();
+            List<HistoryItemOld> HistoryItemOldList = new List<HistoryItemOld>();
 
             lock (thisLock)
             {
@@ -55,17 +55,17 @@ namespace HistoryLib
 
                     XmlNode rootNode = xml.ChildNodes[1];
 
-                    if (rootNode.Name == "HistoryItems" && rootNode.ChildNodes != null && rootNode.ChildNodes.Count > 0)
+                    if (rootNode.Name == "HistoryItemOlds" && rootNode.ChildNodes != null && rootNode.ChildNodes.Count > 0)
                     {
-                        historyItemList.AddRange(ParseHistoryItem(rootNode));
+                        HistoryItemOldList.AddRange(ParseHistoryItemOld(rootNode));
                     }
                 }
             }
 
-            return historyItemList;
+            return HistoryItemOldList;
         }
 
-        public bool AddHistoryItem(HistoryItem historyItem)
+        public bool AddHistoryItemOld(HistoryItemOld HistoryItemOld)
         {
             if (!string.IsNullOrEmpty(xmlPath))
             {
@@ -81,27 +81,27 @@ namespace HistoryLib
                     if (xml.ChildNodes.Count == 0)
                     {
                         xml.AppendChild(xml.CreateXmlDeclaration("1.0", "UTF-8", null));
-                        xml.AppendElement("HistoryItems");
+                        xml.AppendElement("HistoryItemOlds");
                     }
 
                     XmlNode rootNode = xml.ChildNodes[1];
 
-                    if (rootNode.Name == "HistoryItems")
+                    if (rootNode.Name == "HistoryItemOlds")
                     {
-                        historyItem.ID = Helpers.GetRandomAlphanumeric(12);
+                        HistoryItemOld.ID = Helpers.GetRandomAlphanumeric(12);
 
-                        XmlNode historyItemNode = rootNode.PrependElement("HistoryItem");
+                        XmlNode HistoryItemOldNode = rootNode.PrependElement("HistoryItemOld");
 
-                        historyItemNode.AppendElement("ID", historyItem.ID);
-                        historyItemNode.AppendElement("Filename", historyItem.Filename);
-                        historyItemNode.AppendElement("Filepath", historyItem.Filepath);
-                        historyItemNode.AppendElement("DateTimeUtc", historyItem.DateTimeUtc.ToString("o"));
-                        historyItemNode.AppendElement("Type", historyItem.Type);
-                        historyItemNode.AppendElement("Host", historyItem.Host);
-                        historyItemNode.AppendElement("URL", historyItem.URL);
-                        historyItemNode.AppendElement("ThumbnailURL", historyItem.ThumbnailURL);
-                        historyItemNode.AppendElement("DeletionURL", historyItem.DeletionURL);
-                        historyItemNode.AppendElement("ShortenedURL", historyItem.ShortenedURL);
+                        HistoryItemOldNode.AppendElement("ID", HistoryItemOld.ID);
+                        HistoryItemOldNode.AppendElement("Filename", HistoryItemOld.Filename);
+                        HistoryItemOldNode.AppendElement("Filepath", HistoryItemOld.Filepath);
+                        HistoryItemOldNode.AppendElement("DateTimeUtc", HistoryItemOld.DateTimeUtc.ToString("o"));
+                        HistoryItemOldNode.AppendElement("Type", HistoryItemOld.Type);
+                        HistoryItemOldNode.AppendElement("Host", HistoryItemOld.Host);
+                        HistoryItemOldNode.AppendElement("URL", HistoryItemOld.URL);
+                        HistoryItemOldNode.AppendElement("ThumbnailURL", HistoryItemOld.ThumbnailURL);
+                        HistoryItemOldNode.AppendElement("DeletionURL", HistoryItemOld.DeletionURL);
+                        HistoryItemOldNode.AppendElement("ShortenedURL", HistoryItemOld.ShortenedURL);
 
                         xml.Save(xmlPath);
 
@@ -113,22 +113,22 @@ namespace HistoryLib
             return false;
         }
 
-        public bool RemoveHistoryItem(HistoryItem historyItem)
+        public bool RemoveHistoryItemOld(HistoryItemOld HistoryItemOld)
         {
             lock (thisLock)
             {
-                if (historyItem != null && !string.IsNullOrEmpty(historyItem.ID) && !string.IsNullOrEmpty(xmlPath) && File.Exists(xmlPath))
+                if (HistoryItemOld != null && !string.IsNullOrEmpty(HistoryItemOld.ID) && !string.IsNullOrEmpty(xmlPath) && File.Exists(xmlPath))
                 {
                     XmlDocument xml = new XmlDocument();
                     xml.Load(xmlPath);
 
                     XmlNode rootNode = xml.ChildNodes[1];
 
-                    if (rootNode.Name == "HistoryItems" && rootNode.ChildNodes != null && rootNode.ChildNodes.Count > 0)
+                    if (rootNode.Name == "HistoryItemOlds" && rootNode.ChildNodes != null && rootNode.ChildNodes.Count > 0)
                     {
-                        foreach (HistoryItem hi in ParseHistoryItem(rootNode))
+                        foreach (HistoryItemOld hi in ParseHistoryItemOld(rootNode))
                         {
-                            if (hi.ID == historyItem.ID)
+                            if (hi.ID == HistoryItemOld.ID)
                             {
                                 rootNode.RemoveChild(hi.Node);
                                 xml.Save(xmlPath);
@@ -142,11 +142,11 @@ namespace HistoryLib
             return false;
         }
 
-        private IEnumerable<HistoryItem> ParseHistoryItem(XmlNode rootNode)
+        private IEnumerable<HistoryItemOld> ParseHistoryItemOld(XmlNode rootNode)
         {
             foreach (XmlNode historyNode in rootNode.ChildNodes)
             {
-                HistoryItem hi = new HistoryItem();
+                HistoryItemOld hi = new HistoryItemOld();
 
                 foreach (XmlNode node in historyNode.ChildNodes)
                 {

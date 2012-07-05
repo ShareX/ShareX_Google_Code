@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblProjectPage = new System.Windows.Forms.Label();
             this.lblCopyright = new System.Windows.Forms.Label();
@@ -39,8 +40,8 @@
             this.pbMikeURL = new System.Windows.Forms.PictureBox();
             this.pbAU = new System.Windows.Forms.PictureBox();
             this.lblMike = new System.Windows.Forms.Label();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).BeginInit();
@@ -80,7 +81,7 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyright.Location = new System.Drawing.Point(16, 224);
+            this.lblCopyright.Location = new System.Drawing.Point(16, 232);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(51, 13);
             this.lblCopyright.TabIndex = 7;
@@ -94,11 +95,9 @@
             this.lblCredits.ForeColor = System.Drawing.Color.Black;
             this.lblCredits.Location = new System.Drawing.Point(16, 144);
             this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(195, 65);
+            this.lblCredits.Size = new System.Drawing.Size(348, 78);
             this.lblCredits.TabIndex = 6;
-            this.lblCredits.Text = "Logo/Icon: Mopsy - http://mpql.net\r\nFTP Library: http://www.starksoft.com\r\nJson.N" +
-    "ET: http://json.codeplex.com\r\nSSH.NET: http://sshnet.codeplex.com\r\nIcons: http:/" +
-    "/p.yusukekamiyamane.com";
+            this.lblCredits.Text = resources.GetString("lblCredits.Text");
             // 
             // lblBugs
             // 
@@ -184,16 +183,6 @@
             this.lblMike.TabIndex = 5;
             this.lblMike.Text = "McoreD (mcored) - Mike Delpach";
             // 
-            // pbLogo
-            // 
-            this.pbLogo.Image = global::ShareX.Properties.Resources.ShareXLogo;
-            this.pbLogo.Location = new System.Drawing.Point(240, 8);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(240, 240);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogo.TabIndex = 19;
-            this.pbLogo.TabStop = false;
-            // 
             // uclUpdate
             // 
             this.uclUpdate.Location = new System.Drawing.Point(16, 35);
@@ -201,11 +190,21 @@
             this.uclUpdate.Size = new System.Drawing.Size(224, 24);
             this.uclUpdate.TabIndex = 1;
             // 
+            // pbLogo
+            // 
+            this.pbLogo.Image = global::ShareX.Properties.Resources.ShareXLogo;
+            this.pbLogo.Location = new System.Drawing.Point(240, 8);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(120, 128);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLogo.TabIndex = 19;
+            this.pbLogo.TabStop = false;
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 254);
+            this.ClientSize = new System.Drawing.Size(379, 259);
             this.Controls.Add(this.uclUpdate);
             this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.pbMikeURL);
@@ -248,7 +247,7 @@
         private System.Windows.Forms.PictureBox pbMikeURL;
         private System.Windows.Forms.PictureBox pbAU;
         private System.Windows.Forms.Label lblMike;
-        private System.Windows.Forms.PictureBox pbLogo;
         private UpdateCheckerLib.UpdateCheckerLabel uclUpdate;
+        private System.Windows.Forms.PictureBox pbLogo;
     }
 }
