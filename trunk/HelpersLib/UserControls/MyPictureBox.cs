@@ -137,10 +137,7 @@ namespace HelpersLib
         {
             if (e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
             {
-                using (ImageViewer viewer = new ImageViewer(pbMain.Image))
-                {
-                    viewer.ShowDialog();
-                }
+                ImageViewer.ShowImage(pbMain.Image);
             }
         }
     }

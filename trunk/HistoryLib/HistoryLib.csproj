@@ -39,6 +39,9 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageListView">
+      <HintPath>..\Lib\ImageListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
@@ -48,6 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoryItemManager_ContextMenu.cs" />
+    <Compile Include="HistoryItemOld.cs" />
+    <Compile Include="ImageHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageHistoryForm.Designer.cs">
+      <DependentUpon>ImageHistoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ObjectListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageHistoryForm.resx">
+      <DependentUpon>ImageHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

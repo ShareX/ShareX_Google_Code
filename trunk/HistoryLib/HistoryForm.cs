@@ -46,19 +46,28 @@ namespace HistoryLib
         private HistoryItemManager him;
         private HistoryItem[] allHistoryItems;
 
-        public HistoryForm(string databasePath, int maxItemCount, string title)
+        public HistoryForm(string databasePath, string title, int maxItemCount = -1)
         {
             InitializeComponent();
+
             DatabasePath = databasePath;
             MaxItemCount = maxItemCount;
             this.Text = title;
-            him = new HistoryItemManager(lvHistory);
-            ResetControls();
+
+            him = new HistoryItemManager();
+            him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
+
+            pbThumbnail.Reset();
             cbFilenameFilterMethod.SelectedIndex = 0; // Contains
             cbFilenameFilterCulture.SelectedIndex = 1; // Invariant culture
             cbTypeFilterSelection.SelectedIndex = 0; // Image
             cbFilenameFilterCulture.Items[0] = string.Format("Current culture ({0})", CultureInfo.CurrentCulture.Parent.EnglishName);
             lvHistory.FillLastColumn();
+        }
+
+        private HistoryItem[] him_GetHistoryItems()
+        {
+            return lvHistory.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
         }
 
         private void RefreshHistoryItems()
@@ -214,102 +223,29 @@ namespace HistoryLib
             switch (him.RefreshInfo())
             {
                 case HistoryRefreshInfoResult.Success:
-                    UpdateButtons();
                     UpdatePictureBox();
                     break;
                 case HistoryRefreshInfoResult.Invalid:
-                    ResetControls();
+                    pbThumbnail.Reset();
                     break;
             }
-        }
-
-        private void UpdateTexts()
-        {
-            int itemsCount = lvHistory.SelectedItems.Count;
-
-            if (itemsCount > 1)
-            {
-                tsmiCopyURL.Text = string.Format("URLs ({0})", itemsCount);
-                btnCopyURL.Text = string.Format("Copy URLs ({0})", itemsCount);
-            }
-            else
-            {
-                tsmiCopyURL.Text = "URL";
-                btnCopyURL.Text = "Copy URL";
-            }
-        }
-
-        private void UpdateButtons()
-        {
-            // Buttons
-            btnCopyURL.Enabled = him.IsURLExist;
-            btnOpenURL.Enabled = him.IsURLExist;
-            btnOpenLocalFile.Enabled = him.IsFileExist;
-
-            cmsHistory.SuspendLayout();
-            cmsHistory.Enabled = true;
-
-            // Open
-            tsmiOpenURL.Enabled = him.IsURLExist;
-            tsmiOpenShortenedURL.Enabled = him.IsShortenedURLExist;
-            tsmiOpenThumbnailURL.Enabled = him.IsThumbnailURLExist;
-            tsmiOpenDeletionURL.Enabled = him.IsDeletionURLExist;
-
-            tsmiOpenFile.Enabled = him.IsFileExist;
-            tsmiOpenFolder.Enabled = him.IsFileExist;
-
-            // Copy
-            tsmiCopyURL.Enabled = him.IsURLExist;
-            tsmiCopyShortenedURL.Enabled = him.IsShortenedURLExist;
-            tsmiCopyThumbnailURL.Enabled = him.IsThumbnailURLExist;
-            tsmiCopyDeletionURL.Enabled = him.IsDeletionURLExist;
-
-            tsmiCopyFile.Enabled = him.IsFileExist;
-            tsmiCopyImage.Enabled = him.IsImageFile;
-            tsmiCopyText.Enabled = him.IsTextFile;
-
-            tsmiCopyHTMLLink.Enabled = him.IsURLExist;
-            tsmiCopyHTMLImage.Enabled = him.IsImageURL;
-            tsmiCopyHTMLLinkedImage.Enabled = him.IsImageURL && him.IsThumbnailURLExist;
-
-            tsmiCopyForumLink.Enabled = him.IsURLExist;
-            tsmiCopyForumImage.Enabled = him.IsImageURL && him.IsURLExist;
-            tsmiCopyForumLinkedImage.Enabled = him.IsImageURL && him.IsThumbnailURLExist;
-
-            tsmiCopyFilePath.Enabled = him.IsFilePathValid;
-            tsmiCopyFileName.Enabled = him.IsFilePathValid;
-            tsmiCopyFileNameWithExtension.Enabled = him.IsFilePathValid;
-            tsmiCopyFolder.Enabled = him.IsFilePathValid;
-
-            cmsHistory.ResumeLayout();
         }
 
         private void UpdatePictureBox()
         {
             pbThumbnail.Reset();
 
-            if (him.IsImageFile)
+            if (him != null)
             {
-                pbThumbnail.LoadImageFromFile(him.HistoryItem.Filepath);
+                if (him.IsImageFile)
+                {
+                    pbThumbnail.LoadImageFromFile(him.HistoryItem.Filepath);
+                }
+                else if (him.IsImageURL)
+                {
+                    pbThumbnail.LoadImageFromURL(him.HistoryItem.URL);
+                }
             }
-            else if (him.IsImageURL)
-            {
-                pbThumbnail.LoadImageFromURL(him.HistoryItem.URL);
-            }
-        }
-
-        private void ResetControls()
-        {
-            // Buttons
-            btnCopyURL.Enabled = false;
-            btnOpenURL.Enabled = false;
-            btnOpenLocalFile.Enabled = false;
-
-            // Menu
-            cmsHistory.Enabled = false;
-
-            // PictureBox
-            pbThumbnail.Reset();
         }
 
         #region Form events
@@ -320,26 +256,6 @@ namespace HistoryLib
             RefreshHistoryItems();
             this.BringToFront();
             this.Activate();
-        }
-
-        private void btnRefreshList_Click(object sender, EventArgs e)
-        {
-            RefreshHistoryItems();
-        }
-
-        private void btnCopyURL_Click(object sender, EventArgs e)
-        {
-            him.CopyURL();
-        }
-
-        private void btnOpenURL_Click(object sender, EventArgs e)
-        {
-            him.OpenURL();
-        }
-
-        private void btnOpenLocalFile_Click(object sender, EventArgs e)
-        {
-            him.OpenFile();
         }
 
         private void btnApplyFilters_Click(object sender, EventArgs e)
@@ -354,8 +270,6 @@ namespace HistoryLib
 
         private void lvHistory_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            UpdateTexts();
-
             if (e.IsSelected)
             {
                 UpdateControls();
@@ -366,7 +280,7 @@ namespace HistoryLib
         {
             if (e.Button == MouseButtons.Right)
             {
-                cmsHistory.Show(lvHistory, e.X + 1, e.Y + 1);
+                him.cmsHistory.Show(lvHistory, e.X + 1, e.Y + 1);
             }
         }
 
@@ -379,129 +293,5 @@ namespace HistoryLib
         }
 
         #endregion Form events
-
-        #region Right click menu events
-
-        private void tsmiOpenURL_Click(object sender, EventArgs e)
-        {
-            him.OpenURL();
-        }
-
-        private void tsmiOpenShortenedURL_Click(object sender, EventArgs e)
-        {
-            him.OpenShortenedURL();
-        }
-
-        private void tsmiOpenThumbnailURL_Click(object sender, EventArgs e)
-        {
-            him.OpenThumbnailURL();
-        }
-
-        private void tsmiOpenDeletionURL_Click(object sender, EventArgs e)
-        {
-            him.OpenDeletionURL();
-        }
-
-        private void tsmiOpenFile_Click(object sender, EventArgs e)
-        {
-            him.OpenFile();
-        }
-
-        private void tsmiOpenFolder_Click(object sender, EventArgs e)
-        {
-            him.OpenFolder();
-        }
-
-        private void tsmiCopyURL_Click(object sender, EventArgs e)
-        {
-            him.CopyURL();
-        }
-
-        private void tsmiCopyShortenedURL_Click(object sender, EventArgs e)
-        {
-            him.CopyShortenedURL();
-        }
-
-        private void tsmiCopyThumbnailURL_Click(object sender, EventArgs e)
-        {
-            him.CopyThumbnailURL();
-        }
-
-        private void tsmiCopyDeletionURL_Click(object sender, EventArgs e)
-        {
-            him.CopyDeletionURL();
-        }
-
-        private void tsmiCopyFile_Click(object sender, EventArgs e)
-        {
-            him.CopyFile();
-        }
-
-        private void tsmiCopyImage_Click(object sender, EventArgs e)
-        {
-            him.CopyImage();
-        }
-
-        private void tsmiCopyText_Click(object sender, EventArgs e)
-        {
-            him.CopyText();
-        }
-
-        private void tsmiCopyHTMLLink_Click(object sender, EventArgs e)
-        {
-            him.CopyHTMLLink();
-        }
-
-        private void tsmiCopyHTMLImage_Click(object sender, EventArgs e)
-        {
-            him.CopyHTMLImage();
-        }
-
-        private void tsmiCopyHTMLLinkedImage_Click(object sender, EventArgs e)
-        {
-            him.CopyHTMLLinkedImage();
-        }
-
-        private void tsmiCopyForumLink_Click(object sender, EventArgs e)
-        {
-            him.CopyForumLink();
-        }
-
-        private void tsmiCopyForumImage_Click(object sender, EventArgs e)
-        {
-            him.CopyForumImage();
-        }
-
-        private void tsmiCopyForumLinkedImage_Click(object sender, EventArgs e)
-        {
-            him.CopyForumLinkedImage();
-        }
-
-        private void tsmiCopyFilePath_Click(object sender, EventArgs e)
-        {
-            him.CopyFilePath();
-        }
-
-        private void tsmiCopyFileName_Click(object sender, EventArgs e)
-        {
-            him.CopyFileName();
-        }
-
-        private void tsmiCopyFileNameWithExtension_Click(object sender, EventArgs e)
-        {
-            him.CopyFileNameWithExtension();
-        }
-
-        private void tsmiCopyFolder_Click(object sender, EventArgs e)
-        {
-            him.CopyFolder();
-        }
-
-        private void tsmiMoreInfo_Click(object sender, EventArgs e)
-        {
-            him.MoreInfo();
-        }
-
-        #endregion Right click menu events
     }
 }
