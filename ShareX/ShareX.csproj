@@ -110,6 +110,7 @@
     <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileWatcherManager.cs" />
     <Compile Include="HelperClasses\ImageData.cs" />
     <Compile Include="HelperClasses\ImageExtensions.cs" />
     <Compile Include="Forms\MainForm.cs">
