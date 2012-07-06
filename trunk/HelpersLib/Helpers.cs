@@ -569,5 +569,50 @@ namespace HelpersLib
         {
             ThreadPool.QueueUserWorkItem(state => Backup(filePath));
         }
+
+        public static bool WaitWhile(Func<bool> check, int interval, int timeout = -1)
+        {
+            Stopwatch timer = Stopwatch.StartNew();
+
+            while (check())
+            {
+                if (timeout >= 0 && timer.ElapsedMilliseconds >= timeout)
+                {
+                    return false;
+                }
+
+                Thread.Sleep(interval);
+            }
+
+            return true;
+        }
+
+        public static void WaitWhileAsync(Func<bool> check, int interval, int timeout, Action onSuccess)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += (sender, e) => e.Result = WaitWhile(check, interval, timeout);
+            bw.RunWorkerCompleted += (sender, e) => { if ((bool)e.Result) onSuccess(); };
+            bw.RunWorkerAsync();
+        }
+
+        public static bool IsFileLocked(string path)
+        {
+            FileStream fs = null;
+
+            try
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                if (fs != null) fs.Dispose();
+            }
+
+            return false;
+        }
     }
 }
