@@ -501,9 +501,20 @@ namespace HelpersLib
 
         public static void DrawCursorToImage(Image img, Point offset)
         {
-            using (MyCursor cursor = NativeMethods.CaptureCursor())
+            MyCursor cursor = null;
+
+            try
             {
-                DrawCursorToImage(cursor, img, offset);
+                cursor = NativeMethods.CaptureCursor();
+                if (cursor != null) DrawCursorToImage(cursor, img, offset);
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e, "Cursor capture failed");
+            }
+            finally
+            {
+                if (cursor != null) cursor.Dispose();
             }
         }
 

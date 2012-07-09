@@ -47,7 +47,14 @@ namespace ScreenCapture
                 {
                     if (DrawCursor)
                     {
-                        cursor = NativeMethods.CaptureCursor();
+                        try
+                        {
+                            cursor = NativeMethods.CaptureCursor();
+                        }
+                        catch (Exception e)
+                        {
+                            DebugHelper.WriteException(e, "Cursor capture failed");
+                        }
                     }
 
                     using (Form form = new Form())
