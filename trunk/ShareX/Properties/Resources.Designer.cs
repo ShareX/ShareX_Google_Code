@@ -136,6 +136,13 @@ namespace ShareX.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap cursor_question {
+            get {
+                object obj = ResourceManager.GetObject("cursor-question", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap Diamond {
             get {
                 object obj = ResourceManager.GetObject("Diamond", resourceCulture);
@@ -349,6 +356,13 @@ namespace ShareX.Properties {
         public static System.Drawing.Bitmap tick_button {
             get {
                 object obj = ResourceManager.GetObject("tick_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap toolbox {
+            get {
+                object obj = ResourceManager.GetObject("toolbox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

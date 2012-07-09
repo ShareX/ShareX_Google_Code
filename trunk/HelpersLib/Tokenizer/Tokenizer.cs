@@ -37,6 +37,7 @@ namespace HelpersLib
         public string[] Keywords { get; set; }
         public char LiteralEscapeChar { get; set; }
         public bool KeepWhitespace { get; set; }
+        public bool AutoParseLiteral { get; set; }
 
         public Tokenizer()
         {
@@ -67,6 +68,10 @@ namespace HelpersLib
                         currentToken = new Token(TokenType.Whitespace, currentChar.ToString(), i);
                         tokens.Add(currentToken);
                     }
+                    else
+                    {
+                        currentToken = new Token();
+                    }
                 }
                 else if (SymbolChars.Contains(currentChar)) // Symbol
                 {
@@ -91,6 +96,11 @@ namespace HelpersLib
 
                         if (currentChar == delimeter && !IsEscaped(currentToken.Text))
                         {
+                            if (AutoParseLiteral)
+                            {
+                                currentToken.Text = ParseString(currentToken.Text);
+                            }
+
                             break;
                         }
                     }
@@ -145,7 +155,7 @@ namespace HelpersLib
                 return sb.ToString();
             }
 
-            return "";
+            return string.Empty;
         }
 
         private void CheckIdentifier(List<Token> tokens, Token token)
