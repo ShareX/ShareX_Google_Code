@@ -30,6 +30,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using ColorsLib;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using HistoryLib;
@@ -574,6 +575,16 @@ namespace ShareX
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
             new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
+        }
+
+        private void tsmiCursorHelper_Click(object sender, EventArgs e)
+        {
+            using (DialogColor colorForm = new DialogColor())
+            {
+                colorForm.Icon = Icon;
+                colorForm.ScreenPicker = true;
+                colorForm.ShowDialog();
+            }
         }
 
         private void tsbScreenshotsFolder_Click(object sender, EventArgs e)

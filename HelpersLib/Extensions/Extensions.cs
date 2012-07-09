@@ -32,6 +32,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 
 namespace HelpersLib
 {
@@ -208,6 +209,22 @@ namespace HelpersLib
             IntPtr hicon = bmp.GetHicon();
             Icon icon = Icon.FromHandle(hicon);
             return icon;
+        }
+
+        public static bool IsBetween(this byte num, int min, int max)
+        {
+            return num >= min && num <= max;
+        }
+
+        public static void BeginUpdate(this RichTextBox rtb)
+        {
+            NativeMethods.SendMessage(rtb.Handle, (int)WindowsMessages.SETREDRAW, 0, 0);
+        }
+
+        public static void EndUpdate(this RichTextBox rtb)
+        {
+            NativeMethods.SendMessage(rtb.Handle, (int)WindowsMessages.SETREDRAW, 1, 0);
+            rtb.Invalidate();
         }
     }
 }

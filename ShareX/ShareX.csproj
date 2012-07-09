@@ -157,6 +157,10 @@
     <Compile Include="UploadInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorsLib\ColorsLib.csproj">
+      <Project>{9F44B572-4A09-42D9-9DB7-2587F621B462}</Project>
+      <Name>ColorsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HistoryLib\HistoryLib.csproj">
       <Project>{E7DE6237-AEA2-498B-8F56-9B392472C490}</Project>
       <Name>HistoryLib</Name>
@@ -258,6 +262,8 @@
     <Content Include="Docs\license.txt" />
     <Content Include="Docs\Todo.txt" />
     <Content Include="Docs\VersionHistory.txt" />
+    <None Include="Resources\cursor-question.png" />
+    <None Include="Resources\toolbox.png" />
     <None Include="Resources\application-icon-large.png" />
     <None Include="Resources\upload-cloud.png" />
     <None Include="Resources\globe-share.png" />
