@@ -43,9 +43,12 @@ namespace ColorsLib
             }
             set
             {
-                mColor = value;
-                colorBox.SetColor = value;
-                colorSlider.SetColor = value;
+                if (mColor != value)
+                {
+                    mColor = value;
+                    colorBox.SetColor = value;
+                    colorSlider.SetColor = value;
+                }
             }
         }
 

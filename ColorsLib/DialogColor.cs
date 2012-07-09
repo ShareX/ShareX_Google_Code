@@ -162,7 +162,7 @@ namespace ColorsLib
 
         private void colorTimer_Tick(object sender, EventArgs e)
         {
-            Point pos = MousePosition;
+            Point pos = Helpers.GetCursorPosition();
             colorPicker.Color = Helpers.GetPixelColor(pos);
             txtX.Text = pos.X.ToString();
             txtY.Text = pos.Y.ToString();

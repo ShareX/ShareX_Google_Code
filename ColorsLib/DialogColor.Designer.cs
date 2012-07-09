@@ -376,7 +376,6 @@
             this.rbBlue.Name = "rbBlue";
             this.rbBlue.Size = new System.Drawing.Size(77, 20);
             this.rbBlue.TabIndex = 28;
-            this.rbBlue.TabStop = true;
             this.rbBlue.Text = "Blue:";
             this.rbBlue.UseVisualStyleBackColor = true;
             this.rbBlue.CheckedChanged += new System.EventHandler(this.rbBlue_CheckedChanged);
@@ -387,7 +386,6 @@
             this.rbGreen.Name = "rbGreen";
             this.rbGreen.Size = new System.Drawing.Size(77, 20);
             this.rbGreen.TabIndex = 24;
-            this.rbGreen.TabStop = true;
             this.rbGreen.Text = "Green:";
             this.rbGreen.UseVisualStyleBackColor = true;
             this.rbGreen.CheckedChanged += new System.EventHandler(this.rbGreen_CheckedChanged);
@@ -398,7 +396,6 @@
             this.rbRed.Name = "rbRed";
             this.rbRed.Size = new System.Drawing.Size(77, 20);
             this.rbRed.TabIndex = 19;
-            this.rbRed.TabStop = true;
             this.rbRed.Text = "Red:";
             this.rbRed.UseVisualStyleBackColor = true;
             this.rbRed.CheckedChanged += new System.EventHandler(this.rbRed_CheckedChanged);
@@ -409,7 +406,6 @@
             this.rbBrightness.Name = "rbBrightness";
             this.rbBrightness.Size = new System.Drawing.Size(77, 20);
             this.rbBrightness.TabIndex = 13;
-            this.rbBrightness.TabStop = true;
             this.rbBrightness.Text = "Brightness:";
             this.rbBrightness.UseVisualStyleBackColor = true;
             this.rbBrightness.CheckedChanged += new System.EventHandler(this.rbBrightness_CheckedChanged);
@@ -420,13 +416,13 @@
             this.rbSaturation.Name = "rbSaturation";
             this.rbSaturation.Size = new System.Drawing.Size(77, 20);
             this.rbSaturation.TabIndex = 7;
-            this.rbSaturation.TabStop = true;
             this.rbSaturation.Text = "Saturation:";
             this.rbSaturation.UseVisualStyleBackColor = true;
             this.rbSaturation.CheckedChanged += new System.EventHandler(this.rbSaturation_CheckedChanged);
             // 
             // rbHue
             // 
+            this.rbHue.Checked = true;
             this.rbHue.Location = new System.Drawing.Point(304, 13);
             this.rbHue.Name = "rbHue";
             this.rbHue.Size = new System.Drawing.Size(77, 20);
@@ -517,7 +513,6 @@
             // 
             // colorTimer
             // 
-            this.colorTimer.Interval = 10;
             this.colorTimer.Tick += new System.EventHandler(this.colorTimer_Tick);
             // 
             // txtX
@@ -618,7 +613,7 @@
             this.MinimizeBox = false;
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Screen color picker (Press Ctrl for pause/resume)";
+            this.Text = "Screen color picker (Press Ctrl for pause or resume)";
             this.TopMost = true;
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.DialogColor_HelpButtonClicked);
             this.Load += new System.EventHandler(this.DialogColor_Load);
