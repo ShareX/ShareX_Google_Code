@@ -112,6 +112,13 @@ namespace ColorsLib
             lblColorPreview.Image = bmp;
         }
 
+        private void UpdateColor(int x, int y)
+        {
+            colorPicker.Color = Helpers.GetPixelColor(x, y);
+            txtX.Text = x.ToString();
+            txtY.Text = y.ToString();
+        }
+
         #region Events
 
         private void DialogColor_Load(object sender, EventArgs e)
@@ -162,10 +169,8 @@ namespace ColorsLib
 
         private void colorTimer_Tick(object sender, EventArgs e)
         {
-            Point pos = Helpers.GetCursorPosition();
-            colorPicker.Color = Helpers.GetPixelColor(pos);
-            txtX.Text = pos.X.ToString();
-            txtY.Text = pos.Y.ToString();
+            Point position = Helpers.GetCursorPosition();
+            UpdateColor(position.X, position.Y);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -274,6 +279,16 @@ namespace ColorsLib
                 }
             }
             catch { }
+        }
+
+        private void btnUpdateColor_Click(object sender, EventArgs e)
+        {
+            int x, y;
+
+            if (int.TryParse(txtX.Text, out x) && int.TryParse(txtY.Text, out y))
+            {
+                UpdateColor(x, y);
+            }
         }
 
         #endregion Events

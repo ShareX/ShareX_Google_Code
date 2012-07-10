@@ -101,12 +101,15 @@ namespace ShareX
                 case ImageScaleType.Percentage:
                     rbImageScaleTypePercentage.Checked = true;
                     break;
+
                 case ImageScaleType.Width:
                     rbImageScaleTypeToWidth.Checked = true;
                     break;
+
                 case ImageScaleType.Height:
                     rbImageScaleTypeToHeight.Checked = true;
                     break;
+
                 case ImageScaleType.Specific:
                     rbImageScaleTypeSpecific.Checked = true;
                     break;
@@ -161,6 +164,20 @@ namespace ShareX
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             CreateCodesMenu();
 
+            cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
+
+            if (Program.Settings.WatchFolderList == null)
+            {
+                Program.Settings.WatchFolderList = new List<WatchFolder>();
+            }
+            else
+            {
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                {
+                    AddWatchFolder(watchFolder);
+                }
+            }
+
             // Proxy
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
@@ -193,6 +210,15 @@ namespace ShareX
             lvi.SubItems.Add(fileAction.Path ?? "");
             lvi.SubItems.Add(fileAction.Args ?? "");
             lvActions.Items.Add(lvi);
+        }
+
+        private void AddWatchFolder(WatchFolder watchFolder)
+        {
+            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
+            lvi.Tag = watchFolder;
+            lvi.SubItems.Add(watchFolder.Filter ?? "");
+            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
+            lvWatchFolderList.Items.Add(lvi);
         }
 
         private void CreateCodesMenu()
@@ -633,6 +659,8 @@ namespace ShareX
 
         #region Upload
 
+        #region General
+
         private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
         {
             Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
@@ -660,6 +688,63 @@ namespace ShareX
         {
             codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
         }
+
+        #endregion General
+
+        #region Watch folder
+
+        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
+
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                {
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                    else
+                    {
+                        watchFolder.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        {
+            using (WatchFolderForm form = new WatchFolderForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    WatchFolder watchFolder = form.WatchFolder;
+                    Program.Settings.WatchFolderList.Add(watchFolder);
+                    AddWatchFolder(watchFolder);
+
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                }
+            }
+        }
+
+        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        {
+            if (lvWatchFolderList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
+                WatchFolder watchFolder = lvi.Tag as WatchFolder;
+
+                Program.Settings.WatchFolderList.Remove(watchFolder);
+                lvWatchFolderList.Items.Remove(lvi);
+                watchFolder.Dispose();
+            }
+        }
+
+        #endregion Watch folder
 
         #endregion Upload
 

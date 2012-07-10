@@ -73,6 +73,7 @@
             this.lblX = new System.Windows.Forms.Label();
             this.lblY = new System.Windows.Forms.Label();
             this.colorPicker = new ColorsLib.ColorPicker();
+            this.btnUpdateColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagenta)).BeginInit();
@@ -88,7 +89,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(536, 232);
+            this.btnCancel.Location = new System.Drawing.Point(544, 232);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 32);
             this.btnCancel.TabIndex = 41;
@@ -98,7 +99,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(472, 232);
+            this.btnOK.Location = new System.Drawing.Point(480, 232);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(56, 32);
             this.btnOK.TabIndex = 40;
@@ -504,7 +505,7 @@
             // btnColorPicker
             // 
             this.btnColorPicker.Image = ((System.Drawing.Image)(resources.GetObject("btnColorPicker.Image")));
-            this.btnColorPicker.Location = new System.Drawing.Point(432, 232);
+            this.btnColorPicker.Location = new System.Drawing.Point(440, 232);
             this.btnColorPicker.Name = "btnColorPicker";
             this.btnColorPicker.Size = new System.Drawing.Size(32, 32);
             this.btnColorPicker.TabIndex = 39;
@@ -517,7 +518,7 @@
             // 
             // txtX
             // 
-            this.txtX.Location = new System.Drawing.Point(456, 205);
+            this.txtX.Location = new System.Drawing.Point(456, 203);
             this.txtX.Name = "txtX";
             this.txtX.Size = new System.Drawing.Size(40, 20);
             this.txtX.TabIndex = 36;
@@ -525,7 +526,7 @@
             // 
             // txtY
             // 
-            this.txtY.Location = new System.Drawing.Point(528, 205);
+            this.txtY.Location = new System.Drawing.Point(528, 203);
             this.txtY.Name = "txtY";
             this.txtY.Size = new System.Drawing.Size(40, 20);
             this.txtY.TabIndex = 38;
@@ -559,11 +560,22 @@
             this.colorPicker.TabIndex = 0;
             this.colorPicker.ColorChanged += new ColorsLib.ColorEventHandler(this.colorPicker_ColorChanged);
             // 
+            // btnUpdateColor
+            // 
+            this.btnUpdateColor.Location = new System.Drawing.Point(576, 202);
+            this.btnUpdateColor.Name = "btnUpdateColor";
+            this.btnUpdateColor.Size = new System.Drawing.Size(24, 23);
+            this.btnUpdateColor.TabIndex = 42;
+            this.btnUpdateColor.Text = "U";
+            this.btnUpdateColor.UseVisualStyleBackColor = true;
+            this.btnUpdateColor.Click += new System.EventHandler(this.btnUpdateColor_Click);
+            // 
             // DialogColor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(601, 274);
+            this.ClientSize = new System.Drawing.Size(608, 274);
+            this.Controls.Add(this.btnUpdateColor);
             this.Controls.Add(this.lblY);
             this.Controls.Add(this.lblX);
             this.Controls.Add(this.txtY);
@@ -678,5 +690,6 @@
         private System.Windows.Forms.TextBox txtY;
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Label lblY;
+        private System.Windows.Forms.Button btnUpdateColor;
     }
 }
