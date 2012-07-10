@@ -136,10 +136,21 @@ namespace ShareX
 
         #region Upload
 
+        #region General
+
         public int UploadLimit = 5;
         public int BufferSizePower = 3;
         public bool ClipboardUploadAutoDetectURL = true;
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
+
+        #endregion General
+
+        #region Watch folder
+
+        public bool WatchFolderEnabled = false;
+        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+
+        #endregion Watch folder
 
         #endregion Upload
 

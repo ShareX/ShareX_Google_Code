@@ -125,17 +125,24 @@
             this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpUpload = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpUploadGeneral = new System.Windows.Forms.TabPage();
+            this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
+            this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.btnNameFormatPatternHelp = new System.Windows.Forms.Button();
+            this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
+            this.lblBufferSize = new System.Windows.Forms.Label();
             this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
+            this.lblNameFormatPattern = new System.Windows.Forms.Label();
             this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
-            this.lblNameFormatPattern = new System.Windows.Forms.Label();
-            this.lblUploadLimit = new System.Windows.Forms.Label();
-            this.lblBufferSize = new System.Windows.Forms.Label();
-            this.lblBufferSizeInfo = new System.Windows.Forms.Label();
-            this.cbBufferSize = new System.Windows.Forms.ComboBox();
+            this.tpUploadWatchFolder = new System.Windows.Forms.TabPage();
+            this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
+            this.lvWatchFolderList = new System.Windows.Forms.ListView();
+            this.btnWatchFolderRemove = new System.Windows.Forms.Button();
+            this.btnWatchFolderAdd = new System.Windows.Forms.Button();
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.cboProxyType = new System.Windows.Forms.ComboBox();
             this.lblProxyType = new System.Windows.Forms.Label();
@@ -150,6 +157,9 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -175,7 +185,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
             this.tpActions.SuspendLayout();
             this.tpUpload.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tpUploadGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
+            this.tpUploadWatchFolder.SuspendLayout();
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
@@ -1347,28 +1360,60 @@
             // 
             // tpUpload
             // 
-            this.tpUpload.Controls.Add(this.cbClipboardUploadAutoDetectURL);
-            this.tpUpload.Controls.Add(this.btnNameFormatPatternHelp);
-            this.tpUpload.Controls.Add(this.lblUploadLimitHint);
-            this.tpUpload.Controls.Add(this.lblNameFormatPatternPreview);
-            this.tpUpload.Controls.Add(this.nudUploadLimit);
-            this.tpUpload.Controls.Add(this.txtNameFormatPattern);
-            this.tpUpload.Controls.Add(this.lblNameFormatPattern);
-            this.tpUpload.Controls.Add(this.lblUploadLimit);
-            this.tpUpload.Controls.Add(this.lblBufferSize);
-            this.tpUpload.Controls.Add(this.lblBufferSizeInfo);
-            this.tpUpload.Controls.Add(this.cbBufferSize);
+            this.tpUpload.Controls.Add(this.tabControl1);
             this.tpUpload.Location = new System.Drawing.Point(4, 22);
             this.tpUpload.Name = "tpUpload";
+            this.tpUpload.Padding = new System.Windows.Forms.Padding(5);
             this.tpUpload.Size = new System.Drawing.Size(522, 330);
             this.tpUpload.TabIndex = 2;
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tpUploadGeneral);
+            this.tabControl1.Controls.Add(this.tpUploadWatchFolder);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(5, 5);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(512, 320);
+            this.tabControl1.TabIndex = 6;
+            // 
+            // tpUploadGeneral
+            // 
+            this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
+            this.tpUploadGeneral.Controls.Add(this.cbClipboardUploadAutoDetectURL);
+            this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
+            this.tpUploadGeneral.Controls.Add(this.btnNameFormatPatternHelp);
+            this.tpUploadGeneral.Controls.Add(this.lblBufferSizeInfo);
+            this.tpUploadGeneral.Controls.Add(this.lblUploadLimitHint);
+            this.tpUploadGeneral.Controls.Add(this.lblBufferSize);
+            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreview);
+            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPattern);
+            this.tpUploadGeneral.Controls.Add(this.nudUploadLimit);
+            this.tpUploadGeneral.Controls.Add(this.txtNameFormatPattern);
+            this.tpUploadGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tpUploadGeneral.Name = "tpUploadGeneral";
+            this.tpUploadGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUploadGeneral.Size = new System.Drawing.Size(504, 294);
+            this.tpUploadGeneral.TabIndex = 0;
+            this.tpUploadGeneral.Text = "General";
+            this.tpUploadGeneral.UseVisualStyleBackColor = true;
+            // 
+            // lblUploadLimit
+            // 
+            this.lblUploadLimit.AutoSize = true;
+            this.lblUploadLimit.Location = new System.Drawing.Point(20, 18);
+            this.lblUploadLimit.Name = "lblUploadLimit";
+            this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
+            this.lblUploadLimit.TabIndex = 0;
+            this.lblUploadLimit.Text = "Simultaneous upload limit:";
+            // 
             // cbClipboardUploadAutoDetectURL
             // 
             this.cbClipboardUploadAutoDetectURL.AutoSize = true;
-            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(16, 80);
+            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(20, 82);
             this.cbClipboardUploadAutoDetectURL.Name = "cbClipboardUploadAutoDetectURL";
             this.cbClipboardUploadAutoDetectURL.Size = new System.Drawing.Size(401, 17);
             this.cbClipboardUploadAutoDetectURL.TabIndex = 0;
@@ -1376,9 +1421,19 @@
             this.cbClipboardUploadAutoDetectURL.UseVisualStyleBackColor = true;
             this.cbClipboardUploadAutoDetectURL.CheckedChanged += new System.EventHandler(this.cbClipboardUploadAutoDetectURL_CheckedChanged);
             // 
+            // cbBufferSize
+            // 
+            this.cbBufferSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBufferSize.FormattingEnabled = true;
+            this.cbBufferSize.Location = new System.Drawing.Point(84, 46);
+            this.cbBufferSize.Name = "cbBufferSize";
+            this.cbBufferSize.Size = new System.Drawing.Size(64, 21);
+            this.cbBufferSize.TabIndex = 4;
+            this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
+            // 
             // btnNameFormatPatternHelp
             // 
-            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(440, 136);
+            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(444, 138);
             this.btnNameFormatPatternHelp.Name = "btnNameFormatPatternHelp";
             this.btnNameFormatPatternHelp.Size = new System.Drawing.Size(24, 23);
             this.btnNameFormatPatternHelp.TabIndex = 3;
@@ -1386,27 +1441,54 @@
             this.btnNameFormatPatternHelp.UseVisualStyleBackColor = true;
             this.btnNameFormatPatternHelp.Click += new System.EventHandler(this.btnNameFormatPatternHelp_Click);
             // 
+            // lblBufferSizeInfo
+            // 
+            this.lblBufferSizeInfo.AutoSize = true;
+            this.lblBufferSizeInfo.Location = new System.Drawing.Point(156, 50);
+            this.lblBufferSizeInfo.Name = "lblBufferSizeInfo";
+            this.lblBufferSizeInfo.Size = new System.Drawing.Size(20, 13);
+            this.lblBufferSizeInfo.TabIndex = 5;
+            this.lblBufferSizeInfo.Text = "kB";
+            // 
             // lblUploadLimitHint
             // 
             this.lblUploadLimitHint.AutoSize = true;
-            this.lblUploadLimitHint.Location = new System.Drawing.Point(216, 16);
+            this.lblUploadLimitHint.Location = new System.Drawing.Point(220, 18);
             this.lblUploadLimitHint.Name = "lblUploadLimitHint";
             this.lblUploadLimitHint.Size = new System.Drawing.Size(90, 13);
             this.lblUploadLimitHint.TabIndex = 2;
             this.lblUploadLimitHint.Text = "0 - 25 (0 disables)";
             // 
+            // lblBufferSize
+            // 
+            this.lblBufferSize.AutoSize = true;
+            this.lblBufferSize.Location = new System.Drawing.Point(20, 50);
+            this.lblBufferSize.Name = "lblBufferSize";
+            this.lblBufferSize.Size = new System.Drawing.Size(59, 13);
+            this.lblBufferSize.TabIndex = 3;
+            this.lblBufferSize.Text = "Buffer size:";
+            // 
             // lblNameFormatPatternPreview
             // 
             this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 169);
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(20, 171);
             this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
             this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreview.TabIndex = 4;
             this.lblNameFormatPatternPreview.Text = "Preview:";
             // 
+            // lblNameFormatPattern
+            // 
+            this.lblNameFormatPattern.AutoSize = true;
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(20, 115);
+            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
+            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
+            this.lblNameFormatPattern.TabIndex = 1;
+            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
+            // 
             // nudUploadLimit
             // 
-            this.nudUploadLimit.Location = new System.Drawing.Point(152, 12);
+            this.nudUploadLimit.Location = new System.Drawing.Point(156, 14);
             this.nudUploadLimit.Maximum = new decimal(new int[] {
             25,
             0,
@@ -1425,57 +1507,70 @@
             // 
             // txtNameFormatPattern
             // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 137);
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(20, 139);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
             this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
             this.txtNameFormatPattern.TabIndex = 2;
             this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
             // 
-            // lblNameFormatPattern
+            // tpUploadWatchFolder
             // 
-            this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 113);
-            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
-            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
-            this.lblNameFormatPattern.TabIndex = 1;
-            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
+            this.tpUploadWatchFolder.Controls.Add(this.cbWatchFolderEnabled);
+            this.tpUploadWatchFolder.Controls.Add(this.lvWatchFolderList);
+            this.tpUploadWatchFolder.Controls.Add(this.btnWatchFolderRemove);
+            this.tpUploadWatchFolder.Controls.Add(this.btnWatchFolderAdd);
+            this.tpUploadWatchFolder.Location = new System.Drawing.Point(4, 22);
+            this.tpUploadWatchFolder.Name = "tpUploadWatchFolder";
+            this.tpUploadWatchFolder.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUploadWatchFolder.Size = new System.Drawing.Size(504, 294);
+            this.tpUploadWatchFolder.TabIndex = 1;
+            this.tpUploadWatchFolder.Text = "Watch folder";
+            this.tpUploadWatchFolder.UseVisualStyleBackColor = true;
             // 
-            // lblUploadLimit
+            // cbWatchFolderEnabled
             // 
-            this.lblUploadLimit.AutoSize = true;
-            this.lblUploadLimit.Location = new System.Drawing.Point(16, 16);
-            this.lblUploadLimit.Name = "lblUploadLimit";
-            this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
-            this.lblUploadLimit.TabIndex = 0;
-            this.lblUploadLimit.Text = "Simultaneous upload limit:";
+            this.cbWatchFolderEnabled.AutoSize = true;
+            this.cbWatchFolderEnabled.Location = new System.Drawing.Point(16, 16);
+            this.cbWatchFolderEnabled.Name = "cbWatchFolderEnabled";
+            this.cbWatchFolderEnabled.Size = new System.Drawing.Size(266, 17);
+            this.cbWatchFolderEnabled.TabIndex = 13;
+            this.cbWatchFolderEnabled.Text = "Watch folders and if new file created then upload it";
+            this.cbWatchFolderEnabled.UseVisualStyleBackColor = true;
+            this.cbWatchFolderEnabled.CheckedChanged += new System.EventHandler(this.cbWatchFolderEnabled_CheckedChanged);
             // 
-            // lblBufferSize
+            // lvWatchFolderList
             // 
-            this.lblBufferSize.AutoSize = true;
-            this.lblBufferSize.Location = new System.Drawing.Point(16, 48);
-            this.lblBufferSize.Name = "lblBufferSize";
-            this.lblBufferSize.Size = new System.Drawing.Size(59, 13);
-            this.lblBufferSize.TabIndex = 3;
-            this.lblBufferSize.Text = "Buffer size:";
+            this.lvWatchFolderList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chWatchFolderFolderPath,
+            this.chWatchFolderFilter,
+            this.chWatchFolderIncludeSubdirectories});
+            this.lvWatchFolderList.FullRowSelect = true;
+            this.lvWatchFolderList.Location = new System.Drawing.Point(16, 72);
+            this.lvWatchFolderList.Name = "lvWatchFolderList";
+            this.lvWatchFolderList.Size = new System.Drawing.Size(472, 208);
+            this.lvWatchFolderList.TabIndex = 12;
+            this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
+            this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
             // 
-            // lblBufferSizeInfo
+            // btnWatchFolderRemove
             // 
-            this.lblBufferSizeInfo.AutoSize = true;
-            this.lblBufferSizeInfo.Location = new System.Drawing.Point(152, 48);
-            this.lblBufferSizeInfo.Name = "lblBufferSizeInfo";
-            this.lblBufferSizeInfo.Size = new System.Drawing.Size(20, 13);
-            this.lblBufferSizeInfo.TabIndex = 5;
-            this.lblBufferSizeInfo.Text = "kB";
+            this.btnWatchFolderRemove.Location = new System.Drawing.Point(96, 40);
+            this.btnWatchFolderRemove.Name = "btnWatchFolderRemove";
+            this.btnWatchFolderRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnWatchFolderRemove.TabIndex = 11;
+            this.btnWatchFolderRemove.Text = "Remove";
+            this.btnWatchFolderRemove.UseVisualStyleBackColor = true;
+            this.btnWatchFolderRemove.Click += new System.EventHandler(this.btnWatchFolderRemove_Click);
             // 
-            // cbBufferSize
+            // btnWatchFolderAdd
             // 
-            this.cbBufferSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBufferSize.FormattingEnabled = true;
-            this.cbBufferSize.Location = new System.Drawing.Point(80, 44);
-            this.cbBufferSize.Name = "cbBufferSize";
-            this.cbBufferSize.Size = new System.Drawing.Size(64, 21);
-            this.cbBufferSize.TabIndex = 4;
-            this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
+            this.btnWatchFolderAdd.Location = new System.Drawing.Point(16, 40);
+            this.btnWatchFolderAdd.Name = "btnWatchFolderAdd";
+            this.btnWatchFolderAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnWatchFolderAdd.TabIndex = 10;
+            this.btnWatchFolderAdd.Text = "Add";
+            this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
+            this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
             // 
             // tpProxy
             // 
@@ -1638,6 +1733,20 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // chWatchFolderFolderPath
+            // 
+            this.chWatchFolderFolderPath.Text = "Folder path";
+            this.chWatchFolderFolderPath.Width = 300;
+            // 
+            // chWatchFolderFilter
+            // 
+            this.chWatchFolderFilter.Text = "Filter";
+            this.chWatchFolderFilter.Width = 100;
+            // 
+            // chWatchFolderIncludeSubdirectories
+            // 
+            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1684,8 +1793,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).EndInit();
             this.tpActions.ResumeLayout(false);
             this.tpUpload.ResumeLayout(false);
-            this.tpUpload.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tpUploadGeneral.ResumeLayout(false);
+            this.tpUploadGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
+            this.tpUploadWatchFolder.ResumeLayout(false);
+            this.tpUploadWatchFolder.PerformLayout();
             this.tpProxy.ResumeLayout(false);
             this.tpProxy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
@@ -1819,5 +1932,15 @@
         private System.Windows.Forms.Button btnActionsEdit;
         private System.Windows.Forms.Button btnActionsRemove;
         private System.Windows.Forms.Button btnActionsAdd;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tpUploadGeneral;
+        private System.Windows.Forms.TabPage tpUploadWatchFolder;
+        private System.Windows.Forms.CheckBox cbWatchFolderEnabled;
+        private System.Windows.Forms.ListView lvWatchFolderList;
+        private System.Windows.Forms.Button btnWatchFolderRemove;
+        private System.Windows.Forms.Button btnWatchFolderAdd;
+        private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
+        private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
+        private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
     }
 }

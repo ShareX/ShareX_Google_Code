@@ -384,7 +384,17 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(url))
             {
-                ThreadPool.QueueUserWorkItem(x => Process.Start(url));
+                ThreadPool.QueueUserWorkItem(state =>
+                {
+                    try
+                    {
+                        Process.Start(url);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e, "LoadBrowserAsync failed");
+                    }
+                });
             }
         }
 

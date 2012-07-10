@@ -345,6 +345,14 @@ namespace ShareX
             UpdatePreviewSplitter();
 
             AddDefaultExternalPrograms();
+
+            if (Program.Settings.WatchFolderEnabled)
+            {
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                {
+                    watchFolder.Enable();
+                }
+            }
         }
 
         private void AddDefaultExternalPrograms()

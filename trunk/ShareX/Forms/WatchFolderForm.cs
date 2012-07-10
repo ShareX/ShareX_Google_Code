@@ -26,34 +26,49 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using HelpersLib;
 
 namespace ShareX
 {
-    public class FileWatcherManager
+    public partial class WatchFolderForm : Form
     {
-        public List<FileSystemWatcher> FileWatchers;
+        public WatchFolder WatchFolder { get; private set; }
 
-        public FileWatcherManager()
+        public WatchFolderForm()
+            : this(new WatchFolder())
         {
-            FileWatchers = new List<FileSystemWatcher>();
         }
 
-        public void AddFileWatcher(string filepath)
+        public WatchFolderForm(WatchFolder watchFolder)
         {
-            FileSystemWatcher fileWatcher = new FileSystemWatcher(filepath);
-            fileWatcher.EnableRaisingEvents = true;
-            fileWatcher.Created += new FileSystemEventHandler(fileWatcher_Created);
-            FileWatchers.Add(fileWatcher);
+            WatchFolder = watchFolder;
+            InitializeComponent();
+            txtFolderPath.Text = watchFolder.FolderPath ?? "";
+            txtFilter.Text = watchFolder.Filter ?? "";
+            cbIncludeSubdirectories.Checked = watchFolder.IncludeSubdirectories;
         }
 
-        private void fileWatcher_Created(object sender, FileSystemEventArgs e)
+        private void btnPathBrowse_Click(object sender, EventArgs e)
         {
-            string path = e.FullPath;
-            Helpers.WaitWhileAsync(() => Helpers.IsFileLocked(path), 250, 5000, () => UploadManager.UploadFile(path));
+            Helpers.BrowseFolder("ShareX - Choose folder path", txtFolderPath);
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            WatchFolder.FolderPath = txtFolderPath.Text;
+            WatchFolder.Filter = txtFilter.Text;
+            WatchFolder.IncludeSubdirectories = cbIncludeSubdirectories.Checked;
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }
