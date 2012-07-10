@@ -54,9 +54,11 @@ namespace ScreenCapture
                 case Keys.I:
                     Config.ShowInfo = !Config.ShowInfo;
                     break;
+
                 case Keys.C:
                     Config.ShowCrosshair = !Config.ShowCrosshair;
                     break;
+
                 case Keys.M:
                     Config.ShowMagnifier = !Config.ShowMagnifier;
                     break;
@@ -115,6 +117,9 @@ namespace ScreenCapture
 
         protected override void Draw(Graphics g)
         {
+            borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
+            borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
+
             if (Config.ShowCrosshair)
             {
                 DrawCrosshair(g);
@@ -132,9 +137,6 @@ namespace ScreenCapture
                     g.FillRectangle(shadowBrush, 0, 0, Width, Height);
                     g.ResetClip();
                 }
-
-                borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
-                borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
 
                 g.DrawPath(borderPen, regionDrawPath);
 
@@ -202,13 +204,14 @@ namespace ScreenCapture
             Point mousePos = InputManager.MousePosition0Based;
             int offset = 2;
 
-            using (Pen crosshairPen = new Pen(Color.FromArgb(100, Color.Black)))
-            {
-                g.DrawLine(crosshairPen, new Point(0, mousePos.Y), new Point(mousePos.X - offset, mousePos.Y)); // Left
-                g.DrawLine(crosshairPen, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
-                g.DrawLine(crosshairPen, new Point(mousePos.X, 0), new Point(mousePos.X, mousePos.Y - offset)); // Top
-                g.DrawLine(crosshairPen, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
-            }
+            g.DrawLine(borderDotPen, new Point(mousePos.X - offset, mousePos.Y), new Point(0, mousePos.Y)); // Left
+            g.DrawLine(borderDotPen2, new Point(mousePos.X - offset, mousePos.Y), new Point(0, mousePos.Y)); // Left
+            g.DrawLine(borderDotPen, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
+            g.DrawLine(borderDotPen2, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
+            g.DrawLine(borderDotPen, new Point(mousePos.X, mousePos.Y - offset), new Point(mousePos.X, 0)); // Top
+            g.DrawLine(borderDotPen2, new Point(mousePos.X, mousePos.Y - offset), new Point(mousePos.X, 0)); // Top
+            g.DrawLine(borderDotPen, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
+            g.DrawLine(borderDotPen2, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
         }
 
         private void DrawMagnifier(Graphics g)
