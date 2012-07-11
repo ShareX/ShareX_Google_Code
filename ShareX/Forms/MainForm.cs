@@ -230,7 +230,7 @@ namespace ShareX
             tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible =
                 tsmiShowErrors.Visible = tsmiShowResponse.Visible = tsmiUploadSelectedFile.Visible = false;
             pbPreview.Reset();
-            uim.RefreshInfo();
+            uim.RefreshSelectedItems();
 
             if (lvUploads.SelectedIndices.Count > 0)
             {
@@ -242,73 +242,64 @@ namespace ShareX
                 }
                 else
                 {
-                    if (uim.Info != null)
+                    if (uim.IsSelectedItemsValid())
                     {
-                        if (uim.Info.Result.IsError)
+                        if (uim.SelectedItems[0].Info.Result.IsError)
                         {
                             tsmiShowErrors.Visible = tsmiShowResponse.Visible = true;
                         }
                         else
                         {
-                            if (uim.SelectedItemCount > 1)
-                            {
-                                tsmiCopyURL.Text = string.Format("URLs ({0})", uim.SelectedItemCount);
-                            }
-                            else
-                            {
-                                tsmiCopyURL.Text = "URL";
-                            }
-
                             // Open
                             tsmiOpen.Visible = true;
 
-                            tsmiOpenURL.Enabled = uim.IsURLExist;
-                            tsmiOpenShortenedURL.Enabled = uim.IsShortenedURLExist;
-                            tsmiOpenThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                            tsmiOpenDeletionURL.Enabled = uim.IsDeletionURLExist;
+                            tsmiOpenURL.Enabled = uim.SelectedItems[0].IsURLExist;
+                            tsmiOpenShortenedURL.Enabled = uim.SelectedItems[0].IsShortenedURLExist;
+                            tsmiOpenThumbnailURL.Enabled = uim.SelectedItems[0].IsThumbnailURLExist;
+                            tsmiOpenDeletionURL.Enabled = uim.SelectedItems[0].IsDeletionURLExist;
 
-                            tsmiOpenFile.Enabled = uim.IsFileExist;
-                            tsmiOpenFolder.Enabled = uim.IsFileExist;
+                            tsmiOpenFile.Enabled = uim.SelectedItems[0].IsFileExist;
+                            tsmiOpenFolder.Enabled = uim.SelectedItems[0].IsFileExist;
 
                             // Copy
                             tsmiCopy.Visible = true;
 
-                            tsmiCopyURL.Enabled = uim.IsURLExist;
-                            tsmiCopyShortenedURL.Enabled = uim.IsShortenedURLExist;
-                            tsmiCopyThumbnailURL.Enabled = uim.IsThumbnailURLExist;
-                            tsmiCopyDeletionURL.Enabled = uim.IsDeletionURLExist;
+                            tsmiCopyURL.Enabled = uim.SelectedItems.Any(x => x.IsURLExist);
+                            tsmiCopyShortenedURL.Enabled = uim.SelectedItems.Any(x => x.IsShortenedURLExist);
+                            tsmiCopyThumbnailURL.Enabled = uim.SelectedItems.Any(x => x.IsThumbnailURLExist);
+                            tsmiCopyDeletionURL.Enabled = uim.SelectedItems.Any(x => x.IsDeletionURLExist);
 
-                            tsmiCopyFile.Enabled = uim.IsFileExist;
-                            tsmiCopyImage.Enabled = uim.IsImageFile;
-                            tsmiCopyText.Enabled = uim.IsTextFile;
+                            tsmiCopyFile.Enabled = uim.SelectedItems[0].IsFileExist;
+                            tsmiCopyImage.Enabled = uim.SelectedItems[0].IsImageFile;
+                            tsmiCopyText.Enabled = uim.SelectedItems[0].IsTextFile;
 
-                            tsmiCopyHTMLLink.Enabled = uim.IsURLExist;
-                            tsmiCopyHTMLImage.Enabled = uim.IsImageURL;
-                            tsmiCopyHTMLLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+                            tsmiCopyHTMLLink.Enabled = uim.SelectedItems.Any(x => x.IsURLExist);
+                            tsmiCopyHTMLImage.Enabled = uim.SelectedItems.Any(x => x.IsImageURL);
+                            tsmiCopyHTMLLinkedImage.Enabled = uim.SelectedItems.Any(x => x.IsImageURL && x.IsThumbnailURLExist);
 
-                            tsmiCopyForumLink.Enabled = uim.IsURLExist;
-                            tsmiCopyForumImage.Enabled = uim.IsImageURL && uim.IsURLExist;
-                            tsmiCopyForumLinkedImage.Enabled = uim.IsImageURL && uim.IsThumbnailURLExist;
+                            tsmiCopyForumLink.Enabled = uim.SelectedItems.Any(x => x.IsURLExist);
+                            tsmiCopyForumImage.Enabled = uim.SelectedItems.Any(x => x.IsImageURL && x.IsURLExist);
+                            tsmiCopyForumLinkedImage.Enabled = uim.SelectedItems.Any(x => x.IsImageURL && x.IsThumbnailURLExist);
 
-                            tsmiCopyFilePath.Enabled = uim.IsFilePathValid;
-                            tsmiCopyFileName.Enabled = uim.IsFilePathValid;
-                            tsmiCopyFileNameWithExtension.Enabled = uim.IsFilePathValid;
-                            tsmiCopyFolder.Enabled = uim.IsFilePathValid;
+                            tsmiCopyFilePath.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
+                            tsmiCopyFileName.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
+                            tsmiCopyFileNameWithExtension.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
+                            tsmiCopyFolder.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
 
                             if (!scMain.Panel2Collapsed)
                             {
-                                if (uim.IsImageFile)
+                                if (uim.SelectedItems[0].IsImageFile)
                                 {
-                                    pbPreview.LoadImageFromFile(uim.Info.FilePath);
+                                    pbPreview.LoadImageFromFile(uim.SelectedItems[0].Info.FilePath);
                                 }
-                                else if (uim.IsImageURL)
+                                else if (uim.SelectedItems[0].IsImageURL)
                                 {
-                                    pbPreview.LoadImageFromURL(uim.Info.Result.URL);
+                                    pbPreview.LoadImageFromURL(uim.SelectedItems[0].Info.Result.URL);
                                 }
                             }
                         }
 
-                        tsmiUploadSelectedFile.Visible = uim.IsFileExist;
+                        tsmiUploadSelectedFile.Visible = uim.SelectedItems[0].IsFileExist;
                     }
                 }
             }

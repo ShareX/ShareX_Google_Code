@@ -54,11 +54,9 @@ namespace ScreenCapture
                 case Keys.I:
                     Config.ShowInfo = !Config.ShowInfo;
                     break;
-
                 case Keys.C:
                     Config.ShowCrosshair = !Config.ShowCrosshair;
                     break;
-
                 case Keys.M:
                     Config.ShowMagnifier = !Config.ShowMagnifier;
                     break;
