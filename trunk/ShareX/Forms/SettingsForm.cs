@@ -101,15 +101,12 @@ namespace ShareX
                 case ImageScaleType.Percentage:
                     rbImageScaleTypePercentage.Checked = true;
                     break;
-
                 case ImageScaleType.Width:
                     rbImageScaleTypeToWidth.Checked = true;
                     break;
-
                 case ImageScaleType.Height:
                     rbImageScaleTypeToHeight.Checked = true;
                     break;
-
                 case ImageScaleType.Specific:
                     rbImageScaleTypeSpecific.Checked = true;
                     break;
