@@ -199,17 +199,36 @@ namespace ScreenCapture
 
         private void DrawCrosshair(Graphics g)
         {
+            int offset = 10;
             Point mousePos = InputManager.MousePosition0Based;
-            int offset = 2;
+            Point left = new Point(mousePos.X - offset, mousePos.Y), left2 = new Point(0, mousePos.Y);
+            Point right = new Point(mousePos.X + offset, mousePos.Y), right2 = new Point(ScreenRectangle0Based.Width - 1, mousePos.Y);
+            Point top = new Point(mousePos.X, mousePos.Y - offset), top2 = new Point(mousePos.X, 0);
+            Point bottom = new Point(mousePos.X, mousePos.Y + offset), bottom2 = new Point(mousePos.X, ScreenRectangle0Based.Height - 1);
 
-            g.DrawLine(borderDotPen, new Point(mousePos.X - offset, mousePos.Y), new Point(0, mousePos.Y)); // Left
-            g.DrawLine(borderDotPen2, new Point(mousePos.X - offset, mousePos.Y), new Point(0, mousePos.Y)); // Left
-            g.DrawLine(borderDotPen, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
-            g.DrawLine(borderDotPen2, new Point(mousePos.X + offset, mousePos.Y), new Point(ScreenRectangle0Based.Width - 1, mousePos.Y)); // Right
-            g.DrawLine(borderDotPen, new Point(mousePos.X, mousePos.Y - offset), new Point(mousePos.X, 0)); // Top
-            g.DrawLine(borderDotPen2, new Point(mousePos.X, mousePos.Y - offset), new Point(mousePos.X, 0)); // Top
-            g.DrawLine(borderDotPen, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
-            g.DrawLine(borderDotPen2, new Point(mousePos.X, mousePos.Y + offset), new Point(mousePos.X, ScreenRectangle0Based.Height - 1)); // Bottom
+            if (left.X - left2.X > 10)
+            {
+                g.DrawLine(borderDotPen, left, left2);
+                g.DrawLine(borderDotPen2, left, left2);
+            }
+
+            if (right2.X - right.X > 10)
+            {
+                g.DrawLine(borderDotPen, right, right2);
+                g.DrawLine(borderDotPen2, right, right2);
+            }
+
+            if (top.Y - top2.Y > 10)
+            {
+                g.DrawLine(borderDotPen, top, top2);
+                g.DrawLine(borderDotPen2, top, top2);
+            }
+
+            if (bottom2.Y - bottom.Y > 10)
+            {
+                g.DrawLine(borderDotPen, bottom, bottom2);
+                g.DrawLine(borderDotPen2, bottom, bottom2);
+            }
         }
 
         private void DrawMagnifier(Graphics g)

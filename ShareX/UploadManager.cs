@@ -100,7 +100,8 @@ namespace ShareX
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
-                UploadImage(img);
+                AfterCaptureTasks tasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.CopyImageToClipboard);
+                UploadManager.UploadImage(img, tasks);
             }
             else if (Clipboard.ContainsFileDropList())
             {
