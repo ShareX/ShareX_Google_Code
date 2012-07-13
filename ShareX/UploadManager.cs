@@ -367,6 +367,12 @@ namespace ShareX
                         lvi.SubItems[1].Text = info.Status;
                         lvi.ImageIndex = 2;
 
+                        if (Program.Settings.SaveHistory && (!string.IsNullOrEmpty(info.Result.URL) || !string.IsNullOrEmpty(info.FilePath)))
+                        {
+                            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
+                            HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
+                        }
+
                         if (!string.IsNullOrEmpty(info.Result.URL))
                         {
                             string url = info.Result.ToString();
@@ -376,12 +382,6 @@ namespace ShareX
                             if (info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
                             {
                                 Helpers.CopyTextSafely(url);
-                            }
-
-                            if (Program.Settings.SaveHistory)
-                            {
-                                HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-                                HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                             }
 
                             if (Program.Settings.TrayBalloonTipAfterUpload && Program.mainForm.niTray.Visible)
