@@ -218,16 +218,18 @@ namespace ShareX
             lvWatchFolderList.Items.Add(lvi);
         }
 
+        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.i, ReplacementVariables.n };
+
         private void CreateCodesMenu()
         {
             codesMenu = new ContextMenuStrip
             {
-                Font = new XFont("Lucida Console", 8),
+                Font = new XmlFont("Lucida Console", 8),
                 Opacity = 0.8,
                 ShowImageMargin = false
             };
 
-            var variables = Enum.GetValues(typeof(ReplacementVariables)).Cast<ReplacementVariables>().
+            var variables = Enum.GetValues(typeof(ReplacementVariables)).Cast<ReplacementVariables>().Where(x => !ignoreList.Contains(x)).
                 Select(x => new
                 {
                     Name = ReplacementExtension.Prefix + Enum.GetName(typeof(ReplacementVariables), x),
@@ -237,17 +239,6 @@ namespace ShareX
 
             foreach (var variable in variables)
             {
-                switch (variable.Enum)
-                {
-                    case ReplacementVariables.t:
-                    case ReplacementVariables.i:
-                    case ReplacementVariables.n:
-                    case ReplacementVariables.link:
-                    case ReplacementVariables.name:
-                    case ReplacementVariables.size:
-                        continue;
-                }
-
                 ToolStripMenuItem tsi = new ToolStripMenuItem { Text = string.Format("{0} - {1}", variable.Name, variable.Description), Tag = variable.Name };
                 tsi.Click += (sender, e) => txtNameFormatPattern.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
                 codesMenu.Items.Add(tsi);

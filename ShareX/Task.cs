@@ -101,7 +101,7 @@ namespace ShareX
         {
             Task task = new Task(TaskJob.ImageJob, EDataType.Image);
             task.Info.AfterCaptureJob = imageJob;
-            task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".bmp";
+            task.Info.FileName = new NameParser(NameParserType.FileName) { Picture = image }.Convert(Program.Settings.NameFormatPattern) + ".bmp";
             task.tempImage = image;
             return task;
         }

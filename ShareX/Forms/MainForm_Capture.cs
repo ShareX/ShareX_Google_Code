@@ -125,14 +125,24 @@ namespace ShareX
 
         private void CaptureActiveWindow(bool autoHideForm = true)
         {
-            if (Program.Settings.CaptureTransparent)
+            Capture(() =>
             {
-                Capture(Screenshot.CaptureActiveWindowTransparent, autoHideForm);
-            }
-            else
-            {
-                Capture(Screenshot.CaptureActiveWindow, autoHideForm);
-            }
+                Image img = null;
+                string activeWindowTitle = NativeMethods.GetForegroundWindowText();
+
+                if (Program.Settings.CaptureTransparent)
+                {
+                    img = Screenshot.CaptureActiveWindowTransparent();
+                }
+                else
+                {
+                    img = Screenshot.CaptureActiveWindow();
+                }
+
+                img.Tag = new ImageTag() { ActiveWindowTitle = activeWindowTitle };
+
+                return img;
+            }, autoHideForm);
         }
 
         private void CaptureActiveMonitor(bool autoHideForm = true)
