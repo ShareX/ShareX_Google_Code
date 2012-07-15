@@ -76,18 +76,8 @@ namespace HelpersLib
         uln,
         [Description("Computer name")]
         cn,
-        [Description("Application name")]
-        app,
-        [Description("Application version")]
-        ver,
         [Description("New line")]
-        n,
-        [Description("Link")]
-        link,
-        [Description("File name")]
-        name,
-        [Description("File size")]
-        size
+        n
     }
 
     public static class ReplacementExtension
@@ -109,7 +99,7 @@ namespace HelpersLib
         URL
     }
 
-    public class NameParser : IDisposable
+    public class NameParser
     {
         public NameParserType Type { get; private set; }
         public int AutoIncrementNumber { get; set; }
@@ -117,9 +107,7 @@ namespace HelpersLib
         public string Host { get; set; }
         public Image Picture { get; set; }
         public DateTime CustomDate { get; set; }
-        public string CustomProductName { get; set; }
         public int MaxNameLength { get; set; }
-        public string Link { get; set; }
         public string FileName { get; set; }
         public string FileSize { get; set; }
         public string WindowText { get; set; }
@@ -139,21 +127,27 @@ namespace HelpersLib
 
             StringBuilder sb = new StringBuilder(pattern);
 
-            sb.Replace(ReplacementVariables.link.ToPrefixString(), Link);
-            sb.Replace(ReplacementVariables.name.ToPrefixString(), FileName);
-            sb.Replace(ReplacementVariables.size.ToPrefixString(), FileSize);
-            sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
-
             string width = string.Empty, height = string.Empty;
 
             if (Picture != null)
             {
                 width = Picture.Width.ToString();
                 height = Picture.Height.ToString();
+
+                if (string.IsNullOrEmpty(WindowText))
+                {
+                    ImageTag imageTag = Picture.Tag as ImageTag;
+
+                    if (imageTag != null)
+                    {
+                        WindowText = imageTag.ActiveWindowTitle.Replace(' ', '_');
+                    }
+                }
             }
 
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
+            sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
 
             sb.Replace("%host", Host);
 
@@ -204,10 +198,6 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.uln.ToPrefixString(), Environment.UserDomainName);
             sb.Replace(ReplacementVariables.cn.ToPrefixString(), Environment.MachineName);
 
-            string productName = string.IsNullOrEmpty(CustomProductName) ? Application.ProductName : CustomProductName;
-            sb.Replace(ReplacementVariables.app.ToPrefixString(), productName);
-            sb.Replace(ReplacementVariables.ver.ToPrefixString(), Application.ProductVersion);
-
             if (Type == NameParserType.Text && AllowNewLine)
             {
                 sb.Replace(ReplacementVariables.n.ToPrefixString(), "\n");
@@ -244,14 +234,6 @@ namespace HelpersLib
             }
 
             return result;
-        }
-
-        public void Dispose()
-        {
-            if (Picture != null)
-            {
-                Picture.Dispose();
-            }
         }
     }
 }

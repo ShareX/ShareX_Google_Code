@@ -89,6 +89,7 @@
     <Compile Include="ImageQuantization\OctreeQuantizer.cs" />
     <Compile Include="ImageQuantization\PaletteQuantizer.cs" />
     <Compile Include="ImageQuantization\Quantizer.cs" />
+    <Compile Include="ImageTag.cs" />
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />
@@ -209,8 +210,9 @@
     <Compile Include="UpdateChecker\UpdaterForm.designer.cs">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SerializationHelper.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="XmlColor.cs" />
+    <Compile Include="XmlFont.cs" />
     <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
       <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
     </EmbeddedResource>
