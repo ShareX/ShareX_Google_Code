@@ -38,7 +38,7 @@ namespace ShareX
         {
             InitializeComponent();
             Text = Program.Title;
-            lblProductName.Text = Program.Title;
+            lblProductName.Text = Program.FullTitle;
             lblCopyright.Text = AssemblyCopyright;
 
             UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,

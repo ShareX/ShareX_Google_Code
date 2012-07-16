@@ -1,4 +1,13 @@
-﻿ShareX 6.1 - 2012-06-24
+﻿ShareX 6.2 - 16-07-2012
+
+* Added watch folder tab to settings for auto uploading newly created files in these folders
+* Added screen color picker to tools section
+* Added image history with a thumbnail view
+* Updated naming pattern to include variables such as 'active window title' and 'image width/height'
+* It is now possible to copy multiple uploaded item infos (html, bbcode etc.)
+* In 'shape capture' mode spacebar will now perform a fullscreen capture
+
+ShareX 6.1 - 24-06-2012
 
 * Added support for sharing via social networking services initially with Twitter
 * After capture tasks and After upload tasks are configurable from the main window or tray menu
@@ -7,7 +16,7 @@
 * Ability to retry upload via main window context menu
 * Added printer support
 
-ShareX 6.0 - 2012-06-09
+ShareX 6.0 - 09-06-2012
 
 * Improved right click menu to include more open/copy options
 * Added support to preview image in the main window
@@ -22,7 +31,7 @@ ShareX 6.0 - 2012-06-09
 * Added imm.io Image Uploader
 * Rebranded as ShareX
 
-ZUploader 5.5 - 2012-03-07
+ZUploader 5.5 - 07-03-2012
 
 5.5.0 Added Email as file uploader
 5.4.1 Clipboard upload auto detects URL and shortens it
@@ -73,7 +82,7 @@ ZUploader 5.5 - 2012-03-07
 1.2 Added support for Shell Extension "Upload using ShareX"
 1.1 Reconfigured UI, Added proxy support
 
-ZUploader 1.0 - 2010-03-27
+ZUploader 1.0 - 27-03-2010
 
 1.0 Initial version of ZUploader
 
