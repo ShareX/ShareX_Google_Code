@@ -174,8 +174,17 @@ namespace ShareX
         {
             get
             {
-                string title = string.Format("{0} {1}.{2}.{3} r{4}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor,
-                    AssemblyVersion.Build, AssemblyVersion.Revision);
+                string title = string.Format("{0} {1}.{2}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor);
+                if (IsPortable) title += " Portable";
+                return title;
+            }
+        }
+
+        public static string FullTitle
+        {
+            get
+            {
+                string title = string.Format("{0} {1}.{2}.{3}.{4}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor, AssemblyVersion.Build, AssemblyVersion.Revision);
                 if (IsPortable) title += " Portable";
                 return title;
             }

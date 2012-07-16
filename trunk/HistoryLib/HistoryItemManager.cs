@@ -23,10 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using HelpersLib;
 
 namespace HistoryLib
