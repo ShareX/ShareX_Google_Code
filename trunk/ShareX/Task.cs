@@ -101,7 +101,7 @@ namespace ShareX
         {
             Task task = new Task(TaskJob.ImageJob, EDataType.Image);
             task.Info.AfterCaptureJob = imageJob;
-            task.Info.FileName = new NameParser(NameParserType.FileName) { Picture = image }.Convert(Program.Settings.NameFormatPattern) + ".bmp";
+            task.Info.FileName = GetImageFilename(image);
             task.tempImage = image;
             return task;
         }
@@ -123,6 +123,24 @@ namespace ShareX
         }
 
         #endregion Constructors
+
+        private static string GetImageFilename(Image image)
+        {
+            NameParser nameParser = new NameParser(NameParserType.FileName) { Picture = image };
+            ImageTag imageTag = image.Tag as ImageTag;
+
+            if (imageTag != null)
+            {
+                nameParser.WindowText = imageTag.ActiveWindowTitle;
+            }
+
+            if (!string.IsNullOrEmpty(nameParser.WindowText))
+            {
+                return nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
+            }
+
+            return nameParser.Convert(Program.Settings.NameFormatPattern) + ".bmp";
+        }
 
         public void Start()
         {

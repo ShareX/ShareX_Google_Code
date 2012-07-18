@@ -126,27 +126,21 @@ namespace HelpersLib
 
             StringBuilder sb = new StringBuilder(pattern);
 
+            if (!string.IsNullOrEmpty(WindowText))
+            {
+                sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText.Replace(' ', '_'));
+            }
+
             string width = string.Empty, height = string.Empty;
 
             if (Picture != null)
             {
                 width = Picture.Width.ToString();
                 height = Picture.Height.ToString();
-
-                if (string.IsNullOrEmpty(WindowText))
-                {
-                    ImageTag imageTag = Picture.Tag as ImageTag;
-
-                    if (imageTag != null)
-                    {
-                        WindowText = imageTag.ActiveWindowTitle.Replace(' ', '_');
-                    }
-                }
             }
 
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
-            sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText);
 
             sb.Replace("%host", Host);
 
