@@ -42,7 +42,7 @@ namespace ShareX
         private const int MaxBufferSizePower = 12;
 
         private bool loaded;
-        private ContextMenuStrip codesMenu;
+        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
 
         public SettingsForm()
         {
@@ -159,7 +159,9 @@ namespace ShareX
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
             cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
-            CreateCodesMenu();
+            txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
+            cmsNameFormatPattern = CreateCodesMenu(txtNameFormatPattern);
+            cmsNameFormatPatternActiveWindow = CreateCodesMenu(txtNameFormatPatternActiveWindow);
 
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
 
@@ -220,9 +222,9 @@ namespace ShareX
 
         private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.i, ReplacementVariables.n };
 
-        private void CreateCodesMenu()
+        private ContextMenuStrip CreateCodesMenu(TextBox tb)
         {
-            codesMenu = new ContextMenuStrip
+            ContextMenuStrip cms = new ContextMenuStrip
             {
                 Font = new XmlFont("Lucida Console", 8),
                 Opacity = 0.8,
@@ -240,9 +242,11 @@ namespace ShareX
             foreach (var variable in variables)
             {
                 ToolStripMenuItem tsi = new ToolStripMenuItem { Text = string.Format("{0} - {1}", variable.Name, variable.Description), Tag = variable.Name };
-                tsi.Click += (sender, e) => txtNameFormatPattern.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
-                codesMenu.Items.Add(tsi);
+                tsi.Click += (sender, e) => tb.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
+                cms.Items.Add(tsi);
             }
+
+            return cms;
         }
 
         #region General
@@ -669,12 +673,24 @@ namespace ShareX
         private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser(NameParserType.URL).Convert(Program.Settings.NameFormatPattern);
+            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern);
         }
 
         private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
         {
-            codesMenu.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
+            cmsNameFormatPattern.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
+        }
+
+        private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
+            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + new NameParser(NameParserType.FileName) { WindowText = Text }.
+                Convert(Program.Settings.NameFormatPatternActiveWindow);
+        }
+
+        private void btnNameFormatPatternHelpActiveWindow_Click(object sender, EventArgs e)
+        {
+            cmsNameFormatPatternActiveWindow.Show(btnNameFormatPatternHelpActiveWindow, new Point(btnNameFormatPatternHelpActiveWindow.Width + 1, 0));
         }
 
         #endregion General

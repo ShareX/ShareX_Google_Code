@@ -142,6 +142,7 @@ namespace ShareX
         public int BufferSizePower = 3;
         public bool ClipboardUploadAutoDetectURL = true;
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
+        public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
 
         #endregion General
 

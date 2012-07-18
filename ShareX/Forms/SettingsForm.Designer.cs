@@ -141,6 +141,9 @@
             this.tpUploadWatchFolder = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
+            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
             this.tpProxy = new System.Windows.Forms.TabPage();
@@ -157,9 +160,10 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnNameFormatPatternHelpActiveWindow = new System.Windows.Forms.Button();
+            this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
+            this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
+            this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1382,6 +1386,10 @@
             // 
             // tpUploadGeneral
             // 
+            this.tpUploadGeneral.Controls.Add(this.btnNameFormatPatternHelpActiveWindow);
+            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
+            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
+            this.tpUploadGeneral.Controls.Add(this.txtNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
             this.tpUploadGeneral.Controls.Add(this.cbClipboardUploadAutoDetectURL);
             this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
@@ -1433,7 +1441,7 @@
             // 
             // btnNameFormatPatternHelp
             // 
-            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(444, 138);
+            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(448, 138);
             this.btnNameFormatPatternHelp.Name = "btnNameFormatPatternHelp";
             this.btnNameFormatPatternHelp.Size = new System.Drawing.Size(24, 23);
             this.btnNameFormatPatternHelp.TabIndex = 3;
@@ -1471,7 +1479,7 @@
             // lblNameFormatPatternPreview
             // 
             this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(20, 171);
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(24, 171);
             this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
             this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreview.TabIndex = 4;
@@ -1480,7 +1488,7 @@
             // lblNameFormatPattern
             // 
             this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(20, 115);
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(24, 115);
             this.lblNameFormatPattern.Name = "lblNameFormatPattern";
             this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
             this.lblNameFormatPattern.TabIndex = 1;
@@ -1507,7 +1515,7 @@
             // 
             // txtNameFormatPattern
             // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(20, 139);
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(24, 139);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
             this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
             this.txtNameFormatPattern.TabIndex = 2;
@@ -1551,6 +1559,20 @@
             this.lvWatchFolderList.TabIndex = 12;
             this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
             this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
+            // 
+            // chWatchFolderFolderPath
+            // 
+            this.chWatchFolderFolderPath.Text = "Folder path";
+            this.chWatchFolderFolderPath.Width = 300;
+            // 
+            // chWatchFolderFilter
+            // 
+            this.chWatchFolderFilter.Text = "Filter";
+            this.chWatchFolderFilter.Width = 100;
+            // 
+            // chWatchFolderIncludeSubdirectories
+            // 
+            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
             // 
             // btnWatchFolderRemove
             // 
@@ -1733,19 +1755,41 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // chWatchFolderFolderPath
+            // btnNameFormatPatternHelpActiveWindow
             // 
-            this.chWatchFolderFolderPath.Text = "Folder path";
-            this.chWatchFolderFolderPath.Width = 300;
+            this.btnNameFormatPatternHelpActiveWindow.Location = new System.Drawing.Point(448, 223);
+            this.btnNameFormatPatternHelpActiveWindow.Name = "btnNameFormatPatternHelpActiveWindow";
+            this.btnNameFormatPatternHelpActiveWindow.Size = new System.Drawing.Size(24, 23);
+            this.btnNameFormatPatternHelpActiveWindow.TabIndex = 8;
+            this.btnNameFormatPatternHelpActiveWindow.Text = "?";
+            this.btnNameFormatPatternHelpActiveWindow.UseVisualStyleBackColor = true;
+            this.btnNameFormatPatternHelpActiveWindow.Click += new System.EventHandler(this.btnNameFormatPatternHelpActiveWindow_Click);
             // 
-            // chWatchFolderFilter
+            // lblNameFormatPatternPreviewActiveWindow
             // 
-            this.chWatchFolderFilter.Text = "Filter";
-            this.chWatchFolderFilter.Width = 100;
+            this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 256);
+            this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
+            this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
+            this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
+            this.lblNameFormatPatternPreviewActiveWindow.Text = "Preview:";
             // 
-            // chWatchFolderIncludeSubdirectories
+            // lblNameFormatPatternActiveWindow
             // 
-            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
+            this.lblNameFormatPatternActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 200);
+            this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
+            this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
+            this.lblNameFormatPatternActiveWindow.TabIndex = 6;
+            this.lblNameFormatPatternActiveWindow.Text = "Name pattern for active window capture:";
+            // 
+            // txtNameFormatPatternActiveWindow
+            // 
+            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 224);
+            this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
+            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(416, 20);
+            this.txtNameFormatPatternActiveWindow.TabIndex = 7;
+            this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
             // 
             // SettingsForm
             // 
@@ -1942,5 +1986,9 @@
         private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
         private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
         private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
+        private System.Windows.Forms.Button btnNameFormatPatternHelpActiveWindow;
+        private System.Windows.Forms.Label lblNameFormatPatternPreviewActiveWindow;
+        private System.Windows.Forms.Label lblNameFormatPatternActiveWindow;
+        private System.Windows.Forms.TextBox txtNameFormatPatternActiveWindow;
     }
 }
