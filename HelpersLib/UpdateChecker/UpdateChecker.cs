@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -79,7 +80,9 @@ namespace UpdateCheckerLib
 
             try
             {
-                using (WebClient wc = new WebClient { Proxy = Proxy })
+                RequestCachePolicy cachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+
+                using (WebClient wc = new WebClient { Proxy = Proxy, CachePolicy = cachePolicy })
                 using (MemoryStream ms = new MemoryStream(wc.DownloadData(URL)))
                 using (XmlTextReader xml = new XmlTextReader(ms))
                 {
