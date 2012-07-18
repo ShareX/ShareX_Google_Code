@@ -276,6 +276,7 @@
             this.lvHistory.UseCompatibleStateImageBehavior = false;
             this.lvHistory.View = System.Windows.Forms.View.Details;
             this.lvHistory.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvHistory_ItemSelectionChanged);
+            this.lvHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvHistory_KeyDown);
             this.lvHistory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvHistory_MouseDoubleClick);
             this.lvHistory.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvHistory_MouseUp);
             // 
@@ -322,11 +323,13 @@
             this.Controls.Add(this.pbThumbnail);
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ssMain);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(925, 725);
             this.Name = "HistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HistoryFormTest";
             this.Shown += new System.EventHandler(this.HistoryForm_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HistoryForm_KeyDown);
             this.ssMain.ResumeLayout(false);
             this.ssMain.PerformLayout();
             this.gbFilters.ResumeLayout(false);

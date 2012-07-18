@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,18 +37,18 @@ namespace HistoryLib
     public partial class ImageHistoryForm : Form
     {
         public string HistoryPath { get; private set; }
+        public int MaxItemCount { get; set; }
 
         private HistoryManager history;
         private HistoryItemManager him;
         private HistoryItem[] historyItems;
 
-        public ImageHistoryForm(string historyPath, string title = "")
+        public ImageHistoryForm(string historyPath, string title = "", int maxItemCount = -1)
         {
             InitializeComponent();
-            HistoryPath = historyPath;
 
-            him = new HistoryItemManager();
-            him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
+            HistoryPath = historyPath;
+            MaxItemCount = maxItemCount;
 
             if (!string.IsNullOrEmpty(title))
             {
@@ -57,22 +58,19 @@ namespace HistoryLib
             {
                 Text = "Image history: " + historyPath;
             }
+
+            him = new HistoryItemManager();
+            him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
         }
 
-        private HistoryItem[] him_GetHistoryItems()
-        {
-            return ilvImages.SelectedItems.Cast<ImageListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
-        }
-
-        private void GetHistoryItems()
+        private void RefreshHistoryItems()
         {
             if (history == null)
             {
                 history = new HistoryManager(HistoryPath);
             }
 
-            historyItems = history.GetHistoryItems().Where(x => !string.IsNullOrEmpty(x.Filepath) &&
-                Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath)).Reverse().ToArray();
+            historyItems = GetHistoryItems();
 
             ilvImages.Items.Clear();
             ilvImages.SuspendLayout();
@@ -87,6 +85,24 @@ namespace HistoryLib
             ilvImages.ResumeLayout();
         }
 
+        private HistoryItem[] him_GetHistoryItems()
+        {
+            return ilvImages.SelectedItems.Cast<ImageListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
+        }
+
+        private HistoryItem[] GetHistoryItems()
+        {
+            IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems().Where(x => !string.IsNullOrEmpty(x.Filepath) &&
+                Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath)).Reverse().ToArray();
+
+            if (MaxItemCount > -1)
+            {
+                tempHistoryItems = tempHistoryItems.Take(MaxItemCount);
+            }
+
+            return tempHistoryItems.ToArray();
+        }
+
         #region Form events
 
         private void ImageHistoryForm_Shown(object sender, EventArgs e)
@@ -94,7 +110,18 @@ namespace HistoryLib
             Application.DoEvents();
             BringToFront();
             Activate();
-            GetHistoryItems();
+            RefreshHistoryItems();
+        }
+
+        private void ImageHistoryForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.F5:
+                    RefreshHistoryItems();
+                    e.Handled = true;
+                    break;
+            }
         }
 
         private void ilvImages_MouseUp(object sender, MouseEventArgs e)
@@ -114,8 +141,6 @@ namespace HistoryLib
         {
             him.ShowImagePreview();
         }
-
-        #endregion Form events
 
         private void tsmiThumbnailSize75_Click(object sender, EventArgs e)
         {
@@ -156,5 +181,26 @@ namespace HistoryLib
         {
             ilvImages.View = Manina.Windows.Forms.View.Pane;
         }
+
+        private void ilvImages_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                default: return;
+                case Keys.Enter:
+                    him.OpenURL();
+                    break;
+                case Keys.Control | Keys.Enter:
+                    him.OpenFile();
+                    break;
+                case Keys.Control | Keys.C:
+                    him.CopyURL();
+                    break;
+            }
+
+            e.Handled = true;
+        }
+
+        #endregion Form events
     }
 }

@@ -652,6 +652,25 @@ namespace ShareX
             Program.Settings.PreviewSplitterDistance = scMain.SplitterDistance;
         }
 
+        private void lvUploads_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                default: return;
+                case Keys.Enter:
+                    uim.OpenURL();
+                    break;
+                case Keys.Control | Keys.Enter:
+                    uim.OpenFile();
+                    break;
+                case Keys.Control | Keys.C:
+                    uim.CopyURL();
+                    break;
+            }
+
+            e.Handled = true;
+        }
+
         #region Tray events
 
         private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)

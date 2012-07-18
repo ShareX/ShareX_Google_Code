@@ -35,21 +35,28 @@ namespace HistoryLib
 {
     public partial class HistoryForm : Form
     {
-        public string DatabasePath { get; private set; }
-
+        public string HistoryPath { get; private set; }
         public int MaxItemCount { get; set; }
 
         private HistoryManager history;
         private HistoryItemManager him;
         private HistoryItem[] allHistoryItems;
 
-        public HistoryForm(string databasePath, string title, int maxItemCount = -1)
+        public HistoryForm(string historyPath, string title = "", int maxItemCount = -1)
         {
             InitializeComponent();
 
-            DatabasePath = databasePath;
+            HistoryPath = historyPath;
             MaxItemCount = maxItemCount;
-            this.Text = title;
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                Text = title;
+            }
+            else
+            {
+                Text = "History: " + historyPath;
+            }
 
             him = new HistoryItemManager();
             him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
@@ -62,32 +69,32 @@ namespace HistoryLib
             lvHistory.FillLastColumn();
         }
 
-        private HistoryItem[] him_GetHistoryItems()
-        {
-            return lvHistory.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
-        }
-
         private void RefreshHistoryItems()
         {
             if (history == null)
             {
-                history = new HistoryManager(DatabasePath);
+                history = new HistoryManager(HistoryPath);
             }
 
             allHistoryItems = GetHistoryItems();
             ApplyFiltersAndAdd();
         }
 
+        private HistoryItem[] him_GetHistoryItems()
+        {
+            return lvHistory.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
+        }
+
         private HistoryItem[] GetHistoryItems()
         {
-            IEnumerable<HistoryItem> historyItems = history.GetHistoryItems().OrderByDescending(x => x.DateTimeUtc);
+            IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems().OrderByDescending(x => x.DateTimeUtc);
 
             if (MaxItemCount > -1)
             {
-                historyItems = historyItems.Take(MaxItemCount);
+                tempHistoryItems = tempHistoryItems.Take(MaxItemCount);
             }
 
-            return historyItems.ToArray();
+            return tempHistoryItems.ToArray();
         }
 
         private void ApplyFiltersAndAdd()
@@ -250,9 +257,20 @@ namespace HistoryLib
         private void HistoryForm_Shown(object sender, EventArgs e)
         {
             Application.DoEvents();
+            BringToFront();
+            Activate();
             RefreshHistoryItems();
-            this.BringToFront();
-            this.Activate();
+        }
+
+        private void HistoryForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.F5:
+                    RefreshHistoryItems();
+                    e.Handled = true;
+                    break;
+            }
         }
 
         private void btnApplyFilters_Click(object sender, EventArgs e)
@@ -287,6 +305,25 @@ namespace HistoryLib
             {
                 him.OpenURL();
             }
+        }
+
+        private void lvHistory_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                default: return;
+                case Keys.Enter:
+                    him.OpenURL();
+                    break;
+                case Keys.Control | Keys.Enter:
+                    him.OpenFile();
+                    break;
+                case Keys.Control | Keys.C:
+                    him.CopyURL();
+                    break;
+            }
+
+            e.Handled = true;
         }
 
         #endregion Form events
