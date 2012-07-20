@@ -234,22 +234,22 @@ namespace ScreenCapture
         private void DrawMagnifier(Graphics g)
         {
             Point mousePos = InputManager.MousePosition0Based;
-            int offset = 25;
+            int offsetX = 10, offsetY = 50;
 
             using (Bitmap magnifier = Magnifier(SurfaceImage, mousePos, magnifierPixelCount, magnifierPixelCount, magnifierPixelSize))
             {
-                int x = mousePos.X + offset;
+                int x = mousePos.X + offsetX;
 
                 if (x + magnifier.Width > ScreenRectangle0Based.Width)
                 {
-                    x = mousePos.X - offset - magnifier.Width;
+                    x = mousePos.X - offsetX - magnifier.Width;
                 }
 
-                int y = mousePos.Y + offset;
+                int y = mousePos.Y + offsetY;
 
                 if (y + magnifier.Height > ScreenRectangle0Based.Height)
                 {
-                    y = mousePos.Y - offset - magnifier.Height;
+                    y = mousePos.Y - offsetY - magnifier.Height;
                 }
 
                 g.DrawImage(magnifier, new Point(x, y));
