@@ -2,8 +2,9 @@
 
 ==Instructions==
 
-  * After creating region(s) double click anywhere or press *Space / Enter* to capture these region(s)
+  * After creating region(s) double click anywhere or press *Enter* to capture these region(s)
   * You can right click on region to remove it
+  * *Space* key captures full screen
   * Right click empty area or press *Esc* to cancel capture
 
 ==When region is not selected or when drawing region==
