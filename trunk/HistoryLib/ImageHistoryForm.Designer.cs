@@ -50,7 +50,9 @@
             // 
             // ilvImages
             // 
+            this.ilvImages.AllowDuplicateFileNames = true;
             this.ilvImages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ilvImages.CacheLimit = "100MB";
             this.ilvImages.ColumnHeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.ilvImages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ilvImages.GroupHeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);

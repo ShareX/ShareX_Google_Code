@@ -319,6 +319,15 @@ namespace HelpersLib
             return (Rectangle)rect;
         }
 
+        public static Rectangle GetClientRect(IntPtr handle)
+        {
+            RECT rect;
+            GetClientRect(handle, out rect);
+            Point position = rect.Location;
+            ClientToScreen(handle, ref position);
+            return new Rectangle(position, rect.Size);
+        }
+
         public static Rectangle MaximizedWindowFix(IntPtr handle, Rectangle windowRect)
         {
             Size size = Size.Empty;

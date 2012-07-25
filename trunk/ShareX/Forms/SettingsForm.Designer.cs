@@ -127,6 +127,10 @@
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
+            this.btnNameFormatPatternHelpActiveWindow = new System.Windows.Forms.Button();
+            this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
+            this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
+            this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
@@ -160,10 +164,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.btnNameFormatPatternHelpActiveWindow = new System.Windows.Forms.Button();
-            this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
-            this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
-            this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
+            this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1080,6 +1081,7 @@
             // 
             // tpCaptureGeneral
             // 
+            this.tpCaptureGeneral.Controls.Add(this.cbCaptureClientArea);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureShadow);
             this.tpCaptureGeneral.Controls.Add(this.cbShowCursor);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureTransparent);
@@ -1408,6 +1410,42 @@
             this.tpUploadGeneral.TabIndex = 0;
             this.tpUploadGeneral.Text = "General";
             this.tpUploadGeneral.UseVisualStyleBackColor = true;
+            // 
+            // btnNameFormatPatternHelpActiveWindow
+            // 
+            this.btnNameFormatPatternHelpActiveWindow.Location = new System.Drawing.Point(448, 223);
+            this.btnNameFormatPatternHelpActiveWindow.Name = "btnNameFormatPatternHelpActiveWindow";
+            this.btnNameFormatPatternHelpActiveWindow.Size = new System.Drawing.Size(24, 23);
+            this.btnNameFormatPatternHelpActiveWindow.TabIndex = 8;
+            this.btnNameFormatPatternHelpActiveWindow.Text = "?";
+            this.btnNameFormatPatternHelpActiveWindow.UseVisualStyleBackColor = true;
+            this.btnNameFormatPatternHelpActiveWindow.Click += new System.EventHandler(this.btnNameFormatPatternHelpActiveWindow_Click);
+            // 
+            // lblNameFormatPatternPreviewActiveWindow
+            // 
+            this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 256);
+            this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
+            this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
+            this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
+            this.lblNameFormatPatternPreviewActiveWindow.Text = "Preview:";
+            // 
+            // lblNameFormatPatternActiveWindow
+            // 
+            this.lblNameFormatPatternActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 200);
+            this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
+            this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
+            this.lblNameFormatPatternActiveWindow.TabIndex = 6;
+            this.lblNameFormatPatternActiveWindow.Text = "Name pattern for active window capture:";
+            // 
+            // txtNameFormatPatternActiveWindow
+            // 
+            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 224);
+            this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
+            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(416, 20);
+            this.txtNameFormatPatternActiveWindow.TabIndex = 7;
+            this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
             // 
             // lblUploadLimit
             // 
@@ -1755,41 +1793,16 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // btnNameFormatPatternHelpActiveWindow
+            // cbCaptureClientArea
             // 
-            this.btnNameFormatPatternHelpActiveWindow.Location = new System.Drawing.Point(448, 223);
-            this.btnNameFormatPatternHelpActiveWindow.Name = "btnNameFormatPatternHelpActiveWindow";
-            this.btnNameFormatPatternHelpActiveWindow.Size = new System.Drawing.Size(24, 23);
-            this.btnNameFormatPatternHelpActiveWindow.TabIndex = 8;
-            this.btnNameFormatPatternHelpActiveWindow.Text = "?";
-            this.btnNameFormatPatternHelpActiveWindow.UseVisualStyleBackColor = true;
-            this.btnNameFormatPatternHelpActiveWindow.Click += new System.EventHandler(this.btnNameFormatPatternHelpActiveWindow_Click);
-            // 
-            // lblNameFormatPatternPreviewActiveWindow
-            // 
-            this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 256);
-            this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
-            this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
-            this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
-            this.lblNameFormatPatternPreviewActiveWindow.Text = "Preview:";
-            // 
-            // lblNameFormatPatternActiveWindow
-            // 
-            this.lblNameFormatPatternActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 200);
-            this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
-            this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
-            this.lblNameFormatPatternActiveWindow.TabIndex = 6;
-            this.lblNameFormatPatternActiveWindow.Text = "Name pattern for active window capture:";
-            // 
-            // txtNameFormatPatternActiveWindow
-            // 
-            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 224);
-            this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
-            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(416, 20);
-            this.txtNameFormatPatternActiveWindow.TabIndex = 7;
-            this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
+            this.cbCaptureClientArea.AutoSize = true;
+            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 88);
+            this.cbCaptureClientArea.Name = "cbCaptureClientArea";
+            this.cbCaptureClientArea.Size = new System.Drawing.Size(334, 17);
+            this.cbCaptureClientArea.TabIndex = 3;
+            this.cbCaptureClientArea.Text = "Capture client area when doing window or active window capture";
+            this.cbCaptureClientArea.UseVisualStyleBackColor = true;
+            this.cbCaptureClientArea.CheckedChanged += new System.EventHandler(this.cbCaptureClientArea_CheckedChanged);
             // 
             // SettingsForm
             // 
@@ -1801,6 +1814,7 @@
             this.MinimumSize = new System.Drawing.Size(552, 400);
             this.Name = "SettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3);
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Settings";
             this.Shown += new System.EventHandler(this.SettingsForm_Shown);
@@ -1990,5 +2004,6 @@
         private System.Windows.Forms.Label lblNameFormatPatternPreviewActiveWindow;
         private System.Windows.Forms.Label lblNameFormatPatternActiveWindow;
         private System.Windows.Forms.TextBox txtNameFormatPatternActiveWindow;
+        private System.Windows.Forms.CheckBox cbCaptureClientArea;
     }
 }

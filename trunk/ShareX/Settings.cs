@@ -124,6 +124,7 @@ namespace ShareX
         public bool ShowCursor = false;
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
+        public bool CaptureClientArea = false;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
         #endregion Capture

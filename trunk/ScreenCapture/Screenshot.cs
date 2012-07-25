@@ -35,6 +35,7 @@ namespace ScreenCapture
         public static bool RemoveOutsideScreenArea = true;
         public static bool DrawCursor = false;
         public static bool CaptureShadow = true;
+        public static bool CaptureClientArea = false;
 
         public static Image CaptureRectangle(Rectangle rect)
         {
@@ -66,7 +67,16 @@ namespace ScreenCapture
         {
             if (handle.ToInt32() > 0)
             {
-                Rectangle rect = CaptureHelpers.GetWindowRectangle(handle);
+                Rectangle rect;
+
+                if (CaptureClientArea)
+                {
+                    rect = NativeMethods.GetClientRect(handle);
+                }
+                else
+                {
+                    rect = CaptureHelpers.GetWindowRectangle(handle);
+                }
 
                 return CaptureRectangle(rect);
             }

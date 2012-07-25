@@ -124,6 +124,7 @@ namespace ShareX
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
+            cbCaptureClientArea.Checked = Program.Settings.CaptureClientArea;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
             cbDrawBorder.Checked = Program.Settings.SurfaceOptions.DrawBorder;
@@ -539,6 +540,11 @@ namespace ShareX
         private void cbCaptureShadow_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureShadow = cbCaptureShadow.Checked;
+        }
+
+        private void cbCaptureClientArea_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CaptureClientArea = cbCaptureClientArea.Checked;
         }
 
         #endregion Capture / General
