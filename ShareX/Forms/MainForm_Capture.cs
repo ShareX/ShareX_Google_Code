@@ -88,6 +88,7 @@ namespace ShareX
             {
                 Screenshot.DrawCursor = Program.Settings.ShowCursor;
                 Screenshot.CaptureShadow = Program.Settings.CaptureShadow;
+                Screenshot.CaptureClientArea = Program.Settings.CaptureClientArea;
                 img = capture();
 
                 if (img != null && Program.Settings.PlaySoundAfterCapture)
@@ -130,7 +131,7 @@ namespace ShareX
                 Image img = null;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
 
-                if (Program.Settings.CaptureTransparent)
+                if (Program.Settings.CaptureTransparent && !Program.Settings.CaptureClientArea)
                 {
                     img = Screenshot.CaptureActiveWindowTransparent();
                 }
@@ -164,12 +165,14 @@ namespace ShareX
                 NativeMethods.SetForegroundWindow(handle);
                 Thread.Sleep(250);
 
-                if (Program.Settings.CaptureTransparent)
+                if (Program.Settings.CaptureTransparent && !Program.Settings.CaptureClientArea)
                 {
                     return Screenshot.CaptureWindowTransparent(handle);
                 }
-
-                return Screenshot.CaptureWindow(handle);
+                else
+                {
+                    return Screenshot.CaptureWindow(handle);
+                }
             }, autoHideForm);
         }
 
