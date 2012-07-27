@@ -81,10 +81,10 @@ namespace UploadersLib.FileUploaders
             }
         }
 
-        protected string GetRemotePath(string fileName)
+        protected string GetRemotePath(string filename)
         {
-            fileName = Helpers.GetValidURL(fileName);
-            return Helpers.CombineURL(Account.GetSubFolderPath(), fileName);
+            filename = Helpers.GetValidURL(filename);
+            return Account.GetSubFolderPath(filename);
         }
     }
 }
