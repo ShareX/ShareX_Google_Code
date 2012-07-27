@@ -163,8 +163,10 @@ namespace UploadersLib
         Http,
         [Description("https://")]
         Https,
-        [Description("Same as ServerProtocol")]
-        ServerProtocol,
+        [Description("ftp://")]
+        Ftp,
+        [Description("ftps://")]
+        Ftps,
         [Description("file://")]
         File
     }
