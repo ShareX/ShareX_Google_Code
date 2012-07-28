@@ -109,7 +109,7 @@ namespace ShareX
         public static Task CreateTextUploaderTask(string text)
         {
             Task task = new Task(TaskJob.TextUpload, EDataType.Text);
-            task.Info.FileName = new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern) + ".txt";
+            task.Info.FileName = GetTextFilename();
             task.tempText = text;
             return task;
         }
@@ -126,7 +126,12 @@ namespace ShareX
 
         private static string GetImageFilename(Image image)
         {
-            NameParser nameParser = new NameParser(NameParserType.FileName) { Picture = image };
+            string filename;
+
+            NameParser nameParser = new NameParser(NameParserType.FileName);
+            nameParser.Picture = image;
+            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
+
             ImageTag imageTag = image.Tag as ImageTag;
 
             if (imageTag != null)
@@ -134,12 +139,32 @@ namespace ShareX
                 nameParser.WindowText = imageTag.ActiveWindowTitle;
             }
 
-            if (!string.IsNullOrEmpty(nameParser.WindowText))
+            if (string.IsNullOrEmpty(nameParser.WindowText))
             {
-                return nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
+                filename = nameParser.Convert(Program.Settings.NameFormatPattern) + ".bmp";
+            }
+            else
+            {
+                filename = nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
             }
 
-            return nameParser.Convert(Program.Settings.NameFormatPattern) + ".bmp";
+            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+
+            return filename;
+        }
+
+        private static string GetTextFilename()
+        {
+            string filename;
+
+            NameParser nameParser = new NameParser(NameParserType.FileName);
+            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
+
+            filename = nameParser.Convert(Program.Settings.NameFormatPattern) + ".txt";
+
+            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+
+            return filename;
         }
 
         public void Start()

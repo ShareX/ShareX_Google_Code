@@ -101,6 +101,7 @@
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
+            this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
@@ -164,7 +165,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
+            this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1093,6 +1094,17 @@
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbCaptureClientArea
+            // 
+            this.cbCaptureClientArea.AutoSize = true;
+            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 88);
+            this.cbCaptureClientArea.Name = "cbCaptureClientArea";
+            this.cbCaptureClientArea.Size = new System.Drawing.Size(334, 17);
+            this.cbCaptureClientArea.TabIndex = 3;
+            this.cbCaptureClientArea.Text = "Capture client area when doing window or active window capture";
+            this.cbCaptureClientArea.UseVisualStyleBackColor = true;
+            this.cbCaptureClientArea.CheckedChanged += new System.EventHandler(this.cbCaptureClientArea_CheckedChanged);
+            // 
             // cbCaptureShadow
             // 
             this.cbCaptureShadow.AutoSize = true;
@@ -1388,6 +1400,7 @@
             // 
             // tpUploadGeneral
             // 
+            this.tpUploadGeneral.Controls.Add(this.btnResetAutoIncrementNumber);
             this.tpUploadGeneral.Controls.Add(this.btnNameFormatPatternHelpActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
@@ -1793,16 +1806,15 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbCaptureClientArea
+            // btnResetAutoIncrementNumber
             // 
-            this.cbCaptureClientArea.AutoSize = true;
-            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 88);
-            this.cbCaptureClientArea.Name = "cbCaptureClientArea";
-            this.cbCaptureClientArea.Size = new System.Drawing.Size(334, 17);
-            this.cbCaptureClientArea.TabIndex = 3;
-            this.cbCaptureClientArea.Text = "Capture client area when doing window or active window capture";
-            this.cbCaptureClientArea.UseVisualStyleBackColor = true;
-            this.cbCaptureClientArea.CheckedChanged += new System.EventHandler(this.cbCaptureClientArea_CheckedChanged);
+            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 112);
+            this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
+            this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
+            this.btnResetAutoIncrementNumber.TabIndex = 10;
+            this.btnResetAutoIncrementNumber.Text = "Reset auto increment number";
+            this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
+            this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
             // 
             // SettingsForm
             // 
@@ -2005,5 +2017,6 @@
         private System.Windows.Forms.Label lblNameFormatPatternActiveWindow;
         private System.Windows.Forms.TextBox txtNameFormatPatternActiveWindow;
         private System.Windows.Forms.CheckBox cbCaptureClientArea;
+        private System.Windows.Forms.Button btnResetAutoIncrementNumber;
     }
 }

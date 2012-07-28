@@ -53,14 +53,14 @@ namespace HelpersLib
         s,
         [Description("Current milisecond")]
         ms,
+        [Description("Gets AM/PM")]
+        pm,
         [Description("Current week name (Local language)")]
         w,
         [Description("Current week name (English)")]
         w2,
         [Description("Auto increment number")]
         i,
-        [Description("Gets AM/PM")]
-        pm,
         [Description("Random number 0 to 9")]
         rn,
         [Description("Random alphanumeric char")]
@@ -102,7 +102,6 @@ namespace HelpersLib
     {
         public NameParserType Type { get; private set; }
         public int AutoIncrementNumber { get; set; }
-        public bool IsPreview { get; set; }
         public string Host { get; set; }
         public Image Picture { get; set; }
         public DateTime CustomDate { get; set; }
@@ -180,12 +179,11 @@ namespace HelpersLib
                  .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                  .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
 
-            if (!IsPreview && sb.ToString().Contains("%i"))
+            if (sb.ToString().Contains("%i"))
             {
                 AutoIncrementNumber++;
+                sb.Replace(ReplacementVariables.i.ToPrefixString(), AutoIncrementNumber.ToString());
             }
-
-            sb.Replace(ReplacementVariables.i.ToPrefixString(), Helpers.AddZeroes(AutoIncrementNumber, 4));
 
             sb.Replace(ReplacementVariables.un.ToPrefixString(), Environment.UserName);
             sb.Replace(ReplacementVariables.uln.ToPrefixString(), Environment.UserDomainName);

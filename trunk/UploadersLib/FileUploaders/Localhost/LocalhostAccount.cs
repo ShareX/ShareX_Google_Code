@@ -107,13 +107,13 @@ namespace UploadersLib
 
         public string GetSubFolderPath()
         {
-            NameParser parser = new NameParser(NameParserType.URL) { Host = this.LocalhostRoot };
-            return parser.Convert(this.SubFolderPath);
+            NameParser parser = new NameParser(NameParserType.URL) { Host = LocalhostRoot };
+            return parser.Convert(SubFolderPath);
         }
 
         public string GetHttpHomePath()
         {
-            NameParser parser = new NameParser(NameParserType.URL) { Host = this.LocalhostRoot };
+            NameParser parser = new NameParser(NameParserType.URL) { Host = LocalhostRoot };
             HttpHomePath = FTPHelpers.RemovePrefixes(HttpHomePath);
             return parser.Convert(HttpHomePath);
         }
