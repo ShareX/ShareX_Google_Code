@@ -221,7 +221,7 @@ namespace ShareX
             lvWatchFolderList.Items.Add(lvi);
         }
 
-        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.i, ReplacementVariables.n };
+        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n };
 
         private ContextMenuStrip CreateCodesMenu(TextBox tb)
         {
@@ -676,10 +676,16 @@ namespace ShareX
             Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
         }
 
+        private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
+        {
+            Program.Settings.AutoIncrementNumber = 0;
+        }
+
         private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            lblNameFormatPatternPreview.Text = "Preview: " + new NameParser(NameParserType.FileName).Convert(Program.Settings.NameFormatPattern);
+            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber };
+            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPattern);
         }
 
         private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
@@ -690,8 +696,8 @@ namespace ShareX
         private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
-            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + new NameParser(NameParserType.FileName) { WindowText = Text }.
-                Convert(Program.Settings.NameFormatPatternActiveWindow);
+            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber, WindowText = Text };
+            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow);
         }
 
         private void btnNameFormatPatternHelpActiveWindow_Click(object sender, EventArgs e)
