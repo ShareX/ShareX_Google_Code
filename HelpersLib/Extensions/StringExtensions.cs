@@ -90,6 +90,34 @@ namespace HelpersLib
             return str;
         }
 
+        public static bool ReplaceFirst(this string text, string search, string replace, out string result)
+        {
+            int location = text.IndexOf(search);
+
+            if (location < 0)
+            {
+                result = text;
+                return false;
+            }
+
+            result = text.Remove(location, search.Length).Insert(location, replace);
+            return true;
+        }
+
+        public static string ReplaceAll(this string text, string search, Func<string> replace)
+        {
+            while (true)
+            {
+                int location = text.IndexOf(search);
+
+                if (location < 0) break;
+
+                text = text.Remove(location, search.Length).Insert(location, replace());
+            }
+
+            return text;
+        }
+
         public static string RemoveWhiteSpaces(this string str)
         {
             StringBuilder result = new StringBuilder();

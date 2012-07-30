@@ -221,7 +221,7 @@ namespace ShareX
             lvWatchFolderList.Items.Add(lvi);
         }
 
-        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n };
+        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n, ReplacementVariables.host };
 
         private ContextMenuStrip CreateCodesMenu(TextBox tb)
         {
