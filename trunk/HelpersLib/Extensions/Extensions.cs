@@ -115,20 +115,6 @@ namespace HelpersLib
             return "image/unknown";
         }
 
-        public static bool ReplaceFirst(this string text, string search, string replace, out string result)
-        {
-            int location = text.IndexOf(search);
-
-            if (location < 0)
-            {
-                result = text;
-                return false;
-            }
-
-            result = text.Remove(location, search.Length).Insert(location, replace);
-            return true;
-        }
-
         public static bool IsValidIndex<T>(this T[] array, int index)
         {
             return array != null && index >= 0 && index < array.Length;

@@ -76,7 +76,9 @@ namespace HelpersLib
         [Description("Computer name")]
         cn,
         [Description("New line")]
-        n
+        n,
+        [Description("FTP host")]
+        host
     }
 
     public static class ReplacementExtension
@@ -102,14 +104,11 @@ namespace HelpersLib
     {
         public NameParserType Type { get; private set; }
         public int AutoIncrementNumber { get; set; }
-        public string Host { get; set; }
         public Image Picture { get; set; }
-        public DateTime CustomDate { get; set; }
         public int MaxNameLength { get; set; }
-        public string FileName { get; set; }
-        public string FileSize { get; set; }
         public string WindowText { get; set; }
         public bool AllowNewLine { get; set; }
+        public string Host { get; set; }
 
         public NameParser(NameParserType nameParserType)
         {
@@ -125,7 +124,7 @@ namespace HelpersLib
 
             StringBuilder sb = new StringBuilder(pattern);
 
-            if (!string.IsNullOrEmpty(WindowText))
+            if (WindowText != null)
             {
                 sb.Replace(ReplacementVariables.t.ToPrefixString(), WindowText.Replace(' ', '_'));
             }
@@ -141,18 +140,12 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
 
-            sb.Replace("%host", Host);
-
-            DateTime dt;
-
-            if (CustomDate != DateTime.MinValue)
+            if (Host != null)
             {
-                dt = CustomDate;
+                sb.Replace(ReplacementVariables.host.ToPrefixString(), Host);
             }
-            else
-            {
-                dt = FastDateTime.Now;
-            }
+
+            DateTime dt = FastDateTime.Now;
 
             sb.Replace(ReplacementVariables.mon2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(dt.Month))
                 .Replace(ReplacementVariables.mon.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month))
@@ -179,7 +172,7 @@ namespace HelpersLib
                  .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                  .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
 
-            if (sb.ToString().Contains("%i"))
+            if (sb.ToString().Contains(ReplacementVariables.i.ToPrefixString()))
             {
                 AutoIncrementNumber++;
                 sb.Replace(ReplacementVariables.i.ToPrefixString(), AutoIncrementNumber.ToString());
@@ -191,16 +184,13 @@ namespace HelpersLib
 
             if (Type == NameParserType.Text && AllowNewLine)
             {
-                sb.Replace(ReplacementVariables.n.ToPrefixString(), "\n");
+                sb.Replace(ReplacementVariables.n.ToPrefixString(), Environment.NewLine);
             }
 
             string result = sb.ToString();
 
-            string rn = ReplacementVariables.rn.ToPrefixString();
-            while (result.ReplaceFirst(rn, Helpers.GetRandomChar(Helpers.Numbers).ToString(), out result)) ;
-
-            string ra = ReplacementVariables.ra.ToPrefixString();
-            while (result.ReplaceFirst(ra, Helpers.GetRandomChar(Helpers.Alphanumeric).ToString(), out result)) ;
+            result = result.ReplaceAll(ReplacementVariables.rn.ToPrefixString(), () => Helpers.GetRandomChar(Helpers.Numbers).ToString());
+            result = result.ReplaceAll(ReplacementVariables.ra.ToPrefixString(), () => Helpers.GetRandomChar(Helpers.Alphanumeric).ToString());
 
             if (Type == NameParserType.FolderPath)
             {
