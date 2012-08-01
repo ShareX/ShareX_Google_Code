@@ -181,6 +181,7 @@
     <Compile Include="HelperClasses\OAuth\IOAuth.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthManager.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthInfo.cs" />
+    <Compile Include="TextUploaders\Paste_ee.cs" />
     <Compile Include="UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
       <SubType>Form</SubType>
@@ -234,11 +235,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TextUploader.cs" />
-    <Compile Include="TextUploaders\Paste2Uploader.cs" />
-    <Compile Include="TextUploaders\PastebinCaUploader.cs" />
-    <Compile Include="TextUploaders\PastebinUploader.cs" />
+    <Compile Include="TextUploaders\Paste2.cs" />
+    <Compile Include="TextUploaders\Pastebin_ca.cs" />
+    <Compile Include="TextUploaders\Pastebin.cs" />
     <Compile Include="TextUploaders\Pastee.cs" />
-    <Compile Include="TextUploaders\SlexyUploader.cs" />
+    <Compile Include="TextUploaders\Slexy.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="URLShortener.cs" />
     <Compile Include="URLShorteners\BitlyURLShortener.cs" />

@@ -28,16 +28,20 @@ using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
 {
-    public sealed class Pastee : TextUploader
+    public sealed class Paste2 : TextUploader
     {
-        public string Lexer { get; set; }
-        public int TimeToLive { get; set; } // Days
-        public string Key { get; set; }
+        private const string APIURL = "http://paste2.org/new-paste";
 
-        public Pastee()
+        private Paste2Settings settings;
+
+        public Paste2()
         {
-            Lexer = "text";
-            TimeToLive = 30;
+            settings = new Paste2Settings();
+        }
+
+        public Paste2(Paste2Settings settings)
+        {
+            this.settings = settings;
         }
 
         public override UploadResult UploadText(string text)
@@ -47,20 +51,28 @@ namespace UploadersLib.TextUploaders
             if (!string.IsNullOrEmpty(text))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
-                arguments.Add("lexer", Lexer);
-                arguments.Add("content", text);
-                arguments.Add("ttl", (TimeToLive * 86400).ToString());
+                arguments.Add("code", text);
+                arguments.Add("description", settings.Description);
+                arguments.Add("lang", settings.TextFormat);
+                arguments.Add("parent", "0");
 
-                if (!string.IsNullOrEmpty(Key))
-                {
-                    arguments.Add("encrypt", "checked");
-                    arguments.Add("key", Key);
-                }
-
-                ur.URL = SendPostRequest("https://pastee.org/submit", arguments, ResponseType.RedirectionURL);
+                ur.URL = SendPostRequest(APIURL, arguments, ResponseType.RedirectionURL);
             }
 
             return ur;
+        }
+    }
+
+    public class Paste2Settings
+    {
+        public string TextFormat { get; set; }
+
+        public string Description { get; set; }
+
+        public Paste2Settings()
+        {
+            TextFormat = "text";
+            Description = string.Empty;
         }
     }
 }

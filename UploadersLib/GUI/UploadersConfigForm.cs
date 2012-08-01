@@ -838,6 +838,15 @@ namespace UploadersLib
 
         #endregion Pastebin
 
+        #region Paste.ee
+
+        private void txtPaste_eeUserAPIKey_TextChanged(object sender, EventArgs e)
+        {
+            Config.Paste_eeUserAPIKey = txtPaste_eeUserAPIKey.Text;
+        }
+
+        #endregion Paste.ee
+
         #endregion Text Uploaders
 
         #region URL Shorteners

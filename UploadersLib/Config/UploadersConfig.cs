@@ -87,6 +87,10 @@ namespace UploadersLib
 
         public PastebinSettings PastebinSettings = new PastebinSettings();
 
+        // Paste.ee
+
+        public string Paste_eeUserAPIKey = "public";
+
         #endregion Text uploaders
 
         #region File uploaders

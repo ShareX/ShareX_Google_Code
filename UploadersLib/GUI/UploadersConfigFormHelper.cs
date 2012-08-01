@@ -699,7 +699,7 @@ namespace UploadersLib
             {
                 try
                 {
-                    PastebinUploader pastebin = new PastebinUploader(APIKeys.PastebinKey, Config.PastebinSettings);
+                    Pastebin pastebin = new Pastebin(APIKeys.PastebinKey, Config.PastebinSettings);
 
                     if (pastebin.Login())
                     {

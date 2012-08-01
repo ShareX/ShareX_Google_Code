@@ -25,27 +25,30 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
 {
-    public sealed class SlexyUploader : TextUploader
+    public sealed class Slexy : TextUploader
     {
         private const string APIURL = "http://slexy.org/index.php/submit";
 
         private SlexySettings settings;
 
-        public SlexyUploader()
+        public Slexy()
         {
             settings = new SlexySettings();
         }
 
-        public SlexyUploader(SlexySettings settings)
+        public Slexy(SlexySettings settings)
         {
             this.settings = settings;
         }
 
-        public override string UploadText(string text)
+        public override UploadResult UploadText(string text)
         {
+            UploadResult ur = new UploadResult();
+
             if (!string.IsNullOrEmpty(text))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
@@ -61,10 +64,10 @@ namespace UploadersLib.TextUploaders
                 arguments.Add("tabbing", "true");
                 arguments.Add("tabtype", "real");
 
-                return SendPostRequest(APIURL, arguments, ResponseType.RedirectionURL);
+                ur.URL = SendPostRequest(APIURL, arguments, ResponseType.RedirectionURL);
             }
 
-            return null;
+            return ur;
         }
     }
 

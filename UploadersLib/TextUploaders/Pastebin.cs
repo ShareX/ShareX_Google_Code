@@ -26,10 +26,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using HelpersLib;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
 {
-    public sealed class PastebinUploader : TextUploader
+    public sealed class Pastebin : TextUploader
     {
         private const string APIURL = "http://pastebin.com/api/api_post.php";
         private const string APILoginURL = "http://pastebin.com/api/api_login.php";
@@ -38,13 +39,13 @@ namespace UploadersLib.TextUploaders
 
         public PastebinSettings Settings { get; private set; }
 
-        public PastebinUploader(string apiKey)
+        public Pastebin(string apiKey)
         {
             APIKey = apiKey;
             Settings = new PastebinSettings();
         }
 
-        public PastebinUploader(string apiKey, PastebinSettings settings)
+        public Pastebin(string apiKey, PastebinSettings settings)
         {
             APIKey = apiKey;
             Settings = settings;
@@ -74,8 +75,10 @@ namespace UploadersLib.TextUploaders
             return false;
         }
 
-        public override string UploadText(string text)
+        public override UploadResult UploadText(string text)
         {
+            UploadResult ur = new UploadResult();
+
             if (!string.IsNullOrEmpty(text) && Settings != null)
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
@@ -95,17 +98,19 @@ namespace UploadersLib.TextUploaders
                     args.Add("api_user_key", Settings.UserKey); // this paramater is part of the login system
                 }
 
-                string response = SendPostRequest(APIURL, args);
+                ur.Source = SendPostRequest(APIURL, args);
 
-                if (!string.IsNullOrEmpty(response) && !response.StartsWith("Bad API request") && response.IsValidUrl())
+                if (!string.IsNullOrEmpty(ur.Source) && !ur.Source.StartsWith("Bad API request") && ur.Source.IsValidUrl())
                 {
-                    return response;
+                    ur.URL = ur.Source;
                 }
-
-                Errors.Add(response);
+                else
+                {
+                    Errors.Add(ur.Source);
+                }
             }
 
-            return null;
+            return ur;
         }
     }
 

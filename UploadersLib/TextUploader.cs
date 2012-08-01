@@ -25,14 +25,15 @@
 
 using System.IO;
 using System.Text;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib
 {
     public abstract class TextUploader : Uploader
     {
-        public abstract string UploadText(string text);
+        public abstract UploadResult UploadText(string text);
 
-        public string UploadText(Stream stream)
+        public UploadResult UploadText(Stream stream)
         {
             using (StreamReader sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -40,7 +41,7 @@ namespace UploadersLib
             }
         }
 
-        public string UploadTextFile(string filePath)
+        public UploadResult UploadTextFile(string filePath)
         {
             if (File.Exists(filePath))
             {

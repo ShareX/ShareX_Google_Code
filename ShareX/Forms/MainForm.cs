@@ -246,7 +246,7 @@ namespace ShareX
                     {
                         if (uim.SelectedItems[0].Info.Result.IsError)
                         {
-                            tsmiShowErrors.Visible = tsmiShowResponse.Visible = true;
+                            tsmiShowErrors.Visible = true;
                         }
                         else
                         {
@@ -297,6 +297,11 @@ namespace ShareX
                                     pbPreview.LoadImageFromURL(uim.SelectedItems[0].Info.Result.URL);
                                 }
                             }
+                        }
+
+                        if ((uim.SelectedItems[0].Info.Result.IsError || Program.IsDebug) && !string.IsNullOrEmpty(uim.SelectedItems[0].Info.Result.Source))
+                        {
+                            tsmiShowResponse.Visible = true;
                         }
 
                         tsmiUploadSelectedFile.Visible = uim.SelectedItems[0].IsFileExist;

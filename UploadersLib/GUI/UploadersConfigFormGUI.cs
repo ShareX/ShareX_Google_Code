@@ -192,6 +192,10 @@ namespace UploadersLib
 
             pgPastebinSettings.SelectedObject = Config.PastebinSettings;
 
+            // Paste.ee
+
+            txtPaste_eeUserAPIKey.Text = Config.Paste_eeUserAPIKey;
+
             #endregion Text uploaders
 
             #region File uploaders
