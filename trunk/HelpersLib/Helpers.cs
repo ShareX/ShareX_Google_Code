@@ -50,9 +50,24 @@ namespace HelpersLib
 
         private static readonly object ClipboardLock = new object();
 
+        public static string GetFilenameExtension(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath) && filePath.Contains('.'))
+            {
+                int pos = filePath.LastIndexOf('.');
+
+                if (pos <= filePath.Length)
+                {
+                    return filePath.Substring(pos + 1);
+                }
+            }
+
+            return string.Empty;
+        }
+
         private static bool IsValidFile(string filePath, Type enumType)
         {
-            string ext = Path.GetExtension(filePath);
+            string ext = GetFilenameExtension(filePath);
 
             if (!string.IsNullOrEmpty(ext) && ext.Length > 1)
             {

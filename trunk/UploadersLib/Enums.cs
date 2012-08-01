@@ -67,6 +67,8 @@ namespace UploadersLib
         Slexy,
         [Description("pastee.org")]
         Pastee,
+        [Description("paste.ee")]
+        Paste_ee,
         [Description("File Uploader")]
         FileUploader
     }

@@ -25,10 +25,11 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
 {
-    public sealed class PastebinCaUploader : TextUploader
+    public sealed class Pastebin_ca : TextUploader
     {
         private const string APIURL = "http://pastebin.ca/quiet-paste.php";
 
@@ -36,20 +37,22 @@ namespace UploadersLib.TextUploaders
 
         private PastebinCaSettings settings;
 
-        public PastebinCaUploader(string apiKey)
+        public Pastebin_ca(string apiKey)
         {
             APIKey = apiKey;
             settings = new PastebinCaSettings();
         }
 
-        public PastebinCaUploader(string apiKey, PastebinCaSettings settings)
+        public Pastebin_ca(string apiKey, PastebinCaSettings settings)
         {
             APIKey = apiKey;
             this.settings = settings;
         }
 
-        public override string UploadText(string text)
+        public override UploadResult UploadText(string text)
         {
+            UploadResult ur = new UploadResult();
+
             if (!string.IsNullOrEmpty(text))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
@@ -69,23 +72,22 @@ namespace UploadersLib.TextUploaders
                 arguments.Add("tags", settings.Tags);
                 arguments.Add("type", settings.TextFormat);
 
-                string response = SendPostRequest(APIURL, arguments);
+                ur.Source = SendPostRequest(APIURL, arguments);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(ur.Source))
                 {
-                    if (response.StartsWith("SUCCESS:"))
+                    if (ur.Source.StartsWith("SUCCESS:"))
                     {
-                        return "http://pastebin.ca/" + response.Substring(8);
+                        ur.URL = "http://pastebin.ca/" + ur.Source.Substring(8);
                     }
-
-                    if (response.StartsWith("FAIL:"))
+                    else if (ur.Source.StartsWith("FAIL:"))
                     {
-                        this.Errors.Add(response.Substring(5));
+                        Errors.Add(ur.Source.Substring(5));
                     }
                 }
             }
 
-            return null;
+            return ur;
         }
     }
 

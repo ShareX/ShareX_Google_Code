@@ -23,53 +23,59 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
 {
-    public sealed class Paste2Uploader : TextUploader
+    public sealed class Paste_ee : TextUploader
     {
-        private const string APIURL = "http://paste2.org/new-paste";
+        public string APIKey { get; private set; }
 
-        private Paste2Settings settings;
-
-        public Paste2Uploader()
+        public Paste_ee()
         {
-            settings = new Paste2Settings();
+            APIKey = "public";
         }
 
-        public Paste2Uploader(Paste2Settings settings)
+        public Paste_ee(string apiKey)
         {
-            this.settings = settings;
+            APIKey = apiKey;
         }
 
-        public override string UploadText(string text)
+        public override UploadResult UploadText(string text)
         {
+            UploadResult ur = new UploadResult();
+
             if (!string.IsNullOrEmpty(text))
             {
-                Dictionary<string, string> arguments = new Dictionary<string, string>();
-                arguments.Add("code", text);
-                arguments.Add("description", settings.Description);
-                arguments.Add("lang", settings.TextFormat);
-                arguments.Add("parent", "0");
+                if (string.IsNullOrEmpty(APIKey))
+                {
+                    APIKey = "public";
+                }
 
-                return SendPostRequest(APIURL, arguments, ResponseType.RedirectionURL);
+                Dictionary<string, string> arguments = new Dictionary<string, string>();
+                arguments.Add("key", APIKey);
+                arguments.Add("description", string.Empty);
+                arguments.Add("paste", text);
+                arguments.Add("format", "simple");
+                arguments.Add("return", "link");
+
+                ur.Source = SendPostRequest("http://paste.ee/api", arguments, ResponseType.Text);
+
+                if (!string.IsNullOrEmpty(ur.Source) && ur.Source.StartsWith("error"))
+                {
+                    Errors.Add(ur.Source);
+                }
+                else
+                {
+                    ur.URL = ur.Source;
+                }
             }
 
-            return null;
-        }
-    }
-
-    public class Paste2Settings
-    {
-        public string TextFormat { get; set; }
-
-        public string Description { get; set; }
-
-        public Paste2Settings()
-        {
-            TextFormat = "text";
-            Description = string.Empty;
+            return ur;
         }
     }
 }

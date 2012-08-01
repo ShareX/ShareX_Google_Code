@@ -447,27 +447,29 @@ namespace ShareX
             switch (Info.TextDestination)
             {
                 case TextDestination.Pastebin:
-                    textUploader = new PastebinUploader(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
+                    textUploader = new Pastebin(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new PastebinCaUploader(ApiKeys.PastebinCaKey);
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey);
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2Uploader();
+                    textUploader = new Paste2();
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new SlexyUploader();
+                    textUploader = new Slexy();
                     break;
                 case TextDestination.Pastee:
                     textUploader = new Pastee();
+                    break;
+                case TextDestination.Paste_ee:
+                    textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);
                     break;
             }
 
             if (textUploader != null)
             {
                 PrepareUploader(textUploader);
-                string url = textUploader.UploadText(stream);
-                return new UploadResult(null, url);
+                return textUploader.UploadText(stream);
             }
 
             return null;
