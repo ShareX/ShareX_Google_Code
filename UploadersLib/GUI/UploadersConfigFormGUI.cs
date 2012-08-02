@@ -229,9 +229,6 @@ namespace UploadersLib
                 }
             }
 
-            txtFTPThumbWidth.Text = Config.FTPThumbnailWidthLimit.ToString();
-            chkFTPThumbnailCheckSize.Checked = Config.FTPThumbnailCheckSize;
-
             // Email
 
             txtEmailSmtpServer.Text = Config.EmailSmtpServer;

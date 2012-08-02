@@ -106,6 +106,9 @@
             this.tpPastebin = new System.Windows.Forms.TabPage();
             this.btnPastebinLogin = new System.Windows.Forms.Button();
             this.pgPastebinSettings = new System.Windows.Forms.PropertyGrid();
+            this.tpPaste_ee = new System.Windows.Forms.TabPage();
+            this.lblPaste_eeUserAPIKey = new System.Windows.Forms.Label();
+            this.txtPaste_eeUserAPIKey = new System.Windows.Forms.TextBox();
             this.tpFileUploaders = new System.Windows.Forms.TabPage();
             this.tcFileUploaders = new System.Windows.Forms.TabControl();
             this.tpDropbox = new System.Windows.Forms.TabPage();
@@ -155,9 +158,6 @@
             this.cboFtpFiles = new System.Windows.Forms.ComboBox();
             this.cboFtpText = new System.Windows.Forms.ComboBox();
             this.cboFtpImages = new System.Windows.Forms.ComboBox();
-            this.chkFTPThumbnailCheckSize = new System.Windows.Forms.CheckBox();
-            this.lblFTPThumbWidth = new System.Windows.Forms.Label();
-            this.txtFTPThumbWidth = new System.Windows.Forms.TextBox();
             this.tpRapidShare = new System.Windows.Forms.TabPage();
             this.txtRapidShareFolderID = new System.Windows.Forms.TextBox();
             this.lblRapidShareFolderID = new System.Windows.Forms.Label();
@@ -250,9 +250,6 @@
             this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.tpPaste_ee = new System.Windows.Forms.TabPage();
-            this.txtPaste_eeUserAPIKey = new System.Windows.Forms.TextBox();
-            this.lblPaste_eeUserAPIKey = new System.Windows.Forms.Label();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -271,6 +268,7 @@
             this.tpTextUploaders.SuspendLayout();
             this.tcTextUploaders.SuspendLayout();
             this.tpPastebin.SuspendLayout();
+            this.tpPaste_ee.SuspendLayout();
             this.tpFileUploaders.SuspendLayout();
             this.tcFileUploaders.SuspendLayout();
             this.tpDropbox.SuspendLayout();
@@ -301,7 +299,6 @@
             this.tpSocialNetworkingServices.SuspendLayout();
             this.tcSocialNetworkingServices.SuspendLayout();
             this.tpTwitter.SuspendLayout();
-            this.tpPaste_ee.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcUploaders
@@ -1127,6 +1124,35 @@
             this.pgPastebinSettings.Size = new System.Drawing.Size(504, 468);
             this.pgPastebinSettings.TabIndex = 0;
             // 
+            // tpPaste_ee
+            // 
+            this.tpPaste_ee.Controls.Add(this.lblPaste_eeUserAPIKey);
+            this.tpPaste_ee.Controls.Add(this.txtPaste_eeUserAPIKey);
+            this.tpPaste_ee.Location = new System.Drawing.Point(4, 22);
+            this.tpPaste_ee.Name = "tpPaste_ee";
+            this.tpPaste_ee.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPaste_ee.Size = new System.Drawing.Size(804, 474);
+            this.tpPaste_ee.TabIndex = 1;
+            this.tpPaste_ee.Text = "Paste.ee";
+            this.tpPaste_ee.UseVisualStyleBackColor = true;
+            // 
+            // lblPaste_eeUserAPIKey
+            // 
+            this.lblPaste_eeUserAPIKey.AutoSize = true;
+            this.lblPaste_eeUserAPIKey.Location = new System.Drawing.Point(16, 24);
+            this.lblPaste_eeUserAPIKey.Name = "lblPaste_eeUserAPIKey";
+            this.lblPaste_eeUserAPIKey.Size = new System.Drawing.Size(72, 13);
+            this.lblPaste_eeUserAPIKey.TabIndex = 1;
+            this.lblPaste_eeUserAPIKey.Text = "User API key:";
+            // 
+            // txtPaste_eeUserAPIKey
+            // 
+            this.txtPaste_eeUserAPIKey.Location = new System.Drawing.Point(96, 20);
+            this.txtPaste_eeUserAPIKey.Name = "txtPaste_eeUserAPIKey";
+            this.txtPaste_eeUserAPIKey.Size = new System.Drawing.Size(296, 20);
+            this.txtPaste_eeUserAPIKey.TabIndex = 0;
+            this.txtPaste_eeUserAPIKey.TextChanged += new System.EventHandler(this.txtPaste_eeUserAPIKey_TextChanged);
+            // 
             // tpFileUploaders
             // 
             this.tpFileUploaders.Controls.Add(this.tcFileUploaders);
@@ -1599,9 +1625,6 @@
             this.gbFtpSettings.Controls.Add(this.cboFtpFiles);
             this.gbFtpSettings.Controls.Add(this.cboFtpText);
             this.gbFtpSettings.Controls.Add(this.cboFtpImages);
-            this.gbFtpSettings.Controls.Add(this.chkFTPThumbnailCheckSize);
-            this.gbFtpSettings.Controls.Add(this.lblFTPThumbWidth);
-            this.gbFtpSettings.Controls.Add(this.txtFTPThumbWidth);
             this.gbFtpSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbFtpSettings.Location = new System.Drawing.Point(3, 354);
             this.gbFtpSettings.Name = "gbFtpSettings";
@@ -1613,7 +1636,7 @@
             // lblFtpFiles
             // 
             this.lblFtpFiles.AutoSize = true;
-            this.lblFtpFiles.Location = new System.Drawing.Point(432, 70);
+            this.lblFtpFiles.Location = new System.Drawing.Point(29, 75);
             this.lblFtpFiles.Name = "lblFtpFiles";
             this.lblFtpFiles.Size = new System.Drawing.Size(28, 13);
             this.lblFtpFiles.TabIndex = 7;
@@ -1622,7 +1645,7 @@
             // lblFtpText
             // 
             this.lblFtpText.AutoSize = true;
-            this.lblFtpText.Location = new System.Drawing.Point(432, 44);
+            this.lblFtpText.Location = new System.Drawing.Point(29, 49);
             this.lblFtpText.Name = "lblFtpText";
             this.lblFtpText.Size = new System.Drawing.Size(28, 13);
             this.lblFtpText.TabIndex = 4;
@@ -1631,7 +1654,7 @@
             // lblFtpImages
             // 
             this.lblFtpImages.AutoSize = true;
-            this.lblFtpImages.Location = new System.Drawing.Point(419, 19);
+            this.lblFtpImages.Location = new System.Drawing.Point(16, 24);
             this.lblFtpImages.Name = "lblFtpImages";
             this.lblFtpImages.Size = new System.Drawing.Size(41, 13);
             this.lblFtpImages.TabIndex = 0;
@@ -1641,7 +1664,7 @@
             // 
             this.cboFtpFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFtpFiles.FormattingEnabled = true;
-            this.cboFtpFiles.Location = new System.Drawing.Point(472, 64);
+            this.cboFtpFiles.Location = new System.Drawing.Point(69, 69);
             this.cboFtpFiles.Name = "cboFtpFiles";
             this.cboFtpFiles.Size = new System.Drawing.Size(272, 21);
             this.cboFtpFiles.TabIndex = 8;
@@ -1651,7 +1674,7 @@
             // 
             this.cboFtpText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFtpText.FormattingEnabled = true;
-            this.cboFtpText.Location = new System.Drawing.Point(472, 40);
+            this.cboFtpText.Location = new System.Drawing.Point(69, 45);
             this.cboFtpText.Name = "cboFtpText";
             this.cboFtpText.Size = new System.Drawing.Size(272, 21);
             this.cboFtpText.TabIndex = 5;
@@ -1661,41 +1684,11 @@
             // 
             this.cboFtpImages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFtpImages.FormattingEnabled = true;
-            this.cboFtpImages.Location = new System.Drawing.Point(472, 16);
+            this.cboFtpImages.Location = new System.Drawing.Point(69, 21);
             this.cboFtpImages.Name = "cboFtpImages";
             this.cboFtpImages.Size = new System.Drawing.Size(272, 21);
             this.cboFtpImages.TabIndex = 1;
             this.cboFtpImages.SelectedIndexChanged += new System.EventHandler(this.cboFtpImages_SelectedIndexChanged);
-            // 
-            // chkFTPThumbnailCheckSize
-            // 
-            this.chkFTPThumbnailCheckSize.AutoSize = true;
-            this.chkFTPThumbnailCheckSize.Location = new System.Drawing.Point(16, 48);
-            this.chkFTPThumbnailCheckSize.Name = "chkFTPThumbnailCheckSize";
-            this.chkFTPThumbnailCheckSize.Size = new System.Drawing.Size(331, 17);
-            this.chkFTPThumbnailCheckSize.TabIndex = 6;
-            this.chkFTPThumbnailCheckSize.Text = "If image size smaller than thumbnail size then not make thumbnail";
-            this.chkFTPThumbnailCheckSize.UseVisualStyleBackColor = true;
-            this.chkFTPThumbnailCheckSize.CheckedChanged += new System.EventHandler(this.chkFTPThumbnailCheckSize_CheckedChanged);
-            // 
-            // lblFTPThumbWidth
-            // 
-            this.lblFTPThumbWidth.AutoSize = true;
-            this.lblFTPThumbWidth.Location = new System.Drawing.Point(16, 25);
-            this.lblFTPThumbWidth.Name = "lblFTPThumbWidth";
-            this.lblFTPThumbWidth.Size = new System.Drawing.Size(107, 13);
-            this.lblFTPThumbWidth.TabIndex = 2;
-            this.lblFTPThumbWidth.Text = "Thumbnail width (px):";
-            // 
-            // txtFTPThumbWidth
-            // 
-            this.txtFTPThumbWidth.Location = new System.Drawing.Point(128, 22);
-            this.txtFTPThumbWidth.Name = "txtFTPThumbWidth";
-            this.txtFTPThumbWidth.Size = new System.Drawing.Size(40, 20);
-            this.txtFTPThumbWidth.TabIndex = 3;
-            this.txtFTPThumbWidth.Text = "2500";
-            this.txtFTPThumbWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFTPThumbWidth.TextChanged += new System.EventHandler(this.txtFTPThumbWidth_TextChanged);
             // 
             // tpRapidShare
             // 
@@ -2637,35 +2630,6 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // tpPaste_ee
-            // 
-            this.tpPaste_ee.Controls.Add(this.lblPaste_eeUserAPIKey);
-            this.tpPaste_ee.Controls.Add(this.txtPaste_eeUserAPIKey);
-            this.tpPaste_ee.Location = new System.Drawing.Point(4, 22);
-            this.tpPaste_ee.Name = "tpPaste_ee";
-            this.tpPaste_ee.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPaste_ee.Size = new System.Drawing.Size(804, 474);
-            this.tpPaste_ee.TabIndex = 1;
-            this.tpPaste_ee.Text = "Paste.ee";
-            this.tpPaste_ee.UseVisualStyleBackColor = true;
-            // 
-            // txtPaste_eeUserAPIKey
-            // 
-            this.txtPaste_eeUserAPIKey.Location = new System.Drawing.Point(96, 20);
-            this.txtPaste_eeUserAPIKey.Name = "txtPaste_eeUserAPIKey";
-            this.txtPaste_eeUserAPIKey.Size = new System.Drawing.Size(296, 20);
-            this.txtPaste_eeUserAPIKey.TabIndex = 0;
-            this.txtPaste_eeUserAPIKey.TextChanged += new System.EventHandler(this.txtPaste_eeUserAPIKey_TextChanged);
-            // 
-            // lblPaste_eeUserAPIKey
-            // 
-            this.lblPaste_eeUserAPIKey.AutoSize = true;
-            this.lblPaste_eeUserAPIKey.Location = new System.Drawing.Point(16, 24);
-            this.lblPaste_eeUserAPIKey.Name = "lblPaste_eeUserAPIKey";
-            this.lblPaste_eeUserAPIKey.Size = new System.Drawing.Size(72, 13);
-            this.lblPaste_eeUserAPIKey.TabIndex = 1;
-            this.lblPaste_eeUserAPIKey.Text = "User API key:";
-            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2707,6 +2671,8 @@
             this.tpTextUploaders.ResumeLayout(false);
             this.tcTextUploaders.ResumeLayout(false);
             this.tpPastebin.ResumeLayout(false);
+            this.tpPaste_ee.ResumeLayout(false);
+            this.tpPaste_ee.PerformLayout();
             this.tpFileUploaders.ResumeLayout(false);
             this.tcFileUploaders.ResumeLayout(false);
             this.tpDropbox.ResumeLayout(false);
@@ -2752,8 +2718,6 @@
             this.tpSocialNetworkingServices.ResumeLayout(false);
             this.tcSocialNetworkingServices.ResumeLayout(false);
             this.tpTwitter.ResumeLayout(false);
-            this.tpPaste_ee.ResumeLayout(false);
-            this.tpPaste_ee.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2821,9 +2785,6 @@
         private System.Windows.Forms.ComboBox cboFtpFiles;
         private System.Windows.Forms.ComboBox cboFtpText;
         private System.Windows.Forms.ComboBox cboFtpImages;
-        private System.Windows.Forms.CheckBox chkFTPThumbnailCheckSize;
-        private System.Windows.Forms.Label lblFTPThumbWidth;
-        private System.Windows.Forms.TextBox txtFTPThumbWidth;
         private System.Windows.Forms.Panel panelFtp;
         private AccountsControl ucFTPAccounts;
         private System.Windows.Forms.Button btnFtpHelp;

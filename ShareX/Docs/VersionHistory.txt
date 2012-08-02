@@ -1,4 +1,6 @@
-﻿ShareX 6.2 - 16-07-2012
+﻿ShareX 6.3
+
+ShareX 6.2 - 16-07-2012
 
 * Added watch folder tab to settings for auto uploading newly created files in these folders
 * Added screen color picker to tools section
