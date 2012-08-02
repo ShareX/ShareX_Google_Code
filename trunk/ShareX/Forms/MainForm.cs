@@ -87,8 +87,8 @@ namespace ShareX
         {
             InitializeComponent();
 
-            this.Text = Program.Title;
-            this.Icon = Resources.ShareX;
+            Text = Program.Title;
+            Icon = Resources.ShareX;
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
@@ -626,11 +626,6 @@ namespace ShareX
         private void tsbAbout_Click(object sender, EventArgs e)
         {
             new AboutForm() { Icon = this.Icon }.ShowDialog();
-        }
-
-        private void tsbDonate_Click(object sender, EventArgs e)
-        {
-            Helpers.LoadBrowserAsync(Links.URL_DONATE);
         }
 
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)

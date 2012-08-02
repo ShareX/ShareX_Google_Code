@@ -190,7 +190,7 @@ namespace ShareX
             }
         }
 
-        public static MainForm mainForm;
+        public static MainForm MainForm;
         public static ManualResetEvent SettingsResetEvent;
         public static ManualResetEvent UploaderSettingsResetEvent;
 
@@ -238,7 +238,7 @@ namespace ShareX
                 ThreadPool.QueueUserWorkItem(state => LoadSettings());
 
                 MyLogger.WriteLine("new MainForm() started");
-                mainForm = new MainForm();
+                MainForm = new MainForm();
                 MyLogger.WriteLine("new MainForm() finished");
 
                 if (Settings == null)
@@ -248,7 +248,7 @@ namespace ShareX
 
                 Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-                Application.Run(mainForm);
+                Application.Run(MainForm);
 
                 Settings.Save();
 
@@ -298,15 +298,15 @@ namespace ShareX
             {
                 Action d = () =>
                 {
-                    if (mainForm.Visible)
+                    if (MainForm.Visible)
                     {
-                        mainForm.ShowActivate();
+                        MainForm.ShowActivate();
                     }
 
-                    mainForm.UseCommandLineArgs(args.CommandLineArgs);
+                    MainForm.UseCommandLineArgs(args.CommandLineArgs);
                 };
 
-                mainForm.Invoke(d);
+                MainForm.Invoke(d);
             }
         }
 
@@ -316,7 +316,7 @@ namespace ShareX
 
             while (timer.ElapsedMilliseconds < wait)
             {
-                if (mainForm != null && mainForm.IsReady) return true;
+                if (MainForm != null && MainForm.IsReady) return true;
 
                 Thread.Sleep(10);
             }

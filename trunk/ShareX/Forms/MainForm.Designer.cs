@@ -93,7 +93,6 @@ namespace ShareX
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lblSplitter = new System.Windows.Forms.Label();
             this.lvUploads = new HelpersLib.MyListView();
@@ -141,7 +140,6 @@ namespace ShareX
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTraySettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -210,8 +208,7 @@ namespace ShareX
             this.tsbHistory,
             this.tsbImageHistory,
             this.tsbSettings,
-            this.tsbAbout,
-            this.tsbDonate});
+            this.tsbAbout});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
@@ -564,16 +561,6 @@ namespace ShareX
             this.tsbAbout.Text = "About...";
             this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
-            // tsbDonate
-            // 
-            this.tsbDonate.Image = global::ShareX.Properties.Resources.present;
-            this.tsbDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDonate.Name = "tsbDonate";
-            this.tsbDonate.Size = new System.Drawing.Size(147, 20);
-            this.tsbDonate.Text = "Donate...";
-            this.tsbDonate.Click += new System.EventHandler(this.tsbDonate_Click);
-            // 
             // scMain
             // 
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -710,7 +697,6 @@ namespace ShareX
             this.tsmiTrayImageHistory,
             this.tsmiTraySettings,
             this.tsmiTrayAbout,
-            this.tsmiTrayDonate,
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
@@ -978,14 +964,6 @@ namespace ShareX
             this.tsmiTrayAbout.Size = new System.Drawing.Size(180, 22);
             this.tsmiTrayAbout.Text = "About...";
             this.tsmiTrayAbout.Click += new System.EventHandler(this.tsbAbout_Click);
-            // 
-            // tsmiTrayDonate
-            // 
-            this.tsmiTrayDonate.Image = global::ShareX.Properties.Resources.present;
-            this.tsmiTrayDonate.Name = "tsmiTrayDonate";
-            this.tsmiTrayDonate.Size = new System.Drawing.Size(180, 22);
-            this.tsmiTrayDonate.Text = "Donate...";
-            this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
             // tssTray2
             // 
@@ -1346,7 +1324,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripDropDownButton tsddbDestinations;
         private System.Windows.Forms.ToolStripSeparator tssDestinations1;
         private System.Windows.Forms.ToolStripMenuItem tsmiUploadersConfig;
-        private System.Windows.Forms.ToolStripButton tsbDonate;
         private System.Windows.Forms.ContextMenuStrip cmsTray;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayExit;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayClipboardUpload;
@@ -1367,7 +1344,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayHistory;
         private System.Windows.Forms.ToolStripMenuItem tsmiTraySettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayAbout;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripSeparator tssTray2;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayCapture;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayFullscreen;
