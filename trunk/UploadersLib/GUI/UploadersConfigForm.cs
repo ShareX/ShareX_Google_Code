@@ -490,20 +490,6 @@ namespace UploadersLib
             FTPAccountsExport();
         }
 
-        private void chkFTPThumbnailCheckSize_CheckedChanged(object sender, EventArgs e)
-        {
-            Config.FTPThumbnailCheckSize = chkFTPThumbnailCheckSize.Checked;
-        }
-
-        private void txtFTPThumbWidth_TextChanged(object sender, EventArgs e)
-        {
-            int width;
-            if (int.TryParse(txtFTPThumbWidth.Text, out width))
-            {
-                Config.FTPThumbnailWidthLimit = width;
-            }
-        }
-
         #endregion FTP
 
         #region Email

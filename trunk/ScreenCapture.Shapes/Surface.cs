@@ -159,10 +159,6 @@ namespace ScreenCapture
             g.SmoothingMode = SmoothingMode.HighSpeed;
             g.FillRectangle(backgroundBrush, ScreenRectangle0Based);
 
-#if DEBUG
-            g.DrawRectangleProper(Pens.Yellow, ScreenRectangle0Based);
-#endif
-
             Draw(g);
 
 #if DEBUG
@@ -266,7 +262,7 @@ namespace ScreenCapture
 
         private void DrawInfo(Graphics g)
         {
-            string text = string.Format("FPS: {0}\nBounds: {1}", FPS, Bounds);
+            string text = "FPS: " + FPS;
 
             if (!string.IsNullOrEmpty(DebugText))
             {
@@ -279,13 +275,12 @@ namespace ScreenCapture
 
             Rectangle primaryScreen = Screen.PrimaryScreen.Bounds;
 
-            Point position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + (int)(primaryScreen.Width / 2 - textSize.Width / 2), primaryScreen.Y + offset - 1));
+            Point position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + offset, primaryScreen.Y + offset));
             Rectangle rect = new Rectangle(position, new Size((int)textSize.Width, (int)textSize.Height));
 
             if (rect.Contains(InputManager.MousePosition0Based))
             {
-                position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + (int)(primaryScreen.Width / 2 - textSize.Width / 2),
-                    primaryScreen.Y + primaryScreen.Height - (int)textSize.Height - offset - 1));
+                position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + offset, primaryScreen.Y + primaryScreen.Height - (int)textSize.Height - offset));
             }
 
             CaptureHelpers.DrawTextWithOutline(g, text, position, textFont, Color.White, Color.Black);
