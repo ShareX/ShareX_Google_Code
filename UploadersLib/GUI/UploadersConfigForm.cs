@@ -622,6 +622,15 @@ namespace UploadersLib
 
         #endregion SendSpace
 
+        #region Ge.tt
+
+        private void btnGe_ttLogin_Click(object sender, EventArgs e)
+        {
+            Ge_ttLogin();
+        }
+
+        #endregion Ge.tt
+
         #region Custom Uploader
 
         private void btnCustomUploaderAdd_Click(object sender, EventArgs e)

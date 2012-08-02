@@ -130,6 +130,13 @@ namespace UploadersLib.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Gett {
+            get {
+                object obj = ResourceManager.GetObject("Gett", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap globe_network {
             get {
                 object obj = ResourceManager.GetObject("globe_network", resourceCulture);
