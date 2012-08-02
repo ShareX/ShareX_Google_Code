@@ -301,9 +301,9 @@ namespace HistoryLib
 
         private void lvHistory_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (him != null)
+            if (him != null && e.Button == MouseButtons.Left)
             {
-                him.OpenURL();
+                him.TryOpen();
             }
         }
 
@@ -313,7 +313,7 @@ namespace HistoryLib
             {
                 default: return;
                 case Keys.Enter:
-                    him.OpenURL();
+                    him.TryOpen();
                     break;
                 case Keys.Control | Keys.Enter:
                     him.OpenFile();
