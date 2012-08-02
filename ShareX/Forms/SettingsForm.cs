@@ -49,9 +49,9 @@ namespace ShareX
             InitializeComponent();
             LoadSettings();
 
-            if (Program.IsHotkeysAllowed && Program.mainForm.HotkeyManager != null)
+            if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
             {
-                hmHotkeys.PrepareHotkeys(Program.mainForm.HotkeyManager);
+                hmHotkeys.PrepareHotkeys(Program.MainForm.HotkeyManager);
             }
             else
             {
@@ -258,7 +258,7 @@ namespace ShareX
 
             if (loaded)
             {
-                Program.mainForm.niTray.Visible = Program.Settings.ShowTray;
+                Program.MainForm.niTray.Visible = Program.Settings.ShowTray;
             }
         }
 

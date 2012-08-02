@@ -302,6 +302,7 @@ namespace ShareX
         {
             Program.MyLogger.WriteLine("Task preparing. ID: {0}", info.ID);
             ChangeListViewItemStatus(info);
+            UpdateProgressUI();
         }
 
         private static void task_UploadStarted(UploadInfo info)
@@ -331,7 +332,7 @@ namespace ShareX
 
                 lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);
                 lvi.SubItems[5].Text = Helpers.ProperTimeSpan(info.Progress.Remaining);
-                UpdateTrayIcon();
+                UpdateProgressUI();
             }
         }
 
@@ -384,10 +385,10 @@ namespace ShareX
                                 Helpers.CopyTextSafely(url);
                             }
 
-                            if (Program.Settings.TrayBalloonTipAfterUpload && Program.mainForm.niTray.Visible)
+                            if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
                             {
-                                Program.mainForm.niTray.Tag = url;
-                                Program.mainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
+                                Program.MainForm.niTray.Tag = url;
+                                Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
                             }
                         }
 
@@ -403,20 +404,36 @@ namespace ShareX
             finally
             {
                 StartTasks();
-                UpdateTrayIcon();
+                UpdateProgressUI();
             }
         }
 
-        public static void UpdateTrayIcon()
+        public static void UpdateProgressUI()
         {
-            if (Program.mainForm.niTray.Visible)
+            double averageProgress = -1;
+
+            IEnumerable<Task> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null);
+
+            if (workingTasks.Count() > 0)
             {
-                IEnumerable<Task> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null && x.Info.Progress != null);
-                Icon icon = null;
+                workingTasks = workingTasks.Where(x => x.Info.Progress != null);
 
                 if (workingTasks.Count() > 0)
                 {
-                    double averageProgress = workingTasks.Average(x => x.Info.Progress.Percentage);
+                    averageProgress = workingTasks.Average(x => x.Info.Progress.Percentage);
+                }
+                else
+                {
+                    averageProgress = 0;
+                }
+            }
+
+            if (Program.MainForm.niTray.Visible)
+            {
+                Icon icon = null;
+
+                if (averageProgress >= 0)
+                {
                     int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
                     icon = trayIcons.ReturnIfValidIndex(index) ?? trayIcons.Last();
                 }
@@ -425,10 +442,26 @@ namespace ShareX
                     icon = trayIcons.Last();
                 }
 
-                if (Program.mainForm.niTray.Icon != icon)
+                if (Program.MainForm.niTray.Icon != icon)
                 {
-                    Program.mainForm.niTray.Icon = icon;
+                    Program.MainForm.niTray.Icon = icon;
                 }
+            }
+
+            string title;
+
+            if (averageProgress >= 0)
+            {
+                title = string.Format("{0} - {1:0.0}%", Program.Title, averageProgress);
+            }
+            else
+            {
+                title = Program.Title;
+            }
+
+            if (Program.MainForm.Text != title)
+            {
+                Program.MainForm.Text = title;
             }
         }
     }
