@@ -88,7 +88,9 @@ namespace ShareX
             {
                 Screenshot.DrawCursor = Program.Settings.ShowCursor;
                 Screenshot.CaptureShadow = Program.Settings.CaptureShadow;
+                Screenshot.ShadowOffset = Program.Settings.CaptureShadowOffset;
                 Screenshot.CaptureClientArea = Program.Settings.CaptureClientArea;
+
                 img = capture();
 
                 if (img != null && Program.Settings.PlaySoundAfterCapture)
