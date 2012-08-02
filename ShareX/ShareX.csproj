@@ -265,7 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\license.txt" />
-    <Content Include="Docs\Todo.txt" />
     <Content Include="Docs\VersionHistory.txt" />
     <None Include="Resources\cursor-question.png" />
     <None Include="Resources\toolbox.png" />

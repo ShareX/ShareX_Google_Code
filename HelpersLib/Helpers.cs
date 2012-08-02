@@ -69,9 +69,8 @@ namespace HelpersLib
         {
             string ext = GetFilenameExtension(filePath);
 
-            if (!string.IsNullOrEmpty(ext) && ext.Length > 1)
+            if (!string.IsNullOrEmpty(ext))
             {
-                ext = ext.Remove(0, 1);
                 return Enum.GetNames(enumType).Any(x => ext.Equals(x, StringComparison.InvariantCultureIgnoreCase));
             }
 
