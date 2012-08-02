@@ -65,9 +65,7 @@ namespace ScreenCapture
 
                         if (CaptureShadow && !NativeMethods.IsZoomed(handle) && NativeMethods.IsDWMEnabled())
                         {
-                            const int offset = 20;
-
-                            rect.Inflate(offset, offset);
+                            rect.Inflate(ShadowOffset, ShadowOffset);
                             rect.Intersect(CaptureHelpers.GetScreenBounds());
                         }
 

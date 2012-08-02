@@ -410,21 +410,20 @@ namespace ShareX
 
         public static void UpdateProgressUI()
         {
-            double averageProgress = -1;
+            bool isWorkingTasks = false;
+            double averageProgress = 0;
 
             IEnumerable<Task> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null);
 
             if (workingTasks.Count() > 0)
             {
+                isWorkingTasks = true;
+
                 workingTasks = workingTasks.Where(x => x.Info.Progress != null);
 
                 if (workingTasks.Count() > 0)
                 {
                     averageProgress = workingTasks.Average(x => x.Info.Progress.Percentage);
-                }
-                else
-                {
-                    averageProgress = 0;
                 }
             }
 
@@ -432,7 +431,7 @@ namespace ShareX
             {
                 Icon icon = null;
 
-                if (averageProgress >= 0)
+                if (isWorkingTasks)
                 {
                     int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
                     icon = trayIcons.ReturnIfValidIndex(index) ?? trayIcons.Last();
@@ -450,7 +449,7 @@ namespace ShareX
 
             string title;
 
-            if (averageProgress >= 0)
+            if (isWorkingTasks)
             {
                 title = string.Format("{0} - {1:0.0}%", Program.Title, averageProgress);
             }

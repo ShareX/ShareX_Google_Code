@@ -128,6 +128,7 @@
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
+            this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
             this.btnNameFormatPatternHelpActiveWindow = new System.Windows.Forms.Button();
             this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
             this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
@@ -165,7 +166,8 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
+            this.lblCaptureShadowOffset = new System.Windows.Forms.Label();
+            this.nudCaptureShadowOffset = new System.Windows.Forms.NumericUpDown();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -198,6 +200,7 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -1082,6 +1085,8 @@
             // 
             // tpCaptureGeneral
             // 
+            this.tpCaptureGeneral.Controls.Add(this.nudCaptureShadowOffset);
+            this.tpCaptureGeneral.Controls.Add(this.lblCaptureShadowOffset);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureClientArea);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureShadow);
             this.tpCaptureGeneral.Controls.Add(this.cbShowCursor);
@@ -1097,7 +1102,7 @@
             // cbCaptureClientArea
             // 
             this.cbCaptureClientArea.AutoSize = true;
-            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 88);
+            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 120);
             this.cbCaptureClientArea.Name = "cbCaptureClientArea";
             this.cbCaptureClientArea.Size = new System.Drawing.Size(334, 17);
             this.cbCaptureClientArea.TabIndex = 3;
@@ -1423,6 +1428,16 @@
             this.tpUploadGeneral.TabIndex = 0;
             this.tpUploadGeneral.Text = "General";
             this.tpUploadGeneral.UseVisualStyleBackColor = true;
+            // 
+            // btnResetAutoIncrementNumber
+            // 
+            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 112);
+            this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
+            this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
+            this.btnResetAutoIncrementNumber.TabIndex = 10;
+            this.btnResetAutoIncrementNumber.Text = "Reset auto increment number";
+            this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
+            this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
             // 
             // btnNameFormatPatternHelpActiveWindow
             // 
@@ -1806,15 +1821,28 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // btnResetAutoIncrementNumber
+            // lblCaptureShadowOffset
             // 
-            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 112);
-            this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
-            this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
-            this.btnResetAutoIncrementNumber.TabIndex = 10;
-            this.btnResetAutoIncrementNumber.Text = "Reset auto increment number";
-            this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
-            this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
+            this.lblCaptureShadowOffset.AutoSize = true;
+            this.lblCaptureShadowOffset.Location = new System.Drawing.Point(32, 92);
+            this.lblCaptureShadowOffset.Name = "lblCaptureShadowOffset";
+            this.lblCaptureShadowOffset.Size = new System.Drawing.Size(78, 13);
+            this.lblCaptureShadowOffset.TabIndex = 4;
+            this.lblCaptureShadowOffset.Text = "Shadow offset:";
+            // 
+            // nudCaptureShadowOffset
+            // 
+            this.nudCaptureShadowOffset.Location = new System.Drawing.Point(112, 88);
+            this.nudCaptureShadowOffset.Name = "nudCaptureShadowOffset";
+            this.nudCaptureShadowOffset.Size = new System.Drawing.Size(48, 20);
+            this.nudCaptureShadowOffset.TabIndex = 5;
+            this.nudCaptureShadowOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCaptureShadowOffset.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudCaptureShadowOffset.ValueChanged += new System.EventHandler(this.nudCaptureShadowOffset_ValueChanged);
             // 
             // SettingsForm
             // 
@@ -1874,6 +1902,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2018,5 +2047,7 @@
         private System.Windows.Forms.TextBox txtNameFormatPatternActiveWindow;
         private System.Windows.Forms.CheckBox cbCaptureClientArea;
         private System.Windows.Forms.Button btnResetAutoIncrementNumber;
+        private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
+        private System.Windows.Forms.Label lblCaptureShadowOffset;
     }
 }
