@@ -101,6 +101,9 @@ namespace UploadersLib
         [Category("Drop.IO"), Browsable(false), DefaultValue(ApiKeys.DropIOKey), Description("Drop.IO Consumer Secret")]
         public string DropIOKey { get; set; }
 
+        [Category("Ge.tt"), Browsable(false), DefaultValue(ApiKeys.Ge_ttKey), Description("Ge.tt Key")]
+        public string Ge_ttKey { get; set; }
+
         #endregion File Uploaders
 
         #region Text Uploaders

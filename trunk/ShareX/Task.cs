@@ -231,13 +231,15 @@ namespace ShareX
                     if (!IsStopped)
                     {
                         DebugHelper.WriteException(e);
-                        uploader.Errors.Add(e.ToString());
+
+                        if (Info.Result == null) Info.Result = new UploadResult();
+                        Info.Result.Errors.Add(e.ToString());
                     }
                 }
                 finally
                 {
                     if (Info.Result == null) Info.Result = new UploadResult();
-                    if (uploader != null) Info.Result.Errors = uploader.Errors;
+                    if (uploader != null) Info.Result.Errors.AddRange(uploader.Errors);
                 }
             }
             else
@@ -515,6 +517,15 @@ namespace ShareX
                         FolderID = Program.UploadersConfig.BoxFolderID,
                         Share = Program.UploadersConfig.BoxShare
                     };
+                    break;
+                case FileDestination.Ge_tt:
+                    if (Program.UploadersConfig.IsActive(FileDestination.Ge_tt))
+                    {
+                        fileUploader = new Ge_tt(ApiKeys.Ge_ttKey)
+                        {
+                            AccessToken = Program.UploadersConfig.Ge_ttLogin.AccessToken
+                        };
+                    }
                     break;
                 case FileDestination.CustomUploader:
                     if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomUploaderSelected))

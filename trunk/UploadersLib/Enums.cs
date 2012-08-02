@@ -86,6 +86,8 @@ namespace UploadersLib
         Minus,
         [Description("box.com")]
         Box,
+        [Description("ge.tt")]
+        Ge_tt,
         [Description("Custom Uploader")]
         CustomUploader,
         [Description("FTP Server")]

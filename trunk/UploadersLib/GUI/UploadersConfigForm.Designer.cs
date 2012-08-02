@@ -174,6 +174,13 @@
             this.txtSendSpacePassword = new System.Windows.Forms.TextBox();
             this.txtSendSpaceUserName = new System.Windows.Forms.TextBox();
             this.atcSendSpaceAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.tpGe_tt = new System.Windows.Forms.TabPage();
+            this.lblGe_ttAccessToken = new System.Windows.Forms.Label();
+            this.lblGe_ttPassword = new System.Windows.Forms.Label();
+            this.lblGe_ttEmail = new System.Windows.Forms.Label();
+            this.btnGe_ttLogin = new System.Windows.Forms.Button();
+            this.txtGe_ttPassword = new System.Windows.Forms.TextBox();
+            this.txtGe_ttEmail = new System.Windows.Forms.TextBox();
             this.tpCustomUploaders = new System.Windows.Forms.TabPage();
             this.txtCustomUploaderLog = new System.Windows.Forms.RichTextBox();
             this.btnCustomUploaderTest = new System.Windows.Forms.Button();
@@ -283,6 +290,7 @@
             this.gbFtpSettings.SuspendLayout();
             this.tpRapidShare.SuspendLayout();
             this.tpSendSpace.SuspendLayout();
+            this.tpGe_tt.SuspendLayout();
             this.tpCustomUploaders.SuspendLayout();
             this.gbCustomUploaders.SuspendLayout();
             this.gbCustomUploaderRegexp.SuspendLayout();
@@ -1172,6 +1180,7 @@
             this.tcFileUploaders.Controls.Add(this.tpFTP);
             this.tcFileUploaders.Controls.Add(this.tpRapidShare);
             this.tcFileUploaders.Controls.Add(this.tpSendSpace);
+            this.tcFileUploaders.Controls.Add(this.tpGe_tt);
             this.tcFileUploaders.Controls.Add(this.tpCustomUploaders);
             this.tcFileUploaders.Controls.Add(this.tpSharedFolder);
             this.tcFileUploaders.Controls.Add(this.tpEmail);
@@ -1847,6 +1856,74 @@
             this.atcSendSpaceAccountType.Size = new System.Drawing.Size(214, 29);
             this.atcSendSpaceAccountType.TabIndex = 0;
             this.atcSendSpaceAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcSendSpaceAccountType_AccountTypeChanged);
+            // 
+            // tpGe_tt
+            // 
+            this.tpGe_tt.Controls.Add(this.lblGe_ttAccessToken);
+            this.tpGe_tt.Controls.Add(this.lblGe_ttPassword);
+            this.tpGe_tt.Controls.Add(this.lblGe_ttEmail);
+            this.tpGe_tt.Controls.Add(this.btnGe_ttLogin);
+            this.tpGe_tt.Controls.Add(this.txtGe_ttPassword);
+            this.tpGe_tt.Controls.Add(this.txtGe_ttEmail);
+            this.tpGe_tt.Location = new System.Drawing.Point(4, 22);
+            this.tpGe_tt.Name = "tpGe_tt";
+            this.tpGe_tt.Padding = new System.Windows.Forms.Padding(3);
+            this.tpGe_tt.Size = new System.Drawing.Size(804, 474);
+            this.tpGe_tt.TabIndex = 9;
+            this.tpGe_tt.Text = "Ge.tt";
+            this.tpGe_tt.UseVisualStyleBackColor = true;
+            // 
+            // lblGe_ttAccessToken
+            // 
+            this.lblGe_ttAccessToken.AutoSize = true;
+            this.lblGe_ttAccessToken.Location = new System.Drawing.Point(24, 112);
+            this.lblGe_ttAccessToken.Name = "lblGe_ttAccessToken";
+            this.lblGe_ttAccessToken.Size = new System.Drawing.Size(75, 13);
+            this.lblGe_ttAccessToken.TabIndex = 5;
+            this.lblGe_ttAccessToken.Text = "Access token:";
+            // 
+            // lblGe_ttPassword
+            // 
+            this.lblGe_ttPassword.AutoSize = true;
+            this.lblGe_ttPassword.Location = new System.Drawing.Point(24, 48);
+            this.lblGe_ttPassword.Name = "lblGe_ttPassword";
+            this.lblGe_ttPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblGe_ttPassword.TabIndex = 4;
+            this.lblGe_ttPassword.Text = "Password:";
+            // 
+            // lblGe_ttEmail
+            // 
+            this.lblGe_ttEmail.AutoSize = true;
+            this.lblGe_ttEmail.Location = new System.Drawing.Point(24, 24);
+            this.lblGe_ttEmail.Name = "lblGe_ttEmail";
+            this.lblGe_ttEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblGe_ttEmail.TabIndex = 3;
+            this.lblGe_ttEmail.Text = "Email:";
+            // 
+            // btnGe_ttLogin
+            // 
+            this.btnGe_ttLogin.Location = new System.Drawing.Point(184, 72);
+            this.btnGe_ttLogin.Name = "btnGe_ttLogin";
+            this.btnGe_ttLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnGe_ttLogin.TabIndex = 2;
+            this.btnGe_ttLogin.Text = "Login";
+            this.btnGe_ttLogin.UseVisualStyleBackColor = true;
+            this.btnGe_ttLogin.Click += new System.EventHandler(this.btnGe_ttLogin_Click);
+            // 
+            // txtGe_ttPassword
+            // 
+            this.txtGe_ttPassword.Location = new System.Drawing.Point(88, 44);
+            this.txtGe_ttPassword.Name = "txtGe_ttPassword";
+            this.txtGe_ttPassword.PasswordChar = '*';
+            this.txtGe_ttPassword.Size = new System.Drawing.Size(168, 20);
+            this.txtGe_ttPassword.TabIndex = 1;
+            // 
+            // txtGe_ttEmail
+            // 
+            this.txtGe_ttEmail.Location = new System.Drawing.Point(88, 20);
+            this.txtGe_ttEmail.Name = "txtGe_ttEmail";
+            this.txtGe_ttEmail.Size = new System.Drawing.Size(168, 20);
+            this.txtGe_ttEmail.TabIndex = 0;
             // 
             // tpCustomUploaders
             // 
@@ -2695,6 +2772,8 @@
             this.tpRapidShare.PerformLayout();
             this.tpSendSpace.ResumeLayout(false);
             this.tpSendSpace.PerformLayout();
+            this.tpGe_tt.ResumeLayout(false);
+            this.tpGe_tt.PerformLayout();
             this.tpCustomUploaders.ResumeLayout(false);
             this.tpCustomUploaders.PerformLayout();
             this.gbCustomUploaders.ResumeLayout(false);
@@ -2945,5 +3024,12 @@
         private System.Windows.Forms.TabPage tpPaste_ee;
         private System.Windows.Forms.Label lblPaste_eeUserAPIKey;
         private System.Windows.Forms.TextBox txtPaste_eeUserAPIKey;
+        private System.Windows.Forms.TabPage tpGe_tt;
+        private System.Windows.Forms.Label lblGe_ttAccessToken;
+        private System.Windows.Forms.Label lblGe_ttPassword;
+        private System.Windows.Forms.Label lblGe_ttEmail;
+        private System.Windows.Forms.Button btnGe_ttLogin;
+        private System.Windows.Forms.TextBox txtGe_ttPassword;
+        private System.Windows.Forms.TextBox txtGe_ttEmail;
     }
 }

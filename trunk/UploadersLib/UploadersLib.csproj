@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="FileUploaders\Box.cs" />
     <Compile Include="FileUploaders\Email.cs" />
+    <Compile Include="FileUploaders\Ge_tt.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="FileUploaders\SharedFolderUploader.cs" />
@@ -316,6 +317,7 @@
     <None Include="Favicons\Box.ico" />
     <Content Include="Favicons\Dropbox.ico" />
     <Content Include="Favicons\Flickr.ico" />
+    <None Include="Favicons\Gett.ico" />
     <Content Include="Favicons\Google.ico" />
     <Content Include="Favicons\ImageShack.ico" />
     <Content Include="Favicons\Imgur.ico" />
@@ -334,7 +336,6 @@
     <None Include="Resources\mail.png" />
     <None Include="Resources\globe-network.png" />
     <None Include="Resources\folder-network.png" />
-    <None Include="Resources\photobucket.png" />
     <None Include="Resources\server[1].png" />
     <None Include="Resources\ZScreen_256.png" />
     <None Include="Resources\page_white_powerpoint.gif" />

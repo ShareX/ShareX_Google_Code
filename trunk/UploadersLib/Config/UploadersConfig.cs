@@ -125,6 +125,10 @@ namespace UploadersLib
         public string BoxFolderID = "0";
         public bool BoxShare = true;
 
+        // Ge.tt
+
+        public Ge_ttLogin Ge_ttLogin = null;
+
         // Custom Uploader
 
         public List<CustomUploaderInfo> CustomUploadersList = new List<CustomUploaderInfo>();
@@ -252,6 +256,8 @@ namespace UploadersLib
                     return MinusConfig != null && MinusConfig.MinusUser != null;
                 case FileDestination.Box:
                     return !string.IsNullOrEmpty(BoxAuthToken);
+                case FileDestination.Ge_tt:
+                    return Ge_ttLogin != null && !string.IsNullOrEmpty(Ge_ttLogin.AccessToken);
                 case FileDestination.CustomUploader:
                     return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomUploaderSelected);
                 case FileDestination.FTP:
