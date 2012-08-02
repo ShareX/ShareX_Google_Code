@@ -138,6 +138,25 @@ namespace HistoryLib
             if (HistoryItem != null && IsFileExist) Helpers.OpenFolderWithFile(HistoryItem.Filepath);
         }
 
+        public void TryOpen()
+        {
+            if (HistoryItem != null)
+            {
+                if (IsShortenedURLExist)
+                {
+                    Helpers.LoadBrowserAsync(HistoryItem.ShortenedURL);
+                }
+                else if (IsURLExist)
+                {
+                    Helpers.LoadBrowserAsync(HistoryItem.URL);
+                }
+                else if (IsFileExist)
+                {
+                    Helpers.LoadBrowserAsync(HistoryItem.Filepath);
+                }
+            }
+        }
+
         public void CopyURL()
         {
             if (HistoryItem != null && IsURLExist)

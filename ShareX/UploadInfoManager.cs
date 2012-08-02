@@ -108,6 +108,25 @@ namespace ShareX
             if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) Helpers.OpenFolderWithFile(SelectedItems[0].Info.FilePath);
         }
 
+        public void TryOpen()
+        {
+            if (IsSelectedItemsValid())
+            {
+                if (SelectedItems[0].IsShortenedURLExist)
+                {
+                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.ShortenedURL);
+                }
+                else if (SelectedItems[0].IsURLExist)
+                {
+                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.URL);
+                }
+                else if (SelectedItems[0].IsFileExist)
+                {
+                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.FilePath);
+                }
+            }
+        }
+
         #endregion Open
 
         #region Copy

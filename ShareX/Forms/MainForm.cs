@@ -642,9 +642,12 @@ namespace ShareX
             }
         }
 
-        private void lvUploads_DoubleClick(object sender, EventArgs e)
+        private void lvUploads_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            uim.OpenURL();
+            if (e.Button == MouseButtons.Left)
+            {
+                uim.TryOpen();
+            }
         }
 
         private void scMain_SplitterMoved(object sender, SplitterEventArgs e)
@@ -658,7 +661,7 @@ namespace ShareX
             {
                 default: return;
                 case Keys.Enter:
-                    uim.OpenURL();
+                    uim.TryOpen();
                     break;
                 case Keys.Control | Keys.Enter:
                     uim.OpenFile();
