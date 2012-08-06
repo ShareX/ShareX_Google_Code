@@ -331,15 +331,20 @@ namespace HelpersLib
 
             if (!string.IsNullOrEmpty(text))
             {
-                foreach (char symbol in text)
+                foreach (char c in text)
                 {
-                    if (UnreservedCharacters.Contains(symbol))
+                    if (UnreservedCharacters.Contains(c))
                     {
-                        result.Append(symbol);
+                        result.Append(c);
                     }
                     else
                     {
-                        result.AppendFormat("%{0:X2}", (int)symbol);
+                        byte[] bytes = Encoding.UTF8.GetBytes(c.ToString());
+
+                        foreach (byte b in bytes)
+                        {
+                            result.AppendFormat(CultureInfo.InvariantCulture, "%{0:X2}", b);
+                        }
                     }
                 }
             }
