@@ -65,7 +65,12 @@ namespace UploadersLib.HelperClasses
                 return ShortenedURL;
             }
 
-            return URL;
+            if (!string.IsNullOrEmpty(URL))
+            {
+                return URL;
+            }
+
+            return string.Empty;
         }
 
         public string ErrorsToString()
