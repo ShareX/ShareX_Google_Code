@@ -40,6 +40,8 @@ namespace UploadersLib
         Flickr,
         [Description("photobucket.com")]
         Photobucket,
+        [Description("picasaweb.google.com")]
+        Picasa,
         [Description("uploadscreenshot.com")]
         UploadScreenshot,
         [Description("twitpic.com")]

@@ -375,6 +375,13 @@ namespace UploadersLib.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Picasa {
+            get {
+                object obj = ResourceManager.GetObject("Picasa", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon RapidShare {
             get {
                 object obj = ResourceManager.GetObject("RapidShare", resourceCulture);

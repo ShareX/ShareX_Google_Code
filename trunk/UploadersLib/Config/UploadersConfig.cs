@@ -79,6 +79,10 @@ namespace UploadersLib
         public string YFrogUsername = string.Empty;
         public string YFrogPassword = string.Empty;
 
+        // Picasa
+
+        public OAuthInfo PicasaOAuthInfo = null;
+
         #endregion Image uploaders
 
         #region Text uploaders
@@ -223,6 +227,8 @@ namespace UploadersLib
                     return !string.IsNullOrEmpty(FlickrAuthInfo.Token);
                 case ImageDestination.Photobucket:
                     return PhotobucketAccountInfo != null && OAuthInfo.CheckOAuth(PhotobucketOAuthInfo);
+                case ImageDestination.Picasa:
+                    return PicasaOAuthInfo != null && OAuthInfo.CheckOAuth(PicasaOAuthInfo);
                 case ImageDestination.Twitpic:
                 case ImageDestination.Twitsnaps:
                     return TwitterOAuthInfoList != null && TwitterOAuthInfoList.IsValidIndex(TwitterSelectedAccount);

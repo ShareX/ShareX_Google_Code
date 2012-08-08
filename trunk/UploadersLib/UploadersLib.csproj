@@ -182,6 +182,7 @@
     <Compile Include="HelperClasses\OAuth\IOAuth.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthManager.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthInfo.cs" />
+    <Compile Include="ImageUploaders\Picasa.cs" />
     <Compile Include="TextUploaders\Paste_ee.cs" />
     <Compile Include="UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
@@ -313,6 +314,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Picasa.ico" />
     <None Include="Resources\ShareXLogo.png" />
     <None Include="Favicons\Box.ico" />
     <Content Include="Favicons\Dropbox.ico" />
@@ -372,6 +374,10 @@
     <None Include="Resources\page_white_ruby.gif" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorsLib\ColorsLib.csproj">
+      <Project>{9F44B572-4A09-42D9-9DB7-2587F621B462}</Project>
+      <Name>ColorsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HelpersLib\HelpersLib.csproj">
       <Project>{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}</Project>
       <Name>HelpersLib</Name>
