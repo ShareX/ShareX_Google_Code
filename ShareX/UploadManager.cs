@@ -361,40 +361,47 @@ namespace ShareX
                     }
                     else
                     {
-                        Program.MyLogger.WriteLine("Task completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms", info.ID, info.FileName,
-                            info.Result.URL, (int)info.UploadDuration.TotalMilliseconds);
+                        Program.MyLogger.WriteLine("Task completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms",
+                            info.ID, info.FileName, info.Result.ToString(), (int)info.UploadDuration.TotalMilliseconds);
 
                         lvi.Text = info.FileName;
                         lvi.SubItems[1].Text = info.Status;
                         lvi.ImageIndex = 2;
 
-                        if (Program.Settings.SaveHistory && (!string.IsNullOrEmpty(info.Result.URL) || !string.IsNullOrEmpty(info.FilePath)))
+                        string result = info.Result.ToString();
+
+                        if (!string.IsNullOrEmpty(result))
                         {
-                            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-                            HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
+                            lvi.SubItems[8].Text = result;
+
+                            if (info.IsUploadJob && info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+                            {
+                                Helpers.CopyTextSafely(result);
+                            }
+                        }
+                        else if (!string.IsNullOrEmpty(info.FilePath))
+                        {
+                            result = info.FilePath;
                         }
 
-                        if (!string.IsNullOrEmpty(info.Result.URL))
+                        if (!string.IsNullOrEmpty(result))
                         {
-                            string url = info.Result.ToString();
-
-                            lvi.SubItems[8].Text = url;
-
-                            if (info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+                            if (Program.Settings.SaveHistory)
                             {
-                                Helpers.CopyTextSafely(url);
+                                HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
+                                HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                             }
 
                             if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
                             {
-                                Program.MainForm.niTray.Tag = url;
-                                Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Upload completed", url, ToolTipIcon.Info);
+                                Program.MainForm.niTray.Tag = result;
+                                Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
                             }
-                        }
 
-                        if (Program.Settings.PlaySoundAfterUpload)
-                        {
-                            SystemSounds.Exclamation.Play();
+                            if (Program.Settings.PlaySoundAfterUpload)
+                            {
+                                SystemSounds.Exclamation.Play();
+                            }
                         }
                     }
 

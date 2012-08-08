@@ -101,6 +101,8 @@
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
+            this.nudCaptureShadowOffset = new System.Windows.Forms.NumericUpDown();
+            this.lblCaptureShadowOffset = new System.Windows.Forms.Label();
             this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
@@ -166,8 +168,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.lblCaptureShadowOffset = new System.Windows.Forms.Label();
-            this.nudCaptureShadowOffset = new System.Windows.Forms.NumericUpDown();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -188,6 +188,7 @@
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).BeginInit();
             this.tpCaptureShape.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
@@ -200,7 +201,6 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -208,9 +208,9 @@
             this.cbPlaySoundAfterUpload.AutoSize = true;
             this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 160);
             this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
-            this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(199, 17);
+            this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(187, 17);
             this.cbPlaySoundAfterUpload.TabIndex = 8;
-            this.cbPlaySoundAfterUpload.Text = "Play sound after upload is completed";
+            this.cbPlaySoundAfterUpload.Text = "Play sound after task is completed";
             this.cbPlaySoundAfterUpload.UseVisualStyleBackColor = true;
             this.cbPlaySoundAfterUpload.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterUpload_CheckedChanged);
             // 
@@ -256,9 +256,9 @@
             this.cbTrayBalloonTipAfterUpload.AutoSize = true;
             this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 184);
             this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
-            this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(245, 17);
+            this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(233, 17);
             this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
-            this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after upload is completed";
+            this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after task is completed";
             this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
             this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
             // 
@@ -267,9 +267,9 @@
             this.cbHistorySave.AutoSize = true;
             this.cbHistorySave.Location = new System.Drawing.Point(16, 208);
             this.cbHistorySave.Name = "cbHistorySave";
-            this.cbHistorySave.Size = new System.Drawing.Size(189, 17);
+            this.cbHistorySave.Size = new System.Drawing.Size(139, 17);
             this.cbHistorySave.TabIndex = 11;
-            this.cbHistorySave.Text = "Save successful uploads to history";
+            this.cbHistorySave.Text = "Save task info to history";
             this.cbHistorySave.UseVisualStyleBackColor = true;
             this.cbHistorySave.CheckedChanged += new System.EventHandler(this.cbHistorySave_CheckedChanged);
             // 
@@ -1099,6 +1099,29 @@
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
             // 
+            // nudCaptureShadowOffset
+            // 
+            this.nudCaptureShadowOffset.Location = new System.Drawing.Point(112, 88);
+            this.nudCaptureShadowOffset.Name = "nudCaptureShadowOffset";
+            this.nudCaptureShadowOffset.Size = new System.Drawing.Size(48, 20);
+            this.nudCaptureShadowOffset.TabIndex = 5;
+            this.nudCaptureShadowOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCaptureShadowOffset.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudCaptureShadowOffset.ValueChanged += new System.EventHandler(this.nudCaptureShadowOffset_ValueChanged);
+            // 
+            // lblCaptureShadowOffset
+            // 
+            this.lblCaptureShadowOffset.AutoSize = true;
+            this.lblCaptureShadowOffset.Location = new System.Drawing.Point(32, 92);
+            this.lblCaptureShadowOffset.Name = "lblCaptureShadowOffset";
+            this.lblCaptureShadowOffset.Size = new System.Drawing.Size(78, 13);
+            this.lblCaptureShadowOffset.TabIndex = 4;
+            this.lblCaptureShadowOffset.Text = "Shadow offset:";
+            // 
             // cbCaptureClientArea
             // 
             this.cbCaptureClientArea.AutoSize = true;
@@ -1821,29 +1844,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // lblCaptureShadowOffset
-            // 
-            this.lblCaptureShadowOffset.AutoSize = true;
-            this.lblCaptureShadowOffset.Location = new System.Drawing.Point(32, 92);
-            this.lblCaptureShadowOffset.Name = "lblCaptureShadowOffset";
-            this.lblCaptureShadowOffset.Size = new System.Drawing.Size(78, 13);
-            this.lblCaptureShadowOffset.TabIndex = 4;
-            this.lblCaptureShadowOffset.Text = "Shadow offset:";
-            // 
-            // nudCaptureShadowOffset
-            // 
-            this.nudCaptureShadowOffset.Location = new System.Drawing.Point(112, 88);
-            this.nudCaptureShadowOffset.Name = "nudCaptureShadowOffset";
-            this.nudCaptureShadowOffset.Size = new System.Drawing.Size(48, 20);
-            this.nudCaptureShadowOffset.TabIndex = 5;
-            this.nudCaptureShadowOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudCaptureShadowOffset.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nudCaptureShadowOffset.ValueChanged += new System.EventHandler(this.nudCaptureShadowOffset_ValueChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1885,6 +1885,7 @@
             this.tcCapture.ResumeLayout(false);
             this.tpCaptureGeneral.ResumeLayout(false);
             this.tpCaptureGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).EndInit();
             this.tpCaptureShape.ResumeLayout(false);
             this.tpCaptureShape.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).EndInit();
@@ -1902,7 +1903,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).EndInit();
             this.ResumeLayout(false);
 
         }
