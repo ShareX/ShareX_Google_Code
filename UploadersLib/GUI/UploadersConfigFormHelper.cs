@@ -252,6 +252,56 @@ namespace UploadersLib
 
         #endregion Photobucket
 
+        #region Picasa
+
+        public void PicasaAuthOpen()
+        {
+            try
+            {
+                OAuthInfo oauth = new OAuthInfo(APIKeys.GoogleConsumerKey, APIKeys.GoogleConsumerSecret);
+
+                string url = new Picasa(oauth).GetAuthorizationURL();
+
+                if (!string.IsNullOrEmpty(url))
+                {
+                    Config.PicasaOAuthInfo = oauth;
+                    Helpers.LoadBrowserAsync(url);
+                    btnPicasaAuthComplete.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void PicasaAuthComplete()
+        {
+            if (Config.PicasaOAuthInfo != null && !string.IsNullOrEmpty(Config.PicasaOAuthInfo.AuthToken) &&
+                !string.IsNullOrEmpty(Config.PicasaOAuthInfo.AuthSecret))
+            {
+                Picasa gus = new Picasa(Config.PicasaOAuthInfo);
+                bool result = gus.GetAccessToken();
+
+                if (result)
+                {
+                    MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lblPicasaAccountStatus.Text = "Login successful: " + Config.PicasaOAuthInfo.UserToken;
+                    return;
+                }
+
+                MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("You must give access from Authorize page first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Config.PicasaOAuthInfo = null;
+        }
+
+        #endregion Picasa
+
         #region Dropbox
 
         public void DropboxOpenFiles()

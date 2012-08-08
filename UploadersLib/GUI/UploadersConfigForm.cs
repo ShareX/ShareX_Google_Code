@@ -249,6 +249,20 @@ namespace UploadersLib
 
         #endregion Photobucket
 
+        #region Picasa
+
+        private void btnPicasaAuthOpen_Click(object sender, EventArgs e)
+        {
+            PicasaAuthOpen();
+        }
+
+        private void btnPicasaAuthComplete_Click(object sender, EventArgs e)
+        {
+            PicasaAuthComplete();
+        }
+
+        #endregion Picasa
+
         #region Flickr
 
         private void btnFlickrOpenAuthorize_Click(object sender, EventArgs e)

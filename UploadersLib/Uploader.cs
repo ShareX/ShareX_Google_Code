@@ -242,6 +242,38 @@ namespace UploadersLib
             return null;
         }
 
+        protected string UploadDataPicasa(Stream dataStream, string url, string fileName, string contentType, CookieCollection cookies = null)
+        {
+            IsUploading = true;
+            stopUpload = false;
+
+            try
+            {
+                string boundary = CreateBoundary();
+
+                long contentLength = dataStream.Length;
+                HttpWebRequest request = PreparePostWebRequest(url, boundary, contentLength, contentType, cookies);
+                request.Headers.Add("Slug", fileName);
+
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    if (!TransferData(dataStream, requestStream)) return null;
+                }
+
+                return ResponseToString(request.GetResponse());
+            }
+            catch (Exception e)
+            {
+                if (!stopUpload) AddWebError(e);
+            }
+            finally
+            {
+                IsUploading = false;
+            }
+
+            return null;
+        }
+
         #endregion Post methods
 
         #region Get methods

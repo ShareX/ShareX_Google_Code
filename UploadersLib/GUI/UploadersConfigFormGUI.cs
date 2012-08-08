@@ -45,6 +45,7 @@ namespace UploadersLib
             imageUploadersImageList.Images.Add("Imgur", Resources.Imgur);
             imageUploadersImageList.Images.Add("Flickr", Resources.Flickr);
             imageUploadersImageList.Images.Add("Photobucket", Resources.Photobucket);
+            imageUploadersImageList.Images.Add("Picasa", Resources.Picasa);
             imageUploadersImageList.Images.Add("TwitPic", Resources.TwitPic);
             imageUploadersImageList.Images.Add("TwitSnaps", Resources.TwitSnaps);
             imageUploadersImageList.Images.Add("YFrog", Resources.YFrog);
@@ -84,6 +85,7 @@ namespace UploadersLib
             tpImgur.ImageKey = "Imgur";
             tpFlickr.ImageKey = "Flickr";
             tpPhotobucket.ImageKey = "Photobucket";
+            tpPicasa.ImageKey = "Picasa";
             tpTwitPic.ImageKey = "TwitPic";
             tpTwitSnaps.ImageKey = "TwitSnaps";
             tpYFrog.ImageKey = "YFrog";
@@ -146,6 +148,13 @@ namespace UploadersLib
                 lblPhotobucketAccountStatus.Text = "Login successful: " + Config.PhotobucketOAuthInfo.UserToken;
                 txtPhotobucketDefaultAlbumName.Text = Config.PhotobucketAccountInfo.AlbumID;
                 lblPhotobucketParentAlbumPath.Text = "Parent album path e.g. " + Config.PhotobucketAccountInfo.AlbumID + "/Personal/" + DateTime.Now.Year;
+            }
+
+            // Picasa
+
+            if (OAuthInfo.CheckOAuth(Config.PicasaOAuthInfo))
+            {
+                lblPicasaAccountStatus.Text = "Login successful: " + Config.PicasaOAuthInfo.UserToken;
             }
 
             if (Config.PhotobucketAccountInfo != null)
