@@ -136,6 +136,14 @@ namespace UploadersLib
             }
         }
 
+        protected string SendPostRequestStream(string url, Stream stream, string contentType, CookieCollection cookies = null, NameValueCollection headers = null)
+        {
+            using (HttpWebResponse response = GetResponseUsingPost(url, stream, CreateBoundary(), contentType, cookies, headers))
+            {
+                return ResponseToString(response, ResponseType.Text);
+            }
+        }
+
         private HttpWebResponse PostResponseMultiPart(string url, Dictionary<string, string> arguments, CookieCollection cookies = null)
         {
             string boundary = CreateBoundary();
@@ -175,14 +183,15 @@ namespace UploadersLib
             }
         }
 
-        private HttpWebResponse GetResponseUsingPost(string url, Stream dataStream, string boundary, string contentType, CookieCollection cookies = null)
+        private HttpWebResponse GetResponseUsingPost(string url, Stream dataStream, string boundary, string contentType,
+            CookieCollection cookies = null, NameValueCollection headers = null)
         {
             IsUploading = true;
             stopUpload = false;
 
             try
             {
-                HttpWebRequest request = PreparePostWebRequest(url, boundary, dataStream.Length, contentType, cookies);
+                HttpWebRequest request = PreparePostWebRequest(url, boundary, dataStream.Length, contentType, cookies, headers);
 
                 using (Stream requestStream = request.GetRequestStream())
                 {
@@ -226,38 +235,6 @@ namespace UploadersLib
                     requestStream.Write(bytesDataOpen, 0, bytesDataOpen.Length);
                     if (!TransferData(dataStream, requestStream)) return null;
                     requestStream.Write(bytesDataClose, 0, bytesDataClose.Length);
-                }
-
-                return ResponseToString(request.GetResponse());
-            }
-            catch (Exception e)
-            {
-                if (!stopUpload) AddWebError(e);
-            }
-            finally
-            {
-                IsUploading = false;
-            }
-
-            return null;
-        }
-
-        protected string UploadDataPicasa(Stream dataStream, string url, string fileName, string contentType, CookieCollection cookies = null)
-        {
-            IsUploading = true;
-            stopUpload = false;
-
-            try
-            {
-                string boundary = CreateBoundary();
-
-                long contentLength = dataStream.Length;
-                HttpWebRequest request = PreparePostWebRequest(url, boundary, contentLength, contentType, cookies);
-                request.Headers.Add("Slug", fileName);
-
-                using (Stream requestStream = request.GetRequestStream())
-                {
-                    if (!TransferData(dataStream, requestStream)) return null;
                 }
 
                 return ResponseToString(request.GetResponse());
@@ -360,7 +337,7 @@ namespace UploadersLib
 
         #region Helper methods
 
-        private HttpWebRequest PreparePostWebRequest(string url, string boundary, long length, string contentType, CookieCollection cookies = null)
+        private HttpWebRequest PreparePostWebRequest(string url, string boundary, long length, string contentType, CookieCollection cookies = null, NameValueCollection headers = null)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AllowWriteStreamBuffering = ProxySettings.ProxyConfig != EProxyConfigType.NoProxy;
@@ -370,6 +347,7 @@ namespace UploadersLib
             request.ContentType = contentType;
             request.CookieContainer = new CookieContainer();
             if (cookies != null) request.CookieContainer.Add(cookies);
+            if (headers != null) request.Headers.Add(headers);
             request.KeepAlive = false;
             request.Method = HttpMethod.Post.GetDescription();
             request.Pipelined = false;
