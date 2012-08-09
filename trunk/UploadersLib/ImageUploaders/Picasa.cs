@@ -23,16 +23,17 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using HelpersLib;
 using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
-using System.Drawing;
-using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace UploadersLib.URLShorteners
 {
@@ -68,55 +69,38 @@ namespace UploadersLib.URLShorteners
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            string query = OAuthManager.GenerateQuery(APIURL, null, HttpMethod.Post, AuthInfo);
+            UploadResult ur = new UploadResult();
 
-            string contentType = "image/*";
+            string url = OAuthManager.GenerateQuery(APIURL, null, HttpMethod.Post, AuthInfo);
+            string contentType = Helpers.GetMimeType(fileName);
+            NameValueCollection headers = new NameValueCollection { { "Slug", fileName } };
 
-            if (fileName.EndsWith(".jpg") || fileName.EndsWith(".jpeg")) contentType = "image/jpeg";
-            else if (fileName.EndsWith(".png")) contentType = "image/png";
-            else if (fileName.EndsWith(".bmp")) contentType = "image/bmp";
-            else if (fileName.EndsWith(".gif")) contentType = "image/gif";
+            ur.Source = SendPostRequestStream(url, stream, contentType, null, headers);
 
-            string response = UploadDataPicasa(stream, query, fileName, contentType);
-
-            UploadResult result = new UploadResult();
-
-            XDocument xd = XDocument.Parse(response);
+            XDocument xd = XDocument.Parse(ur.Source);
 
             XElement entry_element = xd.Element(AtomNS + "entry");
 
             if (entry_element != null)
             {
-                Console.WriteLine("entry_element is not null", entry_element);
-
                 XElement group_element = entry_element.Element(MediaNS + "group");
 
                 if (group_element != null)
                 {
-                    Console.WriteLine("group_element is not null", group_element);
-
                     XElement content_element = group_element.Element(MediaNS + "content");
 
                     if (content_element != null)
                     {
-                        result.ThumbnailURL = content_element.GetAttributeValue("url");
+                        ur.ThumbnailURL = content_element.GetAttributeValue("url");
 
-                        int last_slash_index = result.ThumbnailURL.LastIndexOf(@"/");
+                        int last_slash_index = ur.ThumbnailURL.LastIndexOf(@"/");
 
-                        result.URL = result.ThumbnailURL.Insert(last_slash_index, @"/s0");
+                        ur.URL = ur.ThumbnailURL.Insert(last_slash_index, @"/s0");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("group_element is null");
-                }
-            }
-            else
-            {
-                Console.WriteLine("entry_element is null");
             }
 
-            return result;
+            return ur;
         }
     }
 }
