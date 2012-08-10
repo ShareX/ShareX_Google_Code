@@ -232,11 +232,9 @@ namespace ShareX
             pbPreview.Reset();
             uim.RefreshSelectedItems();
 
-            if (lvUploads.SelectedIndices.Count > 0)
+            if (lvUploads.SelectedItems.Count > 0)
             {
-                int index = lvUploads.SelectedIndices[0];
-
-                if (UploadManager.Tasks[index].IsWorking)
+                if (GetCurrentTasks().Any(x => x.IsWorking))
                 {
                     tsmiStopUpload.Visible = true;
                 }
@@ -430,13 +428,24 @@ namespace ShareX
             }
         }
 
+        private Task[] GetCurrentTasks()
+        {
+            if (lvUploads.SelectedItems.Count > 0)
+            {
+                return lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null).ToArray();
+            }
+
+            return null;
+        }
+
         private UploadInfo GetCurrentUploadInfo()
         {
             UploadInfo info = null;
+            Task[] tasks = GetCurrentTasks();
 
-            if (lvUploads.SelectedItems.Count > 0)
+            if (tasks != null && tasks.Length > 0)
             {
-                info = lvUploads.SelectedItems[0].Tag as UploadInfo;
+                info = tasks[0].Info;
             }
 
             return info;
@@ -711,11 +720,11 @@ namespace ShareX
 
         private void tsmiStopUpload_Click(object sender, EventArgs e)
         {
-            if (lvUploads.SelectedIndices.Count > 0)
+            if (lvUploads.SelectedItems.Count > 0)
             {
-                foreach (int index in lvUploads.SelectedIndices)
+                foreach (Task task in GetCurrentTasks())
                 {
-                    UploadManager.Tasks[index].Stop();
+                    task.Stop();
                 }
             }
         }

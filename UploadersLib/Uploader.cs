@@ -64,7 +64,6 @@ namespace UploadersLib
             ServicePointManager.DefaultConnectionLimit = 25;
             ServicePointManager.Expect100Continue = false;
             ServicePointManager.UseNagleAlgorithm = false;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
         }
 
         protected void OnProgressChanged(ProgressManager progress)

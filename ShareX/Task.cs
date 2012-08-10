@@ -43,7 +43,7 @@ namespace ShareX
 {
     public class Task : IDisposable
     {
-        public delegate void TaskEventHandler(UploadInfo info);
+        public delegate void TaskEventHandler(Task task);
 
         public event TaskEventHandler UploadStarted;
         public event TaskEventHandler UploadPreparing;
@@ -675,7 +675,7 @@ namespace ShareX
 
             if (UploadPreparing != null)
             {
-                UploadPreparing(Info);
+                UploadPreparing(this);
             }
         }
 
@@ -683,7 +683,7 @@ namespace ShareX
         {
             if (UploadStarted != null)
             {
-                UploadStarted(Info);
+                UploadStarted(this);
             }
         }
 
@@ -691,7 +691,7 @@ namespace ShareX
         {
             if (UploadProgressChanged != null)
             {
-                UploadProgressChanged(Info);
+                UploadProgressChanged(this);
             }
         }
 
@@ -710,7 +710,7 @@ namespace ShareX
 
             if (UploadCompleted != null)
             {
-                UploadCompleted(Info);
+                UploadCompleted(this);
             }
 
             Dispose();

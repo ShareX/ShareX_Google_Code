@@ -41,8 +41,8 @@ namespace ShareX
     public static class UploadManager
     {
         public static MyListView ListViewControl { get; set; }
-        public static List<Task> Tasks { get; private set; }
 
+        private static List<Task> Tasks;
         private static object uploadManagerLock = new object();
         private static Icon[] trayIcons;
 
@@ -211,12 +211,11 @@ namespace ShareX
         private static void StartTask(Task task)
         {
             Tasks.Add(task);
-            task.Info.ID = Tasks.Count - 1;
             task.UploadPreparing += new Task.TaskEventHandler(task_UploadPreparing);
             task.UploadStarted += new Task.TaskEventHandler(task_UploadStarted);
             task.UploadProgressChanged += new Task.TaskEventHandler(task_UploadProgressChanged);
             task.UploadCompleted += new Task.TaskEventHandler(task_UploadCompleted);
-            CreateListViewItem(task.Info);
+            CreateListViewItem(task);
             StartTasks();
         }
 
@@ -245,14 +244,6 @@ namespace ShareX
             }
         }
 
-        public static void StopUpload(int index)
-        {
-            if (Tasks.Count < index)
-            {
-                Tasks[index].Stop();
-            }
-        }
-
         public static void UpdateProxySettings()
         {
             ProxySettings proxy = new ProxySettings();
@@ -264,23 +255,40 @@ namespace ShareX
             Uploader.ProxySettings = proxy;
         }
 
-        private static void ChangeListViewItemStatus(UploadInfo info)
+        private static void ChangeListViewItemStatus(Task task)
         {
             if (ListViewControl != null)
             {
-                ListViewItem lvi = ListViewControl.Items[info.ID];
-                lvi.SubItems[1].Text = info.Status;
+                ListViewItem lvi = FindListViewItem(task);
+                lvi.SubItems[1].Text = task.Info.Status;
             }
         }
 
-        private static void CreateListViewItem(UploadInfo info)
+        private static ListViewItem FindListViewItem(Task task)
+        {
+            foreach (ListViewItem lvi in ListViewControl.Items)
+            {
+                Task tag = lvi.Tag as Task;
+
+                if (tag != null && tag == task)
+                {
+                    return lvi;
+                }
+            }
+
+            return null;
+        }
+
+        private static void CreateListViewItem(Task task)
         {
             if (ListViewControl != null)
             {
-                Program.MyLogger.WriteLine("Task in queue. ID: {0}, Job: {1}, Type: {2}, Host: {3}", info.ID, info.Job, info.UploadDestination, info.UploaderHost);
+                UploadInfo info = task.Info;
+
+                Program.MyLogger.WriteLine("Task in queue. Job: {0}, Type: {1}, Host: {2}", info.Job, info.UploadDestination, info.UploaderHost);
 
                 ListViewItem lvi = new ListViewItem();
-                lvi.Tag = info;
+                lvi.Tag = task;
                 lvi.Text = info.FileName;
                 lvi.SubItems.Add("In queue");
                 lvi.SubItems.Add(string.Empty);
@@ -290,7 +298,6 @@ namespace ShareX
                 lvi.SubItems.Add(info.DataType.ToString());
                 lvi.SubItems.Add(info.IsUploadJob ? info.UploaderHost : string.Empty);
                 lvi.SubItems.Add(string.Empty);
-                lvi.BackColor = info.ID % 2 == 0 ? Color.White : Color.WhiteSmoke;
                 lvi.ImageIndex = 3;
                 ListViewControl.Items.Add(lvi);
                 lvi.EnsureVisible();
@@ -298,30 +305,34 @@ namespace ShareX
             }
         }
 
-        private static void task_UploadPreparing(UploadInfo info)
+        private static void task_UploadPreparing(Task task)
         {
-            Program.MyLogger.WriteLine("Task preparing. ID: {0}", info.ID);
-            ChangeListViewItemStatus(info);
+            Program.MyLogger.WriteLine("Task preparing.");
+            ChangeListViewItemStatus(task);
             UpdateProgressUI();
         }
 
-        private static void task_UploadStarted(UploadInfo info)
+        private static void task_UploadStarted(Task task)
         {
-            string status = string.Format("Upload started. ID: {0}, Filename: {1}", info.ID, info.FileName);
+            UploadInfo info = task.Info;
+
+            string status = string.Format("Upload started. Filename: {0}", info.FileName);
             if (!string.IsNullOrEmpty(info.FilePath)) status += ", Filepath: " + info.FilePath;
             Program.MyLogger.WriteLine(status);
 
-            ListViewItem lvi = ListViewControl.Items[info.ID];
+            ListViewItem lvi = FindListViewItem(task);
             lvi.Text = info.FileName;
             lvi.SubItems[1].Text = info.Status;
             lvi.ImageIndex = 0;
         }
 
-        private static void task_UploadProgressChanged(UploadInfo info)
+        private static void task_UploadProgressChanged(Task task)
         {
             if (ListViewControl != null)
             {
-                ListViewItem lvi = ListViewControl.Items[info.ID];
+                UploadInfo info = task.Info;
+
+                ListViewItem lvi = FindListViewItem(task);
                 lvi.SubItems[1].Text = string.Format("{0:0.0}%", info.Progress.Percentage);
                 lvi.SubItems[2].Text = string.Format("{0} / {1}", Helpers.ProperFileSize(info.Progress.Position), Helpers.ProperFileSize(info.Progress.Length));
 
@@ -336,76 +347,81 @@ namespace ShareX
             }
         }
 
-        private static void task_UploadCompleted(UploadInfo info)
+        private static void task_UploadCompleted(Task task)
         {
             try
             {
-                if (ListViewControl != null && info != null && info.Result != null)
+                if (ListViewControl != null && task != null)
                 {
-                    ListViewItem lvi = ListViewControl.Items[info.ID];
+                    UploadInfo info = task.Info;
 
-                    if (info.Result.IsError)
+                    if (info != null && info.Result != null)
                     {
-                        string errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
+                        ListViewItem lvi = FindListViewItem(task);
 
-                        Program.MyLogger.WriteLine("Task failed. ID: {0}, Filename: {1}, Errors:\r\n{2}", info.ID, info.FileName, errors);
-
-                        lvi.SubItems[1].Text = "Error";
-                        lvi.SubItems[8].Text = string.Empty;
-                        lvi.ImageIndex = 1;
-
-                        if (Program.Settings.PlaySoundAfterUpload)
+                        if (info.Result.IsError)
                         {
-                            SystemSounds.Asterisk.Play();
-                        }
-                    }
-                    else
-                    {
-                        Program.MyLogger.WriteLine("Task completed. ID: {0}, Filename: {1}, URL: {2}, Duration: {3}ms",
-                            info.ID, info.FileName, info.Result.ToString(), (int)info.UploadDuration.TotalMilliseconds);
+                            string errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
 
-                        lvi.Text = info.FileName;
-                        lvi.SubItems[1].Text = info.Status;
-                        lvi.ImageIndex = 2;
+                            Program.MyLogger.WriteLine("Task failed. Filename: {0}, Errors:\r\n{1}", info.FileName, errors);
 
-                        string result = info.Result.ToString();
-
-                        if (!string.IsNullOrEmpty(result))
-                        {
-                            lvi.SubItems[8].Text = result;
-
-                            if (info.IsUploadJob && info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
-                            {
-                                Helpers.CopyTextSafely(result);
-                            }
-                        }
-                        else if (!string.IsNullOrEmpty(info.FilePath))
-                        {
-                            result = info.FilePath;
-                        }
-
-                        if (!string.IsNullOrEmpty(result))
-                        {
-                            if (Program.Settings.SaveHistory)
-                            {
-                                HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-                                HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
-                            }
-
-                            if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
-                            {
-                                Program.MainForm.niTray.Tag = result;
-                                Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
-                            }
+                            lvi.SubItems[1].Text = "Error";
+                            lvi.SubItems[8].Text = string.Empty;
+                            lvi.ImageIndex = 1;
 
                             if (Program.Settings.PlaySoundAfterUpload)
                             {
-                                SystemSounds.Exclamation.Play();
+                                SystemSounds.Asterisk.Play();
                             }
                         }
-                    }
+                        else
+                        {
+                            Program.MyLogger.WriteLine("Task completed. Filename: {0}, URL: {1}, Duration: {2}ms",
+                                info.FileName, info.Result.ToString(), (int)info.UploadDuration.TotalMilliseconds);
 
-                    lvi.EnsureVisible();
+                            lvi.Text = info.FileName;
+                            lvi.SubItems[1].Text = info.Status;
+                            lvi.ImageIndex = 2;
+
+                            string result = info.Result.ToString();
+
+                            if (!string.IsNullOrEmpty(result))
+                            {
+                                lvi.SubItems[8].Text = result;
+
+                                if (info.IsUploadJob && info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+                                {
+                                    Helpers.CopyTextSafely(result);
+                                }
+                            }
+                            else if (!string.IsNullOrEmpty(info.FilePath))
+                            {
+                                result = info.FilePath;
+                            }
+
+                            if (!string.IsNullOrEmpty(result))
+                            {
+                                if (Program.Settings.SaveHistory)
+                                {
+                                    HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
+                                    HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
+                                }
+
+                                if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
+                                {
+                                    Program.MainForm.niTray.Tag = result;
+                                    Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
+                                }
+
+                                if (Program.Settings.PlaySoundAfterUpload)
+                                {
+                                    SystemSounds.Exclamation.Play();
+                                }
+                            }
+                        }
+
+                        lvi.EnsureVisible();
+                    }
                 }
             }
             finally
