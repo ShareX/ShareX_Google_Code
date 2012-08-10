@@ -34,7 +34,6 @@ namespace ShareX
 {
     public class UploadInfo
     {
-        public int ID { get; set; }
         public string Status { get; set; }
         public TaskJob Job { get; set; }
         public AfterCaptureTasks AfterCaptureJob { get; set; }
