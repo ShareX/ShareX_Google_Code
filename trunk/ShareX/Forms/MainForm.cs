@@ -111,7 +111,7 @@ namespace ShareX
             lvUploads.SmallImageList = il;
             lvUploads.FillLastColumn();
 
-            UploadManager.ListViewControl = lvUploads;
+            TaskManager.ListViewControl = lvUploads;
             uim = new UploadInfoManager(lvUploads);
         }
 
@@ -227,8 +227,8 @@ namespace ShareX
         {
             cmsUploadInfo.SuspendLayout();
 
-            tsmiUploadFile.Visible = tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible =
-                tsmiShowErrors.Visible = tsmiShowResponse.Visible = tsmiUploadSelectedFile.Visible = false;
+            tsmiStopUpload.Visible = tsmiOpen.Visible = tsmiCopy.Visible = tsmiShowErrors.Visible = tsmiShowResponse.Visible =
+                tsmiUploadSelectedFile.Visible = tsmiClearList.Visible = tssUploadInfo1.Visible = false;
             pbPreview.Reset();
             uim.RefreshSelectedItems();
 
@@ -306,10 +306,8 @@ namespace ShareX
                     }
                 }
             }
-            else
-            {
-                tsmiUploadFile.Visible = true;
-            }
+
+            tsmiClearList.Visible = tssUploadInfo1.Visible = lvUploads.Items.Count > 0;
 
             cmsUploadInfo.ResumeLayout();
         }
@@ -713,11 +711,6 @@ namespace ShareX
 
         #region UploadInfoMenu events
 
-        private void tsmiUploadFile_Click(object sender, EventArgs e)
-        {
-            UploadManager.UploadFile();
-        }
-
         private void tsmiStopUpload_Click(object sender, EventArgs e)
         {
             if (lvUploads.SelectedItems.Count > 0)
@@ -857,6 +850,16 @@ namespace ShareX
         private void tsmiUploadSelectedFile_Click(object sender, EventArgs e)
         {
             uim.Upload();
+        }
+
+        private void tsmiClearList_Click(object sender, EventArgs e)
+        {
+            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+        }
+
+        private void tsmiUploadFile_Click(object sender, EventArgs e)
+        {
+            UploadManager.UploadFile();
         }
 
         private void tsmiShowPreview_Click(object sender, EventArgs e)
