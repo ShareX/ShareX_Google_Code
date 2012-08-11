@@ -67,6 +67,13 @@ namespace HelpersLib.Properties {
             }
         }
         
+        internal static System.Drawing.Icon ShareX {
+            get {
+                object obj = ResourceManager.GetObject("ShareX", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tick {
             get {
                 object obj = ResourceManager.GetObject("tick", resourceCulture);

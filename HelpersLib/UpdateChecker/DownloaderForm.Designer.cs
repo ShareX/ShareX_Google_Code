@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloaderForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtChangelog = new System.Windows.Forms.TextBox();
             this.lblProgress = new HelpersLib.MyLabel();
@@ -87,6 +86,7 @@
             this.cbShowChangelog.SpaceAfterCheckBox = 3;
             this.cbShowChangelog.TabIndex = 15;
             this.cbShowChangelog.Text = "Show changelog?";
+            this.cbShowChangelog.Visible = false;
             this.cbShowChangelog.CheckedChanged += new System.EventHandler(this.cbShowChangelog_CheckedChanged);
             // 
             // lblStatus
@@ -122,7 +122,7 @@
             this.btnAction.Size = new System.Drawing.Size(128, 32);
             this.btnAction.TabIndex = 9;
             this.btnAction.Text = "Download";
-            this.btnAction.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnAction.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAction_MouseClick);
             // 
             // pbProgress
             // 
@@ -151,11 +151,10 @@
             this.Controls.Add(this.pbProgress);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "DownloaderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Manager";
+            this.Text = "ShareX updater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdaterForm_FormClosing);
             this.Shown += new System.EventHandler(this.DownloaderForm_Shown);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.UpdaterForm_Paint);

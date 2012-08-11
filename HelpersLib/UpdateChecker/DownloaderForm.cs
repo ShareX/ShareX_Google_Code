@@ -32,6 +32,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Windows.Forms;
+using HelpersLib.Properties;
 
 namespace HelpersLib
 {
@@ -55,6 +56,8 @@ namespace HelpersLib
         public DownloaderForm()
         {
             InitializeComponent();
+            Icon = Resources.ShareX;
+
             fillRect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
             backgroundBrush = new LinearGradientBrush(fillRect, Color.FromArgb(80, 80, 80), Color.FromArgb(50, 50, 50), LinearGradientMode.Vertical);
             UpdateFormSize();
@@ -71,7 +74,13 @@ namespace HelpersLib
             URL = url;
             Proxy = proxy;
             Changelog = changelog;
-            txtChangelog.Text = changelog;
+
+            if (!string.IsNullOrEmpty(changelog))
+            {
+                txtChangelog.Text = changelog;
+                cbShowChangelog.Visible = true;
+            }
+
             FileName = HttpUtility.UrlDecode(URL.Substring(URL.LastIndexOf('/') + 1));
             lblFilename.Text = "Filename: " + FileName;
         }
@@ -87,6 +96,40 @@ namespace HelpersLib
             if (AutoStartDownload)
             {
                 StartDownload();
+            }
+        }
+
+        private void btnAction_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                switch (Status)
+                {
+                    case DownloaderFormStatus.Waiting:
+                        StartDownload();
+                        break;
+                    default:
+                    case DownloaderFormStatus.DownloadStarted:
+                        Close();
+                        break;
+                    case DownloaderFormStatus.DownloadCompleted:
+                        try
+                        {
+                            btnAction.Enabled = false;
+                            ProcessStartInfo psi = new ProcessStartInfo(SavePath);
+                            psi.Verb = "runas";
+                            psi.UseShellExecute = true;
+                            Process.Start(psi);
+                            Status = DownloaderFormStatus.InstallStarted;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                        Close();
+                        break;
+                }
             }
         }
 
@@ -142,37 +185,6 @@ namespace HelpersLib
             Status = DownloaderFormStatus.DownloadCompleted;
             ChangeStatus("Download completed.");
             btnAction.Text = "Install";
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            switch (Status)
-            {
-                case DownloaderFormStatus.Waiting:
-                    StartDownload();
-                    break;
-                default:
-                case DownloaderFormStatus.DownloadStarted:
-                    Close();
-                    break;
-                case DownloaderFormStatus.DownloadCompleted:
-                    try
-                    {
-                        btnAction.Enabled = false;
-                        ProcessStartInfo psi = new ProcessStartInfo(SavePath);
-                        psi.Verb = "runas";
-                        psi.UseShellExecute = true;
-                        Process.Start(psi);
-                        Status = DownloaderFormStatus.InstallStarted;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString(), "Updater", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    Close();
-                    break;
-            }
         }
 
         private void cbShowChangelog_CheckedChanged(object sender, EventArgs e)

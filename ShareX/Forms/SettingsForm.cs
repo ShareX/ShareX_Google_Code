@@ -825,7 +825,5 @@ namespace ShareX
         }
 
         #endregion Proxy
-
-
     }
 }
