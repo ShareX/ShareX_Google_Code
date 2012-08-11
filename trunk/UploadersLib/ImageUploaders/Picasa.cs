@@ -23,16 +23,12 @@
 
 #endregion License Information (GPL v3)
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Linq;
 using HelpersLib;
-using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners

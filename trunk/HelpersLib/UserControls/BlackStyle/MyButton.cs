@@ -24,12 +24,14 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace HelpersLib
 {
+    [DefaultEvent("MouseClick")]
     public class MyButton : Control
     {
         public override string Text

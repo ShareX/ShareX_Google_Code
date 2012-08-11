@@ -90,7 +90,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap application_icon_large {
             get {
-                object obj = ResourceManager.GetObject("application-icon-large", resourceCulture);
+                object obj = ResourceManager.GetObject("application_icon_large", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -138,7 +138,7 @@ namespace ShareX.Properties {
         
         public static System.Drawing.Bitmap cursor_question {
             get {
-                object obj = ResourceManager.GetObject("cursor-question", resourceCulture);
+                object obj = ResourceManager.GetObject("cursor_question", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

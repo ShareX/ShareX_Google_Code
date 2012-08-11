@@ -25,8 +25,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -38,7 +36,6 @@ using ScreenCapture;
 using ShareX.Properties;
 using UpdateCheckerLib;
 using UploadersLib;
-using UploadersLib.HelperClasses;
 
 namespace ShareX
 {

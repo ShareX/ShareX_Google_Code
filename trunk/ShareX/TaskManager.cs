@@ -23,18 +23,14 @@
 
 #endregion License Information (GPL v3)
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Windows.Forms;
 using HelpersLib;
 using HistoryLib;
 using ShareX.Properties;
-using UploadersLib;
-using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
