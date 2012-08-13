@@ -446,6 +446,16 @@ namespace ShareX
             return info;
         }
 
+        private void RemoveSelectedItems()
+        {
+            lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+        }
+
+        private void RemoveAllItems()
+        {
+            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+        }
+
         private void UpdatePreviewSplitter()
         {
             if (Program.Settings.IsPreviewCollapsed)
@@ -673,6 +683,9 @@ namespace ShareX
                 case Keys.Control | Keys.C:
                     uim.CopyURL();
                     break;
+                case Keys.Delete:
+                    RemoveSelectedItems();
+                    break;
             }
 
             e.Handled = true;
@@ -851,7 +864,7 @@ namespace ShareX
 
         private void tsmiClearList_Click(object sender, EventArgs e)
         {
-            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+            RemoveAllItems();
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
