@@ -129,6 +129,7 @@ namespace ShareX
             string filename;
 
             NameParser nameParser = new NameParser(NameParserType.FileName);
+            nameParser.MaxNameLength = 100;
             nameParser.Picture = image;
             nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
 
@@ -158,6 +159,7 @@ namespace ShareX
             string filename;
 
             NameParser nameParser = new NameParser(NameParserType.FileName);
+            nameParser.MaxNameLength = 100;
             nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
 
             filename = nameParser.Convert(Program.Settings.NameFormatPattern) + ".txt";

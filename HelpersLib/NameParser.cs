@@ -211,7 +211,7 @@ namespace HelpersLib
 
             if (MaxNameLength > 0 && result.Length > MaxNameLength)
             {
-                result = result.Substring(0, MaxNameLength);
+                result = result.Remove(MaxNameLength);
             }
 
             return result;
