@@ -41,9 +41,11 @@
             this.lvAfterCaptureTasks.CheckBoxes = true;
             this.lvAfterCaptureTasks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chAfterCapture});
+            this.lvAfterCaptureTasks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lvAfterCaptureTasks.FullRowSelect = true;
             this.lvAfterCaptureTasks.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvAfterCaptureTasks.Location = new System.Drawing.Point(8, 8);
+            this.lvAfterCaptureTasks.MultiSelect = false;
             this.lvAfterCaptureTasks.Name = "lvAfterCaptureTasks";
             this.lvAfterCaptureTasks.Size = new System.Drawing.Size(256, 224);
             this.lvAfterCaptureTasks.TabIndex = 3;
@@ -53,7 +55,8 @@
             // 
             // chAfterCapture
             // 
-            this.chAfterCapture.Width = 229;
+            this.chAfterCapture.Text = "Tasks";
+            this.chAfterCapture.Width = 252;
             // 
             // btnContinue
             // 
