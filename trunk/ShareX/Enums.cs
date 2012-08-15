@@ -81,4 +81,9 @@ namespace ShareX
     {
         Percentage, Width, Height, Specific
     }
+
+    public enum AfterCaptureFormResult
+    {
+        Continue, Cancel, Copy
+    }
 }

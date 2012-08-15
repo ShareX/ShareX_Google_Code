@@ -572,7 +572,7 @@ namespace ShareX
 
         private void tsmiTestImageUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadImage(Resources.ShareXLogo);
+            UploadManager.RunImageTask(Resources.ShareXLogo);
         }
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)

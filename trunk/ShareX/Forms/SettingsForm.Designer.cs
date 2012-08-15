@@ -31,6 +31,7 @@
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
             this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
             this.cbHistorySave = new System.Windows.Forms.CheckBox();
             this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
@@ -206,7 +207,7 @@
             // cbPlaySoundAfterUpload
             // 
             this.cbPlaySoundAfterUpload.AutoSize = true;
-            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 160);
+            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 184);
             this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
             this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(187, 17);
             this.cbPlaySoundAfterUpload.TabIndex = 8;
@@ -234,6 +235,7 @@
             // 
             // tpGeneral
             // 
+            this.tpGeneral.Controls.Add(this.cbShowAfterCaptureTasksForm);
             this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
             this.tpGeneral.Controls.Add(this.cbHistorySave);
             this.tpGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
@@ -251,10 +253,21 @@
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbShowAfterCaptureTasksForm
+            // 
+            this.cbShowAfterCaptureTasksForm.AutoSize = true;
+            this.cbShowAfterCaptureTasksForm.Location = new System.Drawing.Point(16, 136);
+            this.cbShowAfterCaptureTasksForm.Name = "cbShowAfterCaptureTasksForm";
+            this.cbShowAfterCaptureTasksForm.Size = new System.Drawing.Size(295, 17);
+            this.cbShowAfterCaptureTasksForm.TabIndex = 12;
+            this.cbShowAfterCaptureTasksForm.Text = "Show \"Post capture tasks\" window after capture is made";
+            this.cbShowAfterCaptureTasksForm.UseVisualStyleBackColor = true;
+            this.cbShowAfterCaptureTasksForm.CheckedChanged += new System.EventHandler(this.cbShowAfterCaptureTasksForm_CheckedChanged);
+            // 
             // cbTrayBalloonTipAfterUpload
             // 
             this.cbTrayBalloonTipAfterUpload.AutoSize = true;
-            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 184);
+            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 208);
             this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
             this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(233, 17);
             this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
@@ -265,7 +278,7 @@
             // cbHistorySave
             // 
             this.cbHistorySave.AutoSize = true;
-            this.cbHistorySave.Location = new System.Drawing.Point(16, 208);
+            this.cbHistorySave.Location = new System.Drawing.Point(16, 232);
             this.cbHistorySave.Name = "cbHistorySave";
             this.cbHistorySave.Size = new System.Drawing.Size(139, 17);
             this.cbHistorySave.TabIndex = 11;
@@ -276,7 +289,7 @@
             // cbPlaySoundAfterCapture
             // 
             this.cbPlaySoundAfterCapture.AutoSize = true;
-            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 136);
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 160);
             this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
             this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
             this.cbPlaySoundAfterCapture.TabIndex = 7;
@@ -2049,5 +2062,6 @@
         private System.Windows.Forms.Button btnResetAutoIncrementNumber;
         private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
         private System.Windows.Forms.Label lblCaptureShadowOffset;
+        private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
     }
 }

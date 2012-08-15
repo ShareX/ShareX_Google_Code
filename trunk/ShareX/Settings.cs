@@ -56,6 +56,7 @@ namespace ShareX
 
         public bool ShowTray = true;
         public bool AutoCheckUpdate = true;
+        public bool ShowAfterCaptureTasksForm = false;
         public bool PlaySoundAfterCapture = true;
         public bool PlaySoundAfterUpload = true;
         public bool TrayBalloonTipAfterUpload = true;

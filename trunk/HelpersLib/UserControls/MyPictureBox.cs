@@ -33,15 +33,31 @@ namespace HelpersLib
 {
     public partial class MyPictureBox : UserControl
     {
-        public new string Text
+        private string text;
+
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true)]
+        public override string Text
         {
             get
             {
-                return lblStatus.Text;
+                return text;
             }
             set
             {
-                lblStatus.Text = value;
+                text = value;
+
+                if (string.IsNullOrEmpty(value))
+                {
+                    lblStatus.Visible = false;
+                }
+                else
+                {
+                    lblStatus.Text = value;
+                    lblStatus.Visible = true;
+                }
             }
         }
 
@@ -51,6 +67,7 @@ namespace HelpersLib
         public MyPictureBox()
         {
             InitializeComponent();
+            Text = string.Empty;
             pbMain.InitialImage = Resources.Loading;
             pbMain.LoadProgressChanged += new ProgressChangedEventHandler(pbMain_LoadProgressChanged);
             pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
