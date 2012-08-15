@@ -70,6 +70,7 @@ namespace ShareX
             cbStartWithWindows.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.Startup); //RegistryHelper.CheckStartWithWindows();
             cbShellContextMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo); //RegistryHelper.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
+            cbShowAfterCaptureTasksForm.Checked = Program.Settings.ShowAfterCaptureTasksForm;
             cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
             cbPlaySoundAfterUpload.Checked = Program.Settings.PlaySoundAfterUpload;
             cbTrayBalloonTipAfterUpload.Checked = Program.Settings.TrayBalloonTipAfterUpload;
@@ -284,6 +285,11 @@ namespace ShareX
         private void cbCheckUpdates_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.AutoCheckUpdate = cbCheckUpdates.Checked;
+        }
+
+        private void cbShowAfterCaptureTasksForm_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ShowAfterCaptureTasksForm = cbShowAfterCaptureTasksForm.Checked;
         }
 
         private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)

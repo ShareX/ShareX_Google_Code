@@ -84,7 +84,7 @@ namespace ShareX
             {
                 Image img = Clipboard.GetImage();
                 AfterCaptureTasks tasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.CopyImageToClipboard);
-                UploadManager.UploadImage(img, tasks);
+                UploadManager.RunImageTask(img, tasks);
             }
             else if (Clipboard.ContainsFileDropList())
             {
@@ -136,7 +136,7 @@ namespace ShareX
             else if (data.GetDataPresent(DataFormats.Bitmap, false))
             {
                 Image img = data.GetData(DataFormats.Bitmap, false) as Image;
-                UploadImage(img);
+                RunImageTask(img);
             }
             else if (data.GetDataPresent(DataFormats.Text, false))
             {
@@ -145,7 +145,7 @@ namespace ShareX
             }
         }
 
-        public static void UploadImage(Image img, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
+        public static void RunImageTask(Image img, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
         {
             if (img != null && imageJob != AfterCaptureTasks.None)
             {

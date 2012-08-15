@@ -117,7 +117,27 @@ namespace ShareX
         {
             if (img != null)
             {
-                UploadManager.UploadImage(img, Program.Settings.AfterCaptureTasks);
+                if (Program.Settings.ShowAfterCaptureTasksForm)
+                {
+                    using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, Program.Settings.AfterCaptureTasks))
+                    {
+                        afterCaptureForm.ShowDialog();
+
+                        switch (afterCaptureForm.Result)
+                        {
+                            case AfterCaptureFormResult.Continue:
+                                UploadManager.RunImageTask(img, afterCaptureForm.AfterCaptureTasks);
+                                break;
+                            case AfterCaptureFormResult.Copy:
+                                UploadManager.RunImageTask(img, AfterCaptureTasks.CopyImageToClipboard);
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    UploadManager.RunImageTask(img, Program.Settings.AfterCaptureTasks);
+                }
             }
         }
 
