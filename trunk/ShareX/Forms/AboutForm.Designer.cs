@@ -190,6 +190,8 @@
             this.cLogo.Size = new System.Drawing.Size(200, 200);
             this.cLogo.TabIndex = 20;
             this.cLogo.Draw += new HelpersLib.Canvas.DrawEventHandler(this.cLogo_Draw);
+            this.cLogo.MouseLeave += new System.EventHandler(this.cLogo_MouseLeave);
+            this.cLogo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cLogo_MouseMove);
             // 
             // uclUpdate
             // 

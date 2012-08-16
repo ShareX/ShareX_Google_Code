@@ -77,7 +77,7 @@ namespace HelpersLib
         private void timer_Tick(object sender, EventArgs e)
         {
             needPaint = true;
-            Refresh();
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
