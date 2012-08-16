@@ -40,13 +40,12 @@
             this.pbMikeURL = new System.Windows.Forms.PictureBox();
             this.pbAU = new System.Windows.Forms.PictureBox();
             this.lblMike = new System.Windows.Forms.Label();
+            this.cLogo = new HelpersLib.Canvas();
             this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProductName
@@ -183,6 +182,15 @@
             this.lblMike.TabIndex = 5;
             this.lblMike.Text = "McoreD (mcored) - Mike Delpach";
             // 
+            // cLogo
+            // 
+            this.cLogo.Interval = 100;
+            this.cLogo.Location = new System.Drawing.Point(209, 0);
+            this.cLogo.Name = "cLogo";
+            this.cLogo.Size = new System.Drawing.Size(200, 200);
+            this.cLogo.TabIndex = 20;
+            this.cLogo.Draw += new HelpersLib.Canvas.DrawEventHandler(this.cLogo_Draw);
+            // 
             // uclUpdate
             // 
             this.uclUpdate.Location = new System.Drawing.Point(16, 35);
@@ -190,45 +198,35 @@
             this.uclUpdate.Size = new System.Drawing.Size(224, 24);
             this.uclUpdate.TabIndex = 1;
             // 
-            // pbLogo
-            // 
-            this.pbLogo.Image = global::ShareX.Properties.Resources.ShareXLogo;
-            this.pbLogo.Location = new System.Drawing.Point(240, 8);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(120, 128);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogo.TabIndex = 19;
-            this.pbLogo.TabStop = false;
-            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 259);
+            this.ClientSize = new System.Drawing.Size(395, 259);
+            this.Controls.Add(this.lblBerk);
+            this.Controls.Add(this.lblMike);
+            this.Controls.Add(this.cLogo);
             this.Controls.Add(this.uclUpdate);
-            this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.pbMikeURL);
             this.Controls.Add(this.pbAU);
-            this.Controls.Add(this.lblMike);
             this.Controls.Add(this.pbBerkURL);
             this.Controls.Add(this.pbTR);
-            this.Controls.Add(this.lblBerk);
             this.Controls.Add(this.lblBugs);
-            this.Controls.Add(this.lblCredits);
             this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.lblProjectPage);
             this.Controls.Add(this.lblProductName);
+            this.Controls.Add(this.lblCredits);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - About";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutForm_FormClosing);
             this.Shown += new System.EventHandler(this.AboutForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +246,6 @@
         private System.Windows.Forms.PictureBox pbAU;
         private System.Windows.Forms.Label lblMike;
         private UpdateCheckerLib.UpdateCheckerLabel uclUpdate;
-        private System.Windows.Forms.PictureBox pbLogo;
+        private HelpersLib.Canvas cLogo;
     }
 }
