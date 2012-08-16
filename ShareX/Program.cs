@@ -40,6 +40,21 @@ namespace ShareX
         public static readonly string ApplicationName = Application.ProductName;
         public static readonly Version AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
+        public static string AssemblyCopyright
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+
+                if (attributes.Length == 0)
+                {
+                    return string.Empty;
+                }
+
+                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            }
+        }
+
         #region Paths
 
         private static readonly string DefaultPersonalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);

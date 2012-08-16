@@ -24,6 +24,8 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Windows.Forms;
 using HelpersLib;
@@ -39,7 +41,7 @@ namespace ShareX
             InitializeComponent();
             Text = Program.Title;
             lblProductName.Text = Program.FullTitle;
-            lblCopyright.Text = AssemblyCopyright;
+            lblCopyright.Text = Program.AssemblyCopyright;
 
             UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,
                 ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
@@ -48,21 +50,15 @@ namespace ShareX
 
         private void AboutForm_Shown(object sender, EventArgs e)
         {
-            this.BringToFront();
-            this.Activate();
+            BringToFront();
+            Activate();
+
+            cLogo.Start();
         }
 
-        public string AssemblyCopyright
+        private void AboutForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return string.Empty;
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
+            cLogo.Stop();
         }
 
         private void lblProjectPage_Click(object sender, EventArgs e)
@@ -84,5 +80,51 @@ namespace ShareX
         {
             Helpers.LoadBrowserAsync(Links.URL_MIKE);
         }
+
+        #region Animation
+
+        private const int w = 200;
+        private const int h = w;
+        private const int mX = w / 2;
+        private const int mY = h / 2;
+        private const int minStep = 3;
+        private const int maxStep = 30;
+        private const int speed = 1;
+        private int step = 10;
+        private int direction = speed;
+
+        private void cLogo_Draw(Graphics g)
+        {
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            g.TranslateTransform(mX, -(mY / 2));
+            g.RotateTransform(45);
+
+            for (int i = 0; i <= mX; i += step)
+            {
+                g.DrawLine(Pens.Black, i, mY, mX, mY + i); // Left top
+                g.DrawLine(Pens.Black, i, mY, mX, mY - i); // Left bottom
+                g.DrawLine(Pens.Black, w - i, mY, mX, mY - i); // Right top
+                g.DrawLine(Pens.Black, w - i, mY, mX, mY + i); // Right bottom
+            }
+
+            g.DrawLine(Pens.Black, mX, mY, mX, mY + mX); // Left top
+            g.DrawLine(Pens.Black, mX, mY, mX, mY - mX); // Left bottom
+            g.DrawLine(Pens.Black, w - mX, mY, mX, mY - mX); // Right top
+            g.DrawLine(Pens.Black, w - mX, mY, mX, mY + mX); // Right bottom
+
+            if (step + speed > maxStep)
+            {
+                direction = -speed;
+            }
+            else if (step - speed < minStep)
+            {
+                direction = speed;
+            }
+
+            step += direction;
+        }
+
+        #endregion Animation
     }
 }
