@@ -135,11 +135,11 @@ namespace UploadersLib.FileUploaders
         /// For compatibility reasons, it returns the link's expiration date in Dropbox's usual date format.
         /// All links are currently set to expire far enough in the future so that expiration is effectively not an issue.
         /// </returns>
-        public DropboxShares CreateShareableLink(string path, string fileName = "")
+        public DropboxShares CreateShareableLink(string path)
         {
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLShares, path, fileName), null, HttpMethod.Get, AuthInfo);
+                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLShares, path), null, HttpMethod.Get, AuthInfo);
 
                 string response = SendGetRequest(url);
 
@@ -186,27 +186,27 @@ namespace UploadersLib.FileUploaders
 
             if (!string.IsNullOrEmpty(response))
             {
-                if (AutoCreateShareableLink)
-                {
-                    DropboxShares shares = CreateShareableLink(UploadPath, fileName);
+                DropboxContentInfo content = JsonConvert.DeserializeObject<DropboxContentInfo>(response);
 
-                    if (shares != null)
-                    {
-                        result.URL = shares.URL;
-                    }
-                }
-                else
+                if (content != null)
                 {
-                    result.URL = GetDropboxURL(AccountInfo.Uid, UploadPath, fileName);
+                    if (AutoCreateShareableLink)
+                    {
+                        DropboxShares shares = CreateShareableLink(content.Path);
+
+                        if (shares != null)
+                        {
+                            result.URL = shares.URL;
+                        }
+                    }
+                    else
+                    {
+                        result.URL = GetDropboxURL(AccountInfo.Uid, content.Path);
+                    }
                 }
             }
 
             return result;
-        }
-
-        public static string GetDropboxURL(long userID, string uploadPath, string fileName)
-        {
-            return GetDropboxURL(userID, Helpers.CombineURL(uploadPath, HttpUtility.UrlPathEncode(fileName)));
         }
 
         public static string GetDropboxURL(long userID, string uploadPath)
@@ -271,12 +271,16 @@ namespace UploadersLib.FileUploaders
     public class DropboxContentInfo
     {
         public long Revision { get; set; }
+        public string Rev { get; set; }
         public bool Thumb_exists { get; set; }
         public long Bytes { get; set; }
         public string Modified { get; set; }
+        public string Client_mtime { get; set; }
         public string Path { get; set; }
         public bool Is_dir { get; set; }
         public string Icon { get; set; }
+        public string Root { get; set; }
+        public string Mime_type { get; set; }
         public string Size { get; set; }
     }
 

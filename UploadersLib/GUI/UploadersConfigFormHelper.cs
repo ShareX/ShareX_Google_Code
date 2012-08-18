@@ -387,7 +387,7 @@ namespace UploadersLib
                 sb.AppendLine("User ID: " + Config.DropboxAccountInfo.Uid.ToString());
                 string uploadPath = GetDropboxUploadPath();
                 sb.AppendLine("Upload path: " + uploadPath);
-                sb.AppendLine("Download path: " + Dropbox.GetDropboxURL(Config.DropboxAccountInfo.Uid, uploadPath, "{Filename}"));
+                sb.AppendLine("Download path: " + Dropbox.GetDropboxURL(Config.DropboxAccountInfo.Uid, uploadPath + "{Filename}"));
                 lblDropboxStatus.Text = sb.ToString();
                 btnDropboxShowFiles.Enabled = true;
             }
