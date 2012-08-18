@@ -36,18 +36,14 @@ namespace UploadersLib.FileUploaders
     public sealed class Dropbox : FileUploader, IOAuth
     {
         public OAuthInfo AuthInfo { get; set; }
-
         public DropboxAccountInfo AccountInfo { get; set; }
-
         public string UploadPath { get; set; }
-
         public bool AutoCreateShareableLink { get; set; }
 
         private const string APIVersion = "1";
         private const string URLAPI = "https://api.dropbox.com/" + APIVersion;
         private const string URLAPIContent = "https://api-content.dropbox.com/" + APIVersion;
 
-        private const string URLToken = URLAPI + "/token";
         private const string URLAccountInfo = URLAPI + "/account/info";
         private const string URLFiles = URLAPIContent + "/files/dropbox";
         private const string URLMetaData = URLAPI + "/metadata/dropbox";
@@ -79,34 +75,6 @@ namespace UploadersLib.FileUploaders
         {
             AuthInfo.AuthVerifier = verificationCode;
             return GetAccessToken(URLAccessToken, AuthInfo);
-        }
-
-        public DropboxUserLogin Login(string email, string password)
-        {
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
-            {
-                Dictionary<string, string> args = new Dictionary<string, string>();
-                args.Add("email", email);
-                args.Add("password", password);
-
-                string url = OAuthManager.GenerateQuery(URLToken, args, HttpMethod.Get, AuthInfo);
-
-                string response = SendGetRequest(url);
-
-                if (!string.IsNullOrEmpty(response))
-                {
-                    DropboxUserLogin login = JsonConvert.DeserializeObject<DropboxUserLogin>(response);
-
-                    if (login != null)
-                    {
-                        AuthInfo.UserToken = login.Token;
-                        AuthInfo.UserSecret = login.Secret;
-                        return login;
-                    }
-                }
-            }
-
-            return null;
         }
 
         /// <summary>Retrieves information about the user's account.</summary>

@@ -95,6 +95,7 @@ namespace ShareX
         private int step = 10;
         private int direction = speed;
         private Color lineColor = Color.Black;
+        private bool isPaused = false;
 
         private void cLogo_Draw(Graphics g)
         {
@@ -122,16 +123,24 @@ namespace ShareX
                 g.DrawLine(pen, w - mX, mY, mX, mY + mX); // Right bottom
             }
 
-            if (step + speed > maxStep)
+            if (!isPaused)
             {
-                direction = -speed;
-            }
-            else if (step - speed < minStep)
-            {
-                direction = speed;
-            }
+                if (step + speed > maxStep)
+                {
+                    direction = -speed;
+                }
+                else if (step - speed < minStep)
+                {
+                    direction = speed;
+                }
 
-            step += direction;
+                step += direction;
+            }
+        }
+
+        private void cLogo_MouseDown(object sender, MouseEventArgs e)
+        {
+            isPaused = !isPaused;
         }
 
         private void cLogo_MouseMove(object sender, MouseEventArgs e)
