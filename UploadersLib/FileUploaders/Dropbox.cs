@@ -77,8 +77,6 @@ namespace UploadersLib.FileUploaders
             return GetAccessToken(URLAccessToken, AuthInfo);
         }
 
-        /// <summary>Retrieves information about the user's account.</summary>
-        /// <returns>User account information.</returns>
         public DropboxAccountInfo GetAccountInfo()
         {
             if (OAuthInfo.CheckOAuth(AuthInfo))
@@ -102,12 +100,6 @@ namespace UploadersLib.FileUploaders
             return null;
         }
 
-        /// <summary>Retrieves file and folder metadata.</summary>
-        /// <param name="path">The path to the file or folder.</param>
-        /// <returns>
-        /// The metadata for the file or folder at the given <path>.
-        /// If <path> represents a folder and the list parameter is true, the metadata will also include a listing of metadata for the folder's contents.
-        /// </returns>
         public DropboxDirectoryInfo GetFilesList(string path)
         {
             DropboxDirectoryInfo directoryInfo = null;
@@ -127,14 +119,6 @@ namespace UploadersLib.FileUploaders
             return directoryInfo;
         }
 
-        /// <summary>
-        /// Creates and returns a Dropbox link to files or folders users can use to view a preview of the file in a web browser.
-        /// </summary>
-        /// <returns>
-        /// A Dropbox link to the given path. The link can be used publicly and directs to a preview page of the file.
-        /// For compatibility reasons, it returns the link's expiration date in Dropbox's usual date format.
-        /// All links are currently set to expire far enough in the future so that expiration is effectively not an issue.
-        /// </returns>
         public DropboxShares CreateShareableLink(string path)
         {
             if (OAuthInfo.CheckOAuth(AuthInfo))

@@ -59,6 +59,8 @@ namespace HelpersLib
         w,
         [Description("Current week name (English)")]
         w2,
+        [Description("Unix timestamp")]
+        unix,
         [Description("Auto increment number")]
         i,
         [Description("Random number 0 to 9")]
@@ -171,6 +173,8 @@ namespace HelpersLib
                  .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                  .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                  .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
+
+            sb.Replace(ReplacementVariables.unix.ToPrefixString(), FastDateTime.NowUnix.ToString());
 
             if (sb.ToString().Contains(ReplacementVariables.i.ToPrefixString()))
             {
