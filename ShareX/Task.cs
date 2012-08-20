@@ -268,6 +268,12 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark))
+                {
+                    WatermarkManager watermarkManager = new WatermarkManager(Program.Settings.WatermarkConfig);
+                    watermarkManager.ApplyWatermark(tempImage);
+                }
+
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
                     Clipboard.SetImage(tempImage);

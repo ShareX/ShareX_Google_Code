@@ -169,6 +169,8 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.tpWatermark = new System.Windows.Forms.TabPage();
+            this.btnWatermarkSettings = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -202,6 +204,7 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
+            this.tpWatermark.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -540,6 +543,7 @@
             // 
             this.tcImage.Controls.Add(this.tpQuality);
             this.tcImage.Controls.Add(this.tpResize);
+            this.tcImage.Controls.Add(this.tpWatermark);
             this.tcImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcImage.Location = new System.Drawing.Point(5, 5);
             this.tcImage.Name = "tcImage";
@@ -1514,7 +1518,7 @@
             // lblUploadLimit
             // 
             this.lblUploadLimit.AutoSize = true;
-            this.lblUploadLimit.Location = new System.Drawing.Point(20, 18);
+            this.lblUploadLimit.Location = new System.Drawing.Point(24, 18);
             this.lblUploadLimit.Name = "lblUploadLimit";
             this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
             this.lblUploadLimit.TabIndex = 0;
@@ -1523,7 +1527,7 @@
             // cbClipboardUploadAutoDetectURL
             // 
             this.cbClipboardUploadAutoDetectURL.AutoSize = true;
-            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(20, 82);
+            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(24, 82);
             this.cbClipboardUploadAutoDetectURL.Name = "cbClipboardUploadAutoDetectURL";
             this.cbClipboardUploadAutoDetectURL.Size = new System.Drawing.Size(401, 17);
             this.cbClipboardUploadAutoDetectURL.TabIndex = 0;
@@ -1572,7 +1576,7 @@
             // lblBufferSize
             // 
             this.lblBufferSize.AutoSize = true;
-            this.lblBufferSize.Location = new System.Drawing.Point(20, 50);
+            this.lblBufferSize.Location = new System.Drawing.Point(24, 50);
             this.lblBufferSize.Name = "lblBufferSize";
             this.lblBufferSize.Size = new System.Drawing.Size(59, 13);
             this.lblBufferSize.TabIndex = 3;
@@ -1857,6 +1861,27 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // tpWatermark
+            // 
+            this.tpWatermark.Controls.Add(this.btnWatermarkSettings);
+            this.tpWatermark.Location = new System.Drawing.Point(4, 22);
+            this.tpWatermark.Name = "tpWatermark";
+            this.tpWatermark.Padding = new System.Windows.Forms.Padding(3);
+            this.tpWatermark.Size = new System.Drawing.Size(504, 294);
+            this.tpWatermark.TabIndex = 2;
+            this.tpWatermark.Text = "Watermark";
+            this.tpWatermark.UseVisualStyleBackColor = true;
+            // 
+            // btnWatermarkSettings
+            // 
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
+            this.btnWatermarkSettings.Name = "btnWatermarkSettings";
+            this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
+            this.btnWatermarkSettings.TabIndex = 0;
+            this.btnWatermarkSettings.Text = "Watermark settings...";
+            this.btnWatermarkSettings.UseVisualStyleBackColor = true;
+            this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1916,6 +1941,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
+            this.tpWatermark.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2063,5 +2089,7 @@
         private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
         private System.Windows.Forms.Label lblCaptureShadowOffset;
         private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
+        private System.Windows.Forms.TabPage tpWatermark;
+        private System.Windows.Forms.Button btnWatermarkSettings;
     }
 }

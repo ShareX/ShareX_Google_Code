@@ -42,18 +42,16 @@ namespace ShareX
 
         private ContextMenuStrip codesMenu;
 
-        public WatermarkUI(WatermarkConfig cfg = null)
+        public WatermarkUI(WatermarkConfig config = null)
         {
             InitializeComponent();
 
-            if (cfg == null)
+            if (config == null)
             {
-                Config = new WatermarkConfig();
+                config = new WatermarkConfig();
             }
-            else
-            {
-                Config = cfg;
-            }
+
+            Config = config;
 
             codesMenu = new ContextMenuStrip();
             codesMenu.AutoClose = false;
@@ -62,7 +60,6 @@ namespace ShareX
             codesMenu.ShowImageMargin = false;
         }
 
-        /// <summary>Get Image with Watermark</summary>
         public Image ApplyWatermark(Image img, NameParser parser = null)
         {
             if (parser == null)
@@ -147,7 +144,7 @@ namespace ShareX
 
         private void TestWatermark()
         {
-            using (Bitmap bmp = Resources.ShareXLogo.Clone(new Rectangle(62, 33, 199, 140), PixelFormat.Format32bppArgb))
+            using (Bitmap bmp = CaptureHelpers.ResizeImage(Resources.ShareXLogo, pbWatermarkShow.Width, pbWatermarkShow.Height, false, true))
             {
                 Bitmap bmp2 = new Bitmap(pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height);
                 using (Graphics g = Graphics.FromImage(bmp2))
@@ -261,31 +258,31 @@ namespace ShareX
 
         private void nudWatermarkBackTrans_ValueChanged(object sender, EventArgs e)
         {
-            Config.WatermarkBackTrans = nudWatermarkBackTrans.Value;
+            Config.WatermarkBackTrans = (int)nudWatermarkBackTrans.Value;
             trackWatermarkBackgroundTrans.Value = (int)nudWatermarkBackTrans.Value;
         }
 
         private void nudWatermarkCornerRadius_ValueChanged(object sender, EventArgs e)
         {
-            Config.WatermarkCornerRadius = nudWatermarkCornerRadius.Value;
+            Config.WatermarkCornerRadius = (int)nudWatermarkCornerRadius.Value;
             TestWatermark();
         }
 
         private void nudWatermarkFontTrans_ValueChanged(object sender, EventArgs e)
         {
-            Config.WatermarkFontTrans = nudWatermarkFontTrans.Value;
+            Config.WatermarkFontTrans = (int)nudWatermarkFontTrans.Value;
             trackWatermarkFontTrans.Value = (int)nudWatermarkFontTrans.Value;
         }
 
         private void nudWatermarkImageScale_ValueChanged(object sender, EventArgs e)
         {
-            Config.WatermarkImageScale = nudWatermarkImageScale.Value;
+            Config.WatermarkImageScale = (int)nudWatermarkImageScale.Value;
             TestWatermark();
         }
 
         private void nudWatermarkOffset_ValueChanged(object sender, EventArgs e)
         {
-            Config.WatermarkOffset = nudWatermarkOffset.Value;
+            Config.WatermarkOffset = (int)nudWatermarkOffset.Value;
             TestWatermark();
         }
 

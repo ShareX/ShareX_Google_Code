@@ -47,6 +47,7 @@ namespace ShareX
         public bool ShowClipboardContentViewer = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
+        public WatermarkConfig WatermarkConfig = new WatermarkConfig();
 
         #endregion Main Form
 
