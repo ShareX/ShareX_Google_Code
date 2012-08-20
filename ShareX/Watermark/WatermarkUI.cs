@@ -53,11 +53,7 @@ namespace ShareX
 
             Config = config;
 
-            codesMenu = new ContextMenuStrip();
-            codesMenu.AutoClose = false;
-            codesMenu.Font = new XmlFont("Lucida Console", 8);
-            codesMenu.Opacity = 0.8;
-            codesMenu.ShowImageMargin = false;
+            codesMenu = NameParser.CreateCodesMenu(txtWatermarkText, new ReplacementVariables[] { ReplacementVariables.t, ReplacementVariables.host });
         }
 
         private void WatermarkUI_Load(object sender, EventArgs e)
@@ -103,74 +99,12 @@ namespace ShareX
             cbWatermarkUseBorder.Checked = Config.WatermarkUseBorder;
             nudWatermarkImageScale.Value = Config.WatermarkImageScale;
 
-            CreateCodesMenu();
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void WatermarkUI_Resize(object sender, EventArgs e)
         {
             Refresh();
-        }
-
-        public Image ApplyWatermark(Image img, NameParser parser = null)
-        {
-            if (parser == null)
-            {
-                parser = new NameParser(NameParserType.Text) { Picture = img };
-            }
-
-            return new WatermarkManager(Config).ApplyWatermark(img, parser, Config.WatermarkMode);
-        }
-
-        private void CheckForCodes(object checkObject)
-        {
-            var textBox = (TextBox)checkObject;
-            if (codesMenu.Items.Count > 0)
-            {
-                codesMenu.Show(textBox, new Point(textBox.Width + 1, 0));
-            }
-        }
-
-        private void CodesMenuCloseEvent(object sender, MouseEventArgs e)
-        {
-            codesMenu.Close();
-        }
-
-        private void CodesMenuCloseEvents()
-        {
-            this.MouseClick += CodesMenuCloseEvent;
-            foreach (Control cntrl in this.Controls)
-            {
-                if (cntrl.GetType() == typeof(GroupBox))
-                {
-                    cntrl.MouseClick += CodesMenuCloseEvent;
-                }
-            }
-        }
-
-        private void CreateCodesMenu()
-        {
-            var variables = Enum.GetValues(typeof(ReplacementVariables)).Cast<ReplacementVariables>().
-                Select(
-                    x =>
-                    new
-                    {
-                        Name = ReplacementExtension.Prefix + Enum.GetName(typeof(ReplacementVariables), x),
-                        Description = x.GetDescription()
-                    });
-
-            foreach (var variable in variables)
-            {
-                var tsi = new ToolStripMenuItem
-                {
-                    Text = string.Format("{0} - {1}", variable.Name, variable.Description),
-                    Tag = variable.Name
-                };
-                tsi.Click += watermarkCodeMenu_Click;
-                codesMenu.Items.Add(tsi);
-            }
-
-            CodesMenuCloseEvents();
         }
 
         private string FontToString()
@@ -180,8 +114,7 @@ namespace ShareX
 
         private string FontToString(Font font, Color color)
         {
-            return "Name: " + font.Name + " - Size: " + font.Size + " - Style: " + font.Style + " - Color: " +
-                   color.R + "," + color.G + "," + color.B;
+            return "Name: " + font.Name + " - Size: " + font.Size + " - Style: " + font.Style + " - Color: " + color.R + "," + color.G + "," + color.B;
         }
 
         private void SelectColor(Control pb, ref XmlColor color)
@@ -194,31 +127,10 @@ namespace ShareX
             }
         }
 
-        private void TestWatermark()
+        private void UpdatePreview()
         {
             Bitmap bmp = CaptureHelpers.ResizeImage(Resources.ShareXLogo, pbWatermarkShow.Width, pbWatermarkShow.Height, false, true);
             pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
-        }
-
-        private void watermarkCodeMenu_Click(object sender, EventArgs e)
-        {
-            var tsi = (ToolStripMenuItem)sender;
-            int oldPos = txtWatermarkText.SelectionStart;
-            string appendText;
-            if (oldPos > 0 && txtWatermarkText.Text[txtWatermarkText.SelectionStart - 1] == ReplacementExtension.Prefix)
-            {
-                appendText = tsi.Tag.ToString().TrimStart('%');
-                txtWatermarkText.Text =
-                    txtWatermarkText.Text.Insert(txtWatermarkText.SelectionStart, appendText);
-                txtWatermarkText.Select(oldPos + appendText.Length, 0);
-            }
-            else
-            {
-                appendText = tsi.Tag.ToString();
-                txtWatermarkText.Text =
-                    txtWatermarkText.Text.Insert(txtWatermarkText.SelectionStart, appendText);
-                txtWatermarkText.Select(oldPos + appendText.Length, 0);
-            }
         }
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
@@ -229,7 +141,7 @@ namespace ShareX
                 if (gradient.ShowDialog() == DialogResult.OK)
                 {
                     Config.GradientMakerOptions = gradient.Options;
-                    TestWatermark();
+                    UpdatePreview();
                 }
             }
         }
@@ -242,7 +154,7 @@ namespace ShareX
             {
                 pbWatermarkFontColor.BackColor = Config.WatermarkFontArgb;
                 lblWatermarkFont.Text = FontToString();
-                TestWatermark();
+                UpdatePreview();
             }
         }
 
@@ -259,45 +171,44 @@ namespace ShareX
         private void cboWatermarkType_SelectedIndexChanged(object sender, EventArgs e)
         {
             Config.WatermarkMode = (WatermarkType)cboWatermarkType.SelectedIndex;
-            TestWatermark();
-            tcWatermark.Enabled = Config.WatermarkMode != WatermarkType.NONE;
+            UpdatePreview();
         }
 
         private void cbUseCustomGradient_CheckedChanged(object sender, EventArgs e)
         {
             Config.WatermarkUseCustomGradient = cboUseCustomGradient.Checked;
             gbGradientMakerBasic.Enabled = !cboUseCustomGradient.Checked;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void cbWatermarkAddReflection_CheckedChanged(object sender, EventArgs e)
         {
             Config.WatermarkAddReflection = cbWatermarkAddReflection.Checked;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void cbWatermarkAutoHide_CheckedChanged(object sender, EventArgs e)
         {
             Config.WatermarkAutoHide = cbWatermarkAutoHide.Checked;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void cbWatermarkGradientType_SelectedIndexChanged(object sender, EventArgs e)
         {
             Config.WatermarkGradientType = (LinearGradientMode)cbWatermarkGradientType.SelectedIndex;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void cbWatermarkPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             Config.WatermarkPositionMode = (WatermarkPositionType)chkWatermarkPosition.SelectedIndex;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void cbWatermarkUseBorder_CheckedChanged(object sender, EventArgs e)
         {
             Config.WatermarkUseBorder = cbWatermarkUseBorder.Checked;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void nudWatermarkBackTrans_ValueChanged(object sender, EventArgs e)
@@ -309,7 +220,7 @@ namespace ShareX
         private void nudWatermarkCornerRadius_ValueChanged(object sender, EventArgs e)
         {
             Config.WatermarkCornerRadius = (int)nudWatermarkCornerRadius.Value;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void nudWatermarkFontTrans_ValueChanged(object sender, EventArgs e)
@@ -321,52 +232,52 @@ namespace ShareX
         private void nudWatermarkImageScale_ValueChanged(object sender, EventArgs e)
         {
             Config.WatermarkImageScale = (int)nudWatermarkImageScale.Value;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void nudWatermarkOffset_ValueChanged(object sender, EventArgs e)
         {
             Config.WatermarkOffset = (int)nudWatermarkOffset.Value;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void pbWatermarkBorderColor_Click(object sender, EventArgs e)
         {
             SelectColor((PictureBox)sender, ref Config.WatermarkBorderArgb);
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void pbWatermarkFontColor_Click(object sender, EventArgs e)
         {
             SelectColor((PictureBox)sender, ref Config.WatermarkFontArgb);
             lblWatermarkFont.Text = FontToString();
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void pbWatermarkGradient1_Click(object sender, EventArgs e)
         {
             SelectColor((PictureBox)sender, ref Config.WatermarkGradient1Argb);
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void pbWatermarkGradient2_Click(object sender, EventArgs e)
         {
             SelectColor((PictureBox)sender, ref Config.WatermarkGradient2Argb);
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void trackWatermarkBackgroundTrans_Scroll(object sender, EventArgs e)
         {
             Config.WatermarkBackTrans = trackWatermarkBackgroundTrans.Value;
             nudWatermarkBackTrans.Value = Config.WatermarkBackTrans;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void trackWatermarkFontTrans_Scroll(object sender, EventArgs e)
         {
             Config.WatermarkFontTrans = trackWatermarkFontTrans.Value;
             nudWatermarkFontTrans.Value = Config.WatermarkFontTrans;
-            TestWatermark();
+            UpdatePreview();
         }
 
         private void txtWatermarkImageLocation_TextChanged(object sender, EventArgs e)
@@ -374,35 +285,14 @@ namespace ShareX
             if (File.Exists(txtWatermarkImageLocation.Text))
             {
                 Config.WatermarkImageLocation = txtWatermarkImageLocation.Text;
-                TestWatermark();
+                UpdatePreview();
             }
-        }
-
-        private void txtWatermarkText_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && codesMenu.Visible)
-            {
-                codesMenu.Close();
-            }
-        }
-
-        private void txtWatermarkText_Leave(object sender, EventArgs e)
-        {
-            if (codesMenu.Visible)
-            {
-                codesMenu.Close();
-            }
-        }
-
-        private void txtWatermarkText_MouseDown(object sender, MouseEventArgs e)
-        {
-            CheckForCodes(sender);
         }
 
         private void txtWatermarkText_TextChanged(object sender, EventArgs e)
         {
             Config.WatermarkText = txtWatermarkText.Text;
-            TestWatermark();
+            UpdatePreview();
         }
     }
 }

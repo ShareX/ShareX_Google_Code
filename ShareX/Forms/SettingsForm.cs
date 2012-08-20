@@ -166,8 +166,10 @@ namespace ShareX
             cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
-            cmsNameFormatPattern = CreateCodesMenu(txtNameFormatPattern);
-            cmsNameFormatPatternActiveWindow = CreateCodesMenu(txtNameFormatPatternActiveWindow);
+
+            ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n, ReplacementVariables.host };
+            cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ignoreList);
+            cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ignoreList);
 
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
 
@@ -224,35 +226,6 @@ namespace ShareX
             lvi.SubItems.Add(watchFolder.Filter ?? "");
             lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
             lvWatchFolderList.Items.Add(lvi);
-        }
-
-        private ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n, ReplacementVariables.host };
-
-        private ContextMenuStrip CreateCodesMenu(TextBox tb)
-        {
-            ContextMenuStrip cms = new ContextMenuStrip
-            {
-                Font = new XmlFont("Lucida Console", 8),
-                Opacity = 0.8,
-                ShowImageMargin = false
-            };
-
-            var variables = Enum.GetValues(typeof(ReplacementVariables)).Cast<ReplacementVariables>().Where(x => !ignoreList.Contains(x)).
-                Select(x => new
-                {
-                    Name = ReplacementExtension.Prefix + Enum.GetName(typeof(ReplacementVariables), x),
-                    Description = x.GetDescription(),
-                    Enum = x
-                });
-
-            foreach (var variable in variables)
-            {
-                ToolStripMenuItem tsi = new ToolStripMenuItem { Text = string.Format("{0} - {1}", variable.Name, variable.Description), Tag = variable.Name };
-                tsi.Click += (sender, e) => tb.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
-                cms.Items.Add(tsi);
-            }
-
-            return cms;
         }
 
         #region General
@@ -721,21 +694,11 @@ namespace ShareX
             lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPattern);
         }
 
-        private void btnNameFormatPatternHelp_Click(object sender, EventArgs e)
-        {
-            cmsNameFormatPattern.Show(btnNameFormatPatternHelp, new Point(btnNameFormatPatternHelp.Width + 1, 0));
-        }
-
         private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
             NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber, WindowText = Text };
             lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow);
-        }
-
-        private void btnNameFormatPatternHelpActiveWindow_Click(object sender, EventArgs e)
-        {
-            cmsNameFormatPatternActiveWindow.Show(btnNameFormatPatternHelpActiveWindow, new Point(btnNameFormatPatternHelpActiveWindow.Width + 1, 0));
         }
 
         #endregion General

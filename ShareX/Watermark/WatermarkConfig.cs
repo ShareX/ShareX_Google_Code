@@ -52,7 +52,7 @@ namespace ShareX
 
         public string WatermarkImageLocation = "";
         public int WatermarkImageScale = 100;
-        public WatermarkType WatermarkMode = WatermarkType.NONE;
+        public WatermarkType WatermarkMode = WatermarkType.TEXT;
         public int WatermarkOffset = 5;
         public WatermarkPositionType WatermarkPositionMode = WatermarkPositionType.BOTTOM_RIGHT;
 
@@ -85,8 +85,6 @@ namespace ShareX
 
     public enum WatermarkType
     {
-        [Description("None")]
-        NONE,
         [Description("Text")]
         TEXT,
         [Description("Image")]

@@ -27,7 +27,9 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace HelpersLib
 {
@@ -219,6 +221,53 @@ namespace HelpersLib
             }
 
             return result;
+        }
+
+        public static ContextMenuStrip CreateCodesMenu(TextBox tb, params ReplacementVariables[] ignoreList)
+        {
+            ContextMenuStrip cms = new ContextMenuStrip
+            {
+                Font = new XmlFont("Lucida Console", 8),
+                AutoClose = false,
+                Opacity = 0.8,
+                ShowImageMargin = false
+            };
+
+            var variables = Enum.GetValues(typeof(ReplacementVariables)).Cast<ReplacementVariables>().Where(x => !ignoreList.Contains(x)).
+                Select(x => new
+                {
+                    Name = ReplacementExtension.Prefix + Enum.GetName(typeof(ReplacementVariables), x),
+                    Description = x.GetDescription(),
+                    Enum = x
+                });
+
+            foreach (var variable in variables)
+            {
+                ToolStripMenuItem tsi = new ToolStripMenuItem { Text = string.Format("{0} - {1}", variable.Name, variable.Description), Tag = variable.Name };
+                tsi.Click += (sender, e) => tb.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
+                cms.Items.Add(tsi);
+            }
+
+            tb.MouseDown += (sender, e) =>
+            {
+                if (cms.Items.Count > 0) cms.Show(tb, new Point(tb.Width + 1, 0));
+            };
+
+            tb.Leave += (sender, e) =>
+            {
+                if (cms.Visible) cms.Close();
+            };
+
+            tb.KeyDown += (sender, e) =>
+            {
+                if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Escape) && cms.Visible)
+                {
+                    cms.Close();
+                    e.SuppressKeyPress = true;
+                }
+            };
+
+            return cms;
         }
     }
 }

@@ -100,6 +100,7 @@
             this.lblImageScaleSpecificWidth = new System.Windows.Forms.Label();
             this.nudImageScaleSpecificWidth = new System.Windows.Forms.NumericUpDown();
             this.tpWatermark = new System.Windows.Forms.TabPage();
+            this.cbWatermarkExcludeClipboardUpload = new System.Windows.Forms.CheckBox();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
@@ -134,14 +135,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
             this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
-            this.btnNameFormatPatternHelpActiveWindow = new System.Windows.Forms.Button();
             this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
             this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
             this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
-            this.btnNameFormatPatternHelp = new System.Windows.Forms.Button();
             this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
             this.lblBufferSize = new System.Windows.Forms.Label();
@@ -171,7 +170,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbWatermarkExcludeClipboardUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1091,6 +1089,17 @@
             this.tpWatermark.Text = "Watermark";
             this.tpWatermark.UseVisualStyleBackColor = true;
             // 
+            // cbWatermarkExcludeClipboardUpload
+            // 
+            this.cbWatermarkExcludeClipboardUpload.AutoSize = true;
+            this.cbWatermarkExcludeClipboardUpload.Location = new System.Drawing.Point(16, 56);
+            this.cbWatermarkExcludeClipboardUpload.Name = "cbWatermarkExcludeClipboardUpload";
+            this.cbWatermarkExcludeClipboardUpload.Size = new System.Drawing.Size(217, 17);
+            this.cbWatermarkExcludeClipboardUpload.TabIndex = 1;
+            this.cbWatermarkExcludeClipboardUpload.Text = "Don\'t add watermark to clipboard upload";
+            this.cbWatermarkExcludeClipboardUpload.UseVisualStyleBackColor = true;
+            this.cbWatermarkExcludeClipboardUpload.CheckedChanged += new System.EventHandler(this.cbWatermarkExcludeClipboardUpload_CheckedChanged);
+            // 
             // btnWatermarkSettings
             // 
             this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
@@ -1469,14 +1478,12 @@
             // tpUploadGeneral
             // 
             this.tpUploadGeneral.Controls.Add(this.btnResetAutoIncrementNumber);
-            this.tpUploadGeneral.Controls.Add(this.btnNameFormatPatternHelpActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.txtNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
             this.tpUploadGeneral.Controls.Add(this.cbClipboardUploadAutoDetectURL);
             this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
-            this.tpUploadGeneral.Controls.Add(this.btnNameFormatPatternHelp);
             this.tpUploadGeneral.Controls.Add(this.lblBufferSizeInfo);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimitHint);
             this.tpUploadGeneral.Controls.Add(this.lblBufferSize);
@@ -1502,16 +1509,6 @@
             this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
             this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
             // 
-            // btnNameFormatPatternHelpActiveWindow
-            // 
-            this.btnNameFormatPatternHelpActiveWindow.Location = new System.Drawing.Point(448, 223);
-            this.btnNameFormatPatternHelpActiveWindow.Name = "btnNameFormatPatternHelpActiveWindow";
-            this.btnNameFormatPatternHelpActiveWindow.Size = new System.Drawing.Size(24, 23);
-            this.btnNameFormatPatternHelpActiveWindow.TabIndex = 8;
-            this.btnNameFormatPatternHelpActiveWindow.Text = "?";
-            this.btnNameFormatPatternHelpActiveWindow.UseVisualStyleBackColor = true;
-            this.btnNameFormatPatternHelpActiveWindow.Click += new System.EventHandler(this.btnNameFormatPatternHelpActiveWindow_Click);
-            // 
             // lblNameFormatPatternPreviewActiveWindow
             // 
             this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
@@ -1534,7 +1531,7 @@
             // 
             this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 224);
             this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
-            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(416, 20);
+            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPatternActiveWindow.TabIndex = 7;
             this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
             // 
@@ -1567,16 +1564,6 @@
             this.cbBufferSize.Size = new System.Drawing.Size(64, 21);
             this.cbBufferSize.TabIndex = 4;
             this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
-            // 
-            // btnNameFormatPatternHelp
-            // 
-            this.btnNameFormatPatternHelp.Location = new System.Drawing.Point(448, 138);
-            this.btnNameFormatPatternHelp.Name = "btnNameFormatPatternHelp";
-            this.btnNameFormatPatternHelp.Size = new System.Drawing.Size(24, 23);
-            this.btnNameFormatPatternHelp.TabIndex = 3;
-            this.btnNameFormatPatternHelp.Text = "?";
-            this.btnNameFormatPatternHelp.UseVisualStyleBackColor = true;
-            this.btnNameFormatPatternHelp.Click += new System.EventHandler(this.btnNameFormatPatternHelp_Click);
             // 
             // lblBufferSizeInfo
             // 
@@ -1646,7 +1633,7 @@
             // 
             this.txtNameFormatPattern.Location = new System.Drawing.Point(24, 139);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
-            this.txtNameFormatPattern.Size = new System.Drawing.Size(416, 20);
+            this.txtNameFormatPattern.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPattern.TabIndex = 2;
             this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
             // 
@@ -1884,17 +1871,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbWatermarkExcludeClipboardUpload
-            // 
-            this.cbWatermarkExcludeClipboardUpload.AutoSize = true;
-            this.cbWatermarkExcludeClipboardUpload.Location = new System.Drawing.Point(16, 56);
-            this.cbWatermarkExcludeClipboardUpload.Name = "cbWatermarkExcludeClipboardUpload";
-            this.cbWatermarkExcludeClipboardUpload.Size = new System.Drawing.Size(217, 17);
-            this.cbWatermarkExcludeClipboardUpload.TabIndex = 1;
-            this.cbWatermarkExcludeClipboardUpload.Text = "Don\'t add watermark to clipboard upload";
-            this.cbWatermarkExcludeClipboardUpload.UseVisualStyleBackColor = true;
-            this.cbWatermarkExcludeClipboardUpload.CheckedChanged += new System.EventHandler(this.cbWatermarkExcludeClipboardUpload_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1986,7 +1962,6 @@
         private System.Windows.Forms.Label lblImageJPEGQualityHint;
         private System.Windows.Forms.TabPage tpDebug;
         private System.Windows.Forms.TextBox txtDebugLog;
-        private System.Windows.Forms.Button btnNameFormatPatternHelp;
         private System.Windows.Forms.TextBox txtNameFormatPattern;
         private System.Windows.Forms.Label lblNameFormatPattern;
         private System.Windows.Forms.Label lblNameFormatPatternPreview;
@@ -2094,7 +2069,6 @@
         private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
         private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
         private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
-        private System.Windows.Forms.Button btnNameFormatPatternHelpActiveWindow;
         private System.Windows.Forms.Label lblNameFormatPatternPreviewActiveWindow;
         private System.Windows.Forms.Label lblNameFormatPatternActiveWindow;
         private System.Windows.Forms.TextBox txtNameFormatPatternActiveWindow;
