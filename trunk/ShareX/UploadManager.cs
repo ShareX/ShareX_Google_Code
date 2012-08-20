@@ -88,7 +88,7 @@ namespace ShareX
 
                 if (Program.Settings.WatermarkConfig != null && Program.Settings.WatermarkExcludeClipboardUpload)
                 {
-                    tasks.Remove(AfterCaptureTasks.AddWatermark);
+                    tasks = tasks.Remove(AfterCaptureTasks.AddWatermark);
                 }
 
                 UploadManager.RunImageTask(img, tasks);
