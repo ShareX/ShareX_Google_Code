@@ -41,7 +41,6 @@ namespace HelpersLib
 
         private Timer timer;
         private bool needPaint;
-        private Bitmap canvas;
 
         public Canvas()
         {

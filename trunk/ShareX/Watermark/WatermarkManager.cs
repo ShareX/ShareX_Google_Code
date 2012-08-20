@@ -127,22 +127,16 @@ namespace ShareX
 
         public Image ApplyWatermark(Image img)
         {
-            NameParser parser = new NameParser(NameParserType.Text) { Picture = img };
-            return ApplyWatermark(img, parser, Config.WatermarkMode);
-        }
-
-        public Image ApplyWatermark(Image img, NameParser parser, WatermarkType watermarkType)
-        {
-            switch (watermarkType)
+            switch (Config.WatermarkMode)
             {
-                default:
-                case WatermarkType.NONE:
-                    return img;
                 case WatermarkType.TEXT:
+                    NameParser parser = new NameParser(NameParserType.Text) { Picture = img, AllowNewLine = true };
                     return DrawWatermark(img, parser.Convert(Config.WatermarkText));
                 case WatermarkType.IMAGE:
                     return DrawImageWatermark(img, Config.WatermarkImageLocation);
             }
+
+            return img;
         }
 
         private Image DrawImageWatermark(Image img, string imgPath)

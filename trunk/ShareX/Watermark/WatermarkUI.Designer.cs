@@ -534,9 +534,6 @@
             this.txtWatermarkText.Size = new System.Drawing.Size(336, 20);
             this.txtWatermarkText.TabIndex = 1;
             this.txtWatermarkText.TextChanged += new System.EventHandler(this.txtWatermarkText_TextChanged);
-            this.txtWatermarkText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWatermarkText_KeyDown);
-            this.txtWatermarkText.Leave += new System.EventHandler(this.txtWatermarkText_Leave);
-            this.txtWatermarkText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtWatermarkText_MouseDown);
             // 
             // pbWatermarkFontColor
             // 
