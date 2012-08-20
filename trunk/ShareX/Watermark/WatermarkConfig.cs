@@ -42,7 +42,6 @@ namespace ShareX
         public int WatermarkBackTrans = 225;
         public XmlColor WatermarkBorderArgb = Color.Black;
         public int WatermarkCornerRadius = 4;
-        public bool WatermarkExcludeClipboardUpload = false;
 
         public XmlFont WatermarkFont = new XmlFont("Arial", 8);
         public XmlColor WatermarkFontArgb = Color.White;

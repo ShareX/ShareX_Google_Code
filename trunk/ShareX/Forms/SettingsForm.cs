@@ -533,7 +533,7 @@ namespace ShareX
             new WatermarkUI(Program.Settings.WatermarkConfig).ShowDialog();
         }
 
-        #endregion
+        #endregion Watermark
 
         #endregion Image
 
@@ -840,6 +840,5 @@ namespace ShareX
         }
 
         #endregion Proxy
-
     }
 }

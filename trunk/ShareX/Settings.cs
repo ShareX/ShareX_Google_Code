@@ -47,7 +47,6 @@ namespace ShareX
         public bool ShowClipboardContentViewer = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
-        public WatermarkConfig WatermarkConfig = new WatermarkConfig();
 
         #endregion Main Form
 
@@ -120,6 +119,13 @@ namespace ShareX
         public int ImageScaleSpecificHeight = 100;
 
         #endregion Image / Resize
+
+        #region Image / Watermark
+
+        public WatermarkConfig WatermarkConfig = new WatermarkConfig();
+        public bool WatermarkExcludeClipboardUpload = false;
+
+        #endregion Image / Watermark
 
         #region Capture
 
