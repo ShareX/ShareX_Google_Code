@@ -60,6 +60,58 @@ namespace ShareX
             codesMenu.ShowImageMargin = false;
         }
 
+        private void WatermarkUI_Load(object sender, EventArgs e)
+        {
+            this.Text = "Watermark Configurator - " + Application.ProductName;
+
+            if (cboWatermarkType.Items.Count == 0)
+            {
+                cboWatermarkType.Items.AddRange(Helpers.GetEnumDescriptions<WatermarkType>());
+            }
+
+            cboWatermarkType.SelectedIndex = (int)Config.WatermarkMode;
+            if (chkWatermarkPosition.Items.Count == 0)
+            {
+                chkWatermarkPosition.Items.AddRange(Helpers.GetEnumDescriptions<WatermarkPositionType>());
+            }
+
+            chkWatermarkPosition.SelectedIndex = (int)Config.WatermarkPositionMode;
+            nudWatermarkOffset.Value = Config.WatermarkOffset;
+            cbWatermarkAddReflection.Checked = Config.WatermarkAddReflection;
+            cbWatermarkAutoHide.Checked = Config.WatermarkAutoHide;
+
+            txtWatermarkText.Text = Config.WatermarkText;
+            pbWatermarkFontColor.BackColor = Config.WatermarkFontArgb;
+            lblWatermarkFont.Text = FontToString();
+            nudWatermarkFontTrans.Value = Config.WatermarkFontTrans;
+            trackWatermarkFontTrans.Value = (int)Config.WatermarkFontTrans;
+            nudWatermarkCornerRadius.Value = Config.WatermarkCornerRadius;
+            pbWatermarkGradient1.BackColor = Config.WatermarkGradient1Argb;
+            pbWatermarkGradient2.BackColor = Config.WatermarkGradient2Argb;
+            pbWatermarkBorderColor.BackColor = Config.WatermarkBorderArgb;
+            nudWatermarkBackTrans.Value = Config.WatermarkBackTrans;
+            trackWatermarkBackgroundTrans.Value = (int)Config.WatermarkBackTrans;
+            if (cbWatermarkGradientType.Items.Count == 0)
+            {
+                cbWatermarkGradientType.Items.AddRange(Enum.GetNames(typeof(LinearGradientMode)));
+            }
+
+            cbWatermarkGradientType.SelectedIndex = (int)Config.WatermarkGradientType;
+            cboUseCustomGradient.Checked = Config.WatermarkUseCustomGradient;
+
+            txtWatermarkImageLocation.Text = Config.WatermarkImageLocation;
+            cbWatermarkUseBorder.Checked = Config.WatermarkUseBorder;
+            nudWatermarkImageScale.Value = Config.WatermarkImageScale;
+
+            CreateCodesMenu();
+            TestWatermark();
+        }
+
+        private void WatermarkUI_Resize(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
         public Image ApplyWatermark(Image img, NameParser parser = null)
         {
             if (parser == null)
@@ -144,16 +196,8 @@ namespace ShareX
 
         private void TestWatermark()
         {
-            using (Bitmap bmp = CaptureHelpers.ResizeImage(Resources.ShareXLogo, pbWatermarkShow.Width, pbWatermarkShow.Height, false, true))
-            {
-                Bitmap bmp2 = new Bitmap(pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height);
-                using (Graphics g = Graphics.FromImage(bmp2))
-                {
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.DrawImage(bmp, new Rectangle(0, 0, pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height));
-                }
-                pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp2);
-            }
+            Bitmap bmp = CaptureHelpers.ResizeImage(Resources.ShareXLogo, pbWatermarkShow.Width, pbWatermarkShow.Height, false, true);
+            pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
         }
 
         private void watermarkCodeMenu_Click(object sender, EventArgs e)
@@ -359,58 +403,6 @@ namespace ShareX
         {
             Config.WatermarkText = txtWatermarkText.Text;
             TestWatermark();
-        }
-
-        private void WatermarkUI_Load(object sender, EventArgs e)
-        {
-            this.Text = "Watermark Configurator - " + Application.ProductName;
-
-            if (cboWatermarkType.Items.Count == 0)
-            {
-                cboWatermarkType.Items.AddRange(Helpers.GetEnumDescriptions<WatermarkType>());
-            }
-
-            cboWatermarkType.SelectedIndex = (int)Config.WatermarkMode;
-            if (chkWatermarkPosition.Items.Count == 0)
-            {
-                chkWatermarkPosition.Items.AddRange(Helpers.GetEnumDescriptions<WatermarkPositionType>());
-            }
-
-            chkWatermarkPosition.SelectedIndex = (int)Config.WatermarkPositionMode;
-            nudWatermarkOffset.Value = Config.WatermarkOffset;
-            cbWatermarkAddReflection.Checked = Config.WatermarkAddReflection;
-            cbWatermarkAutoHide.Checked = Config.WatermarkAutoHide;
-
-            txtWatermarkText.Text = Config.WatermarkText;
-            pbWatermarkFontColor.BackColor = Config.WatermarkFontArgb;
-            lblWatermarkFont.Text = FontToString();
-            nudWatermarkFontTrans.Value = Config.WatermarkFontTrans;
-            trackWatermarkFontTrans.Value = (int)Config.WatermarkFontTrans;
-            nudWatermarkCornerRadius.Value = Config.WatermarkCornerRadius;
-            pbWatermarkGradient1.BackColor = Config.WatermarkGradient1Argb;
-            pbWatermarkGradient2.BackColor = Config.WatermarkGradient2Argb;
-            pbWatermarkBorderColor.BackColor = Config.WatermarkBorderArgb;
-            nudWatermarkBackTrans.Value = Config.WatermarkBackTrans;
-            trackWatermarkBackgroundTrans.Value = (int)Config.WatermarkBackTrans;
-            if (cbWatermarkGradientType.Items.Count == 0)
-            {
-                cbWatermarkGradientType.Items.AddRange(Enum.GetNames(typeof(LinearGradientMode)));
-            }
-
-            cbWatermarkGradientType.SelectedIndex = (int)Config.WatermarkGradientType;
-            cboUseCustomGradient.Checked = Config.WatermarkUseCustomGradient;
-
-            txtWatermarkImageLocation.Text = Config.WatermarkImageLocation;
-            cbWatermarkUseBorder.Checked = Config.WatermarkUseBorder;
-            nudWatermarkImageScale.Value = Config.WatermarkImageScale;
-
-            CreateCodesMenu();
-            TestWatermark();
-        }
-
-        private void WatermarkUI_Resize(object sender, EventArgs e)
-        {
-            this.Refresh();
         }
     }
 }

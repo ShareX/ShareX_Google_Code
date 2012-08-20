@@ -83,7 +83,14 @@ namespace ShareX
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
-                AfterCaptureTasks tasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.CopyImageToClipboard);
+                AfterCaptureTasks tasks = Program.Settings.AfterCaptureTasks;
+                tasks = tasks.Remove(AfterCaptureTasks.CopyImageToClipboard);
+
+                if (Program.Settings.WatermarkConfig != null && Program.Settings.WatermarkExcludeClipboardUpload)
+                {
+                    tasks.Remove(AfterCaptureTasks.AddWatermark);
+                }
+
                 UploadManager.RunImageTask(img, tasks);
             }
             else if (Clipboard.ContainsFileDropList())

@@ -306,8 +306,13 @@ namespace HelpersLib
             return img;
         }
 
-        public static Bitmap ResizeImage(Image img, int width, int height, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, int width, int height, bool smoothScaling = true)
         {
+            if (img.Width == width && img.Height == height)
+            {
+                return img;
+            }
+
             Bitmap bmp = new Bitmap(width, height);
 
             using (Graphics g = Graphics.FromImage(bmp))

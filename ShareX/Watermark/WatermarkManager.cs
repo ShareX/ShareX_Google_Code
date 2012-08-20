@@ -146,38 +146,44 @@ namespace ShareX
 
         private Image DrawImageWatermark(Image img, string imgPath)
         {
+            Image img2 = null;
+
             try
             {
                 if (img != null && !string.IsNullOrEmpty(imgPath) && File.Exists(imgPath))
                 {
+                    img2 = Image.FromFile(imgPath);
+
                     int offset = (int)Config.WatermarkOffset;
-                    int width = (int)(Config.WatermarkImageScale / 100 * img.Width);
-                    int height = (int)(Config.WatermarkImageScale / 100 * img.Height);
+                    int width = (int)(Config.WatermarkImageScale / 100f * img2.Width);
+                    int height = (int)(Config.WatermarkImageScale / 100f * img2.Height);
 
                     if (Config.WatermarkAutoHide && ((img.Width < width + offset) || (img.Height < height + offset)))
                     {
                         return img;
                     }
 
-                    using (Image img2 = CaptureHelpers.LoadImageWithSize(imgPath, width, height))
+                    if (Config.WatermarkImageScale != 100)
                     {
-                        Point imgPos = FindPosition(Config.WatermarkPositionMode, offset, img.Size, img2.Size, 0);
+                        img2 = CaptureHelpers.ResizeImage(img2, width, height);
+                    }
 
-                        using (Graphics g = Graphics.FromImage(img))
+                    Point imgPos = FindPosition(Config.WatermarkPositionMode, offset, img.Size, img2.Size, 0);
+
+                    using (Graphics g = Graphics.FromImage(img))
+                    {
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.DrawImage(img2, imgPos);
+
+                        /*if (Config.WatermarkAddReflection)
                         {
-                            g.SmoothingMode = SmoothingMode.HighQuality;
-                            g.DrawImage(img2, imgPos);
+                            Bitmap bmp = AddReflection((Bitmap)img2, 50, 200);
+                            g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
+                        }*/
 
-                            /*if (Config.WatermarkAddReflection)
-                            {
-                                Bitmap bmp = AddReflection((Bitmap)img2, 50, 200);
-                                g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
-                            }*/
-
-                            if (Config.WatermarkUseBorder)
-                            {
-                                g.DrawRectangle(Pens.Black, new Rectangle(imgPos.X, imgPos.Y, img2.Width - 1, img2.Height - 1));
-                            }
+                        if (Config.WatermarkUseBorder)
+                        {
+                            g.DrawRectangle(Pens.Black, new Rectangle(imgPos.X, imgPos.Y, img2.Width - 1, img2.Height - 1));
                         }
                     }
                 }
@@ -185,6 +191,10 @@ namespace ShareX
             catch (Exception ex)
             {
                 DebugHelper.WriteException(ex, "Error while drawing image watermark");
+            }
+            finally
+            {
+                if (img2 != null) img2.Dispose();
             }
 
             return img;

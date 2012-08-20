@@ -97,10 +97,9 @@
             // pbWatermarkShow
             // 
             this.pbWatermarkShow.BackColor = System.Drawing.Color.White;
-            this.pbWatermarkShow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbWatermarkShow.Location = new System.Drawing.Point(16, 184);
+            this.pbWatermarkShow.Location = new System.Drawing.Point(8, 176);
             this.pbWatermarkShow.Name = "pbWatermarkShow";
-            this.pbWatermarkShow.Size = new System.Drawing.Size(272, 200);
+            this.pbWatermarkShow.Size = new System.Drawing.Size(288, 240);
             this.pbWatermarkShow.TabIndex = 16;
             this.pbWatermarkShow.TabStop = false;
             // 
@@ -115,9 +114,9 @@
             this.gbWatermarkGeneral.Controls.Add(this.lblWatermarkPosition);
             this.gbWatermarkGeneral.Controls.Add(this.nudWatermarkOffset);
             this.gbWatermarkGeneral.Controls.Add(this.lblWatermarkOffset);
-            this.gbWatermarkGeneral.Location = new System.Drawing.Point(16, 8);
+            this.gbWatermarkGeneral.Location = new System.Drawing.Point(8, 8);
             this.gbWatermarkGeneral.Name = "gbWatermarkGeneral";
-            this.gbWatermarkGeneral.Size = new System.Drawing.Size(272, 168);
+            this.gbWatermarkGeneral.Size = new System.Drawing.Size(288, 160);
             this.gbWatermarkGeneral.TabIndex = 0;
             this.gbWatermarkGeneral.TabStop = false;
             this.gbWatermarkGeneral.Text = "Watermark Settings";
@@ -224,7 +223,7 @@
             this.tcWatermark.Location = new System.Drawing.Point(304, 8);
             this.tcWatermark.Name = "tcWatermark";
             this.tcWatermark.SelectedIndex = 0;
-            this.tcWatermark.Size = new System.Drawing.Size(476, 405);
+            this.tcWatermark.Size = new System.Drawing.Size(480, 408);
             this.tcWatermark.TabIndex = 1;
             // 
             // tpWatermarkText
@@ -235,7 +234,7 @@
             this.tpWatermarkText.Location = new System.Drawing.Point(4, 22);
             this.tpWatermarkText.Name = "tpWatermarkText";
             this.tpWatermarkText.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWatermarkText.Size = new System.Drawing.Size(468, 379);
+            this.tpWatermarkText.Size = new System.Drawing.Size(472, 382);
             this.tpWatermarkText.TabIndex = 0;
             this.tpWatermarkText.Text = "Text";
             this.tpWatermarkText.UseVisualStyleBackColor = true;
@@ -252,7 +251,7 @@
             this.gbWatermarkBackground.Controls.Add(this.lblWatermarkCornerRadiusTip);
             this.gbWatermarkBackground.Location = new System.Drawing.Point(8, 136);
             this.gbWatermarkBackground.Name = "gbWatermarkBackground";
-            this.gbWatermarkBackground.Size = new System.Drawing.Size(446, 216);
+            this.gbWatermarkBackground.Size = new System.Drawing.Size(450, 216);
             this.gbWatermarkBackground.TabIndex = 1;
             this.gbWatermarkBackground.TabStop = false;
             this.gbWatermarkBackground.Text = "Text Background Settings";
@@ -455,7 +454,7 @@
             this.gbWatermarkText.Controls.Add(this.pbWatermarkFontColor);
             this.gbWatermarkText.Location = new System.Drawing.Point(8, 8);
             this.gbWatermarkText.Name = "gbWatermarkText";
-            this.gbWatermarkText.Size = new System.Drawing.Size(446, 120);
+            this.gbWatermarkText.Size = new System.Drawing.Size(450, 120);
             this.gbWatermarkText.TabIndex = 0;
             this.gbWatermarkText.TabStop = false;
             this.gbWatermarkText.Text = "Text Settings";
@@ -562,7 +561,7 @@
             this.tpWatermarkImage.Location = new System.Drawing.Point(4, 22);
             this.tpWatermarkImage.Name = "tpWatermarkImage";
             this.tpWatermarkImage.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWatermarkImage.Size = new System.Drawing.Size(468, 379);
+            this.tpWatermarkImage.Size = new System.Drawing.Size(472, 382);
             this.tpWatermarkImage.TabIndex = 1;
             this.tpWatermarkImage.Text = "Image";
             this.tpWatermarkImage.UseVisualStyleBackColor = true;
@@ -608,7 +607,7 @@
             // btwWatermarkBrowseImage
             // 
             this.btwWatermarkBrowseImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btwWatermarkBrowseImage.Location = new System.Drawing.Point(399, 13);
+            this.btwWatermarkBrowseImage.Location = new System.Drawing.Point(392, 13);
             this.btwWatermarkBrowseImage.Name = "btwWatermarkBrowseImage";
             this.btwWatermarkBrowseImage.Size = new System.Drawing.Size(64, 24);
             this.btwWatermarkBrowseImage.TabIndex = 1;
@@ -623,7 +622,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWatermarkImageLocation.Location = new System.Drawing.Point(16, 16);
             this.txtWatermarkImageLocation.Name = "txtWatermarkImageLocation";
-            this.txtWatermarkImageLocation.Size = new System.Drawing.Size(375, 20);
+            this.txtWatermarkImageLocation.Size = new System.Drawing.Size(368, 20);
             this.txtWatermarkImageLocation.TabIndex = 0;
             this.txtWatermarkImageLocation.TextChanged += new System.EventHandler(this.txtWatermarkImageLocation_TextChanged);
             // 
