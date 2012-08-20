@@ -38,7 +38,6 @@
             this.rtbCodes = new System.Windows.Forms.RichTextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.cboGradientDirection = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbBrushData = new System.Windows.Forms.ListBox();
@@ -141,16 +140,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnHelp
-            // 
-            this.btnHelp.Location = new System.Drawing.Point(8, 400);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(72, 23);
-            this.btnHelp.TabIndex = 13;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
             // cboGradientDirection
             // 
             this.cboGradientDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -176,9 +165,10 @@
             // lbBrushData
             // 
             this.lbBrushData.FormattingEnabled = true;
+            this.lbBrushData.IntegralHeight = false;
             this.lbBrushData.Location = new System.Drawing.Point(400, 64);
             this.lbBrushData.Name = "lbBrushData";
-            this.lbBrushData.Size = new System.Drawing.Size(152, 277);
+            this.lbBrushData.Size = new System.Drawing.Size(152, 296);
             this.lbBrushData.TabIndex = 6;
             this.lbBrushData.SelectedIndexChanged += new System.EventHandler(this.lbBrushData_SelectedIndexChanged);
             this.lbBrushData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbBrushData_KeyDown);
@@ -222,7 +212,6 @@
             this.Controls.Add(this.lbBrushData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboGradientDirection);
-            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.rtbCodes);
@@ -254,7 +243,6 @@
         private System.Windows.Forms.RichTextBox rtbCodes;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ComboBox cboGradientDirection;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbBrushData;

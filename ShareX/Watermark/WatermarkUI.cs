@@ -62,7 +62,7 @@ namespace ShareX
 
         private void WatermarkUI_Load(object sender, EventArgs e)
         {
-            this.Text = "Watermark Configurator - " + Application.ProductName;
+            Text = Application.ProductName + " - Watermark settings";
 
             if (cboWatermarkType.Items.Count == 0)
             {

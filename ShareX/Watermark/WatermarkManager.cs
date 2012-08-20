@@ -34,6 +34,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using HelpersLib;
+using ScreenCapture;
 
 namespace ShareX
 {
@@ -175,11 +176,13 @@ namespace ShareX
                         g.SmoothingMode = SmoothingMode.HighQuality;
                         g.DrawImage(img2, imgPos);
 
-                        /*if (Config.WatermarkAddReflection)
+                        if (Config.WatermarkAddReflection)
                         {
-                            Bitmap bmp = AddReflection((Bitmap)img2, 50, 200);
-                            g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
-                        }*/
+                            using (Bitmap bmp = CreateReflection((Bitmap)img2, 50, 10, 150))
+                            {
+                                g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
+                            }
+                        }
 
                         if (Config.WatermarkUseBorder)
                         {
@@ -266,11 +269,13 @@ namespace ShareX
                             gImg.SmoothingMode = SmoothingMode.HighQuality;
                             gImg.DrawImage(bmp, labelPosition);
 
-                            /*if (Config.WatermarkAddReflection)
+                            if (Config.WatermarkAddReflection)
                             {
-                                Bitmap bmp2 = AddReflection(bmp, 50, 200);
-                                gImg.DrawImage(bmp2, new Rectangle(labelPosition.X, labelPosition.Y + bmp.Height - 1, bmp2.Width, bmp2.Height));
-                            }*/
+                                using (Bitmap bmp2 = CreateReflection(bmp, 50, 10, 150))
+                                {
+                                    gImg.DrawImage(bmp2, new Rectangle(labelPosition.X, labelPosition.Y + bmp.Height - 1, bmp2.Width, bmp2.Height));
+                                }
+                            }
                         }
                     }
                 }
@@ -288,40 +293,35 @@ namespace ShareX
             return img;
         }
 
-        // TODO: Replace AddReflection
-
-        /*public static Bitmap AddReflection(Image bmp, int percentage, int transparency)
+        public static Bitmap CreateReflection(Image bmp, int percentage, int minAlpha, int maxAlpha)
         {
-            return null;
-
-            Bitmap b = new Bitmap(bmp);
+            Bitmap b = (Bitmap)bmp.Clone();
             b.RotateFlip(RotateFlipType.RotateNoneFlipY);
             b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
-            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
 
-            byte alpha;
-            int nOffset = bmData.Stride - b.Width * 4;
-            transparency.Between(0, 255);
-
-            unsafe
+            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(b, true, ImageLockMode.ReadWrite))
             {
-                byte* p = (byte*)(void*)bmData.Scan0;
+                maxAlpha = maxAlpha.Between(0, 255);
+                minAlpha = minAlpha.Between(0, 255);
+                int alphaAdd = maxAlpha - minAlpha;
 
                 for (int y = 0; y < b.Height; ++y)
                 {
                     for (int x = 0; x < b.Width; ++x)
                     {
-                        alpha = (byte)(transparency - transparency * (y + 1) / b.Height);
-                        if (p[3] > alpha) p[3] = alpha;
-                        p += 4;
+                        ColorBgra color = unsafeBitmap.GetPixel(x, y);
+                        byte alpha = (byte)(minAlpha + (maxAlpha - (alphaAdd * (y + 1) / b.Height)));
+
+                        if (color.Alpha > alpha)
+                        {
+                            color.Alpha = alpha;
+                            unsafeBitmap.SetPixel(x, y, color);
+                        }
                     }
-                    p += nOffset;
                 }
             }
 
-            b.UnlockBits(bmData);
-
             return b;
-        }*/
+        }
     }
 }

@@ -120,6 +120,9 @@ namespace ShareX
             nudImageScaleSpecificWidth.Value = Program.Settings.ImageScaleSpecificWidth;
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
+            // Image - Watermark
+            cbWatermarkExcludeClipboardUpload.Checked = Program.Settings.WatermarkExcludeClipboardUpload;
+
             // Capture
             cbShowCursor.Checked = Program.Settings.ShowCursor;
             cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
@@ -530,7 +533,16 @@ namespace ShareX
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
-            new WatermarkUI(Program.Settings.WatermarkConfig).ShowDialog();
+            using (WatermarkUI watermarkForm = new WatermarkUI(Program.Settings.WatermarkConfig))
+            {
+                watermarkForm.Icon = Icon;
+                watermarkForm.ShowDialog();
+            }
+        }
+
+        private void cbWatermarkExcludeClipboardUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.WatermarkExcludeClipboardUpload = cbWatermarkExcludeClipboardUpload.Checked;
         }
 
         #endregion Watermark

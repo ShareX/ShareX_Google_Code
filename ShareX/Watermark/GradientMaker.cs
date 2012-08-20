@@ -238,12 +238,6 @@ namespace ShareX
             this.Close();
         }
 
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            // TODO: Wiki page create
-            ThreadPool.QueueUserWorkItem(x => Process.Start("http://code.google.com/p/zscreen/wiki/Watermark"));
-        }
-
         private void cboGradientDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdatePreview(GetNewBrushData());
