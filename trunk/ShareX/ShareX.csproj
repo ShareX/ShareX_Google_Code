@@ -132,6 +132,21 @@
     <Compile Include="TaskManager.cs" />
     <Compile Include="UploadInfoStatus.cs" />
     <Compile Include="WatchFolder.cs" />
+    <Compile Include="Watermark\GradientMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Watermark\GradientMaker.Designer.cs">
+      <DependentUpon>GradientMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Watermark\GradientStop.cs" />
+    <Compile Include="Watermark\WatermarkConfig.cs" />
+    <Compile Include="Watermark\WatermarkEffects.cs" />
+    <Compile Include="Watermark\WatermarkUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Watermark\WatermarkUI.Designer.cs">
+      <DependentUpon>WatermarkUI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
