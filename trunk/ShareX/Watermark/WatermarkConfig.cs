@@ -39,24 +39,22 @@ namespace ShareX
         public GradientMakerSettings GradientMakerOptions = new GradientMakerSettings();
         public bool WatermarkAddReflection = false;
         public bool WatermarkAutoHide = true;
-        public decimal WatermarkBackTrans = 225;
+        public int WatermarkBackTrans = 225;
         public XmlColor WatermarkBorderArgb = Color.Black;
-        public decimal WatermarkCornerRadius = 4;
-
-        [Category(ComponentModelStrings.InputsClipboard), DefaultValue(false), Description("Do not apply watermark during Clipboard Upload")]
-        public bool WatermarkExcludeClipboardUpload { get; set; }
+        public int WatermarkCornerRadius = 4;
+        public bool WatermarkExcludeClipboardUpload = false;
 
         public XmlFont WatermarkFont = new XmlFont("Arial", 8);
         public XmlColor WatermarkFontArgb = Color.White;
-        public decimal WatermarkFontTrans = 255;
+        public int WatermarkFontTrans = 255;
         public XmlColor WatermarkGradient1Argb = Color.FromArgb(85, 85, 85);
         public XmlColor WatermarkGradient2Argb = Color.Black;
         public LinearGradientMode WatermarkGradientType = LinearGradientMode.Vertical;
 
         public string WatermarkImageLocation = "";
-        public decimal WatermarkImageScale = 100;
+        public int WatermarkImageScale = 100;
         public WatermarkType WatermarkMode = WatermarkType.NONE;
-        public decimal WatermarkOffset = 5;
+        public int WatermarkOffset = 5;
         public WatermarkPositionType WatermarkPositionMode = WatermarkPositionType.BOTTOM_RIGHT;
 
         public string WatermarkText = "%h:%mi";

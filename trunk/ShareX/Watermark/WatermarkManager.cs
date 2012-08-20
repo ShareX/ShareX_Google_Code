@@ -124,13 +124,9 @@ namespace ShareX
             return result;
         }
 
-        public Image ApplyWatermark(Image img, NameParser parser = null)
+        public Image ApplyWatermark(Image img)
         {
-            if (parser == null)
-            {
-                parser = new NameParser(NameParserType.Text) { Picture = img };
-            }
-
+            NameParser parser = new NameParser(NameParserType.Text) { Picture = img };
             return ApplyWatermark(img, parser, Config.WatermarkMode);
         }
 

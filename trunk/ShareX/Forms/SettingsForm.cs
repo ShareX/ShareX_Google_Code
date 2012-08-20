@@ -526,6 +526,15 @@ namespace ShareX
 
         #endregion Resize
 
+        #region Watermark
+
+        private void btnWatermarkSettings_Click(object sender, EventArgs e)
+        {
+            new WatermarkUI(Program.Settings.WatermarkConfig).ShowDialog();
+        }
+
+        #endregion
+
         #endregion Image
 
         #region Capture
@@ -831,5 +840,6 @@ namespace ShareX
         }
 
         #endregion Proxy
+
     }
 }
