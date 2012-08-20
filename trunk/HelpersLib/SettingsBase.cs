@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Threading;
@@ -31,6 +32,7 @@ using Newtonsoft.Json;
 
 namespace HelpersLib
 {
+    [Serializable]
     public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
     {
         public static readonly SerializationType SerializationType = SerializationType.Json;

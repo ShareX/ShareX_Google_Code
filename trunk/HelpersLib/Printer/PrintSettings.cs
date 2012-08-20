@@ -23,8 +23,11 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+
 namespace HelpersLib
 {
+    [Serializable]
     public class PrintSettings
     {
         public int Margin { get; set; }
