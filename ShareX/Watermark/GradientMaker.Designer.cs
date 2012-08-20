@@ -236,7 +236,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GradientMaker";
             this.Text = "Gradient Maker";
-            this.Load += new System.EventHandler(this.GradientMaker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

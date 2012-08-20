@@ -43,9 +43,9 @@ namespace ShareX
 
         public GradientStop(string color, string offset)
         {
-            this.Color = MyColors.ParseColor(color);
+            Color = MyColors.ParseColor(color);
 
-            if (this.Color == null)
+            if (Color == null)
             {
                 throw new Exception("Color is unknown.");
             }
@@ -53,11 +53,11 @@ namespace ShareX
             float offset2;
             if (float.TryParse(offset, NumberStyles.Any, CultureInfo.InvariantCulture, out offset2))
             {
-                this.Offset = offset2;
+                Offset = offset2;
             }
             else
             {
-                this.Offset = 0;
+                Offset = 0;
             }
         }
     }

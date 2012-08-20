@@ -140,7 +140,7 @@
     </Compile>
     <Compile Include="Watermark\GradientStop.cs" />
     <Compile Include="Watermark\WatermarkConfig.cs" />
-    <Compile Include="Watermark\WatermarkEffects.cs" />
+    <Compile Include="Watermark\WatermarkManager.cs" />
     <Compile Include="Watermark\WatermarkUI.cs">
       <SubType>Form</SubType>
     </Compile>
