@@ -294,6 +294,18 @@ namespace HelpersLib
             return null;
         }
 
+        public static Image LoadImageWithSize(string path, int width, int height)
+        {
+            Image img = Image.FromFile(path);
+
+            if (img.Width != width || img.Height != height)
+            {
+                img = ResizeImage(img, width, height);
+            }
+
+            return img;
+        }
+
         public static Bitmap ResizeImage(Image img, int width, int height, bool smoothScaling = true)
         {
             Bitmap bmp = new Bitmap(width, height);

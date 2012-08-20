@@ -51,15 +51,18 @@ namespace ShareX
         public GradientMaker(GradientMakerSettings options)
         {
             InitializeComponent();
-            this.Options = options;
-            if (0 == this.Options.BrushDataList.Count)
+
+            Options = options;
+            if (Options.BrushDataList.Count == 0)
             {
                 this.Options.BrushDataList.Add(new BrushData());
             }
+
             foreach (BrushData bd in options.BrushDataList)
             {
                 lbBrushData.Items.Add(bd);
             }
+
             if (options.BrushDataSelected < lbBrushData.Items.Count)
             {
                 lbBrushData.SelectedIndex = options.BrushDataSelected;
@@ -237,6 +240,7 @@ namespace ShareX
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
+            // TODO: Wiki page create
             ThreadPool.QueueUserWorkItem(x => Process.Start("http://code.google.com/p/zscreen/wiki/Watermark"));
         }
 
@@ -246,10 +250,6 @@ namespace ShareX
         }
 
         #endregion Form events
-
-        private void GradientMaker_Load(object sender, EventArgs e)
-        {
-        }
 
         private void lbBrushData_SelectedIndexChanged(object sender, EventArgs e)
         {

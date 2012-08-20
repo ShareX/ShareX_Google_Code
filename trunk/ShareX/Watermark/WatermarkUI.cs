@@ -70,7 +70,7 @@ namespace ShareX
                 parser = new NameParser(NameParserType.Text) { Picture = img };
             }
 
-            return new WatermarkEffects(Config).ApplyWatermark(img, parser, Config.WatermarkMode);
+            return new WatermarkManager(Config).ApplyWatermark(img, parser, Config.WatermarkMode);
         }
 
         private void CheckForCodes(object checkObject)
@@ -149,13 +149,13 @@ namespace ShareX
         {
             using (Bitmap bmp = Resources.ShareXLogo.Clone(new Rectangle(62, 33, 199, 140), PixelFormat.Format32bppArgb))
             {
-                var bmp2 = new Bitmap(pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height);
-                Graphics g = Graphics.FromImage(bmp2);
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(bmp,
-                            new Rectangle(0, 0, pbWatermarkShow.ClientRectangle.Width,
-                                          pbWatermarkShow.ClientRectangle.Height));
-                pbWatermarkShow.Image = new WatermarkEffects(Config).ApplyWatermark(bmp2);
+                Bitmap bmp2 = new Bitmap(pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height);
+                using (Graphics g = Graphics.FromImage(bmp2))
+                {
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(bmp, new Rectangle(0, 0, pbWatermarkShow.ClientRectangle.Width, pbWatermarkShow.ClientRectangle.Height));
+                }
+                pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp2);
             }
         }
 
@@ -195,7 +195,7 @@ namespace ShareX
 
         private void btnWatermarkFont_Click(object sender, EventArgs e)
         {
-            DialogResult result = WatermarkEffects.ShowFontDialog(Config);
+            DialogResult result = WatermarkManager.ShowFontDialog(Config);
 
             if (result == DialogResult.OK)
             {
@@ -207,10 +207,8 @@ namespace ShareX
 
         private void btwWatermarkBrowseImage_Click(object sender, EventArgs e)
         {
-            var fd = new OpenFileDialog
-                         {
-                             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-                         };
+            OpenFileDialog fd = new OpenFileDialog { InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) };
+
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 txtWatermarkImageLocation.Text = fd.FileName;
