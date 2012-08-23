@@ -25,7 +25,7 @@
 
 using System;
 
-namespace ColorsLib
+namespace HelpersLib
 {
     public delegate void ColorEventHandler(object sender, ColorEventArgs e);
 

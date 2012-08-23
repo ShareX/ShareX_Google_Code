@@ -27,9 +27,9 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using ColorsLib.Properties;
+using HelpersLib.Properties;
 
-namespace ColorsLib
+namespace HelpersLib
 {
     public class ColorUserControl : UserControl
     {
@@ -148,6 +148,7 @@ namespace ColorsLib
             drawCrosshair = true;
             mouseDown = true;
             mouseMoveTimer.Start();
+
             //EventMouseMove(this, e);
         }
 

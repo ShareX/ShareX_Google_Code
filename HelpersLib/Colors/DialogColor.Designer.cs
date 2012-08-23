@@ -1,4 +1,4 @@
-﻿namespace ColorsLib
+﻿namespace HelpersLib
 {
     partial class DialogColor
     {
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogColor));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lblOld = new System.Windows.Forms.Label();
@@ -72,7 +71,7 @@
             this.txtY = new System.Windows.Forms.TextBox();
             this.lblX = new System.Windows.Forms.Label();
             this.lblY = new System.Windows.Forms.Label();
-            this.colorPicker = new ColorsLib.ColorPicker();
+            this.colorPicker = new HelpersLib.ColorPicker();
             this.btnUpdateColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).BeginInit();
@@ -504,11 +503,11 @@
             // 
             // btnColorPicker
             // 
-            this.btnColorPicker.Image = ((System.Drawing.Image)(resources.GetObject("btnColorPicker.Image")));
-            this.btnColorPicker.Location = new System.Drawing.Point(440, 232);
+            this.btnColorPicker.Location = new System.Drawing.Point(416, 232);
             this.btnColorPicker.Name = "btnColorPicker";
-            this.btnColorPicker.Size = new System.Drawing.Size(32, 32);
+            this.btnColorPicker.Size = new System.Drawing.Size(56, 32);
             this.btnColorPicker.TabIndex = 39;
+            this.btnColorPicker.Text = "Cursor";
             this.btnColorPicker.UseVisualStyleBackColor = true;
             this.btnColorPicker.Click += new System.EventHandler(this.btnColorPicker_Click);
             // 
@@ -553,12 +552,12 @@
             // colorPicker
             // 
             this.colorPicker.AutoSize = true;
-            this.colorPicker.DrawStyle = ColorsLib.DrawStyle.Hue;
+            this.colorPicker.DrawStyle = HelpersLib.DrawStyle.Hue;
             this.colorPicker.Location = new System.Drawing.Point(8, 8);
             this.colorPicker.Name = "colorPicker";
             this.colorPicker.Size = new System.Drawing.Size(293, 263);
             this.colorPicker.TabIndex = 0;
-            this.colorPicker.ColorChanged += new ColorsLib.ColorEventHandler(this.colorPicker_ColorChanged);
+            this.colorPicker.ColorChanged += new HelpersLib.ColorEventHandler(this.colorPicker_ColorChanged);
             // 
             // btnUpdateColor
             // 

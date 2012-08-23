@@ -114,6 +114,7 @@
             this.Controls.Add(this.pbImage);
             this.Name = "AfterCaptureForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Post capture tasks";
             this.ResumeLayout(false);
 

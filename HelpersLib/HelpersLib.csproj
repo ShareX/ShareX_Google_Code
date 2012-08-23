@@ -65,7 +65,26 @@
     <Compile Include="CLI\CLIManager.cs" />
     <Compile Include="CLI\CLIManagerRegex.cs" />
     <Compile Include="CLI\CLIParser.cs" />
-    <Compile Include="ComponentModelStrings.cs" />
+    <Compile Include="Colors\ColorBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Colors\ColorHelpers.cs" />
+    <Compile Include="Colors\ColorPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Colors\ColorSlider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Colors\ColorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Colors\DialogColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Colors\DialogColor.Designer.cs">
+      <DependentUpon>DialogColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Colors\MyColors.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="Extensions\GraphicsPathExtensions.cs" />
@@ -142,7 +161,6 @@
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Hotkey\HotkeySetting.cs" />
-    <Compile Include="IClone.cs" />
     <Compile Include="Hotkey\KeyInfo.cs" />
     <Compile Include="Native\NativeEnums.cs" />
     <Compile Include="Native\NativeMethods.cs" />
@@ -206,6 +224,7 @@
     <Compile Include="UpdateChecker\UpdateChecker.cs" />
     <Compile Include="UpdateChecker\UpdateInfo.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
     <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
@@ -269,6 +288,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShareX.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crosshair.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

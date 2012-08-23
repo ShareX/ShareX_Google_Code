@@ -23,10 +23,30 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
 namespace HelpersLib
 {
-    public interface IClone
+    public class WindowState
     {
-        T Clone<T>(T instance) where T : class;
+        public Point Location { get; set; }
+        public Size Size { get; set; }
+        public bool IsMaximized { get; set; }
+
+        public void SetFormState(Form form)
+        {
+            form.Location = Location;
+            form.Size = Size;
+
+            if (IsMaximized)
+            {
+                form.WindowState = FormWindowState.Maximized;
+            }
+        }
     }
 }

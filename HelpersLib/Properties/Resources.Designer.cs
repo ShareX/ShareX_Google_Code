@@ -60,6 +60,13 @@ namespace HelpersLib.Properties {
             }
         }
         
+        internal static byte[] Crosshair {
+            get {
+                object obj = ResourceManager.GetObject("Crosshair", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Loading {
             get {
                 object obj = ResourceManager.GetObject("Loading", resourceCulture);
