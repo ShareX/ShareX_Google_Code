@@ -194,7 +194,7 @@
             this.KeyPreview = true;
             this.Name = "ImageHistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ImageHistoryForm";
+            this.Text = "Image history";
             this.Shown += new System.EventHandler(this.ImageHistoryForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ImageHistoryForm_KeyDown);
             this.tscMain.ContentPanel.ResumeLayout(false);

@@ -307,6 +307,8 @@
             // 
             // pbThumbnail
             // 
+            this.pbThumbnail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbThumbnail.BackColor = System.Drawing.Color.White;
             this.pbThumbnail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbThumbnail.Location = new System.Drawing.Point(328, 8);
@@ -327,7 +329,7 @@
             this.MinimumSize = new System.Drawing.Size(925, 725);
             this.Name = "HistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "HistoryFormTest";
+            this.Text = "History";
             this.Shown += new System.EventHandler(this.HistoryForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HistoryForm_KeyDown);
             this.ssMain.ResumeLayout(false);

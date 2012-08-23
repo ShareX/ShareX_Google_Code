@@ -49,6 +49,7 @@ namespace ShareX
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
 
+        public WindowState HistoryWindowState = new WindowState();
         public WindowState ImageHistoryWindowState = new WindowState();
         public int ImageHistoryViewMode = 3;
         public Size ImageHistoryThumbnailSize = new Size(100, 100);
