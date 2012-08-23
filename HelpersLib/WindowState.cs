@@ -63,5 +63,11 @@ namespace HelpersLib
                 IsMaximized = wp.showCmd == SHOWWINDOW.SW_MAXIMIZE;
             }
         }
+
+        public void AutoHandleFormState(Form form)
+        {
+            SetFormState(form);
+            form.FormClosing += (sender, e) => GetFormState(form);
+        }
     }
 }

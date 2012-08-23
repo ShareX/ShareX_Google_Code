@@ -42,21 +42,12 @@ namespace HistoryLib
         private HistoryItemManager him;
         private HistoryItem[] allHistoryItems;
 
-        public HistoryForm(string historyPath, string title = "", int maxItemCount = -1)
+        public HistoryForm(string historyPath, int maxItemCount = -1)
         {
             InitializeComponent();
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                Text = title;
-            }
-            else
-            {
-                Text = "History: " + historyPath;
-            }
 
             him = new HistoryItemManager();
             him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);

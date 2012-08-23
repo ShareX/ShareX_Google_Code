@@ -70,21 +70,12 @@ namespace HistoryLib
         private HistoryItemManager him;
         private HistoryItem[] historyItems;
 
-        public ImageHistoryForm(string historyPath, int viewMode, Size thumbnailSize, string title = "", int maxItemCount = -1)
+        public ImageHistoryForm(string historyPath, int viewMode, Size thumbnailSize, int maxItemCount = -1)
         {
             InitializeComponent();
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                Text = title;
-            }
-            else
-            {
-                Text = "Image history: " + historyPath;
-            }
 
             ViewMode = viewMode;
             ThumbnailSize = thumbnailSize;
