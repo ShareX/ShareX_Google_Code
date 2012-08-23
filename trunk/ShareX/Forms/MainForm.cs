@@ -28,7 +28,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using ColorsLib;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using HistoryLib;

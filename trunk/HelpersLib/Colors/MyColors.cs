@@ -27,7 +27,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 
-namespace ColorsLib
+namespace HelpersLib
 {
     #region Public Structs
 

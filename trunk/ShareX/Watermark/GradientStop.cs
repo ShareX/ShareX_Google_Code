@@ -26,7 +26,7 @@
 using System;
 using System.Drawing;
 using System.Globalization;
-using ColorsLib;
+using HelpersLib;
 
 namespace ShareX
 {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,22 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnColorPicker.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABtElEQVQ4T2P4//8/AwyHhob6
-        ArFWUFAQg7+/P4O3tzeDu7s7g7OzM4OdnR2DtrY2Ax8fH1w9SB8KB6gxo7CwsBpIa2EzwNLSksHExAS3
-        AUBNmUBT/+fn59cA2droLiBoAFBDNsgAEMjOzq4F8rWRvUDQAKDiXJgBIDojI6MeKKYDCwOCBgAV5iMb
-        AGKnpKQ0Ojk56YICkaABQEWF6AaA+AkJCc1AOT2CBgAVFGMzACQWHR3dYmFhoYc3FoCSpbgMAImHh4e3
-        GRsb6yOnHZQ41dfXr0A24Pv3718dHR3rQeIwbGBgEIXTAHV19SqQAW/fvn3f1dW1EsSeO3fuTjU1NX1Q
-        KtTV1WUAGoQ7ISkoKNSBNLu6uvYD2fEXLly48w0IgM7Ol5OTY1dSUsJvgKSkZKO9vf1EKSkpXSAWBwbc
-        DJArpk6duldCQsJQXFycgYeHB7cLhIWFk4FYn5eXl0FAQIBBSEgo+OzZs/e+fv36TVZWthCUkUAAZxgA
-        5RiBmAWIOYGYn5WVVSMwMHAOyBVAb0wGiQExKz4DmIAKOIBYCIhlgVhdUFAwXk9PbyrQsGCoGBeyAQC/
-        UCOicVAm7wAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="colorTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

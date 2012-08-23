@@ -26,7 +26,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace ColorsLib
+namespace HelpersLib
 {
     [DefaultEvent("ColorChanged")]
     public class ColorPicker : UserControl
@@ -150,21 +150,23 @@ namespace ColorsLib
         {
             this.SuspendLayout();
 
-            this.colorBox = new ColorsLib.ColorBox();
-            this.colorSlider = new ColorsLib.ColorSlider();
+            this.colorBox = new HelpersLib.ColorBox();
+            this.colorSlider = new HelpersLib.ColorSlider();
 
             // colorBox
             this.colorBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorBox.DrawStyle = ColorsLib.DrawStyle.Hue;
+            this.colorBox.DrawStyle = HelpersLib.DrawStyle.Hue;
             this.colorBox.Location = new System.Drawing.Point(0, 0);
             this.colorBox.Name = "colorBox";
             this.colorBox.TabIndex = 0;
+
             // colorSlider
             this.colorSlider.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.colorSlider.DrawStyle = ColorsLib.DrawStyle.Hue;
+            this.colorSlider.DrawStyle = HelpersLib.DrawStyle.Hue;
             this.colorSlider.Location = new System.Drawing.Point(colorBox.Width, 0);
             this.colorSlider.Name = "colorSlider";
             this.colorSlider.TabIndex = 1;
+
             // ColorPicker
             this.Controls.Add(this.colorBox);
             this.Controls.Add(this.colorSlider);

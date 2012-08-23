@@ -31,7 +31,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using ColorsLib;
+using HelpersLib;
 
 namespace ShareX
 {

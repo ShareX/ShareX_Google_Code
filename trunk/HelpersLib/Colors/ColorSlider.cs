@@ -25,7 +25,7 @@
 
 using System.Drawing;
 
-namespace ColorsLib
+namespace HelpersLib
 {
     public class ColorSlider : ColorUserControl
     {

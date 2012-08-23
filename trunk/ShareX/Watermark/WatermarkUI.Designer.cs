@@ -633,6 +633,7 @@
             this.Controls.Add(this.tcWatermark);
             this.MinimumSize = new System.Drawing.Size(808, 464);
             this.Name = "WatermarkUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WatermarkUI";
             this.Load += new System.EventHandler(this.WatermarkUI_Load);
             this.Resize += new System.EventHandler(this.WatermarkUI_Resize);
