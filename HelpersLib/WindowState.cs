@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -40,12 +41,26 @@ namespace HelpersLib
 
         public void SetFormState(Form form)
         {
-            form.Location = Location;
-            form.Size = Size;
-
-            if (IsMaximized)
+            if (!Location.IsEmpty)
             {
-                form.WindowState = FormWindowState.Maximized;
+                form.StartPosition = FormStartPosition.Manual;
+                form.Location = Location;
+            }
+
+            if (!Size.IsEmpty) form.Size = Size;
+            if (IsMaximized) form.WindowState = FormWindowState.Maximized;
+        }
+
+        public void GetFormState(Form form)
+        {
+            WINDOWPLACEMENT wp = new WINDOWPLACEMENT();
+            wp.length = Marshal.SizeOf(wp);
+
+            if (NativeMethods.GetWindowPlacement(form.Handle, ref wp))
+            {
+                Location = wp.rcNormalPosition.Location;
+                Size = wp.rcNormalPosition.Size;
+                IsMaximized = wp.showCmd == SHOWWINDOW.SW_MAXIMIZE;
             }
         }
     }

@@ -427,8 +427,9 @@ namespace HelpersLib
         public static bool IsWindowMaximized(IntPtr handle)
         {
             WINDOWPLACEMENT wp = new WINDOWPLACEMENT();
+            wp.length = Marshal.SizeOf(wp);
             GetWindowPlacement(handle, ref wp);
-            return wp.showCmd == (int)SHOWWINDOW.SW_MAXIMIZE;
+            return wp.showCmd == SHOWWINDOW.SW_MAXIMIZE;
         }
 
         public static IntPtr SetHook(int hookType, HookProc hookProc)
@@ -443,15 +444,16 @@ namespace HelpersLib
         public static void RestoreWindow(IntPtr handle)
         {
             WINDOWPLACEMENT wp = new WINDOWPLACEMENT();
+            wp.length = Marshal.SizeOf(wp);
             GetWindowPlacement(handle, ref wp);
 
             if (wp.flags == (int)WindowPlacementFlags.WPF_RESTORETOMAXIMIZED)
             {
-                wp.showCmd = (int)SHOWWINDOW.SW_SHOWMAXIMIZED;
+                wp.showCmd = SHOWWINDOW.SW_SHOWMAXIMIZED;
             }
             else
             {
-                wp.showCmd = (int)SHOWWINDOW.SW_RESTORE;
+                wp.showCmd = SHOWWINDOW.SW_RESTORE;
             }
 
             SetWindowPlacement(handle, ref wp);

@@ -39,11 +39,38 @@ namespace HistoryLib
         public string HistoryPath { get; private set; }
         public int MaxItemCount { get; set; }
 
+        public int ViewMode
+        {
+            get
+            {
+                return (int)ilvImages.View;
+            }
+            set
+            {
+                if (value.IsBetween(0, 3))
+                {
+                    ilvImages.View = (Manina.Windows.Forms.View)value;
+                }
+            }
+        }
+
+        public Size ThumbnailSize
+        {
+            get
+            {
+                return ilvImages.ThumbnailSize;
+            }
+            set
+            {
+                ilvImages.ThumbnailSize = value;
+            }
+        }
+
         private HistoryManager history;
         private HistoryItemManager him;
         private HistoryItem[] historyItems;
 
-        public ImageHistoryForm(string historyPath, string title = "", int maxItemCount = -1)
+        public ImageHistoryForm(string historyPath, int viewMode, Size thumbnailSize, string title = "", int maxItemCount = -1)
         {
             InitializeComponent();
 
@@ -58,6 +85,9 @@ namespace HistoryLib
             {
                 Text = "Image history: " + historyPath;
             }
+
+            ViewMode = viewMode;
+            ThumbnailSize = thumbnailSize;
 
             him = new HistoryItemManager();
             him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
@@ -142,6 +172,21 @@ namespace HistoryLib
             him.ShowImagePreview();
         }
 
+        private void tsmiViewModeThumbnails_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Thumbnails;
+        }
+
+        private void tsmiViewModeGallery_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Gallery;
+        }
+
+        private void tsmiViewModePane_Click(object sender, EventArgs e)
+        {
+            ilvImages.View = Manina.Windows.Forms.View.Pane;
+        }
+
         private void tsmiThumbnailSize75_Click(object sender, EventArgs e)
         {
             ilvImages.ThumbnailSize = new Size(75, 75);
@@ -165,21 +210,6 @@ namespace HistoryLib
         private void tsmiThumbnailSize250_Click(object sender, EventArgs e)
         {
             ilvImages.ThumbnailSize = new Size(250, 250);
-        }
-
-        private void tsmiViewModeThumbnails_Click(object sender, EventArgs e)
-        {
-            ilvImages.View = Manina.Windows.Forms.View.Thumbnails;
-        }
-
-        private void tsmiViewModeGallery_Click(object sender, EventArgs e)
-        {
-            ilvImages.View = Manina.Windows.Forms.View.Gallery;
-        }
-
-        private void tsmiViewModePane_Click(object sender, EventArgs e)
-        {
-            ilvImages.View = Manina.Windows.Forms.View.Pane;
         }
 
         private void ilvImages_KeyDown(object sender, KeyEventArgs e)

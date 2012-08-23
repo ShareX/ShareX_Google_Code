@@ -622,9 +622,17 @@ namespace ShareX
         private void tsbImageHistory_Click(object sender, EventArgs e)
         {
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-            using (ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath, "ShareX - History: " + Program.HistoryFilePath))
+            using (ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath, Program.Settings.ImageHistoryViewMode,
+                Program.Settings.ImageHistoryThumbnailSize, "ShareX - History: " + Program.HistoryFilePath))
             {
+                Program.Settings.ImageHistoryWindowState.SetFormState(imageHistoryForm);
                 imageHistoryForm.Icon = Icon;
+                imageHistoryForm.FormClosing += (a, b) =>
+                {
+                    Program.Settings.ImageHistoryViewMode = imageHistoryForm.ViewMode;
+                    Program.Settings.ImageHistoryThumbnailSize = imageHistoryForm.ThumbnailSize;
+                    Program.Settings.ImageHistoryWindowState.GetFormState(imageHistoryForm);
+                };
                 imageHistoryForm.ShowDialog();
             }
         }
