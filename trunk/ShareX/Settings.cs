@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
@@ -47,6 +48,10 @@ namespace ShareX
         public bool ShowClipboardContentViewer = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
+
+        public WindowState ImageHistoryWindowState = new WindowState();
+        public int ImageHistoryViewMode = 3;
+        public Size ImageHistoryThumbnailSize = new Size(100, 100);
 
         #endregion Main Form
 

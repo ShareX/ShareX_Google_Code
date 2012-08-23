@@ -172,10 +172,10 @@ namespace HelpersLib
     {
         public int length;
         public int flags;
-        public int showCmd;
-        public Point ptMinPosition;
-        public Point ptMaxPosition;
-        public Rectangle rcNormalPosition;
+        public SHOWWINDOW showCmd;
+        public POINT ptMinPosition;
+        public POINT ptMaxPosition;
+        public RECT rcNormalPosition;
     }
 
     public struct BLENDFUNCTION
