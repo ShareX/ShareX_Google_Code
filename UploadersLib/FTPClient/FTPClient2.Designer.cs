@@ -1,4 +1,4 @@
-﻿namespace ZSS.FTPClientLib
+﻿namespace UploadersLib
 {
     partial class FTPClient2
     {
@@ -50,7 +50,7 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lvFTPList = new ZSS.FTPClientLib.ListViewEx();
+            this.lvFTPList = new UploadersLib.ListViewEx();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chFilesize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chFiletype = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -278,7 +278,7 @@
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 17);
+            this.lblStatus.Size = new System.Drawing.Size(38, 17);
             this.lblStatus.Text = "status";
             // 
             // lvFTPList
@@ -409,7 +409,7 @@
             this.scConsole.Panel2.Controls.Add(this.txtConsoleWrite);
             this.scConsole.Panel2MinSize = 20;
             this.scConsole.Size = new System.Drawing.Size(952, 557);
-            this.scConsole.SplitterDistance = 533;
+            this.scConsole.SplitterDistance = 536;
             this.scConsole.SplitterWidth = 1;
             this.scConsole.TabIndex = 0;
             // 
@@ -422,7 +422,7 @@
             this.rtbConsole.Location = new System.Drawing.Point(0, 0);
             this.rtbConsole.Name = "rtbConsole";
             this.rtbConsole.ReadOnly = true;
-            this.rtbConsole.Size = new System.Drawing.Size(952, 533);
+            this.rtbConsole.Size = new System.Drawing.Size(952, 536);
             this.rtbConsole.TabIndex = 0;
             this.rtbConsole.Text = "";
             this.rtbConsole.WordWrap = false;
@@ -431,7 +431,7 @@
             // 
             this.txtConsoleWrite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConsoleWrite.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtConsoleWrite.Location = new System.Drawing.Point(0, 3);
+            this.txtConsoleWrite.Location = new System.Drawing.Point(0, 0);
             this.txtConsoleWrite.Name = "txtConsoleWrite";
             this.txtConsoleWrite.Size = new System.Drawing.Size(952, 20);
             this.txtConsoleWrite.TabIndex = 0;

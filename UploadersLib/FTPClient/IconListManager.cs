@@ -27,7 +27,7 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace IconHelper
+namespace UploadersLib
 {
     /// <summary>
     /// Maintains a list of currently added file extensions
@@ -36,8 +36,8 @@ namespace IconHelper
     {
         private Hashtable _extensionList = new Hashtable();
         private System.Collections.ArrayList _imageLists = new ArrayList();			//will hold ImageList objects
-        private IconHelper.IconReader.IconSize _iconSize;
-        bool ManageBothSizes = false; //flag, used to determine whether to create two ImageLists.
+        private IconReader.IconSize _iconSize;
+        private bool ManageBothSizes = false; //flag, used to determine whether to create two ImageLists.
 
         /// <summary>
         /// Creates an instance of <c>IconListManager</c> that will add icons to a single <c>ImageList</c> using the

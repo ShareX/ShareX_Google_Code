@@ -266,4 +266,14 @@ namespace UploadersLib
         [Description("Local File path as URI")]
         LocalFilePathUri
     }
+
+    public enum EProxyConfigType
+    {
+        [Description("No proxy")]
+        NoProxy,
+        [Description("Manual proxy configuration")]
+        ManualProxy,
+        [Description("Use system proxy settings")]
+        SystemProxy
+    }
 }

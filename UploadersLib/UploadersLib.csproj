@@ -103,6 +103,23 @@
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="FileUploaders\SharedFolderUploader.cs" />
+    <Compile Include="FTPClient\FTPClient2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPClient\FTPClient2.Designer.cs">
+      <DependentUpon>FTPClient2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPClient\IconHelper.cs" />
+    <Compile Include="FTPClient\IconListManager.cs" />
+    <Compile Include="FTPClient\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FTPClient\LoginDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTPClient\LoginDialog.Designer.cs">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\AccountTypeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,6 +273,12 @@
   <ItemGroup>
     <EmbeddedResource Include="ApiKeys\ApiKeysUI.resx">
       <DependentUpon>ApiKeysUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPClient\FTPClient2.resx">
+      <DependentUpon>FTPClient2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTPClient\LoginDialog.resx">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\AccountTypeControl.resx">
       <DependentUpon>AccountTypeControl.cs</DependentUpon>
