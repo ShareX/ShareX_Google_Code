@@ -589,6 +589,15 @@ namespace ShareX
             UploadManager.ShortenURL(Links.URL_WEBSITE);
         }
 
+        private void tsmiTestUploaders_Click(object sender, EventArgs e)
+        {
+            using (UploadTestForm form = new UploadTestForm())
+            {
+                form.Icon = Icon;
+                form.ShowDialog();
+            }
+        }
+
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
             new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();

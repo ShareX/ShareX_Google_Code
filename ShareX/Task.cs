@@ -72,7 +72,7 @@ namespace ShareX
 
         #region Constructors
 
-        private Task(TaskJob job, EDataType dataType)
+        public Task(TaskJob job, EDataType dataType)
         {
             Status = TaskStatus.InQueue;
             Info = new UploadInfo();
@@ -85,6 +85,14 @@ namespace ShareX
             Task task = new Task(TaskJob.DataUpload, dataType);
             task.Info.FileName = fileName;
             task.data = stream;
+            return task;
+        }
+
+        public static Task CreateDataUploaderTask(EDataType dataType, string filePath)
+        {
+            Task task = new Task(TaskJob.DataUpload, dataType);
+            task.Info.FilePath = filePath;
+            task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return task;
         }
 
@@ -182,6 +190,16 @@ namespace ShareX
             }
         }
 
+        public void StartSync()
+        {
+            if (Status == TaskStatus.InQueue && !IsStopped)
+            {
+                OnUploadPreparing();
+                ThreadDoWork();
+                ThreadCompleted();
+            }
+        }
+
         public void Stop()
         {
             IsStopped = true;
@@ -211,7 +229,15 @@ namespace ShareX
 
                 Status = TaskStatus.Working;
                 Info.Status = "Uploading";
-                threadWorker.InvokeAsync(OnUploadStarted);
+
+                if (threadWorker != null)
+                {
+                    threadWorker.InvokeAsync(OnUploadStarted);
+                }
+                else
+                {
+                    OnUploadStarted();
+                }
 
                 try
                 {
@@ -662,7 +688,15 @@ namespace ShareX
             if (progress != null)
             {
                 Info.Progress = progress;
-                threadWorker.InvokeAsync(OnUploadProgressChanged);
+
+                if (threadWorker != null)
+                {
+                    threadWorker.InvokeAsync(OnUploadProgressChanged);
+                }
+                else
+                {
+                    OnUploadProgressChanged();
+                }
             }
         }
 
