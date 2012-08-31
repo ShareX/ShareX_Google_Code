@@ -120,18 +120,16 @@ namespace UploadersLib.ImageUploaders
 
             arguments.Add("key", this.Options.DeveloperKey);
 
-            string source = UploadData(stream, url, fileName, "media", arguments);
+            UploadResult result = UploadData(stream, url, fileName, "media", arguments);
 
-            return ParseResult(source);
+            return ParseResult(result);
         }
 
-        private UploadResult ParseResult(string source)
+        private UploadResult ParseResult(UploadResult result)
         {
-            UploadResult ur = new UploadResult(source);
-
-            if (!string.IsNullOrEmpty(source))
+            if (result.IsSuccess)
             {
-                XDocument xdoc = XDocument.Parse(source);
+                XDocument xdoc = XDocument.Parse(result.Response);
                 XElement xele = xdoc.Element("rsp");
 
                 if (xele != null)
@@ -145,8 +143,8 @@ namespace UploadersLib.ImageUploaders
                             mediaid = xele.GetElementValue("mediaid");
                             mediaurl = xele.GetElementValue("mediaurl");
                             if (this.Options.ShowFull) mediaurl = mediaurl + "/full";
-                            ur.URL = mediaurl;
-                            ur.ThumbnailURL = mediaurl + ".th.jpg";
+                            result.URL = mediaurl;
+                            result.ThumbnailURL = mediaurl + ".th.jpg";
                             break;
                         case "fail":
                             string code, msg;
@@ -158,7 +156,7 @@ namespace UploadersLib.ImageUploaders
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 }

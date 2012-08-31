@@ -113,9 +113,9 @@ namespace UploadersLib.ImageUploaders
 
             string query = OAuthManager.GenerateQuery(URLUserUpload, null, HttpMethod.Post, AuthInfo);
 
-            string response = UploadData(stream, query, fileName, "image");
+            UploadResult result = UploadData(stream, query, fileName, "image");
 
-            return ParseResponse(response);
+            return ParseResponse(result);
         }
 
         private UploadResult AnonymousUpload(Stream stream, string fileName)
@@ -123,36 +123,34 @@ namespace UploadersLib.ImageUploaders
             Dictionary<string, string> arguments = new Dictionary<string, string>();
             arguments.Add("key", AnonymousKey);
 
-            string response = UploadData(stream, URLAnonymousUpload, fileName, "image", arguments);
+            UploadResult result = UploadData(stream, URLAnonymousUpload, fileName, "image", arguments);
 
-            return ParseResponse(response);
+            return ParseResponse(result);
         }
 
-        private UploadResult ParseResponse(string source)
+        private UploadResult ParseResponse(UploadResult result)
         {
-            UploadResult ur = new UploadResult(source);
-
-            if (!string.IsNullOrEmpty(source))
+            if (result.IsSuccess)
             {
                 try
                 {
-                    XDocument xd = XDocument.Parse(source);
+                    XDocument xd = XDocument.Parse(result.Response);
                     XElement xe;
 
                     if ((xe = xd.GetNode("upload|images/links")) != null)
                     {
-                        ur.URL = xe.GetElementValue("original");
+                        result.URL = xe.GetElementValue("original");
 
                         if (ThumbnailType == ImgurThumbnailType.Large_Thumbnail)
                         {
-                            ur.ThumbnailURL = xe.GetElementValue("large_thumbnail");
+                            result.ThumbnailURL = xe.GetElementValue("large_thumbnail");
                         }
                         else
                         {
-                            ur.ThumbnailURL = xe.GetElementValue("small_square");
+                            result.ThumbnailURL = xe.GetElementValue("small_square");
                         }
 
-                        ur.DeletionURL = xe.GetElementValue("delete_page");
+                        result.DeletionURL = xe.GetElementValue("delete_page");
                     }
                     else if ((xe = xd.GetElement("error")) != null)
                     {
@@ -165,7 +163,7 @@ namespace UploadersLib.ImageUploaders
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 }

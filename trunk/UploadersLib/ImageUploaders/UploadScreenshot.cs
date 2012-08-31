@@ -47,18 +47,16 @@ namespace UploadersLib.ImageUploaders
             arguments.Add("xmlOutput", "1");
             //arguments.Add("testMode", "1");
 
-            string response = UploadData(stream, "http://img1.uploadscreenshot.com/api-upload.php", fileName, "userfile", arguments);
+            UploadResult result = UploadData(stream, "http://img1.uploadscreenshot.com/api-upload.php", fileName, "userfile", arguments);
 
-            return ParseResult(response);
+            return ParseResult(result);
         }
 
-        private UploadResult ParseResult(string source)
+        private UploadResult ParseResult(UploadResult result)
         {
-            UploadResult ur = new UploadResult(source);
-
-            if (!string.IsNullOrEmpty(source))
+            if (result.IsSuccess)
             {
-                XDocument xdoc = XDocument.Parse(source);
+                XDocument xdoc = XDocument.Parse(result.Response);
                 XElement xele = xdoc.Root.Element("upload");
 
                 string error = xele.GetElementValue("errorCode");
@@ -91,13 +89,13 @@ namespace UploadersLib.ImageUploaders
                 }
                 else
                 {
-                    ur.URL = xele.GetElementValue("original");
-                    ur.ThumbnailURL = xele.GetElementValue("small");
-                    ur.DeletionURL = xele.GetElementValue("deleteurl");
+                    result.URL = xele.GetElementValue("original");
+                    result.ThumbnailURL = xele.GetElementValue("small");
+                    result.DeletionURL = xele.GetElementValue("deleteurl");
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 }

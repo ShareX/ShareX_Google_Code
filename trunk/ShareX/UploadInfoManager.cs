@@ -28,6 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using HelpersLib;
+using ShareX.Properties;
 
 namespace ShareX
 {
@@ -235,16 +236,24 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(errors))
                 {
-                    new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES).ShowDialog();
+                    using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES))
+                    {
+                        form.Icon = Resources.ShareX;
+                        form.ShowDialog();
+                    }
                 }
             }
         }
 
         public void ShowResponse()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].Info.Result != null && !string.IsNullOrEmpty(SelectedItems[0].Info.Result.Source))
+            if (IsSelectedItemsValid() && SelectedItems[0].Info.Result != null && !string.IsNullOrEmpty(SelectedItems[0].Info.Result.Response))
             {
-                new ResponseForm(SelectedItems[0].Info.Result.Source).ShowDialog();
+                using (ResponseForm form = new ResponseForm(SelectedItems[0].Info.Result.Response))
+                {
+                    form.Icon = Resources.ShareX;
+                    form.ShowDialog();
+                }
             }
         }
 

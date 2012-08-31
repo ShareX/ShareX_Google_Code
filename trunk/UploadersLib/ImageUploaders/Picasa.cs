@@ -71,9 +71,9 @@ namespace UploadersLib.URLShorteners
             string contentType = Helpers.GetMimeType(fileName);
             NameValueCollection headers = new NameValueCollection { { "Slug", fileName } };
 
-            ur.Source = SendPostRequestStream(url, stream, contentType, null, headers);
+            ur.Response = SendPostRequestStream(url, stream, contentType, null, headers);
 
-            XDocument xd = XDocument.Parse(ur.Source);
+            XDocument xd = XDocument.Parse(ur.Response);
 
             XElement entry_element = xd.Element(AtomNS + "entry");
 

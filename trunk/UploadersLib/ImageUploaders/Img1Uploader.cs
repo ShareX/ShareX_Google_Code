@@ -34,16 +34,15 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
-            ur.Source = UploadData(stream, uploadURL, fileName, "fileup");
+            UploadResult result = UploadData(stream, uploadURL, fileName, "fileup");
 
-            if (!string.IsNullOrEmpty(ur.Source))
+            if (result.IsSuccess)
             {
-                string lastLine = ur.Source.Remove(0, ur.Source.LastIndexOf('\n') + 1).Trim();
-                ur.URL = lastLine;
+                string lastLine = result.Response.Remove(0, result.Response.LastIndexOf('\n') + 1).Trim();
+                result.URL = lastLine;
             }
 
-            return ur;
+            return result;
         }
     }
 }

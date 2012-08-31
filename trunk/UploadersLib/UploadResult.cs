@@ -36,7 +36,20 @@ namespace UploadersLib.HelperClasses
         public string ShortenedURL { get; set; }
         public string LocalFilePath { get; set; }
 
-        public string Source { get; set; }
+        private bool isSuccess;
+        public bool IsSuccess
+        {
+            get
+            {
+                return isSuccess && !string.IsNullOrEmpty(Response);
+            }
+            set
+            {
+                isSuccess = value;
+            }
+        }
+
+        public string Response { get; set; }
         public List<string> Errors { get; set; }
         public bool IsURLExpected { get; set; }
 
@@ -54,7 +67,7 @@ namespace UploadersLib.HelperClasses
         public UploadResult(string source, string url = null)
             : this()
         {
-            Source = source;
+            Response = source;
             URL = url;
         }
 

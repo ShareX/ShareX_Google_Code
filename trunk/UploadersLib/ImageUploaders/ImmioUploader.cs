@@ -33,11 +33,13 @@ namespace UploadersLib.ImageUploaders
     {
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
-            ur.Source = UploadData(stream, "http://imm.io/store/", fileName, "image");
-            ImmioResponse response = JsonConvert.DeserializeObject<ImmioResponse>(ur.Source);
-            if (response != null) ur.URL = response.Payload.Uri;
-            return ur;
+            UploadResult result = UploadData(stream, "http://imm.io/store/", fileName, "image");
+            if (result.IsSuccess)
+            {
+                ImmioResponse response = JsonConvert.DeserializeObject<ImmioResponse>(result.Response);
+                if (response != null) result.URL = response.Payload.Uri;
+            }
+            return result;
         }
 
         private class ImmioResponse

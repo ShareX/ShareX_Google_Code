@@ -111,7 +111,7 @@ namespace UploadersLib
             }
         }
 
-        protected string SendPostRequestURLEncoded(string url, Dictionary<string, string> arguments = null, ResponseType responseType = ResponseType.Text)
+        protected string SendPostRequestURLEncoded(string url, string arguments = null, ResponseType responseType = ResponseType.Text)
         {
             using (HttpWebResponse response = PostResponseURLEncoded(url, arguments))
             {
@@ -119,12 +119,9 @@ namespace UploadersLib
             }
         }
 
-        protected string SendPostRequestURLEncoded(string url, string arguments = null, ResponseType responseType = ResponseType.Text)
+        protected string SendPostRequestURLEncoded(string url, Dictionary<string, string> arguments = null, ResponseType responseType = ResponseType.Text)
         {
-            using (HttpWebResponse response = PostResponseURLEncoded(url, arguments))
-            {
-                return ResponseToString(response, responseType);
-            }
+            return SendPostRequestURLEncoded(url, CreateQuery(arguments), responseType);
         }
 
         protected string SendPostRequestJSON(string url, string json, ResponseType responseType = ResponseType.Text)
@@ -211,9 +208,11 @@ namespace UploadersLib
             return null;
         }
 
-        protected string UploadData(Stream dataStream, string url, string fileName, string fileFormName = "file", Dictionary<string, string> arguments = null,
-            CookieCollection cookies = null)
+        protected UploadResult UploadData(Stream dataStream, string url, string fileName, string fileFormName = "file",
+            Dictionary<string, string> arguments = null, CookieCollection cookies = null)
         {
+            UploadResult result = new UploadResult();
+
             IsUploading = true;
             stopUpload = false;
 
@@ -236,18 +235,22 @@ namespace UploadersLib
                     requestStream.Write(bytesDataClose, 0, bytesDataClose.Length);
                 }
 
-                return ResponseToString(request.GetResponse());
+                result.Response = ResponseToString(request.GetResponse());
+                result.IsSuccess = true;
             }
             catch (Exception e)
             {
-                if (!stopUpload) AddWebError(e);
+                if (!stopUpload)
+                {
+                    result.Response = AddWebError(e);
+                }
             }
             finally
             {
                 IsUploading = false;
             }
 
-            return null;
+            return result;
         }
 
         #endregion Post methods
@@ -551,8 +554,10 @@ namespace UploadersLib
             return url;
         }
 
-        private void AddWebError(Exception e)
+        private string AddWebError(Exception e)
         {
+            string response = null;
+
             if (Errors != null && e != null)
             {
                 StringBuilder str = new StringBuilder();
@@ -561,7 +566,7 @@ namespace UploadersLib
 
                 if (e is WebException)
                 {
-                    string response = ResponseToString(((WebException)e).Response);
+                    response = ResponseToString(((WebException)e).Response);
 
                     if (!string.IsNullOrEmpty(response))
                     {
@@ -577,6 +582,8 @@ namespace UploadersLib
 
                 Errors.Add(str.ToString());
             }
+
+            return response;
         }
 
         #endregion Helper methods

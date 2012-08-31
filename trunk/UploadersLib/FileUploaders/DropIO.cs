@@ -61,33 +61,23 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult result = new UploadResult();
+            DropName = "ShareX_" + Helpers.GetRandomAlphanumeric(10);
+            DropDescription = string.Empty;
+            Drop drop = CreateDrop(DropName, DropDescription, false, false, false);
 
-            try
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("version", "2.0");
+            args.Add("api_key", APIKey);
+            args.Add("format", "xml");
+            args.Add("token", drop.AdminToken);
+            args.Add("drop_name", drop.Name);
+
+            UploadResult result = UploadData(stream, "http://assets.drop.io/upload", fileName, "file", args);
+
+            if (result.IsSuccess)
             {
-                DropName = "ShareX_" + Helpers.GetRandomAlphanumeric(10);
-                DropDescription = string.Empty;
-                Drop drop = CreateDrop(DropName, DropDescription, false, false, false);
-
-                Dictionary<string, string> args = new Dictionary<string, string>();
-                args.Add("version", "2.0");
-                args.Add("api_key", APIKey);
-                args.Add("format", "xml");
-                args.Add("token", drop.AdminToken);
-                args.Add("drop_name", drop.Name);
-
-                string response = UploadData(stream, "http://assets.drop.io/upload", fileName, "file", args);
-                result.Source = response;
-
-                if (!string.IsNullOrEmpty(response))
-                {
-                    Asset asset = ParseAsset(response);
-                    result.URL = string.Format("http://drop.io/{0}/asset/{1}", drop.Name, asset.Name);
-                }
-            }
-            catch (Exception e)
-            {
-                Errors.Add(e.Message);
+                Asset asset = ParseAsset(result.Response);
+                result.URL = string.Format("http://drop.io/{0}/asset/{1}", drop.Name, asset.Name);
             }
 
             return result;
