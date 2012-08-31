@@ -293,7 +293,7 @@ namespace ShareX
                             }
                         }
 
-                        if ((uim.SelectedItems[0].Info.Result.IsError || Program.IsDebug) && !string.IsNullOrEmpty(uim.SelectedItems[0].Info.Result.Source))
+                        if ((uim.SelectedItems[0].Info.Result.IsError || Program.IsDebug) && !string.IsNullOrEmpty(uim.SelectedItems[0].Info.Result.Response))
                         {
                             tsmiShowResponse.Visible = true;
                         }

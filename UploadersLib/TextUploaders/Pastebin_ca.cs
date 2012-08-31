@@ -72,17 +72,17 @@ namespace UploadersLib.TextUploaders
                 arguments.Add("tags", settings.Tags);
                 arguments.Add("type", settings.TextFormat);
 
-                ur.Source = SendPostRequest(APIURL, arguments);
+                ur.Response = SendPostRequest(APIURL, arguments);
 
-                if (!string.IsNullOrEmpty(ur.Source))
+                if (!string.IsNullOrEmpty(ur.Response))
                 {
-                    if (ur.Source.StartsWith("SUCCESS:"))
+                    if (ur.Response.StartsWith("SUCCESS:"))
                     {
-                        ur.URL = "http://pastebin.ca/" + ur.Source.Substring(8);
+                        ur.URL = "http://pastebin.ca/" + ur.Response.Substring(8);
                     }
-                    else if (ur.Source.StartsWith("FAIL:"))
+                    else if (ur.Response.StartsWith("FAIL:"))
                     {
-                        Errors.Add(ur.Source.Substring(5));
+                        Errors.Add(ur.Response.Substring(5));
                     }
                 }
             }

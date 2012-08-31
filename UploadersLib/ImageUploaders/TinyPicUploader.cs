@@ -51,7 +51,7 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
+            UploadResult result = null;
 
             string action = "getuploadkey", tpid = TinyPicID, tpk = TinyPicKey;
             string upk = GetUploadKey(action, tpid, tpk);
@@ -78,16 +78,16 @@ namespace UploadersLib.ImageUploaders
                 arguments.Add("type", "image");
                 arguments.Add("tags", string.Empty);
 
-                ur.Source = UploadData(stream, URLAPI, fileName, "uploadfile", arguments);
+                result = UploadData(stream, URLAPI, fileName, "uploadfile", arguments);
 
-                if (!string.IsNullOrEmpty(ur.Source) && CheckResponse(ur.Source))
+                if (result.IsSuccess && CheckResponse(result.Response))
                 {
-                    ur.URL = Helpers.GetXMLValue(ur.Source, "fullsize");
-                    ur.ThumbnailURL = Helpers.GetXMLValue(ur.Source, "thumbnail");
+                    result.URL = Helpers.GetXMLValue(result.Response, "fullsize");
+                    result.ThumbnailURL = Helpers.GetXMLValue(result.Response, "thumbnail");
                 }
             }
 
-            return ur;
+            return result;
         }
 
         public string UserAuth(string email, string password)

@@ -246,13 +246,11 @@ namespace UploadersLib.FileUploaders
             args.Add("caption", fileName);
             args.Add("filename", fileName);
 
-            string response = UploadData(stream, url, fileName, "file", args);
+            UploadResult result = UploadData(stream, url, fileName, "file", args);
 
-            UploadResult result = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                MinusFile minusFile = JsonConvert.DeserializeObject<MinusFile>(response);
+                MinusFile minusFile = JsonConvert.DeserializeObject<MinusFile>(result.Response);
 
                 if (minusFile != null)
                 {

@@ -98,15 +98,15 @@ namespace UploadersLib.TextUploaders
                     args.Add("api_user_key", Settings.UserKey); // this paramater is part of the login system
                 }
 
-                ur.Source = SendPostRequest(APIURL, args);
+                ur.Response = SendPostRequest(APIURL, args);
 
-                if (!string.IsNullOrEmpty(ur.Source) && !ur.Source.StartsWith("Bad API request") && ur.Source.IsValidUrl())
+                if (!string.IsNullOrEmpty(ur.Response) && !ur.Response.StartsWith("Bad API request") && ur.Response.IsValidUrl())
                 {
-                    ur.URL = ur.Source;
+                    ur.URL = ur.Response;
                 }
                 else
                 {
-                    Errors.Add(ur.Source);
+                    Errors.Add(ur.Response);
                 }
             }
 

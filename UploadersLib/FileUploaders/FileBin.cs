@@ -36,13 +36,11 @@ namespace UploadersLib.FileUploaders
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("MAX_FILE_SIZE", "82428800");
 
-            string response = UploadData(stream, "http://filebin.ca/upload.php", fileName, "file", args);
+            UploadResult result = UploadData(stream, "http://filebin.ca/upload.php", fileName, "file", args);
 
-            UploadResult result = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                result.URL = response.Substring(response.LastIndexOf(' ') + 1).Trim();
+                result.URL = result.Response.Substring(result.Response.LastIndexOf(' ') + 1).Trim();
             }
 
             return result;

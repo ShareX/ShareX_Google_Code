@@ -101,20 +101,18 @@ namespace UploadersLib.ImageUploaders
             args.Add("oauth_secret", AuthInfo.UserSecret);
             args.Add("message", msg);
 
-            string source = UploadData(stream, url, fileName, "media", args);
+            UploadResult result = UploadData(stream, url, fileName, "media", args);
 
-            UploadResult ur = new UploadResult(source);
-
-            TwitPicResponse response = JsonConvert.DeserializeObject<TwitPicResponse>(source);
+            TwitPicResponse response = JsonConvert.DeserializeObject<TwitPicResponse>(result.Response);
 
             if (response != null)
             {
-                ur.URL = response.URL;
-                if (ShowFull) ur.URL += "/full";
-                ur.ThumbnailURL = string.Format("http://twitpic.com/show/{0}/{1}.{2}", TwitPicThumbnailMode.ToString().ToLowerInvariant(), response.ID, response.Type);
+                result.URL = response.URL;
+                if (ShowFull) result.URL += "/full";
+                result.ThumbnailURL = string.Format("http://twitpic.com/show/{0}/{1}.{2}", TwitPicThumbnailMode.ToString().ToLowerInvariant(), response.ID, response.Type);
             }
 
-            return ur;
+            return result;
         }
 
         public class TwitPicResponse

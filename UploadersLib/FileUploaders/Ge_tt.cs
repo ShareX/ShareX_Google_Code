@@ -84,7 +84,7 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
+            UploadResult result = null;
 
             Ge_ttShare share = CreateShare(AccessToken);
 
@@ -94,12 +94,16 @@ namespace UploadersLib.FileUploaders
 
                 if (file != null)
                 {
-                    ur.Source = UploadData(stream, file.Upload.PostURL, fileName);
-                    ur.URL = file.GettURL;
+                    result = UploadData(stream, file.Upload.PostURL, fileName);
+
+                    if (result.IsSuccess)
+                    {
+                        result.URL = file.GettURL;
+                    }
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 

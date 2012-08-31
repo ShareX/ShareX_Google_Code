@@ -216,13 +216,11 @@ namespace UploadersLib.FileUploaders
             if (Share) args.Add("share", "1");
 
             string url = string.Format(UploadURL, AuthToken, FolderID);
-            string response = UploadData(stream, url, fileName, "file", args);
+            UploadResult result = UploadData(stream, url, fileName, "file", args);
 
-            UploadResult ur = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                XDocument xd = XDocument.Parse(response);
+                XDocument xd = XDocument.Parse(result.Response);
                 XElement xe = xd.GetElement("response");
 
                 if (xe != null && xe.GetElementValue("status") == "upload_ok")
@@ -235,13 +233,13 @@ namespace UploadersLib.FileUploaders
 
                         if (!string.IsNullOrEmpty(publicName))
                         {
-                            ur.URL = string.Format(ShareURL, publicName);
+                            result.URL = string.Format(ShareURL, publicName);
                         }
                     }
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 

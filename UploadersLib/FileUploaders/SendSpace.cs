@@ -452,26 +452,24 @@ namespace UploadersLib.FileUploaders
 
         public UploadResult Upload(Stream stream, string fileName, UploadInfo uploadInfo)
         {
-            UploadResult result = new UploadResult();
+            UploadResult result = null;
 
             if (uploadInfo != null)
             {
                 Dictionary<string, string> args = PrepareArguments(uploadInfo.MaxFileSize, uploadInfo.UploadIdentifier, uploadInfo.ExtraInfo);
 
-                string response = UploadData(stream, uploadInfo.URL, fileName, "userfile", args);
+                result = UploadData(stream, uploadInfo.URL, fileName, "userfile", args);
 
-                if (!string.IsNullOrEmpty(response))
+                if (result.IsSuccess)
                 {
-                    result.Source = response;
-
-                    if (response.StartsWith("upload_status=ok")) // User
+                    if (result.Response.StartsWith("upload_status=ok")) // User
                     {
-                        string fileid = Regex.Match(response, @"file_id=(\w+)").Groups[1].Value;
+                        string fileid = Regex.Match(result.Response, @"file_id=(\w+)").Groups[1].Value;
                         result.URL = "http://www.sendspace.com/file/" + fileid;
                     }
                     else // Anonymous
                     {
-                        UploadResponsePacket urp = ParseUploadResponse(response);
+                        UploadResponsePacket urp = ParseUploadResponse(result.Response);
                         result.URL = urp.DownloadURL;
                         result.DeletionURL = urp.DeleteURL;
                     }

@@ -74,19 +74,17 @@ namespace UploadersLib.FileUploaders
                 args.Add("folder", FolderID);
             }
 
-            string response = UploadData(stream, url, fileName, "filecontent", args);
+            UploadResult result = UploadData(stream, url, fileName, "filecontent", args);
 
-            UploadResult result = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                if (response.StartsWith("ERROR: "))
+                if (result.Response.StartsWith("ERROR: "))
                 {
-                    Errors.Add(response.Substring(7));
+                    Errors.Add(result.Response.Substring(7));
                 }
-                else if (response.StartsWith("COMPLETE\n"))
+                else if (result.Response.StartsWith("COMPLETE\n"))
                 {
-                    RapidShareUploadInfo info = new RapidShareUploadInfo(response);
+                    RapidShareUploadInfo info = new RapidShareUploadInfo(result.Response);
                     result.URL = info.URL;
                 }
             }

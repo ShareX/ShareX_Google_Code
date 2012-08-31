@@ -68,18 +68,16 @@ namespace UploadersLib.ImageUploaders
                 args.Add("message", msg);
             }
 
-            string source = UploadData(stream, APIURL, fileName, "media", args);
+            UploadResult result = UploadData(stream, APIURL, fileName, "media", args);
 
-            return ParseResult(source);
+            return ParseResult(result);
         }
 
-        private UploadResult ParseResult(string source)
+        private UploadResult ParseResult(UploadResult result)
         {
-            UploadResult ur = new UploadResult(source);
-
-            if (!string.IsNullOrEmpty(source))
+            if (result.IsSuccess)
             {
-                XDocument xd = XDocument.Parse(source);
+                XDocument xd = XDocument.Parse(result.Response);
                 XElement xe;
 
                 xe = xd.Element("image");
@@ -87,8 +85,8 @@ namespace UploadersLib.ImageUploaders
                 if (xe != null)
                 {
                     string id = xe.GetElementValue("id");
-                    ur.URL = "http://twitsnaps.com/snap/" + id;
-                    ur.ThumbnailURL = "http://twitsnaps.com/thumb/" + id;
+                    result.URL = "http://twitsnaps.com/snap/" + id;
+                    result.ThumbnailURL = "http://twitsnaps.com/thumb/" + id;
                 }
                 else
                 {
@@ -101,7 +99,7 @@ namespace UploadersLib.ImageUploaders
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 }

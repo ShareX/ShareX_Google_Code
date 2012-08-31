@@ -39,13 +39,11 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            string response = UploadData(stream, imageHosting.UploadURL, fileName, imageHosting.FileFormName, imageHosting.GetArguments());
+            UploadResult result = UploadData(stream, imageHosting.UploadURL, fileName, imageHosting.FileFormName, imageHosting.GetArguments());
 
-            UploadResult result = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                imageHosting.Parse(response);
+                imageHosting.Parse(result.Response);
 
                 if (!string.IsNullOrEmpty(imageHosting.URL))
                 {
@@ -53,7 +51,7 @@ namespace UploadersLib.ImageUploaders
                 }
                 else if (imageHosting.AutoUseResponse)
                 {
-                    result.URL = response;
+                    result.URL = result.Response;
                 }
 
                 if (!string.IsNullOrEmpty(imageHosting.ThumbnailURL))

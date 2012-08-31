@@ -47,17 +47,17 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
+            UploadResult result = null;
 
             string url = GetUploadURL();
 
             if (!string.IsNullOrEmpty(url))
             {
-                ur.Source = UploadData(stream, url, fileName);
+                result = UploadData(stream, url, fileName);
 
-                if (!string.IsNullOrEmpty(ur.Source))
+                if (!string.IsNullOrEmpty(result.Response))
                 {
-                    ur.URL = ur.Source;
+                    result.URL = result.Response;
                 }
             }
             else
@@ -65,7 +65,7 @@ namespace UploadersLib.FileUploaders
                 Errors.Add("GetUploadURL failed.");
             }
 
-            return ur;
+            return result;
         }
 
         public string GetUploadURL()

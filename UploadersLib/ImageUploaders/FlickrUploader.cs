@@ -213,8 +213,6 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = new UploadResult();
-
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("api_key", API_Key);
             args.Add("auth_token", this.Auth.Token);
@@ -231,21 +229,21 @@ namespace UploadersLib.ImageUploaders
 
             args.Add("api_sig", GetAPISig(args));
 
-            ur.Source = UploadData(stream, API_Upload_URL, fileName, "photo", args);
+            UploadResult result = UploadData(stream, API_Upload_URL, fileName, "photo", args);
 
-            if (!string.IsNullOrEmpty(ur.Source))
+            if (result.IsSuccess)
             {
-                XElement xele = ParseResponse(ur.Source, "photoid");
+                XElement xele = ParseResponse(result.Response, "photoid");
 
                 if (null != xele)
                 {
                     string photoid = xele.Value;
                     string url = Helpers.CombineURL(GetPhotosLink(), photoid);
-                    ur.URL = Helpers.CombineURL(url, "sizes/o");
+                    result.URL = Helpers.CombineURL(url, "sizes/o");
                 }
             }
 
-            return ur;
+            return result;
         }
     }
 

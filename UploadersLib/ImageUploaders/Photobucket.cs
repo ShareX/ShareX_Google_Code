@@ -103,23 +103,21 @@ namespace UploadersLib.ImageUploaders
             string query = OAuthManager.GenerateQuery(url, args, HttpMethod.Post, AuthInfo);
             query = FixURL(query);
 
-            string response = UploadData(stream, query, fileName, "uploadfile");
+            UploadResult result = UploadData(stream, query, fileName, "uploadfile");
 
-            UploadResult ur = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                XDocument xd = XDocument.Parse(response);
+                XDocument xd = XDocument.Parse(result.Response);
                 XElement xe;
 
                 if ((xe = xd.GetNode("response/content")) != null)
                 {
-                    ur.URL = xe.GetElementValue("url");
-                    ur.ThumbnailURL = xe.GetElementValue("thumb");
+                    result.URL = xe.GetElementValue("url");
+                    result.ThumbnailURL = xe.GetElementValue("thumb");
                 }
             }
 
-            return ur;
+            return result;
         }
 
         public bool CreateAlbum(string albumID, string albumName)

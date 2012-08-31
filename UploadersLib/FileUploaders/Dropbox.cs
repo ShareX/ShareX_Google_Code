@@ -164,13 +164,11 @@ namespace UploadersLib.FileUploaders
             string query = OAuthManager.GenerateQuery(url, args, HttpMethod.Post, AuthInfo);
 
             // There's a 150MB limit to all uploads through the API.
-            string response = UploadData(stream, query, fileName);
+            UploadResult result = UploadData(stream, query, fileName);
 
-            UploadResult result = new UploadResult(response);
-
-            if (!string.IsNullOrEmpty(response))
+            if (result.IsSuccess)
             {
-                DropboxContentInfo content = JsonConvert.DeserializeObject<DropboxContentInfo>(response);
+                DropboxContentInfo content = JsonConvert.DeserializeObject<DropboxContentInfo>(result.Response);
 
                 if (content != null)
                 {
