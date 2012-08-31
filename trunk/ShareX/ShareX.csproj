@@ -94,12 +94,6 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
-    <Compile Include="Forms\InputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\InputBox.Designer.cs">
-      <DependentUpon>InputBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ResponseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,9 +149,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\InputBox.resx">
-      <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResponseForm.resx">
       <DependentUpon>ResponseForm.cs</DependentUpon>

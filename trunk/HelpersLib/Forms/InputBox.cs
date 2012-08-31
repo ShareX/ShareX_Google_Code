@@ -26,7 +26,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace ZSS.FTPClientLib
+namespace HelpersLib
 {
     public partial class InputBox : Form
     {
@@ -38,15 +38,21 @@ namespace ZSS.FTPClientLib
             InitializeComponent();
         }
 
+        public InputBox(string question, string inputText)
+        {
+            Question = question;
+            InputText = inputText;
+        }
+
         private void InputBox_Load(object sender, EventArgs e)
         {
-            lblQuestion.Text = Question;
-            txtInputText.Text = InputText;
+            lblQuestion.Text = Question ?? "";
+            txtInputText.Text = InputText ?? "";
         }
 
         private void InputBox_Shown(object sender, EventArgs e)
         {
-            this.BringToFront();
+            BringToFront();
             txtInputText.Focus();
             txtInputText.SelectionLength = txtInputText.Text.Length;
         }
@@ -56,18 +62,27 @@ namespace ZSS.FTPClientLib
             if (!string.IsNullOrEmpty(txtInputText.Text))
             {
                 InputText = txtInputText.Text;
-                this.DialogResult = DialogResult.OK;
-                this.Hide();
+                DialogResult = DialogResult.OK;
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Hide();
+            DialogResult = DialogResult.Cancel;
         }
 
-        private Label lblQuestion;
+        public static string GetInputText(string question = "", string inputText = "")
+        {
+            using (InputBox form = new InputBox(question, inputText))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    return form.InputText;
+                }
+
+                return null;
+            }
+        }
 
         #region Windows Form Designer generated code
 
@@ -92,9 +107,9 @@ namespace ZSS.FTPClientLib
             //
             // btnOK
             //
-            this.btnOK.Location = new System.Drawing.Point(208, 64);
+            this.btnOK.Location = new System.Drawing.Point(208, 56);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(73, 23);
+            this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -102,9 +117,9 @@ namespace ZSS.FTPClientLib
             //
             // btnCancel
             //
-            this.btnCancel.Location = new System.Drawing.Point(288, 64);
+            this.btnCancel.Location = new System.Drawing.Point(288, 56);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(72, 23);
+            this.btnCancel.Size = new System.Drawing.Size(72, 24);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -120,17 +135,18 @@ namespace ZSS.FTPClientLib
             // lblQuestion
             //
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Location = new System.Drawing.Point(8, 10);
+            this.lblQuestion.Location = new System.Drawing.Point(8, 8);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(0, 13);
+            this.lblQuestion.Size = new System.Drawing.Size(31, 13);
             this.lblQuestion.TabIndex = 0;
+            this.lblQuestion.Text = "Input";
             //
             // InputBox
             //
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 97);
+            this.ClientSize = new System.Drawing.Size(369, 89);
             this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.txtInputText);
             this.Controls.Add(this.btnCancel);
@@ -148,6 +164,7 @@ namespace ZSS.FTPClientLib
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Label lblQuestion;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtInputText;

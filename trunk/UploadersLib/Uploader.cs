@@ -40,26 +40,24 @@ namespace UploadersLib
 {
     public class Uploader
     {
-        public delegate void ProgressEventHandler(ProgressManager progress);
-
-        public event ProgressEventHandler ProgressChanged;
-
         public static ProxySettings ProxySettings = new ProxySettings();
+        public static string UserAgent = string.Format("{0} {1}", Application.ProductName, Application.ProductVersion);
+
+        public delegate void ProgressEventHandler(ProgressManager progress);
+        public event ProgressEventHandler ProgressChanged;
 
         public List<string> Errors { get; private set; }
         public bool IsUploading { get; protected set; }
         public int BufferSize { get; set; }
-        public string UserAgent { get; set; }
         public CookieCollection LastResponseCookies { get; private set; }
 
         protected bool stopUpload;
 
         public Uploader()
         {
-            this.Errors = new List<string>();
-            this.IsUploading = false;
-            this.BufferSize = 8192;
-            this.UserAgent = string.Format("{0} {1}", Application.ProductName, Application.ProductVersion);
+            Errors = new List<string>();
+            IsUploading = false;
+            BufferSize = 8192;
 
             ServicePointManager.DefaultConnectionLimit = 25;
             ServicePointManager.Expect100Continue = false;

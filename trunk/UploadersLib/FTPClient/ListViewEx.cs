@@ -28,7 +28,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ZSS.FTPClientLib
+namespace UploadersLib
 {
     ///	<summary>
     ///	Inherited ListView to allow in-place editing of subitems

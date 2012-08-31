@@ -31,22 +31,20 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using IconHelper;
+using HelpersLib;
 using Starksoft.Net.Ftp;
 using UploadersLib;
 
-namespace ZSS.FTPClientLib
+namespace UploadersLib
 {
     public partial class FTPClient2 : Form
     {
         private const string Root = "/";
 
         public FTP FTPAdapter { get; set; }
-
         public FTPAccount Account { get; set; }
 
         private string currentDirectory;
-
         private ListViewItem tempSelected;
 
         public FTPClient2(FTPAccount account)
@@ -67,7 +65,7 @@ namespace ZSS.FTPClientLib
             this.Text = "FTP Client - " + account.Name;
             lblConnecting.Text = "Connecting to " + account.FTPAddress;
 
-            FTPAdapter.Client.OpenAsync(account.UserName, account.Password);
+            FTPAdapter.Client.OpenAsync(account.Username, account.Password);
         }
 
         #region Methods
@@ -290,7 +288,7 @@ namespace ZSS.FTPClientLib
             this.BringToFront();
             if (ib.DialogResult == DialogResult.OK)
             {
-                FTPAdapter.MakeDirectory(FTPHelpers.CombineURL(currentDirectory, ib.InputText));
+                FTPAdapter.MakeDirectory(Helpers.CombineURL(currentDirectory, ib.InputText));
                 RefreshDirectory();
             }
         }
@@ -426,7 +424,7 @@ namespace ZSS.FTPClientLib
                             {
                                 if (file.Name != filename)
                                 {
-                                    string path = FTPHelpers.CombineURL(currentDirectory, filename);
+                                    string path = Helpers.CombineURL(currentDirectory, filename);
                                     string movePath = string.Empty;
                                     if (file.ItemType == FtpItemType.Unknown)
                                     {
@@ -441,7 +439,7 @@ namespace ZSS.FTPClientLib
                                     }
                                     else
                                     {
-                                        movePath = FTPHelpers.CombineURL(file.FullPath, filename);
+                                        movePath = Helpers.CombineURL(file.FullPath, filename);
                                     }
 
                                     if (!string.IsNullOrEmpty(movePath))
@@ -480,7 +478,7 @@ namespace ZSS.FTPClientLib
                 FtpItem file = (FtpItem)lvFTPList.SelectedItems[0].Tag;
                 if (file.Name != e.DisplayText)
                 {
-                    FTPAdapter.Rename(file.FullPath, FTPHelpers.CombineURL(currentDirectory, e.DisplayText));
+                    FTPAdapter.Rename(file.FullPath, Helpers.CombineURL(currentDirectory, e.DisplayText));
                     RefreshDirectory();
                 }
             }
@@ -533,7 +531,7 @@ namespace ZSS.FTPClientLib
                 FtpItem file = lvi.Tag as FtpItem;
                 if (file != null && file.ItemType == FtpItemType.File)
                 {
-                    path = FTPHelpers.CombineURL(Account.GetHttpHomePath(), file.FullPath);
+                    path = Helpers.CombineURL(Account.HttpHomePath, file.FullPath);
                     list.Add(path);
                 }
             }
@@ -542,7 +540,7 @@ namespace ZSS.FTPClientLib
 
             if (!string.IsNullOrEmpty(clipboard))
             {
-                Clipboard.SetText(clipboard); // ok
+                Clipboard.SetText(clipboard);
             }
         }
 
@@ -553,7 +551,7 @@ namespace ZSS.FTPClientLib
                 FtpItem file = lvFTPList.SelectedItems[0].Tag as FtpItem;
                 if (file != null && file.ItemType == FtpItemType.File)
                 {
-                    ThreadPool.QueueUserWorkItem(x => Process.Start(this.Account.GetUriPath(file.FullPath, true)));
+                    ThreadPool.QueueUserWorkItem(x => Process.Start(Account.GetUriPath("@" + file.FullPath)));
                 }
             }
         }

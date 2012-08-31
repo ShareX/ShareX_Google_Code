@@ -29,16 +29,6 @@ using Starksoft.Net.Proxy;
 
 namespace UploadersLib.HelperClasses
 {
-    public enum EProxyConfigType
-    {
-        [Description("No proxy")]
-        NoProxy,
-        [Description("Manual proxy configuration")]
-        ManualProxy,
-        [Description("Use system proxy settings")]
-        SystemProxy
-    }
-
     public class ProxySettings
     {
         public EProxyConfigType ProxyConfig { get; set; }

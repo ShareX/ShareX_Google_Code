@@ -1,4 +1,4 @@
-﻿namespace ZSS.FTPClientLib
+﻿namespace UploadersLib
 {
     partial class LoginDialog
     {
@@ -112,7 +112,6 @@
             this.Name = "LoginDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginDialog";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginDialog_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

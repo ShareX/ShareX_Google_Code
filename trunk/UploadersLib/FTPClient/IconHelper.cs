@@ -26,8 +26,9 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using HelpersLib;
 
-namespace IconHelper
+namespace UploadersLib
 {
     /// <summary>
     /// Provides static methods to read system icons for both folders and files.
@@ -94,7 +95,7 @@ namespace IconHelper
 
             // Copy (clone) the returned icon to a new object, thus allowing us to clean-up properly
             Icon icon = (Icon)Icon.FromHandle(shfi.hIcon).Clone();
-            User32.DestroyIcon(shfi.hIcon); // Cleanup
+            NativeMethods.DestroyIcon(shfi.hIcon); // Cleanup
             return icon;
         }
 
@@ -131,7 +132,7 @@ namespace IconHelper
             // Now clone the icon, so that it can be successfully stored in an ImageList
             Icon icon = (Icon)Icon.FromHandle(shfi.hIcon).Clone();
 
-            User32.DestroyIcon(shfi.hIcon); // Cleanup
+            NativeMethods.DestroyIcon(shfi.hIcon); // Cleanup
             return icon;
         }
 
@@ -233,20 +234,5 @@ namespace IconHelper
 
         [DllImport("shell32.dll")]
         public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
-    }
-
-    /// <summary>
-    /// Wraps necessary functions imported from User32.dll. Code courtesy of MSDN Cold Rooster Consulting example.
-    /// </summary>
-    public class User32
-    {
-        /// <summary>
-        /// Provides access to function required to delete handle. This method is used internally
-        /// and is not required to be called separately.
-        /// </summary>
-        /// <param name="hIcon">Pointer to icon handle.</param>
-        /// <returns>N/A</returns>
-        [DllImport("User32.dll")]
-        public static extern int DestroyIcon(IntPtr hIcon);
     }
 }
