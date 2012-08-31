@@ -406,11 +406,7 @@ namespace UploadersLib
 
         private void btnAuthRefresh_Click(object sender, EventArgs e)
         {
-            if (Config.MinusConfig != null)
-            {
-                Minus minus = new Minus(Config.MinusConfig, new OAuthInfo(APIKeys.MinusConsumerKey, APIKeys.MinusConsumerSecret));
-                minus.RefreshAccessTokens();
-            }
+            MinusAuthRefresh();
         }
 
         private void cboMinusFolders_SelectedIndexChanged(object sender, EventArgs e)

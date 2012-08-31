@@ -40,18 +40,9 @@ namespace ShareX
 {
     public partial class UploadTestForm : Form
     {
-        public enum UploaderType
-        {
-            None,
-            ImageUploader,
-            TextUploader,
-            FileUploader,
-            UrlShortener
-        }
-
         public class UploaderInfo
         {
-            public UploaderType UploaderType;
+            public EDataType UploaderType;
             public ImageDestination ImageUploader;
             public TextDestination TextUploader;
             public FileDestination FileUploader;
@@ -101,7 +92,7 @@ namespace ShareX
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = UploaderType.ImageUploader, ImageUploader = uploader };
+                lvi.Tag = new UploaderInfo { UploaderType = EDataType.Image, ImageUploader = uploader };
                 lvi.Group = imageUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -115,7 +106,7 @@ namespace ShareX
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = UploaderType.TextUploader, TextUploader = uploader };
+                lvi.Tag = new UploaderInfo { UploaderType = EDataType.Text, TextUploader = uploader };
                 lvi.Group = textUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -124,12 +115,14 @@ namespace ShareX
             {
                 switch (uploader)
                 {
+                    case FileDestination.Email:
+                    case FileDestination.SharedFolder:
                     case FileDestination.CustomUploader:
                         continue;
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = UploaderType.FileUploader, FileUploader = uploader };
+                lvi.Tag = new UploaderInfo { UploaderType = EDataType.File, FileUploader = uploader };
                 lvi.Group = fileUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -137,7 +130,7 @@ namespace ShareX
             foreach (UrlShortenerType uploader in Enum.GetValues(typeof(UrlShortenerType)))
             {
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = UploaderType.UrlShortener, UrlShortener = uploader };
+                lvi.Tag = new UploaderInfo { UploaderType = EDataType.URL, UrlShortener = uploader };
                 lvi.Group = urlShortenersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -146,11 +139,6 @@ namespace ShareX
         }
 
         private void TesterGUI_Load(object sender, EventArgs e)
-        {
-            CheckPaths();
-        }
-
-        private void CheckPaths()
         {
             if (TestImage == null)
             {
@@ -254,20 +242,20 @@ namespace ShareX
                 {
                     switch (uploader.UploaderType)
                     {
-                        case UploaderType.ImageUploader:
+                        case EDataType.Image:
                             uploader.Task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
                             uploader.Task.Info.ImageDestination = uploader.ImageUploader;
                             break;
-                        case UploaderType.TextUploader:
+                        case EDataType.Text:
                             uploader.Task = Task.CreateTextUploaderTask(TestText);
                             uploader.Task.Info.TextDestination = uploader.TextUploader;
                             break;
-                        case UploaderType.FileUploader:
+                        case EDataType.File:
                             uploader.Task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
                             uploader.Task.Info.ImageDestination = ImageDestination.FileUploader;
                             uploader.Task.Info.FileDestination = uploader.FileUploader;
                             break;
-                        case UploaderType.UrlShortener:
+                        case EDataType.URL:
                             uploader.Task = Task.CreateURLShortenerTask(TestURL);
                             uploader.Task.Info.URLShortenerDestination = uploader.UrlShortener;
                             break;
@@ -320,6 +308,7 @@ namespace ShareX
                                 {
                                     lvUploaders.Items[uploader.Index].BackColor = Color.LightCoral;
                                     lvUploaders.Items[uploader.Index].SubItems[1].Text = "Failed: " + info.Result.ErrorsToString();
+                                    txtConsole.AppendText(info.Result.ErrorsToString());
                                 }
                             }
 
@@ -370,6 +359,11 @@ namespace ShareX
         private void TesterGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             isTesting = false;
+
+            if (TestImage != null)
+            {
+                TestImage.Dispose();
+            }
         }
 
         private void btnTestAll_Click(object sender, EventArgs e)

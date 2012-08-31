@@ -529,6 +529,22 @@ namespace UploadersLib
             }
         }
 
+        public void MinusAuthRefresh()
+        {
+            if (Config.MinusConfig != null)
+            {
+                try
+                {
+                    Minus minus = new Minus(Config.MinusConfig, new OAuthInfo(APIKeys.MinusConsumerKey, APIKeys.MinusConsumerSecret));
+                    minus.RefreshAccessTokens();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         public void MinusUpdateControls()
         {
             if (Config.MinusConfig != null && Config.MinusConfig.MinusUser != null)

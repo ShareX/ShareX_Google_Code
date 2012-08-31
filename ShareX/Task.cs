@@ -72,7 +72,7 @@ namespace ShareX
 
         #region Constructors
 
-        public Task(TaskJob job, EDataType dataType)
+        private Task(TaskJob job, EDataType dataType)
         {
             Status = TaskStatus.InQueue;
             Info = new UploadInfo();
