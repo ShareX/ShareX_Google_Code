@@ -177,10 +177,11 @@ namespace ShareX
             this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUploadSelectedFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiClearList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -439,6 +440,7 @@ namespace ShareX
             this.tsmiTestTextUpload,
             this.tsmiTestFileUpload,
             this.tsmiTestURLShortener,
+            this.tsmiTestUploaders,
             this.tsmiTestShapeCapture});
             this.tsbDebug.Image = global::ShareX.Properties.Resources.block;
             this.tsbDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1252,17 +1254,17 @@ namespace ShareX
             this.tsmiUploadSelectedFile.Text = "Upload";
             this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
             // 
-            // tssUploadInfo1
-            // 
-            this.tssUploadInfo1.Name = "tssUploadInfo1";
-            this.tssUploadInfo1.Size = new System.Drawing.Size(160, 6);
-            // 
             // tsmiClearList
             // 
             this.tsmiClearList.Name = "tsmiClearList";
             this.tsmiClearList.Size = new System.Drawing.Size(163, 22);
             this.tsmiClearList.Text = "Clear list";
             this.tsmiClearList.Click += new System.EventHandler(this.tsmiClearList_Click);
+            // 
+            // tssUploadInfo1
+            // 
+            this.tssUploadInfo1.Name = "tssUploadInfo1";
+            this.tssUploadInfo1.Size = new System.Drawing.Size(160, 6);
             // 
             // tsmiUploadFile
             // 
@@ -1277,6 +1279,14 @@ namespace ShareX
             this.tsmiShowPreview.Size = new System.Drawing.Size(163, 22);
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
+            // 
+            // tsmiTestUploaders
+            // 
+            this.tsmiTestUploaders.Image = global::ShareX.Properties.Resources.application_browser;
+            this.tsmiTestUploaders.Name = "tsmiTestUploaders";
+            this.tsmiTestUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestUploaders.Text = "Test uploaders";
+            this.tsmiTestUploaders.Click += new System.EventHandler(this.tsmiTestUploaders_Click);
             // 
             // MainForm
             // 
@@ -1436,5 +1446,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripDropDownButton tsddbTools;
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenColorPicker;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearList;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
     }
 }
