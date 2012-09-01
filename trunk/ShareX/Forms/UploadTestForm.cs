@@ -40,18 +40,9 @@ namespace ShareX
 {
     public partial class UploadTestForm : Form
     {
-        public class UploaderInfo
-        {
-            public EDataType UploaderType;
-            public ImageDestination ImageUploader;
-            public TextDestination TextUploader;
-            public FileDestination FileUploader;
-            public UrlShortenerType UrlShortener;
-            public Task Task;
-            public int Index;
-            public Stopwatch Timer;
-        }
+        public enum UploadStatus { Uploading, Uploaded }
 
+        private bool isTesting;
         public bool Testing
         {
             get { return isTesting; }
@@ -68,11 +59,24 @@ namespace ShareX
         public string TestText { get; set; }
         public string TestURL { get; set; }
 
-        private bool isTesting = false;
-
         public UploadTestForm()
         {
             InitializeComponent();
+
+            if (TestImage == null)
+            {
+                TestImage = Resources.ShareXLogo;
+            }
+
+            if (string.IsNullOrEmpty(TestText))
+            {
+                TestText = Program.ApplicationName + " text upload test";
+            }
+
+            if (string.IsNullOrEmpty(TestURL))
+            {
+                TestURL = Links.URL_WEBSITE;
+            }
 
             ListViewItem lvi;
 
@@ -92,7 +96,11 @@ namespace ShareX
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = EDataType.Image, ImageUploader = uploader };
+
+                Task task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
+                task.Info.ImageDestination = uploader;
+
+                lvi.Tag = task;
                 lvi.Group = imageUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -106,7 +114,11 @@ namespace ShareX
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = EDataType.Text, TextUploader = uploader };
+
+                Task task = Task.CreateTextUploaderTask(TestText);
+                task.Info.TextDestination = uploader;
+
+                lvi.Tag = task;
                 lvi.Group = textUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -115,14 +127,19 @@ namespace ShareX
             {
                 switch (uploader)
                 {
-                    case FileDestination.Email:
-                    case FileDestination.SharedFolder:
                     case FileDestination.CustomUploader:
+                    case FileDestination.SharedFolder:
+                    case FileDestination.Email:
                         continue;
                 }
 
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = EDataType.File, FileUploader = uploader };
+
+                Task task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
+                task.Info.ImageDestination = ImageDestination.FileUploader;
+                task.Info.FileDestination = uploader;
+
+                lvi.Tag = task;
                 lvi.Group = fileUploadersGroup;
                 lvUploaders.Items.Add(lvi);
             }
@@ -130,45 +147,16 @@ namespace ShareX
             foreach (UrlShortenerType uploader in Enum.GetValues(typeof(UrlShortenerType)))
             {
                 lvi = new ListViewItem(uploader.GetDescription());
-                lvi.Tag = new UploaderInfo { UploaderType = EDataType.URL, UrlShortener = uploader };
+
+                Task task = Task.CreateURLShortenerTask(TestURL);
+                task.Info.URLShortenerDestination = uploader;
+
+                lvi.Tag = task;
                 lvi.Group = urlShortenersGroup;
                 lvUploaders.Items.Add(lvi);
             }
 
             PrepareListItems();
-        }
-
-        private void TesterGUI_Load(object sender, EventArgs e)
-        {
-            if (TestImage == null)
-            {
-                /*using (OpenFileDialog dlg = new OpenFileDialog())
-                {
-                    dlg.Filter = "Image Files (*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
-                    dlg.Title = "Browse for a test image file. It will be used for Image/File upload tests.";
-
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        TestImage = Image.FromFile(dlg.FileName);
-                    }
-                    else
-                    {
-                        Close();
-                    }
-                }*/
-
-                TestImage = Resources.ShareXLogo;
-            }
-
-            if (string.IsNullOrEmpty(TestText))
-            {
-                TestText = Program.ApplicationName + " text upload test";
-            }
-
-            if (string.IsNullOrEmpty(TestURL))
-            {
-                TestURL = Links.URL_WEBSITE;
-            }
         }
 
         private void PrepareListItems()
@@ -184,13 +172,19 @@ namespace ShareX
 
                 lvi.SubItems[1].Text = "Waiting";
                 lvi.BackColor = Color.LightYellow;
-
-                UploaderInfo uploadInfo = lvi.Tag as UploaderInfo;
-                if (uploadInfo != null)
-                {
-                    uploadInfo.Index = i;
-                }
             }
+        }
+
+        private void btnTestAll_Click(object sender, EventArgs e)
+        {
+            Task[] uploaders = lvUploaders.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).ToArray();
+            StartTest(uploaders);
+        }
+
+        private void btnTestSelected_Click(object sender, EventArgs e)
+        {
+            Task[] uploaders = lvUploaders.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).ToArray();
+            StartTest(uploaders);
         }
 
         private void ConsoleWriteLine(string value)
@@ -204,7 +198,18 @@ namespace ShareX
             }
         }
 
-        public void StartTest(UploaderInfo[] uploaders)
+        private ListViewItem FindListViewItem(Task task)
+        {
+            foreach (ListViewItem lvi in lvUploaders.Items)
+            {
+                Task x = lvi.Tag as Task;
+                if (x != null && x == task) return lvi;
+            }
+
+            return null;
+        }
+
+        public void StartTest(Task[] uploaders)
         {
             Testing = true;
 
@@ -216,54 +221,23 @@ namespace ShareX
             bw.RunWorkerAsync(uploaders);
         }
 
-        public enum UploadStatus
-        {
-            Uploading,
-            Uploaded
-        }
-
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bw = (BackgroundWorker)sender;
-            UploaderInfo[] uploaders = (UploaderInfo[])e.Argument;
+            Task[] uploaders = (Task[])e.Argument;
 
-            foreach (UploaderInfo uploader in uploaders)
+            foreach (Task task in uploaders)
             {
-                if (IsDisposed || !isTesting || uploader == null)
+                if (IsDisposed || !isTesting || task == null)
                 {
                     break;
                 }
 
-                uploader.Timer = new Stopwatch();
-                uploader.Timer.Start();
-                bw.ReportProgress((int)UploadStatus.Uploading, uploader);
+                bw.ReportProgress((int)UploadStatus.Uploading, task);
 
                 try
                 {
-                    switch (uploader.UploaderType)
-                    {
-                        case EDataType.Image:
-                            uploader.Task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
-                            uploader.Task.Info.ImageDestination = uploader.ImageUploader;
-                            break;
-                        case EDataType.Text:
-                            uploader.Task = Task.CreateTextUploaderTask(TestText);
-                            uploader.Task.Info.TextDestination = uploader.TextUploader;
-                            break;
-                        case EDataType.File:
-                            uploader.Task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
-                            uploader.Task.Info.ImageDestination = ImageDestination.FileUploader;
-                            uploader.Task.Info.FileDestination = uploader.FileUploader;
-                            break;
-                        case EDataType.URL:
-                            uploader.Task = Task.CreateURLShortenerTask(TestURL);
-                            uploader.Task.Info.URLShortenerDestination = uploader.UrlShortener;
-                            break;
-                        default:
-                            throw new Exception("Unknown uploader.");
-                    }
-
-                    uploader.Task.StartSync();
+                    task.StartSync();
                 }
                 catch (Exception ex)
                 {
@@ -271,8 +245,7 @@ namespace ShareX
                 }
                 finally
                 {
-                    uploader.Timer.Stop();
-                    bw.ReportProgress((int)UploadStatus.Uploaded, uploader);
+                    bw.ReportProgress((int)UploadStatus.Uploaded, task);
                 }
             }
         }
@@ -281,39 +254,42 @@ namespace ShareX
         {
             if (!IsDisposed)
             {
-                UploaderInfo uploader = e.UserState as UploaderInfo;
+                Task task = e.UserState as Task;
 
-                if (uploader != null)
+                if (task != null)
                 {
-                    lvUploaders.Items[uploader.Index].Tag = uploader;
+                    ListViewItem lvi = FindListViewItem(task);
 
-                    switch ((UploadStatus)e.ProgressPercentage)
+                    if (lvi != null)
                     {
-                        case UploadStatus.Uploading:
-                            lvUploaders.Items[uploader.Index].BackColor = Color.Gold;
-                            lvUploaders.Items[uploader.Index].SubItems[1].Text = "Uploading...";
-                            lvUploaders.Items[uploader.Index].SubItems[2].Text = string.Empty;
-                            break;
-                        case UploadStatus.Uploaded:
-                            UploadInfo info = uploader.Task.Info;
+                        switch ((UploadStatus)e.ProgressPercentage)
+                        {
+                            case UploadStatus.Uploading:
+                                lvi.BackColor = Color.Gold;
+                                lvi.SubItems[1].Text = "Uploading...";
+                                lvi.SubItems[2].Text = string.Empty;
+                                break;
+                            case UploadStatus.Uploaded:
+                                UploadInfo info = task.Info;
 
-                            if (info != null && info.Result != null)
-                            {
-                                if (!info.Result.IsError && !string.IsNullOrEmpty(info.Result.ToString()))
+                                if (info != null && info.Result != null)
                                 {
-                                    lvUploaders.Items[uploader.Index].BackColor = Color.LightGreen;
-                                    lvUploaders.Items[uploader.Index].SubItems[1].Text = "Success: " + info.Result.ToString();
+                                    if (!info.Result.IsError && !string.IsNullOrEmpty(info.Result.ToString()))
+                                    {
+                                        lvi.BackColor = Color.LightGreen;
+                                        lvi.SubItems[1].Text = "Success: " + info.Result.ToString();
+                                    }
+                                    else
+                                    {
+                                        lvi.BackColor = Color.LightCoral;
+                                        lvi.SubItems[1].Text = "Failed: " + info.Result.ErrorsToString();
+                                        txtConsole.AppendText(info.Result.ErrorsToString());
+                                    }
                                 }
-                                else
-                                {
-                                    lvUploaders.Items[uploader.Index].BackColor = Color.LightCoral;
-                                    lvUploaders.Items[uploader.Index].SubItems[1].Text = "Failed: " + info.Result.ErrorsToString();
-                                    txtConsole.AppendText(info.Result.ErrorsToString());
-                                }
-                            }
 
-                            lvUploaders.Items[uploader.Index].SubItems[2].Text = uploader.Timer.ElapsedMilliseconds + " ms";
-                            break;
+                                lvi.SubItems[2].Text = (int)info.UploadDuration.TotalMilliseconds + " ms";
+                                break;
+                        }
                     }
                 }
             }
@@ -323,11 +299,11 @@ namespace ShareX
         {
             if (lvUploaders.SelectedItems.Count > 0)
             {
-                UploaderInfo uploader = lvUploaders.SelectedItems[0].Tag as UploaderInfo;
+                Task task = lvUploaders.SelectedItems[0].Tag as Task;
 
-                if (uploader != null && uploader.Task != null && uploader.Task.Info != null && uploader.Task.Info.Result != null && !string.IsNullOrEmpty(uploader.Task.Info.Result.ToString()))
+                if (task != null && task.Info != null && task.Info.Result != null && !string.IsNullOrEmpty(task.Info.Result.ToString()))
                 {
-                    ThreadPool.QueueUserWorkItem(x => Process.Start(uploader.Task.Info.Result.ToString()));
+                    ThreadPool.QueueUserWorkItem(x => Process.Start(task.Info.Result.ToString()));
                 }
             }
         }
@@ -337,15 +313,14 @@ namespace ShareX
             if (lvUploaders.SelectedItems.Count > 0)
             {
                 List<string> urls = new List<string>();
-                UploaderInfo uploader;
 
                 foreach (ListViewItem lvi in lvUploaders.SelectedItems)
                 {
-                    uploader = lvi.Tag as UploaderInfo;
+                    Task task = lvi.Tag as Task;
 
-                    if (uploader != null && uploader.Task != null && uploader.Task.Info != null && uploader.Task.Info.Result != null && !string.IsNullOrEmpty(uploader.Task.Info.Result.ToString()))
+                    if (task != null && task.Info != null && task.Info.Result != null && !string.IsNullOrEmpty(task.Info.Result.ToString()))
                     {
-                        urls.Add(string.Format("{0}: {1}", lvi.Text, uploader.Task.Info.Result.ToString()));
+                        urls.Add(string.Format("{0}: {1}", lvi.Text, task.Info.Result.ToString()));
                     }
                 }
 
@@ -364,18 +339,6 @@ namespace ShareX
             {
                 TestImage.Dispose();
             }
-        }
-
-        private void btnTestAll_Click(object sender, EventArgs e)
-        {
-            UploaderInfo[] uploaders = lvUploaders.Items.Cast<ListViewItem>().Select(x => x.Tag as UploaderInfo).ToArray();
-            StartTest(uploaders);
-        }
-
-        private void btnTestSelected_Click(object sender, EventArgs e)
-        {
-            UploaderInfo[] uploaders = lvUploaders.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploaderInfo).ToArray();
-            StartTest(uploaders);
         }
     }
 }

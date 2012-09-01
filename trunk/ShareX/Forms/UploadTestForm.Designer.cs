@@ -227,7 +227,6 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "ShareX - Test uploaders";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TesterGUI_FormClosing);
-            this.Load += new System.EventHandler(this.TesterGUI_Load);
             this.cmsUploaders.ResumeLayout(false);
             this.tcTesters.ResumeLayout(false);
             this.tpTestUploaders.ResumeLayout(false);
