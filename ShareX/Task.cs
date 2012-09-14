@@ -300,6 +300,11 @@ namespace ShareX
                     watermarkManager.ApplyWatermark(tempImage);
                 }
 
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
+                {
+                    tempImage = CaptureHelpers.DrawBorder(tempImage, BorderType.Outside, Program.Settings.BorderColor, Program.Settings.BorderSize);
+                }
+
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
                     Clipboard.SetImage(tempImage);

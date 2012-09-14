@@ -126,12 +126,15 @@ namespace ShareX
 
         #endregion Image / Resize
 
-        #region Image / Watermark
+        #region Image / Other
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
         public bool WatermarkExcludeClipboardUpload = false;
 
-        #endregion Image / Watermark
+        public XmlColor BorderColor = Color.Black;
+        public int BorderSize = 1;
+
+        #endregion Image / Other
 
         #region Capture
 

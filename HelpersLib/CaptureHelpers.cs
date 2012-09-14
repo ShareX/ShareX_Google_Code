@@ -375,13 +375,31 @@ namespace HelpersLib
             return ResizeImage(img, new Rectangle(0, 0, width, height), allowEnlarge, centerImage);
         }
 
-        public static Image DrawBorder(Image img)
+        public static Image DrawBorder(Image img, BorderType borderType, Color borderColor, int borderSize)
         {
-            Bitmap bmp = new Bitmap(img);
+            Bitmap bmp = null;
 
-            using (Graphics g = Graphics.FromImage(bmp))
+            using (Pen borderPen = new Pen(borderColor, borderSize) { Alignment = PenAlignment.Inset })
             {
-                g.DrawRectangleProper(Pens.Black, new Rectangle(0, 0, img.Width, img.Height));
+                if (borderType == BorderType.Inside)
+                {
+                    bmp = new Bitmap(img);
+
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width, img.Height));
+                    }
+                }
+                else
+                {
+                    bmp = new Bitmap(img.Width + borderSize * 2, img.Height + borderSize * 2);
+
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.DrawImage(img, borderSize, borderSize, img.Width, img.Height);
+                        g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width + borderSize * 2, img.Height + borderSize * 2));
+                    }
+                }
             }
 
             return bmp;

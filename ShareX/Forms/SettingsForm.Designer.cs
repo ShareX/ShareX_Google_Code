@@ -99,9 +99,15 @@
             this.lblImageScaleSpecificHeight = new System.Windows.Forms.Label();
             this.lblImageScaleSpecificWidth = new System.Windows.Forms.Label();
             this.nudImageScaleSpecificWidth = new System.Windows.Forms.NumericUpDown();
-            this.tpWatermark = new System.Windows.Forms.TabPage();
-            this.cbWatermarkExcludeClipboardUpload = new System.Windows.Forms.CheckBox();
+            this.tpOther = new System.Windows.Forms.TabPage();
+            this.gbBorder = new System.Windows.Forms.GroupBox();
+            this.btnBorderColor = new System.Windows.Forms.Button();
+            this.nudBorderSize = new System.Windows.Forms.NumericUpDown();
+            this.lblBorderSize = new System.Windows.Forms.Label();
+            this.lblBorderColor = new System.Windows.Forms.Label();
+            this.gbWatermark = new System.Windows.Forms.GroupBox();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
+            this.cbWatermarkExcludeClipboardUpload = new System.Windows.Forms.CheckBox();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
@@ -187,7 +193,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).BeginInit();
-            this.tpWatermark.SuspendLayout();
+            this.tpOther.SuspendLayout();
+            this.gbBorder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).BeginInit();
+            this.gbWatermark.SuspendLayout();
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
@@ -542,7 +551,7 @@
             // 
             this.tcImage.Controls.Add(this.tpQuality);
             this.tcImage.Controls.Add(this.tpResize);
-            this.tcImage.Controls.Add(this.tpWatermark);
+            this.tcImage.Controls.Add(this.tpOther);
             this.tcImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcImage.Location = new System.Drawing.Point(5, 5);
             this.tcImage.Name = "tcImage";
@@ -1077,38 +1086,109 @@
             0});
             this.nudImageScaleSpecificWidth.ValueChanged += new System.EventHandler(this.nudImageScaleSpecificWidth_ValueChanged);
             // 
-            // tpWatermark
+            // tpOther
             // 
-            this.tpWatermark.Controls.Add(this.cbWatermarkExcludeClipboardUpload);
-            this.tpWatermark.Controls.Add(this.btnWatermarkSettings);
-            this.tpWatermark.Location = new System.Drawing.Point(4, 22);
-            this.tpWatermark.Name = "tpWatermark";
-            this.tpWatermark.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWatermark.Size = new System.Drawing.Size(504, 294);
-            this.tpWatermark.TabIndex = 2;
-            this.tpWatermark.Text = "Watermark";
-            this.tpWatermark.UseVisualStyleBackColor = true;
+            this.tpOther.Controls.Add(this.gbBorder);
+            this.tpOther.Controls.Add(this.gbWatermark);
+            this.tpOther.Location = new System.Drawing.Point(4, 22);
+            this.tpOther.Name = "tpOther";
+            this.tpOther.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOther.Size = new System.Drawing.Size(504, 294);
+            this.tpOther.TabIndex = 2;
+            this.tpOther.Text = "Other";
+            this.tpOther.UseVisualStyleBackColor = true;
             // 
-            // cbWatermarkExcludeClipboardUpload
+            // gbBorder
             // 
-            this.cbWatermarkExcludeClipboardUpload.AutoSize = true;
-            this.cbWatermarkExcludeClipboardUpload.Location = new System.Drawing.Point(16, 56);
-            this.cbWatermarkExcludeClipboardUpload.Name = "cbWatermarkExcludeClipboardUpload";
-            this.cbWatermarkExcludeClipboardUpload.Size = new System.Drawing.Size(217, 17);
-            this.cbWatermarkExcludeClipboardUpload.TabIndex = 1;
-            this.cbWatermarkExcludeClipboardUpload.Text = "Don\'t add watermark to clipboard upload";
-            this.cbWatermarkExcludeClipboardUpload.UseVisualStyleBackColor = true;
-            this.cbWatermarkExcludeClipboardUpload.CheckedChanged += new System.EventHandler(this.cbWatermarkExcludeClipboardUpload_CheckedChanged);
+            this.gbBorder.Controls.Add(this.btnBorderColor);
+            this.gbBorder.Controls.Add(this.nudBorderSize);
+            this.gbBorder.Controls.Add(this.lblBorderSize);
+            this.gbBorder.Controls.Add(this.lblBorderColor);
+            this.gbBorder.Location = new System.Drawing.Point(16, 120);
+            this.gbBorder.Name = "gbBorder";
+            this.gbBorder.Size = new System.Drawing.Size(472, 80);
+            this.gbBorder.TabIndex = 2;
+            this.gbBorder.TabStop = false;
+            this.gbBorder.Text = "Border";
+            // 
+            // btnBorderColor
+            // 
+            this.btnBorderColor.BackColor = System.Drawing.Color.Black;
+            this.btnBorderColor.Location = new System.Drawing.Point(88, 16);
+            this.btnBorderColor.Name = "btnBorderColor";
+            this.btnBorderColor.Size = new System.Drawing.Size(56, 24);
+            this.btnBorderColor.TabIndex = 3;
+            this.btnBorderColor.UseVisualStyleBackColor = false;
+            this.btnBorderColor.Click += new System.EventHandler(this.btnBorderColor_Click);
+            // 
+            // nudBorderSize
+            // 
+            this.nudBorderSize.Location = new System.Drawing.Point(88, 48);
+            this.nudBorderSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBorderSize.Name = "nudBorderSize";
+            this.nudBorderSize.Size = new System.Drawing.Size(56, 20);
+            this.nudBorderSize.TabIndex = 2;
+            this.nudBorderSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudBorderSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBorderSize.ValueChanged += new System.EventHandler(this.nudBorderSize_ValueChanged);
+            // 
+            // lblBorderSize
+            // 
+            this.lblBorderSize.AutoSize = true;
+            this.lblBorderSize.Location = new System.Drawing.Point(16, 48);
+            this.lblBorderSize.Name = "lblBorderSize";
+            this.lblBorderSize.Size = new System.Drawing.Size(62, 13);
+            this.lblBorderSize.TabIndex = 1;
+            this.lblBorderSize.Text = "Border size:";
+            // 
+            // lblBorderColor
+            // 
+            this.lblBorderColor.AutoSize = true;
+            this.lblBorderColor.Location = new System.Drawing.Point(16, 24);
+            this.lblBorderColor.Name = "lblBorderColor";
+            this.lblBorderColor.Size = new System.Drawing.Size(67, 13);
+            this.lblBorderColor.TabIndex = 0;
+            this.lblBorderColor.Text = "Border color:";
+            // 
+            // gbWatermark
+            // 
+            this.gbWatermark.Controls.Add(this.btnWatermarkSettings);
+            this.gbWatermark.Controls.Add(this.cbWatermarkExcludeClipboardUpload);
+            this.gbWatermark.Location = new System.Drawing.Point(16, 16);
+            this.gbWatermark.Name = "gbWatermark";
+            this.gbWatermark.Size = new System.Drawing.Size(472, 96);
+            this.gbWatermark.TabIndex = 2;
+            this.gbWatermark.TabStop = false;
+            this.gbWatermark.Text = "Watermark";
             // 
             // btnWatermarkSettings
             // 
-            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 24);
             this.btnWatermarkSettings.Name = "btnWatermarkSettings";
             this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
             this.btnWatermarkSettings.TabIndex = 0;
             this.btnWatermarkSettings.Text = "Watermark settings...";
             this.btnWatermarkSettings.UseVisualStyleBackColor = true;
             this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
+            // 
+            // cbWatermarkExcludeClipboardUpload
+            // 
+            this.cbWatermarkExcludeClipboardUpload.AutoSize = true;
+            this.cbWatermarkExcludeClipboardUpload.Location = new System.Drawing.Point(16, 64);
+            this.cbWatermarkExcludeClipboardUpload.Name = "cbWatermarkExcludeClipboardUpload";
+            this.cbWatermarkExcludeClipboardUpload.Size = new System.Drawing.Size(217, 17);
+            this.cbWatermarkExcludeClipboardUpload.TabIndex = 1;
+            this.cbWatermarkExcludeClipboardUpload.Text = "Don\'t add watermark to clipboard upload";
+            this.cbWatermarkExcludeClipboardUpload.UseVisualStyleBackColor = true;
+            this.cbWatermarkExcludeClipboardUpload.CheckedChanged += new System.EventHandler(this.cbWatermarkExcludeClipboardUpload_CheckedChanged);
             // 
             // tpCapture
             // 
@@ -1908,8 +1988,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).EndInit();
-            this.tpWatermark.ResumeLayout(false);
-            this.tpWatermark.PerformLayout();
+            this.tpOther.ResumeLayout(false);
+            this.gbBorder.ResumeLayout(false);
+            this.gbBorder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).EndInit();
+            this.gbWatermark.ResumeLayout(false);
+            this.gbWatermark.PerformLayout();
             this.tpCapture.ResumeLayout(false);
             this.tcCapture.ResumeLayout(false);
             this.tpCaptureGeneral.ResumeLayout(false);
@@ -2077,8 +2161,14 @@
         private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
         private System.Windows.Forms.Label lblCaptureShadowOffset;
         private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
-        private System.Windows.Forms.TabPage tpWatermark;
+        private System.Windows.Forms.TabPage tpOther;
         private System.Windows.Forms.Button btnWatermarkSettings;
         private System.Windows.Forms.CheckBox cbWatermarkExcludeClipboardUpload;
+        private System.Windows.Forms.GroupBox gbBorder;
+        private System.Windows.Forms.GroupBox gbWatermark;
+        private System.Windows.Forms.NumericUpDown nudBorderSize;
+        private System.Windows.Forms.Label lblBorderSize;
+        private System.Windows.Forms.Label lblBorderColor;
+        private System.Windows.Forms.Button btnBorderColor;
     }
 }
