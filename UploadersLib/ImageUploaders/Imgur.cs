@@ -43,8 +43,8 @@ namespace UploadersLib.ImageUploaders
 
     public sealed class Imgur : ImageUploader, IOAuth
     {
-        private const string URLAnonymousUpload = "https://api.imgur.com/2/upload.xml";
-        private const string URLUserUpload = "https://api.imgur.com/2/account/images.xml";
+        private const string URLAnonymousUpload = "http://api.imgur.com/2/upload.xml";
+        private const string URLUserUpload = "http://api.imgur.com/2/account/images.xml";
 
         private const string URLRequestToken = "https://api.imgur.com/oauth/request_token";
         private const string URLAuthorize = "https://api.imgur.com/oauth/authorize";
