@@ -53,18 +53,20 @@ namespace ShareX
         None = 0,
         [Description("Add watermark")]
         AddWatermark = 1,
+        [Description("Add border")]
+        AddBorder = 1 << 1,
         [Description("Copy image to clipboard")]
-        CopyImageToClipboard = 1 << 1,
+        CopyImageToClipboard = 1 << 2,
         [Description("Print image")]
-        SendImageToPrinter = 1 << 2,
+        SendImageToPrinter = 1 << 3,
         [Description("Save image to file")]
-        SaveImageToFile = 1 << 3,
+        SaveImageToFile = 1 << 4,
         [Description("Save image to file as...")]
-        SaveImageToFileWithDialog = 1 << 4,
+        SaveImageToFileWithDialog = 1 << 5,
         [Description("Perform actions")]
-        PerformActions = 1 << 5,
+        PerformActions = 1 << 6,
         [Description("Upload image to host")]
-        UploadImageToHost = 1 << 6
+        UploadImageToHost = 1 << 7
     }
 
     [Flags]

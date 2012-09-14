@@ -120,8 +120,10 @@ namespace ShareX
             nudImageScaleSpecificWidth.Value = Program.Settings.ImageScaleSpecificWidth;
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
-            // Image - Watermark
+            // Image - Other
             cbWatermarkExcludeClipboardUpload.Checked = Program.Settings.WatermarkExcludeClipboardUpload;
+            btnBorderColor.BackColor = Program.Settings.BorderColor;
+            nudBorderSize.Value = Program.Settings.BorderSize;
 
             // Capture
             cbShowCursor.Checked = Program.Settings.ShowCursor;
@@ -502,7 +504,7 @@ namespace ShareX
 
         #endregion Resize
 
-        #region Watermark
+        #region Other
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
@@ -518,7 +520,24 @@ namespace ShareX
             Program.Settings.WatermarkExcludeClipboardUpload = cbWatermarkExcludeClipboardUpload.Checked;
         }
 
-        #endregion Watermark
+        private void btnBorderColor_Click(object sender, EventArgs e)
+        {
+            using (DialogColor dColor = new DialogColor(Program.Settings.BorderColor))
+            {
+                if (dColor.ShowDialog() == DialogResult.OK)
+                {
+                    Program.Settings.BorderColor = dColor.Color;
+                    btnBorderColor.BackColor = dColor.Color;
+                }
+            }
+        }
+
+        private void nudBorderSize_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.BorderSize = (int)nudBorderSize.Value;
+        }
+
+        #endregion Other
 
         #endregion Image
 

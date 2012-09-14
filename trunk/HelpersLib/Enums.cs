@@ -204,4 +204,9 @@ namespace HelpersLib
         [Description("Last Region")]
         LastRegion
     }
+
+    public enum BorderType
+    {
+        Inside, Outside
+    }
 }

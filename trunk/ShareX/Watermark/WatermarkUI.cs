@@ -118,11 +118,13 @@ namespace ShareX
 
         private void SelectColor(Control pb, ref XmlColor color)
         {
-            var dColor = new DialogColor(pb.BackColor);
-            if (dColor.ShowDialog() == DialogResult.OK)
+            using (DialogColor dColor = new DialogColor(pb.BackColor))
             {
-                pb.BackColor = dColor.Color;
-                color = dColor.Color;
+                if (dColor.ShowDialog() == DialogResult.OK)
+                {
+                    pb.BackColor = dColor.Color;
+                    color = dColor.Color;
+                }
             }
         }
 
