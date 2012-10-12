@@ -102,7 +102,7 @@ namespace ShareX
             {
                 string text = Clipboard.GetText();
 
-                if (Program.Settings.ClipboardUploadAutoDetectURL && Helpers.IsValidURL(text))
+                if (Program.Settings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
                 {
                     ShortenURL(text.Trim());
                 }
