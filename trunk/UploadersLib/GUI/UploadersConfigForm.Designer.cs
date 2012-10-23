@@ -101,6 +101,11 @@
             this.lblYFrogUsername = new System.Windows.Forms.Label();
             this.txtYFrogPassword = new System.Windows.Forms.TextBox();
             this.txtYFrogUsername = new System.Windows.Forms.TextBox();
+            this.tpPicasa = new System.Windows.Forms.TabPage();
+            this.gbPicasaUserAccount = new System.Windows.Forms.GroupBox();
+            this.btnPicasaAuthComplete = new System.Windows.Forms.Button();
+            this.btnPicasaAuthOpen = new System.Windows.Forms.Button();
+            this.lblPicasaAccountStatus = new System.Windows.Forms.Label();
             this.tpTextUploaders = new System.Windows.Forms.TabPage();
             this.tcTextUploaders = new System.Windows.Forms.TabControl();
             this.tpPastebin = new System.Windows.Forms.TabPage();
@@ -257,11 +262,7 @@
             this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.tpPicasa = new System.Windows.Forms.TabPage();
-            this.btnPicasaAuthOpen = new System.Windows.Forms.Button();
-            this.gbPicasaUserAccount = new System.Windows.Forms.GroupBox();
-            this.btnPicasaAuthComplete = new System.Windows.Forms.Button();
-            this.lblPicasaAccountStatus = new System.Windows.Forms.Label();
+            this.btnFtpClient = new System.Windows.Forms.Button();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -277,6 +278,8 @@
             this.tpTwitPic.SuspendLayout();
             this.tpTwitSnaps.SuspendLayout();
             this.tpYFrog.SuspendLayout();
+            this.tpPicasa.SuspendLayout();
+            this.gbPicasaUserAccount.SuspendLayout();
             this.tpTextUploaders.SuspendLayout();
             this.tcTextUploaders.SuspendLayout();
             this.tpPastebin.SuspendLayout();
@@ -312,8 +315,6 @@
             this.tpSocialNetworkingServices.SuspendLayout();
             this.tcSocialNetworkingServices.SuspendLayout();
             this.tpTwitter.SuspendLayout();
-            this.tpPicasa.SuspendLayout();
-            this.gbPicasaUserAccount.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcUploaders
@@ -1087,6 +1088,59 @@
             this.txtYFrogUsername.TabIndex = 1;
             this.txtYFrogUsername.TextChanged += new System.EventHandler(this.txtYFrogUsername_TextChanged);
             // 
+            // tpPicasa
+            // 
+            this.tpPicasa.Controls.Add(this.gbPicasaUserAccount);
+            this.tpPicasa.Location = new System.Drawing.Point(4, 22);
+            this.tpPicasa.Name = "tpPicasa";
+            this.tpPicasa.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPicasa.Size = new System.Drawing.Size(804, 474);
+            this.tpPicasa.TabIndex = 8;
+            this.tpPicasa.Text = "Picasa";
+            this.tpPicasa.UseVisualStyleBackColor = true;
+            // 
+            // gbPicasaUserAccount
+            // 
+            this.gbPicasaUserAccount.Controls.Add(this.btnPicasaAuthComplete);
+            this.gbPicasaUserAccount.Controls.Add(this.btnPicasaAuthOpen);
+            this.gbPicasaUserAccount.Controls.Add(this.lblPicasaAccountStatus);
+            this.gbPicasaUserAccount.Location = new System.Drawing.Point(6, 6);
+            this.gbPicasaUserAccount.Name = "gbPicasaUserAccount";
+            this.gbPicasaUserAccount.Size = new System.Drawing.Size(736, 128);
+            this.gbPicasaUserAccount.TabIndex = 2;
+            this.gbPicasaUserAccount.TabStop = false;
+            this.gbPicasaUserAccount.Text = "User account";
+            // 
+            // btnPicasaAuthComplete
+            // 
+            this.btnPicasaAuthComplete.Enabled = false;
+            this.btnPicasaAuthComplete.Location = new System.Drawing.Point(16, 56);
+            this.btnPicasaAuthComplete.Name = "btnPicasaAuthComplete";
+            this.btnPicasaAuthComplete.Size = new System.Drawing.Size(152, 24);
+            this.btnPicasaAuthComplete.TabIndex = 1;
+            this.btnPicasaAuthComplete.Text = "2. Complete authorization";
+            this.btnPicasaAuthComplete.UseVisualStyleBackColor = true;
+            this.btnPicasaAuthComplete.Click += new System.EventHandler(this.btnPicasaAuthComplete_Click);
+            // 
+            // btnPicasaAuthOpen
+            // 
+            this.btnPicasaAuthOpen.Location = new System.Drawing.Point(16, 24);
+            this.btnPicasaAuthOpen.Name = "btnPicasaAuthOpen";
+            this.btnPicasaAuthOpen.Size = new System.Drawing.Size(152, 24);
+            this.btnPicasaAuthOpen.TabIndex = 0;
+            this.btnPicasaAuthOpen.Text = "1. Open authorize page...";
+            this.btnPicasaAuthOpen.UseVisualStyleBackColor = true;
+            this.btnPicasaAuthOpen.Click += new System.EventHandler(this.btnPicasaAuthOpen_Click);
+            // 
+            // lblPicasaAccountStatus
+            // 
+            this.lblPicasaAccountStatus.AutoSize = true;
+            this.lblPicasaAccountStatus.Location = new System.Drawing.Point(24, 96);
+            this.lblPicasaAccountStatus.Name = "lblPicasaAccountStatus";
+            this.lblPicasaAccountStatus.Size = new System.Drawing.Size(77, 13);
+            this.lblPicasaAccountStatus.TabIndex = 2;
+            this.lblPicasaAccountStatus.Text = "Login required.";
+            // 
             // tpTextUploaders
             // 
             this.tpTextUploaders.Controls.Add(this.tcTextUploaders);
@@ -1577,6 +1631,7 @@
             // 
             // panelFtp
             // 
+            this.panelFtp.Controls.Add(this.btnFtpClient);
             this.panelFtp.Controls.Add(this.btnFTPExport);
             this.panelFtp.Controls.Add(this.btnFTPImport);
             this.panelFtp.Controls.Add(this.btnFtpHelp);
@@ -1621,7 +1676,7 @@
             this.btnFtpHelp.Name = "btnFtpHelp";
             this.btnFtpHelp.Size = new System.Drawing.Size(64, 24);
             this.btnFtpHelp.TabIndex = 1;
-            this.btnFtpHelp.Text = "&Help...";
+            this.btnFtpHelp.Text = "Help...";
             this.btnFtpHelp.UseVisualStyleBackColor = true;
             this.btnFtpHelp.Click += new System.EventHandler(this.btnFtpHelp_Click);
             // 
@@ -2715,58 +2770,15 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // tpPicasa
+            // btnFtpClient
             // 
-            this.tpPicasa.Controls.Add(this.gbPicasaUserAccount);
-            this.tpPicasa.Location = new System.Drawing.Point(4, 22);
-            this.tpPicasa.Name = "tpPicasa";
-            this.tpPicasa.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPicasa.Size = new System.Drawing.Size(804, 474);
-            this.tpPicasa.TabIndex = 8;
-            this.tpPicasa.Text = "Picasa";
-            this.tpPicasa.UseVisualStyleBackColor = true;
-            // 
-            // btnPicasaAuthOpen
-            // 
-            this.btnPicasaAuthOpen.Location = new System.Drawing.Point(16, 24);
-            this.btnPicasaAuthOpen.Name = "btnPicasaAuthOpen";
-            this.btnPicasaAuthOpen.Size = new System.Drawing.Size(152, 24);
-            this.btnPicasaAuthOpen.TabIndex = 0;
-            this.btnPicasaAuthOpen.Text = "1. Open authorize page...";
-            this.btnPicasaAuthOpen.UseVisualStyleBackColor = true;
-            this.btnPicasaAuthOpen.Click += new System.EventHandler(this.btnPicasaAuthOpen_Click);
-            // 
-            // gbPicasaUserAccount
-            // 
-            this.gbPicasaUserAccount.Controls.Add(this.btnPicasaAuthComplete);
-            this.gbPicasaUserAccount.Controls.Add(this.btnPicasaAuthOpen);
-            this.gbPicasaUserAccount.Controls.Add(this.lblPicasaAccountStatus);
-            this.gbPicasaUserAccount.Location = new System.Drawing.Point(6, 6);
-            this.gbPicasaUserAccount.Name = "gbPicasaUserAccount";
-            this.gbPicasaUserAccount.Size = new System.Drawing.Size(736, 128);
-            this.gbPicasaUserAccount.TabIndex = 2;
-            this.gbPicasaUserAccount.TabStop = false;
-            this.gbPicasaUserAccount.Text = "User account";
-            // 
-            // btnPicasaAuthComplete
-            // 
-            this.btnPicasaAuthComplete.Enabled = false;
-            this.btnPicasaAuthComplete.Location = new System.Drawing.Point(16, 56);
-            this.btnPicasaAuthComplete.Name = "btnPicasaAuthComplete";
-            this.btnPicasaAuthComplete.Size = new System.Drawing.Size(152, 24);
-            this.btnPicasaAuthComplete.TabIndex = 1;
-            this.btnPicasaAuthComplete.Text = "2. Complete authorization";
-            this.btnPicasaAuthComplete.UseVisualStyleBackColor = true;
-            this.btnPicasaAuthComplete.Click += new System.EventHandler(this.btnPicasaAuthComplete_Click);
-            // 
-            // lblPicasaAccountStatus
-            // 
-            this.lblPicasaAccountStatus.AutoSize = true;
-            this.lblPicasaAccountStatus.Location = new System.Drawing.Point(24, 96);
-            this.lblPicasaAccountStatus.Name = "lblPicasaAccountStatus";
-            this.lblPicasaAccountStatus.Size = new System.Drawing.Size(77, 13);
-            this.lblPicasaAccountStatus.TabIndex = 2;
-            this.lblPicasaAccountStatus.Text = "Login required.";
+            this.btnFtpClient.Location = new System.Drawing.Point(376, 8);
+            this.btnFtpClient.Name = "btnFtpClient";
+            this.btnFtpClient.Size = new System.Drawing.Size(64, 24);
+            this.btnFtpClient.TabIndex = 4;
+            this.btnFtpClient.Text = "Client...";
+            this.btnFtpClient.UseVisualStyleBackColor = true;
+            this.btnFtpClient.Click += new System.EventHandler(this.btnFtpClient_Click);
             // 
             // UploadersConfigForm
             // 
@@ -2806,6 +2818,9 @@
             this.tpTwitSnaps.PerformLayout();
             this.tpYFrog.ResumeLayout(false);
             this.tpYFrog.PerformLayout();
+            this.tpPicasa.ResumeLayout(false);
+            this.gbPicasaUserAccount.ResumeLayout(false);
+            this.gbPicasaUserAccount.PerformLayout();
             this.tpTextUploaders.ResumeLayout(false);
             this.tcTextUploaders.ResumeLayout(false);
             this.tpPastebin.ResumeLayout(false);
@@ -2858,9 +2873,6 @@
             this.tpSocialNetworkingServices.ResumeLayout(false);
             this.tcSocialNetworkingServices.ResumeLayout(false);
             this.tpTwitter.ResumeLayout(false);
-            this.tpPicasa.ResumeLayout(false);
-            this.gbPicasaUserAccount.ResumeLayout(false);
-            this.gbPicasaUserAccount.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3100,5 +3112,6 @@
         private System.Windows.Forms.Button btnPicasaAuthComplete;
         private System.Windows.Forms.Button btnPicasaAuthOpen;
         private System.Windows.Forms.Label lblPicasaAccountStatus;
+        private System.Windows.Forms.Button btnFtpClient;
     }
 }
