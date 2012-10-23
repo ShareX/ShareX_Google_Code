@@ -596,6 +596,15 @@ namespace UploadersLib
             ucFTPAccounts.btnTest.Enabled = true;
         }
 
+        private void FTPOpenClient()
+        {
+            if (CheckFTPAccounts())
+            {
+                FTPClient2 ftpclient = new FTPClient2((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]);
+                ftpclient.Show();
+            }
+        }
+
         private void FTPAccountsExport()
         {
             if (Config.FTPAccountList != null)

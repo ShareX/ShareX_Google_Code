@@ -490,6 +490,11 @@ namespace UploadersLib
             Helpers.LoadBrowserAsync("http://code.google.com/p/sharex/wiki/FTPAccounts");
         }
 
+        private void btnFtpClient_Click(object sender, EventArgs e)
+        {
+            FTPOpenClient();
+        }
+
         private void btnFTPImport_Click(object sender, EventArgs e)
         {
             FTPAccountsImport();
