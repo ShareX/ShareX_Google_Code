@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using ScreenCapture.Shapes.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,8 +34,6 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using HelpersLib;
-using ScreenCapture.Shapes.Properties;
 
 namespace ScreenCapture
 {

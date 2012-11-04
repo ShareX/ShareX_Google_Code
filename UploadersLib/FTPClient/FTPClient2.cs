@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Starksoft.Net.Ftp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,9 +33,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using HelpersLib;
-using Starksoft.Net.Ftp;
-using UploadersLib;
 
 namespace UploadersLib
 {

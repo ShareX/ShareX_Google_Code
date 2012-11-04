@@ -30,7 +30,10 @@ namespace ScreenCapture
 {
     public class EllipseRegion : RectangleRegion
     {
-        public EllipseRegion(Image backgroundImage = null) : base(backgroundImage) { }
+        public EllipseRegion(Image backgroundImage = null)
+            : base(backgroundImage)
+        {
+        }
 
         protected override void AddShapePath(GraphicsPath graphicsPath, Rectangle rect)
         {

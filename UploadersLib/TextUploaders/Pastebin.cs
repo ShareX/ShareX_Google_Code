@@ -23,9 +23,9 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.Collections.Generic;
 using System.ComponentModel;
-using HelpersLib;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders

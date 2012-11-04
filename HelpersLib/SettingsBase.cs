@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
 
 namespace HelpersLib
 {

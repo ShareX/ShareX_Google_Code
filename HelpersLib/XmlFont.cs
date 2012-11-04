@@ -36,7 +36,9 @@ namespace HelpersLib
         public FontStyle Style { get; set; }
         public GraphicsUnit GraphicsUnit { get; set; }
 
-        public XmlFont() { }
+        public XmlFont()
+        {
+        }
 
         public XmlFont(Font font)
         {

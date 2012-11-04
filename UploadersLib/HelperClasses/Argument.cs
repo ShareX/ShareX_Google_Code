@@ -31,7 +31,9 @@ namespace UploadersLib.HelperClasses
 
         public string Value { get; set; }
 
-        public Argument() { }
+        public Argument()
+        {
+        }
 
         public Argument(string name, string value)
         {

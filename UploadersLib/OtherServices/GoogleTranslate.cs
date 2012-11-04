@@ -23,11 +23,11 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HelpersLib;
-using Newtonsoft.Json.Linq;
 
 namespace UploadersLib.OtherServices
 {
@@ -126,7 +126,9 @@ namespace UploadersLib.OtherServices
 
         public string Name { get; set; }
 
-        public GoogleLanguage() { }
+        public GoogleLanguage()
+        {
+        }
 
         public GoogleLanguage(string language, string name)
         {

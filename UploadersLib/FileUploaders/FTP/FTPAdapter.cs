@@ -23,20 +23,22 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Text;
-using HelpersLib;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib
 {
     public class FTPOptions
     {
-        public FTPOptions() { }
+        public FTPOptions()
+        {
+        }
 
         public FTPOptions(FTPAccount acc, IWebProxy proxy)
         {

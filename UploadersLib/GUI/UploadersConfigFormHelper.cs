@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,6 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using HelpersLib;
 using UploadersLib.FileUploaders;
 using UploadersLib.Forms;
 using UploadersLib.HelperClasses;

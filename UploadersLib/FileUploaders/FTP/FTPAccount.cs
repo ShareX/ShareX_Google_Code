@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Starksoft.Net.Ftp;
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.IO;
-using HelpersLib;
-using Starksoft.Net.Ftp;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib

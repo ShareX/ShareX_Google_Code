@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using HelpersLib;
 using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
 using UploadersLib.Properties;

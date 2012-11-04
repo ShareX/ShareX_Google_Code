@@ -23,15 +23,18 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using HelpersLib;
 
 namespace ScreenCapture
 {
     public class DiamondRegion : RectangleRegion
     {
-        public DiamondRegion(Image backgroundImage = null) : base(backgroundImage) { }
+        public DiamondRegion(Image backgroundImage = null)
+            : base(backgroundImage)
+        {
+        }
 
         protected override void AddShapePath(GraphicsPath graphicsPath, Rectangle rect)
         {

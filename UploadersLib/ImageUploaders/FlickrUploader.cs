@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using HelpersLib;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.ImageUploaders
@@ -264,7 +264,9 @@ namespace UploadersLib.ImageUploaders
         [Description("Full name"), ReadOnly(true)]
         public string Fullname { get; set; }
 
-        public FlickrAuthInfo() { }
+        public FlickrAuthInfo()
+        {
+        }
 
         public FlickrAuthInfo(XElement element)
         {

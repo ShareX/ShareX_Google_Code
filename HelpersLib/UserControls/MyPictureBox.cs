@@ -23,11 +23,11 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using HelpersLib.Properties;
 
 namespace HelpersLib
 {

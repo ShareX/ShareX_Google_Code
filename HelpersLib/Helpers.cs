@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -40,7 +41,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace HelpersLib
 {

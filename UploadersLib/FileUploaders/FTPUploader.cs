@@ -23,9 +23,9 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.IO;
 using System.Threading;
-using HelpersLib;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
