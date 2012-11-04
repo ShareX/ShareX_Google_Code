@@ -23,15 +23,15 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Starksoft.Net.Ftp;
+using Starksoft.Net.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using HelpersLib;
-using Starksoft.Net.Ftp;
-using Starksoft.Net.Proxy;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib

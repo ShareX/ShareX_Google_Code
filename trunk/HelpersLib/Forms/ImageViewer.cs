@@ -127,7 +127,7 @@ namespace HelpersLib
 
             this.BackColor = Color.White;
             this.BackgroundImage = screenshot;
-            this.Bounds = Helpers.GetScreenBounds();
+            this.Bounds = CaptureHelpers.GetScreenBounds();
             this.Cursor = Cursors.Hand;
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.None;
