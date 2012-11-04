@@ -23,15 +23,16 @@
 
 #endregion License Information (GPL v3)
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using ScreenCapture;
 using ShareX.Properties;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace ShareX
 {
@@ -74,7 +75,23 @@ namespace ShareX
             }
         }
 
-        private new void Capture(ScreenCaptureDelegate capture, bool autoHideForm = true)
+        private void DoCapture(ScreenCaptureDelegate capture, bool autoHideForm = true)
+        {
+            if (Program.Settings.IsDelayScreenshot && Program.Settings.DelayScreenshot > 0)
+            {
+                int sleep = (int)(Program.Settings.DelayScreenshot * 1000);
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += (sender, e) => Thread.Sleep(sleep);
+                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, autoHideForm);
+                bw.RunWorkerAsync();
+            }
+            else
+            {
+                DoCaptureWork(capture, autoHideForm);
+            }
+        }
+
+        private void DoCaptureWork(ScreenCaptureDelegate capture, bool autoHideForm = true)
         {
             if (autoHideForm)
             {
@@ -143,12 +160,12 @@ namespace ShareX
 
         private void CaptureScreen(bool autoHideForm = true)
         {
-            Capture(Screenshot.CaptureFullscreen, autoHideForm);
+            DoCapture(Screenshot.CaptureFullscreen, autoHideForm);
         }
 
         private void CaptureActiveWindow(bool autoHideForm = true)
         {
-            Capture(() =>
+            DoCapture(() =>
             {
                 Image img = null;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
@@ -170,14 +187,14 @@ namespace ShareX
 
         private void CaptureActiveMonitor(bool autoHideForm = true)
         {
-            Capture(Screenshot.CaptureActiveMonitor, autoHideForm);
+            DoCapture(Screenshot.CaptureActiveMonitor, autoHideForm);
         }
 
         private void CaptureWindow(IntPtr handle, bool autoHideForm = true)
         {
             autoHideForm = autoHideForm && handle != this.Handle;
 
-            Capture(() =>
+            DoCapture(() =>
             {
                 if (NativeMethods.IsIconic(handle))
                 {
@@ -200,7 +217,7 @@ namespace ShareX
 
         private void CaptureRegion(Surface surface, bool autoHideForm = true)
         {
-            Capture(() =>
+            DoCapture(() =>
             {
                 Image img = null;
                 Image screenshot = Screenshot.CaptureFullscreen();
@@ -230,7 +247,7 @@ namespace ShareX
         {
             if (Surface.LastRegionFillPath != null)
             {
-                Capture(() =>
+                DoCapture(() =>
                 {
                     using (Image screenshot = Screenshot.CaptureFullscreen())
                     {

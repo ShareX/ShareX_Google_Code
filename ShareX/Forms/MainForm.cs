@@ -23,16 +23,16 @@
 
 #endregion License Information (GPL v3)
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 using UpdateCheckerLib;
 using UploadersLib;
 

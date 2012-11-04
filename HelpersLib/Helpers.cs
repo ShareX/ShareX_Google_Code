@@ -149,21 +149,6 @@ namespace HelpersLib
             CopyTextSafely(text);
         }
 
-        /// <summary>Function to get a Rectangle of all the screens combined</summary>
-        public static Rectangle GetScreenBounds()
-        {
-            Point topLeft = new Point(0, 0);
-            Point bottomRight = new Point(0, 0);
-            foreach (Screen screen in Screen.AllScreens)
-            {
-                if (screen.Bounds.X < topLeft.X) topLeft.X = screen.Bounds.X;
-                if (screen.Bounds.Y < topLeft.Y) topLeft.Y = screen.Bounds.Y;
-                if ((screen.Bounds.X + screen.Bounds.Width) > bottomRight.X) bottomRight.X = screen.Bounds.X + screen.Bounds.Width;
-                if ((screen.Bounds.Y + screen.Bounds.Height) > bottomRight.Y) bottomRight.Y = screen.Bounds.Y + screen.Bounds.Height;
-            }
-            return new Rectangle(topLeft.X, topLeft.Y, bottomRight.X + Math.Abs(topLeft.X), bottomRight.Y + Math.Abs(topLeft.Y));
-        }
-
         public static string AddZeroes(int number, int digits = 2)
         {
             return number.ToString("d" + digits);

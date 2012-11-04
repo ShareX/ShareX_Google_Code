@@ -112,7 +112,6 @@
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
             this.nudCaptureShadowOffset = new System.Windows.Forms.NumericUpDown();
-            this.lblCaptureShadowOffset = new System.Windows.Forms.Label();
             this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
@@ -176,6 +175,9 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbScreenshotDelay = new System.Windows.Forms.CheckBox();
+            this.nudScreenshotDelay = new System.Windows.Forms.NumericUpDown();
+            this.lblScreenshotDelayInfo = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -213,6 +215,7 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -1214,8 +1217,10 @@
             // 
             // tpCaptureGeneral
             // 
+            this.tpCaptureGeneral.Controls.Add(this.lblScreenshotDelayInfo);
+            this.tpCaptureGeneral.Controls.Add(this.nudScreenshotDelay);
+            this.tpCaptureGeneral.Controls.Add(this.cbScreenshotDelay);
             this.tpCaptureGeneral.Controls.Add(this.nudCaptureShadowOffset);
-            this.tpCaptureGeneral.Controls.Add(this.lblCaptureShadowOffset);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureClientArea);
             this.tpCaptureGeneral.Controls.Add(this.cbCaptureShadow);
             this.tpCaptureGeneral.Controls.Add(this.cbShowCursor);
@@ -1230,7 +1235,7 @@
             // 
             // nudCaptureShadowOffset
             // 
-            this.nudCaptureShadowOffset.Location = new System.Drawing.Point(112, 88);
+            this.nudCaptureShadowOffset.Location = new System.Drawing.Point(368, 62);
             this.nudCaptureShadowOffset.Name = "nudCaptureShadowOffset";
             this.nudCaptureShadowOffset.Size = new System.Drawing.Size(48, 20);
             this.nudCaptureShadowOffset.TabIndex = 5;
@@ -1242,19 +1247,10 @@
             0});
             this.nudCaptureShadowOffset.ValueChanged += new System.EventHandler(this.nudCaptureShadowOffset_ValueChanged);
             // 
-            // lblCaptureShadowOffset
-            // 
-            this.lblCaptureShadowOffset.AutoSize = true;
-            this.lblCaptureShadowOffset.Location = new System.Drawing.Point(32, 92);
-            this.lblCaptureShadowOffset.Name = "lblCaptureShadowOffset";
-            this.lblCaptureShadowOffset.Size = new System.Drawing.Size(78, 13);
-            this.lblCaptureShadowOffset.TabIndex = 4;
-            this.lblCaptureShadowOffset.Text = "Shadow offset:";
-            // 
             // cbCaptureClientArea
             // 
             this.cbCaptureClientArea.AutoSize = true;
-            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 120);
+            this.cbCaptureClientArea.Location = new System.Drawing.Point(16, 88);
             this.cbCaptureClientArea.Name = "cbCaptureClientArea";
             this.cbCaptureClientArea.Size = new System.Drawing.Size(334, 17);
             this.cbCaptureClientArea.TabIndex = 3;
@@ -1267,9 +1263,9 @@
             this.cbCaptureShadow.AutoSize = true;
             this.cbCaptureShadow.Location = new System.Drawing.Point(16, 64);
             this.cbCaptureShadow.Name = "cbCaptureShadow";
-            this.cbCaptureShadow.Size = new System.Drawing.Size(274, 17);
+            this.cbCaptureShadow.Size = new System.Drawing.Size(351, 17);
             this.cbCaptureShadow.TabIndex = 2;
-            this.cbCaptureShadow.Text = "Capture window with shadow (requires transparency)";
+            this.cbCaptureShadow.Text = "Capture window with shadow (requires transparency)  Shadow offset:";
             this.cbCaptureShadow.UseVisualStyleBackColor = true;
             this.cbCaptureShadow.CheckedChanged += new System.EventHandler(this.cbCaptureShadow_CheckedChanged);
             // 
@@ -1951,6 +1947,51 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbScreenshotDelay
+            // 
+            this.cbScreenshotDelay.AutoSize = true;
+            this.cbScreenshotDelay.Location = new System.Drawing.Point(16, 112);
+            this.cbScreenshotDelay.Name = "cbScreenshotDelay";
+            this.cbScreenshotDelay.Size = new System.Drawing.Size(111, 17);
+            this.cbScreenshotDelay.TabIndex = 6;
+            this.cbScreenshotDelay.Text = "Screenshot delay:";
+            this.cbScreenshotDelay.UseVisualStyleBackColor = true;
+            this.cbScreenshotDelay.CheckedChanged += new System.EventHandler(this.cbScreenshotDelay_CheckedChanged);
+            // 
+            // nudScreenshotDelay
+            // 
+            this.nudScreenshotDelay.DecimalPlaces = 1;
+            this.nudScreenshotDelay.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudScreenshotDelay.Location = new System.Drawing.Point(128, 110);
+            this.nudScreenshotDelay.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudScreenshotDelay.Name = "nudScreenshotDelay";
+            this.nudScreenshotDelay.Size = new System.Drawing.Size(56, 20);
+            this.nudScreenshotDelay.TabIndex = 7;
+            this.nudScreenshotDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudScreenshotDelay.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudScreenshotDelay.ValueChanged += new System.EventHandler(this.nudScreenshotDelay_ValueChanged);
+            // 
+            // lblScreenshotDelayInfo
+            // 
+            this.lblScreenshotDelayInfo.AutoSize = true;
+            this.lblScreenshotDelayInfo.Location = new System.Drawing.Point(192, 114);
+            this.lblScreenshotDelayInfo.Name = "lblScreenshotDelayInfo";
+            this.lblScreenshotDelayInfo.Size = new System.Drawing.Size(47, 13);
+            this.lblScreenshotDelayInfo.TabIndex = 8;
+            this.lblScreenshotDelayInfo.Text = "seconds";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2016,6 +2057,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2159,7 +2201,6 @@
         private System.Windows.Forms.CheckBox cbCaptureClientArea;
         private System.Windows.Forms.Button btnResetAutoIncrementNumber;
         private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
-        private System.Windows.Forms.Label lblCaptureShadowOffset;
         private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
         private System.Windows.Forms.TabPage tpOther;
         private System.Windows.Forms.Button btnWatermarkSettings;
@@ -2170,5 +2211,8 @@
         private System.Windows.Forms.Label lblBorderSize;
         private System.Windows.Forms.Label lblBorderColor;
         private System.Windows.Forms.Button btnBorderColor;
+        private System.Windows.Forms.Label lblScreenshotDelayInfo;
+        private System.Windows.Forms.NumericUpDown nudScreenshotDelay;
+        private System.Windows.Forms.CheckBox cbScreenshotDelay;
     }
 }

@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
 using HelpersLib;
 using HelpersLib.Hotkey;
 using ScreenCapture;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using UploadersLib;
 using UploadersLib.HelperClasses;
 
@@ -143,6 +143,8 @@ namespace ShareX
         public bool CaptureShadow = true;
         public int CaptureShadowOffset = 20;
         public bool CaptureClientArea = false;
+        public bool IsDelayScreenshot = false;
+        public decimal DelayScreenshot = 2.0m;
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
         #endregion Capture

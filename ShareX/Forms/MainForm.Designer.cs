@@ -84,6 +84,7 @@ namespace ShareX
             this.tsmiTestTextUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestFileUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tssMain1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
@@ -181,7 +182,6 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -480,6 +480,14 @@ namespace ShareX
             this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
             this.tsmiTestURLShortener.Text = "Test URL shortener";
             this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
+            // 
+            // tsmiTestUploaders
+            // 
+            this.tsmiTestUploaders.Image = global::ShareX.Properties.Resources.application_browser;
+            this.tsmiTestUploaders.Name = "tsmiTestUploaders";
+            this.tsmiTestUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestUploaders.Text = "Test uploaders";
+            this.tsmiTestUploaders.Click += new System.EventHandler(this.tsmiTestUploaders_Click);
             // 
             // tsmiTestShapeCapture
             // 
@@ -996,7 +1004,7 @@ namespace ShareX
             this.tsmiShowPreview});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(164, 230);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(164, 208);
             // 
             // tsmiStopUpload
             // 
@@ -1279,14 +1287,6 @@ namespace ShareX
             this.tsmiShowPreview.Size = new System.Drawing.Size(163, 22);
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
-            // 
-            // tsmiTestUploaders
-            // 
-            this.tsmiTestUploaders.Image = global::ShareX.Properties.Resources.application_browser;
-            this.tsmiTestUploaders.Name = "tsmiTestUploaders";
-            this.tsmiTestUploaders.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestUploaders.Text = "Test uploaders";
-            this.tsmiTestUploaders.Click += new System.EventHandler(this.tsmiTestUploaders_Click);
             // 
             // MainForm
             // 

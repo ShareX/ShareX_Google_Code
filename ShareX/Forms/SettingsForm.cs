@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using ScreenCapture;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,8 +33,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
-using HelpersLib;
-using ScreenCapture;
 using UploadersLib;
 
 namespace ShareX
@@ -132,6 +132,8 @@ namespace ShareX
             cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
             nudCaptureShadowOffset.Value = Program.Settings.CaptureShadowOffset;
             cbCaptureClientArea.Checked = Program.Settings.CaptureClientArea;
+            cbScreenshotDelay.Checked = Program.Settings.IsDelayScreenshot;
+            nudScreenshotDelay.Value = Program.Settings.DelayScreenshot;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
             cbDrawBorder.Checked = Program.Settings.SurfaceOptions.DrawBorder;
@@ -553,7 +555,6 @@ namespace ShareX
         private void cbCaptureTransparent_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureTransparent = cbCaptureTransparent.Checked;
-
             cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
         }
 
@@ -570,6 +571,16 @@ namespace ShareX
         private void cbCaptureClientArea_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.CaptureClientArea = cbCaptureClientArea.Checked;
+        }
+
+        private void cbScreenshotDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.IsDelayScreenshot = cbScreenshotDelay.Checked;
+        }
+
+        private void nudScreenshotDelay_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.DelayScreenshot = nudScreenshotDelay.Value;
         }
 
         #endregion Capture / General
