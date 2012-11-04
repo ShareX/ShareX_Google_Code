@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -32,7 +33,6 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Windows.Forms;
-using HelpersLib.Properties;
 
 namespace HelpersLib
 {

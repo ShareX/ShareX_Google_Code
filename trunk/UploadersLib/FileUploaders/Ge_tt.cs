@@ -23,9 +23,9 @@
 
 #endregion License Information (GPL v3)
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders

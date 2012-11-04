@@ -23,11 +23,11 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using HelpersLib.Properties;
 
 namespace HelpersLib
 {
@@ -411,19 +411,33 @@ namespace HelpersLib
 
         #region Protected Virtual Members
 
-        protected virtual void DrawCrosshair(Graphics g) { }
+        protected virtual void DrawCrosshair(Graphics g)
+        {
+        }
 
-        protected virtual void DrawHue() { }
+        protected virtual void DrawHue()
+        {
+        }
 
-        protected virtual void DrawSaturation() { }
+        protected virtual void DrawSaturation()
+        {
+        }
 
-        protected virtual void DrawBrightness() { }
+        protected virtual void DrawBrightness()
+        {
+        }
 
-        protected virtual void DrawRed() { }
+        protected virtual void DrawRed()
+        {
+        }
 
-        protected virtual void DrawGreen() { }
+        protected virtual void DrawGreen()
+        {
+        }
 
-        protected virtual void DrawBlue() { }
+        protected virtual void DrawBlue()
+        {
+        }
 
         #endregion Protected Virtual Members
     }

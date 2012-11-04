@@ -23,14 +23,14 @@
 
 #endregion License Information (GPL v3)
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using HelpersLib;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 using Renci.SshNet.Sftp;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders

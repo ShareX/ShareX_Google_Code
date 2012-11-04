@@ -23,13 +23,13 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HelpersLib;
 
 namespace HistoryLib
 {

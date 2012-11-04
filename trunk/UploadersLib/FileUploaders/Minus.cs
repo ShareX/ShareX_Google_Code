@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,8 +32,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using HelpersLib;
-using Newtonsoft.Json;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders

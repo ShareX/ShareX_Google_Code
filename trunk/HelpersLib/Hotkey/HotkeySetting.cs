@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using Newtonsoft.Json;
 using System;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
 
 namespace HelpersLib.Hotkey
 {

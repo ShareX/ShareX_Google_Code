@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml.Linq;
-using HelpersLib;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
@@ -153,7 +153,9 @@ namespace UploadersLib.FileUploaders
 
             public string Points { get; set; }
 
-            public LoginInfo() { }
+            public LoginInfo()
+            {
+            }
 
             public LoginInfo(XElement element)
             {
@@ -187,7 +189,9 @@ namespace UploadersLib.FileUploaders
 
             public string ExtraInfo { get; set; }
 
-            public UploadInfo() { }
+            public UploadInfo()
+            {
+            }
 
             public UploadInfo(XElement element)
             {
@@ -545,7 +549,9 @@ namespace UploadersLib.FileUploaders
 
                 public string Meter { get; set; }
 
-                public ProgressInfo() { }
+                public ProgressInfo()
+                {
+                }
 
                 public ProgressInfo(string response)
                 {

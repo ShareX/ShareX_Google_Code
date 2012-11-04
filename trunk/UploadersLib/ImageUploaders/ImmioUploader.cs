@@ -23,8 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using System.IO;
 using Newtonsoft.Json;
+using System.IO;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.ImageUploaders

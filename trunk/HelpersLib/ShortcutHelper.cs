@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using IWshRuntimeLibrary;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using IWshRuntimeLibrary;
 using File = System.IO.File;
 
 namespace HelpersLib

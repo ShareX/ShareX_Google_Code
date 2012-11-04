@@ -23,9 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using System.ComponentModel;
-using System.Net;
 using Starksoft.Net.Proxy;
+using System.Net;
 
 namespace UploadersLib.HelperClasses
 {

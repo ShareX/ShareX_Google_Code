@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -32,7 +33,6 @@ using System.Net.Cache;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HelpersLib;
 
 namespace UpdateCheckerLib
 {

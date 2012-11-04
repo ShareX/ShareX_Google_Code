@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using HelpersLib;
 
 namespace UploadersLib.GUI
 {

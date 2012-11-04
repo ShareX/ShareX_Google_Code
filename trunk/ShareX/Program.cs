@@ -23,14 +23,14 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using SingleInstanceApplication;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
-using HelpersLib;
-using SingleInstanceApplication;
 using UploadersLib;
 
 namespace ShareX

@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using HelpersLib;
 
 namespace UploadersLib
 {

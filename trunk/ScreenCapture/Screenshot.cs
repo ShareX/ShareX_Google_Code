@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using HelpersLib;
 
 namespace ScreenCapture
 {

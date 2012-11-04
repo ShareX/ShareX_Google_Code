@@ -23,8 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using System.IO;
 using HelpersLib;
+using System.IO;
 
 namespace ShareX
 {

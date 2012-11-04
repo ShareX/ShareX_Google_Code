@@ -23,12 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using ShareX.Properties;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using HelpersLib;
-using ShareX.Properties;
 
 namespace ShareX
 {

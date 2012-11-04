@@ -23,10 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace HelpersLib
 {

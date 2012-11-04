@@ -23,14 +23,14 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
+using Manina.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using HelpersLib;
-using Manina.Windows.Forms;
 
 namespace HistoryLib
 {

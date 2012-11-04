@@ -23,9 +23,9 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.IO;
-using HelpersLib;
 
 namespace ShareX
 {
