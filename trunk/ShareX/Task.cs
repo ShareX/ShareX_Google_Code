@@ -294,7 +294,7 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark))
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Program.Settings.WatermarkConfig != null)
                 {
                     WatermarkManager watermarkManager = new WatermarkManager(Program.Settings.WatermarkConfig);
                     watermarkManager.ApplyWatermark(tempImage);

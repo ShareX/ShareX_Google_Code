@@ -71,6 +71,18 @@ namespace HelpersLib
             return text.Remove(end);
         }
 
+        public static string Repeat(this string str, int count)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                StringBuilder sb = new StringBuilder(str.Length * count);
+                sb.Append(str, 0, count);
+                return sb.ToString();
+            }
+
+            return null;
+        }
+
         public static string ReplaceWith(this string str, string search, string replace,
             int occurrence = 0, StringComparison comparison = StringComparison.InvariantCultureIgnoreCase)
         {

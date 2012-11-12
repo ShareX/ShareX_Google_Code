@@ -58,7 +58,6 @@
             this.ilvImages.GroupHeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.ilvImages.Location = new System.Drawing.Point(0, 0);
             this.ilvImages.Name = "ilvImages";
-            this.ilvImages.PersistentCacheFile = "";
             this.ilvImages.PersistentCacheSize = ((long)(100));
             this.ilvImages.Size = new System.Drawing.Size(804, 587);
             this.ilvImages.TabIndex = 0;
