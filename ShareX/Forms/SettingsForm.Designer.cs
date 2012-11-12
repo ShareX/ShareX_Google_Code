@@ -107,10 +107,12 @@
             this.lblBorderColor = new System.Windows.Forms.Label();
             this.gbWatermark = new System.Windows.Forms.GroupBox();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
-            this.cbWatermarkExcludeClipboardUpload = new System.Windows.Forms.CheckBox();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
+            this.lblScreenshotDelayInfo = new System.Windows.Forms.Label();
+            this.nudScreenshotDelay = new System.Windows.Forms.NumericUpDown();
+            this.cbScreenshotDelay = new System.Windows.Forms.CheckBox();
             this.nudCaptureShadowOffset = new System.Windows.Forms.NumericUpDown();
             this.cbCaptureClientArea = new System.Windows.Forms.CheckBox();
             this.cbCaptureShadow = new System.Windows.Forms.CheckBox();
@@ -144,7 +146,6 @@
             this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
             this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
-            this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
@@ -153,6 +154,11 @@
             this.lblNameFormatPattern = new System.Windows.Forms.Label();
             this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
+            this.tpUploadClipboard = new System.Windows.Forms.TabPage();
+            this.cbShowClipboardContentViewer = new System.Windows.Forms.CheckBox();
+            this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
+            this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
+            this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
             this.tpUploadWatchFolder = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
@@ -175,9 +181,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbScreenshotDelay = new System.Windows.Forms.CheckBox();
-            this.nudScreenshotDelay = new System.Windows.Forms.NumericUpDown();
-            this.lblScreenshotDelayInfo = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -202,6 +205,7 @@
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).BeginInit();
             this.tpCaptureShape.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
@@ -211,11 +215,11 @@
             this.tabControl1.SuspendLayout();
             this.tpUploadGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
+            this.tpUploadClipboard.SuspendLayout();
             this.tpUploadWatchFolder.SuspendLayout();
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -1107,9 +1111,9 @@
             this.gbBorder.Controls.Add(this.nudBorderSize);
             this.gbBorder.Controls.Add(this.lblBorderSize);
             this.gbBorder.Controls.Add(this.lblBorderColor);
-            this.gbBorder.Location = new System.Drawing.Point(16, 120);
+            this.gbBorder.Location = new System.Drawing.Point(16, 88);
             this.gbBorder.Name = "gbBorder";
-            this.gbBorder.Size = new System.Drawing.Size(472, 80);
+            this.gbBorder.Size = new System.Drawing.Size(472, 88);
             this.gbBorder.TabIndex = 2;
             this.gbBorder.TabStop = false;
             this.gbBorder.Text = "Border";
@@ -1117,7 +1121,7 @@
             // btnBorderColor
             // 
             this.btnBorderColor.BackColor = System.Drawing.Color.Black;
-            this.btnBorderColor.Location = new System.Drawing.Point(88, 16);
+            this.btnBorderColor.Location = new System.Drawing.Point(88, 18);
             this.btnBorderColor.Name = "btnBorderColor";
             this.btnBorderColor.Size = new System.Drawing.Size(56, 24);
             this.btnBorderColor.TabIndex = 3;
@@ -1126,7 +1130,7 @@
             // 
             // nudBorderSize
             // 
-            this.nudBorderSize.Location = new System.Drawing.Point(88, 48);
+            this.nudBorderSize.Location = new System.Drawing.Point(88, 52);
             this.nudBorderSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1146,7 +1150,7 @@
             // lblBorderSize
             // 
             this.lblBorderSize.AutoSize = true;
-            this.lblBorderSize.Location = new System.Drawing.Point(16, 48);
+            this.lblBorderSize.Location = new System.Drawing.Point(16, 56);
             this.lblBorderSize.Name = "lblBorderSize";
             this.lblBorderSize.Size = new System.Drawing.Size(62, 13);
             this.lblBorderSize.TabIndex = 1;
@@ -1164,10 +1168,9 @@
             // gbWatermark
             // 
             this.gbWatermark.Controls.Add(this.btnWatermarkSettings);
-            this.gbWatermark.Controls.Add(this.cbWatermarkExcludeClipboardUpload);
             this.gbWatermark.Location = new System.Drawing.Point(16, 16);
             this.gbWatermark.Name = "gbWatermark";
-            this.gbWatermark.Size = new System.Drawing.Size(472, 96);
+            this.gbWatermark.Size = new System.Drawing.Size(472, 64);
             this.gbWatermark.TabIndex = 2;
             this.gbWatermark.TabStop = false;
             this.gbWatermark.Text = "Watermark";
@@ -1181,17 +1184,6 @@
             this.btnWatermarkSettings.Text = "Watermark settings...";
             this.btnWatermarkSettings.UseVisualStyleBackColor = true;
             this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
-            // 
-            // cbWatermarkExcludeClipboardUpload
-            // 
-            this.cbWatermarkExcludeClipboardUpload.AutoSize = true;
-            this.cbWatermarkExcludeClipboardUpload.Location = new System.Drawing.Point(16, 64);
-            this.cbWatermarkExcludeClipboardUpload.Name = "cbWatermarkExcludeClipboardUpload";
-            this.cbWatermarkExcludeClipboardUpload.Size = new System.Drawing.Size(217, 17);
-            this.cbWatermarkExcludeClipboardUpload.TabIndex = 1;
-            this.cbWatermarkExcludeClipboardUpload.Text = "Don\'t add watermark to clipboard upload";
-            this.cbWatermarkExcludeClipboardUpload.UseVisualStyleBackColor = true;
-            this.cbWatermarkExcludeClipboardUpload.CheckedChanged += new System.EventHandler(this.cbWatermarkExcludeClipboardUpload_CheckedChanged);
             // 
             // tpCapture
             // 
@@ -1232,6 +1224,51 @@
             this.tpCaptureGeneral.TabIndex = 0;
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
+            // 
+            // lblScreenshotDelayInfo
+            // 
+            this.lblScreenshotDelayInfo.AutoSize = true;
+            this.lblScreenshotDelayInfo.Location = new System.Drawing.Point(192, 114);
+            this.lblScreenshotDelayInfo.Name = "lblScreenshotDelayInfo";
+            this.lblScreenshotDelayInfo.Size = new System.Drawing.Size(47, 13);
+            this.lblScreenshotDelayInfo.TabIndex = 8;
+            this.lblScreenshotDelayInfo.Text = "seconds";
+            // 
+            // nudScreenshotDelay
+            // 
+            this.nudScreenshotDelay.DecimalPlaces = 1;
+            this.nudScreenshotDelay.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.nudScreenshotDelay.Location = new System.Drawing.Point(128, 110);
+            this.nudScreenshotDelay.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudScreenshotDelay.Name = "nudScreenshotDelay";
+            this.nudScreenshotDelay.Size = new System.Drawing.Size(56, 20);
+            this.nudScreenshotDelay.TabIndex = 7;
+            this.nudScreenshotDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudScreenshotDelay.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudScreenshotDelay.ValueChanged += new System.EventHandler(this.nudScreenshotDelay_ValueChanged);
+            // 
+            // cbScreenshotDelay
+            // 
+            this.cbScreenshotDelay.AutoSize = true;
+            this.cbScreenshotDelay.Location = new System.Drawing.Point(16, 112);
+            this.cbScreenshotDelay.Name = "cbScreenshotDelay";
+            this.cbScreenshotDelay.Size = new System.Drawing.Size(111, 17);
+            this.cbScreenshotDelay.TabIndex = 6;
+            this.cbScreenshotDelay.Text = "Screenshot delay:";
+            this.cbScreenshotDelay.UseVisualStyleBackColor = true;
+            this.cbScreenshotDelay.CheckedChanged += new System.EventHandler(this.cbScreenshotDelay_CheckedChanged);
             // 
             // nudCaptureShadowOffset
             // 
@@ -1543,6 +1580,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tpUploadGeneral);
+            this.tabControl1.Controls.Add(this.tpUploadClipboard);
             this.tabControl1.Controls.Add(this.tpUploadWatchFolder);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
@@ -1558,7 +1596,6 @@
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.txtNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
-            this.tpUploadGeneral.Controls.Add(this.cbClipboardUploadAutoDetectURL);
             this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
             this.tpUploadGeneral.Controls.Add(this.lblBufferSizeInfo);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimitHint);
@@ -1577,7 +1614,7 @@
             // 
             // btnResetAutoIncrementNumber
             // 
-            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 112);
+            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 80);
             this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
             this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
             this.btnResetAutoIncrementNumber.TabIndex = 10;
@@ -1588,7 +1625,7 @@
             // lblNameFormatPatternPreviewActiveWindow
             // 
             this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 256);
+            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 224);
             this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
             this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
@@ -1597,7 +1634,7 @@
             // lblNameFormatPatternActiveWindow
             // 
             this.lblNameFormatPatternActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 200);
+            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 168);
             this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
             this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
             this.lblNameFormatPatternActiveWindow.TabIndex = 6;
@@ -1605,7 +1642,7 @@
             // 
             // txtNameFormatPatternActiveWindow
             // 
-            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 224);
+            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 192);
             this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
             this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPatternActiveWindow.TabIndex = 7;
@@ -1619,17 +1656,6 @@
             this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
             this.lblUploadLimit.TabIndex = 0;
             this.lblUploadLimit.Text = "Simultaneous upload limit:";
-            // 
-            // cbClipboardUploadAutoDetectURL
-            // 
-            this.cbClipboardUploadAutoDetectURL.AutoSize = true;
-            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(24, 82);
-            this.cbClipboardUploadAutoDetectURL.Name = "cbClipboardUploadAutoDetectURL";
-            this.cbClipboardUploadAutoDetectURL.Size = new System.Drawing.Size(401, 17);
-            this.cbClipboardUploadAutoDetectURL.TabIndex = 0;
-            this.cbClipboardUploadAutoDetectURL.Text = "Automatically detect URL when performing Text Upload and use URL shortener";
-            this.cbClipboardUploadAutoDetectURL.UseVisualStyleBackColor = true;
-            this.cbClipboardUploadAutoDetectURL.CheckedChanged += new System.EventHandler(this.cbClipboardUploadAutoDetectURL_CheckedChanged);
             // 
             // cbBufferSize
             // 
@@ -1671,7 +1697,7 @@
             // lblNameFormatPatternPreview
             // 
             this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(24, 171);
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(24, 139);
             this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
             this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreview.TabIndex = 4;
@@ -1680,7 +1706,7 @@
             // lblNameFormatPattern
             // 
             this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(24, 115);
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(24, 83);
             this.lblNameFormatPattern.Name = "lblNameFormatPattern";
             this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
             this.lblNameFormatPattern.TabIndex = 1;
@@ -1707,11 +1733,69 @@
             // 
             // txtNameFormatPattern
             // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(24, 139);
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(24, 107);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
             this.txtNameFormatPattern.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPattern.TabIndex = 2;
             this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
+            // 
+            // tpUploadClipboard
+            // 
+            this.tpUploadClipboard.Controls.Add(this.cbShowClipboardContentViewer);
+            this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadUseAfterCaptureTasks);
+            this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadAutoDetectURL);
+            this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadExcludeImageEffects);
+            this.tpUploadClipboard.Location = new System.Drawing.Point(4, 22);
+            this.tpUploadClipboard.Name = "tpUploadClipboard";
+            this.tpUploadClipboard.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUploadClipboard.Size = new System.Drawing.Size(504, 294);
+            this.tpUploadClipboard.TabIndex = 2;
+            this.tpUploadClipboard.Text = "Clipboard upload";
+            this.tpUploadClipboard.UseVisualStyleBackColor = true;
+            // 
+            // cbShowClipboardContentViewer
+            // 
+            this.cbShowClipboardContentViewer.AutoSize = true;
+            this.cbShowClipboardContentViewer.Location = new System.Drawing.Point(16, 16);
+            this.cbShowClipboardContentViewer.Name = "cbShowClipboardContentViewer";
+            this.cbShowClipboardContentViewer.Size = new System.Drawing.Size(418, 17);
+            this.cbShowClipboardContentViewer.TabIndex = 3;
+            this.cbShowClipboardContentViewer.Text = "Show clipboard content viewer when using clipboard upload button in main window";
+            this.cbShowClipboardContentViewer.UseVisualStyleBackColor = true;
+            this.cbShowClipboardContentViewer.CheckedChanged += new System.EventHandler(this.cbShowClipboardContentViewer_CheckedChanged);
+            // 
+            // cbClipboardUploadUseAfterCaptureTasks
+            // 
+            this.cbClipboardUploadUseAfterCaptureTasks.AutoSize = true;
+            this.cbClipboardUploadUseAfterCaptureTasks.Location = new System.Drawing.Point(16, 64);
+            this.cbClipboardUploadUseAfterCaptureTasks.Name = "cbClipboardUploadUseAfterCaptureTasks";
+            this.cbClipboardUploadUseAfterCaptureTasks.Size = new System.Drawing.Size(286, 17);
+            this.cbClipboardUploadUseAfterCaptureTasks.TabIndex = 2;
+            this.cbClipboardUploadUseAfterCaptureTasks.Text = "Use \"After capture tasks\" when doing clipboard upload";
+            this.cbClipboardUploadUseAfterCaptureTasks.UseVisualStyleBackColor = true;
+            this.cbClipboardUploadUseAfterCaptureTasks.CheckedChanged += new System.EventHandler(this.cbClipboardUploadUseAfterCaptureTasks_CheckedChanged);
+            // 
+            // cbClipboardUploadAutoDetectURL
+            // 
+            this.cbClipboardUploadAutoDetectURL.AutoSize = true;
+            this.cbClipboardUploadAutoDetectURL.Location = new System.Drawing.Point(16, 40);
+            this.cbClipboardUploadAutoDetectURL.Name = "cbClipboardUploadAutoDetectURL";
+            this.cbClipboardUploadAutoDetectURL.Size = new System.Drawing.Size(418, 17);
+            this.cbClipboardUploadAutoDetectURL.TabIndex = 0;
+            this.cbClipboardUploadAutoDetectURL.Text = "Automatically detect URL when doing clipboard text upload and use URL shortener";
+            this.cbClipboardUploadAutoDetectURL.UseVisualStyleBackColor = true;
+            this.cbClipboardUploadAutoDetectURL.CheckedChanged += new System.EventHandler(this.cbClipboardUploadAutoDetectURL_CheckedChanged);
+            // 
+            // cbClipboardUploadExcludeImageEffects
+            // 
+            this.cbClipboardUploadExcludeImageEffects.AutoSize = true;
+            this.cbClipboardUploadExcludeImageEffects.Location = new System.Drawing.Point(16, 88);
+            this.cbClipboardUploadExcludeImageEffects.Name = "cbClipboardUploadExcludeImageEffects";
+            this.cbClipboardUploadExcludeImageEffects.Size = new System.Drawing.Size(395, 17);
+            this.cbClipboardUploadExcludeImageEffects.TabIndex = 1;
+            this.cbClipboardUploadExcludeImageEffects.Text = "Don\'t add image effects (Watermark, border etc.) when doing clipboard upload";
+            this.cbClipboardUploadExcludeImageEffects.UseVisualStyleBackColor = true;
+            this.cbClipboardUploadExcludeImageEffects.CheckedChanged += new System.EventHandler(this.cbClipboardUploadExcludeImageEffects_CheckedChanged);
             // 
             // tpUploadWatchFolder
             // 
@@ -1947,51 +2031,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbScreenshotDelay
-            // 
-            this.cbScreenshotDelay.AutoSize = true;
-            this.cbScreenshotDelay.Location = new System.Drawing.Point(16, 112);
-            this.cbScreenshotDelay.Name = "cbScreenshotDelay";
-            this.cbScreenshotDelay.Size = new System.Drawing.Size(111, 17);
-            this.cbScreenshotDelay.TabIndex = 6;
-            this.cbScreenshotDelay.Text = "Screenshot delay:";
-            this.cbScreenshotDelay.UseVisualStyleBackColor = true;
-            this.cbScreenshotDelay.CheckedChanged += new System.EventHandler(this.cbScreenshotDelay_CheckedChanged);
-            // 
-            // nudScreenshotDelay
-            // 
-            this.nudScreenshotDelay.DecimalPlaces = 1;
-            this.nudScreenshotDelay.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.nudScreenshotDelay.Location = new System.Drawing.Point(128, 110);
-            this.nudScreenshotDelay.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nudScreenshotDelay.Name = "nudScreenshotDelay";
-            this.nudScreenshotDelay.Size = new System.Drawing.Size(56, 20);
-            this.nudScreenshotDelay.TabIndex = 7;
-            this.nudScreenshotDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudScreenshotDelay.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nudScreenshotDelay.ValueChanged += new System.EventHandler(this.nudScreenshotDelay_ValueChanged);
-            // 
-            // lblScreenshotDelayInfo
-            // 
-            this.lblScreenshotDelayInfo.AutoSize = true;
-            this.lblScreenshotDelayInfo.Location = new System.Drawing.Point(192, 114);
-            this.lblScreenshotDelayInfo.Name = "lblScreenshotDelayInfo";
-            this.lblScreenshotDelayInfo.Size = new System.Drawing.Size(47, 13);
-            this.lblScreenshotDelayInfo.TabIndex = 8;
-            this.lblScreenshotDelayInfo.Text = "seconds";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2034,11 +2073,11 @@
             this.gbBorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).EndInit();
             this.gbWatermark.ResumeLayout(false);
-            this.gbWatermark.PerformLayout();
             this.tpCapture.ResumeLayout(false);
             this.tcCapture.ResumeLayout(false);
             this.tpCaptureGeneral.ResumeLayout(false);
             this.tpCaptureGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).EndInit();
             this.tpCaptureShape.ResumeLayout(false);
             this.tpCaptureShape.PerformLayout();
@@ -2050,6 +2089,8 @@
             this.tpUploadGeneral.ResumeLayout(false);
             this.tpUploadGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
+            this.tpUploadClipboard.ResumeLayout(false);
+            this.tpUploadClipboard.PerformLayout();
             this.tpUploadWatchFolder.ResumeLayout(false);
             this.tpUploadWatchFolder.PerformLayout();
             this.tpProxy.ResumeLayout(false);
@@ -2057,7 +2098,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2204,7 +2244,7 @@
         private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
         private System.Windows.Forms.TabPage tpOther;
         private System.Windows.Forms.Button btnWatermarkSettings;
-        private System.Windows.Forms.CheckBox cbWatermarkExcludeClipboardUpload;
+        private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
         private System.Windows.Forms.GroupBox gbBorder;
         private System.Windows.Forms.GroupBox gbWatermark;
         private System.Windows.Forms.NumericUpDown nudBorderSize;
@@ -2214,5 +2254,8 @@
         private System.Windows.Forms.Label lblScreenshotDelayInfo;
         private System.Windows.Forms.NumericUpDown nudScreenshotDelay;
         private System.Windows.Forms.CheckBox cbScreenshotDelay;
+        private System.Windows.Forms.TabPage tpUploadClipboard;
+        private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
+        private System.Windows.Forms.CheckBox cbShowClipboardContentViewer;
     }
 }

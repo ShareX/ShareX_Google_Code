@@ -45,7 +45,6 @@ namespace ShareX
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;
         public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
         public SocialNetworkingService SocialServiceDestination = SocialNetworkingService.Twitter;
-        public bool ShowClipboardContentViewer = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
 
@@ -129,14 +128,13 @@ namespace ShareX
         #region Image / Other
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
-        public bool WatermarkExcludeClipboardUpload = false;
 
         public XmlColor BorderColor = Color.Black;
         public int BorderSize = 1;
 
         #endregion Image / Other
 
-        #region Capture
+        #region Capture / General
 
         public bool ShowCursor = false;
         public bool CaptureTransparent = true;
@@ -145,9 +143,14 @@ namespace ShareX
         public bool CaptureClientArea = false;
         public bool IsDelayScreenshot = false;
         public decimal DelayScreenshot = 2.0m;
+
+        #endregion Capture / General
+
+        #region Capture / Shape capture
+
         public SurfaceOptions SurfaceOptions = new SurfaceOptions();
 
-        #endregion Capture
+        #endregion Capture / Shape capture
 
         #region Actions
 
@@ -155,27 +158,31 @@ namespace ShareX
 
         #endregion Actions
 
-        #region Upload
-
-        #region General
+        #region Upload / General
 
         public int UploadLimit = 5;
         public int BufferSizePower = 3;
-        public bool ClipboardUploadAutoDetectURL = true;
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
         public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
         public int AutoIncrementNumber = 0;
 
-        #endregion General
+        #endregion Upload / General
 
-        #region Watch folder
+        #region Upload / Clipboard upload
+
+        public bool ShowClipboardContentViewer = true;
+        public bool ClipboardUploadAutoDetectURL = true;
+        public bool ClipboardUploadUseAfterCaptureTasks = false;
+        public bool ClipboardUploadExcludeImageEffects = true;
+
+        #endregion Upload / Clipboard upload
+
+        #region Upload / Watch folder
 
         public bool WatchFolderEnabled = false;
         public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
 
-        #endregion Watch folder
-
-        #endregion Upload
+        #endregion Upload / Watch folder
 
         #region Proxy
 

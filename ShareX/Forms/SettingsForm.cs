@@ -120,7 +120,6 @@ namespace ShareX
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
             // Image - Other
-            cbWatermarkExcludeClipboardUpload.Checked = Program.Settings.WatermarkExcludeClipboardUpload;
             btnBorderColor.BackColor = Program.Settings.BorderColor;
             nudBorderSize.Value = Program.Settings.BorderSize;
 
@@ -157,7 +156,7 @@ namespace ShareX
                 }
             }
 
-            // Upload
+            // Upload / General
             nudUploadLimit.Value = Program.Settings.UploadLimit;
 
             for (int i = 0; i < MaxBufferSizePower; i++)
@@ -166,7 +165,6 @@ namespace ShareX
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
-            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
 
@@ -174,6 +172,13 @@ namespace ShareX
             cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ignoreList);
             cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ignoreList);
 
+            // Upload / Clipboard upload
+            cbShowClipboardContentViewer.Checked = Program.Settings.ShowClipboardContentViewer;
+            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
+            cbClipboardUploadUseAfterCaptureTasks.Checked = Program.Settings.ClipboardUploadUseAfterCaptureTasks;
+            cbClipboardUploadExcludeImageEffects.Checked = Program.Settings.ClipboardUploadExcludeImageEffects;
+
+            // Upload / Watch folder
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
 
             if (Program.Settings.WatchFolderList == null)
@@ -203,13 +208,13 @@ namespace ShareX
 
         private void SettingsForm_Shown(object sender, EventArgs e)
         {
-            this.BringToFront();
-            this.Activate();
+            BringToFront();
+            Activate();
         }
 
         private void SettingsForm_Resize(object sender, EventArgs e)
         {
-            this.Refresh();
+            Refresh();
         }
 
         private void AddFileAction(ExternalProgram fileAction)
@@ -365,9 +370,7 @@ namespace ShareX
 
         #endregion Paths
 
-        #region Image
-
-        #region Quality
+        #region Image / Quality
 
         private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -394,9 +397,9 @@ namespace ShareX
             Program.Settings.ImageFormat2 = (EImageFormat)cbImageFormat2.SelectedIndex;
         }
 
-        #endregion Quality
+        #endregion Image / Quality
 
-        #region Resize
+        #region Image / Resize
 
         private void cbImageAutoResize_CheckedChanged(object sender, EventArgs e)
         {
@@ -503,9 +506,9 @@ namespace ShareX
             Program.Settings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
         }
 
-        #endregion Resize
+        #endregion Image / Resize
 
-        #region Other
+        #region Image / Other
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
@@ -514,11 +517,6 @@ namespace ShareX
                 watermarkForm.Icon = Icon;
                 watermarkForm.ShowDialog();
             }
-        }
-
-        private void cbWatermarkExcludeClipboardUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.WatermarkExcludeClipboardUpload = cbWatermarkExcludeClipboardUpload.Checked;
         }
 
         private void btnBorderColor_Click(object sender, EventArgs e)
@@ -538,11 +536,7 @@ namespace ShareX
             Program.Settings.BorderSize = (int)nudBorderSize.Value;
         }
 
-        #endregion Other
-
-        #endregion Image
-
-        #region Capture
+        #endregion Image / Other
 
         #region Capture / General
 
@@ -633,8 +627,6 @@ namespace ShareX
 
         #endregion Capture / Shape capture
 
-        #endregion Capture
-
         #region Actions
 
         private void btnActionsAdd_Click(object sender, EventArgs e)
@@ -690,9 +682,7 @@ namespace ShareX
 
         #endregion Actions
 
-        #region Upload
-
-        #region General
+        #region Upload / General
 
         private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
         {
@@ -704,11 +694,6 @@ namespace ShareX
             Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
             string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
             lblBufferSizeInfo.Text = string.Format("x {0} kB = {1} kB", 1.024, bufferSize);
-        }
-
-        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
         }
 
         private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
@@ -730,9 +715,33 @@ namespace ShareX
             lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow);
         }
 
-        #endregion General
+        #endregion Upload / General
 
-        #region Watch folder
+        #region Upload / Clipboard upload
+
+        private void cbShowClipboardContentViewer_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
+        }
+
+        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
+        }
+
+        private void cbClipboardUploadUseAfterCaptureTasks_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ClipboardUploadUseAfterCaptureTasks = cbClipboardUploadUseAfterCaptureTasks.Checked;
+        }
+
+        private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
+        }
+
+        #endregion Upload / Clipboard upload
+
+        #region Upload / Watch folder
 
         private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
         {
@@ -785,9 +794,7 @@ namespace ShareX
             }
         }
 
-        #endregion Watch folder
-
-        #endregion Upload
+        #endregion Upload / Watch folder
 
         #region Proxy
 
