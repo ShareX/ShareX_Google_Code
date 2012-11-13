@@ -105,18 +105,49 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(text))
             {
-                try
+                IDataObject data = new DataObject();
+                string dataFormat;
+
+                if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Major < 5)
                 {
-                    lock (ClipboardLock)
-                    {
-                        Clipboard.Clear();
-                        Clipboard.SetText(text);
-                    }
+                    dataFormat = DataFormats.Text;
                 }
-                catch
+                else
                 {
-                    return false;
+                    dataFormat = DataFormats.UnicodeText;
                 }
+
+                data.SetData(dataFormat, false, text);
+                return CopyDataSafely(data);
+            }
+
+            return false;
+        }
+
+        public static bool CopyImageSafely(Image img)
+        {
+            if (img != null)
+            {
+                IDataObject data = new DataObject();
+                data.SetData(DataFormats.Bitmap, true, img);
+                return CopyDataSafely(data);
+            }
+
+            return false;
+        }
+
+        private static bool CopyDataSafely(object data)
+        {
+            try
+            {
+                lock (ClipboardLock)
+                {
+                    Clipboard.SetDataObject(data, true, 3, 500);
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
@@ -137,7 +168,7 @@ namespace HelpersLib
             {
                 using (Image img = Image.FromFile(path))
                 {
-                    Clipboard.SetImage(img);
+                    CopyImageSafely(img);
                 }
             }
             catch { }
