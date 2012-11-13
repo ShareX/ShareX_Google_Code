@@ -307,7 +307,7 @@ namespace ShareX
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
-                    Clipboard.SetImage(tempImage);
+                    Helpers.CopyImageSafely(tempImage);
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
