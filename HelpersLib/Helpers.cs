@@ -370,7 +370,7 @@ namespace HelpersLib
 
         public static void OpenFolder(string folderPath)
         {
-            if (Directory.Exists(folderPath))
+            if (!string.IsNullOrEmpty(folderPath) && Directory.Exists(folderPath))
             {
                 Process.Start("explorer.exe", folderPath);
             }
@@ -378,7 +378,7 @@ namespace HelpersLib
 
         public static void OpenFolderWithFile(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
                 Process.Start("explorer.exe", string.Format("/select,\"{0}\"", filePath));
             }
