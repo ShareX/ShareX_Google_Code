@@ -36,9 +36,16 @@ namespace ShareX
 
         public string Write(string filePath)
         {
-            if (ImageStream != null && !string.IsNullOrEmpty(filePath) && ImageStream.WriteToFile(filePath))
+            try
             {
-                return filePath;
+                if (ImageStream != null && !string.IsNullOrEmpty(filePath) && ImageStream.WriteToFile(filePath))
+                {
+                    return filePath;
+                }
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e);
             }
 
             return string.Empty;
