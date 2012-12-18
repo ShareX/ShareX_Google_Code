@@ -30,39 +30,24 @@ namespace UploadersLib.ImageUploaders
 {
     public sealed class CustomUploader : FileUploader
     {
-        private CustomUploaderInfo imageHosting;
+        private CustomUploaderItem customUploader;
 
-        public CustomUploader(CustomUploaderInfo imageHosting)
+        public CustomUploader(CustomUploaderItem customUploaderItem)
         {
-            this.imageHosting = imageHosting;
+            customUploader = customUploaderItem;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult result = UploadData(stream, imageHosting.UploadURL, fileName, imageHosting.FileFormName, imageHosting.GetArguments());
+            UploadResult result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
 
             if (result.IsSuccess)
             {
-                imageHosting.Parse(result.Response);
+                customUploader.Parse(result.Response);
 
-                if (!string.IsNullOrEmpty(imageHosting.URL))
-                {
-                    result.URL = imageHosting.GetURL(URLType.URL);
-                }
-                else if (imageHosting.AutoUseResponse)
-                {
-                    result.URL = result.Response;
-                }
-
-                if (!string.IsNullOrEmpty(imageHosting.ThumbnailURL))
-                {
-                    result.ThumbnailURL = imageHosting.GetURL(URLType.ThumbnailURL);
-                }
-
-                if (!string.IsNullOrEmpty(imageHosting.DeletionURL))
-                {
-                    result.DeletionURL = imageHosting.GetURL(URLType.DeletionURL);
-                }
+                result.URL = customUploader.ResultURL;
+                result.ThumbnailURL = customUploader.ResultThumbnailURL;
+                result.DeletionURL = customUploader.ResultDeletionURL;
             }
 
             return result;

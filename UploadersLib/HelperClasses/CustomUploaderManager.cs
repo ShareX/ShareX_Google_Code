@@ -30,14 +30,14 @@ namespace UploadersLib.HelperClasses
 {
     public class CustomUploaderManager
     {
-        public List<CustomUploaderInfo> ImageHostingServices { get; set; }
+        public List<CustomUploaderItem> ImageHostingServices { get; set; }
 
         public CustomUploaderManager()
         {
-            ImageHostingServices = new List<CustomUploaderInfo>();
+            ImageHostingServices = new List<CustomUploaderItem>();
         }
 
-        public CustomUploaderManager(List<CustomUploaderInfo> imageHostingServices)
+        public CustomUploaderManager(List<CustomUploaderItem> imageHostingServices)
         {
             ImageHostingServices = imageHostingServices;
         }

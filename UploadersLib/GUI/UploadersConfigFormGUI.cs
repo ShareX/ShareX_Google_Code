@@ -296,12 +296,12 @@ namespace UploadersLib
 
             if (Config.CustomUploadersList == null)
             {
-                Config.CustomUploadersList = new List<CustomUploaderInfo>();
-                LoadCustomUploader(new CustomUploaderInfo());
+                Config.CustomUploadersList = new List<CustomUploaderItem>();
+                LoadCustomUploader(new CustomUploaderItem());
             }
             else
             {
-                foreach (CustomUploaderInfo customUploader in Config.CustomUploadersList)
+                foreach (CustomUploaderItem customUploader in Config.CustomUploadersList)
                 {
                     lbCustomUploaderList.Items.Add(customUploader.Name);
                 }
