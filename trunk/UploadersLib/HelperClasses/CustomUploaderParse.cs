@@ -25,82 +25,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Text;
 
 namespace UploadersLib.HelperClasses
 {
-    public class CustomUploaderInfo
+    public class CustomUploaderParse
     {
-        public string Name { get; set; }
-
-        public string UploadURL { get; set; }
-
-        public string FileFormName { get; set; }
-
-        public List<Argument> Arguments { get; set; }
-
-        [Description("This regexps will be used on response and results will be accessable using $n syntax in URL sections."),
-        Editor(@"System.Windows.Forms.Design.StringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(System.Drawing.Design.UITypeEditor))]
-        public List<string> RegexpList { get; set; }
-
-        [Description("Syntax for parse URL from response.")]
-        public string URL { get; set; }
-
-        public string ThumbnailURL { get; set; }
-
-        public string DeletionURL { get; set; }
-
-        [Description("If URL section is empty then URL will be response.")]
-        public bool AutoUseResponse { get; set; }
-
         private List<string> regexpResult = new List<string>();
         private string lastOperation;
-
-        public CustomUploaderInfo()
-        {
-            Arguments = new List<Argument>();
-            RegexpList = new List<string>();
-            AutoUseResponse = true;
-        }
-
-        public CustomUploaderInfo(string name)
-            : this()
-        {
-            Name = name;
-        }
-
-        public void Parse(string response)
-        {
-            regexpResult.Clear();
-
-            foreach (string regexp in RegexpList)
-            {
-                regexpResult.Add(Regex.Match(response, regexp).Value);
-            }
-        }
-
-        public Dictionary<string, string> GetArguments()
-        {
-            return Arguments.ToDictionary(arg => arg.Name, arg => arg.Value);
-        }
-
-        public string GetURL(URLType type)
-        {
-            switch (type)
-            {
-                case URLType.URL:
-                    return ReturnLink(URL);
-                case URLType.ThumbnailURL:
-                    return ReturnLink(ThumbnailURL);
-                case URLType.DeletionURL:
-                    return ReturnLink(DeletionURL);
-            }
-
-            return null;
-        }
 
         private string ReturnLink(string str)
         {

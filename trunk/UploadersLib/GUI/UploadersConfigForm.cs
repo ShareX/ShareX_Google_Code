@@ -652,7 +652,7 @@ namespace UploadersLib
         {
             if (!string.IsNullOrEmpty(txtCustomUploaderName.Text))
             {
-                CustomUploaderInfo iUploader = GetCustomUploaderFromFields();
+                CustomUploaderItem iUploader = GetCustomUploaderFromFields();
                 Config.CustomUploadersList.Add(iUploader);
                 lbCustomUploaderList.Items.Add(iUploader.Name);
                 lbCustomUploaderList.SelectedIndex = lbCustomUploaderList.Items.Count - 1;
@@ -666,7 +666,7 @@ namespace UploadersLib
                 int selected = lbCustomUploaderList.SelectedIndex;
                 Config.CustomUploadersList.RemoveAt(selected);
                 lbCustomUploaderList.Items.RemoveAt(selected);
-                LoadCustomUploader(new CustomUploaderInfo());
+                LoadCustomUploader(new CustomUploaderItem());
             }
         }
 
@@ -728,6 +728,21 @@ namespace UploadersLib
             txtCustomUploaderRegexp.Text = regex;
         }
 
+        private void btnURLParseHelp_Click(object sender, EventArgs e)
+        {
+            string helpText = @"If URL textbox is empty then response text will be automatically used.
+
+Regex usage for get regex result: $n$
+n must be index number from 'Regex from response' list.
+Example for get second regex result from list: $2$
+
+Regex groups usage: $n,n$ or $n,name$
+Second n here must be group number or group name.
+Example: $3,1$ or $2,thumbnail_result$";
+
+            MessageBox.Show(helpText, "ShareX - Custom uploader help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void btnCustomUploaderArgAdd_Click(object sender, EventArgs e)
         {
             string name = txtCustomUploaderArgName.Text;
@@ -781,7 +796,7 @@ namespace UploadersLib
         {
             if (Config.CustomUploadersList == null)
             {
-                Config.CustomUploadersList = new List<CustomUploaderInfo>();
+                Config.CustomUploadersList = new List<CustomUploaderItem>();
             }
 
             using (OpenFileDialog dlg = new OpenFileDialog { Filter = "Custom Image Uploaders(*.ciu)|*.ciu" })
@@ -813,7 +828,7 @@ namespace UploadersLib
 
         private void btnCustomUploaderClear_Click(object sender, EventArgs e)
         {
-            LoadCustomUploader(new CustomUploaderInfo());
+            LoadCustomUploader(new CustomUploaderItem());
         }
 
         private void btnCustomUploaderTest_Click(object sender, EventArgs e)

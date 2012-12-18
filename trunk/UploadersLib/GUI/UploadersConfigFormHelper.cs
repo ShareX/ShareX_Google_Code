@@ -920,50 +920,54 @@ namespace UploadersLib
 
         private void UpdateCustomUploader()
         {
-            if (lbCustomUploaderList.SelectedIndex != -1)
+            int index = lbCustomUploaderList.SelectedIndex;
+
+            if (index != -1)
             {
-                CustomUploaderInfo iUploader = GetCustomUploaderFromFields();
-                iUploader.Name = lbCustomUploaderList.SelectedItem.ToString();
-                Config.CustomUploadersList[lbCustomUploaderList.SelectedIndex] = iUploader;
+                CustomUploaderItem customUploader = GetCustomUploaderFromFields();
+                Config.CustomUploadersList[index] = customUploader;
+                lbCustomUploaderList.Items[index] = customUploader.Name;
             }
         }
 
-        private void LoadCustomUploader(CustomUploaderInfo imageUploader)
+        private void LoadCustomUploader(CustomUploaderItem customUploader)
         {
+            txtCustomUploaderName.Text = customUploader.Name;
+
             txtCustomUploaderArgName.Text = string.Empty;
             txtCustomUploaderArgValue.Text = string.Empty;
             lvCustomUploaderArguments.Items.Clear();
-            foreach (Argument arg in imageUploader.Arguments)
+            foreach (KeyValuePair<string, string> arg in customUploader.Arguments)
             {
-                lvCustomUploaderArguments.Items.Add(arg.Name).SubItems.Add(arg.Value);
+                lvCustomUploaderArguments.Items.Add(arg.Key).SubItems.Add(arg.Value);
             }
 
-            txtCustomUploaderURL.Text = imageUploader.UploadURL;
-            txtCustomUploaderFileForm.Text = imageUploader.FileFormName;
+            txtCustomUploaderURL.Text = customUploader.RequestURL;
+            txtCustomUploaderFileForm.Text = customUploader.FileFormName;
             txtCustomUploaderRegexp.Text = string.Empty;
             lvCustomUploaderRegexps.Items.Clear();
-            foreach (string regexp in imageUploader.RegexpList)
+            foreach (string regexp in customUploader.RegexList)
             {
                 lvCustomUploaderRegexps.Items.Add(regexp);
             }
 
-            txtCustomUploaderFullImage.Text = imageUploader.URL;
-            txtCustomUploaderThumbnail.Text = imageUploader.ThumbnailURL;
+            txtCustomUploaderFullImage.Text = customUploader.URL;
+            txtCustomUploaderThumbnail.Text = customUploader.ThumbnailURL;
         }
 
-        private CustomUploaderInfo GetCustomUploaderFromFields()
+        private CustomUploaderItem GetCustomUploaderFromFields()
         {
-            CustomUploaderInfo iUploader = new CustomUploaderInfo(txtCustomUploaderName.Text);
+            CustomUploaderItem iUploader = new CustomUploaderItem(txtCustomUploaderName.Text);
             foreach (ListViewItem lvItem in lvCustomUploaderArguments.Items)
             {
-                iUploader.Arguments.Add(new Argument(lvItem.Text, lvItem.SubItems[1].Text));
+                iUploader.Arguments.Add(lvItem.Text, lvItem.SubItems[1].Text);
             }
 
-            iUploader.UploadURL = txtCustomUploaderURL.Text;
+            iUploader.RequestURL = txtCustomUploaderURL.Text;
             iUploader.FileFormName = txtCustomUploaderFileForm.Text;
             foreach (ListViewItem lvItem in lvCustomUploaderRegexps.Items)
             {
-                iUploader.RegexpList.Add(lvItem.Text);
+                iUploader.RegexList.Add(lvItem.Text);
             }
 
             iUploader.URL = txtCustomUploaderFullImage.Text;
@@ -980,7 +984,7 @@ namespace UploadersLib
             {
                 Config.CustomUploadersList = um.ImageHostingServices;
 
-                foreach (CustomUploaderInfo cui in Config.CustomUploadersList)
+                foreach (CustomUploaderItem cui in Config.CustomUploadersList)
                 {
                     lbCustomUploaderList.Items.Add(cui.Name);
                 }
@@ -993,7 +997,7 @@ namespace UploadersLib
             um.Save(fp);
         }
 
-        private void TestCustomUploader(CustomUploaderInfo cui)
+        private void TestCustomUploader(CustomUploaderItem cui)
         {
             UploadResult ur = null;
 

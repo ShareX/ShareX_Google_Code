@@ -135,7 +135,7 @@ namespace UploadersLib
 
         // Custom Uploader
 
-        public List<CustomUploaderInfo> CustomUploadersList = new List<CustomUploaderInfo>();
+        public List<CustomUploaderItem> CustomUploadersList = new List<CustomUploaderItem>();
         public int CustomUploaderSelected = 0;
 
         // FTP Server
