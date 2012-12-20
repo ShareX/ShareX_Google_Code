@@ -264,6 +264,8 @@
             this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.cbMinusURLType = new System.Windows.Forms.ComboBox();
+            this.lblMinusURLType = new System.Windows.Forms.Label();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -1442,14 +1444,14 @@
             this.gbMinusUserPass.Controls.Add(this.btnMinusAuth);
             this.gbMinusUserPass.Location = new System.Drawing.Point(16, 16);
             this.gbMinusUserPass.Name = "gbMinusUserPass";
-            this.gbMinusUserPass.Size = new System.Drawing.Size(712, 96);
+            this.gbMinusUserPass.Size = new System.Drawing.Size(712, 88);
             this.gbMinusUserPass.TabIndex = 0;
             this.gbMinusUserPass.TabStop = false;
             this.gbMinusUserPass.Text = "Authentication";
             // 
             // btnAuthRefresh
             // 
-            this.btnAuthRefresh.Location = new System.Drawing.Point(528, 48);
+            this.btnAuthRefresh.Location = new System.Drawing.Point(552, 16);
             this.btnAuthRefresh.Name = "btnAuthRefresh";
             this.btnAuthRefresh.Size = new System.Drawing.Size(144, 24);
             this.btnAuthRefresh.TabIndex = 4;
@@ -1492,7 +1494,7 @@
             // 
             // btnMinusAuth
             // 
-            this.btnMinusAuth.Location = new System.Drawing.Point(528, 16);
+            this.btnMinusAuth.Location = new System.Drawing.Point(400, 16);
             this.btnMinusAuth.Name = "btnMinusAuth";
             this.btnMinusAuth.Size = new System.Drawing.Size(144, 24);
             this.btnMinusAuth.TabIndex = 1;
@@ -1502,14 +1504,16 @@
             // 
             // gbMinusUpload
             // 
+            this.gbMinusUpload.Controls.Add(this.lblMinusURLType);
+            this.gbMinusUpload.Controls.Add(this.cbMinusURLType);
             this.gbMinusUpload.Controls.Add(this.btnMinusReadFolderList);
             this.gbMinusUpload.Controls.Add(this.chkMinusPublic);
             this.gbMinusUpload.Controls.Add(this.btnMinusFolderAdd);
             this.gbMinusUpload.Controls.Add(this.btnMinusFolderRemove);
             this.gbMinusUpload.Controls.Add(this.cboMinusFolders);
-            this.gbMinusUpload.Location = new System.Drawing.Point(16, 128);
+            this.gbMinusUpload.Location = new System.Drawing.Point(16, 112);
             this.gbMinusUpload.Name = "gbMinusUpload";
-            this.gbMinusUpload.Size = new System.Drawing.Size(712, 96);
+            this.gbMinusUpload.Size = new System.Drawing.Size(712, 88);
             this.gbMinusUpload.TabIndex = 1;
             this.gbMinusUpload.TabStop = false;
             this.gbMinusUpload.Text = "Upload images to";
@@ -1517,7 +1521,7 @@
             // btnMinusReadFolderList
             // 
             this.btnMinusReadFolderList.AutoSize = true;
-            this.btnMinusReadFolderList.Location = new System.Drawing.Point(488, 56);
+            this.btnMinusReadFolderList.Location = new System.Drawing.Point(512, 48);
             this.btnMinusReadFolderList.Name = "btnMinusReadFolderList";
             this.btnMinusReadFolderList.Size = new System.Drawing.Size(184, 23);
             this.btnMinusReadFolderList.TabIndex = 4;
@@ -1528,7 +1532,7 @@
             // chkMinusPublic
             // 
             this.chkMinusPublic.AutoSize = true;
-            this.chkMinusPublic.Location = new System.Drawing.Point(416, 24);
+            this.chkMinusPublic.Location = new System.Drawing.Point(416, 26);
             this.chkMinusPublic.Name = "chkMinusPublic";
             this.chkMinusPublic.Size = new System.Drawing.Size(55, 17);
             this.chkMinusPublic.TabIndex = 1;
@@ -1537,7 +1541,7 @@
             // 
             // btnMinusFolderAdd
             // 
-            this.btnMinusFolderAdd.Location = new System.Drawing.Point(488, 24);
+            this.btnMinusFolderAdd.Location = new System.Drawing.Point(512, 16);
             this.btnMinusFolderAdd.Name = "btnMinusFolderAdd";
             this.btnMinusFolderAdd.Size = new System.Drawing.Size(75, 23);
             this.btnMinusFolderAdd.TabIndex = 2;
@@ -1548,7 +1552,7 @@
             // btnMinusFolderRemove
             // 
             this.btnMinusFolderRemove.AutoSize = true;
-            this.btnMinusFolderRemove.Location = new System.Drawing.Point(568, 24);
+            this.btnMinusFolderRemove.Location = new System.Drawing.Point(592, 16);
             this.btnMinusFolderRemove.Name = "btnMinusFolderRemove";
             this.btnMinusFolderRemove.Size = new System.Drawing.Size(104, 23);
             this.btnMinusFolderRemove.TabIndex = 3;
@@ -2792,6 +2796,25 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
+            // cbMinusURLType
+            // 
+            this.cbMinusURLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMinusURLType.FormattingEnabled = true;
+            this.cbMinusURLType.Location = new System.Drawing.Point(80, 52);
+            this.cbMinusURLType.Name = "cbMinusURLType";
+            this.cbMinusURLType.Size = new System.Drawing.Size(88, 21);
+            this.cbMinusURLType.TabIndex = 5;
+            this.cbMinusURLType.SelectedIndexChanged += new System.EventHandler(this.cbMinusURLType_SelectedIndexChanged);
+            // 
+            // lblMinusURLType
+            // 
+            this.lblMinusURLType.AutoSize = true;
+            this.lblMinusURLType.Location = new System.Drawing.Point(16, 56);
+            this.lblMinusURLType.Name = "lblMinusURLType";
+            this.lblMinusURLType.Size = new System.Drawing.Size(55, 13);
+            this.lblMinusURLType.TabIndex = 6;
+            this.lblMinusURLType.Text = "URL type:";
+            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3126,5 +3149,7 @@
         private System.Windows.Forms.Label lblPicasaAccountStatus;
         private System.Windows.Forms.Button btnFtpClient;
         private System.Windows.Forms.Button btnURLParseHelp;
+        private System.Windows.Forms.Label lblMinusURLType;
+        private System.Windows.Forms.ComboBox cbMinusURLType;
     }
 }

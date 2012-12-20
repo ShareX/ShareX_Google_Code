@@ -466,6 +466,14 @@ namespace UploadersLib
             }
         }
 
+        private void cbMinusURLType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Config.MinusConfig != null)
+            {
+                Config.MinusConfig.LinkType = (MinusLinkType)cbMinusURLType.SelectedIndex;
+            }
+        }
+
         #endregion Minus
 
         #region FTP
