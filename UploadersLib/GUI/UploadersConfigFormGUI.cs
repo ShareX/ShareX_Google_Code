@@ -27,6 +27,7 @@ using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
 using UploadersLib.Properties;
@@ -219,6 +220,7 @@ namespace UploadersLib
 
             // Minus
 
+            cbMinusURLType.Items.AddRange(Enum.GetNames(typeof(MinusLinkType)));
             MinusUpdateControls();
 
             // Box

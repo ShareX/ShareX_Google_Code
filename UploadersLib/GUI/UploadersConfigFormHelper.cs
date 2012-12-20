@@ -499,9 +499,12 @@ namespace UploadersLib
             if (!string.IsNullOrEmpty(txtMinusUsername.Text) && !string.IsNullOrEmpty(txtMinusPassword.Text))
             {
                 btnMinusAuth.Enabled = false;
+
                 try
                 {
-                    Minus minus = new Minus(Config.MinusConfig, new OAuthInfo(APIKeys.MinusConsumerKey, APIKeys.MinusConsumerSecret), txtMinusUsername.Text, txtMinusPassword.Text);
+                    Config.MinusConfig.Username = txtMinusUsername.Text;
+                    Config.MinusConfig.Password = txtMinusPassword.Text;
+                    Minus minus = new Minus(Config.MinusConfig, new OAuthInfo(APIKeys.MinusConsumerKey, APIKeys.MinusConsumerSecret));
                     string url = minus.GetAuthorizationURL();
 
                     if (!string.IsNullOrEmpty(url))
@@ -549,14 +552,16 @@ namespace UploadersLib
         {
             if (Config.MinusConfig != null && Config.MinusConfig.MinusUser != null)
             {
-                lblMinusAuthStatus.Text = "Logged in: " + Config.MinusConfig.MinusUser.username;
-                txtMinusUsername.Text = Config.MinusConfig.MinusUser.username;
+                lblMinusAuthStatus.Text = "Logged in: " + Config.MinusConfig.MinusUser.display_name;
+                txtMinusUsername.Text = Config.MinusConfig.Username;
+                txtMinusPassword.Text = Config.MinusConfig.Password;
                 cboMinusFolders.Items.Clear();
                 if (Config.MinusConfig.FolderList.Count > 0)
                 {
                     cboMinusFolders.Items.AddRange(Config.MinusConfig.FolderList.ToArray());
                     cboMinusFolders.SelectedIndex = Config.MinusConfig.FolderID.BetweenOrDefault(0, cboMinusFolders.Items.Count - 1);
                 }
+                cbMinusURLType.SelectedIndex = (int)Config.MinusConfig.LinkType;
             }
             else
             {
