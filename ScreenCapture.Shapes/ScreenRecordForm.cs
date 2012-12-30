@@ -24,44 +24,75 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ScreenCapture;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace ScreenCapture
 {
     public partial class ScreenRecordForm : Form
     {
+        public Rectangle CaptureRectangle { get; set; }
+        public int FPS { get; set; }
+        public float Duration { get; set; } // Seconds
+        public GIFQuality GIFQuality { get; set; }
+
         public ScreenRecordForm()
         {
             InitializeComponent();
+            FPS = 5;
+            Duration = 3;
+            CaptureRectangle = new Rectangle(0, 0, 500, 500);
+
+            lblRegion.Text = CaptureRectangle.ToString();
+            nudFPS.Value = FPS;
+            nudDuration.Value = (decimal)Duration;
         }
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
             btnRecord.Enabled = false;
-            Screenshot.DrawCursor = Program.Settings.ShowCursor;
-            ScreenRecorder screenRecorder = new ScreenRecorder(5, 3, new Rectangle(0, 0, 500, 500));
+            Hide();
+            ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle);
             Helpers.AsyncJob(() =>
             {
+                Thread.Sleep(1000);
                 screenRecorder.StartRecording();
+                Stopwatch timer = Stopwatch.StartNew();
+                screenRecorder.MakeGIF2(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), GIFQuality);
+                Debug.WriteLine("GIF encoding completed in " + timer.ElapsedMilliseconds + "ms");
             },
             () =>
             {
-                Stopwatch timer = Stopwatch.StartNew();
-                screenRecorder.MakeGIF2(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), Program.Settings.ImageGIFQuality);
-                Debug.WriteLine(timer.ElapsedMilliseconds);
                 screenRecorder.ClearTempFolder();
                 btnRecord.Enabled = true;
+                Show();
             });
+        }
+
+        private void btnRegion_Click(object sender, EventArgs e)
+        {
+            using (CropLight cropForm = new CropLight())
+            {
+                if (cropForm.ShowDialog() == DialogResult.OK)
+                {
+                    CaptureRectangle = cropForm.SelectionRectangle;
+                    lblRegion.Text = CaptureRectangle.ToString();
+                }
+            }
+        }
+
+        private void nudFPS_ValueChanged(object sender, EventArgs e)
+        {
+            FPS = (int)nudFPS.Value;
+        }
+
+        private void nudDuration_ValueChanged(object sender, EventArgs e)
+        {
+            Duration = (float)nudDuration.Value;
         }
     }
 }
