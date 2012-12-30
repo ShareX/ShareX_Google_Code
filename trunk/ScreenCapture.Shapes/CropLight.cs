@@ -41,6 +41,11 @@ namespace ScreenCapture
 
         public Rectangle SelectionRectangle { get; private set; }
 
+        public CropLight()
+            : this(Screenshot.CaptureFullscreen())
+        {
+        }
+
         public CropLight(Image backgroundImage)
         {
             InitializeComponent();
