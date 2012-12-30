@@ -35,12 +35,12 @@ namespace HelpersLib
 {
     public class AnimatedGif : IDisposable
     {
-        private Byte[] buf1, buf2, buf3;
+        private byte[] buf1, buf2, buf3;
         private MemoryStream gifStream;
         private BinaryWriter binaryWriter;
         private int frameNum;
 
-        public AnimatedGif(int delay, int repeatCount = 0)
+        public AnimatedGif(int delay, int repeat = 0)
         {
             buf2 = new byte[19];
             buf2[0] = 0x21; // Extension introducer
@@ -59,8 +59,8 @@ namespace HelpersLib
             buf2[13] = 48; // 0
             buf2[14] = 0x03; // Size of block
             buf2[15] = 0x01; // Loop indicator
-            buf2[16] = (byte)(repeatCount % 0x100); // Number of repetitions
-            buf2[17] = (byte)(repeatCount / 0x100); // 0 for endless loop
+            buf2[16] = (byte)(repeat % 0x100); // Number of repetitions
+            buf2[17] = (byte)(repeat / 0x100); // 0 for endless loop
             buf2[18] = 0x00; // Block terminator
 
             buf3 = new byte[8];
@@ -77,12 +77,12 @@ namespace HelpersLib
             binaryWriter = new BinaryWriter(gifStream);
         }
 
-        public void AddFrame(string path, GIFQuality quality = GIFQuality.Default)
+        public void AddFrame(string path)
         {
             using (Image img = Image.FromFile(path))
             using (MemoryStream ms = new MemoryStream())
             {
-                img.SaveGIF(ms, quality);
+                img.Save(ms, ImageFormat.Gif);
                 buf1 = ms.ToArray();
             }
 
@@ -107,7 +107,7 @@ namespace HelpersLib
 
         public void Save(string filePath)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 fs.Write(gifStream.ToArray(), 0, (int)gifStream.Length);
             }
