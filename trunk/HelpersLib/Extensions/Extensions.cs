@@ -210,5 +210,49 @@ namespace HelpersLib
             NativeMethods.SendMessage(rtb.Handle, (int)WindowsMessages.SETREDRAW, 1, 0);
             rtb.Invalidate();
         }
+
+        public static void SaveJPG(this Image img, Stream stream, int quality, bool fillBackground)
+        {
+            using (EncoderParameters encoderParameters = new EncoderParameters(1))
+            {
+                if (fillBackground)
+                {
+                    img = CaptureHelpers.FillImageBackground(img, Color.White);
+                }
+
+                encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+                img.Save(stream, ImageFormat.Jpeg.GetCodecInfo(), encoderParameters);
+            }
+        }
+
+        public static void SaveGIF(this Image img, Stream stream, GIFQuality quality)
+        {
+            if (quality == GIFQuality.Default)
+            {
+                img.Save(stream, ImageFormat.Gif);
+            }
+            else
+            {
+                Quantizer quantizer;
+                switch (quality)
+                {
+                    case GIFQuality.Grayscale:
+                        quantizer = new GrayscaleQuantizer();
+                        break;
+                    case GIFQuality.Bit4:
+                        quantizer = new OctreeQuantizer(15, 4);
+                        break;
+                    case GIFQuality.Bit8:
+                    default:
+                        quantizer = new OctreeQuantizer(255, 4);
+                        break;
+                }
+
+                using (Bitmap quantized = quantizer.Quantize(img))
+                {
+                    quantized.Save(stream, ImageFormat.Gif);
+                }
+            }
+        }
     }
 }

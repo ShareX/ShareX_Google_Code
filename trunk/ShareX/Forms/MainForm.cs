@@ -613,6 +613,15 @@ namespace ShareX
             }
         }
 
+        private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
+        {
+            using (ScreenRecordForm recordForm = new ScreenRecordForm())
+            {
+                recordForm.Icon = Icon;
+                recordForm.ShowDialog();
+            }
+        }
+
         private void tsbScreenshotsFolder_Click(object sender, EventArgs e)
         {
             Helpers.OpenFolder(Program.ScreenshotsPath);

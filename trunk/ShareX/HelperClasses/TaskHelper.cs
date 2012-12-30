@@ -25,6 +25,8 @@
 
 using HelpersLib;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace ShareX
 {
@@ -39,12 +41,12 @@ namespace ShareX
                 img = ResizeImage(img, Program.Settings.ImageScaleType);
             }
 
-            imageData.ImageStream = img.SaveImage(Program.Settings.ImageFormat);
+            imageData.ImageStream = SaveImage(img, Program.Settings.ImageFormat);
 
             int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
             if (Program.Settings.ImageFormat != Program.Settings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
             {
-                imageData.ImageStream = img.SaveImage(Program.Settings.ImageFormat2);
+                imageData.ImageStream = SaveImage(img, Program.Settings.ImageFormat2);
                 imageData.ImageFormat = Program.Settings.ImageFormat2;
             }
             else
@@ -85,6 +87,32 @@ namespace ShareX
             }
 
             return img;
+        }
+
+        private static MemoryStream SaveImage(Image img, EImageFormat imageFormat)
+        {
+            MemoryStream stream = new MemoryStream();
+
+            switch (imageFormat)
+            {
+                case EImageFormat.PNG:
+                    img.Save(stream, ImageFormat.Png);
+                    break;
+                case EImageFormat.JPEG:
+                    img.SaveJPG(stream, Program.Settings.ImageJPEGQuality, true);
+                    break;
+                case EImageFormat.GIF:
+                    img.SaveGIF(stream, Program.Settings.ImageGIFQuality);
+                    break;
+                case EImageFormat.BMP:
+                    img.Save(stream, ImageFormat.Bmp);
+                    break;
+                case EImageFormat.TIFF:
+                    img.Save(stream, ImageFormat.Tiff);
+                    break;
+            }
+
+            return stream;
         }
     }
 }
