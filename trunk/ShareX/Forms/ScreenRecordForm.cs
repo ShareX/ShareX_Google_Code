@@ -48,7 +48,8 @@ namespace ShareX
         private void btnRecord_Click(object sender, EventArgs e)
         {
             btnRecord.Enabled = false;
-            ScreenRecorder screenRecorder = new ScreenRecorder(5, 3, new Rectangle(0, 0, 500, 300));
+            Screenshot.DrawCursor = Program.Settings.ShowCursor;
+            ScreenRecorder screenRecorder = new ScreenRecorder(5, 3, new Rectangle(0, 0, 500, 500));
             Helpers.AsyncJob(() =>
             {
                 screenRecorder.StartRecording();
@@ -56,7 +57,7 @@ namespace ShareX
             () =>
             {
                 Stopwatch timer = Stopwatch.StartNew();
-                screenRecorder.MakeGIF(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), Program.Settings.ImageGIFQuality);
+                screenRecorder.MakeGIF2(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), Program.Settings.ImageGIFQuality);
                 Debug.WriteLine(timer.ElapsedMilliseconds);
                 screenRecorder.ClearTempFolder();
                 btnRecord.Enabled = true;

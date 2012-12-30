@@ -99,9 +99,23 @@ namespace ScreenCapture
             }
         }
 
-        public void MakeGIF(string path, GIFQuality quality = GIFQuality.Default)
+        public void MakeGIF(string path)
         {
             using (AnimatedGif gifEncoder = new AnimatedGif(delay))
+            {
+                foreach (string file in Directory.GetFiles(tempFolderPath, "*.png", SearchOption.TopDirectoryOnly))
+                {
+                    gifEncoder.AddFrame(file);
+                }
+
+                gifEncoder.Finish();
+                gifEncoder.Save(path);
+            }
+        }
+
+        public void MakeGIF2(string path, GIFQuality quality = GIFQuality.Default)
+        {
+            using (GifCreator gifEncoder = new GifCreator(delay))
             {
                 foreach (string file in Directory.GetFiles(tempFolderPath, "*.png", SearchOption.TopDirectoryOnly))
                 {
