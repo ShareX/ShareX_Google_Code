@@ -55,11 +55,10 @@ namespace HelpersLib
         public List<byte> m_ImageDescriptor = new List<byte>();
         public List<byte> m_ImageData = new List<byte>();
 
-        public void LoadGifPicture(string path, GIFQuality quality)
+        public void LoadGifPicture(Image img, GIFQuality quality)
         {
             List<byte> dataList;
 
-            using (Image img = Image.FromFile(path))
             using (MemoryStream ms = new MemoryStream())
             {
                 img.SaveGIF(ms, quality);
@@ -68,7 +67,7 @@ namespace HelpersLib
 
             if (!AnalyzeGifSignature(dataList))
             {
-                throw (new Exception("File is not a gif!"));
+                throw new Exception("File is not a gif!");
             }
 
             AnalyzeScreenDescriptor(dataList);

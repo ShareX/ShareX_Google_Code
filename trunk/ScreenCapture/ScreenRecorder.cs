@@ -37,11 +37,10 @@ using System.Windows.Forms;
 
 namespace ScreenCapture
 {
-    public class ScreenRecorder
+    public class ScreenRecorder : IDisposable
     {
-        private static string tempFolderName = "TempVideos";
-        private static string tempFolderPath = Path.Combine(Application.StartupPath, tempFolderName);
         private bool isWorking;
+        private List<Image> screenshots;
 
         private int fps, delay, frameCount;
         private float durationSeconds;
@@ -63,67 +62,73 @@ namespace ScreenCapture
             {
                 isWorking = true;
 
-                PrepareTempFolder();
+                if (screenshots != null)
+                {
+                    Dispose();
+                }
+
+                screenshots = new List<Image>();
 
                 for (int i = 0; i < frameCount; i++)
                 {
-                    string path = Path.Combine(tempFolderPath, i.ToString("d5") + ".png");
-
-                    using (Image img = Screenshot.CaptureRectangle(captureRect))
+                    Stopwatch timer = Stopwatch.StartNew();
+                    Image img = Screenshot.CaptureRectangle(captureRect);
+                    screenshots.Add(img);
+                    int sleepTime = delay - (int)timer.ElapsedMilliseconds;
+                    if (sleepTime > 0)
                     {
-                        img.Save(path, ImageFormat.Png);
+                        Thread.Sleep(sleepTime);
                     }
-
-                    Thread.Sleep(delay);
                 }
 
                 isWorking = false;
             }
         }
 
-        private void PrepareTempFolder()
+        public void SaveAsGIF(string path)
         {
-            if (Directory.Exists(tempFolderPath))
+            if (!isWorking && screenshots.Count > 0)
             {
-                Directory.Delete(tempFolderPath, true);
-            }
-
-            Directory.CreateDirectory(tempFolderPath);
-        }
-
-        public void ClearTempFolder()
-        {
-            if (Directory.Exists(tempFolderPath))
-            {
-                Directory.Delete(tempFolderPath, true);
-            }
-        }
-
-        public void MakeGIF(string path)
-        {
-            using (AnimatedGif gifEncoder = new AnimatedGif(delay))
-            {
-                foreach (string file in Directory.GetFiles(tempFolderPath, "*.png", SearchOption.TopDirectoryOnly))
+                using (AnimatedGif gifEncoder = new AnimatedGif(delay))
                 {
-                    gifEncoder.AddFrame(file);
-                }
+                    foreach (Image img in screenshots)
+                    {
+                        gifEncoder.AddFrame(img);
+                    }
 
-                gifEncoder.Finish();
-                gifEncoder.Save(path);
+                    gifEncoder.Finish();
+                    gifEncoder.Save(path);
+                }
             }
         }
 
-        public void MakeGIF2(string path, GIFQuality quality = GIFQuality.Default)
+        public void SaveAsGIF(string path, GIFQuality quality)
         {
-            using (GifCreator gifEncoder = new GifCreator(delay))
+            if (!isWorking && screenshots.Count > 0)
             {
-                foreach (string file in Directory.GetFiles(tempFolderPath, "*.png", SearchOption.TopDirectoryOnly))
+                using (GifCreator gifEncoder = new GifCreator(delay))
                 {
-                    gifEncoder.AddFrame(file, quality);
-                }
+                    foreach (Image img in screenshots)
+                    {
+                        gifEncoder.AddFrame(img, quality);
+                    }
 
-                gifEncoder.Finish();
-                gifEncoder.Save(path);
+                    gifEncoder.Finish();
+                    gifEncoder.Save(path);
+                }
+            }
+        }
+
+        public void SaveAsAVI(string path)
+        {
+            // TODO: ScreenRecorder AVI support
+        }
+
+        public void Dispose()
+        {
+            foreach (Image img in screenshots)
+            {
+                if (img != null) img.Dispose();
             }
         }
     }
