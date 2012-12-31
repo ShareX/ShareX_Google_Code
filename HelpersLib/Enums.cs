@@ -209,4 +209,9 @@ namespace HelpersLib
     {
         Inside, Outside
     }
+
+    public enum ScreenRecordOutput
+    {
+        GIF, AVI
+    }
 }

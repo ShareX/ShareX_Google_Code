@@ -35,13 +35,15 @@
             this.nudDuration = new System.Windows.Forms.NumericUpDown();
             this.nudFPS = new System.Windows.Forms.NumericUpDown();
             this.lblRegion = new System.Windows.Forms.Label();
+            this.lblOutput = new System.Windows.Forms.Label();
+            this.cbOutput = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(16, 131);
+            this.btnRecord.Location = new System.Drawing.Point(16, 152);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(200, 24);
             this.btnRecord.TabIndex = 0;
@@ -71,7 +73,7 @@
             // lblDuration
             // 
             this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(16, 104);
+            this.lblDuration.Location = new System.Drawing.Point(16, 100);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(99, 13);
             this.lblDuration.TabIndex = 4;
@@ -85,7 +87,7 @@
             0,
             0,
             65536});
-            this.nudDuration.Location = new System.Drawing.Point(120, 100);
+            this.nudDuration.Location = new System.Drawing.Point(120, 96);
             this.nudDuration.Maximum = new decimal(new int[] {
             30,
             0,
@@ -134,17 +136,38 @@
             // lblRegion
             // 
             this.lblRegion.AutoSize = true;
-            this.lblRegion.Location = new System.Drawing.Point(16, 48);
+            this.lblRegion.Location = new System.Drawing.Point(16, 52);
             this.lblRegion.Name = "lblRegion";
             this.lblRegion.Size = new System.Drawing.Size(41, 13);
             this.lblRegion.TabIndex = 7;
             this.lblRegion.Text = "Region";
             // 
+            // lblOutput
+            // 
+            this.lblOutput.AutoSize = true;
+            this.lblOutput.Location = new System.Drawing.Point(16, 124);
+            this.lblOutput.Name = "lblOutput";
+            this.lblOutput.Size = new System.Drawing.Size(42, 13);
+            this.lblOutput.TabIndex = 8;
+            this.lblOutput.Text = "Output:";
+            // 
+            // cbOutput
+            // 
+            this.cbOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOutput.FormattingEnabled = true;
+            this.cbOutput.Location = new System.Drawing.Point(64, 120);
+            this.cbOutput.Name = "cbOutput";
+            this.cbOutput.Size = new System.Drawing.Size(64, 21);
+            this.cbOutput.TabIndex = 9;
+            this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
+            // 
             // ScreenRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 169);
+            this.ClientSize = new System.Drawing.Size(231, 188);
+            this.Controls.Add(this.cbOutput);
+            this.Controls.Add(this.lblOutput);
             this.Controls.Add(this.lblRegion);
             this.Controls.Add(this.nudFPS);
             this.Controls.Add(this.nudDuration);
@@ -172,5 +195,7 @@
         private System.Windows.Forms.NumericUpDown nudDuration;
         private System.Windows.Forms.NumericUpDown nudFPS;
         private System.Windows.Forms.Label lblRegion;
+        private System.Windows.Forms.Label lblOutput;
+        private System.Windows.Forms.ComboBox cbOutput;
     }
 }
