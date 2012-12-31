@@ -101,7 +101,7 @@
             this.nudDuration.TabIndex = 5;
             this.nudDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudDuration.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             0});
@@ -111,7 +111,7 @@
             // 
             this.nudFPS.Location = new System.Drawing.Point(56, 72);
             this.nudFPS.Maximum = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});
@@ -125,7 +125,7 @@
             this.nudFPS.TabIndex = 6;
             this.nudFPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudFPS.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});

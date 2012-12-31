@@ -56,18 +56,19 @@ namespace ScreenCapture
         {
             btnRecord.Enabled = false;
             Hide();
-            ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle);
             Helpers.AsyncJob(() =>
             {
                 Thread.Sleep(1000);
-                screenRecorder.StartRecording();
-                Stopwatch timer = Stopwatch.StartNew();
-                screenRecorder.MakeGIF2(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), GIFQuality);
-                Debug.WriteLine("GIF encoding completed in " + timer.ElapsedMilliseconds + "ms");
+                using (ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle))
+                {
+                    screenRecorder.StartRecording();
+                    Stopwatch timer = Stopwatch.StartNew();
+                    screenRecorder.SaveAsGIF(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), GIFQuality);
+                    Debug.WriteLine("GIF encoding completed in " + timer.ElapsedMilliseconds + "ms");
+                }
             },
             () =>
             {
-                screenRecorder.ClearTempFolder();
                 btnRecord.Enabled = true;
                 Show();
             });

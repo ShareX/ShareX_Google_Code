@@ -50,10 +50,10 @@ namespace HelpersLib
             binaryWriter.Write(signature);
         }
 
-        public void AddFrame(string path, GIFQuality quality = GIFQuality.Default)
+        public void AddFrame(Image img, GIFQuality quality = GIFQuality.Default)
         {
             GifClass gif = new GifClass();
-            gif.LoadGifPicture(path, quality);
+            gif.LoadGifPicture(img, quality);
 
             if (frameNum == 0)
             {
@@ -66,6 +66,14 @@ namespace HelpersLib
             binaryWriter.Write(gif.m_ImageData.ToArray());
 
             frameNum++;
+        }
+
+        public void AddFrame(string path, GIFQuality quality = GIFQuality.Default)
+        {
+            using (Image img = Image.FromFile(path))
+            {
+                AddFrame(img, quality);
+            }
         }
 
         public void Finish()

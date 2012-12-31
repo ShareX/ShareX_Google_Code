@@ -77,9 +77,8 @@ namespace HelpersLib
             binaryWriter = new BinaryWriter(gifStream);
         }
 
-        public void AddFrame(string path)
+        public void AddFrame(Image img)
         {
-            using (Image img = Image.FromFile(path))
             using (MemoryStream ms = new MemoryStream())
             {
                 img.Save(ms, ImageFormat.Gif);
@@ -97,6 +96,14 @@ namespace HelpersLib
             binaryWriter.Write(buf1, 789, buf1.Length - 790); // Image data
 
             frameNum++;
+        }
+
+        public void AddFrame(string path)
+        {
+            using (Image img = Image.FromFile(path))
+            {
+                AddFrame(img);
+            }
         }
 
         public void Finish()
