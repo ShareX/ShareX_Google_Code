@@ -38,6 +38,7 @@ namespace ScreenCapture
         public Rectangle CaptureRectangle { get; set; }
         public int FPS { get; set; }
         public float Duration { get; set; } // Seconds
+        public ScreenRecordOutput Output { get; set; }
         public GIFQuality GIFQuality { get; set; }
 
         public ScreenRecordForm()
@@ -46,10 +47,13 @@ namespace ScreenCapture
             FPS = 5;
             Duration = 3;
             CaptureRectangle = new Rectangle(0, 0, 500, 500);
+            Output = ScreenRecordOutput.GIF;
 
             lblRegion.Text = CaptureRectangle.ToString();
             nudFPS.Value = FPS;
             nudDuration.Value = (decimal)Duration;
+            cbOutput.Items.AddRange(Enum.GetNames(typeof(ScreenRecordOutput)));
+            cbOutput.SelectedIndex = (int)Output;
         }
 
         private void btnRecord_Click(object sender, EventArgs e)
@@ -63,8 +67,20 @@ namespace ScreenCapture
                 {
                     screenRecorder.StartRecording();
                     Stopwatch timer = Stopwatch.StartNew();
-                    screenRecorder.SaveAsGIF(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif"), GIFQuality);
-                    Debug.WriteLine("GIF encoding completed in " + timer.ElapsedMilliseconds + "ms");
+
+                    switch (Output)
+                    {
+                        case ScreenRecordOutput.GIF:
+                            string pathGIF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif");
+                            screenRecorder.SaveAsGIF(pathGIF, GIFQuality);
+                            break;
+                        case ScreenRecordOutput.AVI:
+                            string pathAVI = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.avi");
+                            screenRecorder.SaveAsAVI(pathAVI);
+                            break;
+                    }
+
+                    Debug.WriteLine("Encoding completed in " + timer.ElapsedMilliseconds + "ms");
                 }
             },
             () =>
@@ -94,6 +110,11 @@ namespace ScreenCapture
         private void nudDuration_ValueChanged(object sender, EventArgs e)
         {
             Duration = (float)nudDuration.Value;
+        }
+
+        private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Output = (ScreenRecordOutput)cbOutput.SelectedIndex;
         }
     }
 }

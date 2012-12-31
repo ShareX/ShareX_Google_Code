@@ -121,7 +121,16 @@ namespace ScreenCapture
 
         public void SaveAsAVI(string path)
         {
-            // TODO: ScreenRecorder AVI support
+            if (!isWorking && screenshots.Count > 0)
+            {
+                using (AVIManager aviManager = new AVIManager(path, fps))
+                {
+                    foreach (Image img in screenshots)
+                    {
+                        aviManager.AddFrame(img);
+                    }
+                }
+            }
         }
 
         public void Dispose()
