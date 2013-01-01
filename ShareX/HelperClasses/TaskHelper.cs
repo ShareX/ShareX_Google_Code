@@ -27,6 +27,8 @@ using HelpersLib;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Media;
+using System.Windows.Forms;
 
 namespace ShareX
 {
@@ -113,6 +115,39 @@ namespace ShareX
             }
 
             return stream;
+        }
+
+        public static string GetFilename(string extension = "")
+        {
+            NameParser nameParser = new NameParser(NameParserType.FileName)
+            {
+                AutoIncrementNumber = Program.Settings.AutoIncrementNumber,
+                MaxNameLength = 100
+            };
+
+            string filename = nameParser.Convert(Program.Settings.NameFormatPattern);
+            if (!string.IsNullOrEmpty(extension)) filename += "." + extension;
+
+            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+
+            return filename;
+        }
+
+        public static void ShowResultNotifications(string result)
+        {
+            if (!string.IsNullOrEmpty(result))
+            {
+                if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
+                {
+                    Program.MainForm.niTray.Tag = result;
+                    Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
+                }
+
+                if (Program.Settings.PlaySoundAfterUpload)
+                {
+                    SystemSounds.Exclamation.Play();
+                }
+            }
         }
     }
 }
