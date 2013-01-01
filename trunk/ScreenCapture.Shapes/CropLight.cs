@@ -24,9 +24,11 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture.Shapes.Properties;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ScreenCapture
@@ -39,6 +41,7 @@ namespace ScreenCapture
         private Point positionOnClick, positionCurrent, positionOld;
         private bool isMouseDown;
 
+        public bool ShowRectangleInfo { get; set; }
         public Rectangle SelectionRectangle { get; private set; }
 
         public CropLight()
@@ -49,6 +52,11 @@ namespace ScreenCapture
         public CropLight(Image backgroundImage)
         {
             InitializeComponent();
+
+            using (MemoryStream cursorStream = new MemoryStream(Resources.Crosshair))
+            {
+                Cursor = new Cursor(cursorStream);
+            }
 
             backgroundBrush = new TextureBrush(backgroundImage);
             rectanglePen = new Pen(Color.Red);
@@ -66,16 +74,13 @@ namespace ScreenCapture
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (isMouseDown)
-            {
-                positionOld = positionCurrent;
-                positionCurrent = CaptureHelpers.GetZeroBasedMousePosition();
+            positionOld = positionCurrent;
+            positionCurrent = CaptureHelpers.GetZeroBasedMousePosition();
 
-                if (positionCurrent != positionOld)
-                {
-                    SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, positionCurrent.X, positionCurrent.Y);
-                    Refresh();
-                }
+            if (positionCurrent != positionOld)
+            {
+                SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, positionCurrent.X, positionCurrent.Y);
+                Refresh();
             }
         }
 
@@ -125,6 +130,14 @@ namespace ScreenCapture
             g.SmoothingMode = SmoothingMode.HighSpeed;
             g.FillRectangle(backgroundBrush, Bounds);
 
+            if (ShowRectangleInfo)
+            {
+                int offset = 10;
+                Point position = CaptureHelpers.FixScreenCoordinates(new Point(positionCurrent.X + offset, positionCurrent.Y + offset));
+                CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
+                    SelectionRectangle.Width, SelectionRectangle.Height), position, new Font("Arial", 17, FontStyle.Bold), Color.White, Color.Black, 3);
+            }
+
             if (isMouseDown)
             {
                 g.DrawRectangleProper(rectanglePen, SelectionRectangle);
@@ -157,7 +170,6 @@ namespace ScreenCapture
             this.FormBorderStyle = FormBorderStyle.None;
             this.Bounds = CaptureHelpers.GetScreenBounds();
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.Cursor = Cursors.Cross;
             this.ShowInTaskbar = false;
             this.TopMost = true;
             this.KeyDown += new KeyEventHandler(this.Crop_KeyDown);

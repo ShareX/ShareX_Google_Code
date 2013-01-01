@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -31,7 +32,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ScreenCapture
+namespace ShareX
 {
     public partial class ScreenRecordForm : Form
     {
@@ -39,7 +40,6 @@ namespace ScreenCapture
         public int FPS { get; set; }
         public float Duration { get; set; } // Seconds
         public ScreenRecordOutput Output { get; set; }
-        public GIFQuality GIFQuality { get; set; }
 
         public ScreenRecordForm()
         {
@@ -54,6 +54,8 @@ namespace ScreenCapture
             nudDuration.Value = (decimal)Duration;
             cbOutput.Items.AddRange(Enum.GetNames(typeof(ScreenRecordOutput)));
             cbOutput.SelectedIndex = (int)Output;
+
+            Screenshot.DrawCursor = Program.Settings.ShowCursor;
         }
 
         private void btnRecord_Click(object sender, EventArgs e)
@@ -63,7 +65,7 @@ namespace ScreenCapture
             Helpers.AsyncJob(() =>
             {
                 Thread.Sleep(1000);
-                using (ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle))
+                using (ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle, Program.ScreenRecorderCacheFilePath))
                 {
                     screenRecorder.StartRecording();
                     Stopwatch timer = Stopwatch.StartNew();
@@ -72,7 +74,7 @@ namespace ScreenCapture
                     {
                         case ScreenRecordOutput.GIF:
                             string pathGIF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif");
-                            screenRecorder.SaveAsGIF(pathGIF, GIFQuality);
+                            screenRecorder.SaveAsGIF(pathGIF, Program.Settings.ImageGIFQuality);
                             break;
                         case ScreenRecordOutput.AVI:
                             string pathAVI = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.avi");
@@ -94,6 +96,8 @@ namespace ScreenCapture
         {
             using (CropLight cropForm = new CropLight())
             {
+                cropForm.ShowRectangleInfo = true;
+
                 if (cropForm.ShowDialog() == DialogResult.OK)
                 {
                     CaptureRectangle = cropForm.SelectionRectangle;
