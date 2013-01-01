@@ -117,7 +117,7 @@ namespace ShareX
         public static Task CreateTextUploaderTask(string text)
         {
             Task task = new Task(TaskJob.TextUpload, EDataType.Text);
-            task.Info.FileName = GetTextFilename();
+            task.Info.FileName = TaskHelper.GetFilename("txt");
             task.tempText = text;
             return task;
         }
@@ -156,21 +156,6 @@ namespace ShareX
             {
                 filename = nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
             }
-
-            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
-
-            return filename;
-        }
-
-        private static string GetTextFilename()
-        {
-            string filename;
-
-            NameParser nameParser = new NameParser(NameParserType.FileName);
-            nameParser.MaxNameLength = 100;
-            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
-
-            filename = nameParser.Convert(Program.Settings.NameFormatPattern) + ".txt";
 
             Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 

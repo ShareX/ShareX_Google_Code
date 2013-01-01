@@ -62,6 +62,7 @@ namespace ShareX
         {
             btnRecord.Enabled = false;
             Hide();
+            string path = "";
             Helpers.AsyncJob(() =>
             {
                 Thread.Sleep(1000);
@@ -73,12 +74,12 @@ namespace ShareX
                     switch (Output)
                     {
                         case ScreenRecordOutput.GIF:
-                            string pathGIF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.gif");
-                            screenRecorder.SaveAsGIF(pathGIF, Program.Settings.ImageGIFQuality);
+                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
+                            screenRecorder.SaveAsGIF(path, Program.Settings.ImageGIFQuality);
                             break;
                         case ScreenRecordOutput.AVI:
-                            string pathAVI = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Test.avi");
-                            screenRecorder.SaveAsAVI(pathAVI);
+                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
+                            screenRecorder.SaveAsAVI(path);
                             break;
                     }
 
@@ -89,6 +90,7 @@ namespace ShareX
             {
                 btnRecord.Enabled = true;
                 Show();
+                TaskHelper.ShowResultNotifications(path);
             });
         }
 

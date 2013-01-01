@@ -280,16 +280,7 @@ namespace ShareX
                                     HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                                 }
 
-                                if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
-                                {
-                                    Program.MainForm.niTray.Tag = result;
-                                    Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
-                                }
-
-                                if (Program.Settings.PlaySoundAfterUpload)
-                                {
-                                    SystemSounds.Exclamation.Play();
-                                }
+                                TaskHelper.ShowResultNotifications(result);
                             }
                         }
 
