@@ -1,4 +1,4 @@
-﻿namespace ScreenCapture
+﻿namespace ShareX
 {
     partial class ScreenRecordForm
     {
@@ -113,7 +113,7 @@
             // 
             this.nudFPS.Location = new System.Drawing.Point(56, 72);
             this.nudFPS.Maximum = new decimal(new int[] {
-            10,
+            30,
             0,
             0,
             0});

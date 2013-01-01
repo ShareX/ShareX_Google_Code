@@ -615,11 +615,8 @@ namespace ShareX
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            Screenshot.DrawCursor = Program.Settings.ShowCursor;
-
             ScreenRecordForm recordForm = new ScreenRecordForm();
             recordForm.Icon = Icon;
-            recordForm.GIFQuality = Program.Settings.ImageGIFQuality;
             recordForm.Show();
         }
 

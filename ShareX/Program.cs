@@ -137,7 +137,7 @@ namespace ShareX
         {
             get
             {
-                return Path.Combine(PersonalPath, "Logs"); ;
+                return Path.Combine(PersonalPath, "Logs");
             }
         }
 
@@ -169,6 +169,14 @@ namespace ShareX
             {
                 string subFolderName = new NameParser(NameParserType.FolderPath).Convert(Settings.SaveImageSubFolderPattern);
                 return Path.Combine(ScreenshotsParentFolder, subFolderName);
+            }
+        }
+
+        public static string ScreenRecorderCacheFilePath
+        {
+            get
+            {
+                return Path.Combine(PersonalPath, "ScreenRecorder.cache");
             }
         }
 

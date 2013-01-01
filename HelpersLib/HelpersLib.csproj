@@ -117,6 +117,7 @@
     <Compile Include="GIF\PaletteQuantizer.cs" />
     <Compile Include="GIF\Quantizer.cs" />
     <Compile Include="ImageTag.cs" />
+    <Compile Include="LocationInfo.cs" />
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />

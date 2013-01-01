@@ -40,20 +40,26 @@ namespace ScreenCapture
     public class ScreenRecorder : IDisposable
     {
         private bool isWorking;
-        private List<Image> screenshots;
-
         private int fps, delay, frameCount;
         private float durationSeconds;
         private Rectangle captureRect;
+        private string cachePath;
+        private List<LocationInfo> indexList;
 
-        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRect)
+        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRect, string cachePath)
         {
             this.fps = fps;
             this.durationSeconds = durationSeconds;
             this.captureRect = captureRect;
+            this.cachePath = cachePath;
 
             delay = 1000 / fps;
             frameCount = (int)(fps * durationSeconds);
+
+            if (string.IsNullOrEmpty(cachePath))
+            {
+                throw new Exception("Screen recorder cache path is empty.");
+            }
         }
 
         public void StartRecording()
@@ -62,22 +68,28 @@ namespace ScreenCapture
             {
                 isWorking = true;
 
-                if (screenshots != null)
+                using (FileStream fsCache = new FileStream(cachePath, FileMode.Create, FileAccess.Write, FileShare.Read))
                 {
-                    Dispose();
-                }
+                    indexList = new List<LocationInfo>();
 
-                screenshots = new List<Image>();
-
-                for (int i = 0; i < frameCount; i++)
-                {
-                    Stopwatch timer = Stopwatch.StartNew();
-                    Image img = Screenshot.CaptureRectangle(captureRect);
-                    screenshots.Add(img);
-                    int sleepTime = delay - (int)timer.ElapsedMilliseconds;
-                    if (sleepTime > 0)
+                    for (int i = 0; i < frameCount; i++)
                     {
-                        Thread.Sleep(sleepTime);
+                        Stopwatch timer = Stopwatch.StartNew();
+                        Image img = Screenshot.CaptureRectangle(captureRect);
+
+                        long position = fsCache.Position;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            img.Save(ms, ImageFormat.Bmp);
+                            ms.CopyStreamTo(fsCache);
+                        }
+                        indexList.Add(new LocationInfo(position, fsCache.Length - position));
+
+                        int sleepTime = delay - (int)timer.ElapsedMilliseconds;
+                        if (sleepTime > 0)
+                        {
+                            Thread.Sleep(sleepTime);
+                        }
                     }
                 }
 
@@ -85,32 +97,24 @@ namespace ScreenCapture
             }
         }
 
-        public void SaveAsGIF(string path)
-        {
-            if (!isWorking && screenshots.Count > 0)
-            {
-                using (AnimatedGif gifEncoder = new AnimatedGif(delay))
-                {
-                    foreach (Image img in screenshots)
-                    {
-                        gifEncoder.AddFrame(img);
-                    }
-
-                    gifEncoder.Finish();
-                    gifEncoder.Save(path);
-                }
-            }
-        }
-
         public void SaveAsGIF(string path, GIFQuality quality)
         {
-            if (!isWorking && screenshots.Count > 0)
+            if (!isWorking && File.Exists(cachePath) && indexList != null && indexList.Count > 0)
             {
                 using (GifCreator gifEncoder = new GifCreator(delay))
+                using (FileStream fsCache = new FileStream(cachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    foreach (Image img in screenshots)
+                    foreach (LocationInfo index in indexList)
                     {
-                        gifEncoder.AddFrame(img, quality);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            fsCache.CopyStreamTo(ms, (int)index.Location, (int)index.Length);
+
+                            using (Image img = Image.FromStream(ms))
+                            {
+                                gifEncoder.AddFrame(img, quality);
+                            }
+                        }
                     }
 
                     gifEncoder.Finish();
@@ -121,13 +125,22 @@ namespace ScreenCapture
 
         public void SaveAsAVI(string path)
         {
-            if (!isWorking && screenshots.Count > 0)
+            if (!isWorking && File.Exists(cachePath) && indexList != null && indexList.Count > 0)
             {
                 using (AVIManager aviManager = new AVIManager(path, fps))
+                using (FileStream fsCache = new FileStream(cachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    foreach (Image img in screenshots)
+                    foreach (LocationInfo index in indexList)
                     {
-                        aviManager.AddFrame(img);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            fsCache.CopyStreamTo(ms, (int)index.Location, (int)index.Length);
+
+                            using (Image img = Image.FromStream(ms))
+                            {
+                                aviManager.AddFrame(img);
+                            }
+                        }
                     }
                 }
             }
@@ -135,9 +148,9 @@ namespace ScreenCapture
 
         public void Dispose()
         {
-            foreach (Image img in screenshots)
+            if (File.Exists(cachePath))
             {
-                if (img != null) img.Dispose();
+                File.Delete(cachePath);
             }
         }
     }

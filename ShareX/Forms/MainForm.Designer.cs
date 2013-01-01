@@ -89,7 +89,7 @@ namespace ShareX
             this.tssMain1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiScreenRecorderGIF = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiScreenRecorder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbScreenshotsFolder = new System.Windows.Forms.ToolStripButton();
             this.tsbHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
@@ -137,6 +137,7 @@ namespace ShareX
             this.tssTray1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayTools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayScreenRecorder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenshotsFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +184,6 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayScreenRecorderGIF = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -508,8 +508,8 @@ namespace ShareX
             // tsddbTools
             // 
             this.tsddbTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiScreenColorPicker,
-            this.tsmiScreenRecorderGIF});
+            this.tsmiScreenRecorder,
+            this.tsmiScreenColorPicker});
             this.tsddbTools.Image = global::ShareX.Properties.Resources.toolbox;
             this.tsddbTools.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbTools.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -521,16 +521,16 @@ namespace ShareX
             // 
             this.tsmiScreenColorPicker.Image = global::ShareX.Properties.Resources.cursor_question;
             this.tsmiScreenColorPicker.Name = "tsmiScreenColorPicker";
-            this.tsmiScreenColorPicker.Size = new System.Drawing.Size(184, 22);
+            this.tsmiScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiScreenColorPicker.Text = "Screen color picker...";
             this.tsmiScreenColorPicker.Click += new System.EventHandler(this.tsmiCursorHelper_Click);
             // 
-            // tsmiScreenRecorderGIF
+            // tsmiScreenRecorder
             // 
-            this.tsmiScreenRecorderGIF.Name = "tsmiScreenRecorderGIF";
-            this.tsmiScreenRecorderGIF.Size = new System.Drawing.Size(184, 22);
-            this.tsmiScreenRecorderGIF.Text = "Screen recorder (GIF)";
-            this.tsmiScreenRecorderGIF.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
+            this.tsmiScreenRecorder.Name = "tsmiScreenRecorder";
+            this.tsmiScreenRecorder.Size = new System.Drawing.Size(183, 22);
+            this.tsmiScreenRecorder.Text = "Screen recorder...";
+            this.tsmiScreenRecorder.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
             // 
             // tsbScreenshotsFolder
             // 
@@ -721,7 +721,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 324);
+            this.cmsTray.Size = new System.Drawing.Size(181, 302);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -932,8 +932,8 @@ namespace ShareX
             // tsmiTrayTools
             // 
             this.tsmiTrayTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTrayScreenColorPicker,
-            this.tsmiTrayScreenRecorderGIF});
+            this.tsmiTrayScreenRecorder,
+            this.tsmiTrayScreenColorPicker});
             this.tsmiTrayTools.Image = global::ShareX.Properties.Resources.toolbox;
             this.tsmiTrayTools.Name = "tsmiTrayTools";
             this.tsmiTrayTools.Size = new System.Drawing.Size(180, 22);
@@ -943,9 +943,16 @@ namespace ShareX
             // 
             this.tsmiTrayScreenColorPicker.Image = global::ShareX.Properties.Resources.cursor_question;
             this.tsmiTrayScreenColorPicker.Name = "tsmiTrayScreenColorPicker";
-            this.tsmiTrayScreenColorPicker.Size = new System.Drawing.Size(184, 22);
+            this.tsmiTrayScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiTrayScreenColorPicker.Text = "Screen color picker...";
             this.tsmiTrayScreenColorPicker.Click += new System.EventHandler(this.tsmiCursorHelper_Click);
+            // 
+            // tsmiTrayScreenRecorder
+            // 
+            this.tsmiTrayScreenRecorder.Name = "tsmiTrayScreenRecorder";
+            this.tsmiTrayScreenRecorder.Size = new System.Drawing.Size(183, 22);
+            this.tsmiTrayScreenRecorder.Text = "Screen recorder";
+            this.tsmiTrayScreenRecorder.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
             // 
             // tsmiScreenshotsFolder
             // 
@@ -1299,13 +1306,6 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
-            // tsmiTrayScreenRecorderGIF
-            // 
-            this.tsmiTrayScreenRecorderGIF.Name = "tsmiTrayScreenRecorderGIF";
-            this.tsmiTrayScreenRecorderGIF.Size = new System.Drawing.Size(184, 22);
-            this.tsmiTrayScreenRecorderGIF.Text = "Screen recorder (GIF)";
-            this.tsmiTrayScreenRecorderGIF.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1465,7 +1465,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenColorPicker;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearList;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScreenRecorderGIF;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTrayScreenRecorderGIF;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScreenRecorder;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayScreenRecorder;
     }
 }
