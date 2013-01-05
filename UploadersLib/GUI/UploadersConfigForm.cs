@@ -414,7 +414,7 @@ namespace UploadersLib
             if (Config.MinusConfig != null)
             {
                 Config.MinusConfig.FolderID = cboMinusFolders.SelectedIndex;
-                MinusFolder tempMf = Config.MinusConfig.MinusFolderActive;
+                MinusFolder tempMf = Config.MinusConfig.GetActiveFolder();
                 chkMinusPublic.Checked = tempMf.is_public;
             }
         }
@@ -455,6 +455,7 @@ namespace UploadersLib
 
                 List<MinusFolder> tempListMf = new Minus(Config.MinusConfig,
                     new OAuthInfo(APIKeys.MinusConsumerKey, APIKeys.MinusConsumerSecret)).ReadFolderList(MinusScope.read_all);
+
                 if (tempListMf.Count > 0)
                 {
                     cboMinusFolders.Items.Clear();

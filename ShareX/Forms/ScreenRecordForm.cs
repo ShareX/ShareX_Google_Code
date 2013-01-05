@@ -79,7 +79,7 @@ namespace ShareX
                             break;
                         case ScreenRecordOutput.AVI:
                             path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
-                            screenRecorder.SaveAsAVI(path);
+                            screenRecorder.SaveAsAVI(path, 720);
                             break;
                     }
 

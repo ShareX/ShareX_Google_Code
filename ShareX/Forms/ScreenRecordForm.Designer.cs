@@ -89,7 +89,7 @@
             65536});
             this.nudDuration.Location = new System.Drawing.Point(120, 96);
             this.nudDuration.Maximum = new decimal(new int[] {
-            30,
+            60,
             0,
             0,
             0});
