@@ -39,43 +39,95 @@ namespace ScreenCapture
 {
     public class ScreenRecorder : IDisposable
     {
-        private bool isWorking;
+        public bool IsRecording { get; private set; }
+
+        public int FPS
+        {
+            get
+            {
+                return fps;
+            }
+            set
+            {
+                if (!IsRecording)
+                {
+                    fps = value;
+                    UpdateInfo();
+                }
+            }
+        }
+
+        public float DurationSeconds
+        {
+            get
+            {
+                return durationSeconds;
+            }
+            set
+            {
+                if (!IsRecording)
+                {
+                    durationSeconds = value;
+                    UpdateInfo();
+                }
+            }
+        }
+
+        public Rectangle CaptureRectangle
+        {
+            get
+            {
+                return captureRectangle;
+            }
+            private set
+            {
+                if (!IsRecording)
+                {
+                    captureRectangle = value;
+                }
+            }
+        }
+
+        public string CachePath { get; private set; }
+
         private int fps, delay, frameCount;
         private float durationSeconds;
-        private Rectangle captureRect;
-        private string cachePath;
+        private Rectangle captureRectangle;
         private List<LocationInfo> indexList;
 
-        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRect, string cachePath)
+        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath)
         {
-            this.fps = fps;
-            this.durationSeconds = durationSeconds;
-            this.captureRect = captureRect;
-            this.cachePath = cachePath;
-
-            delay = 1000 / fps;
-            frameCount = (int)(fps * durationSeconds);
-
             if (string.IsNullOrEmpty(cachePath))
             {
                 throw new Exception("Screen recorder cache path is empty.");
             }
+
+            FPS = fps;
+            DurationSeconds = durationSeconds;
+            CaptureRectangle = captureRectangle;
+            CachePath = cachePath;
+        }
+
+        private void UpdateInfo()
+        {
+            delay = 1000 / fps;
+            frameCount = (int)(fps * durationSeconds);
         }
 
         public void StartRecording()
         {
-            if (!isWorking)
+            if (!IsRecording)
             {
-                isWorking = true;
+                IsRecording = true;
 
-                using (FileStream fsCache = new FileStream(cachePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                using (FileStream fsCache = new FileStream(CachePath, FileMode.Create, FileAccess.Write, FileShare.Read))
                 {
                     indexList = new List<LocationInfo>();
 
                     for (int i = 0; i < frameCount; i++)
                     {
                         Stopwatch timer = Stopwatch.StartNew();
-                        Image img = Screenshot.CaptureRectangle(captureRect);
+                        Image img = Screenshot.CaptureRectangle(CaptureRectangle);
 
                         long position = fsCache.Position;
                         using (MemoryStream ms = new MemoryStream())
@@ -93,16 +145,16 @@ namespace ScreenCapture
                     }
                 }
 
-                isWorking = false;
+                IsRecording = false;
             }
         }
 
         public void SaveAsGIF(string path, GIFQuality quality)
         {
-            if (!isWorking && File.Exists(cachePath) && indexList != null && indexList.Count > 0)
+            if (!IsRecording && File.Exists(CachePath) && indexList != null && indexList.Count > 0)
             {
                 using (GifCreator gifEncoder = new GifCreator(delay))
-                using (FileStream fsCache = new FileStream(cachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (FileStream fsCache = new FileStream(CachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     foreach (LocationInfo index in indexList)
                     {
@@ -123,12 +175,12 @@ namespace ScreenCapture
             }
         }
 
-        public void SaveAsAVI(string path)
+        public void SaveAsAVI(string path, int heightLimit = 720)
         {
-            if (!isWorking && File.Exists(cachePath) && indexList != null && indexList.Count > 0)
+            if (!IsRecording && File.Exists(CachePath) && indexList != null && indexList.Count > 0)
             {
-                using (AVIManager aviManager = new AVIManager(path, fps))
-                using (FileStream fsCache = new FileStream(cachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (AVIManager aviManager = new AVIManager(path, FPS))
+                using (FileStream fsCache = new FileStream(CachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     foreach (LocationInfo index in indexList)
                     {
@@ -136,9 +188,23 @@ namespace ScreenCapture
                         {
                             fsCache.CopyStreamTo(ms, (int)index.Location, (int)index.Length);
 
-                            using (Image img = Image.FromStream(ms))
+                            Image img = null;
+
+                            try
                             {
+                                img = Image.FromStream(ms);
+
+                                if (heightLimit > 0 && CaptureRectangle.Height > heightLimit)
+                                {
+                                    int width = (int)((float)heightLimit / CaptureRectangle.Height * captureRectangle.Width);
+                                    img = CaptureHelpers.ResizeImage(img, width, heightLimit);
+                                }
+
                                 aviManager.AddFrame(img);
+                            }
+                            finally
+                            {
+                                if (img != null) img.Dispose();
                             }
                         }
                     }
@@ -148,9 +214,9 @@ namespace ScreenCapture
 
         public void Dispose()
         {
-            if (File.Exists(cachePath))
+            if (File.Exists(CachePath))
             {
-                File.Delete(cachePath);
+                File.Delete(CachePath);
             }
         }
     }

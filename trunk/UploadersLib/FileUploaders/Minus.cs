@@ -42,9 +42,8 @@ namespace UploadersLib.FileUploaders
         private const string API_VERSION = "2";
         private const string URL_API = URL_HOST + "/api/v" + API_VERSION;
 
+        public MinusOptions Config { get; set; }
         public OAuthInfo AuthInfo { get; set; }
-
-        public MinusOptions Config { get; private set; }
 
         public Minus(MinusOptions config, OAuthInfo auth)
         {
@@ -107,14 +106,8 @@ namespace UploadersLib.FileUploaders
 
         private string GetActiveUserFolderURL(MinusScope scope)
         {
-            if (!string.IsNullOrEmpty(Config.Password))
-            {
-                Config.MinusUser = null; // user requested reconfiguration
-            }
-
             MinusUser user = Config.MinusUser != null ? Config.MinusUser : Config.MinusUser = GetActiveUser(scope);
-            string url = URL_API + "/users/" + user.slug + "/folders?bearer_token=" + Config.GetToken(scope).access_token;
-            return url;
+            return URL_API + "/users/" + user.slug + "/folders?bearer_token=" + Config.GetToken(scope).access_token;
         }
 
         public MinusUser GetActiveUser(MinusScope scope)
@@ -158,7 +151,6 @@ namespace UploadersLib.FileUploaders
             }
             else
             {
-                Thread.Sleep(1000);
                 MinusFolder mf = CreateFolder(Application.ProductName, true);
                 if (mf != null)
                 {
@@ -214,7 +206,7 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            string url = GetFolderLinkFromID(Config.MinusFolderActive.id, MinusScope.upload_new);
+            string url = GetFolderLinkFromID(Config.GetActiveFolder().id, MinusScope.upload_new);
 
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("caption", fileName);
@@ -324,13 +316,9 @@ namespace UploadersLib.FileUploaders
             return Tokens.FirstOrDefault(mat => scope.ToString() == mat.scope);
         }
 
-        [JsonIgnore]
-        public MinusFolder MinusFolderActive
+        public MinusFolder GetActiveFolder()
         {
-            get
-            {
-                return FolderList.ReturnIfValidIndex(FolderID);
-            }
+            return FolderList.ReturnIfValidIndex(FolderID);
         }
     }
 
