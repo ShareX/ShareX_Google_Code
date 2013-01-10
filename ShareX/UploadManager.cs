@@ -42,7 +42,7 @@ namespace ShareX
             {
                 if (File.Exists(filePath))
                 {
-                    Task task = Task.CreateFileUploaderTask(filePath);
+                    UploadTask task = UploadTask.CreateFileUploaderTask(filePath);
                     TaskManager.Start(task);
                 }
                 else if (Directory.Exists(filePath))
@@ -164,7 +164,7 @@ namespace ShareX
         {
             if (img != null && imageJob != AfterCaptureTasks.None)
             {
-                Task task = Task.CreateImageUploaderTask(img, imageJob);
+                UploadTask task = UploadTask.CreateImageUploaderTask(img, imageJob);
                 TaskManager.Start(task);
             }
         }
@@ -173,7 +173,7 @@ namespace ShareX
         {
             if (img != null)
             {
-                Task task = Task.CreateImageUploaderTask(img);
+                UploadTask task = UploadTask.CreateImageUploaderTask(img);
                 task.Info.ImageDestination = imageDestination;
                 TaskManager.Start(task);
             }
@@ -183,7 +183,7 @@ namespace ShareX
         {
             if (!string.IsNullOrEmpty(text))
             {
-                Task task = Task.CreateTextUploaderTask(text);
+                UploadTask task = UploadTask.CreateTextUploaderTask(text);
                 TaskManager.Start(task);
             }
         }
@@ -192,7 +192,7 @@ namespace ShareX
         {
             if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filename))
             {
-                Task task = Task.CreateDataUploaderTask(EDataType.Image, stream, filename);
+                UploadTask task = UploadTask.CreateDataUploaderTask(EDataType.Image, stream, filename);
                 TaskManager.Start(task);
             }
         }
@@ -201,7 +201,7 @@ namespace ShareX
         {
             if (!string.IsNullOrEmpty(url))
             {
-                Task task = Task.CreateURLShortenerTask(url);
+                UploadTask task = UploadTask.CreateURLShortenerTask(url);
                 TaskManager.Start(task);
             }
         }

@@ -177,6 +177,7 @@
             this.Controls.Add(this.btnRecord);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ScreenRecordForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Screen record";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).EndInit();

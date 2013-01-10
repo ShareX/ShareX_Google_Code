@@ -96,7 +96,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                Task task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone());
                 task.Info.ImageDestination = uploader;
 
                 lvi.Tag = task;
@@ -114,7 +114,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                Task task = Task.CreateTextUploaderTask(TestText);
+                UploadTask task = UploadTask.CreateTextUploaderTask(TestText);
                 task.Info.TextDestination = uploader;
 
                 lvi.Tag = task;
@@ -134,7 +134,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                Task task = Task.CreateImageUploaderTask((Image)TestImage.Clone());
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone());
                 task.Info.ImageDestination = ImageDestination.FileUploader;
                 task.Info.FileDestination = uploader;
 
@@ -147,7 +147,7 @@ namespace ShareX
             {
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                Task task = Task.CreateURLShortenerTask(TestURL);
+                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL);
                 task.Info.URLShortenerDestination = uploader;
 
                 lvi.Tag = task;
@@ -176,13 +176,13 @@ namespace ShareX
 
         private void btnTestAll_Click(object sender, EventArgs e)
         {
-            Task[] uploaders = lvUploaders.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).ToArray();
+            UploadTask[] uploaders = lvUploaders.Items.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).ToArray();
             StartTest(uploaders);
         }
 
         private void btnTestSelected_Click(object sender, EventArgs e)
         {
-            Task[] uploaders = lvUploaders.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).ToArray();
+            UploadTask[] uploaders = lvUploaders.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).ToArray();
             StartTest(uploaders);
         }
 
@@ -197,18 +197,18 @@ namespace ShareX
             }
         }
 
-        private ListViewItem FindListViewItem(Task task)
+        private ListViewItem FindListViewItem(UploadTask task)
         {
             foreach (ListViewItem lvi in lvUploaders.Items)
             {
-                Task x = lvi.Tag as Task;
+                UploadTask x = lvi.Tag as UploadTask;
                 if (x != null && x == task) return lvi;
             }
 
             return null;
         }
 
-        public void StartTest(Task[] uploaders)
+        public void StartTest(UploadTask[] uploaders)
         {
             Testing = true;
 
@@ -223,9 +223,9 @@ namespace ShareX
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bw = (BackgroundWorker)sender;
-            Task[] uploaders = (Task[])e.Argument;
+            UploadTask[] uploaders = (UploadTask[])e.Argument;
 
-            foreach (Task task in uploaders)
+            foreach (UploadTask task in uploaders)
             {
                 if (IsDisposed || !isTesting || task == null)
                 {
@@ -253,7 +253,7 @@ namespace ShareX
         {
             if (!IsDisposed)
             {
-                Task task = e.UserState as Task;
+                UploadTask task = e.UserState as UploadTask;
 
                 if (task != null)
                 {
@@ -298,7 +298,7 @@ namespace ShareX
         {
             if (lvUploaders.SelectedItems.Count > 0)
             {
-                Task task = lvUploaders.SelectedItems[0].Tag as Task;
+                UploadTask task = lvUploaders.SelectedItems[0].Tag as UploadTask;
 
                 if (task != null && task.Info != null && task.Info.Result != null && !string.IsNullOrEmpty(task.Info.Result.ToString()))
                 {
@@ -315,7 +315,7 @@ namespace ShareX
 
                 foreach (ListViewItem lvi in lvUploaders.SelectedItems)
                 {
-                    Task task = lvi.Tag as Task;
+                    UploadTask task = lvi.Tag as UploadTask;
 
                     if (task != null && task.Info != null && task.Info.Result != null && !string.IsNullOrEmpty(task.Info.Result.ToString()))
                     {

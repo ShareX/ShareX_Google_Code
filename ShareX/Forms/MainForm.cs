@@ -422,11 +422,11 @@ namespace ShareX
             }
         }
 
-        private Task[] GetCurrentTasks()
+        private UploadTask[] GetCurrentTasks()
         {
             if (lvUploads.SelectedItems.Count > 0)
             {
-                return lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null).ToArray();
+                return lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null).ToArray();
             }
 
             return null;
@@ -435,7 +435,7 @@ namespace ShareX
         private UploadInfo GetCurrentUploadInfo()
         {
             UploadInfo info = null;
-            Task[] tasks = GetCurrentTasks();
+            UploadTask[] tasks = GetCurrentTasks();
 
             if (tasks != null && tasks.Length > 0)
             {
@@ -447,12 +447,12 @@ namespace ShareX
 
         private void RemoveSelectedItems()
         {
-            lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+            lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
         }
 
         private void RemoveAllItems()
         {
-            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as Task).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
         }
 
         private void UpdatePreviewSplitter()
@@ -750,7 +750,7 @@ namespace ShareX
         {
             if (lvUploads.SelectedItems.Count > 0)
             {
-                foreach (Task task in GetCurrentTasks())
+                foreach (UploadTask task in GetCurrentTasks())
                 {
                     task.Stop();
                 }

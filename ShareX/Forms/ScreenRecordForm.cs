@@ -29,7 +29,9 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ShareX
@@ -56,19 +58,49 @@ namespace ShareX
             cbOutput.SelectedIndex = (int)Output;
 
             Screenshot.DrawCursor = Program.Settings.ShowCursor;
+
+            SetRegion();
         }
 
-        private void btnRecord_Click(object sender, EventArgs e)
+        private void SetRegion()
+        {
+            using (RectangleRegion surface = new RectangleRegion())
+            {
+                surface.Config = Program.Settings.SurfaceOptions;
+                surface.Config.QuickCrop = true;
+                surface.Prepare();
+                surface.ShowDialog();
+
+                if (surface.Result != SurfaceResult.Close && surface.AreaManager.IsCurrentAreaValid)
+                {
+                    CaptureRectangle = surface.AreaManager.CurrentArea;
+                    lblRegion.Text = CaptureRectangle.ToString();
+                }
+            }
+        }
+
+        private async void btnRecord_Click(object sender, EventArgs e)
         {
             btnRecord.Enabled = false;
             Hide();
             string path = "";
-            Helpers.AsyncJob(() =>
+            ScreenRecorder screenRecorder = null;
+
+            try
             {
-                Thread.Sleep(1000);
-                using (ScreenRecorder screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle, Program.ScreenRecorderCacheFilePath))
+                await Task.Run(() =>
                 {
+                    Thread.Sleep(1000);
+
+                    screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle, Program.ScreenRecorderCacheFilePath);
                     screenRecorder.StartRecording();
+                });
+
+                Show();
+                btnRecord.Text = "Encoding...";
+
+                await Task.Run(() =>
+                {
                     Stopwatch timer = Stopwatch.StartNew();
 
                     switch (Output)
@@ -84,28 +116,21 @@ namespace ShareX
                     }
 
                     Debug.WriteLine("Encoding completed in " + timer.ElapsedMilliseconds + "ms");
-                }
-            },
-            () =>
+                });
+            }
+            finally
             {
-                btnRecord.Enabled = true;
-                Show();
-                TaskHelper.ShowResultNotifications(path);
-            });
+                if (screenRecorder != null) screenRecorder.Dispose();
+            }
+
+            btnRecord.Text = "Start record (after 1 second)";
+            btnRecord.Enabled = true;
+            TaskHelper.ShowResultNotifications(path);
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            using (CropLight cropForm = new CropLight())
-            {
-                cropForm.ShowRectangleInfo = true;
-
-                if (cropForm.ShowDialog() == DialogResult.OK)
-                {
-                    CaptureRectangle = cropForm.SelectionRectangle;
-                    lblRegion.Text = CaptureRectangle.ToString();
-                }
-            }
+            SetRegion();
         }
 
         private void nudFPS_ValueChanged(object sender, EventArgs e)
