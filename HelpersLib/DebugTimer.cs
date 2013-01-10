@@ -25,20 +25,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace HelpersLib
 {
-    public class LocationInfo
+    public class DebugTimer : IDisposable
     {
-        public long Location { get; set; }
-        public long Length { get; set; }
+        private Stopwatch timer;
 
-        public LocationInfo(long location, long length)
+        public DebugTimer()
         {
-            Location = location;
-            Length = length;
+            timer = Stopwatch.StartNew();
+        }
+
+        private void Write(string timeText, string text = "")
+        {
+            Console.WriteLine(string.Format("{0}: {1}", text, timeText));
+        }
+
+        public void WriteElapsedSeconds(string text = "")
+        {
+            Write(timer.Elapsed.TotalSeconds + " seconds.", text);
+        }
+
+        public void WriteElapsedMiliseconds(string text = "")
+        {
+            Write(timer.ElapsedMilliseconds + " miliseconds.", text);
+        }
+
+        public void Dispose()
+        {
+            WriteElapsedMiliseconds();
         }
     }
 }

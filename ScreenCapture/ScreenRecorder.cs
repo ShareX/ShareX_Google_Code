@@ -93,7 +93,7 @@ namespace ScreenCapture
         private int fps, delay, frameCount;
         private float durationSeconds;
         private Rectangle captureRectangle;
-        private List<LocationInfo> indexList;
+        private ScreenRecorderCache cache;
 
         public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath)
         {
@@ -120,29 +120,31 @@ namespace ScreenCapture
             {
                 IsRecording = true;
 
-                using (FileStream fsCache = new FileStream(CachePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                using (cache = new ScreenRecorderCache(CachePath))
                 {
-                    indexList = new List<LocationInfo>();
-
                     for (int i = 0; i < frameCount; i++)
                     {
                         Stopwatch timer = Stopwatch.StartNew();
                         Image img = Screenshot.CaptureRectangle(CaptureRectangle);
 
-                        long position = fsCache.Position;
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            img.Save(ms, ImageFormat.Bmp);
-                            ms.CopyStreamTo(fsCache);
-                        }
-                        indexList.Add(new LocationInfo(position, fsCache.Length - position));
+                        cache.AddImageAsync(img);
 
-                        int sleepTime = delay - (int)timer.ElapsedMilliseconds;
-                        if (sleepTime > 0)
+                        if (i + 1 < frameCount)
                         {
-                            Thread.Sleep(sleepTime);
+                            int sleepTime = delay - (int)timer.ElapsedMilliseconds;
+
+                            if (sleepTime > 0)
+                            {
+                                Thread.Sleep(sleepTime);
+                            }
+                            else
+                            {
+                                Debug.WriteLine("FPS drop: " + sleepTime);
+                            }
                         }
                     }
+
+                    cache.Finish();
                 }
 
                 IsRecording = false;
@@ -151,21 +153,15 @@ namespace ScreenCapture
 
         public void SaveAsGIF(string path, GIFQuality quality)
         {
-            if (!IsRecording && File.Exists(CachePath) && indexList != null && indexList.Count > 0)
+            if (!IsRecording)
             {
                 using (GifCreator gifEncoder = new GifCreator(delay))
-                using (FileStream fsCache = new FileStream(CachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    foreach (LocationInfo index in indexList)
+                    foreach (Image img in cache.GetImageEnumerator())
                     {
-                        using (MemoryStream ms = new MemoryStream())
+                        using (img)
                         {
-                            fsCache.CopyStreamTo(ms, (int)index.Location, (int)index.Length);
-
-                            using (Image img = Image.FromStream(ms))
-                            {
-                                gifEncoder.AddFrame(img, quality);
-                            }
+                            gifEncoder.AddFrame(img, quality);
                         }
                     }
 
@@ -177,35 +173,27 @@ namespace ScreenCapture
 
         public void SaveAsAVI(string path, int heightLimit = 720)
         {
-            if (!IsRecording && File.Exists(CachePath) && indexList != null && indexList.Count > 0)
+            if (!IsRecording)
             {
                 using (AVIManager aviManager = new AVIManager(path, FPS))
-                using (FileStream fsCache = new FileStream(CachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    foreach (LocationInfo index in indexList)
+                    foreach (Image img in cache.GetImageEnumerator())
                     {
-                        using (MemoryStream ms = new MemoryStream())
+                        Image img2 = img;
+
+                        try
                         {
-                            fsCache.CopyStreamTo(ms, (int)index.Location, (int)index.Length);
-
-                            Image img = null;
-
-                            try
+                            if (heightLimit > 0 && CaptureRectangle.Height > heightLimit)
                             {
-                                img = Image.FromStream(ms);
-
-                                if (heightLimit > 0 && CaptureRectangle.Height > heightLimit)
-                                {
-                                    int width = (int)((float)heightLimit / CaptureRectangle.Height * captureRectangle.Width);
-                                    img = CaptureHelpers.ResizeImage(img, width, heightLimit);
-                                }
-
-                                aviManager.AddFrame(img);
+                                int width = (int)((float)heightLimit / CaptureRectangle.Height * captureRectangle.Width);
+                                img2 = CaptureHelpers.ResizeImage(img2, width, heightLimit);
                             }
-                            finally
-                            {
-                                if (img != null) img.Dispose();
-                            }
+
+                            aviManager.AddFrame(img2);
+                        }
+                        finally
+                        {
+                            if (img2 != null) img2.Dispose();
                         }
                     }
                 }
@@ -214,6 +202,11 @@ namespace ScreenCapture
 
         public void Dispose()
         {
+            if (cache != null)
+            {
+                cache.Dispose();
+            }
+
             if (File.Exists(CachePath))
             {
                 File.Delete(CachePath);
