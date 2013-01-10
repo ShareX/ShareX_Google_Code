@@ -71,8 +71,11 @@ namespace ScreenCapture
                 Cursor = new Cursor(cursorStream);
             }
 
-            SurfaceImage = backgroundImage;
-            Prepare();
+            if (backgroundImage != null)
+            {
+                SurfaceImage = backgroundImage;
+                Prepare();
+            }
 
             DrawableObjects = new List<DrawableObject>();
             Config = new SurfaceOptions();
@@ -111,10 +114,12 @@ namespace ScreenCapture
         /// <summary>Must be called before show form</summary>
         public virtual void Prepare()
         {
-            if (SurfaceImage != null)
+            if (SurfaceImage == null)
             {
-                backgroundBrush = new TextureBrush(SurfaceImage);
+                SurfaceImage = Screenshot.CaptureFullscreen();
             }
+
+            backgroundBrush = new TextureBrush(SurfaceImage);
         }
 
         private void Surface_Shown(object sender, EventArgs e)

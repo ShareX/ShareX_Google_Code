@@ -191,7 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Task.cs" />
+    <Compile Include="UploadTask.cs" />
     <Compile Include="UploadInfoManager.cs" />
     <Compile Include="UploadManager.cs" />
     <Compile Include="Settings.cs" />

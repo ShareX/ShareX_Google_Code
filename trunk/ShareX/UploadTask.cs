@@ -41,9 +41,9 @@ using UploadersLib.URLShorteners;
 
 namespace ShareX
 {
-    public class Task : IDisposable
+    public class UploadTask : IDisposable
     {
-        public delegate void TaskEventHandler(Task task);
+        public delegate void TaskEventHandler(UploadTask task);
 
         public event TaskEventHandler UploadStarted;
         public event TaskEventHandler UploadPreparing;
@@ -72,7 +72,7 @@ namespace ShareX
 
         #region Constructors
 
-        private Task(TaskJob job, EDataType dataType)
+        private UploadTask(TaskJob job, EDataType dataType)
         {
             Status = TaskStatus.InQueue;
             Info = new UploadInfo();
@@ -80,51 +80,51 @@ namespace ShareX
             Info.DataType = dataType;
         }
 
-        public static Task CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
         {
-            Task task = new Task(TaskJob.DataUpload, dataType);
+            UploadTask task = new UploadTask(TaskJob.DataUpload, dataType);
             task.Info.FileName = fileName;
             task.data = stream;
             return task;
         }
 
-        public static Task CreateDataUploaderTask(EDataType dataType, string filePath)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, string filePath)
         {
-            Task task = new Task(TaskJob.DataUpload, dataType);
+            UploadTask task = new UploadTask(TaskJob.DataUpload, dataType);
             task.Info.FilePath = filePath;
             task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return task;
         }
 
-        public static Task CreateFileUploaderTask(string filePath)
+        public static UploadTask CreateFileUploaderTask(string filePath)
         {
             EDataType dataType = Helpers.FindDataType(filePath);
-            Task task = new Task(TaskJob.FileUpload, dataType);
+            UploadTask task = new UploadTask(TaskJob.FileUpload, dataType);
             task.Info.FilePath = filePath;
             task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return task;
         }
 
-        public static Task CreateImageUploaderTask(Image image, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
+        public static UploadTask CreateImageUploaderTask(Image image, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
         {
-            Task task = new Task(TaskJob.ImageJob, EDataType.Image);
+            UploadTask task = new UploadTask(TaskJob.ImageJob, EDataType.Image);
             task.Info.AfterCaptureJob = imageJob;
             task.Info.FileName = GetImageFilename(image);
             task.tempImage = image;
             return task;
         }
 
-        public static Task CreateTextUploaderTask(string text)
+        public static UploadTask CreateTextUploaderTask(string text)
         {
-            Task task = new Task(TaskJob.TextUpload, EDataType.Text);
+            UploadTask task = new UploadTask(TaskJob.TextUpload, EDataType.Text);
             task.Info.FileName = TaskHelper.GetFilename("txt");
             task.tempText = text;
             return task;
         }
 
-        public static Task CreateURLShortenerTask(string url)
+        public static UploadTask CreateURLShortenerTask(string url)
         {
-            Task task = new Task(TaskJob.ShortenURL, EDataType.URL);
+            UploadTask task = new UploadTask(TaskJob.ShortenURL, EDataType.URL);
             task.Info.FileName = "URL shorten";
             task.Info.Result.URL = url;
             return task;
