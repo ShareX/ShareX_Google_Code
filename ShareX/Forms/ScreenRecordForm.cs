@@ -39,23 +39,17 @@ namespace ShareX
     public partial class ScreenRecordForm : Form
     {
         public Rectangle CaptureRectangle { get; set; }
-        public int FPS { get; set; }
-        public float Duration { get; set; } // Seconds
-        public ScreenRecordOutput Output { get; set; }
 
         public ScreenRecordForm()
         {
             InitializeComponent();
-            FPS = 5;
-            Duration = 3;
-            CaptureRectangle = new Rectangle(0, 0, 500, 500);
-            Output = ScreenRecordOutput.GIF;
 
             lblRegion.Text = CaptureRectangle.ToString();
-            nudFPS.Value = FPS;
-            nudDuration.Value = (decimal)Duration;
+            nudFPS.Value = Program.Settings.ScreenRecordFPS;
+            nudDuration.Value = (decimal)Program.Settings.ScreenRecordDuration;
             cbOutput.Items.AddRange(Enum.GetNames(typeof(ScreenRecordOutput)));
-            cbOutput.SelectedIndex = (int)Output;
+            cbOutput.SelectedIndex = (int)Program.Settings.ScreenRecordOutput;
+            cbAutoUploadGIF.Checked = Program.Settings.ScreenRecordAutoUploadGIF;
 
             Screenshot.DrawCursor = Program.Settings.ShowCursor;
 
@@ -74,7 +68,8 @@ namespace ShareX
                 if (surface.Result != SurfaceResult.Close && surface.AreaManager.IsCurrentAreaValid)
                 {
                     CaptureRectangle = surface.AreaManager.CurrentArea;
-                    lblRegion.Text = CaptureRectangle.ToString();
+                    lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
+                        CaptureRectangle.Width, CaptureRectangle.Height);
                 }
             }
         }
@@ -92,7 +87,8 @@ namespace ShareX
                 {
                     Thread.Sleep(1000);
 
-                    screenRecorder = new ScreenRecorder(FPS, Duration, CaptureRectangle, Program.ScreenRecorderCacheFilePath);
+                    screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
+                        CaptureRectangle, Program.ScreenRecorderCacheFilePath);
                     screenRecorder.StartRecording();
                 });
 
@@ -103,7 +99,7 @@ namespace ShareX
                 {
                     Stopwatch timer = Stopwatch.StartNew();
 
-                    switch (Output)
+                    switch (Program.Settings.ScreenRecordOutput)
                     {
                         case ScreenRecordOutput.GIF:
                             path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
@@ -125,7 +121,15 @@ namespace ShareX
 
             btnRecord.Text = "Start record (after 1 second)";
             btnRecord.Enabled = true;
-            TaskHelper.ShowResultNotifications(path);
+
+            if (Program.Settings.ScreenRecordAutoUploadGIF && Program.Settings.ScreenRecordOutput == ScreenRecordOutput.GIF)
+            {
+                UploadManager.UploadFile(path);
+            }
+            else
+            {
+                TaskHelper.ShowResultNotifications(path);
+            }
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
@@ -135,17 +139,22 @@ namespace ShareX
 
         private void nudFPS_ValueChanged(object sender, EventArgs e)
         {
-            FPS = (int)nudFPS.Value;
+            Program.Settings.ScreenRecordFPS = (int)nudFPS.Value;
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)
         {
-            Duration = (float)nudDuration.Value;
+            Program.Settings.ScreenRecordDuration = (float)nudDuration.Value;
         }
 
         private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Output = (ScreenRecordOutput)cbOutput.SelectedIndex;
+            Program.Settings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
+        }
+
+        private void cbAutoUploadGIF_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ScreenRecordAutoUploadGIF = cbAutoUploadGIF.Checked;
         }
     }
 }

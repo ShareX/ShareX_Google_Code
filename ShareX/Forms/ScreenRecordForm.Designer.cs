@@ -37,13 +37,14 @@
             this.lblRegion = new System.Windows.Forms.Label();
             this.lblOutput = new System.Windows.Forms.Label();
             this.cbOutput = new System.Windows.Forms.ComboBox();
+            this.cbAutoUploadGIF = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(16, 152);
+            this.btnRecord.Location = new System.Drawing.Point(16, 176);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(200, 24);
             this.btnRecord.TabIndex = 0;
@@ -136,7 +137,7 @@
             // lblRegion
             // 
             this.lblRegion.AutoSize = true;
-            this.lblRegion.Location = new System.Drawing.Point(16, 52);
+            this.lblRegion.Location = new System.Drawing.Point(16, 48);
             this.lblRegion.Name = "lblRegion";
             this.lblRegion.Size = new System.Drawing.Size(41, 13);
             this.lblRegion.TabIndex = 7;
@@ -161,11 +162,23 @@
             this.cbOutput.TabIndex = 9;
             this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
             // 
+            // cbAutoUploadGIF
+            // 
+            this.cbAutoUploadGIF.AutoSize = true;
+            this.cbAutoUploadGIF.Location = new System.Drawing.Point(16, 152);
+            this.cbAutoUploadGIF.Name = "cbAutoUploadGIF";
+            this.cbAutoUploadGIF.Size = new System.Drawing.Size(103, 17);
+            this.cbAutoUploadGIF.TabIndex = 10;
+            this.cbAutoUploadGIF.Text = "Auto upload GIF";
+            this.cbAutoUploadGIF.UseVisualStyleBackColor = true;
+            this.cbAutoUploadGIF.CheckedChanged += new System.EventHandler(this.cbAutoUploadGIF_CheckedChanged);
+            // 
             // ScreenRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 188);
+            this.ClientSize = new System.Drawing.Size(231, 211);
+            this.Controls.Add(this.cbAutoUploadGIF);
             this.Controls.Add(this.cbOutput);
             this.Controls.Add(this.lblOutput);
             this.Controls.Add(this.lblRegion);
@@ -198,5 +211,6 @@
         private System.Windows.Forms.Label lblRegion;
         private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.ComboBox cbOutput;
+        private System.Windows.Forms.CheckBox cbAutoUploadGIF;
     }
 }
