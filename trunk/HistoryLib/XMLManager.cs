@@ -93,6 +93,8 @@ namespace HistoryLib
             {
                 lock (thisLock)
                 {
+                    Helpers.CreateDirectoryIfNotExist(xmlPath);
+
                     using (FileStream fs = File.Open(xmlPath, FileMode.Append, FileAccess.Write, FileShare.Read))
                     using (XmlTextWriter writer = new XmlTextWriter(fs, Encoding.UTF8))
                     {

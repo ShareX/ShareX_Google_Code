@@ -80,12 +80,7 @@ namespace HelpersLib
         {
             if (stream.Length > 0 && !string.IsNullOrEmpty(filePath))
             {
-                string directoryName = Path.GetDirectoryName(filePath);
-
-                if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
-                {
-                    Directory.CreateDirectory(directoryName);
-                }
+                Helpers.CreateDirectoryIfNotExist(filePath);
 
                 using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read))
                 {

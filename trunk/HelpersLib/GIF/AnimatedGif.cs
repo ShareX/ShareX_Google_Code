@@ -114,10 +114,7 @@ namespace HelpersLib
 
         public void Save(string filePath)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                fs.Write(gifStream.ToArray(), 0, (int)gifStream.Length);
-            }
+            gifStream.WriteToFile(filePath);
         }
 
         public void Dispose()

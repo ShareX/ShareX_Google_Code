@@ -106,12 +106,7 @@ namespace HelpersLib
 
                 if (!string.IsNullOrEmpty(filepath) && !string.IsNullOrEmpty(messages))
                 {
-                    string directory = Path.GetDirectoryName(filepath);
-
-                    if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                    {
-                        Directory.CreateDirectory(directory);
-                    }
+                    Helpers.CreateDirectoryIfNotExist(filepath);
 
                     File.AppendAllText(filepath, messages, Encoding.UTF8);
 
