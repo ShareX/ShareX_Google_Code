@@ -42,6 +42,7 @@ namespace HelpersLib
 
         public AVIManager(string path, int fps)
         {
+            Helpers.CreateDirectoryIfNotExist(path);
             aviManager = new AviManager(path, false);
             this.fps = fps;
         }

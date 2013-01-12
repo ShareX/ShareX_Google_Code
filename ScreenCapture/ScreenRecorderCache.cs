@@ -62,6 +62,8 @@ namespace ScreenCapture
 
                 task = Task.Run(() =>
                 {
+                    Helpers.CreateDirectoryIfNotExist(CachePath);
+
                     using (FileStream fsCache = new FileStream(CachePath, FileMode.Create, FileAccess.Write, FileShare.Read))
                     {
                         while (!imageQueue.IsCompleted)

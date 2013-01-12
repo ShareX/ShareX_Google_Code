@@ -114,8 +114,6 @@ namespace ShareX
                             screenRecorder.SaveAsAVI(path, 720);
                             break;
                     }
-
-                    Debug.WriteLine("Encoding completed in " + timer.ElapsedMilliseconds + "ms");
                 });
             }
             finally

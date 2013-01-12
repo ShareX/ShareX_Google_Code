@@ -766,5 +766,18 @@ namespace HelpersLib
                 return unsafeBitmap1 == unsafeBitmap2;
             }
         }
+
+        public static void CreateDirectoryIfNotExist(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                string directoryName = Path.GetDirectoryName(filePath);
+
+                if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
+                {
+                    Directory.CreateDirectory(directoryName);
+                }
+            }
+        }
     }
 }

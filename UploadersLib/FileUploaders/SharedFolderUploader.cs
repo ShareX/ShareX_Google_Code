@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.IO;
 using UploadersLib.HelperClasses;
 
@@ -42,9 +43,8 @@ namespace UploadersLib.FileUploaders
             UploadResult result = new UploadResult();
 
             string filePath = account.GetLocalhostPath(fileName);
-            string destDir = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(destDir))
-                Directory.CreateDirectory(destDir);
+
+            Helpers.CreateDirectoryIfNotExist(filePath);
 
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
