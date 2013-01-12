@@ -757,5 +757,14 @@ namespace HelpersLib
                 targetColor.G.IsBetween(color.G - variation, color.G + variation) &&
                 targetColor.B.IsBetween(color.B - variation, color.B + variation);
         }
+
+        public static bool IsImagesEqual(Bitmap bmp1, Bitmap bmp2)
+        {
+            using (UnsafeBitmap unsafeBitmap1 = new UnsafeBitmap(bmp1))
+            using (UnsafeBitmap unsafeBitmap2 = new UnsafeBitmap(bmp2))
+            {
+                return unsafeBitmap1 == unsafeBitmap2;
+            }
+        }
     }
 }

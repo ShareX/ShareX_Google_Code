@@ -294,29 +294,17 @@ namespace HelpersLib
             return null;
         }
 
-        public static Image LoadImageWithSize(string path, int width, int height)
+        public static Image ResizeImage(Image img, int width, int height, bool highQualityScaling = true)
         {
-            Image img = Image.FromFile(path);
-
-            if (img.Width != width || img.Height != height)
-            {
-                img = ResizeImage(img, width, height);
-            }
-
-            return img;
+            return ResizeImage(img, 0, 0, width, height, highQualityScaling);
         }
 
-        public static Image ResizeImage(Image img, int width, int height, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, Rectangle rect, bool highQualityScaling = true)
         {
-            return ResizeImage(img, 0, 0, width, height, smoothScaling);
+            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, highQualityScaling);
         }
 
-        public static Image ResizeImage(Image img, Rectangle rect, bool smoothScaling = true)
-        {
-            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, smoothScaling);
-        }
-
-        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool highQualityScaling = true)
         {
             if (img.Width == width && img.Height == height)
             {
@@ -327,10 +315,9 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                if (smoothScaling)
+                if (highQualityScaling)
                 {
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.HighQuality;
                 }
 
                 g.DrawImage(img, x, y, width, height);
@@ -340,17 +327,17 @@ namespace HelpersLib
             return bmp;
         }
 
-        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
         {
-            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage, smoothScaling);
+            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage, highQualityScaling);
         }
 
-        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
         {
-            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage, smoothScaling);
+            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage, highQualityScaling);
         }
 
-        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage, bool smoothScaling = true)
+        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
         {
             double ratio;
             int newWidth, newHeight, newX, newY;
@@ -379,7 +366,7 @@ namespace HelpersLib
                 newY += (int)((height - (img.Height * ratio)) / 2);
             }
 
-            return ResizeImage(img, newX, newY, newWidth, newHeight, smoothScaling);
+            return ResizeImage(img, newX, newY, newWidth, newHeight, highQualityScaling);
         }
 
         public static Image DrawBorder(Image img, BorderType borderType, Color borderColor, int borderSize)

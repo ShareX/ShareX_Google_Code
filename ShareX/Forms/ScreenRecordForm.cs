@@ -80,18 +80,22 @@ namespace ShareX
             Hide();
             string path = "";
             ScreenRecorder screenRecorder = null;
+            ScreenRegionForm regionForm = new ScreenRegionForm(CaptureRectangle);
+            regionForm.Show();
+
+            await Task.Delay(1000);
+            regionForm.ChangeColor(Color.FromArgb(0, 255, 0));
 
             try
             {
                 await Task.Run(() =>
                 {
-                    Thread.Sleep(1000);
-
                     screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
                         CaptureRectangle, Program.ScreenRecorderCacheFilePath);
                     screenRecorder.StartRecording();
                 });
 
+                regionForm.Close();
                 Show();
                 btnRecord.Text = "Encoding...";
 
@@ -107,7 +111,7 @@ namespace ShareX
                             break;
                         case ScreenRecordOutput.AVI:
                             path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
-                            screenRecorder.SaveAsAVI(path, 0);
+                            screenRecorder.SaveAsAVI(path, 720);
                             break;
                     }
 
@@ -117,6 +121,7 @@ namespace ShareX
             finally
             {
                 if (screenRecorder != null) screenRecorder.Dispose();
+                if (regionForm != null) regionForm.Dispose();
             }
 
             btnRecord.Text = "Start record (after 1 second)";

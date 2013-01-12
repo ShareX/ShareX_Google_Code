@@ -27,7 +27,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace ScreenCapture
+namespace HelpersLib
 {
     public unsafe class UnsafeBitmap : IDisposable
     {

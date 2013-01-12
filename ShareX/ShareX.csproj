@@ -108,6 +108,12 @@
     <Compile Include="Forms\ScreenRecordForm.Designer.cs">
       <DependentUpon>ScreenRecordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ScreenRegionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenRegionForm.Designer.cs">
+      <DependentUpon>ScreenRegionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScreenRecordForm.resx">
       <DependentUpon>ScreenRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenRegionForm.resx">
+      <DependentUpon>ScreenRegionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

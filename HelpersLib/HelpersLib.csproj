@@ -32,6 +32,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +45,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AviFile">
@@ -65,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AVIManager.cs" />
+    <Compile Include="ColorBgra.cs" />
     <Compile Include="DebugTimer.cs" />
     <Compile Include="GIF\AnimatedGif.cs" />
     <Compile Include="CaptureHelpers.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="Translator\HashCheck.cs" />
     <Compile Include="Translator\Translator.cs" />
     <Compile Include="Translator\TranslatorHelper.cs" />
+    <Compile Include="UnsafeBitmap.cs" />
     <Compile Include="UpdateChecker\DownloaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
