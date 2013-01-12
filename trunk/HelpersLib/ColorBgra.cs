@@ -26,7 +26,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ScreenCapture
+namespace HelpersLib
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct ColorBgra

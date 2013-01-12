@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -52,6 +53,10 @@
       <Project>{327750e1-9fb7-4cc3-8aea-9bc42180cad3}</Project>
       <Name>HelpersLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HistoryLib\HistoryLib.csproj">
+      <Project>{e7de6237-aea2-498b-8f56-9b392472c490}</Project>
+      <Name>HistoryLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScreenCapture.Shapes\ScreenCapture.Shapes.csproj">
       <Project>{7f53bd0c-1bbd-416c-89ce-3ff39d4d3414}</Project>
       <Name>ScreenCapture.Shapes</Name>
@@ -59,6 +64,10 @@
     <ProjectReference Include="..\ScreenCapture\ScreenCapture.csproj">
       <Project>{dbdb0daa-b3ae-4cc4-a8c2-20550b7f32e3}</Project>
       <Name>ScreenCapture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShareX\ShareX.csproj">
+      <Project>{c5ae4585-e9ec-4fa3-b75a-e1210635acb6}</Project>
+      <Name>ShareX</Name>
     </ProjectReference>
     <ProjectReference Include="..\UploadersLib\UploadersLib.csproj">
       <Project>{e1c94415-3424-4517-a2a1-b2fdd1f59c67}</Project>

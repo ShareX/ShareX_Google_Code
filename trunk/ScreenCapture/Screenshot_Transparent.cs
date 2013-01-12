@@ -98,7 +98,7 @@ namespace ScreenCapture
 
                     Bitmap transparentImage;
 
-                    if (IsImagesEqual(whiteBackground, whiteBackground2))
+                    if (Helpers.IsImagesEqual(whiteBackground, whiteBackground2))
                     {
                         transparentImage = CreateTransparentImage(whiteBackground, blackBackground);
                         isTransparent = true;
@@ -144,15 +144,6 @@ namespace ScreenCapture
             IntPtr handle = NativeMethods.GetForegroundWindow();
 
             return CaptureWindowTransparent(handle);
-        }
-
-        private static bool IsImagesEqual(Bitmap bmp1, Bitmap bmp2)
-        {
-            using (UnsafeBitmap unsafeBitmap1 = new UnsafeBitmap(bmp1))
-            using (UnsafeBitmap unsafeBitmap2 = new UnsafeBitmap(bmp2))
-            {
-                return unsafeBitmap1 == unsafeBitmap2;
-            }
         }
 
         private static Bitmap CreateTransparentImage(Bitmap whiteBackground, Bitmap blackBackground)

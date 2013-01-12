@@ -1,9 +1,11 @@
 ﻿using HelpersLib;
 using ScreenCapture;
+using ShareX;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,8 +16,13 @@ namespace ShareXTest
     {
         private static void Main(string[] args)
         {
-            TestScreenCaptureSpeed();
+            //TestScreenCaptureSpeed();
+            Test();
             Console.ReadLine();
+        }
+
+        private static void Test()
+        {
         }
 
         private static void TestScreenCaptureSpeed()
