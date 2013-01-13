@@ -23,23 +23,45 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
-using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
-    public sealed class TinyURLShortener : URLShortener
+    public sealed class CustomURLShortener : URLShortener
     {
-        private const string APIURL = "http://tinyurl.com/api-create.php";
+        private CustomUploaderItem customUploader;
+
+        public CustomURLShortener(CustomUploaderItem customUploaderItem)
+        {
+            customUploader = customUploaderItem;
+        }
 
         public override string ShortenURL(string url)
         {
-            if (!string.IsNullOrEmpty(url))
-            {
-                Dictionary<string, string> arguments = new Dictionary<string, string>();
-                arguments.Add("url", url);
+            customUploader.SetInput(url);
 
-                return SendGetRequest(APIURL, arguments);
+            UploadResult result = new UploadResult();
+
+            if (customUploader.RequestType == CustomUploaderRequestType.POST)
+            {
+                result.Response = SendPostRequest(customUploader.RequestURL, customUploader.Arguments);
+            }
+            else if (customUploader.RequestType == CustomUploaderRequestType.GET)
+            {
+                result.Response = SendGetRequest(customUploader.RequestURL, customUploader.Arguments);
+            }
+
+            if (result.IsSuccess)
+            {
+                customUploader.Parse(result.Response);
+
+                result.URL = customUploader.ResultURL;
+                result.ThumbnailURL = customUploader.ResultThumbnailURL;
+                result.DeletionURL = customUploader.ResultDeletionURL;
+
+                return result.URL;
             }
 
             return null;

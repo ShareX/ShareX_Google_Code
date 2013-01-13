@@ -52,6 +52,8 @@ namespace UploadersLib
         yFrog,
         [Description("imm.io")]
         Immio,
+        [Description("Custom Image Uploader")]
+        CustomImageUploader,
         [Description("File Uploader")]
         FileUploader
     }
@@ -71,6 +73,8 @@ namespace UploadersLib
         Pastee,
         [Description("paste.ee")]
         Paste_ee,
+        [Description("Custom Text Uploader")]
+        CustomTextUploader,
         [Description("File Uploader")]
         FileUploader
     }
@@ -90,14 +94,14 @@ namespace UploadersLib
         Box,
         [Description("ge.tt")]
         Ge_tt,
-        [Description("Custom Uploader")]
-        CustomUploader,
         [Description("FTP Server")]
         FTP,
         [Description("Shared Folder")]
         SharedFolder,
         [Description("Email")]
-        Email
+        Email,
+        [Description("Custom File Uploader")]
+        CustomFileUploader
     }
 
     [Description("URL shorteners")]
@@ -114,7 +118,9 @@ namespace UploadersLib
         [Description("tinyurl.com")]
         TINYURL,
         [Description("turl.ca")]
-        TURL
+        TURL,
+        [Description("Custom URL Shortener")]
+        CustomURLShortener
     }
 
     [Description("Social networking services")]
@@ -275,5 +281,10 @@ namespace UploadersLib
         ManualProxy,
         [Description("Use system proxy settings")]
         SystemProxy
+    }
+
+    public enum CustomUploaderRequestType
+    {
+        POST, GET
     }
 }

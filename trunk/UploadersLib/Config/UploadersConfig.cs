@@ -133,14 +133,6 @@ namespace UploadersLib
 
         public Ge_ttLogin Ge_ttLogin = null;
 
-        // Custom Uploader
-
-        public List<CustomUploaderItem> CustomUploadersList = new List<CustomUploaderItem>();
-        public int CustomUploaderImageUploaderSelected = 0;
-        public int CustomUploaderTextUploaderSelected = 0;
-        public int CustomUploaderFileUploaderSelected = 0;
-        public int CustomUploaderURLShortenerSelected = 0;
-
         // FTP Server
 
         public List<FTPAccount> FTPAccountList = new List<FTPAccount>();
@@ -185,6 +177,16 @@ namespace UploadersLib
         public TwitterClientSettings TwitterClientConfig = new TwitterClientSettings();
 
         #endregion Social networking services
+
+        #region Custom Uploaders
+
+        public List<CustomUploaderItem> CustomUploadersList = new List<CustomUploaderItem>();
+        public int CustomImageUploaderSelected = 0;
+        public int CustomTextUploaderSelected = 0;
+        public int CustomFileUploaderSelected = 0;
+        public int CustomURLShortenerSelected = 0;
+
+        #endregion Custom Uploaders
 
         #region Helper Methods
 
@@ -267,8 +269,8 @@ namespace UploadersLib
                     return !string.IsNullOrEmpty(BoxAuthToken);
                 case FileDestination.Ge_tt:
                     return Ge_ttLogin != null && !string.IsNullOrEmpty(Ge_ttLogin.AccessToken);
-                case FileDestination.CustomUploader:
-                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomUploaderFileUploaderSelected);
+                case FileDestination.CustomFileUploader:
+                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomFileUploaderSelected);
                 case FileDestination.FTP:
                     return FTPAccountList != null && FTPAccountList.IsValidIndex(FTPSelectedFile);
                 case FileDestination.SharedFolder:

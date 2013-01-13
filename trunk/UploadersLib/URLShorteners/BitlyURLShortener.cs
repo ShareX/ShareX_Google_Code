@@ -37,14 +37,6 @@ namespace UploadersLib.URLShorteners
 
         public string APIKey { get; set; }
 
-        public override string Host
-        {
-            get
-            {
-                return UrlShortenerType.BITLY.GetDescription();
-            }
-        }
-
         public BitlyURLShortener(string login, string key)
         {
             APILogin = login;

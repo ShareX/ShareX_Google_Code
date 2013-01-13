@@ -35,14 +35,6 @@ namespace UploadersLib.URLShorteners
 
         private string APILogin, APIKey;
 
-        public override string Host
-        {
-            get
-            {
-                return UrlShortenerType.Jmp.GetDescription();
-            }
-        }
-
         public JmpURLShortener(string login, string key)
         {
             APILogin = login;

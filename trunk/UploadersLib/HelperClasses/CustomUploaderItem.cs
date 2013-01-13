@@ -35,6 +35,7 @@ namespace UploadersLib.HelperClasses
     public class CustomUploaderItem
     {
         public string Name { get; set; }
+        public CustomUploaderRequestType RequestType { get; set; }
         public string RequestURL { get; set; }
         public string FileFormName { get; set; }
         public Dictionary<string, string> Arguments { get; set; }
@@ -66,6 +67,16 @@ namespace UploadersLib.HelperClasses
         public override string ToString()
         {
             return Name;
+        }
+
+        public void SetInput(string input)
+        {
+            List<string> keys = new List<string>(Arguments.Keys);
+
+            foreach (string key in keys)
+            {
+                Arguments[key] = Arguments[key].Replace("$input$", input);
+            }
         }
 
         public void Parse(string response)

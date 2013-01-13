@@ -23,33 +23,39 @@
 
 #endregion License Information (GPL v3)
 
-using System.Collections.Generic;
+using System.IO;
+using UploadersLib.HelperClasses;
 
-namespace UploadersLib.URLShorteners
+namespace UploadersLib.ImageUploaders
 {
-    public sealed class ThreelyURLShortener : URLShortener
+    public sealed class CustomImageUploader : ImageUploader
     {
-        private const string APIURL = "http://3.ly";
+        private CustomUploaderItem customUploader;
 
-        private string APIKey;
-
-        public ThreelyURLShortener(string key)
+        public CustomImageUploader(CustomUploaderItem customUploaderItem)
         {
-            APIKey = key;
+            customUploader = customUploaderItem;
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult Upload(Stream stream, string fileName)
         {
-            if (!string.IsNullOrEmpty(url))
-            {
-                Dictionary<string, string> arguments = new Dictionary<string, string>();
-                arguments.Add("api", APIKey);
-                arguments.Add("u", url);
+            UploadResult result = null;
 
-                return SendGetRequest(APIURL, arguments);
+            if (customUploader.RequestType == CustomUploaderRequestType.POST && !string.IsNullOrEmpty(customUploader.FileFormName))
+            {
+                result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
+
+                if (result.IsSuccess)
+                {
+                    customUploader.Parse(result.Response);
+
+                    result.URL = customUploader.ResultURL;
+                    result.ThumbnailURL = customUploader.ResultThumbnailURL;
+                    result.DeletionURL = customUploader.ResultDeletionURL;
+                }
             }
 
-            return null;
+            return result;
         }
     }
 }

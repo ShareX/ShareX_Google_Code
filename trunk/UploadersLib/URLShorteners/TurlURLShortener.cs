@@ -32,14 +32,6 @@ namespace UploadersLib.URLShorteners
     {
         private const string APIURL = "http://turl.ca/api.php";
 
-        public override string Host
-        {
-            get
-            {
-                return UrlShortenerType.TURL.GetDescription();
-            }
-        }
-
         public override string ShortenURL(string url)
         {
             if (!string.IsNullOrEmpty(url))

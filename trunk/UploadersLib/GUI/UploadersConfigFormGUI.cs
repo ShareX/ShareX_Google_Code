@@ -310,6 +310,8 @@ namespace UploadersLib
                 PrepareCustomUploaderList();
             }
 
+            cbCustomUploaderRequestType.Items.AddRange(Enum.GetNames(typeof(CustomUploaderRequestType)));
+
             #endregion File uploaders
 
             #region URL Shorteners
