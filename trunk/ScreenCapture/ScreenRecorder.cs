@@ -105,7 +105,7 @@ namespace ScreenCapture
             FPS = fps;
             DurationSeconds = durationSeconds;
             CaptureRectangle = captureRectangle;
-            CachePath = cachePath; // TODO: create directory if not exist
+            CachePath = cachePath;
         }
 
         private void UpdateInfo()

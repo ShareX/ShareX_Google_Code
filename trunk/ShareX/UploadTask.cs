@@ -555,9 +555,9 @@ namespace ShareX
                     }
                     break;
                 case FileDestination.CustomUploader:
-                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomUploaderSelected))
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomUploaderFileUploaderSelected))
                     {
-                        fileUploader = new CustomUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomUploaderSelected]);
+                        fileUploader = new CustomUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomUploaderFileUploaderSelected]);
                     }
                     break;
                 case FileDestination.FTP:

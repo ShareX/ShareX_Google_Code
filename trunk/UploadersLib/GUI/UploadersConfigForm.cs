@@ -661,10 +661,11 @@ namespace UploadersLib
         {
             if (!string.IsNullOrEmpty(txtCustomUploaderName.Text))
             {
-                CustomUploaderItem iUploader = GetCustomUploaderFromFields();
-                Config.CustomUploadersList.Add(iUploader);
-                lbCustomUploaderList.Items.Add(iUploader.Name);
+                CustomUploaderItem item = GetCustomUploaderFromFields();
+                Config.CustomUploadersList.Add(item);
+                lbCustomUploaderList.Items.Add(item.Name);
                 lbCustomUploaderList.SelectedIndex = lbCustomUploaderList.Items.Count - 1;
+                PrepareCustomUploaderList();
             }
         }
 
@@ -675,7 +676,8 @@ namespace UploadersLib
                 int selected = lbCustomUploaderList.SelectedIndex;
                 Config.CustomUploadersList.RemoveAt(selected);
                 lbCustomUploaderList.Items.RemoveAt(selected);
-                LoadCustomUploader(new CustomUploaderItem());
+                CustomUploaderClear();
+                PrepareCustomUploaderList();
             }
         }
 
@@ -691,7 +693,6 @@ namespace UploadersLib
             if (index > -1)
             {
                 LoadCustomUploader(Config.CustomUploadersList[index]);
-                Config.CustomUploaderSelected = index;
             }
         }
 
@@ -837,18 +838,39 @@ Example: $3,1$ or $2,thumbnail_result$";
 
         private void btnCustomUploaderClear_Click(object sender, EventArgs e)
         {
-            LoadCustomUploader(new CustomUploaderItem());
+            CustomUploaderClear();
         }
 
-        private void btnCustomUploaderTest_Click(object sender, EventArgs e)
+        private void cbCustomUploaderImageUploader_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Config.CustomUploaderImageUploaderSelected = cbCustomUploaderImageUploader.SelectedIndex;
+        }
+
+        private void cbCustomUploaderTextUploader_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Config.CustomUploaderTextUploaderSelected = cbCustomUploaderTextUploader.SelectedIndex;
+        }
+
+        private void cbCustomUploaderFileUploader_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Config.CustomUploaderFileUploaderSelected = cbCustomUploaderFileUploader.SelectedIndex;
+        }
+
+        private void cbCustomUploaderURLShortener_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Config.CustomUploaderURLShortenerSelected = cbCustomUploaderURLShortener.SelectedIndex;
+        }
+
+        private void btnCustomUploaderImageUploaderTest_Click(object sender, EventArgs e)
         {
             UpdateCustomUploader();
 
-            if (lbCustomUploaderList.SelectedIndex > -1)
+            if (Config.CustomUploaderImageUploaderSelected > -1)
             {
-                btnCustomUploaderTest.Enabled = false;
+                btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
+                    btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
 
-                TestCustomUploader(Config.CustomUploadersList[lbCustomUploaderList.SelectedIndex]);
+                TestCustomUploader(Config.CustomUploadersList[Config.CustomUploaderImageUploaderSelected]);
             }
         }
 

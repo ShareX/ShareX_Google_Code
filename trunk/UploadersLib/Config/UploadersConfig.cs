@@ -136,7 +136,10 @@ namespace UploadersLib
         // Custom Uploader
 
         public List<CustomUploaderItem> CustomUploadersList = new List<CustomUploaderItem>();
-        public int CustomUploaderSelected = 0;
+        public int CustomUploaderImageUploaderSelected = 0;
+        public int CustomUploaderTextUploaderSelected = 0;
+        public int CustomUploaderFileUploaderSelected = 0;
+        public int CustomUploaderURLShortenerSelected = 0;
 
         // FTP Server
 
@@ -265,7 +268,7 @@ namespace UploadersLib
                 case FileDestination.Ge_tt:
                     return Ge_ttLogin != null && !string.IsNullOrEmpty(Ge_ttLogin.AccessToken);
                 case FileDestination.CustomUploader:
-                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomUploaderSelected);
+                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomUploaderFileUploaderSelected);
                 case FileDestination.FTP:
                     return FTPAccountList != null && FTPAccountList.IsValidIndex(FTPSelectedFile);
                 case FileDestination.SharedFolder:

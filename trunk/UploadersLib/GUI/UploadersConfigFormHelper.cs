@@ -933,6 +933,44 @@ namespace UploadersLib
                 Config.CustomUploadersList[index] = customUploader;
                 lbCustomUploaderList.Items[index] = customUploader.Name;
             }
+
+            PrepareCustomUploaderList();
+        }
+
+        private void CustomUploaderClear()
+        {
+            LoadCustomUploader(new CustomUploaderItem());
+        }
+
+        private void PrepareCustomUploaderList()
+        {
+            foreach (CustomUploaderItem item in Config.CustomUploadersList)
+            {
+                cbCustomUploaderImageUploader.Items.Add(item);
+                cbCustomUploaderTextUploader.Items.Add(item);
+                cbCustomUploaderFileUploader.Items.Add(item);
+                cbCustomUploaderURLShortener.Items.Add(item);
+            }
+
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderImageUploaderSelected))
+            {
+                cbCustomUploaderImageUploader.SelectedIndex = Config.CustomUploaderImageUploaderSelected;
+            }
+
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderTextUploaderSelected))
+            {
+                cbCustomUploaderTextUploader.SelectedIndex = Config.CustomUploaderTextUploaderSelected;
+            }
+
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderFileUploaderSelected))
+            {
+                cbCustomUploaderFileUploader.SelectedIndex = Config.CustomUploaderFileUploaderSelected;
+            }
+
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderURLShortenerSelected))
+            {
+                cbCustomUploaderURLShortener.SelectedIndex = Config.CustomUploaderURLShortenerSelected;
+            }
         }
 
         private void LoadCustomUploader(CustomUploaderItem customUploader)
@@ -1039,7 +1077,7 @@ namespace UploadersLib
                     txtCustomUploaderLog.ScrollToCaret();
                 }
 
-                btnCustomUploaderTest.Enabled = true;
+                btnCustomUploaderImageUploaderTest.Enabled = true;
             });
         }
 

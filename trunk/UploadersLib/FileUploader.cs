@@ -34,7 +34,7 @@ namespace UploadersLib
 
         public UploadResult Upload(string filePath)
         {
-            if (File.Exists(filePath))
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
                 using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
