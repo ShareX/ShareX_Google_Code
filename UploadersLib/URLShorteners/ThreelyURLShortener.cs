@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.Collections.Generic;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
@@ -38,18 +39,20 @@ namespace UploadersLib.URLShorteners
             APIKey = key;
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
                 arguments.Add("api", APIKey);
                 arguments.Add("u", url);
 
-                return SendGetRequest(APIURL, arguments);
+                result.Response = result.ShortenedURL = SendGetRequest(APIURL, arguments);
             }
 
-            return null;
+            return result;
         }
     }
 }

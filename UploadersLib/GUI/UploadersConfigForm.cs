@@ -880,7 +880,46 @@ Example: $3,1$ or $2,thumbnail_result$";
                 btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
                     btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
 
-                TestCustomUploader(Config.CustomUploadersList[Config.CustomImageUploaderSelected]);
+                TestCustomUploader(CustomUploaderType.Image, Config.CustomUploadersList[Config.CustomImageUploaderSelected]);
+            }
+        }
+
+        private void btnCustomUploaderTextUploaderTest_Click(object sender, EventArgs e)
+        {
+            UpdateCustomUploader();
+
+            if (Config.CustomTextUploaderSelected > -1)
+            {
+                btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
+                    btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
+
+                TestCustomUploader(CustomUploaderType.Text, Config.CustomUploadersList[Config.CustomTextUploaderSelected]);
+            }
+        }
+
+        private void btnCustomUploaderFileUploaderTest_Click(object sender, EventArgs e)
+        {
+            UpdateCustomUploader();
+
+            if (Config.CustomFileUploaderSelected > -1)
+            {
+                btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
+                    btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
+
+                TestCustomUploader(CustomUploaderType.File, Config.CustomUploadersList[Config.CustomFileUploaderSelected]);
+            }
+        }
+
+        private void btnCustomUploaderURLShortenerTest_Click(object sender, EventArgs e)
+        {
+            UpdateCustomUploader();
+
+            if (Config.CustomURLShortenerSelected > -1)
+            {
+                btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
+                    btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
+
+                TestCustomUploader(CustomUploaderType.URL, Config.CustomUploadersList[Config.CustomURLShortenerSelected]);
             }
         }
 

@@ -23,10 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using UploadersLib.HelperClasses;
+
 namespace UploadersLib
 {
     public abstract class URLShortener : Uploader
     {
-        public abstract string ShortenURL(string url);
+        public abstract UploadResult ShortenURL(string url);
     }
 }

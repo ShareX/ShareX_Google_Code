@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using System.Collections.Generic;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
@@ -32,17 +33,19 @@ namespace UploadersLib.URLShorteners
     {
         private const string APIURL = "http://is.gd/api.php";
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
                 arguments.Add("longurl", url);
 
-                return SendGetRequest(APIURL, arguments);
+                result.Response = result.ShortenedURL = SendGetRequest(APIURL, arguments);
             }
 
-            return null;
+            return result;
         }
     }
 }

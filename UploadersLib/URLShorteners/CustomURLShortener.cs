@@ -38,11 +38,11 @@ namespace UploadersLib.URLShorteners
             customUploader = customUploaderItem;
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
             customUploader.SetInput(url);
 
-            UploadResult result = new UploadResult();
+            UploadResult result = new UploadResult { URL = url };
 
             if (customUploader.RequestType == CustomUploaderRequestType.POST)
             {
@@ -57,14 +57,12 @@ namespace UploadersLib.URLShorteners
             {
                 customUploader.Parse(result.Response);
 
-                result.URL = customUploader.ResultURL;
+                result.ShortenedURL = customUploader.ResultURL;
                 result.ThumbnailURL = customUploader.ResultThumbnailURL;
                 result.DeletionURL = customUploader.ResultDeletionURL;
-
-                return result.URL;
             }
 
-            return null;
+            return result;
         }
     }
 }

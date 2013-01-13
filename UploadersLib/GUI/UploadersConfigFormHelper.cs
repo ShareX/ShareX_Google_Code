@@ -31,6 +31,7 @@ using System.IO;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using UploadersLib.FileUploaders;
 using UploadersLib.Forms;
@@ -944,6 +945,11 @@ namespace UploadersLib
 
         private void PrepareCustomUploaderList()
         {
+            cbCustomUploaderImageUploader.Items.Clear();
+            cbCustomUploaderTextUploader.Items.Clear();
+            cbCustomUploaderFileUploader.Items.Clear();
+            cbCustomUploaderURLShortener.Items.Clear();
+
             foreach (CustomUploaderItem item in Config.CustomUploadersList)
             {
                 cbCustomUploaderImageUploader.Items.Add(item);
@@ -977,6 +983,10 @@ namespace UploadersLib
         {
             txtCustomUploaderName.Text = customUploader.Name;
 
+            cbCustomUploaderRequestType.SelectedIndex = (int)customUploader.RequestType;
+            txtCustomUploaderURL.Text = customUploader.RequestURL;
+            txtCustomUploaderFileForm.Text = customUploader.FileFormName;
+
             txtCustomUploaderArgName.Text = string.Empty;
             txtCustomUploaderArgValue.Text = string.Empty;
             lvCustomUploaderArguments.Items.Clear();
@@ -985,8 +995,6 @@ namespace UploadersLib
                 lvCustomUploaderArguments.Items.Add(arg.Key).SubItems.Add(arg.Value);
             }
 
-            txtCustomUploaderURL.Text = customUploader.RequestURL;
-            txtCustomUploaderFileForm.Text = customUploader.FileFormName;
             txtCustomUploaderRegexp.Text = string.Empty;
             lvCustomUploaderRegexps.Items.Clear();
             foreach (string regexp in customUploader.RegexList)
@@ -1000,23 +1008,24 @@ namespace UploadersLib
 
         private CustomUploaderItem GetCustomUploaderFromFields()
         {
-            CustomUploaderItem iUploader = new CustomUploaderItem(txtCustomUploaderName.Text);
+            CustomUploaderItem item = new CustomUploaderItem(txtCustomUploaderName.Text);
             foreach (ListViewItem lvItem in lvCustomUploaderArguments.Items)
             {
-                iUploader.Arguments.Add(lvItem.Text, lvItem.SubItems[1].Text);
+                item.Arguments.Add(lvItem.Text, lvItem.SubItems[1].Text);
             }
 
-            iUploader.RequestURL = txtCustomUploaderURL.Text;
-            iUploader.FileFormName = txtCustomUploaderFileForm.Text;
+            item.RequestType = (CustomUploaderRequestType)cbCustomUploaderRequestType.SelectedIndex;
+            item.RequestURL = txtCustomUploaderURL.Text;
+            item.FileFormName = txtCustomUploaderFileForm.Text;
             foreach (ListViewItem lvItem in lvCustomUploaderRegexps.Items)
             {
-                iUploader.RegexList.Add(lvItem.Text);
+                item.RegexList.Add(lvItem.Text);
             }
 
-            iUploader.URL = txtCustomUploaderFullImage.Text;
-            iUploader.ThumbnailURL = txtCustomUploaderThumbnail.Text;
+            item.URL = txtCustomUploaderFullImage.Text;
+            item.ThumbnailURL = txtCustomUploaderThumbnail.Text;
 
-            return iUploader;
+            return item;
         }
 
         private void ImportCustomUploaders(string fp)
@@ -1040,45 +1049,67 @@ namespace UploadersLib
             um.Save(fp);
         }
 
-        private void TestCustomUploader(CustomUploaderItem cui)
+        private async void TestCustomUploader(CustomUploaderType type, CustomUploaderItem item)
         {
-            UploadResult ur = null;
+            UploadResult result = null;
 
-            Helpers.AsyncJob(() =>
+            await Task.Run(() =>
             {
                 try
                 {
-                    using (Stream stream = Resources.ShareXLogo.GetStream())
+                    switch (type)
                     {
-                        CustomFileUploader cu = new CustomFileUploader(cui);
-                        ur = cu.Upload(stream, "Test.png");
-                        ur.Errors = cu.Errors;
+                        case CustomUploaderType.Image:
+                            using (Stream stream = Resources.ShareXLogo.GetStream())
+                            {
+                                CustomImageUploader imageUploader = new CustomImageUploader(item);
+                                result = imageUploader.Upload(stream, "Test.png");
+                                result.Errors = imageUploader.Errors;
+                            }
+                            break;
+                        case CustomUploaderType.Text:
+                            CustomTextUploader textUploader = new CustomTextUploader(item);
+                            result = textUploader.UploadText(Application.ProductName + " text upload test");
+                            result.Errors = textUploader.Errors;
+                            break;
+                        case CustomUploaderType.File:
+                            using (Stream stream = Resources.ShareXLogo.GetStream())
+                            {
+                                CustomFileUploader fileUploader = new CustomFileUploader(item);
+                                result = fileUploader.Upload(stream, "Test.png");
+                                result.Errors = fileUploader.Errors;
+                            }
+                            break;
+                        case CustomUploaderType.URL:
+                            CustomURLShortener urlShortener = new CustomURLShortener(item);
+                            result = urlShortener.ShortenURL(Links.URL_WEBSITE);
+                            result.Errors = urlShortener.Errors;
+                            break;
                     }
                 }
                 catch { }
-            },
-            () =>
-            {
-                if (ur != null)
-                {
-                    if (!string.IsNullOrEmpty(ur.URL))
-                    {
-                        txtCustomUploaderLog.AppendText("URL: " + ur.URL + Environment.NewLine);
-                    }
-                    else if (ur.IsError)
-                    {
-                        txtCustomUploaderLog.AppendText("Error: " + ur.ErrorsToString() + Environment.NewLine);
-                    }
-                    else
-                    {
-                        txtCustomUploaderLog.AppendText("Error: Result is empty." + Environment.NewLine);
-                    }
+            });
 
-                    txtCustomUploaderLog.ScrollToCaret();
+            if (result != null)
+            {
+                if (!string.IsNullOrEmpty(result.URL))
+                {
+                    txtCustomUploaderLog.AppendText("URL: " + result.URL + Environment.NewLine);
+                }
+                else if (result.IsError)
+                {
+                    txtCustomUploaderLog.AppendText("Error: " + result.ErrorsToString() + Environment.NewLine);
+                }
+                else
+                {
+                    txtCustomUploaderLog.AppendText("Error: Result is empty." + Environment.NewLine);
                 }
 
-                btnCustomUploaderImageUploaderTest.Enabled = true;
-            });
+                txtCustomUploaderLog.ScrollToCaret();
+            }
+
+            btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
+                btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = true;
         }
 
         #endregion Custom uploader

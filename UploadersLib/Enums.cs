@@ -283,6 +283,11 @@ namespace UploadersLib
         SystemProxy
     }
 
+    public enum CustomUploaderType
+    {
+        Image, Text, File, URL
+    }
+
     public enum CustomUploaderRequestType
     {
         POST, GET

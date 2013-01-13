@@ -76,8 +76,10 @@ namespace UploadersLib.URLShorteners
             return GetAccessToken(URLAccessToken, AuthInfo);
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 string query;
@@ -95,12 +97,16 @@ namespace UploadersLib.URLShorteners
 
                 string json = string.Format("{{\"longUrl\":\"{0}\"}}", url);
 
-                string response = SendPostRequestJSON(query, json);
+                result.Response = SendPostRequestJSON(query, json);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(result.Response))
                 {
-                    GoogleURLShortenerResponse result = JsonConvert.DeserializeObject<GoogleURLShortenerResponse>(response);
-                    if (result != null) return result.id;
+                    GoogleURLShortenerResponse response = JsonConvert.DeserializeObject<GoogleURLShortenerResponse>(result.Response);
+
+                    if (response != null)
+                    {
+                        result.ShortenedURL = response.id;
+                    }
                 }
             }
 

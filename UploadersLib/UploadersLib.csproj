@@ -265,7 +265,6 @@
     <Compile Include="URLShortener.cs" />
     <Compile Include="URLShorteners\BitlyURLShortener.cs" />
     <Compile Include="URLShorteners\CustomURLShortener.cs" />
-    <Compile Include="URLShorteners\DebliURLShortener.cs" />
     <Compile Include="URLShorteners\GoogleURLShortener.cs" />
     <Compile Include="URLShorteners\IsgdURLShortener.cs" />
     <Compile Include="URLShorteners\JmpURLShortener.cs" />
