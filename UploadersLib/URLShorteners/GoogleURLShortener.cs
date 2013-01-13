@@ -45,14 +45,6 @@ namespace UploadersLib.URLShorteners
 
         public OAuthInfo AuthInfo { get; set; }
 
-        public override string Host
-        {
-            get
-            {
-                return UrlShortenerType.Google.GetDescription();
-            }
-        }
-
         public GoogleURLShortener(AccountType uploadMethod, string anonymousKey, OAuthInfo oauth)
         {
             UploadMethod = uploadMethod;

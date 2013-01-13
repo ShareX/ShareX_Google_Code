@@ -24,22 +24,34 @@
 #endregion License Information (GPL v3)
 
 using System.IO;
+using System.Text;
 using UploadersLib.HelperClasses;
 
-namespace UploadersLib.ImageUploaders
+namespace UploadersLib.TextUploaders
 {
-    public sealed class CustomUploader : FileUploader
+    public sealed class CustomTextUploader : TextUploader
     {
         private CustomUploaderItem customUploader;
 
-        public CustomUploader(CustomUploaderItem customUploaderItem)
+        public CustomTextUploader(CustomUploaderItem customUploaderItem)
         {
             customUploader = customUploaderItem;
         }
 
-        public override UploadResult Upload(Stream stream, string fileName)
+        public override UploadResult UploadText(string text)
         {
-            UploadResult result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
+            customUploader.SetInput(text);
+
+            UploadResult result = new UploadResult();
+
+            if (customUploader.RequestType == CustomUploaderRequestType.POST)
+            {
+                result.Response = SendPostRequest(customUploader.RequestURL, customUploader.Arguments);
+            }
+            else if (customUploader.RequestType == CustomUploaderRequestType.GET)
+            {
+                result.Response = SendGetRequest(customUploader.RequestURL, customUploader.Arguments);
+            }
 
             if (result.IsSuccess)
             {

@@ -32,14 +32,6 @@ namespace UploadersLib.URLShorteners
     {
         private const string APIURL = "http://is.gd/api.php";
 
-        public override string Host
-        {
-            get
-            {
-                return UrlShortenerType.ISGD.GetDescription();
-            }
-        }
-
         public override string ShortenURL(string url)
         {
             if (!string.IsNullOrEmpty(url))

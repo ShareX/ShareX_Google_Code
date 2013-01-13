@@ -126,7 +126,7 @@ namespace ShareX
             {
                 switch (uploader)
                 {
-                    case FileDestination.CustomUploader:
+                    case FileDestination.CustomFileUploader:
                     case FileDestination.SharedFolder:
                     case FileDestination.Email:
                         continue;

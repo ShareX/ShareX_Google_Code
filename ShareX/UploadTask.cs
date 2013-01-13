@@ -458,6 +458,12 @@ namespace ShareX
                 case ImageDestination.Immio:
                     imageUploader = new ImmioUploader();
                     break;
+                case ImageDestination.CustomImageUploader:
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomImageUploaderSelected))
+                    {
+                        imageUploader = new CustomImageUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomImageUploaderSelected]);
+                    }
+                    break;
             }
 
             if (imageUploader != null)
@@ -492,6 +498,12 @@ namespace ShareX
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);
+                    break;
+                case TextDestination.CustomTextUploader:
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomTextUploaderSelected))
+                    {
+                        textUploader = new CustomTextUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomTextUploaderSelected]);
+                    }
                     break;
             }
 
@@ -554,10 +566,10 @@ namespace ShareX
                         };
                     }
                     break;
-                case FileDestination.CustomUploader:
-                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomUploaderFileUploaderSelected))
+                case FileDestination.CustomFileUploader:
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomFileUploaderSelected))
                     {
-                        fileUploader = new CustomUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomUploaderFileUploaderSelected]);
+                        fileUploader = new CustomFileUploader(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomFileUploaderSelected]);
                     }
                     break;
                 case FileDestination.FTP:
@@ -650,6 +662,12 @@ namespace ShareX
                     break;
                 case UrlShortenerType.TURL:
                     urlShortener = new TurlURLShortener();
+                    break;
+                case UrlShortenerType.CustomURLShortener:
+                    if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomURLShortenerSelected))
+                    {
+                        urlShortener = new CustomURLShortener(Program.UploadersConfig.CustomUploadersList[Program.UploadersConfig.CustomURLShortenerSelected]);
+                    }
                     break;
             }
 

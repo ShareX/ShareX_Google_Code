@@ -696,6 +696,16 @@ namespace UploadersLib
             }
         }
 
+        private void btnCustomUploaderRequestTypeHelp_Click(object sender, EventArgs e)
+        {
+            string helpText = @"For image & file upload 'POST' request type required with 'File form name'.
+For text & url shortener both request type usable. You can't use 'File form name' for them. Instead you need to use '$input$' for argument value.
+Example if argument name is 'pastebin_text' then need to use '$input$' without quotation marks and it will be automatically replaced with text which we gonna upload.
+Same thing apply for url shortener. '$input$' will be replaced with url.";
+
+            MessageBox.Show(helpText, "ShareX - Custom uploader help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void btnCustomUploaderRegexpAdd_Click(object sender, EventArgs e)
         {
             string regexp = txtCustomUploaderRegexp.Text;
@@ -843,34 +853,34 @@ Example: $3,1$ or $2,thumbnail_result$";
 
         private void cbCustomUploaderImageUploader_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Config.CustomUploaderImageUploaderSelected = cbCustomUploaderImageUploader.SelectedIndex;
+            Config.CustomImageUploaderSelected = cbCustomUploaderImageUploader.SelectedIndex;
         }
 
         private void cbCustomUploaderTextUploader_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Config.CustomUploaderTextUploaderSelected = cbCustomUploaderTextUploader.SelectedIndex;
+            Config.CustomTextUploaderSelected = cbCustomUploaderTextUploader.SelectedIndex;
         }
 
         private void cbCustomUploaderFileUploader_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Config.CustomUploaderFileUploaderSelected = cbCustomUploaderFileUploader.SelectedIndex;
+            Config.CustomFileUploaderSelected = cbCustomUploaderFileUploader.SelectedIndex;
         }
 
         private void cbCustomUploaderURLShortener_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Config.CustomUploaderURLShortenerSelected = cbCustomUploaderURLShortener.SelectedIndex;
+            Config.CustomURLShortenerSelected = cbCustomUploaderURLShortener.SelectedIndex;
         }
 
         private void btnCustomUploaderImageUploaderTest_Click(object sender, EventArgs e)
         {
             UpdateCustomUploader();
 
-            if (Config.CustomUploaderImageUploaderSelected > -1)
+            if (Config.CustomImageUploaderSelected > -1)
             {
                 btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
                     btnCustomUploaderFileUploaderTest.Enabled = btnCustomUploaderURLShortenerTest.Enabled = false;
 
-                TestCustomUploader(Config.CustomUploadersList[Config.CustomUploaderImageUploaderSelected]);
+                TestCustomUploader(Config.CustomUploadersList[Config.CustomImageUploaderSelected]);
             }
         }
 

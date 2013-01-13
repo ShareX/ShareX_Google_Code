@@ -952,24 +952,24 @@ namespace UploadersLib
                 cbCustomUploaderURLShortener.Items.Add(item);
             }
 
-            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderImageUploaderSelected))
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomImageUploaderSelected))
             {
-                cbCustomUploaderImageUploader.SelectedIndex = Config.CustomUploaderImageUploaderSelected;
+                cbCustomUploaderImageUploader.SelectedIndex = Config.CustomImageUploaderSelected;
             }
 
-            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderTextUploaderSelected))
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomTextUploaderSelected))
             {
-                cbCustomUploaderTextUploader.SelectedIndex = Config.CustomUploaderTextUploaderSelected;
+                cbCustomUploaderTextUploader.SelectedIndex = Config.CustomTextUploaderSelected;
             }
 
-            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderFileUploaderSelected))
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomFileUploaderSelected))
             {
-                cbCustomUploaderFileUploader.SelectedIndex = Config.CustomUploaderFileUploaderSelected;
+                cbCustomUploaderFileUploader.SelectedIndex = Config.CustomFileUploaderSelected;
             }
 
-            if (Config.CustomUploadersList.IsValidIndex(Config.CustomUploaderURLShortenerSelected))
+            if (Config.CustomUploadersList.IsValidIndex(Config.CustomURLShortenerSelected))
             {
-                cbCustomUploaderURLShortener.SelectedIndex = Config.CustomUploaderURLShortenerSelected;
+                cbCustomUploaderURLShortener.SelectedIndex = Config.CustomURLShortenerSelected;
             }
         }
 
@@ -1050,7 +1050,7 @@ namespace UploadersLib
                 {
                     using (Stream stream = Resources.ShareXLogo.GetStream())
                     {
-                        CustomUploader cu = new CustomUploader(cui);
+                        CustomFileUploader cu = new CustomFileUploader(cui);
                         ur = cu.Upload(stream, "Test.png");
                         ur.Errors = cu.Errors;
                     }

@@ -31,11 +31,6 @@ namespace UploadersLib.URLShorteners
     {
         private const string APIURL = "http://deb.li/rpc/json";
 
-        public override string Host
-        {
-            get { return "Deb.li"; }
-        }
-
         public override string ShortenURL(string url)
         {
             if (!string.IsNullOrEmpty(url))

@@ -28,6 +28,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
@@ -59,52 +60,47 @@ namespace UploadersLib.Forms
             }
         }
 
-        public void OpenDirectory(string path)
+        public async void OpenDirectory(string path)
         {
             lvDropboxFiles.Items.Clear();
 
             DropboxDirectoryInfo directory = null;
 
-            Helpers.AsyncJob(() =>
+            directory = await Task.Run(() => dropbox.GetFilesList(path));
+
+            if (directory != null)
             {
-                directory = dropbox.GetFilesList(path);
-            },
-            () =>
+                lvDropboxFiles.Tag = directory;
+
+                ListViewItem lvi = GetParentFolder(directory.Path);
+
+                if (lvi != null)
+                {
+                    lvDropboxFiles.Items.Add(lvi);
+                }
+
+                foreach (DropboxContentInfo content in directory.Contents.OrderBy(x => !x.Is_dir))
+                {
+                    string filename = Path.GetFileName(content.Path);
+                    lvi = new ListViewItem(filename);
+                    lvi.SubItems.Add(content.Is_dir ? "" : content.Size);
+                    DateTime modified;
+                    if (DateTime.TryParse(content.Modified, out modified))
+                    {
+                        lvi.SubItems.Add(modified.ToString());
+                    }
+                    lvi.ImageKey = ilm.AddImage(content.Icon);
+                    lvi.Tag = content;
+                    lvDropboxFiles.Items.Add(lvi);
+                }
+
+                CurrentFolderPath = directory.Path.Trim('/');
+                Text = "Dropbox - " + CurrentFolderPath;
+            }
+            else
             {
-                if (directory != null)
-                {
-                    lvDropboxFiles.Tag = directory;
-
-                    ListViewItem lvi = GetParentFolder(directory.Path);
-
-                    if (lvi != null)
-                    {
-                        lvDropboxFiles.Items.Add(lvi);
-                    }
-
-                    foreach (DropboxContentInfo content in directory.Contents.OrderBy(x => !x.Is_dir))
-                    {
-                        string filename = Path.GetFileName(content.Path);
-                        lvi = new ListViewItem(filename);
-                        lvi.SubItems.Add(content.Is_dir ? "" : content.Size);
-                        DateTime modified;
-                        if (DateTime.TryParse(content.Modified, out modified))
-                        {
-                            lvi.SubItems.Add(modified.ToString());
-                        }
-                        lvi.ImageKey = ilm.AddImage(content.Icon);
-                        lvi.Tag = content;
-                        lvDropboxFiles.Items.Add(lvi);
-                    }
-
-                    CurrentFolderPath = directory.Path.Trim('/');
-                    Text = "Dropbox - " + CurrentFolderPath;
-                }
-                else
-                {
-                    MessageBox.Show("Path not exist: " + path, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            });
+                MessageBox.Show("Path not exist: " + path, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public ListViewItem GetParentFolder(string currentPath)

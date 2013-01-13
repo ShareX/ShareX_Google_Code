@@ -199,7 +199,9 @@
     <Compile Include="HelperClasses\OAuth\IOAuth.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthManager.cs" />
     <Compile Include="HelperClasses\OAuth\OAuthInfo.cs" />
+    <Compile Include="ImageUploaders\CustomImageUploader.cs" />
     <Compile Include="ImageUploaders\Picasa.cs" />
+    <Compile Include="TextUploaders\CustomTextUploader.cs" />
     <Compile Include="TextUploaders\Paste_ee.cs" />
     <Compile Include="UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
@@ -232,7 +234,7 @@
     <Compile Include="Proxy\ProxySettings.cs" />
     <Compile Include="HelperClasses\TCPClient.cs" />
     <Compile Include="ImageUploader.cs" />
-    <Compile Include="FileUploaders\CustomUploader.cs" />
+    <Compile Include="FileUploaders\CustomFileUploader.cs" />
     <Compile Include="ImageUploaders\FlickrUploader.cs" />
     <Compile Include="FileUploaders\FTPUploader.cs" />
     <Compile Include="ImageUploaders\ImageBin.cs" />
@@ -262,6 +264,7 @@
     <Compile Include="Uploader.cs" />
     <Compile Include="URLShortener.cs" />
     <Compile Include="URLShorteners\BitlyURLShortener.cs" />
+    <Compile Include="URLShorteners\CustomURLShortener.cs" />
     <Compile Include="URLShorteners\DebliURLShortener.cs" />
     <Compile Include="URLShorteners\GoogleURLShortener.cs" />
     <Compile Include="URLShorteners\IsgdURLShortener.cs" />

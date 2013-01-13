@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ShareX
@@ -268,48 +269,43 @@ namespace ShareX
             CaptureRegion(rectangleRegion, autoHideForm);
         }
 
-        private void PrepareWindowsMenuAsync(ToolStripMenuItem tsmi, EventHandler handler)
+        private async void PrepareWindowsMenuAsync(ToolStripMenuItem tsmi, EventHandler handler)
         {
             tsmi.DropDownItems.Clear();
 
             List<WindowInfo> windows = null;
 
-            Helpers.AsyncJob(() =>
-            {
-                WindowsList windowsList = new WindowsList();
-                windows = windowsList.GetVisibleWindowsList();
-            },
-            () =>
-            {
-                if (windows != null)
-                {
-                    foreach (WindowInfo window in windows)
-                    {
-                        string title = window.Text.Truncate(50);
-                        ToolStripItem tsi = tsmi.DropDownItems.Add(title);
-                        tsi.Click += handler;
+            WindowsList windowsList = new WindowsList();
+            windows = await Task.Run(() => windowsList.GetVisibleWindowsList());
 
-                        try
+            if (windows != null)
+            {
+                foreach (WindowInfo window in windows)
+                {
+                    string title = window.Text.Truncate(50);
+                    ToolStripItem tsi = tsmi.DropDownItems.Add(title);
+                    tsi.Click += handler;
+
+                    try
+                    {
+                        using (Icon icon = window.Icon)
                         {
-                            using (Icon icon = window.Icon)
+                            if (icon != null)
                             {
-                                if (icon != null)
-                                {
-                                    tsi.Image = icon.ToBitmap();
-                                }
+                                tsi.Image = icon.ToBitmap();
                             }
                         }
-                        catch (Exception e)
-                        {
-                            DebugHelper.WriteException(e);
-                        }
-
-                        tsi.Tag = window;
+                    }
+                    catch (Exception e)
+                    {
+                        DebugHelper.WriteException(e);
                     }
 
-                    tsmi.Invalidate();
+                    tsi.Tag = window;
                 }
-            });
+
+                tsmi.Invalidate();
+            }
         }
 
         #region Menu events
