@@ -26,6 +26,7 @@
 using HelpersLib;
 using System.Collections.Generic;
 using System.Xml;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
@@ -41,8 +42,10 @@ namespace UploadersLib.URLShorteners
             APIKey = key;
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
@@ -52,18 +55,18 @@ namespace UploadersLib.URLShorteners
                 arguments.Add("apiKey", APIKey);
                 arguments.Add("format", "xml");
 
-                string result = SendGetRequest(APIURL, arguments);
+                result.Response = SendGetRequest(APIURL, arguments);
 
                 XmlDocument xdoc = new XmlDocument();
-                xdoc.LoadXml(result);
+                xdoc.LoadXml(result.Response);
                 XmlNode xnode = xdoc.SelectSingleNode("bitly/results/nodeKeyVal/shortUrl");
                 if (xnode != null)
                 {
-                    return xnode.InnerText;
+                    result.ShortenedURL = xnode.InnerText;
                 }
             }
 
-            return null;
+            return result;
         }
     }
 }

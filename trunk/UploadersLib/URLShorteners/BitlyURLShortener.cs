@@ -26,6 +26,7 @@
 using HelpersLib;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
@@ -43,8 +44,10 @@ namespace UploadersLib.URLShorteners
             APIKey = key;
         }
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
@@ -53,13 +56,13 @@ namespace UploadersLib.URLShorteners
                 arguments.Add("login", APILogin);
                 arguments.Add("apiKey", APIKey);
 
-                string result = SendGetRequest(URLShorten, arguments);
+                result.Response = SendGetRequest(URLShorten, arguments);
 
-                XDocument xd = XDocument.Parse(result);
-                return xd.GetValue("response/data/url");
+                XDocument xd = XDocument.Parse(result.Response);
+                result.ShortenedURL = xd.GetValue("response/data/url");
             }
 
-            return null;
+            return result;
         }
     }
 }

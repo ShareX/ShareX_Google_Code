@@ -374,7 +374,12 @@ namespace ShareX
         {
             if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
             {
-                Info.Result.ShortenedURL = ShortenURL(Info.Result.URL);
+                UploadResult result = ShortenURL(Info.Result.URL);
+
+                if (result != null)
+                {
+                    Info.Result.ShortenedURL = result.ShortenedURL;
+                }
             }
 
             if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
@@ -635,7 +640,7 @@ namespace ShareX
             return null;
         }
 
-        public string ShortenURL(string url)
+        public UploadResult ShortenURL(string url)
         {
             URLShortener urlShortener = null;
 

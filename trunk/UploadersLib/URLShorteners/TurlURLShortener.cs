@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using System.Collections.Generic;
+using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
@@ -32,31 +33,33 @@ namespace UploadersLib.URLShorteners
     {
         private const string APIURL = "http://turl.ca/api.php";
 
-        public override string ShortenURL(string url)
+        public override UploadResult ShortenURL(string url)
         {
+            UploadResult result = new UploadResult { URL = url };
+
             if (!string.IsNullOrEmpty(url))
             {
                 Dictionary<string, string> arguments = new Dictionary<string, string>();
                 arguments.Add("url", url);
                 // arguments.Add("tag", settings.Tag);
 
-                string response = SendGetRequest(APIURL, arguments);
+                result.Response = SendGetRequest(APIURL, arguments);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(result.Response))
                 {
-                    if (response.StartsWith("SUCCESS:"))
+                    if (result.Response.StartsWith("SUCCESS:"))
                     {
-                        return "http://turl.ca/" + response.Substring(8);
+                        result.ShortenedURL = "http://turl.ca/" + result.Response.Substring(8);
                     }
 
-                    if (response.StartsWith("ERROR:"))
+                    if (result.Response.StartsWith("ERROR:"))
                     {
-                        this.Errors.Add(response.Substring(6));
+                        Errors.Add(result.Response.Substring(6));
                     }
                 }
             }
 
-            return null;
+            return result;
         }
     }
 }
