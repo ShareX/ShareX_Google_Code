@@ -299,7 +299,6 @@ namespace UploadersLib
             if (Config.CustomUploadersList == null)
             {
                 Config.CustomUploadersList = new List<CustomUploaderItem>();
-                LoadCustomUploader(new CustomUploaderItem());
             }
             else
             {
@@ -308,13 +307,7 @@ namespace UploadersLib
                     lbCustomUploaderList.Items.Add(customUploader.Name);
                 }
 
-                int selected = Config.CustomUploaderSelected;
-
-                if (selected >= 0 && selected < lbCustomUploaderList.Items.Count)
-                {
-                    lbCustomUploaderList.SelectedIndex = selected;
-                    LoadCustomUploader(Config.CustomUploadersList[selected]);
-                }
+                PrepareCustomUploaderList();
             }
 
             #endregion File uploaders
