@@ -673,12 +673,28 @@ namespace UploadersLib
         {
             if (lbCustomUploaderList.SelectedIndex > -1)
             {
-                int selected = lbCustomUploaderList.SelectedIndex;
-                Config.CustomUploadersList.RemoveAt(selected);
-                lbCustomUploaderList.Items.RemoveAt(selected);
+                int index = lbCustomUploaderList.SelectedIndex;
+                Config.CustomUploadersList.RemoveAt(index);
+                lbCustomUploaderList.Items.RemoveAt(index);
                 CustomUploaderClear();
+                FixSelectedUploader(index);
                 PrepareCustomUploaderList();
             }
+        }
+
+        private void FixSelectedUploader(int removedIndex)
+        {
+            if (Config.CustomImageUploaderSelected == removedIndex) Config.CustomImageUploaderSelected = 0;
+            else if (Config.CustomImageUploaderSelected > removedIndex) Config.CustomImageUploaderSelected--;
+
+            if (Config.CustomTextUploaderSelected == removedIndex) Config.CustomTextUploaderSelected = 0;
+            else if (Config.CustomTextUploaderSelected > removedIndex) Config.CustomTextUploaderSelected--;
+
+            if (Config.CustomFileUploaderSelected == removedIndex) Config.CustomFileUploaderSelected = 0;
+            else if (Config.CustomFileUploaderSelected > removedIndex) Config.CustomFileUploaderSelected--;
+
+            if (Config.CustomURLShortenerSelected == removedIndex) Config.CustomURLShortenerSelected = 0;
+            else if (Config.CustomURLShortenerSelected > removedIndex) Config.CustomURLShortenerSelected--;
         }
 
         private void btnCustomUploaderUpdate_Click(object sender, EventArgs e)
@@ -696,12 +712,17 @@ namespace UploadersLib
             }
         }
 
+        private void cbCustomUploaderRequestType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCustomUploaderFileForm.Enabled = (CustomUploaderRequestType)cbCustomUploaderRequestType.SelectedIndex == CustomUploaderRequestType.POST;
+        }
+
         private void btnCustomUploaderRequestTypeHelp_Click(object sender, EventArgs e)
         {
             string helpText = @"For image & file upload 'POST' request type required with 'File form name'.
 For text & url shortener both request type usable. You can't use 'File form name' for them. Instead you need to use '$input$' for argument value.
 Example if argument name is 'pastebin_text' then need to use '$input$' without quotation marks and it will be automatically replaced with text which we gonna upload.
-Same thing apply for url shortener. '$input$' will be replaced with url.";
+Same thing apply for url shortener, '$input$' will be replaced with url.";
 
             MessageBox.Show(helpText, "ShareX - Custom uploader help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
