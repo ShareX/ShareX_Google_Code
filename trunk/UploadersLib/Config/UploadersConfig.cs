@@ -239,6 +239,8 @@ namespace UploadersLib
                     return TwitterOAuthInfoList != null && TwitterOAuthInfoList.IsValidIndex(TwitterSelectedAccount);
                 case ImageDestination.yFrog:
                     return !string.IsNullOrEmpty(YFrogUsername) && !string.IsNullOrEmpty(YFrogPassword);
+                case ImageDestination.CustomImageUploader:
+                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomImageUploaderSelected);
                 default:
                     return true;
             }
@@ -248,6 +250,8 @@ namespace UploadersLib
         {
             switch (destination)
             {
+                case TextDestination.CustomTextUploader:
+                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomTextUploaderSelected);
                 default:
                     return true;
             }
@@ -288,6 +292,8 @@ namespace UploadersLib
             {
                 case UrlShortenerType.Google:
                     return GoogleURLShortenerAccountType == AccountType.Anonymous || OAuthInfo.CheckOAuth(GoogleURLShortenerOAuthInfo);
+                case UrlShortenerType.CustomURLShortener:
+                    return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomURLShortenerSelected);
                 default:
                     return true;
             }

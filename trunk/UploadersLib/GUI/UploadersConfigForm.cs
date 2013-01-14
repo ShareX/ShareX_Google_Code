@@ -717,16 +717,6 @@ namespace UploadersLib
             txtCustomUploaderFileForm.Enabled = (CustomUploaderRequestType)cbCustomUploaderRequestType.SelectedIndex == CustomUploaderRequestType.POST;
         }
 
-        private void btnCustomUploaderRequestTypeHelp_Click(object sender, EventArgs e)
-        {
-            string helpText = @"For image & file upload 'POST' request type required with 'File form name'.
-For text & url shortener both request type usable. You can't use 'File form name' for them. Instead you need to use '$input$' for argument value.
-Example if argument name is 'pastebin_text' then need to use '$input$' without quotation marks and it will be automatically replaced with text which we gonna upload.
-Same thing apply for url shortener, '$input$' will be replaced with url.";
-
-            MessageBox.Show(helpText, "ShareX - Custom uploader help", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void btnCustomUploaderRegexpAdd_Click(object sender, EventArgs e)
         {
             string regexp = txtCustomUploaderRegexp.Text;
@@ -767,21 +757,6 @@ Same thing apply for url shortener, '$input$' will be replaced with url.";
             }
 
             txtCustomUploaderRegexp.Text = regex;
-        }
-
-        private void btnURLParseHelp_Click(object sender, EventArgs e)
-        {
-            string helpText = @"If URL textbox is empty then response text will be automatically used.
-
-Regex usage for get regex result: $n$
-n must be index number from 'Regex from response' list.
-Example for get second regex result from list: $2$
-
-Regex groups usage: $n,n$ or $n,name$
-Second n here must be group number or group name.
-Example: $3,1$ or $2,thumbnail_result$";
-
-            MessageBox.Show(helpText, "ShareX - Custom uploader help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCustomUploaderArgAdd_Click(object sender, EventArgs e)
@@ -831,40 +806,6 @@ Example: $3,1$ or $2,thumbnail_result$";
 
             txtCustomUploaderArgName.Text = name;
             txtCustomUploaderArgValue.Text = value;
-        }
-
-        private void btnCustomUploaderImport_Click(object sender, EventArgs e)
-        {
-            if (Config.CustomUploadersList == null)
-            {
-                Config.CustomUploadersList = new List<CustomUploaderItem>();
-            }
-
-            using (OpenFileDialog dlg = new OpenFileDialog { Filter = "Custom Image Uploaders(*.ciu)|*.ciu" })
-            {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    ImportCustomUploaders(dlg.FileName);
-                }
-            }
-        }
-
-        private void btnCustomUploaderExport_Click(object sender, EventArgs e)
-        {
-            if (Config.CustomUploadersList != null)
-            {
-                using (SaveFileDialog dlg = new SaveFileDialog
-                {
-                    FileName = string.Format("{0}-{1}-uploaders", Application.ProductName, DateTime.Now.ToString("yyyyMMdd")),
-                    Filter = "Custom Image Uploaders(*.ciu)|*.ciu"
-                })
-                {
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        ExportCustomUploaders(dlg.FileName);
-                    }
-                }
-            }
         }
 
         private void btnCustomUploaderClear_Click(object sender, EventArgs e)
