@@ -33,6 +33,7 @@
             this.tpImageUploaders = new System.Windows.Forms.TabPage();
             this.tcImageUploaders = new System.Windows.Forms.TabControl();
             this.tpImageShack = new System.Windows.Forms.TabPage();
+            this.atcImageShackAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.btnImageShackOpenPublicProfile = new System.Windows.Forms.Button();
             this.cbImageShackIsPublic = new System.Windows.Forms.CheckBox();
             this.btnImageShackOpenMyImages = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.txtImageShackRegistrationCode = new System.Windows.Forms.TextBox();
             this.lblImageShackRegistrationCode = new System.Windows.Forms.Label();
             this.tpTinyPic = new System.Windows.Forms.TabPage();
+            this.atcTinyPicAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.btnTinyPicLogin = new System.Windows.Forms.Button();
             this.txtTinyPicPassword = new System.Windows.Forms.TextBox();
             this.lblTinyPicPassword = new System.Windows.Forms.Label();
@@ -60,6 +62,7 @@
             this.btnImgurEnterVerificationCode = new System.Windows.Forms.Button();
             this.txtImgurVerificationCode = new System.Windows.Forms.TextBox();
             this.lblImgurAccountStatus = new System.Windows.Forms.Label();
+            this.atcImgurAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpFlickr = new System.Windows.Forms.TabPage();
             this.btnFlickrOpenImages = new System.Windows.Forms.Button();
             this.pgFlickrAuthInfo = new System.Windows.Forms.PropertyGrid();
@@ -155,6 +158,7 @@
             this.btnFTPExport = new System.Windows.Forms.Button();
             this.btnFTPImport = new System.Windows.Forms.Button();
             this.btnFtpHelp = new System.Windows.Forms.Button();
+            this.ucFTPAccounts = new UploadersLib.AccountsControl();
             this.gbFtpSettings = new System.Windows.Forms.GroupBox();
             this.lblFtpFiles = new System.Windows.Forms.Label();
             this.lblFtpText = new System.Windows.Forms.Label();
@@ -177,6 +181,7 @@
             this.lblSendSpaceUsername = new System.Windows.Forms.Label();
             this.txtSendSpacePassword = new System.Windows.Forms.TextBox();
             this.txtSendSpaceUserName = new System.Windows.Forms.TextBox();
+            this.atcSendSpaceAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpGe_tt = new System.Windows.Forms.TabPage();
             this.lblGe_ttAccessToken = new System.Windows.Forms.Label();
             this.lblGe_ttPassword = new System.Windows.Forms.Label();
@@ -184,55 +189,9 @@
             this.btnGe_ttLogin = new System.Windows.Forms.Button();
             this.txtGe_ttPassword = new System.Windows.Forms.TextBox();
             this.txtGe_ttEmail = new System.Windows.Forms.TextBox();
-            this.btnCustomUploaderTextUploaderTest = new System.Windows.Forms.Button();
-            this.btnCustomUploaderFileUploaderTest = new System.Windows.Forms.Button();
-            this.btnCustomUploaderURLShortenerTest = new System.Windows.Forms.Button();
-            this.lblCustomUploaderURLShortener = new System.Windows.Forms.Label();
-            this.lblCustomUploaderFileUploader = new System.Windows.Forms.Label();
-            this.lblCustomUploaderTextUploader = new System.Windows.Forms.Label();
-            this.lblCustomUploaderImageUploader = new System.Windows.Forms.Label();
-            this.cbCustomUploaderURLShortener = new System.Windows.Forms.ComboBox();
-            this.cbCustomUploaderFileUploader = new System.Windows.Forms.ComboBox();
-            this.cbCustomUploaderTextUploader = new System.Windows.Forms.ComboBox();
-            this.cbCustomUploaderImageUploader = new System.Windows.Forms.ComboBox();
-            this.btnURLParseHelp = new System.Windows.Forms.Button();
-            this.txtCustomUploaderLog = new System.Windows.Forms.RichTextBox();
-            this.btnCustomUploaderImageUploaderTest = new System.Windows.Forms.Button();
-            this.txtCustomUploaderFullImage = new System.Windows.Forms.TextBox();
-            this.txtCustomUploaderThumbnail = new System.Windows.Forms.TextBox();
-            this.lblCustomUploaderFullImage = new System.Windows.Forms.Label();
-            this.lblCustomUploaderThumbnail = new System.Windows.Forms.Label();
-            this.gbCustomUploaderRegexp = new System.Windows.Forms.GroupBox();
-            this.btnCustomUploaderRegexpEdit = new System.Windows.Forms.Button();
-            this.txtCustomUploaderRegexp = new System.Windows.Forms.TextBox();
-            this.lvCustomUploaderRegexps = new System.Windows.Forms.ListView();
-            this.lvRegexpsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnCustomUploaderRegexpRemove = new System.Windows.Forms.Button();
-            this.btnCustomUploaderRegexpAdd = new System.Windows.Forms.Button();
-            this.gbCustomUploaders = new System.Windows.Forms.GroupBox();
-            this.lbCustomUploaderList = new System.Windows.Forms.ListBox();
-            this.btnCustomUploaderClear = new System.Windows.Forms.Button();
-            this.btnCustomUploaderExport = new System.Windows.Forms.Button();
-            this.btnCustomUploaderRemove = new System.Windows.Forms.Button();
-            this.btnCustomUploaderImport = new System.Windows.Forms.Button();
-            this.btnCustomUploaderUpdate = new System.Windows.Forms.Button();
-            this.txtCustomUploaderName = new System.Windows.Forms.TextBox();
-            this.btnCustomUploaderAdd = new System.Windows.Forms.Button();
-            this.txtCustomUploaderFileForm = new System.Windows.Forms.TextBox();
-            this.lblCustomUploaderFileForm = new System.Windows.Forms.Label();
-            this.lblCustomUploaderUploadURL = new System.Windows.Forms.Label();
-            this.txtCustomUploaderURL = new System.Windows.Forms.TextBox();
-            this.gbCustomUploaderArguments = new System.Windows.Forms.GroupBox();
-            this.btnCustomUploaderArgEdit = new System.Windows.Forms.Button();
-            this.txtCustomUploaderArgValue = new System.Windows.Forms.TextBox();
-            this.btnCustomUploaderArgRemove = new System.Windows.Forms.Button();
-            this.lvCustomUploaderArguments = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnCustomUploaderArgAdd = new System.Windows.Forms.Button();
-            this.txtCustomUploaderArgName = new System.Windows.Forms.TextBox();
             this.tpSharedFolder = new System.Windows.Forms.TabPage();
             this.tlpSharedFolders = new System.Windows.Forms.TableLayoutPanel();
+            this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
             this.gbSharedFolder = new System.Windows.Forms.GroupBox();
             this.lblSharedFolderFiles = new System.Windows.Forms.Label();
             this.lblSharedFolderText = new System.Windows.Forms.Label();
@@ -262,25 +221,66 @@
             this.btnGoogleURLShortenerAuthComplete = new System.Windows.Forms.Button();
             this.btnGoogleURLShortenerAuthOpen = new System.Windows.Forms.Button();
             this.lblGooglAccountStatus = new System.Windows.Forms.Label();
+            this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpSocialNetworkingServices = new System.Windows.Forms.TabPage();
             this.tcSocialNetworkingServices = new System.Windows.Forms.TabControl();
             this.tpTwitter = new System.Windows.Forms.TabPage();
             this.btnTwitterLogin = new System.Windows.Forms.Button();
-            this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
-            this.cbCustomUploaderRequestType = new System.Windows.Forms.ComboBox();
-            this.lblCustomUploaderRequestType = new System.Windows.Forms.Label();
-            this.lblCustomUploaderResponseType = new System.Windows.Forms.Label();
-            this.cbCustomUploaderResponseType = new System.Windows.Forms.ComboBox();
+            this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.tpCustomUploaders = new System.Windows.Forms.TabPage();
             this.btnCustomUploaderRequestTypeHelp = new System.Windows.Forms.Button();
-            this.atcImageShackAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.atcTinyPicAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.atcImgurAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.ucFTPAccounts = new UploadersLib.AccountsControl();
-            this.atcSendSpaceAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
-            this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.ucTwitterAccounts = new UploadersLib.AccountsControl();
+            this.lblCustomUploaderResponseType = new System.Windows.Forms.Label();
+            this.gbCustomUploaders = new System.Windows.Forms.GroupBox();
+            this.lbCustomUploaderList = new System.Windows.Forms.ListBox();
+            this.btnCustomUploaderClear = new System.Windows.Forms.Button();
+            this.btnCustomUploaderExport = new System.Windows.Forms.Button();
+            this.btnCustomUploaderRemove = new System.Windows.Forms.Button();
+            this.btnCustomUploaderImport = new System.Windows.Forms.Button();
+            this.btnCustomUploaderUpdate = new System.Windows.Forms.Button();
+            this.txtCustomUploaderName = new System.Windows.Forms.TextBox();
+            this.btnCustomUploaderAdd = new System.Windows.Forms.Button();
+            this.lblCustomUploaderImageUploader = new System.Windows.Forms.Label();
+            this.lblCustomUploaderUploadURL = new System.Windows.Forms.Label();
+            this.cbCustomUploaderImageUploader = new System.Windows.Forms.ComboBox();
+            this.btnCustomUploaderTextUploaderTest = new System.Windows.Forms.Button();
+            this.gbCustomUploaderRegexp = new System.Windows.Forms.GroupBox();
+            this.btnCustomUploaderRegexpEdit = new System.Windows.Forms.Button();
+            this.txtCustomUploaderRegexp = new System.Windows.Forms.TextBox();
+            this.lvCustomUploaderRegexps = new System.Windows.Forms.ListView();
+            this.lvRegexpsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnCustomUploaderRegexpRemove = new System.Windows.Forms.Button();
+            this.btnCustomUploaderRegexpAdd = new System.Windows.Forms.Button();
+            this.txtCustomUploaderThumbnail = new System.Windows.Forms.TextBox();
+            this.cbCustomUploaderResponseType = new System.Windows.Forms.ComboBox();
+            this.txtCustomUploaderFullImage = new System.Windows.Forms.TextBox();
+            this.lblCustomUploaderURLShortener = new System.Windows.Forms.Label();
+            this.txtCustomUploaderLog = new System.Windows.Forms.RichTextBox();
+            this.cbCustomUploaderTextUploader = new System.Windows.Forms.ComboBox();
+            this.txtCustomUploaderURL = new System.Windows.Forms.TextBox();
+            this.btnCustomUploaderURLShortenerTest = new System.Windows.Forms.Button();
+            this.lblCustomUploaderTextUploader = new System.Windows.Forms.Label();
+            this.btnURLParseHelp = new System.Windows.Forms.Button();
+            this.cbCustomUploaderURLShortener = new System.Windows.Forms.ComboBox();
+            this.lblCustomUploaderThumbnail = new System.Windows.Forms.Label();
+            this.lblCustomUploaderFileForm = new System.Windows.Forms.Label();
+            this.lblCustomUploaderRequestType = new System.Windows.Forms.Label();
+            this.cbCustomUploaderRequestType = new System.Windows.Forms.ComboBox();
+            this.txtCustomUploaderFileForm = new System.Windows.Forms.TextBox();
+            this.lblCustomUploaderFullImage = new System.Windows.Forms.Label();
+            this.cbCustomUploaderFileUploader = new System.Windows.Forms.ComboBox();
+            this.btnCustomUploaderImageUploaderTest = new System.Windows.Forms.Button();
+            this.lblCustomUploaderFileUploader = new System.Windows.Forms.Label();
+            this.btnCustomUploaderFileUploaderTest = new System.Windows.Forms.Button();
+            this.gbCustomUploaderArguments = new System.Windows.Forms.GroupBox();
+            this.btnCustomUploaderArgEdit = new System.Windows.Forms.Button();
+            this.txtCustomUploaderArgValue = new System.Windows.Forms.TextBox();
+            this.btnCustomUploaderArgRemove = new System.Windows.Forms.Button();
+            this.lvCustomUploaderArguments = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnCustomUploaderArgAdd = new System.Windows.Forms.Button();
+            this.txtCustomUploaderArgName = new System.Windows.Forms.TextBox();
+            this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
@@ -318,9 +318,6 @@
             this.tpRapidShare.SuspendLayout();
             this.tpSendSpace.SuspendLayout();
             this.tpGe_tt.SuspendLayout();
-            this.gbCustomUploaderRegexp.SuspendLayout();
-            this.gbCustomUploaders.SuspendLayout();
-            this.gbCustomUploaderArguments.SuspendLayout();
             this.tpSharedFolder.SuspendLayout();
             this.tlpSharedFolders.SuspendLayout();
             this.gbSharedFolder.SuspendLayout();
@@ -334,6 +331,9 @@
             this.tcSocialNetworkingServices.SuspendLayout();
             this.tpTwitter.SuspendLayout();
             this.tpCustomUploaders.SuspendLayout();
+            this.gbCustomUploaders.SuspendLayout();
+            this.gbCustomUploaderRegexp.SuspendLayout();
+            this.gbCustomUploaderArguments.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcUploaders
@@ -399,6 +399,15 @@
             this.tpImageShack.TabIndex = 0;
             this.tpImageShack.Text = "ImageShack";
             this.tpImageShack.UseVisualStyleBackColor = true;
+            // 
+            // atcImageShackAccountType
+            // 
+            this.atcImageShackAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcImageShackAccountType.Name = "atcImageShackAccountType";
+            this.atcImageShackAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcImageShackAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcImageShackAccountType.TabIndex = 0;
+            this.atcImageShackAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImageShackAccountType_AccountTypeChanged);
             // 
             // btnImageShackOpenPublicProfile
             // 
@@ -499,6 +508,15 @@
             this.tpTinyPic.TabIndex = 1;
             this.tpTinyPic.Text = "TinyPic";
             this.tpTinyPic.UseVisualStyleBackColor = true;
+            // 
+            // atcTinyPicAccountType
+            // 
+            this.atcTinyPicAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcTinyPicAccountType.Name = "atcTinyPicAccountType";
+            this.atcTinyPicAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcTinyPicAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcTinyPicAccountType.TabIndex = 0;
+            this.atcTinyPicAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcTinyPicAccountType_AccountTypeChanged);
             // 
             // btnTinyPicLogin
             // 
@@ -678,6 +696,15 @@
             this.lblImgurAccountStatus.Size = new System.Drawing.Size(77, 13);
             this.lblImgurAccountStatus.TabIndex = 4;
             this.lblImgurAccountStatus.Text = "Login required.";
+            // 
+            // atcImgurAccountType
+            // 
+            this.atcImgurAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcImgurAccountType.Name = "atcImgurAccountType";
+            this.atcImgurAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcImgurAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcImgurAccountType.TabIndex = 0;
+            this.atcImgurAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImgurAccountType_AccountTypeChanged);
             // 
             // tpFlickr
             // 
@@ -1703,6 +1730,15 @@
             this.btnFtpHelp.UseVisualStyleBackColor = true;
             this.btnFtpHelp.Click += new System.EventHandler(this.btnFtpHelp_Click);
             // 
+            // ucFTPAccounts
+            // 
+            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
+            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
+            this.ucFTPAccounts.Name = "ucFTPAccounts";
+            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
+            this.ucFTPAccounts.TabIndex = 0;
+            // 
             // gbFtpSettings
             // 
             this.gbFtpSettings.Controls.Add(this.lblFtpFiles);
@@ -1925,6 +1961,15 @@
             this.txtSendSpaceUserName.TabIndex = 3;
             this.txtSendSpaceUserName.TextChanged += new System.EventHandler(this.txtSendSpaceUserName_TextChanged);
             // 
+            // atcSendSpaceAccountType
+            // 
+            this.atcSendSpaceAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcSendSpaceAccountType.Name = "atcSendSpaceAccountType";
+            this.atcSendSpaceAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcSendSpaceAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcSendSpaceAccountType.TabIndex = 0;
+            this.atcSendSpaceAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcSendSpaceAccountType_AccountTypeChanged);
+            // 
             // tpGe_tt
             // 
             this.tpGe_tt.Controls.Add(this.lblGe_ttAccessToken);
@@ -1993,457 +2038,6 @@
             this.txtGe_ttEmail.Size = new System.Drawing.Size(168, 20);
             this.txtGe_ttEmail.TabIndex = 0;
             // 
-            // btnCustomUploaderTextUploaderTest
-            // 
-            this.btnCustomUploaderTextUploaderTest.Location = new System.Drawing.Point(264, 384);
-            this.btnCustomUploaderTextUploaderTest.Name = "btnCustomUploaderTextUploaderTest";
-            this.btnCustomUploaderTextUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderTextUploaderTest.TabIndex = 24;
-            this.btnCustomUploaderTextUploaderTest.Text = "Test";
-            this.btnCustomUploaderTextUploaderTest.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderTextUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderTextUploaderTest_Click);
-            // 
-            // btnCustomUploaderFileUploaderTest
-            // 
-            this.btnCustomUploaderFileUploaderTest.Location = new System.Drawing.Point(264, 408);
-            this.btnCustomUploaderFileUploaderTest.Name = "btnCustomUploaderFileUploaderTest";
-            this.btnCustomUploaderFileUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderFileUploaderTest.TabIndex = 23;
-            this.btnCustomUploaderFileUploaderTest.Text = "Test";
-            this.btnCustomUploaderFileUploaderTest.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderFileUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderFileUploaderTest_Click);
-            // 
-            // btnCustomUploaderURLShortenerTest
-            // 
-            this.btnCustomUploaderURLShortenerTest.Location = new System.Drawing.Point(264, 432);
-            this.btnCustomUploaderURLShortenerTest.Name = "btnCustomUploaderURLShortenerTest";
-            this.btnCustomUploaderURLShortenerTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderURLShortenerTest.TabIndex = 22;
-            this.btnCustomUploaderURLShortenerTest.Text = "Test";
-            this.btnCustomUploaderURLShortenerTest.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderURLShortenerTest.Click += new System.EventHandler(this.btnCustomUploaderURLShortenerTest_Click);
-            // 
-            // lblCustomUploaderURLShortener
-            // 
-            this.lblCustomUploaderURLShortener.AutoSize = true;
-            this.lblCustomUploaderURLShortener.Location = new System.Drawing.Point(16, 436);
-            this.lblCustomUploaderURLShortener.Name = "lblCustomUploaderURLShortener";
-            this.lblCustomUploaderURLShortener.Size = new System.Drawing.Size(79, 13);
-            this.lblCustomUploaderURLShortener.TabIndex = 21;
-            this.lblCustomUploaderURLShortener.Text = "URL shortener:";
-            // 
-            // lblCustomUploaderFileUploader
-            // 
-            this.lblCustomUploaderFileUploader.AutoSize = true;
-            this.lblCustomUploaderFileUploader.Location = new System.Drawing.Point(16, 412);
-            this.lblCustomUploaderFileUploader.Name = "lblCustomUploaderFileUploader";
-            this.lblCustomUploaderFileUploader.Size = new System.Drawing.Size(70, 13);
-            this.lblCustomUploaderFileUploader.TabIndex = 20;
-            this.lblCustomUploaderFileUploader.Text = "File uploader:";
-            // 
-            // lblCustomUploaderTextUploader
-            // 
-            this.lblCustomUploaderTextUploader.AutoSize = true;
-            this.lblCustomUploaderTextUploader.Location = new System.Drawing.Point(16, 388);
-            this.lblCustomUploaderTextUploader.Name = "lblCustomUploaderTextUploader";
-            this.lblCustomUploaderTextUploader.Size = new System.Drawing.Size(75, 13);
-            this.lblCustomUploaderTextUploader.TabIndex = 19;
-            this.lblCustomUploaderTextUploader.Text = "Text uploader:";
-            // 
-            // lblCustomUploaderImageUploader
-            // 
-            this.lblCustomUploaderImageUploader.AutoSize = true;
-            this.lblCustomUploaderImageUploader.Location = new System.Drawing.Point(16, 364);
-            this.lblCustomUploaderImageUploader.Name = "lblCustomUploaderImageUploader";
-            this.lblCustomUploaderImageUploader.Size = new System.Drawing.Size(83, 13);
-            this.lblCustomUploaderImageUploader.TabIndex = 18;
-            this.lblCustomUploaderImageUploader.Text = "Image uploader:";
-            // 
-            // cbCustomUploaderURLShortener
-            // 
-            this.cbCustomUploaderURLShortener.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderURLShortener.FormattingEnabled = true;
-            this.cbCustomUploaderURLShortener.Location = new System.Drawing.Point(104, 432);
-            this.cbCustomUploaderURLShortener.Name = "cbCustomUploaderURLShortener";
-            this.cbCustomUploaderURLShortener.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderURLShortener.TabIndex = 17;
-            this.cbCustomUploaderURLShortener.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderURLShortener_SelectedIndexChanged);
-            // 
-            // cbCustomUploaderFileUploader
-            // 
-            this.cbCustomUploaderFileUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderFileUploader.FormattingEnabled = true;
-            this.cbCustomUploaderFileUploader.Location = new System.Drawing.Point(104, 408);
-            this.cbCustomUploaderFileUploader.Name = "cbCustomUploaderFileUploader";
-            this.cbCustomUploaderFileUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderFileUploader.TabIndex = 16;
-            this.cbCustomUploaderFileUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderFileUploader_SelectedIndexChanged);
-            // 
-            // cbCustomUploaderTextUploader
-            // 
-            this.cbCustomUploaderTextUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderTextUploader.FormattingEnabled = true;
-            this.cbCustomUploaderTextUploader.Location = new System.Drawing.Point(104, 384);
-            this.cbCustomUploaderTextUploader.Name = "cbCustomUploaderTextUploader";
-            this.cbCustomUploaderTextUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderTextUploader.TabIndex = 15;
-            this.cbCustomUploaderTextUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderTextUploader_SelectedIndexChanged);
-            // 
-            // cbCustomUploaderImageUploader
-            // 
-            this.cbCustomUploaderImageUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderImageUploader.FormattingEnabled = true;
-            this.cbCustomUploaderImageUploader.Location = new System.Drawing.Point(104, 360);
-            this.cbCustomUploaderImageUploader.Name = "cbCustomUploaderImageUploader";
-            this.cbCustomUploaderImageUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderImageUploader.TabIndex = 14;
-            this.cbCustomUploaderImageUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderImageUploader_SelectedIndexChanged);
-            // 
-            // btnURLParseHelp
-            // 
-            this.btnURLParseHelp.Location = new System.Drawing.Point(760, 240);
-            this.btnURLParseHelp.Name = "btnURLParseHelp";
-            this.btnURLParseHelp.Size = new System.Drawing.Size(24, 23);
-            this.btnURLParseHelp.TabIndex = 13;
-            this.btnURLParseHelp.Text = "?";
-            this.btnURLParseHelp.UseVisualStyleBackColor = true;
-            this.btnURLParseHelp.Click += new System.EventHandler(this.btnURLParseHelp_Click);
-            // 
-            // txtCustomUploaderLog
-            // 
-            this.txtCustomUploaderLog.Location = new System.Drawing.Point(320, 360);
-            this.txtCustomUploaderLog.Name = "txtCustomUploaderLog";
-            this.txtCustomUploaderLog.Size = new System.Drawing.Size(464, 96);
-            this.txtCustomUploaderLog.TabIndex = 7;
-            this.txtCustomUploaderLog.Text = "";
-            this.txtCustomUploaderLog.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtCustomUploaderLog_LinkClicked);
-            // 
-            // btnCustomUploaderImageUploaderTest
-            // 
-            this.btnCustomUploaderImageUploaderTest.Location = new System.Drawing.Point(264, 360);
-            this.btnCustomUploaderImageUploaderTest.Name = "btnCustomUploaderImageUploaderTest";
-            this.btnCustomUploaderImageUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderImageUploaderTest.TabIndex = 12;
-            this.btnCustomUploaderImageUploaderTest.Text = "Test";
-            this.btnCustomUploaderImageUploaderTest.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderImageUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderImageUploaderTest_Click);
-            // 
-            // txtCustomUploaderFullImage
-            // 
-            this.txtCustomUploaderFullImage.Location = new System.Drawing.Point(536, 264);
-            this.txtCustomUploaderFullImage.Name = "txtCustomUploaderFullImage";
-            this.txtCustomUploaderFullImage.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderFullImage.TabIndex = 9;
-            // 
-            // txtCustomUploaderThumbnail
-            // 
-            this.txtCustomUploaderThumbnail.Location = new System.Drawing.Point(536, 304);
-            this.txtCustomUploaderThumbnail.Name = "txtCustomUploaderThumbnail";
-            this.txtCustomUploaderThumbnail.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderThumbnail.TabIndex = 11;
-            // 
-            // lblCustomUploaderFullImage
-            // 
-            this.lblCustomUploaderFullImage.AutoSize = true;
-            this.lblCustomUploaderFullImage.Location = new System.Drawing.Point(536, 248);
-            this.lblCustomUploaderFullImage.Name = "lblCustomUploaderFullImage";
-            this.lblCustomUploaderFullImage.Size = new System.Drawing.Size(32, 13);
-            this.lblCustomUploaderFullImage.TabIndex = 8;
-            this.lblCustomUploaderFullImage.Text = "URL:";
-            // 
-            // lblCustomUploaderThumbnail
-            // 
-            this.lblCustomUploaderThumbnail.AutoSize = true;
-            this.lblCustomUploaderThumbnail.Location = new System.Drawing.Point(536, 288);
-            this.lblCustomUploaderThumbnail.Name = "lblCustomUploaderThumbnail";
-            this.lblCustomUploaderThumbnail.Size = new System.Drawing.Size(84, 13);
-            this.lblCustomUploaderThumbnail.TabIndex = 10;
-            this.lblCustomUploaderThumbnail.Text = "Thumbnail URL:";
-            // 
-            // gbCustomUploaderRegexp
-            // 
-            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpEdit);
-            this.gbCustomUploaderRegexp.Controls.Add(this.txtCustomUploaderRegexp);
-            this.gbCustomUploaderRegexp.Controls.Add(this.lvCustomUploaderRegexps);
-            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpRemove);
-            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpAdd);
-            this.gbCustomUploaderRegexp.Location = new System.Drawing.Point(536, 56);
-            this.gbCustomUploaderRegexp.Name = "gbCustomUploaderRegexp";
-            this.gbCustomUploaderRegexp.Size = new System.Drawing.Size(248, 184);
-            this.gbCustomUploaderRegexp.TabIndex = 5;
-            this.gbCustomUploaderRegexp.TabStop = false;
-            this.gbCustomUploaderRegexp.Text = "Regex from response";
-            // 
-            // btnCustomUploaderRegexpEdit
-            // 
-            this.btnCustomUploaderRegexpEdit.Location = new System.Drawing.Point(168, 40);
-            this.btnCustomUploaderRegexpEdit.Name = "btnCustomUploaderRegexpEdit";
-            this.btnCustomUploaderRegexpEdit.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderRegexpEdit.TabIndex = 3;
-            this.btnCustomUploaderRegexpEdit.Text = "Update";
-            this.btnCustomUploaderRegexpEdit.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderRegexpEdit.Click += new System.EventHandler(this.btnCustomUploaderRegexpEdit_Click);
-            // 
-            // txtCustomUploaderRegexp
-            // 
-            this.txtCustomUploaderRegexp.Location = new System.Drawing.Point(8, 16);
-            this.txtCustomUploaderRegexp.Name = "txtCustomUploaderRegexp";
-            this.txtCustomUploaderRegexp.Size = new System.Drawing.Size(232, 20);
-            this.txtCustomUploaderRegexp.TabIndex = 0;
-            // 
-            // lvCustomUploaderRegexps
-            // 
-            this.lvCustomUploaderRegexps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvRegexpsColumn});
-            this.lvCustomUploaderRegexps.FullRowSelect = true;
-            this.lvCustomUploaderRegexps.GridLines = true;
-            this.lvCustomUploaderRegexps.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvCustomUploaderRegexps.HideSelection = false;
-            this.lvCustomUploaderRegexps.Location = new System.Drawing.Point(8, 72);
-            this.lvCustomUploaderRegexps.MultiSelect = false;
-            this.lvCustomUploaderRegexps.Name = "lvCustomUploaderRegexps";
-            this.lvCustomUploaderRegexps.Scrollable = false;
-            this.lvCustomUploaderRegexps.Size = new System.Drawing.Size(232, 104);
-            this.lvCustomUploaderRegexps.TabIndex = 4;
-            this.lvCustomUploaderRegexps.UseCompatibleStateImageBehavior = false;
-            this.lvCustomUploaderRegexps.View = System.Windows.Forms.View.Details;
-            this.lvCustomUploaderRegexps.SelectedIndexChanged += new System.EventHandler(this.lvCustomUploaderRegexps_SelectedIndexChanged);
-            // 
-            // lvRegexpsColumn
-            // 
-            this.lvRegexpsColumn.Width = 227;
-            // 
-            // btnCustomUploaderRegexpRemove
-            // 
-            this.btnCustomUploaderRegexpRemove.Location = new System.Drawing.Point(88, 40);
-            this.btnCustomUploaderRegexpRemove.Name = "btnCustomUploaderRegexpRemove";
-            this.btnCustomUploaderRegexpRemove.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderRegexpRemove.TabIndex = 2;
-            this.btnCustomUploaderRegexpRemove.Text = "Remove";
-            this.btnCustomUploaderRegexpRemove.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderRegexpRemove.Click += new System.EventHandler(this.btnCustomUploaderRegexpRemove_Click);
-            // 
-            // btnCustomUploaderRegexpAdd
-            // 
-            this.btnCustomUploaderRegexpAdd.Location = new System.Drawing.Point(8, 40);
-            this.btnCustomUploaderRegexpAdd.Name = "btnCustomUploaderRegexpAdd";
-            this.btnCustomUploaderRegexpAdd.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderRegexpAdd.TabIndex = 1;
-            this.btnCustomUploaderRegexpAdd.Text = "Add";
-            this.btnCustomUploaderRegexpAdd.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderRegexpAdd.Click += new System.EventHandler(this.btnCustomUploaderRegexpAdd_Click);
-            // 
-            // gbCustomUploaders
-            // 
-            this.gbCustomUploaders.Controls.Add(this.lbCustomUploaderList);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderClear);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderExport);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderRemove);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderImport);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderUpdate);
-            this.gbCustomUploaders.Controls.Add(this.txtCustomUploaderName);
-            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderAdd);
-            this.gbCustomUploaders.Location = new System.Drawing.Point(8, 8);
-            this.gbCustomUploaders.Name = "gbCustomUploaders";
-            this.gbCustomUploaders.Size = new System.Drawing.Size(248, 264);
-            this.gbCustomUploaders.TabIndex = 0;
-            this.gbCustomUploaders.TabStop = false;
-            this.gbCustomUploaders.Text = "Uploaders";
-            // 
-            // lbCustomUploaderList
-            // 
-            this.lbCustomUploaderList.FormattingEnabled = true;
-            this.lbCustomUploaderList.IntegralHeight = false;
-            this.lbCustomUploaderList.Location = new System.Drawing.Point(8, 72);
-            this.lbCustomUploaderList.Name = "lbCustomUploaderList";
-            this.lbCustomUploaderList.Size = new System.Drawing.Size(232, 152);
-            this.lbCustomUploaderList.TabIndex = 4;
-            this.lbCustomUploaderList.SelectedIndexChanged += new System.EventHandler(this.lbCustomUploaderList_SelectedIndexChanged);
-            // 
-            // btnCustomUploaderClear
-            // 
-            this.btnCustomUploaderClear.Location = new System.Drawing.Point(168, 232);
-            this.btnCustomUploaderClear.Name = "btnCustomUploaderClear";
-            this.btnCustomUploaderClear.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderClear.TabIndex = 7;
-            this.btnCustomUploaderClear.Text = "Clear";
-            this.btnCustomUploaderClear.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderClear.Click += new System.EventHandler(this.btnCustomUploaderClear_Click);
-            // 
-            // btnCustomUploaderExport
-            // 
-            this.btnCustomUploaderExport.Location = new System.Drawing.Point(88, 232);
-            this.btnCustomUploaderExport.Name = "btnCustomUploaderExport";
-            this.btnCustomUploaderExport.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderExport.TabIndex = 6;
-            this.btnCustomUploaderExport.Text = "Export...";
-            this.btnCustomUploaderExport.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderExport.Click += new System.EventHandler(this.btnCustomUploaderExport_Click);
-            // 
-            // btnCustomUploaderRemove
-            // 
-            this.btnCustomUploaderRemove.Location = new System.Drawing.Point(88, 40);
-            this.btnCustomUploaderRemove.Name = "btnCustomUploaderRemove";
-            this.btnCustomUploaderRemove.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderRemove.TabIndex = 2;
-            this.btnCustomUploaderRemove.Text = "Remove";
-            this.btnCustomUploaderRemove.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderRemove.Click += new System.EventHandler(this.btnCustomUploaderRemove_Click);
-            // 
-            // btnCustomUploaderImport
-            // 
-            this.btnCustomUploaderImport.Location = new System.Drawing.Point(8, 232);
-            this.btnCustomUploaderImport.Name = "btnCustomUploaderImport";
-            this.btnCustomUploaderImport.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderImport.TabIndex = 5;
-            this.btnCustomUploaderImport.Text = "Import...";
-            this.btnCustomUploaderImport.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderImport.Click += new System.EventHandler(this.btnCustomUploaderImport_Click);
-            // 
-            // btnCustomUploaderUpdate
-            // 
-            this.btnCustomUploaderUpdate.Location = new System.Drawing.Point(168, 40);
-            this.btnCustomUploaderUpdate.Name = "btnCustomUploaderUpdate";
-            this.btnCustomUploaderUpdate.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderUpdate.TabIndex = 3;
-            this.btnCustomUploaderUpdate.Text = "Update";
-            this.btnCustomUploaderUpdate.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderUpdate.Click += new System.EventHandler(this.btnCustomUploaderUpdate_Click);
-            // 
-            // txtCustomUploaderName
-            // 
-            this.txtCustomUploaderName.Location = new System.Drawing.Point(8, 16);
-            this.txtCustomUploaderName.Name = "txtCustomUploaderName";
-            this.txtCustomUploaderName.Size = new System.Drawing.Size(232, 20);
-            this.txtCustomUploaderName.TabIndex = 0;
-            // 
-            // btnCustomUploaderAdd
-            // 
-            this.btnCustomUploaderAdd.Location = new System.Drawing.Point(8, 40);
-            this.btnCustomUploaderAdd.Name = "btnCustomUploaderAdd";
-            this.btnCustomUploaderAdd.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderAdd.TabIndex = 1;
-            this.btnCustomUploaderAdd.Text = "Add";
-            this.btnCustomUploaderAdd.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderAdd.Click += new System.EventHandler(this.btnCustomUploaderAdd_Click);
-            // 
-            // txtCustomUploaderFileForm
-            // 
-            this.txtCustomUploaderFileForm.Location = new System.Drawing.Point(272, 112);
-            this.txtCustomUploaderFileForm.Name = "txtCustomUploaderFileForm";
-            this.txtCustomUploaderFileForm.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderFileForm.TabIndex = 4;
-            // 
-            // lblCustomUploaderFileForm
-            // 
-            this.lblCustomUploaderFileForm.AutoSize = true;
-            this.lblCustomUploaderFileForm.Location = new System.Drawing.Point(272, 96);
-            this.lblCustomUploaderFileForm.Name = "lblCustomUploaderFileForm";
-            this.lblCustomUploaderFileForm.Size = new System.Drawing.Size(78, 13);
-            this.lblCustomUploaderFileForm.TabIndex = 3;
-            this.lblCustomUploaderFileForm.Text = "File form name:";
-            // 
-            // lblCustomUploaderUploadURL
-            // 
-            this.lblCustomUploaderUploadURL.AutoSize = true;
-            this.lblCustomUploaderUploadURL.Location = new System.Drawing.Point(272, 56);
-            this.lblCustomUploaderUploadURL.Name = "lblCustomUploaderUploadURL";
-            this.lblCustomUploaderUploadURL.Size = new System.Drawing.Size(75, 13);
-            this.lblCustomUploaderUploadURL.TabIndex = 1;
-            this.lblCustomUploaderUploadURL.Text = "Request URL:";
-            // 
-            // txtCustomUploaderURL
-            // 
-            this.txtCustomUploaderURL.Location = new System.Drawing.Point(272, 72);
-            this.txtCustomUploaderURL.Name = "txtCustomUploaderURL";
-            this.txtCustomUploaderURL.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderURL.TabIndex = 2;
-            // 
-            // gbCustomUploaderArguments
-            // 
-            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgEdit);
-            this.gbCustomUploaderArguments.Controls.Add(this.txtCustomUploaderArgValue);
-            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgRemove);
-            this.gbCustomUploaderArguments.Controls.Add(this.lvCustomUploaderArguments);
-            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgAdd);
-            this.gbCustomUploaderArguments.Controls.Add(this.txtCustomUploaderArgName);
-            this.gbCustomUploaderArguments.Location = new System.Drawing.Point(272, 136);
-            this.gbCustomUploaderArguments.Name = "gbCustomUploaderArguments";
-            this.gbCustomUploaderArguments.Size = new System.Drawing.Size(248, 184);
-            this.gbCustomUploaderArguments.TabIndex = 6;
-            this.gbCustomUploaderArguments.TabStop = false;
-            this.gbCustomUploaderArguments.Text = "Arguments";
-            // 
-            // btnCustomUploaderArgEdit
-            // 
-            this.btnCustomUploaderArgEdit.Location = new System.Drawing.Point(168, 40);
-            this.btnCustomUploaderArgEdit.Name = "btnCustomUploaderArgEdit";
-            this.btnCustomUploaderArgEdit.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderArgEdit.TabIndex = 4;
-            this.btnCustomUploaderArgEdit.Text = "Update";
-            this.btnCustomUploaderArgEdit.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderArgEdit.Click += new System.EventHandler(this.btnCustomUploaderArgEdit_Click);
-            // 
-            // txtCustomUploaderArgValue
-            // 
-            this.txtCustomUploaderArgValue.Location = new System.Drawing.Point(128, 16);
-            this.txtCustomUploaderArgValue.Name = "txtCustomUploaderArgValue";
-            this.txtCustomUploaderArgValue.Size = new System.Drawing.Size(112, 20);
-            this.txtCustomUploaderArgValue.TabIndex = 1;
-            // 
-            // btnCustomUploaderArgRemove
-            // 
-            this.btnCustomUploaderArgRemove.Location = new System.Drawing.Point(88, 40);
-            this.btnCustomUploaderArgRemove.Name = "btnCustomUploaderArgRemove";
-            this.btnCustomUploaderArgRemove.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderArgRemove.TabIndex = 3;
-            this.btnCustomUploaderArgRemove.Text = "Remove";
-            this.btnCustomUploaderArgRemove.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderArgRemove.Click += new System.EventHandler(this.btnCustomUploaderArgRemove_Click);
-            // 
-            // lvCustomUploaderArguments
-            // 
-            this.lvCustomUploaderArguments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.lvCustomUploaderArguments.FullRowSelect = true;
-            this.lvCustomUploaderArguments.GridLines = true;
-            this.lvCustomUploaderArguments.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvCustomUploaderArguments.HideSelection = false;
-            this.lvCustomUploaderArguments.Location = new System.Drawing.Point(8, 72);
-            this.lvCustomUploaderArguments.MultiSelect = false;
-            this.lvCustomUploaderArguments.Name = "lvCustomUploaderArguments";
-            this.lvCustomUploaderArguments.Size = new System.Drawing.Size(232, 104);
-            this.lvCustomUploaderArguments.TabIndex = 5;
-            this.lvCustomUploaderArguments.UseCompatibleStateImageBehavior = false;
-            this.lvCustomUploaderArguments.View = System.Windows.Forms.View.Details;
-            this.lvCustomUploaderArguments.SelectedIndexChanged += new System.EventHandler(this.lvCustomUploaderArguments_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 113;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Width = 113;
-            // 
-            // btnCustomUploaderArgAdd
-            // 
-            this.btnCustomUploaderArgAdd.Location = new System.Drawing.Point(8, 40);
-            this.btnCustomUploaderArgAdd.Name = "btnCustomUploaderArgAdd";
-            this.btnCustomUploaderArgAdd.Size = new System.Drawing.Size(72, 24);
-            this.btnCustomUploaderArgAdd.TabIndex = 2;
-            this.btnCustomUploaderArgAdd.Text = "Add";
-            this.btnCustomUploaderArgAdd.UseVisualStyleBackColor = true;
-            this.btnCustomUploaderArgAdd.Click += new System.EventHandler(this.btnCustomUploaderArgAdd_Click);
-            // 
-            // txtCustomUploaderArgName
-            // 
-            this.txtCustomUploaderArgName.Location = new System.Drawing.Point(8, 16);
-            this.txtCustomUploaderArgName.Name = "txtCustomUploaderArgName";
-            this.txtCustomUploaderArgName.Size = new System.Drawing.Size(112, 20);
-            this.txtCustomUploaderArgName.TabIndex = 0;
-            // 
             // tpSharedFolder
             // 
             this.tpSharedFolder.Controls.Add(this.tlpSharedFolders);
@@ -2474,6 +2068,15 @@
             this.tlpSharedFolders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpSharedFolders.Size = new System.Drawing.Size(798, 468);
             this.tlpSharedFolders.TabIndex = 0;
+            // 
+            // ucLocalhostAccounts
+            // 
+            this.ucLocalhostAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucLocalhostAccounts.Location = new System.Drawing.Point(4, 4);
+            this.ucLocalhostAccounts.Margin = new System.Windows.Forms.Padding(4);
+            this.ucLocalhostAccounts.Name = "ucLocalhostAccounts";
+            this.ucLocalhostAccounts.Size = new System.Drawing.Size(790, 343);
+            this.ucLocalhostAccounts.TabIndex = 0;
             // 
             // gbSharedFolder
             // 
@@ -2784,6 +2387,15 @@
             this.lblGooglAccountStatus.TabIndex = 2;
             this.lblGooglAccountStatus.Text = "Login required.";
             // 
+            // atcGoogleURLShortenerAccountType
+            // 
+            this.atcGoogleURLShortenerAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcGoogleURLShortenerAccountType.Name = "atcGoogleURLShortenerAccountType";
+            this.atcGoogleURLShortenerAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcGoogleURLShortenerAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcGoogleURLShortenerAccountType.TabIndex = 0;
+            this.atcGoogleURLShortenerAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcGoogleURLShortenerAccountType_AccountTypeChanged);
+            // 
             // tpSocialNetworkingServices
             // 
             this.tpSocialNetworkingServices.Controls.Add(this.tcSocialNetworkingServices);
@@ -2827,48 +2439,13 @@
             this.btnTwitterLogin.UseVisualStyleBackColor = true;
             this.btnTwitterLogin.Click += new System.EventHandler(this.btnTwitterLogin_Click);
             // 
-            // txtRapidSharePremiumUserName
+            // ucTwitterAccounts
             // 
-            this.txtRapidSharePremiumUserName.Location = new System.Drawing.Point(88, 84);
-            this.txtRapidSharePremiumUserName.Name = "txtRapidSharePremiumUserName";
-            this.txtRapidSharePremiumUserName.Size = new System.Drawing.Size(120, 20);
-            this.txtRapidSharePremiumUserName.TabIndex = 11;
-            // 
-            // cbCustomUploaderRequestType
-            // 
-            this.cbCustomUploaderRequestType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderRequestType.FormattingEnabled = true;
-            this.cbCustomUploaderRequestType.Location = new System.Drawing.Point(272, 24);
-            this.cbCustomUploaderRequestType.Name = "cbCustomUploaderRequestType";
-            this.cbCustomUploaderRequestType.Size = new System.Drawing.Size(144, 21);
-            this.cbCustomUploaderRequestType.TabIndex = 25;
-            // 
-            // lblCustomUploaderRequestType
-            // 
-            this.lblCustomUploaderRequestType.AutoSize = true;
-            this.lblCustomUploaderRequestType.Location = new System.Drawing.Point(272, 8);
-            this.lblCustomUploaderRequestType.Name = "lblCustomUploaderRequestType";
-            this.lblCustomUploaderRequestType.Size = new System.Drawing.Size(73, 13);
-            this.lblCustomUploaderRequestType.TabIndex = 26;
-            this.lblCustomUploaderRequestType.Text = "Request type:";
-            // 
-            // lblCustomUploaderResponseType
-            // 
-            this.lblCustomUploaderResponseType.AutoSize = true;
-            this.lblCustomUploaderResponseType.Location = new System.Drawing.Point(536, 8);
-            this.lblCustomUploaderResponseType.Name = "lblCustomUploaderResponseType";
-            this.lblCustomUploaderResponseType.Size = new System.Drawing.Size(81, 13);
-            this.lblCustomUploaderResponseType.TabIndex = 28;
-            this.lblCustomUploaderResponseType.Text = "Response type:";
-            // 
-            // cbCustomUploaderResponseType
-            // 
-            this.cbCustomUploaderResponseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomUploaderResponseType.FormattingEnabled = true;
-            this.cbCustomUploaderResponseType.Location = new System.Drawing.Point(536, 24);
-            this.cbCustomUploaderResponseType.Name = "cbCustomUploaderResponseType";
-            this.cbCustomUploaderResponseType.Size = new System.Drawing.Size(144, 21);
-            this.cbCustomUploaderResponseType.TabIndex = 27;
+            this.ucTwitterAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTwitterAccounts.Location = new System.Drawing.Point(3, 3);
+            this.ucTwitterAccounts.Name = "ucTwitterAccounts";
+            this.ucTwitterAccounts.Size = new System.Drawing.Size(798, 468);
+            this.ucTwitterAccounts.TabIndex = 0;
             // 
             // tpCustomUploaders
             // 
@@ -2920,76 +2497,500 @@
             this.btnCustomUploaderRequestTypeHelp.UseVisualStyleBackColor = true;
             this.btnCustomUploaderRequestTypeHelp.Click += new System.EventHandler(this.btnCustomUploaderRequestTypeHelp_Click);
             // 
-            // atcImageShackAccountType
+            // lblCustomUploaderResponseType
             // 
-            this.atcImageShackAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcImageShackAccountType.Name = "atcImageShackAccountType";
-            this.atcImageShackAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcImageShackAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcImageShackAccountType.TabIndex = 0;
-            this.atcImageShackAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImageShackAccountType_AccountTypeChanged);
+            this.lblCustomUploaderResponseType.AutoSize = true;
+            this.lblCustomUploaderResponseType.Location = new System.Drawing.Point(536, 8);
+            this.lblCustomUploaderResponseType.Name = "lblCustomUploaderResponseType";
+            this.lblCustomUploaderResponseType.Size = new System.Drawing.Size(81, 13);
+            this.lblCustomUploaderResponseType.TabIndex = 28;
+            this.lblCustomUploaderResponseType.Text = "Response type:";
             // 
-            // atcTinyPicAccountType
+            // gbCustomUploaders
             // 
-            this.atcTinyPicAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcTinyPicAccountType.Name = "atcTinyPicAccountType";
-            this.atcTinyPicAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcTinyPicAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcTinyPicAccountType.TabIndex = 0;
-            this.atcTinyPicAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcTinyPicAccountType_AccountTypeChanged);
+            this.gbCustomUploaders.Controls.Add(this.lbCustomUploaderList);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderClear);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderExport);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderRemove);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderImport);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderUpdate);
+            this.gbCustomUploaders.Controls.Add(this.txtCustomUploaderName);
+            this.gbCustomUploaders.Controls.Add(this.btnCustomUploaderAdd);
+            this.gbCustomUploaders.Location = new System.Drawing.Point(8, 8);
+            this.gbCustomUploaders.Name = "gbCustomUploaders";
+            this.gbCustomUploaders.Size = new System.Drawing.Size(248, 264);
+            this.gbCustomUploaders.TabIndex = 0;
+            this.gbCustomUploaders.TabStop = false;
+            this.gbCustomUploaders.Text = "Uploaders";
             // 
-            // atcImgurAccountType
+            // lbCustomUploaderList
             // 
-            this.atcImgurAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcImgurAccountType.Name = "atcImgurAccountType";
-            this.atcImgurAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcImgurAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcImgurAccountType.TabIndex = 0;
-            this.atcImgurAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImgurAccountType_AccountTypeChanged);
+            this.lbCustomUploaderList.FormattingEnabled = true;
+            this.lbCustomUploaderList.IntegralHeight = false;
+            this.lbCustomUploaderList.Location = new System.Drawing.Point(8, 72);
+            this.lbCustomUploaderList.Name = "lbCustomUploaderList";
+            this.lbCustomUploaderList.Size = new System.Drawing.Size(232, 152);
+            this.lbCustomUploaderList.TabIndex = 4;
+            this.lbCustomUploaderList.SelectedIndexChanged += new System.EventHandler(this.lbCustomUploaderList_SelectedIndexChanged);
             // 
-            // ucFTPAccounts
+            // btnCustomUploaderClear
             // 
-            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
-            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
-            this.ucFTPAccounts.Name = "ucFTPAccounts";
-            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
-            this.ucFTPAccounts.TabIndex = 0;
+            this.btnCustomUploaderClear.Location = new System.Drawing.Point(168, 232);
+            this.btnCustomUploaderClear.Name = "btnCustomUploaderClear";
+            this.btnCustomUploaderClear.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderClear.TabIndex = 7;
+            this.btnCustomUploaderClear.Text = "Clear";
+            this.btnCustomUploaderClear.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderClear.Click += new System.EventHandler(this.btnCustomUploaderClear_Click);
             // 
-            // atcSendSpaceAccountType
+            // btnCustomUploaderExport
             // 
-            this.atcSendSpaceAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcSendSpaceAccountType.Name = "atcSendSpaceAccountType";
-            this.atcSendSpaceAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcSendSpaceAccountType.Size = new System.Drawing.Size(214, 29);
-            this.atcSendSpaceAccountType.TabIndex = 0;
-            this.atcSendSpaceAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcSendSpaceAccountType_AccountTypeChanged);
+            this.btnCustomUploaderExport.Location = new System.Drawing.Point(88, 232);
+            this.btnCustomUploaderExport.Name = "btnCustomUploaderExport";
+            this.btnCustomUploaderExport.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderExport.TabIndex = 6;
+            this.btnCustomUploaderExport.Text = "Export...";
+            this.btnCustomUploaderExport.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderExport.Click += new System.EventHandler(this.btnCustomUploaderExport_Click);
             // 
-            // ucLocalhostAccounts
+            // btnCustomUploaderRemove
             // 
-            this.ucLocalhostAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucLocalhostAccounts.Location = new System.Drawing.Point(4, 4);
-            this.ucLocalhostAccounts.Margin = new System.Windows.Forms.Padding(4);
-            this.ucLocalhostAccounts.Name = "ucLocalhostAccounts";
-            this.ucLocalhostAccounts.Size = new System.Drawing.Size(790, 343);
-            this.ucLocalhostAccounts.TabIndex = 0;
+            this.btnCustomUploaderRemove.Location = new System.Drawing.Point(88, 40);
+            this.btnCustomUploaderRemove.Name = "btnCustomUploaderRemove";
+            this.btnCustomUploaderRemove.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderRemove.TabIndex = 2;
+            this.btnCustomUploaderRemove.Text = "Remove";
+            this.btnCustomUploaderRemove.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderRemove.Click += new System.EventHandler(this.btnCustomUploaderRemove_Click);
             // 
-            // atcGoogleURLShortenerAccountType
+            // btnCustomUploaderImport
             // 
-            this.atcGoogleURLShortenerAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcGoogleURLShortenerAccountType.Name = "atcGoogleURLShortenerAccountType";
-            this.atcGoogleURLShortenerAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcGoogleURLShortenerAccountType.Size = new System.Drawing.Size(214, 29);
-            this.atcGoogleURLShortenerAccountType.TabIndex = 0;
-            this.atcGoogleURLShortenerAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcGoogleURLShortenerAccountType_AccountTypeChanged);
+            this.btnCustomUploaderImport.Location = new System.Drawing.Point(8, 232);
+            this.btnCustomUploaderImport.Name = "btnCustomUploaderImport";
+            this.btnCustomUploaderImport.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderImport.TabIndex = 5;
+            this.btnCustomUploaderImport.Text = "Import...";
+            this.btnCustomUploaderImport.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderImport.Click += new System.EventHandler(this.btnCustomUploaderImport_Click);
             // 
-            // ucTwitterAccounts
+            // btnCustomUploaderUpdate
             // 
-            this.ucTwitterAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTwitterAccounts.Location = new System.Drawing.Point(3, 3);
-            this.ucTwitterAccounts.Name = "ucTwitterAccounts";
-            this.ucTwitterAccounts.Size = new System.Drawing.Size(798, 468);
-            this.ucTwitterAccounts.TabIndex = 0;
+            this.btnCustomUploaderUpdate.Location = new System.Drawing.Point(168, 40);
+            this.btnCustomUploaderUpdate.Name = "btnCustomUploaderUpdate";
+            this.btnCustomUploaderUpdate.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderUpdate.TabIndex = 3;
+            this.btnCustomUploaderUpdate.Text = "Update";
+            this.btnCustomUploaderUpdate.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderUpdate.Click += new System.EventHandler(this.btnCustomUploaderUpdate_Click);
+            // 
+            // txtCustomUploaderName
+            // 
+            this.txtCustomUploaderName.Location = new System.Drawing.Point(8, 16);
+            this.txtCustomUploaderName.Name = "txtCustomUploaderName";
+            this.txtCustomUploaderName.Size = new System.Drawing.Size(232, 20);
+            this.txtCustomUploaderName.TabIndex = 0;
+            // 
+            // btnCustomUploaderAdd
+            // 
+            this.btnCustomUploaderAdd.Location = new System.Drawing.Point(8, 40);
+            this.btnCustomUploaderAdd.Name = "btnCustomUploaderAdd";
+            this.btnCustomUploaderAdd.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderAdd.TabIndex = 1;
+            this.btnCustomUploaderAdd.Text = "Add";
+            this.btnCustomUploaderAdd.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderAdd.Click += new System.EventHandler(this.btnCustomUploaderAdd_Click);
+            // 
+            // lblCustomUploaderImageUploader
+            // 
+            this.lblCustomUploaderImageUploader.AutoSize = true;
+            this.lblCustomUploaderImageUploader.Location = new System.Drawing.Point(16, 364);
+            this.lblCustomUploaderImageUploader.Name = "lblCustomUploaderImageUploader";
+            this.lblCustomUploaderImageUploader.Size = new System.Drawing.Size(83, 13);
+            this.lblCustomUploaderImageUploader.TabIndex = 18;
+            this.lblCustomUploaderImageUploader.Text = "Image uploader:";
+            // 
+            // lblCustomUploaderUploadURL
+            // 
+            this.lblCustomUploaderUploadURL.AutoSize = true;
+            this.lblCustomUploaderUploadURL.Location = new System.Drawing.Point(272, 56);
+            this.lblCustomUploaderUploadURL.Name = "lblCustomUploaderUploadURL";
+            this.lblCustomUploaderUploadURL.Size = new System.Drawing.Size(75, 13);
+            this.lblCustomUploaderUploadURL.TabIndex = 1;
+            this.lblCustomUploaderUploadURL.Text = "Request URL:";
+            // 
+            // cbCustomUploaderImageUploader
+            // 
+            this.cbCustomUploaderImageUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderImageUploader.FormattingEnabled = true;
+            this.cbCustomUploaderImageUploader.Location = new System.Drawing.Point(104, 360);
+            this.cbCustomUploaderImageUploader.Name = "cbCustomUploaderImageUploader";
+            this.cbCustomUploaderImageUploader.Size = new System.Drawing.Size(152, 21);
+            this.cbCustomUploaderImageUploader.TabIndex = 14;
+            this.cbCustomUploaderImageUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderImageUploader_SelectedIndexChanged);
+            // 
+            // btnCustomUploaderTextUploaderTest
+            // 
+            this.btnCustomUploaderTextUploaderTest.Location = new System.Drawing.Point(264, 384);
+            this.btnCustomUploaderTextUploaderTest.Name = "btnCustomUploaderTextUploaderTest";
+            this.btnCustomUploaderTextUploaderTest.Size = new System.Drawing.Size(48, 24);
+            this.btnCustomUploaderTextUploaderTest.TabIndex = 24;
+            this.btnCustomUploaderTextUploaderTest.Text = "Test";
+            this.btnCustomUploaderTextUploaderTest.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderTextUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderTextUploaderTest_Click);
+            // 
+            // gbCustomUploaderRegexp
+            // 
+            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpEdit);
+            this.gbCustomUploaderRegexp.Controls.Add(this.txtCustomUploaderRegexp);
+            this.gbCustomUploaderRegexp.Controls.Add(this.lvCustomUploaderRegexps);
+            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpRemove);
+            this.gbCustomUploaderRegexp.Controls.Add(this.btnCustomUploaderRegexpAdd);
+            this.gbCustomUploaderRegexp.Location = new System.Drawing.Point(536, 56);
+            this.gbCustomUploaderRegexp.Name = "gbCustomUploaderRegexp";
+            this.gbCustomUploaderRegexp.Size = new System.Drawing.Size(248, 184);
+            this.gbCustomUploaderRegexp.TabIndex = 5;
+            this.gbCustomUploaderRegexp.TabStop = false;
+            this.gbCustomUploaderRegexp.Text = "Regex from response";
+            // 
+            // btnCustomUploaderRegexpEdit
+            // 
+            this.btnCustomUploaderRegexpEdit.Location = new System.Drawing.Point(168, 40);
+            this.btnCustomUploaderRegexpEdit.Name = "btnCustomUploaderRegexpEdit";
+            this.btnCustomUploaderRegexpEdit.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderRegexpEdit.TabIndex = 3;
+            this.btnCustomUploaderRegexpEdit.Text = "Update";
+            this.btnCustomUploaderRegexpEdit.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderRegexpEdit.Click += new System.EventHandler(this.btnCustomUploaderRegexpEdit_Click);
+            // 
+            // txtCustomUploaderRegexp
+            // 
+            this.txtCustomUploaderRegexp.Location = new System.Drawing.Point(8, 16);
+            this.txtCustomUploaderRegexp.Name = "txtCustomUploaderRegexp";
+            this.txtCustomUploaderRegexp.Size = new System.Drawing.Size(232, 20);
+            this.txtCustomUploaderRegexp.TabIndex = 0;
+            // 
+            // lvCustomUploaderRegexps
+            // 
+            this.lvCustomUploaderRegexps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvRegexpsColumn});
+            this.lvCustomUploaderRegexps.FullRowSelect = true;
+            this.lvCustomUploaderRegexps.GridLines = true;
+            this.lvCustomUploaderRegexps.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvCustomUploaderRegexps.HideSelection = false;
+            this.lvCustomUploaderRegexps.Location = new System.Drawing.Point(8, 72);
+            this.lvCustomUploaderRegexps.MultiSelect = false;
+            this.lvCustomUploaderRegexps.Name = "lvCustomUploaderRegexps";
+            this.lvCustomUploaderRegexps.Scrollable = false;
+            this.lvCustomUploaderRegexps.Size = new System.Drawing.Size(232, 104);
+            this.lvCustomUploaderRegexps.TabIndex = 4;
+            this.lvCustomUploaderRegexps.UseCompatibleStateImageBehavior = false;
+            this.lvCustomUploaderRegexps.View = System.Windows.Forms.View.Details;
+            this.lvCustomUploaderRegexps.SelectedIndexChanged += new System.EventHandler(this.lvCustomUploaderRegexps_SelectedIndexChanged);
+            // 
+            // lvRegexpsColumn
+            // 
+            this.lvRegexpsColumn.Width = 227;
+            // 
+            // btnCustomUploaderRegexpRemove
+            // 
+            this.btnCustomUploaderRegexpRemove.Location = new System.Drawing.Point(88, 40);
+            this.btnCustomUploaderRegexpRemove.Name = "btnCustomUploaderRegexpRemove";
+            this.btnCustomUploaderRegexpRemove.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderRegexpRemove.TabIndex = 2;
+            this.btnCustomUploaderRegexpRemove.Text = "Remove";
+            this.btnCustomUploaderRegexpRemove.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderRegexpRemove.Click += new System.EventHandler(this.btnCustomUploaderRegexpRemove_Click);
+            // 
+            // btnCustomUploaderRegexpAdd
+            // 
+            this.btnCustomUploaderRegexpAdd.Location = new System.Drawing.Point(8, 40);
+            this.btnCustomUploaderRegexpAdd.Name = "btnCustomUploaderRegexpAdd";
+            this.btnCustomUploaderRegexpAdd.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderRegexpAdd.TabIndex = 1;
+            this.btnCustomUploaderRegexpAdd.Text = "Add";
+            this.btnCustomUploaderRegexpAdd.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderRegexpAdd.Click += new System.EventHandler(this.btnCustomUploaderRegexpAdd_Click);
+            // 
+            // txtCustomUploaderThumbnail
+            // 
+            this.txtCustomUploaderThumbnail.Location = new System.Drawing.Point(536, 304);
+            this.txtCustomUploaderThumbnail.Name = "txtCustomUploaderThumbnail";
+            this.txtCustomUploaderThumbnail.Size = new System.Drawing.Size(248, 20);
+            this.txtCustomUploaderThumbnail.TabIndex = 11;
+            // 
+            // cbCustomUploaderResponseType
+            // 
+            this.cbCustomUploaderResponseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderResponseType.FormattingEnabled = true;
+            this.cbCustomUploaderResponseType.Location = new System.Drawing.Point(536, 24);
+            this.cbCustomUploaderResponseType.Name = "cbCustomUploaderResponseType";
+            this.cbCustomUploaderResponseType.Size = new System.Drawing.Size(144, 21);
+            this.cbCustomUploaderResponseType.TabIndex = 27;
+            // 
+            // txtCustomUploaderFullImage
+            // 
+            this.txtCustomUploaderFullImage.Location = new System.Drawing.Point(536, 264);
+            this.txtCustomUploaderFullImage.Name = "txtCustomUploaderFullImage";
+            this.txtCustomUploaderFullImage.Size = new System.Drawing.Size(248, 20);
+            this.txtCustomUploaderFullImage.TabIndex = 9;
+            // 
+            // lblCustomUploaderURLShortener
+            // 
+            this.lblCustomUploaderURLShortener.AutoSize = true;
+            this.lblCustomUploaderURLShortener.Location = new System.Drawing.Point(16, 436);
+            this.lblCustomUploaderURLShortener.Name = "lblCustomUploaderURLShortener";
+            this.lblCustomUploaderURLShortener.Size = new System.Drawing.Size(79, 13);
+            this.lblCustomUploaderURLShortener.TabIndex = 21;
+            this.lblCustomUploaderURLShortener.Text = "URL shortener:";
+            // 
+            // txtCustomUploaderLog
+            // 
+            this.txtCustomUploaderLog.Location = new System.Drawing.Point(320, 360);
+            this.txtCustomUploaderLog.Name = "txtCustomUploaderLog";
+            this.txtCustomUploaderLog.Size = new System.Drawing.Size(464, 96);
+            this.txtCustomUploaderLog.TabIndex = 7;
+            this.txtCustomUploaderLog.Text = "";
+            this.txtCustomUploaderLog.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtCustomUploaderLog_LinkClicked);
+            // 
+            // cbCustomUploaderTextUploader
+            // 
+            this.cbCustomUploaderTextUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderTextUploader.FormattingEnabled = true;
+            this.cbCustomUploaderTextUploader.Location = new System.Drawing.Point(104, 384);
+            this.cbCustomUploaderTextUploader.Name = "cbCustomUploaderTextUploader";
+            this.cbCustomUploaderTextUploader.Size = new System.Drawing.Size(152, 21);
+            this.cbCustomUploaderTextUploader.TabIndex = 15;
+            this.cbCustomUploaderTextUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderTextUploader_SelectedIndexChanged);
+            // 
+            // txtCustomUploaderURL
+            // 
+            this.txtCustomUploaderURL.Location = new System.Drawing.Point(272, 72);
+            this.txtCustomUploaderURL.Name = "txtCustomUploaderURL";
+            this.txtCustomUploaderURL.Size = new System.Drawing.Size(248, 20);
+            this.txtCustomUploaderURL.TabIndex = 2;
+            // 
+            // btnCustomUploaderURLShortenerTest
+            // 
+            this.btnCustomUploaderURLShortenerTest.Location = new System.Drawing.Point(264, 432);
+            this.btnCustomUploaderURLShortenerTest.Name = "btnCustomUploaderURLShortenerTest";
+            this.btnCustomUploaderURLShortenerTest.Size = new System.Drawing.Size(48, 24);
+            this.btnCustomUploaderURLShortenerTest.TabIndex = 22;
+            this.btnCustomUploaderURLShortenerTest.Text = "Test";
+            this.btnCustomUploaderURLShortenerTest.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderURLShortenerTest.Click += new System.EventHandler(this.btnCustomUploaderURLShortenerTest_Click);
+            // 
+            // lblCustomUploaderTextUploader
+            // 
+            this.lblCustomUploaderTextUploader.AutoSize = true;
+            this.lblCustomUploaderTextUploader.Location = new System.Drawing.Point(16, 388);
+            this.lblCustomUploaderTextUploader.Name = "lblCustomUploaderTextUploader";
+            this.lblCustomUploaderTextUploader.Size = new System.Drawing.Size(75, 13);
+            this.lblCustomUploaderTextUploader.TabIndex = 19;
+            this.lblCustomUploaderTextUploader.Text = "Text uploader:";
+            // 
+            // btnURLParseHelp
+            // 
+            this.btnURLParseHelp.Location = new System.Drawing.Point(760, 240);
+            this.btnURLParseHelp.Name = "btnURLParseHelp";
+            this.btnURLParseHelp.Size = new System.Drawing.Size(24, 23);
+            this.btnURLParseHelp.TabIndex = 13;
+            this.btnURLParseHelp.Text = "?";
+            this.btnURLParseHelp.UseVisualStyleBackColor = true;
+            this.btnURLParseHelp.Click += new System.EventHandler(this.btnURLParseHelp_Click);
+            // 
+            // cbCustomUploaderURLShortener
+            // 
+            this.cbCustomUploaderURLShortener.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderURLShortener.FormattingEnabled = true;
+            this.cbCustomUploaderURLShortener.Location = new System.Drawing.Point(104, 432);
+            this.cbCustomUploaderURLShortener.Name = "cbCustomUploaderURLShortener";
+            this.cbCustomUploaderURLShortener.Size = new System.Drawing.Size(152, 21);
+            this.cbCustomUploaderURLShortener.TabIndex = 17;
+            this.cbCustomUploaderURLShortener.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderURLShortener_SelectedIndexChanged);
+            // 
+            // lblCustomUploaderThumbnail
+            // 
+            this.lblCustomUploaderThumbnail.AutoSize = true;
+            this.lblCustomUploaderThumbnail.Location = new System.Drawing.Point(536, 288);
+            this.lblCustomUploaderThumbnail.Name = "lblCustomUploaderThumbnail";
+            this.lblCustomUploaderThumbnail.Size = new System.Drawing.Size(84, 13);
+            this.lblCustomUploaderThumbnail.TabIndex = 10;
+            this.lblCustomUploaderThumbnail.Text = "Thumbnail URL:";
+            // 
+            // lblCustomUploaderFileForm
+            // 
+            this.lblCustomUploaderFileForm.AutoSize = true;
+            this.lblCustomUploaderFileForm.Location = new System.Drawing.Point(272, 96);
+            this.lblCustomUploaderFileForm.Name = "lblCustomUploaderFileForm";
+            this.lblCustomUploaderFileForm.Size = new System.Drawing.Size(78, 13);
+            this.lblCustomUploaderFileForm.TabIndex = 3;
+            this.lblCustomUploaderFileForm.Text = "File form name:";
+            // 
+            // lblCustomUploaderRequestType
+            // 
+            this.lblCustomUploaderRequestType.AutoSize = true;
+            this.lblCustomUploaderRequestType.Location = new System.Drawing.Point(272, 8);
+            this.lblCustomUploaderRequestType.Name = "lblCustomUploaderRequestType";
+            this.lblCustomUploaderRequestType.Size = new System.Drawing.Size(73, 13);
+            this.lblCustomUploaderRequestType.TabIndex = 26;
+            this.lblCustomUploaderRequestType.Text = "Request type:";
+            // 
+            // cbCustomUploaderRequestType
+            // 
+            this.cbCustomUploaderRequestType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderRequestType.FormattingEnabled = true;
+            this.cbCustomUploaderRequestType.Location = new System.Drawing.Point(272, 24);
+            this.cbCustomUploaderRequestType.Name = "cbCustomUploaderRequestType";
+            this.cbCustomUploaderRequestType.Size = new System.Drawing.Size(144, 21);
+            this.cbCustomUploaderRequestType.TabIndex = 25;
+            this.cbCustomUploaderRequestType.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderRequestType_SelectedIndexChanged);
+            // 
+            // txtCustomUploaderFileForm
+            // 
+            this.txtCustomUploaderFileForm.Location = new System.Drawing.Point(272, 112);
+            this.txtCustomUploaderFileForm.Name = "txtCustomUploaderFileForm";
+            this.txtCustomUploaderFileForm.Size = new System.Drawing.Size(248, 20);
+            this.txtCustomUploaderFileForm.TabIndex = 4;
+            // 
+            // lblCustomUploaderFullImage
+            // 
+            this.lblCustomUploaderFullImage.AutoSize = true;
+            this.lblCustomUploaderFullImage.Location = new System.Drawing.Point(536, 248);
+            this.lblCustomUploaderFullImage.Name = "lblCustomUploaderFullImage";
+            this.lblCustomUploaderFullImage.Size = new System.Drawing.Size(32, 13);
+            this.lblCustomUploaderFullImage.TabIndex = 8;
+            this.lblCustomUploaderFullImage.Text = "URL:";
+            // 
+            // cbCustomUploaderFileUploader
+            // 
+            this.cbCustomUploaderFileUploader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomUploaderFileUploader.FormattingEnabled = true;
+            this.cbCustomUploaderFileUploader.Location = new System.Drawing.Point(104, 408);
+            this.cbCustomUploaderFileUploader.Name = "cbCustomUploaderFileUploader";
+            this.cbCustomUploaderFileUploader.Size = new System.Drawing.Size(152, 21);
+            this.cbCustomUploaderFileUploader.TabIndex = 16;
+            this.cbCustomUploaderFileUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderFileUploader_SelectedIndexChanged);
+            // 
+            // btnCustomUploaderImageUploaderTest
+            // 
+            this.btnCustomUploaderImageUploaderTest.Location = new System.Drawing.Point(264, 360);
+            this.btnCustomUploaderImageUploaderTest.Name = "btnCustomUploaderImageUploaderTest";
+            this.btnCustomUploaderImageUploaderTest.Size = new System.Drawing.Size(48, 24);
+            this.btnCustomUploaderImageUploaderTest.TabIndex = 12;
+            this.btnCustomUploaderImageUploaderTest.Text = "Test";
+            this.btnCustomUploaderImageUploaderTest.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderImageUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderImageUploaderTest_Click);
+            // 
+            // lblCustomUploaderFileUploader
+            // 
+            this.lblCustomUploaderFileUploader.AutoSize = true;
+            this.lblCustomUploaderFileUploader.Location = new System.Drawing.Point(16, 412);
+            this.lblCustomUploaderFileUploader.Name = "lblCustomUploaderFileUploader";
+            this.lblCustomUploaderFileUploader.Size = new System.Drawing.Size(70, 13);
+            this.lblCustomUploaderFileUploader.TabIndex = 20;
+            this.lblCustomUploaderFileUploader.Text = "File uploader:";
+            // 
+            // btnCustomUploaderFileUploaderTest
+            // 
+            this.btnCustomUploaderFileUploaderTest.Location = new System.Drawing.Point(264, 408);
+            this.btnCustomUploaderFileUploaderTest.Name = "btnCustomUploaderFileUploaderTest";
+            this.btnCustomUploaderFileUploaderTest.Size = new System.Drawing.Size(48, 24);
+            this.btnCustomUploaderFileUploaderTest.TabIndex = 23;
+            this.btnCustomUploaderFileUploaderTest.Text = "Test";
+            this.btnCustomUploaderFileUploaderTest.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderFileUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderFileUploaderTest_Click);
+            // 
+            // gbCustomUploaderArguments
+            // 
+            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgEdit);
+            this.gbCustomUploaderArguments.Controls.Add(this.txtCustomUploaderArgValue);
+            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgRemove);
+            this.gbCustomUploaderArguments.Controls.Add(this.lvCustomUploaderArguments);
+            this.gbCustomUploaderArguments.Controls.Add(this.btnCustomUploaderArgAdd);
+            this.gbCustomUploaderArguments.Controls.Add(this.txtCustomUploaderArgName);
+            this.gbCustomUploaderArguments.Location = new System.Drawing.Point(272, 136);
+            this.gbCustomUploaderArguments.Name = "gbCustomUploaderArguments";
+            this.gbCustomUploaderArguments.Size = new System.Drawing.Size(248, 184);
+            this.gbCustomUploaderArguments.TabIndex = 6;
+            this.gbCustomUploaderArguments.TabStop = false;
+            this.gbCustomUploaderArguments.Text = "Arguments";
+            // 
+            // btnCustomUploaderArgEdit
+            // 
+            this.btnCustomUploaderArgEdit.Location = new System.Drawing.Point(168, 40);
+            this.btnCustomUploaderArgEdit.Name = "btnCustomUploaderArgEdit";
+            this.btnCustomUploaderArgEdit.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderArgEdit.TabIndex = 4;
+            this.btnCustomUploaderArgEdit.Text = "Update";
+            this.btnCustomUploaderArgEdit.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderArgEdit.Click += new System.EventHandler(this.btnCustomUploaderArgEdit_Click);
+            // 
+            // txtCustomUploaderArgValue
+            // 
+            this.txtCustomUploaderArgValue.Location = new System.Drawing.Point(128, 16);
+            this.txtCustomUploaderArgValue.Name = "txtCustomUploaderArgValue";
+            this.txtCustomUploaderArgValue.Size = new System.Drawing.Size(112, 20);
+            this.txtCustomUploaderArgValue.TabIndex = 1;
+            // 
+            // btnCustomUploaderArgRemove
+            // 
+            this.btnCustomUploaderArgRemove.Location = new System.Drawing.Point(88, 40);
+            this.btnCustomUploaderArgRemove.Name = "btnCustomUploaderArgRemove";
+            this.btnCustomUploaderArgRemove.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderArgRemove.TabIndex = 3;
+            this.btnCustomUploaderArgRemove.Text = "Remove";
+            this.btnCustomUploaderArgRemove.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderArgRemove.Click += new System.EventHandler(this.btnCustomUploaderArgRemove_Click);
+            // 
+            // lvCustomUploaderArguments
+            // 
+            this.lvCustomUploaderArguments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvCustomUploaderArguments.FullRowSelect = true;
+            this.lvCustomUploaderArguments.GridLines = true;
+            this.lvCustomUploaderArguments.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvCustomUploaderArguments.HideSelection = false;
+            this.lvCustomUploaderArguments.Location = new System.Drawing.Point(8, 72);
+            this.lvCustomUploaderArguments.MultiSelect = false;
+            this.lvCustomUploaderArguments.Name = "lvCustomUploaderArguments";
+            this.lvCustomUploaderArguments.Size = new System.Drawing.Size(232, 104);
+            this.lvCustomUploaderArguments.TabIndex = 5;
+            this.lvCustomUploaderArguments.UseCompatibleStateImageBehavior = false;
+            this.lvCustomUploaderArguments.View = System.Windows.Forms.View.Details;
+            this.lvCustomUploaderArguments.SelectedIndexChanged += new System.EventHandler(this.lvCustomUploaderArguments_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 113;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 113;
+            // 
+            // btnCustomUploaderArgAdd
+            // 
+            this.btnCustomUploaderArgAdd.Location = new System.Drawing.Point(8, 40);
+            this.btnCustomUploaderArgAdd.Name = "btnCustomUploaderArgAdd";
+            this.btnCustomUploaderArgAdd.Size = new System.Drawing.Size(72, 24);
+            this.btnCustomUploaderArgAdd.TabIndex = 2;
+            this.btnCustomUploaderArgAdd.Text = "Add";
+            this.btnCustomUploaderArgAdd.UseVisualStyleBackColor = true;
+            this.btnCustomUploaderArgAdd.Click += new System.EventHandler(this.btnCustomUploaderArgAdd_Click);
+            // 
+            // txtCustomUploaderArgName
+            // 
+            this.txtCustomUploaderArgName.Location = new System.Drawing.Point(8, 16);
+            this.txtCustomUploaderArgName.Name = "txtCustomUploaderArgName";
+            this.txtCustomUploaderArgName.Size = new System.Drawing.Size(112, 20);
+            this.txtCustomUploaderArgName.TabIndex = 0;
+            // 
+            // txtRapidSharePremiumUserName
+            // 
+            this.txtRapidSharePremiumUserName.Location = new System.Drawing.Point(88, 84);
+            this.txtRapidSharePremiumUserName.Name = "txtRapidSharePremiumUserName";
+            this.txtRapidSharePremiumUserName.Size = new System.Drawing.Size(120, 20);
+            this.txtRapidSharePremiumUserName.TabIndex = 11;
             // 
             // actRapidShareAccountType
             // 
@@ -3069,12 +3070,6 @@
             this.tpSendSpace.PerformLayout();
             this.tpGe_tt.ResumeLayout(false);
             this.tpGe_tt.PerformLayout();
-            this.gbCustomUploaderRegexp.ResumeLayout(false);
-            this.gbCustomUploaderRegexp.PerformLayout();
-            this.gbCustomUploaders.ResumeLayout(false);
-            this.gbCustomUploaders.PerformLayout();
-            this.gbCustomUploaderArguments.ResumeLayout(false);
-            this.gbCustomUploaderArguments.PerformLayout();
             this.tpSharedFolder.ResumeLayout(false);
             this.tlpSharedFolders.ResumeLayout(false);
             this.gbSharedFolder.ResumeLayout(false);
@@ -3092,6 +3087,12 @@
             this.tpTwitter.ResumeLayout(false);
             this.tpCustomUploaders.ResumeLayout(false);
             this.tpCustomUploaders.PerformLayout();
+            this.gbCustomUploaders.ResumeLayout(false);
+            this.gbCustomUploaders.PerformLayout();
+            this.gbCustomUploaderRegexp.ResumeLayout(false);
+            this.gbCustomUploaderRegexp.PerformLayout();
+            this.gbCustomUploaderArguments.ResumeLayout(false);
+            this.gbCustomUploaderArguments.PerformLayout();
             this.ResumeLayout(false);
 
         }

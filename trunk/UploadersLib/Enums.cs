@@ -144,7 +144,10 @@ namespace UploadersLib
 
     public enum ResponseType
     {
-        Text, RedirectionURL
+        [Description("Response text")]
+        Text,
+        [Description("Redirection URL")]
+        RedirectionURL
     }
 
     public enum Proxy

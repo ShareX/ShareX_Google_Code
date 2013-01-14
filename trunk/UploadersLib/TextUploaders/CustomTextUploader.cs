@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UploadersLib.HelperClasses;
@@ -40,20 +41,20 @@ namespace UploadersLib.TextUploaders
 
         public override UploadResult UploadText(string text)
         {
-            customUploader.SetInput(text);
-
             UploadResult result = new UploadResult();
+
+            Dictionary<string, string> args = customUploader.GetArgumentsWithInput(text);
 
             if (customUploader.RequestType == CustomUploaderRequestType.POST)
             {
-                result.Response = SendPostRequest(customUploader.RequestURL, customUploader.Arguments);
+                result.Response = SendPostRequest(customUploader.RequestURL, args, customUploader.ResponseType);
             }
             else if (customUploader.RequestType == CustomUploaderRequestType.GET)
             {
-                result.Response = SendGetRequest(customUploader.RequestURL, customUploader.Arguments);
+                result.Response = SendGetRequest(customUploader.RequestURL, args, customUploader.ResponseType);
             }
 
-            if (result.IsSuccess)
+            if (!string.IsNullOrEmpty(result.Response))
             {
                 customUploader.Parse(result.Response);
 

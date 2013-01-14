@@ -35,10 +35,13 @@ namespace UploadersLib.HelperClasses
     public class CustomUploaderItem
     {
         public string Name { get; set; }
+
         public CustomUploaderRequestType RequestType { get; set; }
         public string RequestURL { get; set; }
         public string FileFormName { get; set; }
         public Dictionary<string, string> Arguments { get; set; }
+
+        public ResponseType ResponseType { get; set; }
         public List<string> RegexList { get; set; }
         public string URL { get; set; }
         public string ThumbnailURL { get; set; }
@@ -69,14 +72,16 @@ namespace UploadersLib.HelperClasses
             return Name;
         }
 
-        public void SetInput(string input)
+        public Dictionary<string, string> GetArgumentsWithInput(string input)
         {
-            List<string> keys = new List<string>(Arguments.Keys);
+            Dictionary<string, string> arguments = new Dictionary<string, string>();
 
-            foreach (string key in keys)
+            foreach (KeyValuePair<string, string> arg in Arguments)
             {
-                Arguments[key] = Arguments[key].Replace("$input$", input);
+                arguments.Add(arg.Key, arg.Value.Replace("$input$", input));
             }
+
+            return arguments;
         }
 
         public void Parse(string response)

@@ -311,6 +311,7 @@ namespace UploadersLib
             }
 
             cbCustomUploaderRequestType.Items.AddRange(Enum.GetNames(typeof(CustomUploaderRequestType)));
+            cbCustomUploaderResponseType.Items.AddRange(Helpers.GetEnumDescriptions<ResponseType>());
 
             #endregion File uploaders
 

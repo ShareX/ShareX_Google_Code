@@ -986,6 +986,7 @@ namespace UploadersLib
             cbCustomUploaderRequestType.SelectedIndex = (int)customUploader.RequestType;
             txtCustomUploaderURL.Text = customUploader.RequestURL;
             txtCustomUploaderFileForm.Text = customUploader.FileFormName;
+            txtCustomUploaderFileForm.Enabled = customUploader.RequestType == CustomUploaderRequestType.POST;
 
             txtCustomUploaderArgName.Text = string.Empty;
             txtCustomUploaderArgValue.Text = string.Empty;
@@ -995,6 +996,7 @@ namespace UploadersLib
                 lvCustomUploaderArguments.Items.Add(arg.Key).SubItems.Add(arg.Value);
             }
 
+            cbCustomUploaderResponseType.SelectedIndex = (int)customUploader.ResponseType;
             txtCustomUploaderRegexp.Text = string.Empty;
             lvCustomUploaderRegexps.Items.Clear();
             foreach (string regexp in customUploader.RegexList)
@@ -1017,6 +1019,8 @@ namespace UploadersLib
             item.RequestType = (CustomUploaderRequestType)cbCustomUploaderRequestType.SelectedIndex;
             item.RequestURL = txtCustomUploaderURL.Text;
             item.FileFormName = txtCustomUploaderFileForm.Text;
+
+            item.ResponseType = (ResponseType)cbCustomUploaderResponseType.SelectedIndex;
             foreach (ListViewItem lvItem in lvCustomUploaderRegexps.Items)
             {
                 item.RegexList.Add(lvItem.Text);
@@ -1092,9 +1096,9 @@ namespace UploadersLib
 
             if (result != null)
             {
-                if (!string.IsNullOrEmpty(result.URL))
+                if ((type != CustomUploaderType.URL && !string.IsNullOrEmpty(result.URL)) || (type == CustomUploaderType.URL && !string.IsNullOrEmpty(result.ShortenedURL)))
                 {
-                    txtCustomUploaderLog.AppendText("URL: " + result.URL + Environment.NewLine);
+                    txtCustomUploaderLog.AppendText("URL: " + result.ToString() + Environment.NewLine);
                 }
                 else if (result.IsError)
                 {
