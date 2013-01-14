@@ -29,22 +29,8 @@ using UploadersLib.OtherServices;
 
 namespace UploadersLib
 {
-    public class GoogleTranslatorConfig
+    public class GoogleTranslatorConfig : SettingsBase<GoogleTranslatorConfig>
     {
-        #region I/O Methods
-
-        public bool Write(string filePath)
-        {
-            return SettingsHelper.Save(this, filePath, SerializationType.Xml);
-        }
-
-        public static GoogleTranslatorConfig Read(string filePath)
-        {
-            return SettingsHelper.Load<GoogleTranslatorConfig>(filePath, SerializationType.Xml);
-        }
-
-        #endregion I/O Methods
-
         public string APIKey = "";
         public List<GoogleLanguage> GoogleLanguages;
         public string GoogleSourceLanguage = "en";

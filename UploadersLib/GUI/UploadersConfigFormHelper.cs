@@ -607,6 +607,7 @@ namespace UploadersLib
             if (CheckFTPAccounts())
             {
                 FTPClient2 ftpclient = new FTPClient2((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]);
+                ftpclient.Icon = Icon;
                 ftpclient.Show();
             }
         }
@@ -931,11 +932,14 @@ namespace UploadersLib
             if (index != -1)
             {
                 CustomUploaderItem customUploader = GetCustomUploaderFromFields();
-                Config.CustomUploadersList[index] = customUploader;
-                lbCustomUploaderList.Items[index] = customUploader.Name;
-            }
 
-            PrepareCustomUploaderList();
+                if (!string.IsNullOrEmpty(customUploader.Name))
+                {
+                    Config.CustomUploadersList[index] = customUploader;
+                    lbCustomUploaderList.Items[index] = customUploader.Name;
+                    PrepareCustomUploaderList();
+                }
+            }
         }
 
         private void CustomUploaderClear()
@@ -1032,27 +1036,6 @@ namespace UploadersLib
             item.DeletionURL = txtCustomUploaderDeletionURL.Text;
 
             return item;
-        }
-
-        private void ImportCustomUploaders(string fp)
-        {
-            CustomUploaderManager um = CustomUploaderManager.Load(fp);
-
-            if (um != null)
-            {
-                Config.CustomUploadersList = um.ImageHostingServices;
-
-                foreach (CustomUploaderItem cui in Config.CustomUploadersList)
-                {
-                    lbCustomUploaderList.Items.Add(cui.Name);
-                }
-            }
-        }
-
-        private void ExportCustomUploaders(string fp)
-        {
-            CustomUploaderManager um = new CustomUploaderManager(Config.CustomUploadersList);
-            um.Save(fp);
         }
 
         private async void TestCustomUploader(CustomUploaderType type, CustomUploaderItem item)

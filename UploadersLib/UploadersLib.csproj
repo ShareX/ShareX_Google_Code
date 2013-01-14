@@ -221,7 +221,6 @@
     </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="HelperClasses\CustomUploaderItem.cs" />
-    <Compile Include="HelperClasses\CustomUploaderManager.cs" />
     <Compile Include="ImageUploaders\ImmioUploader.cs" />
     <Compile Include="ImageUploaders\Photobucket.cs" />
     <Compile Include="SocialServices\Twitter.cs" />
