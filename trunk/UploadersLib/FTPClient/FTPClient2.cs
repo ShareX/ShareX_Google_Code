@@ -104,7 +104,7 @@ namespace UploadersLib
             List<FtpItem> list = FTPAdapter.GetDirList(currentDirectory).
                 OrderBy(x => x.ItemType != FtpItemType.Directory).ThenBy(x => x.Name).ToList();
 
-            list.Insert(0, new FtpItem("..", DateTime.Now, 0, FtpItemType.None, "", 0, "", ""));
+            list.Insert(0, new FtpItem("..", DateTime.Now, 0, null, null, FtpItemType.Unknown, null));
 
             lvFTPList.Items.Clear();
             lvFTPList.SmallImageList = new ImageList { ColorDepth = ColorDepth.Depth32Bit };
@@ -120,7 +120,7 @@ namespace UploadersLib
 
                 lvi.Tag = file;
 
-                if (file.ItemType != FtpItemType.None)
+                if (file.ItemType != FtpItemType.Unknown)
                 {
                     if (file.ItemType == FtpItemType.File)
                     {
@@ -132,12 +132,12 @@ namespace UploadersLib
                     }
 
                     lvi.SubItems.Add(IconReader.GetDisplayName(file.Name, file.ItemType == FtpItemType.Directory));
-                    lvi.SubItems.Add(file.Modified.Value.ToLocalTime().ToString());
+                    lvi.SubItems.Add(file.Modified.ToLocalTime().ToString());
                     lvi.SubItems.Add(file.Attributes);
                 }
 
                 string ext;
-                if (file.ItemType == FtpItemType.Directory || file.ItemType == FtpItemType.None)
+                if (file.ItemType == FtpItemType.Directory || file.ItemType == FtpItemType.Unknown)
                 {
                     ext = "Directory";
                 }
@@ -224,7 +224,7 @@ namespace UploadersLib
 
                 if (openDirectory && checkDirectory != null)
                 {
-                    if (checkDirectory.ItemType == FtpItemType.None && checkDirectory.Name == "..")
+                    if (checkDirectory.ItemType == FtpItemType.Unknown && checkDirectory.Name == "..")
                     {
                         FTPNavigateBack();
                         return;
@@ -261,7 +261,7 @@ namespace UploadersLib
             if (lvFTPList.SelectedItems.Count > 0)
             {
                 FtpItem file = lvFTPList.SelectedItems[0].Tag as FtpItem;
-                if (file != null && file.ItemType != FtpItemType.None)
+                if (file != null && file.ItemType != FtpItemType.Unknown)
                 {
                     lvFTPList.StartEditing(txtRename, lvFTPList.SelectedItems[0], 0);
                     int offset = 23;
@@ -425,7 +425,7 @@ namespace UploadersLib
                                 {
                                     string path = Helpers.CombineURL(currentDirectory, filename);
                                     string movePath = string.Empty;
-                                    if (file.ItemType == FtpItemType.None)
+                                    if (file.ItemType == FtpItemType.Unknown)
                                     {
                                         if (file.Name == ".")
                                         {
@@ -493,7 +493,7 @@ namespace UploadersLib
 
                 if (file != null)
                 {
-                    enabled = file.ItemType != FtpItemType.None;
+                    enabled = file.ItemType != FtpItemType.Unknown;
                 }
             }
 

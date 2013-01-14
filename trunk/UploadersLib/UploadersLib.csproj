@@ -71,8 +71,11 @@
     <Reference Include="Renci.SshNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2012.3.9\lib\net35\Renci.SshNet.dll</HintPath>
     </Reference>
-    <Reference Include="StarksoftBiko">
-      <HintPath>..\Lib\StarksoftBiko.dll</HintPath>
+    <Reference Include="Starksoft.Net.Ftp">
+      <HintPath>..\Lib\Starksoft.Net.Ftp.dll</HintPath>
+    </Reference>
+    <Reference Include="Starksoft.Net.Proxy">
+      <HintPath>..\Lib\Starksoft.Net.Proxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Design" />
