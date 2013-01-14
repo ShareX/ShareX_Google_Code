@@ -1,4 +1,4 @@
-﻿namespace ShareX
+﻿namespace UploadersLib
 {
     partial class ResponseForm
     {
