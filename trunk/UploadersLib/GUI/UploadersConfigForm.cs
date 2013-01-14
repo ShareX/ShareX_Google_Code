@@ -944,6 +944,20 @@ Example: $3,1$ or $2,thumbnail_result$";
             }
         }
 
+        private void btnCustomUploaderShowLastResponse_Click(object sender, EventArgs e)
+        {
+            string response = btnCustomUploaderShowLastResponse.Tag as string;
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                using (ResponseForm form = new ResponseForm(response))
+                {
+                    form.Icon = Icon;
+                    form.ShowDialog();
+                }
+            }
+        }
+
         private void txtCustomUploaderLog_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             Helpers.LoadBrowserAsync(e.LinkText);

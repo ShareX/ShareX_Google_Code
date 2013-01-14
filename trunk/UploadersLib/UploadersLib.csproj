@@ -137,6 +137,12 @@
     <Compile Include="GUI\GoogleTranslateGUI.Designer.cs">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ResponseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ResponseForm.Designer.cs">
+      <DependentUpon>ResponseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\UploadersConfigFormGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\GoogleTranslateGUI.resx">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ResponseForm.resx">
+      <DependentUpon>ResponseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\UploadersConfigForm.resx">
       <DependentUpon>UploadersConfigForm.cs</DependentUpon>

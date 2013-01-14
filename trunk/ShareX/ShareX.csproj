@@ -96,12 +96,6 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
-    <Compile Include="Forms\ResponseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ResponseForm.Designer.cs">
-      <DependentUpon>ResponseForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ScreenRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,9 +162,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ResponseForm.resx">
-      <DependentUpon>ResponseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScreenRecordForm.resx">
       <DependentUpon>ScreenRecordForm.cs</DependentUpon>

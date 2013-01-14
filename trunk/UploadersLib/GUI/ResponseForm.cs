@@ -25,7 +25,7 @@
 
 using System.Windows.Forms;
 
-namespace ShareX
+namespace UploadersLib
 {
     public partial class ResponseForm : Form
     {

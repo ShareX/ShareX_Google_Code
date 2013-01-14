@@ -984,7 +984,7 @@ namespace UploadersLib
             txtCustomUploaderName.Text = customUploader.Name;
 
             cbCustomUploaderRequestType.SelectedIndex = (int)customUploader.RequestType;
-            txtCustomUploaderURL.Text = customUploader.RequestURL;
+            txtCustomUploaderRequestURL.Text = customUploader.RequestURL;
             txtCustomUploaderFileForm.Text = customUploader.FileFormName;
             txtCustomUploaderFileForm.Enabled = customUploader.RequestType == CustomUploaderRequestType.POST;
 
@@ -1004,8 +1004,9 @@ namespace UploadersLib
                 lvCustomUploaderRegexps.Items.Add(regexp);
             }
 
-            txtCustomUploaderFullImage.Text = customUploader.URL;
-            txtCustomUploaderThumbnail.Text = customUploader.ThumbnailURL;
+            txtCustomUploaderURL.Text = customUploader.URL;
+            txtCustomUploaderThumbnailURL.Text = customUploader.ThumbnailURL;
+            txtCustomUploaderDeletionURL.Text = customUploader.DeletionURL;
         }
 
         private CustomUploaderItem GetCustomUploaderFromFields()
@@ -1017,7 +1018,7 @@ namespace UploadersLib
             }
 
             item.RequestType = (CustomUploaderRequestType)cbCustomUploaderRequestType.SelectedIndex;
-            item.RequestURL = txtCustomUploaderURL.Text;
+            item.RequestURL = txtCustomUploaderRequestURL.Text;
             item.FileFormName = txtCustomUploaderFileForm.Text;
 
             item.ResponseType = (ResponseType)cbCustomUploaderResponseType.SelectedIndex;
@@ -1026,8 +1027,9 @@ namespace UploadersLib
                 item.RegexList.Add(lvItem.Text);
             }
 
-            item.URL = txtCustomUploaderFullImage.Text;
-            item.ThumbnailURL = txtCustomUploaderThumbnail.Text;
+            item.URL = txtCustomUploaderURL.Text;
+            item.ThumbnailURL = txtCustomUploaderThumbnailURL.Text;
+            item.DeletionURL = txtCustomUploaderDeletionURL.Text;
 
             return item;
         }
@@ -1110,6 +1112,9 @@ namespace UploadersLib
                 }
 
                 txtCustomUploaderLog.ScrollToCaret();
+
+                btnCustomUploaderShowLastResponse.Tag = result.Response;
+                btnCustomUploaderShowLastResponse.Enabled = !string.IsNullOrEmpty(result.Response);
             }
 
             btnCustomUploaderImageUploaderTest.Enabled = btnCustomUploaderTextUploaderTest.Enabled =
