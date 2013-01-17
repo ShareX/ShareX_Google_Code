@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.IO;
 using UploadersLib.HelperClasses;
 
@@ -39,20 +40,19 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult result = null;
+            if (customUploader.RequestType != CustomUploaderRequestType.POST) throw new Exception("'Request type' must be 'POST' when using custom file uploader.");
+            if (string.IsNullOrEmpty(customUploader.FileFormName)) throw new Exception("'File form name' must be not empty when using custom file uploader.");
+            if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
 
-            if (customUploader.RequestType == CustomUploaderRequestType.POST && !string.IsNullOrEmpty(customUploader.FileFormName))
+            UploadResult result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
+
+            if (result.IsSuccess)
             {
-                result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
+                customUploader.Parse(result.Response);
 
-                if (result.IsSuccess)
-                {
-                    customUploader.Parse(result.Response);
-
-                    result.URL = customUploader.ResultURL;
-                    result.ThumbnailURL = customUploader.ResultThumbnailURL;
-                    result.DeletionURL = customUploader.ResultDeletionURL;
-                }
+                result.URL = customUploader.ResultURL;
+                result.ThumbnailURL = customUploader.ResultThumbnailURL;
+                result.DeletionURL = customUploader.ResultDeletionURL;
             }
 
             return result;
