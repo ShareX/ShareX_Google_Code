@@ -23,8 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UploadersLib.HelperClasses;
 
@@ -41,6 +43,14 @@ namespace UploadersLib.TextUploaders
 
         public override UploadResult UploadText(string text)
         {
+            if (customUploader.RequestType == CustomUploaderRequestType.POST && !string.IsNullOrEmpty(customUploader.FileFormName))
+                throw new Exception("'File form name' cannot be used with custom text uploader.");
+
+            if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
+
+            if (customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value == "$input$"))
+                throw new Exception("Atleast one '$input$' required for argument value when using custom text uploader.");
+
             UploadResult result = new UploadResult();
 
             Dictionary<string, string> args = customUploader.GetArgumentsWithInput(text);

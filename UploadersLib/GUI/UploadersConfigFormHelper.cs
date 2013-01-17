@@ -1076,7 +1076,11 @@ namespace UploadersLib
                             break;
                     }
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    result = new UploadResult();
+                    result.Errors.Add(e.Message);
+                }
             });
 
             if (result != null)

@@ -23,8 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UploadersLib.HelperClasses;
 
@@ -41,6 +43,14 @@ namespace UploadersLib.URLShorteners
 
         public override UploadResult ShortenURL(string url)
         {
+            if (customUploader.RequestType == CustomUploaderRequestType.POST && !string.IsNullOrEmpty(customUploader.FileFormName))
+                throw new Exception("'File form name' cannot be used with custom URL shortener.");
+
+            if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
+
+            if (customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value == "$input$"))
+                throw new Exception("Atleast one '$input$' required for argument value when using custom URL shortener.");
+
             UploadResult result = new UploadResult { URL = url };
 
             Dictionary<string, string> args = customUploader.GetArgumentsWithInput(url);
