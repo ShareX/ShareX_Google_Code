@@ -128,7 +128,6 @@ namespace ShareX
             {
                 UploadManager.UploadFile(path);
             }
-
             else
             {
                 TaskHelper.ShowResultNotifications(path);
