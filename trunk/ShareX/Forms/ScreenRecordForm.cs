@@ -78,24 +78,24 @@ namespace ShareX
         {
             btnRecord.Enabled = false;
             Hide();
-            string path = "";
-            ScreenRecorder screenRecorder = null;
-            ScreenRegionForm regionForm = new ScreenRegionForm(CaptureRectangle);
-            regionForm.Show();
 
-            await Task.Delay(1000);
-            regionForm.ChangeColor(Color.FromArgb(0, 255, 0));
+            ScreenRecorder screenRecorder = null;
+            string path = "";
 
             try
             {
-                await Task.Run(() =>
+                using (ScreenRegionManager screenRegionManager = new ScreenRegionManager())
                 {
-                    screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
-                        CaptureRectangle, Program.ScreenRecorderCacheFilePath);
-                    screenRecorder.StartRecording();
-                });
+                    screenRegionManager.Start(CaptureRectangle, 1000);
 
-                regionForm.Close();
+                    await Task.Run(() =>
+                    {
+                        screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
+                            CaptureRectangle, Program.ScreenRecorderCacheFilePath);
+                        screenRecorder.StartRecording();
+                    });
+                }
+
                 Show();
                 btnRecord.Text = "Encoding...";
 
@@ -119,7 +119,6 @@ namespace ShareX
             finally
             {
                 if (screenRecorder != null) screenRecorder.Dispose();
-                if (regionForm != null) regionForm.Dispose();
             }
 
             btnRecord.Text = "Start record (after 1 second)";
@@ -129,6 +128,7 @@ namespace ShareX
             {
                 UploadManager.UploadFile(path);
             }
+
             else
             {
                 TaskHelper.ShowResultNotifications(path);
