@@ -2,10 +2,10 @@
 <Update>
   <ShareX>
     <Stable>
-      <Version>6.5.0.248</Version>
-      <URL>http://sharex.googlecode.com/files/ShareX-6.5.0.248-setup.exe</URL>
-      <Date>2012-09-19</Date>
-      <Summary></Summary>
+      <Version>6.6.0.280</Version>
+      <URL>https://sharex.googlecode.com/files/ShareX-6.6.0.280-setup.exe</URL>
+      <Date>2013-01-20</Date>
+      <Summary>Note: .NET Framework 4.5 required.</Summary>
     </Stable>
   </ShareX>
 </Update>
