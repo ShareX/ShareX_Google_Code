@@ -95,6 +95,7 @@ namespace ShareX
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lblSplitter = new System.Windows.Forms.Label();
             this.lvUploads = new HelpersLib.MyListView();
@@ -184,6 +185,7 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
@@ -213,7 +215,8 @@ namespace ShareX
             this.tsbHistory,
             this.tsbImageHistory,
             this.tsbSettings,
-            this.tsbAbout});
+            this.tsbAbout,
+            this.tsbDonate});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
@@ -584,6 +587,16 @@ namespace ShareX
             this.tsbAbout.Text = "About...";
             this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
+            // tsbDonate
+            // 
+            this.tsbDonate.Image = global::ShareX.Properties.Resources.present;
+            this.tsbDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsbDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDonate.Name = "tsbDonate";
+            this.tsbDonate.Size = new System.Drawing.Size(147, 20);
+            this.tsbDonate.Text = "Donate...";
+            this.tsbDonate.Click += new System.EventHandler(this.tsbDonate_Click);
+            // 
             // scMain
             // 
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -720,10 +733,11 @@ namespace ShareX
             this.tsmiTrayImageHistory,
             this.tsmiTraySettings,
             this.tsmiTrayAbout,
+            this.tsmiTrayDonate,
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 302);
+            this.cmsTray.Size = new System.Drawing.Size(181, 346);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -946,7 +960,7 @@ namespace ShareX
             this.tsmiTrayScreenRecorder.Image = global::ShareX.Properties.Resources.camcorder_image;
             this.tsmiTrayScreenRecorder.Name = "tsmiTrayScreenRecorder";
             this.tsmiTrayScreenRecorder.Size = new System.Drawing.Size(183, 22);
-            this.tsmiTrayScreenRecorder.Text = "Screen recorder";
+            this.tsmiTrayScreenRecorder.Text = "Screen recorder...";
             this.tsmiTrayScreenRecorder.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
             // 
             // tsmiTrayScreenColorPicker
@@ -1309,6 +1323,14 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
+            // tsmiTrayDonate
+            // 
+            this.tsmiTrayDonate.Image = global::ShareX.Properties.Resources.present;
+            this.tsmiTrayDonate.Name = "tsmiTrayDonate";
+            this.tsmiTrayDonate.Size = new System.Drawing.Size(180, 22);
+            this.tsmiTrayDonate.Text = "Donate...";
+            this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1471,5 +1493,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenRecorder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayScreenRecorder;
+        private System.Windows.Forms.ToolStripButton tsbDonate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
     }
 }
