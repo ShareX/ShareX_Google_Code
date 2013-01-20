@@ -172,11 +172,11 @@ namespace HelpersLib
         {
             if (cbShowChangelog.Checked)
             {
-                Size = new Size(Size.Width, 445);
+                ClientSize = new Size(fillRect.Width, fillRect.Height);
             }
             else
             {
-                Size = new Size(Size.Width, 233);
+                ClientSize = new Size(fillRect.Width, txtChangelog.Location.Y - 3);
             }
         }
 
