@@ -606,7 +606,7 @@ namespace UploadersLib
         {
             if (CheckFTPAccounts())
             {
-                FTPClient2 ftpclient = new FTPClient2((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]);
+                FTPClientForm ftpclient = new FTPClientForm((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]);
                 ftpclient.Icon = Icon;
                 ftpclient.Show();
             }
@@ -1042,7 +1042,7 @@ namespace UploadersLib
         {
             UploadResult result = null;
 
-            await Task.Run(() =>
+            await TaskEx.Run(() =>
             {
                 try
                 {

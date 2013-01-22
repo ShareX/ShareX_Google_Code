@@ -88,7 +88,7 @@ namespace ShareX
                 {
                     screenRegionManager.Start(CaptureRectangle, 1000);
 
-                    await Task.Run(() =>
+                    await TaskEx.Run(() =>
                     {
                         screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
                             CaptureRectangle, Program.ScreenRecorderCacheFilePath);
@@ -99,7 +99,7 @@ namespace ShareX
                 Show();
                 btnRecord.Text = "Encoding...";
 
-                await Task.Run(() =>
+                await TaskEx.Run(() =>
                 {
                     Stopwatch timer = Stopwatch.StartNew();
 

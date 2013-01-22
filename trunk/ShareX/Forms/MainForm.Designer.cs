@@ -144,6 +144,7 @@ namespace ShareX
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTraySettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -185,9 +186,7 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
@@ -737,7 +736,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 346);
+            this.cmsTray.Size = new System.Drawing.Size(181, 324);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -1010,6 +1009,14 @@ namespace ShareX
             this.tsmiTrayAbout.Size = new System.Drawing.Size(180, 22);
             this.tsmiTrayAbout.Text = "About...";
             this.tsmiTrayAbout.Click += new System.EventHandler(this.tsbAbout_Click);
+            // 
+            // tsmiTrayDonate
+            // 
+            this.tsmiTrayDonate.Image = global::ShareX.Properties.Resources.present;
+            this.tsmiTrayDonate.Name = "tsmiTrayDonate";
+            this.tsmiTrayDonate.Size = new System.Drawing.Size(180, 22);
+            this.tsmiTrayDonate.Text = "Donate...";
+            this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
             // tssTray2
             // 
@@ -1323,14 +1330,6 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
-            // tsmiTrayDonate
-            // 
-            this.tsmiTrayDonate.Image = global::ShareX.Properties.Resources.present;
-            this.tsmiTrayDonate.Name = "tsmiTrayDonate";
-            this.tsmiTrayDonate.Size = new System.Drawing.Size(180, 22);
-            this.tsmiTrayDonate.Text = "Donate...";
-            this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1353,7 +1352,6 @@ namespace ShareX
             this.tsMain.PerformLayout();
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
             this.cmsTray.ResumeLayout(false);
             this.cmsUploadInfo.ResumeLayout(false);
