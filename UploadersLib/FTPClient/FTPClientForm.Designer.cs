@@ -1,6 +1,6 @@
 ﻿namespace UploadersLib
 {
-    partial class FTPClient2
+    partial class FTPClientForm
     {
         /// <summary>
         /// Required designer variable.
@@ -437,14 +437,14 @@
             this.txtConsoleWrite.TabIndex = 0;
             this.txtConsoleWrite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConsoleWrite_KeyDown);
             // 
-            // FTPClient2
+            // FTPClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 595);
             this.Controls.Add(this.tcFTP);
             this.Controls.Add(this.txtRename);
-            this.Name = "FTPClient2";
+            this.Name = "FTPClientForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "FTP Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FTPClient2_FormClosing);

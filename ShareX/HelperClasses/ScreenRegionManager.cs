@@ -43,12 +43,12 @@ namespace ShareX
             {
                 regionForm = new ScreenRegionForm(captureRectangle);
                 regionForm.Show();
-                await Task.Delay(startDelay);
+                await TaskEx.Delay(startDelay);
                 regionForm.ChangeColor(Color.FromArgb(0, 255, 0));
             }
             else
             {
-                await Task.Delay(startDelay);
+                await TaskEx.Delay(startDelay);
             }
         }
 

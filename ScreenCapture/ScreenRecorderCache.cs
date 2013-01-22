@@ -60,7 +60,7 @@ namespace ScreenCapture
             {
                 isWorking = true;
 
-                task = Task.Run(() =>
+                task = TaskEx.Run(() =>
                 {
                     Helpers.CreateDirectoryIfNotExist(CachePath);
 

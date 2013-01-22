@@ -36,7 +36,7 @@ using System.Windows.Forms;
 
 namespace UploadersLib
 {
-    public partial class FTPClient2 : Form
+    public partial class FTPClientForm : Form
     {
         private const string Root = "/";
 
@@ -46,7 +46,7 @@ namespace UploadersLib
         private string currentDirectory;
         private ListViewItem tempSelected;
 
-        public FTPClient2(FTPAccount account)
+        public FTPClientForm(FTPAccount account)
         {
             InitializeComponent();
 

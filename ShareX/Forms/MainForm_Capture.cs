@@ -276,7 +276,7 @@ namespace ShareX
             List<WindowInfo> windows = null;
 
             WindowsList windowsList = new WindowsList();
-            windows = await Task.Run(() => windowsList.GetVisibleWindowsList());
+            windows = await TaskEx.Run(() => windowsList.GetVisibleWindowsList());
 
             if (windows != null)
             {

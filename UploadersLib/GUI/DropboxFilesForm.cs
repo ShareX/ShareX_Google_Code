@@ -66,7 +66,7 @@ namespace UploadersLib.Forms
 
             DropboxDirectoryInfo directory = null;
 
-            directory = await Task.Run(() => dropbox.GetFilesList(path));
+            directory = await TaskEx.Run(() => dropbox.GetFilesList(path));
 
             if (directory != null)
             {
