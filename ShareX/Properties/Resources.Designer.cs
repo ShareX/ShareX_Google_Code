@@ -135,7 +135,7 @@ namespace ShareX.Properties {
         /// </summary>
         public static System.Drawing.Bitmap camcorder_image {
             get {
-                object obj = ResourceManager.GetObject("camcorder-image", resourceCulture);
+                object obj = ResourceManager.GetObject("camcorder_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -485,6 +485,16 @@ namespace ShareX.Properties {
         public static System.Drawing.Bitmap ShareXLogo {
             get {
                 object obj = ResourceManager.GetObject("ShareXLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap steam {
+            get {
+                object obj = ResourceManager.GetObject("steam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
