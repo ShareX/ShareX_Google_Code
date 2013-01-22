@@ -68,16 +68,28 @@ namespace ScreenCapture
                     {
                         while (!imageQueue.IsCompleted)
                         {
-                            long position = fsCache.Position;
+                            Image img = null;
 
-                            using (Image img = imageQueue.Take())
-                            using (MemoryStream ms = new MemoryStream())
+                            try
                             {
-                                img.Save(ms, ImageFormat.Bmp);
-                                ms.CopyStreamTo(fsCache);
-                            }
+                                img = imageQueue.Take();
 
-                            indexList.Add(new LocationInfo(position, fsCache.Length - position));
+                                if (img != null)
+                                {
+                                    using (MemoryStream ms = new MemoryStream())
+                                    {
+                                        img.Save(ms, ImageFormat.Bmp);
+                                        long position = fsCache.Position;
+                                        ms.CopyStreamTo(fsCache);
+                                        indexList.Add(new LocationInfo(position, fsCache.Length - position));
+                                    }
+                                }
+                            }
+                            catch (InvalidOperationException) { }
+                            finally
+                            {
+                                if (img != null) img.Dispose();
+                            }
                         }
                     }
 
