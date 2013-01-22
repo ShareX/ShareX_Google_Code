@@ -76,6 +76,11 @@ namespace ShareX
             Helpers.LoadBrowserAsync(Links.URL_BERK);
         }
 
+        private void pbBerkSteamURL_Click(object sender, EventArgs e)
+        {
+            Helpers.LoadBrowserAsync(Links.URL_BERK_STEAM);
+        }
+
         private void pbMikeURL_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_MIKE);
