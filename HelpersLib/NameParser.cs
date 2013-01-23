@@ -80,9 +80,7 @@ namespace HelpersLib
         [Description("Computer name")]
         cn,
         [Description("New line")]
-        n,
-        [Description("FTP host")]
-        host
+        n
     }
 
     public static class ReplacementExtension
@@ -97,7 +95,7 @@ namespace HelpersLib
 
     public enum NameParserType
     {
-        Text,
+        Text, // Allows new line
         FileName,
         FolderPath,
         FilePath,
@@ -107,19 +105,17 @@ namespace HelpersLib
     public class NameParser
     {
         public NameParserType Type { get; private set; }
-        public int AutoIncrementNumber { get; set; }
-        public Image Picture { get; set; }
         public int MaxNameLength { get; set; }
-        public string WindowText { get; set; }
-        public bool AllowNewLine { get; set; }
-        public string Host { get; set; }
+        public int AutoIncrementNumber { get; set; } // %i
+        public Image Picture { get; set; } // %width, %height
+        public string WindowText { get; set; } // %t
 
         public NameParser(NameParserType nameParserType)
         {
             Type = nameParserType;
         }
 
-        public string Convert(string pattern)
+        public string Parse(string pattern)
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -143,11 +139,6 @@ namespace HelpersLib
 
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
-
-            if (Host != null)
-            {
-                sb.Replace(ReplacementVariables.host.ToPrefixString(), Host);
-            }
 
             DateTime dt = FastDateTime.Now;
 
@@ -188,7 +179,7 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.uln.ToPrefixString(), Environment.UserDomainName);
             sb.Replace(ReplacementVariables.cn.ToPrefixString(), Environment.MachineName);
 
-            if (Type == NameParserType.Text && AllowNewLine)
+            if (Type == NameParserType.Text)
             {
                 sb.Replace(ReplacementVariables.n.ToPrefixString(), Environment.NewLine);
             }

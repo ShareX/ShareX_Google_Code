@@ -127,8 +127,8 @@ namespace ShareX
             switch (Config.WatermarkMode)
             {
                 case WatermarkType.TEXT:
-                    NameParser parser = new NameParser(NameParserType.Text) { Picture = img, AllowNewLine = true };
-                    return DrawWatermark(img, parser.Convert(Config.WatermarkText));
+                    NameParser parser = new NameParser(NameParserType.Text) { Picture = img };
+                    return DrawWatermark(img, parser.Parse(Config.WatermarkText));
                 case WatermarkType.IMAGE:
                     return DrawImageWatermark(img, Config.WatermarkImageLocation);
             }

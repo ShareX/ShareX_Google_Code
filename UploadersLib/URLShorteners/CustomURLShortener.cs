@@ -53,7 +53,8 @@ namespace UploadersLib.URLShorteners
 
             UploadResult result = new UploadResult { URL = url };
 
-            Dictionary<string, string> args = customUploader.GetArgumentsWithInput(url);
+            customUploader.Input = url;
+            Dictionary<string, string> args = customUploader.ParseArguments();
 
             if (customUploader.RequestType == CustomUploaderRequestType.POST)
             {

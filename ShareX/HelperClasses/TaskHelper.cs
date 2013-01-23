@@ -125,7 +125,7 @@ namespace ShareX
                 MaxNameLength = 100
             };
 
-            string filename = nameParser.Convert(Program.Settings.NameFormatPattern);
+            string filename = nameParser.Parse(Program.Settings.NameFormatPattern);
             if (!string.IsNullOrEmpty(extension)) filename += "." + extension;
 
             Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
