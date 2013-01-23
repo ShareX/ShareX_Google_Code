@@ -50,7 +50,7 @@ namespace ShareX
 
             Config = config;
 
-            codesMenu = NameParser.CreateCodesMenu(txtWatermarkText, new ReplacementVariables[] { ReplacementVariables.t, ReplacementVariables.host });
+            codesMenu = NameParser.CreateCodesMenu(txtWatermarkText, ReplacementVariables.t);
         }
 
         private void WatermarkUI_Load(object sender, EventArgs e)

@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pbDropboxLogo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAOcAAAA8CAYAAACdDa3MAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -240,7 +240,7 @@
         53qeVx5YIJ05fGYAOxwBNk6f/g9PlXoh0MT9NAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="ttHelpTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="ttHelpTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="label1.ToolTip" xml:space="preserve">
@@ -257,9 +257,9 @@ Example: $3,1$ or $2,thumbnail_result$</value>
   <data name="lblCustomUploaderRequestTypeHelp.ToolTip" xml:space="preserve">
     <value>For image &amp; file upload, 'POST' request type is required along with the 'File form name'. 
 For text &amp; url shortener, both request type is usable; however, you can't use 'File form name' for them.
-Instead, you need to use '$input$' for the argument value. 
-For example, if argument name is 'pastebin_text' then you need to use '$input$' without quotation marks
+Instead, you need to use '%input' for the argument value. 
+For example, if argument name is 'pastebin_text' then you need to use '%input' without quotation marks
 and it will be automatically replaced with the text you're going to upload. 
-Same thing applies for url shortener; '$input$' will be replaced with the url.</value>
+Same thing applies for url shortener; '%input' will be replaced with the url.</value>
   </data>
 </root>

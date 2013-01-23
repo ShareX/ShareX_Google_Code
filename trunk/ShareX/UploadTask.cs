@@ -150,11 +150,11 @@ namespace ShareX
 
             if (string.IsNullOrEmpty(nameParser.WindowText))
             {
-                filename = nameParser.Convert(Program.Settings.NameFormatPattern) + ".bmp";
+                filename = nameParser.Parse(Program.Settings.NameFormatPattern) + ".bmp";
             }
             else
             {
-                filename = nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
+                filename = nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
             }
 
             Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
@@ -529,7 +529,7 @@ namespace ShareX
             {
                 case FileDestination.Dropbox:
                     NameParser parser = new NameParser(NameParserType.URL);
-                    string uploadPath = parser.Convert(Dropbox.TidyUploadPath(Program.UploadersConfig.DropboxUploadPath));
+                    string uploadPath = parser.Parse(Dropbox.TidyUploadPath(Program.UploadersConfig.DropboxUploadPath));
                     fileUploader = new Dropbox(Program.UploadersConfig.DropboxOAuthInfo, uploadPath, Program.UploadersConfig.DropboxAccountInfo)
                     {
                         AutoCreateShareableLink = Program.UploadersConfig.DropboxAutoCreateShareableLink

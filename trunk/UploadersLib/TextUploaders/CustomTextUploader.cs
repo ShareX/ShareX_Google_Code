@@ -53,7 +53,8 @@ namespace UploadersLib.TextUploaders
 
             UploadResult result = new UploadResult();
 
-            Dictionary<string, string> args = customUploader.GetArgumentsWithInput(text);
+            customUploader.Input = text;
+            Dictionary<string, string> args = customUploader.ParseArguments();
 
             if (customUploader.RequestType == CustomUploaderRequestType.POST)
             {

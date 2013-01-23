@@ -168,9 +168,8 @@ namespace ShareX
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
 
-            ReplacementVariables[] ignoreList = new ReplacementVariables[] { ReplacementVariables.n, ReplacementVariables.host };
-            cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ignoreList);
-            cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ignoreList);
+            cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ReplacementVariables.n);
+            cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ReplacementVariables.n);
 
             // Upload / Clipboard upload
             cbShowClipboardContentViewer.Checked = Program.Settings.ShowClipboardContentViewer;
@@ -705,14 +704,14 @@ namespace ShareX
         {
             Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
             NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber };
-            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPattern);
+            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(Program.Settings.NameFormatPattern);
         }
 
         private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
         {
             Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
             NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber, WindowText = Text };
-            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Convert(Program.Settings.NameFormatPatternActiveWindow);
+            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow);
         }
 
         #endregion Upload / General

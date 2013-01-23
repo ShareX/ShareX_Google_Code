@@ -400,7 +400,7 @@ namespace UploadersLib
 
         private string GetDropboxUploadPath()
         {
-            return new NameParser(NameParserType.URL).Convert(Dropbox.TidyUploadPath(Config.DropboxUploadPath));
+            return new NameParser(NameParserType.URL).Parse(Dropbox.TidyUploadPath(Config.DropboxUploadPath));
         }
 
         #endregion Dropbox

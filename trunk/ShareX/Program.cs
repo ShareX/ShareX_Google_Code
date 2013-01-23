@@ -167,7 +167,7 @@ namespace ShareX
         {
             get
             {
-                string subFolderName = new NameParser(NameParserType.FolderPath).Convert(Settings.SaveImageSubFolderPattern);
+                string subFolderName = new NameParser(NameParserType.FolderPath).Parse(Settings.SaveImageSubFolderPattern);
                 return Path.Combine(ScreenshotsParentFolder, subFolderName);
             }
         }
@@ -252,7 +252,7 @@ namespace ShareX
 
                 MyLogger = new Logger();
                 DebugHelper.MyLogger = MyLogger;
-                MyLogger.WriteLine("{0} started", Title);
+                MyLogger.WriteLine("{0} started", FullTitle);
                 MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
                 MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
 

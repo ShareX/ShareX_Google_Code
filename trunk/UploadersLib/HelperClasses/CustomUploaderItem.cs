@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,6 +49,8 @@ namespace UploadersLib.HelperClasses
         public string DeletionURL { get; set; }
         public bool AutoUseResponse { get; set; }
 
+        public string Input { get; set; }
+
         public string ResultURL { get; private set; }
         public string ResultThumbnailURL { get; private set; }
         public string ResultDeletionURL { get; private set; }
@@ -72,13 +75,24 @@ namespace UploadersLib.HelperClasses
             return Name;
         }
 
-        public Dictionary<string, string> GetArgumentsWithInput(string input)
+        public Dictionary<string, string> ParseArguments()
         {
             Dictionary<string, string> arguments = new Dictionary<string, string>();
 
             foreach (KeyValuePair<string, string> arg in Arguments)
             {
-                arguments.Add(arg.Key, arg.Value.Replace("$input$", input));
+                string value = arg.Value;
+
+                if (!string.IsNullOrEmpty(Input))
+                {
+                    value = value.Replace("%input", Input);
+                    value = value.Replace("$input$", Input);
+                }
+
+                NameParser parser = new NameParser(NameParserType.Text);
+                value = parser.Parse(value);
+
+                arguments.Add(arg.Key, value);
             }
 
             return arguments;
