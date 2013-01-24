@@ -140,11 +140,14 @@ namespace HelpersLib
 
         private void ChangeProgress()
         {
-            pbProgress.Value = (int)Math.Round(fileDownloader.DownloadPercentage);
-            lblProgress.Text = String.Format(CultureInfo.CurrentCulture,
-                "Progress: {0:0.##}%\nDownload speed: {1:0.##} kB/s\nFile size: {2:n0} / {3:n0} kB",
-                fileDownloader.DownloadPercentage, fileDownloader.DownloadSpeed / 1024, fileDownloader.DownloadedSize / 1024,
-                fileDownloader.FileSize / 1024);
+            if (fileDownloader != null)
+            {
+                pbProgress.Value = (int)Math.Round(fileDownloader.DownloadPercentage);
+                lblProgress.Text = String.Format(CultureInfo.CurrentCulture,
+                    "Progress: {0:0.##}%\nDownload speed: {1:0.##} kB/s\nFile size: {2:n0} / {3:n0} kB",
+                    fileDownloader.DownloadPercentage, fileDownloader.DownloadSpeed / 1024, fileDownloader.DownloadedSize / 1024,
+                    fileDownloader.FileSize / 1024);
+            }
         }
 
         private void StartDownload()
@@ -194,7 +197,7 @@ namespace HelpersLib
 
         private void UpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Status == DownloaderFormStatus.DownloadStarted)
+            if (Status == DownloaderFormStatus.DownloadStarted && fileDownloader != null)
             {
                 fileDownloader.StopDownload();
             }
