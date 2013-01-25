@@ -68,11 +68,24 @@ namespace ShareX
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                if (!string.IsNullOrEmpty(Program.Settings.FileUploadDefaultDirectory) && Directory.Exists(Program.Settings.FileUploadDefaultDirectory))
+                {
+                    ofd.InitialDirectory = Program.Settings.FileUploadDefaultDirectory;
+                }
+                else
+                {
+                    ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
+
                 ofd.Multiselect = true;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    if (!string.IsNullOrEmpty(ofd.FileName))
+                    {
+                        Program.Settings.FileUploadDefaultDirectory = Path.GetDirectoryName(ofd.FileName);
+                    }
+
                     UploadFile(ofd.FileNames);
                 }
             }
