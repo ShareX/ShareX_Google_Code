@@ -47,6 +47,7 @@ namespace ShareX
         public SocialNetworkingService SocialServiceDestination = SocialNetworkingService.Twitter;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
+        public string FileUploadDefaultDirectory = "";
 
         public WindowState HistoryWindowState = new WindowState();
         public WindowState ImageHistoryWindowState = new WindowState();
