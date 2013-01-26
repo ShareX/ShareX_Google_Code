@@ -62,7 +62,7 @@ namespace ScreenCapture
         public Surface(Image backgroundImage = null)
         {
             ScreenRectangle = CaptureHelpers.GetScreenBounds();
-            ScreenRectangle0Based = CaptureHelpers.FixScreenCoordinates(ScreenRectangle);
+            ScreenRectangle0Based = CaptureHelpers.ScreenToClient(ScreenRectangle);
 
             InitializeComponent();
 
@@ -280,12 +280,12 @@ namespace ScreenCapture
 
             Rectangle primaryScreen = Screen.PrimaryScreen.Bounds;
 
-            Point position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + offset, primaryScreen.Y + offset));
+            Point position = CaptureHelpers.ScreenToClient(new Point(primaryScreen.X + offset, primaryScreen.Y + offset));
             Rectangle rect = new Rectangle(position, new Size((int)textSize.Width, (int)textSize.Height));
 
             if (rect.Contains(InputManager.MousePosition0Based))
             {
-                position = CaptureHelpers.FixScreenCoordinates(new Point(primaryScreen.X + offset, primaryScreen.Y + primaryScreen.Height - (int)textSize.Height - offset));
+                position = CaptureHelpers.ScreenToClient(new Point(primaryScreen.X + offset, primaryScreen.Y + primaryScreen.Height - (int)textSize.Height - offset));
             }
 
             CaptureHelpers.DrawTextWithOutline(g, text, position, textFont, Color.White, Color.Black);

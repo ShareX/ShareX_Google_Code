@@ -84,7 +84,7 @@ namespace ShareXTest
                     Thread.Sleep(1000);
 
                     DebugTimer timer4 = new DebugTimer();
-                    Point cursorOffset = CaptureHelpers.FixScreenCoordinates(rect.Location);
+                    Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
                     CaptureHelpers.DrawCursorToImage(img3, cursorOffset);
                     timer4.WriteElapsedMiliseconds("DrawCursorToImage");
                 }

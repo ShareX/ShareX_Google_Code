@@ -39,7 +39,7 @@ namespace ScreenCapture
         {
             Buttons = Control.MouseButtons;
             Position = Control.MousePosition;
-            ZeroBasedPosition = CaptureHelpers.FixScreenCoordinates(Position);
+            ZeroBasedPosition = CaptureHelpers.ScreenToClient(Position);
         }
     }
 }

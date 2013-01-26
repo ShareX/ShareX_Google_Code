@@ -133,7 +133,7 @@ namespace ScreenCapture
             if (ShowRectangleInfo)
             {
                 int offset = 10;
-                Point position = CaptureHelpers.FixScreenCoordinates(new Point(positionCurrent.X + offset, positionCurrent.Y + offset));
+                Point position = CaptureHelpers.ScreenToClient(new Point(positionCurrent.X + offset, positionCurrent.Y + offset));
                 CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
                     SelectionRectangle.Width, SelectionRectangle.Height), position, new Font("Arial", 17, FontStyle.Bold), Color.White, Color.Black, 3);
             }

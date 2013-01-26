@@ -61,7 +61,7 @@ namespace ScreenCapture
         {
             get
             {
-                return CaptureHelpers.FixScreenCoordinates(Rectangle);
+                return CaptureHelpers.ScreenToClient(Rectangle);
             }
         }
 
