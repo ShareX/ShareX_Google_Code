@@ -176,7 +176,7 @@ namespace ScreenCapture
 
                     if (!hoverArea.IsEmpty)
                     {
-                        hoverArea = CaptureHelpers.FixScreenCoordinates(hoverArea);
+                        hoverArea = CaptureHelpers.ScreenToClient(hoverArea);
                         CurrentHoverArea = Rectangle.Intersect(surface.ScreenRectangle0Based, hoverArea);
                     }
                 }

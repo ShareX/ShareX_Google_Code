@@ -82,24 +82,31 @@ namespace HelpersLib
 
         public static Rectangle GetScreenBounds0Based()
         {
-            Rectangle rect = GetScreenBounds();
-            return new Rectangle(0, 0, rect.Width, rect.Height);
+            return ScreenToClient(GetScreenBounds());
         }
 
-        /// <summary>For multi monitor</summary>
-        public static Point FixScreenCoordinates(Point point)
+        public static Point ScreenToClient(Point p)
         {
             int screenX = NativeMethods.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
             int screenY = NativeMethods.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
-            return new Point(point.X - screenX, point.Y - screenY);
+            return new Point(p.X - screenX, p.Y - screenY);
         }
 
-        /// <summary>For multi monitor</summary>
-        public static Rectangle FixScreenCoordinates(Rectangle rect)
+        public static Rectangle ScreenToClient(Rectangle r)
+        {
+            return new Rectangle(ScreenToClient(r.Location), r.Size);
+        }
+
+        public static Point ClientToScreen(Point p)
         {
             int screenX = NativeMethods.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
             int screenY = NativeMethods.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
-            return new Rectangle(rect.X - screenX, rect.Y - screenY, rect.Width, rect.Height);
+            return new Point(p.X + screenX, p.Y + screenY);
+        }
+
+        public static Rectangle ClientToScreen(Rectangle r)
+        {
+            return new Rectangle(ClientToScreen(r.Location), r.Size);
         }
 
         public static Point GetMousePosition()
@@ -109,10 +116,9 @@ namespace HelpersLib
             return (Point)pt;
         }
 
-        /// <summary>For multi monitor</summary>
         public static Point GetZeroBasedMousePosition()
         {
-            return FixScreenCoordinates(GetMousePosition());
+            return ScreenToClient(GetMousePosition());
         }
 
         public static Rectangle CreateRectangle(int x, int y, int x2, int y2)

@@ -67,7 +67,7 @@ namespace ShareX
 
                 if (surface.Result != SurfaceResult.Close && surface.AreaManager.IsCurrentAreaValid)
                 {
-                    CaptureRectangle = surface.AreaManager.CurrentArea;
+                    CaptureRectangle = CaptureHelpers.ClientToScreen(surface.AreaManager.CurrentArea);
                     lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
                         CaptureRectangle.Width, CaptureRectangle.Height);
                 }

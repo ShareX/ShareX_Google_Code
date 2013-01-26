@@ -111,7 +111,7 @@ namespace ScreenCapture
 
                     if (cursor != null)
                     {
-                        Point cursorOffset = CaptureHelpers.FixScreenCoordinates(rect.Location);
+                        Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
                         CaptureHelpers.DrawCursorToImage(cursor, transparentImage, cursorOffset);
                     }
 
