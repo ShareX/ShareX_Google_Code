@@ -147,7 +147,6 @@
             this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
-            this.lblBufferSizeInfo = new System.Windows.Forms.Label();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
             this.lblBufferSize = new System.Windows.Forms.Label();
             this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
@@ -1597,7 +1596,6 @@
             this.tpUploadGeneral.Controls.Add(this.txtNameFormatPatternActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
             this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
-            this.tpUploadGeneral.Controls.Add(this.lblBufferSizeInfo);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimitHint);
             this.tpUploadGeneral.Controls.Add(this.lblBufferSize);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreview);
@@ -1663,18 +1661,9 @@
             this.cbBufferSize.FormattingEnabled = true;
             this.cbBufferSize.Location = new System.Drawing.Point(84, 46);
             this.cbBufferSize.Name = "cbBufferSize";
-            this.cbBufferSize.Size = new System.Drawing.Size(64, 21);
+            this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
             this.cbBufferSize.TabIndex = 4;
             this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
-            // 
-            // lblBufferSizeInfo
-            // 
-            this.lblBufferSizeInfo.AutoSize = true;
-            this.lblBufferSizeInfo.Location = new System.Drawing.Point(156, 50);
-            this.lblBufferSizeInfo.Name = "lblBufferSizeInfo";
-            this.lblBufferSizeInfo.Size = new System.Drawing.Size(20, 13);
-            this.lblBufferSizeInfo.TabIndex = 5;
-            this.lblBufferSizeInfo.Text = "kB";
             // 
             // lblUploadLimitHint
             // 
@@ -2134,7 +2123,6 @@
         private System.Windows.Forms.TabPage tpUpload;
         private System.Windows.Forms.ComboBox cbBufferSize;
         private System.Windows.Forms.Label lblBufferSize;
-        private System.Windows.Forms.Label lblBufferSizeInfo;
         private System.Windows.Forms.Button btnOpenPersonalFolder;
         private System.Windows.Forms.Label lblUploadLimitHint;
         private System.Windows.Forms.NumericUpDown nudUploadLimit;
