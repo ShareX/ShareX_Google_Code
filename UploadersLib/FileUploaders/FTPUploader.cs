@@ -48,7 +48,7 @@ namespace UploadersLib.FileUploaders
             fileName = Helpers.GetValidURL(fileName);
             string path = Account.GetSubFolderPath(fileName);
 
-            using (ftpClient = new FTP(Account))
+            using (ftpClient = new FTP(Account, BufferSize))
             {
                 ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
 

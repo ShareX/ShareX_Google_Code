@@ -46,10 +46,11 @@ namespace UploadersLib
 
         private ProgressManager progress;
 
-        public FTP(FTPAccount account)
+        public FTP(FTPAccount account, int bufferSize = 8192)
         {
             Account = account;
             Client = new FtpClient(account.Host, account.Port);
+            Client.TcpBufferSize = bufferSize;
 
             if (account.Protocol == FTPProtocol.FTP || account.FtpsSecurityProtocol == FtpSecurityProtocol.None)
             {
