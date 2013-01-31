@@ -268,7 +268,7 @@ namespace ShareX
                 }
                 else
                 {
-                    DoURLJobs();
+                    DoAfterUploadJobs();
                 }
             }
 
@@ -370,7 +370,7 @@ namespace ShareX
             }
         }
 
-        private void DoURLJobs()
+        private void DoAfterUploadJobs()
         {
             if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
             {
@@ -394,6 +394,16 @@ namespace ShareX
                         twitter.Config = Program.UploadersConfig.TwitterClientConfig;
                         twitter.ShowDialog();
                     }
+                }
+            }
+
+            if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+            {
+                string url = Info.Result.ToString();
+
+                if (!string.IsNullOrEmpty(url))
+                {
+                    Helpers.CopyTextSafely(url);
                 }
             }
         }

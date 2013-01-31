@@ -38,7 +38,7 @@ namespace ShareX
 {
     public partial class SettingsForm : Form
     {
-        private const int MaxBufferSizePower = 12;
+        private const int MaxBufferSizePower = 14;
 
         private bool loaded;
         private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
@@ -161,7 +161,7 @@ namespace ShareX
 
             for (int i = 0; i < MaxBufferSizePower; i++)
             {
-                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0"));
+                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " kB");
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
@@ -691,8 +691,6 @@ namespace ShareX
         private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
-            string bufferSize = (Math.Pow(2, Program.Settings.BufferSizePower) * 1024 / 1000).ToString("#,0.###");
-            lblBufferSizeInfo.Text = string.Format("x {0} kB = {1} kB", 1.024, bufferSize);
         }
 
         private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)

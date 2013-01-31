@@ -248,14 +248,7 @@ namespace ShareX
 
                             string result = info.Result.ToString();
 
-                            if (!string.IsNullOrEmpty(result))
-                            {
-                                if (info.IsUploadJob && info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
-                                {
-                                    Helpers.CopyTextSafely(result);
-                                }
-                            }
-                            else if (!string.IsNullOrEmpty(info.FilePath))
+                            if (string.IsNullOrEmpty(result) && !string.IsNullOrEmpty(info.FilePath))
                             {
                                 result = info.FilePath;
                             }
@@ -272,7 +265,7 @@ namespace ShareX
                                 }
                             }
 
-                            if (!string.IsNullOrEmpty(result))
+                            if (!task.IsStopped && !string.IsNullOrEmpty(result))
                             {
                                 if (Program.Settings.SaveHistory)
                                 {
