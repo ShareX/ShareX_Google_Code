@@ -110,7 +110,7 @@ namespace UploadersLib.URLShorteners
                 }
             }
 
-            return null;
+            return result;
         }
     }
 

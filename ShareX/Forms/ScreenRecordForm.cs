@@ -121,9 +121,6 @@ namespace ShareX
                 if (screenRecorder != null) screenRecorder.Dispose();
             }
 
-            btnRecord.Text = "Start record (after 1 second)";
-            btnRecord.Enabled = true;
-
             if (Program.Settings.ScreenRecordAutoUploadGIF && Program.Settings.ScreenRecordOutput == ScreenRecordOutput.GIF)
             {
                 UploadManager.UploadFile(path);
@@ -132,6 +129,9 @@ namespace ShareX
             {
                 TaskHelper.ShowResultNotifications(path);
             }
+
+            btnRecord.Text = "Start record (after 1 second)";
+            btnRecord.Enabled = true;
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
