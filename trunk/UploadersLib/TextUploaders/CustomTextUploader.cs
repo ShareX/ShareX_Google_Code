@@ -48,7 +48,7 @@ namespace UploadersLib.TextUploaders
 
             if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
 
-            if (customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value == "%input" || x.Value == "$input$"))
+            if (customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value.Contains("%input") || x.Value.Contains("$input$")))
                 throw new Exception("Atleast one '$input$' required for argument value when using custom text uploader.");
 
             UploadResult result = new UploadResult();

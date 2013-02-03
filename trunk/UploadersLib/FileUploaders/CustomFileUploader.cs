@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UploadersLib.HelperClasses;
 
@@ -44,7 +45,7 @@ namespace UploadersLib.FileUploaders
             if (string.IsNullOrEmpty(customUploader.FileFormName)) throw new Exception("'File form name' must be not empty when using custom file uploader.");
             if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
 
-            UploadResult result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.Arguments);
+            UploadResult result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, customUploader.ParseArguments());
 
             if (result.IsSuccess)
             {
