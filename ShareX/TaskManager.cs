@@ -103,6 +103,14 @@ namespace ShareX
             }
         }
 
+        public static void StopAllTasks()
+        {
+            foreach (UploadTask task in Tasks)
+            {
+                if (task != null) task.Stop();
+            }
+        }
+
         private static ListViewItem FindListViewItem(UploadTask task)
         {
             if (ListViewControl != null)

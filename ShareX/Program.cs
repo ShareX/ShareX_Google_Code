@@ -319,17 +319,20 @@ namespace ShareX
         {
             if (WaitFormLoad(5000))
             {
-                Action d = () =>
+                if (!MainForm.IsDisposed)
                 {
-                    if (MainForm.Visible)
+                    Action d = () =>
                     {
-                        MainForm.ShowActivate();
-                    }
+                        if (MainForm.Visible)
+                        {
+                            MainForm.ShowActivate();
+                        }
 
-                    MainForm.UseCommandLineArgs(args.CommandLineArgs);
-                };
+                        MainForm.UseCommandLineArgs(args.CommandLineArgs);
+                    };
 
-                MainForm.Invoke(d);
+                    MainForm.Invoke(d);
+                }
             }
         }
 
