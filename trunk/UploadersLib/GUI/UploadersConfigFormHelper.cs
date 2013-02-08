@@ -1058,7 +1058,7 @@ namespace UploadersLib
                             break;
                         case CustomUploaderType.Text:
                             CustomTextUploader textUploader = new CustomTextUploader(item);
-                            result = textUploader.UploadText(Application.ProductName + " text upload test");
+                            result = textUploader.UploadText(Application.ProductName + " text upload test", "Test.txt");
                             result.Errors = textUploader.Errors;
                             break;
                         case CustomUploaderType.File:

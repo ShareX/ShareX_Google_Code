@@ -41,15 +41,13 @@ namespace UploadersLib.TextUploaders
             customUploader = customUploaderItem;
         }
 
-        public override UploadResult UploadText(string text)
+        public override UploadResult UploadText(string text, string fileName)
         {
-            if (customUploader.RequestType == CustomUploaderRequestType.POST && !string.IsNullOrEmpty(customUploader.FileFormName))
-                throw new Exception("'File form name' cannot be used with custom text uploader.");
-
             if (string.IsNullOrEmpty(customUploader.RequestURL)) throw new Exception("'Request URL' must be not empty.");
 
-            if (customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value.Contains("%input") || x.Value.Contains("$input$")))
-                throw new Exception("Atleast one '%input' or '$input$' required for argument value when using custom text uploader.");
+            if ((customUploader.RequestType == CustomUploaderRequestType.GET || string.IsNullOrEmpty(customUploader.FileFormName)) &&
+                customUploader.Arguments == null || !customUploader.Arguments.Any(x => x.Value.Contains("%input") || x.Value.Contains("$input$")))
+                throw new Exception("Atleast one '%input' or '$input$' required for argument value when using GET or non-file POST.");
 
             UploadResult result = new UploadResult();
 
@@ -58,7 +56,18 @@ namespace UploadersLib.TextUploaders
 
             if (customUploader.RequestType == CustomUploaderRequestType.POST)
             {
-                result.Response = SendPostRequest(customUploader.RequestURL, args, customUploader.ResponseType);
+                if (string.IsNullOrEmpty(customUploader.FileFormName))
+                {
+                    result.Response = SendPostRequest(customUploader.RequestURL, args, customUploader.ResponseType);
+                }
+                else
+                {
+                    byte[] byteArray = Encoding.UTF8.GetBytes(text);
+                    using (MemoryStream stream = new MemoryStream(byteArray))
+                    {
+                        result = UploadData(stream, customUploader.RequestURL, fileName, customUploader.FileFormName, args);
+                    }
+                }
             }
             else if (customUploader.RequestType == CustomUploaderRequestType.GET)
             {

@@ -235,7 +235,7 @@ namespace ShareX
                             Info.Result = UploadFile(data, Info.FileName);
                             break;
                         case EDataType.Text:
-                            Info.Result = UploadText(data);
+                            Info.Result = UploadText(data, Info.FileName);
                             break;
                     }
                 }
@@ -490,7 +490,7 @@ namespace ShareX
             return null;
         }
 
-        public UploadResult UploadText(Stream stream)
+        public UploadResult UploadText(Stream stream, string fileName)
         {
             TextUploader textUploader = null;
 
@@ -525,7 +525,7 @@ namespace ShareX
             if (textUploader != null)
             {
                 PrepareUploader(textUploader);
-                return textUploader.UploadText(stream);
+                return textUploader.UploadText(stream, fileName);
             }
 
             return null;

@@ -31,13 +31,13 @@ namespace UploadersLib
 {
     public abstract class TextUploader : Uploader
     {
-        public abstract UploadResult UploadText(string text);
+        public abstract UploadResult UploadText(string text, string fileName);
 
-        public UploadResult UploadText(Stream stream)
+        public UploadResult UploadText(Stream stream, string fileName)
         {
             using (StreamReader sr = new StreamReader(stream, Encoding.UTF8))
             {
-                return UploadText(sr.ReadToEnd());
+                return UploadText(sr.ReadToEnd(), fileName);
             }
         }
 
@@ -47,7 +47,7 @@ namespace UploadersLib
             {
                 using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    return UploadText(stream);
+                    return UploadText(stream, Path.GetFileName(filePath));
                 }
             }
 
