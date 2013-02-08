@@ -49,7 +49,7 @@ namespace UploadersLib.TextUploaders
             this.settings = settings;
         }
 
-        public override UploadResult UploadText(string text)
+        public override UploadResult UploadText(string text, string fileName)
         {
             UploadResult ur = new UploadResult();
 
