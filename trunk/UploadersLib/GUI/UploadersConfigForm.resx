@@ -255,13 +255,15 @@ Second 'n' here must be group number or group name.
 Example: $3,1$ or $2,thumbnail_result$</value>
   </data>
   <data name="lblCustomUploaderRequestTypeHelp.ToolTip" xml:space="preserve">
-    <value>For image &amp; file uploads, the 'POST' request type is required along with the 'File form name'.
+    <value>For image uploader &amp; file uploader: The 'POST' request type is required along with the 'File form name'.
 
-For text &amp; url shorteners, both request types are usable: if using the POST method, entering a 
-File Form Name will upload the input as a file (useful for very long inputs), while leaving 
-FileFormName blank will act like GET, where you need to use '%input' for an argument value.
+For text uploader or url shortener: 'POST' with no 'File Form Name' or 'GET' will replace an argument with 
+value '%input' or '$input$' with the text or URL.
 
-For example, if the argument name is 'pastebin_text' then a value of %input will be automatically
+For text uploader: Specifying 'POST' request type and a 'File Form Name' will upload the input as a file
+(useful for very long inputs).
+
+For example, if the argument name is 'pastebin_text' then a value of '%input' will be automatically
 replaced with the text you're going to upload. Same thing applies for url shortener; '%input' 
 will be replaced with the url in the argument.</value>
   </data>
