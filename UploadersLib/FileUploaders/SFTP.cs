@@ -80,6 +80,11 @@ namespace UploadersLib.FileUploaders
             {
                 client = new SftpClient(Account.Host, Account.Port, Account.Username, Account.Password);
             }
+
+            if (client != null)
+            {
+                client.BufferSize = (uint)BufferSize;
+            }
         }
 
         public bool Connect()
