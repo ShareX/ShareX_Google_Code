@@ -51,7 +51,6 @@
             this.lvAfterCaptureTasks.TabIndex = 3;
             this.lvAfterCaptureTasks.UseCompatibleStateImageBehavior = false;
             this.lvAfterCaptureTasks.View = System.Windows.Forms.View.Details;
-            this.lvAfterCaptureTasks.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvAfterCaptureTasks_ItemChecked);
             // 
             // chAfterCapture
             // 
