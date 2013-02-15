@@ -45,6 +45,7 @@ namespace ShareX
             AddAfterCaptureItems(AfterCaptureTasks);
             Image = img;
             pbImage.LoadImage(Image);
+            Result = AfterCaptureFormResult.Cancel;
         }
 
         private void AddAfterCaptureItems(AfterCaptureTasks afterCaptureTasks)
@@ -60,11 +61,11 @@ namespace ShareX
             }
         }
 
-        private void lvAfterCaptureTasks_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private AfterCaptureTasks GetAfterCaptureTasks()
         {
             AfterCaptureTasks afterCaptureTasks = AfterCaptureTasks.None;
 
-            for (int i = 1; i < lvAfterCaptureTasks.Items.Count; i++)
+            for (int i = 0; i < lvAfterCaptureTasks.Items.Count; i++)
             {
                 ListViewItem lvi = lvAfterCaptureTasks.Items[i];
 
@@ -74,11 +75,12 @@ namespace ShareX
                 }
             }
 
-            AfterCaptureTasks = afterCaptureTasks;
+            return afterCaptureTasks;
         }
 
         private void Close(AfterCaptureFormResult result)
         {
+            AfterCaptureTasks = GetAfterCaptureTasks();
             Result = result;
             Close();
         }
@@ -90,7 +92,7 @@ namespace ShareX
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Close(AfterCaptureFormResult.Cancel);
+            Close();
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
