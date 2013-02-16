@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="AVIManager.cs" />
     <Compile Include="ColorBgra.cs" />
+    <Compile Include="CursorData.cs" />
     <Compile Include="DebugTimer.cs" />
     <Compile Include="GIF\AnimatedGif.cs" />
     <Compile Include="CaptureHelpers.cs" />

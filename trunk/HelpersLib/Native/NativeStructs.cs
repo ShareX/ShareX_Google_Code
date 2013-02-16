@@ -227,16 +227,6 @@ namespace HelpersLib
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct IconInfo
-    {
-        public bool fIcon;         // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies
-        public Int32 xHotspot;     // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot
-        public Int32 yHotspot;     // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot
-        public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon,
-        public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
     public struct CursorInfo
     {
         public Int32 cbSize;        // Specifies the size, in bytes, of the structure.
@@ -245,30 +235,13 @@ namespace HelpersLib
         public Point ptScreenPos;   // A POINT structure that receives the screen coordinates of the cursor.
     }
 
-    public class MyCursor : IDisposable
+    [StructLayout(LayoutKind.Sequential)]
+    public struct IconInfo
     {
-        public Cursor Cursor;
-        public Point Position;
-        public Bitmap Bitmap;
-
-        public MyCursor()
-        {
-            this.Cursor = Cursor.Current;
-            this.Position = new Point(Cursor.Position.X - this.Cursor.HotSpot.X, Cursor.Position.Y - this.Cursor.HotSpot.Y);
-            this.Bitmap = Icon.FromHandle(this.Cursor.Handle).ToBitmap();
-        }
-
-        public MyCursor(Cursor cursor, Point position, Bitmap bitmap)
-        {
-            this.Cursor = cursor;
-            this.Position = position;
-            this.Bitmap = bitmap;
-        }
-
-        public void Dispose()
-        {
-            Cursor.Dispose();
-            Bitmap.Dispose();
-        }
+        public bool fIcon;         // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies
+        public Int32 xHotspot;     // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot
+        public Int32 yHotspot;     // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot
+        public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon,
+        public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this
     }
 }
