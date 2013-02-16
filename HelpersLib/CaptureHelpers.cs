@@ -528,40 +528,5 @@ namespace HelpersLib
                 g.DrawString(text, font, textBrush, position.X, position.Y);
             }
         }
-
-        public static void DrawCursorToImage(Image img)
-        {
-            DrawCursorToImage(img, Point.Empty);
-        }
-
-        public static void DrawCursorToImage(Image img, Point offset)
-        {
-            MyCursor cursor = null;
-
-            try
-            {
-                cursor = NativeMethods.CaptureCursor();
-                if (cursor != null) DrawCursorToImage(cursor, img, offset);
-            }
-            catch (Exception e)
-            {
-                DebugHelper.WriteException(e, "Cursor capture failed");
-            }
-            finally
-            {
-                if (cursor != null) cursor.Dispose();
-            }
-        }
-
-        public static void DrawCursorToImage(MyCursor cursor, Image img, Point offset)
-        {
-            cursor.Position.Offset(-offset.X, -offset.Y);
-
-            using (Graphics g = Graphics.FromImage(img))
-            {
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.DrawImage(cursor.Bitmap, cursor.Position);
-            }
-        }
     }
 }

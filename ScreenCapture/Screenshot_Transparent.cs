@@ -40,7 +40,7 @@ namespace ScreenCapture
             {
                 Rectangle rect = CaptureHelpers.GetWindowRectangle(handle);
                 Bitmap whiteBackground = null, blackBackground = null, whiteBackground2 = null;
-                MyCursor cursor = null;
+                CursorData cursor = null;
                 bool isTransparent = false;
 
                 try
@@ -49,7 +49,7 @@ namespace ScreenCapture
                     {
                         try
                         {
-                            cursor = NativeMethods.CaptureCursor();
+                            cursor = CursorData.GetCursorData();
                         }
                         catch (Exception e)
                         {
@@ -109,10 +109,10 @@ namespace ScreenCapture
                         transparentImage = whiteBackground2;
                     }
 
-                    if (cursor != null)
+                    if (cursor != null && cursor.IsVisible)
                     {
                         Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
-                        CaptureHelpers.DrawCursorToImage(cursor, transparentImage, cursorOffset);
+                        cursor.DrawIcon(transparentImage, cursorOffset);
                     }
 
                     if (isTransparent)

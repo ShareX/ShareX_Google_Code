@@ -51,7 +51,7 @@ namespace ScreenCapture
             if (DrawCursor)
             {
                 Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
-                CaptureHelpers.DrawCursorToImage(img, cursorOffset);
+                CursorData.DrawCursorToImage(img, cursorOffset);
             }
 
             return img;
