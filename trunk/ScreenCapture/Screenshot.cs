@@ -27,13 +27,14 @@ using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace ScreenCapture
 {
     public static partial class Screenshot
     {
         public static bool RemoveOutsideScreenArea = true;
-        public static bool DrawCursor = false;
+        public static bool CaptureCursor = false;
         public static bool CaptureClientArea = false;
         public static bool CaptureShadow = true;
         public static int ShadowOffset = 20;
@@ -46,15 +47,7 @@ namespace ScreenCapture
                 rect = Rectangle.Intersect(bounds, rect);
             }
 
-            Image img = CaptureRectangleNative2(rect);
-
-            if (DrawCursor)
-            {
-                Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
-                CursorData.DrawCursorToImage(img, cursorOffset);
-            }
-
-            return img;
+            return CaptureRectangleNative(rect, CaptureCursor);
         }
 
         public static Image CaptureFullscreen()
@@ -99,9 +92,56 @@ namespace ScreenCapture
             return CaptureRectangle(bounds);
         }
 
+        public static Image CaptureRectangleNative(Rectangle rect, bool captureCursor = false)
+        {
+            return CaptureRectangleNative(NativeMethods.GetDesktopWindow(), rect, captureCursor);
+        }
+
+        public static Image CaptureRectangleNative(IntPtr handle, Rectangle rect, bool captureCursor = false)
+        {
+            if (rect.Width == 0 || rect.Height == 0)
+            {
+                return null;
+            }
+
+            IntPtr hdcSrc = NativeMethods.GetWindowDC(handle);
+            IntPtr hdcDest = NativeMethods.CreateCompatibleDC(hdcSrc);
+            IntPtr hBitmap = NativeMethods.CreateCompatibleBitmap(hdcSrc, rect.Width, rect.Height);
+            IntPtr hOld = NativeMethods.SelectObject(hdcDest, hBitmap);
+            NativeMethods.BitBlt(hdcDest, 0, 0, rect.Width, rect.Height, hdcSrc, rect.X, rect.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+
+            if (captureCursor)
+            {
+                Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
+
+                try
+                {
+                    using (CursorData cursorData = new CursorData())
+                    {
+                        cursorData.DrawCursorToHandle(hdcDest, cursorOffset);
+                    }
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Cursor capture failed.");
+                }
+            }
+
+            NativeMethods.SelectObject(hdcDest, hOld);
+            NativeMethods.DeleteDC(hdcDest);
+            NativeMethods.ReleaseDC(handle, hdcSrc);
+            Image img = Image.FromHbitmap(hBitmap);
+            NativeMethods.DeleteObject(hBitmap);
+
+            return img;
+        }
+
         public static Image CaptureRectangleManaged(Rectangle rect)
         {
-            if (rect.Width == 0 || rect.Height == 0) return null;
+            if (rect.Width == 0 || rect.Height == 0)
+            {
+                return null;
+            }
 
             Image img = new Bitmap(rect.Width, rect.Height, PixelFormat.Format24bppRgb);
 
@@ -110,53 +150,6 @@ namespace ScreenCapture
                 // Managed can't use SourceCopy | CaptureBlt because of .NET bug
                 g.CopyFromScreen(rect.Location, Point.Empty, rect.Size, CopyPixelOperation.SourceCopy);
             }
-
-            return img;
-        }
-
-        public static Image CaptureRectangleNative(Rectangle rect)
-        {
-            return CaptureRectangleNative(NativeMethods.GetDesktopWindow(), rect);
-        }
-
-        public static Image CaptureRectangleNative(IntPtr handle, Rectangle rect)
-        {
-            if (rect.Width == 0 || rect.Height == 0) return null;
-
-            // Format24bppRgb because some images can show up with white dots
-            Image img = new Bitmap(rect.Width, rect.Height, PixelFormat.Format24bppRgb);
-
-            using (Graphics g = Graphics.FromImage(img))
-            {
-                IntPtr hdcSrc = NativeMethods.GetWindowDC(handle);
-                IntPtr hdcDest = g.GetHdc();
-                NativeMethods.BitBlt(hdcDest, 0, 0, rect.Width, rect.Height, hdcSrc, rect.X, rect.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
-                NativeMethods.ReleaseDC(handle, hdcSrc);
-                g.ReleaseHdc(hdcDest);
-            }
-
-            return img;
-        }
-
-        public static Image CaptureRectangleNative2(Rectangle rect)
-        {
-            return CaptureRectangleNative2(NativeMethods.GetDesktopWindow(), rect);
-        }
-
-        public static Image CaptureRectangleNative2(IntPtr handle, Rectangle rect)
-        {
-            if (rect.Width == 0 || rect.Height == 0) return null;
-
-            IntPtr hdcSrc = NativeMethods.GetWindowDC(handle);
-            IntPtr hdcDest = NativeMethods.CreateCompatibleDC(hdcSrc);
-            IntPtr hBitmap = NativeMethods.CreateCompatibleBitmap(hdcSrc, rect.Width, rect.Height);
-            IntPtr hOld = NativeMethods.SelectObject(hdcDest, hBitmap);
-            NativeMethods.BitBlt(hdcDest, 0, 0, rect.Width, rect.Height, hdcSrc, rect.X, rect.Y, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
-            NativeMethods.SelectObject(hdcDest, hOld);
-            NativeMethods.DeleteDC(hdcDest);
-            NativeMethods.ReleaseDC(handle, hdcSrc);
-            Image img = Image.FromHbitmap(hBitmap);
-            NativeMethods.DeleteObject(hBitmap);
 
             return img;
         }

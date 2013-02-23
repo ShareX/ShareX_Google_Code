@@ -51,7 +51,7 @@ namespace ShareX
             cbOutput.SelectedIndex = (int)Program.Settings.ScreenRecordOutput;
             cbAutoUploadGIF.Checked = Program.Settings.ScreenRecordAutoUploadGIF;
 
-            Screenshot.DrawCursor = Program.Settings.ShowCursor;
+            Screenshot.CaptureCursor = Program.Settings.ShowCursor;
 
             SetRegion();
         }

@@ -45,15 +45,15 @@ namespace ScreenCapture
 
                 try
                 {
-                    if (DrawCursor)
+                    if (CaptureCursor)
                     {
                         try
                         {
-                            cursor = CursorData.GetCursorData();
+                            cursor = new CursorData();
                         }
                         catch (Exception e)
                         {
-                            DebugHelper.WriteException(e, "Cursor capture failed");
+                            DebugHelper.WriteException(e, "Cursor capture failed.");
                         }
                     }
 
@@ -112,7 +112,7 @@ namespace ScreenCapture
                     if (cursor != null && cursor.IsVisible)
                     {
                         Point cursorOffset = CaptureHelpers.ScreenToClient(rect.Location);
-                        cursor.DrawIcon(transparentImage, cursorOffset);
+                        cursor.DrawCursorToImage(transparentImage, cursorOffset);
                     }
 
                     if (isTransparent)

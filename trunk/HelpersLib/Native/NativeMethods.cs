@@ -114,6 +114,9 @@ namespace HelpersLib
         public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
 
         [DllImport("user32.dll")]
+        public static extern bool DrawIcon(IntPtr hDC, int X, int Y, IntPtr hIcon);
+
+        [DllImport("user32.dll")]
         public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
 
         [DllImport("user32.dll")]
