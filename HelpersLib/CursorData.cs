@@ -36,32 +36,33 @@ namespace HelpersLib
 {
     public class CursorData : IDisposable
     {
-        public Icon Icon { get; private set; }
-        public Point Position { get; private set; }
         public bool IsVisible { get; private set; }
+        public IntPtr IconHandle { get; private set; }
+        public Point Position { get; private set; }
 
-        public static CursorData GetCursorData()
+        public CursorData()
         {
-            CursorData cursorData = new CursorData();
+            UpdateCursorData();
+        }
 
+        public void UpdateCursorData()
+        {
             CursorInfo cursorInfo = new CursorInfo();
             cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
 
             if (NativeMethods.GetCursorInfo(out cursorInfo))
             {
-                cursorData.IsVisible = cursorInfo.flags == NativeMethods.CURSOR_SHOWING;
+                IsVisible = cursorInfo.flags == NativeMethods.CURSOR_SHOWING;
 
-                if (cursorData.IsVisible)
+                if (IsVisible)
                 {
-                    IntPtr hIcon = NativeMethods.CopyIcon(cursorInfo.hCursor);
+                    IconHandle = NativeMethods.CopyIcon(cursorInfo.hCursor);
                     IconInfo iconInfo;
 
-                    if (NativeMethods.GetIconInfo(hIcon, out iconInfo))
+                    if (NativeMethods.GetIconInfo(IconHandle, out iconInfo))
                     {
                         Point cursorPosition = CaptureHelpers.GetZeroBasedMousePosition();
-                        cursorData.Position = new Point(cursorPosition.X - iconInfo.xHotspot, cursorPosition.Y - iconInfo.yHotspot);
-
-                        cursorData.Icon = Icon.FromHandle(hIcon);
+                        Position = new Point(cursorPosition.X - iconInfo.xHotspot, cursorPosition.Y - iconInfo.yHotspot);
 
                         if (iconInfo.hbmMask != IntPtr.Zero)
                         {
@@ -75,50 +76,47 @@ namespace HelpersLib
                     }
                 }
             }
-
-            return cursorData;
         }
 
-        public static void DrawCursorToImage(Image img)
+        public void DrawCursorToImage(Image img)
         {
             DrawCursorToImage(img, Point.Empty);
         }
 
-        public static void DrawCursorToImage(Image img, Point offset)
+        public void DrawCursorToImage(Image img, Point cursorOffset)
         {
-            try
+            if (IconHandle != IntPtr.Zero)
             {
-                using (CursorData cursor = CursorData.GetCursorData())
-                {
-                    if (cursor != null && cursor.IsVisible)
-                    {
-                        cursor.DrawIcon(img, offset);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                DebugHelper.WriteException(e, "Cursor capture failed");
-            }
-        }
-
-        public void DrawIcon(Image img, Point offset)
-        {
-            if (Icon != null)
-            {
-                Point position = new Point(Position.X - offset.X, Position.Y - offset.Y);
+                Point drawPosition = new Point(Position.X - cursorOffset.X, Position.Y - cursorOffset.Y);
 
                 using (Graphics g = Graphics.FromImage(img))
                 {
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.DrawIcon(Icon, position.X, position.Y);
+                    g.DrawIcon(Icon.FromHandle(IconHandle), drawPosition.X, drawPosition.Y);
                 }
+            }
+        }
+
+        public void DrawCursorToHandle(IntPtr hdcDest)
+        {
+            DrawCursorToHandle(hdcDest, Point.Empty);
+        }
+
+        public void DrawCursorToHandle(IntPtr hdcDest, Point cursorOffset)
+        {
+            if (IconHandle != IntPtr.Zero)
+            {
+                Point drawPosition = new Point(Position.X - cursorOffset.X, Position.Y - cursorOffset.Y);
+                NativeMethods.DrawIcon(hdcDest, drawPosition.X, drawPosition.Y, IconHandle);
             }
         }
 
         public void Dispose()
         {
-            if (Icon != null) Icon.Dispose();
+            if (IconHandle != IntPtr.Zero)
+            {
+                NativeMethods.DestroyIcon(IconHandle);
+                IconHandle = IntPtr.Zero;
+            }
         }
     }
 }
