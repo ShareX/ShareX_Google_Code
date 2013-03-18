@@ -133,6 +133,12 @@ namespace UploadersLib
 
         public Ge_ttLogin Ge_ttLogin = null;
 
+        // Localhostr
+
+        public string LocalhostrEmail = string.Empty;
+        public string LocalhostrPassword = string.Empty;
+        public bool LocalhostrDirectURL = true;
+
         // FTP Server
 
         public List<FTPAccount> FTPAccountList = new List<FTPAccount>();
@@ -273,6 +279,8 @@ namespace UploadersLib
                     return !string.IsNullOrEmpty(BoxAuthToken);
                 case FileDestination.Ge_tt:
                     return Ge_ttLogin != null && !string.IsNullOrEmpty(Ge_ttLogin.AccessToken);
+                case FileDestination.Localhostr:
+                    return !string.IsNullOrEmpty(LocalhostrEmail) && !string.IsNullOrEmpty(LocalhostrPassword);
                 case FileDestination.CustomFileUploader:
                     return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomFileUploaderSelected);
                 case FileDestination.FTP:

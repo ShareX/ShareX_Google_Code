@@ -109,6 +109,7 @@
     <Compile Include="FileUploaders\Box.cs" />
     <Compile Include="FileUploaders\Email.cs" />
     <Compile Include="FileUploaders\Ge_tt.cs" />
+    <Compile Include="FileUploaders\Localhostr.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="FileUploaders\SharedFolderUploader.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Favicons\ImageShack.ico" />
     <Content Include="Favicons\Imgur.ico" />
     <None Include="Favicons\Minus.ico" />
+    <None Include="Favicons\Localhostr.ico" />
     <Content Include="Favicons\Pastebin.ico" />
     <Content Include="Favicons\Photobucket.ico" />
     <Content Include="Favicons\RapidShare.ico" />

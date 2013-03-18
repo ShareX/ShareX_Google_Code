@@ -655,6 +655,25 @@ namespace UploadersLib
 
         #endregion Ge.tt
 
+        #region Localhostr
+
+        private void txtLocalhostrEmail_TextChanged(object sender, EventArgs e)
+        {
+            Config.LocalhostrEmail = txtLocalhostrEmail.Text;
+        }
+
+        private void txtLocalhostrPassword_TextChanged(object sender, EventArgs e)
+        {
+            Config.LocalhostrPassword = txtLocalhostrPassword.Text;
+        }
+
+        private void cbLocalhostrDirectURL_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.LocalhostrDirectURL = cbLocalhostrDirectURL.Checked;
+        }
+
+        #endregion Localhostr
+
         #region Custom Uploader
 
         private void btnCustomUploaderAdd_Click(object sender, EventArgs e)

@@ -94,6 +94,8 @@ namespace UploadersLib
         Box,
         [Description("ge.tt")]
         Ge_tt,
+        [Description("localhostr.com")]
+        Localhostr,
         [Description("FTP Server")]
         FTP,
         [Description("Shared Folder")]

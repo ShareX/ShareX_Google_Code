@@ -207,7 +207,7 @@ namespace UploadersLib
         }
 
         protected UploadResult UploadData(Stream dataStream, string url, string fileName, string fileFormName = "file",
-            Dictionary<string, string> arguments = null, CookieCollection cookies = null)
+            Dictionary<string, string> arguments = null, CookieCollection cookies = null, NameValueCollection headers = null)
         {
             UploadResult result = new UploadResult();
 
@@ -223,7 +223,7 @@ namespace UploadersLib
                 byte[] bytesDataClose = MakeFileInputContentClose(boundary);
 
                 long contentLength = bytesArguments.Length + bytesDataOpen.Length + dataStream.Length + bytesDataClose.Length;
-                HttpWebRequest request = PreparePostWebRequest(url, boundary, contentLength, "multipart/form-data", cookies);
+                HttpWebRequest request = PreparePostWebRequest(url, boundary, contentLength, "multipart/form-data", cookies, headers);
 
                 using (Stream requestStream = request.GetRequestStream())
                 {
@@ -337,7 +337,8 @@ namespace UploadersLib
 
         #region Helper methods
 
-        private HttpWebRequest PreparePostWebRequest(string url, string boundary, long length, string contentType, CookieCollection cookies = null, NameValueCollection headers = null)
+        private HttpWebRequest PreparePostWebRequest(string url, string boundary, long length, string contentType, CookieCollection cookies = null,
+            NameValueCollection headers = null)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AllowWriteStreamBuffering = ProxySettings.ProxyConfig != EProxyConfigType.NoProxy;
@@ -550,6 +551,15 @@ namespace UploadersLib
             }
 
             return url;
+        }
+
+        protected NameValueCollection CreateAuthenticationHeader(string username, string password)
+        {
+            string authInfo = username + ":" + password;
+            authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
+            NameValueCollection headers = new NameValueCollection();
+            headers["Authorization"] = "Basic " + authInfo;
+            return headers;
         }
 
         private string AddWebError(Exception e)
