@@ -581,6 +581,12 @@ namespace ShareX
                         };
                     }
                     break;
+                case FileDestination.Localhostr:
+                    fileUploader = new Localhostr(Program.UploadersConfig.LocalhostrEmail, Program.UploadersConfig.LocalhostrPassword)
+                    {
+                        DirectURL = Program.UploadersConfig.LocalhostrDirectURL
+                    };
+                    break;
                 case FileDestination.CustomFileUploader:
                     if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomFileUploaderSelected))
                     {

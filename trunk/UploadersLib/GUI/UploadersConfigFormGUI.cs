@@ -61,6 +61,7 @@ namespace UploadersLib
             fileUploadersImageList.Images.Add("RapidShare", Resources.RapidShare);
             fileUploadersImageList.Images.Add("SendSpace", Resources.SendSpace);
             fileUploadersImageList.Images.Add("Gett", Resources.Gett);
+            fileUploadersImageList.Images.Add("Localhostr", Resources.Localhostr);
             fileUploadersImageList.Images.Add("CustomUploader", Resources.globe_network);
             fileUploadersImageList.Images.Add("SharedFolders", Resources.server_network);
             fileUploadersImageList.Images.Add("Email", Resources.mail);
@@ -99,6 +100,7 @@ namespace UploadersLib
             tpSharedFolder.ImageKey = "SharedFolders";
             tpEmail.ImageKey = "Email";
             tpGe_tt.ImageKey = "Gett";
+            tpLocalhostr.ImageKey = "Localhostr";
             tpCustomUploaders.ImageKey = "CustomUploader";
             tpPastebin.ImageKey = "Pastebin";
             tpGoogleURLShortener.ImageKey = "Google";
@@ -235,6 +237,12 @@ namespace UploadersLib
             {
                 lblGe_ttAccessToken.Text += " " + Config.Ge_ttLogin.AccessToken;
             }
+
+            // Localhostr
+
+            txtLocalhostrEmail.Text = Config.LocalhostrEmail;
+            txtLocalhostrPassword.Text = Config.LocalhostrPassword;
+            cbLocalhostrDirectURL.Checked = Config.LocalhostrDirectURL;
 
             // FTP
 

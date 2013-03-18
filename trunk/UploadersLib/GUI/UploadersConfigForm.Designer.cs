@@ -190,6 +190,12 @@
             this.btnGe_ttLogin = new System.Windows.Forms.Button();
             this.txtGe_ttPassword = new System.Windows.Forms.TextBox();
             this.txtGe_ttEmail = new System.Windows.Forms.TextBox();
+            this.tpLocalhostr = new System.Windows.Forms.TabPage();
+            this.cbLocalhostrDirectURL = new System.Windows.Forms.CheckBox();
+            this.lblLocalhostrPassword = new System.Windows.Forms.Label();
+            this.lblLocalhostrEmail = new System.Windows.Forms.Label();
+            this.txtLocalhostrPassword = new System.Windows.Forms.TextBox();
+            this.txtLocalhostrEmail = new System.Windows.Forms.TextBox();
             this.tpSharedFolder = new System.Windows.Forms.TabPage();
             this.tlpSharedFolders = new System.Windows.Forms.TableLayoutPanel();
             this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
@@ -322,6 +328,7 @@
             this.tpRapidShare.SuspendLayout();
             this.tpSendSpace.SuspendLayout();
             this.tpGe_tt.SuspendLayout();
+            this.tpLocalhostr.SuspendLayout();
             this.tpSharedFolder.SuspendLayout();
             this.tlpSharedFolders.SuspendLayout();
             this.gbSharedFolder.SuspendLayout();
@@ -1267,6 +1274,7 @@
             this.tcFileUploaders.Controls.Add(this.tpRapidShare);
             this.tcFileUploaders.Controls.Add(this.tpSendSpace);
             this.tcFileUploaders.Controls.Add(this.tpGe_tt);
+            this.tcFileUploaders.Controls.Add(this.tpLocalhostr);
             this.tcFileUploaders.Controls.Add(this.tpSharedFolder);
             this.tcFileUploaders.Controls.Add(this.tpEmail);
             this.tcFileUploaders.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2041,6 +2049,67 @@
             this.txtGe_ttEmail.Name = "txtGe_ttEmail";
             this.txtGe_ttEmail.Size = new System.Drawing.Size(168, 20);
             this.txtGe_ttEmail.TabIndex = 0;
+            // 
+            // tpLocalhostr
+            // 
+            this.tpLocalhostr.Controls.Add(this.cbLocalhostrDirectURL);
+            this.tpLocalhostr.Controls.Add(this.lblLocalhostrPassword);
+            this.tpLocalhostr.Controls.Add(this.lblLocalhostrEmail);
+            this.tpLocalhostr.Controls.Add(this.txtLocalhostrPassword);
+            this.tpLocalhostr.Controls.Add(this.txtLocalhostrEmail);
+            this.tpLocalhostr.Location = new System.Drawing.Point(4, 22);
+            this.tpLocalhostr.Name = "tpLocalhostr";
+            this.tpLocalhostr.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLocalhostr.Size = new System.Drawing.Size(804, 474);
+            this.tpLocalhostr.TabIndex = 10;
+            this.tpLocalhostr.Text = "Localhostr";
+            this.tpLocalhostr.UseVisualStyleBackColor = true;
+            // 
+            // cbLocalhostrDirectURL
+            // 
+            this.cbLocalhostrDirectURL.AutoSize = true;
+            this.cbLocalhostrDirectURL.Location = new System.Drawing.Point(26, 72);
+            this.cbLocalhostrDirectURL.Name = "cbLocalhostrDirectURL";
+            this.cbLocalhostrDirectURL.Size = new System.Drawing.Size(131, 17);
+            this.cbLocalhostrDirectURL.TabIndex = 9;
+            this.cbLocalhostrDirectURL.Text = "Use direct URL if exist";
+            this.cbLocalhostrDirectURL.UseVisualStyleBackColor = true;
+            this.cbLocalhostrDirectURL.CheckedChanged += new System.EventHandler(this.cbLocalhostrDirectURL_CheckedChanged);
+            // 
+            // lblLocalhostrPassword
+            // 
+            this.lblLocalhostrPassword.AutoSize = true;
+            this.lblLocalhostrPassword.Location = new System.Drawing.Point(24, 48);
+            this.lblLocalhostrPassword.Name = "lblLocalhostrPassword";
+            this.lblLocalhostrPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblLocalhostrPassword.TabIndex = 8;
+            this.lblLocalhostrPassword.Text = "Password:";
+            // 
+            // lblLocalhostrEmail
+            // 
+            this.lblLocalhostrEmail.AutoSize = true;
+            this.lblLocalhostrEmail.Location = new System.Drawing.Point(24, 24);
+            this.lblLocalhostrEmail.Name = "lblLocalhostrEmail";
+            this.lblLocalhostrEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblLocalhostrEmail.TabIndex = 7;
+            this.lblLocalhostrEmail.Text = "Email:";
+            // 
+            // txtLocalhostrPassword
+            // 
+            this.txtLocalhostrPassword.Location = new System.Drawing.Point(88, 44);
+            this.txtLocalhostrPassword.Name = "txtLocalhostrPassword";
+            this.txtLocalhostrPassword.PasswordChar = '*';
+            this.txtLocalhostrPassword.Size = new System.Drawing.Size(168, 20);
+            this.txtLocalhostrPassword.TabIndex = 6;
+            this.txtLocalhostrPassword.TextChanged += new System.EventHandler(this.txtLocalhostrPassword_TextChanged);
+            // 
+            // txtLocalhostrEmail
+            // 
+            this.txtLocalhostrEmail.Location = new System.Drawing.Point(88, 20);
+            this.txtLocalhostrEmail.Name = "txtLocalhostrEmail";
+            this.txtLocalhostrEmail.Size = new System.Drawing.Size(168, 20);
+            this.txtLocalhostrEmail.TabIndex = 5;
+            this.txtLocalhostrEmail.TextChanged += new System.EventHandler(this.txtLocalhostrEmail_TextChanged);
             // 
             // tpSharedFolder
             // 
@@ -3110,6 +3179,8 @@
             this.tpSendSpace.PerformLayout();
             this.tpGe_tt.ResumeLayout(false);
             this.tpGe_tt.PerformLayout();
+            this.tpLocalhostr.ResumeLayout(false);
+            this.tpLocalhostr.PerformLayout();
             this.tpSharedFolder.ResumeLayout(false);
             this.tlpSharedFolders.ResumeLayout(false);
             this.gbSharedFolder.ResumeLayout(false);
@@ -3395,5 +3466,11 @@
         private System.Windows.Forms.ToolTip ttHelpTip;
         private System.Windows.Forms.Label lblCustomUploaderRequestTypeHelp;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tpLocalhostr;
+        private System.Windows.Forms.Label lblLocalhostrPassword;
+        private System.Windows.Forms.Label lblLocalhostrEmail;
+        private System.Windows.Forms.TextBox txtLocalhostrPassword;
+        private System.Windows.Forms.TextBox txtLocalhostrEmail;
+        private System.Windows.Forms.CheckBox cbLocalhostrDirectURL;
     }
 }
