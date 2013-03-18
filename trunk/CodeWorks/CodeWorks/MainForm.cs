@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (C) 2012 ShareX Developers
+    Copyright (C) 2008-2013 ShareX Developers
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -23,15 +23,16 @@
 
 #endregion License Information (GPL v3)
 
+using CodeWorks.Properties;
+using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using CodeWorks.Properties;
-using HelpersLib;
 
 namespace CodeWorks
 {
@@ -56,6 +57,7 @@ namespace CodeWorks
             lvResults.Items.Clear();
             SearchFolderRegionAreas(txtFolderPath.Text);
             lblFileCount.Text = lvResults.Items.Count + " files.";
+            SystemSounds.Exclamation.Play();
         }
 
         private void SearchFolderRegionAreas(string path)
@@ -111,6 +113,7 @@ namespace CodeWorks
             lvResults.Items.Clear();
             SearchFolder(txtFolderPath.Text);
             lblFileCount.Text = lvResults.Items.Count + " files.";
+            SystemSounds.Exclamation.Play();
         }
 
         private void SearchFolder(string path)
