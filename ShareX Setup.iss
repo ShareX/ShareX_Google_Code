@@ -26,7 +26,7 @@ DefaultGroupName={#MyAppName}
 DirExistsWarning=no
 InternalCompressLevel=ultra64
 LanguageDetectionMethod=uilanguage
-MinVersion=4.90.3000,5.0.2195sp3
+MinVersion=0,5.01.2600
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-setup
 OutputDir=Output\
 PrivilegesRequired=none
@@ -55,6 +55,7 @@ Name: "CreateStartupIcon"; Description: "Run {#MyAppName} on Windows startup"; G
 Source: "ShareX\bin\Release\*.exe"; Excludes: *.vshost.exe; DestDir: {app}; Flags: ignoreversion
 Source: "ShareX\bin\Release\*.dll"; DestDir: {app}; Flags: ignoreversion
 ;Source: "ShareX\bin\Release\*.pdb"; DestDir: {app}; Flags: ignoreversion
+Source: "ShareX\Docs\license.txt"; DestDir: {app}; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: "{app}"
