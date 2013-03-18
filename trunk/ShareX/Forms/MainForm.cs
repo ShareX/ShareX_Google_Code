@@ -923,8 +923,6 @@ namespace ShareX
 
         #endregion UploadInfoMenu events
 
-  
-
         #endregion Form events
     }
 }

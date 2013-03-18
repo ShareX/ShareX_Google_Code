@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Windows.Forms;
