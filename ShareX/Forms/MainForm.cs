@@ -608,6 +608,13 @@ namespace ShareX
             new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
         }
 
+        private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
+        {
+            ScreenRecordForm recordForm = new ScreenRecordForm();
+            recordForm.Icon = Icon;
+            recordForm.Show();
+        }
+
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
         {
             using (DialogColor colorForm = new DialogColor())
@@ -618,11 +625,11 @@ namespace ShareX
             }
         }
 
-        private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
+        private void tsmiHashCheck_Click(object sender, EventArgs e)
         {
-            ScreenRecordForm recordForm = new ScreenRecordForm();
-            recordForm.Icon = Icon;
-            recordForm.Show();
+            HashCheckForm hashCheckForm = new HashCheckForm();
+            hashCheckForm.Icon = Icon;
+            hashCheckForm.Show();
         }
 
         private void tsbScreenshotsFolder_Click(object sender, EventArgs e)
@@ -915,6 +922,8 @@ namespace ShareX
         }
 
         #endregion UploadInfoMenu events
+
+  
 
         #endregion Form events
     }
