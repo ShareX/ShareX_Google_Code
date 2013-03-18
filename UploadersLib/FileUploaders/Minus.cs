@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using UploadersLib.HelperClasses;
 
