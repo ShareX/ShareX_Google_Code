@@ -316,6 +316,7 @@
   <ItemGroup>
     <Content Include="Docs\license.txt" />
     <Content Include="Docs\VersionHistory.txt" />
+    <None Include="Resources\application-task.png" />
     <None Include="Resources\steam.ico" />
     <None Include="Resources\camcorder-image.png" />
     <None Include="Resources\cursor-question.png" />

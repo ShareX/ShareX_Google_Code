@@ -90,6 +90,7 @@ namespace ShareX
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiScreenRecorder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHashCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbScreenshotsFolder = new System.Windows.Forms.ToolStripButton();
             this.tsbHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
@@ -512,7 +513,8 @@ namespace ShareX
             // 
             this.tsddbTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScreenRecorder,
-            this.tsmiScreenColorPicker});
+            this.tsmiScreenColorPicker,
+            this.tsmiHashCheck});
             this.tsddbTools.Image = global::ShareX.Properties.Resources.toolbox;
             this.tsddbTools.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbTools.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -535,6 +537,14 @@ namespace ShareX
             this.tsmiScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiScreenColorPicker.Text = "Screen color picker...";
             this.tsmiScreenColorPicker.Click += new System.EventHandler(this.tsmiCursorHelper_Click);
+            // 
+            // tsmiHashCheck
+            // 
+            this.tsmiHashCheck.Image = global::ShareX.Properties.Resources.application_task;
+            this.tsmiHashCheck.Name = "tsmiHashCheck";
+            this.tsmiHashCheck.Size = new System.Drawing.Size(183, 22);
+            this.tsmiHashCheck.Text = "Hash check...";
+            this.tsmiHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
             // 
             // tsbScreenshotsFolder
             // 
@@ -1494,5 +1504,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayScreenRecorder;
         private System.Windows.Forms.ToolStripButton tsbDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHashCheck;
     }
 }

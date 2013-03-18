@@ -113,7 +113,7 @@ namespace HelpersLib
                 {
                     totalRead += bytesRead;
 
-                    if (timer.ElapsedMilliseconds > 100)
+                    if (timer.ElapsedMilliseconds > 200)
                     {
                         float progress = (float)totalRead / stream.Length * 100;
                         bw.ReportProgress(0, progress);
@@ -124,10 +124,12 @@ namespace HelpersLib
 
                 if (bw.CancellationPending)
                 {
+                    bw.ReportProgress(0, 0f);
                     e.Cancel = true;
                 }
                 else
                 {
+                    bw.ReportProgress(0, 100f);
                     string[] hex = TranslatorHelper.BytesToHexadecimal(hash.Hash);
                     e.Result = string.Concat(hex);
                 }
