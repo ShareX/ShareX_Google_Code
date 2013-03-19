@@ -54,7 +54,7 @@ namespace UploadersLib.FileUploaders
             if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
             {
                 NameValueCollection headers = CreateAuthenticationHeader(Email, Password);
-                result = UploadData(stream, "http://api.localhostr.com/file", fileName, "file", null, null, headers);
+                result = UploadData(stream, "https://api.localhostr.com/file", fileName, "file", null, null, headers);
 
                 if (result.IsSuccess)
                 {
@@ -91,7 +91,9 @@ namespace UploadersLib.FileUploaders
 
         public class LocalhostrFileUploadResponseDirect
         {
+            [JsonProperty("150x")]
             public string direct_150x { get; set; }
+            [JsonProperty("930x")]
             public string direct_930x { get; set; }
         }
     }
