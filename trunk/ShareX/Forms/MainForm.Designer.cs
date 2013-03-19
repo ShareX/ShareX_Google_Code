@@ -187,6 +187,7 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayHashCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -746,7 +747,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 324);
+            this.cmsTray.Size = new System.Drawing.Size(181, 346);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -958,7 +959,8 @@ namespace ShareX
             // 
             this.tsmiTrayTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTrayScreenRecorder,
-            this.tsmiTrayScreenColorPicker});
+            this.tsmiTrayScreenColorPicker,
+            this.tsmiTrayHashCheck});
             this.tsmiTrayTools.Image = global::ShareX.Properties.Resources.toolbox;
             this.tsmiTrayTools.Name = "tsmiTrayTools";
             this.tsmiTrayTools.Size = new System.Drawing.Size(180, 22);
@@ -1340,6 +1342,14 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
+            // tsmiTrayHashCheck
+            // 
+            this.tsmiTrayHashCheck.Image = global::ShareX.Properties.Resources.application_task;
+            this.tsmiTrayHashCheck.Name = "tsmiTrayHashCheck";
+            this.tsmiTrayHashCheck.Size = new System.Drawing.Size(183, 22);
+            this.tsmiTrayHashCheck.Text = "Hash check...";
+            this.tsmiTrayHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1505,5 +1515,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripButton tsbDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiHashCheck;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTrayHashCheck;
     }
 }
