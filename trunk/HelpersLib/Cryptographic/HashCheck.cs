@@ -102,7 +102,7 @@ namespace HelpersLib
         private void CheckThread(object sender, DoWorkEventArgs e)
         {
             using (FileStream stream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (HashAlgorithm hash = TranslatorHelper.GetHashAlgorithm(HashType))
+            using (HashAlgorithm hash = GetHashAlgorithm(HashType))
             using (CryptoStream cs = new CryptoStream(stream, hash, CryptoStreamMode.Read))
             {
                 long bytesRead = 0, totalRead = 0;
@@ -134,6 +134,29 @@ namespace HelpersLib
                     e.Result = string.Concat(hex);
                 }
             }
+        }
+
+        public static HashAlgorithm GetHashAlgorithm(HashType hashType)
+        {
+            switch (hashType)
+            {
+                case HashType.CRC32:
+                    return new Crc32();
+                case HashType.MD5:
+                    return new MD5CryptoServiceProvider();
+                case HashType.SHA1:
+                    return new SHA1CryptoServiceProvider();
+                case HashType.SHA256:
+                    return new SHA256CryptoServiceProvider();
+                case HashType.SHA384:
+                    return new SHA384CryptoServiceProvider();
+                case HashType.SHA512:
+                    return new SHA512CryptoServiceProvider();
+                case HashType.RIPEMD160:
+                    return new RIPEMD160Managed();
+            }
+
+            return null;
         }
     }
 }

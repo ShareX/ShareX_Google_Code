@@ -65,7 +65,7 @@ namespace HelpersLib
 
         public static string TextToHash(string text, HashType hashType, bool uppercase = false)
         {
-            using (HashAlgorithm hash = GetHashAlgorithm(hashType))
+            using (HashAlgorithm hash = HashCheck.GetHashAlgorithm(hashType))
             {
                 byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(text));
                 string[] hex = BytesToHexadecimal(bytes);
@@ -192,30 +192,5 @@ namespace HelpersLib
         }
 
         #endregion ASCII to ...
-
-        #region Other
-
-        public static HashAlgorithm GetHashAlgorithm(HashType hashType)
-        {
-            switch (hashType)
-            {
-                case HashType.MD5:
-                    return new MD5CryptoServiceProvider();
-                case HashType.SHA1:
-                    return new SHA1CryptoServiceProvider();
-                case HashType.SHA256:
-                    return new SHA256CryptoServiceProvider();
-                case HashType.SHA384:
-                    return new SHA384CryptoServiceProvider();
-                case HashType.SHA512:
-                    return new SHA512CryptoServiceProvider();
-                case HashType.RIPEMD160:
-                    return new RIPEMD160Managed();
-            }
-
-            return null;
-        }
-
-        #endregion Other
     }
 }
