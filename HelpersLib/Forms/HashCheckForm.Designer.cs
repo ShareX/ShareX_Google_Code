@@ -149,6 +149,7 @@
             this.txtTarget.Name = "txtTarget";
             this.txtTarget.Size = new System.Drawing.Size(360, 20);
             this.txtTarget.TabIndex = 12;
+            this.txtTarget.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
             // lblFile
             // 

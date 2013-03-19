@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AVIManager.cs" />
     <Compile Include="ColorBgra.cs" />
+    <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />
     <Compile Include="DebugTimer.cs" />
     <Compile Include="Forms\HashCheckForm.cs">
@@ -144,9 +145,9 @@
     <Compile Include="ThreadWorker.cs" />
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />
-    <Compile Include="Translator\HashCheck.cs" />
-    <Compile Include="Translator\Translator.cs" />
-    <Compile Include="Translator\TranslatorHelper.cs" />
+    <Compile Include="Cryptographic\HashCheck.cs" />
+    <Compile Include="Cryptographic\Translator.cs" />
+    <Compile Include="Cryptographic\TranslatorHelper.cs" />
     <Compile Include="UnsafeBitmap.cs" />
     <Compile Include="UpdateChecker\DownloaderForm.cs">
       <SubType>Form</SubType>

@@ -37,8 +37,8 @@ namespace HelpersLib
         {
             InitializeComponent();
 
-            cbHashType.Items.AddRange(Enum.GetNames(typeof(HashType)));
-            cbHashType.SelectedIndex = 1;
+            cbHashType.Items.AddRange(Helpers.GetEnumDescriptions<HashType>());
+            cbHashType.SelectedIndex = (int)HashType.SHA1;
 
             hashCheck = new HashCheck();
             hashCheck.FileCheckProgressChanged += new HashCheck.ProgressChanged(fileCheck_FileCheckProgressChanged);
