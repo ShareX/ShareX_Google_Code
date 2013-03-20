@@ -98,6 +98,7 @@ namespace ShareX
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
+            this.lblSplitter2 = new System.Windows.Forms.Label();
             this.lblSplitter = new System.Windows.Forms.Label();
             this.lvUploads = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -109,6 +110,7 @@ namespace ShareX
             this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblSplitter3 = new System.Windows.Forms.Label();
             this.pbPreview = new HelpersLib.MyPictureBox();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -140,6 +142,7 @@ namespace ShareX
             this.tsmiTrayTools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenRecorder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayHashCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenshotsFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,7 +190,6 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayHashCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -616,17 +618,28 @@ namespace ShareX
             // 
             // scMain.Panel1
             // 
+            this.scMain.Panel1.Controls.Add(this.lblSplitter2);
             this.scMain.Panel1.Controls.Add(this.lblSplitter);
             this.scMain.Panel1.Controls.Add(this.lvUploads);
             // 
             // scMain.Panel2
             // 
+            this.scMain.Panel2.Controls.Add(this.lblSplitter3);
             this.scMain.Panel2.Controls.Add(this.pbPreview);
             this.scMain.Panel2Collapsed = true;
             this.scMain.Size = new System.Drawing.Size(784, 362);
             this.scMain.SplitterDistance = 500;
             this.scMain.TabIndex = 1;
             this.scMain.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scMain_SplitterMoved);
+            // 
+            // lblSplitter2
+            // 
+            this.lblSplitter2.BackColor = System.Drawing.Color.Black;
+            this.lblSplitter2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblSplitter2.Location = new System.Drawing.Point(783, 0);
+            this.lblSplitter2.Name = "lblSplitter2";
+            this.lblSplitter2.Size = new System.Drawing.Size(1, 362);
+            this.lblSplitter2.TabIndex = 3;
             // 
             // lblSplitter
             // 
@@ -708,16 +721,24 @@ namespace ShareX
             // chURL
             // 
             this.chURL.Text = "URL";
-            this.chURL.Width = 234;
+            this.chURL.Width = 134;
+            // 
+            // lblSplitter3
+            // 
+            this.lblSplitter3.BackColor = System.Drawing.Color.Black;
+            this.lblSplitter3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblSplitter3.Location = new System.Drawing.Point(0, 0);
+            this.lblSplitter3.Name = "lblSplitter3";
+            this.lblSplitter3.Size = new System.Drawing.Size(1, 362);
+            this.lblSplitter3.TabIndex = 3;
             // 
             // pbPreview
             // 
             this.pbPreview.BackColor = System.Drawing.Color.White;
-            this.pbPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbPreview.Location = new System.Drawing.Point(0, 0);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(96, 100);
+            this.pbPreview.Size = new System.Drawing.Size(280, 362);
             this.pbPreview.TabIndex = 0;
             // 
             // niTray
@@ -747,7 +768,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 346);
+            this.cmsTray.Size = new System.Drawing.Size(181, 324);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -981,6 +1002,14 @@ namespace ShareX
             this.tsmiTrayScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiTrayScreenColorPicker.Text = "Screen color picker...";
             this.tsmiTrayScreenColorPicker.Click += new System.EventHandler(this.tsmiCursorHelper_Click);
+            // 
+            // tsmiTrayHashCheck
+            // 
+            this.tsmiTrayHashCheck.Image = global::ShareX.Properties.Resources.application_task;
+            this.tsmiTrayHashCheck.Name = "tsmiTrayHashCheck";
+            this.tsmiTrayHashCheck.Size = new System.Drawing.Size(183, 22);
+            this.tsmiTrayHashCheck.Text = "Hash check...";
+            this.tsmiTrayHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
             // 
             // tsmiScreenshotsFolder
             // 
@@ -1342,14 +1371,6 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
-            // tsmiTrayHashCheck
-            // 
-            this.tsmiTrayHashCheck.Image = global::ShareX.Properties.Resources.application_task;
-            this.tsmiTrayHashCheck.Name = "tsmiTrayHashCheck";
-            this.tsmiTrayHashCheck.Size = new System.Drawing.Size(183, 22);
-            this.tsmiTrayHashCheck.Text = "Hash check...";
-            this.tsmiTrayHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1516,5 +1537,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiHashCheck;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayHashCheck;
+        private System.Windows.Forms.Label lblSplitter2;
+        private System.Windows.Forms.Label lblSplitter3;
     }
 }
