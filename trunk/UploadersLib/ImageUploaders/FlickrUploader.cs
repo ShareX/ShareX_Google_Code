@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -92,9 +93,24 @@ namespace UploadersLib.ImageUploaders
 
             string response = SendPostRequest(API_URL, args);
 
-            this.Frob = ParseResponse(response, "frob").Value;
+            XElement eFrob = ParseResponse(response, "frob");
 
-            return this.Frob;
+            if (eFrob == null)
+            {
+                string errorMessage = ToErrorString();
+
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    throw new Exception("getFrob failed.");
+                }
+                else
+                {
+                    throw new Exception(errorMessage);
+                }
+            }
+
+            Frob = eFrob.Value;
+            return Frob;
         }
 
         /// <summary>
