@@ -175,9 +175,6 @@
     <Compile Include="Helpers\CopyData.cs" />
     <Compile Include="Helpers\GeometryHelper.cs" />
     <None Include="Helpers\HookHelper.cs" />
-    <None Include="Greenshot.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Compile Include="Helpers\WindowWrapper.cs" />
     <Compile Include="Memento\AddElementMemento.cs" />
     <Compile Include="Memento\ChangeFieldHolderMemento.cs" />
@@ -199,7 +196,6 @@
     <EmbeddedResource Include="Forms\ImageEditorForm.resx">
       <DependentUpon>ImageEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sounds.resx" />
     <None Include="greenshot.manifest" />
     <EmbeddedResource Include="Languages\language-en-US.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
