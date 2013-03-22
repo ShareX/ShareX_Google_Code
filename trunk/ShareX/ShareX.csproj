@@ -211,6 +211,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GreenshotPlugin\GreenshotPlugin.csproj">
+      <Project>{5b924697-4dcd-4f98-85f1-105cb84b7341}</Project>
+      <Name>GreenshotPlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Greenshot\Greenshot.csproj">
+      <Project>{cd642bf4-d815-4d67-a0b5-c69f0b8231af}</Project>
+      <Name>Greenshot</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HistoryLib\HistoryLib.csproj">
       <Project>{E7DE6237-AEA2-498B-8F56-9B392472C490}</Project>
       <Name>HistoryLib</Name>

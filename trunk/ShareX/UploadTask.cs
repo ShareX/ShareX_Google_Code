@@ -290,6 +290,11 @@ namespace ShareX
                     tempImage = CaptureHelpers.DrawBorder(tempImage, BorderType.Outside, Program.Settings.BorderColor, Program.Settings.BorderSize);
                 }
 
+                if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
+                {
+                    tempImage = AnnotateImage(tempImage);
+                }
+
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
                     Helpers.CopyImageSafely(tempImage);
@@ -698,6 +703,24 @@ namespace ShareX
             }
 
             return null;
+        }
+
+        public Image AnnotateImage(Image img)
+        {
+            if (!Greenshot.IniFile.IniConfig.isInitialized)
+            {
+                Greenshot.IniFile.IniConfig.Init();
+            }
+
+            Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture();
+            capture.Image = img;
+
+            Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture);
+            Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true);
+            editor.Visible = false;
+            editor.ShowDialog();
+
+            return editor.GetImageForExport();
         }
 
         private void ThreadCompleted()

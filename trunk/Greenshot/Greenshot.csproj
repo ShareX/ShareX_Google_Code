@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectGuid>{CD642BF4-D815-4D67-A0B5-C69F0B8231AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Greenshot</RootNamespace>
+    <AssemblyName>Greenshot</AssemblyName>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ApplicationIcon>icons\applicationIcon\icon.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Configuration\EditorConfiguration.cs" />
+    <Compile Include="Configuration\LanguageKeys.cs" />
+    <Compile Include="Controls\BindableToolStripComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BindableToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BindableToolStripDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NonJumpingPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FontFamilyComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuStripEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Pipette.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Drawing\ArrowContainer.cs" />
+    <Compile Include="Drawing\Fields\Binding\AlignmentConverter.cs" />
+    <Compile Include="Drawing\ImageContainer.cs" />
+    <Compile Include="Drawing\CropContainer.cs" />
+    <Compile Include="Drawing\CursorContainer.cs" />
+    <Compile Include="Drawing\DrawableContainer.cs" />
+    <Compile Include="Drawing\DrawableContainerList.cs" />
+    <Compile Include="Drawing\EllipseContainer.cs" />
+    <Compile Include="Drawing\Fields\AbstractFieldHolderWithChildren.cs" />
+    <Compile Include="Drawing\Fields\Binding\AbstractBindingConverter.cs" />
+    <Compile Include="Drawing\Fields\Binding\BidirectionalBinding.cs" />
+    <Compile Include="Drawing\Fields\Binding\DecimalDoublePercentageConverter.cs" />
+    <Compile Include="Drawing\Fields\Binding\DecimalFloatConverter.cs" />
+    <Compile Include="Drawing\Fields\Binding\DecimalIntConverter.cs" />
+    <Compile Include="Drawing\Fields\Binding\IBindingConverter.cs" />
+    <Compile Include="Drawing\Fields\Binding\IBindingValidator.cs" />
+    <Compile Include="Drawing\Fields\Binding\NotNullValidator.cs" />
+    <Compile Include="Drawing\FilterContainer.cs" />
+    <Compile Include="Drawing\Filters\AbstractFilter.cs" />
+    <Compile Include="Drawing\Filters\BrightnessFilter.cs" />
+    <Compile Include="Drawing\Filters\GrayscaleFilter.cs" />
+    <Compile Include="Drawing\Filters\HighlightFilter.cs" />
+    <Compile Include="Drawing\Filters\IFilter.cs" />
+    <Compile Include="Drawing\Filters\MagnifierFilter.cs" />
+    <Compile Include="Drawing\Filters\PixelizationFilter.cs" />
+    <Compile Include="Drawing\Filters\BlurFilter.cs" />
+    <Compile Include="Drawing\Gripper.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Drawing\HighlightContainer.cs" />
+    <Compile Include="Drawing\IconContainer.cs" />
+    <Compile Include="Drawing\LineContainer.cs" />
+    <Compile Include="Drawing\Fields\AbstractFieldHolder.cs" />
+    <Compile Include="Drawing\Fields\Field.cs" />
+    <Compile Include="Drawing\Fields\FieldType.cs" />
+    <Compile Include="Drawing\Fields\IFieldHolder.cs" />
+    <Compile Include="Drawing\Fields\FieldAggregator.cs" />
+    <Compile Include="Drawing\ObfuscateContainer.cs" />
+    <Compile Include="Drawing\FreehandContainer.cs" />
+    <Compile Include="Drawing\RectangleContainer.cs" />
+    <Compile Include="Drawing\RoundedRectangle.cs" />
+    <Compile Include="Drawing\Surface.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Drawing\TextContainer.cs" />
+    <Compile Include="Forms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <None Include="Forms\DropShadowSettingsForm.cs">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="Forms\DropShadowSettingsForm.Designer.cs">
+      <DependentUpon>DropShadowSettingsForm.cs</DependentUpon>
+    </None>
+    <Compile Include="Forms\ImageEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageEditorForm.Designer.cs">
+      <DependentUpon>ImageEditorForm.cs</DependentUpon>
+    </Compile>
+    <None Include="Forms\ResizeSettingsForm.cs">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="Forms\ResizeSettingsForm.Designer.cs">
+      <DependentUpon>ResizeSettingsForm.cs</DependentUpon>
+    </None>
+    <None Include="Forms\TornEdgeSettingsForm.cs">
+      <SubType>Form</SubType>
+    </None>
+    <None Include="Forms\TornEdgeSettingsForm.Designer.cs">
+      <DependentUpon>TornEdgeSettingsForm.cs</DependentUpon>
+    </None>
+    <Compile Include="Forms\ToolStripMenuSelectList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\MovableShowColorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MovableShowColorForm.Designer.cs">
+      <DependentUpon>MovableShowColorForm.cs</DependentUpon>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Helpers\AviHelper.cs" />
+    <Compile Include="Helpers\Colors.cs" />
+    <Compile Include="Helpers\CopyData.cs" />
+    <Compile Include="Helpers\GeometryHelper.cs" />
+    <None Include="Helpers\HookHelper.cs" />
+    <None Include="Greenshot.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Helpers\WindowWrapper.cs" />
+    <Compile Include="Memento\AddElementMemento.cs" />
+    <Compile Include="Memento\ChangeFieldHolderMemento.cs" />
+    <Compile Include="Memento\DeleteElementMemento.cs" />
+    <Compile Include="Memento\TextChangeMemento.cs" />
+    <Compile Include="Memento\IMemento.cs" />
+    <Compile Include="Memento\DrawableContainerBoundsChangeMemento.cs" />
+    <Compile Include="Memento\SurfaceBackgroundChangeMemento.cs" />
+    <None Include="Helpers\ScreenCaptureHelper.cs" />
+    <Compile Include="Helpers\EnvironmentInfo.cs" />
+    <Compile Include="Helpers\GuiRectangle.cs" />
+    <Compile Include="Helpers\ScaleHelper.cs" />
+    <Compile Include="Helpers\SoundHelper.cs" />
+    <Compile Include="Helpers\StartupHelper.cs" />
+    <Compile Include="Helpers\ToolStripItemEndisabler.cs" />
+    <EmbeddedResource Include="Forms\ColorDialog.resx">
+      <DependentUpon>ColorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageEditorForm.resx">
+      <DependentUpon>ImageEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds.resx" />
+    <None Include="greenshot.manifest" />
+    <None Include="Languages\help-en-US.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-de-DE.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-es-ES.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-fr-FR.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-hu-HU.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-it-IT.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-nl-NL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-nn-NO.html" />
+    <None Include="Languages\help-pl-PL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-ru-RU.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-sv-SE.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-tr-TR.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\help-zh-CN.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-ar-SY.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-cs-CZ.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-de-DE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-el-GR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Languages\language-en-US.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Languages\language-es-ES.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-fa-IR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-fi-FI.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-fr-FR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-fr-QC.xml" />
+    <None Include="Languages\language-he-IL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-hu-HU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-it-IT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-ja-JP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-ko-KR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-lt-LT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-nl-NL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-nn-NO.xml" />
+    <None Include="Languages\language-pl-PL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-pt-BR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-pt-PT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-ro-RO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-ru-RU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-sk-SK.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-sr-RS.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-sv-SE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-tr-TR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-uk-UA.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-vi-VN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-zh-CN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\language-zh-tw.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Forms\ColorDialog.Designer.cs">
+      <DependentUpon>ColorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ColorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GreenshotPlugin\GreenshotPlugin.csproj">
+      <Project>{5B924697-4DCD-4F98-85F1-105CB84B7341}</Project>
+      <Name>GreenshotPlugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>x86</PlatformTarget>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DebugType>Full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DebugType>None</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+</Project>
