@@ -58,6 +58,8 @@ namespace Greenshot
         // whether part of the editor controls are disabled depending on selected item(s)
         private bool controlsDisabledDueToConfirmable = false;
 
+        private bool forceClose = false;
+
         /// <summary>
         /// An Implementation for the IImageEditor, this way Plugins have access to the HWND handles wich can be used with Win32 API calls.
         /// </summary>
@@ -190,15 +192,6 @@ namespace Greenshot
                 }
             }
             items.Clear();
-        }
-
-        private void FileMenuDropDownOpening(object sender, EventArgs eventArgs)
-        {
-            ClearItems(this.fileStripMenuItem.DropDownItems);
-
-            // add the elements after the destinations
-            this.fileStripMenuItem.DropDownItems.Add(this.toolStripSeparator9);
-            this.fileStripMenuItem.DropDownItems.Add(this.closeToolStripMenuItem);
         }
 
         /// <summary>
@@ -355,23 +348,10 @@ namespace Greenshot
 
         public ToolStripMenuItem GetFileMenuItem()
         {
-            return fileStripMenuItem;
+            return null;
         }
 
         #endregion plugin interfaces
-
-        #region filesystem options
-
-        private void BtnSaveClick(object sender, EventArgs e)
-        {
-        }
-
-        private void CloseToolStripMenuItemClick(object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
-
-        #endregion filesystem options
 
         #region drawing options
 
@@ -629,7 +609,7 @@ namespace Greenshot
 
         private void ImageEditorFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (surface.Modified) //&& !editorConfiguration.SuppressSaveDialogAtClose)
+            if (!forceClose && surface.Modified) //&& !editorConfiguration.SuppressSaveDialogAtClose)
             {
                 // Make sure the editor is visible
                 WindowDetails.ToForeground(this.Handle);
@@ -846,7 +826,7 @@ namespace Greenshot
 
         private void updateStatusLabel(string text, ContextMenuStrip contextMenu)
         {
-            statusLabel.Text = text;
+            //statusLabel.Text = text;
             statusStrip1.ContextMenuStrip = contextMenu;
         }
 
@@ -1284,6 +1264,19 @@ namespace Greenshot
                     canvas.Top = offsetY + 0;
                 }
             }
+        }
+
+        private void btnSaveClose_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            forceClose = true;
+            Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            forceClose = true;
+            Close();
         }
     }
 }
