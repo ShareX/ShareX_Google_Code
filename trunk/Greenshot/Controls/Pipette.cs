@@ -102,7 +102,7 @@ namespace Greenshot.Controls
             }
             movableShowColorForm = null;
             _cursor = null;
-            base.Dispose();
+            base.Dispose(disposing);
         }
 
         /// <summary>

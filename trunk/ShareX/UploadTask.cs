@@ -712,15 +712,17 @@ namespace ShareX
                 Greenshot.IniFile.IniConfig.Init();
             }
 
-            Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture();
-            capture.Image = img;
+            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = img })
+            using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
+            using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
+            {
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    return editor.GetImageForExport();
+                }
+            }
 
-            Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture);
-            Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true);
-            editor.Visible = false;
-            editor.ShowDialog();
-
-            return editor.GetImageForExport();
+            return img;
         }
 
         private void ThreadCompleted()

@@ -82,7 +82,7 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyright.Location = new System.Drawing.Point(16, 256);
+            this.lblCopyright.Location = new System.Drawing.Point(16, 272);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(51, 13);
             this.lblCopyright.TabIndex = 7;
@@ -96,7 +96,7 @@
             this.lblCredits.ForeColor = System.Drawing.Color.Black;
             this.lblCredits.Location = new System.Drawing.Point(16, 144);
             this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(348, 104);
+            this.lblCredits.Size = new System.Drawing.Size(348, 117);
             this.lblCredits.TabIndex = 6;
             this.lblCredits.Text = resources.GetString("lblCredits.Text");
             // 
@@ -220,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 282);
+            this.ClientSize = new System.Drawing.Size(395, 294);
             this.Controls.Add(this.pbBerkSteamURL);
             this.Controls.Add(this.lblBerk);
             this.Controls.Add(this.lblMike);

@@ -629,7 +629,7 @@ namespace Greenshot
 
         private void ImageEditorFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (surface.Modified && true) //!editorConfiguration.SuppressSaveDialogAtClose)
+            if (surface.Modified) //&& !editorConfiguration.SuppressSaveDialogAtClose)
             {
                 // Make sure the editor is visible
                 WindowDetails.ToForeground(this.Handle);
@@ -648,22 +648,12 @@ namespace Greenshot
                 }
                 if (result.Equals(DialogResult.Yes))
                 {
-                    BtnSaveClick(sender, e);
-                    // Check if the save was made, if not it was cancelled so we cancel the closing
-                    if (surface.Modified)
-                    {
-                        e.Cancel = true;
-                        return;
-                    }
+                    DialogResult = DialogResult.OK;
                 }
             }
 
             // remove from the editor list
             editorList.Remove(this);
-
-            surface.Dispose();
-
-            System.GC.Collect();
         }
 
         private void ImageEditorFormKeyDown(object sender, KeyEventArgs e)
