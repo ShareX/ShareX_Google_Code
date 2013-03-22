@@ -60,6 +60,11 @@ namespace UploadersLib
                 {
                     Config.ImgurOAuthInfo = oauth;
                     Helpers.LoadBrowserAsync(url);
+                    DebugHelper.WriteLine("ImgurAuthOpen - Authorization URL is opened: " + url);
+                }
+                else
+                {
+                    DebugHelper.WriteLine("ImgurAuthOpen - Authorization URL is empty.");
                 }
             }
             catch (Exception ex)
@@ -332,6 +337,11 @@ namespace UploadersLib
                     Config.DropboxOAuthInfo = oauth;
                     Helpers.LoadBrowserAsync(url);
                     btnDropboxCompleteAuth.Enabled = true;
+                    DebugHelper.WriteLine("DropboxAuthOpen - Authorization URL is opened: " + url);
+                }
+                else
+                {
+                    DebugHelper.WriteLine("DropboxAuthOpen - Authorization URL is empty.");
                 }
             }
             catch (Exception ex)
@@ -342,39 +352,47 @@ namespace UploadersLib
 
         public void DropboxAuthComplete()
         {
-            if (Config.DropboxOAuthInfo != null && !string.IsNullOrEmpty(Config.DropboxOAuthInfo.AuthToken) &&
-                !string.IsNullOrEmpty(Config.DropboxOAuthInfo.AuthSecret))
+            try
             {
-                Dropbox dropbox = new Dropbox(Config.DropboxOAuthInfo);
-                bool result = dropbox.GetAccessToken();
-
-                if (result)
+                if (Config.DropboxOAuthInfo != null && !string.IsNullOrEmpty(Config.DropboxOAuthInfo.AuthToken) &&
+                    !string.IsNullOrEmpty(Config.DropboxOAuthInfo.AuthSecret))
                 {
-                    DropboxAccountInfo account = dropbox.GetAccountInfo();
+                    Dropbox dropbox = new Dropbox(Config.DropboxOAuthInfo);
+                    bool result = dropbox.GetAccessToken();
 
-                    if (account != null)
+                    if (result)
                     {
-                        Config.DropboxAccountInfo = account;
-                        Config.DropboxUploadPath = txtDropboxPath.Text;
-                        UpdateDropboxStatus();
-                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
+                        DropboxAccountInfo account = dropbox.GetAccountInfo();
 
-                    MessageBox.Show("GetAccountInfo failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (account != null)
+                        {
+                            Config.DropboxAccountInfo = account;
+                            Config.DropboxUploadPath = txtDropboxPath.Text;
+                            UpdateDropboxStatus();
+                            MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+
+                        MessageBox.Show("GetAccountInfo failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You must give access from Authorize page first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
-                MessageBox.Show("You must give access from Authorize page first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
-            Config.DropboxOAuthInfo = null;
-            UpdateDropboxStatus();
+                Config.DropboxOAuthInfo = null;
+                UpdateDropboxStatus();
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.WriteException(ex);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UpdateDropboxStatus()

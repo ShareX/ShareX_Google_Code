@@ -238,10 +238,7 @@ namespace UploadersLib
             }
             catch (Exception e)
             {
-                if (!stopUpload)
-                {
-                    result.Response = AddWebError(e);
-                }
+                if (!stopUpload) result.Response = AddWebError(e);
             }
             finally
             {
@@ -574,21 +571,27 @@ namespace UploadersLib
 
                 if (e is WebException)
                 {
-                    response = ResponseToString(((WebException)e).Response);
-
-                    if (!string.IsNullOrEmpty(response))
+                    try
                     {
-                        str.AppendLine();
-                        str.AppendLine("Response:");
-                        str.AppendLine(response);
+                        response = ResponseToString(((WebException)e).Response);
+
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            str.AppendLine();
+                            str.AppendLine("Response:");
+                            str.AppendLine(response);
+                        }
                     }
+                    catch { }
                 }
 
                 str.AppendLine();
                 str.AppendLine("StackTrace:");
                 str.AppendLine(e.StackTrace);
 
-                Errors.Add(str.ToString());
+                string errorText = str.ToString();
+                Errors.Add(errorText);
+                DebugHelper.WriteLine("AddWebError(): " + errorText);
             }
 
             return response;

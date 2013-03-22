@@ -389,17 +389,25 @@ namespace ShareX
                 ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
             updateChecker.CheckUpdate();
 
-            if (updateChecker.UpdateInfo != null && updateChecker.UpdateInfo.Status == UpdateStatus.UpdateRequired)
+            if (updateChecker.UpdateInfo != null)
             {
-                string updateText = string.Format("Would you like to download the update?\r\n\r\n{0} is current version.\r\n{1} is latest version.",
-                    updateChecker.UpdateInfo.CurrentVersion, updateChecker.UpdateInfo.LatestVersion);
-
-                if (MessageBox.Show(updateText, "ShareX update is available", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                switch (updateChecker.UpdateInfo.Status)
                 {
-                    DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
-                    downloader.ShowDialog();
-                    if (downloader.Status == DownloaderFormStatus.InstallStarted) Application.Exit();
+                    case UpdateStatus.UpdateRequired:
+                        string updateText = string.Format("Would you like to download the update?\r\n\r\n{0} is current version.\r\n{1} is latest version.",
+                            updateChecker.UpdateInfo.CurrentVersion, updateChecker.UpdateInfo.LatestVersion);
+
+                        if (MessageBox.Show(updateText, "ShareX update is available", MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        {
+                            DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
+                            downloader.ShowDialog();
+                            if (downloader.Status == DownloaderFormStatus.InstallStarted) Application.Exit();
+                        }
+                        break;
+                    case UpdateStatus.UpdateCheckFailed:
+                        DebugHelper.WriteLine("Update check failed.");
+                        break;
                 }
             }
         }
