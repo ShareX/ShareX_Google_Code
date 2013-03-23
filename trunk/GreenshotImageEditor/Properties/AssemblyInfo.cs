@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -19,22 +19,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#region Using directives
-
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-#endregion Using directives
+// Information about this assembly is defined by the following
+// attributes.
+//
+// change them to the information which is associated with the assembly
+// you compile.
 
-// General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("GreenshotPlugin")]
+[assembly: AssemblyTitle("Greenshot")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Greenshot")]
-[assembly: AssemblyProduct("GreenshotPlugin")]
-[assembly: AssemblyCopyright("Copyright (C) 2007-2013")]
+[assembly: AssemblyProduct("Greenshot")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -46,6 +45,7 @@ using System.Runtime.InteropServices;
 //
 // Major.Minor.Build.Revision
 //
-// You can specify all the values or you can use the default the Revision and
-// Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("1.1.0.2531")]
+// You can specify all values by your own or you can build default build and revision
+// numbers with the '*' character (the default):
+
+[assembly: AssemblyVersion("1.1.0.2534")]
