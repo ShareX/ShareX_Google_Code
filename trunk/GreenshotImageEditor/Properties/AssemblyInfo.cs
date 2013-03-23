@@ -28,11 +28,11 @@ using System.Runtime.InteropServices;
 // change them to the information which is associated with the assembly
 // you compile.
 
-[assembly: AssemblyTitle("Greenshot")]
+[assembly: AssemblyTitle("GreenshotImageEditor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Greenshot")]
-[assembly: AssemblyProduct("Greenshot")]
+[assembly: AssemblyProduct("GreenshotImageEditor")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -48,4 +48,4 @@ using System.Runtime.InteropServices;
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
 
-[assembly: AssemblyVersion("1.1.0.2534")]
+[assembly: AssemblyVersion("1.0.0.2534")]

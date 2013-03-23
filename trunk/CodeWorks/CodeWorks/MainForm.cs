@@ -38,7 +38,7 @@ namespace CodeWorks
 {
     public partial class MainForm : Form
     {
-        private string[] ignoreFolders = new string[] { "bin", "obj", "Properties" };
+        private string[] ignoreFolders = new string[] { "bin", "obj", "Properties", "GreenshotImageEditor" };
         private string[] ignoreFiles = new string[] { };
         private string[] ignoreFilenamesEndsWith = new string[] { ".designer.cs" };
         private string[] allowFilenamesEndsWith = new string[] { ".cs" };

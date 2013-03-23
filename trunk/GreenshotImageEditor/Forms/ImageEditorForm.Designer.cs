@@ -168,6 +168,7 @@ namespace Greenshot {
             this.fileSavedStatusContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyPathMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.openDirectoryMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -625,8 +626,9 @@ namespace Greenshot {
             this.toolStripSeparator8,
             this.selectAllToolStripMenuItem,
             this.removeObjectToolStripMenuItem,
-            this.toolStripSeparator7,
+            this.clearToolStripMenuItem,
             this.arrangeToolStripMenuItem,
+            this.toolStripSeparator7,
             this.saveElementsToolStripMenuItem,
             this.loadElementsToolStripMenuItem});
             this.objectToolStripMenuItem.LanguageKey = "editor_object";
@@ -1584,6 +1586,13 @@ namespace Greenshot {
             this.openDirectoryMenuItem.Text = "Open directory in Windows Explorer";
             this.openDirectoryMenuItem.Click += new System.EventHandler(this.OpenDirectoryMenuItemClick);
             // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.clearToolStripMenuItem.Text = "Delete all";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
             // ImageEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1743,5 +1752,6 @@ namespace Greenshot {
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 	}
 }
