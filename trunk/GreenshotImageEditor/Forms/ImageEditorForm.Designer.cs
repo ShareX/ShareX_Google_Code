@@ -818,7 +818,7 @@ namespace Greenshot {
             this.btnSaveClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveClose.Name = "btnSaveClose";
             this.btnSaveClose.Size = new System.Drawing.Size(23, 22);
-            this.btnSaveClose.Text = "Save & Close";
+            this.btnSaveClose.Text = "Save && Close";
             this.btnSaveClose.Click += new System.EventHandler(this.btnSaveClose_Click);
             // 
             // btnClose
