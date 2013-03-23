@@ -153,7 +153,7 @@ namespace Greenshot
             // Fix title
             if (surface != null && surface.CaptureDetails != null && surface.CaptureDetails.Title != null)
             {
-                this.Text = surface.CaptureDetails.Title + " - " + Language.GetString(LangKey.editor_title);
+                this.Text = surface.CaptureDetails.Title + " - Greenshot image editor";
             }
             WindowDetails.ToForeground(this.Handle);
         }
@@ -218,7 +218,7 @@ namespace Greenshot
                     // Put the event message on the status label and attach the context menu
                     updateStatusLabel(dateTime + " - " + eventArgs.Message, fileSavedStatusContextMenu);
                     // Change title
-                    this.Text = eventArgs.Surface.LastSaveFullPath + " - " + Language.GetString(LangKey.editor_title);
+                    this.Text = eventArgs.Surface.LastSaveFullPath + " - Greenshot image editor";
                     break;
                 case SurfaceMessageTyp.Error:
                 case SurfaceMessageTyp.Info:
@@ -262,7 +262,7 @@ namespace Greenshot
                 // Fix title
                 if (surface != null && surface.CaptureDetails != null && surface.CaptureDetails.Title != null)
                 {
-                    this.Text = surface.CaptureDetails.Title + " - " + Language.GetString(LangKey.editor_title);
+                    this.Text = surface.CaptureDetails.Title + " - Greenshot image editor";
                 }
             });
         }
@@ -292,8 +292,8 @@ namespace Greenshot
             {
                 return;
             }
-            updateStatusLabel(Language.GetFormattedString(LangKey.editor_imagesaved, fullpath), fileSavedStatusContextMenu);
-            this.Text = Path.GetFileName(fullpath) + " - " + Language.GetString(LangKey.editor_title);
+            updateStatusLabel(string.Format("Image saved to {0}.", fullpath), fileSavedStatusContextMenu);
+            this.Text = Path.GetFileName(fullpath) + " - Greenshot image editor";
         }
 
         private void surface_DrawingModeChanged(object source, SurfaceDrawingModeEventArgs eventArgs)
@@ -628,7 +628,7 @@ namespace Greenshot
                 {
                     buttons = MessageBoxButtons.YesNo;
                 }
-                DialogResult result = MessageBox.Show(Language.GetString(LangKey.editor_close_on_save), Language.GetString(LangKey.editor_close_on_save_title), buttons, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Do you want the save the screenshot?", "Save image?", buttons, MessageBoxIcon.Question);
 
                 if (result.Equals(DialogResult.Cancel))
                 {
@@ -787,7 +787,7 @@ namespace Greenshot
                     undoAction = Language.GetString(surface.UndoActionLanguageKey);
                 }
             }
-            string undoText = Language.GetFormattedString(LangKey.editor_undo, undoAction);
+            string undoText = string.Format("Undo {0}", undoAction);
             this.btnUndo.Text = undoText;
             this.undoToolStripMenuItem.Text = undoText;
 
@@ -802,7 +802,7 @@ namespace Greenshot
                     redoAction = Language.GetString(surface.RedoActionLanguageKey);
                 }
             }
-            string redoText = Language.GetFormattedString(LangKey.editor_redo, redoAction);
+            string redoText = string.Format("Redo {0}", redoAction);
             this.btnRedo.Text = redoText;
             this.redoToolStripMenuItem.Text = redoText;
         }

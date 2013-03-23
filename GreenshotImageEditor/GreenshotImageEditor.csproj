@@ -315,7 +315,6 @@
     <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\GuiRectangle.cs" />
     <Compile Include="Helpers\ScaleHelper.cs" />
-    <Compile Include="Helpers\StartupHelper.cs" />
     <Compile Include="Helpers\ToolStripItemEndisabler.cs" />
     <EmbeddedResource Include="Core\GreenshotResources.resx">
       <DependentUpon>GreenshotResources.cs</DependentUpon>
@@ -325,9 +324,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImageEditorForm.resx">
       <DependentUpon>ImageEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Languages\language-en-US.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Compile Include="Forms\ColorDialog.Designer.cs">
       <DependentUpon>ColorDialog.cs</DependentUpon>

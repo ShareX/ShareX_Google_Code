@@ -61,7 +61,7 @@ namespace GreenshotPlugin.Core
         /// </summary>
         static Language()
         {
-            try
+            /*try
             {
                 string applicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string applicationFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -130,7 +130,7 @@ namespace GreenshotPlugin.Core
             if (CurrentLanguage == null)
             {
                 LOG.Error("Couldn't set language, installation problem?");
-            }
+            }*/
         }
 
         /// <summary>
