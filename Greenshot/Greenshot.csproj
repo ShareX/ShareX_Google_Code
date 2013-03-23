@@ -170,7 +170,6 @@
       <DependentUpon>MovableShowColorForm.cs</DependentUpon>
     </Compile>
     <None Include="App.config" />
-    <None Include="Helpers\AviHelper.cs" />
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Helpers\CopyData.cs" />
     <Compile Include="Helpers\GeometryHelper.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\GuiRectangle.cs" />
     <Compile Include="Helpers\ScaleHelper.cs" />
-    <Compile Include="Helpers\SoundHelper.cs" />
     <Compile Include="Helpers\StartupHelper.cs" />
     <Compile Include="Helpers\ToolStripItemEndisabler.cs" />
     <EmbeddedResource Include="Forms\ColorDialog.resx">

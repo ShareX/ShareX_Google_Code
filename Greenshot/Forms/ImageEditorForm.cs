@@ -44,6 +44,7 @@ namespace Greenshot
     /// </summary>
     public partial class ImageEditorForm : BaseForm, IImageEditor
     {
+        private static EditorConfiguration editorConfiguration = IniConfig.GetIniSection<EditorConfiguration>();
         private static List<string> ignoreDestinations = new List<string>() { };
         private static List<IImageEditor> editorList = new List<IImageEditor>();
 
@@ -85,6 +86,13 @@ namespace Greenshot
             //
             this.ManualLanguageApply = true;
             InitializeComponent();
+
+            this.Shown += delegate
+            {
+                // Make sure the editor is placed on the same location as the last editor was on close
+                WindowDetails thisForm = new WindowDetails(this.Handle);
+                thisForm.WindowPlacement = editorConfiguration.GetEditorPlacement();
+            };
 
             // init surface
             Surface = iSurface;
@@ -228,7 +236,7 @@ namespace Greenshot
         /// <param name="source"></param>
         private void SurfaceSizeChanged(object sender, EventArgs e)
         {
-            if (true) //editorConfiguration.MatchSizeToCapture)
+            if (editorConfiguration.MatchSizeToCapture)
             {
                 // Set editor's initial size to the size of the surface plus the size of the chrome
                 Size imageSize = this.Surface.Image.Size;
@@ -609,7 +617,7 @@ namespace Greenshot
 
         private void ImageEditorFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!forceClose && surface.Modified) //&& !editorConfiguration.SuppressSaveDialogAtClose)
+            if (!forceClose && surface.Modified && !editorConfiguration.SuppressSaveDialogAtClose)
             {
                 // Make sure the editor is visible
                 WindowDetails.ToForeground(this.Handle);
@@ -621,16 +629,22 @@ namespace Greenshot
                     buttons = MessageBoxButtons.YesNo;
                 }
                 DialogResult result = MessageBox.Show(Language.GetString(LangKey.editor_close_on_save), Language.GetString(LangKey.editor_close_on_save_title), buttons, MessageBoxIcon.Question);
+
                 if (result.Equals(DialogResult.Cancel))
                 {
                     e.Cancel = true;
                     return;
                 }
+
                 if (result.Equals(DialogResult.Yes))
                 {
                     DialogResult = DialogResult.OK;
                 }
             }
+
+            // persist our geometry string.
+            editorConfiguration.SetEditorPlacement(new WindowDetails(this.Handle).WindowPlacement);
+            IniConfig.Save();
 
             // remove from the editor list
             editorList.Remove(this);

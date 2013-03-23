@@ -1,8 +1,4 @@
-﻿using Greenshot.Drawing.Fields;
-using Greenshot.IniFile;
-using GreenshotPlugin.UnmanagedHelpers;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -23,6 +19,9 @@ using GreenshotPlugin.UnmanagedHelpers;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Drawing.Fields;
+using Greenshot.IniFile;
+using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -51,7 +50,7 @@ namespace Greenshot.Configuration
         public Point WindowMinPosition;
         [IniProperty("WindowMaxPosition", Description = "Position of maximized window", DefaultValue = "-1,-1")]
         public Point WindowMaxPosition;
-        [IniProperty("WindowNormalPosition", Description = "Position of normal window", DefaultValue = "100,100,400,400")]
+        [IniProperty("WindowNormalPosition", Description = "Position of normal window", DefaultValue = "100,100,600,500")]
         public Rectangle WindowNormalPosition;
         [IniProperty("ReuseEditor", Description = "Reuse already open editor", DefaultValue = "false")]
         public bool ReuseEditor;

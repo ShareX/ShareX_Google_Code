@@ -709,7 +709,8 @@ namespace ShareX
         {
             if (!Greenshot.IniFile.IniConfig.isInitialized)
             {
-                Greenshot.IniFile.IniConfig.Init();
+                Greenshot.IniFile.IniConfig.AllowSave = !Program.IsSandbox;
+                Greenshot.IniFile.IniConfig.Init(Program.PersonalPath);
             }
 
             using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = img })

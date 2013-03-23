@@ -872,22 +872,6 @@ namespace Greenshot.Drawing
         {
             List<string> filenames = ClipboardHelper.GetImageFilenames(e.Data);
             Point mouse = this.PointToClient(new Point(e.X, e.Y));
-            if (e.Data.GetDataPresent("Text"))
-            {
-                string possibleUrl = ClipboardHelper.GetText(e.Data);
-                // Test if it's an url and try to download the image so we have it in the original form
-                if (possibleUrl != null && possibleUrl.StartsWith("http"))
-                {
-                    using (Image image = NetworkHelper.DownloadImage(possibleUrl))
-                    {
-                        if (image != null)
-                        {
-                            AddImageContainer(image, mouse.X, mouse.Y);
-                            return;
-                        }
-                    }
-                }
-            }
 
             foreach (Image image in ClipboardHelper.GetImages(e.Data))
             {
