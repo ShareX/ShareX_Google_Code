@@ -485,6 +485,12 @@ namespace Greenshot
             surface.RemoveSelectedElements();
         }
 
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            surface.SelectAllElements();
+            surface.RemoveSelectedElements();
+        }
+
         private void BtnDeleteClick(object sender, EventArgs e)
         {
             RemoveObjectToolStripMenuItemClick(sender, e);
