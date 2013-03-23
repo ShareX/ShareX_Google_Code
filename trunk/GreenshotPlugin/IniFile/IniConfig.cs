@@ -57,6 +57,8 @@ namespace Greenshot.IniFile
         /// </summary>
         private static string configName = null;
 
+        private static string configFolderPath = null;
+
         /// <summary>
         /// A Dictionary with all the sections stored by section name
         /// </summary>
@@ -94,18 +96,7 @@ namespace Greenshot.IniFile
             }
         }
 
-        /// <summary>
-        /// Initialize the ini config
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="configName"></param>
-        public static void Init(string appName, string confName)
-        {
-            applicationName = appName;
-            configName = confName;
-            Reload();
-            WatchConfigFile(true);
-        }
+        public static bool AllowSave = true;
 
         /// <summary>
         /// Checks if we initialized the ini
@@ -119,39 +110,33 @@ namespace Greenshot.IniFile
         }
 
         /// <summary>
-        /// This forces the ini to be stored in the startup path, used for portable applications
+        /// Initialize the ini config
         /// </summary>
-        public static void ForceIniInStartupPath()
+        /// <param name="applicationName"></param>
+        /// <param name="configName"></param>
+        public static void Init(string appName, string confName, string configFolder)
         {
-            if (portableCheckMade)
+            applicationName = appName;
+            configName = confName;
+            configFolderPath = configFolder;
+            if (AllowSave)
             {
-                throw new Exception("ForceLocal should be called before any file is read");
-            }
-            portable = false;
-            portableCheckMade = true;
-            string applicationStartupPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            if (applicationName == null || configName == null)
-            {
-                Init();
-            }
-            string forcedIni = Path.Combine(applicationStartupPath, applicationName + INI_EXTENSION);
-            if (!File.Exists(forcedIni))
-            {
-                using (File.Create(forcedIni)) { }
+                Reload();
+                WatchConfigFile(true);
             }
         }
 
         /// <summary>
         /// Default init
         /// </summary>
-        public static void Init()
+        public static void Init(string configFolder)
         {
             AssemblyProductAttribute[] assemblyProductAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false) as AssemblyProductAttribute[];
             if (assemblyProductAttributes.Length > 0)
             {
                 string productName = assemblyProductAttributes[0].Product;
                 LOG.InfoFormat("Using ProductName {0}", productName);
-                Init(productName, productName);
+                Init(productName, "GreenshotImageEditor", configFolder);
             }
             else
             {
@@ -165,7 +150,7 @@ namespace Greenshot.IniFile
         /// <param name="sendEvents"></param>
         private static void WatchConfigFile(bool sendEvents)
         {
-            string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
+            /*string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
             // Wait with watching until the file is there
             if (Directory.Exists(Path.GetDirectoryName(iniLocation)))
             {
@@ -183,18 +168,7 @@ namespace Greenshot.IniFile
             if (watcher != null)
             {
                 watcher.EnableRaisingEvents = sendEvents;
-            }
-        }
-
-        /// <summary>
-        /// Get the location of the configuration
-        /// </summary>
-        public static string ConfigLocation
-        {
-            get
-            {
-                return CreateIniLocation(configName + INI_EXTENSION);
-            }
+            }*/
         }
 
         /// <summary>
@@ -204,7 +178,7 @@ namespace Greenshot.IniFile
         /// <param name="e"></param>
         private static void ConfigFileChanged(object source, FileSystemEventArgs e)
         {
-            string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
+            /*string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
             if (iniLocation.Equals(e.FullPath))
             {
                 LOG.InfoFormat("Config file {0} was changed, reloading", e.FullPath);
@@ -230,7 +204,7 @@ namespace Greenshot.IniFile
                 {
                     IniChanged.Invoke(source, e);
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -242,7 +216,8 @@ namespace Greenshot.IniFile
             {
                 throw new InvalidOperationException("IniConfig.Init not called!");
             }
-            string iniFilePath = null;
+
+            /*string iniFilePath = null;
             string applicationStartupPath = "";
             try
             {
@@ -253,6 +228,7 @@ namespace Greenshot.IniFile
                 LOG.WarnFormat("Problem retrieving the AssemblyLocation: {0} (Designer mode?)", exception.Message);
                 applicationStartupPath = @".";
             }
+
             string pafPath = Path.Combine(applicationStartupPath, @"App\" + applicationName);
 
             if (portable || !portableCheckMade)
@@ -284,6 +260,7 @@ namespace Greenshot.IniFile
                     }
                 }
             }
+
             if (iniFilePath == null)
             {
                 // check if file is in the same location as started from, if this is the case
@@ -301,7 +278,19 @@ namespace Greenshot.IniFile
                 }
             }
             LOG.InfoFormat("Using ini file {0}", iniFilePath);
-            return iniFilePath;
+
+            return iniFilePath;*/
+
+            if (AllowSave)
+            {
+                if (!Directory.Exists(configFolderPath))
+                {
+                    Directory.CreateDirectory(configFolderPath);
+                }
+                return Path.Combine(configFolderPath, configFilename);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -480,35 +469,38 @@ namespace Greenshot.IniFile
         /// </summary>
         public static void Save()
         {
-            bool acquiredLock = false;
-            try
+            if (AllowSave)
             {
-                acquiredLock = Monitor.TryEnter(iniLock, TimeSpan.FromMilliseconds(200));
-                if (acquiredLock)
+                bool acquiredLock = false;
+                try
                 {
-                    // Code that accesses resources that are protected by the lock.
-                    string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
-                    try
+                    acquiredLock = Monitor.TryEnter(iniLock, TimeSpan.FromMilliseconds(200));
+                    if (acquiredLock)
                     {
-                        SaveInternally(iniLocation);
+                        // Code that accesses resources that are protected by the lock.
+                        string iniLocation = CreateIniLocation(configName + INI_EXTENSION);
+                        try
+                        {
+                            SaveInternally(iniLocation);
+                        }
+                        catch (Exception ex)
+                        {
+                            LOG.Error("A problem occured while writing the configuration file to: " + iniLocation);
+                            LOG.Error(ex);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        LOG.Error("A problem occured while writing the configuration file to: " + iniLocation);
-                        LOG.Error(ex);
+                        // Code to deal with the fact that the lock was not acquired.
+                        LOG.Warn("A second thread tried to save the ini-file, we blocked as the first took too long.");
                     }
                 }
-                else
+                finally
                 {
-                    // Code to deal with the fact that the lock was not acquired.
-                    LOG.Warn("A second thread tried to save the ini-file, we blocked as the first took too long.");
-                }
-            }
-            finally
-            {
-                if (acquiredLock)
-                {
-                    Monitor.Exit(iniLock);
+                    if (acquiredLock)
+                    {
+                        Monitor.Exit(iniLock);
+                    }
                 }
             }
         }
