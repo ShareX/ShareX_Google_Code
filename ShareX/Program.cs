@@ -244,6 +244,11 @@ namespace ShareX
                 }
 
                 IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
+
+#if DEBUG
+                IsDebug = true;
+#endif
+
                 IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
                 IsSandbox = CLIHelper.CheckArgs(args, "sandbox");
 

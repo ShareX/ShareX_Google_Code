@@ -523,10 +523,14 @@ namespace Greenshot.IniFile
                 {
                     foreach (IniSection section in sectionMap.Values)
                     {
-                        section.Write(writer, false);
-                        // Add empty line after section
-                        writer.WriteLine();
-                        section.IsDirty = false;
+                        // Only save EditorConfiguration
+                        if (section != null && section.IniSectionAttribute != null && section.IniSectionAttribute.Name == "Editor")
+                        {
+                            section.Write(writer, false);
+                            // Add empty line after section
+                            writer.WriteLine();
+                            section.IsDirty = false;
+                        }
                     }
                     writer.WriteLine();
                     // Write left over properties
