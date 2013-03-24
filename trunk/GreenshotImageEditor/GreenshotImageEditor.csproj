@@ -165,7 +165,7 @@
     <Compile Include="Core\BinaryStructHelper.cs" />
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\ClipboardHelper.cs" />
-    <Compile Include="Core\CoreConfiguration.cs" />
+    <Compile Include="Configuration\CoreConfiguration.cs" />
     <Compile Include="Core\CredentialsHelper.cs" />
     <Compile Include="Core\DisplayKeyAttribute.cs" />
     <Compile Include="Core\Effects.cs" />
