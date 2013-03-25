@@ -96,12 +96,13 @@ namespace Greenshot {
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.removeObjectToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrangeToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.upToTopToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.upOneLevelToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.downOneLevelToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.downToBottomToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.saveElementsToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.loadElementsToolStripMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.toolStrip1 = new Greenshot.Controls.ToolStripEx();
@@ -168,7 +169,6 @@ namespace Greenshot {
             this.fileSavedStatusContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyPathMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.openDirectoryMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -715,10 +715,12 @@ namespace Greenshot {
             this.removeObjectToolStripMenuItem.Text = "Delete";
             this.removeObjectToolStripMenuItem.Click += new System.EventHandler(this.RemoveObjectToolStripMenuItemClick);
             // 
-            // toolStripSeparator7
+            // clearToolStripMenuItem
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(186, 6);
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.clearToolStripMenuItem.Text = "Delete all";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // arrangeToolStripMenuItem
             // 
@@ -773,6 +775,11 @@ namespace Greenshot {
             this.downToBottomToolStripMenuItem.Text = "Down to bottom";
             this.downToBottomToolStripMenuItem.Click += new System.EventHandler(this.DownToBottomToolStripMenuItemClick);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(186, 6);
+            // 
             // saveElementsToolStripMenuItem
             // 
             this.saveElementsToolStripMenuItem.LanguageKey = "editor_save_objects";
@@ -817,17 +824,15 @@ namespace Greenshot {
             // 
             this.btnSaveClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnSaveClose.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveClose.Image")));
-            this.btnSaveClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveClose.Name = "btnSaveClose";
             this.btnSaveClose.Size = new System.Drawing.Size(23, 22);
-            this.btnSaveClose.Text = "Save && Close";
+            this.btnSaveClose.Text = "Save and close";
             this.btnSaveClose.Click += new System.EventHandler(this.btnSaveClose_Click);
             // 
             // btnClose
             // 
             this.btnClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(23, 22);
             this.btnClose.Text = "Close";
@@ -1451,8 +1456,8 @@ namespace Greenshot {
             // 
             this.arrowHeadsLabel.LanguageKey = "editor_pixel_size";
             this.arrowHeadsLabel.Name = "arrowHeadsLabel";
-            this.arrowHeadsLabel.Size = new System.Drawing.Size(53, 15);
-            this.arrowHeadsLabel.Text = "Pixel size";
+            this.arrowHeadsLabel.Size = new System.Drawing.Size(73, 15);
+            this.arrowHeadsLabel.Text = "Arrow heads";
             // 
             // arrowHeadsDropDownButton
             // 
@@ -1585,13 +1590,6 @@ namespace Greenshot {
             this.openDirectoryMenuItem.Size = new System.Drawing.Size(263, 22);
             this.openDirectoryMenuItem.Text = "Open directory in Windows Explorer";
             this.openDirectoryMenuItem.Click += new System.EventHandler(this.OpenDirectoryMenuItemClick);
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.clearToolStripMenuItem.Text = "Delete all";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // ImageEditorForm
             // 
