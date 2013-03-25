@@ -12,7 +12,7 @@
     <NoStdLib>False</NoStdLib>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -166,7 +166,6 @@
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\ClipboardHelper.cs" />
     <Compile Include="Configuration\CoreConfiguration.cs" />
-    <Compile Include="Core\CredentialsHelper.cs" />
     <Compile Include="Core\DisplayKeyAttribute.cs" />
     <Compile Include="Core\Effects.cs" />
     <Compile Include="Core\EncryptionHelper.cs" />
@@ -178,7 +177,6 @@
     <Compile Include="Core\ImageHelper.cs" />
     <Compile Include="Core\ImageOutput.cs" />
     <Compile Include="Core\InterfaceUtils.cs" />
-    <Compile Include="Core\JSONHelper.cs" />
     <Compile Include="Core\Language.cs" />
     <Compile Include="Core\Objects.cs" />
     <Compile Include="Core\PluginUtils.cs" />
@@ -282,7 +280,6 @@
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Helpers\CopyData.cs" />
     <Compile Include="Helpers\GeometryHelper.cs" />
-    <None Include="Helpers\HookHelper.cs" />
     <Compile Include="Helpers\WindowWrapper.cs" />
     <Compile Include="IniFile\IniAttributes.cs" />
     <Compile Include="IniFile\IniConfig.cs" />
@@ -311,7 +308,6 @@
     <Compile Include="Memento\IMemento.cs" />
     <Compile Include="Memento\DrawableContainerBoundsChangeMemento.cs" />
     <Compile Include="Memento\SurfaceBackgroundChangeMemento.cs" />
-    <None Include="Helpers\ScreenCaptureHelper.cs" />
     <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\GuiRectangle.cs" />
     <Compile Include="Helpers\ScaleHelper.cs" />
