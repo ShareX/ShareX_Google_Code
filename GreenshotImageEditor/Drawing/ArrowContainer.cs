@@ -43,7 +43,7 @@ namespace Greenshot.Drawing
         {
             AddField(GetType(), FieldType.ARROWHEADS, 2);
             AddField(GetType(), FieldType.LINE_COLOR, Color.Red);
-            AddField(GetType(), FieldType.FILL_COLOR, Color.Transparent);
+            //AddField(GetType(), FieldType.FILL_COLOR, Color.Transparent);
             AddField(GetType(), FieldType.SHADOW, true);
             AddField(GetType(), FieldType.ARROWHEADS, Greenshot.Drawing.ArrowContainer.ArrowHeadCombination.END_POINT);
         }
