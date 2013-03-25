@@ -913,8 +913,10 @@ namespace Greenshot
         private void refreshFieldControls()
         {
             propertiesToolStrip.SuspendLayout();
+
             if (surface.HasSelectedElements || surface.DrawingMode != DrawingModes.None)
             {
+                toolStripSeparator5.Visible = true;
                 FieldAggregator props = surface.FieldAggregator;
                 btnFillColor.Visible = props.HasFieldValue(FieldType.FILL_COLOR);
                 btnLineColor.Visible = props.HasFieldValue(FieldType.LINE_COLOR);
@@ -934,7 +936,6 @@ namespace Greenshot
                 shadowButton.Visible = props.HasFieldValue(FieldType.SHADOW);
                 btnConfirm.Visible = btnCancel.Visible = props.HasFieldValue(FieldType.FLAGS)
                     && ((FieldType.Flag)props.GetFieldValue(FieldType.FLAGS) & FieldType.Flag.CONFIRMABLE) == FieldType.Flag.CONFIRMABLE;
-
                 obfuscateModeButton.Visible = props.HasFieldValue(FieldType.PREPARED_FILTER_OBFUSCATE);
                 highlightModeButton.Visible = props.HasFieldValue(FieldType.PREPARED_FILTER_HIGHLIGHT);
             }
@@ -942,15 +943,19 @@ namespace Greenshot
             {
                 hideToolstripItems();
             }
+
             propertiesToolStrip.ResumeLayout();
         }
 
         private void hideToolstripItems()
         {
-            foreach (ToolStripItem toolStripItem in propertiesToolStrip.Items)
-            {
-                toolStripItem.Visible = false;
-            }
+            btnFillColor.Visible = btnLineColor.Visible = lineThicknessLabel.Visible = lineThicknessUpDown.Visible = blurRadiusLabel.Visible =
+                blurRadiusUpDown.Visible = previewQualityLabel.Visible = previewQualityUpDown.Visible = magnificationFactorLabel.Visible =
+                magnificationFactorUpDown.Visible = pixelSizeLabel.Visible = pixelSizeUpDown.Visible = brightnessLabel.Visible = brightnessUpDown.Visible =
+                arrowHeadsLabel.Visible = arrowHeadsDropDownButton.Visible = fontFamilyComboBox.Visible = fontSizeLabel.Visible = fontSizeUpDown.Visible =
+                fontBoldButton.Visible = fontItalicButton.Visible = textHorizontalAlignmentButton.Visible = textVerticalAlignmentButton.Visible =
+                shadowButton.Visible = btnConfirm.Visible = btnCancel.Visible = obfuscateModeButton.Visible = highlightModeButton.Visible =
+                toolStripSeparator5.Visible = false;
         }
 
         /// <summary>
@@ -967,7 +972,7 @@ namespace Greenshot
                 if (!controlsDisabledDueToConfirmable)
                 {
                     ToolStripItemEndisabler.Disable(menuStrip1);
-                    ToolStripItemEndisabler.Disable(toolStrip1);
+                    //ToolStripItemEndisabler.Disable(propertiesToolStrip);
                     ToolStripItemEndisabler.Disable(toolStrip2);
                     ToolStripItemEndisabler.Enable(closeToolStripMenuItem);
                     controlsDisabledDueToConfirmable = true;
@@ -977,7 +982,7 @@ namespace Greenshot
             {
                 // re-enable disabled controls, confirmable element has either been confirmed or cancelled
                 ToolStripItemEndisabler.Enable(menuStrip1);
-                ToolStripItemEndisabler.Enable(toolStrip1);
+                //ToolStripItemEndisabler.Enable(propertiesToolStrip);
                 ToolStripItemEndisabler.Enable(toolStrip2);
                 controlsDisabledDueToConfirmable = false;
             }
