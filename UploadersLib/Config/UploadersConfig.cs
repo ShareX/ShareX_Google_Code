@@ -57,7 +57,7 @@ namespace UploadersLib
 
         public AccountType ImgurAccountType = AccountType.Anonymous;
         public ImgurThumbnailType ImgurThumbnailType = ImgurThumbnailType.Large_Thumbnail;
-        public OAuthInfo ImgurOAuthInfo = null;
+        public OAuth2Info ImgurOAuth2Info = null;
 
         // Flickr
 
@@ -233,7 +233,7 @@ namespace UploadersLib
                 case ImageDestination.TinyPic:
                     return TinyPicAccountType == AccountType.Anonymous || !string.IsNullOrEmpty(TinyPicRegistrationCode);
                 case ImageDestination.Imgur:
-                    return ImgurAccountType == AccountType.Anonymous || OAuthInfo.CheckOAuth(ImgurOAuthInfo);
+                    return ImgurAccountType == AccountType.Anonymous || OAuth2Info.CheckOAuth(ImgurOAuth2Info);
                 case ImageDestination.Flickr:
                     return !string.IsNullOrEmpty(FlickrAuthInfo.Token);
                 case ImageDestination.Photobucket:

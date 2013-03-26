@@ -40,14 +40,20 @@ namespace UploadersLib
         [Category("TinyPic"), DefaultValue(ApiKeys.TinyPicKey), Description("TinyPic Key")]
         public string TinyPicKey { get; set; }
 
-        [Category("Imgur"), DefaultValue(ApiKeys.ImgurAnonymousKey), Description("Imgur Anonymous Key")]
+        /*[Category("Imgur"), DefaultValue(ApiKeys.ImgurAnonymousKey), Description("Imgur Anonymous Key")]
         public string ImgurAnonymousKey { get; set; }
 
         [Category("Imgur"), DefaultValue(ApiKeys.ImgurConsumerKey), Description("Imgur Consumer Key")]
         public string ImgurConsumerKey { get; set; }
 
         [Category("Imgur"), DefaultValue(ApiKeys.ImgurConsumerSecret), Description("Imgur Consumer Secret")]
-        public string ImgurConsumerSecret { get; set; }
+        public string ImgurConsumerSecret { get; set; }*/
+
+        [Category("Imgur"), DefaultValue(ApiKeys.ImgurClientID), Description("Imgur Client ID")]
+        public string ImgurClientID { get; set; }
+
+        [Category("Imgur"), DefaultValue(ApiKeys.ImgurClientSecret), Description("Imgur Client Secret")]
+        public string ImgurClientSecret { get; set; }
 
         [Category("Flickr"), DefaultValue(ApiKeys.FlickrKey), Description("Flickr Key")]
         public string FlickrKey { get; set; }

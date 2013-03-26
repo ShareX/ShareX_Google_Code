@@ -139,9 +139,9 @@ namespace UploadersLib
 
             cbImgurThumbnailType.SelectedIndex = (int)Config.ImgurThumbnailType;
 
-            if (OAuthInfo.CheckOAuth(Config.ImgurOAuthInfo))
+            if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
             {
-                lblImgurAccountStatus.Text = "Login successful: " + Config.ImgurOAuthInfo.UserToken;
+                lblImgurAccountStatus.Text = "Login successful.";
             }
 
             // Photobucket
