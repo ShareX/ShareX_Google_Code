@@ -37,5 +37,20 @@ namespace UploadersLib.HelperClasses
         public int expires_in { get; set; }
         public string token_type { get; set; }
         public string scope { get; set; }
+
+        public DateTime ExpireDate { get; set; }
+
+        public bool IsExpired
+        {
+            get
+            {
+                return ExpireDate == DateTime.MinValue || DateTime.Now > ExpireDate;
+            }
+        }
+
+        public void UpdateExpireDate()
+        {
+            ExpireDate = DateTime.Now + TimeSpan.FromSeconds(expires_in - 60);
+        }
     }
 }

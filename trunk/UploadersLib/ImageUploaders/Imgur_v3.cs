@@ -51,13 +51,13 @@ namespace UploadersLib.ImageUploaders
             return string.Format("https://api.imgur.com/oauth2/authorize?client_id={0}&response_type={1}", AuthInfo.Client_ID, "pin");
         }
 
-        public bool GetAccessToken(string verificationCode)
+        public bool GetAccessToken(string pin)
         {
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("client_id", AuthInfo.Client_ID);
             args.Add("client_secret", AuthInfo.Client_Secret);
             args.Add("grant_type", "pin");
-            args.Add("pin", verificationCode);
+            args.Add("pin", pin);
 
             string response = SendPostRequest("https://api.imgur.com/oauth2/token", args);
 
@@ -67,6 +67,7 @@ namespace UploadersLib.ImageUploaders
 
                 if (token != null)
                 {
+                    token.UpdateExpireDate();
                     AuthInfo.Token = token;
                     return true;
                 }
@@ -93,6 +94,7 @@ namespace UploadersLib.ImageUploaders
 
                     if (token != null)
                     {
+                        token.UpdateExpireDate();
                         AuthInfo.Token = token;
                         return true;
                     }
@@ -114,6 +116,15 @@ namespace UploadersLib.ImageUploaders
 
             if (UploadMethod == AccountType.User)
             {
+                if (AuthInfo.Token.IsExpired)
+                {
+                    if (!RefreshAccessToken())
+                    {
+                        Errors.Add("Refresh access token failed.");
+                        return null;
+                    }
+                }
+
                 headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
             }
             else if (UploadMethod == AccountType.Anonymous)
