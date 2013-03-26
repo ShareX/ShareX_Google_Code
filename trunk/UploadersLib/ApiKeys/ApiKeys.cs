@@ -31,9 +31,11 @@ namespace UploadersLib
         public const string ImageShackKey = "025NOQXYf0bda57b2c9dbb88d1891870306be674";
         public const string TinyPicID = "e2aabb8d555322fa";
         public const string TinyPicKey = "00a68ed73ddd54da52dc2d5803fa35ee";
-        public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";
+        /*public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";
         public const string ImgurConsumerKey = "7daf4350229dc1fd8a9d5f8a2302094004fab40cf";
-        public const string ImgurConsumerSecret = "6324137e9489cc561f76c372cc5efcd3";
+        public const string ImgurConsumerSecret = "6324137e9489cc561f76c372cc5efcd3";*/
+        public const string ImgurClientID = "d297fd441566f99";
+        public const string ImgurClientSecret = "e7d67e86cafa32e313930100607c7ed953c5ad83";
         public const string FlickrKey = "fbe042faa01e6af0371b6d87be75436a";
         public const string FlickrSecret = "9f85687dcccc7ef9";
         public const string PhotobucketConsumerKey = "149828681";

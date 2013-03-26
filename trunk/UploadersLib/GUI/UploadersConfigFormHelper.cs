@@ -52,13 +52,13 @@ namespace UploadersLib
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo(APIKeys.ImgurConsumerKey, APIKeys.ImgurConsumerSecret);
+                OAuth2Info oauth = new OAuth2Info(APIKeys.ImgurClientID, APIKeys.ImgurClientSecret);
 
-                string url = new Imgur(oauth).GetAuthorizationURL();
+                string url = new Imgur_v3(oauth).GetAuthorizationURL();
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    Config.ImgurOAuthInfo = oauth;
+                    Config.ImgurOAuth2Info = oauth;
                     Helpers.LoadBrowserAsync(url);
                     DebugHelper.WriteLine("ImgurAuthOpen - Authorization URL is opened: " + url);
                 }
@@ -77,16 +77,15 @@ namespace UploadersLib
         {
             try
             {
-                string verification = txtImgurVerificationCode.Text;
+                string pin = txtImgurVerificationCode.Text;
 
-                if (!string.IsNullOrEmpty(verification) && Config.ImgurOAuthInfo != null &&
-                    !string.IsNullOrEmpty(Config.ImgurOAuthInfo.AuthToken) && !string.IsNullOrEmpty(Config.ImgurOAuthInfo.AuthSecret))
+                if (!string.IsNullOrEmpty(pin) && Config.ImgurOAuth2Info != null)
                 {
-                    bool result = new Imgur(Config.ImgurOAuthInfo).GetAccessToken(verification);
+                    bool result = new Imgur_v3(Config.ImgurOAuth2Info).GetAccessToken(pin);
 
                     if (result)
                     {
-                        lblImgurAccountStatus.Text = "Login successful: " + Config.ImgurOAuthInfo.UserToken;
+                        lblImgurAccountStatus.Text = "Login successful.";
                         MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else

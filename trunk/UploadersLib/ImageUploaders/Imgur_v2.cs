@@ -41,7 +41,7 @@ namespace UploadersLib.ImageUploaders
         Large_Thumbnail
     }
 
-    public sealed class Imgur : ImageUploader, IOAuth
+    public sealed class Imgur_v2 : ImageUploader, IOAuth
     {
         private const string URLAnonymousUpload = "http://api.imgur.com/2/upload.xml";
         private const string URLUserUpload = "http://api.imgur.com/2/account/images.xml";
@@ -55,20 +55,20 @@ namespace UploadersLib.ImageUploaders
         public OAuthInfo AuthInfo { get; set; }
         public ImgurThumbnailType ThumbnailType { get; set; }
 
-        public Imgur(AccountType uploadMethod, string anonymousKey, OAuthInfo oauth)
+        public Imgur_v2(AccountType uploadMethod, string anonymousKey, OAuthInfo oauth)
         {
             UploadMethod = uploadMethod;
             AnonymousKey = anonymousKey;
             AuthInfo = oauth;
         }
 
-        public Imgur(string anonymousKey)
+        public Imgur_v2(string anonymousKey)
         {
             UploadMethod = AccountType.Anonymous;
             AnonymousKey = anonymousKey;
         }
 
-        public Imgur(OAuthInfo oauth)
+        public Imgur_v2(OAuthInfo oauth)
         {
             UploadMethod = AccountType.User;
             AuthInfo = oauth;

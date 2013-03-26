@@ -431,8 +431,9 @@ namespace ShareX
                         Program.UploadersConfig.TinyPicRegistrationCode);
                     break;
                 case ImageDestination.Imgur:
-                    imageUploader = new Imgur(Program.UploadersConfig.ImgurAccountType, ApiKeys.ImgurAnonymousKey, Program.UploadersConfig.ImgurOAuthInfo)
+                    imageUploader = new Imgur_v3(Program.UploadersConfig.ImgurOAuth2Info)
                     {
+                        UploadMethod = Program.UploadersConfig.ImgurAccountType,
                         ThumbnailType = Program.UploadersConfig.ImgurThumbnailType
                     };
                     break;
