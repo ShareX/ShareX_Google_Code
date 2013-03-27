@@ -623,26 +623,34 @@ namespace Greenshot
 
         private void ImageEditorFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!forceClose && surface.Modified && !editorConfiguration.SuppressSaveDialogAtClose)
+            if (!forceClose && surface.Modified)
             {
-                // Make sure the editor is visible
-                WindowDetails.ToForeground(this.Handle);
-
-                MessageBoxButtons buttons = MessageBoxButtons.YesNoCancel;
-                // Dissallow "CANCEL" if the application needs to shutdown
-                if (e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
+                if (!editorConfiguration.SuppressSaveDialogAtClose)
                 {
-                    buttons = MessageBoxButtons.YesNo;
-                }
-                DialogResult result = MessageBox.Show("Do you want the save the screenshot?", "Save image?", buttons, MessageBoxIcon.Question);
+                    // Make sure the editor is visible
+                    WindowDetails.ToForeground(this.Handle);
 
-                if (result.Equals(DialogResult.Cancel))
-                {
-                    e.Cancel = true;
-                    return;
-                }
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNoCancel;
+                    // Dissallow "CANCEL" if the application needs to shutdown
+                    if (e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
+                    {
+                        buttons = MessageBoxButtons.YesNo;
+                    }
 
-                if (result.Equals(DialogResult.Yes))
+                    DialogResult result = MessageBox.Show("Do you want the save the screenshot?", "Save image?", buttons, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+
+                    if (result == DialogResult.Yes)
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                }
+                else
                 {
                     DialogResult = DialogResult.OK;
                 }
