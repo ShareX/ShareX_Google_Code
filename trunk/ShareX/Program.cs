@@ -279,6 +279,7 @@ namespace ShareX
                 Application.Run(MainForm);
 
                 Settings.Save();
+                UploadersConfig.Save();
 
                 MyLogger.WriteLine("ShareX closing");
                 MyLogger.SaveLog(LogFilePath);

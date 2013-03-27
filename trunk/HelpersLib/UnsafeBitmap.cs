@@ -53,7 +53,10 @@ namespace HelpersLib
             Width = bitmap.Width;
             Height = bitmap.Height;
 
-            if (lockBitmap) Lock(imageLockMode);
+            if (lockBitmap)
+            {
+                Lock(imageLockMode);
+            }
         }
 
         public void Lock(ImageLockMode imageLockMode = ImageLockMode.ReadWrite)
@@ -61,7 +64,7 @@ namespace HelpersLib
             if (!IsLocked)
             {
                 IsLocked = true;
-                bitmapData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                bitmapData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), imageLockMode, PixelFormat.Format32bppArgb);
                 Pointer = (ColorBgra*)bitmapData.Scan0.ToPointer();
             }
         }
@@ -101,7 +104,10 @@ namespace HelpersLib
         {
             int pixelCount = bmp1.PixelCount;
 
-            if (pixelCount != bmp2.PixelCount) return false;
+            if (pixelCount != bmp2.PixelCount)
+            {
+                return false;
+            }
 
             bmp1.Lock(ImageLockMode.ReadOnly);
             bmp2.Lock(ImageLockMode.ReadOnly);
@@ -111,7 +117,10 @@ namespace HelpersLib
 
             for (int i = 0; i < pixelCount; i++)
             {
-                if (pointer1->Bgra != pointer2->Bgra) return false;
+                if (pointer1->Bgra != pointer2->Bgra)
+                {
+                    return false;
+                }
 
                 pointer1++;
                 pointer2++;

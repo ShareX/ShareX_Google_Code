@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace UploadersLib.HelperClasses
 
         public DateTime ExpireDate { get; set; }
 
+        [JsonIgnore]
         public bool IsExpired
         {
             get
