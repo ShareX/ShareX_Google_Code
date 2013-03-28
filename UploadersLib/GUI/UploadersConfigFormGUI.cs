@@ -142,6 +142,7 @@ namespace UploadersLib
             if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
             {
                 lblImgurAccountStatus.Text = "Login successful.";
+                btnImgurRefreshAccessToken.Enabled = true;
             }
 
             // Photobucket

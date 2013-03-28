@@ -201,6 +201,11 @@ namespace UploadersLib
             ImgurAuthComplete();
         }
 
+        private void btnImgurRefreshAccessToken_Click(object sender, EventArgs e)
+        {
+            ImgurAuthRefresh();
+        }
+
         #endregion Imgur
 
         #region Photobucket

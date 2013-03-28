@@ -78,7 +78,7 @@ namespace UploadersLib.ImageUploaders
 
         public bool RefreshAccessToken()
         {
-            if (AuthInfo != null && AuthInfo.Token != null && !string.IsNullOrEmpty(AuthInfo.Token.refresh_token))
+            if (OAuth2Info.CheckOAuth(AuthInfo) && !string.IsNullOrEmpty(AuthInfo.Token.refresh_token))
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("refresh_token", AuthInfo.Token.refresh_token);
