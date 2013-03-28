@@ -94,6 +94,35 @@ namespace UploadersLib
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         atcImgurAccountType.SelectedAccountType = AccountType.Anonymous;
                     }
+
+                    btnImgurRefreshAccessToken.Enabled = result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ImgurAuthRefresh()
+        {
+            try
+            {
+                if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
+                {
+                    bool result = new Imgur_v3(Config.ImgurOAuth2Info).RefreshAccessToken();
+
+                    if (result)
+                    {
+                        lblImgurAccountStatus.Text = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        lblImgurAccountStatus.Text = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        atcImgurAccountType.SelectedAccountType = AccountType.Anonymous;
+                    }
                 }
             }
             catch (Exception ex)
