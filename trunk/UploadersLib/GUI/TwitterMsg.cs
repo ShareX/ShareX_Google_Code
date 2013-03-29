@@ -80,9 +80,9 @@ namespace UploadersLib
                     try
                     {
                         TweetStatus status = new Twitter(AuthInfo).TweetMessage(Message);
-                        if (status != null && !string.IsNullOrEmpty(status.InReplyToScreenName))
+                        if (status != null && !string.IsNullOrEmpty(status.in_reply_to_screen_name))
                         {
-                            Config.AddUser(status.InReplyToScreenName);
+                            Config.AddUser(status.in_reply_to_screen_name);
                         }
                     }
                     catch (Exception ex)

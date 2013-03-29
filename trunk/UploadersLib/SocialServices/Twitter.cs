@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -33,12 +34,11 @@ namespace UploadersLib.SocialServices
 {
     public class Twitter : Uploader, IOAuth
     {
-        private const string APIVersion = "1";
-        private const string URLRequestToken = "https://twitter.com/oauth/request_token";
-        private const string URLAuthorize = "https://twitter.com/oauth/authorize";
-        private const string URLAccessToken = "https://twitter.com/oauth/access_token";
-        private const string URLTweet = "https://twitter.com/statuses/update.xml";
-        // private const string URLTweet =  "http://api.twitter.com/" + APIVersion + "/statuses/update.xml";
+        private const string APIVersion = "1.1";
+        private const string URLRequestToken = "https://api.twitter.com/oauth/request_token";
+        private const string URLAuthorize = "https://api.twitter.com/oauth/authorize";
+        private const string URLAccessToken = "https://api.twitter.com/oauth/access_token";
+        private const string URLTweet = "https://api.twitter.com/" + APIVersion + "/statuses/update.json";
 
         public OAuthInfo AuthInfo { get; set; }
 
@@ -67,35 +67,19 @@ namespace UploadersLib.SocialServices
 
             string response = SendPostRequest(query);
 
-            return ParseTweetResponse(response);
-        }
-
-        private TweetStatus ParseTweetResponse(string response)
-        {
-            TweetStatus tweet = new TweetStatus();
-
-            XDocument xd = XDocument.Parse(response);
-
-            if (xd != null)
+            if (!string.IsNullOrEmpty(response))
             {
-                XElement xe = xd.Element("status");
-
-                if (xe != null)
-                {
-                    tweet.ID = Convert.ToInt64(xe.GetElementValue("id"));
-                    tweet.Text = xe.GetElementValue("text");
-                    tweet.InReplyToScreenName = xe.GetElementValue("in_reply_to_screen_name");
-                }
+                return JsonConvert.DeserializeObject<TweetStatus>(response);
             }
 
-            return tweet;
+            return null;
         }
     }
 
     public class TweetStatus
     {
-        public long ID { get; set; }
-        public string Text { get; set; }
-        public string InReplyToScreenName { get; set; }
+        public long id { get; set; }
+        public string text { get; set; }
+        public string in_reply_to_screen_name { get; set; }
     }
 }
