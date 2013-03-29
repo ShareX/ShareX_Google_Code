@@ -25,14 +25,18 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace HelpersLib
 {
     public class ExternalProgram
     {
         public bool IsActive { get; set; }
+
         public string Name { get; set; }
+
         public string Path { get; set; }
+
         public string Args { get; set; }
 
         public ExternalProgram()
@@ -50,7 +54,7 @@ namespace HelpersLib
 
         public void Run(string filePath)
         {
-            if (!string.IsNullOrEmpty(Path))
+            if (File.Exists(Path))
             {
                 filePath = '"' + filePath.Trim('"') + '"';
 
