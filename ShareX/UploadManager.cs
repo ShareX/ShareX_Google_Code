@@ -221,16 +221,10 @@ namespace ShareX
 
         public static void UpdateProxySettings()
         {
-            ProxySettings proxy = new ProxySettings();
-
-            if (!string.IsNullOrEmpty(Program.Settings.ProxySettings.Host))
+            Uploader.ProxySettings = new ProxySettings()
             {
-                proxy.ProxyConfig = EProxyConfigType.ManualProxy;
-            }
-
-            proxy.ProxyActive = Program.Settings.ProxySettings;
-
-            Uploader.ProxySettings = proxy;
+                ProxyActive = Program.Settings.ProxySettings
+            };
         }
     }
 }
