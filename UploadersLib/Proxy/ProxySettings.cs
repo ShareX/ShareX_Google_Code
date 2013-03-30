@@ -30,7 +30,7 @@ namespace UploadersLib.HelperClasses
 {
     public class ProxySettings
     {
-        public EProxyConfigType ProxyConfig { get; set; }
+        public EProxyConfigType ProxyConfig { get; private set; }
 
         public ProxyInfo ProxyActive { get; set; }
 
@@ -43,8 +43,9 @@ namespace UploadersLib.HelperClasses
                     string host = ProxyActive.Host;
                     NetworkCredential credentials = new NetworkCredential(ProxyActive.UserName, ProxyActive.Password);
 
-                    if (!string.IsNullOrEmpty(host)) // ManualProxy
+                    if (!string.IsNullOrEmpty(host))
                     {
+                        ProxyConfig = EProxyConfigType.ManualProxy;
                         return new WebProxy(ProxyActive.GetAddress(), true, null, credentials);
                     }
                     else
@@ -52,11 +53,14 @@ namespace UploadersLib.HelperClasses
                         WebProxy systemProxy = HelpersLib.Helpers.GetDefaultWebProxy();
                         if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
                         {
-                            systemProxy.Credentials = credentials; // SystemProxy
+                            ProxyConfig = EProxyConfigType.SystemProxy;
+                            systemProxy.Credentials = credentials;
                             return systemProxy;
                         }
                     }
                 }
+
+                ProxyConfig = EProxyConfigType.NoProxy;
                 return null;
             }
         }
