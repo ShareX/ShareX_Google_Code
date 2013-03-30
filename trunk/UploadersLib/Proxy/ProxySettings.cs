@@ -38,19 +38,25 @@ namespace UploadersLib.HelperClasses
         {
             get
             {
-                switch (ProxyConfig)
+                if (ProxyActive != null)
                 {
-                    case EProxyConfigType.ManualProxy:
-                        if (ProxyActive != null)
-                        {
-                            NetworkCredential credential = new NetworkCredential(ProxyActive.UserName, ProxyActive.Password);
-                            return new WebProxy(ProxyActive.GetAddress(), true, null, credential);
-                        }
-                        break;
-                    case EProxyConfigType.SystemProxy:
-                        return HttpWebRequest.DefaultWebProxy;
-                }
+                    string host = ProxyActive.Host;
+                    NetworkCredential credentials = new NetworkCredential(ProxyActive.UserName, ProxyActive.Password);
 
+                    if (!string.IsNullOrEmpty(host)) // ManualProxy
+                    {
+                        return new WebProxy(ProxyActive.GetAddress(), true, null, credentials);
+                    }
+                    else
+                    {
+                        WebProxy systemProxy = HelpersLib.Helpers.GetDefaultWebProxy();
+                        if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
+                        {
+                            systemProxy.Credentials = credentials; // SystemProxy
+                            return systemProxy;
+                        }
+                    }
+                }
                 return null;
             }
         }
@@ -66,15 +72,19 @@ namespace UploadersLib.HelperClasses
                     case Proxy.HTTP:
                         proxyType = ProxyType.Http;
                         break;
+
                     case Proxy.SOCKS4:
                         proxyType = ProxyType.Socks4;
                         break;
+
                     case Proxy.SOCKS4a:
                         proxyType = ProxyType.Socks4a;
                         break;
+
                     case Proxy.SOCKS5:
                         proxyType = ProxyType.Socks5;
                         break;
+
                     default:
                         proxyType = ProxyType.None;
                         break;
@@ -90,7 +100,7 @@ namespace UploadersLib.HelperClasses
 
         public IProxyClient GetProxyClient()
         {
-            if (ProxyConfig != EProxyConfigType.NoProxy && ProxyActive != null)
+            if (ProxyActive != null)
             {
                 return GetProxyClient(ProxyActive);
             }
