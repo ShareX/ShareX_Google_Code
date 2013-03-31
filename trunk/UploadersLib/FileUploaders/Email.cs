@@ -42,9 +42,6 @@ namespace UploadersLib.FileUploaders
 
         public void Send(string toEmail, string subject, string body, Stream stream, string fileName)
         {
-            MailAddress fromAddress = new MailAddress(FromEmail);
-            MailAddress toAddress = new MailAddress(toEmail);
-
             SmtpClient smtp = new SmtpClient
             {
                 Host = SmtpServer,
@@ -52,10 +49,10 @@ namespace UploadersLib.FileUploaders
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, Password)
+                Credentials = new NetworkCredential(FromEmail, Password)
             };
 
-            using (MailMessage message = new MailMessage(fromAddress, toAddress))
+            using (MailMessage message = new MailMessage(FromEmail, toEmail))
             {
                 message.Subject = subject;
                 message.Body = body;

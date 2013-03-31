@@ -51,7 +51,7 @@
             // txtToEmail
             // 
             this.txtToEmail.Location = new System.Drawing.Point(96, 15);
-            this.txtToEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtToEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtToEmail.Name = "txtToEmail";
             this.txtToEmail.Size = new System.Drawing.Size(287, 22);
             this.txtToEmail.TabIndex = 1;
@@ -69,7 +69,7 @@
             // txtSubject
             // 
             this.txtSubject.Location = new System.Drawing.Point(96, 44);
-            this.txtSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubject.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(287, 22);
             this.txtSubject.TabIndex = 3;
@@ -87,7 +87,7 @@
             // txtMessage
             // 
             this.txtMessage.Location = new System.Drawing.Point(21, 98);
-            this.txtMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMessage.Margin = new System.Windows.Forms.Padding(4);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(361, 176);
@@ -96,7 +96,7 @@
             // btnSend
             // 
             this.btnSend.Location = new System.Drawing.Point(277, 286);
-            this.btnSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(100, 28);
             this.btnSend.TabIndex = 7;
@@ -108,7 +108,7 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(171, 286);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 6;
@@ -118,7 +118,6 @@
             // 
             // EmailForm
             // 
-            this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
@@ -131,7 +130,7 @@
             this.Controls.Add(this.lblSubject);
             this.Controls.Add(this.txtToEmail);
             this.Controls.Add(this.lblToEmail);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EmailForm";
             this.Text = "Send Email";
             this.ResumeLayout(false);
