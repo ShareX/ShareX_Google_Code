@@ -35,6 +35,7 @@ namespace ScreenCapture
     public class ScreenRecorder : IDisposable
     {
         public bool IsRecording { get; private set; }
+        public bool WriteCompressed { get; set; }
 
         public int FPS
         {
@@ -90,7 +91,7 @@ namespace ScreenCapture
         private Rectangle captureRectangle;
         private ScreenRecorderCache cache;
 
-        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath)
+        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, bool writeCompressed)
         {
             if (string.IsNullOrEmpty(cachePath))
             {
@@ -101,6 +102,7 @@ namespace ScreenCapture
             DurationSeconds = durationSeconds;
             CaptureRectangle = captureRectangle;
             CachePath = cachePath;
+            WriteCompressed = writeCompressed;
         }
 
         private void UpdateInfo()
@@ -184,7 +186,7 @@ namespace ScreenCapture
                                 img2 = CaptureHelpers.ResizeImage(img2, width, heightLimit);
                             }
 
-                            aviManager.AddFrame(img2);
+                            aviManager.AddFrame(img2, WriteCompressed);
                         }
                         finally
                         {

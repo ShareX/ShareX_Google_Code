@@ -385,7 +385,7 @@ namespace AviFile
             }
             else
             {
-                //SetFormat(aviStream, 0);
+                SetFormat(aviStream, 0);
             }
         }
 

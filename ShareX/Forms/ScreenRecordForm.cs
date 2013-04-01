@@ -89,7 +89,7 @@ namespace ShareX
                     await TaskEx.Run(() =>
                     {
                         screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
-                            CaptureRectangle, Program.ScreenRecorderCacheFilePath);
+                            CaptureRectangle, Program.ScreenRecorderCacheFilePath, true);
                         screenRecorder.StartRecording();
                     });
                 }
