@@ -104,7 +104,7 @@ namespace UploadersLib.HelperClasses
             sb.AppendLine("Thumbnail URL: " + this.ThumbnailURL);
             sb.AppendLine("Shortened URL: " + this.ShortenedURL);
             sb.AppendLine("Deletion URL: " + this.DeletionURL);
-            sb.AppendLine("Local File Path: " + this.LocalFilePath); 
+            sb.AppendLine("Local File Path: " + this.LocalFilePath);
             return sb.ToString();
         }
     }

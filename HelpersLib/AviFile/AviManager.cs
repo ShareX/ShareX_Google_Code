@@ -1,20 +1,19 @@
 /* This class has been written by
  * Corinna John (Hannover, Germany)
  * cj@binary-universe.net
- * 
+ *
  * You may do with this code whatever you like,
  * except selling it or claiming any rights/ownership.
- * 
+ *
  * Please send me a little feedback about what you're
  * using this code for and what changes you'd like to
  * see in later versions. (And please excuse my bad english.)
- * 
+ *
  * WARNING: This is experimental code.
  * Please do not expect "Release Quality".
  * */
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -22,110 +21,118 @@ using System.Runtime.InteropServices;
 
 namespace AviFile
 {
-	public class AviManager
-	{
-		private int aviFile = 0;
-		private ArrayList streams = new ArrayList();
+    public class AviManager
+    {
+        private int aviFile = 0;
+        private ArrayList streams = new ArrayList();
 
-		/// <summary>Open or create an AVI file</summary>
-		/// <param name="fileName">Name of the AVI file</param>
-		/// <param name="open">true: Open the file; false: Create or overwrite the file</param>
-		public AviManager(String fileName, bool open){
-			Avi.AVIFileInit();
-			int result;
+        /// <summary>Open or create an AVI file</summary>
+        /// <param name="fileName">Name of the AVI file</param>
+        /// <param name="open">true: Open the file; false: Create or overwrite the file</param>
+        public AviManager(String fileName, bool open)
+        {
+            Avi.AVIFileInit();
+            int result;
 
-			if(open){ //open existing file
-				
-				result = Avi.AVIFileOpen(
-					ref aviFile, fileName,
-					Avi.OF_READWRITE, 0);
+            if (open)
+            { //open existing file
+                result = Avi.AVIFileOpen(
+                    ref aviFile, fileName,
+                    Avi.OF_READWRITE, 0);
+            }
+            else
+            { //create empty file
+                result = Avi.AVIFileOpen(
+                    ref aviFile, fileName,
+                    Avi.OF_WRITE | Avi.OF_CREATE, 0);
+            }
 
-			}else{ //create empty file
-				
-				result = Avi.AVIFileOpen(
-					ref aviFile, fileName, 
-					Avi.OF_WRITE | Avi.OF_CREATE, 0);
-			
-			}
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIFileOpen: " + result.ToString());
+            }
+        }
 
-			if(result != 0) {
-				throw new Exception("Exception in AVIFileOpen: "+result.ToString());
-			}
-		}
-
-        private AviManager(int aviFile) {
+        private AviManager(int aviFile)
+        {
             this.aviFile = aviFile;
         }
 
         /// <summary>Get the first video stream - usually there is only one video stream</summary>
-		/// <returns>VideoStream object for the stream</returns>
-		public VideoStream GetVideoStream(){
-			IntPtr aviStream;
+        /// <returns>VideoStream object for the stream</returns>
+        public VideoStream GetVideoStream()
+        {
+            IntPtr aviStream;
 
-			int result = Avi.AVIFileGetStream(
-				aviFile,
-				out aviStream,
-				Avi.streamtypeVIDEO, 0);
-			
-			if(result != 0){
-				throw new Exception("Exception in AVIFileGetStream: "+result.ToString());
-			}
+            int result = Avi.AVIFileGetStream(
+                aviFile,
+                out aviStream,
+                Avi.streamtypeVIDEO, 0);
 
-			VideoStream stream = new VideoStream(aviFile, aviStream);
-			streams.Add(stream);
-			return stream;
-		}
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIFileGetStream: " + result.ToString());
+            }
 
-		/// <summary>Getthe first wave audio stream</summary>
-		/// <returns>AudioStream object for the stream</returns>
-		public AudioStream GetWaveStream(){
-			IntPtr aviStream;
+            VideoStream stream = new VideoStream(aviFile, aviStream);
+            streams.Add(stream);
+            return stream;
+        }
 
-			int result = Avi.AVIFileGetStream(
-				aviFile,
-				out aviStream,
-				Avi.streamtypeAUDIO, 0);
-			
-			if(result != 0){
-				throw new Exception("Exception in AVIFileGetStream: "+result.ToString());
-			}
+        /// <summary>Getthe first wave audio stream</summary>
+        /// <returns>AudioStream object for the stream</returns>
+        public AudioStream GetWaveStream()
+        {
+            IntPtr aviStream;
 
-			AudioStream stream = new AudioStream(aviFile, aviStream);
-			streams.Add(stream);
-			return stream;
-		}
+            int result = Avi.AVIFileGetStream(
+                aviFile,
+                out aviStream,
+                Avi.streamtypeAUDIO, 0);
 
-		/// <summary>Get a stream from the internal list of opened streams</summary>
-		/// <param name="index">Index of the stream. The streams are not sorted, the first stream is the one that was opened first.</param>
-		/// <returns>VideoStream at position [index]</returns>
-		/// <remarks>
-		/// Use this method after DecompressToNewFile,
-		/// to get the copied stream from the new AVI file
-		/// </remarks>
-		/// <example>
-		/// //streams cannot be edited - copy to a new file
-		///	AviManager newManager = aviStream.DecompressToNewFile(@"..\..\testdata\temp.avi", true);
-		/// //there is only one stream in the new file - get it and add a frame
-		///	VideoStream aviStream = newManager.GetOpenStream(0);
-		///	aviStream.AddFrame(bitmap);
-		/// </example>
-		public VideoStream GetOpenStream(int index){
-			return (VideoStream)streams[index];
-		}
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIFileGetStream: " + result.ToString());
+            }
 
-		/// <summary>Add an empty video stream to the file</summary>
-		/// <param name="isCompressed">true: Create a compressed stream before adding frames</param>
-		/// <param name="frameRate">Frames per second</param>
-		/// <param name="frameSize">Size of one frame in bytes</param>
-		/// <param name="width">Width of each image</param>
-		/// <param name="height">Height of each image</param>
-		/// <param name="format">PixelFormat of the images</param>
-		/// <returns>VideoStream object for the new stream</returns>
-		public VideoStream AddVideoStream(bool isCompressed, double frameRate, int frameSize, int width, int height, PixelFormat format){
-			VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, frameSize, width, height, format);
-			streams.Add(stream);
-			return stream;
-		}
+            AudioStream stream = new AudioStream(aviFile, aviStream);
+            streams.Add(stream);
+            return stream;
+        }
+
+        /// <summary>Get a stream from the internal list of opened streams</summary>
+        /// <param name="index">Index of the stream. The streams are not sorted, the first stream is the one that was opened first.</param>
+        /// <returns>VideoStream at position [index]</returns>
+        /// <remarks>
+        /// Use this method after DecompressToNewFile,
+        /// to get the copied stream from the new AVI file
+        /// </remarks>
+        /// <example>
+        /// //streams cannot be edited - copy to a new file
+        ///	AviManager newManager = aviStream.DecompressToNewFile(@"..\..\testdata\temp.avi", true);
+        /// //there is only one stream in the new file - get it and add a frame
+        ///	VideoStream aviStream = newManager.GetOpenStream(0);
+        ///	aviStream.AddFrame(bitmap);
+        /// </example>
+        public VideoStream GetOpenStream(int index)
+        {
+            return (VideoStream)streams[index];
+        }
+
+        /// <summary>Add an empty video stream to the file</summary>
+        /// <param name="isCompressed">true: Create a compressed stream before adding frames</param>
+        /// <param name="frameRate">Frames per second</param>
+        /// <param name="frameSize">Size of one frame in bytes</param>
+        /// <param name="width">Width of each image</param>
+        /// <param name="height">Height of each image</param>
+        /// <param name="format">PixelFormat of the images</param>
+        /// <returns>VideoStream object for the new stream</returns>
+        public VideoStream AddVideoStream(bool isCompressed, double frameRate, int frameSize, int width, int height, PixelFormat format)
+        {
+            VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, frameSize, width, height, format);
+            streams.Add(stream);
+            return stream;
+        }
 
         /// <summary>Add an empty video stream to the file</summary>
         /// <remarks>Compresses the stream without showing the codecs dialog</remarks>
@@ -133,34 +140,38 @@ namespace AviFile
         /// <param name="frameRate">Frames per second</param>
         /// <param name="firstFrame">Image to write into the stream as the first frame</param>
         /// <returns>VideoStream object for the new stream</returns>
-        public VideoStream AddVideoStream(Avi.AVICOMPRESSOPTIONS compressOptions, double frameRate, Bitmap firstFrame) {
+        public VideoStream AddVideoStream(Avi.AVICOMPRESSOPTIONS compressOptions, double frameRate, Bitmap firstFrame)
+        {
             VideoStream stream = new VideoStream(aviFile, compressOptions, frameRate, firstFrame);
             streams.Add(stream);
             return stream;
         }
 
         /// <summary>Add an empty video stream to the file</summary>
-		/// <param name="isCompressed">true: Create a compressed stream before adding frames</param>
-		/// <param name="frameRate">Frames per second</param>
-		/// <param name="firstFrame">Image to write into the stream as the first frame</param>
-		/// <returns>VideoStream object for the new stream</returns>
-		public VideoStream AddVideoStream(bool isCompressed, double frameRate, Bitmap firstFrame){
-			VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, firstFrame);
-			streams.Add(stream);
-			return stream;
-		}
+        /// <param name="isCompressed">true: Create a compressed stream before adding frames</param>
+        /// <param name="frameRate">Frames per second</param>
+        /// <param name="firstFrame">Image to write into the stream as the first frame</param>
+        /// <returns>VideoStream object for the new stream</returns>
+        public VideoStream AddVideoStream(bool isCompressed, double frameRate, Bitmap firstFrame)
+        {
+            VideoStream stream = new VideoStream(aviFile, isCompressed, frameRate, firstFrame);
+            streams.Add(stream);
+            return stream;
+        }
 
-		/// <summary>Add a wave audio stream from another file to this file</summary>
-		/// <param name="waveFileName">Name of the wave file to add</param>
+        /// <summary>Add a wave audio stream from another file to this file</summary>
+        /// <param name="waveFileName">Name of the wave file to add</param>
         /// <param name="startAtFrameIndex">Index of the video frame at which the sound is going to start</param>
-        public void AddAudioStream(String waveFileName, int startAtFrameIndex) {
+        public void AddAudioStream(String waveFileName, int startAtFrameIndex)
+        {
             AviManager audioManager = new AviManager(waveFileName, true);
-			AudioStream newStream = audioManager.GetWaveStream();
+            AudioStream newStream = audioManager.GetWaveStream();
             AddAudioStream(newStream, startAtFrameIndex);
             audioManager.Close();
-		}
+        }
 
-        private IntPtr InsertSilence(int countSilentSamples, IntPtr waveData, int lengthWave, ref Avi.AVISTREAMINFO streamInfo) {
+        private IntPtr InsertSilence(int countSilentSamples, IntPtr waveData, int lengthWave, ref Avi.AVISTREAMINFO streamInfo)
+        {
             //initialize silence
             int lengthSilence = countSilentSamples * streamInfo.dwSampleSize;
             byte[] silence = new byte[lengthSilence];
@@ -190,15 +201,17 @@ namespace AviFile
         /// The index of the video frame at which the sound is going to start.
         /// '0' inserts the sound at the beginning of the video.
         /// </param>
-        public void AddAudioStream(AudioStream newStream, int startAtFrameIndex) {
+        public void AddAudioStream(AudioStream newStream, int startAtFrameIndex)
+        {
             Avi.AVISTREAMINFO streamInfo = new Avi.AVISTREAMINFO();
-			Avi.PCMWAVEFORMAT streamFormat = new Avi.PCMWAVEFORMAT();
-			int streamLength = 0;
+            Avi.PCMWAVEFORMAT streamFormat = new Avi.PCMWAVEFORMAT();
+            int streamLength = 0;
 
-			IntPtr rawData = newStream.GetStreamData(ref streamInfo, ref streamFormat, ref streamLength);
-			IntPtr waveData = rawData;
-			
-			if (startAtFrameIndex > 0) {
+            IntPtr rawData = newStream.GetStreamData(ref streamInfo, ref streamFormat, ref streamLength);
+            IntPtr waveData = rawData;
+
+            if (startAtFrameIndex > 0)
+            {
                 //not supported
                 //streamInfo.dwStart = startAtFrameIndex;
 
@@ -211,53 +224,62 @@ namespace AviFile
             }
 
             IntPtr aviStream;
-			int result = Avi.AVIFileCreateStream(aviFile, out aviStream, ref streamInfo);
-			if(result != 0){
-				throw new Exception("Exception in AVIFileCreateStream: "+result.ToString());
-			}
+            int result = Avi.AVIFileCreateStream(aviFile, out aviStream, ref streamInfo);
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIFileCreateStream: " + result.ToString());
+            }
 
-			result = Avi.AVIStreamSetFormat(aviStream, 0, ref streamFormat, Marshal.SizeOf(streamFormat));
-			if(result != 0){
-				throw new Exception("Exception in AVIStreamSetFormat: "+result.ToString());
-			}
-			
-			result = Avi.AVIStreamWrite(aviStream, 0, streamLength, waveData, streamLength, Avi.AVIIF_KEYFRAME, 0, 0);
-			if(result != 0){
-				throw new Exception("Exception in AVIStreamWrite: "+result.ToString());
-			}
-			
-			result = Avi.AVIStreamRelease(aviStream);
-			if(result != 0){
-				throw new Exception("Exception in AVIStreamRelease: "+result.ToString());
-			}
+            result = Avi.AVIStreamSetFormat(aviStream, 0, ref streamFormat, Marshal.SizeOf(streamFormat));
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIStreamSetFormat: " + result.ToString());
+            }
 
-			Marshal.FreeHGlobal(waveData);
-		}
+            result = Avi.AVIStreamWrite(aviStream, 0, streamLength, waveData, streamLength, Avi.AVIIF_KEYFRAME, 0, 0);
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIStreamWrite: " + result.ToString());
+            }
+
+            result = Avi.AVIStreamRelease(aviStream);
+            if (result != 0)
+            {
+                throw new Exception("Exception in AVIStreamRelease: " + result.ToString());
+            }
+
+            Marshal.FreeHGlobal(waveData);
+        }
 
         /// <summary>Add an existing wave audio stream to the file</summary>
         /// <param name="waveData">The new stream's data</param>
         /// <param name="streamInfo">Header info for the new stream</param>
         /// <param name="streamFormat">The new stream' format info</param>
         /// <param name="streamLength">Length of the new stream</param>
-        public void AddAudioStream(IntPtr waveData, Avi.AVISTREAMINFO streamInfo, Avi.PCMWAVEFORMAT streamFormat, int streamLength) {
+        public void AddAudioStream(IntPtr waveData, Avi.AVISTREAMINFO streamInfo, Avi.PCMWAVEFORMAT streamFormat, int streamLength)
+        {
             IntPtr aviStream;
             int result = Avi.AVIFileCreateStream(aviFile, out aviStream, ref streamInfo);
-            if (result != 0) {
+            if (result != 0)
+            {
                 throw new Exception("Exception in AVIFileCreateStream: " + result.ToString());
             }
 
             result = Avi.AVIStreamSetFormat(aviStream, 0, ref streamFormat, Marshal.SizeOf(streamFormat));
-            if (result != 0) {
+            if (result != 0)
+            {
                 throw new Exception("Exception in AVIStreamSetFormat: " + result.ToString());
             }
 
             result = Avi.AVIStreamWrite(aviStream, 0, streamLength, waveData, streamLength, Avi.AVIIF_KEYFRAME, 0, 0);
-            if (result != 0) {
+            if (result != 0)
+            {
                 throw new Exception("Exception in AVIStreamWrite: " + result.ToString());
             }
 
             result = Avi.AVIStreamRelease(aviStream);
-            if (result != 0) {
+            if (result != 0)
+            {
                 throw new Exception("Exception in AVIStreamRelease: " + result.ToString());
             }
         }
@@ -267,10 +289,12 @@ namespace AviFile
         /// <param name="startAtSecond">Start copying at second x</param>
         /// <param name="stopAtSecond">Stop copying at second y</param>
         /// <returns>AviManager for the new video</returns>
-        public AviManager CopyTo(String newFileName, float startAtSecond, float stopAtSecond) {
+        public AviManager CopyTo(String newFileName, float startAtSecond, float stopAtSecond)
+        {
             AviManager newFile = new AviManager(newFileName, false);
 
-            try {
+            try
+            {
                 //copy video stream
 
                 VideoStream videoStream = GetVideoStream();
@@ -281,7 +305,8 @@ namespace AviFile
                 videoStream.GetFrameOpen();
                 Bitmap bmp = videoStream.GetBitmap(startFrameIndex);
                 VideoStream newStream = newFile.AddVideoStream(false, videoStream.FrameRate, bmp);
-                for (int n = startFrameIndex + 1; n <= stopFrameIndex; n++) {
+                for (int n = startFrameIndex + 1; n <= stopFrameIndex; n++)
+                {
                     bmp = videoStream.GetBitmap(n);
                     newStream.AddFrame(bmp);
                 }
@@ -299,14 +324,14 @@ namespace AviFile
                     ref streamFormat,
                     ref streamLength);
 
-				int startByteIndex = (int)( startAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
-				int stopByteIndex = (int)( stopAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
+                int startByteIndex = (int)(startAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
+                int stopByteIndex = (int)(stopAtSecond * (float)(waveStream.CountSamplesPerSecond * streamFormat.nChannels * waveStream.CountBitsPerSample) / 8);
 
                 IntPtr ptrWavePart = new IntPtr(ptrRawData.ToInt32() + startByteIndex);
 
                 byte[] rawData = new byte[stopByteIndex - startByteIndex];
-				Marshal.Copy(ptrWavePart, rawData, 0, rawData.Length);
-				Marshal.FreeHGlobal(ptrRawData);
+                Marshal.Copy(ptrWavePart, rawData, 0, rawData.Length);
+                Marshal.FreeHGlobal(ptrRawData);
 
                 streamInfo.dwLength = rawData.Length;
                 streamInfo.dwStart = 0;
@@ -314,8 +339,10 @@ namespace AviFile
                 IntPtr unmanagedRawData = Marshal.AllocHGlobal(rawData.Length);
                 Marshal.Copy(rawData, 0, unmanagedRawData, rawData.Length);
                 newFile.AddAudioStream(unmanagedRawData, streamInfo, streamFormat, rawData.Length);
-				Marshal.FreeHGlobal(unmanagedRawData);
-            } catch (Exception ex) {
+                Marshal.FreeHGlobal(unmanagedRawData);
+            }
+            catch (Exception ex)
+            {
                 newFile.Close();
                 throw ex;
             }
@@ -324,16 +351,19 @@ namespace AviFile
         }
 
         /// <summary>Release all ressources</summary>
-		public void Close(){
-			foreach(AviStream stream in streams){
-				stream.Close();
-			}
-			
-			Avi.AVIFileRelease(aviFile);
-			Avi.AVIFileExit();
-		}
+        public void Close()
+        {
+            foreach (AviStream stream in streams)
+            {
+                stream.Close();
+            }
 
-        public static void MakeFileFromStream(String fileName, AviStream stream) {
+            Avi.AVIFileRelease(aviFile);
+            Avi.AVIFileExit();
+        }
+
+        public static void MakeFileFromStream(String fileName, AviStream stream)
+        {
             IntPtr newFile = IntPtr.Zero;
             IntPtr streamPointer = stream.StreamPointer;
 

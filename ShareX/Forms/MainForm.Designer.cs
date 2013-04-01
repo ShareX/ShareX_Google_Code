@@ -262,7 +262,8 @@ namespace ShareX
             this.tsmiDiamond,
             this.tsmiPolygon,
             this.tsmiFreeHand,
-            this.tsmiLastRegion});
+            this.tsmiLastRegion,
+            this.tsmiScreenRecorder});
             this.tsddbCapture.Image = global::ShareX.Properties.Resources.camera;
             this.tsddbCapture.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbCapture.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -515,7 +516,6 @@ namespace ShareX
             // tsddbTools
             // 
             this.tsddbTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiScreenRecorder,
             this.tsmiScreenColorPicker,
             this.tsmiHashCheck});
             this.tsddbTools.Image = global::ShareX.Properties.Resources.toolbox;
@@ -799,7 +799,8 @@ namespace ShareX
             this.tsmiTrayDiamond,
             this.tsmiTrayPolygon,
             this.tsmiTrayFreeHand,
-            this.tsmiTrayLastRegion});
+            this.tsmiTrayLastRegion,
+            this.tsmiTrayScreenRecorder});
             this.tsmiTrayCapture.Image = global::ShareX.Properties.Resources.camera;
             this.tsmiTrayCapture.Name = "tsmiTrayCapture";
             this.tsmiTrayCapture.Size = new System.Drawing.Size(180, 22);
@@ -979,7 +980,6 @@ namespace ShareX
             // tsmiTrayTools
             // 
             this.tsmiTrayTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTrayScreenRecorder,
             this.tsmiTrayScreenColorPicker,
             this.tsmiTrayHashCheck});
             this.tsmiTrayTools.Image = global::ShareX.Properties.Resources.toolbox;
