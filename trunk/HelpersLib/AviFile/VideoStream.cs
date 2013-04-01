@@ -28,35 +28,30 @@ namespace AviFile
 
         /// <summary>size of an imge in bytes, stride*height</summary>
         private int frameSize;
-
         public int FrameSize
         {
             get { return frameSize; }
         }
 
         protected double frameRate;
-
         public double FrameRate
         {
             get { return frameRate; }
         }
 
         private int width;
-
         public int Width
         {
             get { return width; }
         }
 
         private int height;
-
         public int Height
         {
             get { return height; }
         }
 
         private Int16 countBitsPerPixel;
-
         public Int16 CountBitsPerPixel
         {
             get { return countBitsPerPixel; }
@@ -64,7 +59,6 @@ namespace AviFile
 
         /// <summary>count of frames in the stream</summary>
         protected int countFrames = 0;
-
         public int CountFrames
         {
             get { return countFrames; }
@@ -72,7 +66,6 @@ namespace AviFile
 
         /// <summary>Palette for indexed frames</summary>
         protected Avi.RGBQUAD[] palette;
-
         public Avi.RGBQUAD[] Palette
         {
             get { return palette; }
@@ -81,14 +74,12 @@ namespace AviFile
         /// <summary>initial frame index</summary>
         /// <remarks>Added by M. Covington</remarks>
         protected int firstFrame = 0;
-
         public int FirstFrame
         {
             get { return firstFrame; }
         }
 
         private Avi.AVICOMPRESSOPTIONS compressOptions;
-
         public Avi.AVICOMPRESSOPTIONS CompressOptions
         {
             get { return compressOptions; }
@@ -409,7 +400,6 @@ namespace AviFile
 
             //..or set static options
             /*Avi.AVICOMPRESSOPTIONS opts = new Avi.AVICOMPRESSOPTIONS();
-
             //opts.fccType         = (UInt32)Avi.mmioStringToFOURCC("vids", 0);
             //opts.fccHandler      = (UInt32)Avi.mmioStringToFOURCC("CVID", 0);
             opts.fccType = (UInt32)Avi.mmioStringToFOURCC("mrle", 0);
@@ -647,10 +637,8 @@ namespace AviFile
             bw.Write(bfh.bfReserved1);
             bw.Write(bfh.bfReserved2);
             bw.Write(bfh.bfOffBits);
-
             //write bitmap info
             bw.Write(bitmapInfo);
-
             //write bitmap data
             bw.Write(bitmapData);
 

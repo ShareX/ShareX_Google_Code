@@ -76,19 +76,15 @@ namespace UploadersLib.HelperClasses
                     case Proxy.HTTP:
                         proxyType = ProxyType.Http;
                         break;
-
                     case Proxy.SOCKS4:
                         proxyType = ProxyType.Socks4;
                         break;
-
                     case Proxy.SOCKS4a:
                         proxyType = ProxyType.Socks4a;
                         break;
-
                     case Proxy.SOCKS5:
                         proxyType = ProxyType.Socks5;
                         break;
-
                     default:
                         proxyType = ProxyType.None;
                         break;

@@ -501,7 +501,7 @@ namespace UploadersLib
 
         private void btnFtpHelp_Click(object sender, EventArgs e)
         {
-            Helpers.LoadBrowserAsync("http://code.google.com/p/zscreen/wiki/FTPAccounts");
+            Helpers.LoadBrowserAsync("http://code.google.com/p/sharex/wiki/FTPAccounts");
         }
 
         private void btnFtpClient_Click(object sender, EventArgs e)
