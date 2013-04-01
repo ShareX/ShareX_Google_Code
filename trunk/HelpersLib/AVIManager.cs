@@ -44,13 +44,13 @@ namespace HelpersLib
             this.fps = fps;
         }
 
-        public void AddFrame(Image img)
+        public void AddFrame(Image img, bool writeCompressed)
         {
             Bitmap bmp = (Bitmap)img;
 
             if (aviStream == null)
             {
-                aviStream = aviManager.AddVideoStream(true, fps, bmp);
+                aviStream = aviManager.AddVideoStream(writeCompressed, fps, bmp);
             }
             else
             {
