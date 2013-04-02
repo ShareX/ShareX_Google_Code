@@ -279,14 +279,19 @@ namespace UploadersLib
 
         #region Picasa
 
-        private void btnPicasaAuthOpen_Click(object sender, EventArgs e)
+        private void oauth2Picasa_OpenButtonClicked()
         {
             PicasaAuthOpen();
         }
 
-        private void btnPicasaAuthComplete_Click(object sender, EventArgs e)
+        private void oauth2Picasa_CompleteButtonClicked(string code)
         {
-            PicasaAuthComplete();
+            PicasaAuthComplete(code);
+        }
+
+        private void oauth2Picasa_RefreshButtonClicked()
+        {
+            PicasaAuthRefresh();
         }
 
         #endregion Picasa
@@ -1043,5 +1048,6 @@ namespace UploadersLib
         }
 
         #endregion Other Services
+
     }
 }

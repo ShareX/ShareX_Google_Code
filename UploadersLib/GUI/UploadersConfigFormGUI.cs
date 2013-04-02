@@ -155,13 +155,6 @@ namespace UploadersLib
                 lblPhotobucketParentAlbumPath.Text = "Parent album path e.g. " + Config.PhotobucketAccountInfo.AlbumID + "/Personal/" + DateTime.Now.Year;
             }
 
-            // Picasa
-
-            if (OAuthInfo.CheckOAuth(Config.PicasaOAuthInfo))
-            {
-                lblPicasaAccountStatus.Text = "Login successful: " + Config.PicasaOAuthInfo.UserToken;
-            }
-
             if (Config.PhotobucketAccountInfo != null)
             {
                 if (cboPhotobucketAlbumPaths.Items.Count == 0)
@@ -177,6 +170,14 @@ namespace UploadersLib
                         cboPhotobucketAlbumPaths.SelectedIndex = Config.PhotobucketAccountInfo.ActiveAlbumID;
                     }
                 }
+            }
+
+            // Picasa
+
+            if (OAuth2Info.CheckOAuth(Config.PicasaOAuth2Info))
+            {
+                oauth2Picasa.Status = "Login successful.";
+                oauth2Picasa.LoginStatus = true;
             }
 
             // Flickr
