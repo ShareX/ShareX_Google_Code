@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ using UploadersLib.HelperClasses;
 
 namespace UploadersLib.URLShorteners
 {
-    public class GoogleURLShortener : URLShortener, IOAuth
+    public class GoogleURLShortener : URLShortener, IOAuth2
     {
         private const string APIURL = "https://www.googleapis.com/urlshortener/v1/url";
 
@@ -42,9 +43,9 @@ namespace UploadersLib.URLShorteners
 
         public string AnonymousKey { get; set; }
 
-        public OAuthInfo AuthInfo { get; set; }
+        public OAuth2Info AuthInfo { get; set; }
 
-        public GoogleURLShortener(AccountType uploadMethod, string anonymousKey, OAuthInfo oauth)
+        public GoogleURLShortener(AccountType uploadMethod, string anonymousKey, OAuth2Info oauth)
         {
             UploadMethod = uploadMethod;
             AnonymousKey = anonymousKey;
@@ -57,7 +58,7 @@ namespace UploadersLib.URLShorteners
             AnonymousKey = anonymousKey;
         }
 
-        public GoogleURLShortener(OAuthInfo oauth)
+        public GoogleURLShortener(OAuth2Info oauth)
         {
             UploadMethod = AccountType.User;
             AuthInfo = oauth;
@@ -65,14 +66,83 @@ namespace UploadersLib.URLShorteners
 
         public string GetAuthorizationURL()
         {
-            return GetAuthorizationURL(URLRequestToken, URLAuthorize, AuthInfo,
-                new Dictionary<string, string> { { "scope", "https://www.googleapis.com/auth/urlshortener" }, { "xoauth_displayname", Application.ProductName } });
+            return string.Format("https://accounts.google.com/o/oauth2/auth?response_type={0}&client_id={1}&redirect_uri={2}&scope={3}",
+                "code", AuthInfo.Client_ID, "urn:ietf:wg:oauth:2.0:oob", Helpers.URLEncode("https://www.googleapis.com/auth/urlshortener"));
         }
 
-        public bool GetAccessToken(string verificationCode = null)
+        public bool GetAccessToken(string code)
         {
-            AuthInfo.AuthVerifier = verificationCode;
-            return GetAccessToken(URLAccessToken, AuthInfo);
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            args.Add("code", code);
+            args.Add("client_id", AuthInfo.Client_ID);
+            args.Add("client_secret", AuthInfo.Client_Secret);
+            args.Add("redirect_uri", "urn:ietf:wg:oauth:2.0:oob");
+            args.Add("grant_type", "authorization_code");
+
+            string response = SendPostRequest("https://accounts.google.com/o/oauth2/token", args);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
+
+                if (token != null && !string.IsNullOrEmpty(token.access_token))
+                {
+                    token.UpdateExpireDate();
+                    AuthInfo.Token = token;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool RefreshAccessToken()
+        {
+            if (OAuth2Info.CheckOAuth(AuthInfo) && !string.IsNullOrEmpty(AuthInfo.Token.refresh_token))
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("refresh_token", AuthInfo.Token.refresh_token);
+                args.Add("client_id", AuthInfo.Client_ID);
+                args.Add("client_secret", AuthInfo.Client_Secret);
+                args.Add("grant_type", "refresh_token");
+
+                string response = SendPostRequest("https://accounts.google.com/o/oauth2/token", args);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
+
+                    if (token != null && !string.IsNullOrEmpty(token.access_token))
+                    {
+                        token.UpdateExpireDate();
+                        string refresh_token = AuthInfo.Token.refresh_token;
+                        AuthInfo.Token = token;
+                        AuthInfo.Token.refresh_token = refresh_token;
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool CheckAuthorization()
+        {
+            if (OAuth2Info.CheckOAuth(AuthInfo))
+            {
+                if (AuthInfo.Token.IsExpired && !RefreshAccessToken())
+                {
+                    Errors.Add("Refresh access token failed.");
+                    return false;
+                }
+            }
+            else
+            {
+                Errors.Add("Login is required.");
+                return false;
+            }
+
+            return true;
         }
 
         public override UploadResult ShortenURL(string url)
@@ -90,7 +160,12 @@ namespace UploadersLib.URLShorteners
                         query = string.Format("{0}?key={1}", APIURL, AnonymousKey);
                         break;
                     case AccountType.User:
-                        query = OAuthManager.GenerateQuery(APIURL, null, HttpMethod.Post, AuthInfo);
+                        if (!CheckAuthorization())
+                        {
+                            return null;
+                        }
+
+                        query = string.Format("{0}?access_token={1}", APIURL, AuthInfo.Token.access_token);
                         break;
                 }
 

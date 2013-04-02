@@ -152,6 +152,9 @@ namespace UploadersLib
         [Category("Google"), DefaultValue(ApiKeys.GoogleClientSecret), Description("Google Client Secret")]
         public string GoogleClientSecret { get; set; }
 
+        [Category("Google"), DefaultValue(ApiKeys.GoogleAPIKey), Description("Google API Key")]
+        public string GoogleAPIKey { get; set; }
+
         [Category("Twitter"), DefaultValue(ApiKeys.TwitterConsumerKey), Description("Twitter Consumer Secret")]
         public string TwitterConsumerKey { get; set; }
 

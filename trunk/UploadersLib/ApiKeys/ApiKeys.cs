@@ -71,6 +71,7 @@ namespace UploadersLib
         // Other Services
         public const string GoogleClientID = "810697162603.apps.googleusercontent.com";
         public const string GoogleClientSecret = "BzjPSjDufImJM6Dcg-WBZvoh";
+        public const string GoogleAPIKey = "AIzaSyDjW0ATw7G-72iAoNsnkGbQKplasWG3eSA";
         public const string TwitterConsumerKey = "Dw9iuniatwgsk4nwOcKGNg";
         public const string TwitterConsumerSecret = "q2fGaWzuHbbRwQPast1lYZjFnpuiI6axTYWwTytj8";
         public const string PicnikKey = "3aacd2de4563b8817de708b29b5bdd0e";

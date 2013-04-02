@@ -191,21 +191,6 @@ namespace UploadersLib
             Config.ImgurThumbnailType = (ImgurThumbnailType)cbImgurThumbnailType.SelectedIndex;
         }
 
-        private void btnImgurOpenAuthorizePage_Click(object sender, EventArgs e)
-        {
-            ImgurAuthOpen();
-        }
-
-        private void btnImgurEnterVerificationCode_Click(object sender, EventArgs e)
-        {
-            ImgurAuthComplete();
-        }
-
-        private void btnImgurRefreshAccessToken_Click(object sender, EventArgs e)
-        {
-            ImgurAuthRefresh();
-        }
-
         private void txtImgurAlbumID_TextChanged(object sender, EventArgs e)
         {
             Config.ImgurAlbumID = txtImgurAlbumID.Text;
@@ -227,6 +212,21 @@ namespace UploadersLib
                     txtImgurAlbumID.Text = album.id;
                 }
             }
+        }
+
+        private void oauth2Imgur_OpenButtonClicked()
+        {
+            ImgurAuthOpen();
+        }
+
+        private void oauth2Imgur_CompleteButtonClicked(string code)
+        {
+            ImgurAuthComplete(code);
+        }
+
+        private void oauth2Imgur_RefreshButtonClicked()
+        {
+            ImgurAuthRefresh();
         }
 
         #endregion Imgur
@@ -389,17 +389,17 @@ namespace UploadersLib
 
         #region Google Drive
 
-        private void btnGoogleDriveOpenAuthorizePage_Click(object sender, EventArgs e)
+        private void oauth2GoogleDrive_OpenButtonClicked()
         {
             GoogleDriveAuthOpen();
         }
 
-        private void btnGoogleDriveCompleteAuthorization_Click(object sender, EventArgs e)
+        private void oauth2GoogleDrive_CompleteButtonClicked(string code)
         {
-            GoogleDriveAuthComplete();
+            GoogleDriveAuthComplete(code);
         }
 
-        private void btnGoogleDriveRefreshAuthorization_Click(object sender, EventArgs e)
+        private void oauth2GoogleDrive_RefreshButtonClicked()
         {
             GoogleDriveAuthRefresh();
         }
@@ -1003,14 +1003,19 @@ namespace UploadersLib
             Config.GoogleURLShortenerAccountType = accountType;
         }
 
-        private void btnGoogleURLShortenerAuthOpen_Click(object sender, EventArgs e)
+        private void oauth2GoogleURLShortener_OpenButtonClicked()
         {
-            GooglAuthOpen();
+            GoogleURLShortenerAuthOpen();
         }
 
-        private void btnGoogleURLShortenerAuthComplete_Click(object sender, EventArgs e)
+        private void oauth2GoogleURLShortener_CompleteButtonClicked(string code)
         {
-            GooglAuthComplete();
+            GoogleURLShortenerAuthComplete(code);
+        }
+
+        private void oauth2GoogleURLShortener_RefreshButtonClicked()
+        {
+            GoogleURLShortenerAuthRefresh();
         }
 
         #endregion URL Shorteners

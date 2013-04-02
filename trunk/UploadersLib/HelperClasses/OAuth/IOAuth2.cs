@@ -34,5 +34,7 @@ namespace UploadersLib.HelperClasses
         bool GetAccessToken(string pin);
 
         bool RefreshAccessToken();
+
+        bool CheckAuthorization();
     }
 }

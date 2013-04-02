@@ -43,13 +43,13 @@ namespace UploadersLib.HelperClasses
         {
             get
             {
-                return ExpireDate == DateTime.MinValue || DateTime.Now > ExpireDate;
+                return ExpireDate == DateTime.MinValue || DateTime.UtcNow > ExpireDate;
             }
         }
 
         public void UpdateExpireDate()
         {
-            ExpireDate = DateTime.Now + TimeSpan.FromSeconds(expires_in - 60);
+            ExpireDate = DateTime.UtcNow + TimeSpan.FromSeconds(expires_in - 10);
         }
     }
 }

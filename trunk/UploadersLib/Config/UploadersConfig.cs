@@ -175,7 +175,7 @@ namespace UploadersLib
         #region URL shorteners
 
         public AccountType GoogleURLShortenerAccountType = AccountType.Anonymous;
-        public OAuthInfo GoogleURLShortenerOAuthInfo = null;
+        public OAuth2Info GoogleURLShortenerOAuth2Info = null;
 
         #endregion URL shorteners
 
@@ -306,7 +306,7 @@ namespace UploadersLib
             switch (destination)
             {
                 case UrlShortenerType.Google:
-                    return GoogleURLShortenerAccountType == AccountType.Anonymous || OAuthInfo.CheckOAuth(GoogleURLShortenerOAuthInfo);
+                    return GoogleURLShortenerAccountType == AccountType.Anonymous || OAuth2Info.CheckOAuth(GoogleURLShortenerOAuth2Info);
                 case UrlShortenerType.CustomURLShortener:
                     return CustomUploadersList != null && CustomUploadersList.IsValidIndex(CustomURLShortenerSelected);
                 default:

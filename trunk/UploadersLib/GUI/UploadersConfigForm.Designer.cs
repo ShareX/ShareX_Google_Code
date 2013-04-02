@@ -34,7 +34,6 @@
             this.tpImageUploaders = new System.Windows.Forms.TabPage();
             this.tcImageUploaders = new System.Windows.Forms.TabControl();
             this.tpImageShack = new System.Windows.Forms.TabPage();
-            this.atcImageShackAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.btnImageShackOpenPublicProfile = new System.Windows.Forms.Button();
             this.cbImageShackIsPublic = new System.Windows.Forms.CheckBox();
             this.btnImageShackOpenMyImages = new System.Windows.Forms.Button();
@@ -44,7 +43,6 @@
             this.txtImageShackRegistrationCode = new System.Windows.Forms.TextBox();
             this.lblImageShackRegistrationCode = new System.Windows.Forms.Label();
             this.tpTinyPic = new System.Windows.Forms.TabPage();
-            this.atcTinyPicAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.btnTinyPicLogin = new System.Windows.Forms.Button();
             this.txtTinyPicPassword = new System.Windows.Forms.TextBox();
             this.lblTinyPicPassword = new System.Windows.Forms.Label();
@@ -64,14 +62,6 @@
             this.btnImgurRefreshAlbumList = new System.Windows.Forms.Button();
             this.cbImgurThumbnailType = new System.Windows.Forms.ComboBox();
             this.lblImgurThumbnailType = new System.Windows.Forms.Label();
-            this.gbImgurUserAccount = new System.Windows.Forms.GroupBox();
-            this.btnImgurRefreshAccessToken = new System.Windows.Forms.Button();
-            this.btnImgurOpenAuthorizePage = new System.Windows.Forms.Button();
-            this.lblImgurVerificationCode = new System.Windows.Forms.Label();
-            this.btnImgurEnterVerificationCode = new System.Windows.Forms.Button();
-            this.txtImgurVerificationCode = new System.Windows.Forms.TextBox();
-            this.lblImgurAccountStatus = new System.Windows.Forms.Label();
-            this.atcImgurAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpFlickr = new System.Windows.Forms.TabPage();
             this.btnFlickrOpenImages = new System.Windows.Forms.Button();
             this.pgFlickrAuthInfo = new System.Windows.Forms.PropertyGrid();
@@ -136,6 +126,7 @@
             this.lblDropboxPath = new System.Windows.Forms.Label();
             this.btnDropboxOpenAuthorize = new System.Windows.Forms.Button();
             this.txtDropboxPath = new System.Windows.Forms.TextBox();
+            this.tpGoogleDrive = new System.Windows.Forms.TabPage();
             this.tpBox = new System.Windows.Forms.TabPage();
             this.txtBoxFolderID = new System.Windows.Forms.TextBox();
             this.lblBoxFolderID = new System.Windows.Forms.Label();
@@ -167,7 +158,6 @@
             this.btnFTPExport = new System.Windows.Forms.Button();
             this.btnFTPImport = new System.Windows.Forms.Button();
             this.btnFtpHelp = new System.Windows.Forms.Button();
-            this.ucFTPAccounts = new UploadersLib.AccountsControl();
             this.gbFtpSettings = new System.Windows.Forms.GroupBox();
             this.lblFtpFiles = new System.Windows.Forms.Label();
             this.lblFtpText = new System.Windows.Forms.Label();
@@ -190,7 +180,6 @@
             this.lblSendSpaceUsername = new System.Windows.Forms.Label();
             this.txtSendSpacePassword = new System.Windows.Forms.TextBox();
             this.txtSendSpaceUserName = new System.Windows.Forms.TextBox();
-            this.atcSendSpaceAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpGe_tt = new System.Windows.Forms.TabPage();
             this.lblGe_ttAccessToken = new System.Windows.Forms.Label();
             this.lblGe_ttPassword = new System.Windows.Forms.Label();
@@ -206,7 +195,6 @@
             this.txtLocalhostrEmail = new System.Windows.Forms.TextBox();
             this.tpSharedFolder = new System.Windows.Forms.TabPage();
             this.tlpSharedFolders = new System.Windows.Forms.TableLayoutPanel();
-            this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
             this.gbSharedFolder = new System.Windows.Forms.GroupBox();
             this.lblSharedFolderFiles = new System.Windows.Forms.Label();
             this.lblSharedFolderText = new System.Windows.Forms.Label();
@@ -232,16 +220,10 @@
             this.tpURLShorteners = new System.Windows.Forms.TabPage();
             this.tcURLShorteners = new System.Windows.Forms.TabControl();
             this.tpGoogleURLShortener = new System.Windows.Forms.TabPage();
-            this.gbGoogleURLShortenerUserAccount = new System.Windows.Forms.GroupBox();
-            this.btnGoogleURLShortenerAuthComplete = new System.Windows.Forms.Button();
-            this.btnGoogleURLShortenerAuthOpen = new System.Windows.Forms.Button();
-            this.lblGooglAccountStatus = new System.Windows.Forms.Label();
-            this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
             this.tpSocialNetworkingServices = new System.Windows.Forms.TabPage();
             this.tcSocialNetworkingServices = new System.Windows.Forms.TabControl();
             this.tpTwitter = new System.Windows.Forms.TabPage();
             this.btnTwitterLogin = new System.Windows.Forms.Button();
-            this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.tpCustomUploaders = new System.Windows.Forms.TabPage();
             this.lblCustomUploaderImageUploader = new System.Windows.Forms.Label();
             this.btnCustomUploaderFileUploaderTest = new System.Windows.Forms.Button();
@@ -299,22 +281,24 @@
             this.txtCustomUploaderArgName = new System.Windows.Forms.TextBox();
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
+            this.atcImageShackAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.atcTinyPicAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.atcImgurAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.ucFTPAccounts = new UploadersLib.AccountsControl();
+            this.atcSendSpaceAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
+            this.atcGoogleURLShortenerAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.ucTwitterAccounts = new UploadersLib.AccountsControl();
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.tpGoogleDrive = new System.Windows.Forms.TabPage();
-            this.gbGoogleDriveUserAccount = new System.Windows.Forms.GroupBox();
-            this.btnGoogleDriveRefreshAuthorization = new System.Windows.Forms.Button();
-            this.btnGoogleDriveOpenAuthorizePage = new System.Windows.Forms.Button();
-            this.lblGoogleDriveVerificationCode = new System.Windows.Forms.Label();
-            this.btnGoogleDriveCompleteAuthorization = new System.Windows.Forms.Button();
-            this.txtGoogleDriveVerificationCode = new System.Windows.Forms.TextBox();
-            this.lblGoogleDriveLoginStatus = new System.Windows.Forms.Label();
+            this.oauth2GoogleDrive = new UploadersLib.GUI.OAuth2Control();
+            this.oauth2Imgur = new UploadersLib.GUI.OAuth2Control();
+            this.oauth2GoogleURLShortener = new UploadersLib.GUI.OAuth2Control();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
             this.tpImageShack.SuspendLayout();
             this.tpTinyPic.SuspendLayout();
             this.tpImgur.SuspendLayout();
-            this.gbImgurUserAccount.SuspendLayout();
             this.tpFlickr.SuspendLayout();
             this.tpPhotobucket.SuspendLayout();
             this.gbPhotobucketAlbumPath.SuspendLayout();
@@ -333,6 +317,7 @@
             this.tcFileUploaders.SuspendLayout();
             this.tpDropbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDropboxLogo)).BeginInit();
+            this.tpGoogleDrive.SuspendLayout();
             this.tpBox.SuspendLayout();
             this.tpMinus.SuspendLayout();
             this.gbMinusUserPass.SuspendLayout();
@@ -353,7 +338,6 @@
             this.tpURLShorteners.SuspendLayout();
             this.tcURLShorteners.SuspendLayout();
             this.tpGoogleURLShortener.SuspendLayout();
-            this.gbGoogleURLShortenerUserAccount.SuspendLayout();
             this.tpSocialNetworkingServices.SuspendLayout();
             this.tcSocialNetworkingServices.SuspendLayout();
             this.tpTwitter.SuspendLayout();
@@ -361,8 +345,6 @@
             this.gbCustomUploaders.SuspendLayout();
             this.gbCustomUploaderRegexp.SuspendLayout();
             this.gbCustomUploaderArguments.SuspendLayout();
-            this.tpGoogleDrive.SuspendLayout();
-            this.gbGoogleDriveUserAccount.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcUploaders
@@ -428,15 +410,6 @@
             this.tpImageShack.TabIndex = 0;
             this.tpImageShack.Text = "ImageShack";
             this.tpImageShack.UseVisualStyleBackColor = true;
-            // 
-            // atcImageShackAccountType
-            // 
-            this.atcImageShackAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcImageShackAccountType.Name = "atcImageShackAccountType";
-            this.atcImageShackAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcImageShackAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcImageShackAccountType.TabIndex = 0;
-            this.atcImageShackAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImageShackAccountType_AccountTypeChanged);
             // 
             // btnImageShackOpenPublicProfile
             // 
@@ -538,15 +511,6 @@
             this.tpTinyPic.Text = "TinyPic";
             this.tpTinyPic.UseVisualStyleBackColor = true;
             // 
-            // atcTinyPicAccountType
-            // 
-            this.atcTinyPicAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcTinyPicAccountType.Name = "atcTinyPicAccountType";
-            this.atcTinyPicAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcTinyPicAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcTinyPicAccountType.TabIndex = 0;
-            this.atcTinyPicAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcTinyPicAccountType_AccountTypeChanged);
-            // 
             // btnTinyPicLogin
             // 
             this.btnTinyPicLogin.Location = new System.Drawing.Point(16, 168);
@@ -636,13 +600,13 @@
             // 
             // tpImgur
             // 
+            this.tpImgur.Controls.Add(this.oauth2Imgur);
             this.tpImgur.Controls.Add(this.txtImgurAlbumID);
             this.tpImgur.Controls.Add(this.lblImgurAlbumID);
             this.tpImgur.Controls.Add(this.lvImgurAlbumList);
             this.tpImgur.Controls.Add(this.btnImgurRefreshAlbumList);
             this.tpImgur.Controls.Add(this.cbImgurThumbnailType);
             this.tpImgur.Controls.Add(this.lblImgurThumbnailType);
-            this.tpImgur.Controls.Add(this.gbImgurUserAccount);
             this.tpImgur.Controls.Add(this.atcImgurAccountType);
             this.tpImgur.Location = new System.Drawing.Point(4, 22);
             this.tpImgur.Name = "tpImgur";
@@ -728,86 +692,6 @@
             this.lblImgurThumbnailType.Size = new System.Drawing.Size(82, 13);
             this.lblImgurThumbnailType.TabIndex = 1;
             this.lblImgurThumbnailType.Text = "Thumbnail type:";
-            // 
-            // gbImgurUserAccount
-            // 
-            this.gbImgurUserAccount.Controls.Add(this.btnImgurRefreshAccessToken);
-            this.gbImgurUserAccount.Controls.Add(this.btnImgurOpenAuthorizePage);
-            this.gbImgurUserAccount.Controls.Add(this.lblImgurVerificationCode);
-            this.gbImgurUserAccount.Controls.Add(this.btnImgurEnterVerificationCode);
-            this.gbImgurUserAccount.Controls.Add(this.txtImgurVerificationCode);
-            this.gbImgurUserAccount.Controls.Add(this.lblImgurAccountStatus);
-            this.gbImgurUserAccount.Location = new System.Drawing.Point(464, 16);
-            this.gbImgurUserAccount.Name = "gbImgurUserAccount";
-            this.gbImgurUserAccount.Size = new System.Drawing.Size(320, 224);
-            this.gbImgurUserAccount.TabIndex = 3;
-            this.gbImgurUserAccount.TabStop = false;
-            this.gbImgurUserAccount.Text = "User account";
-            // 
-            // btnImgurRefreshAccessToken
-            // 
-            this.btnImgurRefreshAccessToken.Enabled = false;
-            this.btnImgurRefreshAccessToken.Location = new System.Drawing.Point(16, 184);
-            this.btnImgurRefreshAccessToken.Name = "btnImgurRefreshAccessToken";
-            this.btnImgurRefreshAccessToken.Size = new System.Drawing.Size(200, 23);
-            this.btnImgurRefreshAccessToken.TabIndex = 5;
-            this.btnImgurRefreshAccessToken.Text = "Refresh authorization";
-            this.btnImgurRefreshAccessToken.UseVisualStyleBackColor = true;
-            this.btnImgurRefreshAccessToken.Click += new System.EventHandler(this.btnImgurRefreshAccessToken_Click);
-            // 
-            // btnImgurOpenAuthorizePage
-            // 
-            this.btnImgurOpenAuthorizePage.Location = new System.Drawing.Point(16, 24);
-            this.btnImgurOpenAuthorizePage.Name = "btnImgurOpenAuthorizePage";
-            this.btnImgurOpenAuthorizePage.Size = new System.Drawing.Size(200, 23);
-            this.btnImgurOpenAuthorizePage.TabIndex = 0;
-            this.btnImgurOpenAuthorizePage.Text = "1. Open authorize page...";
-            this.btnImgurOpenAuthorizePage.UseVisualStyleBackColor = true;
-            this.btnImgurOpenAuthorizePage.Click += new System.EventHandler(this.btnImgurOpenAuthorizePage_Click);
-            // 
-            // lblImgurVerificationCode
-            // 
-            this.lblImgurVerificationCode.AutoSize = true;
-            this.lblImgurVerificationCode.Location = new System.Drawing.Point(16, 64);
-            this.lblImgurVerificationCode.Name = "lblImgurVerificationCode";
-            this.lblImgurVerificationCode.Size = new System.Drawing.Size(292, 13);
-            this.lblImgurVerificationCode.TabIndex = 1;
-            this.lblImgurVerificationCode.Text = "Verification code (Get verification code from authorize page):";
-            // 
-            // btnImgurEnterVerificationCode
-            // 
-            this.btnImgurEnterVerificationCode.Location = new System.Drawing.Point(16, 120);
-            this.btnImgurEnterVerificationCode.Name = "btnImgurEnterVerificationCode";
-            this.btnImgurEnterVerificationCode.Size = new System.Drawing.Size(200, 23);
-            this.btnImgurEnterVerificationCode.TabIndex = 3;
-            this.btnImgurEnterVerificationCode.Text = "2. Complete authorization";
-            this.btnImgurEnterVerificationCode.UseVisualStyleBackColor = true;
-            this.btnImgurEnterVerificationCode.Click += new System.EventHandler(this.btnImgurEnterVerificationCode_Click);
-            // 
-            // txtImgurVerificationCode
-            // 
-            this.txtImgurVerificationCode.Location = new System.Drawing.Point(16, 88);
-            this.txtImgurVerificationCode.Name = "txtImgurVerificationCode";
-            this.txtImgurVerificationCode.Size = new System.Drawing.Size(288, 20);
-            this.txtImgurVerificationCode.TabIndex = 2;
-            // 
-            // lblImgurAccountStatus
-            // 
-            this.lblImgurAccountStatus.AutoSize = true;
-            this.lblImgurAccountStatus.Location = new System.Drawing.Point(16, 160);
-            this.lblImgurAccountStatus.Name = "lblImgurAccountStatus";
-            this.lblImgurAccountStatus.Size = new System.Drawing.Size(77, 13);
-            this.lblImgurAccountStatus.TabIndex = 4;
-            this.lblImgurAccountStatus.Text = "Login required.";
-            // 
-            // atcImgurAccountType
-            // 
-            this.atcImgurAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcImgurAccountType.Name = "atcImgurAccountType";
-            this.atcImgurAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcImgurAccountType.Size = new System.Drawing.Size(272, 29);
-            this.atcImgurAccountType.TabIndex = 0;
-            this.atcImgurAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImgurAccountType_AccountTypeChanged);
             // 
             // tpFlickr
             // 
@@ -1497,6 +1381,17 @@
             this.txtDropboxPath.TabIndex = 4;
             this.txtDropboxPath.TextChanged += new System.EventHandler(this.txtDropboxPath_TextChanged);
             // 
+            // tpGoogleDrive
+            // 
+            this.tpGoogleDrive.Controls.Add(this.oauth2GoogleDrive);
+            this.tpGoogleDrive.Location = new System.Drawing.Point(4, 22);
+            this.tpGoogleDrive.Name = "tpGoogleDrive";
+            this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
+            this.tpGoogleDrive.Size = new System.Drawing.Size(804, 474);
+            this.tpGoogleDrive.TabIndex = 11;
+            this.tpGoogleDrive.Text = "Google Drive";
+            this.tpGoogleDrive.UseVisualStyleBackColor = true;
+            // 
             // tpBox
             // 
             this.tpBox.Controls.Add(this.txtBoxFolderID);
@@ -1835,15 +1730,6 @@
             this.btnFtpHelp.UseVisualStyleBackColor = true;
             this.btnFtpHelp.Click += new System.EventHandler(this.btnFtpHelp_Click);
             // 
-            // ucFTPAccounts
-            // 
-            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
-            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
-            this.ucFTPAccounts.Name = "ucFTPAccounts";
-            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
-            this.ucFTPAccounts.TabIndex = 0;
-            // 
             // gbFtpSettings
             // 
             this.gbFtpSettings.Controls.Add(this.lblFtpFiles);
@@ -2066,15 +1952,6 @@
             this.txtSendSpaceUserName.TabIndex = 3;
             this.txtSendSpaceUserName.TextChanged += new System.EventHandler(this.txtSendSpaceUserName_TextChanged);
             // 
-            // atcSendSpaceAccountType
-            // 
-            this.atcSendSpaceAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcSendSpaceAccountType.Name = "atcSendSpaceAccountType";
-            this.atcSendSpaceAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcSendSpaceAccountType.Size = new System.Drawing.Size(214, 29);
-            this.atcSendSpaceAccountType.TabIndex = 0;
-            this.atcSendSpaceAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcSendSpaceAccountType_AccountTypeChanged);
-            // 
             // tpGe_tt
             // 
             this.tpGe_tt.Controls.Add(this.lblGe_ttAccessToken);
@@ -2234,15 +2111,6 @@
             this.tlpSharedFolders.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpSharedFolders.Size = new System.Drawing.Size(798, 468);
             this.tlpSharedFolders.TabIndex = 0;
-            // 
-            // ucLocalhostAccounts
-            // 
-            this.ucLocalhostAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucLocalhostAccounts.Location = new System.Drawing.Point(4, 4);
-            this.ucLocalhostAccounts.Margin = new System.Windows.Forms.Padding(4);
-            this.ucLocalhostAccounts.Name = "ucLocalhostAccounts";
-            this.ucLocalhostAccounts.Size = new System.Drawing.Size(790, 343);
-            this.ucLocalhostAccounts.TabIndex = 0;
             // 
             // gbSharedFolder
             // 
@@ -2501,7 +2369,7 @@
             // 
             // tpGoogleURLShortener
             // 
-            this.tpGoogleURLShortener.Controls.Add(this.gbGoogleURLShortenerUserAccount);
+            this.tpGoogleURLShortener.Controls.Add(this.oauth2GoogleURLShortener);
             this.tpGoogleURLShortener.Controls.Add(this.atcGoogleURLShortenerAccountType);
             this.tpGoogleURLShortener.Location = new System.Drawing.Point(4, 22);
             this.tpGoogleURLShortener.Name = "tpGoogleURLShortener";
@@ -2510,57 +2378,6 @@
             this.tpGoogleURLShortener.TabIndex = 0;
             this.tpGoogleURLShortener.Text = "Google";
             this.tpGoogleURLShortener.UseVisualStyleBackColor = true;
-            // 
-            // gbGoogleURLShortenerUserAccount
-            // 
-            this.gbGoogleURLShortenerUserAccount.Controls.Add(this.btnGoogleURLShortenerAuthComplete);
-            this.gbGoogleURLShortenerUserAccount.Controls.Add(this.btnGoogleURLShortenerAuthOpen);
-            this.gbGoogleURLShortenerUserAccount.Controls.Add(this.lblGooglAccountStatus);
-            this.gbGoogleURLShortenerUserAccount.Location = new System.Drawing.Point(16, 56);
-            this.gbGoogleURLShortenerUserAccount.Name = "gbGoogleURLShortenerUserAccount";
-            this.gbGoogleURLShortenerUserAccount.Size = new System.Drawing.Size(736, 128);
-            this.gbGoogleURLShortenerUserAccount.TabIndex = 1;
-            this.gbGoogleURLShortenerUserAccount.TabStop = false;
-            this.gbGoogleURLShortenerUserAccount.Text = "User account";
-            // 
-            // btnGoogleURLShortenerAuthComplete
-            // 
-            this.btnGoogleURLShortenerAuthComplete.Enabled = false;
-            this.btnGoogleURLShortenerAuthComplete.Location = new System.Drawing.Point(16, 56);
-            this.btnGoogleURLShortenerAuthComplete.Name = "btnGoogleURLShortenerAuthComplete";
-            this.btnGoogleURLShortenerAuthComplete.Size = new System.Drawing.Size(152, 24);
-            this.btnGoogleURLShortenerAuthComplete.TabIndex = 1;
-            this.btnGoogleURLShortenerAuthComplete.Text = "2. Complete authorization";
-            this.btnGoogleURLShortenerAuthComplete.UseVisualStyleBackColor = true;
-            this.btnGoogleURLShortenerAuthComplete.Click += new System.EventHandler(this.btnGoogleURLShortenerAuthComplete_Click);
-            // 
-            // btnGoogleURLShortenerAuthOpen
-            // 
-            this.btnGoogleURLShortenerAuthOpen.Location = new System.Drawing.Point(16, 24);
-            this.btnGoogleURLShortenerAuthOpen.Name = "btnGoogleURLShortenerAuthOpen";
-            this.btnGoogleURLShortenerAuthOpen.Size = new System.Drawing.Size(152, 24);
-            this.btnGoogleURLShortenerAuthOpen.TabIndex = 0;
-            this.btnGoogleURLShortenerAuthOpen.Text = "1. Open authorize page...";
-            this.btnGoogleURLShortenerAuthOpen.UseVisualStyleBackColor = true;
-            this.btnGoogleURLShortenerAuthOpen.Click += new System.EventHandler(this.btnGoogleURLShortenerAuthOpen_Click);
-            // 
-            // lblGooglAccountStatus
-            // 
-            this.lblGooglAccountStatus.AutoSize = true;
-            this.lblGooglAccountStatus.Location = new System.Drawing.Point(24, 96);
-            this.lblGooglAccountStatus.Name = "lblGooglAccountStatus";
-            this.lblGooglAccountStatus.Size = new System.Drawing.Size(77, 13);
-            this.lblGooglAccountStatus.TabIndex = 2;
-            this.lblGooglAccountStatus.Text = "Login required.";
-            // 
-            // atcGoogleURLShortenerAccountType
-            // 
-            this.atcGoogleURLShortenerAccountType.Location = new System.Drawing.Point(8, 16);
-            this.atcGoogleURLShortenerAccountType.Name = "atcGoogleURLShortenerAccountType";
-            this.atcGoogleURLShortenerAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcGoogleURLShortenerAccountType.Size = new System.Drawing.Size(214, 29);
-            this.atcGoogleURLShortenerAccountType.TabIndex = 0;
-            this.atcGoogleURLShortenerAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcGoogleURLShortenerAccountType_AccountTypeChanged);
             // 
             // tpSocialNetworkingServices
             // 
@@ -2604,14 +2421,6 @@
             this.btnTwitterLogin.Text = "Login";
             this.btnTwitterLogin.UseVisualStyleBackColor = true;
             this.btnTwitterLogin.Click += new System.EventHandler(this.btnTwitterLogin_Click);
-            // 
-            // ucTwitterAccounts
-            // 
-            this.ucTwitterAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTwitterAccounts.Location = new System.Drawing.Point(3, 3);
-            this.ucTwitterAccounts.Name = "ucTwitterAccounts";
-            this.ucTwitterAccounts.Size = new System.Drawing.Size(798, 468);
-            this.ucTwitterAccounts.TabIndex = 0;
             // 
             // tpCustomUploaders
             // 
@@ -3194,6 +3003,77 @@
             this.ttHelpTip.UseAnimation = false;
             this.ttHelpTip.UseFading = false;
             // 
+            // atcImageShackAccountType
+            // 
+            this.atcImageShackAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcImageShackAccountType.Name = "atcImageShackAccountType";
+            this.atcImageShackAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcImageShackAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcImageShackAccountType.TabIndex = 0;
+            this.atcImageShackAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImageShackAccountType_AccountTypeChanged);
+            // 
+            // atcTinyPicAccountType
+            // 
+            this.atcTinyPicAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcTinyPicAccountType.Name = "atcTinyPicAccountType";
+            this.atcTinyPicAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcTinyPicAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcTinyPicAccountType.TabIndex = 0;
+            this.atcTinyPicAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcTinyPicAccountType_AccountTypeChanged);
+            // 
+            // atcImgurAccountType
+            // 
+            this.atcImgurAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcImgurAccountType.Name = "atcImgurAccountType";
+            this.atcImgurAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcImgurAccountType.Size = new System.Drawing.Size(272, 29);
+            this.atcImgurAccountType.TabIndex = 0;
+            this.atcImgurAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcImgurAccountType_AccountTypeChanged);
+            // 
+            // ucFTPAccounts
+            // 
+            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
+            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
+            this.ucFTPAccounts.Name = "ucFTPAccounts";
+            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
+            this.ucFTPAccounts.TabIndex = 0;
+            // 
+            // atcSendSpaceAccountType
+            // 
+            this.atcSendSpaceAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcSendSpaceAccountType.Name = "atcSendSpaceAccountType";
+            this.atcSendSpaceAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcSendSpaceAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcSendSpaceAccountType.TabIndex = 0;
+            this.atcSendSpaceAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcSendSpaceAccountType_AccountTypeChanged);
+            // 
+            // ucLocalhostAccounts
+            // 
+            this.ucLocalhostAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucLocalhostAccounts.Location = new System.Drawing.Point(4, 4);
+            this.ucLocalhostAccounts.Margin = new System.Windows.Forms.Padding(4);
+            this.ucLocalhostAccounts.Name = "ucLocalhostAccounts";
+            this.ucLocalhostAccounts.Size = new System.Drawing.Size(790, 343);
+            this.ucLocalhostAccounts.TabIndex = 0;
+            // 
+            // atcGoogleURLShortenerAccountType
+            // 
+            this.atcGoogleURLShortenerAccountType.Location = new System.Drawing.Point(8, 16);
+            this.atcGoogleURLShortenerAccountType.Name = "atcGoogleURLShortenerAccountType";
+            this.atcGoogleURLShortenerAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcGoogleURLShortenerAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcGoogleURLShortenerAccountType.TabIndex = 0;
+            this.atcGoogleURLShortenerAccountType.AccountTypeChanged += new UploadersLib.GUI.AccountTypeControl.AccountTypeChangedEventHandler(this.atcGoogleURLShortenerAccountType_AccountTypeChanged);
+            // 
+            // ucTwitterAccounts
+            // 
+            this.ucTwitterAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTwitterAccounts.Location = new System.Drawing.Point(3, 3);
+            this.ucTwitterAccounts.Name = "ucTwitterAccounts";
+            this.ucTwitterAccounts.Size = new System.Drawing.Size(798, 468);
+            this.ucTwitterAccounts.TabIndex = 0;
+            // 
             // actRapidShareAccountType
             // 
             this.actRapidShareAccountType.Location = new System.Drawing.Point(8, 16);
@@ -3202,87 +3082,38 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // tpGoogleDrive
+            // oauth2GoogleDrive
             // 
-            this.tpGoogleDrive.Controls.Add(this.gbGoogleDriveUserAccount);
-            this.tpGoogleDrive.Location = new System.Drawing.Point(4, 22);
-            this.tpGoogleDrive.Name = "tpGoogleDrive";
-            this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGoogleDrive.Size = new System.Drawing.Size(804, 474);
-            this.tpGoogleDrive.TabIndex = 11;
-            this.tpGoogleDrive.Text = "Google Drive";
-            this.tpGoogleDrive.UseVisualStyleBackColor = true;
+            this.oauth2GoogleDrive.Location = new System.Drawing.Point(16, 16);
+            this.oauth2GoogleDrive.Name = "oauth2GoogleDrive";
+            this.oauth2GoogleDrive.Size = new System.Drawing.Size(328, 207);
+            this.oauth2GoogleDrive.Status = "Status: Login required.";
+            this.oauth2GoogleDrive.TabIndex = 0;
+            this.oauth2GoogleDrive.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2GoogleDrive_OpenButtonClicked);
+            this.oauth2GoogleDrive.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2GoogleDrive_CompleteButtonClicked);
+            this.oauth2GoogleDrive.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2GoogleDrive_RefreshButtonClicked);
             // 
-            // gbGoogleDriveUserAccount
+            // oauth2Imgur
             // 
-            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveRefreshAuthorization);
-            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveOpenAuthorizePage);
-            this.gbGoogleDriveUserAccount.Controls.Add(this.lblGoogleDriveVerificationCode);
-            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveCompleteAuthorization);
-            this.gbGoogleDriveUserAccount.Controls.Add(this.txtGoogleDriveVerificationCode);
-            this.gbGoogleDriveUserAccount.Controls.Add(this.lblGoogleDriveLoginStatus);
-            this.gbGoogleDriveUserAccount.Location = new System.Drawing.Point(16, 16);
-            this.gbGoogleDriveUserAccount.Name = "gbGoogleDriveUserAccount";
-            this.gbGoogleDriveUserAccount.Size = new System.Drawing.Size(320, 224);
-            this.gbGoogleDriveUserAccount.TabIndex = 4;
-            this.gbGoogleDriveUserAccount.TabStop = false;
-            this.gbGoogleDriveUserAccount.Text = "User account";
+            this.oauth2Imgur.Location = new System.Drawing.Point(464, 16);
+            this.oauth2Imgur.Name = "oauth2Imgur";
+            this.oauth2Imgur.Size = new System.Drawing.Size(328, 207);
+            this.oauth2Imgur.Status = "Status: Login required.";
+            this.oauth2Imgur.TabIndex = 9;
+            this.oauth2Imgur.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2Imgur_OpenButtonClicked);
+            this.oauth2Imgur.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2Imgur_CompleteButtonClicked);
+            this.oauth2Imgur.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2Imgur_RefreshButtonClicked);
             // 
-            // btnGoogleDriveRefreshAuthorization
+            // oauth2GoogleURLShortener
             // 
-            this.btnGoogleDriveRefreshAuthorization.Enabled = false;
-            this.btnGoogleDriveRefreshAuthorization.Location = new System.Drawing.Point(16, 184);
-            this.btnGoogleDriveRefreshAuthorization.Name = "btnGoogleDriveRefreshAuthorization";
-            this.btnGoogleDriveRefreshAuthorization.Size = new System.Drawing.Size(200, 23);
-            this.btnGoogleDriveRefreshAuthorization.TabIndex = 5;
-            this.btnGoogleDriveRefreshAuthorization.Text = "Refresh authorization";
-            this.btnGoogleDriveRefreshAuthorization.UseVisualStyleBackColor = true;
-            this.btnGoogleDriveRefreshAuthorization.Click += new System.EventHandler(this.btnGoogleDriveRefreshAuthorization_Click);
-            // 
-            // btnGoogleDriveOpenAuthorizePage
-            // 
-            this.btnGoogleDriveOpenAuthorizePage.Location = new System.Drawing.Point(16, 24);
-            this.btnGoogleDriveOpenAuthorizePage.Name = "btnGoogleDriveOpenAuthorizePage";
-            this.btnGoogleDriveOpenAuthorizePage.Size = new System.Drawing.Size(200, 23);
-            this.btnGoogleDriveOpenAuthorizePage.TabIndex = 0;
-            this.btnGoogleDriveOpenAuthorizePage.Text = "1. Open authorize page...";
-            this.btnGoogleDriveOpenAuthorizePage.UseVisualStyleBackColor = true;
-            this.btnGoogleDriveOpenAuthorizePage.Click += new System.EventHandler(this.btnGoogleDriveOpenAuthorizePage_Click);
-            // 
-            // lblGoogleDriveVerificationCode
-            // 
-            this.lblGoogleDriveVerificationCode.AutoSize = true;
-            this.lblGoogleDriveVerificationCode.Location = new System.Drawing.Point(16, 64);
-            this.lblGoogleDriveVerificationCode.Name = "lblGoogleDriveVerificationCode";
-            this.lblGoogleDriveVerificationCode.Size = new System.Drawing.Size(292, 13);
-            this.lblGoogleDriveVerificationCode.TabIndex = 1;
-            this.lblGoogleDriveVerificationCode.Text = "Verification code (Get verification code from authorize page):";
-            // 
-            // btnGoogleDriveCompleteAuthorization
-            // 
-            this.btnGoogleDriveCompleteAuthorization.Location = new System.Drawing.Point(16, 120);
-            this.btnGoogleDriveCompleteAuthorization.Name = "btnGoogleDriveCompleteAuthorization";
-            this.btnGoogleDriveCompleteAuthorization.Size = new System.Drawing.Size(200, 23);
-            this.btnGoogleDriveCompleteAuthorization.TabIndex = 3;
-            this.btnGoogleDriveCompleteAuthorization.Text = "2. Complete authorization";
-            this.btnGoogleDriveCompleteAuthorization.UseVisualStyleBackColor = true;
-            this.btnGoogleDriveCompleteAuthorization.Click += new System.EventHandler(this.btnGoogleDriveCompleteAuthorization_Click);
-            // 
-            // txtGoogleDriveVerificationCode
-            // 
-            this.txtGoogleDriveVerificationCode.Location = new System.Drawing.Point(16, 88);
-            this.txtGoogleDriveVerificationCode.Name = "txtGoogleDriveVerificationCode";
-            this.txtGoogleDriveVerificationCode.Size = new System.Drawing.Size(288, 20);
-            this.txtGoogleDriveVerificationCode.TabIndex = 2;
-            // 
-            // lblGoogleDriveLoginStatus
-            // 
-            this.lblGoogleDriveLoginStatus.AutoSize = true;
-            this.lblGoogleDriveLoginStatus.Location = new System.Drawing.Point(16, 160);
-            this.lblGoogleDriveLoginStatus.Name = "lblGoogleDriveLoginStatus";
-            this.lblGoogleDriveLoginStatus.Size = new System.Drawing.Size(77, 13);
-            this.lblGoogleDriveLoginStatus.TabIndex = 4;
-            this.lblGoogleDriveLoginStatus.Text = "Login required.";
+            this.oauth2GoogleURLShortener.Location = new System.Drawing.Point(16, 56);
+            this.oauth2GoogleURLShortener.Name = "oauth2GoogleURLShortener";
+            this.oauth2GoogleURLShortener.Size = new System.Drawing.Size(328, 207);
+            this.oauth2GoogleURLShortener.Status = "Status: Login required.";
+            this.oauth2GoogleURLShortener.TabIndex = 1;
+            this.oauth2GoogleURLShortener.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2GoogleURLShortener_OpenButtonClicked);
+            this.oauth2GoogleURLShortener.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2GoogleURLShortener_CompleteButtonClicked);
+            this.oauth2GoogleURLShortener.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2GoogleURLShortener_RefreshButtonClicked);
             // 
             // UploadersConfigForm
             // 
@@ -3306,8 +3137,6 @@
             this.tpTinyPic.PerformLayout();
             this.tpImgur.ResumeLayout(false);
             this.tpImgur.PerformLayout();
-            this.gbImgurUserAccount.ResumeLayout(false);
-            this.gbImgurUserAccount.PerformLayout();
             this.tpFlickr.ResumeLayout(false);
             this.tpPhotobucket.ResumeLayout(false);
             this.gbPhotobucketAlbumPath.ResumeLayout(false);
@@ -3335,6 +3164,7 @@
             this.tpDropbox.ResumeLayout(false);
             this.tpDropbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDropboxLogo)).EndInit();
+            this.tpGoogleDrive.ResumeLayout(false);
             this.tpBox.ResumeLayout(false);
             this.tpBox.PerformLayout();
             this.tpMinus.ResumeLayout(false);
@@ -3366,8 +3196,6 @@
             this.tpURLShorteners.ResumeLayout(false);
             this.tcURLShorteners.ResumeLayout(false);
             this.tpGoogleURLShortener.ResumeLayout(false);
-            this.gbGoogleURLShortenerUserAccount.ResumeLayout(false);
-            this.gbGoogleURLShortenerUserAccount.PerformLayout();
             this.tpSocialNetworkingServices.ResumeLayout(false);
             this.tcSocialNetworkingServices.ResumeLayout(false);
             this.tpTwitter.ResumeLayout(false);
@@ -3379,9 +3207,6 @@
             this.gbCustomUploaderRegexp.PerformLayout();
             this.gbCustomUploaderArguments.ResumeLayout(false);
             this.gbCustomUploaderArguments.PerformLayout();
-            this.tpGoogleDrive.ResumeLayout(false);
-            this.gbGoogleDriveUserAccount.ResumeLayout(false);
-            this.gbGoogleDriveUserAccount.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3427,12 +3252,6 @@
         private System.Windows.Forms.TextBox txtTinyPicUsername;
         private System.Windows.Forms.Label lblTinyPicUsername;
         private System.Windows.Forms.Button btnTinyPicLogin;
-        private System.Windows.Forms.Button btnImgurOpenAuthorizePage;
-        private System.Windows.Forms.Label lblImgurAccountStatus;
-        private System.Windows.Forms.Button btnImgurEnterVerificationCode;
-        private System.Windows.Forms.TextBox txtImgurVerificationCode;
-        private System.Windows.Forms.GroupBox gbImgurUserAccount;
-        private System.Windows.Forms.Label lblImgurVerificationCode;
         private System.Windows.Forms.Button btnDropboxCompleteAuth;
         private System.Windows.Forms.PictureBox pbDropboxLogo;
         private System.Windows.Forms.Button btnDropboxRegister;
@@ -3541,10 +3360,6 @@
         private System.Windows.Forms.ComboBox cbImgurThumbnailType;
         private System.Windows.Forms.Label lblImgurThumbnailType;
         private GUI.AccountTypeControl atcGoogleURLShortenerAccountType;
-        private System.Windows.Forms.Button btnGoogleURLShortenerAuthComplete;
-        private System.Windows.Forms.Button btnGoogleURLShortenerAuthOpen;
-        private System.Windows.Forms.GroupBox gbGoogleURLShortenerUserAccount;
-        private System.Windows.Forms.Label lblGooglAccountStatus;
         private System.Windows.Forms.TabPage tpPhotobucket;
         private System.Windows.Forms.GroupBox gbPhotobucketUserAccount;
         private System.Windows.Forms.Button btnPhotobucketAuthOpen;
@@ -3650,7 +3465,6 @@
         private System.Windows.Forms.TextBox txtLocalhostrPassword;
         private System.Windows.Forms.TextBox txtLocalhostrEmail;
         private System.Windows.Forms.CheckBox cbLocalhostrDirectURL;
-        private System.Windows.Forms.Button btnImgurRefreshAccessToken;
         private System.Windows.Forms.Button btnImgurRefreshAlbumList;
         private System.Windows.Forms.TextBox txtImgurAlbumID;
         private System.Windows.Forms.Label lblImgurAlbumID;
@@ -3659,12 +3473,8 @@
         private System.Windows.Forms.ColumnHeader chID;
         private System.Windows.Forms.ColumnHeader chDescription;
         private System.Windows.Forms.TabPage tpGoogleDrive;
-        private System.Windows.Forms.GroupBox gbGoogleDriveUserAccount;
-        private System.Windows.Forms.Button btnGoogleDriveRefreshAuthorization;
-        private System.Windows.Forms.Button btnGoogleDriveOpenAuthorizePage;
-        private System.Windows.Forms.Label lblGoogleDriveVerificationCode;
-        private System.Windows.Forms.Button btnGoogleDriveCompleteAuthorization;
-        private System.Windows.Forms.TextBox txtGoogleDriveVerificationCode;
-        private System.Windows.Forms.Label lblGoogleDriveLoginStatus;
+        private GUI.OAuth2Control oauth2GoogleDrive;
+        private GUI.OAuth2Control oauth2Imgur;
+        private GUI.OAuth2Control oauth2GoogleURLShortener;
     }
 }

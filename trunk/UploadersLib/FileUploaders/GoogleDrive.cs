@@ -65,7 +65,7 @@ namespace UploadersLib.FileUploaders
             {
                 OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
 
-                if (token != null)
+                if (token != null && !string.IsNullOrEmpty(token.access_token))
                 {
                     token.UpdateExpireDate();
                     AuthInfo.Token = token;
@@ -92,7 +92,7 @@ namespace UploadersLib.FileUploaders
                 {
                     OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
 
-                    if (token != null)
+                    if (token != null && !string.IsNullOrEmpty(token.access_token))
                     {
                         token.UpdateExpireDate();
                         string refresh_token = AuthInfo.Token.refresh_token;
@@ -106,7 +106,7 @@ namespace UploadersLib.FileUploaders
             return false;
         }
 
-        public bool CheckLogin()
+        public bool CheckAuthorization()
         {
             if (OAuth2Info.CheckOAuth(AuthInfo))
             {
@@ -127,7 +127,7 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            if (!CheckLogin())
+            if (!CheckAuthorization())
             {
                 return null;
             }

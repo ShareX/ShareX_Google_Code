@@ -82,6 +82,7 @@
       <HintPath>..\Lib\Starksoft.Net.Proxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -148,6 +149,12 @@
     </Compile>
     <Compile Include="GUI\GoogleTranslateGUI.Designer.cs">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\OAuth2Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\OAuth2Control.Designer.cs">
+      <DependentUpon>OAuth2Control.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ResponseForm.cs">
       <SubType>Form</SubType>
@@ -311,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\GoogleTranslateGUI.resx">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\OAuth2Control.resx">
+      <DependentUpon>OAuth2Control.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ResponseForm.resx">
       <DependentUpon>ResponseForm.cs</DependentUpon>
