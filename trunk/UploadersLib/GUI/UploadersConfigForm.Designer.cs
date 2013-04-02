@@ -58,8 +58,8 @@
             this.txtImgurAlbumID = new System.Windows.Forms.TextBox();
             this.lblImgurAlbumID = new System.Windows.Forms.Label();
             this.lvImgurAlbumList = new System.Windows.Forms.ListView();
-            this.chTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnImgurRefreshAlbumList = new System.Windows.Forms.Button();
             this.cbImgurThumbnailType = new System.Windows.Forms.ComboBox();
@@ -300,6 +300,14 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.tpGoogleDrive = new System.Windows.Forms.TabPage();
+            this.gbGoogleDriveUserAccount = new System.Windows.Forms.GroupBox();
+            this.btnGoogleDriveRefreshAuthorization = new System.Windows.Forms.Button();
+            this.btnGoogleDriveOpenAuthorizePage = new System.Windows.Forms.Button();
+            this.lblGoogleDriveVerificationCode = new System.Windows.Forms.Label();
+            this.btnGoogleDriveCompleteAuthorization = new System.Windows.Forms.Button();
+            this.txtGoogleDriveVerificationCode = new System.Windows.Forms.TextBox();
+            this.lblGoogleDriveLoginStatus = new System.Windows.Forms.Label();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -353,6 +361,8 @@
             this.gbCustomUploaders.SuspendLayout();
             this.gbCustomUploaderRegexp.SuspendLayout();
             this.gbCustomUploaderArguments.SuspendLayout();
+            this.tpGoogleDrive.SuspendLayout();
+            this.gbGoogleDriveUserAccount.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcUploaders
@@ -675,15 +685,15 @@
             this.lvImgurAlbumList.View = System.Windows.Forms.View.Details;
             this.lvImgurAlbumList.SelectedIndexChanged += new System.EventHandler(this.lvImgurAlbumList_SelectedIndexChanged);
             // 
-            // chTitle
-            // 
-            this.chTitle.Text = "Title";
-            this.chTitle.Width = 150;
-            // 
             // chID
             // 
             this.chID.Text = "ID";
             this.chID.Width = 70;
+            // 
+            // chTitle
+            // 
+            this.chTitle.Text = "Title";
+            this.chTitle.Width = 150;
             // 
             // chDescription
             // 
@@ -1350,6 +1360,7 @@
             // tcFileUploaders
             // 
             this.tcFileUploaders.Controls.Add(this.tpDropbox);
+            this.tcFileUploaders.Controls.Add(this.tpGoogleDrive);
             this.tcFileUploaders.Controls.Add(this.tpBox);
             this.tcFileUploaders.Controls.Add(this.tpMinus);
             this.tcFileUploaders.Controls.Add(this.tpFTP);
@@ -3191,6 +3202,88 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
+            // tpGoogleDrive
+            // 
+            this.tpGoogleDrive.Controls.Add(this.gbGoogleDriveUserAccount);
+            this.tpGoogleDrive.Location = new System.Drawing.Point(4, 22);
+            this.tpGoogleDrive.Name = "tpGoogleDrive";
+            this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
+            this.tpGoogleDrive.Size = new System.Drawing.Size(804, 474);
+            this.tpGoogleDrive.TabIndex = 11;
+            this.tpGoogleDrive.Text = "Google Drive";
+            this.tpGoogleDrive.UseVisualStyleBackColor = true;
+            // 
+            // gbGoogleDriveUserAccount
+            // 
+            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveRefreshAuthorization);
+            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveOpenAuthorizePage);
+            this.gbGoogleDriveUserAccount.Controls.Add(this.lblGoogleDriveVerificationCode);
+            this.gbGoogleDriveUserAccount.Controls.Add(this.btnGoogleDriveCompleteAuthorization);
+            this.gbGoogleDriveUserAccount.Controls.Add(this.txtGoogleDriveVerificationCode);
+            this.gbGoogleDriveUserAccount.Controls.Add(this.lblGoogleDriveLoginStatus);
+            this.gbGoogleDriveUserAccount.Location = new System.Drawing.Point(16, 16);
+            this.gbGoogleDriveUserAccount.Name = "gbGoogleDriveUserAccount";
+            this.gbGoogleDriveUserAccount.Size = new System.Drawing.Size(320, 224);
+            this.gbGoogleDriveUserAccount.TabIndex = 4;
+            this.gbGoogleDriveUserAccount.TabStop = false;
+            this.gbGoogleDriveUserAccount.Text = "User account";
+            // 
+            // btnGoogleDriveRefreshAuthorization
+            // 
+            this.btnGoogleDriveRefreshAuthorization.Enabled = false;
+            this.btnGoogleDriveRefreshAuthorization.Location = new System.Drawing.Point(16, 184);
+            this.btnGoogleDriveRefreshAuthorization.Name = "btnGoogleDriveRefreshAuthorization";
+            this.btnGoogleDriveRefreshAuthorization.Size = new System.Drawing.Size(200, 23);
+            this.btnGoogleDriveRefreshAuthorization.TabIndex = 5;
+            this.btnGoogleDriveRefreshAuthorization.Text = "Refresh authorization";
+            this.btnGoogleDriveRefreshAuthorization.UseVisualStyleBackColor = true;
+            this.btnGoogleDriveRefreshAuthorization.Click += new System.EventHandler(this.btnGoogleDriveRefreshAuthorization_Click);
+            // 
+            // btnGoogleDriveOpenAuthorizePage
+            // 
+            this.btnGoogleDriveOpenAuthorizePage.Location = new System.Drawing.Point(16, 24);
+            this.btnGoogleDriveOpenAuthorizePage.Name = "btnGoogleDriveOpenAuthorizePage";
+            this.btnGoogleDriveOpenAuthorizePage.Size = new System.Drawing.Size(200, 23);
+            this.btnGoogleDriveOpenAuthorizePage.TabIndex = 0;
+            this.btnGoogleDriveOpenAuthorizePage.Text = "1. Open authorize page...";
+            this.btnGoogleDriveOpenAuthorizePage.UseVisualStyleBackColor = true;
+            this.btnGoogleDriveOpenAuthorizePage.Click += new System.EventHandler(this.btnGoogleDriveOpenAuthorizePage_Click);
+            // 
+            // lblGoogleDriveVerificationCode
+            // 
+            this.lblGoogleDriveVerificationCode.AutoSize = true;
+            this.lblGoogleDriveVerificationCode.Location = new System.Drawing.Point(16, 64);
+            this.lblGoogleDriveVerificationCode.Name = "lblGoogleDriveVerificationCode";
+            this.lblGoogleDriveVerificationCode.Size = new System.Drawing.Size(292, 13);
+            this.lblGoogleDriveVerificationCode.TabIndex = 1;
+            this.lblGoogleDriveVerificationCode.Text = "Verification code (Get verification code from authorize page):";
+            // 
+            // btnGoogleDriveCompleteAuthorization
+            // 
+            this.btnGoogleDriveCompleteAuthorization.Location = new System.Drawing.Point(16, 120);
+            this.btnGoogleDriveCompleteAuthorization.Name = "btnGoogleDriveCompleteAuthorization";
+            this.btnGoogleDriveCompleteAuthorization.Size = new System.Drawing.Size(200, 23);
+            this.btnGoogleDriveCompleteAuthorization.TabIndex = 3;
+            this.btnGoogleDriveCompleteAuthorization.Text = "2. Complete authorization";
+            this.btnGoogleDriveCompleteAuthorization.UseVisualStyleBackColor = true;
+            this.btnGoogleDriveCompleteAuthorization.Click += new System.EventHandler(this.btnGoogleDriveCompleteAuthorization_Click);
+            // 
+            // txtGoogleDriveVerificationCode
+            // 
+            this.txtGoogleDriveVerificationCode.Location = new System.Drawing.Point(16, 88);
+            this.txtGoogleDriveVerificationCode.Name = "txtGoogleDriveVerificationCode";
+            this.txtGoogleDriveVerificationCode.Size = new System.Drawing.Size(288, 20);
+            this.txtGoogleDriveVerificationCode.TabIndex = 2;
+            // 
+            // lblGoogleDriveLoginStatus
+            // 
+            this.lblGoogleDriveLoginStatus.AutoSize = true;
+            this.lblGoogleDriveLoginStatus.Location = new System.Drawing.Point(16, 160);
+            this.lblGoogleDriveLoginStatus.Name = "lblGoogleDriveLoginStatus";
+            this.lblGoogleDriveLoginStatus.Size = new System.Drawing.Size(77, 13);
+            this.lblGoogleDriveLoginStatus.TabIndex = 4;
+            this.lblGoogleDriveLoginStatus.Text = "Login required.";
+            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3286,6 +3379,9 @@
             this.gbCustomUploaderRegexp.PerformLayout();
             this.gbCustomUploaderArguments.ResumeLayout(false);
             this.gbCustomUploaderArguments.PerformLayout();
+            this.tpGoogleDrive.ResumeLayout(false);
+            this.gbGoogleDriveUserAccount.ResumeLayout(false);
+            this.gbGoogleDriveUserAccount.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3562,5 +3658,13 @@
         private System.Windows.Forms.ColumnHeader chTitle;
         private System.Windows.Forms.ColumnHeader chID;
         private System.Windows.Forms.ColumnHeader chDescription;
+        private System.Windows.Forms.TabPage tpGoogleDrive;
+        private System.Windows.Forms.GroupBox gbGoogleDriveUserAccount;
+        private System.Windows.Forms.Button btnGoogleDriveRefreshAuthorization;
+        private System.Windows.Forms.Button btnGoogleDriveOpenAuthorizePage;
+        private System.Windows.Forms.Label lblGoogleDriveVerificationCode;
+        private System.Windows.Forms.Button btnGoogleDriveCompleteAuthorization;
+        private System.Windows.Forms.TextBox txtGoogleDriveVerificationCode;
+        private System.Windows.Forms.Label lblGoogleDriveLoginStatus;
     }
 }

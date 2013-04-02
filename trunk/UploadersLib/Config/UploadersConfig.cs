@@ -107,6 +107,10 @@ namespace UploadersLib
         public bool DropboxAutoCreateShareableLink = false;
         public DropboxAccountInfo DropboxAccountInfo = null;
 
+        // Google Drive
+
+        public OAuth2Info GoogleDriveOAuth2Info = null;
+
         // RapidShare
 
         public string RapidShareUsername = string.Empty;
@@ -270,6 +274,8 @@ namespace UploadersLib
             {
                 case FileDestination.Dropbox:
                     return OAuthInfo.CheckOAuth(DropboxOAuthInfo);
+                case FileDestination.GoogleDrive:
+                    return OAuth2Info.CheckOAuth(GoogleDriveOAuth2Info);
                 case FileDestination.RapidShare:
                     return !string.IsNullOrEmpty(RapidShareUsername) && !string.IsNullOrEmpty(RapidSharePassword);
                 case FileDestination.SendSpace:

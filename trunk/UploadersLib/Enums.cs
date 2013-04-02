@@ -84,6 +84,8 @@ namespace UploadersLib
     {
         [Description("dropbox.com")]
         Dropbox,
+        [Description("drive.google.com")]
+        GoogleDrive,
         [Description("rapidshare.com")]
         RapidShare,
         [Description("sendspace.com")]

@@ -136,12 +136,6 @@ namespace UploadersLib
         [Category("bit.ly"), DefaultValue(ApiKeys.BitlyConsumerSecret), Description("bit.ly Consumer Secret")]
         public string BitlyConsumerSecret { get; set; }
 
-        [Category("Google"), DefaultValue(ApiKeys.GoogleConsumerKey), Description("Google Consumer Key")]
-        public string GoogleConsumerKey { get; set; }
-
-        [Category("Google"), DefaultValue(ApiKeys.GoogleConsumerSecret), Description("Google Consumer Secret")]
-        public string GoogleConsumerSecret { get; set; }
-
         [Category("kl.am"), Browsable(false), DefaultValue(ApiKeys.KlamKey), Description("kl.am key")]
         public string KlamKey { get; set; }
 
@@ -152,14 +146,17 @@ namespace UploadersLib
 
         #region Other Services
 
+        [Category("Google"), DefaultValue(ApiKeys.GoogleClientID), Description("Google Client ID")]
+        public string GoogleClientID { get; set; }
+
+        [Category("Google"), DefaultValue(ApiKeys.GoogleClientSecret), Description("Google Client Secret")]
+        public string GoogleClientSecret { get; set; }
+
         [Category("Twitter"), DefaultValue(ApiKeys.TwitterConsumerKey), Description("Twitter Consumer Secret")]
         public string TwitterConsumerKey { get; set; }
 
         [Category("Twitter"), DefaultValue(ApiKeys.TwitterConsumerSecret), Description("Twitter Consumer Secret")]
         public string TwitterConsumerSecret { get; set; }
-
-        [Category("Google"), DefaultValue(ApiKeys.GoogleApiKey), Description("Google API Key")]
-        public string GoogleApiKey { get; set; }
 
         [Category("Picnik"), DefaultValue(ApiKeys.PicnikKey), Description("Picnik Key")]
         public string PicnikKey { get; set; }

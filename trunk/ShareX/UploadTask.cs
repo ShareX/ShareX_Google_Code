@@ -552,6 +552,9 @@ namespace ShareX
                         AutoCreateShareableLink = Program.UploadersConfig.DropboxAutoCreateShareableLink
                     };
                     break;
+                case FileDestination.GoogleDrive:
+                    fileUploader = new GoogleDrive(Program.UploadersConfig.GoogleDriveOAuth2Info);
+                    break;
                 case FileDestination.RapidShare:
                     fileUploader = new RapidShare(Program.UploadersConfig.RapidShareUsername, Program.UploadersConfig.RapidSharePassword,
                         Program.UploadersConfig.RapidShareFolderID);
@@ -673,8 +676,8 @@ namespace ShareX
                     urlShortener = new BitlyURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);
                     break;
                 case UrlShortenerType.Google:
-                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, ApiKeys.GoogleApiKey,
-                        Program.UploadersConfig.GoogleURLShortenerOAuthInfo);
+                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, "",
+                        Program.UploadersConfig.GoogleURLShortenerOAuthInfo); // TODO: oauth2s
                     break;
                 case UrlShortenerType.ISGD:
                     urlShortener = new IsgdURLShortener();
