@@ -36,6 +36,7 @@ namespace UploadersLib.ImageUploaders
         public AccountType UploadMethod { get; set; }
         public OAuth2Info AuthInfo { get; set; }
         public ImgurThumbnailType ThumbnailType { get; set; }
+        public string UploadAlbumID { get; set; }
 
         public Imgur_v3(OAuth2Info oauth)
         {
@@ -100,25 +101,69 @@ namespace UploadersLib.ImageUploaders
             return false;
         }
 
-        public override UploadResult Upload(Stream stream, string fileName)
+        public bool CheckLogin()
         {
-            if (UploadMethod == AccountType.User && !OAuth2Info.CheckOAuth(AuthInfo))
+            if (OAuth2Info.CheckOAuth(AuthInfo))
+            {
+                if (AuthInfo.Token.IsExpired && !RefreshAccessToken())
+                {
+                    Errors.Add("Refresh access token failed.");
+                    return false;
+                }
+            }
+            else
             {
                 Errors.Add("Login is required.");
-                return null;
+                return false;
             }
 
+            return true;
+        }
+
+        public List<ImgurAlbumData> GetAlbums()
+        {
+            if (CheckLogin())
+            {
+                NameValueCollection headers = new NameValueCollection();
+                headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
+                string response = SendGetRequest("https://api.imgur.com/3/account/me/albums", null, ResponseType.Text, null, headers);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    ImgurAlbums albums = JsonConvert.DeserializeObject<ImgurAlbums>(response);
+
+                    if (albums != null)
+                    {
+                        if (albums.success)
+                        {
+                            return albums.data;
+                        }
+                        else
+                        {
+                            Errors.Add("Imgur albums failed. Status code: " + albums.status);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public override UploadResult Upload(Stream stream, string fileName)
+        {
+            Dictionary<string, string> args = new Dictionary<string, string>();
             NameValueCollection headers = new NameValueCollection();
 
             if (UploadMethod == AccountType.User)
             {
-                if (AuthInfo.Token.IsExpired)
+                if (!CheckLogin())
                 {
-                    if (!RefreshAccessToken())
-                    {
-                        Errors.Add("Refresh access token failed.");
-                        return null;
-                    }
+                    return null;
+                }
+
+                if (!string.IsNullOrEmpty(UploadAlbumID))
+                {
+                    args.Add("album", UploadAlbumID);
                 }
 
                 headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
@@ -128,7 +173,7 @@ namespace UploadersLib.ImageUploaders
                 headers.Add("Authorization", "Client-ID " + AuthInfo.Client_ID);
             }
 
-            UploadResult result = UploadData(stream, "https://api.imgur.com/3/image", fileName, "image", null, null, headers);
+            UploadResult result = UploadData(stream, "https://api.imgur.com/3/image", fileName, "image", args, null, headers);
 
             if (!string.IsNullOrEmpty(result.Response))
             {
@@ -167,19 +212,42 @@ namespace UploadersLib.ImageUploaders
 
             return result;
         }
+    }
 
-        public class ImgurUploadData
-        {
-            public string id { get; set; }
-            public string deletehash { get; set; }
-            public string link { get; set; }
-        }
+    public class ImgurUploadData
+    {
+        public string id { get; set; }
+        public string deletehash { get; set; }
+        public string link { get; set; }
+    }
 
-        public class ImgurUpload
-        {
-            public ImgurUploadData data { get; set; }
-            public bool success { get; set; }
-            public int status { get; set; }
-        }
+    public class ImgurUpload
+    {
+        public ImgurUploadData data { get; set; }
+        public bool success { get; set; }
+        public int status { get; set; }
+    }
+
+    public class ImgurAlbumData
+    {
+        public string id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public int datetime { get; set; }
+        public object cover { get; set; }
+        public string account_url { get; set; }
+        public string privacy { get; set; }
+        public string layout { get; set; }
+        public int views { get; set; }
+        public string link { get; set; }
+        public bool favorite { get; set; }
+        public int order { get; set; }
+    }
+
+    public class ImgurAlbums
+    {
+        public List<ImgurAlbumData> data { get; set; }
+        public bool success { get; set; }
+        public int status { get; set; }
     }
 }

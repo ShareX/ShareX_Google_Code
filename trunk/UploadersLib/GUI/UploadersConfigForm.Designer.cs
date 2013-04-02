@@ -55,9 +55,17 @@
             this.lblTinyPicRegistrationCode = new System.Windows.Forms.Label();
             this.txtTinyPicRegistrationCode = new System.Windows.Forms.TextBox();
             this.tpImgur = new System.Windows.Forms.TabPage();
+            this.txtImgurAlbumID = new System.Windows.Forms.TextBox();
+            this.lblImgurAlbumID = new System.Windows.Forms.Label();
+            this.lvImgurAlbumList = new System.Windows.Forms.ListView();
+            this.chTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnImgurRefreshAlbumList = new System.Windows.Forms.Button();
             this.cbImgurThumbnailType = new System.Windows.Forms.ComboBox();
             this.lblImgurThumbnailType = new System.Windows.Forms.Label();
             this.gbImgurUserAccount = new System.Windows.Forms.GroupBox();
+            this.btnImgurRefreshAccessToken = new System.Windows.Forms.Button();
             this.btnImgurOpenAuthorizePage = new System.Windows.Forms.Button();
             this.lblImgurVerificationCode = new System.Windows.Forms.Label();
             this.btnImgurEnterVerificationCode = new System.Windows.Forms.Button();
@@ -292,7 +300,6 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.btnImgurRefreshAccessToken = new System.Windows.Forms.Button();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -619,6 +626,10 @@
             // 
             // tpImgur
             // 
+            this.tpImgur.Controls.Add(this.txtImgurAlbumID);
+            this.tpImgur.Controls.Add(this.lblImgurAlbumID);
+            this.tpImgur.Controls.Add(this.lvImgurAlbumList);
+            this.tpImgur.Controls.Add(this.btnImgurRefreshAlbumList);
             this.tpImgur.Controls.Add(this.cbImgurThumbnailType);
             this.tpImgur.Controls.Add(this.lblImgurThumbnailType);
             this.tpImgur.Controls.Add(this.gbImgurUserAccount);
@@ -630,6 +641,64 @@
             this.tpImgur.TabIndex = 2;
             this.tpImgur.Text = "Imgur";
             this.tpImgur.UseVisualStyleBackColor = true;
+            // 
+            // txtImgurAlbumID
+            // 
+            this.txtImgurAlbumID.Location = new System.Drawing.Point(256, 84);
+            this.txtImgurAlbumID.Name = "txtImgurAlbumID";
+            this.txtImgurAlbumID.Size = new System.Drawing.Size(176, 20);
+            this.txtImgurAlbumID.TabIndex = 8;
+            this.txtImgurAlbumID.TextChanged += new System.EventHandler(this.txtImgurAlbumID_TextChanged);
+            // 
+            // lblImgurAlbumID
+            // 
+            this.lblImgurAlbumID.AutoSize = true;
+            this.lblImgurAlbumID.Location = new System.Drawing.Point(16, 88);
+            this.lblImgurAlbumID.Name = "lblImgurAlbumID";
+            this.lblImgurAlbumID.Size = new System.Drawing.Size(233, 13);
+            this.lblImgurAlbumID.TabIndex = 7;
+            this.lblImgurAlbumID.Text = "Album ID for upload (Empty = No album upload):";
+            // 
+            // lvImgurAlbumList
+            // 
+            this.lvImgurAlbumList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chID,
+            this.chTitle,
+            this.chDescription});
+            this.lvImgurAlbumList.FullRowSelect = true;
+            this.lvImgurAlbumList.Location = new System.Drawing.Point(16, 144);
+            this.lvImgurAlbumList.MultiSelect = false;
+            this.lvImgurAlbumList.Name = "lvImgurAlbumList";
+            this.lvImgurAlbumList.Size = new System.Drawing.Size(432, 312);
+            this.lvImgurAlbumList.TabIndex = 6;
+            this.lvImgurAlbumList.UseCompatibleStateImageBehavior = false;
+            this.lvImgurAlbumList.View = System.Windows.Forms.View.Details;
+            this.lvImgurAlbumList.SelectedIndexChanged += new System.EventHandler(this.lvImgurAlbumList_SelectedIndexChanged);
+            // 
+            // chTitle
+            // 
+            this.chTitle.Text = "Title";
+            this.chTitle.Width = 150;
+            // 
+            // chID
+            // 
+            this.chID.Text = "ID";
+            this.chID.Width = 70;
+            // 
+            // chDescription
+            // 
+            this.chDescription.Text = "Description";
+            this.chDescription.Width = 208;
+            // 
+            // btnImgurRefreshAlbumList
+            // 
+            this.btnImgurRefreshAlbumList.Location = new System.Drawing.Point(16, 112);
+            this.btnImgurRefreshAlbumList.Name = "btnImgurRefreshAlbumList";
+            this.btnImgurRefreshAlbumList.Size = new System.Drawing.Size(200, 23);
+            this.btnImgurRefreshAlbumList.TabIndex = 4;
+            this.btnImgurRefreshAlbumList.Text = "Refresh album list";
+            this.btnImgurRefreshAlbumList.UseVisualStyleBackColor = true;
+            this.btnImgurRefreshAlbumList.Click += new System.EventHandler(this.btnImgurRefreshAlbumList_Click);
             // 
             // cbImgurThumbnailType
             // 
@@ -658,12 +727,23 @@
             this.gbImgurUserAccount.Controls.Add(this.btnImgurEnterVerificationCode);
             this.gbImgurUserAccount.Controls.Add(this.txtImgurVerificationCode);
             this.gbImgurUserAccount.Controls.Add(this.lblImgurAccountStatus);
-            this.gbImgurUserAccount.Location = new System.Drawing.Point(16, 88);
+            this.gbImgurUserAccount.Location = new System.Drawing.Point(464, 16);
             this.gbImgurUserAccount.Name = "gbImgurUserAccount";
-            this.gbImgurUserAccount.Size = new System.Drawing.Size(392, 224);
+            this.gbImgurUserAccount.Size = new System.Drawing.Size(320, 224);
             this.gbImgurUserAccount.TabIndex = 3;
             this.gbImgurUserAccount.TabStop = false;
             this.gbImgurUserAccount.Text = "User account";
+            // 
+            // btnImgurRefreshAccessToken
+            // 
+            this.btnImgurRefreshAccessToken.Enabled = false;
+            this.btnImgurRefreshAccessToken.Location = new System.Drawing.Point(16, 184);
+            this.btnImgurRefreshAccessToken.Name = "btnImgurRefreshAccessToken";
+            this.btnImgurRefreshAccessToken.Size = new System.Drawing.Size(200, 23);
+            this.btnImgurRefreshAccessToken.TabIndex = 5;
+            this.btnImgurRefreshAccessToken.Text = "Refresh authorization";
+            this.btnImgurRefreshAccessToken.UseVisualStyleBackColor = true;
+            this.btnImgurRefreshAccessToken.Click += new System.EventHandler(this.btnImgurRefreshAccessToken_Click);
             // 
             // btnImgurOpenAuthorizePage
             // 
@@ -671,7 +751,7 @@
             this.btnImgurOpenAuthorizePage.Name = "btnImgurOpenAuthorizePage";
             this.btnImgurOpenAuthorizePage.Size = new System.Drawing.Size(200, 23);
             this.btnImgurOpenAuthorizePage.TabIndex = 0;
-            this.btnImgurOpenAuthorizePage.Text = "Open authorize page...";
+            this.btnImgurOpenAuthorizePage.Text = "1. Open authorize page...";
             this.btnImgurOpenAuthorizePage.UseVisualStyleBackColor = true;
             this.btnImgurOpenAuthorizePage.Click += new System.EventHandler(this.btnImgurOpenAuthorizePage_Click);
             // 
@@ -690,7 +770,7 @@
             this.btnImgurEnterVerificationCode.Name = "btnImgurEnterVerificationCode";
             this.btnImgurEnterVerificationCode.Size = new System.Drawing.Size(200, 23);
             this.btnImgurEnterVerificationCode.TabIndex = 3;
-            this.btnImgurEnterVerificationCode.Text = "Complete authorization";
+            this.btnImgurEnterVerificationCode.Text = "2. Complete authorization";
             this.btnImgurEnterVerificationCode.UseVisualStyleBackColor = true;
             this.btnImgurEnterVerificationCode.Click += new System.EventHandler(this.btnImgurEnterVerificationCode_Click);
             // 
@@ -698,7 +778,7 @@
             // 
             this.txtImgurVerificationCode.Location = new System.Drawing.Point(16, 88);
             this.txtImgurVerificationCode.Name = "txtImgurVerificationCode";
-            this.txtImgurVerificationCode.Size = new System.Drawing.Size(360, 20);
+            this.txtImgurVerificationCode.Size = new System.Drawing.Size(288, 20);
             this.txtImgurVerificationCode.TabIndex = 2;
             // 
             // lblImgurAccountStatus
@@ -3111,17 +3191,6 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // btnImgurRefreshAccessToken
-            // 
-            this.btnImgurRefreshAccessToken.Enabled = false;
-            this.btnImgurRefreshAccessToken.Location = new System.Drawing.Point(16, 184);
-            this.btnImgurRefreshAccessToken.Name = "btnImgurRefreshAccessToken";
-            this.btnImgurRefreshAccessToken.Size = new System.Drawing.Size(200, 23);
-            this.btnImgurRefreshAccessToken.TabIndex = 5;
-            this.btnImgurRefreshAccessToken.Text = "Refresh authorization";
-            this.btnImgurRefreshAccessToken.UseVisualStyleBackColor = true;
-            this.btnImgurRefreshAccessToken.Click += new System.EventHandler(this.btnImgurRefreshAccessToken_Click);
-            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3486,5 +3555,12 @@
         private System.Windows.Forms.TextBox txtLocalhostrEmail;
         private System.Windows.Forms.CheckBox cbLocalhostrDirectURL;
         private System.Windows.Forms.Button btnImgurRefreshAccessToken;
+        private System.Windows.Forms.Button btnImgurRefreshAlbumList;
+        private System.Windows.Forms.TextBox txtImgurAlbumID;
+        private System.Windows.Forms.Label lblImgurAlbumID;
+        private System.Windows.Forms.ListView lvImgurAlbumList;
+        private System.Windows.Forms.ColumnHeader chTitle;
+        private System.Windows.Forms.ColumnHeader chID;
+        private System.Windows.Forms.ColumnHeader chDescription;
     }
 }

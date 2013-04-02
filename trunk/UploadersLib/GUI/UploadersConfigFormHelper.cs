@@ -131,6 +131,35 @@ namespace UploadersLib
             }
         }
 
+        public void ImgurRefreshAlbumList()
+        {
+            try
+            {
+                lvImgurAlbumList.Items.Clear();
+
+                if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
+                {
+                    List<ImgurAlbumData> albums = new Imgur_v3(Config.ImgurOAuth2Info).GetAlbums();
+
+                    if (albums != null && albums.Count > 0)
+                    {
+                        foreach (ImgurAlbumData album in albums)
+                        {
+                            ListViewItem lvi = new ListViewItem(album.id);
+                            lvi.SubItems.Add(album.title ?? "");
+                            lvi.SubItems.Add(album.description ?? "");
+                            lvi.Tag = album;
+                            lvImgurAlbumList.Items.Add(lvi);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         #endregion Imgur
 
         #region Flickr

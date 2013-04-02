@@ -206,6 +206,29 @@ namespace UploadersLib
             ImgurAuthRefresh();
         }
 
+        private void txtImgurAlbumID_TextChanged(object sender, EventArgs e)
+        {
+            Config.ImgurAlbumID = txtImgurAlbumID.Text;
+        }
+
+        private void btnImgurRefreshAlbumList_Click(object sender, EventArgs e)
+        {
+            ImgurRefreshAlbumList();
+        }
+
+        private void lvImgurAlbumList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvImgurAlbumList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvImgurAlbumList.SelectedItems[0];
+                if (lvi.Tag is ImgurAlbumData)
+                {
+                    ImgurAlbumData album = (ImgurAlbumData)lvi.Tag;
+                    txtImgurAlbumID.Text = album.id;
+                }
+            }
+        }
+
         #endregion Imgur
 
         #region Photobucket

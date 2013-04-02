@@ -252,9 +252,10 @@ namespace UploadersLib
 
         #region Get methods
 
-        protected string SendGetRequest(string url, Dictionary<string, string> arguments = null, ResponseType responseType = ResponseType.Text)
+        protected string SendGetRequest(string url, Dictionary<string, string> arguments = null, ResponseType responseType = ResponseType.Text,
+            CookieCollection cookies = null, NameValueCollection headers = null)
         {
-            using (HttpWebResponse response = GetResponseUsingGet(url, arguments))
+            using (HttpWebResponse response = GetResponseUsingGet(url, arguments, cookies, headers))
             {
                 return ResponseToString(response, responseType);
             }
@@ -274,7 +275,8 @@ namespace UploadersLib
             return false;
         }
 
-        private HttpWebResponse GetResponseUsingGet(string url, Dictionary<string, string> arguments = null)
+        private HttpWebResponse GetResponseUsingGet(string url, Dictionary<string, string> arguments = null,
+            CookieCollection cookies = null, NameValueCollection headers = null)
         {
             IsUploading = true;
 
@@ -282,7 +284,7 @@ namespace UploadersLib
 
             try
             {
-                return (HttpWebResponse)PrepareGetWebRequest(url).GetResponse();
+                return (HttpWebResponse)PrepareGetWebRequest(url, cookies, headers).GetResponse();
             }
             catch (Exception e)
             {
@@ -357,9 +359,12 @@ namespace UploadersLib
             return request;
         }
 
-        private HttpWebRequest PrepareGetWebRequest(string url)
+        private HttpWebRequest PrepareGetWebRequest(string url, CookieCollection cookies = null, NameValueCollection headers = null)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.CookieContainer = new CookieContainer();
+            if (cookies != null) request.CookieContainer.Add(cookies);
+            if (headers != null) request.Headers.Add(headers);
             request.KeepAlive = false;
             request.Method = HttpMethod.Get.GetDescription();
             IWebProxy proxy = ProxySettings.GetWebProxy;
