@@ -33,16 +33,8 @@ namespace UploadersLib.URLShorteners
 {
     public class GoogleURLShortener : URLShortener, IOAuth2
     {
-        private const string APIURL = "https://www.googleapis.com/urlshortener/v1/url";
-
-        private const string URLRequestToken = "https://www.google.com/accounts/OAuthGetRequestToken";
-        private const string URLAuthorize = "https://www.google.com/accounts/OAuthAuthorizeToken";
-        private const string URLAccessToken = "https://www.google.com/accounts/OAuthGetAccessToken";
-
         public AccountType UploadMethod { get; set; }
-
         public string AnonymousKey { get; set; }
-
         public OAuth2Info AuthInfo { get; set; }
 
         public GoogleURLShortener(AccountType uploadMethod, string anonymousKey, OAuth2Info oauth)
@@ -157,7 +149,7 @@ namespace UploadersLib.URLShorteners
                 {
                     default:
                     case AccountType.Anonymous:
-                        query = string.Format("{0}?key={1}", APIURL, AnonymousKey);
+                        query = string.Format("https://www.googleapis.com/urlshortener/v1/url?key={0}", AnonymousKey);
                         break;
                     case AccountType.User:
                         if (!CheckAuthorization())
@@ -165,7 +157,7 @@ namespace UploadersLib.URLShorteners
                             return null;
                         }
 
-                        query = string.Format("{0}?access_token={1}", APIURL, AuthInfo.Token.access_token);
+                        query = string.Format("https://www.googleapis.com/urlshortener/v1/url?access_token={0}", AuthInfo.Token.access_token);
                         break;
                 }
 

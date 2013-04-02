@@ -319,15 +319,19 @@ namespace UploadersLib
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo("", "");
+                OAuth2Info oauth = new OAuth2Info(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret);
 
                 string url = new Picasa(oauth).GetAuthorizationURL();
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    Config.PicasaOAuthInfo = oauth;
+                    Config.PicasaOAuth2Info = oauth;
                     Helpers.LoadBrowserAsync(url);
-                    btnPicasaAuthComplete.Enabled = true;
+                    DebugHelper.WriteLine("PicasaAuthOpen - Authorization URL is opened: " + url);
+                }
+                else
+                {
+                    DebugHelper.WriteLine("PicasaAuthOpen - Authorization URL is empty.");
                 }
             }
             catch (Exception ex)
@@ -336,29 +340,58 @@ namespace UploadersLib
             }
         }
 
-        public void PicasaAuthComplete()
+        public void PicasaAuthComplete(string code)
         {
-            if (Config.PicasaOAuthInfo != null && !string.IsNullOrEmpty(Config.PicasaOAuthInfo.AuthToken) &&
-                !string.IsNullOrEmpty(Config.PicasaOAuthInfo.AuthSecret))
+            try
             {
-                Picasa gus = new Picasa(Config.PicasaOAuthInfo);
-                bool result = gus.GetAccessToken();
-
-                if (result)
+                if (!string.IsNullOrEmpty(code) && Config.PicasaOAuth2Info != null)
                 {
-                    MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    lblPicasaAccountStatus.Text = "Login successful: " + Config.PicasaOAuthInfo.UserToken;
-                    return;
+                    bool result = new GoogleDrive(Config.PicasaOAuth2Info).GetAccessToken(code);
+
+                    if (result)
+                    {
+                        oauth2Picasa.Status = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        oauth2Picasa.Status = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    oauth2Picasa.LoginStatus = result;
                 }
-
-                MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You must give access from Authorize page first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-            Config.PicasaOAuthInfo = null;
+        public void PicasaAuthRefresh()
+        {
+            try
+            {
+                if (OAuth2Info.CheckOAuth(Config.PicasaOAuth2Info))
+                {
+                    bool result = new GoogleDrive(Config.PicasaOAuth2Info).RefreshAccessToken();
+
+                    if (result)
+                    {
+                        oauth2Picasa.Status = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        oauth2Picasa.Status = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion Picasa

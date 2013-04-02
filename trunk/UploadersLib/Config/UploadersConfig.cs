@@ -82,7 +82,7 @@ namespace UploadersLib
 
         // Picasa
 
-        public OAuthInfo PicasaOAuthInfo = null;
+        public OAuth2Info PicasaOAuth2Info = null;
 
         #endregion Image uploaders
 
@@ -244,7 +244,7 @@ namespace UploadersLib
                 case ImageDestination.Photobucket:
                     return PhotobucketAccountInfo != null && OAuthInfo.CheckOAuth(PhotobucketOAuthInfo);
                 case ImageDestination.Picasa:
-                    return PicasaOAuthInfo != null && OAuthInfo.CheckOAuth(PicasaOAuthInfo);
+                    return OAuth2Info.CheckOAuth(PicasaOAuth2Info);
                 case ImageDestination.Twitpic:
                 case ImageDestination.Twitsnaps:
                     return TwitterOAuthInfoList != null && TwitterOAuthInfoList.IsValidIndex(TwitterSelectedAccount);
