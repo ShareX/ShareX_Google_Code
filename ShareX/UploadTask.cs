@@ -434,7 +434,8 @@ namespace ShareX
                     imageUploader = new Imgur_v3(Program.UploadersConfig.ImgurOAuth2Info)
                     {
                         UploadMethod = Program.UploadersConfig.ImgurAccountType,
-                        ThumbnailType = Program.UploadersConfig.ImgurThumbnailType
+                        ThumbnailType = Program.UploadersConfig.ImgurThumbnailType,
+                        UploadAlbumID = Program.UploadersConfig.ImgurAlbumID
                     };
                     break;
                 case ImageDestination.Flickr:

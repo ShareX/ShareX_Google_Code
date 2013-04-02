@@ -138,6 +138,7 @@ namespace UploadersLib
             }
 
             cbImgurThumbnailType.SelectedIndex = (int)Config.ImgurThumbnailType;
+            txtImgurAlbumID.Text = Config.ImgurAlbumID;
 
             if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
             {
