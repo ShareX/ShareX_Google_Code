@@ -321,7 +321,7 @@ namespace UploadersLib
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo(APIKeys.GoogleConsumerKey, APIKeys.GoogleConsumerSecret);
+                OAuthInfo oauth = new OAuthInfo("", ""); // TODO: oauth2
 
                 string url = new Picasa(oauth).GetAuthorizationURL();
 
@@ -479,6 +479,91 @@ namespace UploadersLib
         }
 
         #endregion Dropbox
+
+        #region Google Drive
+
+        public void GoogleDriveAuthOpen()
+        {
+            try
+            {
+                OAuth2Info oauth = new OAuth2Info(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret);
+
+                string url = new GoogleDrive(oauth).GetAuthorizationURL();
+
+                if (!string.IsNullOrEmpty(url))
+                {
+                    Config.GoogleDriveOAuth2Info = oauth;
+                    Helpers.LoadBrowserAsync(url);
+                    DebugHelper.WriteLine("GoogleDriveAuthOpen - Authorization URL is opened: " + url);
+                }
+                else
+                {
+                    DebugHelper.WriteLine("GoogleDriveAuthOpen - Authorization URL is empty.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void GoogleDriveAuthComplete()
+        {
+            try
+            {
+                string pin = txtGoogleDriveVerificationCode.Text;
+
+                if (!string.IsNullOrEmpty(pin) && Config.GoogleDriveOAuth2Info != null)
+                {
+                    bool result = new GoogleDrive(Config.GoogleDriveOAuth2Info).GetAccessToken(pin);
+
+                    if (result)
+                    {
+                        lblGoogleDriveLoginStatus.Text = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        lblGoogleDriveLoginStatus.Text = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    btnGoogleDriveRefreshAuthorization.Enabled = result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void GoogleDriveAuthRefresh()
+        {
+            try
+            {
+                if (OAuth2Info.CheckOAuth(Config.GoogleDriveOAuth2Info))
+                {
+                    bool result = new GoogleDrive(Config.GoogleDriveOAuth2Info).RefreshAccessToken();
+
+                    if (result)
+                    {
+                        lblGoogleDriveLoginStatus.Text = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        lblGoogleDriveLoginStatus.Text = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion Google Drive
 
         #region Box
 
@@ -951,7 +1036,7 @@ namespace UploadersLib
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo(APIKeys.GoogleConsumerKey, APIKeys.GoogleConsumerSecret);
+                OAuthInfo oauth = new OAuthInfo(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret); // TODO: oauth2 support
 
                 string url = new GoogleURLShortener(oauth).GetAuthorizationURL();
 

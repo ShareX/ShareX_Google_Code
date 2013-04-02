@@ -387,6 +387,25 @@ namespace UploadersLib
 
         #endregion Dropbox
 
+        #region Google Drive
+
+        private void btnGoogleDriveOpenAuthorizePage_Click(object sender, EventArgs e)
+        {
+            GoogleDriveAuthOpen();
+        }
+
+        private void btnGoogleDriveCompleteAuthorization_Click(object sender, EventArgs e)
+        {
+            GoogleDriveAuthComplete();
+        }
+
+        private void btnGoogleDriveRefreshAuthorization_Click(object sender, EventArgs e)
+        {
+            GoogleDriveAuthRefresh();
+        }
+
+        #endregion Google Drive
+
         #region Box
 
         private void btnBoxOpenAuthorize_Click(object sender, EventArgs e)

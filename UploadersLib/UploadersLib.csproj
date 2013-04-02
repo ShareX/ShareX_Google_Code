@@ -109,6 +109,7 @@
     <Compile Include="FileUploaders\Box.cs" />
     <Compile Include="FileUploaders\Email.cs" />
     <Compile Include="FileUploaders\Ge_tt.cs" />
+    <Compile Include="FileUploaders\GoogleDrive.cs" />
     <Compile Include="FileUploaders\Localhostr.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
