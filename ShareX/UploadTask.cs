@@ -676,8 +676,8 @@ namespace ShareX
                     urlShortener = new BitlyURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);
                     break;
                 case UrlShortenerType.Google:
-                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, "",
-                        Program.UploadersConfig.GoogleURLShortenerOAuthInfo); // TODO: oauth2s
+                    urlShortener = new GoogleURLShortener(Program.UploadersConfig.GoogleURLShortenerAccountType, ApiKeys.GoogleAPIKey,
+                        Program.UploadersConfig.GoogleURLShortenerOAuth2Info);
                     break;
                 case UrlShortenerType.ISGD:
                     urlShortener = new IsgdURLShortener();

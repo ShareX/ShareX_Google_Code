@@ -73,29 +73,27 @@ namespace UploadersLib
             }
         }
 
-        public void ImgurAuthComplete()
+        public void ImgurAuthComplete(string code)
         {
             try
             {
-                string pin = txtImgurVerificationCode.Text;
-
-                if (!string.IsNullOrEmpty(pin) && Config.ImgurOAuth2Info != null)
+                if (!string.IsNullOrEmpty(code) && Config.ImgurOAuth2Info != null)
                 {
-                    bool result = new Imgur_v3(Config.ImgurOAuth2Info).GetAccessToken(pin);
+                    bool result = new Imgur_v3(Config.ImgurOAuth2Info).GetAccessToken(code);
 
                     if (result)
                     {
-                        lblImgurAccountStatus.Text = "Login successful.";
+                        oauth2Imgur.Status = "Login successful.";
                         MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        lblImgurAccountStatus.Text = "Login failed.";
+                        oauth2Imgur.Status = "Login failed.";
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         atcImgurAccountType.SelectedAccountType = AccountType.Anonymous;
                     }
 
-                    btnImgurRefreshAccessToken.Enabled = result;
+                    oauth2Imgur.LoginStatus = result;
                 }
             }
             catch (Exception ex)
@@ -114,12 +112,12 @@ namespace UploadersLib
 
                     if (result)
                     {
-                        lblImgurAccountStatus.Text = "Login successful.";
+                        oauth2Imgur.Status = "Login successful.";
                         MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        lblImgurAccountStatus.Text = "Login failed.";
+                        oauth2Imgur.Status = "Login failed.";
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         atcImgurAccountType.SelectedAccountType = AccountType.Anonymous;
                     }
@@ -321,7 +319,7 @@ namespace UploadersLib
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo("", ""); // TODO: oauth2
+                OAuthInfo oauth = new OAuthInfo("", "");
 
                 string url = new Picasa(oauth).GetAuthorizationURL();
 
@@ -507,28 +505,26 @@ namespace UploadersLib
             }
         }
 
-        public void GoogleDriveAuthComplete()
+        public void GoogleDriveAuthComplete(string code)
         {
             try
             {
-                string pin = txtGoogleDriveVerificationCode.Text;
-
-                if (!string.IsNullOrEmpty(pin) && Config.GoogleDriveOAuth2Info != null)
+                if (!string.IsNullOrEmpty(code) && Config.GoogleDriveOAuth2Info != null)
                 {
-                    bool result = new GoogleDrive(Config.GoogleDriveOAuth2Info).GetAccessToken(pin);
+                    bool result = new GoogleDrive(Config.GoogleDriveOAuth2Info).GetAccessToken(code);
 
                     if (result)
                     {
-                        lblGoogleDriveLoginStatus.Text = "Login successful.";
+                        oauth2GoogleDrive.Status = "Login successful.";
                         MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        lblGoogleDriveLoginStatus.Text = "Login failed.";
+                        oauth2GoogleDrive.Status = "Login failed.";
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    btnGoogleDriveRefreshAuthorization.Enabled = result;
+                    oauth2GoogleDrive.LoginStatus = result;
                 }
             }
             catch (Exception ex)
@@ -547,12 +543,12 @@ namespace UploadersLib
 
                     if (result)
                     {
-                        lblGoogleDriveLoginStatus.Text = "Login successful.";
+                        oauth2GoogleDrive.Status = "Login successful.";
                         MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        lblGoogleDriveLoginStatus.Text = "Login failed.";
+                        oauth2GoogleDrive.Status = "Login failed.";
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -1032,19 +1028,23 @@ namespace UploadersLib
 
         #region goo.gl
 
-        public void GooglAuthOpen()
+        public void GoogleURLShortenerAuthOpen()
         {
             try
             {
-                OAuthInfo oauth = new OAuthInfo(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret); // TODO: oauth2 support
+                OAuth2Info oauth = new OAuth2Info(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret);
 
                 string url = new GoogleURLShortener(oauth).GetAuthorizationURL();
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    Config.GoogleURLShortenerOAuthInfo = oauth;
+                    Config.GoogleURLShortenerOAuth2Info = oauth;
                     Helpers.LoadBrowserAsync(url);
-                    btnGoogleURLShortenerAuthComplete.Enabled = true;
+                    DebugHelper.WriteLine("GoogleURLShortenerAuthOpen - Authorization URL is opened: " + url);
+                }
+                else
+                {
+                    DebugHelper.WriteLine("GoogleURLShortenerAuthOpen - Authorization URL is empty.");
                 }
             }
             catch (Exception ex)
@@ -1053,30 +1053,58 @@ namespace UploadersLib
             }
         }
 
-        public void GooglAuthComplete()
+        public void GoogleURLShortenerAuthComplete(string code)
         {
-            if (Config.GoogleURLShortenerOAuthInfo != null && !string.IsNullOrEmpty(Config.GoogleURLShortenerOAuthInfo.AuthToken) &&
-                !string.IsNullOrEmpty(Config.GoogleURLShortenerOAuthInfo.AuthSecret))
+            try
             {
-                GoogleURLShortener gus = new GoogleURLShortener(Config.GoogleURLShortenerOAuthInfo);
-                bool result = gus.GetAccessToken();
-
-                if (result)
+                if (!string.IsNullOrEmpty(code) && Config.GoogleURLShortenerOAuth2Info != null)
                 {
-                    MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    lblGooglAccountStatus.Text = "Login successful: " + Config.GoogleURLShortenerOAuthInfo.UserToken;
-                    return;
+                    bool result = new GoogleDrive(Config.GoogleURLShortenerOAuth2Info).GetAccessToken(code);
+
+                    if (result)
+                    {
+                        oauth2GoogleURLShortener.Status = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        oauth2GoogleURLShortener.Status = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    oauth2GoogleURLShortener.LoginStatus = result;
                 }
-
-                MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                atcGoogleURLShortenerAccountType.SelectedAccountType = AccountType.Anonymous;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("You must give access from Authorize page first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-            Config.GoogleURLShortenerOAuthInfo = null;
+        public void GoogleURLShortenerAuthRefresh()
+        {
+            try
+            {
+                if (OAuth2Info.CheckOAuth(Config.GoogleURLShortenerOAuth2Info))
+                {
+                    bool result = new GoogleDrive(Config.GoogleURLShortenerOAuth2Info).RefreshAccessToken();
+
+                    if (result)
+                    {
+                        oauth2GoogleURLShortener.Status = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        oauth2GoogleURLShortener.Status = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion goo.gl

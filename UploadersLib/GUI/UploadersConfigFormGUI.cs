@@ -142,8 +142,8 @@ namespace UploadersLib
 
             if (OAuth2Info.CheckOAuth(Config.ImgurOAuth2Info))
             {
-                lblImgurAccountStatus.Text = "Login successful.";
-                btnImgurRefreshAccessToken.Enabled = true;
+                oauth2Imgur.Status = "Login successful.";
+                oauth2Imgur.LoginStatus = true;
             }
 
             // Photobucket
@@ -221,6 +221,14 @@ namespace UploadersLib
             txtDropboxPath.Text = Config.DropboxUploadPath;
             cbDropboxAutoCreateShareableLink.Checked = Config.DropboxAutoCreateShareableLink;
             UpdateDropboxStatus();
+
+            // Google Drive
+
+            if (OAuth2Info.CheckOAuth(Config.GoogleDriveOAuth2Info))
+            {
+                oauth2GoogleDrive.Status = "Login successful.";
+                oauth2GoogleDrive.LoginStatus = true;
+            }
 
             // Minus
 
@@ -331,9 +339,10 @@ namespace UploadersLib
 
             atcGoogleURLShortenerAccountType.SelectedAccountType = Config.GoogleURLShortenerAccountType;
 
-            if (OAuthInfo.CheckOAuth(Config.GoogleURLShortenerOAuthInfo))
+            if (OAuth2Info.CheckOAuth(Config.GoogleURLShortenerOAuth2Info))
             {
-                lblGooglAccountStatus.Text = "Login successful: " + Config.GoogleURLShortenerOAuthInfo.UserToken;
+                oauth2GoogleURLShortener.Status = "Login successful.";
+                oauth2GoogleURLShortener.LoginStatus = true;
             }
 
             #endregion URL Shorteners

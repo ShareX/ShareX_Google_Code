@@ -62,7 +62,7 @@ namespace UploadersLib.ImageUploaders
             {
                 OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
 
-                if (token != null)
+                if (token != null && !string.IsNullOrEmpty(token.access_token))
                 {
                     token.UpdateExpireDate();
                     AuthInfo.Token = token;
@@ -89,7 +89,7 @@ namespace UploadersLib.ImageUploaders
                 {
                     OAuth2Token token = JsonConvert.DeserializeObject<OAuth2Token>(response);
 
-                    if (token != null)
+                    if (token != null && !string.IsNullOrEmpty(token.access_token))
                     {
                         token.UpdateExpireDate();
                         AuthInfo.Token = token;
@@ -101,7 +101,7 @@ namespace UploadersLib.ImageUploaders
             return false;
         }
 
-        public bool CheckLogin()
+        public bool CheckAuthorization()
         {
             if (OAuth2Info.CheckOAuth(AuthInfo))
             {
@@ -122,7 +122,7 @@ namespace UploadersLib.ImageUploaders
 
         public List<ImgurAlbumData> GetAlbums()
         {
-            if (CheckLogin())
+            if (CheckAuthorization())
             {
                 NameValueCollection headers = new NameValueCollection();
                 headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
@@ -156,7 +156,7 @@ namespace UploadersLib.ImageUploaders
 
             if (UploadMethod == AccountType.User)
             {
-                if (!CheckLogin())
+                if (!CheckAuthorization())
                 {
                     return null;
                 }
