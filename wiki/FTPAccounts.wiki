@@ -40,7 +40,7 @@ Host: 80.1.3.37
 SubFolderPath: ShareX
 HttpHomePath: sharexftptest.com/jaex
 PreviewFtpPath: ftp://80.1.3.37:21/ShareX/screenshot.jpg
-PreviewHttpPath: http://sharextest.com/jaex/ShareX/screenshot.jpg
+PreviewHttpPath: http://sharexftptest.com/jaex/ShareX/screenshot.jpg
 }}}
 === Using domain ===
 {{{
