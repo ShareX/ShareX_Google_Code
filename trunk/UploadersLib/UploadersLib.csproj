@@ -380,6 +380,7 @@
     <Content Include="Favicons\Flickr.ico" />
     <None Include="Favicons\Gett.ico" />
     <Content Include="Favicons\Google.ico" />
+    <Content Include="Favicons\GoogleDrive.ico" />
     <Content Include="Favicons\ImageShack.ico" />
     <Content Include="Favicons\Imgur.ico" />
     <None Include="Favicons\Minus.ico" />

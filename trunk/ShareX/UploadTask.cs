@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ShareX.Properties;
 using System;
 using System.Drawing;
 using System.IO;
@@ -402,6 +403,33 @@ namespace ShareX
                 }
             }
 
+            if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.SendURLWithEmail))
+            {
+                using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
+                    Program.UploadersConfig.EmailDefaultSubject, Info.Result.ToString()))
+                {
+                    emailForm.Icon = Resources.ShareX;
+
+                    if (emailForm.ShowDialog() == DialogResult.OK)
+                    {
+                        if (Program.UploadersConfig.EmailRememberLastTo)
+                        {
+                            Program.UploadersConfig.EmailLastTo = emailForm.ToEmail;
+                        }
+
+                        Email email = new Email
+                        {
+                            SmtpServer = Program.UploadersConfig.EmailSmtpServer,
+                            SmtpPort = Program.UploadersConfig.EmailSmtpPort,
+                            FromEmail = Program.UploadersConfig.EmailFrom,
+                            Password = Program.UploadersConfig.EmailPassword
+                        };
+
+                        email.Send(emailForm.ToEmail, emailForm.Subject, emailForm.Body);
+                    }
+                }
+            }
+
             if (Info.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
             {
                 string url = Info.Result.ToString();
@@ -631,6 +659,8 @@ namespace ShareX
                     using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
                         Program.UploadersConfig.EmailDefaultSubject, Program.UploadersConfig.EmailDefaultBody))
                     {
+                        emailForm.Icon = Resources.ShareX;
+
                         if (emailForm.ShowDialog() == DialogResult.OK)
                         {
                             if (Program.UploadersConfig.EmailRememberLastTo)

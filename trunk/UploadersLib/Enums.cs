@@ -132,8 +132,6 @@ namespace UploadersLib
     {
         [Description("twitter.com")]
         Twitter
-        //[Description("Google+")]
-        //Google
     }
 
     public enum HttpMethod

@@ -79,8 +79,10 @@ namespace ShareX
         UseURLShortener = 1,
         [Description("Post URL to social networking service")]
         ShareURLToSocialNetworkingService = 1 << 1,
+        [Description("Send URL with Email")]
+        SendURLWithEmail = 1 << 2,
         [Description("Copy URL to clipboard")]
-        CopyURLToClipboard = 1 << 2
+        CopyURLToClipboard = 1 << 3
     }
 
     public enum ImageScaleType
