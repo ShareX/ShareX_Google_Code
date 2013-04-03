@@ -97,6 +97,7 @@
             // pbWatermarkShow
             // 
             this.pbWatermarkShow.BackColor = System.Drawing.Color.White;
+            this.pbWatermarkShow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbWatermarkShow.Location = new System.Drawing.Point(8, 176);
             this.pbWatermarkShow.Name = "pbWatermarkShow";
             this.pbWatermarkShow.Size = new System.Drawing.Size(288, 240);
