@@ -55,6 +55,7 @@ namespace UploadersLib
             ImageList fileUploadersImageList = new ImageList();
             fileUploadersImageList.ColorDepth = ColorDepth.Depth32Bit;
             fileUploadersImageList.Images.Add("Dropbox", Resources.Dropbox);
+            fileUploadersImageList.Images.Add("GoogleDrive", Resources.GoogleDrive);
             fileUploadersImageList.Images.Add("Box", Resources.Box);
             fileUploadersImageList.Images.Add("Minus", Resources.Minus);
             fileUploadersImageList.Images.Add("FTP", Resources.folder_network);
@@ -92,6 +93,7 @@ namespace UploadersLib
             tpTwitSnaps.ImageKey = "TwitSnaps";
             tpYFrog.ImageKey = "YFrog";
             tpDropbox.ImageKey = "Dropbox";
+            tpGoogleDrive.ImageKey = "GoogleDrive";
             tpBox.ImageKey = "Box";
             tpMinus.ImageKey = "Minus";
             tpFTP.ImageKey = "FTP";

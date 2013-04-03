@@ -31,9 +31,7 @@ namespace UploadersLib.GUI
     public partial class EmailForm : Form
     {
         public string ToEmail { get; private set; }
-
         public string Subject { get; private set; }
-
         public string Body { get; private set; }
 
         public EmailForm()
