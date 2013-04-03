@@ -140,7 +140,7 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.width.ToPrefixString(), width);
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
 
-            DateTime dt = FastDateTime.Now;
+            DateTime dt = DateTime.Now;
 
             sb.Replace(ReplacementVariables.mon2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(dt.Month))
                 .Replace(ReplacementVariables.mon.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month))
@@ -167,7 +167,7 @@ namespace HelpersLib
                  .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
                  .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
 
-            sb.Replace(ReplacementVariables.unix.ToPrefixString(), FastDateTime.NowUnix.ToString());
+            sb.Replace(ReplacementVariables.unix.ToPrefixString(), DateTime.UtcNow.ToUnix().ToString());
 
             if (sb.ToString().Contains(ReplacementVariables.i.ToPrefixString()))
             {
