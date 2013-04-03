@@ -128,8 +128,8 @@ namespace ShareX
 
         private void UpdatePreview()
         {
-            Image img = CaptureHelpers.ResizeImage(Resources.ShareXLogo, pbWatermarkShow.Width, pbWatermarkShow.Height, false, true);
-            pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(img);
+            Bitmap bmp = new Bitmap(pbWatermarkShow.ClientSize.Width, pbWatermarkShow.ClientSize.Height);
+            pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
         }
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
