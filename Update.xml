@@ -2,10 +2,10 @@
 <Update>
   <ShareX>
     <Stable>
-      <Version>6.7.0.311</Version>
-      <URL>https://sharex.googlecode.com/files/ShareX-6.7.0.311-setup.exe</URL>
-      <Date>2013-03-19</Date>
-      <Summary></Summary>
+      <Version>7.0.0.350</Version>
+      <URL>https://sharex.googlecode.com/files/ShareX-7.0.0.350-setup.exe</URL>
+      <Date>2013-04-05</Date>
+      <Summary>Imgur, Picasa and Google URL Shortener now using OAuth 2.0 so you need to re authorize if you are using this services.</Summary>
     </Stable>
   </ShareX>
 </Update>
