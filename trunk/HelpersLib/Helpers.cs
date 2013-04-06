@@ -674,29 +674,33 @@ namespace HelpersLib
             return true;
         }
 
-        public static void WaitWhileAsync(Func<bool> check, int interval, int timeout, Action onSuccess)
+        public static void WaitWhileAsync(Func<bool> check, int interval, int timeout, Action onSuccess, int waitStart = 0)
         {
             BackgroundWorker bw = new BackgroundWorker();
-            bw.DoWork += (sender, e) => e.Result = WaitWhile(check, interval, timeout);
+            bw.DoWork += (sender, e) =>
+            {
+                if (waitStart > 0)
+                {
+                    Thread.Sleep(waitStart);
+                }
+
+                e.Result = WaitWhile(check, interval, timeout);
+            };
             bw.RunWorkerCompleted += (sender, e) => { if ((bool)e.Result) onSuccess(); };
             bw.RunWorkerAsync();
         }
 
         public static bool IsFileLocked(string path)
         {
-            FileStream fs = null;
-
             try
             {
-                fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                }
             }
             catch (IOException)
             {
                 return true;
-            }
-            finally
-            {
-                if (fs != null) fs.Dispose();
             }
 
             return false;
