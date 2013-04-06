@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoryLib", "HistoryLib\Hi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenCapture", "ScreenCapture\ScreenCapture.csproj", "{DBDB0DAA-B3AE-4CC4-A8C2-20550B7F32E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenCapture.Shapes", "ScreenCapture.Shapes\ScreenCapture.Shapes.csproj", "{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpersLib", "HelpersLib\HelpersLib.csproj", "{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareX", "ShareX\ShareX.csproj", "{C5AE4585-E9EC-4FA3-B75A-E1210635ACB6}"
@@ -29,10 +27,6 @@ Global
 		{DBDB0DAA-B3AE-4CC4-A8C2-20550B7F32E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBDB0DAA-B3AE-4CC4-A8C2-20550B7F32E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBDB0DAA-B3AE-4CC4-A8C2-20550B7F32E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}.Release|Any CPU.Build.0 = Release|Any CPU
 		{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327750E1-9FB7-4CC3-8AEA-9BC42180CAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU

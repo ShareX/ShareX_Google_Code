@@ -28,7 +28,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncBridge.Net35">
@@ -51,7 +52,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
+    <Compile Include="Forms\CropLight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RegionCapturePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RegionCapturePreview.Designer.cs">
+      <DependentUpon>RegionCapturePreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Surface.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LocationInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RegionHelpers\AreaManager.cs" />
+    <Compile Include="RegionHelpers\DrawObject.cs" />
+    <Compile Include="Forms\DiamondRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EllipseRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FreeHandRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PolygonRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RectangleRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoundedRectangleRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TriangleRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegionHelpers\InputManager.cs" />
+    <Compile Include="RegionHelpers\MouseState.cs" />
+    <Compile Include="RegionHelpers\NodeObject.cs" />
+    <Compile Include="RegionHelpers\ResizeManager.cs" />
+    <Compile Include="RegionHelpers\ShapeCaptureHelpers.cs" />
+    <Compile Include="RegionHelpers\SurfaceOptions.cs" />
     <Compile Include="ScreenRecorder.cs" />
     <Compile Include="ScreenRecorderCache.cs" />
     <Compile Include="Screenshot.cs" />
@@ -69,6 +117,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Crosshair.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\RegionCapturePreview.resx">
+      <DependentUpon>RegionCapturePreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

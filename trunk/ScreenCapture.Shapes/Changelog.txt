@@ -1,7 +1,0 @@
-﻿2.0
-
-Support for multiple areas
-
-1.0
-
-Initial release with Shapes supporting Rectange, Diamond, Ellipse, Triangle, Rounded rectangle, Polygon and Freehand
