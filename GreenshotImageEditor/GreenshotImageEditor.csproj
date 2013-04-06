@@ -32,6 +32,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <Prefer32Bit>false</Prefer32Bit>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -158,28 +160,20 @@
     <Compile Include="Controls\Pipette.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Core\AbstractDestination.cs" />
-    <Compile Include="Core\AbstractProcessor.cs" />
-    <Compile Include="Core\AccessibleHelper.cs" />
-    <Compile Include="Core\AnimationHelpers.cs" />
     <Compile Include="Core\BinaryStructHelper.cs" />
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\ClipboardHelper.cs" />
     <Compile Include="Configuration\CoreConfiguration.cs" />
-    <Compile Include="Core\DisplayKeyAttribute.cs" />
     <Compile Include="Core\Effects.cs" />
     <Compile Include="Core\EncryptionHelper.cs" />
     <Compile Include="Core\EnumExtensions.cs" />
-    <Compile Include="Core\ExtensionAttribute.cs" />
     <Compile Include="Core\FastBitmap.cs" />
     <Compile Include="Core\FilenameHelper.cs" />
     <Compile Include="Core\GreenshotResources.cs" />
     <Compile Include="Core\ImageHelper.cs" />
     <Compile Include="Core\ImageOutput.cs" />
-    <Compile Include="Core\InterfaceUtils.cs" />
     <Compile Include="Core\Language.cs" />
     <Compile Include="Core\Objects.cs" />
-    <Compile Include="Core\PluginUtils.cs" />
     <Compile Include="Core\QuantizerHelper.cs" />
     <Compile Include="Core\WindowCapture.cs" />
     <Compile Include="Core\WindowsHelper.cs" />
@@ -278,9 +272,7 @@
       <DependentUpon>MovableShowColorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Colors.cs" />
-    <Compile Include="Helpers\CopyData.cs" />
     <Compile Include="Helpers\GeometryHelper.cs" />
-    <Compile Include="Helpers\WindowWrapper.cs" />
     <Compile Include="IniFile\IniAttributes.cs" />
     <Compile Include="IniFile\IniConfig.cs" />
     <Compile Include="IniFile\IniReader.cs" />
@@ -308,7 +300,6 @@
     <Compile Include="Memento\IMemento.cs" />
     <Compile Include="Memento\DrawableContainerBoundsChangeMemento.cs" />
     <Compile Include="Memento\SurfaceBackgroundChangeMemento.cs" />
-    <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\GuiRectangle.cs" />
     <Compile Include="Helpers\ScaleHelper.cs" />
     <Compile Include="Helpers\ToolStripItemEndisabler.cs" />

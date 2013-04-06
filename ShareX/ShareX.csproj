@@ -49,7 +49,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -218,10 +218,6 @@
     <ProjectReference Include="..\HistoryLib\HistoryLib.csproj">
       <Project>{E7DE6237-AEA2-498B-8F56-9B392472C490}</Project>
       <Name>HistoryLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScreenCapture.Shapes\ScreenCapture.Shapes.csproj">
-      <Project>{7F53BD0C-1BBD-416C-89CE-3FF39D4D3414}</Project>
-      <Name>ScreenCapture.Shapes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScreenCapture\ScreenCapture.csproj">
       <Project>{DBDB0DAA-B3AE-4CC4-A8C2-20550B7F32E3}</Project>
