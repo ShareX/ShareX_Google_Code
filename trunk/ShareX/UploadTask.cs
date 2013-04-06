@@ -459,6 +459,11 @@ namespace ShareX
                         Program.UploadersConfig.TinyPicRegistrationCode);
                     break;
                 case ImageDestination.Imgur:
+                    if (Program.UploadersConfig.ImgurOAuth2Info == null)
+                    {
+                        Program.UploadersConfig.ImgurOAuth2Info = new OAuth2Info(ApiKeys.ImgurClientID, ApiKeys.ImgurClientSecret);
+                    }
+
                     imageUploader = new Imgur_v3(Program.UploadersConfig.ImgurOAuth2Info)
                     {
                         UploadMethod = Program.UploadersConfig.ImgurAccountType,
