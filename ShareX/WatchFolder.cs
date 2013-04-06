@@ -25,6 +25,8 @@
 
 using HelpersLib;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -34,6 +36,7 @@ namespace ShareX
     {
         private SynchronizationContext context;
         private FileSystemWatcher fileWatcher;
+        private List<WatchFolderDuplicateEventTimer> timers = new List<WatchFolderDuplicateEventTimer>();
 
         public string FolderPath { get; set; }
         public string Filter { get; set; }
@@ -62,14 +65,73 @@ namespace ShareX
 
         private void fileWatcher_Created(object sender, FileSystemEventArgs e)
         {
+            CleanElapsedTimers();
+
             string path = e.FullPath;
+
+            foreach (WatchFolderDuplicateEventTimer timer in timers)
+            {
+                if (timer.IsDuplicateEvent(path))
+                {
+                    return;
+                }
+            }
+
+            timers.Add(new WatchFolderDuplicateEventTimer(path));
+
             Action onCompleted = () => context.Post(state => UploadManager.UploadFile(path), null);
-            Helpers.WaitWhileAsync(() => Helpers.IsFileLocked(path), 250, 5000, onCompleted);
+            Helpers.WaitWhileAsync(() => Helpers.IsFileLocked(path), 250, 5000, onCompleted, 1000);
+        }
+
+        private void CleanElapsedTimers()
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].IsElapsed)
+                {
+                    timers.Remove(timers[i]);
+                }
+            }
         }
 
         public void Dispose()
         {
-            if (fileWatcher != null) fileWatcher.Dispose();
+            if (fileWatcher != null)
+            {
+                fileWatcher.Dispose();
+            }
+        }
+    }
+
+    public class WatchFolderDuplicateEventTimer
+    {
+        private const int expireTime = 1000;
+
+        private Stopwatch timer;
+        private string path;
+
+        public bool IsElapsed
+        {
+            get
+            {
+                return timer.ElapsedMilliseconds >= expireTime;
+            }
+        }
+
+        public WatchFolderDuplicateEventTimer(string path)
+        {
+            timer = Stopwatch.StartNew();
+            this.path = path;
+        }
+
+        public bool IsDuplicateEvent(string path)
+        {
+            bool result = path == this.path && !IsElapsed;
+            if (result)
+            {
+                timer = Stopwatch.StartNew();
+            }
+            return result;
         }
     }
 }
