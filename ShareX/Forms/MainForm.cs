@@ -338,6 +338,7 @@ namespace ShareX
             {
                 foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
                 {
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
                     watchFolder.Enable();
                 }
             }

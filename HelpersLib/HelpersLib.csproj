@@ -89,6 +89,12 @@
     <Compile Include="Forms\HashCheckForm.Designer.cs">
       <DependentUpon>HashCheckForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WatchFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WatchFolderForm.Designer.cs">
+      <DependentUpon>WatchFolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GIF\AnimatedGif.cs" />
     <Compile Include="CaptureHelpers.cs" />
     <Compile Include="CLI\CLICommand.cs" />
@@ -262,6 +268,7 @@
     <Compile Include="UpdateChecker\UpdateChecker.cs" />
     <Compile Include="UpdateChecker\UpdateInfo.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="WatchFolder.cs" />
     <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
@@ -273,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HashCheckForm.resx">
       <DependentUpon>HashCheckForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WatchFolderForm.resx">
+      <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
       <DependentUpon>DownloaderForm.cs</DependentUpon>

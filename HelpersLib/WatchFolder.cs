@@ -30,7 +30,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-namespace ShareX
+namespace HelpersLib
 {
     public class WatchFolder : IDisposable
     {
@@ -41,6 +41,9 @@ namespace ShareX
         public string FolderPath { get; set; }
         public string Filter { get; set; }
         public bool IncludeSubdirectories { get; set; }
+
+        public delegate void FileWatcherTriggerEventHandler(string path);
+        public event FileWatcherTriggerEventHandler FileWatcherTrigger;
 
         public void Enable()
         {
@@ -63,6 +66,14 @@ namespace ShareX
             }
         }
 
+        private void OnFileWatcherTrigger(string path)
+        {
+            if (FileWatcherTrigger != null)
+            {
+                FileWatcherTrigger(path);
+            }
+        }
+
         private void fileWatcher_Created(object sender, FileSystemEventArgs e)
         {
             CleanElapsedTimers();
@@ -79,7 +90,7 @@ namespace ShareX
 
             timers.Add(new WatchFolderDuplicateEventTimer(path));
 
-            Action onCompleted = () => context.Post(state => UploadManager.UploadFile(path), null);
+            Action onCompleted = () => context.Post(state => OnFileWatcherTrigger(path), null);
             Helpers.WaitWhileAsync(() => Helpers.IsFileLocked(path), 250, 5000, onCompleted, 1000);
         }
 

@@ -129,12 +129,6 @@
     <Compile Include="Forms\UploadTestForm.Designer.cs">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WatchFolderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\WatchFolderForm.Designer.cs">
-      <DependentUpon>WatchFolderForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="HelperClasses\ImageData.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -148,7 +142,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="UploadInfoStatus.cs" />
-    <Compile Include="WatchFolder.cs" />
     <Compile Include="Watermark\GradientMaker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,9 +180,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadTestForm.resx">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WatchFolderForm.resx">
-      <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
