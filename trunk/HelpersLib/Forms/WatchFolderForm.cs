@@ -27,7 +27,7 @@ using HelpersLib;
 using System;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace HelpersLib
 {
     public partial class WatchFolderForm : Form
     {
@@ -49,7 +49,7 @@ namespace ShareX
 
         private void btnPathBrowse_Click(object sender, EventArgs e)
         {
-            Helpers.BrowseFolder("ShareX - Choose folder path", txtFolderPath);
+            Helpers.BrowseFolder(Application.ProductName + " - Choose folder path", txtFolderPath);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
