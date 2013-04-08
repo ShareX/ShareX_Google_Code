@@ -165,6 +165,8 @@ namespace Greenshot {
             this.fileSavedStatusContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyPathMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.openDirectoryMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnClipboardCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -792,6 +794,8 @@ namespace Greenshot {
             this.propertiesToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSaveClose,
             this.btnClose,
+            this.toolStripSeparator6,
+            this.btnClipboardCopy,
             this.toolStripSeparator2,
             this.btnUndo,
             this.btnRedo,
@@ -1154,7 +1158,7 @@ namespace Greenshot {
             this.fontItalicButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fontItalicButton.LanguageKey = "editor_italic";
             this.fontItalicButton.Name = "fontItalicButton";
-            this.fontItalicButton.Size = new System.Drawing.Size(23, 24);
+            this.fontItalicButton.Size = new System.Drawing.Size(23, 20);
             this.fontItalicButton.Text = "Italic";
             this.fontItalicButton.Click += new System.EventHandler(this.FontItalicButtonClick);
             // 
@@ -1554,6 +1558,20 @@ namespace Greenshot {
             this.openDirectoryMenuItem.Text = "Open directory in Windows Explorer";
             this.openDirectoryMenuItem.Click += new System.EventHandler(this.OpenDirectoryMenuItemClick);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
+            // 
+            // btnClipboardCopy
+            // 
+            this.btnClipboardCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnClipboardCopy.Image = ((System.Drawing.Image)(resources.GetObject("btnClipboardCopy.Image")));
+            this.btnClipboardCopy.Name = "btnClipboardCopy";
+            this.btnClipboardCopy.Size = new System.Drawing.Size(23, 24);
+            this.btnClipboardCopy.Text = "Copy to clipboard";
+            this.btnClipboardCopy.Click += new System.EventHandler(this.btnClipboardCopy_Click);
+            // 
             // ImageEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1708,5 +1726,7 @@ namespace Greenshot {
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton btnClipboardCopy;
 	}
 }

@@ -1311,5 +1311,17 @@ namespace Greenshot
             forceClose = true;
             Close();
         }
+
+        private void btnClipboardCopy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClipboardHelper.SetClipboardData(surface);
+            }
+            catch (Exception)
+            {
+                surface.SendMessageEvent(this, SurfaceMessageTyp.Error, "Error while accessing the clipboard. Please try again.");
+            }
+        }
     }
 }
