@@ -48,8 +48,6 @@ namespace Greenshot {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageEditorForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.dimensionsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new GreenshotPlugin.Controls.NonJumpingPanel();
             this.toolStrip2 = new Greenshot.Controls.ToolStripEx();
@@ -107,6 +105,8 @@ namespace Greenshot {
             this.propertiesToolStrip = new Greenshot.Controls.ToolStripEx();
             this.btnSaveClose = new System.Windows.Forms.ToolStripButton();
             this.btnClose = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnClipboardCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnUndo = new System.Windows.Forms.ToolStripButton();
             this.btnRedo = new System.Windows.Forms.ToolStripButton();
@@ -165,14 +165,10 @@ namespace Greenshot {
             this.fileSavedStatusContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyPathMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
             this.openDirectoryMenuItem = new GreenshotPlugin.Controls.GreenshotToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnClipboardCopy = new System.Windows.Forms.ToolStripButton();
-            this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -183,15 +179,11 @@ namespace Greenshot {
             // toolStripContainer1
             // 
             // 
-            // toolStripContainer1.BottomToolStripPanel
-            // 
-            this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip1);
-            // 
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tableLayoutPanel1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(756, 412);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(756, 434);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer1.LeftToolStripPanel
@@ -208,24 +200,6 @@ namespace Greenshot {
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.propertiesToolStrip);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dimensionsLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(785, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // dimensionsLabel
-            // 
-            this.dimensionsLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.dimensionsLabel.Name = "dimensionsLabel";
-            this.dimensionsLabel.Size = new System.Drawing.Size(48, 17);
-            this.dimensionsLabel.Text = "123x321";
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
@@ -237,8 +211,8 @@ namespace Greenshot {
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 412F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(756, 412);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 434F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(756, 434);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // panel1
@@ -249,7 +223,7 @@ namespace Greenshot {
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(750, 406);
+            this.panel1.Size = new System.Drawing.Size(750, 428);
             this.panel1.TabIndex = 2;
             // 
             // toolStrip2
@@ -277,7 +251,7 @@ namespace Greenshot {
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.toolStrip2.Size = new System.Drawing.Size(29, 412);
+            this.toolStrip2.Size = new System.Drawing.Size(29, 434);
             this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 0;
             // 
@@ -858,6 +832,20 @@ namespace Greenshot {
             this.btnClose.Size = new System.Drawing.Size(23, 24);
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
+            // 
+            // btnClipboardCopy
+            // 
+            this.btnClipboardCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnClipboardCopy.Image = ((System.Drawing.Image)(resources.GetObject("btnClipboardCopy.Image")));
+            this.btnClipboardCopy.Name = "btnClipboardCopy";
+            this.btnClipboardCopy.Size = new System.Drawing.Size(23, 24);
+            this.btnClipboardCopy.Text = "Copy to clipboard";
+            this.btnClipboardCopy.Click += new System.EventHandler(this.btnClipboardCopy_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1558,20 +1546,6 @@ namespace Greenshot {
             this.openDirectoryMenuItem.Text = "Open directory in Windows Explorer";
             this.openDirectoryMenuItem.Click += new System.EventHandler(this.OpenDirectoryMenuItemClick);
             // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
-            // 
-            // btnClipboardCopy
-            // 
-            this.btnClipboardCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnClipboardCopy.Image = ((System.Drawing.Image)(resources.GetObject("btnClipboardCopy.Image")));
-            this.btnClipboardCopy.Name = "btnClipboardCopy";
-            this.btnClipboardCopy.Size = new System.Drawing.Size(23, 24);
-            this.btnClipboardCopy.Text = "Copy to clipboard";
-            this.btnClipboardCopy.Click += new System.EventHandler(this.btnClipboardCopy_Click);
-            // 
             // ImageEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1586,8 +1560,6 @@ namespace Greenshot {
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImageEditorFormFormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ImageEditorFormKeyDown);
             this.Resize += new System.EventHandler(this.ImageEditorFormResize);
-            this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.LeftToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.LeftToolStripPanel.PerformLayout();
@@ -1595,8 +1567,6 @@ namespace Greenshot {
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
@@ -1623,8 +1593,7 @@ namespace Greenshot {
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem addBorderToolStripMenuItem;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem tornEdgesToolStripMenuItem;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem addDropshadowToolStripMenuItem;
-		private GreenshotPlugin.Controls.GreenshotToolStripDropDownButton toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripStatusLabel dimensionsLabel;
+        private GreenshotPlugin.Controls.GreenshotToolStripDropDownButton toolStripSplitButton1;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem grayscaleHighlightMenuItem;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem areaHighlightMenuItem;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem textHighlightMenuItem;
@@ -1703,7 +1672,6 @@ namespace Greenshot {
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem cutToolStripMenuItem;
 		private GreenshotPlugin.Controls.GreenshotToolStripMenuItem editToolStripMenuItem;
         private Greenshot.Controls.MenuStripEx menuStrip1;
-		private System.Windows.Forms.StatusStrip statusStrip1;
 		private GreenshotPlugin.Controls.GreenshotToolStripButton btnCut;
 		private GreenshotPlugin.Controls.GreenshotToolStripButton btnCopy;
 		private GreenshotPlugin.Controls.GreenshotToolStripButton btnPaste;

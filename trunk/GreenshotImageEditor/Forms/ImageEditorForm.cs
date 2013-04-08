@@ -60,6 +60,7 @@ namespace Greenshot
         private bool controlsDisabledDueToConfirmable = false;
 
         private bool forceClose = false;
+        private string titlePath = null;
 
         /// <summary>
         /// An Implementation for the IImageEditor, this way Plugins have access to the HWND handles wich can be used with Win32 API calls.
@@ -153,7 +154,7 @@ namespace Greenshot
             // Fix title
             if (surface != null && surface.CaptureDetails != null && surface.CaptureDetails.Title != null)
             {
-                this.Text = surface.CaptureDetails.Title + " - Greenshot image editor";
+                SetTitle(surface.CaptureDetails.Title);
             }
             WindowDetails.ToForeground(this.Handle);
         }
@@ -216,16 +217,16 @@ namespace Greenshot
             {
                 case SurfaceMessageTyp.FileSaved:
                     // Put the event message on the status label and attach the context menu
-                    updateStatusLabel(dateTime + " - " + eventArgs.Message, fileSavedStatusContextMenu);
+                    //updateStatusLabel(dateTime + " - " + eventArgs.Message, fileSavedStatusContextMenu);
                     // Change title
-                    this.Text = eventArgs.Surface.LastSaveFullPath + " - Greenshot image editor";
+                    SetTitle(eventArgs.Surface.LastSaveFullPath);
                     break;
                 case SurfaceMessageTyp.Error:
                 case SurfaceMessageTyp.Info:
                 case SurfaceMessageTyp.UploadedUri:
                 default:
                     // Put the event message on the status label
-                    updateStatusLabel(dateTime + " - " + eventArgs.Message);
+                    //updateStatusLabel(dateTime + " - " + eventArgs.Message);
                     break;
             }
         }
@@ -248,7 +249,7 @@ namespace Greenshot
                 int newHeight = Math.Max(minimumFormHeight, (currentFormSize.Height - currentImageClientSize.Height) + imageSize.Height);
                 this.Size = new Size(newWidth, newHeight);
             }
-            dimensionsLabel.Text = this.Surface.Image.Width + "x" + this.Surface.Image.Height;
+            UpdateTitle();
             ImageEditorFormResize(sender, new EventArgs());
         }
 
@@ -262,9 +263,26 @@ namespace Greenshot
                 // Fix title
                 if (surface != null && surface.CaptureDetails != null && surface.CaptureDetails.Title != null)
                 {
-                    this.Text = surface.CaptureDetails.Title + " - Greenshot image editor";
+                    SetTitle(surface.CaptureDetails.Title);
                 }
             });
+        }
+
+        private void SetTitle(string filePath = null)
+        {
+            titlePath = filePath;
+            string title = "Greenshot image editor";
+            title += " - " + this.Surface.Image.Width + "x" + this.Surface.Image.Height;
+            if (!string.IsNullOrEmpty(titlePath))
+            {
+                title += " - " + filePath;
+            }
+            this.Text = title;
+        }
+
+        private void UpdateTitle()
+        {
+            SetTitle(titlePath);
         }
 
         public ISurface Surface
@@ -292,8 +310,8 @@ namespace Greenshot
             {
                 return;
             }
-            updateStatusLabel(string.Format("Image saved to {0}.", fullpath), fileSavedStatusContextMenu);
-            this.Text = Path.GetFileName(fullpath) + " - Greenshot image editor";
+            //updateStatusLabel(string.Format("Image saved to {0}.", fullpath), fileSavedStatusContextMenu);
+            SetTitle(Path.GetFileName(fullpath));
         }
 
         private void surface_DrawingModeChanged(object source, SurfaceDrawingModeEventArgs eventArgs)
@@ -852,7 +870,7 @@ namespace Greenshot
 
         #region status label handling
 
-        private void updateStatusLabel(string text, ContextMenuStrip contextMenu)
+        /*private void updateStatusLabel(string text, ContextMenuStrip contextMenu)
         {
             //statusLabel.Text = text;
             statusStrip1.ContextMenuStrip = contextMenu;
@@ -875,7 +893,7 @@ namespace Greenshot
             {
                 ss.ContextMenuStrip.Show(ss, e.X, e.Y);
             }
-        }
+        }*/
 
         private void CopyPathMenuItemClick(object sender, EventArgs e)
         {
