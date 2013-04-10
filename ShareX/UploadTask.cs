@@ -102,6 +102,11 @@ namespace ShareX
             EDataType dataType = Helpers.FindDataType(filePath);
             UploadTask task = new UploadTask(TaskJob.FileUpload, dataType);
             task.Info.FilePath = filePath;
+            if (Program.Settings.FileUploadUseNamePattern)
+            {
+                string ext = Path.GetExtension(task.Info.FilePath);
+                task.Info.FileName = TaskHelper.GetFilename(ext);
+            }
             task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return task;
         }
