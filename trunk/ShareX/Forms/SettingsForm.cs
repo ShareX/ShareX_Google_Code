@@ -167,9 +167,9 @@ namespace ShareX
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
-
             cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ReplacementVariables.n);
             cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ReplacementVariables.n);
+            cbFileUploadUseNamePattern.Checked = Program.Settings.FileUploadUseNamePattern;
 
             // Upload / Clipboard upload
             cbShowClipboardContentViewer.Checked = Program.Settings.ShowClipboardContentViewer;
@@ -710,6 +710,11 @@ namespace ShareX
             Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
             NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber, WindowText = Text };
             lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow);
+        }
+
+        private void cbFileUploadUseNamePattern_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.FileUploadUseNamePattern = cbFileUploadUseNamePattern.Checked;
         }
 
         #endregion Upload / General

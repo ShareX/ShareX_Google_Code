@@ -180,6 +180,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1590,6 +1591,7 @@
             // 
             // tpUploadGeneral
             // 
+            this.tpUploadGeneral.Controls.Add(this.cbFileUploadUseNamePattern);
             this.tpUploadGeneral.Controls.Add(this.btnResetAutoIncrementNumber);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
             this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
@@ -2020,6 +2022,17 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbFileUploadUseNamePattern
+            // 
+            this.cbFileUploadUseNamePattern.AutoSize = true;
+            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(24, 256);
+            this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
+            this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
+            this.cbFileUploadUseNamePattern.TabIndex = 11;
+            this.cbFileUploadUseNamePattern.Text = "Use name pattern for file uploads instead actual file name";
+            this.cbFileUploadUseNamePattern.UseVisualStyleBackColor = true;
+            this.cbFileUploadUseNamePattern.CheckedChanged += new System.EventHandler(this.cbFileUploadUseNamePattern_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2245,5 +2258,6 @@
         private System.Windows.Forms.TabPage tpUploadClipboard;
         private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
         private System.Windows.Forms.CheckBox cbShowClipboardContentViewer;
+        private System.Windows.Forms.CheckBox cbFileUploadUseNamePattern;
     }
 }

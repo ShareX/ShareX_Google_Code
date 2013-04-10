@@ -126,7 +126,11 @@ namespace ShareX
             };
 
             string filename = nameParser.Parse(Program.Settings.NameFormatPattern);
-            if (!string.IsNullOrEmpty(extension)) filename += "." + extension;
+
+            if (!string.IsNullOrEmpty(extension))
+            {
+                filename += "." + extension.TrimStart('.');
+            }
 
             Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 
