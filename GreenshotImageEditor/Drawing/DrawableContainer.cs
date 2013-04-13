@@ -400,8 +400,9 @@ namespace Greenshot.Drawing
             }
             if (!layoutSuspended)
             {
-                int[] xChoords = new int[] { this.Left - 2, this.Left + this.Width / 2 - 2, this.Left + this.Width - 2 };
-                int[] yChoords = new int[] { this.Top - 2, this.Top + this.Height / 2 - 2, this.Top + this.Height - 2 };
+                int center = (Gripper.GripperSize - 1) / 2;
+                int[] xChoords = new int[] { this.Left - center, this.Left + this.Width / 2 - center, this.Left + this.Width - center };
+                int[] yChoords = new int[] { this.Top - center, this.Top + this.Height / 2 - center, this.Top + this.Height - center };
 
                 grippers[Gripper.POSITION_TOP_LEFT].Left = xChoords[0]; grippers[Gripper.POSITION_TOP_LEFT].Top = yChoords[0];
                 grippers[Gripper.POSITION_TOP_CENTER].Left = xChoords[1]; grippers[Gripper.POSITION_TOP_CENTER].Top = yChoords[0];
