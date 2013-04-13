@@ -1,0 +1,33 @@
+#summary Screenshots
+
+=== Main window ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/3toSkya0VD.png
+
+=== Rectangle capture ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/GLFpnSFJId.png
+
+=== Outputs configuration / Dropbox ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/2cH1KE1QlV.png
+
+=== Screen color picker ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/bmzm8gksfY.png
+
+=== Hash check ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/5NGW2glfEy.png
+
+=== History ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/zWzzuBxxdg.png
+
+=== Settings / Hotkeys ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/vjTJePStHB.png
+
+=== Watermark settings ===
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/UhHkI5YUsx.png
