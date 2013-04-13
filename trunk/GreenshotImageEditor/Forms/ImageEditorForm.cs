@@ -103,7 +103,7 @@ namespace Greenshot
             updateUI();
 
             // Workaround: As the cursor is (mostly) selected on the surface a funny artifact is visible, this fixes it.
-            hideToolstripItems();
+            //hideToolstripItems();
         }
 
         /// <summary>
@@ -150,6 +150,7 @@ namespace Greenshot
             SurfaceSizeChanged(this.Surface, null);
 
             bindFieldControls();
+            surface.DrawingMode = DrawingModes.Rect;
             refreshEditorControls();
             // Fix title
             if (surface != null && surface.CaptureDetails != null && surface.CaptureDetails.Title != null)
@@ -182,7 +183,7 @@ namespace Greenshot
             // Workaround: for the MouseWheel event which doesn't get to the panel
             this.MouseWheel += new MouseEventHandler(PanelMouseWheel);
 
-            ApplyLanguage();
+            //ApplyLanguage();
         }
 
         /// <summary>

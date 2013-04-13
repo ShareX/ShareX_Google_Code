@@ -43,14 +43,16 @@ namespace Greenshot.Drawing
         public const int POSITION_BOTTOM_CENTER = 5;
         public const int POSITION_BOTTOM_LEFT = 6;
         public const int POSITION_MIDDLE_LEFT = 7;
+        public const int GripperSize = 7;
 
         public int Position;
 
         public Gripper()
         {
-            Width = 5;
-            Height = 5;
-            BackColor = Color.Black;
+            Width = GripperSize;
+            Height = GripperSize;
+            BackColor = Color.White;
+            BorderStyle = BorderStyle.FixedSingle;
         }
 
         public bool IsTop()
