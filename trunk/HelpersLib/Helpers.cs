@@ -339,9 +339,11 @@ namespace HelpersLib
             return Array.IndexOf(values, value);
         }
 
-        public const string UnreservedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~";
+        public const string URLUnreservedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~";
 
-        public static string URLEncode(string text)
+        public const string URLPathUnreservedCharacters = URLUnreservedCharacters + "/";
+
+        public static string Encode(string text, string unreservedCharacters)
         {
             StringBuilder result = new StringBuilder();
 
@@ -349,7 +351,7 @@ namespace HelpersLib
             {
                 foreach (char c in text)
                 {
-                    if (UnreservedCharacters.Contains(c))
+                    if (unreservedCharacters.Contains(c))
                     {
                         result.Append(c);
                     }
@@ -366,6 +368,16 @@ namespace HelpersLib
             }
 
             return result.ToString();
+        }
+
+        public static string URLEncode(string text)
+        {
+            return Encode(text, URLUnreservedCharacters);
+        }
+
+        public static string URLPathEncode(string text)
+        {
+            return Encode(text, URLPathUnreservedCharacters);
         }
 
         public static void OpenFolder(string folderPath)

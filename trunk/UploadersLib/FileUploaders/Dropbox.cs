@@ -199,7 +199,7 @@ namespace UploadersLib.FileUploaders
 
                 if (uploadPath.StartsWith("Public/", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    uploadPath = HttpUtility.UrlPathEncode(uploadPath.Substring(7));
+                    uploadPath = Helpers.URLPathEncode((uploadPath.Substring(7)));
                     return Helpers.CombineURL(URLDownload, userID.ToString(), uploadPath);
                 }
             }
