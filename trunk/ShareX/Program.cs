@@ -329,7 +329,18 @@ namespace ShareX
                 {
                     Action d = () =>
                     {
-                        if (MainForm.Visible)
+                        if (args.CommandLineArgs == null || args.CommandLineArgs.Length <= 1)
+                        {
+                            if (MainForm.niTray != null && MainForm.niTray.Visible)
+                            {
+                                // Workaround for Windows startup tray icon bug
+                                MainForm.niTray.Visible = false;
+                                MainForm.niTray.Visible = true;
+                            }
+
+                            MainForm.ShowActivate();
+                        }
+                        else if (MainForm.Visible)
                         {
                             MainForm.ShowActivate();
                         }
