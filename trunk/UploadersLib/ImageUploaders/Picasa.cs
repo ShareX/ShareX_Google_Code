@@ -129,6 +129,11 @@ namespace UploadersLib.URLShorteners
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
+            if (!CheckAuthorization())
+            {
+                return null;
+            }
+
             UploadResult ur = new UploadResult();
 
             string url = string.Format("https://picasaweb.google.com/data/feed/api/user/default/albumid/default?access_token={0}", AuthInfo.Token.access_token);
