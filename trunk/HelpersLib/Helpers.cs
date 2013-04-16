@@ -46,6 +46,14 @@ namespace HelpersLib
 {
     public static class Helpers
     {
+        public const string Numbers = "0123456789"; // 48 ... 57
+        public const string AlphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 65 ... 90
+        public const string Alphabet = "abcdefghijklmnopqrstuvwxyz"; // 97 ... 122
+        public const string Alphanumeric = Numbers + AlphabetCapital + Alphabet;
+        public const string URLCharacters = Alphanumeric + "-._~"; // 45 46 95 126
+        public const string URLPathCharacters = URLCharacters + "/"; // 47
+        public const string ValidURLCharacters = URLPathCharacters + ":?#[]@!$&'()*+,;=";
+
         public static readonly Random Random = new Random();
 
         private static readonly object ClipboardLock = new object();
@@ -200,11 +208,6 @@ namespace HelpersLib
             return AddZeroes(hour);
         }
 
-        public const string Alphabet = "abcdefghijklmnopqrstuvwxyz";
-        public const string AlphabetCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public const string Numbers = "0123456789";
-        public const string Alphanumeric = Alphabet + AlphabetCapital + Numbers;
-
         public static char GetRandomChar(string chars)
         {
             return chars[Random.Next(chars.Length)];
@@ -264,8 +267,7 @@ namespace HelpersLib
         public static string GetValidURL(string url, bool replaceSpace = true)
         {
             if (replaceSpace) url = url.Replace(' ', '_');
-            string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;=";
-            return new string(url.Where(c => validChars.Contains(c)).ToArray());
+            return new string(url.Where(c => ValidURLCharacters.Contains(c)).ToArray());
         }
 
         public static string GetXMLValue(string input, string tag)
@@ -339,10 +341,6 @@ namespace HelpersLib
             return Array.IndexOf(values, value);
         }
 
-        public const string URLUnreservedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~";
-
-        public const string URLPathUnreservedCharacters = URLUnreservedCharacters + "/";
-
         public static string Encode(string text, string unreservedCharacters)
         {
             StringBuilder result = new StringBuilder();
@@ -372,12 +370,12 @@ namespace HelpersLib
 
         public static string URLEncode(string text)
         {
-            return Encode(text, URLUnreservedCharacters);
+            return Encode(text, URLCharacters);
         }
 
         public static string URLPathEncode(string text)
         {
-            return Encode(text, URLPathUnreservedCharacters);
+            return Encode(text, URLPathCharacters);
         }
 
         public static void OpenFolder(string folderPath)
