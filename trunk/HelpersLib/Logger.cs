@@ -55,7 +55,7 @@ namespace HelpersLib
             Messages = new StringBuilder(1024);
             MessageFormat = "{0:yyyy-MM-dd HH:mm:ss.fff} - {1}";
             ExceptionFormat = "{0}:\r\n{1}";
-            TimerMessageFormat = "{0} - {1}ms";
+            TimerMessageFormat = "{0} - {1} ms";
         }
 
         public void WriteLine(string message = null)
