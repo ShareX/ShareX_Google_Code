@@ -67,7 +67,8 @@ namespace ShareX
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;
             cbStartWithWindows.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.Startup); //RegistryHelper.CheckStartWithWindows();
-            cbShellContextMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo); //RegistryHelper.CheckShellContextMenu();
+            cbSendToMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo);
+            cbShellContextMenu.Checked = RegistryHelper.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
             cbShowAfterCaptureTasksForm.Checked = Program.Settings.ShowAfterCaptureTasksForm;
             cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
@@ -256,12 +257,19 @@ namespace ShareX
             }
         }
 
+        private void cbSendToMenu_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                ShortcutHelper.SetShortcut(cbSendToMenu.Checked, Environment.SpecialFolder.SendTo);
+            }
+        }
+
         private void cbShellContextMenu_CheckedChanged(object sender, EventArgs e)
         {
             if (loaded)
             {
-                //RegistryHelper.SetShellContextMenu(cbShellContextMenu.Checked);
-                ShortcutHelper.SetShortcut(cbShellContextMenu.Checked, Environment.SpecialFolder.SendTo);
+                RegistryHelper.SetShellContextMenu(cbShellContextMenu.Checked);
             }
         }
 

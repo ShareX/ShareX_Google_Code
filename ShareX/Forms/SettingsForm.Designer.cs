@@ -39,7 +39,7 @@
             this.lblGeneralSeparator = new System.Windows.Forms.Label();
             this.cbStartWithWindows = new System.Windows.Forms.CheckBox();
             this.cbShowTray = new System.Windows.Forms.CheckBox();
-            this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
+            this.cbSendToMenu = new System.Windows.Forms.CheckBox();
             this.tpPaths = new System.Windows.Forms.TabPage();
             this.btnBrowseCustomScreenshotsPath = new System.Windows.Forms.Button();
             this.btnOpenPersonalFolder = new System.Windows.Forms.Button();
@@ -141,6 +141,7 @@
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
+            this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
             this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
             this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
             this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
@@ -180,7 +181,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
+            this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -225,7 +226,7 @@
             // cbPlaySoundAfterUpload
             // 
             this.cbPlaySoundAfterUpload.AutoSize = true;
-            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 184);
+            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 208);
             this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
             this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(187, 17);
             this.cbPlaySoundAfterUpload.TabIndex = 8;
@@ -253,6 +254,7 @@
             // 
             // tpGeneral
             // 
+            this.tpGeneral.Controls.Add(this.cbShellContextMenu);
             this.tpGeneral.Controls.Add(this.cbShowAfterCaptureTasksForm);
             this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
             this.tpGeneral.Controls.Add(this.cbHistorySave);
@@ -261,7 +263,7 @@
             this.tpGeneral.Controls.Add(this.lblGeneralSeparator);
             this.tpGeneral.Controls.Add(this.cbStartWithWindows);
             this.tpGeneral.Controls.Add(this.cbShowTray);
-            this.tpGeneral.Controls.Add(this.cbShellContextMenu);
+            this.tpGeneral.Controls.Add(this.cbSendToMenu);
             this.tpGeneral.Controls.Add(this.cbPlaySoundAfterUpload);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
@@ -274,7 +276,7 @@
             // cbShowAfterCaptureTasksForm
             // 
             this.cbShowAfterCaptureTasksForm.AutoSize = true;
-            this.cbShowAfterCaptureTasksForm.Location = new System.Drawing.Point(16, 136);
+            this.cbShowAfterCaptureTasksForm.Location = new System.Drawing.Point(16, 160);
             this.cbShowAfterCaptureTasksForm.Name = "cbShowAfterCaptureTasksForm";
             this.cbShowAfterCaptureTasksForm.Size = new System.Drawing.Size(295, 17);
             this.cbShowAfterCaptureTasksForm.TabIndex = 12;
@@ -285,7 +287,7 @@
             // cbTrayBalloonTipAfterUpload
             // 
             this.cbTrayBalloonTipAfterUpload.AutoSize = true;
-            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 208);
+            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 232);
             this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
             this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(233, 17);
             this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
@@ -296,7 +298,7 @@
             // cbHistorySave
             // 
             this.cbHistorySave.AutoSize = true;
-            this.cbHistorySave.Location = new System.Drawing.Point(16, 232);
+            this.cbHistorySave.Location = new System.Drawing.Point(16, 256);
             this.cbHistorySave.Name = "cbHistorySave";
             this.cbHistorySave.Size = new System.Drawing.Size(139, 17);
             this.cbHistorySave.TabIndex = 11;
@@ -307,7 +309,7 @@
             // cbPlaySoundAfterCapture
             // 
             this.cbPlaySoundAfterCapture.AutoSize = true;
-            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 160);
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 184);
             this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
             this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
             this.cbPlaySoundAfterCapture.TabIndex = 7;
@@ -318,7 +320,7 @@
             // cbCheckUpdates
             // 
             this.cbCheckUpdates.AutoSize = true;
-            this.cbCheckUpdates.Location = new System.Drawing.Point(16, 88);
+            this.cbCheckUpdates.Location = new System.Drawing.Point(16, 112);
             this.cbCheckUpdates.Name = "cbCheckUpdates";
             this.cbCheckUpdates.Size = new System.Drawing.Size(209, 17);
             this.cbCheckUpdates.TabIndex = 3;
@@ -329,7 +331,7 @@
             // lblGeneralSeparator
             // 
             this.lblGeneralSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblGeneralSeparator.Location = new System.Drawing.Point(16, 120);
+            this.lblGeneralSeparator.Location = new System.Drawing.Point(16, 144);
             this.lblGeneralSeparator.Name = "lblGeneralSeparator";
             this.lblGeneralSeparator.Size = new System.Drawing.Size(475, 2);
             this.lblGeneralSeparator.TabIndex = 4;
@@ -356,16 +358,16 @@
             this.cbShowTray.UseVisualStyleBackColor = true;
             this.cbShowTray.CheckedChanged += new System.EventHandler(this.cbShowTray_CheckedChanged);
             // 
-            // cbShellContextMenu
+            // cbSendToMenu
             // 
-            this.cbShellContextMenu.AutoSize = true;
-            this.cbShellContextMenu.Location = new System.Drawing.Point(16, 64);
-            this.cbShellContextMenu.Name = "cbShellContextMenu";
-            this.cbShellContextMenu.Size = new System.Drawing.Size(181, 17);
-            this.cbShellContextMenu.TabIndex = 2;
-            this.cbShellContextMenu.Text = "Show ShareX in \"Send to\" menu";
-            this.cbShellContextMenu.UseVisualStyleBackColor = true;
-            this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
+            this.cbSendToMenu.AutoSize = true;
+            this.cbSendToMenu.Location = new System.Drawing.Point(16, 64);
+            this.cbSendToMenu.Name = "cbSendToMenu";
+            this.cbSendToMenu.Size = new System.Drawing.Size(181, 17);
+            this.cbSendToMenu.TabIndex = 2;
+            this.cbSendToMenu.Text = "Show ShareX in \"Send to\" menu";
+            this.cbSendToMenu.UseVisualStyleBackColor = true;
+            this.cbSendToMenu.CheckedChanged += new System.EventHandler(this.cbSendToMenu_CheckedChanged);
             // 
             // tpPaths
             // 
@@ -1612,6 +1614,17 @@
             this.tpUploadGeneral.Text = "General";
             this.tpUploadGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbFileUploadUseNamePattern
+            // 
+            this.cbFileUploadUseNamePattern.AutoSize = true;
+            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(24, 256);
+            this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
+            this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
+            this.cbFileUploadUseNamePattern.TabIndex = 11;
+            this.cbFileUploadUseNamePattern.Text = "Use name pattern for file uploads instead actual file name";
+            this.cbFileUploadUseNamePattern.UseVisualStyleBackColor = true;
+            this.cbFileUploadUseNamePattern.CheckedChanged += new System.EventHandler(this.cbFileUploadUseNamePattern_CheckedChanged);
+            // 
             // btnResetAutoIncrementNumber
             // 
             this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 80);
@@ -2022,16 +2035,16 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbFileUploadUseNamePattern
+            // cbShellContextMenu
             // 
-            this.cbFileUploadUseNamePattern.AutoSize = true;
-            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(24, 256);
-            this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
-            this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
-            this.cbFileUploadUseNamePattern.TabIndex = 11;
-            this.cbFileUploadUseNamePattern.Text = "Use name pattern for file uploads instead actual file name";
-            this.cbFileUploadUseNamePattern.UseVisualStyleBackColor = true;
-            this.cbFileUploadUseNamePattern.CheckedChanged += new System.EventHandler(this.cbFileUploadUseNamePattern_CheckedChanged);
+            this.cbShellContextMenu.AutoSize = true;
+            this.cbShellContextMenu.Location = new System.Drawing.Point(16, 88);
+            this.cbShellContextMenu.Name = "cbShellContextMenu";
+            this.cbShellContextMenu.Size = new System.Drawing.Size(301, 17);
+            this.cbShellContextMenu.TabIndex = 13;
+            this.cbShellContextMenu.Text = "Show \"Upload using ShareX\" button in shell context menu";
+            this.cbShellContextMenu.UseVisualStyleBackColor = true;
+            this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
             // 
             // SettingsForm
             // 
@@ -2110,7 +2123,7 @@
         private System.Windows.Forms.TabControl tcSettings;
         private System.Windows.Forms.TabPage tpGeneral;
         private System.Windows.Forms.TabPage tpProxy;
-        private System.Windows.Forms.CheckBox cbShellContextMenu;
+        private System.Windows.Forms.CheckBox cbSendToMenu;
         private System.Windows.Forms.TextBox txtCustomHistoryPath;
         private System.Windows.Forms.CheckBox cbUseCustomHistoryPath;
         private System.Windows.Forms.CheckBox cbHistorySave;
@@ -2259,5 +2272,6 @@
         private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
         private System.Windows.Forms.CheckBox cbShowClipboardContentViewer;
         private System.Windows.Forms.CheckBox cbFileUploadUseNamePattern;
+        private System.Windows.Forms.CheckBox cbShellContextMenu;
     }
 }
