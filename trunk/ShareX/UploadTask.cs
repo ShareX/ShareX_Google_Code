@@ -346,6 +346,11 @@ namespace ShareX
                             }
                         }
 
+                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
+                        {
+                            Helpers.CopyTextSafely(Info.FilePath);
+                        }
+
                         if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
