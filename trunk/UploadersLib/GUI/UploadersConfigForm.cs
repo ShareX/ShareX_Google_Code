@@ -294,6 +294,29 @@ namespace UploadersLib
             PicasaAuthRefresh();
         }
 
+        private void txtPicasaAlbumID_TextChanged(object sender, EventArgs e)
+        {
+            Config.PicasaAlbumID = txtPicasaAlbumID.Text;
+        }
+
+        private void btnPicasaRefreshAlbumList_Click(object sender, EventArgs e)
+        {
+            PicasaRefreshAlbumList();
+        }
+
+        private void lvPicasaAlbumList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvPicasaAlbumList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvPicasaAlbumList.SelectedItems[0];
+                if (lvi.Tag is PicasaAlbumInfo)
+                {
+                    PicasaAlbumInfo album = (PicasaAlbumInfo)lvi.Tag;
+                    txtPicasaAlbumID.Text = album.ID;
+                }
+            }
+        }
+
         #endregion Picasa
 
         #region Flickr
@@ -1048,6 +1071,5 @@ namespace UploadersLib
         }
 
         #endregion Other Services
-
     }
 }

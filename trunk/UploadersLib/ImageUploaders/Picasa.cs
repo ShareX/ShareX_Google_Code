@@ -32,11 +32,16 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using UploadersLib.HelperClasses;
 
-namespace UploadersLib.URLShorteners
+namespace UploadersLib.ImageUploaders
 {
     public class Picasa : ImageUploader, IOAuth2
     {
         public OAuth2Info AuthInfo { get; set; }
+        public string AlbumID { get; set; }
+
+        private static readonly XNamespace AtomNS = "http://www.w3.org/2005/Atom";
+        private static readonly XNamespace MediaNS = "http://search.yahoo.com/mrss/";
+        private static readonly XNamespace GPhotoNS = "http://schemas.google.com/photos/2007";
 
         public Picasa(OAuth2Info oauth)
         {
@@ -124,21 +129,54 @@ namespace UploadersLib.URLShorteners
             return true;
         }
 
-        private static readonly XNamespace AtomNS = "http://www.w3.org/2005/Atom";
-        private static readonly XNamespace MediaNS = "http://search.yahoo.com/mrss/";
+        public List<PicasaAlbumInfo> GetAlbumList()
+        {
+            if (!CheckAuthorization()) return null;
+
+            List<PicasaAlbumInfo> albumList = new List<PicasaAlbumInfo>();
+
+            NameValueCollection headers = new NameValueCollection();
+            headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
+
+            string response = SendGetRequest("https://picasaweb.google.com/data/feed/api/user/default", null, ResponseType.Text, null, headers);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                XDocument xd = XDocument.Parse(response);
+
+                if (xd != null)
+                {
+                    foreach (XElement entry in xd.Descendants(AtomNS + "entry"))
+                    {
+                        PicasaAlbumInfo album = new PicasaAlbumInfo();
+                        album.ID = entry.GetElementValue(GPhotoNS + "id");
+                        album.Name = entry.GetElementValue(GPhotoNS + "name");
+                        album.Summary = entry.GetElementValue(AtomNS + "summary");
+                        albumList.Add(album);
+                    }
+                }
+            }
+
+            return albumList;
+        }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            if (!CheckAuthorization())
+            if (!CheckAuthorization()) return null;
+
+            if (string.IsNullOrEmpty(AlbumID))
             {
-                return null;
+                AlbumID = "default";
             }
 
             UploadResult ur = new UploadResult();
 
-            string url = string.Format("https://picasaweb.google.com/data/feed/api/user/default/albumid/default?access_token={0}", AuthInfo.Token.access_token);
+            string url = string.Format("https://picasaweb.google.com/data/feed/api/user/default/albumid/" + AlbumID);
             string contentType = Helpers.GetMimeType(fileName);
-            NameValueCollection headers = new NameValueCollection { { "Slug", fileName } };
+
+            NameValueCollection headers = new NameValueCollection();
+            headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
+            headers.Add("Slug", fileName);
 
             ur.Response = SendPostRequestStream(url, stream, contentType, null, headers);
 
@@ -167,5 +205,12 @@ namespace UploadersLib.URLShorteners
 
             return ur;
         }
+    }
+
+    public class PicasaAlbumInfo
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Summary { get; set; }
     }
 }

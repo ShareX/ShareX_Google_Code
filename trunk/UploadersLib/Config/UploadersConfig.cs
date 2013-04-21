@@ -83,6 +83,7 @@ namespace UploadersLib
         // Picasa
 
         public OAuth2Info PicasaOAuth2Info = null;
+        public string PicasaAlbumID = string.Empty;
 
         #endregion Image uploaders
 

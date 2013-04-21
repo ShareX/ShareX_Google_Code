@@ -488,7 +488,10 @@ namespace ShareX
                     imageUploader = new Photobucket(Program.UploadersConfig.PhotobucketOAuthInfo, Program.UploadersConfig.PhotobucketAccountInfo);
                     break;
                 case ImageDestination.Picasa:
-                    imageUploader = new Picasa(Program.UploadersConfig.PicasaOAuth2Info);
+                    imageUploader = new Picasa(Program.UploadersConfig.PicasaOAuth2Info)
+                    {
+                        AlbumID = Program.UploadersConfig.PicasaAlbumID
+                    };
                     break;
                 case ImageDestination.UploadScreenshot:
                     imageUploader = new UploadScreenshot(ApiKeys.UploadScreenshotKey);
