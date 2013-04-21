@@ -94,6 +94,7 @@ namespace UploadersLib
                     }
 
                     oauth2Imgur.LoginStatus = result;
+                    btnImgurRefreshAlbumList.Enabled = result;
                 }
             }
             catch (Exception ex)
@@ -121,6 +122,8 @@ namespace UploadersLib
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         atcImgurAccountType.SelectedAccountType = AccountType.Anonymous;
                     }
+
+                    btnImgurRefreshAlbumList.Enabled = result;
                 }
             }
             catch (Exception ex)
@@ -360,6 +363,7 @@ namespace UploadersLib
                     }
 
                     oauth2Picasa.LoginStatus = result;
+                    btnPicasaRefreshAlbumList.Enabled = result;
                 }
             }
             catch (Exception ex)
@@ -385,6 +389,37 @@ namespace UploadersLib
                     {
                         oauth2Picasa.Status = "Login failed.";
                         MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    btnPicasaRefreshAlbumList.Enabled = result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void PicasaRefreshAlbumList()
+        {
+            try
+            {
+                lvPicasaAlbumList.Items.Clear();
+
+                if (OAuth2Info.CheckOAuth(Config.PicasaOAuth2Info))
+                {
+                    List<PicasaAlbumInfo> albums = new Picasa(Config.PicasaOAuth2Info).GetAlbumList();
+
+                    if (albums != null && albums.Count > 0)
+                    {
+                        foreach (PicasaAlbumInfo album in albums)
+                        {
+                            ListViewItem lvi = new ListViewItem(album.ID);
+                            lvi.SubItems.Add(album.Name ?? "");
+                            lvi.SubItems.Add(album.Summary ?? "");
+                            lvi.Tag = album;
+                            lvPicasaAlbumList.Items.Add(lvi);
+                        }
                     }
                 }
             }

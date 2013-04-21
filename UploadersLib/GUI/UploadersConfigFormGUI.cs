@@ -146,6 +146,7 @@ namespace UploadersLib
             {
                 oauth2Imgur.Status = "Login successful.";
                 oauth2Imgur.LoginStatus = true;
+                btnImgurRefreshAlbumList.Enabled = true;
             }
 
             // Photobucket
@@ -180,7 +181,10 @@ namespace UploadersLib
             {
                 oauth2Picasa.Status = "Login successful.";
                 oauth2Picasa.LoginStatus = true;
+                btnPicasaRefreshAlbumList.Enabled = true;
             }
+
+            txtPicasaAlbumID.Text = Config.PicasaAlbumID;
 
             // Flickr
 

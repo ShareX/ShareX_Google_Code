@@ -147,7 +147,7 @@ namespace HelpersLib
             return null;
         }
 
-        public static string GetElementValue(this XElement xe, string name)
+        public static string GetElementValue(this XElement xe, XName name)
         {
             if (xe != null)
             {

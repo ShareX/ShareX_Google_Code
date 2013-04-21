@@ -105,6 +105,12 @@
             this.txtYFrogPassword = new System.Windows.Forms.TextBox();
             this.txtYFrogUsername = new System.Windows.Forms.TextBox();
             this.tpPicasa = new System.Windows.Forms.TabPage();
+            this.lvPicasaAlbumList = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnPicasaRefreshAlbumList = new System.Windows.Forms.Button();
+            this.oauth2Picasa = new UploadersLib.GUI.OAuth2Control();
             this.tpTextUploaders = new System.Windows.Forms.TabPage();
             this.tcTextUploaders = new System.Windows.Forms.TabControl();
             this.tpPastebin = new System.Windows.Forms.TabPage();
@@ -289,7 +295,8 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.oauth2Picasa = new UploadersLib.GUI.OAuth2Control();
+            this.txtPicasaAlbumID = new System.Windows.Forms.TextBox();
+            this.lblPicasaAlbumID = new System.Windows.Forms.Label();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -692,6 +699,7 @@
             // 
             // btnImgurRefreshAlbumList
             // 
+            this.btnImgurRefreshAlbumList.Enabled = false;
             this.btnImgurRefreshAlbumList.Location = new System.Drawing.Point(16, 112);
             this.btnImgurRefreshAlbumList.Name = "btnImgurRefreshAlbumList";
             this.btnImgurRefreshAlbumList.Size = new System.Drawing.Size(200, 23);
@@ -1132,6 +1140,10 @@
             // 
             // tpPicasa
             // 
+            this.tpPicasa.Controls.Add(this.txtPicasaAlbumID);
+            this.tpPicasa.Controls.Add(this.lblPicasaAlbumID);
+            this.tpPicasa.Controls.Add(this.lvPicasaAlbumList);
+            this.tpPicasa.Controls.Add(this.btnPicasaRefreshAlbumList);
             this.tpPicasa.Controls.Add(this.oauth2Picasa);
             this.tpPicasa.Location = new System.Drawing.Point(4, 22);
             this.tpPicasa.Name = "tpPicasa";
@@ -1140,6 +1152,60 @@
             this.tpPicasa.TabIndex = 8;
             this.tpPicasa.Text = "Picasa";
             this.tpPicasa.UseVisualStyleBackColor = true;
+            // 
+            // lvPicasaAlbumList
+            // 
+            this.lvPicasaAlbumList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.lvPicasaAlbumList.FullRowSelect = true;
+            this.lvPicasaAlbumList.Location = new System.Drawing.Point(352, 76);
+            this.lvPicasaAlbumList.MultiSelect = false;
+            this.lvPicasaAlbumList.Name = "lvPicasaAlbumList";
+            this.lvPicasaAlbumList.Size = new System.Drawing.Size(432, 312);
+            this.lvPicasaAlbumList.TabIndex = 8;
+            this.lvPicasaAlbumList.UseCompatibleStateImageBehavior = false;
+            this.lvPicasaAlbumList.View = System.Windows.Forms.View.Details;
+            this.lvPicasaAlbumList.SelectedIndexChanged += new System.EventHandler(this.lvPicasaAlbumList_SelectedIndexChanged);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "ID";
+            this.columnHeader3.Width = 135;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Name";
+            this.columnHeader4.Width = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Description";
+            this.columnHeader5.Width = 143;
+            // 
+            // btnPicasaRefreshAlbumList
+            // 
+            this.btnPicasaRefreshAlbumList.Enabled = false;
+            this.btnPicasaRefreshAlbumList.Location = new System.Drawing.Point(352, 44);
+            this.btnPicasaRefreshAlbumList.Name = "btnPicasaRefreshAlbumList";
+            this.btnPicasaRefreshAlbumList.Size = new System.Drawing.Size(200, 23);
+            this.btnPicasaRefreshAlbumList.TabIndex = 7;
+            this.btnPicasaRefreshAlbumList.Text = "Refresh album list";
+            this.btnPicasaRefreshAlbumList.UseVisualStyleBackColor = true;
+            this.btnPicasaRefreshAlbumList.Click += new System.EventHandler(this.btnPicasaRefreshAlbumList_Click);
+            // 
+            // oauth2Picasa
+            // 
+            this.oauth2Picasa.Location = new System.Drawing.Point(16, 16);
+            this.oauth2Picasa.LoginStatus = false;
+            this.oauth2Picasa.Name = "oauth2Picasa";
+            this.oauth2Picasa.Size = new System.Drawing.Size(328, 207);
+            this.oauth2Picasa.Status = "Login required.";
+            this.oauth2Picasa.TabIndex = 0;
+            this.oauth2Picasa.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2Picasa_OpenButtonClicked);
+            this.oauth2Picasa.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2Picasa_CompleteButtonClicked);
+            this.oauth2Picasa.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2Picasa_RefreshButtonClicked);
             // 
             // tpTextUploaders
             // 
@@ -3072,17 +3138,22 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // oauth2Picasa
+            // txtPicasaAlbumID
             // 
-            this.oauth2Picasa.Location = new System.Drawing.Point(16, 16);
-            this.oauth2Picasa.LoginStatus = false;
-            this.oauth2Picasa.Name = "oauth2Picasa";
-            this.oauth2Picasa.Size = new System.Drawing.Size(328, 207);
-            this.oauth2Picasa.Status = "Login required.";
-            this.oauth2Picasa.TabIndex = 0;
-            this.oauth2Picasa.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2Picasa_OpenButtonClicked);
-            this.oauth2Picasa.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2Picasa_CompleteButtonClicked);
-            this.oauth2Picasa.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2Picasa_RefreshButtonClicked);
+            this.txtPicasaAlbumID.Location = new System.Drawing.Point(592, 16);
+            this.txtPicasaAlbumID.Name = "txtPicasaAlbumID";
+            this.txtPicasaAlbumID.Size = new System.Drawing.Size(176, 20);
+            this.txtPicasaAlbumID.TabIndex = 10;
+            this.txtPicasaAlbumID.TextChanged += new System.EventHandler(this.txtPicasaAlbumID_TextChanged);
+            // 
+            // lblPicasaAlbumID
+            // 
+            this.lblPicasaAlbumID.AutoSize = true;
+            this.lblPicasaAlbumID.Location = new System.Drawing.Point(352, 20);
+            this.lblPicasaAlbumID.Name = "lblPicasaAlbumID";
+            this.lblPicasaAlbumID.Size = new System.Drawing.Size(233, 13);
+            this.lblPicasaAlbumID.TabIndex = 9;
+            this.lblPicasaAlbumID.Text = "Album ID for upload (Empty = No album upload):";
             // 
             // UploadersConfigForm
             // 
@@ -3121,6 +3192,7 @@
             this.tpYFrog.ResumeLayout(false);
             this.tpYFrog.PerformLayout();
             this.tpPicasa.ResumeLayout(false);
+            this.tpPicasa.PerformLayout();
             this.tpTextUploaders.ResumeLayout(false);
             this.tcTextUploaders.ResumeLayout(false);
             this.tpPastebin.ResumeLayout(false);
@@ -3440,5 +3512,12 @@
         private GUI.OAuth2Control oauth2Imgur;
         private GUI.OAuth2Control oauth2GoogleURLShortener;
         private GUI.OAuth2Control oauth2Picasa;
+        private System.Windows.Forms.ListView lvPicasaAlbumList;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button btnPicasaRefreshAlbumList;
+        private System.Windows.Forms.TextBox txtPicasaAlbumID;
+        private System.Windows.Forms.Label lblPicasaAlbumID;
     }
 }
