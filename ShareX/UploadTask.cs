@@ -230,35 +230,13 @@ namespace ShareX
                     OnUploadStarted();
                 }
 
-                try
-                {
-                    switch (Info.UploadDestination)
-                    {
-                        case EDataType.Image:
-                            Info.Result = UploadImage(data, Info.FileName);
-                            break;
-                        case EDataType.File:
-                            Info.Result = UploadFile(data, Info.FileName);
-                            break;
-                        case EDataType.Text:
-                            Info.Result = UploadText(data, Info.FileName);
-                            break;
-                    }
-                }
-                catch (Exception e)
-                {
-                    if (!IsStopped)
-                    {
-                        DebugHelper.WriteException(e);
+                bool isError = DoUpload();
 
-                        if (Info.Result == null) Info.Result = new UploadResult();
-                        Info.Result.Errors.Add(e.ToString());
-                    }
-                }
-                finally
+                if (isError && Program.Settings.IfUploadFailRetryOnce)
                 {
-                    if (Info.Result == null) Info.Result = new UploadResult();
-                    if (uploader != null) Info.Result.Errors.AddRange(uploader.Errors);
+                    DebugHelper.WriteLine("Upload failed. Retrying upload.");
+                    Thread.Sleep(1000);
+                    isError = DoUpload();
                 }
             }
             else
@@ -279,6 +257,45 @@ namespace ShareX
             }
 
             Info.UploadTime = DateTime.UtcNow;
+        }
+
+        private bool DoUpload()
+        {
+            bool isError = false;
+
+            try
+            {
+                switch (Info.UploadDestination)
+                {
+                    case EDataType.Image:
+                        Info.Result = UploadImage(data, Info.FileName);
+                        break;
+                    case EDataType.File:
+                        Info.Result = UploadFile(data, Info.FileName);
+                        break;
+                    case EDataType.Text:
+                        Info.Result = UploadText(data, Info.FileName);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                if (!IsStopped)
+                {
+                    DebugHelper.WriteException(e);
+                    isError = true;
+                    if (Info.Result == null) Info.Result = new UploadResult();
+                    Info.Result.Errors.Add(e.ToString());
+                }
+            }
+            finally
+            {
+                if (Info.Result == null) Info.Result = new UploadResult();
+                if (uploader != null) Info.Result.Errors.AddRange(uploader.Errors);
+                isError |= Info.Result.IsError;
+            }
+
+            return isError;
         }
 
         private void DoThreadJob()
