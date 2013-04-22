@@ -43,11 +43,14 @@ namespace UploadersLib.FileUploaders
         private const string APIVersion = "1";
         private const string URLAPI = "https://api.dropbox.com/" + APIVersion;
         private const string URLAPIContent = "https://api-content.dropbox.com/" + APIVersion;
+        private const string Root = "dropbox"; // dropbox or sandbox
 
         private const string URLAccountInfo = URLAPI + "/account/info";
-        private const string URLFiles = URLAPIContent + "/files/dropbox";
-        private const string URLMetaData = URLAPI + "/metadata/dropbox";
-        private const string URLShares = URLAPI + "/shares/dropbox";
+        private const string URLFiles = URLAPIContent + "/files/" + Root;
+        private const string URLMetaData = URLAPI + "/metadata/" + Root;
+        private const string URLShares = URLAPI + "/shares/" + Root;
+        private const string URLCreateFolder = URLAPI + "/fileops/create_folder";
+        private const string URLDelete = URLAPI + "/fileops/delete";
         private const string URLDownload = "https://dl.dropbox.com/u";
 
         private const string URLRequestToken = URLAPI + "/oauth/request_token";
@@ -79,6 +82,8 @@ namespace UploadersLib.FileUploaders
 
         public DropboxAccountInfo GetAccountInfo()
         {
+            DropboxAccountInfo account = null;
+
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
                 string url = OAuthManager.GenerateQuery(URLAccountInfo, null, HttpMethod.Get, AuthInfo);
@@ -87,17 +92,16 @@ namespace UploadersLib.FileUploaders
 
                 if (!string.IsNullOrEmpty(response))
                 {
-                    DropboxAccountInfo account = JsonConvert.DeserializeObject<DropboxAccountInfo>(response);
+                    account = JsonConvert.DeserializeObject<DropboxAccountInfo>(response);
 
                     if (account != null)
                     {
                         AccountInfo = account;
-                        return account;
                     }
                 }
             }
 
-            return null;
+            return account;
         }
 
         public DropboxDirectoryInfo GetFilesList(string path)
@@ -121,6 +125,8 @@ namespace UploadersLib.FileUploaders
 
         public DropboxShares CreateShareableLink(string path)
         {
+            DropboxShares shares = null;
+
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
                 string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLShares, path), null, HttpMethod.Get, AuthInfo);
@@ -129,28 +135,74 @@ namespace UploadersLib.FileUploaders
 
                 if (!string.IsNullOrEmpty(response))
                 {
-                    DropboxShares shares = JsonConvert.DeserializeObject<DropboxShares>(response);
-                    return shares;
+                    shares = JsonConvert.DeserializeObject<DropboxShares>(response);
                 }
             }
 
-            return null;
+            return shares;
         }
 
         public bool DownloadFile(string path, Stream downloadStream)
         {
-            if (OAuthInfo.CheckOAuth(AuthInfo))
+            if (!string.IsNullOrEmpty(path) && OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = OAuthManager.GenerateQuery(Helpers.CombineURL(URLFiles, path), null, HttpMethod.Get, AuthInfo);
-                return SendGetRequest(downloadStream, url, null);
+                string url = Helpers.CombineURL(URLFiles, path);
+                string query = OAuthManager.GenerateQuery(url, null, HttpMethod.Get, AuthInfo);
+                return SendGetRequest(downloadStream, query, null);
             }
 
             return false;
         }
 
+        public DropboxContentInfo CreateFolder(string path)
+        {
+            DropboxContentInfo contentInfo = null;
+
+            if (!string.IsNullOrEmpty(path) && OAuthInfo.CheckOAuth(AuthInfo))
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("root", Root);
+                args.Add("path", path);
+
+                string query = OAuthManager.GenerateQuery(URLCreateFolder, args, HttpMethod.Post, AuthInfo);
+
+                string response = SendPostRequest(query);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    contentInfo = JsonConvert.DeserializeObject<DropboxContentInfo>(response);
+                }
+            }
+
+            return contentInfo;
+        }
+
+        public DropboxContentInfo Delete(string path)
+        {
+            DropboxContentInfo contentInfo = null;
+
+            if (!string.IsNullOrEmpty(path) && OAuthInfo.CheckOAuth(AuthInfo))
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("root", Root);
+                args.Add("path", path);
+
+                string query = OAuthManager.GenerateQuery(URLDelete, args, HttpMethod.Post, AuthInfo);
+
+                string response = SendPostRequest(query);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    contentInfo = JsonConvert.DeserializeObject<DropboxContentInfo>(response);
+                }
+            }
+
+            return contentInfo;
+        }
+
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            if (AuthInfo == null || string.IsNullOrEmpty(AuthInfo.UserToken) || string.IsNullOrEmpty(AuthInfo.UserSecret))
+            if (!OAuthInfo.CheckOAuth(AuthInfo))
             {
                 Errors.Add("Login is required.");
                 return null;
@@ -216,12 +268,6 @@ namespace UploadersLib.FileUploaders
 
             return string.Empty;
         }
-    }
-
-    public class DropboxUserLogin
-    {
-        public string Token { get; set; }
-        public string Secret { get; set; }
     }
 
     public class DropboxAccountInfo

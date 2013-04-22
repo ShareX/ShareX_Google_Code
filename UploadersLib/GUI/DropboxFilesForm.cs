@@ -103,6 +103,11 @@ namespace UploadersLib.Forms
             }
         }
 
+        public void RefreshDirectory()
+        {
+            OpenDirectory(CurrentFolderPath);
+        }
+
         public ListViewItem GetParentFolder(string currentPath)
         {
             if (!string.IsNullOrEmpty(currentPath))
@@ -176,6 +181,42 @@ namespace UploadersLib.Forms
             }
         }
 
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            if (lvDropboxFiles.SelectedItems.Count > 0)
+            {
+                DropboxContentInfo content = lvDropboxFiles.SelectedItems[0].Tag as DropboxContentInfo;
+
+                if (content != null)
+                {
+                    if (MessageBox.Show("Are you sure you want to delete '" + Path.GetFileName(content.Path) + "' from your Dropbox?", "Dropbox - Delete file?",
+                        MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        dropbox.Delete(content.Path);
+                        RefreshDirectory();
+                    }
+                }
+            }
+        }
+
+        private void tsmiRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDirectory();
+        }
+
+        private void tsmiCreateDirectory_Click(object sender, EventArgs e)
+        {
+            using (InputBox ib = new InputBox { Text = "Dropbox - Create directory", Question = "Please enter the name of the directory which should be created:" })
+            {
+                if (ib.ShowDialog() == DialogResult.OK)
+                {
+                    string path = Helpers.CombineURL(CurrentFolderPath, ib.InputText);
+                    dropbox.CreateFolder(path);
+                    RefreshDirectory();
+                }
+            }
+        }
+
         private void lvDropboxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvDropboxFiles.SelectedItems.Count > 0)
@@ -189,16 +230,18 @@ namespace UploadersLib.Forms
                 }
             }
 
+            RefreshMenu();
+        }
+
+        private void RefreshMenu()
+        {
             tsmiCopyPublicLink.Visible = isSelectedFile && isSelectedPublic;
             tsmiDownloadFile.Visible = isSelectedFile;
         }
 
         private void cmsDropbox_Opening(object sender, CancelEventArgs e)
         {
-            if (!isSelectedFile)
-            {
-                e.Cancel = true;
-            }
+            RefreshMenu();
         }
     }
 }

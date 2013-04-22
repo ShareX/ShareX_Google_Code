@@ -32,13 +32,16 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tsbSelectFolder = new System.Windows.Forms.ToolStripButton();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.cmsDropbox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiDownloadFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyPublicLink = new System.Windows.Forms.ToolStripMenuItem();
             this.lvDropboxFiles = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cmsDropbox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiCopyPublicLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDownloadFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCreateDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.cmsDropbox.SuspendLayout();
@@ -80,30 +83,6 @@
             this.tlpMain.Size = new System.Drawing.Size(559, 491);
             this.tlpMain.TabIndex = 3;
             // 
-            // cmsDropbox
-            // 
-            this.cmsDropbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCopyPublicLink,
-            this.tsmiDownloadFile});
-            this.cmsDropbox.Name = "cmsDropbox";
-            this.cmsDropbox.ShowImageMargin = false;
-            this.cmsDropbox.Size = new System.Drawing.Size(136, 48);
-            this.cmsDropbox.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDropbox_Opening);
-            // 
-            // tsmiDownloadFile
-            // 
-            this.tsmiDownloadFile.Name = "tsmiDownloadFile";
-            this.tsmiDownloadFile.Size = new System.Drawing.Size(135, 22);
-            this.tsmiDownloadFile.Text = "Download...";
-            this.tsmiDownloadFile.Click += new System.EventHandler(this.tsmiDownloadFile_Click);
-            // 
-            // tsmiCopyPublicLink
-            // 
-            this.tsmiCopyPublicLink.Name = "tsmiCopyPublicLink";
-            this.tsmiCopyPublicLink.Size = new System.Drawing.Size(135, 22);
-            this.tsmiCopyPublicLink.Text = "Copy public link";
-            this.tsmiCopyPublicLink.Click += new System.EventHandler(this.tsmiCopyPublicLink_Click);
-            // 
             // lvDropboxFiles
             // 
             this.lvDropboxFiles.AutoFillColumn = true;
@@ -139,6 +118,54 @@
             this.chModified.Text = "Modified";
             this.chModified.Width = 200;
             // 
+            // cmsDropbox
+            // 
+            this.cmsDropbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCopyPublicLink,
+            this.tsmiDownloadFile,
+            this.tsmiDelete,
+            this.tsmiRefresh,
+            this.tsmiCreateDirectory});
+            this.cmsDropbox.Name = "cmsDropbox";
+            this.cmsDropbox.ShowImageMargin = false;
+            this.cmsDropbox.Size = new System.Drawing.Size(143, 136);
+            this.cmsDropbox.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDropbox_Opening);
+            // 
+            // tsmiCopyPublicLink
+            // 
+            this.tsmiCopyPublicLink.Name = "tsmiCopyPublicLink";
+            this.tsmiCopyPublicLink.Size = new System.Drawing.Size(142, 22);
+            this.tsmiCopyPublicLink.Text = "Copy public link";
+            this.tsmiCopyPublicLink.Click += new System.EventHandler(this.tsmiCopyPublicLink_Click);
+            // 
+            // tsmiDownloadFile
+            // 
+            this.tsmiDownloadFile.Name = "tsmiDownloadFile";
+            this.tsmiDownloadFile.Size = new System.Drawing.Size(142, 22);
+            this.tsmiDownloadFile.Text = "Download...";
+            this.tsmiDownloadFile.Click += new System.EventHandler(this.tsmiDownloadFile_Click);
+            // 
+            // tsmiDelete
+            // 
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(142, 22);
+            this.tsmiDelete.Text = "Delete...";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
+            // 
+            // tsmiRefresh
+            // 
+            this.tsmiRefresh.Name = "tsmiRefresh";
+            this.tsmiRefresh.Size = new System.Drawing.Size(142, 22);
+            this.tsmiRefresh.Text = "Refresh";
+            this.tsmiRefresh.Click += new System.EventHandler(this.tsmiRefresh_Click);
+            // 
+            // tsmiCreateDirectory
+            // 
+            this.tsmiCreateDirectory.Name = "tsmiCreateDirectory";
+            this.tsmiCreateDirectory.Size = new System.Drawing.Size(142, 22);
+            this.tsmiCreateDirectory.Text = "Create directory...";
+            this.tsmiCreateDirectory.Click += new System.EventHandler(this.tsmiCreateDirectory_Click);
+            // 
             // DropboxFilesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,5 +195,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsDropbox;
         private System.Windows.Forms.ToolStripMenuItem tsmiDownloadFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiCopyPublicLink;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRefresh;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCreateDirectory;
     }
 }
