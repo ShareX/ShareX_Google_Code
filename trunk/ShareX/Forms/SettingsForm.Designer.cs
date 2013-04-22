@@ -31,6 +31,7 @@
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
             this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
             this.cbHistorySave = new System.Windows.Forms.CheckBox();
@@ -154,6 +155,7 @@
             this.lblNameFormatPattern = new System.Windows.Forms.Label();
             this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
+            this.tpUploadNamePattern = new System.Windows.Forms.TabPage();
             this.tpUploadClipboard = new System.Windows.Forms.TabPage();
             this.cbShowClipboardContentViewer = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
@@ -181,7 +183,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
+            this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -216,6 +218,7 @@
             this.tabControl1.SuspendLayout();
             this.tpUploadGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
+            this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
             this.tpUploadWatchFolder.SuspendLayout();
             this.tpProxy.SuspendLayout();
@@ -272,6 +275,17 @@
             this.tpGeneral.TabIndex = 0;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
+            // 
+            // cbShellContextMenu
+            // 
+            this.cbShellContextMenu.AutoSize = true;
+            this.cbShellContextMenu.Location = new System.Drawing.Point(16, 88);
+            this.cbShellContextMenu.Name = "cbShellContextMenu";
+            this.cbShellContextMenu.Size = new System.Drawing.Size(301, 17);
+            this.cbShellContextMenu.TabIndex = 13;
+            this.cbShellContextMenu.Text = "Show \"Upload using ShareX\" button in shell context menu";
+            this.cbShellContextMenu.UseVisualStyleBackColor = true;
+            this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
             // 
             // cbShowAfterCaptureTasksForm
             // 
@@ -1582,6 +1596,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tpUploadGeneral);
+            this.tabControl1.Controls.Add(this.tpUploadNamePattern);
             this.tabControl1.Controls.Add(this.tpUploadClipboard);
             this.tabControl1.Controls.Add(this.tpUploadWatchFolder);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1593,19 +1608,12 @@
             // 
             // tpUploadGeneral
             // 
-            this.tpUploadGeneral.Controls.Add(this.cbFileUploadUseNamePattern);
-            this.tpUploadGeneral.Controls.Add(this.btnResetAutoIncrementNumber);
-            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
-            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternActiveWindow);
-            this.tpUploadGeneral.Controls.Add(this.txtNameFormatPatternActiveWindow);
+            this.tpUploadGeneral.Controls.Add(this.cbIfUploadFailRetryOnce);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimit);
             this.tpUploadGeneral.Controls.Add(this.cbBufferSize);
             this.tpUploadGeneral.Controls.Add(this.lblUploadLimitHint);
             this.tpUploadGeneral.Controls.Add(this.lblBufferSize);
-            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPatternPreview);
-            this.tpUploadGeneral.Controls.Add(this.lblNameFormatPattern);
             this.tpUploadGeneral.Controls.Add(this.nudUploadLimit);
-            this.tpUploadGeneral.Controls.Add(this.txtNameFormatPattern);
             this.tpUploadGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpUploadGeneral.Name = "tpUploadGeneral";
             this.tpUploadGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -1617,7 +1625,7 @@
             // cbFileUploadUseNamePattern
             // 
             this.cbFileUploadUseNamePattern.AutoSize = true;
-            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(24, 256);
+            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(16, 193);
             this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
             this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
             this.cbFileUploadUseNamePattern.TabIndex = 11;
@@ -1627,7 +1635,7 @@
             // 
             // btnResetAutoIncrementNumber
             // 
-            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(304, 80);
+            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(296, 17);
             this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
             this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
             this.btnResetAutoIncrementNumber.TabIndex = 10;
@@ -1638,7 +1646,7 @@
             // lblNameFormatPatternPreviewActiveWindow
             // 
             this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(24, 224);
+            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(16, 161);
             this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
             this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
@@ -1647,7 +1655,7 @@
             // lblNameFormatPatternActiveWindow
             // 
             this.lblNameFormatPatternActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 168);
+            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 105);
             this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
             this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
             this.lblNameFormatPatternActiveWindow.TabIndex = 6;
@@ -1655,7 +1663,7 @@
             // 
             // txtNameFormatPatternActiveWindow
             // 
-            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(24, 192);
+            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 129);
             this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
             this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPatternActiveWindow.TabIndex = 7;
@@ -1664,7 +1672,7 @@
             // lblUploadLimit
             // 
             this.lblUploadLimit.AutoSize = true;
-            this.lblUploadLimit.Location = new System.Drawing.Point(24, 18);
+            this.lblUploadLimit.Location = new System.Drawing.Point(16, 16);
             this.lblUploadLimit.Name = "lblUploadLimit";
             this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
             this.lblUploadLimit.TabIndex = 0;
@@ -1674,7 +1682,7 @@
             // 
             this.cbBufferSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBufferSize.FormattingEnabled = true;
-            this.cbBufferSize.Location = new System.Drawing.Point(84, 46);
+            this.cbBufferSize.Location = new System.Drawing.Point(76, 44);
             this.cbBufferSize.Name = "cbBufferSize";
             this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
             this.cbBufferSize.TabIndex = 4;
@@ -1683,7 +1691,7 @@
             // lblUploadLimitHint
             // 
             this.lblUploadLimitHint.AutoSize = true;
-            this.lblUploadLimitHint.Location = new System.Drawing.Point(220, 18);
+            this.lblUploadLimitHint.Location = new System.Drawing.Point(212, 16);
             this.lblUploadLimitHint.Name = "lblUploadLimitHint";
             this.lblUploadLimitHint.Size = new System.Drawing.Size(90, 13);
             this.lblUploadLimitHint.TabIndex = 2;
@@ -1692,7 +1700,7 @@
             // lblBufferSize
             // 
             this.lblBufferSize.AutoSize = true;
-            this.lblBufferSize.Location = new System.Drawing.Point(24, 50);
+            this.lblBufferSize.Location = new System.Drawing.Point(16, 48);
             this.lblBufferSize.Name = "lblBufferSize";
             this.lblBufferSize.Size = new System.Drawing.Size(59, 13);
             this.lblBufferSize.TabIndex = 3;
@@ -1701,7 +1709,7 @@
             // lblNameFormatPatternPreview
             // 
             this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(24, 139);
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 76);
             this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
             this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
             this.lblNameFormatPatternPreview.TabIndex = 4;
@@ -1710,7 +1718,7 @@
             // lblNameFormatPattern
             // 
             this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(24, 83);
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 20);
             this.lblNameFormatPattern.Name = "lblNameFormatPattern";
             this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
             this.lblNameFormatPattern.TabIndex = 1;
@@ -1718,7 +1726,7 @@
             // 
             // nudUploadLimit
             // 
-            this.nudUploadLimit.Location = new System.Drawing.Point(156, 14);
+            this.nudUploadLimit.Location = new System.Drawing.Point(148, 12);
             this.nudUploadLimit.Maximum = new decimal(new int[] {
             25,
             0,
@@ -1737,11 +1745,29 @@
             // 
             // txtNameFormatPattern
             // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(24, 107);
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 44);
             this.txtNameFormatPattern.Name = "txtNameFormatPattern";
             this.txtNameFormatPattern.Size = new System.Drawing.Size(448, 20);
             this.txtNameFormatPattern.TabIndex = 2;
             this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
+            // 
+            // tpUploadNamePattern
+            // 
+            this.tpUploadNamePattern.Controls.Add(this.cbFileUploadUseNamePattern);
+            this.tpUploadNamePattern.Controls.Add(this.lblNameFormatPattern);
+            this.tpUploadNamePattern.Controls.Add(this.txtNameFormatPatternActiveWindow);
+            this.tpUploadNamePattern.Controls.Add(this.btnResetAutoIncrementNumber);
+            this.tpUploadNamePattern.Controls.Add(this.lblNameFormatPatternActiveWindow);
+            this.tpUploadNamePattern.Controls.Add(this.txtNameFormatPattern);
+            this.tpUploadNamePattern.Controls.Add(this.lblNameFormatPatternPreview);
+            this.tpUploadNamePattern.Controls.Add(this.lblNameFormatPatternPreviewActiveWindow);
+            this.tpUploadNamePattern.Location = new System.Drawing.Point(4, 22);
+            this.tpUploadNamePattern.Name = "tpUploadNamePattern";
+            this.tpUploadNamePattern.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUploadNamePattern.Size = new System.Drawing.Size(504, 294);
+            this.tpUploadNamePattern.TabIndex = 3;
+            this.tpUploadNamePattern.Text = "Name pattern";
+            this.tpUploadNamePattern.UseVisualStyleBackColor = true;
             // 
             // tpUploadClipboard
             // 
@@ -2035,16 +2061,16 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbShellContextMenu
+            // cbIfUploadFailRetryOnce
             // 
-            this.cbShellContextMenu.AutoSize = true;
-            this.cbShellContextMenu.Location = new System.Drawing.Point(16, 88);
-            this.cbShellContextMenu.Name = "cbShellContextMenu";
-            this.cbShellContextMenu.Size = new System.Drawing.Size(301, 17);
-            this.cbShellContextMenu.TabIndex = 13;
-            this.cbShellContextMenu.Text = "Show \"Upload using ShareX\" button in shell context menu";
-            this.cbShellContextMenu.UseVisualStyleBackColor = true;
-            this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
+            this.cbIfUploadFailRetryOnce.AutoSize = true;
+            this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 80);
+            this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
+            this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(192, 17);
+            this.cbIfUploadFailRetryOnce.TabIndex = 5;
+            this.cbIfUploadFailRetryOnce.Text = "If upload fail then retry upload once";
+            this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
+            this.cbIfUploadFailRetryOnce.CheckedChanged += new System.EventHandler(this.cbIfUploadFailRetryOnce_CheckedChanged);
             // 
             // SettingsForm
             // 
@@ -2104,6 +2130,8 @@
             this.tpUploadGeneral.ResumeLayout(false);
             this.tpUploadGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
+            this.tpUploadNamePattern.ResumeLayout(false);
+            this.tpUploadNamePattern.PerformLayout();
             this.tpUploadClipboard.ResumeLayout(false);
             this.tpUploadClipboard.PerformLayout();
             this.tpUploadWatchFolder.ResumeLayout(false);
@@ -2273,5 +2301,7 @@
         private System.Windows.Forms.CheckBox cbShowClipboardContentViewer;
         private System.Windows.Forms.CheckBox cbFileUploadUseNamePattern;
         private System.Windows.Forms.CheckBox cbShellContextMenu;
+        private System.Windows.Forms.TabPage tpUploadNamePattern;
+        private System.Windows.Forms.CheckBox cbIfUploadFailRetryOnce;
     }
 }

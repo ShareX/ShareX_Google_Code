@@ -166,6 +166,9 @@ namespace ShareX
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
+            cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
+
+            // Upload / Name pattern
             txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
             txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
             cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ReplacementVariables.n);
@@ -701,6 +704,15 @@ namespace ShareX
             Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
         }
 
+        private void cbIfUploadFailRetryOnce_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.IfUploadFailRetryOnce = cbIfUploadFailRetryOnce.Checked;
+        }
+
+        #endregion Upload / General
+
+        #region Upload / Name pattern
+
         private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
         {
             Program.Settings.AutoIncrementNumber = 0;
@@ -725,7 +737,7 @@ namespace ShareX
             Program.Settings.FileUploadUseNamePattern = cbFileUploadUseNamePattern.Checked;
         }
 
-        #endregion Upload / General
+        #endregion Upload / Name pattern
 
         #region Upload / Clipboard upload
 

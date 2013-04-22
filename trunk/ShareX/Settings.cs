@@ -163,12 +163,18 @@ namespace ShareX
 
         public int UploadLimit = 5;
         public int BufferSizePower = 5;
+        public bool IfUploadFailRetryOnce = true;
+
+        #endregion Upload / General
+
+        #region Upload / Name pattern
+
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
         public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
         public int AutoIncrementNumber = 0;
         public bool FileUploadUseNamePattern = false;
 
-        #endregion Upload / General
+        #endregion Upload / Name pattern
 
         #region Upload / Clipboard upload
 

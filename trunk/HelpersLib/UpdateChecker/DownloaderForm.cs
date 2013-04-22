@@ -164,7 +164,7 @@ namespace HelpersLib
                 fileDownloader.DownloadStarted += (v1, v2) => ChangeStatus("Download started.");
                 fileDownloader.ProgressChanged += (v1, v2) => ChangeProgress();
                 fileDownloader.DownloadCompleted += new EventHandler(fileDownloader_DownloadCompleted);
-                fileDownloader.ExceptionThrowed += (v1, v2) => ChangeStatus("Exception: " + fileDownloader.LastException.Message);
+                fileDownloader.ExceptionThrowed += (v1, v2) => ChangeStatus(fileDownloader.LastException.Message);
                 fileDownloader.StartDownload();
 
                 ChangeStatus("Getting file size.");
