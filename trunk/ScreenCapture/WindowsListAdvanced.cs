@@ -54,8 +54,28 @@ namespace ScreenCapture
 
         public List<Rectangle> GetWindowsRectangleList()
         {
-            // TODO: Remove not visible windows behind windows
-            return GetWindowsList().Select(x => x.Rectangle).ToList();
+            List<Rectangle> result = new List<Rectangle>();
+
+            foreach (Rectangle rect in GetWindowsList().Select(x => x.Rectangle))
+            {
+                bool rectVisible = true;
+
+                foreach (Rectangle rect2 in result)
+                {
+                    if (rect2.Contains(rect))
+                    {
+                        rectVisible = false;
+                        break;
+                    }
+                }
+
+                if (rectVisible)
+                {
+                    result.Add(rect);
+                }
+            }
+
+            return result;
         }
 
         private bool IsValidWindow(WindowInfo window)

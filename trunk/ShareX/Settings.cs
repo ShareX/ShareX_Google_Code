@@ -163,7 +163,7 @@ namespace ShareX
 
         public int UploadLimit = 5;
         public int BufferSizePower = 5;
-        public bool IfUploadFailRetryOnce = true;
+        public bool IfUploadFailRetryOnce = false;
 
         #endregion Upload / General
 
