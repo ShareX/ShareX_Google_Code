@@ -98,4 +98,22 @@ namespace ShareX
     {
         Continue, Cancel, Copy
     }
+
+    public enum CaptureType
+    {
+        Screen,
+        Monitor,
+        ActiveMonitor,
+        Window,
+        ActiveWindow,
+        RectangleWindow,
+        Rectangle,
+        RoundedRectangle,
+        Ellipse,
+        Triangle,
+        Diamond,
+        Polygon,
+        Freehand,
+        LastRegion
+    }
 }
