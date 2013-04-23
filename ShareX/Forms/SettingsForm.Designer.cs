@@ -106,7 +106,6 @@
             this.nudBorderSize = new System.Windows.Forms.NumericUpDown();
             this.lblBorderSize = new System.Windows.Forms.Label();
             this.lblBorderColor = new System.Windows.Forms.Label();
-            this.gbWatermark = new System.Windows.Forms.GroupBox();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
@@ -142,20 +141,21 @@
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
-            this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
-            this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
-            this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
-            this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
-            this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
+            this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
             this.lblBufferSize = new System.Windows.Forms.Label();
-            this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
-            this.lblNameFormatPattern = new System.Windows.Forms.Label();
             this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
-            this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
             this.tpUploadNamePattern = new System.Windows.Forms.TabPage();
+            this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
+            this.lblNameFormatPattern = new System.Windows.Forms.Label();
+            this.txtNameFormatPatternActiveWindow = new System.Windows.Forms.TextBox();
+            this.btnResetAutoIncrementNumber = new System.Windows.Forms.Button();
+            this.lblNameFormatPatternActiveWindow = new System.Windows.Forms.Label();
+            this.txtNameFormatPattern = new System.Windows.Forms.TextBox();
+            this.lblNameFormatPatternPreview = new System.Windows.Forms.Label();
+            this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
             this.tpUploadClipboard = new System.Windows.Forms.TabPage();
             this.cbShowClipboardContentViewer = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
@@ -183,7 +183,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
+            this.cbImageEffectOnlyRegionCapture = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -204,7 +204,6 @@
             this.tpOther.SuspendLayout();
             this.gbBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).BeginInit();
-            this.gbWatermark.SuspendLayout();
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
@@ -1111,8 +1110,9 @@
             // 
             // tpOther
             // 
+            this.tpOther.Controls.Add(this.cbImageEffectOnlyRegionCapture);
+            this.tpOther.Controls.Add(this.btnWatermarkSettings);
             this.tpOther.Controls.Add(this.gbBorder);
-            this.tpOther.Controls.Add(this.gbWatermark);
             this.tpOther.Location = new System.Drawing.Point(4, 22);
             this.tpOther.Name = "tpOther";
             this.tpOther.Padding = new System.Windows.Forms.Padding(3);
@@ -1129,7 +1129,7 @@
             this.gbBorder.Controls.Add(this.lblBorderColor);
             this.gbBorder.Location = new System.Drawing.Point(16, 88);
             this.gbBorder.Name = "gbBorder";
-            this.gbBorder.Size = new System.Drawing.Size(472, 88);
+            this.gbBorder.Size = new System.Drawing.Size(472, 56);
             this.gbBorder.TabIndex = 2;
             this.gbBorder.TabStop = false;
             this.gbBorder.Text = "Border";
@@ -1146,7 +1146,7 @@
             // 
             // nudBorderSize
             // 
-            this.nudBorderSize.Location = new System.Drawing.Point(88, 52);
+            this.nudBorderSize.Location = new System.Drawing.Point(232, 20);
             this.nudBorderSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1166,7 +1166,7 @@
             // lblBorderSize
             // 
             this.lblBorderSize.AutoSize = true;
-            this.lblBorderSize.Location = new System.Drawing.Point(16, 56);
+            this.lblBorderSize.Location = new System.Drawing.Point(160, 24);
             this.lblBorderSize.Name = "lblBorderSize";
             this.lblBorderSize.Size = new System.Drawing.Size(62, 13);
             this.lblBorderSize.TabIndex = 1;
@@ -1181,19 +1181,9 @@
             this.lblBorderColor.TabIndex = 0;
             this.lblBorderColor.Text = "Border color:";
             // 
-            // gbWatermark
-            // 
-            this.gbWatermark.Controls.Add(this.btnWatermarkSettings);
-            this.gbWatermark.Location = new System.Drawing.Point(16, 16);
-            this.gbWatermark.Name = "gbWatermark";
-            this.gbWatermark.Size = new System.Drawing.Size(472, 64);
-            this.gbWatermark.TabIndex = 2;
-            this.gbWatermark.TabStop = false;
-            this.gbWatermark.Text = "Watermark";
-            // 
             // btnWatermarkSettings
             // 
-            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 24);
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
             this.btnWatermarkSettings.Name = "btnWatermarkSettings";
             this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
             this.btnWatermarkSettings.TabIndex = 0;
@@ -1622,52 +1612,16 @@
             this.tpUploadGeneral.Text = "General";
             this.tpUploadGeneral.UseVisualStyleBackColor = true;
             // 
-            // cbFileUploadUseNamePattern
+            // cbIfUploadFailRetryOnce
             // 
-            this.cbFileUploadUseNamePattern.AutoSize = true;
-            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(16, 193);
-            this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
-            this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
-            this.cbFileUploadUseNamePattern.TabIndex = 11;
-            this.cbFileUploadUseNamePattern.Text = "Use name pattern for file uploads instead actual file name";
-            this.cbFileUploadUseNamePattern.UseVisualStyleBackColor = true;
-            this.cbFileUploadUseNamePattern.CheckedChanged += new System.EventHandler(this.cbFileUploadUseNamePattern_CheckedChanged);
-            // 
-            // btnResetAutoIncrementNumber
-            // 
-            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(296, 17);
-            this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
-            this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
-            this.btnResetAutoIncrementNumber.TabIndex = 10;
-            this.btnResetAutoIncrementNumber.Text = "Reset auto increment number";
-            this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
-            this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
-            // 
-            // lblNameFormatPatternPreviewActiveWindow
-            // 
-            this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(16, 161);
-            this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
-            this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
-            this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
-            this.lblNameFormatPatternPreviewActiveWindow.Text = "Preview:";
-            // 
-            // lblNameFormatPatternActiveWindow
-            // 
-            this.lblNameFormatPatternActiveWindow.AutoSize = true;
-            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 105);
-            this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
-            this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
-            this.lblNameFormatPatternActiveWindow.TabIndex = 6;
-            this.lblNameFormatPatternActiveWindow.Text = "Name pattern for active window capture:";
-            // 
-            // txtNameFormatPatternActiveWindow
-            // 
-            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 129);
-            this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
-            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(448, 20);
-            this.txtNameFormatPatternActiveWindow.TabIndex = 7;
-            this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
+            this.cbIfUploadFailRetryOnce.AutoSize = true;
+            this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 80);
+            this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
+            this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(192, 17);
+            this.cbIfUploadFailRetryOnce.TabIndex = 5;
+            this.cbIfUploadFailRetryOnce.Text = "If upload fail then retry upload once";
+            this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
+            this.cbIfUploadFailRetryOnce.CheckedChanged += new System.EventHandler(this.cbIfUploadFailRetryOnce_CheckedChanged);
             // 
             // lblUploadLimit
             // 
@@ -1706,24 +1660,6 @@
             this.lblBufferSize.TabIndex = 3;
             this.lblBufferSize.Text = "Buffer size:";
             // 
-            // lblNameFormatPatternPreview
-            // 
-            this.lblNameFormatPatternPreview.AutoSize = true;
-            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 76);
-            this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
-            this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
-            this.lblNameFormatPatternPreview.TabIndex = 4;
-            this.lblNameFormatPatternPreview.Text = "Preview:";
-            // 
-            // lblNameFormatPattern
-            // 
-            this.lblNameFormatPattern.AutoSize = true;
-            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 20);
-            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
-            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
-            this.lblNameFormatPattern.TabIndex = 1;
-            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
-            // 
             // nudUploadLimit
             // 
             this.nudUploadLimit.Location = new System.Drawing.Point(148, 12);
@@ -1743,14 +1679,6 @@
             0});
             this.nudUploadLimit.ValueChanged += new System.EventHandler(this.nudUploadLimit_ValueChanged);
             // 
-            // txtNameFormatPattern
-            // 
-            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 44);
-            this.txtNameFormatPattern.Name = "txtNameFormatPattern";
-            this.txtNameFormatPattern.Size = new System.Drawing.Size(448, 20);
-            this.txtNameFormatPattern.TabIndex = 2;
-            this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
-            // 
             // tpUploadNamePattern
             // 
             this.tpUploadNamePattern.Controls.Add(this.cbFileUploadUseNamePattern);
@@ -1768,6 +1696,79 @@
             this.tpUploadNamePattern.TabIndex = 3;
             this.tpUploadNamePattern.Text = "Name pattern";
             this.tpUploadNamePattern.UseVisualStyleBackColor = true;
+            // 
+            // cbFileUploadUseNamePattern
+            // 
+            this.cbFileUploadUseNamePattern.AutoSize = true;
+            this.cbFileUploadUseNamePattern.Location = new System.Drawing.Point(16, 193);
+            this.cbFileUploadUseNamePattern.Name = "cbFileUploadUseNamePattern";
+            this.cbFileUploadUseNamePattern.Size = new System.Drawing.Size(295, 17);
+            this.cbFileUploadUseNamePattern.TabIndex = 11;
+            this.cbFileUploadUseNamePattern.Text = "Use name pattern for file uploads instead actual file name";
+            this.cbFileUploadUseNamePattern.UseVisualStyleBackColor = true;
+            this.cbFileUploadUseNamePattern.CheckedChanged += new System.EventHandler(this.cbFileUploadUseNamePattern_CheckedChanged);
+            // 
+            // lblNameFormatPattern
+            // 
+            this.lblNameFormatPattern.AutoSize = true;
+            this.lblNameFormatPattern.Location = new System.Drawing.Point(16, 20);
+            this.lblNameFormatPattern.Name = "lblNameFormatPattern";
+            this.lblNameFormatPattern.Size = new System.Drawing.Size(221, 13);
+            this.lblNameFormatPattern.TabIndex = 1;
+            this.lblNameFormatPattern.Text = "Name pattern for capture or clipboard upload:";
+            // 
+            // txtNameFormatPatternActiveWindow
+            // 
+            this.txtNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 129);
+            this.txtNameFormatPatternActiveWindow.Name = "txtNameFormatPatternActiveWindow";
+            this.txtNameFormatPatternActiveWindow.Size = new System.Drawing.Size(448, 20);
+            this.txtNameFormatPatternActiveWindow.TabIndex = 7;
+            this.txtNameFormatPatternActiveWindow.TextChanged += new System.EventHandler(this.txtNameFormatPatternActiveWindow_TextChanged);
+            // 
+            // btnResetAutoIncrementNumber
+            // 
+            this.btnResetAutoIncrementNumber.Location = new System.Drawing.Point(296, 17);
+            this.btnResetAutoIncrementNumber.Name = "btnResetAutoIncrementNumber";
+            this.btnResetAutoIncrementNumber.Size = new System.Drawing.Size(168, 23);
+            this.btnResetAutoIncrementNumber.TabIndex = 10;
+            this.btnResetAutoIncrementNumber.Text = "Reset auto increment number";
+            this.btnResetAutoIncrementNumber.UseVisualStyleBackColor = true;
+            this.btnResetAutoIncrementNumber.Click += new System.EventHandler(this.btnResetAutoIncrementNumber_Click);
+            // 
+            // lblNameFormatPatternActiveWindow
+            // 
+            this.lblNameFormatPatternActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternActiveWindow.Location = new System.Drawing.Point(16, 105);
+            this.lblNameFormatPatternActiveWindow.Name = "lblNameFormatPatternActiveWindow";
+            this.lblNameFormatPatternActiveWindow.Size = new System.Drawing.Size(199, 13);
+            this.lblNameFormatPatternActiveWindow.TabIndex = 6;
+            this.lblNameFormatPatternActiveWindow.Text = "Name pattern for active window capture:";
+            // 
+            // txtNameFormatPattern
+            // 
+            this.txtNameFormatPattern.Location = new System.Drawing.Point(16, 44);
+            this.txtNameFormatPattern.Name = "txtNameFormatPattern";
+            this.txtNameFormatPattern.Size = new System.Drawing.Size(448, 20);
+            this.txtNameFormatPattern.TabIndex = 2;
+            this.txtNameFormatPattern.TextChanged += new System.EventHandler(this.txtNameFormatPattern_TextChanged);
+            // 
+            // lblNameFormatPatternPreview
+            // 
+            this.lblNameFormatPatternPreview.AutoSize = true;
+            this.lblNameFormatPatternPreview.Location = new System.Drawing.Point(16, 76);
+            this.lblNameFormatPatternPreview.Name = "lblNameFormatPatternPreview";
+            this.lblNameFormatPatternPreview.Size = new System.Drawing.Size(48, 13);
+            this.lblNameFormatPatternPreview.TabIndex = 4;
+            this.lblNameFormatPatternPreview.Text = "Preview:";
+            // 
+            // lblNameFormatPatternPreviewActiveWindow
+            // 
+            this.lblNameFormatPatternPreviewActiveWindow.AutoSize = true;
+            this.lblNameFormatPatternPreviewActiveWindow.Location = new System.Drawing.Point(16, 161);
+            this.lblNameFormatPatternPreviewActiveWindow.Name = "lblNameFormatPatternPreviewActiveWindow";
+            this.lblNameFormatPatternPreviewActiveWindow.Size = new System.Drawing.Size(48, 13);
+            this.lblNameFormatPatternPreviewActiveWindow.TabIndex = 9;
+            this.lblNameFormatPatternPreviewActiveWindow.Text = "Preview:";
             // 
             // tpUploadClipboard
             // 
@@ -2061,16 +2062,16 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbIfUploadFailRetryOnce
+            // cbImageEffectOnlyRegionCapture
             // 
-            this.cbIfUploadFailRetryOnce.AutoSize = true;
-            this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 80);
-            this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
-            this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(192, 17);
-            this.cbIfUploadFailRetryOnce.TabIndex = 5;
-            this.cbIfUploadFailRetryOnce.Text = "If upload fail then retry upload once";
-            this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
-            this.cbIfUploadFailRetryOnce.CheckedChanged += new System.EventHandler(this.cbIfUploadFailRetryOnce_CheckedChanged);
+            this.cbImageEffectOnlyRegionCapture.AutoSize = true;
+            this.cbImageEffectOnlyRegionCapture.Location = new System.Drawing.Point(16, 56);
+            this.cbImageEffectOnlyRegionCapture.Name = "cbImageEffectOnlyRegionCapture";
+            this.cbImageEffectOnlyRegionCapture.Size = new System.Drawing.Size(240, 17);
+            this.cbImageEffectOnlyRegionCapture.TabIndex = 3;
+            this.cbImageEffectOnlyRegionCapture.Text = "Only apply border && shadow to region capture";
+            this.cbImageEffectOnlyRegionCapture.UseVisualStyleBackColor = true;
+            this.cbImageEffectOnlyRegionCapture.CheckedChanged += new System.EventHandler(this.cbImageEffectOnlyRectangleCapture_CheckedChanged);
             // 
             // SettingsForm
             // 
@@ -2110,10 +2111,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).EndInit();
             this.tpOther.ResumeLayout(false);
+            this.tpOther.PerformLayout();
             this.gbBorder.ResumeLayout(false);
             this.gbBorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).EndInit();
-            this.gbWatermark.ResumeLayout(false);
             this.tpCapture.ResumeLayout(false);
             this.tcCapture.ResumeLayout(false);
             this.tpCaptureGeneral.ResumeLayout(false);
@@ -2288,7 +2289,6 @@
         private System.Windows.Forms.Button btnWatermarkSettings;
         private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
         private System.Windows.Forms.GroupBox gbBorder;
-        private System.Windows.Forms.GroupBox gbWatermark;
         private System.Windows.Forms.NumericUpDown nudBorderSize;
         private System.Windows.Forms.Label lblBorderSize;
         private System.Windows.Forms.Label lblBorderColor;
@@ -2303,5 +2303,6 @@
         private System.Windows.Forms.CheckBox cbShellContextMenu;
         private System.Windows.Forms.TabPage tpUploadNamePattern;
         private System.Windows.Forms.CheckBox cbIfUploadFailRetryOnce;
+        private System.Windows.Forms.CheckBox cbImageEffectOnlyRegionCapture;
     }
 }

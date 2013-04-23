@@ -55,22 +55,24 @@ namespace ShareX
         AddWatermark = 1,
         [Description("Add border")]
         AddBorder = 1 << 1,
+        [Description("Add shadow")]
+        AddShadow = 1 << 2,
         [Description("Annotate image")]
-        AnnotateImage = 1 << 2,
+        AnnotateImage = 1 << 3,
         [Description("Copy image to clipboard")]
-        CopyImageToClipboard = 1 << 3,
+        CopyImageToClipboard = 1 << 4,
         [Description("Print image")]
-        SendImageToPrinter = 1 << 4,
+        SendImageToPrinter = 1 << 5,
         [Description("Save image to file")]
-        SaveImageToFile = 1 << 5,
+        SaveImageToFile = 1 << 6,
         [Description("Save image to file as...")]
-        SaveImageToFileWithDialog = 1 << 6,
+        SaveImageToFileWithDialog = 1 << 7,
         [Description("Copy file path to clipboard")]
-        CopyFilePathToClipboard = 1 << 7,
+        CopyFilePathToClipboard = 1 << 8,
         [Description("Perform actions")]
-        PerformActions = 1 << 8,
+        PerformActions = 1 << 9,
         [Description("Upload image to host")]
-        UploadImageToHost = 1 << 9
+        UploadImageToHost = 1 << 10
     }
 
     [Flags]

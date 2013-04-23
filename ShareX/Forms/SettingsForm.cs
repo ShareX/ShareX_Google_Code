@@ -121,6 +121,7 @@ namespace ShareX
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
             // Image - Other
+            cbImageEffectOnlyRegionCapture.Checked = Program.Settings.ImageEffectOnlyRegionCapture;
             btnBorderColor.BackColor = Program.Settings.BorderColor;
             nudBorderSize.Value = Program.Settings.BorderSize;
 
@@ -527,6 +528,11 @@ namespace ShareX
                 watermarkForm.Icon = Icon;
                 watermarkForm.ShowDialog();
             }
+        }
+
+        private void cbImageEffectOnlyRectangleCapture_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
         }
 
         private void btnBorderColor_Click(object sender, EventArgs e)

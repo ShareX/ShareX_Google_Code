@@ -1,8 +1,4 @@
-﻿using Greenshot.Core;
-using Greenshot.IniFile;
-using GreenshotPlugin.UnmanagedHelpers;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -23,6 +19,9 @@ using GreenshotPlugin.UnmanagedHelpers;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Core;
+using Greenshot.IniFile;
+using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,8 +36,6 @@ namespace GreenshotPlugin.Core
     /// </summary>
     public static class ImageHelper
     {
-        private static CoreConfiguration conf = IniConfig.GetIniSection<CoreConfiguration>();
-
         /// <summary>
         /// Create a thumbnail from an image
         /// </summary>
@@ -859,8 +856,8 @@ namespace GreenshotPlugin.Core
         {
             // Create a new "clean" image
             offset = shadowOffset;
-            offset.X += shadowSize - 1;
-            offset.Y += shadowSize - 1;
+            offset.X += shadowSize; // - 1;
+            offset.Y += shadowSize; // - 1;
             Bitmap returnImage = CreateEmpty(sourceBitmap.Width + (shadowSize * 2), sourceBitmap.Height + (shadowSize * 2), targetPixelformat, Color.Empty, sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
             // Make sure the shadow is odd, there is no reason for an even blur!
             if ((shadowSize & 1) == 0)
