@@ -135,7 +135,7 @@ namespace ShareX
         public XmlColor BorderColor = Color.Black;
         public int BorderSize = 1;
         public float ShadowDarkness = 0.6f;
-        public int ShadowSize = 7;
+        public int ShadowSize = 9;
         public Point ShadowOffset = new Point(0, 0);
 
         #endregion Image / Other

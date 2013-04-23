@@ -46,25 +46,18 @@ namespace ShareX
             HotkeyManager = new HotkeyManager(this);
             HotkeyManager.AddHotkey(EHotkey.ClipboardUpload, Program.Settings.HotkeyClipboardUpload, UploadManager.ClipboardUpload);
             HotkeyManager.AddHotkey(EHotkey.FileUpload, Program.Settings.HotkeyFileUpload, UploadManager.UploadFile);
-            HotkeyManager.AddHotkey(EHotkey.PrintScreen, Program.Settings.HotkeyPrintScreen, () => CaptureScreen(false), tsmiFullscreen);
-            HotkeyManager.AddHotkey(EHotkey.ActiveWindow, Program.Settings.HotkeyActiveWindow, () => CaptureActiveWindow(false));
-            HotkeyManager.AddHotkey(EHotkey.ActiveMonitor, Program.Settings.HotkeyActiveMonitor, () => CaptureActiveMonitor(false));
-            HotkeyManager.AddHotkey(EHotkey.WindowRectangle, Program.Settings.HotkeyWindowRectangle, () => WindowRectangleCapture(false), tsmiWindowRectangle);
-            HotkeyManager.AddHotkey(EHotkey.RectangleRegion, Program.Settings.HotkeyRectangleRegion,
-                () => CaptureRegion(new RectangleRegion(), false), tsmiRectangle);
-            HotkeyManager.AddHotkey(EHotkey.RoundedRectangleRegion, Program.Settings.HotkeyRoundedRectangleRegion,
-                () => CaptureRegion(new RoundedRectangleRegion(), false), tsmiRoundedRectangle);
-            HotkeyManager.AddHotkey(EHotkey.EllipseRegion, Program.Settings.HotkeyEllipseRegion,
-                () => CaptureRegion(new EllipseRegion(), false), tsmiEllipse);
-            HotkeyManager.AddHotkey(EHotkey.TriangleRegion, Program.Settings.HotkeyTriangleRegion,
-                () => CaptureRegion(new TriangleRegion(), false), tsmiTriangle);
-            HotkeyManager.AddHotkey(EHotkey.DiamondRegion, Program.Settings.HotkeyDiamondRegion,
-                () => CaptureRegion(new DiamondRegion(), false), tsmiDiamond);
-            HotkeyManager.AddHotkey(EHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion,
-                () => CaptureRegion(new PolygonRegion(), false), tsmiPolygon);
-            HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion,
-                () => CaptureRegion(new FreeHandRegion(), false), tsmiFreeHand);
-            HotkeyManager.AddHotkey(EHotkey.LastRegion, Program.Settings.HotkeyLastRegion, () => CaptureLastRegion(false), tsmiLastRegion);
+            HotkeyManager.AddHotkey(EHotkey.PrintScreen, Program.Settings.HotkeyPrintScreen, () => CaptureScreenshot(CaptureType.Screen, false), tsmiFullscreen);
+            HotkeyManager.AddHotkey(EHotkey.ActiveWindow, Program.Settings.HotkeyActiveWindow, () => CaptureScreenshot(CaptureType.ActiveWindow, false));
+            HotkeyManager.AddHotkey(EHotkey.ActiveMonitor, Program.Settings.HotkeyActiveMonitor, () => CaptureScreenshot(CaptureType.ActiveMonitor, false));
+            HotkeyManager.AddHotkey(EHotkey.WindowRectangle, Program.Settings.HotkeyWindowRectangle, () => CaptureScreenshot(CaptureType.RectangleWindow, false), tsmiWindowRectangle);
+            HotkeyManager.AddHotkey(EHotkey.RectangleRegion, Program.Settings.HotkeyRectangleRegion, () => CaptureScreenshot(CaptureType.Rectangle, false), tsmiRectangle);
+            HotkeyManager.AddHotkey(EHotkey.RoundedRectangleRegion, Program.Settings.HotkeyRoundedRectangleRegion, () => CaptureScreenshot(CaptureType.RoundedRectangle, false), tsmiRoundedRectangle);
+            HotkeyManager.AddHotkey(EHotkey.EllipseRegion, Program.Settings.HotkeyEllipseRegion, () => CaptureScreenshot(CaptureType.Ellipse, false), tsmiEllipse);
+            HotkeyManager.AddHotkey(EHotkey.TriangleRegion, Program.Settings.HotkeyTriangleRegion, () => CaptureScreenshot(CaptureType.Triangle, false), tsmiTriangle);
+            HotkeyManager.AddHotkey(EHotkey.DiamondRegion, Program.Settings.HotkeyDiamondRegion, () => CaptureScreenshot(CaptureType.Diamond, false), tsmiDiamond);
+            HotkeyManager.AddHotkey(EHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion, () => CaptureScreenshot(CaptureType.Polygon, false), tsmiPolygon);
+            HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion, () => CaptureScreenshot(CaptureType.Freehand, false), tsmiFreeHand);
+            HotkeyManager.AddHotkey(EHotkey.LastRegion, Program.Settings.HotkeyLastRegion, () => CaptureScreenshot(CaptureType.LastRegion, false), tsmiLastRegion);
 
             string failedHotkeys;
 
@@ -76,23 +69,52 @@ namespace ShareX
             }
         }
 
-        private void DoCapture(ScreenCaptureDelegate capture, bool autoHideForm = true)
+        public void CaptureScreenshot(CaptureType captureType, bool autoHideForm = true)
+        {
+            switch (captureType)
+            {
+                case CaptureType.Screen:
+                    DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, autoHideForm);
+                    break;
+                case CaptureType.ActiveWindow:
+                    CaptureActiveWindow(autoHideForm);
+                    break;
+                case CaptureType.ActiveMonitor:
+                    DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, autoHideForm);
+                    break;
+                case CaptureType.RectangleWindow:
+                case CaptureType.Rectangle:
+                case CaptureType.RoundedRectangle:
+                case CaptureType.Ellipse:
+                case CaptureType.Triangle:
+                case CaptureType.Diamond:
+                case CaptureType.Polygon:
+                case CaptureType.Freehand:
+                    CaptureRegion(captureType, autoHideForm);
+                    break;
+                case CaptureType.LastRegion:
+                    CaptureLastRegion(autoHideForm);
+                    break;
+            }
+        }
+
+        private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true)
         {
             if (Program.Settings.IsDelayScreenshot && Program.Settings.DelayScreenshot > 0)
             {
                 int sleep = (int)(Program.Settings.DelayScreenshot * 1000);
                 BackgroundWorker bw = new BackgroundWorker();
                 bw.DoWork += (sender, e) => Thread.Sleep(sleep);
-                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, autoHideForm);
+                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, autoHideForm);
                 bw.RunWorkerAsync();
             }
             else
             {
-                DoCaptureWork(capture, autoHideForm);
+                DoCaptureWork(capture, captureType, autoHideForm);
             }
         }
 
-        private void DoCaptureWork(ScreenCaptureDelegate capture, bool autoHideForm = true)
+        private void DoCaptureWork(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true)
         {
             if (autoHideForm)
             {
@@ -127,17 +149,24 @@ namespace ShareX
                     ShowActivate();
                 }
 
-                AfterCapture(img);
+                AfterCapture(img, captureType);
             }
         }
 
-        private void AfterCapture(Image img)
+        private void AfterCapture(Image img, CaptureType captureType)
         {
             if (img != null)
             {
+                AfterCaptureTasks captureTasks = Program.Settings.AfterCaptureTasks;
+
+                if (Program.Settings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
+                {
+                    captureTasks = captureTasks.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
+                }
+
                 if (Program.Settings.ShowAfterCaptureTasksForm)
                 {
-                    using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, Program.Settings.AfterCaptureTasks))
+                    using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, captureTasks))
                     {
                         afterCaptureForm.ShowDialog();
 
@@ -154,14 +183,15 @@ namespace ShareX
                 }
                 else
                 {
-                    UploadManager.RunImageTask(img, Program.Settings.AfterCaptureTasks);
+                    UploadManager.RunImageTask(img, captureTasks);
                 }
             }
         }
 
-        private void CaptureScreen(bool autoHideForm = true)
+        private bool IsRegionCapture(CaptureType captureType)
         {
-            DoCapture(Screenshot.CaptureFullscreen, autoHideForm);
+            return captureType.HasFlagAny(CaptureType.RectangleWindow, CaptureType.Rectangle, CaptureType.RoundedRectangle, CaptureType.Ellipse, CaptureType.Triangle,
+                CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
         }
 
         private void CaptureActiveWindow(bool autoHideForm = true)
@@ -183,12 +213,7 @@ namespace ShareX
                 img.Tag = new ImageTag() { ActiveWindowTitle = activeWindowTitle };
 
                 return img;
-            }, autoHideForm);
-        }
-
-        private void CaptureActiveMonitor(bool autoHideForm = true)
-        {
-            DoCapture(Screenshot.CaptureActiveMonitor, autoHideForm);
+            }, CaptureType.ActiveWindow, autoHideForm);
         }
 
         private void CaptureWindow(IntPtr handle, bool autoHideForm = true)
@@ -213,11 +238,44 @@ namespace ShareX
                 {
                     return Screenshot.CaptureWindow(handle);
                 }
-            }, autoHideForm);
+            }, CaptureType.Window, autoHideForm);
         }
 
-        private void CaptureRegion(Surface surface, bool autoHideForm = true)
+        private void CaptureRegion(CaptureType captureType, bool autoHideForm = true)
         {
+            Surface surface;
+
+            switch (captureType)
+            {
+                default:
+                case CaptureType.Rectangle:
+                    surface = new RectangleRegion();
+                    break;
+                case CaptureType.RectangleWindow:
+                    RectangleRegion rectangleRegion = new RectangleRegion();
+                    rectangleRegion.AreaManager.WindowCaptureMode = true;
+                    surface = rectangleRegion;
+                    break;
+                case CaptureType.RoundedRectangle:
+                    surface = new RoundedRectangleRegion();
+                    break;
+                case CaptureType.Ellipse:
+                    surface = new EllipseRegion();
+                    break;
+                case CaptureType.Triangle:
+                    surface = new TriangleRegion();
+                    break;
+                case CaptureType.Diamond:
+                    surface = new DiamondRegion();
+                    break;
+                case CaptureType.Polygon:
+                    surface = new PolygonRegion();
+                    break;
+                case CaptureType.Freehand:
+                    surface = new FreeHandRegion();
+                    break;
+            }
+
             DoCapture(() =>
             {
                 Image img = null;
@@ -241,7 +299,7 @@ namespace ShareX
                 surface.Dispose();
 
                 return img;
-            }, autoHideForm);
+            }, captureType, autoHideForm);
         }
 
         private void CaptureLastRegion(bool autoHideForm = true)
@@ -254,19 +312,12 @@ namespace ShareX
                     {
                         return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, Program.Settings.SurfaceOptions);
                     }
-                }, autoHideForm);
+                }, CaptureType.LastRegion, autoHideForm);
             }
             else
             {
-                CaptureRegion(new RectangleRegion(), autoHideForm);
+                CaptureRegion(CaptureType.Rectangle, autoHideForm);
             }
-        }
-
-        private void WindowRectangleCapture(bool autoHideForm = true)
-        {
-            RectangleRegion rectangleRegion = new RectangleRegion();
-            rectangleRegion.AreaManager.WindowCaptureMode = true;
-            CaptureRegion(rectangleRegion, autoHideForm);
         }
 
         private async void PrepareWindowsMenuAsync(ToolStripMenuItem tsmi, EventHandler handler)
@@ -312,7 +363,7 @@ namespace ShareX
 
         private void tsmiFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreen();
+            CaptureScreenshot(CaptureType.Screen);
         }
 
         private void tsddbCapture_DropDownOpening(object sender, EventArgs e)
@@ -324,52 +375,55 @@ namespace ShareX
         {
             ToolStripItem tsi = (ToolStripItem)sender;
             WindowInfo wi = tsi.Tag as WindowInfo;
-            if (wi != null) CaptureWindow(wi.Handle);
+            if (wi != null)
+            {
+                CaptureWindow(wi.Handle);
+            }
         }
 
         private void tsmiWindowRectangle_Click(object sender, EventArgs e)
         {
-            WindowRectangleCapture();
+            CaptureScreenshot(CaptureType.RectangleWindow);
         }
 
         private void tsmiRectangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new RectangleRegion());
+            CaptureScreenshot(CaptureType.Rectangle);
         }
 
         private void tsmiRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new RoundedRectangleRegion());
+            CaptureScreenshot(CaptureType.RoundedRectangle);
         }
 
         private void tsmiEllipse_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new EllipseRegion());
+            CaptureScreenshot(CaptureType.Ellipse);
         }
 
         private void tsmiTriangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new TriangleRegion());
+            CaptureScreenshot(CaptureType.Triangle);
         }
 
         private void tsmiDiamond_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new DiamondRegion());
+            CaptureScreenshot(CaptureType.Diamond);
         }
 
         private void tsmiPolygon_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new PolygonRegion());
+            CaptureScreenshot(CaptureType.Polygon);
         }
 
         private void tsmiFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new FreeHandRegion());
+            CaptureScreenshot(CaptureType.Freehand);
         }
 
         private void tsmiLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureLastRegion();
+            CaptureScreenshot(CaptureType.LastRegion);
         }
 
         #endregion Menu events
@@ -378,7 +432,7 @@ namespace ShareX
 
         private void tsmiTrayFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreen(false);
+            CaptureScreenshot(CaptureType.Screen, false);
         }
 
         private void tsmiCapture_DropDownOpening(object sender, EventArgs e)
@@ -390,52 +444,55 @@ namespace ShareX
         {
             ToolStripItem tsi = (ToolStripItem)sender;
             WindowInfo wi = tsi.Tag as WindowInfo;
-            if (wi != null) CaptureWindow(wi.Handle, false);
+            if (wi != null)
+            {
+                CaptureWindow(wi.Handle, false);
+            }
         }
 
         private void tsmiTrayWindowRectangle_Click(object sender, EventArgs e)
         {
-            WindowRectangleCapture(false);
+            CaptureScreenshot(CaptureType.RectangleWindow, false);
         }
 
         private void tsmiTrayRectangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new RectangleRegion(), false);
+            CaptureScreenshot(CaptureType.Rectangle, false);
         }
 
         private void tsmiTrayRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new RoundedRectangleRegion(), false);
+            CaptureScreenshot(CaptureType.RoundedRectangle, false);
         }
 
         private void tsmiTrayEllipse_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new EllipseRegion(), false);
+            CaptureScreenshot(CaptureType.Ellipse, false);
         }
 
         private void tsmiTrayTriangle_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new TriangleRegion(), false);
+            CaptureScreenshot(CaptureType.Triangle, false);
         }
 
         private void tsmiTrayDiamond_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new DiamondRegion(), false);
+            CaptureScreenshot(CaptureType.Diamond, false);
         }
 
         private void tsmiTrayPolygon_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new PolygonRegion(), false);
+            CaptureScreenshot(CaptureType.Polygon, false);
         }
 
         private void tsmiTrayFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureRegion(new FreeHandRegion(), false);
+            CaptureScreenshot(CaptureType.Freehand, false);
         }
 
         private void tsmiTrayLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureLastRegion(false);
+            CaptureScreenshot(CaptureType.LastRegion, false);
         }
 
         #endregion Tray events
