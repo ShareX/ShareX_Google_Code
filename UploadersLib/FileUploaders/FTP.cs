@@ -54,11 +54,11 @@ namespace UploadersLib
 
             if (account.Protocol == FTPProtocol.FTP || account.FtpsSecurityProtocol == FtpSecurityProtocol.None)
             {
-                Client.SecurityProtocol = FtpSecurityProtocol.None;
+                Client.SecurityProtocol = (Starksoft.Net.Ftp.FtpSecurityProtocol)FtpSecurityProtocol.None;
             }
             else
             {
-                Client.SecurityProtocol = account.FtpsSecurityProtocol;
+                Client.SecurityProtocol = (Starksoft.Net.Ftp.FtpSecurityProtocol)account.FtpsSecurityProtocol;
 
                 if (!string.IsNullOrEmpty(account.FtpsCertLocation) && File.Exists(account.FtpsCertLocation))
                 {

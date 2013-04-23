@@ -297,4 +297,17 @@ namespace UploadersLib
     {
         POST, GET
     }
+
+    public enum FtpSecurityProtocol
+    {
+        None = 0,
+        Tls1Explicit = 1,
+        Tls1OrSsl3Explicit = 2,
+        Ssl3Explicit = 3,
+        Ssl2Explicit = 4,
+        Tls1Implicit = 5,
+        Tls1OrSsl3Implicit = 6,
+        Ssl3Implicit = 7,
+        Ssl2Implicit = 8,
+    }
 }
