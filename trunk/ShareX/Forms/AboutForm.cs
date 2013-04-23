@@ -27,6 +27,9 @@ using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using UpdateCheckerLib;
 using UploadersLib;
@@ -84,6 +87,20 @@ namespace ShareX
         private void pbMikeURL_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_MIKE);
+        }
+
+        private void btnShowLoadedAssemblies_Click(object sender, EventArgs e)
+        {
+            string directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            StringBuilder sb = new StringBuilder();
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (assembly.Location.StartsWith(directoryPath, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    sb.AppendLine(assembly.ManifestModule.Name);
+                }
+            }
+            MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #region Animation

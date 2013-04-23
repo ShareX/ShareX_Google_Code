@@ -43,6 +43,7 @@
             this.cLogo = new HelpersLib.Canvas();
             this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
             this.pbBerkSteamURL = new System.Windows.Forms.PictureBox();
+            this.btnShowLoadedAssemblies = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).BeginInit();
@@ -216,11 +217,22 @@
             this.pbBerkSteamURL.TabStop = false;
             this.pbBerkSteamURL.Click += new System.EventHandler(this.pbBerkSteamURL_Click);
             // 
+            // btnShowLoadedAssemblies
+            // 
+            this.btnShowLoadedAssemblies.Location = new System.Drawing.Point(272, 264);
+            this.btnShowLoadedAssemblies.Name = "btnShowLoadedAssemblies";
+            this.btnShowLoadedAssemblies.Size = new System.Drawing.Size(115, 23);
+            this.btnShowLoadedAssemblies.TabIndex = 22;
+            this.btnShowLoadedAssemblies.Text = "Loaded assemblies";
+            this.btnShowLoadedAssemblies.UseVisualStyleBackColor = true;
+            this.btnShowLoadedAssemblies.Click += new System.EventHandler(this.btnShowLoadedAssemblies_Click);
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(395, 294);
+            this.Controls.Add(this.btnShowLoadedAssemblies);
             this.Controls.Add(this.pbBerkSteamURL);
             this.Controls.Add(this.lblBerk);
             this.Controls.Add(this.lblMike);
@@ -268,5 +280,6 @@
         private UpdateCheckerLib.UpdateCheckerLabel uclUpdate;
         private HelpersLib.Canvas cLogo;
         private System.Windows.Forms.PictureBox pbBerkSteamURL;
+        private System.Windows.Forms.Button btnShowLoadedAssemblies;
     }
 }
