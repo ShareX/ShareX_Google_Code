@@ -130,8 +130,13 @@ namespace ShareX
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
 
+        public bool ImageEffectOnlyRegionCapture = true;
+        public BorderType BorderType = BorderType.Outside;
         public XmlColor BorderColor = Color.Black;
         public int BorderSize = 1;
+        public float ShadowDarkness = 0.6f;
+        public int ShadowSize = 7;
+        public Point ShadowOffset = new Point(0, 0);
 
         #endregion Image / Other
 
