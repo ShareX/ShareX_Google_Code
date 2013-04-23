@@ -783,7 +783,8 @@ namespace ShareX
                 Greenshot.IniFile.IniConfig.Init(Program.PersonalPath);
             }
 
-            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = img })
+            using (Image cloneImage = (Image)img.Clone())
+            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = cloneImage })
             using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
             using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
             {
