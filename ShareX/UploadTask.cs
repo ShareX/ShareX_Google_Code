@@ -616,8 +616,9 @@ namespace ShareX
                 case FileDestination.Dropbox:
                     NameParser parser = new NameParser(NameParserType.URL);
                     string uploadPath = parser.Parse(Dropbox.TidyUploadPath(Program.UploadersConfig.DropboxUploadPath));
-                    fileUploader = new Dropbox(Program.UploadersConfig.DropboxOAuthInfo, uploadPath, Program.UploadersConfig.DropboxAccountInfo)
+                    fileUploader = new Dropbox(Program.UploadersConfig.DropboxOAuthInfo, Program.UploadersConfig.DropboxAccountInfo)
                     {
+                        UploadPath = uploadPath,
                         AutoCreateShareableLink = Program.UploadersConfig.DropboxAutoCreateShareableLink
                     };
                     break;
