@@ -151,7 +151,7 @@ namespace UploadersLib.Forms
 
                 if (content != null && !content.Is_dir && content.Path.StartsWith("/Public/", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    string url = Dropbox.GetDropboxURL(dropboxAccountInfo.Uid, content.Path);
+                    string url = Dropbox.GetPublicURL(dropboxAccountInfo.Uid, content.Path);
                     Helpers.CopyTextSafely(url);
                 }
             }
