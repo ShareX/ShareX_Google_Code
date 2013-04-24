@@ -43,8 +43,8 @@ namespace Greenshot.Core
         public DropShadowEffect()
         {
             Darkness = 0.6f;
-            ShadowSize = 7;
-            ShadowOffset = new Point(-1, -1);
+            ShadowSize = 9;
+            ShadowOffset = new Point(0, 0);
         }
 
         public float Darkness

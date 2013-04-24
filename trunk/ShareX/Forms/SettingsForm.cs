@@ -120,10 +120,12 @@ namespace ShareX
             nudImageScaleSpecificWidth.Value = Program.Settings.ImageScaleSpecificWidth;
             nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
 
-            // Image - Other
+            // Image - Effects
             cbImageEffectOnlyRegionCapture.Checked = Program.Settings.ImageEffectOnlyRegionCapture;
             btnBorderColor.BackColor = Program.Settings.BorderColor;
             nudBorderSize.Value = Program.Settings.BorderSize;
+            nudImageShadowDarkness.Value = (decimal)Program.Settings.ShadowDarkness;
+            nudImageShadowSize.Value = Program.Settings.ShadowSize;
 
             // Capture
             cbShowCursor.Checked = Program.Settings.ShowCursor;
@@ -519,7 +521,7 @@ namespace ShareX
 
         #endregion Image / Resize
 
-        #region Image / Other
+        #region Image / Effects
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
@@ -552,7 +554,17 @@ namespace ShareX
             Program.Settings.BorderSize = (int)nudBorderSize.Value;
         }
 
-        #endregion Image / Other
+        private void nudImageShadowDarkness_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ShadowDarkness = (float)nudImageShadowDarkness.Value;
+        }
+
+        private void nudImageShadowSize_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ShadowSize = (int)nudImageShadowSize.Value;
+        }
+
+        #endregion Image / Effects
 
         #region Capture / General
 

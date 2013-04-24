@@ -126,7 +126,7 @@ namespace ShareX
 
         #endregion Image / Resize
 
-        #region Image / Other
+        #region Image / Effects
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
 
@@ -138,7 +138,7 @@ namespace ShareX
         public int ShadowSize = 9;
         public Point ShadowOffset = new Point(0, 0);
 
-        #endregion Image / Other
+        #endregion Image / Effects
 
         #region Capture / General
 
