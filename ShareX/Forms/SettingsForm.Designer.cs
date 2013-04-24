@@ -100,13 +100,19 @@
             this.lblImageScaleSpecificHeight = new System.Windows.Forms.Label();
             this.lblImageScaleSpecificWidth = new System.Windows.Forms.Label();
             this.nudImageScaleSpecificWidth = new System.Windows.Forms.NumericUpDown();
-            this.tpOther = new System.Windows.Forms.TabPage();
+            this.tpEffects = new System.Windows.Forms.TabPage();
+            this.gbImageShadow = new System.Windows.Forms.GroupBox();
+            this.lblImageShadowSize = new System.Windows.Forms.Label();
+            this.lblImageShadowDarkness = new System.Windows.Forms.Label();
+            this.nudImageShadowSize = new System.Windows.Forms.NumericUpDown();
+            this.nudImageShadowDarkness = new System.Windows.Forms.NumericUpDown();
+            this.cbImageEffectOnlyRegionCapture = new System.Windows.Forms.CheckBox();
+            this.btnWatermarkSettings = new System.Windows.Forms.Button();
             this.gbBorder = new System.Windows.Forms.GroupBox();
             this.btnBorderColor = new System.Windows.Forms.Button();
             this.nudBorderSize = new System.Windows.Forms.NumericUpDown();
             this.lblBorderSize = new System.Windows.Forms.Label();
             this.lblBorderColor = new System.Windows.Forms.Label();
-            this.btnWatermarkSettings = new System.Windows.Forms.Button();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
@@ -183,7 +189,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbImageEffectOnlyRegionCapture = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -201,7 +206,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).BeginInit();
-            this.tpOther.SuspendLayout();
+            this.tpEffects.SuspendLayout();
+            this.gbImageShadow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowDarkness)).BeginInit();
             this.gbBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).BeginInit();
             this.tpCapture.SuspendLayout();
@@ -573,7 +581,7 @@
             // 
             this.tcImage.Controls.Add(this.tpQuality);
             this.tcImage.Controls.Add(this.tpResize);
-            this.tcImage.Controls.Add(this.tpOther);
+            this.tcImage.Controls.Add(this.tpEffects);
             this.tcImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcImage.Location = new System.Drawing.Point(5, 5);
             this.tcImage.Name = "tcImage";
@@ -1108,23 +1116,130 @@
             0});
             this.nudImageScaleSpecificWidth.ValueChanged += new System.EventHandler(this.nudImageScaleSpecificWidth_ValueChanged);
             // 
-            // tpOther
+            // tpEffects
             // 
-            this.tpOther.Controls.Add(this.cbImageEffectOnlyRegionCapture);
-            this.tpOther.Controls.Add(this.btnWatermarkSettings);
-            this.tpOther.Controls.Add(this.gbBorder);
-            this.tpOther.Location = new System.Drawing.Point(4, 22);
-            this.tpOther.Name = "tpOther";
-            this.tpOther.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOther.Size = new System.Drawing.Size(504, 294);
-            this.tpOther.TabIndex = 2;
-            this.tpOther.Text = "Other";
-            this.tpOther.UseVisualStyleBackColor = true;
+            this.tpEffects.Controls.Add(this.gbImageShadow);
+            this.tpEffects.Controls.Add(this.cbImageEffectOnlyRegionCapture);
+            this.tpEffects.Controls.Add(this.btnWatermarkSettings);
+            this.tpEffects.Controls.Add(this.gbBorder);
+            this.tpEffects.Location = new System.Drawing.Point(4, 22);
+            this.tpEffects.Name = "tpEffects";
+            this.tpEffects.Padding = new System.Windows.Forms.Padding(3);
+            this.tpEffects.Size = new System.Drawing.Size(504, 294);
+            this.tpEffects.TabIndex = 2;
+            this.tpEffects.Text = "Effects";
+            this.tpEffects.UseVisualStyleBackColor = true;
+            // 
+            // gbImageShadow
+            // 
+            this.gbImageShadow.Controls.Add(this.lblImageShadowSize);
+            this.gbImageShadow.Controls.Add(this.lblImageShadowDarkness);
+            this.gbImageShadow.Controls.Add(this.nudImageShadowSize);
+            this.gbImageShadow.Controls.Add(this.nudImageShadowDarkness);
+            this.gbImageShadow.Location = new System.Drawing.Point(16, 152);
+            this.gbImageShadow.Name = "gbImageShadow";
+            this.gbImageShadow.Size = new System.Drawing.Size(472, 56);
+            this.gbImageShadow.TabIndex = 4;
+            this.gbImageShadow.TabStop = false;
+            this.gbImageShadow.Text = "Shadow";
+            // 
+            // lblImageShadowSize
+            // 
+            this.lblImageShadowSize.AutoSize = true;
+            this.lblImageShadowSize.Location = new System.Drawing.Point(152, 24);
+            this.lblImageShadowSize.Name = "lblImageShadowSize";
+            this.lblImageShadowSize.Size = new System.Drawing.Size(30, 13);
+            this.lblImageShadowSize.TabIndex = 3;
+            this.lblImageShadowSize.Text = "Size:";
+            // 
+            // lblImageShadowDarkness
+            // 
+            this.lblImageShadowDarkness.AutoSize = true;
+            this.lblImageShadowDarkness.Location = new System.Drawing.Point(16, 24);
+            this.lblImageShadowDarkness.Name = "lblImageShadowDarkness";
+            this.lblImageShadowDarkness.Size = new System.Drawing.Size(55, 13);
+            this.lblImageShadowDarkness.TabIndex = 2;
+            this.lblImageShadowDarkness.Text = "Darkness:";
+            // 
+            // nudImageShadowSize
+            // 
+            this.nudImageShadowSize.Location = new System.Drawing.Point(192, 20);
+            this.nudImageShadowSize.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.nudImageShadowSize.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudImageShadowSize.Name = "nudImageShadowSize";
+            this.nudImageShadowSize.Size = new System.Drawing.Size(56, 20);
+            this.nudImageShadowSize.TabIndex = 1;
+            this.nudImageShadowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudImageShadowSize.Value = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.nudImageShadowSize.ValueChanged += new System.EventHandler(this.nudImageShadowSize_ValueChanged);
+            // 
+            // nudImageShadowDarkness
+            // 
+            this.nudImageShadowDarkness.DecimalPlaces = 1;
+            this.nudImageShadowDarkness.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudImageShadowDarkness.Location = new System.Drawing.Point(80, 20);
+            this.nudImageShadowDarkness.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudImageShadowDarkness.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudImageShadowDarkness.Name = "nudImageShadowDarkness";
+            this.nudImageShadowDarkness.Size = new System.Drawing.Size(56, 20);
+            this.nudImageShadowDarkness.TabIndex = 0;
+            this.nudImageShadowDarkness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudImageShadowDarkness.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            65536});
+            this.nudImageShadowDarkness.ValueChanged += new System.EventHandler(this.nudImageShadowDarkness_ValueChanged);
+            // 
+            // cbImageEffectOnlyRegionCapture
+            // 
+            this.cbImageEffectOnlyRegionCapture.AutoSize = true;
+            this.cbImageEffectOnlyRegionCapture.Location = new System.Drawing.Point(16, 56);
+            this.cbImageEffectOnlyRegionCapture.Name = "cbImageEffectOnlyRegionCapture";
+            this.cbImageEffectOnlyRegionCapture.Size = new System.Drawing.Size(240, 17);
+            this.cbImageEffectOnlyRegionCapture.TabIndex = 3;
+            this.cbImageEffectOnlyRegionCapture.Text = "Only apply border && shadow to region capture";
+            this.cbImageEffectOnlyRegionCapture.UseVisualStyleBackColor = true;
+            this.cbImageEffectOnlyRegionCapture.CheckedChanged += new System.EventHandler(this.cbImageEffectOnlyRectangleCapture_CheckedChanged);
+            // 
+            // btnWatermarkSettings
+            // 
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
+            this.btnWatermarkSettings.Name = "btnWatermarkSettings";
+            this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
+            this.btnWatermarkSettings.TabIndex = 0;
+            this.btnWatermarkSettings.Text = "Watermark settings...";
+            this.btnWatermarkSettings.UseVisualStyleBackColor = true;
+            this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
             // 
             // gbBorder
             // 
-            this.gbBorder.Controls.Add(this.btnBorderColor);
             this.gbBorder.Controls.Add(this.nudBorderSize);
+            this.gbBorder.Controls.Add(this.btnBorderColor);
             this.gbBorder.Controls.Add(this.lblBorderSize);
             this.gbBorder.Controls.Add(this.lblBorderColor);
             this.gbBorder.Location = new System.Drawing.Point(16, 88);
@@ -1146,7 +1261,7 @@
             // 
             // nudBorderSize
             // 
-            this.nudBorderSize.Location = new System.Drawing.Point(232, 20);
+            this.nudBorderSize.Location = new System.Drawing.Point(224, 20);
             this.nudBorderSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1166,7 +1281,7 @@
             // lblBorderSize
             // 
             this.lblBorderSize.AutoSize = true;
-            this.lblBorderSize.Location = new System.Drawing.Point(160, 24);
+            this.lblBorderSize.Location = new System.Drawing.Point(152, 24);
             this.lblBorderSize.Name = "lblBorderSize";
             this.lblBorderSize.Size = new System.Drawing.Size(62, 13);
             this.lblBorderSize.TabIndex = 1;
@@ -1180,16 +1295,6 @@
             this.lblBorderColor.Size = new System.Drawing.Size(67, 13);
             this.lblBorderColor.TabIndex = 0;
             this.lblBorderColor.Text = "Border color:";
-            // 
-            // btnWatermarkSettings
-            // 
-            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
-            this.btnWatermarkSettings.Name = "btnWatermarkSettings";
-            this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
-            this.btnWatermarkSettings.TabIndex = 0;
-            this.btnWatermarkSettings.Text = "Watermark settings...";
-            this.btnWatermarkSettings.UseVisualStyleBackColor = true;
-            this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
             // 
             // tpCapture
             // 
@@ -2062,17 +2167,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // cbImageEffectOnlyRegionCapture
-            // 
-            this.cbImageEffectOnlyRegionCapture.AutoSize = true;
-            this.cbImageEffectOnlyRegionCapture.Location = new System.Drawing.Point(16, 56);
-            this.cbImageEffectOnlyRegionCapture.Name = "cbImageEffectOnlyRegionCapture";
-            this.cbImageEffectOnlyRegionCapture.Size = new System.Drawing.Size(240, 17);
-            this.cbImageEffectOnlyRegionCapture.TabIndex = 3;
-            this.cbImageEffectOnlyRegionCapture.Text = "Only apply border && shadow to region capture";
-            this.cbImageEffectOnlyRegionCapture.UseVisualStyleBackColor = true;
-            this.cbImageEffectOnlyRegionCapture.CheckedChanged += new System.EventHandler(this.cbImageEffectOnlyRectangleCapture_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2110,8 +2204,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).EndInit();
-            this.tpOther.ResumeLayout(false);
-            this.tpOther.PerformLayout();
+            this.tpEffects.ResumeLayout(false);
+            this.tpEffects.PerformLayout();
+            this.gbImageShadow.ResumeLayout(false);
+            this.gbImageShadow.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowDarkness)).EndInit();
             this.gbBorder.ResumeLayout(false);
             this.gbBorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).EndInit();
@@ -2285,7 +2383,7 @@
         private System.Windows.Forms.Button btnResetAutoIncrementNumber;
         private System.Windows.Forms.NumericUpDown nudCaptureShadowOffset;
         private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
-        private System.Windows.Forms.TabPage tpOther;
+        private System.Windows.Forms.TabPage tpEffects;
         private System.Windows.Forms.Button btnWatermarkSettings;
         private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
         private System.Windows.Forms.GroupBox gbBorder;
@@ -2304,5 +2402,10 @@
         private System.Windows.Forms.TabPage tpUploadNamePattern;
         private System.Windows.Forms.CheckBox cbIfUploadFailRetryOnce;
         private System.Windows.Forms.CheckBox cbImageEffectOnlyRegionCapture;
+        private System.Windows.Forms.GroupBox gbImageShadow;
+        private System.Windows.Forms.Label lblImageShadowSize;
+        private System.Windows.Forms.Label lblImageShadowDarkness;
+        private System.Windows.Forms.NumericUpDown nudImageShadowSize;
+        private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
     }
 }

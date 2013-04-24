@@ -1,9 +1,4 @@
-﻿using Greenshot.Drawing.Fields;
-using Greenshot.Plugin.Drawing;
-using GreenshotPlugin.Core;
-using GreenshotPlugin.UnmanagedHelpers;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -24,6 +19,10 @@ using GreenshotPlugin.UnmanagedHelpers;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Drawing.Fields;
+using Greenshot.Plugin.Drawing;
+using GreenshotPlugin.Core;
+using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -52,6 +51,10 @@ namespace Greenshot.Drawing.Filters
             int blurRadius = GetFieldValueAsInt(FieldType.BLUR_RADIUS);
             double previewQuality = GetFieldValueAsDouble(FieldType.PREVIEW_QUALITY);
             Rectangle applyRect = ImageHelper.CreateIntersectRectangle(applyBitmap.Size, rect, Invert);
+            if (applyRect.Width == 0 || applyRect.Height == 0)
+            {
+                return;
+            }
             GraphicsState state = graphics.Save();
             if (Invert)
             {
