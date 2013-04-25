@@ -34,15 +34,15 @@ namespace HelpersLib
     {
         private Image screenshot;
 
-        public ImageViewer(string path)
-        {
-            this.screenshot = Image.FromFile(path);
-            InitializeComponent();
-        }
-
         public ImageViewer(Image image)
         {
             this.screenshot = (Image)image.Clone();
+            InitializeComponent();
+        }
+
+        public ImageViewer(string path)
+        {
+            this.screenshot = Image.FromFile(path);
             InitializeComponent();
         }
 
@@ -65,30 +65,23 @@ namespace HelpersLib
             }
         }
 
-        private void ShowScreenshot_Load(object sender, EventArgs e)
-        {
-            if (this.Bounds.Width > this.BackgroundImage.Width && this.Bounds.Height > this.BackgroundImage.Height)
-            {
-                this.BackgroundImageLayout = ImageLayout.Center;
-            }
-            else
-            {
-                this.BackgroundImageLayout = ImageLayout.Zoom;
-            }
-        }
-
-        private void ShowScreenshot_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.Close();
-        }
-
         private void ShowScreenshot_Shown(object sender, EventArgs e)
         {
-            this.BringToFront();
-            this.Activate();
+            BringToFront();
+            Activate();
         }
 
-        private void ShowScreenshot_KeyDown(object sender, KeyEventArgs e)
+        private void ShowScreenshot_Deactivate(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void pbPreview_MouseDown(object sender, MouseEventArgs e)
+        {
+            Close();
+        }
+
+        private void pbPreview_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
@@ -109,7 +102,10 @@ namespace HelpersLib
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            screenshot.Dispose();
+            if (screenshot != null)
+            {
+                screenshot.Dispose();
+            }
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -123,37 +119,38 @@ namespace HelpersLib
         /// </summary>
         private void InitializeComponent()
         {
+            this.pbPreview = new MyPictureBox();
             this.SuspendLayout();
 
+            this.pbPreview.BackColor = System.Drawing.Color.White;
+            this.pbPreview.Cursor = Cursors.Hand;
+            this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPreview.DrawCheckeredBackground = true;
+            this.pbPreview.FullscreenOnClick = false;
+            this.pbPreview.Location = new System.Drawing.Point(0, 0);
+            this.pbPreview.Name = "pbPreview";
+            this.pbPreview.Size = new System.Drawing.Size(96, 100);
+            this.pbPreview.TabIndex = 0;
+            this.pbPreview.LoadImage(screenshot);
+
             this.BackColor = Color.White;
-            this.BackgroundImage = screenshot;
             this.Bounds = CaptureHelpers.GetScreenBounds();
-            this.Cursor = Cursors.Hand;
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = "Image Viewer";
             this.WindowState = FormWindowState.Maximized;
+            this.Controls.Add(this.pbPreview);
 
-            this.Deactivate += new System.EventHandler(this.ShowScreenshot_Deactivate);
-            this.Load += new System.EventHandler(this.ShowScreenshot_Load);
             this.Shown += new System.EventHandler(this.ShowScreenshot_Shown);
-            this.Leave += new System.EventHandler(this.ShowScreenshot_Leave);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShowScreenshot_MouseDown);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ShowScreenshot_KeyDown);
+            this.Deactivate += new System.EventHandler(this.ShowScreenshot_Deactivate);
+            pbPreview.MouseDown += pbPreview_MouseDown;
+            pbPreview.KeyDown += pbPreview_KeyDown;
 
             this.ResumeLayout(false);
         }
 
+        private MyPictureBox pbPreview;
+
         #endregion Windows Form Designer generated code
-
-        private void ShowScreenshot_Deactivate(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void ShowScreenshot_Leave(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

@@ -59,18 +59,48 @@ namespace HelpersLib
             }
         }
 
-        private bool drawCheckersBackground;
+        private bool drawCheckeredBackground = false;
 
-        public bool DrawCheckersBackground
+        [DefaultValue(false)]
+        public bool DrawCheckeredBackground
         {
             get
             {
-                return drawCheckersBackground;
+                return drawCheckeredBackground;
             }
             set
             {
-                drawCheckersBackground = value;
+                drawCheckeredBackground = value;
                 UpdateCheckers();
+            }
+        }
+
+        private bool fullscreenOnClick = false;
+
+        [DefaultValue(false)]
+        public bool FullscreenOnClick
+        {
+            get
+            {
+                return fullscreenOnClick;
+            }
+            set
+            {
+                fullscreenOnClick = value;
+            }
+        }
+
+        public new event MouseEventHandler MouseDown
+        {
+            add
+            {
+                pbMain.MouseDown += value;
+                lblStatus.MouseDown += value;
+            }
+            remove
+            {
+                pbMain.MouseDown -= value;
+                lblStatus.MouseDown -= value;
             }
         }
 
@@ -85,6 +115,7 @@ namespace HelpersLib
             pbMain.LoadProgressChanged += new ProgressChangedEventHandler(pbMain_LoadProgressChanged);
             pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
             pbMain.Resize += pbMain_Resize;
+            MouseDown += MyPictureBox_MouseDown;
         }
 
         private void pbMain_Resize(object sender, EventArgs e)
@@ -95,12 +126,11 @@ namespace HelpersLib
 
         private void UpdateCheckers()
         {
-            if (DrawCheckersBackground)
+            if (DrawCheckeredBackground)
             {
                 if (pbMain.BackgroundImage == null || pbMain.BackgroundImage.Size != pbMain.ClientSize)
                 {
-                    Image img = CaptureHelpers.CreateCheckers(pbMain.ClientSize.Width, pbMain.ClientSize.Height);
-                    pbMain.BackgroundImage = img;
+                    pbMain.BackgroundImage = CaptureHelpers.CreateCheckers(8, Color.LightGray, Color.White);
                 }
             }
             else
@@ -140,7 +170,10 @@ namespace HelpersLib
         {
             isReady = false;
             lblStatus.Visible = true;
-            Cursor = Cursors.Default;
+            if (FullscreenOnClick)
+            {
+                Cursor = Cursors.Default;
+            }
             pbMain.LoadAsync(path);
         }
 
@@ -153,7 +186,10 @@ namespace HelpersLib
         {
             AutoSetSizeMode();
             lblStatus.Visible = false;
-            Cursor = Cursors.Hand;
+            if (FullscreenOnClick)
+            {
+                Cursor = Cursors.Hand;
+            }
             isReady = true;
         }
 
@@ -189,9 +225,9 @@ namespace HelpersLib
             }
         }
 
-        private void pbMain_MouseClick(object sender, MouseEventArgs e)
+        private void MyPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
+            if (FullscreenOnClick && e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
             {
                 ImageViewer.ShowImage(pbMain.Image);
             }
