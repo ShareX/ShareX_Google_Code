@@ -28,22 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbMain = new System.Windows.Forms.PictureBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.pbMain = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbMain
-            // 
-            this.pbMain.BackColor = System.Drawing.Color.White;
-            this.pbMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbMain.Location = new System.Drawing.Point(0, 0);
-            this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(150, 150);
-            this.pbMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbMain.TabIndex = 0;
-            this.pbMain.TabStop = false;
-            this.pbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseClick);
             // 
             // lblStatus
             // 
@@ -56,6 +44,17 @@
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Image preview";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbMain
+            // 
+            this.pbMain.BackColor = System.Drawing.Color.White;
+            this.pbMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbMain.Location = new System.Drawing.Point(0, 0);
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(150, 150);
+            this.pbMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbMain.TabIndex = 0;
+            this.pbMain.TabStop = false;
             // 
             // MyPictureBox
             // 
@@ -72,7 +71,7 @@
 
         #endregion Component Designer generated code
 
-        private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox pbMain;
     }
 }
