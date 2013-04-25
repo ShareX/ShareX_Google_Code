@@ -311,6 +311,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbThumbnail.BackColor = System.Drawing.Color.White;
             this.pbThumbnail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbThumbnail.DrawCheckeredBackground = true;
+            this.pbThumbnail.FullscreenOnClick = true;
             this.pbThumbnail.Location = new System.Drawing.Point(328, 8);
             this.pbThumbnail.Name = "pbThumbnail";
             this.pbThumbnail.Size = new System.Drawing.Size(584, 272);
