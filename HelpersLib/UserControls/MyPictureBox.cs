@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib.Properties;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -58,6 +59,21 @@ namespace HelpersLib
             }
         }
 
+        private bool drawCheckersBackground;
+
+        public bool DrawCheckersBackground
+        {
+            get
+            {
+                return drawCheckersBackground;
+            }
+            set
+            {
+                drawCheckersBackground = value;
+                UpdateCheckers();
+            }
+        }
+
         private bool isReady;
         private bool isLoadLocal;
 
@@ -68,6 +84,29 @@ namespace HelpersLib
             pbMain.InitialImage = Resources.Loading;
             pbMain.LoadProgressChanged += new ProgressChangedEventHandler(pbMain_LoadProgressChanged);
             pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
+            pbMain.Resize += pbMain_Resize;
+        }
+
+        private void pbMain_Resize(object sender, EventArgs e)
+        {
+            UpdateCheckers();
+            AutoSetSizeMode();
+        }
+
+        private void UpdateCheckers()
+        {
+            if (DrawCheckersBackground)
+            {
+                if (pbMain.BackgroundImage == null || pbMain.BackgroundImage.Size != pbMain.ClientSize)
+                {
+                    Image img = CaptureHelpers.CreateCheckers(pbMain.ClientSize.Width, pbMain.ClientSize.Height);
+                    pbMain.BackgroundImage = img;
+                }
+            }
+            else
+            {
+                pbMain.BackgroundImage = null;
+            }
         }
 
         public void LoadImage(Image img)
@@ -137,13 +176,16 @@ namespace HelpersLib
 
         private void AutoSetSizeMode()
         {
-            if (pbMain.Image.Width > pbMain.ClientSize.Width || pbMain.Image.Height > pbMain.ClientSize.Height)
+            if (pbMain.Image != null)
             {
-                pbMain.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else
-            {
-                pbMain.SizeMode = PictureBoxSizeMode.CenterImage;
+                if (pbMain.Image.Width > pbMain.ClientSize.Width || pbMain.Image.Height > pbMain.ClientSize.Height)
+                {
+                    pbMain.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    pbMain.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
             }
         }
 

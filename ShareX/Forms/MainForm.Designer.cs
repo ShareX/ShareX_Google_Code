@@ -736,6 +736,7 @@ namespace ShareX
             // 
             this.pbPreview.BackColor = System.Drawing.Color.White;
             this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPreview.DrawCheckersBackground = true;
             this.pbPreview.Location = new System.Drawing.Point(0, 0);
             this.pbPreview.Name = "pbPreview";
             this.pbPreview.Size = new System.Drawing.Size(96, 100);
