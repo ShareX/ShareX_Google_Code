@@ -98,6 +98,7 @@ namespace ShareX
         public HotkeySetting HotkeyPolygonRegion = Keys.None;
         public HotkeySetting HotkeyFreeHandRegion = Keys.None;
         public HotkeySetting HotkeyLastRegion = Keys.None;
+        public HotkeySetting HotkeyScreenRecorder = Keys.None;
 
         #endregion Hotkeys
 

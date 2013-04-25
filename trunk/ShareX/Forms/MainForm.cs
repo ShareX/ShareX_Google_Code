@@ -495,6 +495,13 @@ namespace ShareX
             Activate();
         }
 
+        private void OpenScreenRecorder()
+        {
+            ScreenRecordForm recordForm = new ScreenRecordForm();
+            recordForm.Icon = Icon;
+            recordForm.Show();
+        }
+
         #region Form events
 
         protected override void SetVisibleCore(bool value)
@@ -620,9 +627,7 @@ namespace ShareX
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            ScreenRecordForm recordForm = new ScreenRecordForm();
-            recordForm.Icon = Icon;
-            recordForm.Show();
+            OpenScreenRecorder();
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)

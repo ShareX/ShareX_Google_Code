@@ -58,6 +58,7 @@ namespace ShareX
             HotkeyManager.AddHotkey(EHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion, () => CaptureScreenshot(CaptureType.Polygon, false), tsmiPolygon);
             HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion, () => CaptureScreenshot(CaptureType.Freehand, false), tsmiFreeHand);
             HotkeyManager.AddHotkey(EHotkey.LastRegion, Program.Settings.HotkeyLastRegion, () => CaptureScreenshot(CaptureType.LastRegion, false), tsmiLastRegion);
+            HotkeyManager.AddHotkey(EHotkey.ScreenRecorder, Program.Settings.HotkeyScreenRecorder, OpenScreenRecorder, tsmiScreenRecorder);
 
             string failedHotkeys;
 

@@ -215,7 +215,9 @@ namespace HelpersLib
         [Description("Freehand Region")]
         FreeHandRegion,
         [Description("Last Region")]
-        LastRegion
+        LastRegion,
+        [Description("Screen Recorder")]
+        ScreenRecorder
     }
 
     public enum BorderType
