@@ -99,7 +99,10 @@ namespace UpdateCheckerLib
             {
                 DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
                 downloader.ShowDialog();
-                if (downloader.Status == DownloaderFormStatus.InstallStarted) Application.Exit();
+                if (downloader.Status == DownloaderFormStatus.InstallStarted)
+                {
+                    Application.Exit();
+                }
             }
         }
     }
