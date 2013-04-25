@@ -459,6 +459,24 @@ namespace HelpersLib
             return bmp;
         }
 
+        public static Image CreateCheckers(int width, int height)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+
+                Image checker = CreateCheckers(8, Color.LightGray, Color.White);
+                Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
+
+                g.FillRectangle(checkerBrush, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            }
+
+            return bmp;
+        }
+
         public static Image DrawCheckers(Image img)
         {
             Bitmap bmp = new Bitmap(img.Width, img.Height);
