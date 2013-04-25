@@ -31,6 +31,7 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 
@@ -103,33 +104,48 @@ namespace HelpersLib
         {
             if (e.Button == MouseButtons.Left)
             {
-                switch (Status)
+                if (Status == DownloaderFormStatus.Waiting)
                 {
-                    case DownloaderFormStatus.Waiting:
-                        StartDownload();
-                        break;
-                    default:
-                    case DownloaderFormStatus.DownloadStarted:
-                        Close();
-                        break;
-                    case DownloaderFormStatus.DownloadCompleted:
-                        try
-                        {
-                            btnAction.Enabled = false;
-                            ProcessStartInfo psi = new ProcessStartInfo(SavePath);
-                            psi.Verb = "runas";
-                            psi.UseShellExecute = true;
-                            Process.Start(psi);
-                            Status = DownloaderFormStatus.InstallStarted;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-
-                        Close();
-                        break;
+                    StartDownload();
                 }
+                else if (Status == DownloaderFormStatus.DownloadCompleted)
+                {
+                    Status = DownloaderFormStatus.InstallStarted;
+                    btnAction.Enabled = false;
+                    RunInstallerWithDelay();
+                    Close();
+                }
+                else
+                {
+                    Close();
+                }
+            }
+        }
+
+        // This function will give time for ShareX to close so installer won't tell ShareX is already running
+        private void RunInstallerWithDelay(int delay = 1000)
+        {
+            Thread thread = new Thread(() =>
+            {
+                Thread.Sleep(delay);
+                RunInstaller();
+            });
+            thread.Start();
+        }
+
+        private void RunInstaller()
+        {
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo(SavePath);
+                psi.Arguments = "/SILENT";
+                psi.Verb = "runas";
+                psi.UseShellExecute = true;
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

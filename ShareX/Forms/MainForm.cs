@@ -44,7 +44,7 @@ namespace ShareX
 
         public HotkeyManager HotkeyManager { get; private set; }
 
-        private bool trayClose;
+        private bool forceClose;
         private UploadInfoManager uim;
 
         public MainForm()
@@ -403,7 +403,10 @@ namespace ShareX
                         {
                             DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
                             downloader.ShowDialog();
-                            if (downloader.Status == DownloaderFormStatus.InstallStarted) Application.Exit();
+                            if (downloader.Status == DownloaderFormStatus.InstallStarted)
+                            {
+                                Application.Exit();
+                            }
                         }
                         break;
                     case UpdateStatus.UpdateCheckFailed:
@@ -411,6 +414,12 @@ namespace ShareX
                         break;
                 }
             }
+        }
+
+        private void ForceClose()
+        {
+            forceClose = true;
+            Close();
         }
 
         public void UseCommandLineArgs(string[] args)
@@ -532,7 +541,7 @@ namespace ShareX
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing && Program.Settings.ShowTray && !trayClose)
+            if (e.CloseReason == CloseReason.UserClosing && Program.Settings.ShowTray && !forceClose)
             {
                 e.Cancel = true;
                 Hide();
@@ -777,8 +786,7 @@ namespace ShareX
 
         private void tsmiTrayExit_Click(object sender, EventArgs e)
         {
-            trayClose = true;
-            Close();
+            ForceClose();
         }
 
         #endregion Tray events

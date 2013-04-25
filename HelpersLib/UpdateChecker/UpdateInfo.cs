@@ -40,6 +40,8 @@ namespace UpdateCheckerLib
         public ReleaseChannelType ReleaseChannel { get; set; }
         public UpdateStatus Status { get; set; }
 
+        private const bool ForceUpdate = false; // For testing purposes
+
         public UpdateInfo(ReleaseChannelType releaseChannel = ReleaseChannelType.Stable)
         {
             ReleaseChannel = releaseChannel;
@@ -49,7 +51,8 @@ namespace UpdateCheckerLib
         {
             get
             {
-                return CurrentVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) && Helpers.CheckVersion(LatestVersion, CurrentVersion);
+                return CurrentVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) &&
+                    (ForceUpdate || Helpers.CheckVersion(LatestVersion, CurrentVersion));
             }
         }
 
