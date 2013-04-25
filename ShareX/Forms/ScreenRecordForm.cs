@@ -74,6 +74,11 @@ namespace ShareX
 
         private async void btnRecord_Click(object sender, EventArgs e)
         {
+            if (CaptureRectangle.IsEmpty)
+            {
+                return;
+            }
+
             btnRecord.Enabled = false;
             Hide();
 
