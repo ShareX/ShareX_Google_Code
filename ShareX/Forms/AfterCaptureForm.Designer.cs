@@ -84,7 +84,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImage.BackColor = System.Drawing.Color.White;
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbImage.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbImage.DrawCheckeredBackground = true;
+            this.pbImage.FullscreenOnClick = true;
             this.pbImage.Location = new System.Drawing.Point(272, 8);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(360, 256);

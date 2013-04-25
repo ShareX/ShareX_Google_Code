@@ -170,26 +170,23 @@ namespace HelpersLib
         {
             isReady = false;
             lblStatus.Visible = true;
-            if (FullscreenOnClick)
-            {
-                Cursor = Cursors.Default;
-            }
             pbMain.LoadAsync(path);
         }
 
         public void Reset()
         {
             pbMain.Image = null;
+
+            if (FullscreenOnClick)
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private void pbMain_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
             AutoSetSizeMode();
             lblStatus.Visible = false;
-            if (FullscreenOnClick)
-            {
-                Cursor = Cursors.Hand;
-            }
             isReady = true;
         }
 
@@ -221,6 +218,11 @@ namespace HelpersLib
                 else
                 {
                     pbMain.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+
+                if (FullscreenOnClick)
+                {
+                    Cursor = Cursors.Hand;
                 }
             }
         }
