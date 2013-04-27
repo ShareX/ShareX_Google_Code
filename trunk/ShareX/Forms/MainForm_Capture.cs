@@ -321,9 +321,9 @@ namespace ShareX
             }
         }
 
-        private async void PrepareWindowsMenuAsync(ToolStripMenuItem tsmi, EventHandler handler)
+        private async void PrepareCaptureMenuAsync(ToolStripMenuItem tsmiWindow, EventHandler handlerWindow, ToolStripMenuItem tsmiMonitor, EventHandler handlerMonitor)
         {
-            tsmi.DropDownItems.Clear();
+            tsmiWindow.DropDownItems.Clear();
 
             List<WindowInfo> windows = null;
 
@@ -335,8 +335,9 @@ namespace ShareX
                 foreach (WindowInfo window in windows)
                 {
                     string title = window.Text.Truncate(50);
-                    ToolStripItem tsi = tsmi.DropDownItems.Add(title);
-                    tsi.Click += handler;
+                    ToolStripItem tsi = tsmiWindow.DropDownItems.Add(title);
+                    tsi.Tag = window;
+                    tsi.Click += handlerWindow;
 
                     try
                     {
@@ -352,12 +353,24 @@ namespace ShareX
                     {
                         DebugHelper.WriteException(e);
                     }
-
-                    tsi.Tag = window;
                 }
-
-                tsmi.Invalidate();
             }
+
+            tsmiMonitor.DropDownItems.Clear();
+
+            Screen[] screens = Screen.AllScreens;
+
+            for (int i = 0; i < screens.Length; i++)
+            {
+                Screen screen = screens[i];
+                string text = string.Format("{0}. {1}x{2}", i + 1, screen.Bounds.Width, screen.Bounds.Height);
+                ToolStripItem tsi = tsmiMonitor.DropDownItems.Add(text);
+                tsi.Tag = screen.Bounds;
+                tsi.Click += handlerMonitor;
+            }
+
+            tsmiWindow.Invalidate();
+            tsmiMonitor.Invalidate();
         }
 
         #region Menu events
@@ -369,7 +382,7 @@ namespace ShareX
 
         private void tsddbCapture_DropDownOpening(object sender, EventArgs e)
         {
-            PrepareWindowsMenuAsync(tsmiWindow, tsmiWindowItems_Click);
+            PrepareCaptureMenuAsync(tsmiWindow, tsmiWindowItems_Click, tsmiMonitor, tsmiMonitorItems_Click);
         }
 
         private void tsmiWindowItems_Click(object sender, EventArgs e)
@@ -379,6 +392,16 @@ namespace ShareX
             if (wi != null)
             {
                 CaptureWindow(wi.Handle);
+            }
+        }
+
+        private void tsmiMonitorItems_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tsi = (ToolStripItem)sender;
+            Rectangle rectangle = (Rectangle)tsi.Tag;
+            if (!rectangle.IsEmpty)
+            {
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor);
             }
         }
 
@@ -438,7 +461,7 @@ namespace ShareX
 
         private void tsmiCapture_DropDownOpening(object sender, EventArgs e)
         {
-            PrepareWindowsMenuAsync(tsmiTrayWindow, tsmiTrayWindowItems_Click);
+            PrepareCaptureMenuAsync(tsmiTrayWindow, tsmiTrayWindowItems_Click, tsmiTrayMonitor, tsmiTrayMonitorItems_Click);
         }
 
         private void tsmiTrayWindowItems_Click(object sender, EventArgs e)
@@ -448,6 +471,16 @@ namespace ShareX
             if (wi != null)
             {
                 CaptureWindow(wi.Handle, false);
+            }
+        }
+
+        private void tsmiTrayMonitorItems_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tsi = (ToolStripItem)sender;
+            Rectangle rectangle = (Rectangle)tsi.Tag;
+            if (!rectangle.IsEmpty)
+            {
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, false);
             }
         }
 

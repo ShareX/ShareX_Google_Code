@@ -153,5 +153,12 @@ namespace ShareX
                 }
             }
         }
+
+        public static Image DrawShadow(Image img)
+        {
+            Point offsetChange;
+            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Program.Settings.ShadowDarkness, Program.Settings.ShadowSize,
+                Program.Settings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
+        }
     }
 }

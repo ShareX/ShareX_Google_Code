@@ -316,7 +316,7 @@ namespace ShareX
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
                 {
-                    tempImage = DrawShadow(tempImage);
+                    tempImage = TaskHelper.DrawShadow(tempImage);
                 }
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
@@ -802,13 +802,6 @@ namespace ShareX
             }
 
             return img;
-        }
-
-        public Image DrawShadow(Image img)
-        {
-            Point offsetChange;
-            return GreenshotPlugin.Core.ImageHelper.CreateShadow(tempImage, Program.Settings.ShadowDarkness, Program.Settings.ShadowSize,
-                Program.Settings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
         }
 
         private void ThreadCompleted()
