@@ -64,22 +64,20 @@ namespace UploadersLib.Forms
         {
             lvDropboxFiles.Items.Clear();
 
-            DropboxDirectoryInfo directory = null;
+            DropboxContentInfo contentInfo = await TaskEx.Run(() => dropbox.GetMetadata(path, true));
 
-            directory = await TaskEx.Run(() => dropbox.GetFilesList(path));
-
-            if (directory != null)
+            if (contentInfo != null)
             {
-                lvDropboxFiles.Tag = directory;
+                lvDropboxFiles.Tag = contentInfo;
 
-                ListViewItem lvi = GetParentFolder(directory.Path);
+                ListViewItem lvi = GetParentFolder(contentInfo.Path);
 
                 if (lvi != null)
                 {
                     lvDropboxFiles.Items.Add(lvi);
                 }
 
-                foreach (DropboxContentInfo content in directory.Contents.OrderBy(x => !x.Is_dir))
+                foreach (DropboxContentInfo content in contentInfo.Contents.OrderBy(x => !x.Is_dir))
                 {
                     string filename = Path.GetFileName(content.Path);
                     lvi = new ListViewItem(filename);
@@ -94,7 +92,7 @@ namespace UploadersLib.Forms
                     lvDropboxFiles.Items.Add(lvi);
                 }
 
-                CurrentFolderPath = directory.Path.Trim('/');
+                CurrentFolderPath = contentInfo.Path.Trim('/');
                 Text = "Dropbox - " + CurrentFolderPath;
             }
             else
