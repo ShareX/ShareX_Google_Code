@@ -192,19 +192,22 @@ namespace HelpersLib
 
         private void pbMain_LoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string status;
-
-            if (isLoadLocal)
+            if (e.ProgressPercentage < 100)
             {
-                status = "Loading local image - ";
-            }
-            else
-            {
-                status = "Downloading image from URL - ";
-            }
+                string status;
 
-            status += e.ProgressPercentage + "%";
-            Text = status;
+                if (isLoadLocal)
+                {
+                    status = "Loading local image - ";
+                }
+                else
+                {
+                    status = "Downloading image from URL - ";
+                }
+
+                status += e.ProgressPercentage + "%";
+                Text = status;
+            }
         }
 
         private void AutoSetSizeMode()
