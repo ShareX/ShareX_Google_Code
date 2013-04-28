@@ -31,30 +31,42 @@ namespace HelpersLib
     public class DebugTimer : IDisposable
     {
         private Stopwatch timer;
+        private string text;
 
         public DebugTimer()
         {
             timer = Stopwatch.StartNew();
         }
 
-        private void Write(string timeText, string text = "")
+        public DebugTimer(string text)
         {
-            Console.WriteLine(string.Format("{0}: {1}", text, timeText));
+            this.text = text;
+            timer = Stopwatch.StartNew();
+        }
+
+        private void Write(string text, string timeText)
+        {
+            if (!string.IsNullOrEmpty(text))
+            {
+                timeText = text + ": " + timeText;
+            }
+
+            Console.WriteLine(timeText);
         }
 
         public void WriteElapsedSeconds(string text = "")
         {
-            Write(timer.Elapsed.TotalSeconds + " seconds.", text);
+            Write(text, timer.Elapsed.TotalSeconds + " seconds.");
         }
 
         public void WriteElapsedMiliseconds(string text = "")
         {
-            Write(timer.ElapsedMilliseconds + " miliseconds.", text);
+            Write(text, timer.ElapsedMilliseconds + " miliseconds.");
         }
 
         public void Dispose()
         {
-            WriteElapsedMiliseconds();
+            WriteElapsedMiliseconds(text);
         }
     }
 }

@@ -29,6 +29,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using UploadersLib;
@@ -57,19 +58,23 @@ namespace ShareX
 
         #region Paths
 
+        private static readonly string StartupPath = Application.StartupPath;
         private static readonly string DefaultPersonalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);
-        private static readonly string PortablePersonalPath = Path.Combine(Application.StartupPath, ApplicationName);
+        private static readonly string PortablePersonalPath = Path.Combine(StartupPath, ApplicationName);
+        private static readonly string PersonalPathConfig = Path.Combine(StartupPath, "PersonalPath.cfg");
         private static readonly string SettingsFileName = ApplicationName + "Settings.json";
         private static readonly string UploadersConfigFileName = "UploadersConfig.json";
         private static readonly string LogFileName = ApplicationName + "-Log-{0}-{1}.txt";
+
+        public static string CustomPersonalPath { get; private set; }
 
         public static string PersonalPath
         {
             get
             {
-                if (IsPortable)
+                if (!string.IsNullOrEmpty(CustomPersonalPath))
                 {
-                    return PortablePersonalPath;
+                    return CustomPersonalPath;
                 }
 
                 return DefaultPersonalPath;
@@ -236,21 +241,34 @@ namespace ShareX
                 mutex = new Mutex(false, @"Global\82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC"); // Required for installer
 
                 IsSilentRun = CLIHelper.CheckArgs(args, "silent", "s");
-                IsPortable = CLIHelper.CheckArgs(args, "portable", "p");
+                IsSandbox = CLIHelper.CheckArgs(args, "sandbox");
 
-                if (IsPortable && !Directory.Exists(PortablePersonalPath))
+                if (!IsSandbox)
                 {
-                    Directory.CreateDirectory(PortablePersonalPath);
-                }
+                    IsPortable = CLIHelper.CheckArgs(args, "portable", "p");
 
-                IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
+                    if (IsPortable)
+                    {
+                        CustomPersonalPath = PortablePersonalPath;
+                    }
+                    else
+                    {
+                        CheckPersonalPathConfig();
+                    }
+
+                    if (!string.IsNullOrEmpty(PersonalPath) && !Directory.Exists(PersonalPath))
+                    {
+                        Directory.CreateDirectory(PersonalPath);
+                    }
+                }
 
 #if DEBUG
                 IsDebug = true;
+#else
+                IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
 #endif
 
                 IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
-                IsSandbox = CLIHelper.CheckArgs(args, "sandbox");
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -259,7 +277,8 @@ namespace ShareX
                 DebugHelper.MyLogger = MyLogger;
                 MyLogger.WriteLine("{0} started", FullTitle);
                 MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
-                MyLogger.WriteLine("CommandLine: " + Environment.CommandLine);
+                MyLogger.WriteLine("Command line: " + Environment.CommandLine);
+                MyLogger.WriteLine("Personal path: " + PersonalPath);
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
@@ -304,6 +323,24 @@ namespace ShareX
         public static void LoadUploadersConfig()
         {
             UploadersConfig = UploadersConfig.Load(UploadersConfigFilePath);
+        }
+
+        private static void CheckPersonalPathConfig()
+        {
+            if (File.Exists(PersonalPathConfig))
+            {
+                string customPersonalPath = File.ReadAllText(PersonalPathConfig, Encoding.UTF8).Trim();
+
+                if (!string.IsNullOrEmpty(customPersonalPath))
+                {
+                    CustomPersonalPath = Path.GetFullPath(customPersonalPath);
+
+                    if (CustomPersonalPath.Equals(PortablePersonalPath, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        IsPortable = true;
+                    }
+                }
+            }
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
