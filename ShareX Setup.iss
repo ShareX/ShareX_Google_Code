@@ -71,8 +71,8 @@ Filename: "{app}\{#MyAppFile}"; Flags: nowait postinstall; Description: "{cm:Lau
 
 [Registry]
 ;Root: "HKCU"; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "{#MyAppName}"; Flags: uninsdeletevalue
-Root: "HKCU"; Subkey: "Software\Classes\*\shell\{#MyAppName}"; Flags: uninsdeletekey
-Root: "HKCU"; Subkey: "Software\Classes\Folder\shell\{#MyAppName}"; Flags: uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\*\shell\{#MyAppName}"; Flags: dontcreatekey uninsdeletekey
+Root: "HKCU"; Subkey: "Software\Classes\Folder\shell\{#MyAppName}"; Flags: dontcreatekey uninsdeletekey
 
 [Code]
 function DesktopIconExists(): Boolean;
