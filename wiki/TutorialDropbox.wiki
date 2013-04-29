@@ -1,0 +1,34 @@
+#summary How to use Dropbox for image uploads?
+
+= How to use Dropbox for image uploads? =
+
+1. Destinations -> Image uploader: File Uploader
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/7SXNhayOBY.png
+
+2. Destinations -> File uploader: Dropbox
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/HiaMsYbdJu.png
+
+3. Destinations -> Outputs configuration...
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/UnPezwNMnx.png
+
+4. Tab: (File uploaders -> Dropbox) -> Press "1. Open authorize page..." button
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/xNlcHpceWi.png
+
+5. In your default browser dropbox page will open, press "Allow" button.
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/q2sNeXk8Qg.png
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/rddQyJJukC.png
+
+6. After see Success page in Dropbox web site turn back to ShareX configuration window and press "2. Complete authorization" button.
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/0olBz47KIg.png
+
+7. Now if in "After capture" menu is "Upload image to host" is checked then when you take screenshot with any hotkey (Example: Ctrl + Printscreen) then image will be automatically uploaded to Dropbox.
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/04/Gg1JBL6Djq.png
+
+Note: New Dropbox accounts don't have public folder feature so if you want to use this feature you must enable it with this URL: https://www.dropbox.com/enable_public_folder (https://www.dropbox.com/help/16/en)
