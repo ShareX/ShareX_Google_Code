@@ -37,7 +37,7 @@ namespace UploadersLib.FileUploaders
 {
     public sealed class SFTP : FileUploader, IDisposable
     {
-        public FTPAccount Account { get; set; }
+        public FTPAccount Account { get; private set; }
 
         public bool IsValidAccount
         {
@@ -60,46 +60,44 @@ namespace UploadersLib.FileUploaders
         public SFTP(FTPAccount account)
         {
             Account = account;
-
-            if (!string.IsNullOrEmpty(Account.Keypath) && File.Exists(Account.Keypath))
-            {
-                PrivateKeyFile keyFile;
-
-                if (string.IsNullOrEmpty(Account.Passphrase))
-                {
-                    keyFile = new PrivateKeyFile(Account.Keypath);
-                }
-                else
-                {
-                    keyFile = new PrivateKeyFile(Account.Keypath, Account.Passphrase);
-                }
-
-                client = new SftpClient(Account.Host, Account.Port, Account.Username, keyFile);
-            }
-            else if (!string.IsNullOrEmpty(Account.Password))
-            {
-                client = new SftpClient(Account.Host, Account.Port, Account.Username, Account.Password);
-            }
-
-            if (client != null)
-            {
-                client.BufferSize = (uint)BufferSize;
-            }
         }
 
         public bool Connect()
         {
-            if (client != null)
+            if (client == null)
             {
-                if (!client.IsConnected)
+                if (!string.IsNullOrEmpty(Account.Keypath) && File.Exists(Account.Keypath))
                 {
-                    client.Connect();
+                    PrivateKeyFile keyFile;
+
+                    if (string.IsNullOrEmpty(Account.Passphrase))
+                    {
+                        keyFile = new PrivateKeyFile(Account.Keypath);
+                    }
+                    else
+                    {
+                        keyFile = new PrivateKeyFile(Account.Keypath, Account.Passphrase);
+                    }
+
+                    client = new SftpClient(Account.Host, Account.Port, Account.Username, keyFile);
+                }
+                else if (!string.IsNullOrEmpty(Account.Password))
+                {
+                    client = new SftpClient(Account.Host, Account.Port, Account.Username, Account.Password);
                 }
 
-                return client.IsConnected;
+                if (client != null)
+                {
+                    client.BufferSize = (uint)BufferSize;
+                }
             }
 
-            return false;
+            if (client != null && !client.IsConnected)
+            {
+                client.Connect();
+            }
+
+            return IsConnected;
         }
 
         public void Disconnect()
