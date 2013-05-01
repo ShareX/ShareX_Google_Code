@@ -32,7 +32,7 @@ namespace UploadersLib.FileUploaders
 {
     public class FTPUploader : FileUploader
     {
-        public FTPAccount Account;
+        public FTPAccount Account { get; private set; }
 
         private FTP ftpClient;
 
