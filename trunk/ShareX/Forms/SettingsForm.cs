@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using HelpersLib.Steam;
 using ScreenCapture;
 using System;
 using System.Collections.Generic;
@@ -199,6 +200,14 @@ namespace ShareX
                     AddWatchFolder(watchFolder);
                 }
             }
+
+            // Upload / Steam
+            cbSteamScreenshotsAutoUpload.Checked = Program.Settings.SteamScreenshotsAutoUpload;
+            if (string.IsNullOrEmpty(Program.Settings.SteamUserDataPath))
+            {
+                Program.Settings.SteamUserDataPath = SteamHelpers.GetSteamUserDataDirectory();
+            }
+            txtSteamUserDataPath.Text = Program.Settings.SteamUserDataPath;
 
             // Proxy
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
@@ -837,6 +846,33 @@ namespace ShareX
         }
 
         #endregion Upload / Watch folder
+
+        #region Upload / Steam
+
+        private void cbSteamScreenshotsAutoUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                Program.Settings.SteamScreenshotsAutoUpload = cbSteamScreenshotsAutoUpload.Checked;
+
+                if (Program.Settings.SteamScreenshotsAutoUpload)
+                {
+                    string vdfPath = Path.Combine(Program.Settings.SteamUserDataPath, @"760\screenshots.vdf");
+                }
+            }
+        }
+
+        private void txtSteamUserDataPath_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.SteamUserDataPath = txtSteamUserDataPath.Text;
+        }
+
+        private void btnSteamUserDataPath_Click(object sender, EventArgs e)
+        {
+            Helpers.BrowseFolder("Choose folder path", txtSteamUserDataPath);
+        }
+
+        #endregion Upload / Steam
 
         #region Proxy
 

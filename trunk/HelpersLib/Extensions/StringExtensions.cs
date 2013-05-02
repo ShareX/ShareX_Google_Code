@@ -197,5 +197,15 @@ namespace HelpersLib
 
             return str;
         }
+
+        public static bool IsNumber(this string text)
+        {
+            foreach (char c in text)
+            {
+                if (!char.IsNumber(c)) return false;
+            }
+
+            return true;
+        }
     }
 }

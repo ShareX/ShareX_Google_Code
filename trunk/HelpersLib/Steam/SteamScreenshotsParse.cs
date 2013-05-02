@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HelpersLib
+namespace HelpersLib.Steam
 {
     // screenshots.vdf parser
     public class SteamScreenshotsParse

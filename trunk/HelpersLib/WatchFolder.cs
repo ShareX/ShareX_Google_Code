@@ -66,6 +66,27 @@ namespace HelpersLib
             }
         }
 
+        public void EnableFileModify()
+        {
+            Dispose();
+
+            if (!string.IsNullOrEmpty(FolderPath))
+            {
+                context = SynchronizationContext.Current;
+
+                if (context == null)
+                {
+                    context = new SynchronizationContext();
+                }
+
+                fileWatcher = new FileSystemWatcher(FolderPath);
+                if (!string.IsNullOrEmpty(Filter)) fileWatcher.Filter = Filter;
+                fileWatcher.Created += new FileSystemEventHandler(fileWatcher_Created);
+                fileWatcher.Changed += new FileSystemEventHandler(fileWatcher_Created);
+                fileWatcher.EnableRaisingEvents = true;
+            }
+        }
+
         private void OnFileWatcherTrigger(string path)
         {
             if (FileWatcherTrigger != null)
