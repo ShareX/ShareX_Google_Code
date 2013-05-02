@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -47,6 +48,12 @@ namespace HelpersLib
             LiteralEscapeChar = '\\';
             Keywords = new string[] { "if", "else", "return" };
             KeepWhitespace = false;
+        }
+
+        public List<Token> TokenizeFile(string filePath)
+        {
+            string text = File.ReadAllText(filePath, Encoding.UTF8);
+            return Tokenize(text);
         }
 
         public List<Token> Tokenize(string text)
@@ -193,6 +200,62 @@ namespace HelpersLib
             }
 
             return false;
+        }
+
+        public static BetweenTagsResult GetBetweenTags(List<Token> tokens, string startTag, string endTag, int startIndex = 0)
+        {
+            BetweenTagsResult result = new BetweenTagsResult();
+            result.StartIndex = startIndex;
+            result.TokenList = new List<Token>();
+
+            int depth = 0;
+            bool isStartFound = false;
+            int i;
+
+            for (i = startIndex; i < tokens.Count; i++)
+            {
+                Token token = tokens[i];
+
+                if (token.Type == TokenType.Symbol)
+                {
+                    if (isStartFound)
+                    {
+                        if (token.Text == startTag)
+                        {
+                            depth++;
+                        }
+                        else if (token.Text == endTag)
+                        {
+                            if (depth == 0)
+                            {
+                                i++;
+                                result.Status = true;
+                                break;
+                            }
+                            else
+                            {
+                                depth--;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (token.Text == startTag)
+                        {
+                            isStartFound = true;
+                            continue;
+                        }
+                    }
+                }
+
+                if (isStartFound)
+                {
+                    result.TokenList.Add(token);
+                }
+            }
+
+            result.EndIndex = i;
+            return result;
         }
     }
 }
