@@ -235,7 +235,11 @@ namespace HelpersLib
             foreach (var variable in variables)
             {
                 ToolStripMenuItem tsi = new ToolStripMenuItem { Text = string.Format("{0} - {1}", variable.Name, variable.Description), Tag = variable.Name };
-                tsi.Click += (sender, e) => tb.AppendText(((ToolStripMenuItem)sender).Tag.ToString());
+                tsi.Click += (sender, e) =>
+                {
+                    string text = ((ToolStripMenuItem)sender).Tag.ToString();
+                    tb.AppendTextToSelection(text);
+                };
                 cms.Items.Add(tsi);
             }
 

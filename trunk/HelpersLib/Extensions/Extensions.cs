@@ -259,5 +259,15 @@ namespace HelpersLib
         {
             return (dateTime.Ticks - 621355968000000000) / 10000000;
         }
+
+        public static void AppendTextToSelection(this TextBox tb, string text)
+        {
+            if (!string.IsNullOrEmpty(text))
+            {
+                int start = tb.SelectionStart;
+                tb.Text = tb.Text.Insert(start, text);
+                tb.SelectionStart = start + text.Length;
+            }
+        }
     }
 }
