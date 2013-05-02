@@ -37,6 +37,8 @@ namespace UploadersLib
 {
     public partial class UploadersConfigForm : Form
     {
+        private ContextMenuStrip cmsCustomUploaderArgValue;
+
         private void ControlSettings()
         {
             ImageList imageUploadersImageList = new ImageList();
@@ -107,6 +109,8 @@ namespace UploadersLib
             tpPastebin.ImageKey = "Pastebin";
             tpGoogleURLShortener.ImageKey = "Google";
             tpTwitter.ImageKey = "Twitter";
+
+            cmsCustomUploaderArgValue = NameParser.CreateCodesMenu(txtCustomUploaderArgValue, ReplacementVariables.n);
         }
 
         public void LoadSettings(UploadersConfig uploadersConfig)

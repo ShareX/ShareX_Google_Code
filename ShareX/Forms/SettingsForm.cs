@@ -41,7 +41,7 @@ namespace ShareX
         private const int MaxBufferSizePower = 14;
 
         private bool loaded;
-        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
+        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow, cmsSaveImageSubFolderPattern;
 
         public SettingsForm()
         {
@@ -84,6 +84,7 @@ namespace ShareX
             cbUseCustomScreenshotsPath.Checked = Program.Settings.UseCustomScreenshotsPath;
             txtCustomScreenshotsPath.Text = Program.Settings.CustomScreenshotsPath;
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
+            cmsSaveImageSubFolderPattern = NameParser.CreateCodesMenu(txtSaveImageSubFolderPattern, ReplacementVariables.n);
 
             // Image - Quality
             cbImageFormat.SelectedIndex = (int)Program.Settings.ImageFormat;
