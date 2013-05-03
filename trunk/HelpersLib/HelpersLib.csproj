@@ -155,6 +155,7 @@
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="Steam\SteamHelpers.cs" />
     <Compile Include="Steam\SteamScreenshotsParse.cs" />
+    <Compile Include="Steam\SteamScreenshotsWatchFolder.cs" />
     <Compile Include="StringLineReader.cs" />
     <Compile Include="ThreadWorker.cs" />
     <Compile Include="Tokenizer\BetweenTagsResult.cs" />

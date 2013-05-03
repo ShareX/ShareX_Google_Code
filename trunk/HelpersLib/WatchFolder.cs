@@ -34,9 +34,9 @@ namespace HelpersLib
 {
     public class WatchFolder : IDisposable
     {
-        private SynchronizationContext context;
-        private FileSystemWatcher fileWatcher;
-        private List<WatchFolderDuplicateEventTimer> timers = new List<WatchFolderDuplicateEventTimer>();
+        protected SynchronizationContext context;
+        protected FileSystemWatcher fileWatcher;
+        protected List<WatchFolderDuplicateEventTimer> timers = new List<WatchFolderDuplicateEventTimer>();
 
         public string FolderPath { get; set; }
         public string Filter { get; set; }
@@ -45,7 +45,7 @@ namespace HelpersLib
         public delegate void FileWatcherTriggerEventHandler(string path);
         public event FileWatcherTriggerEventHandler FileWatcherTrigger;
 
-        public void Enable()
+        public virtual void Enable()
         {
             Dispose();
 
@@ -66,28 +66,7 @@ namespace HelpersLib
             }
         }
 
-        public void EnableFileModify()
-        {
-            Dispose();
-
-            if (!string.IsNullOrEmpty(FolderPath))
-            {
-                context = SynchronizationContext.Current;
-
-                if (context == null)
-                {
-                    context = new SynchronizationContext();
-                }
-
-                fileWatcher = new FileSystemWatcher(FolderPath);
-                if (!string.IsNullOrEmpty(Filter)) fileWatcher.Filter = Filter;
-                fileWatcher.Created += new FileSystemEventHandler(fileWatcher_Created);
-                fileWatcher.Changed += new FileSystemEventHandler(fileWatcher_Created);
-                fileWatcher.EnableRaisingEvents = true;
-            }
-        }
-
-        private void OnFileWatcherTrigger(string path)
+        protected void OnFileWatcherTrigger(string path)
         {
             if (FileWatcherTrigger != null)
             {
@@ -115,7 +94,7 @@ namespace HelpersLib
             Helpers.WaitWhileAsync(() => Helpers.IsFileLocked(path), 250, 5000, onCompleted, 1000);
         }
 
-        private void CleanElapsedTimers()
+        protected void CleanElapsedTimers()
         {
             for (int i = 0; i < timers.Count; i++)
             {
