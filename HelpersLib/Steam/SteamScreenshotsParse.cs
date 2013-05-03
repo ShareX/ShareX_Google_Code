@@ -51,88 +51,94 @@ namespace HelpersLib.Steam
             tokenList = tokenizer.TokenizeFile(filePath);
             screenshotList = new List<Dictionary<string, string>>();
 
-            try
+            BetweenTagsResult screenshotsResult = Tokenizer.GetBetweenTags(tokenList, "{", "}");
+
+            if (screenshotsResult.Status)
             {
-                BetweenTagsResult screenshotsResult = Tokenizer.GetBetweenTags(tokenList, "{", "}");
+                int gameIDIndex = 0;
 
-                if (screenshotsResult.Status)
+                while (true)
                 {
-                    int gameIDIndex = 0;
+                    BetweenTagsResult gameIDResult = Tokenizer.GetBetweenTags(screenshotsResult.TokenList, "{", "}", gameIDIndex);
 
-                    while (true)
+                    if (gameIDResult.Status)
                     {
-                        BetweenTagsResult gameIDResult = Tokenizer.GetBetweenTags(screenshotsResult.TokenList, "{", "}", gameIDIndex);
+                        int screenshotIDIndex = 0;
 
-                        if (gameIDResult.Status)
+                        while (true)
                         {
-                            int screenshotIDIndex = 0;
+                            BetweenTagsResult screenshotIDResult = Tokenizer.GetBetweenTags(gameIDResult.TokenList, "{", "}", screenshotIDIndex);
 
-                            while (true)
+                            if (screenshotIDResult.Status)
                             {
-                                BetweenTagsResult screenshotIDResult = Tokenizer.GetBetweenTags(gameIDResult.TokenList, "{", "}", screenshotIDIndex);
+                                Dictionary<string, string> nameValuePairs = new Dictionary<string, string>();
 
-                                if (screenshotIDResult.Status)
+                                for (int i = 0; i < screenshotIDResult.TokenList.Count; i++)
                                 {
-                                    Dictionary<string, string> nameValuePairs = new Dictionary<string, string>();
-
-                                    for (int i = 0; i < screenshotIDResult.TokenList.Count; i++)
+                                    Token currentToken = screenshotIDResult.TokenList[i];
+                                    if (currentToken.Type == TokenType.Literal)
                                     {
-                                        Token currentToken = screenshotIDResult.TokenList[i];
+                                        string name = currentToken.Text;
+                                        i++;
+                                        currentToken = screenshotIDResult.TokenList[i];
                                         if (currentToken.Type == TokenType.Literal)
                                         {
-                                            string name = currentToken.Text;
-                                            i++;
-                                            currentToken = screenshotIDResult.TokenList[i];
-                                            if (currentToken.Type == TokenType.Literal)
-                                            {
-                                                string value = currentToken.Text;
-                                                nameValuePairs.Add(name, value);
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
+                                            string value = currentToken.Text;
+                                            nameValuePairs.Add(name, value);
                                         }
                                         else
                                         {
                                             break;
                                         }
                                     }
-
-                                    screenshotList.Add(nameValuePairs);
-
-                                    if (screenshotIDResult.Status && screenshotIDResult.EndIndex < gameIDResult.TokenList.Count)
-                                    {
-                                        screenshotIDIndex = screenshotIDResult.EndIndex;
-                                    }
                                     else
                                     {
                                         break;
                                     }
+                                }
+
+                                screenshotList.Add(nameValuePairs);
+
+                                if (screenshotIDResult.Status && screenshotIDResult.EndIndex < gameIDResult.TokenList.Count)
+                                {
+                                    screenshotIDIndex = screenshotIDResult.EndIndex;
                                 }
                                 else
                                 {
                                     break;
                                 }
                             }
-
-                            if (gameIDResult.Status && gameIDResult.EndIndex < screenshotsResult.TokenList.Count)
-                            {
-                                gameIDIndex = gameIDResult.EndIndex;
-                            }
                             else
                             {
                                 break;
                             }
+                        }
+
+                        if (gameIDResult.Status && gameIDResult.EndIndex < screenshotsResult.TokenList.Count)
+                        {
+                            gameIDIndex = gameIDResult.EndIndex;
                         }
                         else
                         {
                             break;
                         }
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
-            catch { }
+        }
+
+        public string GetLastScreenshotPath()
+        {
+            if (screenshotList != null && screenshotList.Count > 0)
+            {
+                return screenshotList.Where(x => x.ContainsKey("creation")).Aggregate((i1, i2) => int.Parse(i1["creation"]) > int.Parse(i2["creation"]) ? i1 : i2)["filename"];
+            }
+
+            return null;
         }
     }
 }

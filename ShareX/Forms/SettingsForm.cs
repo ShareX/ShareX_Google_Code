@@ -855,9 +855,13 @@ namespace ShareX
             {
                 Program.Settings.SteamScreenshotsAutoUpload = cbSteamScreenshotsAutoUpload.Checked;
 
-                if (Program.Settings.SteamScreenshotsAutoUpload)
+                if (Program.Settings.SteamScreenshotsAutoUpload && !string.IsNullOrEmpty(Program.Settings.SteamUserDataPath))
                 {
-                    string vdfPath = Path.Combine(Program.Settings.SteamUserDataPath, @"760\screenshots.vdf");
+                    Program.SteamScreenshotsWatchFolder.Enable(Program.Settings.SteamUserDataPath);
+                }
+                else
+                {
+                    Program.SteamScreenshotsWatchFolder.Dispose();
                 }
             }
         }
