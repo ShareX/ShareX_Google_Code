@@ -25,7 +25,6 @@
 
 using HelpersLib;
 using HelpersLib.Hotkey;
-using HelpersLib.Steam;
 using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
@@ -342,14 +341,6 @@ namespace ShareX
                     watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
                     watchFolder.Enable();
                 }
-            }
-
-            Program.SteamScreenshotsWatchFolder = new SteamScreenshotsWatchFolder();
-            Program.SteamScreenshotsWatchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
-
-            if (Program.Settings.SteamScreenshotsAutoUpload && !string.IsNullOrEmpty(Program.Settings.SteamUserDataPath))
-            {
-                Program.SteamScreenshotsWatchFolder.Enable(Program.Settings.SteamUserDataPath);
             }
         }
 

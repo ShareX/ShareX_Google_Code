@@ -198,13 +198,6 @@ namespace ShareX
 
         #endregion Upload / Watch folder
 
-        #region Upload / Steam
-
-        public bool SteamScreenshotsAutoUpload = false;
-        public string SteamUserDataPath = string.Empty;
-
-        #endregion Upload / Steam
-
         #region Proxy
 
         public ProxyInfo ProxySettings = new ProxyInfo();
