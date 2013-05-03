@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using HelpersLib.Steam;
 using SingleInstanceApplication;
 using System;
 using System.Diagnostics;
@@ -222,7 +221,6 @@ namespace ShareX
         public static MainForm MainForm;
         public static ManualResetEvent SettingsResetEvent;
         public static ManualResetEvent UploaderSettingsResetEvent;
-        public static SteamScreenshotsWatchFolder SteamScreenshotsWatchFolder;
 
         [STAThread]
         private static void Main(string[] args)

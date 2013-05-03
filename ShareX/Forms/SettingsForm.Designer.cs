@@ -57,6 +57,7 @@
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
+            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
@@ -139,6 +140,10 @@
             this.btnActionsEdit = new System.Windows.Forms.Button();
             this.btnActionsRemove = new System.Windows.Forms.Button();
             this.btnActionsAdd = new System.Windows.Forms.Button();
+            this.lvActions = new HelpersLib.MyListView();
+            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUploadGeneral = new System.Windows.Forms.TabPage();
@@ -184,16 +189,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.tpSteam = new System.Windows.Forms.TabPage();
-            this.cbSteamScreenshotsAutoUpload = new System.Windows.Forms.CheckBox();
-            this.txtSteamUserDataPath = new System.Windows.Forms.TextBox();
-            this.lbSteamUserDataPath = new System.Windows.Forms.Label();
-            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
-            this.lvActions = new HelpersLib.MyListView();
-            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnSteamUserDataPath = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -236,7 +231,6 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
-            this.tpSteam.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -562,6 +556,15 @@
             this.tpHotkeys.TabIndex = 3;
             this.tpHotkeys.Text = "Hotkeys";
             this.tpHotkeys.UseVisualStyleBackColor = true;
+            // 
+            // hmHotkeys
+            // 
+            this.hmHotkeys.AutoScroll = true;
+            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
+            this.hmHotkeys.Name = "hmHotkeys";
+            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
+            this.hmHotkeys.TabIndex = 0;
             // 
             // tpImage
             // 
@@ -1642,6 +1645,38 @@
             this.btnActionsAdd.UseVisualStyleBackColor = true;
             this.btnActionsAdd.Click += new System.EventHandler(this.btnActionsAdd_Click);
             // 
+            // lvActions
+            // 
+            this.lvActions.CheckBoxes = true;
+            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chActionsName,
+            this.chActionsPath,
+            this.chActionsArgs});
+            this.lvActions.FullRowSelect = true;
+            this.lvActions.Location = new System.Drawing.Point(16, 48);
+            this.lvActions.MultiSelect = false;
+            this.lvActions.Name = "lvActions";
+            this.lvActions.Size = new System.Drawing.Size(488, 264);
+            this.lvActions.TabIndex = 1;
+            this.lvActions.UseCompatibleStateImageBehavior = false;
+            this.lvActions.View = System.Windows.Forms.View.Details;
+            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
+            // 
+            // chActionsName
+            // 
+            this.chActionsName.Text = "Name";
+            this.chActionsName.Width = 100;
+            // 
+            // chActionsPath
+            // 
+            this.chActionsPath.Text = "Path";
+            this.chActionsPath.Width = 250;
+            // 
+            // chActionsArgs
+            // 
+            this.chActionsArgs.Text = "Args";
+            this.chActionsArgs.Width = 134;
+            // 
             // tpUpload
             // 
             this.tpUpload.Controls.Add(this.tabControl1);
@@ -1659,7 +1694,6 @@
             this.tabControl1.Controls.Add(this.tpUploadNamePattern);
             this.tabControl1.Controls.Add(this.tpUploadClipboard);
             this.tabControl1.Controls.Add(this.tpUploadWatchFolder);
-            this.tabControl1.Controls.Add(this.tpSteam);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
@@ -2133,99 +2167,6 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // tpSteam
-            // 
-            this.tpSteam.Controls.Add(this.btnSteamUserDataPath);
-            this.tpSteam.Controls.Add(this.lbSteamUserDataPath);
-            this.tpSteam.Controls.Add(this.txtSteamUserDataPath);
-            this.tpSteam.Controls.Add(this.cbSteamScreenshotsAutoUpload);
-            this.tpSteam.Location = new System.Drawing.Point(4, 22);
-            this.tpSteam.Name = "tpSteam";
-            this.tpSteam.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSteam.Size = new System.Drawing.Size(504, 294);
-            this.tpSteam.TabIndex = 4;
-            this.tpSteam.Text = "Steam";
-            this.tpSteam.UseVisualStyleBackColor = true;
-            // 
-            // cbSteamScreenshotsAutoUpload
-            // 
-            this.cbSteamScreenshotsAutoUpload.AutoSize = true;
-            this.cbSteamScreenshotsAutoUpload.Location = new System.Drawing.Point(16, 16);
-            this.cbSteamScreenshotsAutoUpload.Name = "cbSteamScreenshotsAutoUpload";
-            this.cbSteamScreenshotsAutoUpload.Size = new System.Drawing.Size(331, 17);
-            this.cbSteamScreenshotsAutoUpload.TabIndex = 0;
-            this.cbSteamScreenshotsAutoUpload.Text = "Automatically upload screenshots taken with \"Steam Overlay UI\"";
-            this.cbSteamScreenshotsAutoUpload.UseVisualStyleBackColor = true;
-            this.cbSteamScreenshotsAutoUpload.CheckedChanged += new System.EventHandler(this.cbSteamScreenshotsAutoUpload_CheckedChanged);
-            // 
-            // txtSteamUserDataPath
-            // 
-            this.txtSteamUserDataPath.Location = new System.Drawing.Point(16, 72);
-            this.txtSteamUserDataPath.Name = "txtSteamUserDataPath";
-            this.txtSteamUserDataPath.Size = new System.Drawing.Size(384, 20);
-            this.txtSteamUserDataPath.TabIndex = 1;
-            this.txtSteamUserDataPath.TextChanged += new System.EventHandler(this.txtSteamUserDataPath_TextChanged);
-            // 
-            // lbSteamUserDataPath
-            // 
-            this.lbSteamUserDataPath.AutoSize = true;
-            this.lbSteamUserDataPath.Location = new System.Drawing.Point(16, 48);
-            this.lbSteamUserDataPath.Name = "lbSteamUserDataPath";
-            this.lbSteamUserDataPath.Size = new System.Drawing.Size(297, 13);
-            this.lbSteamUserDataPath.TabIndex = 2;
-            this.lbSteamUserDataPath.Text = "Steam user data folder (Example: C:\\Steam\\userdata\\12345):";
-            // 
-            // hmHotkeys
-            // 
-            this.hmHotkeys.AutoScroll = true;
-            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
-            this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
-            this.hmHotkeys.TabIndex = 0;
-            // 
-            // lvActions
-            // 
-            this.lvActions.CheckBoxes = true;
-            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chActionsName,
-            this.chActionsPath,
-            this.chActionsArgs});
-            this.lvActions.FullRowSelect = true;
-            this.lvActions.Location = new System.Drawing.Point(16, 48);
-            this.lvActions.MultiSelect = false;
-            this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(488, 264);
-            this.lvActions.TabIndex = 1;
-            this.lvActions.UseCompatibleStateImageBehavior = false;
-            this.lvActions.View = System.Windows.Forms.View.Details;
-            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
-            // 
-            // chActionsName
-            // 
-            this.chActionsName.Text = "Name";
-            this.chActionsName.Width = 100;
-            // 
-            // chActionsPath
-            // 
-            this.chActionsPath.Text = "Path";
-            this.chActionsPath.Width = 250;
-            // 
-            // chActionsArgs
-            // 
-            this.chActionsArgs.Text = "Args";
-            this.chActionsArgs.Width = 134;
-            // 
-            // btnSteamUserDataPath
-            // 
-            this.btnSteamUserDataPath.Location = new System.Drawing.Point(408, 71);
-            this.btnSteamUserDataPath.Name = "btnSteamUserDataPath";
-            this.btnSteamUserDataPath.Size = new System.Drawing.Size(80, 23);
-            this.btnSteamUserDataPath.TabIndex = 11;
-            this.btnSteamUserDataPath.Text = "Browse...";
-            this.btnSteamUserDataPath.UseVisualStyleBackColor = true;
-            this.btnSteamUserDataPath.Click += new System.EventHandler(this.btnSteamUserDataPath_Click);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2299,8 +2240,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
-            this.tpSteam.ResumeLayout(false);
-            this.tpSteam.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2468,10 +2407,5 @@
         private System.Windows.Forms.Label lblImageShadowDarkness;
         private System.Windows.Forms.NumericUpDown nudImageShadowSize;
         private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
-        private System.Windows.Forms.TabPage tpSteam;
-        private System.Windows.Forms.CheckBox cbSteamScreenshotsAutoUpload;
-        private System.Windows.Forms.Label lbSteamUserDataPath;
-        private System.Windows.Forms.TextBox txtSteamUserDataPath;
-        private System.Windows.Forms.Button btnSteamUserDataPath;
     }
 }
