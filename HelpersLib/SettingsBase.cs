@@ -69,7 +69,7 @@ namespace HelpersLib
         public static T Load(string filePath)
         {
             T setting = SettingsHelper.Load<T>(filePath, SerializationType);
-            setting.FilePath = filePath;
+            if (setting != null) setting.FilePath = filePath;
             return setting;
         }
 

@@ -225,6 +225,9 @@ namespace ShareX
         [STAThread]
         private static void Main(string[] args)
         {
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             StartTimer = Stopwatch.StartNew();
 
             IsMultiInstance = CLIHelper.CheckArgs(args, "multi", "m");
@@ -234,6 +237,11 @@ namespace ShareX
                 return;
             }
 
+            Run(args); // If single instance callback then don't need to load additional assemblies
+        }
+
+        private static void Run(string[] args)
+        {
             Mutex mutex = null;
 
             try
@@ -293,8 +301,6 @@ namespace ShareX
                     SettingsResetEvent.WaitOne();
                 }
 
-                Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
                 Application.Run(MainForm);
 
                 Settings.Save();
