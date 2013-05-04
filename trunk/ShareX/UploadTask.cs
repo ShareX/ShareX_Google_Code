@@ -27,7 +27,6 @@ using HelpersLib;
 using ShareX.Properties;
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
