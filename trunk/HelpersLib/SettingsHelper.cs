@@ -123,6 +123,7 @@ namespace HelpersLib
                             if (fs.Length > 0)
                             {
                                 T settings = Load<T>(fs, type);
+                                if (settings == null) throw new Exception("Settings object is null.");
 
                                 DebugHelper.WriteLine("Settings load finished: " + path);
 
