@@ -24,6 +24,7 @@ CreateAppDir=true
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DirExistsWarning=no
+;InfoBeforeFile=Docs\VersionHistory.txt
 InternalCompressLevel=ultra64
 LanguageDetectionMethod=uilanguage
 LicenseFile=Docs\license.txt
@@ -67,7 +68,7 @@ Name: "{sendto}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: "{app
 Name: "{userstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppFile}"; WorkingDir: "{app}"; Parameters: "-silent"; Tasks: CreateStartupIcon
 
 [Run]
-Filename: "{app}\{#MyAppFile}"; Flags: nowait postinstall; Description: "{cm:LaunchProgram,{#MyAppName}}"
+Filename: "{app}\{#MyAppFile}"; Description: "{cm:LaunchProgram,{#MyAppName}}"; Flags: nowait postinstall
 
 [Registry]
 ;Root: "HKCU"; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueName: "{#MyAppName}"; Flags: uninsdeletevalue

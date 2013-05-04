@@ -104,9 +104,9 @@ namespace HelpersLib
             this.txtInputText = new System.Windows.Forms.TextBox();
             this.lblQuestion = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // btnOK
-            // 
+            //
             this.btnOK.Location = new System.Drawing.Point(208, 56);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 24);
@@ -114,9 +114,9 @@ namespace HelpersLib
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
+            //
             // btnCancel
-            // 
+            //
             this.btnCancel.Location = new System.Drawing.Point(288, 56);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
@@ -124,25 +124,25 @@ namespace HelpersLib
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
+            //
             // txtInputText
-            // 
+            //
             this.txtInputText.Location = new System.Drawing.Point(8, 32);
             this.txtInputText.Name = "txtInputText";
             this.txtInputText.Size = new System.Drawing.Size(352, 20);
             this.txtInputText.TabIndex = 1;
-            // 
+            //
             // lblQuestion
-            // 
+            //
             this.lblQuestion.AutoSize = true;
             this.lblQuestion.Location = new System.Drawing.Point(8, 8);
             this.lblQuestion.Name = "lblQuestion";
             this.lblQuestion.Size = new System.Drawing.Size(31, 13);
             this.lblQuestion.TabIndex = 0;
             this.lblQuestion.Text = "Input";
-            // 
+            //
             // InputBox
-            // 
+            //
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,7 +163,6 @@ namespace HelpersLib
             this.Shown += new System.EventHandler(this.InputBox_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.Label lblQuestion;

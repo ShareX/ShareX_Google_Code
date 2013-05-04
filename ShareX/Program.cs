@@ -232,12 +232,10 @@ namespace ShareX
 
             IsMultiInstance = CLIHelper.CheckArgs(args, "multi", "m");
 
-            if (!IsMultiInstance && !ApplicationInstanceManager.CreateSingleInstance(SingleInstanceCallback))
+            if (IsMultiInstance || ApplicationInstanceManager.CreateSingleInstance(SingleInstanceCallback))
             {
-                return;
+                Run(args);
             }
-
-            Run(args); // If single instance callback then don't need to load additional assemblies
         }
 
         private static void Run(string[] args)
