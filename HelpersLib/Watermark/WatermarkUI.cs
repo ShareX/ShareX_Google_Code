@@ -30,7 +30,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace HelpersLib
 {
     public partial class WatermarkUI : Form
     {

@@ -28,7 +28,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 
-namespace ShareX
+namespace HelpersLib
 {
     public class GradientStop
     {

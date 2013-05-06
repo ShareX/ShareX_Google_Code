@@ -274,6 +274,21 @@
     <Compile Include="UpdateChecker\UpdateInfo.cs" />
     <Compile Include="Links.cs" />
     <Compile Include="WatchFolder.cs" />
+    <Compile Include="Watermark\GradientMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Watermark\GradientMaker.Designer.cs">
+      <DependentUpon>GradientMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Watermark\GradientStop.cs" />
+    <Compile Include="Watermark\WatermarkConfig.cs" />
+    <Compile Include="Watermark\WatermarkManager.cs" />
+    <Compile Include="Watermark\WatermarkUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Watermark\WatermarkUI.Designer.cs">
+      <DependentUpon>WatermarkUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
@@ -325,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MyPictureBox.resx">
       <DependentUpon>MyPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Watermark\WatermarkUI.resx">
+      <DependentUpon>WatermarkUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

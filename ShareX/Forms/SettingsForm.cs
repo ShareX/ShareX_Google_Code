@@ -92,6 +92,7 @@ namespace ShareX
             cbImageGIFQuality.SelectedIndex = (int)Program.Settings.ImageGIFQuality;
             nudUseImageFormat2After.Value = Program.Settings.ImageSizeLimit;
             cbImageFormat2.SelectedIndex = (int)Program.Settings.ImageFormat2;
+            cbUseImageFormat2FileUpload.Checked = Program.Settings.UseImageFormat2FileUpload;
 
             // Image - Resize
             cbImageAutoResize.Checked = Program.Settings.ImageAutoResize;
@@ -409,6 +410,11 @@ namespace ShareX
         private void cbImageFormat2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.Settings.ImageFormat2 = (EImageFormat)cbImageFormat2.SelectedIndex;
+        }
+
+        private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.UseImageFormat2FileUpload = cbUseImageFormat2FileUpload.Checked;
         }
 
         #endregion Image / Quality

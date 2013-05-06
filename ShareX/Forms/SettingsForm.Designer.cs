@@ -189,6 +189,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbUseImageFormat2FileUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -591,6 +592,7 @@
             // 
             // tpQuality
             // 
+            this.tpQuality.Controls.Add(this.cbUseImageFormat2FileUpload);
             this.tpQuality.Controls.Add(this.lblImageFormat);
             this.tpQuality.Controls.Add(this.lblUseImageFormat2AfterHint);
             this.tpQuality.Controls.Add(this.cbImageFormat);
@@ -711,7 +713,7 @@
             this.nudImageJPEGQuality.TabIndex = 3;
             this.nudImageJPEGQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudImageJPEGQuality.Value = new decimal(new int[] {
-            100,
+            90,
             0,
             0,
             0});
@@ -739,7 +741,7 @@
             this.nudUseImageFormat2After.TabIndex = 8;
             this.nudUseImageFormat2After.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudUseImageFormat2After.Value = new decimal(new int[] {
-            5000,
+            1024,
             0,
             0,
             0});
@@ -2167,6 +2169,18 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbUseImageFormat2FileUpload
+            // 
+            this.cbUseImageFormat2FileUpload.AutoSize = true;
+            this.cbUseImageFormat2FileUpload.Location = new System.Drawing.Point(16, 176);
+            this.cbUseImageFormat2FileUpload.Name = "cbUseImageFormat2FileUpload";
+            this.cbUseImageFormat2FileUpload.Size = new System.Drawing.Size(443, 17);
+            this.cbUseImageFormat2FileUpload.TabIndex = 12;
+            this.cbUseImageFormat2FileUpload.Text = "For file upload if file is image and image size is bigger than limit then use \"Im" +
+    "age format 2\"";
+            this.cbUseImageFormat2FileUpload.UseVisualStyleBackColor = true;
+            this.cbUseImageFormat2FileUpload.CheckedChanged += new System.EventHandler(this.cbUseImageFormat2FileUpload_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2407,5 +2421,6 @@
         private System.Windows.Forms.Label lblImageShadowDarkness;
         private System.Windows.Forms.NumericUpDown nudImageShadowSize;
         private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
+        private System.Windows.Forms.CheckBox cbUseImageFormat2FileUpload;
     }
 }
