@@ -59,6 +59,21 @@ namespace ShareX
             return imageData;
         }
 
+        public static void PrepareFileImage(UploadTask task)
+        {
+            int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
+
+            if (sizeLimit > 0 && task.Data.Length > sizeLimit)
+            {
+                using (Stream stream = task.Data)
+                using (Image img = Image.FromStream(stream))
+                {
+                    task.Data = SaveImage(img, Program.Settings.ImageFormat2);
+                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, Program.Settings.ImageFormat2.GetDescription());
+                }
+            }
+        }
+
         private static Image ResizeImage(Image img, ImageScaleType scaleType)
         {
             float width = 0, height = 0;
@@ -137,6 +152,36 @@ namespace ShareX
             return filename;
         }
 
+        public static string GetImageFilename(Image image)
+        {
+            string filename;
+
+            NameParser nameParser = new NameParser(NameParserType.FileName);
+            nameParser.MaxNameLength = 100;
+            nameParser.Picture = image;
+            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
+
+            ImageTag imageTag = image.Tag as ImageTag;
+
+            if (imageTag != null)
+            {
+                nameParser.WindowText = imageTag.ActiveWindowTitle;
+            }
+
+            if (string.IsNullOrEmpty(nameParser.WindowText))
+            {
+                filename = nameParser.Parse(Program.Settings.NameFormatPattern) + ".bmp";
+            }
+            else
+            {
+                filename = nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
+            }
+
+            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+
+            return filename;
+        }
+
         public static void ShowResultNotifications(string result)
         {
             if (!string.IsNullOrEmpty(result))
@@ -152,6 +197,28 @@ namespace ShareX
                     SystemSounds.Exclamation.Play();
                 }
             }
+        }
+
+        public static Image AnnotateImage(Image img)
+        {
+            if (!Greenshot.IniFile.IniConfig.isInitialized)
+            {
+                Greenshot.IniFile.IniConfig.AllowSave = !Program.IsSandbox;
+                Greenshot.IniFile.IniConfig.Init(Program.PersonalPath);
+            }
+
+            using (Image cloneImage = (Image)img.Clone())
+            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = cloneImage })
+            using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
+            using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
+            {
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    return editor.GetImageForExport();
+                }
+            }
+
+            return img;
         }
 
         public static Image DrawShadow(Image img)

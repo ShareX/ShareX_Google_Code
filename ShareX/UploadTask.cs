@@ -65,7 +65,8 @@ namespace ShareX
 
         public bool IsStopped { get; private set; }
 
-        private Stream data;
+        public Stream Data { get; set; }
+
         private Image tempImage;
         private string tempText;
         private ThreadWorker threadWorker;
@@ -85,15 +86,7 @@ namespace ShareX
         {
             UploadTask task = new UploadTask(TaskJob.DataUpload, dataType);
             task.Info.FileName = fileName;
-            task.data = stream;
-            return task;
-        }
-
-        public static UploadTask CreateDataUploaderTask(EDataType dataType, string filePath)
-        {
-            UploadTask task = new UploadTask(TaskJob.DataUpload, dataType);
-            task.Info.FilePath = filePath;
-            task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            task.Data = stream;
             return task;
         }
 
@@ -102,12 +95,20 @@ namespace ShareX
             EDataType dataType = Helpers.FindDataType(filePath);
             UploadTask task = new UploadTask(TaskJob.FileUpload, dataType);
             task.Info.FilePath = filePath;
+
             if (Program.Settings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
                 task.Info.FileName = TaskHelper.GetFilename(ext);
             }
-            task.data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            if (dataType == EDataType.Image && Program.Settings.UseImageFormat2FileUpload)
+            {
+                TaskHelper.PrepareFileImage(task);
+            }
+
             return task;
         }
 
@@ -115,7 +116,7 @@ namespace ShareX
         {
             UploadTask task = new UploadTask(TaskJob.ImageJob, EDataType.Image);
             task.Info.AfterCaptureJob = imageJob;
-            task.Info.FileName = GetImageFilename(image);
+            task.Info.FileName = TaskHelper.GetImageFilename(image);
             task.tempImage = image;
             return task;
         }
@@ -137,36 +138,6 @@ namespace ShareX
         }
 
         #endregion Constructors
-
-        private static string GetImageFilename(Image image)
-        {
-            string filename;
-
-            NameParser nameParser = new NameParser(NameParserType.FileName);
-            nameParser.MaxNameLength = 100;
-            nameParser.Picture = image;
-            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
-
-            ImageTag imageTag = image.Tag as ImageTag;
-
-            if (imageTag != null)
-            {
-                nameParser.WindowText = imageTag.ActiveWindowTitle;
-            }
-
-            if (string.IsNullOrEmpty(nameParser.WindowText))
-            {
-                filename = nameParser.Parse(Program.Settings.NameFormatPattern) + ".bmp";
-            }
-            else
-            {
-                filename = nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
-            }
-
-            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
-
-            return filename;
-        }
 
         public void Start()
         {
@@ -268,13 +239,13 @@ namespace ShareX
                 switch (Info.UploadDestination)
                 {
                     case EDataType.Image:
-                        Info.Result = UploadImage(data, Info.FileName);
+                        Info.Result = UploadImage(Data, Info.FileName);
                         break;
                     case EDataType.File:
-                        Info.Result = UploadFile(data, Info.FileName);
+                        Info.Result = UploadFile(Data, Info.FileName);
                         break;
                     case EDataType.Text:
-                        Info.Result = UploadText(data, Info.FileName);
+                        Info.Result = UploadText(Data, Info.FileName);
                         break;
                 }
             }
@@ -320,7 +291,7 @@ namespace ShareX
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
                 {
-                    tempImage = AnnotateImage(tempImage);
+                    tempImage = TaskHelper.AnnotateImage(tempImage);
                 }
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
@@ -339,7 +310,7 @@ namespace ShareX
                     using (tempImage)
                     {
                         ImageData imageData = TaskHelper.PrepareImage(tempImage);
-                        data = imageData.ImageStream;
+                        Data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
                         if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
@@ -380,9 +351,9 @@ namespace ShareX
 
                             if (actions.Count() > 0)
                             {
-                                if (data != null)
+                                if (Data != null)
                                 {
-                                    data.Dispose();
+                                    Data.Dispose();
                                 }
 
                                 foreach (ExternalProgram fileAction in actions)
@@ -390,7 +361,7 @@ namespace ShareX
                                     fileAction.Run(Info.FilePath);
                                 }
 
-                                data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                                Data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                             }
                         }
                     }
@@ -399,12 +370,12 @@ namespace ShareX
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
-                data = new MemoryStream(byteArray);
+                Data = new MemoryStream(byteArray);
             }
 
-            if (Info.IsUploadJob && data != null && data.CanSeek)
+            if (Info.IsUploadJob && Data != null && Data.CanSeek)
             {
-                data.Position = 0;
+                Data.Position = 0;
             }
         }
 
@@ -781,28 +752,6 @@ namespace ShareX
             return null;
         }
 
-        public Image AnnotateImage(Image img)
-        {
-            if (!Greenshot.IniFile.IniConfig.isInitialized)
-            {
-                Greenshot.IniFile.IniConfig.AllowSave = !Program.IsSandbox;
-                Greenshot.IniFile.IniConfig.Init(Program.PersonalPath);
-            }
-
-            using (Image cloneImage = (Image)img.Clone())
-            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = cloneImage })
-            using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
-            using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
-            {
-                if (editor.ShowDialog() == DialogResult.OK)
-                {
-                    return editor.GetImageForExport();
-                }
-            }
-
-            return img;
-        }
-
         private void ThreadCompleted()
         {
             OnUploadCompleted();
@@ -892,7 +841,7 @@ namespace ShareX
 
         public void Dispose()
         {
-            if (data != null) data.Dispose();
+            if (Data != null) Data.Dispose();
             if (tempImage != null) tempImage.Dispose();
         }
     }
