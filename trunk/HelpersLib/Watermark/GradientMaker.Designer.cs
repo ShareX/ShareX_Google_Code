@@ -1,4 +1,4 @@
-﻿namespace ShareX
+﻿namespace HelpersLib
 {
     partial class GradientMaker
     {

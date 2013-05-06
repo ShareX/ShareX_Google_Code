@@ -32,7 +32,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace HelpersLib
 {
     public partial class GradientMaker : Form
     {

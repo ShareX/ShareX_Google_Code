@@ -32,7 +32,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace HelpersLib
 {
     public class WatermarkManager
     {
