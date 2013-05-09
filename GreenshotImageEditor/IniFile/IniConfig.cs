@@ -103,7 +103,7 @@ namespace Greenshot.IniFile
         {
             get
             {
-                return applicationName != null && configName != null;
+                return applicationName != null && configName != null && sectionMap.Count > 0;
             }
         }
 
@@ -392,6 +392,17 @@ namespace Greenshot.IniFile
                 }
             }
             return newSections;
+        }
+
+        public static IEnumerable<string> IniSectionNames
+        {
+            get
+            {
+                foreach (string sectionName in sectionMap.Keys)
+                {
+                    yield return sectionName;
+                }
+            }
         }
 
         /// <summary>

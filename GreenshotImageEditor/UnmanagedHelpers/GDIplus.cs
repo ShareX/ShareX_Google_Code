@@ -251,15 +251,22 @@ namespace GreenshotPlugin.UnmanagedHelpers
             }
             finally
             {
-                if (hEffect != null)
+                try
                 {
-                    // Delete the effect
-                    GdipDeleteEffect(hEffect);
+                    if (hEffect != IntPtr.Zero)
+                    {
+                        // Delete the effect
+                        GdipDeleteEffect(hEffect);
+                    }
+                    if (hBlurParams != IntPtr.Zero)
+                    {
+                        // Free the memory
+                        Marshal.FreeHGlobal(hBlurParams);
+                    }
                 }
-                if (hBlurParams != IntPtr.Zero)
+                catch (Exception ex)
                 {
-                    // Free the memory
-                    Marshal.FreeHGlobal(hBlurParams);
+                    LOG.Error("Problem cleaning up ApplyBlur: ", ex);
                 }
             }
         }
