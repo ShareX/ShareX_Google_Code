@@ -766,6 +766,16 @@ namespace ShareX
 
         #region Tray events
 
+        private void niTray_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Middle:
+                    CaptureScreenshot(CaptureType.Rectangle, false);
+                    break;
+            }
+        }
+
         private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
