@@ -393,13 +393,20 @@ namespace Greenshot.IniFile
                 Value = defaultValueFromConfig;
                 return;
             }
-            try
+            if (ValueType != typeof(string))
             {
-                Value = Activator.CreateInstance(ValueType);
+                try
+                {
+                    Value = Activator.CreateInstance(ValueType);
+                }
+                catch (Exception)
+                {
+                    LOG.WarnFormat("Couldn't create instance of {0} for {1}, using default value.", ValueType.FullName, attributes.Name);
+                    Value = default(ValueType);
+                }
             }
-            catch (Exception)
+            else
             {
-                LOG.WarnFormat("Couldn't create instance of {0} for {1}, using default value.", ValueType.FullName, attributes.Name);
                 Value = default(ValueType);
             }
         }
