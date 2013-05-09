@@ -60,8 +60,9 @@ namespace ShareX
             this.tsddbCapture = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMonitor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRoundedRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEllipse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTriangle = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,8 +120,9 @@ namespace ShareX
             this.tsmiTrayCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayFullscreen = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayMonitor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayRectangle = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayWindowRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayRoundedRectangle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayEllipse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayTriangle = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,8 +192,6 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMonitor = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayMonitor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -290,13 +290,12 @@ namespace ShareX
             this.tsmiWindow.Size = new System.Drawing.Size(184, 22);
             this.tsmiWindow.Text = "Window";
             // 
-            // tsmiWindowRectangle
+            // tsmiMonitor
             // 
-            this.tsmiWindowRectangle.Image = global::ShareX.Properties.Resources.Window;
-            this.tsmiWindowRectangle.Name = "tsmiWindowRectangle";
-            this.tsmiWindowRectangle.Size = new System.Drawing.Size(184, 22);
-            this.tsmiWindowRectangle.Text = "Rectangle + Window";
-            this.tsmiWindowRectangle.Click += new System.EventHandler(this.tsmiWindowRectangle_Click);
+            this.tsmiMonitor.Image = global::ShareX.Properties.Resources.Fullscreen;
+            this.tsmiMonitor.Name = "tsmiMonitor";
+            this.tsmiMonitor.Size = new System.Drawing.Size(184, 22);
+            this.tsmiMonitor.Text = "Monitor";
             // 
             // tsmiRectangle
             // 
@@ -305,6 +304,14 @@ namespace ShareX
             this.tsmiRectangle.Size = new System.Drawing.Size(184, 22);
             this.tsmiRectangle.Text = "Rectangle";
             this.tsmiRectangle.Click += new System.EventHandler(this.tsmiRectangle_Click);
+            // 
+            // tsmiWindowRectangle
+            // 
+            this.tsmiWindowRectangle.Image = global::ShareX.Properties.Resources.Window;
+            this.tsmiWindowRectangle.Name = "tsmiWindowRectangle";
+            this.tsmiWindowRectangle.Size = new System.Drawing.Size(184, 22);
+            this.tsmiWindowRectangle.Text = "Rectangle + Window";
+            this.tsmiWindowRectangle.Click += new System.EventHandler(this.tsmiWindowRectangle_Click);
             // 
             // tsmiRoundedRectangle
             // 
@@ -752,6 +759,7 @@ namespace ShareX
             this.niTray.Text = "ShareX";
             this.niTray.BalloonTipClicked += new System.EventHandler(this.niTray_BalloonTipClicked);
             this.niTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseDoubleClick);
+            this.niTray.MouseUp += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseUp);
             // 
             // cmsTray
             // 
@@ -828,13 +836,12 @@ namespace ShareX
             this.tsmiTrayWindow.Size = new System.Drawing.Size(184, 22);
             this.tsmiTrayWindow.Text = "Window";
             // 
-            // tsmiTrayWindowRectangle
+            // tsmiTrayMonitor
             // 
-            this.tsmiTrayWindowRectangle.Image = global::ShareX.Properties.Resources.Window;
-            this.tsmiTrayWindowRectangle.Name = "tsmiTrayWindowRectangle";
-            this.tsmiTrayWindowRectangle.Size = new System.Drawing.Size(184, 22);
-            this.tsmiTrayWindowRectangle.Text = "Rectangle + Window";
-            this.tsmiTrayWindowRectangle.Click += new System.EventHandler(this.tsmiTrayWindowRectangle_Click);
+            this.tsmiTrayMonitor.Image = global::ShareX.Properties.Resources.Fullscreen;
+            this.tsmiTrayMonitor.Name = "tsmiTrayMonitor";
+            this.tsmiTrayMonitor.Size = new System.Drawing.Size(184, 22);
+            this.tsmiTrayMonitor.Text = "Monitor";
             // 
             // tsmiTrayRectangle
             // 
@@ -843,6 +850,14 @@ namespace ShareX
             this.tsmiTrayRectangle.Size = new System.Drawing.Size(184, 22);
             this.tsmiTrayRectangle.Text = "Rectangle";
             this.tsmiTrayRectangle.Click += new System.EventHandler(this.tsmiTrayRectangle_Click);
+            // 
+            // tsmiTrayWindowRectangle
+            // 
+            this.tsmiTrayWindowRectangle.Image = global::ShareX.Properties.Resources.Window;
+            this.tsmiTrayWindowRectangle.Name = "tsmiTrayWindowRectangle";
+            this.tsmiTrayWindowRectangle.Size = new System.Drawing.Size(184, 22);
+            this.tsmiTrayWindowRectangle.Text = "Rectangle + Window";
+            this.tsmiTrayWindowRectangle.Click += new System.EventHandler(this.tsmiTrayWindowRectangle_Click);
             // 
             // tsmiTrayRoundedRectangle
             // 
@@ -1376,20 +1391,6 @@ namespace ShareX
             this.tsmiShowPreview.Size = new System.Drawing.Size(163, 22);
             this.tsmiShowPreview.Text = "Show preview section";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
-            // 
-            // tsmiMonitor
-            // 
-            this.tsmiMonitor.Image = global::ShareX.Properties.Resources.Fullscreen;
-            this.tsmiMonitor.Name = "tsmiMonitor";
-            this.tsmiMonitor.Size = new System.Drawing.Size(184, 22);
-            this.tsmiMonitor.Text = "Monitor";
-            // 
-            // tsmiTrayMonitor
-            // 
-            this.tsmiTrayMonitor.Image = global::ShareX.Properties.Resources.Fullscreen;
-            this.tsmiTrayMonitor.Name = "tsmiTrayMonitor";
-            this.tsmiTrayMonitor.Size = new System.Drawing.Size(184, 22);
-            this.tsmiTrayMonitor.Text = "Monitor";
             // 
             // MainForm
             // 
