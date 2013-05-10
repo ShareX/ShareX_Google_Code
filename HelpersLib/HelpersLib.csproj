@@ -165,11 +165,11 @@
     <Compile Include="Cryptographic\Translator.cs" />
     <Compile Include="Cryptographic\TranslatorHelper.cs" />
     <Compile Include="UnsafeBitmap.cs" />
-    <Compile Include="UpdateChecker\DownloaderForm.cs">
+    <Compile Include="UpdateChecker\UpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateChecker\DownloaderForm.Designer.cs">
-      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    <Compile Include="UpdateChecker\UpdaterForm.Designer.cs">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileDownloader.cs" />
     <Compile Include="UserControls\BlackStyle\MyButton.cs">
@@ -307,8 +307,8 @@
     <EmbeddedResource Include="Forms\WatchFolderForm.resx">
       <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateChecker\DownloaderForm.resx">
-      <DependentUpon>DownloaderForm.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateChecker\UpdaterForm.resx">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hotkey\HotkeyInputForm.resx">
       <DependentUpon>HotkeyInputForm.cs</DependentUpon>

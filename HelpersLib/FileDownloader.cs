@@ -35,15 +35,10 @@ namespace HelpersLib
     public class FileDownloader
     {
         public string URL { get; private set; }
-
         public bool IsDownloading { get; private set; }
-
         public bool IsCanceled { get; private set; }
-
         public long FileSize { get; private set; }
-
         public long DownloadedSize { get; private set; }
-
         public double DownloadSpeed { get; private set; }
 
         public double DownloadPercentage
@@ -60,9 +55,7 @@ namespace HelpersLib
         }
 
         public Exception LastException { get; private set; }
-
         public bool IsPaused { get; private set; }
-
         public IWebProxy Proxy { get; set; }
 
         public event EventHandler FileSizeReceived;

@@ -40,7 +40,7 @@ namespace UpdateCheckerLib
         public ReleaseChannelType ReleaseChannel { get; set; }
         public UpdateStatus Status { get; set; }
 
-        private const bool ForceUpdate = false; // For testing purposes
+        private const bool ForceUpdate = true; // For testing purposes
 
         public UpdateInfo(ReleaseChannelType releaseChannel = ReleaseChannelType.Stable)
         {

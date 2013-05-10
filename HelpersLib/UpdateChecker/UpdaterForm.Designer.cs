@@ -1,6 +1,6 @@
 ﻿namespace HelpersLib
 {
-    partial class DownloaderForm
+    partial class UpdaterForm
     {
         /// <summary>
         /// Required designer variable.

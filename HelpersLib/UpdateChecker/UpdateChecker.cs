@@ -36,24 +36,6 @@ using System.Xml.Linq;
 
 namespace UpdateCheckerLib
 {
-    public enum ReleaseChannelType
-    {
-        [Description("Stable version")]
-        Stable,
-        [Description("Beta version")]
-        Beta,
-        [Description("Dev version")]
-        Dev
-    }
-
-    public enum UpdateStatus
-    {
-        None,
-        UpdateCheckFailed,
-        UpdateRequired,
-        UpToDate
-    }
-
     public class UpdateChecker
     {
         public string URL { get; private set; }
