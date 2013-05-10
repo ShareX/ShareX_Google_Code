@@ -97,7 +97,7 @@ namespace UpdateCheckerLib
         {
             if (updateChecker != null && updateChecker.UpdateInfo != null && !string.IsNullOrEmpty(updateChecker.UpdateInfo.URL))
             {
-                DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
+                UpdaterForm downloader = new UpdaterForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
                 downloader.ShowDialog();
                 if (downloader.Status == DownloaderFormStatus.InstallStarted)
                 {

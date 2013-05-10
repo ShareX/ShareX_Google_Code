@@ -37,9 +37,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public enum DownloaderFormStatus { Waiting, DownloadStarted, DownloadCompleted, InstallStarted }
-
-    public partial class DownloaderForm : Form
+    public partial class UpdaterForm : Form
     {
         public string URL { get; set; }
         public string FileName { get; set; }
@@ -47,29 +45,32 @@ namespace HelpersLib
         public IWebProxy Proxy { get; set; }
         public string Changelog { get; set; }
         public bool AutoStartDownload { get; set; }
+        public InstallType InstallType { get; set; }
+        public bool AutoStartInstall { get; set; }
         public DownloaderFormStatus Status { get; private set; }
 
         private FileDownloader fileDownloader;
         private FileStream fileStream;
         private Rectangle fillRect;
-        private LinearGradientBrush backgroundBrush;
 
-        public DownloaderForm()
+        public UpdaterForm()
         {
             InitializeComponent();
             Icon = Resources.ShareX;
 
             fillRect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
-            backgroundBrush = new LinearGradientBrush(fillRect, Color.FromArgb(80, 80, 80), Color.FromArgb(50, 50, 50), LinearGradientMode.Vertical);
+
             UpdateFormSize();
             ChangeStatus("Waiting.");
 
             Status = DownloaderFormStatus.Waiting;
 
             AutoStartDownload = true;
+            InstallType = InstallType.Silent;
+            AutoStartInstall = true;
         }
 
-        public DownloaderForm(string url, IWebProxy proxy, string changelog)
+        public UpdaterForm(string url, IWebProxy proxy, string changelog)
             : this()
         {
             URL = url;
@@ -89,7 +90,11 @@ namespace HelpersLib
         private void UpdaterForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.FillRectangle(backgroundBrush, fillRect);
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(fillRect, Color.FromArgb(80, 80, 80), Color.FromArgb(50, 50, 50), LinearGradientMode.Vertical))
+            {
+                g.FillRectangle(brush, fillRect);
+            }
         }
 
         private void DownloaderForm_Shown(object sender, EventArgs e)
@@ -110,15 +115,23 @@ namespace HelpersLib
                 }
                 else if (Status == DownloaderFormStatus.DownloadCompleted)
                 {
-                    Status = DownloaderFormStatus.InstallStarted;
-                    btnAction.Enabled = false;
-                    RunInstallerWithDelay();
-                    Close();
+                    Install();
                 }
                 else
                 {
                     Close();
                 }
+            }
+        }
+
+        public void Install()
+        {
+            if (Status == DownloaderFormStatus.DownloadCompleted)
+            {
+                Status = DownloaderFormStatus.InstallStarted;
+                btnAction.Enabled = false;
+                RunInstallerWithDelay();
+                Close();
             }
         }
 
@@ -138,7 +151,16 @@ namespace HelpersLib
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo(SavePath);
-                psi.Arguments = "/SILENT";
+
+                if (InstallType == InstallType.Silent)
+                {
+                    psi.Arguments = "/SILENT";
+                }
+                else if (InstallType == InstallType.VerySilent)
+                {
+                    psi.Arguments = "/VERYSILENT";
+                }
+
                 psi.Verb = "runas";
                 psi.UseShellExecute = true;
                 Process.Start(psi);
@@ -201,9 +223,14 @@ namespace HelpersLib
 
         private void fileDownloader_DownloadCompleted(object sender, EventArgs e)
         {
-            Status = DownloaderFormStatus.DownloadCompleted;
             ChangeStatus("Download completed.");
+            Status = DownloaderFormStatus.DownloadCompleted;
             btnAction.Text = "Install";
+
+            if (AutoStartInstall)
+            {
+                Install();
+            }
         }
 
         private void cbShowChangelog_CheckedChanged(object sender, EventArgs e)

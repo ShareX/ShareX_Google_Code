@@ -401,7 +401,7 @@ namespace ShareX
                         if (MessageBox.Show(updateText, "ShareX update is available", MessageBoxButtons.YesNo,
                             MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                         {
-                            DownloaderForm downloader = new DownloaderForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
+                            UpdaterForm downloader = new UpdaterForm(updateChecker.UpdateInfo.URL, updateChecker.Proxy, updateChecker.UpdateInfo.Summary);
                             downloader.ShowDialog();
                             if (downloader.Status == DownloaderFormStatus.InstallStarted)
                             {
