@@ -301,6 +301,7 @@ namespace HelpersLib
         }
     }
 
+    [Serializable]
     public class GradientMakerSettings
     {
         public List<BrushData> BrushDataList { get; set; }
@@ -323,6 +324,7 @@ namespace HelpersLib
         }
     }
 
+    [Serializable]
     public class BrushData
     {
         public string Name { get; set; }

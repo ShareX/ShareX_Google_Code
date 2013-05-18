@@ -23,10 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Drawing;
 
 namespace HelpersLib
 {
+    [Serializable]
     public class XmlColor
     {
         public byte A { get; set; }
