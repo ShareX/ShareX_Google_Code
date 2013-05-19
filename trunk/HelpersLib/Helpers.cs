@@ -628,24 +628,24 @@ namespace HelpersLib
 
         public static bool BrowseFolder(string title, TextBox tb, string initialDirectory = "")
         {
-            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            using (FolderSelectDialog fsd = new FolderSelectDialog())
             {
-                fbd.Description = title;
+                fsd.Title = title;
 
                 string path = tb.Text;
 
                 if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
                 {
-                    fbd.SelectedPath = path;
+                    fsd.InitialDirectory = path;
                 }
                 else if (!string.IsNullOrEmpty(initialDirectory))
                 {
-                    fbd.SelectedPath = initialDirectory;
+                    fsd.InitialDirectory = initialDirectory;
                 }
 
-                if (fbd.ShowDialog() == DialogResult.OK)
+                if (fsd.ShowDialog())
                 {
-                    tb.Text = fbd.SelectedPath;
+                    tb.Text = fsd.FileName;
                     return true;
                 }
             }

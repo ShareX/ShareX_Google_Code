@@ -151,6 +151,7 @@
     <Compile Include="GIF\PaletteQuantizer.cs" />
     <Compile Include="GIF\Quantizer.cs" />
     <Compile Include="ImageTag.cs" />
+    <Compile Include="Native\FolderSelectDialog.cs" />
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="Steam\SteamHelpers.cs" />
