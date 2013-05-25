@@ -269,5 +269,20 @@ namespace HelpersLib
                 tb.SelectionStart = start + text.Length;
             }
         }
+
+        public static void RadioCheck(this ToolStripMenuItem tsmi)
+        {
+            ToolStrip parent = tsmi.GetCurrentParent();
+
+            foreach (ToolStripMenuItem tsmiParent in parent.Items)
+            {
+                if (tsmiParent != tsmi)
+                {
+                    tsmiParent.Checked = false;
+                }
+            }
+
+            tsmi.Checked = true;
+        }
     }
 }

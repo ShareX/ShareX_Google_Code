@@ -51,6 +51,7 @@ namespace ShareX
 
         public WindowState HistoryWindowState = new WindowState();
         public WindowState ImageHistoryWindowState = new WindowState();
+        public int ImageHistoryMaxItemCount = 100;
         public int ImageHistoryViewMode = 3;
         public Size ImageHistoryThumbnailSize = new Size(100, 100);
 
