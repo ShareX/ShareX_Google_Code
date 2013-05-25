@@ -78,14 +78,19 @@ namespace HistoryLib
 
         private HistoryItem[] GetHistoryItems()
         {
-            IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems().OrderByDescending(x => x.DateTimeUtc);
+            IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems();
 
             if (MaxItemCount > -1)
             {
-                tempHistoryItems = tempHistoryItems.Take(MaxItemCount);
+                int skip = tempHistoryItems.Count() - MaxItemCount;
+
+                if (skip > 0)
+                {
+                    tempHistoryItems = tempHistoryItems.Skip(skip);
+                }
             }
 
-            return tempHistoryItems.ToArray();
+            return tempHistoryItems.OrderByDescending(x => x.DateTimeUtc).ToArray();
         }
 
         private void ApplyFiltersAndAdd()

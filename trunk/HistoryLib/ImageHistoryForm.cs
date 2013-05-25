@@ -76,9 +76,10 @@ namespace HistoryLib
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;
-
             ViewMode = viewMode;
             ThumbnailSize = thumbnailSize;
+
+            tsbQuickList.Checked = MaxItemCount > -1;
 
             him = new HistoryItemManager();
             him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
@@ -94,34 +95,31 @@ namespace HistoryLib
             historyItems = GetHistoryItems();
 
             ilvImages.Items.Clear();
-            ilvImages.SuspendLayout();
-
-            foreach (HistoryItem historyItem in historyItems)
-            {
-                ImageListViewItem ilvi = new ImageListViewItem(historyItem.Filepath);
-                ilvi.Tag = historyItem;
-                ilvImages.Items.Add(ilvi);
-            }
-
-            ilvImages.ResumeLayout();
-        }
-
-        private HistoryItem[] him_GetHistoryItems()
-        {
-            return ilvImages.SelectedItems.Cast<ImageListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
+            ImageListViewItem[] ilvItems = historyItems.Select(historyItem => new ImageListViewItem(historyItem.Filepath) { Tag = historyItem }).ToArray();
+            ilvImages.Items.AddRange(ilvItems);
         }
 
         private HistoryItem[] GetHistoryItems()
         {
             IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems().Where(x => !string.IsNullOrEmpty(x.Filepath) &&
-                Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath)).Reverse().ToArray();
+                Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath));
 
             if (MaxItemCount > -1)
             {
-                tempHistoryItems = tempHistoryItems.Take(MaxItemCount);
+                int skip = tempHistoryItems.Count() - MaxItemCount;
+
+                if (skip > 0)
+                {
+                    tempHistoryItems = tempHistoryItems.Skip(skip);
+                }
             }
 
-            return tempHistoryItems.ToArray();
+            return tempHistoryItems.OrderByDescending(x => x.DateTimeUtc).ToArray();
+        }
+
+        private HistoryItem[] him_GetHistoryItems()
+        {
+            return ilvImages.SelectedItems.Cast<ImageListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
         }
 
         #region Form events
@@ -165,42 +163,64 @@ namespace HistoryLib
 
         private void tsmiViewModeThumbnails_Click(object sender, EventArgs e)
         {
+            tsmiViewModeThumbnails.RadioCheck();
             ilvImages.View = Manina.Windows.Forms.View.Thumbnails;
         }
 
         private void tsmiViewModeGallery_Click(object sender, EventArgs e)
         {
+            tsmiViewModeGallery.RadioCheck();
             ilvImages.View = Manina.Windows.Forms.View.Gallery;
         }
 
         private void tsmiViewModePane_Click(object sender, EventArgs e)
         {
+            tsmiViewModePane.RadioCheck();
             ilvImages.View = Manina.Windows.Forms.View.Pane;
         }
 
         private void tsmiThumbnailSize75_Click(object sender, EventArgs e)
         {
+            tsmiThumbnailSize75.RadioCheck();
             ilvImages.ThumbnailSize = new Size(75, 75);
         }
 
         private void tsmiThumbnailSize100_Click(object sender, EventArgs e)
         {
+            tsmiThumbnailSize100.RadioCheck();
             ilvImages.ThumbnailSize = new Size(100, 100);
         }
 
         private void tsmiThumbnailSize150_Click(object sender, EventArgs e)
         {
+            tsmiThumbnailSize150.RadioCheck();
             ilvImages.ThumbnailSize = new Size(150, 150);
         }
 
         private void tsmiThumbnailSize200_Click(object sender, EventArgs e)
         {
+            tsmiThumbnailSize200.RadioCheck();
             ilvImages.ThumbnailSize = new Size(200, 200);
         }
 
         private void tsmiThumbnailSize250_Click(object sender, EventArgs e)
         {
+            tsmiThumbnailSize250.RadioCheck();
             ilvImages.ThumbnailSize = new Size(250, 250);
+        }
+
+        private void tsbQuickList_Click(object sender, EventArgs e)
+        {
+            if (tsbQuickList.Checked)
+            {
+                MaxItemCount = 100;
+            }
+            else
+            {
+                MaxItemCount = -1;
+            }
+
+            RefreshHistoryItems();
         }
 
         private void ilvImages_KeyDown(object sender, KeyEventArgs e)

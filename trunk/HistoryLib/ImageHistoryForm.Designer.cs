@@ -42,6 +42,7 @@
             this.tsmiThumbnailSize150 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiThumbnailSize200 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiThumbnailSize250 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbQuickList = new System.Windows.Forms.ToolStripButton();
             this.tscMain.ContentPanel.SuspendLayout();
             this.tscMain.TopToolStripPanel.SuspendLayout();
             this.tscMain.SuspendLayout();
@@ -58,6 +59,7 @@
             this.ilvImages.GroupHeaderFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.ilvImages.Location = new System.Drawing.Point(0, 0);
             this.ilvImages.Name = "ilvImages";
+            this.ilvImages.PersistentCacheDirectory = "";
             this.ilvImages.PersistentCacheSize = ((long)(100));
             this.ilvImages.Size = new System.Drawing.Size(804, 587);
             this.ilvImages.TabIndex = 0;
@@ -91,11 +93,12 @@
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsddbViewMode,
-            this.tsddbThumbnailSize});
+            this.tsddbThumbnailSize,
+            this.tsbQuickList});
             this.tsMain.Location = new System.Drawing.Point(3, 0);
             this.tsMain.Name = "tsMain";
             this.tsMain.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.tsMain.Size = new System.Drawing.Size(189, 25);
+            this.tsMain.Size = new System.Drawing.Size(396, 25);
             this.tsMain.TabIndex = 0;
             // 
             // tsddbViewMode
@@ -115,21 +118,21 @@
             // tsmiViewModeThumbnails
             // 
             this.tsmiViewModeThumbnails.Name = "tsmiViewModeThumbnails";
-            this.tsmiViewModeThumbnails.Size = new System.Drawing.Size(137, 22);
+            this.tsmiViewModeThumbnails.Size = new System.Drawing.Size(152, 22);
             this.tsmiViewModeThumbnails.Text = "Thumbnails";
             this.tsmiViewModeThumbnails.Click += new System.EventHandler(this.tsmiViewModeThumbnails_Click);
             // 
             // tsmiViewModeGallery
             // 
             this.tsmiViewModeGallery.Name = "tsmiViewModeGallery";
-            this.tsmiViewModeGallery.Size = new System.Drawing.Size(137, 22);
+            this.tsmiViewModeGallery.Size = new System.Drawing.Size(152, 22);
             this.tsmiViewModeGallery.Text = "Gallery";
             this.tsmiViewModeGallery.Click += new System.EventHandler(this.tsmiViewModeGallery_Click);
             // 
             // tsmiViewModePane
             // 
             this.tsmiViewModePane.Name = "tsmiViewModePane";
-            this.tsmiViewModePane.Size = new System.Drawing.Size(137, 22);
+            this.tsmiViewModePane.Size = new System.Drawing.Size(152, 22);
             this.tsmiViewModePane.Text = "Pane";
             this.tsmiViewModePane.Click += new System.EventHandler(this.tsmiViewModePane_Click);
             // 
@@ -144,7 +147,7 @@
             this.tsmiThumbnailSize250});
             this.tsddbThumbnailSize.Image = ((System.Drawing.Image)(resources.GetObject("tsddbThumbnailSize.Image")));
             this.tsddbThumbnailSize.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsddbThumbnailSize.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.tsddbThumbnailSize.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
             this.tsddbThumbnailSize.Name = "tsddbThumbnailSize";
             this.tsddbThumbnailSize.Size = new System.Drawing.Size(100, 19);
             this.tsddbThumbnailSize.Text = "Thumbnail size";
@@ -152,37 +155,49 @@
             // tsmiThumbnailSize75
             // 
             this.tsmiThumbnailSize75.Name = "tsmiThumbnailSize75";
-            this.tsmiThumbnailSize75.Size = new System.Drawing.Size(121, 22);
+            this.tsmiThumbnailSize75.Size = new System.Drawing.Size(152, 22);
             this.tsmiThumbnailSize75.Text = "75 x 75";
             this.tsmiThumbnailSize75.Click += new System.EventHandler(this.tsmiThumbnailSize75_Click);
             // 
             // tsmiThumbnailSize100
             // 
             this.tsmiThumbnailSize100.Name = "tsmiThumbnailSize100";
-            this.tsmiThumbnailSize100.Size = new System.Drawing.Size(121, 22);
+            this.tsmiThumbnailSize100.Size = new System.Drawing.Size(152, 22);
             this.tsmiThumbnailSize100.Text = "100 x 100";
             this.tsmiThumbnailSize100.Click += new System.EventHandler(this.tsmiThumbnailSize100_Click);
             // 
             // tsmiThumbnailSize150
             // 
             this.tsmiThumbnailSize150.Name = "tsmiThumbnailSize150";
-            this.tsmiThumbnailSize150.Size = new System.Drawing.Size(121, 22);
+            this.tsmiThumbnailSize150.Size = new System.Drawing.Size(152, 22);
             this.tsmiThumbnailSize150.Text = "150 x 150";
             this.tsmiThumbnailSize150.Click += new System.EventHandler(this.tsmiThumbnailSize150_Click);
             // 
             // tsmiThumbnailSize200
             // 
             this.tsmiThumbnailSize200.Name = "tsmiThumbnailSize200";
-            this.tsmiThumbnailSize200.Size = new System.Drawing.Size(121, 22);
+            this.tsmiThumbnailSize200.Size = new System.Drawing.Size(152, 22);
             this.tsmiThumbnailSize200.Text = "200 x 200";
             this.tsmiThumbnailSize200.Click += new System.EventHandler(this.tsmiThumbnailSize200_Click);
             // 
             // tsmiThumbnailSize250
             // 
             this.tsmiThumbnailSize250.Name = "tsmiThumbnailSize250";
-            this.tsmiThumbnailSize250.Size = new System.Drawing.Size(121, 22);
+            this.tsmiThumbnailSize250.Size = new System.Drawing.Size(152, 22);
             this.tsmiThumbnailSize250.Text = "250 x 250";
             this.tsmiThumbnailSize250.Click += new System.EventHandler(this.tsmiThumbnailSize250_Click);
+            // 
+            // tsbQuickList
+            // 
+            this.tsbQuickList.CheckOnClick = true;
+            this.tsbQuickList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbQuickList.Image = ((System.Drawing.Image)(resources.GetObject("tsbQuickList.Image")));
+            this.tsbQuickList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbQuickList.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.tsbQuickList.Name = "tsbQuickList";
+            this.tsbQuickList.Size = new System.Drawing.Size(174, 19);
+            this.tsbQuickList.Text = "Only show last 100 screenshots";
+            this.tsbQuickList.Click += new System.EventHandler(this.tsbQuickList_Click);
             // 
             // ImageHistoryForm
             // 
@@ -222,5 +237,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiViewModeThumbnails;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewModeGallery;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewModePane;
+        private System.Windows.Forms.ToolStripButton tsbQuickList;
     }
 }

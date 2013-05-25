@@ -679,7 +679,7 @@ namespace ShareX
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
 
             using (ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath,
-                Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize))
+                Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount))
             {
                 Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
                 imageHistoryForm.Icon = Icon;
@@ -688,6 +688,7 @@ namespace ShareX
 
                 Program.Settings.ImageHistoryViewMode = imageHistoryForm.ViewMode;
                 Program.Settings.ImageHistoryThumbnailSize = imageHistoryForm.ThumbnailSize;
+                Program.Settings.ImageHistoryMaxItemCount = imageHistoryForm.MaxItemCount;
             }
         }
 
