@@ -86,6 +86,9 @@ namespace ScreenCapture
 
         public string CachePath { get; private set; }
 
+        public delegate void ProgressEventHandler(float progress);
+        public event ProgressEventHandler EncodingProgressChanged;
+
         private int fps, delay, frameCount;
         private float durationSeconds;
         private Rectangle captureRectangle;
@@ -154,8 +157,14 @@ namespace ScreenCapture
             {
                 using (GifCreator gifEncoder = new GifCreator(delay))
                 {
+                    int i = 0;
+                    int count = cache.Count;
+
                     foreach (Image img in cache.GetImageEnumerator())
                     {
+                        i++;
+                        OnEncodingProgressChanged((float)i / count * 100);
+
                         using (img)
                         {
                             gifEncoder.AddFrame(img, quality);
@@ -174,8 +183,13 @@ namespace ScreenCapture
             {
                 using (AVIManager aviManager = new AVIManager(path, FPS))
                 {
+                    int i = 0;
+                    int count = cache.Count;
+
                     foreach (Image img in cache.GetImageEnumerator())
                     {
+                        i++;
+                        OnEncodingProgressChanged((float)i / count * 100);
                         Image img2 = img;
 
                         try
@@ -194,6 +208,14 @@ namespace ScreenCapture
                         }
                     }
                 }
+            }
+        }
+
+        protected void OnEncodingProgressChanged(float progress)
+        {
+            if (EncodingProgressChanged != null)
+            {
+                EncodingProgressChanged(progress);
             }
         }
 
