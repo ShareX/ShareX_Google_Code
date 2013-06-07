@@ -38,6 +38,19 @@ namespace ScreenCapture
     {
         public string CachePath { get; private set; }
 
+        public int Count
+        {
+            get
+            {
+                if (indexList != null)
+                {
+                    return indexList.Count;
+                }
+
+                return 0;
+            }
+        }
+
         private List<LocationInfo> indexList;
         private BlockingCollection<Image> imageQueue;
         private bool isWorking;

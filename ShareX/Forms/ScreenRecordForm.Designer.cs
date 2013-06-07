@@ -38,6 +38,7 @@
             this.lblOutput = new System.Windows.Forms.Label();
             this.cbOutput = new System.Windows.Forms.ComboBox();
             this.cbAutoUploadGIF = new System.Windows.Forms.CheckBox();
+            this.pbEncoding = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             this.SuspendLayout();
@@ -173,11 +174,19 @@
             this.cbAutoUploadGIF.UseVisualStyleBackColor = true;
             this.cbAutoUploadGIF.CheckedChanged += new System.EventHandler(this.cbAutoUploadGIF_CheckedChanged);
             // 
+            // pbEncoding
+            // 
+            this.pbEncoding.Location = new System.Drawing.Point(16, 176);
+            this.pbEncoding.Name = "pbEncoding";
+            this.pbEncoding.Size = new System.Drawing.Size(200, 24);
+            this.pbEncoding.TabIndex = 11;
+            this.pbEncoding.Visible = false;
+            // 
             // ScreenRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 211);
+            this.ClientSize = new System.Drawing.Size(230, 211);
             this.Controls.Add(this.cbAutoUploadGIF);
             this.Controls.Add(this.cbOutput);
             this.Controls.Add(this.lblOutput);
@@ -188,6 +197,7 @@
             this.Controls.Add(this.lblFPS);
             this.Controls.Add(this.btnRegion);
             this.Controls.Add(this.btnRecord);
+            this.Controls.Add(this.pbEncoding);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ScreenRecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -212,5 +222,6 @@
         private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.ComboBox cbOutput;
         private System.Windows.Forms.CheckBox cbAutoUploadGIF;
+        private System.Windows.Forms.ProgressBar pbEncoding;
     }
 }

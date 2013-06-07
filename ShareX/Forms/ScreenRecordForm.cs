@@ -81,6 +81,9 @@ namespace ShareX
 
             btnRecord.Enabled = false;
             Hide();
+            btnRecord.Visible = false;
+            pbEncoding.Visible = true;
+            pbEncoding.Value = 0;
 
             ScreenRecorder screenRecorder = null;
             string path = "";
@@ -100,24 +103,28 @@ namespace ShareX
                 }
 
                 Show();
-                btnRecord.Text = "Encoding...";
 
-                await TaskEx.Run(() =>
+                if (screenRecorder != null)
                 {
-                    Stopwatch timer = Stopwatch.StartNew();
+                    screenRecorder.EncodingProgressChanged += screenRecorder_EncodingProgressChanged;
 
-                    switch (Program.Settings.ScreenRecordOutput)
+                    await TaskEx.Run(() =>
                     {
-                        case ScreenRecordOutput.GIF:
-                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
-                            screenRecorder.SaveAsGIF(path, Program.Settings.ImageGIFQuality);
-                            break;
-                        case ScreenRecordOutput.AVI:
-                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
-                            screenRecorder.SaveAsAVI(path, 720);
-                            break;
-                    }
-                });
+                        Stopwatch timer = Stopwatch.StartNew();
+
+                        switch (Program.Settings.ScreenRecordOutput)
+                        {
+                            case ScreenRecordOutput.GIF:
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
+                                screenRecorder.SaveAsGIF(path, Program.Settings.ImageGIFQuality);
+                                break;
+                            case ScreenRecordOutput.AVI:
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
+                                screenRecorder.SaveAsAVI(path, 720);
+                                break;
+                        }
+                    });
+                }
             }
             finally
             {
@@ -133,8 +140,14 @@ namespace ShareX
                 TaskHelper.ShowResultNotifications(path);
             }
 
-            btnRecord.Text = "Start record (after 1 second)";
+            pbEncoding.Visible = false;
             btnRecord.Enabled = true;
+            btnRecord.Visible = true;
+        }
+
+        private void screenRecorder_EncodingProgressChanged(float progress)
+        {
+            Invoke(new MethodInvoker(() => pbEncoding.Value = (int)progress));
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
