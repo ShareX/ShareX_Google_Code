@@ -56,8 +56,6 @@ namespace HelpersLib
 
         public static readonly Random Random = new Random();
 
-        private static readonly object ClipboardLock = new object();
-
         public static string GetFilenameExtension(string filePath)
         {
             if (!string.IsNullOrEmpty(filePath) && filePath.Contains('.'))
@@ -107,85 +105,6 @@ namespace HelpersLib
             }
 
             return EDataType.File;
-        }
-
-        public static bool CopyTextSafely(string text)
-        {
-            if (!string.IsNullOrEmpty(text))
-            {
-                IDataObject data = new DataObject();
-                string dataFormat;
-
-                if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Major < 5)
-                {
-                    dataFormat = DataFormats.Text;
-                }
-                else
-                {
-                    dataFormat = DataFormats.UnicodeText;
-                }
-
-                data.SetData(dataFormat, false, text);
-                return CopyDataSafely(data);
-            }
-
-            return false;
-        }
-
-        public static bool CopyImageSafely(Image img)
-        {
-            if (img != null)
-            {
-                IDataObject data = new DataObject();
-                data.SetData(DataFormats.Bitmap, true, img);
-                return CopyDataSafely(data);
-            }
-
-            return false;
-        }
-
-        private static bool CopyDataSafely(object data)
-        {
-            try
-            {
-                lock (ClipboardLock)
-                {
-                    Clipboard.SetDataObject(data, true, 3, 500);
-                }
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public static void CopyFileToClipboard(string path)
-        {
-            try
-            {
-                Clipboard.SetFileDropList(new StringCollection() { path });
-            }
-            catch { }
-        }
-
-        public static void CopyImageFileToClipboard(string path)
-        {
-            try
-            {
-                using (Image img = Image.FromFile(path))
-                {
-                    CopyImageSafely(img);
-                }
-            }
-            catch { }
-        }
-
-        public static void CopyTextFileToClipboard(string path)
-        {
-            string text = File.ReadAllText(path);
-            CopyTextSafely(text);
         }
 
         public static string AddZeroes(int number, int digits = 2)

@@ -67,7 +67,7 @@ namespace HelpersLib
 
             if (!string.IsNullOrEmpty(text))
             {
-                Helpers.CopyTextSafely(text);
+                ClipboardHelper.CopyText(text);
             }
         }
 

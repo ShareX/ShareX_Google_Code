@@ -171,7 +171,7 @@ namespace HistoryLib
 
                     if (!string.IsNullOrEmpty(urls))
                     {
-                        Helpers.CopyTextSafely(urls);
+                        ClipboardHelper.CopyText(urls);
                     }
                 }
             }
@@ -179,88 +179,88 @@ namespace HistoryLib
 
         public void CopyShortenedURL()
         {
-            if (HistoryItem != null && IsShortenedURLExist) Helpers.CopyTextSafely(HistoryItem.ShortenedURL);
+            if (HistoryItem != null && IsShortenedURLExist) ClipboardHelper.CopyText(HistoryItem.ShortenedURL);
         }
 
         public void CopyThumbnailURL()
         {
-            if (HistoryItem != null && IsThumbnailURLExist) Helpers.CopyTextSafely(HistoryItem.ThumbnailURL);
+            if (HistoryItem != null && IsThumbnailURLExist) ClipboardHelper.CopyText(HistoryItem.ThumbnailURL);
         }
 
         public void CopyDeletionURL()
         {
-            if (HistoryItem != null && IsDeletionURLExist) Helpers.CopyTextSafely(HistoryItem.DeletionURL);
+            if (HistoryItem != null && IsDeletionURLExist) ClipboardHelper.CopyText(HistoryItem.DeletionURL);
         }
 
         public void CopyFile()
         {
-            if (HistoryItem != null && IsFileExist) Helpers.CopyFileToClipboard(HistoryItem.Filepath);
+            if (HistoryItem != null && IsFileExist) ClipboardHelper.CopyFile(HistoryItem.Filepath);
         }
 
         public void CopyImage()
         {
-            if (HistoryItem != null && IsImageFile) Helpers.CopyImageFileToClipboard(HistoryItem.Filepath);
+            if (HistoryItem != null && IsImageFile) ClipboardHelper.CopyImageFile(HistoryItem.Filepath);
         }
 
         public void CopyText()
         {
-            if (HistoryItem != null && IsTextFile) Helpers.CopyTextFileToClipboard(HistoryItem.Filepath);
+            if (HistoryItem != null && IsTextFile) ClipboardHelper.CopyTextFile(HistoryItem.Filepath);
         }
 
         public void CopyHTMLLink()
         {
-            if (HistoryItem != null && IsURLExist) Helpers.CopyTextSafely(string.Format("<a href=\"{0}\">{0}</a>", HistoryItem.URL));
+            if (HistoryItem != null && IsURLExist) ClipboardHelper.CopyText(string.Format("<a href=\"{0}\">{0}</a>", HistoryItem.URL));
         }
 
         public void CopyHTMLImage()
         {
-            if (HistoryItem != null && IsImageURL) Helpers.CopyTextSafely(string.Format("<img src=\"{0}\"/>", HistoryItem.URL));
+            if (HistoryItem != null && IsImageURL) ClipboardHelper.CopyText(string.Format("<img src=\"{0}\"/>", HistoryItem.URL));
         }
 
         public void CopyHTMLLinkedImage()
         {
             if (HistoryItem != null && IsImageURL && IsThumbnailURLExist)
             {
-                Helpers.CopyTextSafely(string.Format("<a href=\"{0}\"><img src=\"{1}\"/></a>", HistoryItem.URL, HistoryItem.ThumbnailURL));
+                ClipboardHelper.CopyText(string.Format("<a href=\"{0}\"><img src=\"{1}\"/></a>", HistoryItem.URL, HistoryItem.ThumbnailURL));
             }
         }
 
         public void CopyForumLink()
         {
-            if (HistoryItem != null && IsURLExist) Helpers.CopyTextSafely(string.Format("[url]{0}[/url]", HistoryItem.URL));
+            if (HistoryItem != null && IsURLExist) ClipboardHelper.CopyText(string.Format("[url]{0}[/url]", HistoryItem.URL));
         }
 
         public void CopyForumImage()
         {
-            if (HistoryItem != null && IsImageURL) Helpers.CopyTextSafely(string.Format("[img]{0}[/img]", HistoryItem.URL));
+            if (HistoryItem != null && IsImageURL) ClipboardHelper.CopyText(string.Format("[img]{0}[/img]", HistoryItem.URL));
         }
 
         public void CopyForumLinkedImage()
         {
             if (HistoryItem != null && IsImageURL && IsThumbnailURLExist)
             {
-                Helpers.CopyTextSafely(string.Format("[url={0}][img]{1}[/img][/url]", HistoryItem.URL, HistoryItem.ThumbnailURL));
+                ClipboardHelper.CopyText(string.Format("[url={0}][img]{1}[/img][/url]", HistoryItem.URL, HistoryItem.ThumbnailURL));
             }
         }
 
         public void CopyFilePath()
         {
-            if (HistoryItem != null && IsFilePathValid) Helpers.CopyTextSafely(HistoryItem.Filepath);
+            if (HistoryItem != null && IsFilePathValid) ClipboardHelper.CopyText(HistoryItem.Filepath);
         }
 
         public void CopyFileName()
         {
-            if (HistoryItem != null && IsFilePathValid) Helpers.CopyTextSafely(Path.GetFileNameWithoutExtension(HistoryItem.Filepath));
+            if (HistoryItem != null && IsFilePathValid) ClipboardHelper.CopyText(Path.GetFileNameWithoutExtension(HistoryItem.Filepath));
         }
 
         public void CopyFileNameWithExtension()
         {
-            if (HistoryItem != null && IsFilePathValid) Helpers.CopyTextSafely(Path.GetFileName(HistoryItem.Filepath));
+            if (HistoryItem != null && IsFilePathValid) ClipboardHelper.CopyText(Path.GetFileName(HistoryItem.Filepath));
         }
 
         public void CopyFolder()
         {
-            if (HistoryItem != null && IsFilePathValid) Helpers.CopyTextSafely(Path.GetDirectoryName(HistoryItem.Filepath));
+            if (HistoryItem != null && IsFilePathValid) ClipboardHelper.CopyText(Path.GetDirectoryName(HistoryItem.Filepath));
         }
 
         public void ShowImagePreview()

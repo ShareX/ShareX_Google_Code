@@ -139,11 +139,11 @@ namespace HelpersLib
         {
             if (sender is NumericUpDown)
             {
-                Helpers.CopyTextSafely(((NumericUpDown)sender).Value.ToString());
+                ClipboardHelper.CopyText(((NumericUpDown)sender).Value.ToString());
             }
             else if (sender is TextBox)
             {
-                Helpers.CopyTextSafely(((TextBox)sender).Text);
+                ClipboardHelper.CopyText(((TextBox)sender).Text);
             }
         }
 

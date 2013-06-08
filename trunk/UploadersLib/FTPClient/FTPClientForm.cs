@@ -539,7 +539,7 @@ namespace UploadersLib
 
             if (!string.IsNullOrEmpty(clipboard))
             {
-                Helpers.CopyTextSafely(clipboard);
+                ClipboardHelper.CopyText(clipboard);
             }
         }
 

@@ -80,6 +80,7 @@
     <Compile Include="AviFile\EditableVideoStream.cs" />
     <Compile Include="AviFile\VideoStream.cs" />
     <Compile Include="AVIManager.cs" />
+    <Compile Include="ClipboardHelper.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />

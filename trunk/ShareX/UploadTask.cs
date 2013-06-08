@@ -296,7 +296,7 @@ namespace ShareX
 
                 if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
-                    Helpers.CopyImageSafely(tempImage);
+                    ClipboardHelper.CopyImage(tempImage);
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
@@ -341,7 +341,7 @@ namespace ShareX
 
                         if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
                         {
-                            Helpers.CopyTextSafely(Info.FilePath);
+                            ClipboardHelper.CopyText(Info.FilePath);
                         }
 
                         if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
@@ -439,7 +439,7 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    Helpers.CopyTextSafely(url);
+                    ClipboardHelper.CopyText(url);
                 }
             }
         }
