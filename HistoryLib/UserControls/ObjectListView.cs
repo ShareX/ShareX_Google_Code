@@ -63,7 +63,7 @@ namespace HistoryLib.CustomControls
                 string text = this.SelectedItems[0].Text;
                 if (!string.IsNullOrEmpty(text))
                 {
-                    Helpers.CopyTextSafely(text);
+                    ClipboardHelper.CopyText(text);
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace HistoryLib.CustomControls
                 string text = this.SelectedItems[0].SubItems[1].Text;
                 if (!string.IsNullOrEmpty(text))
                 {
-                    Helpers.CopyTextSafely(text);
+                    ClipboardHelper.CopyText(text);
                 }
             }
         }

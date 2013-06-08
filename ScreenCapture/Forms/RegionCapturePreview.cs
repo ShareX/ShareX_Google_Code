@@ -170,7 +170,7 @@ namespace ScreenCapture
         {
             if (Result != null)
             {
-                Helpers.CopyImageSafely(Result);
+                ClipboardHelper.CopyImage(Result);
             }
         }
     }
