@@ -24,11 +24,18 @@
 #endregion License Information (GPL v3)
 
 using System.ComponentModel;
+using System.Security.Cryptography;
 
 namespace UploadersLib.HelperClasses
 {
     public class OAuthInfo
     {
+        public enum OAuthInfoSignatureMethod
+        {
+            HMAC_SHA1,
+            RSA_SHA1
+        }
+
         public string Description { get; set; }
 
         [Browsable(false)]
@@ -37,8 +44,16 @@ namespace UploadersLib.HelperClasses
         [Browsable(false)]
         public string ConsumerKey { get; set; }
 
+        // Used for HMAC_SHA1 signature
         [Browsable(false)]
         public string ConsumerSecret { get; set; }
+
+        // Used for RSA_SHA1 signature
+        [Browsable(false)]
+        public string ConsumerPrivateKey { get; set; }
+
+        [Browsable(false)]
+        public OAuthInfoSignatureMethod SignatureMethod { get; set; }
 
         [Browsable(false)]
         public string AuthToken { get; set; }
@@ -61,6 +76,12 @@ namespace UploadersLib.HelperClasses
             OAuthVersion = "1.0";
         }
 
+        public OAuthInfo(string consumerKey)
+            : this()
+        {
+            this.ConsumerKey = consumerKey;
+        }
+
         public OAuthInfo(string consumerKey, string consumerSecret)
             : this()
         {
@@ -77,8 +98,10 @@ namespace UploadersLib.HelperClasses
 
         public static bool CheckOAuth(OAuthInfo oauth)
         {
-            return oauth != null && !string.IsNullOrEmpty(oauth.ConsumerKey) && !string.IsNullOrEmpty(oauth.ConsumerSecret) &&
-                !string.IsNullOrEmpty(oauth.UserToken) && !string.IsNullOrEmpty(oauth.UserSecret);
+            return oauth != null && !string.IsNullOrEmpty(oauth.ConsumerKey) &&
+                ((!string.IsNullOrEmpty(oauth.ConsumerSecret) && oauth.SignatureMethod == OAuthInfoSignatureMethod.HMAC_SHA1)
+                || oauth.ConsumerPrivateKey != null && oauth.SignatureMethod == OAuthInfoSignatureMethod.RSA_SHA1)
+                && !string.IsNullOrEmpty(oauth.UserToken) && !string.IsNullOrEmpty(oauth.UserSecret);
         }
 
         public override string ToString()

@@ -68,6 +68,7 @@ namespace UploadersLib
             fileUploadersImageList.Images.Add("CustomUploader", Resources.globe_network);
             fileUploadersImageList.Images.Add("SharedFolders", Resources.server_network);
             fileUploadersImageList.Images.Add("Email", Resources.mail);
+            fileUploadersImageList.Images.Add("Jira", Resources.jira);
             tcFileUploaders.ImageList = fileUploadersImageList;
 
             ImageList textUploadersImageList = new ImageList();
@@ -103,6 +104,7 @@ namespace UploadersLib
             tpSendSpace.ImageKey = "SendSpace";
             tpSharedFolder.ImageKey = "SharedFolders";
             tpEmail.ImageKey = "Email";
+            tpJira.ImageKey = "Jira";
             tpGe_tt.ImageKey = "Gett";
             tpLocalhostr.ImageKey = "Localhostr";
             tpCustomUploaders.ImageKey = "CustomUploader";
@@ -343,6 +345,33 @@ namespace UploadersLib
             cbCustomUploaderResponseType.Items.AddRange(Helpers.GetEnumDescriptions<ResponseType>());
 
             CustomUploaderClear();
+
+            // Jira
+
+            txtJiraHost.Text = Config.JiraHost;
+            txtJiraIssuePrefix.Text = Config.JiraIssuePrefix;
+            txtJiraConfigHelp.Text = string.Format(@"Howto configure your Jira server:
+
+- Go to 'Administration' -> 'Add-ons'
+- Select 'Application Links'
+
+- Add a new 'Application Link' with following settings:
+    - Server URL: {0}
+    - Application Name: {1}
+    - Application Type: Generic Application
+
+- Now, you have to configure Incoming Authentication
+        - Consumer Key: {2}
+        - Consumer Name: {1}
+        - Public Key (without quotes): '{3}'
+
+- You can now authenticate to Jira", Links.URL_WEBSITE, Application.ProductName, ApiKeys.JiraConsumerKey, Jira.PublicKey);
+
+            if (OAuthInfo.CheckOAuth(Config.JiraOAuthInfo))
+            {
+                oAuthJira.Status = "Login successful.";
+                oAuthJira.LoginStatus = true;
+            }
 
             #endregion File uploaders
 

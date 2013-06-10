@@ -27,8 +27,10 @@ using HelpersLib;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Web;
 
@@ -45,7 +47,7 @@ namespace UploadersLib.HelperClasses
         private const string ParameterToken = "oauth_token";
         private const string ParameterTokenSecret = "oauth_token_secret";
         private const string ParameterVerifier = "oauth_verifier";
-        private const string ParameterCallback = "oauth_callback";
+        public const string ParameterCallback = "oauth_callback";
 
         private const string PlainTextSignatureType = "PLAINTEXT";
         private const string HMACSHA1SignatureType = "HMAC-SHA1";
@@ -53,17 +55,31 @@ namespace UploadersLib.HelperClasses
 
         public static string GenerateQuery(string url, Dictionary<string, string> args, HttpMethod httpMethod, OAuthInfo oauth)
         {
-            if (string.IsNullOrEmpty(oauth.ConsumerKey) || string.IsNullOrEmpty(oauth.ConsumerSecret))
+            if (string.IsNullOrEmpty(oauth.ConsumerKey)
+                || (string.IsNullOrEmpty(oauth.ConsumerSecret) && oauth.SignatureMethod == OAuthInfo.OAuthInfoSignatureMethod.HMAC_SHA1)
+                || (oauth.ConsumerPrivateKey == null && oauth.SignatureMethod == OAuthInfo.OAuthInfoSignatureMethod.RSA_SHA1))
             {
-                throw new Exception("ConsumerKey or ConsumerSecret empty.");
+                throw new Exception("ConsumerKey or ConsumerSecret or ConsumerPrivateKey empty.");
             }
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add(ParameterVersion, oauth.OAuthVersion);
             parameters.Add(ParameterNonce, GenerateNonce());
             parameters.Add(ParameterTimestamp, GenerateTimestamp());
-            parameters.Add(ParameterSignatureMethod, HMACSHA1SignatureType);
             parameters.Add(ParameterConsumerKey, oauth.ConsumerKey);
+            switch (oauth.SignatureMethod)
+            {
+                case OAuthInfo.OAuthInfoSignatureMethod.HMAC_SHA1:
+                    parameters.Add(ParameterSignatureMethod, HMACSHA1SignatureType);
+                    break;
+
+                case OAuthInfo.OAuthInfoSignatureMethod.RSA_SHA1:
+                    parameters.Add(ParameterSignatureMethod, RSASHA1SignatureType);
+                    break;
+
+                default:
+                    throw new NotImplementedException("Unsupported signature method");
+            }
 
             string secret = null;
 
@@ -87,15 +103,29 @@ namespace UploadersLib.HelperClasses
             {
                 foreach (KeyValuePair<string, string> arg in args)
                 {
-                    parameters.Add(arg.Key, arg.Value);
+                    parameters[arg.Key] = arg.Value;
                 }
             }
 
             string normalizedUrl = NormalizeUrl(url);
             string normalizedParameters = NormalizeParameters(parameters);
             string signatureBase = GenerateSignatureBase(httpMethod, normalizedUrl, normalizedParameters);
-            string signature = GenerateSignature(signatureBase, oauth.ConsumerSecret, secret);
+            byte[] signatureData;
+            switch (oauth.SignatureMethod)
+            {
+                case OAuthInfo.OAuthInfoSignatureMethod.HMAC_SHA1:
+                    signatureData = GenerateSignature(signatureBase, oauth.ConsumerSecret, secret);
+                    break;
 
+                case OAuthInfo.OAuthInfoSignatureMethod.RSA_SHA1:
+                    signatureData = GenerateSignatureRSASHA1(signatureBase, oauth.ConsumerPrivateKey);
+                    break;
+
+                default:
+                    throw new NotImplementedException("Unsupported signature method");
+            }
+
+            string signature = Helpers.URLEncode(Convert.ToBase64String(signatureData));
             return string.Format("{0}?{1}&{2}={3}", normalizedUrl, normalizedParameters, ParameterSignature, signature);
         }
 
@@ -152,7 +182,7 @@ namespace UploadersLib.HelperClasses
             return signatureBase.ToString();
         }
 
-        private static string GenerateSignature(string signatureBase, string consumerSecret, string userSecret = null)
+        private static byte[] GenerateSignature(string signatureBase, string consumerSecret, string userSecret = null)
         {
             using (HMACSHA1 hmacsha1 = new HMACSHA1())
             {
@@ -162,12 +192,30 @@ namespace UploadersLib.HelperClasses
                 hmacsha1.Key = Encoding.ASCII.GetBytes(key);
 
                 byte[] dataBuffer = Encoding.ASCII.GetBytes(signatureBase);
-                byte[] hashBytes = hmacsha1.ComputeHash(dataBuffer);
-
-                string signature = Convert.ToBase64String(hashBytes);
-
-                return Helpers.URLEncode(signature);
+                return hmacsha1.ComputeHash(dataBuffer);
             }
+        }
+
+        private static byte[] GenerateSignatureRSASHA1(string signatureBase, string privateKey)
+        {
+            byte[] dataBuffer = Encoding.ASCII.GetBytes(signatureBase);
+
+            using (SHA1CryptoServiceProvider sha1 = GenerateSha1Hash(dataBuffer))
+            using (AsymmetricAlgorithm algorithm = new RSACryptoServiceProvider())
+            {
+                algorithm.FromXmlString(privateKey);
+                RSAPKCS1SignatureFormatter formatter = new RSAPKCS1SignatureFormatter(algorithm);
+                formatter.SetHashAlgorithm("MD5");
+                return formatter.CreateSignature(sha1);
+            }
+        }
+
+        private static SHA1CryptoServiceProvider GenerateSha1Hash(byte[] dataBuffer)
+        {
+            SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
+            CryptoStream cs = new CryptoStream(Stream.Null, sha1, CryptoStreamMode.Write);
+            cs.Write(dataBuffer, 0, dataBuffer.Length);
+            return sha1;
         }
 
         private static string GenerateTimestamp()

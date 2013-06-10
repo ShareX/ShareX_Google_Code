@@ -171,6 +171,12 @@ namespace UploadersLib
         public string EmailDefaultSubject = "Sending email from " + Application.ProductName;
         public string EmailDefaultBody = "Screenshot is attached.";
 
+        // Jira
+
+        public string JiraHost = "http://";
+        public string JiraIssuePrefix = "PROJECT-";
+        public OAuthInfo JiraOAuthInfo = null;
+
         #endregion File uploaders
 
         #region URL shorteners
@@ -297,6 +303,8 @@ namespace UploadersLib
                     return LocalhostAccountList != null && LocalhostAccountList.IsValidIndex(LocalhostSelectedFiles);
                 case FileDestination.Email:
                     return !string.IsNullOrEmpty(EmailSmtpServer) && EmailSmtpPort > 0 && !string.IsNullOrEmpty(EmailFrom) && !string.IsNullOrEmpty(EmailPassword);
+                case FileDestination.Jira:
+                    return OAuthInfo.CheckOAuth(JiraOAuthInfo);
                 default:
                     return true;
             }
