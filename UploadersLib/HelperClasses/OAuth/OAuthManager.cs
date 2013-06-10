@@ -47,7 +47,7 @@ namespace UploadersLib.HelperClasses
         private const string ParameterToken = "oauth_token";
         private const string ParameterTokenSecret = "oauth_token_secret";
         private const string ParameterVerifier = "oauth_verifier";
-        public const string ParameterCallback = "oauth_callback";
+        internal const string ParameterCallback = "oauth_callback";
 
         private const string PlainTextSignatureType = "PLAINTEXT";
         private const string HMACSHA1SignatureType = "HMAC-SHA1";
@@ -116,11 +116,9 @@ namespace UploadersLib.HelperClasses
                 case OAuthInfo.OAuthInfoSignatureMethod.HMAC_SHA1:
                     signatureData = GenerateSignature(signatureBase, oauth.ConsumerSecret, secret);
                     break;
-
                 case OAuthInfo.OAuthInfoSignatureMethod.RSA_SHA1:
                     signatureData = GenerateSignatureRSASHA1(signatureBase, oauth.ConsumerPrivateKey);
                     break;
-
                 default:
                     throw new NotImplementedException("Unsupported signature method");
             }
@@ -213,8 +211,12 @@ namespace UploadersLib.HelperClasses
         private static SHA1CryptoServiceProvider GenerateSha1Hash(byte[] dataBuffer)
         {
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
-            CryptoStream cs = new CryptoStream(Stream.Null, sha1, CryptoStreamMode.Write);
-            cs.Write(dataBuffer, 0, dataBuffer.Length);
+
+            using (CryptoStream cs = new CryptoStream(Stream.Null, sha1, CryptoStreamMode.Write))
+            {
+                cs.Write(dataBuffer, 0, dataBuffer.Length);
+            }
+
             return sha1;
         }
 
