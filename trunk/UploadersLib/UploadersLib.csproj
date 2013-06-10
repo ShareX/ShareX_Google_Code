@@ -113,6 +113,7 @@
     <Compile Include="FileUploaders\Email.cs" />
     <Compile Include="FileUploaders\Ge_tt.cs" />
     <Compile Include="FileUploaders\GoogleDrive.cs" />
+    <Compile Include="FileUploaders\Jira.cs" />
     <Compile Include="FileUploaders\Localhostr.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
@@ -151,6 +152,12 @@
     </Compile>
     <Compile Include="GUI\GoogleTranslateGUI.Designer.cs">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\JiraUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\JiraUpload.Designer.cs">
+      <DependentUpon>JiraUpload.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\OAuth2Control.cs">
       <SubType>UserControl</SubType>
@@ -321,6 +328,9 @@
     <EmbeddedResource Include="GUI\GoogleTranslateGUI.resx">
       <DependentUpon>GoogleTranslateGUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\JiraUpload.resx">
+      <DependentUpon>JiraUpload.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\OAuth2Control.resx">
       <DependentUpon>OAuth2Control.cs</DependentUpon>
     </EmbeddedResource>
@@ -375,6 +385,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ApiKeys\jira_sharex.pfx" />
+    <None Include="Resources\jira.png" />
     <None Include="Resources\Picasa.ico" />
     <None Include="Resources\ShareXLogo.png" />
     <None Include="Favicons\Box.ico" />
@@ -387,6 +399,7 @@
     <Content Include="Favicons\Imgur.ico" />
     <None Include="Favicons\Minus.ico" />
     <None Include="Favicons\Localhostr.ico" />
+    <Content Include="Favicons\jira.png" />
     <Content Include="Favicons\Pastebin.ico" />
     <Content Include="Favicons\Photobucket.ico" />
     <Content Include="Favicons\RapidShare.ico" />

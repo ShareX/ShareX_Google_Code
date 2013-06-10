@@ -47,7 +47,7 @@ namespace HelpersLib
                 {
                     lock (ClipboardLock)
                     {
-                        Clipboard.SetDataObject(data, true, 3, 500);
+                        Clipboard.SetDataObject(data, true, 10, 200);
                     }
 
                     return true;

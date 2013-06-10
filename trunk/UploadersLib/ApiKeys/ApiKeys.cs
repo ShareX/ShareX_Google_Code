@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using System;
+
 namespace UploadersLib
 {
     public static class ApiKeys
@@ -55,6 +57,7 @@ namespace UploadersLib
         public const string SendSpaceKey = "LV6OS1R0Q3";
         public const string DropIOKey = "6c65e2d2bfd858f7d0aa6509784f876483582eea";
         public const string Ge_ttKey = "tdrrlb84kq2dquxrh4dw79gr3act0529";
+        public const string JiraConsumerKey = "NJgrJ4EhAahDwYuxLTtT"; // Random generated string
 
         // Text Uploaders
         public const string PastebinKey = "4b23be71ec78bbd4fb96735320aa09ef";

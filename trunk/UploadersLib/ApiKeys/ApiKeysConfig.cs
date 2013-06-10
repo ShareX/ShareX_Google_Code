@@ -110,6 +110,9 @@ namespace UploadersLib
         [Category("Ge.tt"), Browsable(false), DefaultValue(ApiKeys.Ge_ttKey), Description("Ge.tt Key")]
         public string Ge_ttKey { get; set; }
 
+        [Category("Atlassian Jira"), DefaultValue(ApiKeys.JiraConsumerKey), Description("Atlassian Jira Consumer Key")]
+        public string JiraConsumerKey { get; set; }
+
         #endregion File Uploaders
 
         #region Text Uploaders

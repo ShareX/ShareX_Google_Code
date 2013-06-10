@@ -1000,6 +1000,35 @@ namespace UploadersLib
 
         #endregion Custom Uploader
 
+        #region Jira
+
+        private void txtJiraHost_TextChanged(object sender, EventArgs e)
+        {
+            Config.JiraHost = txtJiraHost.Text;
+        }
+
+        private void txtJiraIssuePrefix_TextChanged(object sender, EventArgs e)
+        {
+            Config.JiraIssuePrefix = txtJiraIssuePrefix.Text;
+        }
+
+        private void oAuthJira_OpenButtonClicked()
+        {
+            this.JiraAuthOpen();
+        }
+
+        private void oAuthJira_CompleteButtonClicked(string code)
+        {
+            this.JiraAuthComplete(code);
+        }
+
+        private void oAuthJira_RefreshButtonClicked()
+        {
+            MessageBox.Show("Refresh authorization is not supported.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #endregion Jira
+
         #endregion File Uploaders
 
         #region Text Uploaders

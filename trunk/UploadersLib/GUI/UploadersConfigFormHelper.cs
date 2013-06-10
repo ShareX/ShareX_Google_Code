@@ -1365,5 +1365,61 @@ namespace UploadersLib
         }
 
         #endregion Custom uploader
+
+        #region Jira
+
+        public void JiraAuthOpen()
+        {
+            try
+            {
+                OAuthInfo oauth = new OAuthInfo(APIKeys.JiraConsumerKey);
+                oauth.SignatureMethod = OAuthInfo.OAuthInfoSignatureMethod.RSA_SHA1;
+                oauth.ConsumerPrivateKey = Jira.PrivateKey;
+
+                string url = new Jira(Config.JiraHost, oauth).GetAuthorizationURL();
+
+                if (!string.IsNullOrEmpty(url))
+                {
+                    Config.JiraOAuthInfo = oauth;
+                    Helpers.LoadBrowserAsync(url);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void JiraAuthComplete(string code)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(code) && Config.JiraOAuthInfo != null &&
+                    !string.IsNullOrEmpty(Config.JiraOAuthInfo.AuthToken) && !string.IsNullOrEmpty(Config.JiraOAuthInfo.AuthSecret))
+                {
+                    Jira jira = new Jira(Config.JiraHost, Config.JiraOAuthInfo);
+                    bool result = jira.GetAccessToken(code);
+
+                    if (result)
+                    {
+                        oAuthJira.Status = "Login successful.";
+                        MessageBox.Show("Login successful.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        oAuthJira.Status = "Login failed.";
+                        MessageBox.Show("Login failed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    oAuthJira.LoginStatus = result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion Jira
     }
 }

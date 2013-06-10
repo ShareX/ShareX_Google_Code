@@ -104,6 +104,8 @@ namespace UploadersLib
         SharedFolder,
         [Description("Email")]
         Email,
+        [Description("Jira")]
+        Jira,
         [Description("Custom File Uploader")]
         CustomFileUploader
     }
