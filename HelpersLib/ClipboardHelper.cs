@@ -43,16 +43,12 @@ namespace HelpersLib
         {
             if (data != null)
             {
-                try
+                lock (ClipboardLock)
                 {
-                    lock (ClipboardLock)
-                    {
-                        Clipboard.SetDataObject(data, true, 10, 200);
-                    }
-
-                    return true;
+                    Clipboard.SetDataObject(data, true, 10, 200);
                 }
-                catch { }
+
+                return true;
             }
 
             return false;
@@ -62,20 +58,27 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(text))
             {
-                DataObject data = new DataObject();
-                string dataFormat;
-
-                if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Major < 5)
+                try
                 {
-                    dataFormat = DataFormats.Text;
-                }
-                else
-                {
-                    dataFormat = DataFormats.UnicodeText;
-                }
+                    DataObject data = new DataObject();
+                    string dataFormat;
 
-                data.SetData(dataFormat, false, text);
-                return CopyData(data);
+                    if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Major < 5)
+                    {
+                        dataFormat = DataFormats.Text;
+                    }
+                    else
+                    {
+                        dataFormat = DataFormats.UnicodeText;
+                    }
+
+                    data.SetData(dataFormat, false, text);
+                    return CopyData(data);
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy text");
+                }
             }
 
             return false;
@@ -85,14 +88,25 @@ namespace HelpersLib
         {
             if (img != null)
             {
-                DataObject data = new DataObject();
-
-                using (MemoryStream ms = new MemoryStream())
+                try
                 {
-                    img.Save(ms, ImageFormat.Png);
-                    data.SetData("PNG", false, ms);
-                    data.SetData(DataFormats.Bitmap, true, img);
-                    return CopyData(data);
+                    DataObject data = new DataObject();
+
+                    using (MemoryStream msPNG = new MemoryStream())
+                    using (MemoryStream msBMP = new MemoryStream())
+                    using (MemoryStream msDIB = new MemoryStream())
+                    {
+                        img.Save(msPNG, ImageFormat.Png);
+                        data.SetData("PNG", false, msPNG);
+                        img.Save(msBMP, ImageFormat.Bmp);
+                        msBMP.CopyStreamTo(msDIB, 14, (int)msBMP.Length - 14);
+                        data.SetData(DataFormats.Dib, true, msDIB);
+                        return CopyData(data);
+                    }
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy image");
                 }
             }
 
@@ -103,9 +117,16 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(path))
             {
-                DataObject data = new DataObject();
-                data.SetFileDropList(new StringCollection() { path });
-                return CopyData(data);
+                try
+                {
+                    DataObject data = new DataObject();
+                    data.SetFileDropList(new StringCollection() { path });
+                    return CopyData(data);
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy file");
+                }
             }
 
             return false;
@@ -122,7 +143,10 @@ namespace HelpersLib
                         return CopyImage(img);
                     }
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy image file");
+                }
             }
 
             return false;
@@ -137,7 +161,10 @@ namespace HelpersLib
                     string text = File.ReadAllText(path);
                     return CopyText(text);
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy text file");
+                }
             }
 
             return false;
