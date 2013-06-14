@@ -192,9 +192,9 @@ namespace ShareX
             this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -665,6 +665,7 @@ namespace ShareX
             // 
             // lvUploads
             // 
+            this.lvUploads.AutoFillColumn = true;
             this.lvUploads.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvUploads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chFilename,
@@ -1114,7 +1115,7 @@ namespace ShareX
             this.tsmiShowPreview});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(159, 280);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(159, 258);
             // 
             // tsmiStopUpload
             // 
@@ -1398,13 +1399,6 @@ namespace ShareX
             this.tsmiFileUpload.Text = "File upload...";
             this.tsmiFileUpload.Click += new System.EventHandler(this.tsmiUploadFile_Click);
             // 
-            // tsmiShowPreview
-            // 
-            this.tsmiShowPreview.Name = "tsmiShowPreview";
-            this.tsmiShowPreview.Size = new System.Drawing.Size(158, 22);
-            this.tsmiShowPreview.Text = "Show image preview";
-            this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
-            // 
             // tssUploadInfo2
             // 
             this.tssUploadInfo2.Name = "tssUploadInfo2";
@@ -1416,6 +1410,13 @@ namespace ShareX
             this.tsmiHideMenu.Size = new System.Drawing.Size(158, 22);
             this.tsmiHideMenu.Text = "Hide menu";
             this.tsmiHideMenu.Click += new System.EventHandler(this.tsmiHideMenu_Click);
+            // 
+            // tsmiShowPreview
+            // 
+            this.tsmiShowPreview.Name = "tsmiShowPreview";
+            this.tsmiShowPreview.Size = new System.Drawing.Size(158, 22);
+            this.tsmiShowPreview.Text = "Show image preview";
+            this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
             // MainForm
             // 
