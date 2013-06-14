@@ -45,6 +45,7 @@ namespace ShareX
         public FileDestination FileUploaderDestination = FileDestination.Dropbox;
         public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
         public SocialNetworkingService SocialServiceDestination = SocialNetworkingService.Twitter;
+        public bool ShowMenu = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
         public string FileUploadDefaultDirectory = "";

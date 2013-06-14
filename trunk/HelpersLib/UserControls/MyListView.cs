@@ -66,7 +66,12 @@ namespace HelpersLib
                     if (i != index) width += Columns[i].Width;
                 }
 
-                Columns[index].Width = ClientSize.Width - width;
+                int columnWidth = ClientSize.Width - width;
+
+                if (columnWidth > 0)
+                {
+                    Columns[index].Width = columnWidth;
+                }
             }
         }
 
