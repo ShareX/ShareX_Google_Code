@@ -64,7 +64,9 @@ namespace ShareX
 
             if (Program.Settings.AutoCheckUpdate)
             {
-                new Thread(CheckUpdate).Start();
+                Thread updateThread = new Thread(CheckUpdate);
+                updateThread.IsBackground = true;
+                updateThread.Start();
             }
 
             IsReady = true;
@@ -76,6 +78,7 @@ namespace ShareX
 
         private void AfterShownJobs()
         {
+            UpdateControls();
             ShowActivate();
         }
 
@@ -304,6 +307,7 @@ namespace ShareX
             }
 
             tsmiClearList.Visible = tssUploadInfo1.Visible = lvUploads.Items.Count > 0;
+            lvUploads.FillLastColumn();
 
             cmsUploadInfo.ResumeLayout();
         }
@@ -321,6 +325,7 @@ namespace ShareX
             SetEnumChecked(Program.Settings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
             SetEnumChecked(Program.Settings.SocialServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
 
+            UpdateMenu();
             UpdateUploaderMenuNames();
 
             UploadManager.UpdateProxySettings();
@@ -473,15 +478,30 @@ namespace ShareX
             lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
         }
 
+        private void UpdateMenu()
+        {
+            if (Program.Settings.ShowMenu)
+            {
+                tsmiHideMenu.Text = "Hide menu";
+            }
+            else
+            {
+                tsmiHideMenu.Text = "Show menu";
+            }
+
+            tsMain.Visible = Program.Settings.ShowMenu;
+            lblSplitter.Visible = Program.Settings.ShowMenu;
+        }
+
         private void UpdatePreviewSplitter()
         {
             if (Program.Settings.IsPreviewCollapsed)
             {
-                tsmiShowPreview.Text = "Show preview section";
+                tsmiShowPreview.Text = "Show image preview";
             }
             else
             {
-                tsmiShowPreview.Text = "Hide preview section";
+                tsmiShowPreview.Text = "Hide image preview";
             }
 
             scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
@@ -950,9 +970,21 @@ namespace ShareX
             RemoveAllItems();
         }
 
+        private void tsmiClipboardUpload_Click(object sender, EventArgs e)
+        {
+            UploadManager.ClipboardUploadWithContentViewer();
+        }
+
         private void tsmiUploadFile_Click(object sender, EventArgs e)
         {
             UploadManager.UploadFile();
+        }
+
+        private void tsmiHideMenu_Click(object sender, EventArgs e)
+        {
+            Program.Settings.ShowMenu = !Program.Settings.ShowMenu;
+            UpdateMenu();
+            UpdateControls();
         }
 
         private void tsmiShowPreview_Click(object sender, EventArgs e)
