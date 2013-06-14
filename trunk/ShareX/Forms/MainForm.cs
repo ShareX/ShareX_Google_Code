@@ -78,7 +78,6 @@ namespace ShareX
 
         private void AfterShownJobs()
         {
-            UpdateControls();
             ShowActivate();
         }
 
@@ -108,7 +107,6 @@ namespace ShareX
             il.Images.Add(Properties.Resources.tick_button);
             il.Images.Add(Properties.Resources.navigation_000_button);
             lvUploads.SmallImageList = il;
-            lvUploads.FillLastColumn();
 
             TaskManager.ListViewControl = lvUploads;
             uim = new UploadInfoManager(lvUploads);
@@ -307,7 +305,6 @@ namespace ShareX
             }
 
             tsmiClearList.Visible = tssUploadInfo1.Visible = lvUploads.Items.Count > 0;
-            lvUploads.FillLastColumn();
 
             cmsUploadInfo.ResumeLayout();
         }
@@ -984,7 +981,6 @@ namespace ShareX
         {
             Program.Settings.ShowMenu = !Program.Settings.ShowMenu;
             UpdateMenu();
-            UpdateControls();
         }
 
         private void tsmiShowPreview_Click(object sender, EventArgs e)

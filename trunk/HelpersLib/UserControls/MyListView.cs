@@ -68,7 +68,7 @@ namespace HelpersLib
 
                 int columnWidth = ClientSize.Width - width;
 
-                if (columnWidth > 0)
+                if (columnWidth > 0 && Columns[index].Width != columnWidth)
                 {
                     Columns[index].Width = columnWidth;
                 }
