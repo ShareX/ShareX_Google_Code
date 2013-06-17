@@ -632,7 +632,7 @@ namespace ShareX
                     }
                     break;
                 case FileDestination.Localhostr:
-                    fileUploader = new Localhostr(Program.UploadersConfig.LocalhostrEmail, Program.UploadersConfig.LocalhostrPassword)
+                    fileUploader = new Hostr(Program.UploadersConfig.LocalhostrEmail, Program.UploadersConfig.LocalhostrPassword)
                     {
                         DirectURL = Program.UploadersConfig.LocalhostrDirectURL
                     };

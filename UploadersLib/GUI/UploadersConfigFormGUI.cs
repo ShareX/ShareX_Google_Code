@@ -106,7 +106,7 @@ namespace UploadersLib
             tpEmail.ImageKey = "Email";
             tpJira.ImageKey = "Jira";
             tpGe_tt.ImageKey = "Gett";
-            tpLocalhostr.ImageKey = "Localhostr";
+            tpHostr.ImageKey = "Localhostr";
             tpCustomUploaders.ImageKey = "CustomUploader";
             tpPastebin.ImageKey = "Pastebin";
             tpGoogleURLShortener.ImageKey = "Google";

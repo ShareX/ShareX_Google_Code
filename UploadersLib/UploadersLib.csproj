@@ -114,7 +114,7 @@
     <Compile Include="FileUploaders\Ge_tt.cs" />
     <Compile Include="FileUploaders\GoogleDrive.cs" />
     <Compile Include="FileUploaders\Jira.cs" />
-    <Compile Include="FileUploaders\Localhostr.cs" />
+    <Compile Include="FileUploaders\Hostr.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="FileUploaders\SharedFolderUploader.cs" />
