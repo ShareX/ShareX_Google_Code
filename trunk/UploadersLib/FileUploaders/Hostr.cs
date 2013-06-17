@@ -30,13 +30,13 @@ using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
 {
-    public sealed class Localhostr : FileUploader
+    public sealed class Hostr : FileUploader
     {
         public string Email { get; set; }
         public string Password { get; set; }
         public bool DirectURL { get; set; }
 
-        public Localhostr(string email, string password)
+        public Hostr(string email, string password)
         {
             Email = email;
             Password = password;
@@ -49,17 +49,17 @@ namespace UploadersLib.FileUploaders
             if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
             {
                 NameValueCollection headers = CreateAuthenticationHeader(Email, Password);
-                result = UploadData(stream, "https://api.localhostr.com/file", fileName, "file", null, null, headers);
+                result = UploadData(stream, "https://api.hostr.co/file", fileName, "file", null, null, headers);
 
                 if (result.IsSuccess)
                 {
-                    LocalhostrFileUploadResponse response = JsonConvert.DeserializeObject<LocalhostrFileUploadResponse>(result.Response);
+                    HostrFileUploadResponse response = JsonConvert.DeserializeObject<HostrFileUploadResponse>(result.Response);
 
                     if (response != null)
                     {
                         if (DirectURL && response.direct != null)
                         {
-                            result.URL = string.Format("http://localhostr.com/file/{0}/{1}", response.id, response.name);
+                            result.URL = string.Format("http://hostr.co/file/{0}/{1}", response.id, response.name);
                             result.ThumbnailURL = response.direct.direct_150x;
                         }
                         else
@@ -73,18 +73,18 @@ namespace UploadersLib.FileUploaders
             return result;
         }
 
-        public class LocalhostrFileUploadResponse
+        public class HostrFileUploadResponse
         {
             public string added { get; set; }
             public string name { get; set; }
             public string href { get; set; }
             public int size { get; set; }
             public string type { get; set; }
-            public LocalhostrFileUploadResponseDirect direct { get; set; }
+            public HostrFileUploadResponseDirect direct { get; set; }
             public string id { get; set; }
         }
 
-        public class LocalhostrFileUploadResponseDirect
+        public class HostrFileUploadResponseDirect
         {
             [JsonProperty("150x")]
             public string direct_150x { get; set; }
