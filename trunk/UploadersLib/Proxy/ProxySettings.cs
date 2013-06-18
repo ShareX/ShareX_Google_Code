@@ -67,7 +67,7 @@ namespace UploadersLib.HelperClasses
 
         public IProxyClient GetProxyClient(ProxyInfo myProxyInfo)
         {
-            if (ProxyConfig != EProxyConfigType.NoProxy && myProxyInfo != null)
+            if (ProxyConfig != EProxyConfigType.NoProxy && myProxyInfo != null && !string.IsNullOrEmpty(myProxyInfo.Host))
             {
                 ProxyType proxyType;
 
