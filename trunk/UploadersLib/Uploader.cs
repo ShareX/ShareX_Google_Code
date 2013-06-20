@@ -40,7 +40,7 @@ namespace UploadersLib
 {
     public class Uploader
     {
-        public static ProxySettings ProxySettings = new ProxySettings();
+        public static ProxyInfo ProxyInfo = new ProxyInfo();
         public static string UserAgent = string.Format("{0} {1}", Application.ProductName, Application.ProductVersion);
 
         public delegate void ProgressEventHandler(ProgressManager progress);
@@ -62,6 +62,11 @@ namespace UploadersLib
             ServicePointManager.DefaultConnectionLimit = 25;
             ServicePointManager.Expect100Continue = false;
             ServicePointManager.UseNagleAlgorithm = false;
+
+            if (ProxyInfo == null)
+            {
+                ProxyInfo = new ProxyInfo();
+            }
         }
 
         protected void OnProgressChanged(ProgressManager progress)
@@ -340,7 +345,7 @@ namespace UploadersLib
             NameValueCollection headers = null)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.AllowWriteStreamBuffering = ProxySettings.ProxyConfig != EProxyConfigType.NoProxy;
+            request.AllowWriteStreamBuffering = ProxyInfo.IsValidProxy();
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
             request.ContentLength = length;
             if (!string.IsNullOrEmpty(boundary)) contentType += "; boundary=" + boundary;
@@ -352,7 +357,7 @@ namespace UploadersLib
             request.Method = HttpMethod.Post.GetDescription();
             request.Pipelined = false;
             request.ProtocolVersion = HttpVersion.Version11;
-            request.Proxy = ProxySettings.GetWebProxy;
+            request.Proxy = ProxyInfo.GetWebProxy();
             request.Timeout = -1;
             request.UserAgent = UserAgent;
 
@@ -367,7 +372,7 @@ namespace UploadersLib
             if (headers != null) request.Headers.Add(headers);
             request.KeepAlive = false;
             request.Method = HttpMethod.Get.GetDescription();
-            IWebProxy proxy = ProxySettings.GetWebProxy;
+            IWebProxy proxy = ProxyInfo.GetWebProxy();
             if (proxy != null) request.Proxy = proxy;
             request.UserAgent = UserAgent;
 
@@ -379,7 +384,7 @@ namespace UploadersLib
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.KeepAlive = false;
             request.Method = HttpMethod.Delete.GetDescription();
-            IWebProxy proxy = ProxySettings.GetWebProxy;
+            IWebProxy proxy = ProxyInfo.GetWebProxy();
             if (proxy != null) request.Proxy = proxy;
             request.UserAgent = UserAgent;
 
