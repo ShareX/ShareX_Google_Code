@@ -221,10 +221,7 @@ namespace ShareX
 
         public static void UpdateProxySettings()
         {
-            Uploader.ProxySettings = new ProxySettings()
-            {
-                ProxyActive = Program.Settings.ProxySettings
-            };
+            Uploader.ProxyInfo = Program.Settings.ProxySettings;
         }
     }
 }

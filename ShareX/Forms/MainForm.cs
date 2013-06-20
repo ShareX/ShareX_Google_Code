@@ -389,7 +389,7 @@ namespace ShareX
         private void CheckUpdate()
         {
             UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,
-                ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
+                ReleaseChannelType.Stable, Uploader.ProxyInfo.GetWebProxy());
             updateChecker.CheckUpdate();
 
             if (updateChecker.UpdateInfo != null)

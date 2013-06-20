@@ -254,21 +254,7 @@
     <Compile Include="ImageUploaders\Photobucket.cs" />
     <Compile Include="SocialServices\Twitter.cs" />
     <Compile Include="HelperClasses\ProgressManager.cs" />
-    <Compile Include="Proxy\ProxyConfig.cs" />
-    <Compile Include="Proxy\ProxyConfigUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Proxy\ProxyConfigUI.Designer.cs">
-      <DependentUpon>ProxyConfigUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Proxy\ProxyUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Proxy\ProxyUI.Designer.cs">
-      <DependentUpon>ProxyUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Proxy\ProxyInfo.cs" />
-    <Compile Include="Proxy\ProxySettings.cs" />
+    <Compile Include="ProxyInfo.cs" />
     <Compile Include="HelperClasses\TCPClient.cs" />
     <Compile Include="ImageUploader.cs" />
     <Compile Include="FileUploaders\CustomFileUploader.cs" />
@@ -359,12 +345,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Proxy\ProxyConfigUI.resx">
-      <DependentUpon>ProxyConfigUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Proxy\ProxyUI.resx">
-      <DependentUpon>ProxyUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

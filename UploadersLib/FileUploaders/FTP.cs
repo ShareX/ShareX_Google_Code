@@ -72,9 +72,9 @@ namespace UploadersLib
 
             Client.DataTransferMode = account.IsActive ? TransferMode.Active : TransferMode.Passive;
 
-            if (Uploader.ProxySettings != null)
+            if (Uploader.ProxyInfo != null)
             {
-                IProxyClient proxy = Uploader.ProxySettings.GetProxyClient();
+                IProxyClient proxy = Uploader.ProxyInfo.GetProxyClient();
 
                 if (proxy != null)
                 {

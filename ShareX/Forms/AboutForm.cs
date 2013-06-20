@@ -46,7 +46,7 @@ namespace ShareX
             lblCopyright.Text = Program.AssemblyCopyright;
 
             UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,
-                ReleaseChannelType.Stable, Uploader.ProxySettings.GetWebProxy);
+                ReleaseChannelType.Stable, Uploader.ProxyInfo.GetWebProxy());
             uclUpdate.CheckUpdate(updateChecker);
         }
 

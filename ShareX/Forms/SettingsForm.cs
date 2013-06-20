@@ -873,29 +873,11 @@ namespace ShareX
 
         private void btnAutofillProxy_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Program.Settings.ProxySettings.UserName))
-            {
-                Program.Settings.ProxySettings.UserName = Environment.UserName;
-            }
-
-            WebProxy proxy = Helpers.GetDefaultWebProxy();
-            if (proxy != null && proxy.Address != null)
-            {
-                if (string.IsNullOrEmpty(Program.Settings.ProxySettings.Host))
-                {
-                    Program.Settings.ProxySettings.Host = proxy.Address.Host;
-                }
-
-                if (Program.Settings.ProxySettings.Port == 0)
-                {
-                    Program.Settings.ProxySettings.Port = proxy.Address.Port;
-                }
-            }
-
+            Program.Settings.ProxySettings.AutoFillProxy();
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
             txtProxyHost.Text = Program.Settings.ProxySettings.Host;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
         }
 
         #endregion Proxy
