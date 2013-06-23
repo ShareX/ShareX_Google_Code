@@ -164,7 +164,7 @@ namespace ShareX
 
         #region Actions
 
-        public List<ExternalProgram> ExternalPrograms;
+        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
 
         #endregion Actions
 

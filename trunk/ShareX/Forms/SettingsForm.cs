@@ -150,16 +150,12 @@ namespace ShareX
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
 
             // Actions
-            if (Program.Settings.ExternalPrograms == null)
+
+            TaskHelper.AddDefaultExternalPrograms();
+
+            foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
             {
-                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
-            }
-            else
-            {
-                foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
-                {
-                    AddFileAction(fileAction);
-                }
+                AddFileAction(fileAction);
             }
 
             // Upload / General

@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -226,6 +227,47 @@ namespace ShareX
             Point offsetChange;
             return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Program.Settings.ShadowDarkness, Program.Settings.ShadowSize,
                 Program.Settings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
+        }
+
+        public static void AddDefaultExternalPrograms()
+        {
+            if (Program.Settings.ExternalPrograms == null)
+            {
+                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
+            }
+
+            AddExternalProgramFromRegistry("Paint", "mspaint.exe");
+            AddExternalProgramFromRegistry("Paint.NET", "PaintDotNet.exe");
+            AddExternalProgramFromRegistry("Adobe Photoshop", "Photoshop.exe");
+            AddExternalProgramFromRegistry("IrfanView", "i_view32.exe");
+            AddExternalProgramFromRegistry("XnView", "xnview.exe");
+            AddExternalProgramFromFile("OptiPNG", "optipng.exe");
+        }
+
+        private static void AddExternalProgramFromFile(string name, string filename, string args = "")
+        {
+            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
+            {
+                if (File.Exists(filename))
+                {
+                    DebugHelper.WriteLine("Found program: " + filename);
+
+                    Program.Settings.ExternalPrograms.Add(new ExternalProgram(name, filename, args));
+                }
+            }
+        }
+
+        private static void AddExternalProgramFromRegistry(string name, string filename)
+        {
+            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
+            {
+                ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
+
+                if (externalProgram != null)
+                {
+                    Program.Settings.ExternalPrograms.Add(externalProgram);
+                }
+            }
         }
     }
 }
