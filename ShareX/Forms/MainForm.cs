@@ -345,47 +345,6 @@ namespace ShareX
             }
         }
 
-        private void AddDefaultExternalPrograms()
-        {
-            if (Program.Settings.ExternalPrograms == null)
-            {
-                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
-            }
-
-            AddExternalProgramFromRegistry("Paint", "mspaint.exe");
-            AddExternalProgramFromRegistry("Paint.NET", "PaintDotNet.exe");
-            AddExternalProgramFromRegistry("Adobe Photoshop", "Photoshop.exe");
-            AddExternalProgramFromRegistry("IrfanView", "i_view32.exe");
-            AddExternalProgramFromRegistry("XnView", "xnview.exe");
-            AddExternalProgramFromFile("OptiPNG", "optipng.exe");
-        }
-
-        private void AddExternalProgramFromFile(string name, string filename, string args = "")
-        {
-            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
-            {
-                if (File.Exists(filename))
-                {
-                    DebugHelper.WriteLine("Found program: " + filename);
-
-                    Program.Settings.ExternalPrograms.Add(new ExternalProgram(name, filename, args));
-                }
-            }
-        }
-
-        private void AddExternalProgramFromRegistry(string name, string filename)
-        {
-            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
-            {
-                ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
-
-                if (externalProgram != null)
-                {
-                    Program.Settings.ExternalPrograms.Add(externalProgram);
-                }
-            }
-        }
-
         private void UpdateUploaderMenuNames()
         {
             string imageUploader = Program.Settings.ImageUploaderDestination == ImageDestination.FileUploader ?
@@ -728,7 +687,6 @@ namespace ShareX
 
         private void tsbSettings_Click(object sender, EventArgs e)
         {
-            AddDefaultExternalPrograms();
             new SettingsForm() { Icon = this.Icon }.ShowDialog();
             UploadManager.UpdateProxySettings();
             Program.Settings.SaveAsync();
