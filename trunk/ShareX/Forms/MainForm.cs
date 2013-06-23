@@ -30,6 +30,7 @@ using ScreenCapture;
 using ShareX.Properties;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -334,8 +335,6 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
-            AddDefaultExternalPrograms();
-
             if (Program.Settings.WatchFolderEnabled)
             {
                 foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
@@ -351,21 +350,39 @@ namespace ShareX
             if (Program.Settings.ExternalPrograms == null)
             {
                 Program.Settings.ExternalPrograms = new List<ExternalProgram>();
-                AddExternalProgram("Paint", "mspaint.exe");
-                AddExternalProgram("Paint.NET", "PaintDotNet.exe");
-                AddExternalProgram("Adobe Photoshop", "Photoshop.exe");
-                AddExternalProgram("IrfanView", "i_view32.exe");
-                AddExternalProgram("XnView", "xnview.exe");
+            }
+
+            AddExternalProgramFromRegistry("Paint", "mspaint.exe");
+            AddExternalProgramFromRegistry("Paint.NET", "PaintDotNet.exe");
+            AddExternalProgramFromRegistry("Adobe Photoshop", "Photoshop.exe");
+            AddExternalProgramFromRegistry("IrfanView", "i_view32.exe");
+            AddExternalProgramFromRegistry("XnView", "xnview.exe");
+            AddExternalProgramFromFile("OptiPNG", "optipng.exe");
+        }
+
+        private void AddExternalProgramFromFile(string name, string filename, string args = "")
+        {
+            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
+            {
+                if (File.Exists(filename))
+                {
+                    DebugHelper.WriteLine("Found program: " + filename);
+
+                    Program.Settings.ExternalPrograms.Add(new ExternalProgram(name, filename, args));
+                }
             }
         }
 
-        private void AddExternalProgram(string name, string filename)
+        private void AddExternalProgramFromRegistry(string name, string filename)
         {
-            ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
-
-            if (externalProgram != null)
+            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
             {
-                Program.Settings.ExternalPrograms.Add(externalProgram);
+                ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
+
+                if (externalProgram != null)
+                {
+                    Program.Settings.ExternalPrograms.Add(externalProgram);
+                }
             }
         }
 
@@ -711,6 +728,7 @@ namespace ShareX
 
         private void tsbSettings_Click(object sender, EventArgs e)
         {
+            AddDefaultExternalPrograms();
             new SettingsForm() { Icon = this.Icon }.ShowDialog();
             UploadManager.UpdateProxySettings();
             Program.Settings.SaveAsync();

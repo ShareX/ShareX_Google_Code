@@ -156,7 +156,7 @@ namespace HelpersLib
                 }
             }
 
-            // Second method: Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
+            // Second method: HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
 
             using (RegistryKey programs = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache"))
             {
