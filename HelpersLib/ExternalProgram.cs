@@ -49,9 +49,18 @@ namespace HelpersLib
             Path = path;
         }
 
+        public ExternalProgram(string name, string path, string args)
+            : this(name, path)
+        {
+            if (!string.IsNullOrEmpty(args))
+            {
+                Args += " " + args;
+            }
+        }
+
         public void Run(string filePath)
         {
-            if (File.Exists(Path))
+            if (!string.IsNullOrEmpty(Path) && File.Exists(Path))
             {
                 filePath = '"' + filePath.Trim('"') + '"';
 

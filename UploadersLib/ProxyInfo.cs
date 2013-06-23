@@ -29,7 +29,7 @@ using System;
 using System.ComponentModel;
 using System.Net;
 
-namespace UploadersLib.HelperClasses
+namespace UploadersLib
 {
     public class ProxyInfo
     {
