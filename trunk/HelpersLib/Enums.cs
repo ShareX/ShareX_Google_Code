@@ -127,7 +127,7 @@ namespace HelpersLib
 
     public enum TaskStatus
     {
-        InQueue, Preparing, Working, Completed
+        InQueue, Preparing, Working, Stopping, Completed
     }
 
     public enum TaskProgress

@@ -403,10 +403,8 @@ namespace UploadersLib
             byte[] buffer = new byte[length];
             int bytesRead;
 
-            while ((bytesRead = dataStream.Read(buffer, 0, length)) > 0)
+            while (!stopUpload && (bytesRead = dataStream.Read(buffer, 0, length)) > 0)
             {
-                if (stopUpload) return false;
-
                 requestStream.Write(buffer, 0, bytesRead);
 
                 if (progress.UpdateProgress(bytesRead))
@@ -415,7 +413,7 @@ namespace UploadersLib
                 }
             }
 
-            return true;
+            return !stopUpload;
         }
 
         private string CreateBoundary()
