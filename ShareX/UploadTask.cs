@@ -46,8 +46,8 @@ namespace ShareX
     {
         public delegate void TaskEventHandler(UploadTask task);
 
+        public event TaskEventHandler StatusChanged;
         public event TaskEventHandler UploadStarted;
-        public event TaskEventHandler UploadPreparing;
         public event TaskEventHandler UploadProgressChanged;
         public event TaskEventHandler UploadCompleted;
 
@@ -59,7 +59,7 @@ namespace ShareX
         {
             get
             {
-                return Status == TaskStatus.Preparing || Status == TaskStatus.Working;
+                return Status != TaskStatus.InQueue && Status != TaskStatus.Completed;
             }
         }
 
@@ -143,8 +143,7 @@ namespace ShareX
         {
             if (Status == TaskStatus.InQueue && !IsStopped)
             {
-                OnUploadPreparing();
-
+                Prepare();
                 threadWorker = new ThreadWorker();
                 threadWorker.DoWork += ThreadDoWork;
                 threadWorker.Completed += ThreadCompleted;
@@ -156,23 +155,47 @@ namespace ShareX
         {
             if (Status == TaskStatus.InQueue && !IsStopped)
             {
-                OnUploadPreparing();
+                Prepare();
                 ThreadDoWork();
                 ThreadCompleted();
             }
         }
 
+        private void Prepare()
+        {
+            Status = TaskStatus.Preparing;
+
+            switch (Info.Job)
+            {
+                case TaskJob.ImageJob:
+                case TaskJob.TextUpload:
+                    Info.Status = "Preparing";
+                    break;
+                default:
+                    Info.Status = "Starting";
+                    break;
+            }
+
+            OnStatusChanged();
+        }
+
         public void Stop()
         {
-            IsStopped = true;
+            if (Status != TaskStatus.Stopping && Status != TaskStatus.Completed)
+            {
+                IsStopped = true;
+                Status = TaskStatus.Stopping;
+                Info.Status = "Stopping";
 
-            if (Status == TaskStatus.InQueue)
-            {
-                OnUploadCompleted();
-            }
-            else if (Status == TaskStatus.Working && uploader != null)
-            {
-                uploader.StopUpload();
+                if (Status == TaskStatus.InQueue)
+                {
+                    OnUploadCompleted();
+                }
+                else if (IsWorking && uploader != null)
+                {
+                    OnStatusChanged();
+                    uploader.StopUpload();
+                }
             }
         }
 
@@ -784,24 +807,18 @@ namespace ShareX
             }
         }
 
-        private void OnUploadPreparing()
+        private void OnStatusChanged()
         {
-            Status = TaskStatus.Preparing;
-
-            switch (Info.Job)
+            if (StatusChanged != null)
             {
-                case TaskJob.ImageJob:
-                case TaskJob.TextUpload:
-                    Info.Status = "Preparing";
-                    break;
-                default:
-                    Info.Status = "Starting";
-                    break;
-            }
-
-            if (UploadPreparing != null)
-            {
-                UploadPreparing(this);
+                if (threadWorker != null)
+                {
+                    threadWorker.InvokeAsync(() => StatusChanged(this));
+                }
+                else
+                {
+                    StatusChanged(this);
+                }
             }
         }
 

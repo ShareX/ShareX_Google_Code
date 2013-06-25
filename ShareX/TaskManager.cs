@@ -52,7 +52,7 @@ namespace ShareX
         public static void Start(UploadTask task)
         {
             Tasks.Add(task);
-            task.UploadPreparing += new UploadTask.TaskEventHandler(task_UploadPreparing);
+            task.StatusChanged += task_StatusChanged;
             task.UploadStarted += new UploadTask.TaskEventHandler(task_UploadStarted);
             task.UploadProgressChanged += new UploadTask.TaskEventHandler(task_UploadProgressChanged);
             task.UploadCompleted += new UploadTask.TaskEventHandler(task_UploadCompleted);
@@ -168,9 +168,9 @@ namespace ShareX
             }
         }
 
-        private static void task_UploadPreparing(UploadTask task)
+        private static void task_StatusChanged(UploadTask task)
         {
-            Program.MyLogger.WriteLine("Task preparing.");
+            Program.MyLogger.WriteLine("Task status: " + task.Status);
             ChangeListViewItemStatus(task);
             UpdateProgressUI();
         }
@@ -195,7 +195,7 @@ namespace ShareX
 
         private static void task_UploadProgressChanged(UploadTask task)
         {
-            if (ListViewControl != null)
+            if (task.Status == TaskStatus.Working && ListViewControl != null)
             {
                 UploadInfo info = task.Info;
 
