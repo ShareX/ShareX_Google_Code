@@ -131,6 +131,7 @@ namespace ShareX
                 Screenshot.CaptureShadow = Program.Settings.CaptureShadow;
                 Screenshot.ShadowOffset = Program.Settings.CaptureShadowOffset;
                 Screenshot.CaptureClientArea = Program.Settings.CaptureClientArea;
+                Screenshot.AutoHideTaskbar = Program.Settings.CaptureAutoHideTaskbar;
 
                 img = capture();
 

@@ -274,63 +274,15 @@ namespace HelpersLib
 
         public static Rectangle GetTaskbarRectangle()
         {
-            APPBARDATA abd = new APPBARDATA();
-            SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, out abd);
+            APPBARDATA abd = APPBARDATA.NewAPPBARDATA();
+            IntPtr retval = SHAppBarMessage((uint)ABMsg.ABM_GETTASKBARPOS, ref abd);
             return (Rectangle)abd.rc;
         }
 
-        /// <summary>
-        /// Method returns information about the Window's TaskBar.
-        /// </summary>
-        /// <param name="taskBarEdge">Location of the TaskBar(Top,Bottom,Left,Right).</param>
-        /// <param name="height">Height of the TaskBar.</param>
-        /// <param name="autoHide">AutoHide property of the TaskBar.</param>
-        public static void GetTaskBarInfo(out TaskBarEdge taskBarEdge, out int height, out bool autoHide)
+        public static void SetTaskbarVisible(bool visible)
         {
-            APPBARDATA abd = new APPBARDATA();
-
-            height = 0;
-            taskBarEdge = TaskBarEdge.Bottom;
-            autoHide = false;
-
-            uint ret = SHAppBarMessage((int)ABMsg.ABM_GETTASKBARPOS, out abd);
-            switch (abd.uEdge)
-            {
-                case (int)ABEdge.ABE_BOTTOM:
-                    taskBarEdge = TaskBarEdge.Bottom;
-                    height = abd.rc.Height;
-                    break;
-                case (int)ABEdge.ABE_TOP:
-                    taskBarEdge = TaskBarEdge.Top;
-                    height = abd.rc.Bottom;
-                    break;
-                case (int)ABEdge.ABE_LEFT:
-                    taskBarEdge = TaskBarEdge.Left;
-                    height = abd.rc.Width;
-                    break;
-                case (int)ABEdge.ABE_RIGHT:
-                    taskBarEdge = TaskBarEdge.Right;
-                    height = abd.rc.Width;
-                    break;
-            }
-
-            abd = new APPBARDATA();
-            uint uState = SHAppBarMessage((int)ABMsg.ABM_GETSTATE, out abd);
-            switch (uState)
-            {
-                case (int)ABState.ABS_ALWAYSONTOP:
-                    autoHide = false;
-                    break;
-                case (int)ABState.ABS_AUTOHIDE:
-                    autoHide = true;
-                    break;
-                case (int)ABState.ABS_AUTOHIDEANDONTOP:
-                    autoHide = true;
-                    break;
-                case (int)ABState.ABS_MANUAL:
-                    autoHide = false;
-                    break;
-            }
+            IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
+            NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
         }
 
         public static void TrimMemoryUse()
@@ -345,7 +297,7 @@ namespace HelpersLib
             WINDOWPLACEMENT wp = new WINDOWPLACEMENT();
             wp.length = Marshal.SizeOf(wp);
             GetWindowPlacement(handle, ref wp);
-            return wp.showCmd == SHOWWINDOW.SW_MAXIMIZE;
+            return wp.showCmd == WindowShowStyle.Maximize;
         }
 
         public static IntPtr SetHook(int hookType, HookProc hookProc)
@@ -365,11 +317,11 @@ namespace HelpersLib
 
             if (wp.flags == (int)WindowPlacementFlags.WPF_RESTORETOMAXIMIZED)
             {
-                wp.showCmd = SHOWWINDOW.SW_SHOWMAXIMIZED;
+                wp.showCmd = WindowShowStyle.ShowMaximized;
             }
             else
             {
-                wp.showCmd = SHOWWINDOW.SW_RESTORE;
+                wp.showCmd = WindowShowStyle.Restore;
             }
 
             SetWindowPlacement(handle, ref wp);

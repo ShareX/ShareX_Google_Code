@@ -37,6 +37,7 @@ namespace ScreenCapture
         public static bool CaptureClientArea = false;
         public static bool CaptureShadow = true;
         public static int ShadowOffset = 20;
+        public static bool AutoHideTaskbar = false;
 
         public static Image CaptureRectangle(Rectangle rect)
         {
@@ -71,7 +72,25 @@ namespace ScreenCapture
                     rect = CaptureHelpers.GetWindowRectangle(handle);
                 }
 
-                return CaptureRectangle(rect);
+                bool isTaskbarHide = false;
+
+                try
+                {
+                    if (AutoHideTaskbar && NativeMethods.GetTaskbarRectangle().IntersectsWith(rect))
+                    {
+                        isTaskbarHide = true;
+                        NativeMethods.SetTaskbarVisible(false);
+                    }
+
+                    return CaptureRectangle(rect);
+                }
+                finally
+                {
+                    if (isTaskbarHide)
+                    {
+                        NativeMethods.SetTaskbarVisible(true);
+                    }
+                }
             }
 
             return null;

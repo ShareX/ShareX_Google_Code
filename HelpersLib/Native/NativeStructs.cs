@@ -171,7 +171,7 @@ namespace HelpersLib
     {
         public int length;
         public int flags;
-        public SHOWWINDOW showCmd;
+        public WindowShowStyle showCmd;
         public POINT ptMinPosition;
         public POINT ptMaxPosition;
         public RECT rcNormalPosition;
@@ -194,6 +194,13 @@ namespace HelpersLib
         public int uEdge;
         public RECT rc;
         public IntPtr lParam;
+
+        public static APPBARDATA NewAPPBARDATA()
+        {
+            APPBARDATA abd = new APPBARDATA();
+            abd.cbSize = Marshal.SizeOf(typeof(APPBARDATA));
+            return abd;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

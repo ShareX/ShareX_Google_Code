@@ -56,7 +56,7 @@ namespace HelpersLib
             {
                 Location = wp.rcNormalPosition.Location;
                 Size = wp.rcNormalPosition.Size;
-                IsMaximized = wp.showCmd == SHOWWINDOW.SW_MAXIMIZE;
+                IsMaximized = wp.showCmd == WindowShowStyle.Maximize;
             }
         }
 
