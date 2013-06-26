@@ -117,6 +117,12 @@ namespace HelpersLib
         public static extern bool DrawIcon(IntPtr hDC, int X, int Y, IntPtr hIcon);
 
         [DllImport("user32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+
+        [DllImport("user32.dll")]
         public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
 
         [DllImport("user32.dll")]
@@ -361,8 +367,8 @@ namespace HelpersLib
 
         #region shell32.dll
 
-        [DllImport("shell32.dll", CallingConvention = CallingConvention.StdCall)]
-        public static extern uint SHAppBarMessage(int dwMessage, out APPBARDATA pData);
+        [DllImport("shell32.dll")]
+        public static extern IntPtr SHAppBarMessage(uint dwMessage, [In] ref APPBARDATA pData);
 
         #endregion shell32.dll
 

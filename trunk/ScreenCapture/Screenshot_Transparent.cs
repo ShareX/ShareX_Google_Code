@@ -39,12 +39,25 @@ namespace ScreenCapture
             if (handle.ToInt32() > 0)
             {
                 Rectangle rect = CaptureHelpers.GetWindowRectangle(handle);
+
+                if (CaptureShadow && !NativeMethods.IsZoomed(handle) && NativeMethods.IsDWMEnabled())
+                {
+                    rect.Inflate(ShadowOffset, ShadowOffset);
+                    rect.Intersect(CaptureHelpers.GetScreenBounds());
+                }
+
                 Bitmap whiteBackground = null, blackBackground = null, whiteBackground2 = null;
                 CursorData cursor = null;
-                bool isTransparent = false;
+                bool isTransparent = false, isTaskbarHide = false;
 
                 try
                 {
+                    if (AutoHideTaskbar && NativeMethods.GetTaskbarRectangle().IntersectsWith(rect))
+                    {
+                        isTaskbarHide = true;
+                        NativeMethods.SetTaskbarVisible(false);
+                    }
+
                     if (CaptureCursor)
                     {
                         try
@@ -62,12 +75,6 @@ namespace ScreenCapture
                         form.BackColor = Color.White;
                         form.FormBorderStyle = FormBorderStyle.None;
                         form.ShowInTaskbar = false;
-
-                        if (CaptureShadow && !NativeMethods.IsZoomed(handle) && NativeMethods.IsDWMEnabled())
-                        {
-                            rect.Inflate(ShadowOffset, ShadowOffset);
-                            rect.Intersect(CaptureHelpers.GetScreenBounds());
-                        }
 
                         NativeMethods.ShowWindow(form.Handle, (int)WindowShowStyle.ShowNormalNoActivate);
 
@@ -129,6 +136,11 @@ namespace ScreenCapture
                 }
                 finally
                 {
+                    if (isTaskbarHide)
+                    {
+                        NativeMethods.SetTaskbarVisible(true);
+                    }
+
                     if (whiteBackground != null) whiteBackground.Dispose();
                     if (blackBackground != null) blackBackground.Dispose();
                     if (isTransparent && whiteBackground2 != null) whiteBackground2.Dispose();

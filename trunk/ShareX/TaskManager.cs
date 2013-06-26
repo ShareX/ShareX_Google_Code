@@ -148,7 +148,7 @@ namespace ShareX
             {
                 UploadInfo info = task.Info;
 
-                Program.MyLogger.WriteLine("Task in queue. Job: {0}, Type: {1}, Host: {2}", info.Job, info.UploadDestination, info.UploaderHost);
+                DebugHelper.WriteLine("Task in queue. Job: {0}, Type: {1}, Host: {2}", info.Job, info.UploadDestination, info.UploaderHost);
 
                 ListViewItem lvi = new ListViewItem();
                 lvi.Tag = task;
@@ -170,7 +170,7 @@ namespace ShareX
 
         private static void task_StatusChanged(UploadTask task)
         {
-            Program.MyLogger.WriteLine("Task status: " + task.Status);
+            DebugHelper.WriteLine("Task status: " + task.Status);
             ChangeListViewItemStatus(task);
             UpdateProgressUI();
         }
@@ -181,7 +181,7 @@ namespace ShareX
 
             string status = string.Format("Upload started. Filename: {0}", info.FileName);
             if (!string.IsNullOrEmpty(info.FilePath)) status += ", Filepath: " + info.FilePath;
-            Program.MyLogger.WriteLine(status);
+            DebugHelper.WriteLine(status);
 
             ListViewItem lvi = FindListViewItem(task);
 
@@ -235,7 +235,7 @@ namespace ShareX
                         {
                             string errors = string.Join("\r\n\r\n", info.Result.Errors.ToArray());
 
-                            Program.MyLogger.WriteLine("Task failed. Filename: {0}, Errors:\r\n{1}", info.FileName, errors);
+                            DebugHelper.WriteLine("Task failed. Filename: {0}, Errors:\r\n{1}", info.FileName, errors);
 
                             if (lvi != null)
                             {
@@ -251,7 +251,7 @@ namespace ShareX
                         }
                         else
                         {
-                            Program.MyLogger.WriteLine("Task completed. Filename: {0}, URL: {1}, Duration: {2}ms",
+                            DebugHelper.WriteLine("Task completed. Filename: {0}, URL: {1}, Duration: {2}ms",
                                 info.FileName, info.Result.ToString(), (int)info.UploadDuration.TotalMilliseconds);
 
                             string result = info.Result.ToString();

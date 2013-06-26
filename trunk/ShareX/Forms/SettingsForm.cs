@@ -138,6 +138,7 @@ namespace ShareX
             cbCaptureClientArea.Checked = Program.Settings.CaptureClientArea;
             cbScreenshotDelay.Checked = Program.Settings.IsDelayScreenshot;
             nudScreenshotDelay.Value = Program.Settings.DelayScreenshot;
+            cbCaptureAutoHideTaskbar.Checked = Program.Settings.CaptureAutoHideTaskbar;
 
             if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
             cbDrawBorder.Checked = Program.Settings.SurfaceOptions.DrawBorder;
@@ -605,6 +606,11 @@ namespace ShareX
         private void nudScreenshotDelay_ValueChanged(object sender, EventArgs e)
         {
             Program.Settings.DelayScreenshot = nudScreenshotDelay.Value;
+        }
+
+        private void cbCaptureAutoHideTaskbar_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.CaptureAutoHideTaskbar = cbCaptureAutoHideTaskbar.Checked;
         }
 
         #endregion Capture / General

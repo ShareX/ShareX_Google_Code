@@ -190,6 +190,7 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.cbCaptureAutoHideTaskbar = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -1334,6 +1335,7 @@
             // 
             // tpCaptureGeneral
             // 
+            this.tpCaptureGeneral.Controls.Add(this.cbCaptureAutoHideTaskbar);
             this.tpCaptureGeneral.Controls.Add(this.lblScreenshotDelayInfo);
             this.tpCaptureGeneral.Controls.Add(this.nudScreenshotDelay);
             this.tpCaptureGeneral.Controls.Add(this.cbScreenshotDelay);
@@ -2181,6 +2183,17 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // cbCaptureAutoHideTaskbar
+            // 
+            this.cbCaptureAutoHideTaskbar.AutoSize = true;
+            this.cbCaptureAutoHideTaskbar.Location = new System.Drawing.Point(16, 136);
+            this.cbCaptureAutoHideTaskbar.Name = "cbCaptureAutoHideTaskbar";
+            this.cbCaptureAutoHideTaskbar.Size = new System.Drawing.Size(402, 17);
+            this.cbCaptureAutoHideTaskbar.TabIndex = 9;
+            this.cbCaptureAutoHideTaskbar.Text = "When doing window capture if window intersects with taskbar then hide taskbar";
+            this.cbCaptureAutoHideTaskbar.UseVisualStyleBackColor = true;
+            this.cbCaptureAutoHideTaskbar.CheckedChanged += new System.EventHandler(this.cbCaptureAutoHideTaskbar_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2422,5 +2435,6 @@
         private System.Windows.Forms.NumericUpDown nudImageShadowSize;
         private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
         private System.Windows.Forms.CheckBox cbUseImageFormat2FileUpload;
+        private System.Windows.Forms.CheckBox cbCaptureAutoHideTaskbar;
     }
 }
