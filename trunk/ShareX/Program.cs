@@ -64,7 +64,7 @@ namespace ShareX
         private static readonly string PersonalPathConfig = Path.Combine(StartupPath, "PersonalPath.cfg");
         private static readonly string SettingsFileName = ApplicationName + "Settings.json";
         private static readonly string UploadersConfigFileName = "UploadersConfig.json";
-        private static readonly string LogFileName = ApplicationName + "-Log-{0}-{1}.txt";
+        private static readonly string LogFileName = ApplicationName + "-Log-{0:yyyy-MM}.txt";
 
         public static string CustomPersonalPath { get; private set; }
 
@@ -150,8 +150,8 @@ namespace ShareX
         {
             get
             {
-                DateTime now = FastDateTime.Now;
-                return Path.Combine(LogParentFolder, string.Format(LogFileName, now.Year, now.Month));
+                string filename = string.Format(LogFileName, FastDateTime.Now);
+                return Path.Combine(LogParentFolder, filename);
             }
         }
 
@@ -182,6 +182,14 @@ namespace ShareX
             get
             {
                 return Path.Combine(PersonalPath, "ScreenRecorder.cache");
+            }
+        }
+
+        private static string BackupFolder
+        {
+            get
+            {
+                return Path.Combine(PersonalPath, "Backup");
             }
         }
 
@@ -301,8 +309,8 @@ namespace ShareX
 
                 Application.Run(MainForm);
 
-                Settings.Save();
-                UploadersConfig.Save();
+                SaveSettings();
+                BackupSettings();
 
                 MyLogger.WriteLine("ShareX closing");
                 MyLogger.SaveLog(LogFilePath);
@@ -318,15 +326,33 @@ namespace ShareX
 
         public static void LoadSettings()
         {
-            Settings = Settings.Load(SettingsFilePath);
+            LoadProgramSettings();
             SettingsResetEvent.Set();
             LoadUploadersConfig();
             UploaderSettingsResetEvent.Set();
         }
 
+        public static void LoadProgramSettings()
+        {
+            Settings = Settings.Load(SettingsFilePath);
+        }
+
         public static void LoadUploadersConfig()
         {
             UploadersConfig = UploadersConfig.Load(UploadersConfigFilePath);
+        }
+
+        public static void SaveSettings()
+        {
+            Settings.Save();
+            UploadersConfig.Save();
+        }
+
+        public static void BackupSettings()
+        {
+            Helpers.BackupFileMonthly(SettingsFilePath, BackupFolder);
+            Helpers.BackupFileMonthly(UploadersConfigFilePath, BackupFolder);
+            Helpers.BackupFileMonthly(HistoryFilePath, BackupFolder);
         }
 
         private static void CheckPersonalPathConfig()
