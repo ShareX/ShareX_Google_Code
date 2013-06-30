@@ -109,14 +109,14 @@ namespace HelpersLib
 
         public static string AddZeroes(int number, int digits = 2)
         {
-            return number.ToString("d" + digits);
+            return number.ToString().PadLeft(digits, '0');
         }
 
         public static string HourTo12(int hour)
         {
             if (hour == 0)
             {
-                return (12).ToString();
+                return 12.ToString();
             }
 
             if (hour > 12)
@@ -572,20 +572,6 @@ namespace HelpersLib
             return false;
         }
 
-        public static void Backup(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                File.Copy(filePath, filePath + string.Format(".{0}.bak", CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
-                    CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)), true);
-            }
-        }
-
-        public static void BackupAsync(string filePath)
-        {
-            ThreadPool.QueueUserWorkItem(state => Backup(filePath));
-        }
-
         public static bool WaitWhile(Func<bool> check, int interval, int timeout = -1)
         {
             Stopwatch timer = Stopwatch.StartNew();
@@ -709,6 +695,23 @@ namespace HelpersLib
                 if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
                 {
                     Directory.CreateDirectory(directoryName);
+                }
+            }
+        }
+
+        public static void BackupFileMonthly(string filepath, string destinationFolder)
+        {
+            if (!string.IsNullOrEmpty(filepath) && File.Exists(filepath))
+            {
+                string filename = Path.GetFileNameWithoutExtension(filepath);
+                string extension = Path.GetExtension(filepath);
+                string newFilename = string.Format("{0}-{1:yyyy-MM}{2}", filename, DateTime.Now, extension);
+                string newFilepath = Path.Combine(destinationFolder, newFilename);
+
+                if (!File.Exists(newFilepath))
+                {
+                    Helpers.CreateDirectoryIfNotExist(newFilepath);
+                    File.Copy(filepath, newFilepath, false);
                 }
             }
         }
