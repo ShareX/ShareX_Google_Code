@@ -57,9 +57,13 @@ namespace ShareX
         {
             if (files != null && files.Length > 0)
             {
-                foreach (string file in files)
+                if (files.Length <= 10 || MessageBox.Show("Are you sure you want to upload " + files.Length + " files?",
+                    "ShareX - Upload files", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    UploadFile(file);
+                    foreach (string file in files)
+                    {
+                        UploadFile(file);
+                    }
                 }
             }
         }
