@@ -362,7 +362,12 @@ namespace ShareX
                             }
                         }
 
-                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
+                        if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
+                            File.Exists(Info.FilePath))
+                        {
+                            ClipboardHelper.CopyFile(Info.FilePath);
+                        }
+                        else if (Info.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
                         {
                             ClipboardHelper.CopyText(Info.FilePath);
                         }

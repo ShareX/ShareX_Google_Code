@@ -199,12 +199,12 @@ namespace HistoryLib
 
         public void CopyImage()
         {
-            if (HistoryItem != null && IsImageFile) ClipboardHelper.CopyImageFile(HistoryItem.Filepath);
+            if (HistoryItem != null && IsImageFile) ClipboardHelper.CopyImageFromFile(HistoryItem.Filepath);
         }
 
         public void CopyText()
         {
-            if (HistoryItem != null && IsTextFile) ClipboardHelper.CopyTextFile(HistoryItem.Filepath);
+            if (HistoryItem != null && IsTextFile) ClipboardHelper.CopyTextFromFile(HistoryItem.Filepath);
         }
 
         public void CopyHTMLLink()

@@ -160,12 +160,12 @@ namespace ShareX
 
         public void CopyImage()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ClipboardHelper.CopyImageFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ClipboardHelper.CopyImageFromFile(SelectedItems[0].Info.FilePath);
         }
 
         public void CopyText()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsTextFile) ClipboardHelper.CopyTextFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsTextFile) ClipboardHelper.CopyTextFromFile(SelectedItems[0].Info.FilePath);
         }
 
         public void CopyHTMLLink()
