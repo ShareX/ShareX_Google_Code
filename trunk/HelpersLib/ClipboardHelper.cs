@@ -132,7 +132,7 @@ namespace HelpersLib
             return false;
         }
 
-        public static bool CopyImageFile(string path)
+        public static bool CopyImageFromFile(string path)
         {
             if (!string.IsNullOrEmpty(path))
             {
@@ -152,7 +152,7 @@ namespace HelpersLib
             return false;
         }
 
-        public static bool CopyTextFile(string path)
+        public static bool CopyTextFromFile(string path)
         {
             if (!string.IsNullOrEmpty(path))
             {

@@ -67,12 +67,14 @@ namespace ShareX
         SaveImageToFile = 1 << 6,
         [Description("Save image to file as...")]
         SaveImageToFileWithDialog = 1 << 7,
+        [Description("Copy file to clipboard")]
+        CopyFileToClipboard = 1 << 8,
         [Description("Copy file path to clipboard")]
-        CopyFilePathToClipboard = 1 << 8,
+        CopyFilePathToClipboard = 1 << 9,
         [Description("Perform actions")]
-        PerformActions = 1 << 9,
+        PerformActions = 1 << 10,
         [Description("Upload image to host")]
-        UploadImageToHost = 1 << 10
+        UploadImageToHost = 1 << 11
     }
 
     [Flags]
