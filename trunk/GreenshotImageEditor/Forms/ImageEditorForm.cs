@@ -44,6 +44,10 @@ namespace Greenshot
     /// </summary>
     public partial class ImageEditorForm : BaseForm, IImageEditor
     {
+        public delegate void ImageEventHandler(Image img);
+        public event ImageEventHandler ClipboardCopyRequested;
+        public event ImageEventHandler ImageUploadRequested;
+
         private static EditorConfiguration editorConfiguration = IniConfig.GetIniSection<EditorConfiguration>();
         private static List<string> ignoreDestinations = new List<string>() { };
         private static List<IImageEditor> editorList = new List<IImageEditor>();
@@ -1333,13 +1337,29 @@ namespace Greenshot
 
         private void btnClipboardCopy_Click(object sender, EventArgs e)
         {
-            try
+            OnClipboardCopyRequested();
+        }
+
+        public void OnClipboardCopyRequested()
+        {
+            if (ClipboardCopyRequested != null)
             {
-                ClipboardHelper.SetClipboardData(surface);
+                Image img = surface.GetImageForExport();
+                ClipboardCopyRequested(img);
             }
-            catch (Exception)
+        }
+
+        private void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            OnImageUploadRequested();
+        }
+
+        public void OnImageUploadRequested()
+        {
+            if (ImageUploadRequested != null)
             {
-                surface.SendMessageEvent(this, SurfaceMessageTyp.Error, "Error while accessing the clipboard. Please try again.");
+                Image img = surface.GetImageForExport();
+                ImageUploadRequested(img);
             }
         }
     }

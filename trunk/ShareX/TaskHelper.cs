@@ -217,6 +217,9 @@ namespace ShareX
             using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
             using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
             {
+                editor.ClipboardCopyRequested += editor_ClipboardCopyRequested;
+                editor.ImageUploadRequested += editor_ImageUploadRequested;
+
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
                     return editor.GetImageForExport();
@@ -224,6 +227,30 @@ namespace ShareX
             }
 
             return img;
+        }
+
+        private static void editor_ClipboardCopyRequested(Image img)
+        {
+            if (Program.MainForm.InvokeRequired)
+            {
+                Program.MainForm.Invoke(new MethodInvoker(() => editor_ClipboardCopyRequested(img)));
+            }
+            else
+            {
+                ClipboardHelper.CopyImage(img);
+            }
+        }
+
+        private static void editor_ImageUploadRequested(Image img)
+        {
+            if (Program.MainForm.InvokeRequired)
+            {
+                Program.MainForm.Invoke(new MethodInvoker(() => editor_ImageUploadRequested(img)));
+            }
+            else
+            {
+                UploadManager.RunImageTask(img);
+            }
         }
 
         public static Image DrawShadow(Image img)
