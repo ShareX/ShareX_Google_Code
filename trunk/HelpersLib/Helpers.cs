@@ -317,12 +317,13 @@ namespace HelpersLib
         {
             try
             {
-                // TODO: This is ugly, need better solution
-                return ((WebProxy)typeof(WebProxy).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
-                    null, new Type[] { typeof(bool) }, null).Invoke(new object[] { true }));
+                // TODO: Need better solution
+                return (WebProxy)typeof(WebProxy).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+                    null, new Type[] { typeof(bool) }, null).Invoke(new object[] { true });
             }
-            catch
+            catch (Exception e)
             {
+                DebugHelper.WriteException(e, "Reflection fail");
             }
 
             return null;

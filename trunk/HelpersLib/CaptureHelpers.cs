@@ -26,7 +26,10 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -433,7 +436,6 @@ namespace HelpersLib
                 g.CompositingQuality = CompositingQuality.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = SmoothingMode.HighQuality;
-
                 g.Clear(color);
                 g.DrawImageUnscaled(img, 0, 0);
             }
@@ -544,6 +546,51 @@ namespace HelpersLib
             using (Brush textBrush = new SolidBrush(textColor))
             {
                 g.DrawString(text, font, textBrush, position.X, position.Y);
+            }
+        }
+
+        public static bool AddMetadata(Image img, int id, string text)
+        {
+            PropertyItem pi = null;
+
+            try
+            {
+                // TODO: Need better solution
+                pi = (PropertyItem)typeof(PropertyItem).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { }, null).Invoke(null);
+                pi.Id = id;
+                pi.Len = text.Length + 1;
+                pi.Type = 2;
+                byte[] bytesText = Encoding.ASCII.GetBytes(text + " ");
+                bytesText[bytesText.Length - 1] = 0;
+                pi.Value = bytesText;
+
+                if (pi != null)
+                {
+                    img.SetPropertyItem(pi);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e, "Reflection fail");
+            }
+
+            return false;
+        }
+
+        public static void CopyMetadata(Image fromImage, Image toImage)
+        {
+            PropertyItem[] propertyItems = fromImage.PropertyItems;
+            foreach (PropertyItem pi in propertyItems)
+            {
+                try
+                {
+                    toImage.SetPropertyItem(pi);
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e);
+                }
             }
         }
     }

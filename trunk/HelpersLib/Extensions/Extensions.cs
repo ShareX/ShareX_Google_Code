@@ -217,7 +217,10 @@ namespace HelpersLib
             {
                 if (fillBackground)
                 {
-                    img = CaptureHelpers.FillImageBackground(img, Color.White);
+                    Image img2 = CaptureHelpers.FillImageBackground(img, Color.White);
+                    CaptureHelpers.CopyMetadata(img, img2);
+                    if (img != null) img.Dispose();
+                    img = img2;
                 }
 
                 encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
