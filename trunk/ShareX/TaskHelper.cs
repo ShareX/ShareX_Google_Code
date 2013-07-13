@@ -231,26 +231,12 @@ namespace ShareX
 
         private static void editor_ClipboardCopyRequested(Image img)
         {
-            if (Program.MainForm.InvokeRequired)
-            {
-                Program.MainForm.Invoke(new MethodInvoker(() => editor_ClipboardCopyRequested(img)));
-            }
-            else
-            {
-                ClipboardHelper.CopyImage(img);
-            }
+            Program.MainForm.InvokeSafe(() => ClipboardHelper.CopyImage(img));
         }
 
         private static void editor_ImageUploadRequested(Image img)
         {
-            if (Program.MainForm.InvokeRequired)
-            {
-                Program.MainForm.Invoke(new MethodInvoker(() => editor_ImageUploadRequested(img)));
-            }
-            else
-            {
-                UploadManager.RunImageTask(img);
-            }
+            Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(img));
         }
 
         public static Image DrawShadow(Image img)

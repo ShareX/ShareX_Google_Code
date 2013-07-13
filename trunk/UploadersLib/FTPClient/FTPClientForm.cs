@@ -302,7 +302,7 @@ namespace UploadersLib
 
         private void AddConsoleMessage(string text, Color color)
         {
-            this.Invoke(new MethodInvoker(delegate
+            this.InvokeSafe(() =>
             {
                 text = string.Format("{0} - {1}\r\n", DateTime.Now.ToLongTimeString(), text);
                 rtbConsole.AppendText(text);
@@ -310,7 +310,7 @@ namespace UploadersLib
                 rtbConsole.SelectionLength = text.Length;
                 rtbConsole.SelectionColor = color;
                 rtbConsole.ScrollToCaret();
-            }));
+            });
         }
 
         #endregion Methods

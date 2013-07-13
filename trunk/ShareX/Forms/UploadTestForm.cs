@@ -188,13 +188,7 @@ namespace ShareX
 
         private void ConsoleWriteLine(string value)
         {
-            if (!this.IsDisposed)
-            {
-                this.Invoke(new MethodInvoker(delegate
-                    {
-                        txtConsole.AppendText(value + "\r\n");
-                    }));
-            }
+            this.InvokeSafe(() => txtConsole.AppendText(value + "\r\n"));
         }
 
         private ListViewItem FindListViewItem(UploadTask task)
