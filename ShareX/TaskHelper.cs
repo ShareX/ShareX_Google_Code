@@ -35,6 +35,8 @@ namespace ShareX
 {
     public static class TaskHelper
     {
+        private const int PropertyTagSoftwareUsed = 0x0131;
+
         public static ImageData PrepareImage(Image img)
         {
             ImageData imageData = new ImageData();
@@ -109,6 +111,8 @@ namespace ShareX
 
         private static MemoryStream SaveImage(Image img, EImageFormat imageFormat)
         {
+            CaptureHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
+
             MemoryStream stream = new MemoryStream();
 
             switch (imageFormat)
