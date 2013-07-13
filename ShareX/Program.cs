@@ -415,7 +415,7 @@ namespace ShareX
                         MainForm.UseCommandLineArgs(args.CommandLineArgs);
                     };
 
-                    MainForm.Invoke(d);
+                    MainForm.InvokeSafe(d);
                 }
             }
         }

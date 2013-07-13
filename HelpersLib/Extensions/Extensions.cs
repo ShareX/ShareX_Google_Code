@@ -287,5 +287,20 @@ namespace HelpersLib
 
             tsmi.Checked = true;
         }
+
+        public static void InvokeSafe(this Control control, Action action)
+        {
+            if (control != null && !control.IsDisposed)
+            {
+                if (control.InvokeRequired)
+                {
+                    control.Invoke(action);
+                }
+                else
+                {
+                    action();
+                }
+            }
+        }
     }
 }

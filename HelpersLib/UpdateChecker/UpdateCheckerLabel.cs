@@ -66,11 +66,7 @@ namespace UpdateCheckerLib
 
         private void UpdateControls()
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new MethodInvoker(UpdateControls));
-            }
-            else
+            this.InvokeSafe(() =>
             {
                 pbLoading.Visible = false;
                 lblCheckingUpdates.Visible = false;
@@ -90,7 +86,7 @@ namespace UpdateCheckerLib
                         lblStatus.Visible = true;
                         break;
                 }
-            }
+            });
         }
 
         private void llblUpdateAvailable_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

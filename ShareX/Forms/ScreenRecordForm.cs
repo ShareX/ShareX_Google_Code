@@ -147,7 +147,7 @@ namespace ShareX
 
         private void screenRecorder_EncodingProgressChanged(float progress)
         {
-            Invoke(new MethodInvoker(() => pbEncoding.Value = (int)progress));
+            this.InvokeSafe(() => pbEncoding.Value = (int)progress);
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
