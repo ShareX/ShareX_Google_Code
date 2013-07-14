@@ -109,6 +109,7 @@ namespace HelpersLib
         public int AutoIncrementNumber { get; set; } // %i
         public Image Picture { get; set; } // %width, %height
         public string WindowText { get; set; } // %t
+        public DateTime CustomDate { get; set; }
 
         public NameParser(NameParserType nameParserType)
         {
@@ -141,6 +142,10 @@ namespace HelpersLib
             sb.Replace(ReplacementVariables.height.ToPrefixString(), height);
 
             DateTime dt = DateTime.Now;
+            if (CustomDate != DateTime.MinValue)
+            {
+                dt = CustomDate;
+            }
 
             sb.Replace(ReplacementVariables.mon2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(dt.Month))
                 .Replace(ReplacementVariables.mon.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month))
