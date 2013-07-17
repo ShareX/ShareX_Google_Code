@@ -113,7 +113,7 @@ namespace HelpersLib
         {
             bool flag = false;
 
-            if (Environment.OSVersion.Version.Major >= 6)
+            if (Helpers.IsWindowsVistaOrGreater())
             {
                 Reflector r = new Reflector("System.Windows.Forms");
 

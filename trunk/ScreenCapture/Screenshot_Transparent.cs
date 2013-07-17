@@ -437,13 +437,11 @@ namespace ScreenCapture
         {
             byte[,] corner;
 
-            Version os = Environment.OSVersion.Version;
-
-            if (os.Major == 6 && os.Minor == 1) // Windows 7
+            if (Helpers.IsWindows7())
             {
                 corner = windows7Corner;
             }
-            else if (os.Major == 6 && os.Minor == 0) // Windows Vista
+            else if (Helpers.IsWindowsVista())
             {
                 corner = windowsVistaCorner;
             }

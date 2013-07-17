@@ -304,7 +304,7 @@ namespace ShareX
             bool isWorkingTasks = false;
             double averageProgress = 0;
 
-            IEnumerable<UploadTask> workingTasks = Tasks.Where(x => x != null && x.IsWorking && x.Info != null);
+            IEnumerable<UploadTask> workingTasks = Tasks.Where(x => x != null && x.Status == TaskStatus.Working && x.Info != null);
 
             if (workingTasks.Count() > 0)
             {
@@ -343,6 +343,7 @@ namespace ShareX
             if (isWorkingTasks)
             {
                 title = string.Format("{0} - {1:0.0}%", Program.Title, averageProgress);
+                TaskbarManager.SetProgressValue(Program.MainForm, (int)averageProgress);
             }
             else
             {
@@ -352,6 +353,11 @@ namespace ShareX
             if (Program.MainForm.Text != title)
             {
                 Program.MainForm.Text = title;
+            }
+
+            if (Tasks == null || Tasks.All(x => x != null && x.Status == TaskStatus.Completed))
+            {
+                TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.NoProgress);
             }
         }
     }
