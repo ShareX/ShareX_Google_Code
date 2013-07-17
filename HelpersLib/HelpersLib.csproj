@@ -159,6 +159,7 @@
     <Compile Include="Steam\SteamScreenshotsParse.cs" />
     <Compile Include="Steam\SteamScreenshotsWatchFolder.cs" />
     <Compile Include="StringLineReader.cs" />
+    <Compile Include="Native\TaskbarManager.cs" />
     <Compile Include="ThreadWorker.cs" />
     <Compile Include="Tokenizer\BetweenTagsResult.cs" />
     <Compile Include="Tokenizer\Token.cs" />

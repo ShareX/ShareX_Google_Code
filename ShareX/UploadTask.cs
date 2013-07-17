@@ -176,6 +176,8 @@ namespace ShareX
                     break;
             }
 
+            TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.Indeterminate);
+
             OnStatusChanged();
         }
 
@@ -214,6 +216,8 @@ namespace ShareX
 
                 Status = TaskStatus.Working;
                 Info.Status = "Uploading";
+
+                TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.Normal);
 
                 if (threadWorker != null)
                 {

@@ -1257,7 +1257,7 @@ namespace ShareX
             // 
             this.tsmiCopyImage.Name = "tsmiCopyImage";
             this.tsmiCopyImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyImage.Text = "Image (Bitmap)";
+            this.tsmiCopyImage.Text = "Image";
             this.tsmiCopyImage.Click += new System.EventHandler(this.tsmiCopyImage_Click);
             // 
             // tsmiCopyText

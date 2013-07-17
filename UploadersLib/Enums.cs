@@ -30,12 +30,12 @@ namespace UploadersLib
     [Description("Image uploaders")]
     public enum ImageDestination
     {
+        [Description("imgur.com")]
+        Imgur,
         [Description("imageshack.us")]
         ImageShack,
         [Description("tinypic.com")]
         TinyPic,
-        [Description("imgur.com")]
-        Imgur,
         [Description("flickr.com")]
         Flickr,
         [Description("photobucket.com")]

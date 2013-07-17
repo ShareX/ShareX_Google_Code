@@ -204,7 +204,7 @@ namespace HelpersLib
 
         public static bool IsDWMEnabled()
         {
-            return Environment.OSVersion.Version.Major >= 6 && DwmIsCompositionEnabled();
+            return Helpers.IsWindowsVistaOrGreater() && DwmIsCompositionEnabled();
         }
 
         public static bool GetExtendedFrameBounds(IntPtr handle, out Rectangle rectangle)
