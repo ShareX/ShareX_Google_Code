@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -46,7 +47,7 @@ namespace HelpersLib
         [ComImportAttribute()]
         [GuidAttribute("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
         [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
-        internal interface ITaskbarList4
+        private interface ITaskbarList4
         {
             // ITaskbarList
             [PreserveSig]
@@ -79,12 +80,12 @@ namespace HelpersLib
         [GuidAttribute("56FDF344-FD6D-11d0-958A-006097C9A090")]
         [ClassInterfaceAttribute(ClassInterfaceType.None)]
         [ComImportAttribute()]
-        internal class CTaskbarList { }
+        private class CTaskbarList { }
 
         private static object _syncLock = new object();
 
         private static ITaskbarList4 _taskbarList;
-        internal static ITaskbarList4 TaskbarList
+        private static ITaskbarList4 TaskbarList
         {
             get
             {
@@ -104,6 +105,29 @@ namespace HelpersLib
             }
         }
 
+        private static IntPtr _mainWindowHandle;
+        private static IntPtr MainWindowHandle
+        {
+            get
+            {
+                if (_mainWindowHandle == IntPtr.Zero)
+                {
+                    Process currentProcess = Process.GetCurrentProcess();
+
+                    if (currentProcess == null || currentProcess.MainWindowHandle == IntPtr.Zero)
+                    {
+                        _mainWindowHandle = IntPtr.Zero;
+                    }
+                    else
+                    {
+                        _mainWindowHandle = currentProcess.MainWindowHandle;
+                    }
+                }
+
+                return _mainWindowHandle;
+            }
+        }
+
         public static bool IsPlatformSupported
         {
             get
@@ -112,28 +136,45 @@ namespace HelpersLib
             }
         }
 
+        public static void SetProgressValue(int currentValue, int maximumValue = 100)
+        {
+            SetProgressValue(MainWindowHandle, currentValue, maximumValue);
+        }
+
         public static void SetProgressValue(Form form, int currentValue, int maximumValue = 100)
         {
-            form.InvokeSafe(() =>
+            if (form != null)
             {
-                SetProgressValue(form.Handle, currentValue, maximumValue);
-            });
+                form.InvokeSafe(() =>
+                {
+                    SetProgressValue(form.Handle, currentValue, maximumValue);
+                });
+            }
         }
 
         public static void SetProgressValue(IntPtr hwnd, int currentValue, int maximumValue = 100)
         {
             if (IsPlatformSupported && hwnd != IntPtr.Zero)
             {
+                currentValue = currentValue.Between(0, maximumValue);
                 TaskbarList.SetProgressValue(hwnd, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
             }
         }
 
+        public static void SetProgressState(TaskbarProgressBarStatus state)
+        {
+            SetProgressState(MainWindowHandle, state);
+        }
+
         public static void SetProgressState(Form form, TaskbarProgressBarStatus state)
         {
-            form.InvokeSafe(() =>
+            if (form != null)
             {
-                SetProgressState(form.Handle, state);
-            });
+                form.InvokeSafe(() =>
+                {
+                    SetProgressState(form.Handle, state);
+                });
+            }
         }
 
         public static void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus state)
