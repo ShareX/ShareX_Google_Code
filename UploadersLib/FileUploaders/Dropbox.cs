@@ -121,7 +121,7 @@ namespace UploadersLib.FileUploaders
         {
             if (!string.IsNullOrEmpty(path) && OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = Helpers.CombineURL(URLFiles, path);
+                string url = Helpers.CombineURL(URLFiles, Helpers.URLPathEncode(path));
                 string query = OAuthManager.GenerateQuery(url, null, HttpMethod.Get, AuthInfo);
                 return SendGetRequest(downloadStream, query);
             }
@@ -138,7 +138,7 @@ namespace UploadersLib.FileUploaders
                 return null;
             }
 
-            string url = Helpers.CombineURL(URLFiles, path);
+            string url = Helpers.CombineURL(URLFiles, Helpers.URLPathEncode(path));
 
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("file", fileName);
@@ -180,7 +180,7 @@ namespace UploadersLib.FileUploaders
 
             if (OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = Helpers.CombineURL(URLMetaData, path);
+                string url = Helpers.CombineURL(URLMetaData, Helpers.URLPathEncode(path));
 
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("list", list ? "true" : "false");
@@ -211,7 +211,7 @@ namespace UploadersLib.FileUploaders
 
             if (!string.IsNullOrEmpty(path) && OAuthInfo.CheckOAuth(AuthInfo))
             {
-                string url = Helpers.CombineURL(URLShares, path);
+                string url = Helpers.CombineURL(URLShares, Helpers.URLPathEncode(path));
 
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("short_url", short_url ? "true" : "false");
