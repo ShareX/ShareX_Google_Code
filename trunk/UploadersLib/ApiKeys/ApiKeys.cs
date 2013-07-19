@@ -30,7 +30,7 @@ namespace UploadersLib
     public static class ApiKeys
     {
         // Image Uploaders
-        public const string ImageShackKey = "025NOQXYf0bda57b2c9dbb88d1891870306be674";
+        public const string ImageShackKey = "47BDEOSU2e5bd1f5ce9a80238aec942c1ce42b83";
         public const string TinyPicID = "e2aabb8d555322fa";
         public const string TinyPicKey = "00a68ed73ddd54da52dc2d5803fa35ee";
         /*public const string ImgurAnonymousKey = "af2fde9818ae53e7670ab52fb8ade644";

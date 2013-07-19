@@ -392,31 +392,28 @@ namespace ShareX
         {
             if (WaitFormLoad(5000))
             {
-                if (!MainForm.IsDisposed)
+                Action d = () =>
                 {
-                    Action d = () =>
+                    if (args.CommandLineArgs == null || args.CommandLineArgs.Length <= 1)
                     {
-                        if (args.CommandLineArgs == null || args.CommandLineArgs.Length <= 1)
+                        if (MainForm.niTray != null && MainForm.niTray.Visible)
                         {
-                            if (MainForm.niTray != null && MainForm.niTray.Visible)
-                            {
-                                // Workaround for Windows startup tray icon bug
-                                MainForm.niTray.Visible = false;
-                                MainForm.niTray.Visible = true;
-                            }
-
-                            MainForm.ShowActivate();
-                        }
-                        else if (MainForm.Visible)
-                        {
-                            MainForm.ShowActivate();
+                            // Workaround for Windows startup tray icon bug
+                            MainForm.niTray.Visible = false;
+                            MainForm.niTray.Visible = true;
                         }
 
-                        MainForm.UseCommandLineArgs(args.CommandLineArgs);
-                    };
+                        MainForm.ShowActivate();
+                    }
+                    else if (MainForm.Visible)
+                    {
+                        MainForm.ShowActivate();
+                    }
 
-                    MainForm.InvokeSafe(d);
-                }
+                    MainForm.UseCommandLineArgs(args.CommandLineArgs);
+                };
+
+                MainForm.InvokeSafe(d);
             }
         }
 

@@ -143,13 +143,10 @@ namespace HelpersLib
 
         public static void SetProgressValue(Form form, int currentValue, int maximumValue = 100)
         {
-            if (form != null)
+            form.InvokeSafe(() =>
             {
-                form.InvokeSafe(() =>
-                {
-                    SetProgressValue(form.Handle, currentValue, maximumValue);
-                });
-            }
+                SetProgressValue(form.Handle, currentValue, maximumValue);
+            });
         }
 
         public static void SetProgressValue(IntPtr hwnd, int currentValue, int maximumValue = 100)
@@ -168,13 +165,10 @@ namespace HelpersLib
 
         public static void SetProgressState(Form form, TaskbarProgressBarStatus state)
         {
-            if (form != null)
+            form.InvokeSafe(() =>
             {
-                form.InvokeSafe(() =>
-                {
-                    SetProgressState(form.Handle, state);
-                });
-            }
+                SetProgressState(form.Handle, state);
+            });
         }
 
         public static void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus state)
