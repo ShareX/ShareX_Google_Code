@@ -104,9 +104,10 @@ namespace UploadersLib
         // Dropbox
 
         public OAuthInfo DropboxOAuthInfo = null;
+        public DropboxAccountInfo DropboxAccountInfo = null;
         public string DropboxUploadPath = "Public/" + Application.ProductName + "/%y-%mo";
         public bool DropboxAutoCreateShareableLink = false;
-        public DropboxAccountInfo DropboxAccountInfo = null;
+        public bool DropboxShortURL = true;
 
         // Google Drive
 

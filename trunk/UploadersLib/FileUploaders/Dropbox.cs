@@ -39,6 +39,7 @@ namespace UploadersLib.FileUploaders
 
         public string UploadPath { get; set; }
         public bool AutoCreateShareableLink { get; set; }
+        public bool ShortURL { get; set; }
 
         private const string APIVersion = "1";
         private const string Root = "dropbox"; // dropbox or sandbox
@@ -130,7 +131,7 @@ namespace UploadersLib.FileUploaders
         }
 
         // https://www.dropbox.com/developers/core/api#files-POST
-        public UploadResult UploadFile(Stream stream, string path, string fileName, bool autoShortenURL = false)
+        public UploadResult UploadFile(Stream stream, string path, string fileName, bool createShareableURL = false, bool shortURL = true)
         {
             if (!OAuthInfo.CheckOAuth(AuthInfo))
             {
@@ -154,9 +155,9 @@ namespace UploadersLib.FileUploaders
 
                 if (content != null)
                 {
-                    if (autoShortenURL)
+                    if (createShareableURL)
                     {
-                        DropboxShares shares = CreateShareableLink(content.Path);
+                        DropboxShares shares = CreateShareableLink(content.Path, shortURL);
 
                         if (shares != null)
                         {
@@ -335,7 +336,7 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            return UploadFile(stream, UploadPath, fileName, AutoCreateShareableLink);
+            return UploadFile(stream, UploadPath, fileName, AutoCreateShareableLink, ShortURL);
         }
 
         public string GetPublicURL(string path)
