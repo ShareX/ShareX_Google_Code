@@ -621,7 +621,8 @@ namespace ShareX
                     fileUploader = new Dropbox(Program.UploadersConfig.DropboxOAuthInfo, Program.UploadersConfig.DropboxAccountInfo)
                     {
                         UploadPath = uploadPath,
-                        AutoCreateShareableLink = Program.UploadersConfig.DropboxAutoCreateShareableLink
+                        AutoCreateShareableLink = Program.UploadersConfig.DropboxAutoCreateShareableLink,
+                        ShortURL = Program.UploadersConfig.DropboxShortURL
                     };
                     break;
                 case FileDestination.GoogleDrive:

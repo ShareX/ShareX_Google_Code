@@ -305,6 +305,7 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.cbDropboxShortURL = new System.Windows.Forms.CheckBox();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -1350,6 +1351,7 @@
             // 
             // tpDropbox
             // 
+            this.tpDropbox.Controls.Add(this.cbDropboxShortURL);
             this.tpDropbox.Controls.Add(this.cbDropboxAutoCreateShareableLink);
             this.tpDropbox.Controls.Add(this.btnDropboxShowFiles);
             this.tpDropbox.Controls.Add(this.btnDropboxCompleteAuth);
@@ -1373,9 +1375,9 @@
             this.cbDropboxAutoCreateShareableLink.AutoSize = true;
             this.cbDropboxAutoCreateShareableLink.Location = new System.Drawing.Point(18, 152);
             this.cbDropboxAutoCreateShareableLink.Name = "cbDropboxAutoCreateShareableLink";
-            this.cbDropboxAutoCreateShareableLink.Size = new System.Drawing.Size(181, 17);
+            this.cbDropboxAutoCreateShareableLink.Size = new System.Drawing.Size(131, 17);
             this.cbDropboxAutoCreateShareableLink.TabIndex = 7;
-            this.cbDropboxAutoCreateShareableLink.Text = "Create shortened shareable URL";
+            this.cbDropboxAutoCreateShareableLink.Text = "Create shareable URL";
             this.cbDropboxAutoCreateShareableLink.UseVisualStyleBackColor = true;
             this.cbDropboxAutoCreateShareableLink.CheckedChanged += new System.EventHandler(this.cbDropboxAutoCreateShareableLink_CheckedChanged);
             // 
@@ -3251,6 +3253,17 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
+            // cbDropboxShortURL
+            // 
+            this.cbDropboxShortURL.AutoSize = true;
+            this.cbDropboxShortURL.Location = new System.Drawing.Point(160, 152);
+            this.cbDropboxShortURL.Name = "cbDropboxShortURL";
+            this.cbDropboxShortURL.Size = new System.Drawing.Size(137, 17);
+            this.cbDropboxShortURL.TabIndex = 20;
+            this.cbDropboxShortURL.Text = "Shorten shareable URL";
+            this.cbDropboxShortURL.UseVisualStyleBackColor = true;
+            this.cbDropboxShortURL.CheckedChanged += new System.EventHandler(this.cbDropboxShortURL_CheckedChanged);
+            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3627,5 +3640,6 @@
         private System.Windows.Forms.TextBox txtJiraConfigHelp;
         private System.Windows.Forms.TextBox txtJiraIssuePrefix;
         private System.Windows.Forms.Label lblJiraIssuePrefix;
+        private System.Windows.Forms.CheckBox cbDropboxShortURL;
     }
 }
