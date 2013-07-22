@@ -175,7 +175,7 @@ namespace UploadersLib.ImageUploaders
 
             NameValueCollection headers = new NameValueCollection();
             headers.Add("Authorization", "Bearer " + AuthInfo.Token.access_token);
-            headers.Add("Slug", fileName);
+            headers.Add("Slug", Helpers.URLEncode(fileName));
 
             ur.Response = SendPostRequestStream(url, stream, contentType, null, headers);
 
