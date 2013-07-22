@@ -225,6 +225,11 @@ namespace ShareX
             {
                 if (ListViewControl != null && task != null)
                 {
+                    if (task.RequestSettingUpdate)
+                    {
+                        Program.MainForm.UpdateMainFormSettings();
+                    }
+
                     UploadInfo info = task.Info;
 
                     if (info != null && info.Result != null)
