@@ -64,6 +64,7 @@ namespace ShareX
         }
 
         public bool IsStopped { get; private set; }
+        public bool RequestSettingUpdate { get; private set; }
 
         public Stream Data { get; set; }
 
@@ -209,32 +210,47 @@ namespace ShareX
 
             if (Info.IsUploadJob)
             {
-                if (Program.UploadersConfig == null)
+                if (Program.Settings.ShowUploadWarning && MessageBox.Show(
+                    "Are you sure you want to upload screenshot?\r\nYou can press 'No' for cancel current upload and disable auto uploading screenshots.",
+                    "ShareX - First time upload warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    Program.UploaderSettingsResetEvent.WaitOne();
-                }
-
-                Status = TaskStatus.Working;
-                Info.Status = "Uploading";
-
-                TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.Normal);
-
-                if (threadWorker != null)
-                {
-                    threadWorker.InvokeAsync(OnUploadStarted);
+                    Program.Settings.ShowUploadWarning = false;
+                    Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.UploadImageToHost);
+                    RequestSettingUpdate = true;
+                    Stop();
                 }
                 else
                 {
-                    OnUploadStarted();
-                }
+                    Program.Settings.ShowUploadWarning = false;
 
-                bool isError = DoUpload();
+                    if (Program.UploadersConfig == null)
+                    {
+                        Program.UploaderSettingsResetEvent.WaitOne();
+                    }
 
-                if (isError && Program.Settings.IfUploadFailRetryOnce)
-                {
-                    DebugHelper.WriteLine("Upload failed. Retrying upload.");
-                    Thread.Sleep(1000);
-                    isError = DoUpload();
+                    Status = TaskStatus.Working;
+                    Info.Status = "Uploading";
+
+                    TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.Normal);
+
+                    if (threadWorker != null)
+                    {
+                        threadWorker.InvokeAsync(OnUploadStarted);
+                    }
+                    else
+                    {
+                        OnUploadStarted();
+                    }
+
+                    bool isError = DoUpload();
+
+                    if (isError && Program.Settings.IfUploadFailRetryOnce)
+                    {
+                        DebugHelper.WriteLine("Upload failed. Retrying upload.");
+                        Thread.Sleep(1000);
+                        isError = DoUpload();
+                    }
                 }
             }
             else
