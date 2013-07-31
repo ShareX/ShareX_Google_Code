@@ -1,0 +1,138 @@
+﻿#region License Information (GPL v3)
+
+/*
+    ShareX - A program that allows you to take screenshots and share any file type
+    Copyright (C) 2008-2013 ShareX Developers
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+    Optionally you can also view the license at <http://www.gnu.org/licenses/>.
+*/
+
+#endregion License Information (GPL v3)
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace HelpersLib
+{
+    public class MyMessageBox : Form
+    {
+        private const int LabelHorizontalPadding = 15;
+        private const int LabelVerticalPadding = 25;
+        private const int ButtonPadding = 10;
+
+        private DialogResult button1Result = DialogResult.OK;
+        private DialogResult button2Result = DialogResult.No;
+
+        public MyMessageBox(string text, string caption, MessageBoxButtons buttons = MessageBoxButtons.OK)
+        {
+            this.SuspendLayout();
+
+            BackColor = Color.White;
+            Width = 180;
+            Height = 100;
+            Text = caption;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            ShowInTaskbar = false;
+            TopMost = true;
+            StartPosition = FormStartPosition.CenterScreen;
+            MinimizeBox = false;
+            MaximizeBox = false;
+
+            Label labelText = new Label();
+            labelText.TextAlign = ContentAlignment.MiddleLeft;
+            labelText.BackColor = Color.White;
+            labelText.AutoSize = true;
+            labelText.MinimumSize = new Size(125, 0);
+            labelText.MaximumSize = new Size(400, 400);
+            labelText.Location = new Point(LabelHorizontalPadding, LabelVerticalPadding);
+            labelText.Text = text;
+
+            FlowLayoutPanel panel = new FlowLayoutPanel();
+            panel.BackColor = Color.FromArgb(240, 240, 240);
+            panel.FlowDirection = FlowDirection.RightToLeft;
+
+            Button button1 = new Button();
+            button1.Margin = new Padding(0, ButtonPadding, ButtonPadding, ButtonPadding);
+            button1.BackColor = Color.Transparent;
+            button1.Size = new Size(80, 26);
+            button1.UseVisualStyleBackColor = false;
+            button1.Text = "button1";
+            button1.TabIndex = 0;
+            button1.Click += (sender, e) =>
+            {
+                this.DialogResult = button1Result;
+                Close();
+            };
+
+            Button button2 = new Button();
+            button2.Margin = new Padding(0, ButtonPadding, ButtonPadding, ButtonPadding);
+            button2.BackColor = Color.Transparent;
+            button2.Size = new Size(80, 26);
+            button2.UseVisualStyleBackColor = false;
+            button2.Text = "button2";
+            button2.TabIndex = 1;
+            button2.Click += (sender, e) =>
+            {
+                this.DialogResult = button2Result;
+                Close();
+            };
+
+            switch (buttons)
+            {
+                default:
+                case MessageBoxButtons.OK:
+                    button1.Text = "OK";
+                    button1Result = DialogResult.OK;
+                    button2.Visible = false;
+                    break;
+                case MessageBoxButtons.OKCancel:
+                    button1.Text = "OK";
+                    button1Result = DialogResult.OK;
+                    button2.Text = "Cancel";
+                    button2Result = DialogResult.Cancel;
+                    break;
+                case MessageBoxButtons.YesNo:
+                    button1.Text = "Yes";
+                    button1Result = DialogResult.Yes;
+                    button2.Text = "No";
+                    button2Result = DialogResult.No;
+                    break;
+            }
+
+            panel.Controls.Add(button2);
+            panel.Controls.Add(button1);
+            Controls.Add(labelText);
+            Controls.Add(panel);
+
+            panel.Location = new Point(0, labelText.Bottom + LabelVerticalPadding);
+            panel.Size = new Size(labelText.Width + (LabelHorizontalPadding * 2), button1.Height + (ButtonPadding * 2));
+            ClientSize = new Size(panel.Width, labelText.Height + (LabelVerticalPadding * 2) + panel.Height);
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
+        public static DialogResult Show(string text, string caption, MessageBoxButtons buttons = MessageBoxButtons.OK)
+        {
+            return new MyMessageBox(text, caption, buttons).ShowDialog();
+        }
+    }
+}
