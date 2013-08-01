@@ -49,7 +49,8 @@ namespace ShareX
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
         public string FileUploadDefaultDirectory = "";
-        public bool ShowUploadWarning = true;
+        public bool ShowUploadWarning = true; // First time upload warning
+        public bool ShowMultiUploadWarning = true; // More than 10 files upload warning
 
         public WindowState HistoryWindowState = new WindowState();
         public WindowState ImageHistoryWindowState = new WindowState();
