@@ -57,8 +57,7 @@ namespace ShareX
         {
             if (files != null && files.Length > 0)
             {
-                if (files.Length <= 10 || MessageBox.Show("Are you sure you want to upload " + files.Length + " files?",
-                    "ShareX - Upload files", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (files.Length <= 10 || IsUploadConfirmed(files.Length))
                 {
                     foreach (string file in files)
                     {
@@ -66,6 +65,22 @@ namespace ShareX
                     }
                 }
             }
+        }
+
+        private static bool IsUploadConfirmed(int length)
+        {
+            if (Program.Settings.ShowMultiUploadWarning)
+            {
+                using (MyMessageBox msgbox = new MyMessageBox("Are you sure you want to upload " + length + " files?", "ShareX - Upload files",
+                    MessageBoxButtons.YesNo, "Don't show this message again"))
+                {
+                    msgbox.ShowDialog();
+                    Program.Settings.ShowMultiUploadWarning = !msgbox.IsChecked;
+                    return msgbox.DialogResult == DialogResult.Yes;
+                }
+            }
+
+            return true;
         }
 
         public static void UploadFile()
