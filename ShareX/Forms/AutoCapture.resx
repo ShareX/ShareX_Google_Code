@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,32 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="tsMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="ssBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tsmiWindow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABTklEQVQ4T6XTzysEcRjH8ecq
-        f4A2VxcpBwcHsak9SEpbamtLInGSEw4cKGlPLqRt2dqIkpLsTX7Uykp8kVXaEmXbZjLT2N1mMmPs+Njn
-        vgff9dT78q1XfZ/DQwD+FXUntEClZCUhGZsA+eNqcvrSLUUyP1i687B47WI+7WAu9YmpUwsTxyaGT0wE
-        zyz4z220XH3Bd/sN34VTYkudsbwYT35g7NDA6IGOkf13DO0pGNzNI7zzhtDWKwYSzwjGs+hff0Jf9BG9
-        aw/oWb1Hw0xK8AqisktNw5a6NhTheR7K5bJUbNhSRzQnXNeF4zhSsWFL7SsvwrZtWJYlFRu21LacFaZp
-        olAoSMWGLbVGMqJYLELXdanYsKXmhRthGAYURZGKDVtqmk0LTdOQy+WkYsOWGiePBH9JVVWp2LCl+vB2
-        rC60KWqJbdULk6nq498D/QLp8Tvv+jwZ3QAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="niTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>105, 17</value>
-  </metadata>
-  <metadata name="cmsTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>190, 17</value>
-  </metadata>
-  <metadata name="cmsUploadInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>286, 17</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>49</value>
   </metadata>
 </root>

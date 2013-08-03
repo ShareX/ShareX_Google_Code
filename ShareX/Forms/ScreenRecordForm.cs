@@ -36,7 +36,7 @@ namespace ShareX
 {
     public partial class ScreenRecordForm : Form
     {
-        public Rectangle CaptureRectangle { get; set; }
+        public Rectangle CaptureRectangle { get; private set; }
 
         public ScreenRecordForm()
         {
@@ -51,24 +51,17 @@ namespace ShareX
 
             Screenshot.CaptureCursor = Program.Settings.ShowCursor;
 
-            SetRegion();
+            SelectRegion();
         }
 
-        private void SetRegion()
+        private void SelectRegion()
         {
-            using (RectangleRegion surface = new RectangleRegion())
+            Rectangle rect;
+            if (TaskHelper.SelectRegion(out rect))
             {
-                surface.Config = Program.Settings.SurfaceOptions;
-                surface.Config.QuickCrop = true;
-                surface.Prepare();
-                surface.ShowDialog();
-
-                if (surface.Result != SurfaceResult.Close && surface.AreaManager.IsCurrentAreaValid)
-                {
-                    CaptureRectangle = CaptureHelpers.ClientToScreen(surface.AreaManager.CurrentArea);
-                    lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
-                        CaptureRectangle.Width, CaptureRectangle.Height);
-                }
+                CaptureRectangle = rect;
+                lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
+                    CaptureRectangle.Width, CaptureRectangle.Height);
             }
         }
 
@@ -152,7 +145,7 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SetRegion();
+            SelectRegion();
         }
 
         private void nudFPS_ValueChanged(object sender, EventArgs e)

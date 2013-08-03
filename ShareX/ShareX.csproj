@@ -89,6 +89,12 @@
     <Compile Include="Forms\AfterCaptureForm.Designer.cs">
       <DependentUpon>AfterCaptureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AutoCapture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoCapture.Designer.cs">
+      <DependentUpon>AutoCapture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ExternalProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AfterCaptureForm.resx">
       <DependentUpon>AfterCaptureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AutoCapture.resx">
+      <DependentUpon>AutoCapture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
@@ -296,6 +305,51 @@
     <None Include="Resources\globe-share.png" />
     <None Include="Resources\image-export.png" />
     <None Include="Resources\folder-open-image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock--plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-select-point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape-curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape-polyline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape-ellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape-round.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape-polygon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-shape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layers-ungroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monitor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\application-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-flip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layers-arrange.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
