@@ -201,7 +201,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ScreenRecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ShareX - Screen record";
+            this.Text = "ShareX - Screen recorder";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).EndInit();

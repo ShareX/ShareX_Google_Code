@@ -509,6 +509,13 @@ namespace ShareX
             recordForm.Show();
         }
 
+        private void OpenAutoCapture()
+        {
+            AutoCapture autoCaptureForm = new AutoCapture();
+            autoCaptureForm.Icon = Icon;
+            autoCaptureForm.Show();
+        }
+
         #region Form events
 
         protected override void SetVisibleCore(bool value)
@@ -635,6 +642,11 @@ namespace ShareX
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
             OpenScreenRecorder();
+        }
+
+        private void tsmiAutoCapture_Click(object sender, EventArgs e)
+        {
+            OpenAutoCapture();
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)

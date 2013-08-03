@@ -38,16 +38,17 @@ namespace ShareX
     {
         public static MyListView ListViewControl { get; set; }
 
-        private static List<UploadTask> Tasks;
-        private static object uploadManagerLock = new object();
-        private static Icon[] trayIcons;
-
-        static TaskManager()
+        public static bool IsBusy
         {
-            Tasks = new List<UploadTask>();
-            trayIcons = new Icon[] { Resources.sharex_16px_0, Resources.sharex_16px_1, Resources.sharex_16px_2, Resources.sharex_16px_3,
-                Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6 };
+            get
+            {
+                return Tasks.Count > 0 && Tasks.Any(task => task.Status != TaskStatus.Completed);
+            }
         }
+
+        private static readonly List<UploadTask> Tasks = new List<UploadTask>();
+        private static readonly Icon[] trayIcons = new Icon[] { Resources.sharex_16px_0, Resources.sharex_16px_1, Resources.sharex_16px_2, Resources.sharex_16px_3,
+            Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6 };
 
         public static void Start(UploadTask task)
         {
@@ -360,7 +361,7 @@ namespace ShareX
                 Program.MainForm.Text = title;
             }
 
-            if (Tasks == null || Tasks.All(x => x != null && x.Status == TaskStatus.Completed))
+            if (!IsBusy)
             {
                 TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.NoProgress);
             }

@@ -220,5 +220,13 @@ namespace ShareX
         public bool ScreenRecordAutoUploadGIF = true;
 
         #endregion ScreenRecord Form
+
+        #region AutoCapture Form
+
+        public decimal AutoCaptureRepeatTime = 60;
+        public bool AutoCaptureMinimize = true;
+        public bool AutoCaptureWaitUpload = true;
+
+        #endregion AutoCapture Form
     }
 }

@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -285,6 +286,34 @@ namespace ShareX
                     Program.Settings.ExternalPrograms.Add(externalProgram);
                 }
             }
+        }
+
+        public static bool SelectRegion(out Rectangle rect)
+        {
+            using (RectangleRegion surface = new RectangleRegion())
+            {
+                surface.Config = Program.Settings.SurfaceOptions;
+                surface.Config.QuickCrop = true;
+                surface.Prepare();
+                surface.ShowDialog();
+
+                if (surface.Result == SurfaceResult.Region)
+                {
+                    if (surface.AreaManager.IsCurrentAreaValid)
+                    {
+                        rect = CaptureHelpers.ClientToScreen(surface.AreaManager.CurrentArea);
+                        return true;
+                    }
+                }
+                else if (surface.Result == SurfaceResult.Fullscreen)
+                {
+                    rect = CaptureHelpers.GetScreenBounds();
+                    return true;
+                }
+            }
+
+            rect = Rectangle.Empty;
+            return false;
         }
     }
 }
