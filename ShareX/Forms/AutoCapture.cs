@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -65,8 +66,20 @@ namespace ShareX
                 stopwatch.Reset();
                 stopwatch.Start();
                 timer.Interval = delay;
-                //Take SS
+                TakeScreenshot();
                 count++;
+            }
+        }
+
+        private void TakeScreenshot()
+        {
+            if (!CaptureRectangle.IsEmpty)
+            {
+                Image img = Screenshot.CaptureRectangle(CaptureRectangle);
+                if (img != null)
+                {
+                    UploadManager.RunImageTask(img, Program.Settings.AfterCaptureTasks);
+                }
             }
         }
 
@@ -97,6 +110,7 @@ namespace ShareX
             {
                 IsRunning = false;
                 tspbBar.Value = 0;
+                stopwatch.Reset();
                 btnExecute.Text = "Start";
             }
             else
@@ -121,8 +135,9 @@ namespace ShareX
             timeleft = Math.Max(0, delay - (int)stopwatch.ElapsedMilliseconds);
             percentage = (int)(100 - (double)timeleft / delay * 100);
             tspbBar.Value = percentage;
-            tsslStatus.Text = " Timeleft: " + timeleft + "ms (" + percentage + "%)";
-            Text = "ShareX - Auto Capture (Count: " + count + ")";
+            string secondsLeft = (timeleft / 1000f).ToString("0.0");
+            tsslStatus.Text = " Timeleft: " + secondsLeft + "s (" + percentage + "%) Total: " + count;
+            Text = "ShareX - Auto Capture";
         }
 
         private void btnRegion_Click(object sender, EventArgs e)

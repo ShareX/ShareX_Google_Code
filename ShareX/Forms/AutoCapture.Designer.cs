@@ -57,7 +57,7 @@
             // tspbBar
             // 
             this.tspbBar.Name = "tspbBar";
-            this.tspbBar.Size = new System.Drawing.Size(125, 16);
+            this.tspbBar.Size = new System.Drawing.Size(75, 16);
             // 
             // tsslStatus
             // 
