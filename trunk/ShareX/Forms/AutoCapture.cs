@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using ScreenCapture;
+using ShareX.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -45,29 +46,34 @@ namespace ShareX
         public AutoCapture()
         {
             InitializeComponent();
+            niTray.Icon = Icon.FromHandle(Resources.clock_plus.GetHicon());
+
             timer = new Timer();
             timer.Tick += TimerTick;
             statusTimer = new Timer { Interval = 250 };
-            statusTimer.Tick += StatusTimerTick;
+            statusTimer.Tick += (sender, e) => UpdateStatus();
 
             nudRepeatTime.Value = Program.Settings.AutoCaptureRepeatTime;
-            cbAutoMinimize.Checked = Program.Settings.AutoCaptureMinimize;
+            cbAutoMinimize.Checked = Program.Settings.AutoCaptureMinimizeToTray;
             cbWaitUploads.Checked = Program.Settings.AutoCaptureWaitUpload;
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if (waitUploads && TaskManager.IsBusy)
+            if (IsRunning)
             {
-                timer.Interval = 1000;
-            }
-            else
-            {
-                stopwatch.Reset();
-                stopwatch.Start();
-                timer.Interval = delay;
-                TakeScreenshot();
-                count++;
+                if (waitUploads && TaskManager.IsBusy)
+                {
+                    timer.Interval = 1000;
+                }
+                else
+                {
+                    stopwatch.Reset();
+                    stopwatch.Start();
+                    timer.Interval = delay;
+                    count++;
+                    TakeScreenshot();
+                }
             }
         }
 
@@ -76,9 +82,13 @@ namespace ShareX
             if (!CaptureRectangle.IsEmpty)
             {
                 Image img = Screenshot.CaptureRectangle(CaptureRectangle);
+
                 if (img != null)
                 {
-                    UploadManager.RunImageTask(img, Program.Settings.AfterCaptureTasks);
+                    TaskInfo taskInfo = new TaskInfo();
+                    taskInfo.DisableNotifications = true;
+                    taskInfo.AfterCaptureJob = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.AnnotateImage);
+                    UploadManager.RunImageTask(img, taskInfo);
                 }
             }
         }
@@ -88,20 +98,31 @@ namespace ShareX
             Rectangle rect;
             if (TaskHelper.SelectRegion(out rect))
             {
-                CaptureRectangle = rect;
-                lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
-                    CaptureRectangle.Width, CaptureRectangle.Height);
+                UpdateRegion(rect);
             }
         }
 
-        private void StatusTimerTick(object sender, EventArgs e)
+        private void UpdateRegion(Rectangle rect)
         {
-            UpdateStatus();
+            if (!rect.IsEmpty)
+            {
+                CaptureRectangle = rect;
+                lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
+                    CaptureRectangle.Width, CaptureRectangle.Height);
+                btnExecute.Enabled = true;
+            }
         }
 
-        private void btnExecute_Click(object sender, EventArgs e)
+        private void UpdateStatus()
         {
-            Execute();
+            if (IsRunning && !IsDisposed)
+            {
+                timeleft = Math.Max(0, delay - (int)stopwatch.ElapsedMilliseconds);
+                percentage = (int)(100 - (double)timeleft / delay * 100);
+                tspbBar.Value = percentage;
+                string secondsLeft = (timeleft / 1000f).ToString("0.0");
+                tsslStatus.Text = " Timeleft: " + secondsLeft + "s (" + percentage + "%) Total: " + count;
+            }
         }
 
         public void Execute()
@@ -120,24 +141,16 @@ namespace ShareX
                 timer.Interval = 1000;
                 delay = (int)(Program.Settings.AutoCaptureRepeatTime * 1000);
                 waitUploads = Program.Settings.AutoCaptureWaitUpload;
-                if (Program.Settings.AutoCaptureMinimize)
+
+                if (Program.Settings.AutoCaptureMinimizeToTray)
                 {
-                    WindowState = FormWindowState.Minimized;
+                    Visible = false;
+                    niTray.Visible = true;
                 }
             }
 
             timer.Enabled = IsRunning;
             statusTimer.Enabled = IsRunning;
-        }
-
-        private void UpdateStatus()
-        {
-            timeleft = Math.Max(0, delay - (int)stopwatch.ElapsedMilliseconds);
-            percentage = (int)(100 - (double)timeleft / delay * 100);
-            tspbBar.Value = percentage;
-            string secondsLeft = (timeleft / 1000f).ToString("0.0");
-            tsslStatus.Text = " Timeleft: " + secondsLeft + "s (" + percentage + "%) Total: " + count;
-            Text = "ShareX - Auto Capture";
         }
 
         private void btnRegion_Click(object sender, EventArgs e)
@@ -152,12 +165,47 @@ namespace ShareX
 
         private void cbAutoMinimize_CheckedChanged(object sender, EventArgs e)
         {
-            Program.Settings.AutoCaptureMinimize = cbAutoMinimize.Checked;
+            Program.Settings.AutoCaptureMinimizeToTray = cbAutoMinimize.Checked;
         }
 
         private void cbWaitUploads_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.AutoCaptureWaitUpload = cbWaitUploads.Checked;
+        }
+
+        private void btnExecute_Click(object sender, EventArgs e)
+        {
+            Execute();
+        }
+
+        private void AutoCapture_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IsRunning = false;
+            timer.Enabled = false;
+            statusTimer.Enabled = false;
+        }
+
+        private void btnFullscreen_Click(object sender, EventArgs e)
+        {
+            UpdateRegion(CaptureHelpers.GetScreenBounds());
+        }
+
+        private void AutoCapture_Resize(object sender, EventArgs e)
+        {
+            if (Program.Settings.AutoCaptureMinimizeToTray && WindowState == FormWindowState.Minimized)
+            {
+                Visible = false;
+                niTray.Visible = true;
+            }
+        }
+
+        private void niTray_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                niTray.Visible = false;
+                this.ShowActivate();
+            }
         }
     }
 }

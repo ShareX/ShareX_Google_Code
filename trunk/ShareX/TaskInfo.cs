@@ -32,7 +32,7 @@ using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
-    public class UploadInfo
+    public class TaskInfo
     {
         public string Status { get; set; }
         public TaskJob Job { get; set; }
@@ -107,6 +107,8 @@ namespace ShareX
             }
         }
 
+        public bool DisableNotifications { get; set; }
+
         public DateTime StartTime { get; set; }
         public DateTime UploadTime { get; set; }
 
@@ -117,7 +119,7 @@ namespace ShareX
 
         public UploadResult Result { get; set; }
 
-        public UploadInfo()
+        public TaskInfo()
         {
             AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
             GetDefaultSettings();

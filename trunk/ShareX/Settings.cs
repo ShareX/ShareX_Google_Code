@@ -224,7 +224,7 @@ namespace ShareX
         #region AutoCapture Form
 
         public decimal AutoCaptureRepeatTime = 60;
-        public bool AutoCaptureMinimize = true;
+        public bool AutoCaptureMinimizeToTray = true;
         public bool AutoCaptureWaitUpload = true;
 
         #endregion AutoCapture Form

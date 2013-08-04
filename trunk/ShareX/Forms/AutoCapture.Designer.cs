@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ssBar = new System.Windows.Forms.StatusStrip();
             this.tspbBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -38,6 +39,8 @@
             this.btnRegion = new System.Windows.Forms.Button();
             this.nudRepeatTime = new System.Windows.Forms.NumericUpDown();
             this.lblDuration = new System.Windows.Forms.Label();
+            this.btnFullscreen = new System.Windows.Forms.Button();
+            this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.ssBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRepeatTime)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +69,7 @@
             // 
             // btnExecute
             // 
+            this.btnExecute.Enabled = false;
             this.btnExecute.Location = new System.Drawing.Point(192, 104);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(112, 40);
@@ -90,9 +94,9 @@
             this.cbAutoMinimize.AutoSize = true;
             this.cbAutoMinimize.Location = new System.Drawing.Point(16, 104);
             this.cbAutoMinimize.Name = "cbAutoMinimize";
-            this.cbAutoMinimize.Size = new System.Drawing.Size(148, 17);
+            this.cbAutoMinimize.Size = new System.Drawing.Size(122, 17);
             this.cbAutoMinimize.TabIndex = 3;
-            this.cbAutoMinimize.Text = "Auto minimize this window";
+            this.cbAutoMinimize.Text = "Auto minimize to tray";
             this.cbAutoMinimize.UseVisualStyleBackColor = true;
             this.cbAutoMinimize.CheckedChanged += new System.EventHandler(this.cbAutoMinimize_CheckedChanged);
             // 
@@ -125,7 +129,7 @@
             65536});
             this.nudRepeatTime.Location = new System.Drawing.Point(136, 72);
             this.nudRepeatTime.Maximum = new decimal(new int[] {
-            60,
+            3600,
             0,
             0,
             0});
@@ -154,11 +158,27 @@
             this.lblDuration.TabIndex = 10;
             this.lblDuration.Text = "Repeat time (seconds):";
             // 
+            // btnFullscreen
+            // 
+            this.btnFullscreen.Location = new System.Drawing.Point(128, 16);
+            this.btnFullscreen.Name = "btnFullscreen";
+            this.btnFullscreen.Size = new System.Drawing.Size(104, 23);
+            this.btnFullscreen.TabIndex = 12;
+            this.btnFullscreen.Text = "Fullscreen";
+            this.btnFullscreen.UseVisualStyleBackColor = true;
+            this.btnFullscreen.Click += new System.EventHandler(this.btnFullscreen_Click);
+            // 
+            // niTray
+            // 
+            this.niTray.Text = "ShareX - Auto capture";
+            this.niTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseDoubleClick);
+            // 
             // AutoCapture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 180);
+            this.Controls.Add(this.btnFullscreen);
             this.Controls.Add(this.nudRepeatTime);
             this.Controls.Add(this.lblDuration);
             this.Controls.Add(this.lblRegion);
@@ -172,6 +192,8 @@
             this.Name = "AutoCapture";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Auto capture";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AutoCapture_FormClosing);
+            this.Resize += new System.EventHandler(this.AutoCapture_Resize);
             this.ssBar.ResumeLayout(false);
             this.ssBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRepeatTime)).EndInit();
@@ -192,5 +214,7 @@
         private System.Windows.Forms.Button btnRegion;
         private System.Windows.Forms.NumericUpDown nudRepeatTime;
         private System.Windows.Forms.Label lblDuration;
+        private System.Windows.Forms.Button btnFullscreen;
+        private System.Windows.Forms.NotifyIcon niTray;
     }
 }
