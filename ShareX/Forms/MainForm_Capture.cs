@@ -148,7 +148,7 @@ namespace ShareX
             {
                 if (autoHideForm)
                 {
-                    ShowActivate();
+                    this.ShowActivate();
                 }
 
                 AfterCapture(img, captureType);

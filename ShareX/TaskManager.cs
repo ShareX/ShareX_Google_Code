@@ -147,7 +147,7 @@ namespace ShareX
         {
             if (ListViewControl != null)
             {
-                UploadInfo info = task.Info;
+                TaskInfo info = task.Info;
 
                 DebugHelper.WriteLine("Task in queue. Job: {0}, Type: {1}, Host: {2}", info.Job, info.UploadDestination, info.UploaderHost);
 
@@ -178,7 +178,7 @@ namespace ShareX
 
         private static void task_UploadStarted(UploadTask task)
         {
-            UploadInfo info = task.Info;
+            TaskInfo info = task.Info;
 
             string status = string.Format("Upload started. Filename: {0}", info.FileName);
             if (!string.IsNullOrEmpty(info.FilePath)) status += ", Filepath: " + info.FilePath;
@@ -198,7 +198,7 @@ namespace ShareX
         {
             if (task.Status == TaskStatus.Working && ListViewControl != null)
             {
-                UploadInfo info = task.Info;
+                TaskInfo info = task.Info;
 
                 ListViewItem lvi = FindListViewItem(task);
 
@@ -231,7 +231,7 @@ namespace ShareX
                         Program.MainForm.UpdateMainFormSettings();
                     }
 
-                    UploadInfo info = task.Info;
+                    TaskInfo info = task.Info;
 
                     if (info != null && info.Result != null)
                     {
@@ -287,7 +287,10 @@ namespace ShareX
                                     HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                                 }
 
-                                TaskHelper.ShowResultNotifications(result);
+                                if (!info.DisableNotifications)
+                                {
+                                    TaskHelper.ShowResultNotifications(result);
+                                }
                             }
                         }
 

@@ -192,12 +192,21 @@ namespace ShareX
             }
         }
 
+        public static void RunImageTask(Image img, TaskInfo taskInfo)
+        {
+            if (img != null && taskInfo != null)
+            {
+                UploadTask task = UploadTask.CreateImageUploaderTask(img, taskInfo);
+                TaskManager.Start(task);
+            }
+        }
+
         public static void RunImageTask(Image img, AfterCaptureTasks imageJob = AfterCaptureTasks.UploadImageToHost)
         {
-            if (img != null && imageJob != AfterCaptureTasks.None)
+            if (imageJob != AfterCaptureTasks.None)
             {
-                UploadTask task = UploadTask.CreateImageUploaderTask(img, imageJob);
-                TaskManager.Start(task);
+                TaskInfo taskInfo = new TaskInfo { AfterCaptureJob = imageJob };
+                RunImageTask(img, taskInfo);
             }
         }
 

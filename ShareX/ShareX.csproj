@@ -189,7 +189,7 @@
     <Compile Include="UploadInfoManager.cs" />
     <Compile Include="UploadManager.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="UploadInfo.cs" />
+    <Compile Include="TaskInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">

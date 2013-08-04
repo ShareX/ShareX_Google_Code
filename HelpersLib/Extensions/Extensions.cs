@@ -302,5 +302,21 @@ namespace HelpersLib
                 }
             }
         }
+
+        public static void ShowActivate(this Form form)
+        {
+            if (!form.Visible)
+            {
+                form.Show();
+            }
+
+            if (form.WindowState == FormWindowState.Minimized)
+            {
+                form.WindowState = FormWindowState.Normal;
+            }
+
+            form.BringToFront();
+            form.Activate();
+        }
     }
 }

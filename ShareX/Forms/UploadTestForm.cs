@@ -263,7 +263,7 @@ namespace ShareX
                                 lvi.SubItems[2].Text = string.Empty;
                                 break;
                             case UploadStatus.Uploaded:
-                                UploadInfo info = task.Info;
+                                TaskInfo info = task.Info;
 
                                 if (info != null && info.Result != null)
                                 {

@@ -79,7 +79,7 @@ namespace ShareX
 
         private void AfterShownJobs()
         {
-            ShowActivate();
+            this.ShowActivate();
         }
 
         private void InitControls()
@@ -433,9 +433,9 @@ namespace ShareX
             return null;
         }
 
-        private UploadInfo GetCurrentUploadInfo()
+        private TaskInfo GetCurrentUploadInfo()
         {
-            UploadInfo info = null;
+            TaskInfo info = null;
             UploadTask[] tasks = GetCurrentTasks();
 
             if (tasks != null && tasks.Length > 0)
@@ -486,21 +486,6 @@ namespace ShareX
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
-        public void ShowActivate()
-        {
-            if (!Visible)
-            {
-                Show();
-            }
-
-            if (WindowState == FormWindowState.Minimized)
-            {
-                WindowState = FormWindowState.Normal;
-            }
-
-            BringToFront();
-            Activate();
-        }
 
         private void OpenScreenRecorder()
         {
@@ -791,7 +776,7 @@ namespace ShareX
         {
             if (e.Button == MouseButtons.Left)
             {
-                ShowActivate();
+                this.ShowActivate();
             }
         }
 
