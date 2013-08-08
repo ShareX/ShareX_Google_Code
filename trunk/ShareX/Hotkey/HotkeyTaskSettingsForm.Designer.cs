@@ -51,7 +51,6 @@
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.btnTask = new System.Windows.Forms.Button();
             this.cmsTask = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -201,7 +200,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(176, 336);
+            this.btnOK.Location = new System.Drawing.Point(264, 336);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
             this.btnOK.TabIndex = 16;
@@ -242,22 +241,11 @@
             this.cmsTask.Name = "cmsAfterCapture";
             this.cmsTask.Size = new System.Drawing.Size(61, 4);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(264, 336);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 23);
-            this.btnCancel.TabIndex = 22;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // HotkeyTaskSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(358, 369);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnTask);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.lblDescription);
@@ -304,7 +292,6 @@
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Button btnTask;
         private System.Windows.Forms.ContextMenuStrip cmsTask;
-        private System.Windows.Forms.Button btnCancel;
 
 
     }

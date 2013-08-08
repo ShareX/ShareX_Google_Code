@@ -169,11 +169,6 @@ namespace ShareX
             DialogResult = DialogResult.OK;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-        }
-
         private void UpdateDestinationStates()
         {
             if (Program.UploadersConfig != null)
