@@ -34,8 +34,31 @@ namespace ShareX
     public partial class HotkeySelectionControl : UserControl
     {
         public event EventHandler HotkeyChanged;
+        public event EventHandler SelectedChanged;
 
         public HotkeySetting Setting { get; set; }
+
+        private bool selected;
+        public bool Selected
+        {
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                selected = value;
+
+                if (selected)
+                {
+                    lblHotkeyDescription.BackColor = Color.FromArgb(200, 255, 200);
+                }
+                else
+                {
+                    lblHotkeyDescription.BackColor = Color.White;
+                }
+            }
+        }
 
         public HotkeySelectionControl(HotkeySetting setting)
         {
@@ -76,6 +99,11 @@ namespace ShareX
             }
         }
 
+        public void UpdateDescription()
+        {
+            lblHotkeyDescription.Text = Setting.Description;
+        }
+
         protected void OnHotkeyChanged()
         {
             if (HotkeyChanged != null)
@@ -84,14 +112,37 @@ namespace ShareX
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        protected void OnSelectedChanged()
         {
-            using (HotkeyTaskSettingsForm taskSettingsForm = new HotkeyTaskSettingsForm(Setting))
+            if (SelectedChanged != null)
             {
-                if (taskSettingsForm.ShowDialog() == DialogResult.OK)
-                {
-                    lblHotkeyDescription.Text = Setting.Description;
-                }
+                SelectedChanged(this, null);
+            }
+        }
+
+        private void lblHotkeyDescription_MouseEnter(object sender, EventArgs e)
+        {
+            if (!Selected)
+            {
+                lblHotkeyDescription.BackColor = Color.FromArgb(220, 240, 255);
+            }
+        }
+
+        private void lblHotkeyDescription_MouseLeave(object sender, EventArgs e)
+        {
+            if (!Selected)
+            {
+                lblHotkeyDescription.BackColor = Color.White;
+            }
+        }
+
+        private void lblHotkeyDescription_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Selected = true;
+                OnSelectedChanged();
+                Focus();
             }
         }
     }

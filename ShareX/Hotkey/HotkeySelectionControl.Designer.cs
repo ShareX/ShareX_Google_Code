@@ -28,20 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblHotkeyDescription = new System.Windows.Forms.Label();
             this.btnSetHotkey = new System.Windows.Forms.Button();
             this.lblIsHotkeyActive = new System.Windows.Forms.Label();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.lblHotkeyDescription = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lblHotkeyDescription
-            // 
-            this.lblHotkeyDescription.Location = new System.Drawing.Point(26, 0);
-            this.lblHotkeyDescription.Name = "lblHotkeyDescription";
-            this.lblHotkeyDescription.Size = new System.Drawing.Size(224, 24);
-            this.lblHotkeyDescription.TabIndex = 0;
-            this.lblHotkeyDescription.Text = "Description";
-            this.lblHotkeyDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSetHotkey
             // 
@@ -59,26 +49,28 @@
             this.lblIsHotkeyActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIsHotkeyActive.BackColor = System.Drawing.Color.IndianRed;
             this.lblIsHotkeyActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblIsHotkeyActive.Location = new System.Drawing.Point(256, 1);
+            this.lblIsHotkeyActive.Location = new System.Drawing.Point(0, 1);
             this.lblIsHotkeyActive.Name = "lblIsHotkeyActive";
-            this.lblIsHotkeyActive.Size = new System.Drawing.Size(28, 21);
+            this.lblIsHotkeyActive.Size = new System.Drawing.Size(24, 21);
             this.lblIsHotkeyActive.TabIndex = 2;
             // 
-            // btnEdit
+            // lblHotkeyDescription
             // 
-            this.btnEdit.Image = global::ShareX.Properties.Resources.gear;
-            this.btnEdit.Location = new System.Drawing.Point(0, 0);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(23, 23);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.lblHotkeyDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblHotkeyDescription.Location = new System.Drawing.Point(32, 1);
+            this.lblHotkeyDescription.Name = "lblHotkeyDescription";
+            this.lblHotkeyDescription.Size = new System.Drawing.Size(248, 21);
+            this.lblHotkeyDescription.TabIndex = 0;
+            this.lblHotkeyDescription.Text = "Description";
+            this.lblHotkeyDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHotkeyDescription.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHotkeyDescription_MouseClick);
+            this.lblHotkeyDescription.MouseEnter += new System.EventHandler(this.lblHotkeyDescription_MouseEnter);
+            this.lblHotkeyDescription.MouseLeave += new System.EventHandler(this.lblHotkeyDescription_MouseLeave);
             // 
             // HotkeySelectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lblIsHotkeyActive);
             this.Controls.Add(this.btnSetHotkey);
             this.Controls.Add(this.lblHotkeyDescription);
@@ -91,9 +83,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblHotkeyDescription;
         private System.Windows.Forms.Button btnSetHotkey;
         private System.Windows.Forms.Label lblIsHotkeyActive;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblHotkeyDescription;
     }
 }

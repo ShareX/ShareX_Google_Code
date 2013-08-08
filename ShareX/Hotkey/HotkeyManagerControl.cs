@@ -30,6 +30,8 @@ namespace ShareX
 {
     public partial class HotkeyManagerControl : UserControl
     {
+        public HotkeySelectionControl Selected { get; private set; }
+
         private HotkeyManager manager;
 
         public HotkeyManagerControl()
@@ -46,9 +48,24 @@ namespace ShareX
                 foreach (HotkeySetting setting in manager.Settings)
                 {
                     HotkeySelectionControl control = new HotkeySelectionControl(setting);
+                    control.SelectedChanged += control_SelectedChanged;
                     control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
                     flpHotkeys.Controls.Add(control);
                 }
+            }
+        }
+
+        private void control_SelectedChanged(object sender, EventArgs e)
+        {
+            Selected = (HotkeySelectionControl)sender;
+            UpdateCheckStates();
+        }
+
+        private void UpdateCheckStates()
+        {
+            foreach (Control control in flpHotkeys.Controls)
+            {
+                ((HotkeySelectionControl)control).Selected = Selected == control;
             }
         }
 
@@ -56,6 +73,28 @@ namespace ShareX
         {
             HotkeySelectionControl control = (HotkeySelectionControl)sender;
             manager.UpdateHotkey(control.Setting);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+            {
+                using (HotkeyTaskSettingsForm taskSettingsForm = new HotkeyTaskSettingsForm(Selected.Setting))
+                {
+                    if (taskSettingsForm.ShowDialog() == DialogResult.OK)
+                    {
+                        Selected.UpdateDescription();
+                    }
+                }
+            }
         }
     }
 }
