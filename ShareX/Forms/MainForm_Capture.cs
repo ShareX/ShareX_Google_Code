@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using HelpersLib.Hotkey;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
@@ -44,21 +43,22 @@ namespace ShareX
         private void InitHotkeys()
         {
             HotkeyManager = new HotkeyManager(this);
-            HotkeyManager.AddHotkey(EHotkey.ClipboardUpload, Program.Settings.HotkeyClipboardUpload, UploadManager.ClipboardUpload);
-            HotkeyManager.AddHotkey(EHotkey.FileUpload, Program.Settings.HotkeyFileUpload, UploadManager.UploadFile);
-            HotkeyManager.AddHotkey(EHotkey.PrintScreen, Program.Settings.HotkeyPrintScreen, () => CaptureScreenshot(CaptureType.Screen, false), tsmiFullscreen);
-            HotkeyManager.AddHotkey(EHotkey.ActiveWindow, Program.Settings.HotkeyActiveWindow, () => CaptureScreenshot(CaptureType.ActiveWindow, false));
-            HotkeyManager.AddHotkey(EHotkey.ActiveMonitor, Program.Settings.HotkeyActiveMonitor, () => CaptureScreenshot(CaptureType.ActiveMonitor, false));
-            HotkeyManager.AddHotkey(EHotkey.WindowRectangle, Program.Settings.HotkeyWindowRectangle, () => CaptureScreenshot(CaptureType.RectangleWindow, false), tsmiWindowRectangle);
-            HotkeyManager.AddHotkey(EHotkey.RectangleRegion, Program.Settings.HotkeyRectangleRegion, () => CaptureScreenshot(CaptureType.Rectangle, false), tsmiRectangle);
-            HotkeyManager.AddHotkey(EHotkey.RoundedRectangleRegion, Program.Settings.HotkeyRoundedRectangleRegion, () => CaptureScreenshot(CaptureType.RoundedRectangle, false), tsmiRoundedRectangle);
-            HotkeyManager.AddHotkey(EHotkey.EllipseRegion, Program.Settings.HotkeyEllipseRegion, () => CaptureScreenshot(CaptureType.Ellipse, false), tsmiEllipse);
-            HotkeyManager.AddHotkey(EHotkey.TriangleRegion, Program.Settings.HotkeyTriangleRegion, () => CaptureScreenshot(CaptureType.Triangle, false), tsmiTriangle);
-            HotkeyManager.AddHotkey(EHotkey.DiamondRegion, Program.Settings.HotkeyDiamondRegion, () => CaptureScreenshot(CaptureType.Diamond, false), tsmiDiamond);
-            HotkeyManager.AddHotkey(EHotkey.PolygonRegion, Program.Settings.HotkeyPolygonRegion, () => CaptureScreenshot(CaptureType.Polygon, false), tsmiPolygon);
-            HotkeyManager.AddHotkey(EHotkey.FreeHandRegion, Program.Settings.HotkeyFreeHandRegion, () => CaptureScreenshot(CaptureType.Freehand, false), tsmiFreeHand);
-            HotkeyManager.AddHotkey(EHotkey.LastRegion, Program.Settings.HotkeyLastRegion, () => CaptureScreenshot(CaptureType.LastRegion, false), tsmiLastRegion);
-            HotkeyManager.AddHotkey(EHotkey.ScreenRecorder, Program.Settings.HotkeyScreenRecorder, OpenScreenRecorder, tsmiScreenRecorder);
+
+            if (Program.Settings.HotkeyList == null)
+            {
+                Program.Settings.HotkeyList = new List<HotkeySetting>();
+            }
+
+            if (Program.Settings.HotkeyList.Count == 0)
+            {
+                ResetHotkeys();
+            }
+
+            foreach (HotkeySetting hotkey in Program.Settings.HotkeyList)
+            {
+                hotkey.Action += HandleHotkeys;
+                HotkeyManager.AddHotkey(hotkey);
+            }
 
             string failedHotkeys;
 
@@ -70,18 +70,96 @@ namespace ShareX
             }
         }
 
-        public void CaptureScreenshot(CaptureType captureType, bool autoHideForm = true)
+        public void ResetHotkeys()
+        {
+            Program.Settings.HotkeyList = new List<HotkeySetting>()
+            {
+                new HotkeySetting(Keys.Control | Keys.PageUp) { Job = EHotkey.ClipboardUpload },
+                new HotkeySetting(Keys.Shift | Keys.PageUp) { Job = EHotkey.FileUpload },
+                new HotkeySetting(Keys.PrintScreen) { Job = EHotkey.PrintScreen },
+                new HotkeySetting(Keys.Alt | Keys.PrintScreen) { Job = EHotkey.ActiveWindow },
+                new HotkeySetting(Keys.Control | Keys.Alt | Keys.PrintScreen) { Job = EHotkey.ActiveMonitor },
+                new HotkeySetting(Keys.Shift | Keys.PrintScreen) { Job = EHotkey.WindowRectangle },
+                new HotkeySetting(Keys.Control | Keys.PrintScreen) { Job = EHotkey.RectangleRegion },
+                new HotkeySetting() { Job = EHotkey.RoundedRectangleRegion },
+                new HotkeySetting() { Job = EHotkey.EllipseRegion },
+                new HotkeySetting() { Job = EHotkey.TriangleRegion },
+                new HotkeySetting() { Job = EHotkey.DiamondRegion },
+                new HotkeySetting() { Job = EHotkey.PolygonRegion },
+                new HotkeySetting() { Job = EHotkey.FreeHandRegion },
+                new HotkeySetting() { Job = EHotkey.LastRegion },
+                new HotkeySetting() { Job = EHotkey.ScreenRecorder },
+                new HotkeySetting() { Job = EHotkey.AutoCapture }
+            };
+        }
+
+        private void HandleHotkeys(HotkeySetting hotkeySetting)
+        {
+            switch (hotkeySetting.Job)
+            {
+                case EHotkey.ClipboardUpload:
+                    UploadManager.ClipboardUpload();
+                    break;
+                case EHotkey.FileUpload:
+                    UploadManager.UploadFile();
+                    break;
+                case EHotkey.PrintScreen:
+                    CaptureScreenshot(CaptureType.Screen, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.ActiveWindow:
+                    CaptureScreenshot(CaptureType.ActiveWindow, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.ActiveMonitor:
+                    CaptureScreenshot(CaptureType.ActiveMonitor, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.WindowRectangle:
+                    CaptureScreenshot(CaptureType.RectangleWindow, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.RectangleRegion:
+                    CaptureScreenshot(CaptureType.Rectangle, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.RoundedRectangleRegion:
+                    CaptureScreenshot(CaptureType.RoundedRectangle, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.EllipseRegion:
+                    CaptureScreenshot(CaptureType.Ellipse, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.TriangleRegion:
+                    CaptureScreenshot(CaptureType.Triangle, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.DiamondRegion:
+                    CaptureScreenshot(CaptureType.Diamond, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.PolygonRegion:
+                    CaptureScreenshot(CaptureType.Polygon, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.FreeHandRegion:
+                    CaptureScreenshot(CaptureType.Freehand, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.LastRegion:
+                    CaptureScreenshot(CaptureType.LastRegion, false, hotkeySetting.TaskSettings);
+                    break;
+                case EHotkey.ScreenRecorder:
+                    OpenScreenRecorder();
+                    break;
+                case EHotkey.AutoCapture:
+                    OpenAutoCapture();
+                    break;
+            }
+        }
+
+        public void CaptureScreenshot(CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             switch (captureType)
             {
                 case CaptureType.Screen:
-                    DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, autoHideForm);
+                    DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, autoHideForm, taskSettings);
                     break;
                 case CaptureType.ActiveWindow:
-                    CaptureActiveWindow(autoHideForm);
+                    CaptureActiveWindow(autoHideForm, taskSettings);
                     break;
                 case CaptureType.ActiveMonitor:
-                    DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, autoHideForm);
+                    DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, autoHideForm, taskSettings);
                     break;
                 case CaptureType.RectangleWindow:
                 case CaptureType.Rectangle:
@@ -91,31 +169,31 @@ namespace ShareX
                 case CaptureType.Diamond:
                 case CaptureType.Polygon:
                 case CaptureType.Freehand:
-                    CaptureRegion(captureType, autoHideForm);
+                    CaptureRegion(captureType, autoHideForm, taskSettings);
                     break;
                 case CaptureType.LastRegion:
-                    CaptureLastRegion(autoHideForm);
+                    CaptureLastRegion(autoHideForm, taskSettings);
                     break;
             }
         }
 
-        private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true)
+        private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             if (Program.Settings.IsDelayScreenshot && Program.Settings.DelayScreenshot > 0)
             {
                 int sleep = (int)(Program.Settings.DelayScreenshot * 1000);
                 BackgroundWorker bw = new BackgroundWorker();
                 bw.DoWork += (sender, e) => Thread.Sleep(sleep);
-                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, autoHideForm);
+                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, autoHideForm, taskSettings);
                 bw.RunWorkerAsync();
             }
             else
             {
-                DoCaptureWork(capture, captureType, autoHideForm);
+                DoCaptureWork(capture, captureType, autoHideForm, taskSettings);
             }
         }
 
-        private void DoCaptureWork(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true)
+        private void DoCaptureWork(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             if (autoHideForm)
             {
@@ -151,42 +229,43 @@ namespace ShareX
                     this.ShowActivate();
                 }
 
-                AfterCapture(img, captureType);
+                AfterCapture(img, captureType, taskSettings);
             }
         }
 
-        private void AfterCapture(Image img, CaptureType captureType)
+        private void AfterCapture(Image img, CaptureType captureType, TaskSettings taskSettings = null)
         {
             if (img != null)
             {
-                AfterCaptureTasks captureTasks = Program.Settings.AfterCaptureTasks;
+                if (taskSettings == null)
+                {
+                    taskSettings = new TaskSettings(true);
+                }
 
                 if (Program.Settings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
                 {
-                    captureTasks = captureTasks.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
+                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
                 }
 
                 if (Program.Settings.ShowAfterCaptureTasksForm)
                 {
-                    using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, captureTasks))
+                    using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, taskSettings.AfterCaptureJob))
                     {
                         afterCaptureForm.ShowDialog();
 
                         switch (afterCaptureForm.Result)
                         {
                             case AfterCaptureFormResult.Continue:
-                                UploadManager.RunImageTask(img, afterCaptureForm.AfterCaptureTasks);
+                                taskSettings.AfterCaptureJob = afterCaptureForm.AfterCaptureTasks;
                                 break;
                             case AfterCaptureFormResult.Copy:
-                                UploadManager.RunImageTask(img, AfterCaptureTasks.CopyImageToClipboard);
+                                taskSettings.AfterCaptureJob = AfterCaptureTasks.CopyImageToClipboard;
                                 break;
                         }
                     }
                 }
-                else
-                {
-                    UploadManager.RunImageTask(img, captureTasks);
-                }
+
+                UploadManager.RunImageTask(img, taskSettings);
             }
         }
 
@@ -196,7 +275,7 @@ namespace ShareX
                 CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
         }
 
-        private void CaptureActiveWindow(bool autoHideForm = true)
+        private void CaptureActiveWindow(bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             DoCapture(() =>
             {
@@ -215,10 +294,10 @@ namespace ShareX
                 img.Tag = new ImageTag() { ActiveWindowTitle = activeWindowTitle };
 
                 return img;
-            }, CaptureType.ActiveWindow, autoHideForm);
+            }, CaptureType.ActiveWindow, autoHideForm, taskSettings);
         }
 
-        private void CaptureWindow(IntPtr handle, bool autoHideForm = true)
+        private void CaptureWindow(IntPtr handle, bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             autoHideForm = autoHideForm && handle != this.Handle;
 
@@ -240,10 +319,10 @@ namespace ShareX
                 {
                     return Screenshot.CaptureWindow(handle);
                 }
-            }, CaptureType.Window, autoHideForm);
+            }, CaptureType.Window, autoHideForm, taskSettings);
         }
 
-        private void CaptureRegion(CaptureType captureType, bool autoHideForm = true)
+        private void CaptureRegion(CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             Surface surface;
 
@@ -301,10 +380,10 @@ namespace ShareX
                 surface.Dispose();
 
                 return img;
-            }, captureType, autoHideForm);
+            }, captureType, autoHideForm, taskSettings);
         }
 
-        private void CaptureLastRegion(bool autoHideForm = true)
+        private void CaptureLastRegion(bool autoHideForm = true, TaskSettings taskSettings = null)
         {
             if (Surface.LastRegionFillPath != null)
             {
@@ -314,7 +393,7 @@ namespace ShareX
                     {
                         return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, Program.Settings.SurfaceOptions);
                     }
-                }, CaptureType.LastRegion, autoHideForm);
+                }, CaptureType.LastRegion, autoHideForm, taskSettings);
             }
             else
             {

@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using HelpersLib.Hotkey;
 using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
@@ -485,7 +484,6 @@ namespace ShareX
             scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
-
 
         private void OpenScreenRecorder()
         {

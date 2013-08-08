@@ -26,7 +26,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace HelpersLib
+namespace ShareX
 {
     public class HotkeyInfo
     {

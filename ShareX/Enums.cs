@@ -118,4 +118,40 @@ namespace ShareX
         Freehand,
         LastRegion
     }
+
+    public enum EHotkey
+    {
+        [Description("Clipboard Upload")]
+        ClipboardUpload,
+        [Description("File Upload")]
+        FileUpload,
+        [Description("Fullscreen")]
+        PrintScreen,
+        [Description("Active Window")]
+        ActiveWindow,
+        [Description("Active Monitor")]
+        ActiveMonitor,
+        [Description("Window && Rectangle")]
+        WindowRectangle,
+        [Description("Rectangle Region")]
+        RectangleRegion,
+        [Description("Rounded Rectangle Region")]
+        RoundedRectangleRegion,
+        [Description("Ellipse Region")]
+        EllipseRegion,
+        [Description("Triangle Region")]
+        TriangleRegion,
+        [Description("Diamond Region")]
+        DiamondRegion,
+        [Description("Polygon Region")]
+        PolygonRegion,
+        [Description("Freehand Region")]
+        FreeHandRegion,
+        [Description("Last Region")]
+        LastRegion,
+        [Description("Screen Recorder")]
+        ScreenRecorder,
+        [Description("Auto Capture")]
+        AutoCapture
+    }
 }

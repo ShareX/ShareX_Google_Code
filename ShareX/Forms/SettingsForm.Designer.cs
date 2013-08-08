@@ -57,7 +57,7 @@
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
-            this.hmHotkeys = new HelpersLib.Hotkey.HotkeyManagerControl();
+            this.hmHotkeys = new HotkeyManagerControl();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
@@ -2315,7 +2315,7 @@
         private System.Windows.Forms.CheckBox cbShowTray;
         private System.Windows.Forms.TabPage tpCapture;
         private System.Windows.Forms.TabPage tpHotkeys;
-        private HelpersLib.Hotkey.HotkeyManagerControl hmHotkeys;
+        private HotkeyManagerControl hmHotkeys;
         private System.Windows.Forms.CheckBox cbShowCursor;
         private System.Windows.Forms.CheckBox cbDrawBorder;
         private System.Windows.Forms.CheckBox cbDrawCheckerboard;
