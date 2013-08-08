@@ -55,7 +55,7 @@ namespace ShareX
             repeatLimitTimer = Stopwatch.StartNew();
         }
 
-        public HotkeyStatus RegisterHotkey(Keys hotkey, Action hotkeyPress = null, int tag = 0)
+        public HotkeyStatus RegisterHotkey(Keys hotkey, Action hotkeyPress, string tag)
         {
             KeyInfo keyInfo = new KeyInfo(hotkey);
 
@@ -125,15 +125,21 @@ namespace ShareX
             return UnregisterHotkey(hotkeyInfo);
         }
 
-        public HotkeyStatus ChangeHotkey(int tag, Keys newHotkey, Action hotkeyPress = null)
+        public bool UnregisterHotkey(string tag)
         {
             HotkeyInfo hi = GetHotkeyInfoFromTag(tag);
 
             if (hi != null)
             {
-                UnregisterHotkey(hi);
+                return UnregisterHotkey(hi);
             }
 
+            return false;
+        }
+
+        public HotkeyStatus ChangeHotkey(string tag, Keys newHotkey, Action hotkeyPress = null)
+        {
+            UnregisterHotkey(tag);
             return RegisterHotkey(newHotkey, hotkeyPress, tag);
         }
 
@@ -155,7 +161,7 @@ namespace ShareX
             return HotkeyList.FirstOrDefault(x => x.Key == key);
         }
 
-        public HotkeyInfo GetHotkeyInfoFromTag(int tag)
+        public HotkeyInfo GetHotkeyInfoFromTag(string tag)
         {
             return HotkeyList.FirstOrDefault(x => x.Tag == tag);
         }

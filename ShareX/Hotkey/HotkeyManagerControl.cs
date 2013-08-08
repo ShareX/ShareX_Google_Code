@@ -44,15 +44,32 @@ namespace ShareX
             if (manager == null)
             {
                 manager = hotkeyManager;
-
-                foreach (HotkeySetting setting in manager.Settings)
-                {
-                    HotkeySelectionControl control = new HotkeySelectionControl(setting);
-                    control.SelectedChanged += control_SelectedChanged;
-                    control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
-                    flpHotkeys.Controls.Add(control);
-                }
+                AddControls();
             }
+        }
+
+        private void AddControls()
+        {
+            flpHotkeys.Controls.Clear();
+
+            foreach (HotkeySetting setting in manager.Hotkeys)
+            {
+                HotkeySelectionControl control = new HotkeySelectionControl(setting);
+                control.SelectedChanged += control_SelectedChanged;
+                control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
+                flpHotkeys.Controls.Add(control);
+            }
+        }
+
+        private HotkeySelectionControl FindSelectionControl(HotkeySetting hotkeySetting)
+        {
+            foreach (Control control in flpHotkeys.Controls)
+            {
+                HotkeySelectionControl hsc = (HotkeySelectionControl)control;
+                if (hsc.Setting == hotkeySetting) return hsc;
+            }
+
+            return null;
         }
 
         private void control_SelectedChanged(object sender, EventArgs e)
@@ -77,13 +94,31 @@ namespace ShareX
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            HotkeySetting hotkeySetting = new HotkeySetting();
+            manager.Hotkeys.Add(hotkeySetting);
+            HotkeySelectionControl control = new HotkeySelectionControl(hotkeySetting);
+            control.Selected = true;
+            control.SelectedChanged += control_SelectedChanged;
+            control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
+            flpHotkeys.Controls.Add(control);
+            Selected = control;
+            UpdateCheckStates();
+            control.Focus();
+            EditSelected();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            if (Selected != null)
+            {
+                manager.RemoveHotkey(Selected.Setting);
+                HotkeySelectionControl hsc = FindSelectionControl(Selected.Setting);
+                if (hsc != null) flpHotkeys.Controls.Remove(hsc);
+                Selected = null;
+            }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void EditSelected()
         {
             if (Selected != null)
             {
@@ -95,6 +130,18 @@ namespace ShareX
                     }
                 }
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditSelected();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            manager.ResetHotkeys();
+            manager.RunHotkeys();
+            AddControls();
         }
     }
 }
