@@ -23,11 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace HelpersLib.Hotkey
+namespace ShareX
 {
     public partial class HotkeySelectionControl : UserControl
     {

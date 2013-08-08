@@ -23,12 +23,13 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using Newtonsoft.Json;
 using System;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace HelpersLib.Hotkey
+namespace ShareX
 {
     public class HotkeySetting
     {
@@ -36,11 +37,15 @@ namespace HelpersLib.Hotkey
 
         public Keys HotkeyDefault { get; set; }
 
+        public EHotkey Job { get; set; }
+
+        public TaskSettings TaskSettings { get; set; }
+
         [XmlIgnore, JsonIgnore]
         public int Tag { get; set; }
 
         [XmlIgnore, JsonIgnore]
-        public Action Action { get; set; }
+        public HotkeyTriggerEventHandler Action { get; set; }
 
         [XmlIgnore, JsonIgnore]
         public ToolStripMenuItem MenuItem { get; set; }
@@ -52,17 +57,18 @@ namespace HelpersLib.Hotkey
         public string Description { get; set; }
 
         public HotkeySetting()
+            : this(Keys.None)
         {
-            Hotkey = Keys.None;
         }
 
         public HotkeySetting(Keys hotkey)
         {
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
+            TaskSettings = new TaskSettings(true);
         }
 
-        public HotkeySetting(Keys hotkey, int tag, Action action, ToolStripMenuItem menuItem = null)
+        public HotkeySetting(Keys hotkey, int tag, HotkeyTriggerEventHandler action, ToolStripMenuItem menuItem = null)
             : this(hotkey)
         {
             Tag = tag;
@@ -76,11 +82,6 @@ namespace HelpersLib.Hotkey
             {
                 MenuItem.ShortcutKeyDisplayString = new KeyInfo(Hotkey).ToString();
             }
-        }
-
-        public static implicit operator HotkeySetting(Keys hotkey)
-        {
-            return new HotkeySetting(hotkey);
         }
 
         public override string ToString()

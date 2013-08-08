@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using HelpersLib.Hotkey;
 using ScreenCapture;
 using System.Collections.Generic;
 using System.Drawing;
@@ -88,21 +87,7 @@ namespace ShareX
 
         #region Hotkeys
 
-        public HotkeySetting HotkeyClipboardUpload = Keys.Control | Keys.PageUp;
-        public HotkeySetting HotkeyFileUpload = Keys.Shift | Keys.PageUp;
-        public HotkeySetting HotkeyPrintScreen = Keys.PrintScreen;
-        public HotkeySetting HotkeyActiveWindow = Keys.Alt | Keys.PrintScreen;
-        public HotkeySetting HotkeyActiveMonitor = Keys.Control | Keys.Alt | Keys.PrintScreen;
-        public HotkeySetting HotkeyWindowRectangle = Keys.Shift | Keys.PrintScreen;
-        public HotkeySetting HotkeyRectangleRegion = Keys.Control | Keys.PrintScreen;
-        public HotkeySetting HotkeyRoundedRectangleRegion = Keys.None;
-        public HotkeySetting HotkeyEllipseRegion = Keys.None;
-        public HotkeySetting HotkeyTriangleRegion = Keys.None;
-        public HotkeySetting HotkeyDiamondRegion = Keys.None;
-        public HotkeySetting HotkeyPolygonRegion = Keys.None;
-        public HotkeySetting HotkeyFreeHandRegion = Keys.None;
-        public HotkeySetting HotkeyLastRegion = Keys.None;
-        public HotkeySetting HotkeyScreenRecorder = Keys.None;
+        public List<HotkeySetting> HotkeyList = new List<HotkeySetting>();
 
         #endregion Hotkeys
 

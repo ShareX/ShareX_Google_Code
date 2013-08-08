@@ -26,7 +26,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace HelpersLib.Hotkey
+namespace ShareX
 {
     public partial class HotkeyManagerControl : UserControl
     {

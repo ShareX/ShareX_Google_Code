@@ -67,6 +67,10 @@
     <Reference Include="AsyncBridge.Net35">
       <HintPath>..\packages\AsyncBridge.Net35.0.2.0\lib\net35-Client\AsyncBridge.Net35.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -135,6 +139,31 @@
     <Compile Include="Forms\UploadTestForm.Designer.cs">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hotkey\HotkeyManager.cs" />
+    <Compile Include="Hotkey\HotkeySetting.cs" />
+    <Compile Include="Hotkey\HotkeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyInfo.cs" />
+    <Compile Include="Hotkey\HotkeyInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyInputForm.Designer.cs">
+      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyManagerControl.Designer.cs">
+      <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\HotkeySelectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeySelectionControl.Designer.cs">
+      <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hotkey\KeyInfo.cs" />
     <Compile Include="ImageData.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -175,6 +204,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadTestForm.resx">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeyInputForm.resx">
+      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeyManagerControl.resx">
+      <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeySelectionControl.resx">
+      <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

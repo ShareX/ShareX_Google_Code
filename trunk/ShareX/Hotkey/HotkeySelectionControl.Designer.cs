@@ -1,4 +1,4 @@
-﻿namespace HelpersLib.Hotkey
+﻿namespace ShareX
 {
     partial class HotkeySelectionControl
     {
