@@ -363,7 +363,7 @@ namespace ShareX
 
             tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.URLShortenerDestination.GetDescription();
 
-            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking services: " + Program.Settings.SocialServiceDestination.GetDescription();
+            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking service: " + Program.Settings.SocialServiceDestination.GetDescription();
         }
 
         private void CheckUpdate()

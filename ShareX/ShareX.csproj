@@ -163,6 +163,12 @@
     <Compile Include="Hotkey\HotkeySelectionControl.Designer.cs">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hotkey\HotkeyTaskSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hotkey\HotkeyTaskSettingsForm.Designer.cs">
+      <DependentUpon>HotkeyTaskSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hotkey\KeyInfo.cs" />
     <Compile Include="ImageData.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Hotkey\HotkeySelectionControl.resx">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hotkey\HotkeyTaskSettingsForm.resx">
+      <DependentUpon>HotkeyTaskSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

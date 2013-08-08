@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ShareX.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -80,6 +81,17 @@ namespace ShareX
             if (HotkeyChanged != null)
             {
                 HotkeyChanged(this, null);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            using (HotkeyTaskSettingsForm taskSettingsForm = new HotkeyTaskSettingsForm(Setting))
+            {
+                if (taskSettingsForm.ShowDialog() == DialogResult.OK)
+                {
+                    lblHotkeyDescription.Text = Setting.Description;
+                }
             }
         }
     }

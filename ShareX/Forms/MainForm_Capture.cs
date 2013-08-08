@@ -74,22 +74,22 @@ namespace ShareX
         {
             Program.Settings.HotkeyList = new List<HotkeySetting>()
             {
-                new HotkeySetting(Keys.Control | Keys.PageUp) { Job = EHotkey.ClipboardUpload },
-                new HotkeySetting(Keys.Shift | Keys.PageUp) { Job = EHotkey.FileUpload },
-                new HotkeySetting(Keys.PrintScreen) { Job = EHotkey.PrintScreen },
-                new HotkeySetting(Keys.Alt | Keys.PrintScreen) { Job = EHotkey.ActiveWindow },
-                new HotkeySetting(Keys.Control | Keys.Alt | Keys.PrintScreen) { Job = EHotkey.ActiveMonitor },
-                new HotkeySetting(Keys.Shift | Keys.PrintScreen) { Job = EHotkey.WindowRectangle },
-                new HotkeySetting(Keys.Control | Keys.PrintScreen) { Job = EHotkey.RectangleRegion },
-                new HotkeySetting() { Job = EHotkey.RoundedRectangleRegion },
-                new HotkeySetting() { Job = EHotkey.EllipseRegion },
-                new HotkeySetting() { Job = EHotkey.TriangleRegion },
-                new HotkeySetting() { Job = EHotkey.DiamondRegion },
-                new HotkeySetting() { Job = EHotkey.PolygonRegion },
-                new HotkeySetting() { Job = EHotkey.FreeHandRegion },
-                new HotkeySetting() { Job = EHotkey.LastRegion },
-                new HotkeySetting() { Job = EHotkey.ScreenRecorder },
-                new HotkeySetting() { Job = EHotkey.AutoCapture }
+                new HotkeySetting(EHotkey.ClipboardUpload, Keys.Control | Keys.PageUp),
+                new HotkeySetting(EHotkey.FileUpload, Keys.Shift | Keys.PageUp),
+                new HotkeySetting(EHotkey.PrintScreen, Keys.PrintScreen),
+                new HotkeySetting(EHotkey.ActiveWindow, Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.WindowRectangle, Keys.Shift | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.RectangleRegion, Keys.Control | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.RoundedRectangleRegion),
+                new HotkeySetting(EHotkey.EllipseRegion),
+                new HotkeySetting(EHotkey.TriangleRegion),
+                new HotkeySetting(EHotkey.DiamondRegion),
+                new HotkeySetting(EHotkey.PolygonRegion),
+                new HotkeySetting(EHotkey.FreeHandRegion),
+                new HotkeySetting(EHotkey.LastRegion),
+                new HotkeySetting(EHotkey.ScreenRecorder),
+                new HotkeySetting(EHotkey.AutoCapture)
             };
         }
 

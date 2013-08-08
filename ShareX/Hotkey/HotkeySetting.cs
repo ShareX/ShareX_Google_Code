@@ -33,6 +33,8 @@ namespace ShareX
 {
     public class HotkeySetting
     {
+        public string Description { get; set; }
+
         public Keys Hotkey { get; set; }
 
         public Keys HotkeyDefault { get; set; }
@@ -53,27 +55,18 @@ namespace ShareX
         [XmlIgnore, JsonIgnore]
         public HotkeyStatus HotkeyStatus { get; set; }
 
-        [XmlIgnore, JsonIgnore]
-        public string Description { get; set; }
-
-        public HotkeySetting()
-            : this(Keys.None)
+        public HotkeySetting(EHotkey job)
+            : this(job, Keys.None)
         {
         }
 
-        public HotkeySetting(Keys hotkey)
+        public HotkeySetting(EHotkey job, Keys hotkey)
         {
+            Job = job;
+            Description = job.GetDescription();
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
             TaskSettings = new TaskSettings(true);
-        }
-
-        public HotkeySetting(Keys hotkey, int tag, HotkeyTriggerEventHandler action, ToolStripMenuItem menuItem = null)
-            : this(hotkey)
-        {
-            Tag = tag;
-            Action = action;
-            MenuItem = menuItem;
         }
 
         public void UpdateMenuItemShortcut()

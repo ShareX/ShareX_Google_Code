@@ -133,6 +133,7 @@ namespace ShareX
             this.tsmiTrayFreeHand = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenRecorder = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayAutoCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayAfterCaptureTasks = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayAfterUploadTasks = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayDestinations = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,7 +198,6 @@ namespace ShareX
             this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayAutoCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -797,7 +797,7 @@ namespace ShareX
             this.tssTray2,
             this.tsmiTrayExit});
             this.cmsTray.Name = "cmsTray";
-            this.cmsTray.Size = new System.Drawing.Size(181, 346);
+            this.cmsTray.Size = new System.Drawing.Size(181, 324);
             // 
             // tsmiTrayClipboardUpload
             // 
@@ -939,6 +939,14 @@ namespace ShareX
             this.tsmiTrayScreenRecorder.Size = new System.Drawing.Size(184, 22);
             this.tsmiTrayScreenRecorder.Text = "Screen Recorder...";
             this.tsmiTrayScreenRecorder.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
+            // 
+            // tsmiTrayAutoCapture
+            // 
+            this.tsmiTrayAutoCapture.Image = global::ShareX.Properties.Resources.clock_plus;
+            this.tsmiTrayAutoCapture.Name = "tsmiTrayAutoCapture";
+            this.tsmiTrayAutoCapture.Size = new System.Drawing.Size(184, 22);
+            this.tsmiTrayAutoCapture.Text = "Auto Capture...";
+            this.tsmiTrayAutoCapture.Click += new System.EventHandler(this.tsmiAutoCapture_Click);
             // 
             // tsmiTrayAfterCaptureTasks
             // 
@@ -1430,14 +1438,6 @@ namespace ShareX
             this.tsmiShowPreview.Size = new System.Drawing.Size(158, 22);
             this.tsmiShowPreview.Text = "Show image preview";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
-            // 
-            // tsmiTrayAutoCapture
-            // 
-            this.tsmiTrayAutoCapture.Image = global::ShareX.Properties.Resources.clock_plus;
-            this.tsmiTrayAutoCapture.Name = "tsmiTrayAutoCapture";
-            this.tsmiTrayAutoCapture.Size = new System.Drawing.Size(184, 22);
-            this.tsmiTrayAutoCapture.Text = "Auto Capture...";
-            this.tsmiTrayAutoCapture.Click += new System.EventHandler(this.tsmiAutoCapture_Click);
             // 
             // MainForm
             // 
