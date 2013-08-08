@@ -57,7 +57,7 @@
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
-            this.hmHotkeys = new HotkeyManagerControl();
+            this.hmHotkeys = new ShareX.HotkeyManagerControl();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
@@ -117,6 +117,7 @@
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
+            this.cbCaptureAutoHideTaskbar = new System.Windows.Forms.CheckBox();
             this.lblScreenshotDelayInfo = new System.Windows.Forms.Label();
             this.nudScreenshotDelay = new System.Windows.Forms.NumericUpDown();
             this.cbScreenshotDelay = new System.Windows.Forms.CheckBox();
@@ -190,7 +191,6 @@
             this.btnAutofillProxy = new System.Windows.Forms.Button();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.cbCaptureAutoHideTaskbar = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -263,6 +263,7 @@
             this.tcSettings.SelectedIndex = 0;
             this.tcSettings.Size = new System.Drawing.Size(530, 356);
             this.tcSettings.TabIndex = 0;
+            this.tcSettings.SelectedIndexChanged += new System.EventHandler(this.tcSettings_SelectedIndexChanged);
             // 
             // tpGeneral
             // 
@@ -1352,6 +1353,17 @@
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbCaptureAutoHideTaskbar
+            // 
+            this.cbCaptureAutoHideTaskbar.AutoSize = true;
+            this.cbCaptureAutoHideTaskbar.Location = new System.Drawing.Point(16, 136);
+            this.cbCaptureAutoHideTaskbar.Name = "cbCaptureAutoHideTaskbar";
+            this.cbCaptureAutoHideTaskbar.Size = new System.Drawing.Size(402, 17);
+            this.cbCaptureAutoHideTaskbar.TabIndex = 9;
+            this.cbCaptureAutoHideTaskbar.Text = "When doing window capture if window intersects with taskbar then hide taskbar";
+            this.cbCaptureAutoHideTaskbar.UseVisualStyleBackColor = true;
+            this.cbCaptureAutoHideTaskbar.CheckedChanged += new System.EventHandler(this.cbCaptureAutoHideTaskbar_CheckedChanged);
+            // 
             // lblScreenshotDelayInfo
             // 
             this.lblScreenshotDelayInfo.AutoSize = true;
@@ -2182,17 +2194,6 @@
             this.txtDebugLog.Size = new System.Drawing.Size(516, 324);
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
-            // 
-            // cbCaptureAutoHideTaskbar
-            // 
-            this.cbCaptureAutoHideTaskbar.AutoSize = true;
-            this.cbCaptureAutoHideTaskbar.Location = new System.Drawing.Point(16, 136);
-            this.cbCaptureAutoHideTaskbar.Name = "cbCaptureAutoHideTaskbar";
-            this.cbCaptureAutoHideTaskbar.Size = new System.Drawing.Size(402, 17);
-            this.cbCaptureAutoHideTaskbar.TabIndex = 9;
-            this.cbCaptureAutoHideTaskbar.Text = "When doing window capture if window intersects with taskbar then hide taskbar";
-            this.cbCaptureAutoHideTaskbar.UseVisualStyleBackColor = true;
-            this.cbCaptureAutoHideTaskbar.CheckedChanged += new System.EventHandler(this.cbCaptureAutoHideTaskbar_CheckedChanged);
             // 
             // SettingsForm
             // 

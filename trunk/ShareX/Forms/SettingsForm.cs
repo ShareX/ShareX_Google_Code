@@ -241,6 +241,14 @@ namespace ShareX
             lvWatchFolderList.Items.Add(lvi);
         }
 
+        private void tcSettings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcSettings.SelectedTab == tpHotkeys)
+            {
+                hmHotkeys.Focus();
+            }
+        }
+
         #region General
 
         private void cbShowTray_CheckedChanged(object sender, EventArgs e)
