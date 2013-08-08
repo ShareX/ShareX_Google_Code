@@ -34,16 +34,16 @@ namespace ShareX
 {
     public class TaskInfo
     {
+        public TaskSettings Settings { get; set; }
+
         public string Status { get; set; }
         public TaskJob Job { get; set; }
-        public AfterCaptureTasks AfterCaptureJob { get; set; }
-        public AfterUploadTasks AfterUploadJob { get; set; }
 
         public bool IsUploadJob
         {
             get
             {
-                return Job != TaskJob.ImageJob || AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost);
+                return Job != TaskJob.ImageJob || Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost);
             }
         }
 
@@ -71,8 +71,8 @@ namespace ShareX
         {
             get
             {
-                if ((DataType == EDataType.Image && ImageDestination == ImageDestination.FileUploader) ||
-                    (DataType == EDataType.Text && TextDestination == TextDestination.FileUploader))
+                if ((DataType == EDataType.Image && Settings.ImageDestination == ImageDestination.FileUploader) ||
+                    (DataType == EDataType.Text && Settings.TextDestination == TextDestination.FileUploader))
                 {
                     return EDataType.File;
                 }
@@ -81,12 +81,6 @@ namespace ShareX
             }
         }
 
-        public ImageDestination ImageDestination { get; set; }
-        public TextDestination TextDestination { get; set; }
-        public FileDestination FileDestination { get; set; }
-        public UrlShortenerType URLShortenerDestination { get; set; }
-        public SocialNetworkingService SocialNetworkingServiceDestination { get; set; }
-
         public string UploaderHost
         {
             get
@@ -94,20 +88,18 @@ namespace ShareX
                 switch (UploadDestination)
                 {
                     case EDataType.Image:
-                        return ImageDestination.GetDescription();
+                        return Settings.ImageDestination.GetDescription();
                     case EDataType.Text:
-                        return TextDestination.GetDescription();
+                        return Settings.TextDestination.GetDescription();
                     case EDataType.File:
-                        return FileDestination.GetDescription();
+                        return Settings.FileDestination.GetDescription();
                     case EDataType.URL:
-                        return URLShortenerDestination.GetDescription();
+                        return Settings.URLShortenerDestination.GetDescription();
                 }
 
                 return string.Empty;
             }
         }
-
-        public bool DisableNotifications { get; set; }
 
         public DateTime StartTime { get; set; }
         public DateTime UploadTime { get; set; }
@@ -121,19 +113,8 @@ namespace ShareX
 
         public TaskInfo()
         {
-            AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
-            GetDefaultSettings();
+            Settings = new TaskSettings();
             Result = new UploadResult();
-        }
-
-        private void GetDefaultSettings()
-        {
-            AfterUploadJob = Program.Settings.AfterUploadTasks;
-            ImageDestination = Program.Settings.ImageUploaderDestination;
-            TextDestination = Program.Settings.TextUploaderDestination;
-            FileDestination = Program.Settings.FileUploaderDestination;
-            URLShortenerDestination = Program.Settings.URLShortenerDestination;
-            SocialNetworkingServiceDestination = Program.Settings.SocialServiceDestination;
         }
 
         public HistoryItem GetHistoryItem()
