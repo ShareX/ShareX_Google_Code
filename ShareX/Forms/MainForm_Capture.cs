@@ -95,6 +95,9 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
+            TaskSettings taskSettings = hotkeySetting.TaskSettings.Clone();
+            taskSettings.SetDefaultSettings();
+
             switch (hotkeySetting.Job)
             {
                 case EHotkey.ClipboardUpload:
@@ -104,40 +107,40 @@ namespace ShareX
                     UploadManager.UploadFile();
                     break;
                 case EHotkey.PrintScreen:
-                    CaptureScreenshot(CaptureType.Screen, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Screen, false, taskSettings);
                     break;
                 case EHotkey.ActiveWindow:
-                    CaptureScreenshot(CaptureType.ActiveWindow, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.ActiveWindow, false, taskSettings);
                     break;
                 case EHotkey.ActiveMonitor:
-                    CaptureScreenshot(CaptureType.ActiveMonitor, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.ActiveMonitor, false, taskSettings);
                     break;
                 case EHotkey.WindowRectangle:
-                    CaptureScreenshot(CaptureType.RectangleWindow, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.RectangleWindow, false, taskSettings);
                     break;
                 case EHotkey.RectangleRegion:
-                    CaptureScreenshot(CaptureType.Rectangle, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Rectangle, false, taskSettings);
                     break;
                 case EHotkey.RoundedRectangleRegion:
-                    CaptureScreenshot(CaptureType.RoundedRectangle, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.RoundedRectangle, false, taskSettings);
                     break;
                 case EHotkey.EllipseRegion:
-                    CaptureScreenshot(CaptureType.Ellipse, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Ellipse, false, taskSettings);
                     break;
                 case EHotkey.TriangleRegion:
-                    CaptureScreenshot(CaptureType.Triangle, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Triangle, false, taskSettings);
                     break;
                 case EHotkey.DiamondRegion:
-                    CaptureScreenshot(CaptureType.Diamond, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Diamond, false, taskSettings);
                     break;
                 case EHotkey.PolygonRegion:
-                    CaptureScreenshot(CaptureType.Polygon, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Polygon, false, taskSettings);
                     break;
                 case EHotkey.FreeHandRegion:
-                    CaptureScreenshot(CaptureType.Freehand, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.Freehand, false, taskSettings);
                     break;
                 case EHotkey.LastRegion:
-                    CaptureScreenshot(CaptureType.LastRegion, false, hotkeySetting.TaskSettings);
+                    CaptureScreenshot(CaptureType.LastRegion, false, taskSettings);
                     break;
                 case EHotkey.ScreenRecorder:
                     OpenScreenRecorder();

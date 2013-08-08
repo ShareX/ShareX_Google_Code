@@ -50,17 +50,10 @@ namespace ShareX
 
         public TaskSettings(bool useDefaultSettings = false)
         {
-            // Init properties with default settings
             SetDefaultSettings(true);
-
-            ChangeUseDefaultSettings(useDefaultSettings);
-        }
-
-        private void ChangeUseDefaultSettings(bool value)
-        {
-            UseDefaultAfterCaptureJob = value;
-            UseDefaultAfterUploadJob = value;
-            UseDefaultDestinations = value;
+            UseDefaultAfterCaptureJob = useDefaultSettings;
+            UseDefaultAfterUploadJob = useDefaultSettings;
+            UseDefaultDestinations = useDefaultSettings;
         }
 
         public bool SetDefaultSettings(bool forceDefaultSettings = false)
@@ -90,6 +83,11 @@ namespace ShareX
             }
 
             return false;
+        }
+
+        public TaskSettings Clone()
+        {
+            return (TaskSettings)MemberwiseClone();
         }
     }
 }
