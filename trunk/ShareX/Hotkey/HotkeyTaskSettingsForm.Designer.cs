@@ -58,7 +58,7 @@
             this.btnAfterCapture.Location = new System.Drawing.Point(16, 96);
             this.btnAfterCapture.Name = "btnAfterCapture";
             this.btnAfterCapture.Size = new System.Drawing.Size(328, 23);
-            this.btnAfterCapture.TabIndex = 0;
+            this.btnAfterCapture.TabIndex = 2;
             this.btnAfterCapture.Text = "After capture...";
             this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAfterCapture.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             this.btnAfterUpload.Location = new System.Drawing.Point(16, 152);
             this.btnAfterUpload.Name = "btnAfterUpload";
             this.btnAfterUpload.Size = new System.Drawing.Size(328, 23);
-            this.btnAfterUpload.TabIndex = 1;
+            this.btnAfterUpload.TabIndex = 3;
             this.btnAfterUpload.Text = "After upload...";
             this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAfterUpload.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             this.btnImageUploaders.Location = new System.Drawing.Point(16, 208);
             this.btnImageUploaders.Name = "btnImageUploaders";
             this.btnImageUploaders.Size = new System.Drawing.Size(328, 23);
-            this.btnImageUploaders.TabIndex = 2;
+            this.btnImageUploaders.TabIndex = 4;
             this.btnImageUploaders.Text = "Image uploaders";
             this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnImageUploaders.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             this.btnTextUploaders.Location = new System.Drawing.Point(16, 232);
             this.btnTextUploaders.Name = "btnTextUploaders";
             this.btnTextUploaders.Size = new System.Drawing.Size(328, 23);
-            this.btnTextUploaders.TabIndex = 3;
+            this.btnTextUploaders.TabIndex = 5;
             this.btnTextUploaders.Text = "Text uploaders";
             this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTextUploaders.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             this.btnFileUploaders.Location = new System.Drawing.Point(16, 256);
             this.btnFileUploaders.Name = "btnFileUploaders";
             this.btnFileUploaders.Size = new System.Drawing.Size(328, 23);
-            this.btnFileUploaders.TabIndex = 4;
+            this.btnFileUploaders.TabIndex = 6;
             this.btnFileUploaders.Text = "File uploaders";
             this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFileUploaders.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             this.btnURLShorteners.Location = new System.Drawing.Point(16, 280);
             this.btnURLShorteners.Name = "btnURLShorteners";
             this.btnURLShorteners.Size = new System.Drawing.Size(328, 23);
-            this.btnURLShorteners.TabIndex = 5;
+            this.btnURLShorteners.TabIndex = 7;
             this.btnURLShorteners.Text = "URL shorteners";
             this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnURLShorteners.UseVisualStyleBackColor = true;
@@ -129,7 +129,7 @@
             this.btnSocialNetworkingServices.Location = new System.Drawing.Point(16, 304);
             this.btnSocialNetworkingServices.Name = "btnSocialNetworkingServices";
             this.btnSocialNetworkingServices.Size = new System.Drawing.Size(328, 23);
-            this.btnSocialNetworkingServices.TabIndex = 6;
+            this.btnSocialNetworkingServices.TabIndex = 8;
             this.btnSocialNetworkingServices.Text = "Social networking services";
             this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
@@ -203,7 +203,7 @@
             this.btnOK.Location = new System.Drawing.Point(264, 336);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
-            this.btnOK.TabIndex = 16;
+            this.btnOK.TabIndex = 9;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -222,7 +222,7 @@
             this.tbDescription.Location = new System.Drawing.Point(88, 12);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(256, 20);
-            this.tbDescription.TabIndex = 19;
+            this.tbDescription.TabIndex = 0;
             this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
             // 
             // btnTask
@@ -230,7 +230,7 @@
             this.btnTask.Location = new System.Drawing.Point(16, 40);
             this.btnTask.Name = "btnTask";
             this.btnTask.Size = new System.Drawing.Size(328, 23);
-            this.btnTask.TabIndex = 20;
+            this.btnTask.TabIndex = 1;
             this.btnTask.Text = "Task...";
             this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTask.UseVisualStyleBackColor = true;
@@ -243,6 +243,7 @@
             // 
             // HotkeyTaskSettingsForm
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(358, 369);
@@ -262,6 +263,7 @@
             this.Controls.Add(this.btnAfterCapture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "HotkeyTaskSettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Hotkey settings";
             this.ResumeLayout(false);
             this.PerformLayout();

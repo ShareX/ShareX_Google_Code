@@ -42,23 +42,13 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            HotkeyManager = new HotkeyManager(this);
-
             if (Program.Settings.HotkeyList == null)
             {
                 Program.Settings.HotkeyList = new List<HotkeySetting>();
             }
 
-            if (Program.Settings.HotkeyList.Count == 0)
-            {
-                ResetHotkeys();
-            }
-
-            foreach (HotkeySetting hotkey in Program.Settings.HotkeyList)
-            {
-                hotkey.Action += HandleHotkeys;
-                HotkeyManager.AddHotkey(hotkey);
-            }
+            HotkeyManager = new HotkeyManager(this, Program.Settings.HotkeyList, HandleHotkeys);
+            HotkeyManager.RunHotkeys();
 
             string failedHotkeys;
 
@@ -68,29 +58,6 @@ namespace ShareX
                     "\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
                     "Hotkey register failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        public void ResetHotkeys()
-        {
-            Program.Settings.HotkeyList = new List<HotkeySetting>()
-            {
-                new HotkeySetting(EHotkey.ClipboardUpload, Keys.Control | Keys.PageUp),
-                new HotkeySetting(EHotkey.FileUpload, Keys.Shift | Keys.PageUp),
-                new HotkeySetting(EHotkey.PrintScreen, Keys.PrintScreen),
-                new HotkeySetting(EHotkey.ActiveWindow, Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.WindowRectangle, Keys.Shift | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.RectangleRegion, Keys.Control | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.RoundedRectangleRegion),
-                new HotkeySetting(EHotkey.EllipseRegion),
-                new HotkeySetting(EHotkey.TriangleRegion),
-                new HotkeySetting(EHotkey.DiamondRegion),
-                new HotkeySetting(EHotkey.PolygonRegion),
-                new HotkeySetting(EHotkey.FreeHandRegion),
-                new HotkeySetting(EHotkey.LastRegion),
-                new HotkeySetting(EHotkey.ScreenRecorder),
-                new HotkeySetting(EHotkey.AutoCapture)
-            };
         }
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)

@@ -44,29 +44,27 @@ namespace ShareX
         public TaskSettings TaskSettings { get; set; }
 
         [XmlIgnore, JsonIgnore]
-        public int Tag { get; set; }
+        public HotkeyStatus HotkeyStatus { get; set; }
 
         [XmlIgnore, JsonIgnore]
-        public HotkeyTriggerEventHandler Action { get; set; }
+        public string Tag { get; set; }
 
         [XmlIgnore, JsonIgnore]
         public ToolStripMenuItem MenuItem { get; set; }
 
-        [XmlIgnore, JsonIgnore]
-        public HotkeyStatus HotkeyStatus { get; set; }
-
-        public HotkeySetting(EHotkey job)
-            : this(job, Keys.None)
+        public HotkeySetting()
         {
+            TaskSettings = new TaskSettings(true);
+            HotkeyStatus = HotkeyStatus.NotConfigured;
         }
 
-        public HotkeySetting(EHotkey job, Keys hotkey)
+        public HotkeySetting(EHotkey job, Keys hotkey = Keys.None)
+            : this()
         {
             Job = job;
             Description = job.GetDescription();
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
-            TaskSettings = new TaskSettings(true);
         }
 
         public void UpdateMenuItemShortcut()

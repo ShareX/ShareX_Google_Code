@@ -64,7 +64,7 @@ namespace ShareX
         {
             InitializeComponent();
             Setting = setting;
-            lblHotkeyDescription.Text = ((EHotkey)Setting.Tag).GetDescription();
+            lblHotkeyDescription.Text = setting.Description;
             btnSetHotkey.Text = new KeyInfo(Setting.Hotkey).ToString();
             UpdateHotkeyStatus();
         }

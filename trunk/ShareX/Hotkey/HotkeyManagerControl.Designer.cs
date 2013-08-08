@@ -85,6 +85,7 @@
             this.btnReset.TabIndex = 3;
             this.btnReset.Text = "Restore default hotkeys";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // HotkeyManagerControl
             // 

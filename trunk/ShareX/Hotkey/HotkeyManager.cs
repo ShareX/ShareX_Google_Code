@@ -35,45 +35,98 @@ namespace ShareX
 
     public class HotkeyManager
     {
-        public List<HotkeySetting> Settings = new List<HotkeySetting>();
+        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
 
         private HotkeyForm hotkeyForm;
+        private HotkeyTriggerEventHandler triggerAction;
 
-        public HotkeyManager(HotkeyForm hotkeyForm)
+        public HotkeyManager(HotkeyForm hotkeyForm, List<HotkeySetting> hotkeys, HotkeyTriggerEventHandler action)
         {
             this.hotkeyForm = hotkeyForm;
+            triggerAction = action;
+
+            Hotkeys = hotkeys;
+
+            if (Hotkeys.Count == 0)
+            {
+                ResetHotkeys();
+            }
+        }
+
+        public void RunHotkeys()
+        {
+            foreach (HotkeySetting hotkey in Hotkeys)
+            {
+                if (hotkey.HotkeyStatus != HotkeyStatus.Registered)
+                {
+                    AddHotkey(hotkey);
+                }
+            }
         }
 
         public void AddHotkey(HotkeySetting hotkeySetting)
         {
-            AddHotkey(hotkeySetting, (int)hotkeySetting.Job);
+            AddHotkey(hotkeySetting, hotkeySetting.Description + "_" + hotkeySetting.Job + "_" + hotkeySetting.Hotkey);
         }
 
-        private void AddHotkey(HotkeySetting hotkeySetting, int hotkeyId)
+        private void AddHotkey(HotkeySetting hotkeySetting, string tag)
         {
-            hotkeySetting.Tag = hotkeyId;
-            Settings.Add(hotkeySetting);
+            hotkeySetting.Tag = tag;
             hotkeySetting.UpdateMenuItemShortcut();
-            hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => hotkeySetting.Action(hotkeySetting), hotkeyId);
+            hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), tag);
         }
 
-        public HotkeyStatus UpdateHotkey(HotkeySetting setting)
+        public HotkeyStatus UpdateHotkey(HotkeySetting hotkeySetting)
         {
-            setting.UpdateMenuItemShortcut();
-            setting.HotkeyStatus = hotkeyForm.ChangeHotkey(setting.Tag, setting.Hotkey, () => setting.Action(setting));
-            return setting.HotkeyStatus;
+            hotkeySetting.UpdateMenuItemShortcut();
+            hotkeySetting.HotkeyStatus = hotkeyForm.ChangeHotkey(hotkeySetting.Tag, hotkeySetting.Hotkey, () => triggerAction(hotkeySetting));
+            return hotkeySetting.HotkeyStatus;
+        }
+
+        public void RemoveHotkey(HotkeySetting hotkeySetting)
+        {
+            hotkeyForm.UnregisterHotkey(hotkeySetting.Tag);
+            Hotkeys.Remove(hotkeySetting);
         }
 
         public bool IsHotkeyRegisterFailed(out string failedHotkeys)
         {
             failedHotkeys = null;
             bool status = false;
-            var failedHotkeysList = Settings.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
+            var failedHotkeysList = Hotkeys.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
             if (status = failedHotkeysList.Count() > 0)
             {
                 failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.Description + ": " + x.ToString()).ToArray());
             }
             return status;
+        }
+
+        public void ResetHotkeys()
+        {
+            for (int i = Hotkeys.Count - 1; i >= 0; i--)
+            {
+                RemoveHotkey(Hotkeys[i]);
+            }
+
+            Hotkeys.AddRange(new HotkeySetting[]
+            {
+                new HotkeySetting(EHotkey.ClipboardUpload, Keys.Control | Keys.PageUp),
+                new HotkeySetting(EHotkey.FileUpload, Keys.Shift | Keys.PageUp),
+                new HotkeySetting(EHotkey.PrintScreen, Keys.PrintScreen),
+                new HotkeySetting(EHotkey.ActiveWindow, Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.WindowRectangle, Keys.Shift | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.RectangleRegion, Keys.Control | Keys.PrintScreen),
+                new HotkeySetting(EHotkey.RoundedRectangleRegion),
+                new HotkeySetting(EHotkey.EllipseRegion),
+                new HotkeySetting(EHotkey.TriangleRegion),
+                new HotkeySetting(EHotkey.DiamondRegion),
+                new HotkeySetting(EHotkey.PolygonRegion),
+                new HotkeySetting(EHotkey.FreeHandRegion),
+                new HotkeySetting(EHotkey.LastRegion),
+                new HotkeySetting(EHotkey.ScreenRecorder),
+                new HotkeySetting(EHotkey.AutoCapture)
+            });
         }
     }
 }
