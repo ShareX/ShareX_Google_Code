@@ -28,6 +28,7 @@
 using AviFile;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace HelpersLib
 {
@@ -46,21 +47,25 @@ namespace HelpersLib
 
         public void AddFrame(Image img, bool writeCompressed)
         {
-            Bitmap bmp = (Bitmap)img;
-
-            if (aviStream == null)
+            using (Bitmap bmp = new Bitmap(img))
             {
-                aviStream = aviManager.AddVideoStream(writeCompressed, fps, bmp);
-            }
-            else
-            {
-                aviStream.AddFrame(bmp);
+                if (aviStream == null)
+                {
+                    aviStream = aviManager.AddVideoStream(writeCompressed, fps, bmp);
+                }
+                else
+                {
+                    aviStream.AddFrame(bmp);
+                }
             }
         }
 
         public void Dispose()
         {
-            aviManager.Close();
+            if (aviManager != null)
+            {
+                aviManager.Close();
+            }
         }
     }
 }

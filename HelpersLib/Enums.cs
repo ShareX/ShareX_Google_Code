@@ -188,7 +188,7 @@ namespace HelpersLib
 
     public enum ScreenRecordOutput
     {
-        GIF, AVI
+        GIF, AVI, AVI_CommandLine
     }
 
     public enum DownloaderFormStatus

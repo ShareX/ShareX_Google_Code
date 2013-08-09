@@ -159,7 +159,7 @@
             this.cbOutput.FormattingEnabled = true;
             this.cbOutput.Location = new System.Drawing.Point(64, 120);
             this.cbOutput.Name = "cbOutput";
-            this.cbOutput.Size = new System.Drawing.Size(64, 21);
+            this.cbOutput.Size = new System.Drawing.Size(120, 21);
             this.cbOutput.TabIndex = 9;
             this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
             // 

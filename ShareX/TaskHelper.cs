@@ -292,6 +292,7 @@ namespace ShareX
         {
             using (RectangleRegion surface = new RectangleRegion())
             {
+                surface.AreaManager.WindowCaptureMode = true;
                 surface.Config = Program.Settings.SurfaceOptions;
                 surface.Config.QuickCrop = true;
                 surface.Prepare();

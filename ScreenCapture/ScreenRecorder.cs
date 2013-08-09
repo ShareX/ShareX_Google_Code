@@ -93,6 +93,7 @@ namespace ScreenCapture
         private float durationSeconds;
         private Rectangle captureRectangle;
         private ScreenRecorderCache cache;
+        private AVICache aviCache;
 
         public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, bool writeCompressed)
         {
@@ -120,14 +121,15 @@ namespace ScreenCapture
             {
                 IsRecording = true;
 
-                using (cache = new ScreenRecorderCache(CachePath))
+                //using (cache = new ScreenRecorderCache(CachePath))
+                using (aviCache = new AVICache(CachePath, FPS))
                 {
                     for (int i = 0; i < frameCount; i++)
                     {
                         Stopwatch timer = Stopwatch.StartNew();
                         Image img = Screenshot.CaptureRectangle(CaptureRectangle);
 
-                        cache.AddImageAsync(img);
+                        aviCache.AddImageAsync(img);
 
                         if (i + 1 < frameCount)
                         {
@@ -144,7 +146,7 @@ namespace ScreenCapture
                         }
                     }
 
-                    cache.Finish();
+                    aviCache.Finish();
                 }
 
                 IsRecording = false;
@@ -211,6 +213,23 @@ namespace ScreenCapture
             }
         }
 
+        public void EncodeUsingCommandLine(string output, string encoderPath, string encoderArguments)
+        {
+            if (!string.IsNullOrEmpty(CachePath) && File.Exists(CachePath) && !string.IsNullOrEmpty(encoderPath) && File.Exists(encoderPath))
+            {
+                using (Process process = new Process())
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo(encoderPath);
+                    encoderArguments = encoderArguments.Replace("%input", "\"" + CachePath + "\"").Replace("%output", "\"" + output + "\"");
+                    psi.Arguments = encoderArguments;
+                    //psi.WindowStyle = ProcessWindowStyle.Hidden;
+                    process.StartInfo = psi;
+                    process.Start();
+                    process.WaitForExit();
+                }
+            }
+        }
+
         protected void OnEncodingProgressChanged(float progress)
         {
             if (EncodingProgressChanged != null)
@@ -226,7 +245,12 @@ namespace ScreenCapture
                 cache.Dispose();
             }
 
-            if (File.Exists(CachePath))
+            if (aviCache != null)
+            {
+                aviCache.Dispose();
+            }
+
+            if (!string.IsNullOrEmpty(CachePath) && File.Exists(CachePath))
             {
                 File.Delete(CachePath);
             }
