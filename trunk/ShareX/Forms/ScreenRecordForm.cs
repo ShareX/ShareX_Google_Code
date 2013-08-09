@@ -47,7 +47,7 @@ namespace ShareX
             nudDuration.Value = (decimal)Program.Settings.ScreenRecordDuration;
             cbOutput.Items.AddRange(Enum.GetNames(typeof(ScreenRecordOutput)));
             cbOutput.SelectedIndex = (int)Program.Settings.ScreenRecordOutput;
-            cbAutoUploadGIF.Checked = Program.Settings.ScreenRecordAutoUploadGIF;
+            cbAutoUploadGIF.Checked = Program.Settings.ScreenRecordAutoUpload;
 
             Screenshot.CaptureCursor = Program.Settings.ShowCursor;
 
@@ -115,6 +115,10 @@ namespace ShareX
                                 path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
                                 screenRecorder.SaveAsAVI(path, 720);
                                 break;
+                            case ScreenRecordOutput.AVI_CommandLine:
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("mp4"));
+                                screenRecorder.EncodeUsingCommandLine(path, "x264.exe", "--output %output %input");
+                                break;
                         }
                     });
                 }
@@ -124,7 +128,7 @@ namespace ShareX
                 if (screenRecorder != null) screenRecorder.Dispose();
             }
 
-            if (Program.Settings.ScreenRecordAutoUploadGIF && Program.Settings.ScreenRecordOutput == ScreenRecordOutput.GIF)
+            if (Program.Settings.ScreenRecordAutoUpload && Program.Settings.ScreenRecordOutput != ScreenRecordOutput.AVI)
             {
                 UploadManager.UploadFile(path);
             }
@@ -165,7 +169,7 @@ namespace ShareX
 
         private void cbAutoUploadGIF_CheckedChanged(object sender, EventArgs e)
         {
-            Program.Settings.ScreenRecordAutoUploadGIF = cbAutoUploadGIF.Checked;
+            Program.Settings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
         }
     }
 }

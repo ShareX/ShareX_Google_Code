@@ -181,7 +181,7 @@ namespace ShareX
         {
             get
             {
-                return Path.Combine(PersonalPath, "ScreenRecorder.cache");
+                return Path.Combine(PersonalPath, "ScreenRecorder.avi");
             }
         }
 
