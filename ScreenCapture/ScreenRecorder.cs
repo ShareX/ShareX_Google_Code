@@ -110,7 +110,7 @@ namespace ScreenCapture
             CachePath = cachePath;
             OutputType = outputType;
 
-            if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
+            if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVICommandLine)
             {
                 bool showOptions = OutputType == ScreenRecordOutput.AVI;
                 aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size, showOptions);
@@ -138,7 +138,7 @@ namespace ScreenCapture
                     Stopwatch timer = Stopwatch.StartNew();
                     Image img = Screenshot.CaptureRectangle(CaptureRectangle);
 
-                    if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
+                    if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVICommandLine)
                     {
                         aviCache.AddImageAsync(img);
                     }
@@ -162,7 +162,7 @@ namespace ScreenCapture
                     }
                 }
 
-                if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
+                if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVICommandLine)
                 {
                     aviCache.Finish();
                 }

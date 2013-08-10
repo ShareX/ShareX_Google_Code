@@ -39,12 +39,14 @@
             this.cbOutput = new System.Windows.Forms.ComboBox();
             this.cbAutoUploadGIF = new System.Windows.Forms.CheckBox();
             this.pbEncoding = new System.Windows.Forms.ProgressBar();
+            this.btnSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRecord
             // 
+            this.btnRecord.Enabled = false;
             this.btnRecord.Location = new System.Drawing.Point(16, 176);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(200, 24);
@@ -159,7 +161,7 @@
             this.cbOutput.FormattingEnabled = true;
             this.cbOutput.Location = new System.Drawing.Point(64, 120);
             this.cbOutput.Name = "cbOutput";
-            this.cbOutput.Size = new System.Drawing.Size(120, 21);
+            this.cbOutput.Size = new System.Drawing.Size(126, 21);
             this.cbOutput.TabIndex = 9;
             this.cbOutput.SelectedIndexChanged += new System.EventHandler(this.cbOutput_SelectedIndexChanged);
             // 
@@ -182,11 +184,22 @@
             this.pbEncoding.TabIndex = 11;
             this.pbEncoding.Visible = false;
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Image = global::ShareX.Properties.Resources.gear;
+            this.btnSettings.Location = new System.Drawing.Point(192, 119);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(24, 23);
+            this.btnSettings.TabIndex = 12;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // ScreenRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 211);
+            this.ClientSize = new System.Drawing.Size(228, 211);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.cbAutoUploadGIF);
             this.Controls.Add(this.cbOutput);
             this.Controls.Add(this.lblOutput);
@@ -202,7 +215,6 @@
             this.Name = "ScreenRecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Screen recorder";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).EndInit();
             this.ResumeLayout(false);
@@ -223,5 +235,6 @@
         private System.Windows.Forms.ComboBox cbOutput;
         private System.Windows.Forms.CheckBox cbAutoUploadGIF;
         private System.Windows.Forms.ProgressBar pbEncoding;
+        private System.Windows.Forms.Button btnSettings;
     }
 }

@@ -58,7 +58,8 @@ namespace ShareX
 
         #region Paths
 
-        private static readonly string StartupPath = Application.StartupPath;
+        public static readonly string StartupPath = Application.StartupPath;
+
         private static readonly string DefaultPersonalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);
         private static readonly string PortablePersonalPath = Path.Combine(StartupPath, ApplicationName);
         private static readonly string PersonalPathConfig = Path.Combine(StartupPath, "PersonalPath.cfg");
