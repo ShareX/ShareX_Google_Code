@@ -29,6 +29,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -85,19 +86,32 @@ namespace ShareX
             {
                 using (ScreenRegionManager screenRegionManager = new ScreenRegionManager())
                 {
-                    screenRegionManager.Start(CaptureRectangle, 1000);
+                    screenRegionManager.Start(CaptureRectangle);
 
                     await TaskEx.Run(() =>
                     {
+                        if (Program.Settings.ScreenRecordOutput == ScreenRecordOutput.AVI)
+                        {
+                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
+                        }
+                        else
+                        {
+                            path = Program.ScreenRecorderCacheFilePath;
+                        }
+
                         screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
-                            CaptureRectangle, Program.ScreenRecorderCacheFilePath, true);
+                            CaptureRectangle, path, Program.Settings.ScreenRecordOutput);
+
+                        Thread.Sleep(1000);
+                        screenRegionManager.ChangeColor();
+
                         screenRecorder.StartRecording();
                     });
                 }
 
                 Show();
 
-                if (screenRecorder != null)
+                if (screenRecorder != null && Program.Settings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
                     screenRecorder.EncodingProgressChanged += screenRecorder_EncodingProgressChanged;
 
@@ -111,10 +125,6 @@ namespace ShareX
                                 path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
                                 screenRecorder.SaveAsGIF(path, Program.Settings.ImageGIFQuality);
                                 break;
-                            case ScreenRecordOutput.AVI:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("avi"));
-                                screenRecorder.SaveAsAVI(path, 720);
-                                break;
                             case ScreenRecordOutput.AVI_CommandLine:
                                 path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("mp4"));
                                 screenRecorder.EncodeUsingCommandLine(path, "x264.exe", "--output %output %input");
@@ -125,7 +135,16 @@ namespace ShareX
             }
             finally
             {
-                if (screenRecorder != null) screenRecorder.Dispose();
+                if (screenRecorder != null)
+                {
+                    if (Program.Settings.ScreenRecordOutput == ScreenRecordOutput.AVI_CommandLine &&
+                        !string.IsNullOrEmpty(screenRecorder.CachePath) && File.Exists(screenRecorder.CachePath))
+                    {
+                        File.Delete(screenRecorder.CachePath);
+                    }
+
+                    screenRecorder.Dispose();
+                }
             }
 
             if (Program.Settings.ScreenRecordAutoUpload && Program.Settings.ScreenRecordOutput != ScreenRecordOutput.AVI)
@@ -142,9 +161,27 @@ namespace ShareX
             btnRecord.Visible = true;
         }
 
-        private void screenRecorder_EncodingProgressChanged(float progress)
+        private void screenRecorder_EncodingProgressChanged(int progress)
         {
-            this.InvokeSafe(() => pbEncoding.Value = (int)progress);
+            this.InvokeSafe(() =>
+            {
+                if (progress == -1)
+                {
+                    if (pbEncoding.Style != ProgressBarStyle.Marquee)
+                    {
+                        pbEncoding.Style = ProgressBarStyle.Marquee;
+                    }
+                }
+                else
+                {
+                    if (pbEncoding.Style != ProgressBarStyle.Blocks)
+                    {
+                        pbEncoding.Style = ProgressBarStyle.Blocks;
+                    }
+
+                    pbEncoding.Value = progress;
+                }
+            });
         }
 
         private void btnRegion_Click(object sender, EventArgs e)

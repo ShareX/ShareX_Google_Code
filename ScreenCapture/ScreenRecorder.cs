@@ -86,16 +86,18 @@ namespace ScreenCapture
 
         public string CachePath { get; private set; }
 
-        public delegate void ProgressEventHandler(float progress);
+        public ScreenRecordOutput OutputType { get; private set; }
+
+        public delegate void ProgressEventHandler(int progress);
         public event ProgressEventHandler EncodingProgressChanged;
 
         private int fps, delay, frameCount;
         private float durationSeconds;
         private Rectangle captureRectangle;
-        private ScreenRecorderCache cache;
+        private HardDiskCache cache;
         private AVICache aviCache;
 
-        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, bool writeCompressed)
+        public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, ScreenRecordOutput outputType)
         {
             if (string.IsNullOrEmpty(cachePath))
             {
@@ -106,7 +108,10 @@ namespace ScreenCapture
             DurationSeconds = durationSeconds;
             CaptureRectangle = captureRectangle;
             CachePath = cachePath;
-            WriteCompressed = writeCompressed;
+            OutputType = outputType;
+
+            bool showOptions = OutputType == ScreenRecordOutput.AVI;
+            aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size, showOptions);
         }
 
         private void UpdateInfo()
@@ -122,7 +127,7 @@ namespace ScreenCapture
                 IsRecording = true;
 
                 //using (cache = new ScreenRecorderCache(CachePath))
-                using (aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size))
+                using (aviCache)
                 {
                     for (int i = 0; i < frameCount; i++)
                     {
@@ -165,7 +170,7 @@ namespace ScreenCapture
                     foreach (Image img in cache.GetImageEnumerator())
                     {
                         i++;
-                        OnEncodingProgressChanged((float)i / count * 100);
+                        OnEncodingProgressChanged((int)((float)i / count * 100));
 
                         using (img)
                         {
@@ -191,7 +196,7 @@ namespace ScreenCapture
                     foreach (Image img in cache.GetImageEnumerator())
                     {
                         i++;
-                        OnEncodingProgressChanged((float)i / count * 100);
+                        OnEncodingProgressChanged((int)((float)i / count * 100));
                         Image img2 = img;
 
                         try
@@ -217,20 +222,24 @@ namespace ScreenCapture
         {
             if (!string.IsNullOrEmpty(CachePath) && File.Exists(CachePath) && !string.IsNullOrEmpty(encoderPath) && File.Exists(encoderPath))
             {
+                OnEncodingProgressChanged(-1);
+
                 using (Process process = new Process())
                 {
                     ProcessStartInfo psi = new ProcessStartInfo(encoderPath);
                     encoderArguments = encoderArguments.Replace("%input", "\"" + CachePath + "\"").Replace("%output", "\"" + output + "\"");
                     psi.Arguments = encoderArguments;
-                    //psi.WindowStyle = ProcessWindowStyle.Hidden;
+                    psi.WindowStyle = ProcessWindowStyle.Hidden;
                     process.StartInfo = psi;
                     process.Start();
                     process.WaitForExit();
                 }
+
+                OnEncodingProgressChanged(100);
             }
         }
 
-        protected void OnEncodingProgressChanged(float progress)
+        protected void OnEncodingProgressChanged(int progress)
         {
             if (EncodingProgressChanged != null)
             {
@@ -248,11 +257,6 @@ namespace ScreenCapture
             if (aviCache != null)
             {
                 aviCache.Dispose();
-            }
-
-            if (!string.IsNullOrEmpty(CachePath) && File.Exists(CachePath))
-            {
-                File.Delete(CachePath);
             }
         }
     }

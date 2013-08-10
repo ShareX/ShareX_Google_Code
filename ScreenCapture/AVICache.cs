@@ -40,16 +40,18 @@ namespace ScreenCapture
         public string OutputPath { get; private set; }
         public int FPS { get; private set; }
         public Size Size { get; private set; }
-
-        private BlockingCollection<Image> imageQueue;
+        public bool ShowOptions { get; private set; }
 
         private Task task;
+        private BlockingCollection<Image> imageQueue;
+        private int position;
 
-        public AVICache(string outputPath, int fps, Size size)
+        public AVICache(string outputPath, int fps, Size size, bool showOptions = false)
         {
             OutputPath = outputPath;
             FPS = fps;
             Size = size;
+            ShowOptions = showOptions;
             imageQueue = new BlockingCollection<Image>();
             StartConsumerThread();
         }
@@ -60,12 +62,16 @@ namespace ScreenCapture
             {
                 IsWorking = true;
 
+                Helpers.CreateDirectoryIfNotExist(OutputPath);
+
+                AVIWriter aviWriter = new AVIWriter(OutputPath, FPS, Size.Width, Size.Height, ShowOptions);
+
                 task = TaskEx.Run(() =>
                 {
-                    int count = 0;
-
-                    using (AVIWriter aviWriter = new AVIWriter(OutputPath, FPS, Size.Width, Size.Height))
+                    try
                     {
+                        position = 0;
+
                         while (!imageQueue.IsCompleted)
                         {
                             Image img = null;
@@ -76,9 +82,9 @@ namespace ScreenCapture
 
                                 if (img != null)
                                 {
-                                    count++;
-                                    //img.Save("Test\\" + count + ".bmp", ImageFormat.Bmp);
+                                    //img.Save("Test\\" + position + ".bmp", ImageFormat.Bmp);
                                     aviWriter.AddFrame((Bitmap)img);
+                                    position++;
                                 }
                             }
                             catch (InvalidOperationException) { }
@@ -88,8 +94,15 @@ namespace ScreenCapture
                             }
                         }
                     }
+                    finally
+                    {
+                        IsWorking = false;
 
-                    IsWorking = false;
+                        if (aviWriter != null)
+                        {
+                            aviWriter.Dispose();
+                        }
+                    }
                 });
             }
         }
@@ -104,8 +117,11 @@ namespace ScreenCapture
 
         public void Finish()
         {
-            imageQueue.CompleteAdding();
-            task.Wait();
+            if (IsWorking)
+            {
+                imageQueue.CompleteAdding();
+                task.Wait();
+            }
         }
 
         public void Dispose()
