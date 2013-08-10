@@ -326,5 +326,84 @@ namespace HelpersLib
 
             SetWindowPlacement(handle, ref wp);
         }
+
+        /// <summary>
+        /// Version of <see cref="AVISaveOptions(IntPtr, int, int, IntPtr[], IntPtr[])"/> for one stream only.
+        /// </summary>
+        ///
+        /// <param name="stream">Stream to configure.</param>
+        /// <param name="options">Stream options.</param>
+        ///
+        /// <returns>Returns TRUE if the user pressed OK, FALSE for CANCEL, or an error otherwise.</returns>
+        public static int AVISaveOptions(IntPtr stream, ref AVICOMPRESSOPTIONS options)
+        {
+            IntPtr[] streams = new IntPtr[1];
+            IntPtr[] infPtrs = new IntPtr[1];
+            IntPtr mem;
+            int ret;
+
+            // alloc unmanaged memory
+            mem = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AVICOMPRESSOPTIONS)));
+
+            // copy from managed structure to unmanaged memory
+            Marshal.StructureToPtr(options, mem, false);
+
+            streams[0] = stream;
+            infPtrs[0] = mem;
+
+            // show dialog with a list of available compresors and configuration
+            ret = AVISaveOptions(IntPtr.Zero, 0, 1, streams, infPtrs);
+
+            // copy from unmanaged memory to managed structure
+            options = (AVICOMPRESSOPTIONS)Marshal.PtrToStructure(mem, typeof(AVICOMPRESSOPTIONS));
+
+            // free AVI compression options
+            AVISaveOptionsFree(1, infPtrs);
+
+            // clear it, because the information already freed by AVISaveOptionsFree
+            options.format = 0;
+            options.parameters = 0;
+
+            // free unmanaged memory
+            Marshal.FreeHGlobal(mem);
+
+            return ret;
+        }
+
+        /// <summary>
+        /// .NET replacement of mmioFOURCC macros. Converts four characters to code.
+        /// </summary>
+        ///
+        /// <param name="str">Four characters string.</param>
+        ///
+        /// <returns>Returns the code created from provided characters.</returns>
+        public static int mmioFOURCC(string str)
+        {
+            return (
+                ((int)(byte)(str[0])) |
+                ((int)(byte)(str[1]) << 8) |
+                ((int)(byte)(str[2]) << 16) |
+                ((int)(byte)(str[3]) << 24));
+        }
+
+        /// <summary>
+        /// Inverse to <see cref="mmioFOURCC"/>. Converts code to fout characters string.
+        /// </summary>
+        ///
+        /// <param name="code">Code to convert.</param>
+        ///
+        /// <returns>Returns four characters string.</returns>
+        public static string decode_mmioFOURCC(int code)
+        {
+            char[] chs = new char[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                chs[i] = (char)(byte)((code >> (i << 3)) & 0xFF);
+                if (!char.IsLetterOrDigit(chs[i]))
+                    chs[i] = ' ';
+            }
+            return new string(chs);
+        }
     }
 }

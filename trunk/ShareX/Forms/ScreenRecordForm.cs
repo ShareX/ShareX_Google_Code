@@ -59,7 +59,7 @@ namespace ShareX
             Rectangle rect;
             if (TaskHelper.SelectRegion(out rect))
             {
-                CaptureRectangle = rect;
+                CaptureRectangle = Helpers.EvenRectangleSize(rect);
                 lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
                     CaptureRectangle.Width, CaptureRectangle.Height);
             }

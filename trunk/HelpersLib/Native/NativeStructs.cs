@@ -250,4 +250,314 @@ namespace HelpersLib
         public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon,
         public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this
     }
+
+    /// <summary>
+    /// Structure, which contains information for a single stream .
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1)]
+    public struct AVISTREAMINFO
+    {
+        /// <summary>
+        /// Four-character code indicating the stream type.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int type;
+
+        /// <summary>
+        /// Four-character code of the compressor handler that will compress this video stream when it is saved.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int handler;
+
+        /// <summary>
+        /// Applicable flags for the stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int flags;
+
+        /// <summary>
+        /// Capability flags; currently unused.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int Capabilities;
+
+        /// <summary>
+        /// Priority of the stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I2)]
+        public short priority;
+
+        /// <summary>
+        /// Language of the stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I2)]
+        public short language;
+
+        /// <summary>
+        /// Time scale applicable for the stream.
+        /// </summary>
+        ///
+        /// <remarks>Dividing <b>rate</b> by <b>scale</b> gives the playback rate in number of samples per second.</remarks>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int scale;
+
+        /// <summary>
+        /// Rate in an integer format.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int rate;
+
+        /// <summary>
+        /// Sample number of the first frame of the AVI file.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int start;
+
+        /// <summary>
+        /// Length of this stream.
+        /// </summary>
+        ///
+        /// <remarks>The units are defined by <b>rate</b> and <b>scale</b>.</remarks>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int length;
+
+        /// <summary>
+        /// Audio skew. This member specifies how much to skew the audio data ahead of the video frames in interleaved files.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int initialFrames;
+
+        /// <summary>
+        /// Recommended buffer size, in bytes, for the stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int suggestedBufferSize;
+
+        /// <summary>
+        /// Quality indicator of the video data in the stream.
+        /// </summary>
+        ///
+        /// <remarks>Quality is represented as a number between 0 and 10,000.</remarks>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int quality;
+
+        /// <summary>
+        /// Size, in bytes, of a single data sample.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int sampleSize;
+
+        /// <summary>
+        /// Dimensions of the video destination rectangle.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.Struct, SizeConst = 16)]
+        public RECT rectFrame;
+
+        /// <summary>
+        /// Number of times the stream has been edited.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int editCount;
+
+        /// <summary>
+        /// Number of times the stream format has changed.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int formatChangeCount;
+
+        /// <summary>
+        /// Description of the stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+        public string name;
+    }
+
+    /// <summary>
+    /// Structure, which contains information about the dimensions and color format of a DIB.
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct BITMAPINFOHEADER
+    {
+        /// <summary>
+        /// Specifies the number of bytes required by the structure.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int size;
+
+        /// <summary>
+        /// Specifies the width of the bitmap, in pixels.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int width;
+
+        /// <summary>
+        /// Specifies the height of the bitmap, in pixels.
+        /// </summary>
+        ///
+        /// <remarks>If <b>heigh</b>t is positive, the bitmap is a bottom-up DIB and its origin is
+        /// the lower-left corner. If <b>height</b> is negative, the bitmap is a top-down DIB and its
+        /// origin is the upper-left corner.</remarks>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int height;
+
+        /// <summary>
+        /// Specifies the number of planes for the target device. This value must be set to 1.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I2)]
+        public short planes;
+
+        /// <summary>
+        /// Specifies the number of bits-per-pixel.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I2)]
+        public short bitCount;
+
+        /// <summary>
+        /// Specifies the type of compression for a compressed bottom-up bitmap (top-down DIBs cannot be compressed).
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int compression;
+
+        /// <summary>
+        /// Specifies the size, in bytes, of the image.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int sizeImage;
+
+        /// <summary>
+        /// Specifies the horizontal resolution, in pixels-per-meter, of the target device for the bitmap.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int xPelsPerMeter;
+
+        /// <summary>
+        /// Specifies the vertical resolution, in pixels-per-meter, of the target device for the bitmap.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int yPelsPerMeter;
+
+        /// <summary>
+        /// Specifies the number of color indexes in the color table that are actually used by the bitmap.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int colorsUsed;
+
+        /// <summary>
+        /// Specifies the number of color indexes that are required for displaying the bitmap.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int colorsImportant;
+    }
+
+    /// <summary>
+    /// Structure, which contains information about a stream and how it is compressed and saved.
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct AVICOMPRESSOPTIONS
+    {
+        /// <summary>
+        /// Four-character code indicating the stream type.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int type;
+
+        /// <summary>
+        /// Four-character code for the compressor handler that will compress this video stream when it is saved.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int handler;
+
+        /// <summary>
+        /// Maximum period between video key frames.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int keyFrameEvery;
+
+        /// <summary>
+        /// Quality value passed to a video compressor.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int quality;
+
+        /// <summary>
+        /// Video compressor data rate.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int bytesPerSecond;
+
+        /// <summary>
+        /// Flags used for compression.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int flags;
+
+        /// <summary>
+        /// Pointer to a structure defining the data format.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int format;
+
+        /// <summary>
+        /// Size, in bytes, of the data referenced by <b>format</b>.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int formatSize;
+
+        /// <summary>
+        /// Video-compressor-specific data; used internally.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int parameters;
+
+        /// <summary>
+        /// Size, in bytes, of the data referenced by <b>parameters</b>.
+        /// </summary>
+        [MarshalAs(UnmanagedType.I4)]
+        public int parametersSize;
+
+        /// <summary>
+        /// Interleave factor for interspersing stream data with data from the first stream.
+        /// </summary>
+        ///
+        [MarshalAs(UnmanagedType.I4)]
+        public int interleaveEvery;
+    }
 }
