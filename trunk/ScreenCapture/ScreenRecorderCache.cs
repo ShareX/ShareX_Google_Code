@@ -34,7 +34,7 @@ using System.Threading.Tasks;
 
 namespace ScreenCapture
 {
-    public class ScreenRecorderCache : IDisposable
+    public class HardDiskCache : IDisposable
     {
         public string CachePath { get; private set; }
 
@@ -56,7 +56,7 @@ namespace ScreenCapture
         private bool isWorking;
         private Task task;
 
-        public ScreenRecorderCache(string cachePath)
+        public HardDiskCache(string cachePath)
         {
             CachePath = cachePath;
             indexList = new List<LocationInfo>();

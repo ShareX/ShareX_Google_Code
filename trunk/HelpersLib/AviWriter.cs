@@ -81,7 +81,7 @@ namespace HelpersLib
         // length of one line
         private int stride;
         // quality
-        private int quality = -1;
+        private int quality = 0;
         // frame rate
         private int rate = 25;
         // current position
@@ -90,7 +90,7 @@ namespace HelpersLib
         private string codec = "DIB ";
 
         // dummy object to lock for synchronization
-        private object sync = new object();
+        private readonly object sync = new object();
 
         /// <summary>
         /// Width of video frames.
@@ -185,12 +185,11 @@ namespace HelpersLib
             NativeMethods.AVIFileInit();
         }
 
-        public AVIWriter(string output, int fps, int width, int height)
+        public AVIWriter(string output, int fps, int width, int height, bool showOptions = false)
             : this()
         {
             FrameRate = fps;
-            Helpers.CreateDirectoryIfNotExist(output);
-            Open(output, width, height);
+            Open(output, width, height, showOptions);
         }
 
         /// <summary>
@@ -258,7 +257,7 @@ namespace HelpersLib
         /// <exception cref="VideoException">A error occurred while creating new video file. See exception message.</exception>
         /// <exception cref="OutOfMemoryException">Insufficient memory for internal buffer.</exception>
         /// <exception cref="ArgumentException">Video file resolution must be a multiple of two.</exception>
-        public void Open(string fileName, int width, int height)
+        public void Open(string fileName, int width, int height, bool showOptions = false)
         {
             // close previous file
             Close();
@@ -306,8 +305,10 @@ namespace HelpersLib
                     options.handler = NativeMethods.mmioFOURCC(codec);
                     options.quality = quality;
 
-                    // uncomment if video settings dialog is required to show
-                    // Win32.AVISaveOptions( stream, ref options );
+                    if (showOptions)
+                    {
+                        NativeMethods.AVISaveOptions(stream, ref options);
+                    }
 
                     // create compressed stream
                     if (NativeMethods.AVIMakeCompressedStream(out streamCompressed, stream, ref options, IntPtr.Zero) != 0)

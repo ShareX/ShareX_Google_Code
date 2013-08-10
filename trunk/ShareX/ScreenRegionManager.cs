@@ -34,18 +34,20 @@ namespace ShareX
     {
         private ScreenRegionForm regionForm;
 
-        public async void Start(Rectangle captureRectangle, int startDelay)
+        public void Start(Rectangle captureRectangle)
         {
             if (captureRectangle != CaptureHelpers.GetScreenBounds())
             {
                 regionForm = new ScreenRegionForm(captureRectangle);
                 regionForm.Show();
-                await TaskEx.Delay(startDelay);
-                regionForm.ChangeColor(Color.FromArgb(0, 255, 0));
             }
-            else
+        }
+
+        public void ChangeColor()
+        {
+            if (regionForm != null)
             {
-                await TaskEx.Delay(startDelay);
+                regionForm.InvokeSafe(() => regionForm.ChangeColor(Color.FromArgb(0, 255, 0)));
             }
         }
 
