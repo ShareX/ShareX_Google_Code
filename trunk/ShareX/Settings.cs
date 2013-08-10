@@ -204,6 +204,10 @@ namespace ShareX
         public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
         public bool ScreenRecordAutoUpload = true;
 
+        public string ScreenRecordCommandLinePath = "x264.exe";
+        public string ScreenRecordCommandLineArgs = "--output %output %input";
+        public string ScreenRecordCommandLineOutputExtension = "mp4";
+
         #endregion ScreenRecord Form
 
         #region AutoCapture Form

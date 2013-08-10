@@ -188,7 +188,12 @@ namespace HelpersLib
 
     public enum ScreenRecordOutput
     {
-        GIF, AVI, AVI_CommandLine
+        [Description("Animated GIF")]
+        GIF,
+        [Description("AVI")]
+        AVI,
+        [Description("AVI CLI encoder")]
+        AVICommandLine
     }
 
     public enum DownloaderFormStatus

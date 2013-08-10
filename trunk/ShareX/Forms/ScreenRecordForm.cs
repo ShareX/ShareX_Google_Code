@@ -46,7 +46,7 @@ namespace ShareX
             lblRegion.Text = CaptureRectangle.ToString();
             nudFPS.Value = Program.Settings.ScreenRecordFPS;
             nudDuration.Value = (decimal)Program.Settings.ScreenRecordDuration;
-            cbOutput.Items.AddRange(Enum.GetNames(typeof(ScreenRecordOutput)));
+            cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
             cbOutput.SelectedIndex = (int)Program.Settings.ScreenRecordOutput;
             cbAutoUploadGIF.Checked = Program.Settings.ScreenRecordAutoUpload;
 
@@ -58,11 +58,12 @@ namespace ShareX
         private void SelectRegion()
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(out rect))
+            if (TaskHelper.SelectRegion(out rect) && !rect.IsEmpty)
             {
                 CaptureRectangle = Helpers.EvenRectangleSize(rect);
                 lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
                     CaptureRectangle.Width, CaptureRectangle.Height);
+                btnRecord.Enabled = true;
             }
         }
 
@@ -125,9 +126,9 @@ namespace ShareX
                                 path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("gif"));
                                 screenRecorder.SaveAsGIF(path, Program.Settings.ImageGIFQuality);
                                 break;
-                            case ScreenRecordOutput.AVI_CommandLine:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename("mp4"));
-                                screenRecorder.EncodeUsingCommandLine(path, "x264.exe", "--output %output %input");
+                            case ScreenRecordOutput.AVICommandLine:
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(Program.Settings.ScreenRecordCommandLineOutputExtension));
+                                screenRecorder.EncodeUsingCommandLine(path, Program.Settings.ScreenRecordCommandLinePath, Program.Settings.ScreenRecordCommandLineArgs);
                                 break;
                         }
                     });
@@ -137,7 +138,7 @@ namespace ShareX
             {
                 if (screenRecorder != null)
                 {
-                    if (Program.Settings.ScreenRecordOutput == ScreenRecordOutput.AVI_CommandLine &&
+                    if (Program.Settings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine &&
                         !string.IsNullOrEmpty(screenRecorder.CachePath) && File.Exists(screenRecorder.CachePath))
                     {
                         File.Delete(screenRecorder.CachePath);
@@ -147,7 +148,7 @@ namespace ShareX
                 }
             }
 
-            if (Program.Settings.ScreenRecordAutoUpload && Program.Settings.ScreenRecordOutput != ScreenRecordOutput.AVI)
+            if (Program.Settings.ScreenRecordAutoUpload)
             {
                 UploadManager.UploadFile(path);
             }
@@ -202,11 +203,22 @@ namespace ShareX
         private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.Settings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
+
+            btnSettings.Visible = Program.Settings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
         }
 
         private void cbAutoUploadGIF_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            using (ScreenRecordCommandLineForm form = new ScreenRecordCommandLineForm())
+            {
+                form.Icon = Icon;
+                form.ShowDialog();
+            }
         }
     }
 }

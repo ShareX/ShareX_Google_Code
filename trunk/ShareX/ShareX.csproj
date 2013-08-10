@@ -115,6 +115,12 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
+    <Compile Include="Forms\ScreenRecordCommandLineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenRecordCommandLineForm.Designer.cs">
+      <DependentUpon>ScreenRecordCommandLineForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ScreenRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenRecordCommandLineForm.resx">
+      <DependentUpon>ScreenRecordCommandLineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScreenRecordForm.resx">
       <DependentUpon>ScreenRecordForm.cs</DependentUpon>
