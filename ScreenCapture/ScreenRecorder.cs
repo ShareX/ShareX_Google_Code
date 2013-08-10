@@ -94,7 +94,7 @@ namespace ScreenCapture
         private int fps, delay, frameCount;
         private float durationSeconds;
         private Rectangle captureRectangle;
-        private HardDiskCache cache;
+        private HardDiskCache hdCache;
         private AVICache aviCache;
 
         public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, ScreenRecordOutput outputType)
@@ -110,8 +110,15 @@ namespace ScreenCapture
             CachePath = cachePath;
             OutputType = outputType;
 
-            bool showOptions = OutputType == ScreenRecordOutput.AVI;
-            aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size, showOptions);
+            if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
+            {
+                bool showOptions = OutputType == ScreenRecordOutput.AVI;
+                aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size, showOptions);
+            }
+            else if (OutputType == ScreenRecordOutput.GIF)
+            {
+                hdCache = new HardDiskCache(CachePath);
+            }
         }
 
         private void UpdateInfo()
@@ -126,36 +133,46 @@ namespace ScreenCapture
             {
                 IsRecording = true;
 
-                //using (cache = new ScreenRecorderCache(CachePath))
-                using (aviCache)
+                for (int i = 0; i < frameCount; i++)
                 {
-                    for (int i = 0; i < frameCount; i++)
+                    Stopwatch timer = Stopwatch.StartNew();
+                    Image img = Screenshot.CaptureRectangle(CaptureRectangle);
+
+                    if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
                     {
-                        Stopwatch timer = Stopwatch.StartNew();
-                        Image img = Screenshot.CaptureRectangle(CaptureRectangle);
-
                         aviCache.AddImageAsync(img);
-
-                        if (i + 1 < frameCount)
-                        {
-                            int sleepTime = delay - (int)timer.ElapsedMilliseconds;
-
-                            if (sleepTime > 0)
-                            {
-                                Thread.Sleep(sleepTime);
-                            }
-                            else
-                            {
-                                Debug.WriteLine("FPS drop: " + sleepTime);
-                            }
-                        }
+                    }
+                    else if (OutputType == ScreenRecordOutput.GIF)
+                    {
+                        hdCache.AddImageAsync(img);
                     }
 
-                    aviCache.Finish();
+                    if (i + 1 < frameCount)
+                    {
+                        int sleepTime = delay - (int)timer.ElapsedMilliseconds;
+
+                        if (sleepTime > 0)
+                        {
+                            Thread.Sleep(sleepTime);
+                        }
+                        else
+                        {
+                            //Debug.WriteLine("FPS drop: " + sleepTime);
+                        }
+                    }
                 }
 
-                IsRecording = false;
+                if (OutputType == ScreenRecordOutput.AVI || OutputType == ScreenRecordOutput.AVI_CommandLine)
+                {
+                    aviCache.Finish();
+                }
+                else if (OutputType == ScreenRecordOutput.GIF)
+                {
+                    hdCache.Finish();
+                }
             }
+
+            IsRecording = false;
         }
 
         public void SaveAsGIF(string path, GIFQuality quality)
@@ -165,9 +182,9 @@ namespace ScreenCapture
                 using (GifCreator gifEncoder = new GifCreator(delay))
                 {
                     int i = 0;
-                    int count = cache.Count;
+                    int count = hdCache.Count;
 
-                    foreach (Image img in cache.GetImageEnumerator())
+                    foreach (Image img in hdCache.GetImageEnumerator())
                     {
                         i++;
                         OnEncodingProgressChanged((int)((float)i / count * 100));
@@ -180,40 +197,6 @@ namespace ScreenCapture
 
                     gifEncoder.Finish();
                     gifEncoder.Save(path);
-                }
-            }
-        }
-
-        public void SaveAsAVI(string path, int heightLimit = 720)
-        {
-            if (!IsRecording)
-            {
-                using (AVIWriter aviWriter = new AVIWriter(path, FPS, CaptureRectangle.Width, CaptureRectangle.Height))
-                {
-                    int i = 0;
-                    int count = cache.Count;
-
-                    foreach (Image img in cache.GetImageEnumerator())
-                    {
-                        i++;
-                        OnEncodingProgressChanged((int)((float)i / count * 100));
-                        Image img2 = img;
-
-                        try
-                        {
-                            if (heightLimit > 0 && CaptureRectangle.Height > heightLimit)
-                            {
-                                int width = (int)((float)heightLimit / CaptureRectangle.Height * captureRectangle.Width);
-                                img2 = CaptureHelpers.ResizeImage(img2, width, heightLimit);
-                            }
-
-                            aviWriter.AddFrame((Bitmap)img2);
-                        }
-                        finally
-                        {
-                            if (img2 != null) img2.Dispose();
-                        }
-                    }
                 }
             }
         }
@@ -249,9 +232,9 @@ namespace ScreenCapture
 
         public void Dispose()
         {
-            if (cache != null)
+            if (hdCache != null)
             {
-                cache.Dispose();
+                hdCache.Dispose();
             }
 
             if (aviCache != null)
