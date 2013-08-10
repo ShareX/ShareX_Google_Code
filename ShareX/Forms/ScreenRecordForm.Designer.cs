@@ -168,9 +168,9 @@
             this.cbAutoUploadGIF.AutoSize = true;
             this.cbAutoUploadGIF.Location = new System.Drawing.Point(16, 152);
             this.cbAutoUploadGIF.Name = "cbAutoUploadGIF";
-            this.cbAutoUploadGIF.Size = new System.Drawing.Size(103, 17);
+            this.cbAutoUploadGIF.Size = new System.Drawing.Size(83, 17);
             this.cbAutoUploadGIF.TabIndex = 10;
-            this.cbAutoUploadGIF.Text = "Auto upload GIF";
+            this.cbAutoUploadGIF.Text = "Auto upload";
             this.cbAutoUploadGIF.UseVisualStyleBackColor = true;
             this.cbAutoUploadGIF.CheckedChanged += new System.EventHandler(this.cbAutoUploadGIF_CheckedChanged);
             // 

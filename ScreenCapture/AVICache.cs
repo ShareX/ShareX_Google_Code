@@ -39,15 +39,17 @@ namespace ScreenCapture
         public bool IsWorking { get; private set; }
         public string OutputPath { get; private set; }
         public int FPS { get; private set; }
+        public Size Size { get; private set; }
 
         private BlockingCollection<Image> imageQueue;
 
         private Task task;
 
-        public AVICache(string outputPath, int fps)
+        public AVICache(string outputPath, int fps, Size size)
         {
             OutputPath = outputPath;
             FPS = fps;
+            Size = size;
             imageQueue = new BlockingCollection<Image>();
             StartConsumerThread();
         }
@@ -60,7 +62,9 @@ namespace ScreenCapture
 
                 task = TaskEx.Run(() =>
                 {
-                    using (AVIManager aviManager = new AVIManager(OutputPath, FPS))
+                    int count = 0;
+
+                    using (AVIWriter aviWriter = new AVIWriter(OutputPath, FPS, Size.Width, Size.Height))
                     {
                         while (!imageQueue.IsCompleted)
                         {
@@ -72,7 +76,9 @@ namespace ScreenCapture
 
                                 if (img != null)
                                 {
-                                    aviManager.AddFrame(img, false);
+                                    count++;
+                                    //img.Save("Test\\" + count + ".bmp", ImageFormat.Bmp);
+                                    aviWriter.AddFrame((Bitmap)img);
                                 }
                             }
                             catch (InvalidOperationException) { }

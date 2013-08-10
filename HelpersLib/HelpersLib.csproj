@@ -72,14 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AviFile\AudioStream.cs" />
-    <Compile Include="AviFile\Avi.cs" />
-    <Compile Include="AviFile\AviManager.cs" />
-    <Compile Include="AviFile\AviPlayer.cs" />
-    <Compile Include="AviFile\AviStream.cs" />
-    <Compile Include="AviFile\EditableVideoStream.cs" />
-    <Compile Include="AviFile\VideoStream.cs" />
-    <Compile Include="AVIManager.cs" />
+    <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardHelper.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />

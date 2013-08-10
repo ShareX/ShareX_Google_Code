@@ -122,7 +122,7 @@ namespace ScreenCapture
                 IsRecording = true;
 
                 //using (cache = new ScreenRecorderCache(CachePath))
-                using (aviCache = new AVICache(CachePath, FPS))
+                using (aviCache = new AVICache(CachePath, FPS, CaptureRectangle.Size))
                 {
                     for (int i = 0; i < frameCount; i++)
                     {
@@ -183,7 +183,7 @@ namespace ScreenCapture
         {
             if (!IsRecording)
             {
-                using (AVIManager aviManager = new AVIManager(path, FPS))
+                using (AVIWriter aviWriter = new AVIWriter(path, FPS, CaptureRectangle.Width, CaptureRectangle.Height))
                 {
                     int i = 0;
                     int count = cache.Count;
@@ -202,7 +202,7 @@ namespace ScreenCapture
                                 img2 = CaptureHelpers.ResizeImage(img2, width, heightLimit);
                             }
 
-                            aviManager.AddFrame(img2, WriteCompressed);
+                            aviWriter.AddFrame((Bitmap)img2);
                         }
                         finally
                         {
