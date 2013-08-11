@@ -55,6 +55,8 @@ namespace ShareX
             }
         }
 
+        public bool IsRecording { get; private set; }
+
         private ScreenRecorder screenRecorder = null;
 
         private ScreenRecordForm()
@@ -91,11 +93,12 @@ namespace ShareX
 
         private async void btnRecord_Click(object sender, EventArgs e)
         {
-            if (CaptureRectangle.IsEmpty || screenRecorder != null)
+            if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
             {
                 return;
             }
 
+            IsRecording = true;
             btnRecord.Enabled = false;
             Hide();
             btnRecord.Visible = false;
@@ -138,6 +141,7 @@ namespace ShareX
                 }
 
                 Show();
+
                 if (niTray.Visible)
                 {
                     niTray.Visible = false;
@@ -192,6 +196,7 @@ namespace ShareX
             pbEncoding.Visible = false;
             btnRecord.Enabled = true;
             btnRecord.Visible = true;
+            IsRecording = false;
         }
 
         private void screenRecorder_EncodingProgressChanged(int progress)
@@ -261,9 +266,18 @@ namespace ShareX
 
         private void niTray_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && screenRecorder != null)
+            if (e.Button == MouseButtons.Left)
+            {
+                StopRecording();
+            }
+        }
+
+        public void StopRecording()
+        {
+            if (IsRecording && screenRecorder != null)
             {
                 screenRecorder.StopRecording();
+
                 if (niTray.Visible)
                 {
                     niTray.Visible = false;
