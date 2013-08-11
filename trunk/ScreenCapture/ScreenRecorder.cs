@@ -96,6 +96,7 @@ namespace ScreenCapture
         private Rectangle captureRectangle;
         private HardDiskCache hdCache;
         private AVICache aviCache;
+        private bool stopRequest;
 
         public ScreenRecorder(int fps, float durationSeconds, Rectangle captureRectangle, string cachePath, ScreenRecordOutput outputType)
         {
@@ -132,8 +133,9 @@ namespace ScreenCapture
             if (!IsRecording)
             {
                 IsRecording = true;
+                stopRequest = false;
 
-                for (int i = 0; i < frameCount; i++)
+                for (int i = 0; (frameCount == 0 && !stopRequest) || i < frameCount; i++)
                 {
                     Stopwatch timer = Stopwatch.StartNew();
                     Image img = Screenshot.CaptureRectangle(CaptureRectangle);
@@ -147,7 +149,7 @@ namespace ScreenCapture
                         hdCache.AddImageAsync(img);
                     }
 
-                    if (i + 1 < frameCount)
+                    if ((frameCount == 0 && !stopRequest) || (i + 1 < frameCount))
                     {
                         int sleepTime = delay - (int)timer.ElapsedMilliseconds;
 
@@ -173,6 +175,11 @@ namespace ScreenCapture
             }
 
             IsRecording = false;
+        }
+
+        public void StopRecording()
+        {
+            stopRequest = true;
         }
 
         public void SaveAsGIF(string path, GIFQuality quality)

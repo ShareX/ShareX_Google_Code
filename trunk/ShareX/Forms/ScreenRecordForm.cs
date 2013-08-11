@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using ScreenCapture;
+using ShareX.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -39,12 +40,33 @@ namespace ShareX
     {
         public Rectangle CaptureRectangle { get; private set; }
 
-        public ScreenRecordForm()
+        private static ScreenRecordForm instance;
+
+        public static ScreenRecordForm Instance
+        {
+            get
+            {
+                if (instance == null || instance.IsDisposed)
+                {
+                    instance = new ScreenRecordForm();
+                }
+
+                return instance;
+            }
+        }
+
+        private ScreenRecorder screenRecorder = null;
+
+        private ScreenRecordForm()
         {
             InitializeComponent();
+            Icon = Resources.ShareX;
+            niTray.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
 
             lblRegion.Text = CaptureRectangle.ToString();
             nudFPS.Value = Program.Settings.ScreenRecordFPS;
+            cbFixedDuration.Checked = Program.Settings.ScreenRecordFixedDuration;
+            nudDuration.Enabled = Program.Settings.ScreenRecordFixedDuration;
             nudDuration.Value = (decimal)Program.Settings.ScreenRecordDuration;
             cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
             cbOutput.SelectedIndex = (int)Program.Settings.ScreenRecordOutput;
@@ -69,7 +91,7 @@ namespace ShareX
 
         private async void btnRecord_Click(object sender, EventArgs e)
         {
-            if (CaptureRectangle.IsEmpty)
+            if (CaptureRectangle.IsEmpty || screenRecorder != null)
             {
                 return;
             }
@@ -80,7 +102,6 @@ namespace ShareX
             pbEncoding.Visible = true;
             pbEncoding.Value = 0;
 
-            ScreenRecorder screenRecorder = null;
             string path = "";
 
             try
@@ -100,17 +121,27 @@ namespace ShareX
                             path = Program.ScreenRecorderCacheFilePath;
                         }
 
-                        screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, Program.Settings.ScreenRecordDuration,
-                            CaptureRectangle, path, Program.Settings.ScreenRecordOutput);
+                        float duration = Program.Settings.ScreenRecordFixedDuration ? Program.Settings.ScreenRecordDuration : 0;
+
+                        screenRecorder = new ScreenRecorder(Program.Settings.ScreenRecordFPS, duration, CaptureRectangle, path, Program.Settings.ScreenRecordOutput);
 
                         Thread.Sleep(1000);
                         screenRegionManager.ChangeColor();
+
+                        if (duration <= 0)
+                        {
+                            this.InvokeSafe(() => niTray.Visible = true);
+                        }
 
                         screenRecorder.StartRecording();
                     });
                 }
 
                 Show();
+                if (niTray.Visible)
+                {
+                    niTray.Visible = false;
+                }
 
                 if (screenRecorder != null && Program.Settings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
@@ -145,6 +176,7 @@ namespace ShareX
                     }
 
                     screenRecorder.Dispose();
+                    screenRecorder = null;
                 }
             }
 
@@ -218,6 +250,24 @@ namespace ShareX
             {
                 form.Icon = Icon;
                 form.ShowDialog();
+            }
+        }
+
+        private void cbFixedDuration_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
+            nudDuration.Enabled = Program.Settings.ScreenRecordFixedDuration;
+        }
+
+        private void niTray_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && screenRecorder != null)
+            {
+                screenRecorder.StopRecording();
+                if (niTray.Visible)
+                {
+                    niTray.Visible = false;
+                }
             }
         }
     }

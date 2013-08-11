@@ -487,9 +487,7 @@ namespace ShareX
 
         private void OpenScreenRecorder()
         {
-            ScreenRecordForm recordForm = new ScreenRecordForm();
-            recordForm.Icon = Icon;
-            recordForm.Show();
+            ScreenRecordForm.Instance.ShowActivate();
         }
 
         private void OpenAutoCapture()
