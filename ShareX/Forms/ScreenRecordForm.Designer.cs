@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnRecord = new System.Windows.Forms.Button();
             this.btnRegion = new System.Windows.Forms.Button();
             this.lblFPS = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@
             this.cbAutoUploadGIF = new System.Windows.Forms.CheckBox();
             this.pbEncoding = new System.Windows.Forms.ProgressBar();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.cbFixedDuration = new System.Windows.Forms.CheckBox();
+            this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +50,7 @@
             // btnRecord
             // 
             this.btnRecord.Enabled = false;
-            this.btnRecord.Location = new System.Drawing.Point(16, 176);
+            this.btnRecord.Location = new System.Drawing.Point(16, 209);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(200, 24);
             this.btnRecord.TabIndex = 0;
@@ -77,7 +80,7 @@
             // lblDuration
             // 
             this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(16, 100);
+            this.lblDuration.Location = new System.Drawing.Point(16, 128);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(99, 13);
             this.lblDuration.TabIndex = 4;
@@ -91,7 +94,7 @@
             0,
             0,
             65536});
-            this.nudDuration.Location = new System.Drawing.Point(120, 96);
+            this.nudDuration.Location = new System.Drawing.Point(120, 124);
             this.nudDuration.Maximum = new decimal(new int[] {
             60,
             0,
@@ -149,7 +152,7 @@
             // lblOutput
             // 
             this.lblOutput.AutoSize = true;
-            this.lblOutput.Location = new System.Drawing.Point(16, 124);
+            this.lblOutput.Location = new System.Drawing.Point(16, 157);
             this.lblOutput.Name = "lblOutput";
             this.lblOutput.Size = new System.Drawing.Size(42, 13);
             this.lblOutput.TabIndex = 8;
@@ -159,7 +162,7 @@
             // 
             this.cbOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOutput.FormattingEnabled = true;
-            this.cbOutput.Location = new System.Drawing.Point(64, 120);
+            this.cbOutput.Location = new System.Drawing.Point(64, 153);
             this.cbOutput.Name = "cbOutput";
             this.cbOutput.Size = new System.Drawing.Size(126, 21);
             this.cbOutput.TabIndex = 9;
@@ -168,7 +171,7 @@
             // cbAutoUploadGIF
             // 
             this.cbAutoUploadGIF.AutoSize = true;
-            this.cbAutoUploadGIF.Location = new System.Drawing.Point(16, 152);
+            this.cbAutoUploadGIF.Location = new System.Drawing.Point(16, 184);
             this.cbAutoUploadGIF.Name = "cbAutoUploadGIF";
             this.cbAutoUploadGIF.Size = new System.Drawing.Size(83, 17);
             this.cbAutoUploadGIF.TabIndex = 10;
@@ -178,7 +181,7 @@
             // 
             // pbEncoding
             // 
-            this.pbEncoding.Location = new System.Drawing.Point(16, 176);
+            this.pbEncoding.Location = new System.Drawing.Point(16, 209);
             this.pbEncoding.Name = "pbEncoding";
             this.pbEncoding.Size = new System.Drawing.Size(200, 24);
             this.pbEncoding.TabIndex = 11;
@@ -187,18 +190,35 @@
             // btnSettings
             // 
             this.btnSettings.Image = global::ShareX.Properties.Resources.gear;
-            this.btnSettings.Location = new System.Drawing.Point(192, 119);
+            this.btnSettings.Location = new System.Drawing.Point(192, 152);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(24, 23);
             this.btnSettings.TabIndex = 12;
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // cbFixedDuration
+            // 
+            this.cbFixedDuration.AutoSize = true;
+            this.cbFixedDuration.Location = new System.Drawing.Point(16, 104);
+            this.cbFixedDuration.Name = "cbFixedDuration";
+            this.cbFixedDuration.Size = new System.Drawing.Size(92, 17);
+            this.cbFixedDuration.TabIndex = 13;
+            this.cbFixedDuration.Text = "Fixed duration";
+            this.cbFixedDuration.UseVisualStyleBackColor = true;
+            this.cbFixedDuration.CheckedChanged += new System.EventHandler(this.cbFixedDuration_CheckedChanged);
+            // 
+            // niTray
+            // 
+            this.niTray.Text = "Stop screen recording";
+            this.niTray.MouseClick += new System.Windows.Forms.MouseEventHandler(this.niTray_MouseClick);
+            // 
             // ScreenRecordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 211);
+            this.ClientSize = new System.Drawing.Size(228, 243);
+            this.Controls.Add(this.cbFixedDuration);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.cbAutoUploadGIF);
             this.Controls.Add(this.cbOutput);
@@ -236,5 +256,7 @@
         private System.Windows.Forms.CheckBox cbAutoUploadGIF;
         private System.Windows.Forms.ProgressBar pbEncoding;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.CheckBox cbFixedDuration;
+        private System.Windows.Forms.NotifyIcon niTray;
     }
 }

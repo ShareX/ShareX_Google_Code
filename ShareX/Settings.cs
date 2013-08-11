@@ -200,6 +200,7 @@ namespace ShareX
         #region ScreenRecord Form
 
         public int ScreenRecordFPS = 5;
+        public bool ScreenRecordFixedDuration = true;
         public float ScreenRecordDuration = 3f;
         public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
         public bool ScreenRecordAutoUpload = true;
