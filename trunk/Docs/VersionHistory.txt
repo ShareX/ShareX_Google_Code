@@ -1,11 +1,19 @@
-﻿ShareX 7.0.1.351 - 06-04-2013
+﻿ShareX 8.0 - 2013-08-23
 
+Unlimited screen recorder support
+Commandline support for screen recorder
+Ability to create custom hotkeys with task settings
+Added auto capture support
+Capture selected monitor screen
+Windows 7 taskbar support
 Imgur anonymous upload bug fixed
+Ability to change settings folder 
+Watermark support 
 
-ShareX 7.0.0.350 - 05-04-2013
+ShareX 7.0.0.350 - 2013-04-05
 
 Added modified version of Greenshot image editor (After capture -> Annotate Image)
-Imgur, Google URL Shortener and Picasa using OAuth 2.0 now (You need to re authorize)
+Imgur, Google URL Shortener and Picasa using OAuth 2.0 now (You need to re-authorize)
 Added Imgur album support
 Added Google Drive uploader
 Fixed Flickr upload issue
@@ -15,7 +23,7 @@ Simplified Proxy handling behavior. No need to manually enter proxy host as the 
 Added "Send URL with email" After upload task
 Issues with DST time fixed
 
-ShareX 6.7.0.311 - 19-03-2013
+ShareX 6.7.0.311 - 2013-03-19
 
 Issues with arguments and custom uploaders fixed
 Fixed screen capture issues with Custom DPI settings
@@ -24,7 +32,7 @@ Shows cursor only if its visible
 Added Hash Check Tool
 Added localhostr.com support
 
-ShareX 6.6.2.293 - 01-02-2013
+ShareX 6.6.2.293 - 2013-02-01
 
 Fixed errors with screen recording
 Added Name Formatting support for custom uploaders
@@ -33,11 +41,11 @@ Remembers file upload directory
 Goo.gl shortener fix
 Fixed issues with slow FTP uploads
 
-ShareX 6.6.1.283 - 21-01-2013
+ShareX 6.6.1.283 - 2013-01-21
 
 Reverted minimum system requirements to .NET 3.5 to support Windows XP
 
-ShareX 6.6.0.280 - 20-01-2013
+ShareX 6.6.0.280 - 2013-01-20
 
 Added Screenshot delay setting
 Added Clipboard upload settings tab
@@ -47,7 +55,7 @@ Added custom uploader support for all data types (image, text, file, url shorten
 Added Screen Recording with GIF/AVI output
 Minimum system requirements updated to .NET 4.5
 
-ShareX 6.5.0.248 - 19-09-2012
+ShareX 6.5.0.248 - 2012-09-19
 
 Use Delete key to remove items from main window
 Added "Post capture tasks" window
@@ -61,14 +69,14 @@ Be able to see response for a failed upload
 Added "Add Border" Option to "After Capture Tasks" menu
 Imgur upload bug fixed
 
-ShareX 6.4.0.220 - 10-08-2012
+ShareX 6.4.0.220 - 2012-08-10
 
 Shows Balloon Tip after capture
 Added Picasa image uploader
 Added option to Clear List in Main Window
 Minor UI changes to updater
 
-ShareX 6.3.0.212 - 03-08-2012
+ShareX 6.3.0.212 - 2012-08-03
 
 Added new hotkeys to main window, history, image history: Enter = Open URL, Ctrl + Enter = Open file, Ctrl + C = Copy URL, F5 = Refresh
 Added separate name format for active window capture
@@ -82,7 +90,7 @@ Added Shadow Offset setting
 Double Clicking on a file performs checks in this order to open it: Shortended url first, url then and then the local file.
 Added ge.tt file uploader
 
-ShareX 6.2.0.195 - 15-07-2012
+ShareX 6.2.0.195 - 2012-07-15
 
 Added watch folder tab to settings for auto uploading newly created files in these folders
 Added screen color picker to tools section
@@ -91,7 +99,7 @@ Updated naming pattern to include variables such as 'active window title' and 'i
 It is now possible to copy multiple uploaded item infos (html, bbcode etc.)
 In 'shape capture' mode spacebar will now perform a fullscreen capture
 
-ShareX 6.1.0.180 - 23-06-2012
+ShareX 6.1.0.180 - 2012-06-23
 
 Added support for sharing via social networking services initially with Twitter
 After capture tasks and After upload tasks are configurable from the main window or tray menu
@@ -100,7 +108,7 @@ History storage optimizations
 Ability to retry upload via main window context menu
 Added printer support
 
-ShareX 6.0.0.161 - 09-06-2012
+ShareX 6.0.0.161 - 2012-06-09
 
 Improved right click menu to include more open/copy options
 Added support to preview image in the main window
@@ -115,7 +123,7 @@ Magnifier support during shapes capture, resizeable with mouse wheel (hold shift
 Added imm.io Image Uploader
 Rebranded as ShareX
 
-ZUploader 5.5.0.3030 - 07-03-2012
+ZUploader 5.5.0.3030 - 2012-03-07
 
 5.5.0 Added Email as file uploader
 5.4.1 Clipboard upload auto detects URL and shortens it
