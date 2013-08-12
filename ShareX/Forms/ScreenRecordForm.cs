@@ -91,16 +91,22 @@ namespace ShareX
             }
         }
 
-        private async void btnRecord_Click(object sender, EventArgs e)
+        private void btnRecord_Click(object sender, EventArgs e)
+        {
+            StartRecording();
+        }
+
+        public async void StartRecording()
         {
             if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
             {
+                if (!Visible) this.ShowActivate();
                 return;
             }
 
             IsRecording = true;
+            if (Visible) Hide();
             btnRecord.Enabled = false;
-            Hide();
             btnRecord.Visible = false;
             pbEncoding.Visible = true;
             pbEncoding.Value = 0;
@@ -140,7 +146,7 @@ namespace ShareX
                     });
                 }
 
-                Show();
+                this.ShowActivate();
 
                 if (niTray.Visible)
                 {

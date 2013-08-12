@@ -500,7 +500,15 @@ namespace ShareX
             }
             else
             {
-                form.ShowActivate();
+                if (Program.Settings.ScreenRecorderHotkeyStartInstantly)
+                {
+                    form.Show();
+                    form.StartRecording();
+                }
+                else
+                {
+                    form.ShowActivate();
+                }
             }
         }
 

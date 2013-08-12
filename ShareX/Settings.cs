@@ -150,6 +150,12 @@ namespace ShareX
 
         #endregion Capture / Shape capture
 
+        #region Capture / Screen recorder
+
+        public bool ScreenRecorderHotkeyStartInstantly = false;
+
+        #endregion Capture / Screen recorder
+
         #region Actions
 
         public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
