@@ -186,6 +186,8 @@
             this.txtProxyUsername = new System.Windows.Forms.TextBox();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.tpScreenRecorder = new System.Windows.Forms.TabPage();
+            this.cbScreenRecorderHotkeyStartInstantly = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -227,6 +229,7 @@
             this.tpUploadWatchFolder.SuspendLayout();
             this.tpProxy.SuspendLayout();
             this.tpDebug.SuspendLayout();
+            this.tpScreenRecorder.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -1321,6 +1324,7 @@
             // 
             this.tcCapture.Controls.Add(this.tpCaptureGeneral);
             this.tcCapture.Controls.Add(this.tpCaptureShape);
+            this.tcCapture.Controls.Add(this.tpScreenRecorder);
             this.tcCapture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcCapture.Location = new System.Drawing.Point(5, 5);
             this.tcCapture.Name = "tcCapture";
@@ -2123,6 +2127,29 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
+            // tpScreenRecorder
+            // 
+            this.tpScreenRecorder.Controls.Add(this.cbScreenRecorderHotkeyStartInstantly);
+            this.tpScreenRecorder.Location = new System.Drawing.Point(4, 22);
+            this.tpScreenRecorder.Name = "tpScreenRecorder";
+            this.tpScreenRecorder.Padding = new System.Windows.Forms.Padding(3);
+            this.tpScreenRecorder.Size = new System.Drawing.Size(504, 294);
+            this.tpScreenRecorder.TabIndex = 2;
+            this.tpScreenRecorder.Text = "Screen recorder";
+            this.tpScreenRecorder.UseVisualStyleBackColor = true;
+            // 
+            // cbScreenRecorderHotkeyStartInstantly
+            // 
+            this.cbScreenRecorderHotkeyStartInstantly.AutoSize = true;
+            this.cbScreenRecorderHotkeyStartInstantly.Location = new System.Drawing.Point(16, 16);
+            this.cbScreenRecorderHotkeyStartInstantly.Name = "cbScreenRecorderHotkeyStartInstantly";
+            this.cbScreenRecorderHotkeyStartInstantly.Size = new System.Drawing.Size(438, 17);
+            this.cbScreenRecorderHotkeyStartInstantly.TabIndex = 0;
+            this.cbScreenRecorderHotkeyStartInstantly.Text = "When \"Screen recorder\" hotkey used start screen recording instantly after select " +
+    "region";
+            this.cbScreenRecorderHotkeyStartInstantly.UseVisualStyleBackColor = true;
+            this.cbScreenRecorderHotkeyStartInstantly.CheckedChanged += new System.EventHandler(this.cbScreenRecorderHotkeyStartInstantly_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2195,6 +2222,8 @@
             this.tpProxy.PerformLayout();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
+            this.tpScreenRecorder.ResumeLayout(false);
+            this.tpScreenRecorder.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2359,5 +2388,7 @@
         private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
         private System.Windows.Forms.CheckBox cbUseImageFormat2FileUpload;
         private System.Windows.Forms.CheckBox cbCaptureAutoHideTaskbar;
+        private System.Windows.Forms.TabPage tpScreenRecorder;
+        private System.Windows.Forms.CheckBox cbScreenRecorderHotkeyStartInstantly;
     }
 }

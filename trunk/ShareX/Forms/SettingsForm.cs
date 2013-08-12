@@ -150,8 +150,9 @@ namespace ShareX
             cbShapeIncludeControls.Checked = Program.Settings.SurfaceOptions.IncludeControls;
             cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
 
-            // Actions
+            cbScreenRecorderHotkeyStartInstantly.Checked = Program.Settings.ScreenRecorderHotkeyStartInstantly;
 
+            // Actions
             TaskHelper.AddDefaultExternalPrograms();
 
             foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
@@ -671,6 +672,15 @@ namespace ShareX
         }
 
         #endregion Capture / Shape capture
+
+        #region Capture / Screen recorder
+
+        private void cbScreenRecorderHotkeyStartInstantly_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ScreenRecorderHotkeyStartInstantly = cbScreenRecorderHotkeyStartInstantly.Checked;
+        }
+
+        #endregion Capture / Screen recorder
 
         #region Actions
 

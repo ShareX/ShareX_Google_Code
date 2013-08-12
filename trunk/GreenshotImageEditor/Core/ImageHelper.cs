@@ -38,6 +38,7 @@ namespace GreenshotPlugin.Core
         // This delegate makes it possible that a plug-in delivers a quicker Blur implementation
         public delegate void BlurDelegate(Bitmap bitmap, int radius);
         public static BlurDelegate BlurReplacement;
+
         /// <summary>
         /// Create a thumbnail from an image
         /// </summary>

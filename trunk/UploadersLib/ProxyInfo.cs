@@ -38,7 +38,6 @@ namespace UploadersLib
         public string Host { get; private set; }
         public int Port { get; private set; }
         public string Address { get; private set; }
-
         public Proxy ProxyType { get; set; }
 
         public ProxyInfo()
