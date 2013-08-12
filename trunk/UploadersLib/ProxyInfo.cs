@@ -33,27 +33,16 @@ namespace UploadersLib
 {
     public class ProxyInfo
     {
-        [DefaultValue("")]
         public string UserName { get; set; }
-
-        [DefaultValue(""), PasswordPropertyText(true)]
         public string Password { get; set; }
+        public string Host { get; private set; }
+        public int Port { get; private set; }
+        public string Address { get; private set; }
 
-        [DefaultValue("")]
-        public string Host { get; set; }
-
-        [DefaultValue(8080)]
-        public int Port { get; set; }
-
-        [DefaultValue(Proxy.HTTP)]
         public Proxy ProxyType { get; set; }
 
         public ProxyInfo()
         {
-            UserName = "";
-            Password = "";
-            Host = "";
-            Port = 8080;
             ProxyType = Proxy.HTTP;
         }
 
@@ -65,36 +54,29 @@ namespace UploadersLib
             Port = port;
         }
 
-        public string GetAddress()
-        {
-            return string.Format("{0}:{1}", Host, Port);
-        }
-
         public void AutoFillProxy()
         {
             if (string.IsNullOrEmpty(UserName))
             {
                 UserName = Environment.UserName;
             }
-
-            WebProxy proxy = Helpers.GetDefaultWebProxy();
-            if (proxy != null && proxy.Address != null)
-            {
-                if (string.IsNullOrEmpty(Host))
-                {
-                    Host = proxy.Address.Host;
-                }
-
-                if (Port == 0)
-                {
-                    Port = proxy.Address.Port;
-                }
-            }
         }
 
         public bool IsValidProxy()
         {
-            return !string.IsNullOrEmpty(Host) && Port > 0;
+            if (string.IsNullOrEmpty(this.Address))
+            {
+                WebProxy systemProxy = Helpers.GetDefaultWebProxy();
+                if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
+                {
+                    this.Address = systemProxy.Address.Authority;
+                    this.Host = systemProxy.Address.Host;
+                    this.Port = systemProxy.Address.Port;
+                    return true;
+                }
+            }
+
+            return !string.IsNullOrEmpty(this.Address);
         }
 
         public IWebProxy GetWebProxy()
@@ -102,7 +84,7 @@ namespace UploadersLib
             if (IsValidProxy())
             {
                 NetworkCredential credentials = new NetworkCredential(UserName, Password);
-                return new WebProxy(GetAddress(), true, null, credentials);
+                return new WebProxy(this.Address, true, null, credentials);
             }
 
             return null;
