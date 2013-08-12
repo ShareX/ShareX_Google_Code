@@ -1,0 +1,59 @@
+#summary Screen recording with x264 encoder
+
+= Screen recording with x264 encoder =
+
+1. Set hotkey for screen recording. This hotkey will be used to open the screen recording window (or start recording if you set [https://dl.dropboxusercontent.com/u/14076298/ShareX/2013/08/js00LeaSTG.png setting]) or stop recording if recording started already.
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/cK8gfz75p5.png
+
+----
+
+2. Open the screen recorder window from here:
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/8X7DmASLcD.png
+
+or you can press the hotkey you had set previously.
+
+----
+
+3. You need to select the region where you wish the application to record.
+
+FPS (frame per second) indicates how many frames per second it is recording. If you record at 10 FPS for 5 seconds, then you will have captured 50 frames. The lower the number of frames, the smaller the video size but also the more choppy it may look. Setting 10 FPS is my suggestion if you are capturing desktop.
+
+If you check the "Fixed duration" option then you can tell ShareX you want to record for a specified duration. Otherwise, if want to record as short or as long as you wish you can do so by not checking "Fixed duration" and stop the recording by simply pressing the same hotkey you used to record or by clicking the red tray icon.
+
+--------
+
+4. In output select "AVI CLI encoder" to be able to use x264 encoder after the video is done recording.
+
+Check auto upload if you have already set up file upload destination before.
+
+----
+
+5. Set settings according to this screenshot if you are unsure what to select, these are recommended settings:
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/AhFg73vJwX.png
+
+Region is up to you. I don't suggest selecting fullscreen region because it can increase video size greatly.
+
+----
+
+6. Now need to download [http://www.videolan.org/developers/x264.html x264] encoder. It is free open source encoder and will keep your videos file size down while still making the video look good.
+
+You can download the compiled version from here: http://www.x264.nl/x264_main.php
+
+8bit-depth version with 32bit/64bit depending on your operating system.
+
+Example i downloaded: 64bit 8bit-depth from mirror 01.
+
+or if you want to compile yourself: http://www.videolan.org/developers/x264.html
+
+After you download it, copy x264.exe to where ShareX is installed (Example: C:\Program Files\ShareX). It is not necessary to copy but if you copy it then you don't need to set encoder path setting because i already set default encoder path "x264.exe".
+
+----
+
+7. Now you can start recording. The region will show a red border for 1 second and then turn to green which means after 1 second the recording will start and you can stop it with hotkey/tray icon any time you want.
+
+After you have stopped it, x264.exe will open in background and encode the recorded video. And after encoding has finish ShareX will upload it to file destination you selected before (in my case it is Dropbox).
+
+Example video i recorded with ShareX (37 seconds, 556kb): https://dl.dropbox.com/u/14076298/ShareX/2013/08/Ju3aOtZchT.mp4
