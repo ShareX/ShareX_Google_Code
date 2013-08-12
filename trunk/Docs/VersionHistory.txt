@@ -1,14 +1,12 @@
-﻿ShareX 8.0 - 2013-08-23
+﻿ShareX 8.0.0.463 - 2013-08-12
 
+Ability to create custom hotkeys with task settings
 Unlimited screen recorder support
 Commandline support for screen recorder
-Ability to create custom hotkeys with task settings
 Added auto capture support
 Capture selected monitor screen
 Windows 7 taskbar support
-Imgur anonymous upload bug fixed
-Ability to change settings folder 
-Watermark support 
+Ability to change settings folder
 
 ShareX 7.0.0.350 - 2013-04-05
 
@@ -62,7 +60,7 @@ Added "Post capture tasks" window
 Long file name error while capturing Active Window fixed
 Updated Dropbox uploader
 Auto Generated file names feature updated
-Added Watemark support
+Added Watermark support
 Image history will remember your view settings
 History & Image history will remember position, size and window state info
 Be able to see response for a failed upload

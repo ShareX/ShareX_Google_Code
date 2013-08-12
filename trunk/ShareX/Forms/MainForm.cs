@@ -485,12 +485,7 @@ namespace ShareX
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
-        private void OpenScreenRecorder()
-        {
-            ScreenRecordForm.Instance.ShowActivate();
-        }
-
-        private void DoScreenRecorder()
+        private void DoScreenRecorder(bool isHotkey = false)
         {
             ScreenRecordForm form = ScreenRecordForm.Instance;
 
@@ -500,10 +495,17 @@ namespace ShareX
             }
             else
             {
-                if (Program.Settings.ScreenRecorderHotkeyStartInstantly)
+                if (isHotkey && Program.Settings.ScreenRecorderHotkeyStartInstantly)
                 {
-                    form.Show();
-                    form.StartRecording();
+                    if (form.Visible)
+                    {
+                        form.ShowActivate();
+                    }
+                    else
+                    {
+                        form.Show();
+                        form.StartRecording();
+                    }
                 }
                 else
                 {
@@ -644,7 +646,7 @@ namespace ShareX
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            OpenScreenRecorder();
+            DoScreenRecorder();
         }
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
