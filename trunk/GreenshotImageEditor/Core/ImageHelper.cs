@@ -35,10 +35,6 @@ namespace GreenshotPlugin.Core
     /// </summary>
     public static class ImageHelper
     {
-        // This delegate makes it possible that a plug-in delivers a quicker Blur implementation
-        public delegate void BlurDelegate(Bitmap bitmap, int radius);
-        public static BlurDelegate BlurReplacement;
-
         /// <summary>
         /// Create a thumbnail from an image
         /// </summary>
@@ -867,15 +863,13 @@ namespace GreenshotPlugin.Core
             {
                 shadowSize++;
             }
-            bool useGDIBlur = GDIplus.isBlurPossible(shadowSize);
-            bool useBlurDelegate = BlurReplacement != null;
-
+            bool canUseGDIBlur = GDIplus.isBlurPossible(shadowSize);
             // Create "mask" for the shadow
             ColorMatrix maskMatrix = new ColorMatrix();
             maskMatrix.Matrix00 = 0;
             maskMatrix.Matrix11 = 0;
             maskMatrix.Matrix22 = 0;
-            if (useGDIBlur)
+            if (canUseGDIBlur)
             {
                 maskMatrix.Matrix33 = darkness + 0.1f;
             }
@@ -887,15 +881,11 @@ namespace GreenshotPlugin.Core
             ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, returnImage, shadowRectangle, maskMatrix);
 
             // blur "shadow", apply to whole new image
-            if (useBlurDelegate)
-            {
-                BlurReplacement(returnImage, shadowSize + 1);
-            }
-            else if (useGDIBlur)
+            if (canUseGDIBlur)
             {
                 // Use GDI Blur
                 Rectangle newImageRectangle = new Rectangle(0, 0, returnImage.Width, returnImage.Height);
-                GDIplus.ApplyBlur(returnImage, newImageRectangle, shadowSize + 1, false);
+                GDIplus.ApplyBlur(returnImage, newImageRectangle, shadowSize, false);
             }
             else
             {
