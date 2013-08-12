@@ -108,6 +108,7 @@ namespace ScreenCapture
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.Text = "RegionCapture";
 #if !DEBUG
+            this.ShowInTaskbar = false;
             this.TopMost = true;
 #endif
             this.ResumeLayout(false);
