@@ -893,7 +893,5 @@ namespace ShareX
         }
 
         #endregion Proxy
-
-
     }
 }
