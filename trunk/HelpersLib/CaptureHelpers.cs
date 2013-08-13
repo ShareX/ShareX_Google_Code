@@ -284,6 +284,7 @@ namespace HelpersLib
             if (img != null && rect.Width > 0 && rect.Height > 0 && gp != null)
             {
                 Bitmap bmp = new Bitmap(rect.Width, rect.Height);
+                bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
@@ -321,6 +322,7 @@ namespace HelpersLib
             }
 
             Bitmap bmp = new Bitmap(width, height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -396,6 +398,7 @@ namespace HelpersLib
                 else
                 {
                     bmp = new Bitmap(img.Width + borderSize * 2, img.Height + borderSize * 2);
+                    bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
@@ -430,12 +433,14 @@ namespace HelpersLib
         public static Image FillImageBackground(Image img, Color color)
         {
             Bitmap bmp = new Bitmap(img.Width, img.Height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 g.CompositingQuality = CompositingQuality.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = SmoothingMode.HighQuality;
+
                 g.Clear(color);
                 g.DrawImageUnscaled(img, 0, 0);
             }
@@ -446,6 +451,7 @@ namespace HelpersLib
         public static Image FillImageBackground(Image img, Color color, Color color2)
         {
             Bitmap bmp = new Bitmap(img.Width, img.Height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -453,9 +459,11 @@ namespace HelpersLib
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = SmoothingMode.HighQuality;
 
-                LinearGradientBrush brush = new LinearGradientBrush(new Point(0, 0), new Point(img.Width - 1, 0), color, color2);
-                g.FillRectangle(brush, 0, 0, img.Width, img.Height);
-                g.DrawImageUnscaled(img, 0, 0);
+                using (LinearGradientBrush brush = new LinearGradientBrush(new Point(0, 0), new Point(img.Width - 1, 0), color, color2))
+                {
+                    g.FillRectangle(brush, 0, 0, img.Width, img.Height);
+                    g.DrawImageUnscaled(img, 0, 0);
+                }
             }
 
             return bmp;
@@ -482,6 +490,7 @@ namespace HelpersLib
         public static Image DrawCheckers(Image img)
         {
             Bitmap bmp = new Bitmap(img.Width, img.Height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {

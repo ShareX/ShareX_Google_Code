@@ -51,7 +51,7 @@ namespace HelpersLib
                 timeText = text + ": " + timeText;
             }
 
-            Console.WriteLine(timeText);
+            Debug.WriteLine(timeText);
         }
 
         public void WriteElapsedSeconds(string text = "")
