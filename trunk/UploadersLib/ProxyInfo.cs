@@ -75,8 +75,6 @@ namespace UploadersLib
                     if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
                     {
                         this.Address = systemProxy.Address.Authority;
-                        this.Host = systemProxy.Address.Host;
-                        this.Port = systemProxy.Address.Port;
                         return true;
                     }
                 }
