@@ -120,7 +120,7 @@ namespace UploadersLib
                 ProxyClientFactory proxy = new ProxyClientFactory();
                 return proxy.CreateProxyClient(proxyType,
                     !string.IsNullOrEmpty(Host) ? Host : SystemHost,
-                    Port > 0 ? Port : SystemPort, 
+                    Port > 0 ? Port : SystemPort,
                     UserName, Password);
             }
 
