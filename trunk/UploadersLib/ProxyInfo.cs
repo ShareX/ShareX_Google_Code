@@ -35,8 +35,8 @@ namespace UploadersLib
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Host { get; private set; }
-        public int Port { get; private set; }
+        public string Host { get; set; }
+        public int Port { get; set; }
         public string Address { get; private set; }
         public Proxy ProxyType { get; set; }
 
@@ -65,13 +65,20 @@ namespace UploadersLib
         {
             if (string.IsNullOrEmpty(this.Address))
             {
-                WebProxy systemProxy = Helpers.GetDefaultWebProxy();
-                if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
+                if (!string.IsNullOrEmpty(this.Host) && this.Port > 0)
                 {
-                    this.Address = systemProxy.Address.Authority;
-                    this.Host = systemProxy.Address.Host;
-                    this.Port = systemProxy.Address.Port;
-                    return true;
+                    this.Address = string.Format("{0}:{1}", this.Host, this.Port);
+                }
+                else
+                {
+                    WebProxy systemProxy = Helpers.GetDefaultWebProxy();
+                    if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
+                    {
+                        this.Address = systemProxy.Address.Authority;
+                        this.Host = systemProxy.Address.Host;
+                        this.Port = systemProxy.Address.Port;
+                        return true;
+                    }
                 }
             }
 

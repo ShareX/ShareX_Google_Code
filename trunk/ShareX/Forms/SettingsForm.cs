@@ -153,6 +153,7 @@ namespace ShareX
             cbScreenRecorderHotkeyStartInstantly.Checked = Program.Settings.ScreenRecorderHotkeyStartInstantly;
 
             // Actions
+
             TaskHelper.AddDefaultExternalPrograms();
 
             foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
@@ -202,8 +203,8 @@ namespace ShareX
             // Proxy
             txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            // txtProxyHost.Text = Program.Settings.ProxySettings.Host;
-            // nudProxyPort.Value = Program.Settings.ProxySettings.Port;
+            txtProxyHost.Text = Program.Settings.ProxySettings.Host;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
             cboProxyType.Items.AddRange(Helpers.GetEnumDescriptions<Proxy>());
             cboProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
 
@@ -876,11 +877,23 @@ namespace ShareX
             Program.Settings.ProxySettings.Password = txtProxyPassword.Text;
         }
 
+        private void txtProxyHost_TextChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Host = txtProxyHost.Text;
+        }
+
+        private void nudProxyPort_ValueChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.Port = (int)nudProxyPort.Value;
+        }
+
         private void cboProxyType_SelectedIndexChanged(object sender, EventArgs e)
         {
             Program.Settings.ProxySettings.ProxyType = (UploadersLib.Proxy)cboProxyType.SelectedIndex;
         }
 
         #endregion Proxy
+
+
     }
 }

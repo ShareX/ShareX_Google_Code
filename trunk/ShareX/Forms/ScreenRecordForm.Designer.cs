@@ -54,7 +54,7 @@
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(200, 24);
             this.btnRecord.TabIndex = 0;
-            this.btnRecord.Text = "Start record (after 1 second)";
+            this.btnRecord.Text = "Start recording after 1 second";
             this.btnRecord.UseVisualStyleBackColor = true;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
