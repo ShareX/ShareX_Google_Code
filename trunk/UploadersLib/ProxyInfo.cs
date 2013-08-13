@@ -37,6 +37,8 @@ namespace UploadersLib
         public string Password { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
+        private string SystemHost { get; set; }
+        private int SystemPort { get; set; }
         public Proxy ProxyType { get; set; }
         public string Address { get; private set; }
 
@@ -69,6 +71,8 @@ namespace UploadersLib
                     if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
                     {
                         Address = systemProxy.Address.Authority;
+                        SystemHost = systemProxy.Address.Host;
+                        SystemPort = systemProxy.Address.Port;
                         return true;
                     }
                 }
@@ -114,7 +118,10 @@ namespace UploadersLib
                 }
 
                 ProxyClientFactory proxy = new ProxyClientFactory();
-                return proxy.CreateProxyClient(proxyType, Host, Port, UserName, Password);
+                return proxy.CreateProxyClient(proxyType,
+                    !string.IsNullOrEmpty(Host) ? Host : SystemHost,
+                    Port > 0 ? Port : SystemPort, 
+                    UserName, Password);
             }
 
             return null;
