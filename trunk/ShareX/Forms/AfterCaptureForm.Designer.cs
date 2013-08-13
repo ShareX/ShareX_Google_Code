@@ -48,21 +48,21 @@
             this.lvAfterCaptureTasks.MultiSelect = false;
             this.lvAfterCaptureTasks.Name = "lvAfterCaptureTasks";
             this.lvAfterCaptureTasks.Size = new System.Drawing.Size(256, 224);
-            this.lvAfterCaptureTasks.TabIndex = 3;
+            this.lvAfterCaptureTasks.TabIndex = 0;
             this.lvAfterCaptureTasks.UseCompatibleStateImageBehavior = false;
             this.lvAfterCaptureTasks.View = System.Windows.Forms.View.Details;
             // 
             // chAfterCapture
             // 
             this.chAfterCapture.Text = "Tasks";
-            this.chAfterCapture.Width = 252;
+            this.chAfterCapture.Width = 235;
             // 
             // btnContinue
             // 
             this.btnContinue.Location = new System.Drawing.Point(8, 240);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(80, 24);
-            this.btnContinue.TabIndex = 0;
+            this.btnContinue.TabIndex = 1;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
@@ -72,7 +72,7 @@
             this.btnCancel.Location = new System.Drawing.Point(96, 240);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 24);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -90,14 +90,14 @@
             this.pbImage.Location = new System.Drawing.Point(272, 8);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(360, 256);
-            this.pbImage.TabIndex = 0;
+            this.pbImage.TabIndex = 4;
             // 
             // btnCopy
             // 
             this.btnCopy.Location = new System.Drawing.Point(184, 240);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(80, 24);
-            this.btnCopy.TabIndex = 2;
+            this.btnCopy.TabIndex = 3;
             this.btnCopy.Text = "Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);

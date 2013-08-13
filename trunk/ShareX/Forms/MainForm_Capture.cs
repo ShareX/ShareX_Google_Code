@@ -231,6 +231,9 @@ namespace ShareX
                             case AfterCaptureFormResult.Copy:
                                 taskSettings.AfterCaptureJob = AfterCaptureTasks.CopyImageToClipboard;
                                 break;
+                            case AfterCaptureFormResult.Cancel:
+                                if (img != null) img.Dispose();
+                                return;
                         }
                     }
                 }
