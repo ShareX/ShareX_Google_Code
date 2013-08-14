@@ -137,6 +137,8 @@
             this.cbDrawCheckerboard = new System.Windows.Forms.CheckBox();
             this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
             this.cbFixedShapeSize = new System.Windows.Forms.CheckBox();
+            this.tpScreenRecorder = new System.Windows.Forms.TabPage();
+            this.cbScreenRecorderHotkeyStartInstantly = new System.Windows.Forms.CheckBox();
             this.tpActions = new System.Windows.Forms.TabPage();
             this.btnActionsEdit = new System.Windows.Forms.Button();
             this.btnActionsRemove = new System.Windows.Forms.Button();
@@ -177,7 +179,7 @@
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
             this.tpProxy = new System.Windows.Forms.TabPage();
-            this.cboProxyType = new System.Windows.Forms.ComboBox();
+            this.cbProxyType = new System.Windows.Forms.ComboBox();
             this.lblProxyType = new System.Windows.Forms.Label();
             this.lblProxyHost = new System.Windows.Forms.Label();
             this.txtProxyHost = new System.Windows.Forms.TextBox();
@@ -189,9 +191,10 @@
             this.txtProxyUsername = new System.Windows.Forms.TextBox();
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
-            this.tpScreenRecorder = new System.Windows.Forms.TabPage();
-            this.cbScreenRecorderHotkeyStartInstantly = new System.Windows.Forms.CheckBox();
+            this.lblProxyMethod = new System.Windows.Forms.Label();
+            this.cbProxyMethod = new System.Windows.Forms.ComboBox();
             this.hmHotkeys = new ShareX.HotkeyManagerControl();
+            this.lblProxyNote = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -223,6 +226,7 @@
             this.tpCaptureShape.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
+            this.tpScreenRecorder.SuspendLayout();
             this.tpActions.SuspendLayout();
             this.tpUpload.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -234,7 +238,6 @@
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
-            this.tpScreenRecorder.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbPlaySoundAfterUpload
@@ -1623,6 +1626,28 @@
             this.cbFixedShapeSize.UseVisualStyleBackColor = true;
             this.cbFixedShapeSize.CheckedChanged += new System.EventHandler(this.cbFixedShapeSize_CheckedChanged);
             // 
+            // tpScreenRecorder
+            // 
+            this.tpScreenRecorder.Controls.Add(this.cbScreenRecorderHotkeyStartInstantly);
+            this.tpScreenRecorder.Location = new System.Drawing.Point(4, 22);
+            this.tpScreenRecorder.Name = "tpScreenRecorder";
+            this.tpScreenRecorder.Padding = new System.Windows.Forms.Padding(3);
+            this.tpScreenRecorder.Size = new System.Drawing.Size(504, 294);
+            this.tpScreenRecorder.TabIndex = 2;
+            this.tpScreenRecorder.Text = "Screen recorder";
+            this.tpScreenRecorder.UseVisualStyleBackColor = true;
+            // 
+            // cbScreenRecorderHotkeyStartInstantly
+            // 
+            this.cbScreenRecorderHotkeyStartInstantly.AutoSize = true;
+            this.cbScreenRecorderHotkeyStartInstantly.Location = new System.Drawing.Point(16, 16);
+            this.cbScreenRecorderHotkeyStartInstantly.Name = "cbScreenRecorderHotkeyStartInstantly";
+            this.cbScreenRecorderHotkeyStartInstantly.Size = new System.Drawing.Size(292, 17);
+            this.cbScreenRecorderHotkeyStartInstantly.TabIndex = 0;
+            this.cbScreenRecorderHotkeyStartInstantly.Text = "Start recording the screen soon after a region is selected";
+            this.cbScreenRecorderHotkeyStartInstantly.UseVisualStyleBackColor = true;
+            this.cbScreenRecorderHotkeyStartInstantly.CheckedChanged += new System.EventHandler(this.cbScreenRecorderHotkeyStartInstantly_CheckedChanged);
+            // 
             // tpActions
             // 
             this.tpActions.Controls.Add(this.btnActionsEdit);
@@ -2030,7 +2055,10 @@
             // 
             // tpProxy
             // 
-            this.tpProxy.Controls.Add(this.cboProxyType);
+            this.tpProxy.Controls.Add(this.lblProxyNote);
+            this.tpProxy.Controls.Add(this.cbProxyMethod);
+            this.tpProxy.Controls.Add(this.lblProxyMethod);
+            this.tpProxy.Controls.Add(this.cbProxyType);
             this.tpProxy.Controls.Add(this.lblProxyType);
             this.tpProxy.Controls.Add(this.lblProxyHost);
             this.tpProxy.Controls.Add(this.txtProxyHost);
@@ -2048,54 +2076,52 @@
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
             // 
-            // cboProxyType
+            // cbProxyType
             // 
-            this.cboProxyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboProxyType.FormattingEnabled = true;
-            this.cboProxyType.Location = new System.Drawing.Point(88, 108);
-            this.cboProxyType.Name = "cboProxyType";
-            this.cboProxyType.Size = new System.Drawing.Size(304, 21);
-            this.cboProxyType.TabIndex = 9;
-            this.cboProxyType.SelectedIndexChanged += new System.EventHandler(this.cboProxyType_SelectedIndexChanged);
+            this.cbProxyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProxyType.FormattingEnabled = true;
+            this.cbProxyType.Location = new System.Drawing.Point(88, 140);
+            this.cbProxyType.Name = "cbProxyType";
+            this.cbProxyType.Size = new System.Drawing.Size(160, 21);
+            this.cbProxyType.TabIndex = 9;
+            this.cbProxyType.SelectedIndexChanged += new System.EventHandler(this.cboProxyType_SelectedIndexChanged);
             // 
             // lblProxyType
             // 
             this.lblProxyType.AutoSize = true;
-            this.lblProxyType.Location = new System.Drawing.Point(16, 112);
+            this.lblProxyType.Location = new System.Drawing.Point(16, 144);
             this.lblProxyType.Name = "lblProxyType";
-            this.lblProxyType.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyType.Size = new System.Drawing.Size(31, 13);
+            this.lblProxyType.Size = new System.Drawing.Size(34, 13);
             this.lblProxyType.TabIndex = 8;
-            this.lblProxyType.Text = "Type";
+            this.lblProxyType.Text = "Type:";
             // 
             // lblProxyHost
             // 
             this.lblProxyHost.AutoSize = true;
-            this.lblProxyHost.Location = new System.Drawing.Point(16, 80);
+            this.lblProxyHost.Location = new System.Drawing.Point(16, 112);
             this.lblProxyHost.Name = "lblProxyHost";
-            this.lblProxyHost.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyHost.Size = new System.Drawing.Size(29, 13);
+            this.lblProxyHost.Size = new System.Drawing.Size(32, 13);
             this.lblProxyHost.TabIndex = 4;
-            this.lblProxyHost.Text = "Host";
+            this.lblProxyHost.Text = "Host:";
             // 
             // txtProxyHost
             // 
-            this.txtProxyHost.Location = new System.Drawing.Point(88, 76);
+            this.txtProxyHost.Location = new System.Drawing.Point(88, 108);
             this.txtProxyHost.Name = "txtProxyHost";
-            this.txtProxyHost.Size = new System.Drawing.Size(304, 20);
+            this.txtProxyHost.Size = new System.Drawing.Size(232, 20);
             this.txtProxyHost.TabIndex = 5;
             this.txtProxyHost.TextChanged += new System.EventHandler(this.txtProxyHost_TextChanged);
             // 
             // nudProxyPort
             // 
-            this.nudProxyPort.Location = new System.Drawing.Point(432, 76);
+            this.nudProxyPort.Location = new System.Drawing.Point(360, 108);
             this.nudProxyPort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.nudProxyPort.Name = "nudProxyPort";
-            this.nudProxyPort.Size = new System.Drawing.Size(72, 20);
+            this.nudProxyPort.Size = new System.Drawing.Size(64, 20);
             this.nudProxyPort.TabIndex = 7;
             this.nudProxyPort.Value = new decimal(new int[] {
             21,
@@ -2107,7 +2133,7 @@
             // lblProxyPort
             // 
             this.lblProxyPort.AutoSize = true;
-            this.lblProxyPort.Location = new System.Drawing.Point(400, 80);
+            this.lblProxyPort.Location = new System.Drawing.Point(328, 112);
             this.lblProxyPort.Name = "lblProxyPort";
             this.lblProxyPort.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblProxyPort.Size = new System.Drawing.Size(26, 13);
@@ -2117,37 +2143,35 @@
             // lblProxyPassword
             // 
             this.lblProxyPassword.AutoSize = true;
-            this.lblProxyPassword.Location = new System.Drawing.Point(16, 48);
+            this.lblProxyPassword.Location = new System.Drawing.Point(16, 80);
             this.lblProxyPassword.Name = "lblProxyPassword";
-            this.lblProxyPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblProxyPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblProxyPassword.Size = new System.Drawing.Size(56, 13);
             this.lblProxyPassword.TabIndex = 2;
-            this.lblProxyPassword.Text = "Password";
+            this.lblProxyPassword.Text = "Password:";
             // 
             // txtProxyPassword
             // 
-            this.txtProxyPassword.Location = new System.Drawing.Point(88, 44);
+            this.txtProxyPassword.Location = new System.Drawing.Point(88, 76);
             this.txtProxyPassword.Name = "txtProxyPassword";
             this.txtProxyPassword.PasswordChar = '●';
-            this.txtProxyPassword.Size = new System.Drawing.Size(416, 20);
+            this.txtProxyPassword.Size = new System.Drawing.Size(232, 20);
             this.txtProxyPassword.TabIndex = 3;
             this.txtProxyPassword.TextChanged += new System.EventHandler(this.txtProxyPassword_TextChanged);
             // 
             // lblProxyUsername
             // 
             this.lblProxyUsername.AutoSize = true;
-            this.lblProxyUsername.Location = new System.Drawing.Point(16, 16);
+            this.lblProxyUsername.Location = new System.Drawing.Point(16, 48);
             this.lblProxyUsername.Name = "lblProxyUsername";
-            this.lblProxyUsername.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblProxyUsername.Size = new System.Drawing.Size(58, 13);
             this.lblProxyUsername.TabIndex = 0;
-            this.lblProxyUsername.Text = "User name";
+            this.lblProxyUsername.Text = "Username:";
             // 
             // txtProxyUsername
             // 
-            this.txtProxyUsername.Location = new System.Drawing.Point(88, 12);
+            this.txtProxyUsername.Location = new System.Drawing.Point(88, 44);
             this.txtProxyUsername.Name = "txtProxyUsername";
-            this.txtProxyUsername.Size = new System.Drawing.Size(416, 20);
+            this.txtProxyUsername.Size = new System.Drawing.Size(232, 20);
             this.txtProxyUsername.TabIndex = 1;
             this.txtProxyUsername.TextChanged += new System.EventHandler(this.txtProxyUsername_TextChanged);
             // 
@@ -2173,27 +2197,24 @@
             this.txtDebugLog.TabIndex = 0;
             this.txtDebugLog.WordWrap = false;
             // 
-            // tpScreenRecorder
+            // lblProxyMethod
             // 
-            this.tpScreenRecorder.Controls.Add(this.cbScreenRecorderHotkeyStartInstantly);
-            this.tpScreenRecorder.Location = new System.Drawing.Point(4, 22);
-            this.tpScreenRecorder.Name = "tpScreenRecorder";
-            this.tpScreenRecorder.Padding = new System.Windows.Forms.Padding(3);
-            this.tpScreenRecorder.Size = new System.Drawing.Size(504, 294);
-            this.tpScreenRecorder.TabIndex = 2;
-            this.tpScreenRecorder.Text = "Screen recorder";
-            this.tpScreenRecorder.UseVisualStyleBackColor = true;
+            this.lblProxyMethod.AutoSize = true;
+            this.lblProxyMethod.Location = new System.Drawing.Point(16, 16);
+            this.lblProxyMethod.Name = "lblProxyMethod";
+            this.lblProxyMethod.Size = new System.Drawing.Size(100, 13);
+            this.lblProxyMethod.TabIndex = 10;
+            this.lblProxyMethod.Text = "Proxy configuration:";
             // 
-            // cbScreenRecorderHotkeyStartInstantly
+            // cbProxyMethod
             // 
-            this.cbScreenRecorderHotkeyStartInstantly.AutoSize = true;
-            this.cbScreenRecorderHotkeyStartInstantly.Location = new System.Drawing.Point(16, 16);
-            this.cbScreenRecorderHotkeyStartInstantly.Name = "cbScreenRecorderHotkeyStartInstantly";
-            this.cbScreenRecorderHotkeyStartInstantly.Size = new System.Drawing.Size(292, 17);
-            this.cbScreenRecorderHotkeyStartInstantly.TabIndex = 0;
-            this.cbScreenRecorderHotkeyStartInstantly.Text = "Start recording the screen soon after a region is selected";
-            this.cbScreenRecorderHotkeyStartInstantly.UseVisualStyleBackColor = true;
-            this.cbScreenRecorderHotkeyStartInstantly.CheckedChanged += new System.EventHandler(this.cbScreenRecorderHotkeyStartInstantly_CheckedChanged);
+            this.cbProxyMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProxyMethod.FormattingEnabled = true;
+            this.cbProxyMethod.Location = new System.Drawing.Point(120, 12);
+            this.cbProxyMethod.Name = "cbProxyMethod";
+            this.cbProxyMethod.Size = new System.Drawing.Size(128, 21);
+            this.cbProxyMethod.TabIndex = 11;
+            this.cbProxyMethod.SelectedIndexChanged += new System.EventHandler(this.cbProxyMethod_SelectedIndexChanged);
             // 
             // hmHotkeys
             // 
@@ -2203,6 +2224,15 @@
             this.hmHotkeys.Name = "hmHotkeys";
             this.hmHotkeys.Size = new System.Drawing.Size(522, 330);
             this.hmHotkeys.TabIndex = 0;
+            // 
+            // lblProxyNote
+            // 
+            this.lblProxyNote.AutoSize = true;
+            this.lblProxyNote.Location = new System.Drawing.Point(256, 144);
+            this.lblProxyNote.Name = "lblProxyNote";
+            this.lblProxyNote.Size = new System.Drawing.Size(196, 13);
+            this.lblProxyNote.TabIndex = 12;
+            this.lblProxyNote.Text = "SOCKS proxy is only supported by FTP. ";
             // 
             // SettingsForm
             // 
@@ -2260,6 +2290,8 @@
             this.tpCaptureShape.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).EndInit();
+            this.tpScreenRecorder.ResumeLayout(false);
+            this.tpScreenRecorder.PerformLayout();
             this.tpActions.ResumeLayout(false);
             this.tpUpload.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -2277,8 +2309,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
             this.tpDebug.ResumeLayout(false);
             this.tpDebug.PerformLayout();
-            this.tpScreenRecorder.ResumeLayout(false);
-            this.tpScreenRecorder.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2392,7 +2422,7 @@
         private System.Windows.Forms.TextBox txtProxyPassword;
         private System.Windows.Forms.Label lblProxyUsername;
         private System.Windows.Forms.TextBox txtProxyUsername;
-        private System.Windows.Forms.ComboBox cboProxyType;
+        private System.Windows.Forms.ComboBox cbProxyType;
         private System.Windows.Forms.Label lblProxyType;
         private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
         private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
@@ -2449,5 +2479,8 @@
         private System.Windows.Forms.CheckBox cbCaptureAutoHideTaskbar;
         private System.Windows.Forms.TabPage tpScreenRecorder;
         private System.Windows.Forms.CheckBox cbScreenRecorderHotkeyStartInstantly;
+        private System.Windows.Forms.ComboBox cbProxyMethod;
+        private System.Windows.Forms.Label lblProxyMethod;
+        private System.Windows.Forms.Label lblProxyNote;
     }
 }

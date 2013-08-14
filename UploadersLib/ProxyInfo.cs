@@ -33,25 +33,23 @@ namespace UploadersLib
 {
     public class ProxyInfo
     {
-        public string UserName { get; set; }
+        public ProxyMethod ProxyMethod { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
-        private string SystemHost { get; set; }
-        private int SystemPort { get; set; }
-        public Proxy ProxyType { get; set; }
-        public string Address { get; private set; }
+        public ProxyType ProxyType { get; set; }
 
         public ProxyInfo()
         {
-            UserName = Environment.UserName;
-            ProxyType = Proxy.HTTP;
+            ProxyMethod = ProxyMethod.Manual;
+            ProxyType = ProxyType.HTTP;
         }
 
         public ProxyInfo(string username, string password, string host, int port)
             : this()
         {
-            UserName = username;
+            Username = username;
             Password = password;
             Host = host;
             Port = port;
@@ -59,34 +57,33 @@ namespace UploadersLib
 
         public bool IsValidProxy()
         {
-            if (string.IsNullOrEmpty(Address))
+            if (ProxyMethod == ProxyMethod.Manual)
             {
-                if (!string.IsNullOrEmpty(Host) && Port > 0)
+                return !string.IsNullOrEmpty(Host) && Port > 0;
+            }
+            else if (ProxyMethod == ProxyMethod.Automatic)
+            {
+                WebProxy systemProxy = Helpers.GetDefaultWebProxy();
+
+                if (systemProxy != null && systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Host) && systemProxy.Address.Port > 0)
                 {
-                    Address = string.Format("{0}:{1}", Host, Port);
-                }
-                else
-                {
-                    WebProxy systemProxy = Helpers.GetDefaultWebProxy();
-                    if (systemProxy.Address != null && !string.IsNullOrEmpty(systemProxy.Address.Authority))
-                    {
-                        Address = systemProxy.Address.Authority;
-                        SystemHost = systemProxy.Address.Host;
-                        SystemPort = systemProxy.Address.Port;
-                        return true;
-                    }
+                    Host = systemProxy.Address.Host;
+                    Port = systemProxy.Address.Port;
+                    ProxyType = ProxyType.HTTP;
+                    return true;
                 }
             }
 
-            return !string.IsNullOrEmpty(Address);
+            return false;
         }
 
         public IWebProxy GetWebProxy()
         {
             if (IsValidProxy())
             {
-                NetworkCredential credentials = new NetworkCredential(UserName, Password);
-                return new WebProxy(Address, true, null, credentials);
+                NetworkCredential credentials = new NetworkCredential(Username, Password);
+                string address = string.Format("{0}:{1}", Host, Port);
+                return new WebProxy(address, true, null, credentials);
             }
 
             return null;
@@ -100,16 +97,16 @@ namespace UploadersLib
 
                 switch (ProxyType)
                 {
-                    case Proxy.HTTP:
+                    case ProxyType.HTTP:
                         proxyType = Starksoft.Net.Proxy.ProxyType.Http;
                         break;
-                    case Proxy.SOCKS4:
+                    case ProxyType.SOCKS4:
                         proxyType = Starksoft.Net.Proxy.ProxyType.Socks4;
                         break;
-                    case Proxy.SOCKS4a:
+                    case ProxyType.SOCKS4a:
                         proxyType = Starksoft.Net.Proxy.ProxyType.Socks4a;
                         break;
-                    case Proxy.SOCKS5:
+                    case ProxyType.SOCKS5:
                         proxyType = Starksoft.Net.Proxy.ProxyType.Socks5;
                         break;
                     default:
@@ -118,10 +115,7 @@ namespace UploadersLib
                 }
 
                 ProxyClientFactory proxy = new ProxyClientFactory();
-                return proxy.CreateProxyClient(proxyType,
-                    !string.IsNullOrEmpty(Host) ? Host : SystemHost,
-                    Port > 0 ? Port : SystemPort,
-                    UserName, Password);
+                return proxy.CreateProxyClient(proxyType, Host, Port, Username, Password);
             }
 
             return null;
@@ -129,7 +123,7 @@ namespace UploadersLib
 
         public override string ToString()
         {
-            return string.Format("{0} - {1}:{2} ({3})", UserName, Host, Port, ProxyType.ToString());
+            return string.Format("{0} - {1}:{2} ({3})", Username, Host, Port, ProxyType.ToString());
         }
     }
 }

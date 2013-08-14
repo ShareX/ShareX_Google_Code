@@ -154,7 +154,12 @@ namespace UploadersLib
         RedirectionURL
     }
 
-    public enum Proxy
+    public enum ProxyMethod
+    {
+        None, Manual, Automatic
+    }
+
+    public enum ProxyType
     {
         [Description("HTTP Proxy")]
         HTTP,
