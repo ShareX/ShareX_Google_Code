@@ -47,7 +47,7 @@
             this.lvAfterCaptureTasks.Location = new System.Drawing.Point(8, 8);
             this.lvAfterCaptureTasks.MultiSelect = false;
             this.lvAfterCaptureTasks.Name = "lvAfterCaptureTasks";
-            this.lvAfterCaptureTasks.Size = new System.Drawing.Size(256, 224);
+            this.lvAfterCaptureTasks.Size = new System.Drawing.Size(256, 256);
             this.lvAfterCaptureTasks.TabIndex = 0;
             this.lvAfterCaptureTasks.UseCompatibleStateImageBehavior = false;
             this.lvAfterCaptureTasks.View = System.Windows.Forms.View.Details;
@@ -59,7 +59,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(8, 240);
+            this.btnContinue.Location = new System.Drawing.Point(8, 272);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(80, 24);
             this.btnContinue.TabIndex = 1;
@@ -69,7 +69,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(96, 240);
+            this.btnCancel.Location = new System.Drawing.Point(96, 272);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 24);
             this.btnCancel.TabIndex = 2;
@@ -89,12 +89,12 @@
             this.pbImage.FullscreenOnClick = true;
             this.pbImage.Location = new System.Drawing.Point(272, 8);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(360, 256);
+            this.pbImage.Size = new System.Drawing.Size(375, 288);
             this.pbImage.TabIndex = 4;
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(184, 240);
+            this.btnCopy.Location = new System.Drawing.Point(184, 272);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(80, 24);
             this.btnCopy.TabIndex = 3;
@@ -107,12 +107,13 @@
             this.AcceptButton = this.btnContinue;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 273);
+            this.ClientSize = new System.Drawing.Size(656, 305);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.lvAfterCaptureTasks);
             this.Controls.Add(this.pbImage);
+            this.MinimumSize = new System.Drawing.Size(672, 344);
             this.Name = "AfterCaptureForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

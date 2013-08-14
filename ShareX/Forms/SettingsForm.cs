@@ -895,7 +895,10 @@ namespace ShareX
                 Program.Settings.ProxySettings.IsValidProxy();
                 txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
                 nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-                cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+                if (cbProxyType.Items.Count > 0)
+                {
+                    cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+                }
             }
 
             UpdateProxyControls();
