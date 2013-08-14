@@ -153,7 +153,6 @@ namespace ShareX
             cbScreenRecorderHotkeyStartInstantly.Checked = Program.Settings.ScreenRecorderHotkeyStartInstantly;
 
             // Actions
-
             TaskHelper.AddDefaultExternalPrograms();
 
             foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
@@ -201,12 +200,15 @@ namespace ShareX
             }
 
             // Proxy
-            txtProxyUsername.Text = Program.Settings.ProxySettings.UserName;
+            cbProxyMethod.Items.AddRange(Enum.GetNames(typeof(ProxyMethod)));
+            cbProxyMethod.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyMethod;
+            txtProxyUsername.Text = Program.Settings.ProxySettings.Username;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            txtProxyHost.Text = Program.Settings.ProxySettings.Host;
+            txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
             nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-            cboProxyType.Items.AddRange(Helpers.GetEnumDescriptions<Proxy>());
-            cboProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+            cbProxyType.Items.AddRange(Helpers.GetEnumDescriptions<ProxyType>());
+            cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+            UpdateProxyControls();
 
             // Debug
             txtDebugLog.Text = Program.MyLogger.Messages.ToString();
@@ -241,6 +243,23 @@ namespace ShareX
             lvi.SubItems.Add(watchFolder.Filter ?? "");
             lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
             lvWatchFolderList.Items.Add(lvi);
+        }
+
+        private void UpdateProxyControls()
+        {
+            switch (Program.Settings.ProxySettings.ProxyMethod)
+            {
+                case ProxyMethod.None:
+                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyHost.Enabled = nudProxyPort.Enabled = cbProxyType.Enabled = false;
+                    break;
+                case ProxyMethod.Manual:
+                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = txtProxyHost.Enabled = nudProxyPort.Enabled = cbProxyType.Enabled = true;
+                    break;
+                case ProxyMethod.Automatic:
+                    txtProxyUsername.Enabled = txtProxyPassword.Enabled = true;
+                    txtProxyHost.Enabled = nudProxyPort.Enabled = cbProxyType.Enabled = false;
+                    break;
+            }
         }
 
         private void tcSettings_SelectedIndexChanged(object sender, EventArgs e)
@@ -867,9 +886,24 @@ namespace ShareX
 
         #region Proxy
 
+        private void cbProxyMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.Settings.ProxySettings.ProxyMethod = (ProxyMethod)cbProxyMethod.SelectedIndex;
+
+            if (Program.Settings.ProxySettings.ProxyMethod == ProxyMethod.Automatic)
+            {
+                Program.Settings.ProxySettings.IsValidProxy();
+                txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
+                nudProxyPort.Value = Program.Settings.ProxySettings.Port;
+                cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+            }
+
+            UpdateProxyControls();
+        }
+
         private void txtProxyUsername_TextChanged(object sender, EventArgs e)
         {
-            Program.Settings.ProxySettings.UserName = txtProxyUsername.Text;
+            Program.Settings.ProxySettings.Username = txtProxyUsername.Text;
         }
 
         private void txtProxyPassword_TextChanged(object sender, EventArgs e)
@@ -889,7 +923,7 @@ namespace ShareX
 
         private void cboProxyType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.Settings.ProxySettings.ProxyType = (UploadersLib.Proxy)cboProxyType.SelectedIndex;
+            Program.Settings.ProxySettings.ProxyType = (ProxyType)cbProxyType.SelectedIndex;
         }
 
         #endregion Proxy
