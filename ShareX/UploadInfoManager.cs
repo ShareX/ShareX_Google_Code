@@ -36,12 +36,13 @@ namespace ShareX
     public class UploadInfoManager
     {
         public UploadInfoStatus[] SelectedItems { get; private set; }
-
         private ListView lv;
+        private UploadInfoParser parser;
 
         public UploadInfoManager(ListView listView)
         {
             lv = listView;
+            parser = new UploadInfoParser();
         }
 
         private UploadInfoStatus[] GetSelectedItems()
@@ -170,34 +171,34 @@ namespace ShareX
 
         public void CopyHTMLLink()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => string.Format("<a href=\"{0}\">{0}</a>", x.Info.Result.URL)));
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLink)));
         }
 
         public void CopyHTMLImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => string.Format("<img src=\"{0}\"/>", x.Info.Result.URL)));
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLImage)));
         }
 
         public void CopyHTMLLinkedImage()
         {
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
-                Select(x => string.Format("<a href=\"{0}\"><img src=\"{1}\"/></a>", x.Info.Result.URL, x.Info.Result.ThumbnailURL)));
+                Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLinkedImage)));
         }
 
         public void CopyForumLink()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => string.Format("[url]{0}[/url]", x.Info.Result.URL)));
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLink)));
         }
 
         public void CopyForumImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => string.Format("[img]{0}[/img]", x.Info.Result.URL)));
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumImage)));
         }
 
         public void CopyForumLinkedImage()
         {
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
-                Select(x => string.Format("[url={0}][img]{1}[/img][/url]", x.Info.Result.URL, x.Info.Result.ThumbnailURL)));
+                Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLinkedImage)));
         }
 
         public void CopyFilePath()
@@ -218,6 +219,11 @@ namespace ShareX
         public void CopyFolder()
         {
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
+        }
+
+        internal void CopyUserFormat()
+        {
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, Program.Settings.ClipboardFormat)));
         }
 
         #endregion Copy
@@ -264,5 +270,7 @@ namespace ShareX
         }
 
         #endregion Other
+
+
     }
 }

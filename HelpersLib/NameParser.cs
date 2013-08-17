@@ -111,12 +111,14 @@ namespace HelpersLib
         public string WindowText { get; set; } // %t
         public DateTime CustomDate { get; set; }
 
+        protected NameParser() { }
+
         public NameParser(NameParserType nameParserType)
         {
             Type = nameParserType;
         }
 
-        public string Parse(string pattern)
+        public virtual string Parse(string pattern)
         {
             if (string.IsNullOrEmpty(pattern))
             {

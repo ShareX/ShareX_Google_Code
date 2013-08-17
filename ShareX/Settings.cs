@@ -176,6 +176,7 @@ namespace ShareX
         public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
         public int AutoIncrementNumber = 0;
         public bool FileUploadUseNamePattern = false;
+        public string ClipboardFormat = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>";
 
         #endregion Upload / Name pattern
 
