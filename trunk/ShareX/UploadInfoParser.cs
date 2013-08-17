@@ -42,11 +42,12 @@ namespace HelpersLib
 
         public string Parse(TaskInfo info, string pattern)
         {
+            pattern = base.Parse(pattern);
+
             pattern = pattern.Replace("%url", info.Result.URL);
             pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
             pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
             pattern = pattern.Replace("%localpath", info.FilePath);
-            pattern = base.Parse(pattern);
 
             return pattern;
         }

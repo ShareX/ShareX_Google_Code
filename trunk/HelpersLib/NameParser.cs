@@ -118,7 +118,7 @@ namespace HelpersLib
             Type = nameParserType;
         }
 
-        public virtual string Parse(string pattern)
+        public string Parse(string pattern)
         {
             if (string.IsNullOrEmpty(pattern))
             {

@@ -271,6 +271,5 @@ namespace ShareX
 
         #endregion Other
 
-
     }
 }
