@@ -44,10 +44,13 @@ namespace HelpersLib
         {
             pattern = base.Parse(pattern);
 
-            pattern = pattern.Replace("%url", info.Result.URL);
-            pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
-            pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
-            pattern = pattern.Replace("%localpath", info.FilePath);
+            if (info != null)
+            {
+                pattern = pattern.Replace("%url", info.Result.URL);
+                pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
+                pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
+                pattern = pattern.Replace("%localpath", info.FilePath);
+            }
 
             return pattern;
         }
