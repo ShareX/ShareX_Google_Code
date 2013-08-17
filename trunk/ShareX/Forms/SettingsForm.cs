@@ -201,12 +201,12 @@ namespace ShareX
 
             // Proxy
             cbProxyMethod.Items.AddRange(Enum.GetNames(typeof(ProxyMethod)));
+            cbProxyType.Items.AddRange(Helpers.GetEnumDescriptions<ProxyType>());
             cbProxyMethod.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyMethod;
             txtProxyUsername.Text = Program.Settings.ProxySettings.Username;
             txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
             txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
             nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-            cbProxyType.Items.AddRange(Helpers.GetEnumDescriptions<ProxyType>());
             cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
             UpdateProxyControls();
 
@@ -895,10 +895,7 @@ namespace ShareX
                 Program.Settings.ProxySettings.IsValidProxy();
                 txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
                 nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-                if (cbProxyType.Items.Count > 0)
-                {
-                    cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
-                }
+                cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
             }
 
             UpdateProxyControls();
