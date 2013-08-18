@@ -1,0 +1,25 @@
+#summary Web page screen capture using watch folder feature
+
+I not added web capture feature to ShareX because it will involve rendering page in background using IE. But mainly you would like to capture web page how you see it in your browser, like you are logged in to web site etc. And another problem gonna be you need to copy url to ShareX and can't even use Clipboard Upload hotkey because when ShareX see url in clipboard it will try to URL shorten it instead do web capture. So instead using Chrome, Firefox etc. addons for capture page and using ShareX watch folder feature to automatically upload them can be better idea.
+
+I will show example using Chrome with official Google screen capture addon. But it will work exactly same for Firefox etc. with different addons.
+
+1. Download Google Screen capture Chrome addon from here:
+
+https://chrome.google.com/webstore/detail/screen-capture-by-google/cpngackimfmofbokmjmljamhdncknpmg
+
+2. (Optional) Change image save location from here:
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/3WPJIpomNo.png
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/rHhkfTtLh4.png
+
+3. Open ShareX settings window, switch to Watch folder tab, add like this folder to watch:
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/E8GXVYpZvY.png
+
+4. Click "Capture Whole Page" in Chrome screen capture addon:
+
+https://dl.dropbox.com/u/14076298/ShareX/2013/08/NuylBpGEUs.png
+
+After save it, ShareX will automatically upload it.
