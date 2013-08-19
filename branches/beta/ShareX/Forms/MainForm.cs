@@ -328,15 +328,12 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
-            foreach (HotkeySetting hotkey in Program.Settings.HotkeyList)
+            if (Program.Settings.WatchFolderEnabled)
             {
-                if (hotkey.TaskSettings.WatchFolderEnabled)
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
                 {
-                    foreach (WatchFolder watchFolder in hotkey.TaskSettings.WatchFolderList)
-                    {
-                        watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, hotkey.TaskSettings);
-                        watchFolder.Enable();
-                    }
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.DefaultTaskSettings);
+                    watchFolder.Enable();
                 }
             }
         }
