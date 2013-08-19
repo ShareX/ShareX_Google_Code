@@ -141,6 +141,13 @@ namespace ShareX
 
         #endregion Upload / Clipboard upload
 
+        #region Upload / Watch folder
+
+        public bool WatchFolderEnabled = false;
+        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+
+        #endregion Upload / Watch folder
+
         #region ScreenRecord Form
 
         public int ScreenRecordFPS = 5;

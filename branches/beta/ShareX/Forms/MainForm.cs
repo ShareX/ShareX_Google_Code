@@ -328,12 +328,15 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
-            if (Program.Settings.WatchFolderEnabled)
+            foreach (HotkeySetting hotkey in Program.Settings.HotkeyList)
             {
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                if (hotkey.TaskSettings.WatchFolderEnabled)
                 {
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.DefaultTaskSettings);
-                    watchFolder.Enable();
+                    foreach (WatchFolder watchFolder in hotkey.TaskSettings.WatchFolderList)
+                    {
+                        watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.DefaultTaskSettings);
+                        watchFolder.Enable();
+                    }
                 }
             }
         }
@@ -1007,7 +1010,6 @@ namespace ShareX
 
         #endregion UploadInfoMenu events
 
-  
         #endregion Form events
     }
 }

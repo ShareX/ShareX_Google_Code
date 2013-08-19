@@ -115,12 +115,5 @@ namespace ShareX
         public bool IfUploadFailRetryOnce = false;
 
         #endregion Upload / General
-
-        #region Upload / Watch folder
-
-        public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
-
-        #endregion Upload / Watch folder
     }
 }

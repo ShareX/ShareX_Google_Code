@@ -40,8 +40,8 @@ namespace ShareX
 {
     public partial class HotkeyTaskSettingsForm : Form
     {
+        private bool loaded;
         private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
-
         public HotkeySetting Setting { get; set; }
 
         public HotkeyTaskSettingsForm(HotkeySetting hotkeySetting)
@@ -51,7 +51,7 @@ namespace ShareX
             Setting = hotkeySetting;
 
             tbDescription.Text = hotkeySetting.Description;
-            Text = Application.ProductName + " - " + hotkeySetting.Description + " - workflow settings"; 
+            Text = Application.ProductName + " - " + hotkeySetting.Description + " - workflow settings";
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;
             cbUseDefaultAfterUploadSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterUploadJob;
             cbUseDefaultDestinationSettings.Checked = hotkeySetting.TaskSettings.UseDefaultDestinations;
@@ -162,6 +162,23 @@ namespace ShareX
             cbClipboardUploadAutoDetectURL.Checked = Setting.TaskSettings.ClipboardUploadAutoDetectURL;
             cbClipboardUploadUseAfterCaptureTasks.Checked = Setting.TaskSettings.ClipboardUploadUseAfterCaptureTasks;
             cbClipboardUploadExcludeImageEffects.Checked = Setting.TaskSettings.ClipboardUploadExcludeImageEffects;
+
+            // Upload / Watch folder
+            cbWatchFolderEnabled.Checked = Setting.TaskSettings.WatchFolderEnabled;
+
+            if (Setting.TaskSettings.WatchFolderList == null)
+            {
+                Setting.TaskSettings.WatchFolderList = new List<WatchFolder>();
+            }
+            else
+            {
+                foreach (WatchFolder watchFolder in Setting.TaskSettings.WatchFolderList)
+                {
+                    AddWatchFolder(watchFolder);
+                }
+            }
+
+            loaded = true;
         }
 
         private void tbDescription_TextChanged(object sender, EventArgs e)
@@ -763,6 +780,67 @@ namespace ShareX
         private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
         {
             Setting.TaskSettings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
+        }
+
+        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                Setting.TaskSettings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
+
+                foreach (WatchFolder watchFolder in Setting.TaskSettings.WatchFolderList)
+                {
+                    if (Setting.TaskSettings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                    else
+                    {
+                        watchFolder.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        {
+            if (lvWatchFolderList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
+                WatchFolder watchFolder = lvi.Tag as WatchFolder;
+
+                Setting.TaskSettings.WatchFolderList.Remove(watchFolder);
+                lvWatchFolderList.Items.Remove(lvi);
+                watchFolder.Dispose();
+            }
+        }
+
+        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        {
+            using (WatchFolderForm form = new WatchFolderForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    WatchFolder watchFolder = form.WatchFolder;
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.DefaultTaskSettings);
+                    Setting.TaskSettings.WatchFolderList.Add(watchFolder);
+                    AddWatchFolder(watchFolder);
+
+                    if (Setting.TaskSettings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                }
+            }
+        }
+
+        private void AddWatchFolder(WatchFolder watchFolder)
+        {
+            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
+            lvi.Tag = watchFolder;
+            lvi.SubItems.Add(watchFolder.Filter ?? "");
+            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
+            lvWatchFolderList.Items.Add(lvi);
         }
     }
 }
