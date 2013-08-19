@@ -129,8 +129,6 @@ namespace ShareX
             Refresh();
         }
 
-
-
         private void UpdateProxyControls()
         {
             switch (Program.Settings.ProxySettings.ProxyMethod)
@@ -405,7 +403,5 @@ namespace ShareX
                 watchFolder.Dispose();
             }
         }
-
-
     }
 }

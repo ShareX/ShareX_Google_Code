@@ -82,9 +82,9 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(336, 8);
+            this.btnReset.Location = new System.Drawing.Point(344, 8);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(147, 23);
+            this.btnReset.Size = new System.Drawing.Size(144, 23);
             this.btnReset.TabIndex = 3;
             this.btnReset.Text = "Restore default hotkeys";
             this.btnReset.UseVisualStyleBackColor = true;

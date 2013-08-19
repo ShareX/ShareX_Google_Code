@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -95,6 +96,17 @@ namespace HelpersLib
             }
 
             return value.Add(flag);
+        }
+
+        public static IEnumerable<T> GetFlags<T>(this Enum input)
+        {
+            foreach (T value in Enum.GetValues(input.GetType()))
+            {
+                if (Convert.ToUInt64(value) != 0 && input.HasFlag(value))
+                {
+                    yield return value;
+                }
+            }
         }
     }
 }

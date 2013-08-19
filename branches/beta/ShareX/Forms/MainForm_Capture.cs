@@ -62,7 +62,7 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
-            TaskSettings taskSettings = hotkeySetting.TaskSettings.Clone();
+            TaskSettings taskSettings = hotkeySetting.TaskSettings.Copy();
             taskSettings.SetDefaultSettings();
 
             switch (hotkeySetting.Job)
@@ -458,7 +458,7 @@ namespace ShareX
             Rectangle rectangle = (Rectangle)tsi.Tag;
             if (!rectangle.IsEmpty)
             {
-                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.DefaultTaskSettings );
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.DefaultTaskSettings);
             }
         }
 

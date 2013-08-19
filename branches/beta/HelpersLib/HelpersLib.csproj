@@ -78,6 +78,7 @@
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />
     <Compile Include="DebugTimer.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Forms\HashCheckForm.cs">
       <SubType>Form</SubType>
     </Compile>

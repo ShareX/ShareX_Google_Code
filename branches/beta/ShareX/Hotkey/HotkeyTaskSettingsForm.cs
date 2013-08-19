@@ -372,6 +372,12 @@ namespace ShareX
         {
             btnTask.Text = "Task: " + Setting.Job.GetDescription();
 
+            btnAfterCapture.Text = "After capture: " + string.Join(", ", Setting.TaskSettings.AfterCaptureJob.GetFlags<AfterCaptureTasks>().
+                Select(x => x.GetDescription()).ToArray());
+
+            btnAfterUpload.Text = "After upload: " + string.Join(", ", Setting.TaskSettings.AfterUploadJob.GetFlags<AfterUploadTasks>().
+                Select(x => x.GetDescription()).ToArray());
+
             string imageUploader = Setting.TaskSettings.ImageDestination == ImageDestination.FileUploader ?
                 Setting.TaskSettings.FileDestination.GetDescription() : Setting.TaskSettings.ImageDestination.GetDescription();
             btnImageUploaders.Text = "Image uploader: " + imageUploader;
