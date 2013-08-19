@@ -1,8 +1,8 @@
 #summary How to upload screenshots using the Steam overlay UI and ShareX
 
-If you're using Steam you can take a screenshot from a game and upload it automatically using ShareX and the Steam overlay UI.
+If you're using Steam, you can take a screenshot from a game and upload it automatically using ShareX and the Steam overlay UI.
 
-1. Open Steam settings menu and switch to the 'in-game' tab. Check "Save an uncompressed copy outside of Steam" and choose a folder for it to store screenshots in by clicking 'select external screenshots folder'.
+1. Open Steam settings menu and switch to the 'in-game' tab. Check "Save an uncompressed copy outside of Steam" and choose a folder to store screenshots by clicking 'select external screenshots folder'.
 
 https://dl.dropbox.com/u/14076298/ShareX/2013/08/qfpwjNhdg7.png
 
@@ -18,6 +18,6 @@ The 'watch folder' will automatically upload new images from the folder you sele
 
 4. You can now open your Steam game and press your Steam screenshot key (set to F12 by default) at any time to export a screenshot. ShareX will notice the new file appear in the folder you specified and upload it automatically. If you completed step 2, ShareX will convert the file to a more sensible format before uploading.
 
-Note: This trick also works with any non-steam game in which you've enabled the Steam overlay UI.
+Note: This trick also works with any non-steam game in which you have enabled the Steam overlay UI.
 
-TLDR: You can use the ShareX 'watch folder' feature with the Steam overlay UI to upload screenshots automatically.
+tl;dr: You can use the ShareX 'watch folder' feature with the Steam overlay UI to upload screenshots automatically.
