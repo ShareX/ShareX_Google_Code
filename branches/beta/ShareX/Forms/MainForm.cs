@@ -157,9 +157,9 @@ namespace ShareX
             }
         }
 
-        private void SetEnumChecked<T>(T value, params ToolStripDropDownItem[] parents)
+        private void SetEnumChecked(Enum value, params ToolStripDropDownItem[] parents)
         {
-            int index = Helpers.GetEnumMemberIndex(value);
+            int index = value.GetIndex();
 
             foreach (ToolStripDropDownItem parent in parents)
             {
