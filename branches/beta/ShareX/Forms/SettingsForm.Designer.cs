@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
@@ -58,7 +59,6 @@
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
-            this.hmHotkeys = new ShareX.HotkeyManagerControl();
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.lblProxyNote = new System.Windows.Forms.Label();
             this.cbProxyMethod = new System.Windows.Forms.ComboBox();
@@ -76,17 +76,18 @@
             this.tpDebug = new System.Windows.Forms.TabPage();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
             this.tpUpload = new System.Windows.Forms.TabPage();
-            this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
             this.lblUploadLimit = new System.Windows.Forms.Label();
-            this.cbBufferSize = new System.Windows.Forms.ComboBox();
+            this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
+            this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
             this.lblUploadLimitHint = new System.Windows.Forms.Label();
             this.lblBufferSize = new System.Windows.Forms.Label();
-            this.nudUploadLimit = new System.Windows.Forms.NumericUpDown();
+            this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.tpWatchFolder = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
+            this.hmHotkeys = new ShareX.HotkeyManagerControl();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -98,6 +99,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.tpWatchFolder.SuspendLayout();
             this.SuspendLayout();
+
+            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+
+            // 
+            // chWatchFolderFolderPath
+            // 
+            this.chWatchFolderFolderPath.DisplayIndex = 0;
+            this.chWatchFolderFolderPath.Text = "Folder path";
+            this.chWatchFolderFolderPath.Width = 300;
+            // 
+            // chWatchFolderFilter
+            // 
+            this.chWatchFolderFilter.DisplayIndex = 1;
+            this.chWatchFolderFilter.Text = "Filter";
+            this.chWatchFolderFilter.Width = 100;
+            // 
+            // chWatchFolderIncludeSubdirectories
+            // 
+            this.chWatchFolderIncludeSubdirectories.DisplayIndex = 2;
+            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
+
             // 
             // cbPlaySoundAfterUpload
             // 
@@ -433,15 +457,6 @@
             this.tpHotkeys.Text = "Hotkeys";
             this.tpHotkeys.UseVisualStyleBackColor = true;
             // 
-            // hmHotkeys
-            // 
-            this.hmHotkeys.AutoScroll = true;
-            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
-            this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(522, 481);
-            this.hmHotkeys.TabIndex = 0;
-            // 
             // tpProxy
             // 
             this.tpProxy.Controls.Add(this.lblProxyNote);
@@ -630,6 +645,15 @@
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
             // 
+            // lblUploadLimit
+            // 
+            this.lblUploadLimit.AutoSize = true;
+            this.lblUploadLimit.Location = new System.Drawing.Point(16, 16);
+            this.lblUploadLimit.Name = "lblUploadLimit";
+            this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
+            this.lblUploadLimit.TabIndex = 6;
+            this.lblUploadLimit.Text = "Simultaneous upload limit:";
+            // 
             // cbIfUploadFailRetryOnce
             // 
             this.cbIfUploadFailRetryOnce.AutoSize = true;
@@ -640,23 +664,23 @@
             this.cbIfUploadFailRetryOnce.Text = "If upload fail then retry upload once";
             this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
             // 
-            // lblUploadLimit
+            // nudUploadLimit
             // 
-            this.lblUploadLimit.AutoSize = true;
-            this.lblUploadLimit.Location = new System.Drawing.Point(16, 16);
-            this.lblUploadLimit.Name = "lblUploadLimit";
-            this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
-            this.lblUploadLimit.TabIndex = 6;
-            this.lblUploadLimit.Text = "Simultaneous upload limit:";
-            // 
-            // cbBufferSize
-            // 
-            this.cbBufferSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBufferSize.FormattingEnabled = true;
-            this.cbBufferSize.Location = new System.Drawing.Point(76, 44);
-            this.cbBufferSize.Name = "cbBufferSize";
-            this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
-            this.cbBufferSize.TabIndex = 10;
+            this.nudUploadLimit.Location = new System.Drawing.Point(148, 12);
+            this.nudUploadLimit.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.nudUploadLimit.Name = "nudUploadLimit";
+            this.nudUploadLimit.Size = new System.Drawing.Size(56, 20);
+            this.nudUploadLimit.TabIndex = 7;
+            this.nudUploadLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudUploadLimit.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // lblUploadLimitHint
             // 
@@ -676,23 +700,14 @@
             this.lblBufferSize.TabIndex = 9;
             this.lblBufferSize.Text = "Buffer size:";
             // 
-            // nudUploadLimit
+            // cbBufferSize
             // 
-            this.nudUploadLimit.Location = new System.Drawing.Point(148, 12);
-            this.nudUploadLimit.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            this.nudUploadLimit.Name = "nudUploadLimit";
-            this.nudUploadLimit.Size = new System.Drawing.Size(56, 20);
-            this.nudUploadLimit.TabIndex = 7;
-            this.nudUploadLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudUploadLimit.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.cbBufferSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBufferSize.FormattingEnabled = true;
+            this.cbBufferSize.Location = new System.Drawing.Point(76, 44);
+            this.cbBufferSize.Name = "cbBufferSize";
+            this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
+            this.cbBufferSize.TabIndex = 10;
             // 
             // tpWatchFolder
             // 
@@ -728,6 +743,10 @@
             this.lvWatchFolderList.TabIndex = 7;
             this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
             this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
+            this.lvWatchFolderList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chWatchFolderFolderPath,
+            this.chWatchFolderFilter,
+            this.chWatchFolderIncludeSubdirectories});
             // 
             // btnWatchFolderRemove
             // 
@@ -748,6 +767,15 @@
             this.btnWatchFolderAdd.Text = "Add";
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
+            // 
+            // hmHotkeys
+            // 
+            this.hmHotkeys.AutoScroll = true;
+            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
+            this.hmHotkeys.Name = "hmHotkeys";
+            this.hmHotkeys.Size = new System.Drawing.Size(522, 481);
+            this.hmHotkeys.TabIndex = 0;
             // 
             // SettingsForm
             // 
@@ -785,7 +813,9 @@
         }
 
         #endregion Windows Form Designer generated code
-
+        private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
+        private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
+        private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
         private System.Windows.Forms.CheckBox cbPlaySoundAfterUpload;
         private System.Windows.Forms.TabControl tcSettings;
         private System.Windows.Forms.TabPage tpGeneral;

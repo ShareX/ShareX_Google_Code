@@ -40,7 +40,6 @@ namespace ShareX
 {
     public partial class HotkeyTaskSettingsForm : Form
     {
-        private bool loaded;
         private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
 
         public HotkeySetting Setting { get; set; }
@@ -162,8 +161,6 @@ namespace ShareX
             cbClipboardUploadAutoDetectURL.Checked = Setting.TaskSettings.ClipboardUploadAutoDetectURL;
             cbClipboardUploadUseAfterCaptureTasks.Checked = Setting.TaskSettings.ClipboardUploadUseAfterCaptureTasks;
             cbClipboardUploadExcludeImageEffects.Checked = Setting.TaskSettings.ClipboardUploadExcludeImageEffects;
-
-            loaded = true;
         }
 
         private void tbDescription_TextChanged(object sender, EventArgs e)

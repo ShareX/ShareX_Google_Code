@@ -54,10 +54,7 @@ namespace ShareX
 
         public HotkeySetting()
         {
-            if (Program.Settings != null)
-                TaskSettings = Program.Settings.DefaultTaskSettings.Clone();
-            else
-                TaskSettings = new TaskSettings(true);
+            TaskSettings = new TaskSettings(true);
             HotkeyStatus = HotkeyStatus.NotConfigured;
         }
 

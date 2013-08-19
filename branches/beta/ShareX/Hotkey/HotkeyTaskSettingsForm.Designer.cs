@@ -159,9 +159,6 @@
             this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
-            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpImage.SuspendLayout();
@@ -1752,23 +1749,7 @@
             this.cbClipboardUploadExcludeImageEffects.Text = "Don\'t add image effects (Watermark, border etc.) when doing clipboard upload";
             this.cbClipboardUploadExcludeImageEffects.UseVisualStyleBackColor = true;
             this.cbClipboardUploadExcludeImageEffects.CheckedChanged += new System.EventHandler(this.cbClipboardUploadExcludeImageEffects_CheckedChanged);
-            // 
-            // chWatchFolderFolderPath
-            // 
-            this.chWatchFolderFolderPath.DisplayIndex = 0;
-            this.chWatchFolderFolderPath.Text = "Folder path";
-            this.chWatchFolderFolderPath.Width = 300;
-            // 
-            // chWatchFolderFilter
-            // 
-            this.chWatchFolderFilter.DisplayIndex = 1;
-            this.chWatchFolderFilter.Text = "Filter";
-            this.chWatchFolderFilter.Width = 100;
-            // 
-            // chWatchFolderIncludeSubdirectories
-            // 
-            this.chWatchFolderIncludeSubdirectories.DisplayIndex = 2;
-            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
+
             // 
             // HotkeyTaskSettingsForm
             // 
@@ -1966,9 +1947,7 @@
         private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
         private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
-        private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
-        private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
-        private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
+
 
 
     }
