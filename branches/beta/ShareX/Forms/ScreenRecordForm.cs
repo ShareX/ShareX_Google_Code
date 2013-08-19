@@ -167,7 +167,7 @@ namespace ShareX
                                 screenRecorder.SaveAsGIF(path, taskSettings.ImageGIFQuality);
                                 break;
                             case ScreenRecordOutput.AVICommandLine:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(taskSettings));
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(taskSettings, taskSettings.ScreenRecordCommandLineOutputExtension));
                                 screenRecorder.EncodeUsingCommandLine(path, taskSettings.ScreenRecordCommandLinePath, taskSettings.ScreenRecordCommandLineArgs);
                                 break;
                         }

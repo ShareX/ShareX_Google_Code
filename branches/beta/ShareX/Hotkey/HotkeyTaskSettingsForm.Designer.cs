@@ -167,6 +167,8 @@
             this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpImage.SuspendLayout();
@@ -203,6 +205,7 @@
             this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
             this.tpWatchFolders.SuspendLayout();
+            this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -401,6 +404,7 @@
             this.tcHotkeySettings.Controls.Add(this.tpActions2);
             this.tcHotkeySettings.Controls.Add(this.tpUpload);
             this.tcHotkeySettings.Controls.Add(this.tpWatchFolders);
+            this.tcHotkeySettings.Controls.Add(this.tpAdvanced);
             this.tcHotkeySettings.Location = new System.Drawing.Point(8, 8);
             this.tcHotkeySettings.Name = "tcHotkeySettings";
             this.tcHotkeySettings.SelectedIndex = 0;
@@ -1833,6 +1837,25 @@
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
             // 
+            // tpAdvanced
+            // 
+            this.tpAdvanced.Controls.Add(this.pgTaskSettings);
+            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvanced.Name = "tpAdvanced";
+            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAdvanced.Size = new System.Drawing.Size(518, 336);
+            this.tpAdvanced.TabIndex = 6;
+            this.tpAdvanced.Text = "Advanced";
+            this.tpAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // pgTaskSettings
+            // 
+            this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgTaskSettings.Location = new System.Drawing.Point(3, 3);
+            this.pgTaskSettings.Name = "pgTaskSettings";
+            this.pgTaskSettings.Size = new System.Drawing.Size(512, 330);
+            this.pgTaskSettings.TabIndex = 0;
+            // 
             // HotkeyTaskSettingsForm
             // 
             this.AcceptButton = this.btnOK;
@@ -1895,6 +1918,7 @@
             this.tpUploadClipboard.PerformLayout();
             this.tpWatchFolders.ResumeLayout(false);
             this.tpWatchFolders.PerformLayout();
+            this.tpAdvanced.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2039,6 +2063,8 @@
         private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
         private System.Windows.Forms.Button btnWatchFolderRemove;
         private System.Windows.Forms.Button btnWatchFolderAdd;
+        private System.Windows.Forms.TabPage tpAdvanced;
+        private System.Windows.Forms.PropertyGrid pgTaskSettings;
 
 
 

@@ -140,11 +140,6 @@ namespace ShareX
 
         public static string GetFilename(TaskSettings taskSettings, string extension = "")
         {
-            if (string.IsNullOrEmpty(extension))
-            {
-                extension = taskSettings.ScreenRecordCommandLineOutputExtension;
-            }
-
             NameParser nameParser = new NameParser(NameParserType.FileName)
             {
                 AutoIncrementNumber = taskSettings.AutoIncrementNumber,

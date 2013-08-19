@@ -131,7 +131,7 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename(taskSettings, "txt");
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.TextFileExtension);
             task.tempText = text;
             return task;
         }
@@ -600,19 +600,21 @@ namespace ShareX
             switch (Info.Settings.TextDestination)
             {
                 case TextDestination.Pastebin:
-                    textUploader = new Pastebin(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
+                    PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
+                    settings.TextFormat = this.Info.Settings.TextFormat;
+                    textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey);
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2();
+                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new Slexy();
+                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Pastee:
-                    textUploader = new Pastee();
+                    textUploader = new Pastee() { Lexer = Info.Settings.TextFormat };
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);

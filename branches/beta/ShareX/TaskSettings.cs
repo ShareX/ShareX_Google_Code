@@ -27,6 +27,7 @@ using HelpersLib;
 using ScreenCapture;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,20 +37,18 @@ namespace ShareX
 {
     public class TaskSettings
     {
-        public bool UseDefaultAfterCaptureJob { get; set; }
-        public AfterCaptureTasks AfterCaptureJob { get; set; }
+        public bool UseDefaultAfterCaptureJob;
+        public AfterCaptureTasks AfterCaptureJob;
 
-        public bool UseDefaultAfterUploadJob { get; set; }
-        public AfterUploadTasks AfterUploadJob { get; set; }
+        public bool UseDefaultAfterUploadJob;
+        public AfterUploadTasks AfterUploadJob;
 
-        public bool UseDefaultDestinations { get; set; }
-        public ImageDestination ImageDestination { get; set; }
-        public TextDestination TextDestination { get; set; }
-        public FileDestination FileDestination { get; set; }
-        public UrlShortenerType URLShortenerDestination { get; set; }
-        public SocialNetworkingService SocialNetworkingServiceDestination { get; set; }
-
-        public bool DisableNotifications { get; set; }
+        public bool UseDefaultDestinations;
+        public ImageDestination ImageDestination;
+        public TextDestination TextDestination;
+        public FileDestination FileDestination;
+        public UrlShortenerType URLShortenerDestination;
+        public SocialNetworkingService SocialNetworkingServiceDestination;
 
         #region Image / Quality
 
@@ -162,8 +161,22 @@ namespace ShareX
 
         #endregion ScreenRecord Form
 
+        #region "Advanced"
+
+        [Category("Interaction"), DefaultValue(false), Description("Disable notifications.")]
+        public bool DisableNotifications { get; set; }
+
+        [Category("Upload Text"), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
+        public string TextFormat { get; set; }
+
+        [Category("Upload Text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
+        public string TextFileExtension { get; set; }
+
+        #endregion "Advanced"
+
         public TaskSettings(bool useDefaultSettings = false)
         {
+            ApplyDefaultValues(this);
             SetDefaultSettings(true);
             UseDefaultAfterCaptureJob = useDefaultSettings;
             UseDefaultAfterUploadJob = useDefaultSettings;
@@ -197,6 +210,16 @@ namespace ShareX
             }
 
             return false;
+        }
+
+        public static void ApplyDefaultValues(object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr == null) continue;
+                prop.SetValue(self, attr.Value);
+            }
         }
 
         public TaskSettings Clone()

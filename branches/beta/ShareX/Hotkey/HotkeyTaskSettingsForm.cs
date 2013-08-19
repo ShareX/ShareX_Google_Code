@@ -178,6 +178,9 @@ namespace ShareX
                 }
             }
 
+            // Advanced
+            pgTaskSettings.SelectedObject = Setting.TaskSettings;
+
             loaded = true;
         }
 
