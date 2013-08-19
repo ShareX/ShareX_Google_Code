@@ -193,7 +193,7 @@ namespace ShareX
 
             if (taskSettings.ScreenRecordAutoUpload)
             {
-                UploadManager.UploadFile(path);
+                UploadManager.UploadFile(path, taskSettings);
             }
             else
             {

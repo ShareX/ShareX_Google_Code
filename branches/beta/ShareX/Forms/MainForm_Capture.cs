@@ -71,7 +71,7 @@ namespace ShareX
                     UploadManager.ClipboardUpload(taskSettings);
                     break;
                 case EHotkey.FileUpload:
-                    UploadManager.UploadFile();
+                    UploadManager.UploadFile(taskSettings);
                     break;
                 case EHotkey.PrintScreen:
                     CaptureScreenshot(CaptureType.Screen, taskSettings, false);
@@ -126,7 +126,7 @@ namespace ShareX
                     DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, taskSettings, autoHideForm);
                     break;
                 case CaptureType.ActiveWindow:
-                    CaptureActiveWindow(autoHideForm, taskSettings);
+                    CaptureActiveWindow(taskSettings, autoHideForm);
                     break;
                 case CaptureType.ActiveMonitor:
                     DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, taskSettings, autoHideForm);
@@ -206,12 +206,10 @@ namespace ShareX
             }
         }
 
-        private void AfterCapture(Image img, CaptureType captureType, TaskSettings taskSettings = null)
+        private void AfterCapture(Image img, CaptureType captureType, TaskSettings taskSettings)
         {
             if (img != null)
             {
-                if (taskSettings == null) taskSettings = Program.Settings.DefaultTaskSettings;
-
                 if (taskSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
                 {
                     taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
@@ -248,7 +246,7 @@ namespace ShareX
                 CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
         }
 
-        private void CaptureActiveWindow(bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void CaptureActiveWindow(TaskSettings taskSettings, bool autoHideForm = true)
         {
             DoCapture(() =>
             {

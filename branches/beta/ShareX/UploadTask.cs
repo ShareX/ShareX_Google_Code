@@ -91,7 +91,7 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateFileUploaderTask(string filePath, TaskSettings taskSettings = null)
+        public static UploadTask CreateFileUploaderTask(string filePath, TaskSettings taskSettings)
         {
             EDataType dataType = Helpers.FindDataType(filePath);
             UploadTask task = new UploadTask(taskSettings);

@@ -334,7 +334,7 @@ namespace ShareX
                 {
                     foreach (WatchFolder watchFolder in hotkey.TaskSettings.WatchFolderList)
                     {
-                        watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
+                        watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, hotkey.TaskSettings);
                         watchFolder.Enable();
                     }
                 }
@@ -419,7 +419,7 @@ namespace ShareX
                     }
                     else if (args[i][0] != '-')
                     {
-                        UploadManager.UploadFile(args[i]);
+                        UploadManager.UploadFile(args[i], taskSettings);
                     }
                 }
             }
@@ -593,7 +593,7 @@ namespace ShareX
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile();
+            UploadManager.UploadFile(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsddbDestinations_DropDownOpened(object sender, EventArgs e)
@@ -987,7 +987,7 @@ namespace ShareX
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile();
+            UploadManager.UploadFile(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiHideMenu_Click(object sender, EventArgs e)

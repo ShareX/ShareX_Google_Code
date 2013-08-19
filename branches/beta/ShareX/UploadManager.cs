@@ -36,24 +36,24 @@ namespace ShareX
 {
     public static class UploadManager
     {
-        public static void UploadFile(string filePath)
+        public static void UploadFile(string filePath, TaskSettings taskSettings)
         {
             if (!string.IsNullOrEmpty(filePath))
             {
                 if (File.Exists(filePath))
                 {
-                    UploadTask task = UploadTask.CreateFileUploaderTask(filePath);
+                    UploadTask task = UploadTask.CreateFileUploaderTask(filePath, taskSettings);
                     TaskManager.Start(task);
                 }
                 else if (Directory.Exists(filePath))
                 {
                     string[] files = Directory.GetFiles(filePath, "*.*", SearchOption.AllDirectories);
-                    UploadFile(files);
+                    UploadFile(files, taskSettings);
                 }
             }
         }
 
-        public static void UploadFile(string[] files)
+        public static void UploadFile(string[] files, TaskSettings taskSettings)
         {
             if (files != null && files.Length > 0)
             {
@@ -61,7 +61,7 @@ namespace ShareX
                 {
                     foreach (string file in files)
                     {
-                        UploadFile(file);
+                        UploadFile(file, taskSettings);
                     }
                 }
             }
@@ -83,7 +83,7 @@ namespace ShareX
             return true;
         }
 
-        public static void UploadFile()
+        public static void UploadFile(TaskSettings taskSettings)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -105,7 +105,7 @@ namespace ShareX
                         Program.Settings.FileUploadDefaultDirectory = Path.GetDirectoryName(ofd.FileName);
                     }
 
-                    UploadFile(ofd.FileNames);
+                    UploadFile(ofd.FileNames, taskSettings);
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace ShareX
             else if (Clipboard.ContainsFileDropList())
             {
                 string[] files = Clipboard.GetFileDropList().Cast<string>().ToArray();
-                UploadFile(files);
+                UploadFile(files, taskSettings);
             }
             else if (Clipboard.ContainsText())
             {
@@ -178,7 +178,7 @@ namespace ShareX
             if (data.GetDataPresent(DataFormats.FileDrop, false))
             {
                 string[] files = data.GetData(DataFormats.FileDrop, false) as string[];
-                UploadFile(files);
+                UploadFile(files, taskSettings);
             }
             else if (data.GetDataPresent(DataFormats.Bitmap, false))
             {

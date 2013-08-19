@@ -816,7 +816,7 @@ namespace ShareX
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Setting.TaskSettings);
                     Setting.TaskSettings.WatchFolderList.Add(watchFolder);
                     AddWatchFolder(watchFolder);
 
