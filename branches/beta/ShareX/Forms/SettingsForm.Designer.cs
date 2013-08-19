@@ -31,6 +31,7 @@
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.btnDefaultHotkeySettings = new System.Windows.Forms.Button();
             this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
             this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
@@ -57,7 +58,6 @@
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
             this.tpHotkeys = new System.Windows.Forms.TabPage();
-            this.btnDefaultHotkeySettings = new System.Windows.Forms.Button();
             this.hmHotkeys = new ShareX.HotkeyManagerControl();
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.lblProxyNote = new System.Windows.Forms.Label();
@@ -141,6 +141,16 @@
             this.tpGeneral.TabIndex = 0;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
+            // 
+            // btnDefaultHotkeySettings
+            // 
+            this.btnDefaultHotkeySettings.Location = new System.Drawing.Point(16, 280);
+            this.btnDefaultHotkeySettings.Name = "btnDefaultHotkeySettings";
+            this.btnDefaultHotkeySettings.Size = new System.Drawing.Size(107, 23);
+            this.btnDefaultHotkeySettings.TabIndex = 2;
+            this.btnDefaultHotkeySettings.Text = "Default Settings...";
+            this.btnDefaultHotkeySettings.UseVisualStyleBackColor = true;
+            this.btnDefaultHotkeySettings.Click += new System.EventHandler(this.btnDefaultHotkeySettings_Click);
             // 
             // cbShellContextMenu
             // 
@@ -416,19 +426,8 @@
             this.tpHotkeys.Text = "Hotkeys";
             this.tpHotkeys.UseVisualStyleBackColor = true;
             // 
-            // btnDefaultHotkeySettings
-            // 
-            this.btnDefaultHotkeySettings.Location = new System.Drawing.Point(16, 280);
-            this.btnDefaultHotkeySettings.Name = "btnDefaultHotkeySettings";
-            this.btnDefaultHotkeySettings.Size = new System.Drawing.Size(107, 23);
-            this.btnDefaultHotkeySettings.TabIndex = 2;
-            this.btnDefaultHotkeySettings.Text = "Default Settings...";
-            this.btnDefaultHotkeySettings.UseVisualStyleBackColor = true;
-            this.btnDefaultHotkeySettings.Click += new System.EventHandler(this.btnDefaultHotkeySettings_Click);
-            // 
             // hmHotkeys
             // 
-            this.hmHotkeys.AutoScroll = true;
             this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
             this.hmHotkeys.Name = "hmHotkeys";

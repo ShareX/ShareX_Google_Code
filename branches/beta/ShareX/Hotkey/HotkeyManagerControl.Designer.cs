@@ -37,12 +37,15 @@
             // 
             // flpHotkeys
             // 
-            this.flpHotkeys.AutoSize = true;
+            this.flpHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpHotkeys.AutoScroll = true;
             this.flpHotkeys.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpHotkeys.Location = new System.Drawing.Point(0, 34);
             this.flpHotkeys.Name = "flpHotkeys";
             this.flpHotkeys.Padding = new System.Windows.Forms.Padding(10);
-            this.flpHotkeys.Size = new System.Drawing.Size(480, 310);
+            this.flpHotkeys.Size = new System.Drawing.Size(488, 310);
             this.flpHotkeys.TabIndex = 0;
             this.flpHotkeys.WrapContents = false;
             // 
@@ -100,7 +103,6 @@
             this.Name = "HotkeyManagerControl";
             this.Size = new System.Drawing.Size(495, 349);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
