@@ -75,15 +75,15 @@ namespace ShareX
 
         #region Constructors
 
-        private UploadTask()
+        private UploadTask(TaskSettings taskSettings)
         {
             Status = TaskStatus.InQueue;
-            Info = new TaskInfo();
+            Info = new TaskInfo(taskSettings);
         }
 
-        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, TaskSettings taskSettings = null)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.DataUpload;
             task.Info.DataType = dataType;
             task.Info.FileName = fileName;
@@ -91,23 +91,23 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateFileUploaderTask(string filePath)
+        public static UploadTask CreateFileUploaderTask(string filePath, TaskSettings taskSettings = null)
         {
             EDataType dataType = Helpers.FindDataType(filePath);
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.FileUpload;
             task.Info.DataType = dataType;
             task.Info.FilePath = filePath;
 
-            if (Program.Settings.FileUploadUseNamePattern)
+            if (task.Info.Settings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
-                task.Info.FileName = TaskHelper.GetFilename(ext);
+                task.Info.FileName = TaskHelper.GetFilename(task.Info.Settings, ext);
             }
 
             task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-            if (dataType == EDataType.Image && Program.Settings.UseImageFormat2FileUpload)
+            if (dataType == EDataType.Image && task.Info.Settings.UseImageFormat2FileUpload)
             {
                 TaskHelper.PrepareFileImage(task);
             }
@@ -115,35 +115,30 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings = null)
+        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
-
-            if (taskSettings != null)
-            {
-                task.Info.Settings = taskSettings;
-            }
+            UploadTask task = new UploadTask(taskSettings);
 
             task.Info.Job = TaskJob.ImageJob;
             task.Info.DataType = EDataType.Image;
-            task.Info.FileName = TaskHelper.GetImageFilename(image);
+            task.Info.FileName = TaskHelper.GetImageFilename(taskSettings, image);
             task.tempImage = image;
             return task;
         }
 
-        public static UploadTask CreateTextUploaderTask(string text)
+        public static UploadTask CreateTextUploaderTask(string text, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename("txt");
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, "txt");
             task.tempText = text;
             return task;
         }
 
-        public static UploadTask CreateURLShortenerTask(string url)
+        public static UploadTask CreateURLShortenerTask(string url, TaskSettings taskSettings = null)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.ShortenURL;
             task.Info.DataType = EDataType.URL;
             task.Info.FileName = "URL shorten";
@@ -219,7 +214,7 @@ namespace ShareX
         {
             Info.StartTime = DateTime.UtcNow;
 
-            DoThreadJob();
+            DoThreadJob(Info.Settings);
 
             if (Info.IsUploadJob)
             {
@@ -325,24 +320,24 @@ namespace ShareX
             return isError;
         }
 
-        private void DoThreadJob()
+        private void DoThreadJob(TaskSettings taskSettings)
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Program.Settings.WatermarkConfig != null)
+                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.Settings.WatermarkConfig != null)
                 {
-                    WatermarkManager watermarkManager = new WatermarkManager(Program.Settings.WatermarkConfig);
+                    WatermarkManager watermarkManager = new WatermarkManager(Info.Settings.WatermarkConfig);
                     watermarkManager.ApplyWatermark(tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
                 {
-                    tempImage = CaptureHelpers.DrawBorder(tempImage, Program.Settings.BorderType, Program.Settings.BorderColor, Program.Settings.BorderSize);
+                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.Settings.BorderType, Info.Settings.BorderColor, Info.Settings.BorderSize);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
                 {
-                    tempImage = TaskHelper.DrawShadow(tempImage);
+                    tempImage = TaskHelper.DrawShadow(taskSettings, tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
@@ -366,7 +361,7 @@ namespace ShareX
                 {
                     using (tempImage)
                     {
-                        ImageData imageData = TaskHelper.PrepareImage(tempImage);
+                        ImageData imageData = TaskHelper.PrepareImage(tempImage, taskSettings);
                         Data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
@@ -406,10 +401,10 @@ namespace ShareX
                             ClipboardHelper.CopyText(Info.FilePath);
                         }
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
+                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.Settings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
-                            var actions = Program.Settings.ExternalPrograms.Where(x => x.IsActive);
+                            var actions = Info.Settings.ExternalPrograms.Where(x => x.IsActive);
 
                             if (actions.Count() > 0)
                             {

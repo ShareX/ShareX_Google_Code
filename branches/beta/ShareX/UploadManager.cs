@@ -110,18 +110,18 @@ namespace ShareX
             }
         }
 
-        public static void ClipboardUpload()
+        public static void ClipboardUpload(TaskSettings taskSettings)
         {
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
                 AfterCaptureTasks tasks;
 
-                if (Program.Settings.ClipboardUploadUseAfterCaptureTasks)
+                if (taskSettings.ClipboardUploadUseAfterCaptureTasks)
                 {
                     tasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.CopyImageToClipboard);
 
-                    if (Program.Settings.ClipboardUploadExcludeImageEffects)
+                    if (taskSettings.ClipboardUploadExcludeImageEffects)
                     {
                         tasks = tasks.Remove(AfterCaptureTasks.AddWatermark | AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
                     }
@@ -142,38 +142,38 @@ namespace ShareX
             {
                 string text = Clipboard.GetText();
 
-                if (Program.Settings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
+                if (taskSettings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
                 {
                     ShortenURL(text.Trim());
                 }
                 else
                 {
-                    UploadText(text);
+                    UploadText(text, taskSettings);
                 }
             }
         }
 
-        public static void ClipboardUploadWithContentViewer()
+        public static void ClipboardUploadWithContentViewer(TaskSettings taskSettings)
         {
-            if (Program.Settings.ShowClipboardContentViewer)
+            if (taskSettings.ShowClipboardContentViewer)
             {
                 using (ClipboardContentViewer ccv = new ClipboardContentViewer())
                 {
                     if (ccv.ShowDialog() == DialogResult.OK && !ccv.IsClipboardEmpty)
                     {
-                        UploadManager.ClipboardUpload();
+                        UploadManager.ClipboardUpload(taskSettings);
                     }
 
-                    Program.Settings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
+                    taskSettings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
                 }
             }
             else
             {
-                UploadManager.ClipboardUpload();
+                UploadManager.ClipboardUpload(taskSettings);
             }
         }
 
-        public static void DragDropUpload(IDataObject data)
+        public static void DragDropUpload(IDataObject data, TaskSettings taskSettings)
         {
             if (data.GetDataPresent(DataFormats.FileDrop, false))
             {
@@ -188,7 +188,7 @@ namespace ShareX
             else if (data.GetDataPresent(DataFormats.Text, false))
             {
                 string text = data.GetData(DataFormats.Text, false) as string;
-                UploadText(text);
+                UploadText(text, taskSettings);
             }
         }
 
@@ -219,11 +219,11 @@ namespace ShareX
             }
         }
 
-        public static void UploadText(string text)
+        public static void UploadText(string text, TaskSettings taskSettings)
         {
             if (!string.IsNullOrEmpty(text))
             {
-                UploadTask task = UploadTask.CreateTextUploaderTask(text);
+                UploadTask task = UploadTask.CreateTextUploaderTask(text, taskSettings);
                 TaskManager.Start(task);
             }
         }

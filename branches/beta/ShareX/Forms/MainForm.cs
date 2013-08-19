@@ -73,7 +73,7 @@ namespace ShareX
 
             DebugHelper.WriteLine("Startup time: {0}ms", Program.StartTimer.ElapsedMilliseconds);
 
-            UseCommandLineArgs(Environment.GetCommandLineArgs());
+            UseCommandLineArgs(Environment.GetCommandLineArgs(), Program.Settings.DefaultTaskSettings);
         }
 
         private void AfterShownJobs()
@@ -328,12 +328,15 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
-            if (Program.Settings.WatchFolderEnabled)
+            foreach (HotkeySetting hotkey in Program.Settings.HotkeyList)
             {
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                if (hotkey.TaskSettings.WatchFolderEnabled)
                 {
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
-                    watchFolder.Enable();
+                    foreach (WatchFolder watchFolder in hotkey.TaskSettings.WatchFolderList)
+                    {
+                        watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
+                        watchFolder.Enable();
+                    }
                 }
             }
         }
@@ -404,7 +407,7 @@ namespace ShareX
             Close();
         }
 
-        public void UseCommandLineArgs(string[] args)
+        public void UseCommandLineArgs(string[] args, TaskSettings taskSettings)
         {
             if (args != null && args.Length > 1)
             {
@@ -412,7 +415,7 @@ namespace ShareX
                 {
                     if (args[i].Equals("-clipboardupload", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        UploadManager.ClipboardUpload();
+                        UploadManager.ClipboardUpload(taskSettings);
                     }
                     else if (args[i][0] != '-')
                     {
@@ -485,9 +488,9 @@ namespace ShareX
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
-        private void DoScreenRecorder(bool isHotkey = false)
+        private void DoScreenRecorder(TaskSettings taskSettings, bool isHotkey = false)
         {
-            ScreenRecordForm form = ScreenRecordForm.Instance;
+            ScreenRecordForm form = ScreenRecordForm.Instance(taskSettings);
 
             if (form.IsRecording)
             {
@@ -495,7 +498,7 @@ namespace ShareX
             }
             else
             {
-                if (isHotkey && Program.Settings.ScreenRecorderHotkeyStartInstantly)
+                if (isHotkey && taskSettings.ScreenRecorderHotkeyStartInstantly)
                 {
                     if (form.Visible)
                     {
@@ -504,7 +507,7 @@ namespace ShareX
                     else
                     {
                         form.Show();
-                        form.StartRecording();
+                        form.StartRecording(taskSettings);
                     }
                 }
                 else
@@ -514,9 +517,9 @@ namespace ShareX
             }
         }
 
-        private void OpenAutoCapture()
+        private void OpenAutoCapture(TaskSettings taskSettings)
         {
-            AutoCapture autoCaptureForm = new AutoCapture();
+            AutoCapture autoCaptureForm = new AutoCapture(taskSettings);
             autoCaptureForm.Icon = Icon;
             autoCaptureForm.Show();
         }
@@ -580,12 +583,12 @@ namespace ShareX
 
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
-            UploadManager.DragDropUpload(e.Data);
+            UploadManager.DragDropUpload(e.Data, Program.Settings.DefaultTaskSettings);
         }
 
         private void tsbClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadWithContentViewer(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
@@ -617,7 +620,7 @@ namespace ShareX
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadText(Program.ApplicationName + " text upload test");
+            UploadManager.UploadText(Program.ApplicationName + " text upload test", Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
@@ -641,17 +644,17 @@ namespace ShareX
 
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
-            new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
+            new RegionCapturePreview(Program.Settings.DefaultTaskSettings.SurfaceOptions).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            DoScreenRecorder();
+            DoScreenRecorder(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
         {
-            OpenAutoCapture();
+            OpenAutoCapture(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
@@ -707,16 +710,28 @@ namespace ShareX
             }
         }
 
-        private void tsbSettings_Click(object sender, EventArgs e)
+        private void tsbAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm() { Icon = this.Icon }.ShowDialog();
+        }
+
+        private void tsmiDefaultWorkflowSettings_Click(object sender, EventArgs e)
+        {
+            using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
+            {
+                Description = "Default Hotkey Settings",
+                TaskSettings = Program.Settings.DefaultTaskSettings
+            }))
+            {
+                dlg.ShowDialog();
+            }
+        }
+
+        private void tsmiApplicationSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm() { Icon = this.Icon }.ShowDialog();
             UploadManager.UpdateProxySettings();
             Program.Settings.SaveAsync();
-        }
-
-        private void tsbAbout_Click(object sender, EventArgs e)
-        {
-            new AboutForm() { Icon = this.Icon }.ShowDialog();
         }
 
         private void tsbDonate_Click(object sender, EventArgs e)
@@ -770,7 +785,7 @@ namespace ShareX
                     uim.CopyURL();
                     break;
                 case Keys.Control | Keys.V:
-                    UploadManager.ClipboardUploadWithContentViewer();
+                    UploadManager.ClipboardUploadWithContentViewer(Program.Settings.DefaultTaskSettings);
                     break;
                 case Keys.Delete:
                     RemoveSelectedItems();
@@ -787,7 +802,7 @@ namespace ShareX
             switch (e.Button)
             {
                 case MouseButtons.Middle:
-                    CaptureScreenshot(CaptureType.Rectangle, false);
+                    CaptureScreenshot(CaptureType.Rectangle, Program.Settings.DefaultTaskSettings, false);
                     break;
             }
         }
@@ -967,7 +982,7 @@ namespace ShareX
 
         private void tsmiClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadWithContentViewer(Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)

@@ -42,10 +42,12 @@ namespace ShareX
         private int delay, count, timeleft, percentage;
         private bool waitUploads;
         private Stopwatch stopwatch = new Stopwatch();
+        private TaskSettings taskSettings;
 
-        public AutoCapture()
+        public AutoCapture(TaskSettings taskSettings)
         {
             InitializeComponent();
+            this.taskSettings = taskSettings;
             niTray.Icon = Icon.FromHandle(Resources.clock_plus.GetHicon());
 
             timer = new Timer();
@@ -96,10 +98,10 @@ namespace ShareX
             }
         }
 
-        private void SelectRegion()
+        private void SelectRegion(TaskSettings taskSettings)
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(out rect))
+            if (TaskHelper.SelectRegion(taskSettings, out rect))
             {
                 UpdateRegion(rect);
             }
@@ -158,7 +160,7 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SelectRegion();
+            SelectRegion(taskSettings);
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)
