@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
@@ -58,7 +57,6 @@
             this.txtSaveImageSubFolderPattern = new System.Windows.Forms.TextBox();
             this.cbUseCustomHistoryPath = new System.Windows.Forms.CheckBox();
             this.btnBrowseCustomUploadersConfigPath = new System.Windows.Forms.Button();
-            this.tpHotkeys = new System.Windows.Forms.TabPage();
             this.tpProxy = new System.Windows.Forms.TabPage();
             this.lblProxyNote = new System.Windows.Forms.Label();
             this.cbProxyMethod = new System.Windows.Forms.ComboBox();
@@ -85,13 +83,14 @@
             this.tpWatchFolder = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
+            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
-            this.hmHotkeys = new ShareX.HotkeyManagerControl();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
-            this.tpHotkeys.SuspendLayout();
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
             this.tpDebug.SuspendLayout();
@@ -99,29 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.tpWatchFolder.SuspendLayout();
             this.SuspendLayout();
-
-            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-
-            // 
-            // chWatchFolderFolderPath
-            // 
-            this.chWatchFolderFolderPath.DisplayIndex = 0;
-            this.chWatchFolderFolderPath.Text = "Folder path";
-            this.chWatchFolderFolderPath.Width = 300;
-            // 
-            // chWatchFolderFilter
-            // 
-            this.chWatchFolderFilter.DisplayIndex = 1;
-            this.chWatchFolderFilter.Text = "Filter";
-            this.chWatchFolderFilter.Width = 100;
-            // 
-            // chWatchFolderIncludeSubdirectories
-            // 
-            this.chWatchFolderIncludeSubdirectories.DisplayIndex = 2;
-            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
-
             // 
             // cbPlaySoundAfterUpload
             // 
@@ -138,7 +114,6 @@
             // 
             this.tcSettings.Controls.Add(this.tpGeneral);
             this.tcSettings.Controls.Add(this.tpPaths);
-            this.tcSettings.Controls.Add(this.tpHotkeys);
             this.tcSettings.Controls.Add(this.tpProxy);
             this.tcSettings.Controls.Add(this.tpDebug);
             this.tcSettings.Controls.Add(this.tpUpload);
@@ -149,7 +124,6 @@
             this.tcSettings.SelectedIndex = 0;
             this.tcSettings.Size = new System.Drawing.Size(530, 507);
             this.tcSettings.TabIndex = 0;
-            this.tcSettings.SelectedIndexChanged += new System.EventHandler(this.tcSettings_SelectedIndexChanged);
             // 
             // tpGeneral
             // 
@@ -447,16 +421,6 @@
             this.btnBrowseCustomUploadersConfigPath.UseVisualStyleBackColor = true;
             this.btnBrowseCustomUploadersConfigPath.Click += new System.EventHandler(this.btnBrowseCustomUploadersConfigPath_Click);
             // 
-            // tpHotkeys
-            // 
-            this.tpHotkeys.Controls.Add(this.hmHotkeys);
-            this.tpHotkeys.Location = new System.Drawing.Point(4, 22);
-            this.tpHotkeys.Name = "tpHotkeys";
-            this.tpHotkeys.Size = new System.Drawing.Size(522, 481);
-            this.tpHotkeys.TabIndex = 2;
-            this.tpHotkeys.Text = "Hotkeys";
-            this.tpHotkeys.UseVisualStyleBackColor = true;
-            // 
             // tpProxy
             // 
             this.tpProxy.Controls.Add(this.lblProxyNote);
@@ -736,6 +700,10 @@
             // 
             // lvWatchFolderList
             // 
+            this.lvWatchFolderList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chWatchFolderFolderPath,
+            this.chWatchFolderFilter,
+            this.chWatchFolderIncludeSubdirectories});
             this.lvWatchFolderList.FullRowSelect = true;
             this.lvWatchFolderList.Location = new System.Drawing.Point(16, 72);
             this.lvWatchFolderList.Name = "lvWatchFolderList";
@@ -743,10 +711,20 @@
             this.lvWatchFolderList.TabIndex = 7;
             this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
             this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
-            this.lvWatchFolderList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chWatchFolderFolderPath,
-            this.chWatchFolderFilter,
-            this.chWatchFolderIncludeSubdirectories});
+            // 
+            // chWatchFolderFolderPath
+            // 
+            this.chWatchFolderFolderPath.Text = "Folder path";
+            this.chWatchFolderFolderPath.Width = 300;
+            // 
+            // chWatchFolderFilter
+            // 
+            this.chWatchFolderFilter.Text = "Filter";
+            this.chWatchFolderFilter.Width = 100;
+            // 
+            // chWatchFolderIncludeSubdirectories
+            // 
+            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
             // 
             // btnWatchFolderRemove
             // 
@@ -768,15 +746,6 @@
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
             // 
-            // hmHotkeys
-            // 
-            this.hmHotkeys.AutoScroll = true;
-            this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
-            this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(522, 481);
-            this.hmHotkeys.TabIndex = 0;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -797,7 +766,6 @@
             this.tpGeneral.PerformLayout();
             this.tpPaths.ResumeLayout(false);
             this.tpPaths.PerformLayout();
-            this.tpHotkeys.ResumeLayout(false);
             this.tpProxy.ResumeLayout(false);
             this.tpProxy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
@@ -833,8 +801,6 @@
         private System.Windows.Forms.CheckBox cbUseCustomUploadersConfigPath;
         private System.Windows.Forms.Button btnLoadUploadersConfig;
         private System.Windows.Forms.CheckBox cbShowTray;
-        private System.Windows.Forms.TabPage tpHotkeys;
-        private HotkeyManagerControl hmHotkeys;
         private System.Windows.Forms.Label lblGeneralSeparator;
         private System.Windows.Forms.CheckBox cbStartWithWindows;
         private System.Windows.Forms.Label lblSaveImageSubFolderPatternPreview;

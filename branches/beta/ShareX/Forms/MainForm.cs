@@ -724,6 +724,11 @@ namespace ShareX
             }
         }
 
+        private void tsmiWorkflows_Click(object sender, EventArgs e)
+        {
+            new WorkflowsForm() { Icon = this.Icon }.Show();
+        }
+
         private void tsmiApplicationSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm() { Icon = this.Icon }.ShowDialog();
@@ -1002,6 +1007,7 @@ namespace ShareX
 
         #endregion UploadInfoMenu events
 
+  
         #endregion Form events
     }
 }

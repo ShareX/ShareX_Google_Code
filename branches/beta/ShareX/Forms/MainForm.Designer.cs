@@ -98,8 +98,9 @@ namespace ShareX
             this.tsbHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbSettings = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmiDefaultWorkflowSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiApplicationSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDefaultWorkflowSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiWorkflows = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
             this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
@@ -609,8 +610,9 @@ namespace ShareX
             // tsbSettings
             // 
             this.tsbSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiApplicationSettings,
             this.tsmiDefaultWorkflowSettings,
-            this.tsmiApplicationSettings});
+            this.tsmiWorkflows});
             this.tsbSettings.Image = global::ShareX.Properties.Resources.application_form;
             this.tsbSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsbSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -618,22 +620,30 @@ namespace ShareX
             this.tsbSettings.Size = new System.Drawing.Size(147, 20);
             this.tsbSettings.Text = "Settings";
             // 
-            // tsmiDefaultWorkflowSettings
-            // 
-            this.tsmiDefaultWorkflowSettings.Name = "tsmiDefaultWorkflowSettings";
-            this.tsmiDefaultWorkflowSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.tsmiDefaultWorkflowSettings.Size = new System.Drawing.Size(262, 22);
-            this.tsmiDefaultWorkflowSettings.Text = "Default workflow settings...";
-            this.tsmiDefaultWorkflowSettings.Click += new System.EventHandler(this.tsmiDefaultWorkflowSettings_Click);
-            // 
             // tsmiApplicationSettings
             // 
             this.tsmiApplicationSettings.Image = global::ShareX.Properties.Resources.gear;
             this.tsmiApplicationSettings.Name = "tsmiApplicationSettings";
             this.tsmiApplicationSettings.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.tsmiApplicationSettings.Size = new System.Drawing.Size(262, 22);
+            this.tsmiApplicationSettings.Size = new System.Drawing.Size(242, 22);
             this.tsmiApplicationSettings.Text = "Application settings...";
             this.tsmiApplicationSettings.Click += new System.EventHandler(this.tsmiApplicationSettings_Click);
+            // 
+            // tsmiDefaultWorkflowSettings
+            // 
+            this.tsmiDefaultWorkflowSettings.Name = "tsmiDefaultWorkflowSettings";
+            this.tsmiDefaultWorkflowSettings.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.tsmiDefaultWorkflowSettings.Size = new System.Drawing.Size(242, 22);
+            this.tsmiDefaultWorkflowSettings.Text = "Default workflow settings...";
+            this.tsmiDefaultWorkflowSettings.Click += new System.EventHandler(this.tsmiDefaultWorkflowSettings_Click);
+            // 
+            // tsmiWorkflows
+            // 
+            this.tsmiWorkflows.Name = "tsmiWorkflows";
+            this.tsmiWorkflows.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.tsmiWorkflows.Size = new System.Drawing.Size(242, 22);
+            this.tsmiWorkflows.Text = "Workflows...";
+            this.tsmiWorkflows.Click += new System.EventHandler(this.tsmiWorkflows_Click);
             // 
             // tsbAbout
             // 
@@ -1636,5 +1646,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayAutoCapture;
         private System.Windows.Forms.ToolStripMenuItem tsmiDefaultWorkflowSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiApplicationSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiWorkflows;
     }
 }

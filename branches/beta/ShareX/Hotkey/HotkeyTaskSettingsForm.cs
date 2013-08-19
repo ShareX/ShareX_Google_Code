@@ -51,6 +51,7 @@ namespace ShareX
             Setting = hotkeySetting;
 
             tbDescription.Text = hotkeySetting.Description;
+            Text = Application.ProductName + " - " + hotkeySetting.Description + " - workflow settings"; 
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;
             cbUseDefaultAfterUploadSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterUploadJob;
             cbUseDefaultDestinationSettings.Checked = hotkeySetting.TaskSettings.UseDefaultDestinations;

@@ -47,15 +47,6 @@ namespace ShareX
             InitializeComponent();
             LoadSettings();
 
-            if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
-            {
-                hmHotkeys.PrepareHotkeys(Program.MainForm.HotkeyManager);
-            }
-            else
-            {
-                tcSettings.TabPages.Remove(tpHotkeys);
-            }
-
             loaded = true;
         }
 
@@ -154,14 +145,6 @@ namespace ShareX
                     txtProxyUsername.Enabled = txtProxyPassword.Enabled = true;
                     txtProxyHost.Enabled = nudProxyPort.Enabled = cbProxyType.Enabled = false;
                     break;
-            }
-        }
-
-        private void tcSettings_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcSettings.SelectedTab == tpHotkeys)
-            {
-                hmHotkeys.Focus();
             }
         }
 
