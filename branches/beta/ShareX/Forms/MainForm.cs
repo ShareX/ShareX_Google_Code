@@ -627,7 +627,7 @@ namespace ShareX
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
         {
-            UploadManager.ShortenURL(Links.URL_WEBSITE);
+            UploadManager.ShortenURL(Links.URL_WEBSITE, Program.Settings.DefaultTaskSettings);
         }
 
         private void tsmiTestUploaders_Click(object sender, EventArgs e)
@@ -716,7 +716,7 @@ namespace ShareX
         {
             using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
             {
-                Description = "Default Hotkey Settings",
+                Description = "Default",
                 TaskSettings = Program.Settings.DefaultTaskSettings
             }))
             {

@@ -97,8 +97,6 @@ namespace ShareX
 
         public async void StartRecording(TaskSettings taskSettings)
         {
-            if (taskSettings == null) taskSettings = Program.Settings.DefaultTaskSettings;
-
             if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
             {
                 if (!Visible) this.ShowActivate();

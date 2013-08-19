@@ -173,9 +173,6 @@ namespace ShareX
 
             Image img = null;
 
-            if (taskSettings == null)
-                taskSettings = Program.Settings.DefaultTaskSettings;
-
             try
             {
                 Screenshot.CaptureCursor = taskSettings.ShowCursor;
@@ -253,9 +250,6 @@ namespace ShareX
                 Image img = null;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
 
-                if (taskSettings == null)
-                    taskSettings = Program.Settings.DefaultTaskSettings;
-
                 if (taskSettings.CaptureTransparent && !taskSettings.CaptureClientArea)
                 {
                     img = Screenshot.CaptureActiveWindowTransparent();
@@ -284,9 +278,6 @@ namespace ShareX
 
                 NativeMethods.SetForegroundWindow(handle);
                 Thread.Sleep(250);
-
-                if (taskSettings == null)
-                    taskSettings = Program.Settings.DefaultTaskSettings;
 
                 if (taskSettings.CaptureTransparent && !taskSettings.CaptureClientArea)
                 {

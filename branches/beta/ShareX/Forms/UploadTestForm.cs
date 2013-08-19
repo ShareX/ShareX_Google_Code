@@ -147,7 +147,7 @@ namespace ShareX
             {
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL);
+                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL, Program.Settings.DefaultTaskSettings);
                 task.Info.Settings.URLShortenerDestination = uploader;
 
                 lvi.Tag = task;

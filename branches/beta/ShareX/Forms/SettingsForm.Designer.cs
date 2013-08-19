@@ -31,7 +31,6 @@
             this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
-            this.btnDefaultHotkeySettings = new System.Windows.Forms.Button();
             this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
             this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
             this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
@@ -127,7 +126,6 @@
             // 
             // tpGeneral
             // 
-            this.tpGeneral.Controls.Add(this.btnDefaultHotkeySettings);
             this.tpGeneral.Controls.Add(this.cbShellContextMenu);
             this.tpGeneral.Controls.Add(this.cbShowAfterCaptureTasksForm);
             this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
@@ -146,16 +144,6 @@
             this.tpGeneral.TabIndex = 0;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
-            // 
-            // btnDefaultHotkeySettings
-            // 
-            this.btnDefaultHotkeySettings.Location = new System.Drawing.Point(16, 280);
-            this.btnDefaultHotkeySettings.Name = "btnDefaultHotkeySettings";
-            this.btnDefaultHotkeySettings.Size = new System.Drawing.Size(107, 23);
-            this.btnDefaultHotkeySettings.TabIndex = 2;
-            this.btnDefaultHotkeySettings.Text = "Default Settings...";
-            this.btnDefaultHotkeySettings.UseVisualStyleBackColor = true;
-            this.btnDefaultHotkeySettings.Click += new System.EventHandler(this.btnDefaultHotkeySettings_Click);
             // 
             // cbShellContextMenu
             // 
@@ -835,7 +823,6 @@
         private System.Windows.Forms.Label lblUploadLimitHint;
         private System.Windows.Forms.Label lblBufferSize;
         private System.Windows.Forms.NumericUpDown nudUploadLimit;
-        private System.Windows.Forms.Button btnDefaultHotkeySettings;
         private System.Windows.Forms.TabPage tpWatchFolder;
         private System.Windows.Forms.CheckBox cbWatchFolderEnabled;
         private System.Windows.Forms.ListView lvWatchFolderList;

@@ -144,7 +144,7 @@ namespace ShareX
 
                 if (taskSettings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
                 {
-                    ShortenURL(text.Trim());
+                    ShortenURL(text.Trim(), taskSettings);
                 }
                 else
                 {
@@ -228,20 +228,20 @@ namespace ShareX
             }
         }
 
-        public static void UploadImageStream(Stream stream, string filename)
+        public static void UploadImageStream(Stream stream, string filename, TaskSettings taskSettings)
         {
             if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filename))
             {
-                UploadTask task = UploadTask.CreateDataUploaderTask(EDataType.Image, stream, filename);
+                UploadTask task = UploadTask.CreateDataUploaderTask(EDataType.Image, stream, filename, taskSettings);
                 TaskManager.Start(task);
             }
         }
 
-        public static void ShortenURL(string url)
+        public static void ShortenURL(string url, TaskSettings taskSettings)
         {
             if (!string.IsNullOrEmpty(url))
             {
-                UploadTask task = UploadTask.CreateURLShortenerTask(url);
+                UploadTask task = UploadTask.CreateURLShortenerTask(url, taskSettings);
                 TaskManager.Start(task);
             }
         }

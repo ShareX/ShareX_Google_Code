@@ -331,18 +331,6 @@ namespace ShareX
 
         #endregion Proxy
 
-        private void btnDefaultHotkeySettings_Click(object sender, EventArgs e)
-        {
-            using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
-            {
-                Description = "Default workflow settings",
-                TaskSettings = Program.Settings.DefaultTaskSettings
-            }))
-            {
-                dlg.ShowDialog();
-            }
-        }
-
         private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
         {
             if (loaded)

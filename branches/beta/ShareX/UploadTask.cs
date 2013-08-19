@@ -81,7 +81,7 @@ namespace ShareX
             Info = new TaskInfo(taskSettings);
         }
 
-        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, TaskSettings taskSettings = null)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, TaskSettings taskSettings)
         {
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.DataUpload;
@@ -136,7 +136,7 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateURLShortenerTask(string url, TaskSettings taskSettings = null)
+        public static UploadTask CreateURLShortenerTask(string url, TaskSettings taskSettings)
         {
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.ShortenURL;
