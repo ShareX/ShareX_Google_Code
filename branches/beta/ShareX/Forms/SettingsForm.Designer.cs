@@ -70,8 +70,6 @@
             this.txtProxyPassword = new System.Windows.Forms.TextBox();
             this.lblProxyUsername = new System.Windows.Forms.Label();
             this.txtProxyUsername = new System.Windows.Forms.TextBox();
-            this.tpDebug = new System.Windows.Forms.TabPage();
-            this.txtDebugLog = new System.Windows.Forms.TextBox();
             this.tpUpload = new System.Windows.Forms.TabPage();
             this.lblUploadLimit = new System.Windows.Forms.Label();
             this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
@@ -92,7 +90,6 @@
             this.tpPaths.SuspendLayout();
             this.tpProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).BeginInit();
-            this.tpDebug.SuspendLayout();
             this.tpUpload.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.tpWatchFolders.SuspendLayout();
@@ -114,7 +111,6 @@
             this.tcSettings.Controls.Add(this.tpGeneral);
             this.tcSettings.Controls.Add(this.tpPaths);
             this.tcSettings.Controls.Add(this.tpProxy);
-            this.tcSettings.Controls.Add(this.tpDebug);
             this.tcSettings.Controls.Add(this.tpUpload);
             this.tcSettings.Controls.Add(this.tpWatchFolders);
             this.tcSettings.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -559,28 +555,6 @@
             this.txtProxyUsername.TabIndex = 3;
             this.txtProxyUsername.TextChanged += new System.EventHandler(this.txtProxyUsername_TextChanged);
             // 
-            // tpDebug
-            // 
-            this.tpDebug.Controls.Add(this.txtDebugLog);
-            this.tpDebug.Location = new System.Drawing.Point(4, 22);
-            this.tpDebug.Name = "tpDebug";
-            this.tpDebug.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDebug.Size = new System.Drawing.Size(522, 481);
-            this.tpDebug.TabIndex = 8;
-            this.tpDebug.Text = "Debug";
-            this.tpDebug.UseVisualStyleBackColor = true;
-            // 
-            // txtDebugLog
-            // 
-            this.txtDebugLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDebugLog.Location = new System.Drawing.Point(3, 3);
-            this.txtDebugLog.Multiline = true;
-            this.txtDebugLog.Name = "txtDebugLog";
-            this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebugLog.Size = new System.Drawing.Size(516, 475);
-            this.txtDebugLog.TabIndex = 0;
-            this.txtDebugLog.WordWrap = false;
-            // 
             // tpUpload
             // 
             this.tpUpload.Controls.Add(this.lblUploadLimit);
@@ -757,8 +731,6 @@
             this.tpProxy.ResumeLayout(false);
             this.tpProxy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudProxyPort)).EndInit();
-            this.tpDebug.ResumeLayout(false);
-            this.tpDebug.PerformLayout();
             this.tpUpload.ResumeLayout(false);
             this.tpUpload.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
@@ -779,8 +751,6 @@
         private System.Windows.Forms.CheckBox cbUseCustomHistoryPath;
         private System.Windows.Forms.CheckBox cbHistorySave;
         private System.Windows.Forms.Button btnBrowseCustomHistoryPath;
-        private System.Windows.Forms.TabPage tpDebug;
-        private System.Windows.Forms.TextBox txtDebugLog;
         private System.Windows.Forms.Button btnOpenPersonalFolder;
         private System.Windows.Forms.Button btnBrowseCustomUploadersConfigPath;
         private System.Windows.Forms.TextBox txtCustomUploadersConfigPath;

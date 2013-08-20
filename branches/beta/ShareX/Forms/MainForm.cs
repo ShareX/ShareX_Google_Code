@@ -736,6 +736,12 @@ namespace ShareX
             Program.Settings.SaveAsync();
         }
 
+        private void tsmiHelpDebug_Click(object sender, EventArgs e)
+        {
+            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
+            dlg.Show();
+        }
+
         private void tsbDonate_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_DONATE);
@@ -1021,6 +1027,8 @@ namespace ShareX
         }
 
         #endregion UploadInfoMenu events
+
+
 
         #endregion Form events
     }

@@ -101,7 +101,9 @@ namespace ShareX
             this.tsmiApplicationSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiWorkflows = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDefaultWorkflowSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsddbHelp = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHelpDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbDonate = new System.Windows.Forms.ToolStripButton();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lblSplitter2 = new System.Windows.Forms.Label();
@@ -204,6 +206,7 @@ namespace ShareX
             this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
+            this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -232,7 +235,7 @@ namespace ShareX
             this.tsbHistory,
             this.tsbImageHistory,
             this.tsbSettings,
-            this.tsbAbout,
+            this.tsddbHelp,
             this.tsbDonate});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
@@ -648,15 +651,35 @@ namespace ShareX
             this.tsmiDefaultWorkflowSettings.Text = "Default workflow settings...";
             this.tsmiDefaultWorkflowSettings.Click += new System.EventHandler(this.tsmiDefaultWorkflowSettings_Click);
             // 
-            // tsbAbout
+            // tsddbHelp
             // 
-            this.tsbAbout.Image = global::ShareX.Properties.Resources.application_browser;
-            this.tsbAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAbout.Name = "tsbAbout";
-            this.tsbAbout.Size = new System.Drawing.Size(147, 20);
-            this.tsbAbout.Text = "About...";
-            this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
+            this.tsddbHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiAbout,
+            this.tsmiHelpDebug});
+            this.tsddbHelp.Image = global::ShareX.Properties.Resources.help;
+            this.tsddbHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsddbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddbHelp.Name = "tsddbHelp";
+            this.tsddbHelp.Size = new System.Drawing.Size(147, 20);
+            this.tsddbHelp.Text = "Help";
+            // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.Image = global::ShareX.Properties.Resources.application_browser;
+            this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAbout.Text = "About...";
+            this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
+            // 
+            // tsmiHelpDebug
+            // 
+            this.tsmiHelpDebug.Image = global::ShareX.Properties.Resources.bug_go;
+            this.tsmiHelpDebug.Name = "tsmiHelpDebug";
+            this.tsmiHelpDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiHelpDebug.Text = "Debug...";
+            this.tsmiHelpDebug.Click += new System.EventHandler(this.tsmiHelpDebug_Click);
             // 
             // tsbDonate
             // 
@@ -1498,6 +1521,12 @@ namespace ShareX
             this.tsmiShowPreview.Text = "Show image preview";
             this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
             // 
+            // ssToolStripMenuItem
+            // 
+            this.ssToolStripMenuItem.Name = "ssToolStripMenuItem";
+            this.ssToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ssToolStripMenuItem.Text = "ss";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1541,7 +1570,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripButton tsbClipboardUpload;
         private System.Windows.Forms.ToolStripButton tsbFileUpload;
         private System.Windows.Forms.ToolStripDropDownButton tsbSettings;
-        private System.Windows.Forms.ToolStripButton tsbAbout;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.ToolStripSeparator tssMain1;
         private System.Windows.Forms.ColumnHeader chSpeed;
         private System.Windows.Forms.ColumnHeader chRemaining;
@@ -1679,5 +1708,8 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayApplicationSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayWorkflows;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDefaultWorkflowSettings;
+        private System.Windows.Forms.ToolStripDropDownButton tsddbHelp;
+        private System.Windows.Forms.ToolStripMenuItem ssToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelpDebug;
     }
 }

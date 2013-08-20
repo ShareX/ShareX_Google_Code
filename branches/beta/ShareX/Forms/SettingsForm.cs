@@ -87,10 +87,6 @@ namespace ShareX
             cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
             UpdateProxyControls();
 
-            // Debug
-            txtDebugLog.Text = Program.MyLogger.Messages.ToString();
-            txtDebugLog.ScrollToCaret();
-
             // Upload / General
             nudUploadLimit.Value = Program.Settings.UploadLimit;
 
