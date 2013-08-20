@@ -49,6 +49,11 @@ namespace ShareX
             Icon = Resources.ShareX;
             Setting = hotkeySetting;
 
+            if (hotkeySetting.Description == "Default")
+            {
+                tcHotkeySettings.TabPages.Remove(tpTask);
+            }
+
             tbDescription.Text = hotkeySetting.Description;
             Text = Application.ProductName + " - " + hotkeySetting.Description + " - workflow settings";
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;

@@ -56,7 +56,7 @@ namespace ShareX
         {
             if (Program.Settings != null)
             {
-                TaskSettings = Program.Settings.DefaultTaskSettings.Copy();
+                TaskSettings = Program.Settings.Workflow.Copy();
             }
             else
             {
