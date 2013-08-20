@@ -50,6 +50,8 @@ namespace ShareX
         public UrlShortenerType URLShortenerDestination;
         public SocialNetworkingService SocialNetworkingServiceDestination;
 
+        public bool UseDefaultWorkflow;
+
         #region Image / Quality
 
         public EImageFormat ImageFormat = EImageFormat.PNG;
@@ -174,6 +176,7 @@ namespace ShareX
             UseDefaultAfterCaptureJob = useDefaultSettings;
             UseDefaultAfterUploadJob = useDefaultSettings;
             UseDefaultDestinations = useDefaultSettings;
+            UseDefaultWorkflow = useDefaultSettings;
         }
 
         public bool SetDefaultSettings(bool forceDefaultSettings = false)

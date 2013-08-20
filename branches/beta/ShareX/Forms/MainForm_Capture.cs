@@ -62,8 +62,16 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
-            TaskSettings taskSettings = hotkeySetting.TaskSettings.Copy();
-            taskSettings.SetDefaultSettings();
+            TaskSettings taskSettings;
+            if (hotkeySetting.TaskSettings.UseDefaultWorkflow)
+            {
+                taskSettings = Program.Settings.Workflow.Copy();
+            }
+            else
+            {
+                taskSettings = hotkeySetting.TaskSettings.Copy();
+                taskSettings.SetDefaultSettings();
+            }
 
             switch (hotkeySetting.Job)
             {

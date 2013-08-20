@@ -81,7 +81,7 @@ namespace ShareX
         #region Hotkeys
 
         public List<HotkeySetting> HotkeyList = new List<HotkeySetting>();
-        public TaskSettings Workflow = new TaskSettings();
+        public TaskSettings Workflow = new TaskSettings(true);
 
         #endregion Hotkeys
 

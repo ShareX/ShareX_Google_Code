@@ -161,6 +161,7 @@
             this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
+            this.chkApplyDefaultWorkflowSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpImage.SuspendLayout();
@@ -1773,12 +1774,24 @@
             this.pgTaskSettings.Size = new System.Drawing.Size(512, 330);
             this.pgTaskSettings.TabIndex = 0;
             // 
+            // chkApplyDefaultWorkflowSettings
+            // 
+            this.chkApplyDefaultWorkflowSettings.AutoSize = true;
+            this.chkApplyDefaultWorkflowSettings.Location = new System.Drawing.Point(16, 376);
+            this.chkApplyDefaultWorkflowSettings.Name = "chkApplyDefaultWorkflowSettings";
+            this.chkApplyDefaultWorkflowSettings.Size = new System.Drawing.Size(171, 17);
+            this.chkApplyDefaultWorkflowSettings.TabIndex = 20;
+            this.chkApplyDefaultWorkflowSettings.Text = "Apply default workflow settings";
+            this.chkApplyDefaultWorkflowSettings.UseVisualStyleBackColor = true;
+            this.chkApplyDefaultWorkflowSettings.CheckedChanged += new System.EventHandler(this.chkApplyDefaultWorkflowSettings_CheckedChanged);
+            // 
             // HotkeyTaskSettingsForm
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 413);
+            this.Controls.Add(this.chkApplyDefaultWorkflowSettings);
             this.Controls.Add(this.tcHotkeySettings);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1835,6 +1848,7 @@
             this.tpUploadClipboard.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1972,6 +1986,7 @@
         private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
         private System.Windows.Forms.TabPage tpAdvanced;
         private System.Windows.Forms.PropertyGrid pgTaskSettings;
+        private System.Windows.Forms.CheckBox chkApplyDefaultWorkflowSettings;
 
 
 

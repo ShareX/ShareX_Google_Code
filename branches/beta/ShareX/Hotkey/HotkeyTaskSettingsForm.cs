@@ -52,6 +52,7 @@ namespace ShareX
             if (hotkeySetting.Description == "Default")
             {
                 tcHotkeySettings.TabPages.Remove(tpTask);
+                chkApplyDefaultWorkflowSettings.Visible = false;
             }
 
             tbDescription.Text = hotkeySetting.Description;
@@ -59,6 +60,7 @@ namespace ShareX
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;
             cbUseDefaultAfterUploadSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterUploadJob;
             cbUseDefaultDestinationSettings.Checked = hotkeySetting.TaskSettings.UseDefaultDestinations;
+            chkApplyDefaultWorkflowSettings.Checked = Setting.TaskSettings.UseDefaultWorkflow;
 
             AddEnumItems<EHotkey>(x => Setting.Job = x, cmsTask);
             AddMultiEnumItems<AfterCaptureTasks>(x => Setting.TaskSettings.AfterCaptureJob = Setting.TaskSettings.AfterCaptureJob.Swap(x), cmsAfterCapture);
@@ -770,6 +772,11 @@ namespace ShareX
         private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
         {
             Setting.TaskSettings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
+        }
+
+        private void chkApplyDefaultWorkflowSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting.TaskSettings.UseDefaultWorkflow = chkApplyDefaultWorkflowSettings.Checked;
         }
     }
 }

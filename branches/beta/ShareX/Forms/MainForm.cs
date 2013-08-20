@@ -832,6 +832,21 @@ namespace ShareX
             ForceClose();
         }
 
+        private void tsmiTrayApplicationSettings_Click(object sender, EventArgs e)
+        {
+            tsmiApplicationSettings_Click(sender, e);
+        }
+
+        private void tsmiTrayWorkflows_Click(object sender, EventArgs e)
+        {
+            tsmiWorkflows_Click(sender, e);
+        }
+
+        private void tsmiTrayDefaultWorkflowSettings_Click(object sender, EventArgs e)
+        {
+            tsmiDefaultWorkflowSettings_Click(sender, e);
+        }
+
         #endregion Tray events
 
         #region UploadInfoMenu events
