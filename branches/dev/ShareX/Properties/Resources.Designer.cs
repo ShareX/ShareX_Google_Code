@@ -153,9 +153,9 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bug_delete {
+        public static System.Drawing.Bitmap bug {
             get {
-                object obj = ResourceManager.GetObject("bug_delete", resourceCulture);
+                object obj = ResourceManager.GetObject("bug", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -362,9 +362,39 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap help {
+        public static System.Drawing.Bitmap hammer {
             get {
-                object obj = ResourceManager.GetObject("help", resourceCulture);
+                object obj = ResourceManager.GetObject("hammer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap hammer__arrow {
+            get {
+                object obj = ResourceManager.GetObject("hammer--arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap hammer__pencil {
+            get {
+                object obj = ResourceManager.GetObject("hammer--pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap hammer_screwdriver {
+            get {
+                object obj = ResourceManager.GetObject("hammer-screwdriver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -525,6 +555,16 @@ namespace ShareX.Properties {
         public static System.Drawing.Bitmap present {
             get {
                 object obj = ResourceManager.GetObject("present", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap question_button {
+            get {
+                object obj = ResourceManager.GetObject("question-button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
