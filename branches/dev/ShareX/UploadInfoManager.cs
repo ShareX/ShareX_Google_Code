@@ -223,7 +223,7 @@ namespace ShareX
 
         internal void CopyUserFormat()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, Program.Settings.ClipboardFormat)));
+            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, x.Info.Settings.UploadSettings.ClipboardFormat)));
         }
 
         #endregion Copy
@@ -266,7 +266,7 @@ namespace ShareX
 
         public void Upload()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.Settings.Workflow);
         }
 
         #endregion Other

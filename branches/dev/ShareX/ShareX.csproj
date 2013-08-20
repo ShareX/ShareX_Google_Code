@@ -191,6 +191,12 @@
     <Compile Include="TaskSettings.cs" />
     <Compile Include="UploadInfoParser.cs" />
     <Compile Include="UploadInfoStatus.cs" />
+    <Compile Include="Forms\WorkflowsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WorkflowsForm.Designer.cs">
+      <DependentUpon>WorkflowsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +254,9 @@
     <Compile Include="UploadManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TaskInfo.cs" />
+    <EmbeddedResource Include="Forms\WorkflowsForm.resx">
+      <DependentUpon>WorkflowsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">
@@ -411,6 +420,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\control-record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bug_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bug_delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

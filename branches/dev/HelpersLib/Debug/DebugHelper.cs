@@ -23,36 +23,42 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 
 namespace HelpersLib
 {
-    public class UploadInfoParser : NameParser
+    public static class DebugHelper
     {
-        public const string HTMLLink = "<a href=\"%url\">%url</a>";
-        public const string HTMLImage = "<img src=\"%url\"/>";
-        public const string HTMLLinkedImage = "<a href=\"%url\"><img src=\"%thumbnailurl\"/></a>";
-        public const string ForumLink = "[url]%url[/url]";
-        public const string ForumImage = "[img]%url[/img]";
-        public const string ForumLinkedImage = "[url=%url][img]%thumbnailurl[/img][/url]";
+        public static Logger MyLogger { private get; set; }
 
-        public string Parse(TaskInfo info, string pattern)
+        public static void WriteLine(string message)
         {
-            pattern = base.Parse(pattern);
-
-            if (info != null)
+            if (MyLogger != null)
             {
-                pattern = pattern.Replace("%url", info.Result.URL);
-                pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
-                pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
-                pattern = pattern.Replace("%localpath", info.FilePath);
+                MyLogger.WriteLine(message);
             }
+            else
+            {
+                Debug.WriteLine(message);
+            }
+        }
 
-            return pattern;
+        public static void WriteLine(string format, params object[] args)
+        {
+            WriteLine(string.Format(format, args));
+        }
+
+        public static void WriteException(Exception e, string message = "Exception")
+        {
+            if (MyLogger != null)
+            {
+                MyLogger.WriteException(e, message);
+            }
+            else
+            {
+                Debug.WriteLine(e);
+            }
         }
     }
 }

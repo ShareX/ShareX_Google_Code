@@ -23,36 +23,50 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 
 namespace HelpersLib
 {
-    public class UploadInfoParser : NameParser
+    public class DebugTimer : IDisposable
     {
-        public const string HTMLLink = "<a href=\"%url\">%url</a>";
-        public const string HTMLImage = "<img src=\"%url\"/>";
-        public const string HTMLLinkedImage = "<a href=\"%url\"><img src=\"%thumbnailurl\"/></a>";
-        public const string ForumLink = "[url]%url[/url]";
-        public const string ForumImage = "[img]%url[/img]";
-        public const string ForumLinkedImage = "[url=%url][img]%thumbnailurl[/img][/url]";
+        private Stopwatch timer;
+        private string text;
 
-        public string Parse(TaskInfo info, string pattern)
+        public DebugTimer()
         {
-            pattern = base.Parse(pattern);
+            timer = Stopwatch.StartNew();
+        }
 
-            if (info != null)
+        public DebugTimer(string text)
+        {
+            this.text = text;
+            timer = Stopwatch.StartNew();
+        }
+
+        private void Write(string text, string timeText)
+        {
+            if (!string.IsNullOrEmpty(text))
             {
-                pattern = pattern.Replace("%url", info.Result.URL);
-                pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
-                pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
-                pattern = pattern.Replace("%localpath", info.FilePath);
+                timeText = text + ": " + timeText;
             }
 
-            return pattern;
+            Debug.WriteLine(timeText);
+        }
+
+        public void WriteElapsedSeconds(string text = "")
+        {
+            Write(text, timer.Elapsed.TotalSeconds + " seconds.");
+        }
+
+        public void WriteElapsedMiliseconds(string text = "")
+        {
+            Write(text, timer.ElapsedMilliseconds + " miliseconds.");
+        }
+
+        public void Dispose()
+        {
+            WriteElapsedMiliseconds(text);
         }
     }
 }

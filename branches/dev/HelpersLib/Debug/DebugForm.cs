@@ -23,36 +23,27 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public class UploadInfoParser : NameParser
+    public partial class DebugForm : Form
     {
-        public const string HTMLLink = "<a href=\"%url\">%url</a>";
-        public const string HTMLImage = "<img src=\"%url\"/>";
-        public const string HTMLLinkedImage = "<a href=\"%url\"><img src=\"%thumbnailurl\"/></a>";
-        public const string ForumLink = "[url]%url[/url]";
-        public const string ForumImage = "[img]%url[/img]";
-        public const string ForumLinkedImage = "[url=%url][img]%thumbnailurl[/img][/url]";
-
-        public string Parse(TaskInfo info, string pattern)
+        public DebugForm(string appName, Logger MyLogger)
         {
-            pattern = base.Parse(pattern);
+            InitializeComponent();
 
-            if (info != null)
-            {
-                pattern = pattern.Replace("%url", info.Result.URL);
-                pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
-                pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
-                pattern = pattern.Replace("%localpath", info.FilePath);
-            }
-
-            return pattern;
+            this.Text = appName + " - Debug log";
+            txtDebugLog.Text = MyLogger.Messages.ToString();
+            txtDebugLog.SelectionStart = txtDebugLog.TextLength;
+            txtDebugLog.ScrollToCaret();
         }
     }
 }

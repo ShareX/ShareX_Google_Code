@@ -111,9 +111,12 @@ namespace ShareX
 
         public UploadResult Result { get; set; }
 
-        public TaskInfo()
+        public TaskInfo(TaskSettings taskSettings)
         {
-            Settings = new TaskSettings();
+            if (taskSettings == null)
+                taskSettings = new TaskSettings();
+
+            Settings = taskSettings;
             Result = new UploadResult();
         }
 

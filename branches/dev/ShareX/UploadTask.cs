@@ -75,15 +75,15 @@ namespace ShareX
 
         #region Constructors
 
-        private UploadTask()
+        private UploadTask(TaskSettings taskSettings)
         {
             Status = TaskStatus.InQueue;
-            Info = new TaskInfo();
+            Info = new TaskInfo(taskSettings);
         }
 
-        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.DataUpload;
             task.Info.DataType = dataType;
             task.Info.FileName = fileName;
@@ -91,23 +91,23 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateFileUploaderTask(string filePath)
+        public static UploadTask CreateFileUploaderTask(string filePath, TaskSettings taskSettings)
         {
             EDataType dataType = Helpers.FindDataType(filePath);
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.FileUpload;
             task.Info.DataType = dataType;
             task.Info.FilePath = filePath;
 
-            if (Program.Settings.FileUploadUseNamePattern)
+            if (task.Info.Settings.UploadSettings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
-                task.Info.FileName = TaskHelper.GetFilename(ext);
+                task.Info.FileName = TaskHelper.GetFilename(task.Info.Settings, ext);
             }
 
             task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-            if (dataType == EDataType.Image && Program.Settings.UseImageFormat2FileUpload)
+            if (dataType == EDataType.Image && task.Info.Settings.ImageSettings.UseImageFormat2FileUpload)
             {
                 TaskHelper.PrepareFileImage(task);
             }
@@ -115,35 +115,30 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings = null)
+        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
-
-            if (taskSettings != null)
-            {
-                task.Info.Settings = taskSettings;
-            }
+            UploadTask task = new UploadTask(taskSettings);
 
             task.Info.Job = TaskJob.ImageJob;
             task.Info.DataType = EDataType.Image;
-            task.Info.FileName = TaskHelper.GetImageFilename(image);
+            task.Info.FileName = TaskHelper.GetImageFilename(taskSettings, image);
             task.tempImage = image;
             return task;
         }
 
-        public static UploadTask CreateTextUploaderTask(string text)
+        public static UploadTask CreateTextUploaderTask(string text, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename("txt");
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.TextFileExtension);
             task.tempText = text;
             return task;
         }
 
-        public static UploadTask CreateURLShortenerTask(string url)
+        public static UploadTask CreateURLShortenerTask(string url, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.ShortenURL;
             task.Info.DataType = EDataType.URL;
             task.Info.FileName = "URL shorten";
@@ -229,7 +224,7 @@ namespace ShareX
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     Program.Settings.ShowUploadWarning = false;
-                    Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.UploadImageToHost);
+                    Program.Settings.Workflow.AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
                     RequestSettingUpdate = true;
                     Stop();
                 }
@@ -329,20 +324,20 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Program.Settings.WatermarkConfig != null)
+                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.Settings.ImageSettings.WatermarkConfig != null)
                 {
-                    WatermarkManager watermarkManager = new WatermarkManager(Program.Settings.WatermarkConfig);
+                    WatermarkManager watermarkManager = new WatermarkManager(Info.Settings.ImageSettings.WatermarkConfig);
                     watermarkManager.ApplyWatermark(tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
                 {
-                    tempImage = CaptureHelpers.DrawBorder(tempImage, Program.Settings.BorderType, Program.Settings.BorderColor, Program.Settings.BorderSize);
+                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.Settings.ImageSettings.BorderType, Info.Settings.ImageSettings.BorderColor, Info.Settings.ImageSettings.BorderSize);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
                 {
-                    tempImage = TaskHelper.DrawShadow(tempImage);
+                    tempImage = TaskHelper.DrawShadow(Info.Settings, tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
@@ -366,7 +361,7 @@ namespace ShareX
                 {
                     using (tempImage)
                     {
-                        ImageData imageData = TaskHelper.PrepareImage(tempImage);
+                        ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.Settings);
                         Data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
@@ -406,10 +401,10 @@ namespace ShareX
                             ClipboardHelper.CopyText(Info.FilePath);
                         }
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
+                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.Settings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
-                            var actions = Program.Settings.ExternalPrograms.Where(x => x.IsActive);
+                            var actions = Info.Settings.ExternalPrograms.Where(x => x.IsActive);
 
                             if (actions.Count() > 0)
                             {
@@ -605,19 +600,21 @@ namespace ShareX
             switch (Info.Settings.TextDestination)
             {
                 case TextDestination.Pastebin:
-                    textUploader = new Pastebin(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
+                    PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
+                    settings.TextFormat = this.Info.Settings.TextFormat;
+                    textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey);
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2();
+                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new Slexy();
+                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.Settings.TextFormat });
                     break;
                 case TextDestination.Pastee:
-                    textUploader = new Pastee();
+                    textUploader = new Pastee() { Lexer = Info.Settings.TextFormat };
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);

@@ -255,12 +255,6 @@ namespace HelpersLib
             return Enum.GetValues(typeof(T)).Length;
         }
 
-        public static int GetEnumMemberIndex<T>(T value)
-        {
-            T[] values = (T[])Enum.GetValues(typeof(T));
-            return Array.IndexOf(values, value);
-        }
-
         public static string Encode(string text, string unreservedCharacters)
         {
             StringBuilder result = new StringBuilder();
