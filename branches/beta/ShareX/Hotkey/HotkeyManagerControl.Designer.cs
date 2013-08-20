@@ -42,12 +42,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpHotkeys.AutoScroll = true;
             this.flpHotkeys.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpHotkeys.Location = new System.Drawing.Point(0, 34);
+            this.flpHotkeys.Location = new System.Drawing.Point(8, 34);
             this.flpHotkeys.Name = "flpHotkeys";
-            this.flpHotkeys.Padding = new System.Windows.Forms.Padding(10);
-            this.flpHotkeys.Size = new System.Drawing.Size(488, 310);
+            this.flpHotkeys.Size = new System.Drawing.Size(480, 310);
             this.flpHotkeys.TabIndex = 0;
             this.flpHotkeys.WrapContents = false;
+            this.flpHotkeys.Layout += new System.Windows.Forms.LayoutEventHandler(this.flpHotkeys_Layout);
             // 
             // btnAdd
             // 
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.flpHotkeys);
             this.Controls.Add(this.btnEdit);

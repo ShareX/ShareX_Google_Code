@@ -209,7 +209,7 @@ namespace ShareX
             {
                 if (taskSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
                 {
-                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
+                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                 }
 
                 if (Program.Settings.ShowAfterCaptureTasksForm)

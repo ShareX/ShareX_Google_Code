@@ -33,21 +33,19 @@
             // 
             // hmHotkeys
             // 
-            this.hmHotkeys.AutoScroll = true;
+            this.hmHotkeys.BackColor = System.Drawing.Color.White;
             this.hmHotkeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hmHotkeys.Location = new System.Drawing.Point(0, 0);
             this.hmHotkeys.Name = "hmHotkeys";
-            this.hmHotkeys.Size = new System.Drawing.Size(536, 513);
+            this.hmHotkeys.Size = new System.Drawing.Size(536, 514);
             this.hmHotkeys.TabIndex = 1;
             // 
             // WorkflowsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 513);
+            this.ClientSize = new System.Drawing.Size(536, 514);
             this.Controls.Add(this.hmHotkeys);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MinimumSize = new System.Drawing.Size(552, 552);
             this.Name = "WorkflowsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ShareX - Workflows";

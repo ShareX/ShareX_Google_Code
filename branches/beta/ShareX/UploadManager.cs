@@ -123,7 +123,7 @@ namespace ShareX
 
                     if (taskSettings.ClipboardUploadExcludeImageEffects)
                     {
-                        tasks = tasks.Remove(AfterCaptureTasks.AddWatermark | AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
+                        tasks = tasks.Remove(AfterCaptureTasks.AddWatermark, AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                     }
                 }
                 else

@@ -46,7 +46,6 @@
             // 
             // lblIsHotkeyActive
             // 
-            this.lblIsHotkeyActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIsHotkeyActive.BackColor = System.Drawing.Color.IndianRed;
             this.lblIsHotkeyActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblIsHotkeyActive.Location = new System.Drawing.Point(0, 1);
@@ -56,6 +55,8 @@
             // 
             // lblHotkeyDescription
             // 
+            this.lblHotkeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHotkeyDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHotkeyDescription.Location = new System.Drawing.Point(32, 1);
             this.lblHotkeyDescription.Name = "lblHotkeyDescription";
@@ -74,7 +75,7 @@
             this.Controls.Add(this.lblIsHotkeyActive);
             this.Controls.Add(this.btnSetHotkey);
             this.Controls.Add(this.lblHotkeyDescription);
-            this.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "HotkeySelectionControl";
             this.Size = new System.Drawing.Size(483, 23);
             this.ResumeLayout(false);
