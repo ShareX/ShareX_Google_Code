@@ -71,7 +71,7 @@ namespace ShareX
 
             IsReady = true;
 
-            DebugHelper.WriteLine("Startup time: {0}ms", Program.StartTimer.ElapsedMilliseconds);
+            DebugHelper.WriteLine("Startup time: {0} ms", Program.StartTimer.ElapsedMilliseconds);
 
             UseCommandLineArgs(Environment.GetCommandLineArgs(), Program.Settings.Workflow);
         }
@@ -495,7 +495,7 @@ namespace ShareX
             }
             else
             {
-                if (isHotkey && taskSettings.ScreenRecorderHotkeyStartInstantly)
+                if (isHotkey && taskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly)
                 {
                     if (form.Visible)
                     {
@@ -641,7 +641,7 @@ namespace ShareX
 
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
-            new RegionCapturePreview(Program.Settings.Workflow.SurfaceOptions).Show();
+            new RegionCapturePreview(Program.Settings.Workflow.CaptureSettings.SurfaceOptions).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)

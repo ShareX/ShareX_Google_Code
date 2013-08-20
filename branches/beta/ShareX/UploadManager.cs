@@ -117,11 +117,11 @@ namespace ShareX
                 Image img = Clipboard.GetImage();
                 AfterCaptureTasks tasks;
 
-                if (taskSettings.ClipboardUploadUseAfterCaptureTasks)
+                if (taskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks)
                 {
                     tasks = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
 
-                    if (taskSettings.ClipboardUploadExcludeImageEffects)
+                    if (taskSettings.UploadSettings.ClipboardUploadExcludeImageEffects)
                     {
                         tasks = tasks.Remove(AfterCaptureTasks.AddWatermark, AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                     }
@@ -142,7 +142,7 @@ namespace ShareX
             {
                 string text = Clipboard.GetText();
 
-                if (taskSettings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
+                if (taskSettings.UploadSettings.ClipboardUploadAutoDetectURL && Helpers.IsValidURLRegex(text))
                 {
                     ShortenURL(text.Trim(), taskSettings);
                 }
@@ -155,7 +155,7 @@ namespace ShareX
 
         public static void ClipboardUploadWithContentViewer(TaskSettings taskSettings)
         {
-            if (taskSettings.ShowClipboardContentViewer)
+            if (taskSettings.UploadSettings.ShowClipboardContentViewer)
             {
                 using (ClipboardContentViewer ccv = new ClipboardContentViewer())
                 {
@@ -164,7 +164,7 @@ namespace ShareX
                         UploadManager.ClipboardUpload(taskSettings);
                     }
 
-                    taskSettings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
+                    taskSettings.UploadSettings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
                 }
             }
             else

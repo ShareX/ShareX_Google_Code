@@ -62,16 +62,8 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
-            TaskSettings taskSettings;
-            if (hotkeySetting.TaskSettings.UseDefaultWorkflow)
-            {
-                taskSettings = Program.Settings.Workflow.Copy();
-            }
-            else
-            {
-                taskSettings = hotkeySetting.TaskSettings.Copy();
-                taskSettings.SetDefaultSettings();
-            }
+            TaskSettings taskSettings = hotkeySetting.TaskSettings.Copy();
+            taskSettings.SetDefaultSettings();
 
             switch (hotkeySetting.Job)
             {
@@ -157,9 +149,9 @@ namespace ShareX
 
         private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, TaskSettings taskSettings, bool autoHideForm = true)
         {
-            if (taskSettings.IsDelayScreenshot && taskSettings.DelayScreenshot > 0)
+            if (taskSettings.CaptureSettings.IsDelayScreenshot && taskSettings.CaptureSettings.DelayScreenshot > 0)
             {
-                int sleep = (int)(taskSettings.DelayScreenshot * 1000);
+                int sleep = (int)(taskSettings.CaptureSettings.DelayScreenshot * 1000);
                 BackgroundWorker bw = new BackgroundWorker();
                 bw.DoWork += (sender, e) => Thread.Sleep(sleep);
                 bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, taskSettings, autoHideForm);
@@ -183,11 +175,11 @@ namespace ShareX
 
             try
             {
-                Screenshot.CaptureCursor = taskSettings.ShowCursor;
-                Screenshot.CaptureShadow = taskSettings.CaptureShadow;
-                Screenshot.ShadowOffset = taskSettings.CaptureShadowOffset;
-                Screenshot.CaptureClientArea = taskSettings.CaptureClientArea;
-                Screenshot.AutoHideTaskbar = taskSettings.CaptureAutoHideTaskbar;
+                Screenshot.CaptureCursor = taskSettings.CaptureSettings.ShowCursor;
+                Screenshot.CaptureShadow = taskSettings.CaptureSettings.CaptureShadow;
+                Screenshot.ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset;
+                Screenshot.CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea;
+                Screenshot.AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar;
 
                 img = capture();
 
@@ -215,7 +207,7 @@ namespace ShareX
         {
             if (img != null)
             {
-                if (taskSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
+                if (taskSettings.ImageSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
                 {
                     taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                 }
@@ -258,7 +250,7 @@ namespace ShareX
                 Image img = null;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
 
-                if (taskSettings.CaptureTransparent && !taskSettings.CaptureClientArea)
+                if (taskSettings.CaptureSettings.CaptureTransparent && !taskSettings.CaptureSettings.CaptureClientArea)
                 {
                     img = Screenshot.CaptureActiveWindowTransparent();
                 }
@@ -287,7 +279,7 @@ namespace ShareX
                 NativeMethods.SetForegroundWindow(handle);
                 Thread.Sleep(250);
 
-                if (taskSettings.CaptureTransparent && !taskSettings.CaptureClientArea)
+                if (taskSettings.CaptureSettings.CaptureTransparent && !taskSettings.CaptureSettings.CaptureClientArea)
                 {
                     return Screenshot.CaptureWindowTransparent(handle);
                 }
@@ -338,7 +330,7 @@ namespace ShareX
                 Image img = null;
                 Image screenshot = Screenshot.CaptureFullscreen();
 
-                surface.Config = taskSettings.SurfaceOptions;
+                surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
                 surface.SurfaceImage = screenshot;
                 surface.Prepare();
                 surface.ShowDialog();
@@ -367,7 +359,7 @@ namespace ShareX
                 {
                     using (Image screenshot = Screenshot.CaptureFullscreen())
                     {
-                        return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, taskSettings.SurfaceOptions);
+                        return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, taskSettings.CaptureSettings.SurfaceOptions);
                     }
                 }, CaptureType.LastRegion, taskSettings, autoHideForm);
             }

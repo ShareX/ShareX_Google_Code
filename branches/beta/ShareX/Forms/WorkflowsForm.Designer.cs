@@ -48,7 +48,7 @@
             this.Controls.Add(this.hmHotkeys);
             this.MinimumSize = new System.Drawing.Size(552, 552);
             this.Name = "WorkflowsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Workflows";
             this.ResumeLayout(false);
 

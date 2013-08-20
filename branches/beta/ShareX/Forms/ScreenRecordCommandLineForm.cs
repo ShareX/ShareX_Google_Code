@@ -37,16 +37,16 @@ namespace ShareX
 {
     public partial class ScreenRecordCommandLineForm : Form
     {
-        TaskSettings taskSettings;
+        private TaskSettings taskSettings;
 
         public ScreenRecordCommandLineForm(TaskSettings taskSettings)
         {
             InitializeComponent();
             this.taskSettings = taskSettings;
 
-            tbCommandLinePath.Text = taskSettings.ScreenRecordCommandLinePath;
-            tbCommandLineArgs.Text = taskSettings.ScreenRecordCommandLineArgs;
-            tbCommandLineOutputExtension.Text = taskSettings.ScreenRecordCommandLineOutputExtension;
+            tbCommandLinePath.Text = taskSettings.CaptureSettings.ScreenRecordCommandLinePath;
+            tbCommandLineArgs.Text = taskSettings.CaptureSettings.ScreenRecordCommandLineArgs;
+            tbCommandLineOutputExtension.Text = taskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension;
         }
 
         private void btnBrowseCommandLinePath_Click(object sender, EventArgs e)
@@ -56,9 +56,9 @@ namespace ShareX
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            taskSettings.ScreenRecordCommandLinePath = tbCommandLinePath.Text;
-            taskSettings.ScreenRecordCommandLineArgs = tbCommandLineArgs.Text;
-            taskSettings.ScreenRecordCommandLineOutputExtension = tbCommandLineOutputExtension.Text;
+            taskSettings.CaptureSettings.ScreenRecordCommandLinePath = tbCommandLinePath.Text;
+            taskSettings.CaptureSettings.ScreenRecordCommandLineArgs = tbCommandLineArgs.Text;
+            taskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension = tbCommandLineOutputExtension.Text;
 
             DialogResult = DialogResult.OK;
         }

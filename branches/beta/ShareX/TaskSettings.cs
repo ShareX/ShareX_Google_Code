@@ -35,23 +35,8 @@ using UploadersLib;
 
 namespace ShareX
 {
-    public class TaskSettings
+    public class TaskSettingsImage
     {
-        public bool UseDefaultAfterCaptureJob;
-        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
-
-        public bool UseDefaultAfterUploadJob;
-        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
-
-        public bool UseDefaultDestinations;
-        public ImageDestination ImageDestination;
-        public TextDestination TextDestination;
-        public FileDestination FileDestination;
-        public UrlShortenerType URLShortenerDestination;
-        public SocialNetworkingService SocialNetworkingServiceDestination;
-
-        public bool UseDefaultWorkflow;
-
         #region Image / Quality
 
         public EImageFormat ImageFormat = EImageFormat.PNG;
@@ -91,7 +76,10 @@ namespace ShareX
         public Point ShadowOffset = new Point(0, 0);
 
         #endregion Image / Effects
+    }
 
+    public class TaskSettingsCapture
+    {
         #region Capture / General
 
         public bool ShowCursor = false;
@@ -117,12 +105,23 @@ namespace ShareX
 
         #endregion Capture / Screen recorder
 
-        #region Actions
+        #region Capture / ScreenRecord Form
 
-        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
+        public int ScreenRecordFPS = 5;
+        public bool ScreenRecordFixedDuration = true;
+        public float ScreenRecordDuration = 3f;
+        public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
+        public bool ScreenRecordAutoUpload = true;
 
-        #endregion Actions
+        public string ScreenRecordCommandLinePath = "x264.exe";
+        public string ScreenRecordCommandLineArgs = "--output %output %input";
+        public string ScreenRecordCommandLineOutputExtension = "mp4";
 
+        #endregion Capture / ScreenRecord Form
+    }
+
+    public class TaskSettingsUpload
+    {
         #region Upload / Name pattern
 
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
@@ -141,22 +140,36 @@ namespace ShareX
         public bool ClipboardUploadExcludeImageEffects = true;
 
         #endregion Upload / Clipboard upload
+    }
 
-        #region ScreenRecord Form
+    public class TaskSettings
+    {
+        public bool UseDefaultAfterCaptureJob;
+        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
 
-        public int ScreenRecordFPS = 5;
-        public bool ScreenRecordFixedDuration = true;
-        public float ScreenRecordDuration = 3f;
-        public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
-        public bool ScreenRecordAutoUpload = true;
+        public bool UseDefaultAfterUploadJob;
+        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
 
-        public string ScreenRecordCommandLinePath = "x264.exe";
-        public string ScreenRecordCommandLineArgs = "--output %output %input";
-        public string ScreenRecordCommandLineOutputExtension = "mp4";
+        public bool UseDefaultDestinations;
+        public ImageDestination ImageDestination;
+        public TextDestination TextDestination;
+        public FileDestination FileDestination;
+        public UrlShortenerType URLShortenerDestination;
+        public SocialNetworkingService SocialNetworkingServiceDestination;
 
-        #endregion ScreenRecord Form
+        public bool UseDefaultImageSettings = true;
+        public TaskSettingsImage ImageSettings = new TaskSettingsImage();
 
-        #region "Advanced"
+        public bool UseDefaultCaptureSettings = true;
+        public TaskSettingsCapture CaptureSettings = new TaskSettingsCapture();
+
+        public bool UseDefaultActions = true;
+        public TaskSettingsUpload UploadSettings = new TaskSettingsUpload();
+
+        public bool UseDefaultUploadSettings = true;
+        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
+
+        #region Advanced
 
         [Category("Interaction"), DefaultValue(false), Description("Disable notifications.")]
         public bool DisableNotifications { get; set; }
@@ -167,7 +180,7 @@ namespace ShareX
         [Category("Upload Text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
         public string TextFileExtension { get; set; }
 
-        #endregion "Advanced"
+        #endregion Advanced
 
         public TaskSettings(bool useDefaultSettings = false)
         {
@@ -176,7 +189,7 @@ namespace ShareX
             UseDefaultAfterCaptureJob = useDefaultSettings;
             UseDefaultAfterUploadJob = useDefaultSettings;
             UseDefaultDestinations = useDefaultSettings;
-            UseDefaultWorkflow = useDefaultSettings;
+            UseDefaultImageSettings = useDefaultSettings;
         }
 
         public bool SetDefaultSettings(bool forceDefaultSettings = false)
@@ -200,6 +213,28 @@ namespace ShareX
                     FileDestination = Program.Settings.Workflow.FileDestination;
                     URLShortenerDestination = Program.Settings.Workflow.URLShortenerDestination;
                     SocialNetworkingServiceDestination = Program.Settings.Workflow.SocialNetworkingServiceDestination;
+                }
+
+                TaskSettings defaultWorkflow = Program.Settings.Workflow.Copy();
+
+                if (UseDefaultImageSettings || forceDefaultSettings)
+                {
+                    ImageSettings = defaultWorkflow.ImageSettings;
+                }
+
+                if (UseDefaultCaptureSettings || forceDefaultSettings)
+                {
+                    CaptureSettings = defaultWorkflow.CaptureSettings;
+                }
+
+                if (UseDefaultActions || forceDefaultSettings)
+                {
+                    ExternalPrograms = defaultWorkflow.ExternalPrograms;
+                }
+
+                if (UseDefaultUploadSettings || forceDefaultSettings)
+                {
+                    UploadSettings = defaultWorkflow.UploadSettings;
                 }
 
                 return true;

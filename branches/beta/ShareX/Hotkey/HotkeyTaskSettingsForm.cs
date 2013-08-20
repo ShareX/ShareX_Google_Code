@@ -52,7 +52,6 @@ namespace ShareX
             if (hotkeySetting.Description == "Default")
             {
                 tcHotkeySettings.TabPages.Remove(tpTask);
-                chkApplyDefaultWorkflowSettings.Visible = false;
             }
 
             tbDescription.Text = hotkeySetting.Description;
@@ -60,7 +59,10 @@ namespace ShareX
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;
             cbUseDefaultAfterUploadSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterUploadJob;
             cbUseDefaultDestinationSettings.Checked = hotkeySetting.TaskSettings.UseDefaultDestinations;
-            chkApplyDefaultWorkflowSettings.Checked = Setting.TaskSettings.UseDefaultWorkflow;
+            chkUseDefaultImageSettings.Checked = Setting.TaskSettings.UseDefaultImageSettings;
+            chkUseDefaultCaptureSettings.Checked = Setting.TaskSettings.UseDefaultCaptureSettings;
+            chkUseDefaultActions.Checked = Setting.TaskSettings.UseDefaultActions;
+            chkUseDefaultUploadSettings.Checked = Setting.TaskSettings.UseDefaultUploadSettings;
 
             AddEnumItems<EHotkey>(x => Setting.Job = x, cmsTask);
             AddMultiEnumItems<AfterCaptureTasks>(x => Setting.TaskSettings.AfterCaptureJob = Setting.TaskSettings.AfterCaptureJob.Swap(x), cmsAfterCapture);
@@ -83,19 +85,19 @@ namespace ShareX
             UpdateUploaderMenuNames();
 
             // Image - Quality
-            cbImageFormat.SelectedIndex = (int)Setting.TaskSettings.ImageFormat;
-            nudImageJPEGQuality.Value = Setting.TaskSettings.ImageJPEGQuality;
-            cbImageGIFQuality.SelectedIndex = (int)Setting.TaskSettings.ImageGIFQuality;
-            nudUseImageFormat2After.Value = Setting.TaskSettings.ImageSizeLimit;
-            cbImageFormat2.SelectedIndex = (int)Setting.TaskSettings.ImageFormat2;
-            cbUseImageFormat2FileUpload.Checked = Setting.TaskSettings.UseImageFormat2FileUpload;
+            cbImageFormat.SelectedIndex = (int)Setting.TaskSettings.ImageSettings.ImageFormat;
+            nudImageJPEGQuality.Value = Setting.TaskSettings.ImageSettings.ImageJPEGQuality;
+            cbImageGIFQuality.SelectedIndex = (int)Setting.TaskSettings.ImageSettings.ImageGIFQuality;
+            nudUseImageFormat2After.Value = Setting.TaskSettings.ImageSettings.ImageSizeLimit;
+            cbImageFormat2.SelectedIndex = (int)Setting.TaskSettings.ImageSettings.ImageFormat2;
+            cbUseImageFormat2FileUpload.Checked = Setting.TaskSettings.ImageSettings.UseImageFormat2FileUpload;
 
             // Image - Resize
-            cbImageAutoResize.Checked = Setting.TaskSettings.ImageAutoResize;
-            cbImageKeepAspectRatio.Checked = Setting.TaskSettings.ImageKeepAspectRatio;
-            cbImageUseSmoothScaling.Checked = Setting.TaskSettings.ImageUseSmoothScaling;
+            cbImageAutoResize.Checked = Setting.TaskSettings.ImageSettings.ImageAutoResize;
+            cbImageKeepAspectRatio.Checked = Setting.TaskSettings.ImageSettings.ImageKeepAspectRatio;
+            cbImageUseSmoothScaling.Checked = Setting.TaskSettings.ImageSettings.ImageUseSmoothScaling;
 
-            switch (Setting.TaskSettings.ImageScaleType)
+            switch (Setting.TaskSettings.ImageSettings.ImageScaleType)
             {
                 case ImageScaleType.Percentage:
                     rbImageScaleTypePercentage.Checked = true;
@@ -111,42 +113,42 @@ namespace ShareX
                     break;
             }
 
-            nudImageScalePercentageWidth.Value = Setting.TaskSettings.ImageScalePercentageWidth;
-            nudImageScalePercentageHeight.Value = Setting.TaskSettings.ImageScalePercentageHeight;
-            nudImageScaleToWidth.Value = Setting.TaskSettings.ImageScaleToWidth;
-            nudImageScaleToHeight.Value = Setting.TaskSettings.ImageScaleToHeight;
-            nudImageScaleSpecificWidth.Value = Setting.TaskSettings.ImageScaleSpecificWidth;
-            nudImageScaleSpecificHeight.Value = Setting.TaskSettings.ImageScaleSpecificHeight;
+            nudImageScalePercentageWidth.Value = Setting.TaskSettings.ImageSettings.ImageScalePercentageWidth;
+            nudImageScalePercentageHeight.Value = Setting.TaskSettings.ImageSettings.ImageScalePercentageHeight;
+            nudImageScaleToWidth.Value = Setting.TaskSettings.ImageSettings.ImageScaleToWidth;
+            nudImageScaleToHeight.Value = Setting.TaskSettings.ImageSettings.ImageScaleToHeight;
+            nudImageScaleSpecificWidth.Value = Setting.TaskSettings.ImageSettings.ImageScaleSpecificWidth;
+            nudImageScaleSpecificHeight.Value = Setting.TaskSettings.ImageSettings.ImageScaleSpecificHeight;
 
             // Image - Effects
-            cbImageEffectOnlyRegionCapture.Checked = Setting.TaskSettings.ImageEffectOnlyRegionCapture;
-            btnBorderColor.BackColor = Setting.TaskSettings.BorderColor;
-            nudBorderSize.Value = Setting.TaskSettings.BorderSize;
-            nudImageShadowDarkness.Value = (decimal)Setting.TaskSettings.ShadowDarkness;
-            nudImageShadowSize.Value = Setting.TaskSettings.ShadowSize;
+            cbImageEffectOnlyRegionCapture.Checked = Setting.TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture;
+            btnBorderColor.BackColor = Setting.TaskSettings.ImageSettings.BorderColor;
+            nudBorderSize.Value = Setting.TaskSettings.ImageSettings.BorderSize;
+            nudImageShadowDarkness.Value = (decimal)Setting.TaskSettings.ImageSettings.ShadowDarkness;
+            nudImageShadowSize.Value = Setting.TaskSettings.ImageSettings.ShadowSize;
 
             // Capture
-            cbShowCursor.Checked = Setting.TaskSettings.ShowCursor;
-            cbCaptureTransparent.Checked = Setting.TaskSettings.CaptureTransparent;
-            cbCaptureShadow.Enabled = Setting.TaskSettings.CaptureTransparent;
-            cbCaptureShadow.Checked = Setting.TaskSettings.CaptureShadow;
-            nudCaptureShadowOffset.Value = Setting.TaskSettings.CaptureShadowOffset;
-            cbCaptureClientArea.Checked = Setting.TaskSettings.CaptureClientArea;
-            cbScreenshotDelay.Checked = Setting.TaskSettings.IsDelayScreenshot;
-            nudScreenshotDelay.Value = Setting.TaskSettings.DelayScreenshot;
-            cbCaptureAutoHideTaskbar.Checked = Setting.TaskSettings.CaptureAutoHideTaskbar;
+            cbShowCursor.Checked = Setting.TaskSettings.CaptureSettings.ShowCursor;
+            cbCaptureTransparent.Checked = Setting.TaskSettings.CaptureSettings.CaptureTransparent;
+            cbCaptureShadow.Enabled = Setting.TaskSettings.CaptureSettings.CaptureTransparent;
+            cbCaptureShadow.Checked = Setting.TaskSettings.CaptureSettings.CaptureShadow;
+            nudCaptureShadowOffset.Value = Setting.TaskSettings.CaptureSettings.CaptureShadowOffset;
+            cbCaptureClientArea.Checked = Setting.TaskSettings.CaptureSettings.CaptureClientArea;
+            cbScreenshotDelay.Checked = Setting.TaskSettings.CaptureSettings.IsDelayScreenshot;
+            nudScreenshotDelay.Value = Setting.TaskSettings.CaptureSettings.DelayScreenshot;
+            cbCaptureAutoHideTaskbar.Checked = Setting.TaskSettings.CaptureSettings.CaptureAutoHideTaskbar;
 
-            if (Setting.TaskSettings.SurfaceOptions == null) Setting.TaskSettings.SurfaceOptions = new SurfaceOptions();
-            cbDrawBorder.Checked = Setting.TaskSettings.SurfaceOptions.DrawBorder;
-            cbDrawCheckerboard.Checked = Setting.TaskSettings.SurfaceOptions.DrawChecker;
-            cbQuickCrop.Checked = Setting.TaskSettings.SurfaceOptions.QuickCrop;
-            cbFixedShapeSize.Checked = Setting.TaskSettings.SurfaceOptions.IsFixedSize;
-            nudFixedShapeSizeWidth.Value = Setting.TaskSettings.SurfaceOptions.FixedSize.Width;
-            nudFixedShapeSizeHeight.Value = Setting.TaskSettings.SurfaceOptions.FixedSize.Height;
-            cbShapeIncludeControls.Checked = Setting.TaskSettings.SurfaceOptions.IncludeControls;
-            cbShapeForceWindowCapture.Checked = Setting.TaskSettings.SurfaceOptions.ForceWindowCapture;
+            if (Setting.TaskSettings.CaptureSettings.SurfaceOptions == null) Setting.TaskSettings.CaptureSettings.SurfaceOptions = new SurfaceOptions();
+            cbDrawBorder.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.DrawBorder;
+            cbDrawCheckerboard.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.DrawChecker;
+            cbQuickCrop.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.QuickCrop;
+            cbFixedShapeSize.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize;
+            nudFixedShapeSizeWidth.Value = Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Width;
+            nudFixedShapeSizeHeight.Value = Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Height;
+            cbShapeIncludeControls.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls;
+            cbShapeForceWindowCapture.Checked = Setting.TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture;
 
-            cbScreenRecorderHotkeyStartInstantly.Checked = Setting.TaskSettings.ScreenRecorderHotkeyStartInstantly;
+            cbScreenRecorderHotkeyStartInstantly.Checked = Setting.TaskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly;
 
             // Actions
             TaskHelper.AddDefaultExternalPrograms(Setting.TaskSettings);
@@ -157,17 +159,17 @@ namespace ShareX
             }
 
             // Upload / Name pattern
-            txtNameFormatPattern.Text = Setting.TaskSettings.NameFormatPattern;
-            txtNameFormatPatternActiveWindow.Text = Setting.TaskSettings.NameFormatPatternActiveWindow;
+            txtNameFormatPattern.Text = Setting.TaskSettings.UploadSettings.NameFormatPattern;
+            txtNameFormatPatternActiveWindow.Text = Setting.TaskSettings.UploadSettings.NameFormatPatternActiveWindow;
             cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ReplacementVariables.n);
             cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ReplacementVariables.n);
-            cbFileUploadUseNamePattern.Checked = Setting.TaskSettings.FileUploadUseNamePattern;
+            cbFileUploadUseNamePattern.Checked = Setting.TaskSettings.UploadSettings.FileUploadUseNamePattern;
 
             // Upload / Clipboard upload
-            cbShowClipboardContentViewer.Checked = Setting.TaskSettings.ShowClipboardContentViewer;
-            cbClipboardUploadAutoDetectURL.Checked = Setting.TaskSettings.ClipboardUploadAutoDetectURL;
-            cbClipboardUploadUseAfterCaptureTasks.Checked = Setting.TaskSettings.ClipboardUploadUseAfterCaptureTasks;
-            cbClipboardUploadExcludeImageEffects.Checked = Setting.TaskSettings.ClipboardUploadExcludeImageEffects;
+            cbShowClipboardContentViewer.Checked = Setting.TaskSettings.UploadSettings.ShowClipboardContentViewer;
+            cbClipboardUploadAutoDetectURL.Checked = Setting.TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL;
+            cbClipboardUploadUseAfterCaptureTasks.Checked = Setting.TaskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks;
+            cbClipboardUploadExcludeImageEffects.Checked = Setting.TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects;
 
             // Advanced
             pgTaskSettings.SelectedObject = Setting.TaskSettings;
@@ -404,44 +406,44 @@ namespace ShareX
 
         private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.UseImageFormat2FileUpload = cbUseImageFormat2FileUpload.Checked;
+            Setting.TaskSettings.ImageSettings.UseImageFormat2FileUpload = cbUseImageFormat2FileUpload.Checked;
         }
 
         private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageFormat = (EImageFormat)cbImageFormat.SelectedIndex;
+            Setting.TaskSettings.ImageSettings.ImageFormat = (EImageFormat)cbImageFormat.SelectedIndex;
         }
 
         private void cbImageGIFQuality_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageGIFQuality = (GIFQuality)cbImageGIFQuality.SelectedIndex;
+            Setting.TaskSettings.ImageSettings.ImageGIFQuality = (GIFQuality)cbImageGIFQuality.SelectedIndex;
         }
 
         private void cbImageFormat2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageFormat2 = (EImageFormat)cbImageFormat2.SelectedIndex;
+            Setting.TaskSettings.ImageSettings.ImageFormat2 = (EImageFormat)cbImageFormat2.SelectedIndex;
         }
 
         private void nudImageJPEGQuality_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageJPEGQuality = (int)nudImageJPEGQuality.Value;
+            Setting.TaskSettings.ImageSettings.ImageJPEGQuality = (int)nudImageJPEGQuality.Value;
         }
 
         private void nudUseImageFormat2After_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageSizeLimit = (int)nudUseImageFormat2After.Value;
+            Setting.TaskSettings.ImageSettings.ImageSizeLimit = (int)nudUseImageFormat2After.Value;
         }
 
         private void cbImageUseSmoothScaling_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageUseSmoothScaling = cbImageUseSmoothScaling.Checked;
+            Setting.TaskSettings.ImageSettings.ImageUseSmoothScaling = cbImageUseSmoothScaling.Checked;
         }
 
         private void cbImageKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageKeepAspectRatio = cbImageKeepAspectRatio.Checked;
+            Setting.TaskSettings.ImageSettings.ImageKeepAspectRatio = cbImageKeepAspectRatio.Checked;
 
-            if (Setting.TaskSettings.ImageKeepAspectRatio)
+            if (Setting.TaskSettings.ImageSettings.ImageKeepAspectRatio)
             {
                 nudImageScalePercentageHeight.Value = nudImageScalePercentageWidth.Value;
             }
@@ -449,7 +451,7 @@ namespace ShareX
 
         private void cbImageAutoResize_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageAutoResize = cbImageAutoResize.Checked;
+            Setting.TaskSettings.ImageSettings.ImageAutoResize = cbImageAutoResize.Checked;
         }
 
         private void rbImageScaleTypePercentage_CheckedChanged(object sender, EventArgs e)
@@ -478,19 +480,19 @@ namespace ShareX
 
             if (rbImageScaleTypePercentage.Checked)
             {
-                Setting.TaskSettings.ImageScaleType = ImageScaleType.Percentage;
+                Setting.TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Percentage;
             }
             else if (rbImageScaleTypeToWidth.Checked)
             {
-                Setting.TaskSettings.ImageScaleType = ImageScaleType.Width;
+                Setting.TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Width;
             }
             else if (rbImageScaleTypeToHeight.Checked)
             {
-                Setting.TaskSettings.ImageScaleType = ImageScaleType.Height;
+                Setting.TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Height;
             }
             else if (rbImageScaleTypeSpecific.Checked)
             {
-                Setting.TaskSettings.ImageScaleType = ImageScaleType.Specific;
+                Setting.TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Specific;
                 aspectRatioEnabled = false;
             }
 
@@ -499,62 +501,62 @@ namespace ShareX
 
         private void nudImageScalePercentageWidth_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScalePercentageWidth = (int)nudImageScalePercentageWidth.Value;
+            Setting.TaskSettings.ImageSettings.ImageScalePercentageWidth = (int)nudImageScalePercentageWidth.Value;
 
-            if (Setting.TaskSettings.ImageKeepAspectRatio)
+            if (Setting.TaskSettings.ImageSettings.ImageKeepAspectRatio)
             {
-                nudImageScalePercentageHeight.Value = Setting.TaskSettings.ImageScalePercentageWidth;
+                nudImageScalePercentageHeight.Value = Setting.TaskSettings.ImageSettings.ImageScalePercentageWidth;
             }
         }
 
         private void nudImageScaleToHeight_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
+            Setting.TaskSettings.ImageSettings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
         }
 
         private void nudImageScalePercentageHeight_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScalePercentageHeight = (int)nudImageScalePercentageHeight.Value;
+            Setting.TaskSettings.ImageSettings.ImageScalePercentageHeight = (int)nudImageScalePercentageHeight.Value;
 
-            if (Setting.TaskSettings.ImageKeepAspectRatio)
+            if (Setting.TaskSettings.ImageSettings.ImageKeepAspectRatio)
             {
-                nudImageScalePercentageWidth.Value = Setting.TaskSettings.ImageScalePercentageHeight;
+                nudImageScalePercentageWidth.Value = Setting.TaskSettings.ImageSettings.ImageScalePercentageHeight;
             }
         }
 
         private void nudImageScaleToWidth_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
+            Setting.TaskSettings.ImageSettings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
         }
 
         private void nudImageScaleSpecificHeight_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
+            Setting.TaskSettings.ImageSettings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
         }
 
         private void nudImageScaleSpecificWidth_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
+            Setting.TaskSettings.ImageSettings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
         }
 
         private void nudImageShadowSize_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ShadowSize = (int)nudImageShadowSize.Value;
+            Setting.TaskSettings.ImageSettings.ShadowSize = (int)nudImageShadowSize.Value;
         }
 
         private void nudImageShadowDarkness_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ShadowDarkness = (float)nudImageShadowDarkness.Value;
+            Setting.TaskSettings.ImageSettings.ShadowDarkness = (float)nudImageShadowDarkness.Value;
         }
 
         private void cbImageEffectOnlyRectangleCapture_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
+            Setting.TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
         }
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
-            using (WatermarkUI watermarkForm = new WatermarkUI(Setting.TaskSettings.WatermarkConfig))
+            using (WatermarkUI watermarkForm = new WatermarkUI(Setting.TaskSettings.ImageSettings.WatermarkConfig))
             {
                 watermarkForm.Icon = Icon;
                 watermarkForm.ShowDialog();
@@ -563,16 +565,16 @@ namespace ShareX
 
         private void nudBorderSize_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.BorderSize = (int)nudBorderSize.Value;
+            Setting.TaskSettings.ImageSettings.BorderSize = (int)nudBorderSize.Value;
         }
 
         private void btnBorderColor_Click(object sender, EventArgs e)
         {
-            using (DialogColor dColor = new DialogColor(Setting.TaskSettings.BorderColor))
+            using (DialogColor dColor = new DialogColor(Setting.TaskSettings.ImageSettings.BorderColor))
             {
                 if (dColor.ShowDialog() == DialogResult.OK)
                 {
-                    Setting.TaskSettings.BorderColor = dColor.Color;
+                    Setting.TaskSettings.ImageSettings.BorderColor = dColor.Color;
                     btnBorderColor.BackColor = dColor.Color;
                 }
             }
@@ -580,43 +582,43 @@ namespace ShareX
 
         private void cbCaptureAutoHideTaskbar_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.CaptureAutoHideTaskbar = cbCaptureAutoHideTaskbar.Checked;
+            Setting.TaskSettings.CaptureSettings.CaptureAutoHideTaskbar = cbCaptureAutoHideTaskbar.Checked;
         }
 
         private void nudScreenshotDelay_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.DelayScreenshot = nudScreenshotDelay.Value;
+            Setting.TaskSettings.CaptureSettings.DelayScreenshot = nudScreenshotDelay.Value;
         }
 
         private void cbScreenshotDelay_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.IsDelayScreenshot = cbScreenshotDelay.Checked;
+            Setting.TaskSettings.CaptureSettings.IsDelayScreenshot = cbScreenshotDelay.Checked;
         }
 
         private void nudCaptureShadowOffset_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.CaptureShadowOffset = (int)nudCaptureShadowOffset.Value;
+            Setting.TaskSettings.CaptureSettings.CaptureShadowOffset = (int)nudCaptureShadowOffset.Value;
         }
 
         private void cbCaptureClientArea_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.CaptureClientArea = cbCaptureClientArea.Checked;
+            Setting.TaskSettings.CaptureSettings.CaptureClientArea = cbCaptureClientArea.Checked;
         }
 
         private void cbCaptureShadow_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.CaptureShadow = cbCaptureShadow.Checked;
+            Setting.TaskSettings.CaptureSettings.CaptureShadow = cbCaptureShadow.Checked;
         }
 
         private void cbShowCursor_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ShowCursor = cbShowCursor.Checked;
+            Setting.TaskSettings.CaptureSettings.ShowCursor = cbShowCursor.Checked;
         }
 
         private void cbCaptureTransparent_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.CaptureTransparent = cbCaptureTransparent.Checked;
-            cbCaptureShadow.Enabled = Setting.TaskSettings.CaptureTransparent;
+            Setting.TaskSettings.CaptureSettings.CaptureTransparent = cbCaptureTransparent.Checked;
+            cbCaptureShadow.Enabled = Setting.TaskSettings.CaptureSettings.CaptureTransparent;
         }
 
         private void btnOpenCapturingShapesWiki_Click(object sender, EventArgs e)
@@ -626,47 +628,47 @@ namespace ShareX
 
         private void cbShapeForceWindowCapture_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.ForceWindowCapture = cbShapeForceWindowCapture.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture = cbShapeForceWindowCapture.Checked;
         }
 
         private void cbShapeIncludeControls_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.IncludeControls = cbShapeIncludeControls.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls = cbShapeIncludeControls.Checked;
         }
 
         private void cbDrawBorder_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.DrawBorder = cbDrawBorder.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.DrawBorder = cbDrawBorder.Checked;
         }
 
         private void cbQuickCrop_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.QuickCrop = cbQuickCrop.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.QuickCrop = cbQuickCrop.Checked;
         }
 
         private void nudFixedShapeSizeHeight_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.FixedSize = new Size(Setting.TaskSettings.SurfaceOptions.FixedSize.Width, (int)nudFixedShapeSizeHeight.Value);
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize = new Size(Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Width, (int)nudFixedShapeSizeHeight.Value);
         }
 
         private void cbDrawCheckerboard_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.DrawChecker = cbDrawCheckerboard.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.DrawChecker = cbDrawCheckerboard.Checked;
         }
 
         private void nudFixedShapeSizeWidth_ValueChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.FixedSize = new Size((int)nudFixedShapeSizeWidth.Value, Setting.TaskSettings.SurfaceOptions.FixedSize.Height);
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize = new Size((int)nudFixedShapeSizeWidth.Value, Setting.TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Height);
         }
 
         private void cbFixedShapeSize_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.SurfaceOptions.IsFixedSize = cbFixedShapeSize.Checked;
+            Setting.TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize = cbFixedShapeSize.Checked;
         }
 
         private void cbScreenRecorderHotkeyStartInstantly_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ScreenRecorderHotkeyStartInstantly = cbScreenRecorderHotkeyStartInstantly.Checked;
+            Setting.TaskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly = cbScreenRecorderHotkeyStartInstantly.Checked;
         }
 
         private void btnActionsEdit_Click(object sender, EventArgs e)
@@ -732,51 +734,70 @@ namespace ShareX
 
         private void cbFileUploadUseNamePattern_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.FileUploadUseNamePattern = cbFileUploadUseNamePattern.Checked;
+            Setting.TaskSettings.UploadSettings.FileUploadUseNamePattern = cbFileUploadUseNamePattern.Checked;
         }
 
         private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Setting.TaskSettings.AutoIncrementNumber, WindowText = Text };
-            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(Setting.TaskSettings.NameFormatPatternActiveWindow);
+            Setting.TaskSettings.UploadSettings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
+            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Setting.TaskSettings.UploadSettings.AutoIncrementNumber, WindowText = Text };
+            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(Setting.TaskSettings.UploadSettings.NameFormatPatternActiveWindow);
         }
 
         private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
         {
-            Setting.TaskSettings.AutoIncrementNumber = 0;
+            Setting.TaskSettings.UploadSettings.AutoIncrementNumber = 0;
         }
 
         private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.NameFormatPattern = txtNameFormatPattern.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Setting.TaskSettings.AutoIncrementNumber };
-            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(Setting.TaskSettings.NameFormatPattern);
+            Setting.TaskSettings.UploadSettings.NameFormatPattern = txtNameFormatPattern.Text;
+            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Setting.TaskSettings.UploadSettings.AutoIncrementNumber };
+            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(Setting.TaskSettings.UploadSettings.NameFormatPattern);
         }
 
         private void cbShowClipboardContentViewer_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
+            Setting.TaskSettings.UploadSettings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
         }
 
         private void cbClipboardUploadUseAfterCaptureTasks_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ClipboardUploadUseAfterCaptureTasks = cbClipboardUploadUseAfterCaptureTasks.Checked;
+            Setting.TaskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks = cbClipboardUploadUseAfterCaptureTasks.Checked;
         }
 
         private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
+            Setting.TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
         }
 
         private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
+            Setting.TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
         }
 
-        private void chkApplyDefaultWorkflowSettings_CheckedChanged(object sender, EventArgs e)
+        private void chkUseDefaultImageSettings_CheckedChanged(object sender, EventArgs e)
         {
-            Setting.TaskSettings.UseDefaultWorkflow = chkApplyDefaultWorkflowSettings.Checked;
+            Setting.TaskSettings.UseDefaultImageSettings = chkUseDefaultImageSettings.Checked;
+            tcImage.Enabled = !Setting.TaskSettings.UseDefaultImageSettings;
+        }
+
+        private void chkUseDefaultCaptureSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting.TaskSettings.UseDefaultCaptureSettings = chkUseDefaultCaptureSettings.Checked;
+            tcImage.Enabled = !Setting.TaskSettings.UseDefaultCaptureSettings;
+        }
+
+        private void chkUseDefaultActions_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting.TaskSettings.UseDefaultActions = chkUseDefaultActions.Checked;
+            tpActions.Enabled = !Setting.TaskSettings.UseDefaultActions;
+        }
+
+        private void chkUseDefaultUploadSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting.TaskSettings.UseDefaultUploadSettings = chkUseDefaultUploadSettings.Checked;
+            tcUpload.Enabled = !Setting.TaskSettings.UseDefaultUploadSettings;
         }
     }
 }

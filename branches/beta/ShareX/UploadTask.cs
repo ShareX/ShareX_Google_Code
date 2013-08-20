@@ -99,7 +99,7 @@ namespace ShareX
             task.Info.DataType = dataType;
             task.Info.FilePath = filePath;
 
-            if (task.Info.Settings.FileUploadUseNamePattern)
+            if (task.Info.Settings.UploadSettings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
                 task.Info.FileName = TaskHelper.GetFilename(task.Info.Settings, ext);
@@ -107,7 +107,7 @@ namespace ShareX
 
             task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-            if (dataType == EDataType.Image && task.Info.Settings.UseImageFormat2FileUpload)
+            if (dataType == EDataType.Image && task.Info.Settings.ImageSettings.UseImageFormat2FileUpload)
             {
                 TaskHelper.PrepareFileImage(task);
             }
@@ -324,15 +324,15 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.Settings.WatermarkConfig != null)
+                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.Settings.ImageSettings.WatermarkConfig != null)
                 {
-                    WatermarkManager watermarkManager = new WatermarkManager(Info.Settings.WatermarkConfig);
+                    WatermarkManager watermarkManager = new WatermarkManager(Info.Settings.ImageSettings.WatermarkConfig);
                     watermarkManager.ApplyWatermark(tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
                 {
-                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.Settings.BorderType, Info.Settings.BorderColor, Info.Settings.BorderSize);
+                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.Settings.ImageSettings.BorderType, Info.Settings.ImageSettings.BorderColor, Info.Settings.ImageSettings.BorderSize);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))

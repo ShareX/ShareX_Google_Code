@@ -42,22 +42,22 @@ namespace ShareX
         {
             ImageData imageData = new ImageData();
 
-            if (taskSettings.ImageAutoResize)
+            if (taskSettings.ImageSettings.ImageAutoResize)
             {
-                img = ResizeImage(taskSettings, img, taskSettings.ImageScaleType);
+                img = ResizeImage(taskSettings, img, taskSettings.ImageSettings.ImageScaleType);
             }
 
-            imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageFormat);
+            imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat);
 
-            int sizeLimit = taskSettings.ImageSizeLimit * 1000;
-            if (taskSettings.ImageFormat != taskSettings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
+            int sizeLimit = taskSettings.ImageSettings.ImageSizeLimit * 1000;
+            if (taskSettings.ImageSettings.ImageFormat != taskSettings.ImageSettings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
             {
-                imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageFormat2);
-                imageData.ImageFormat = taskSettings.ImageFormat2;
+                imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat2);
+                imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat2;
             }
             else
             {
-                imageData.ImageFormat = taskSettings.ImageFormat;
+                imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat;
             }
 
             return imageData;
@@ -65,15 +65,15 @@ namespace ShareX
 
         public static void PrepareFileImage(UploadTask task)
         {
-            int sizeLimit = task.Info.Settings.ImageSizeLimit * 1000;
+            int sizeLimit = task.Info.Settings.ImageSettings.ImageSizeLimit * 1000;
 
             if (sizeLimit > 0 && task.Data.Length > sizeLimit)
             {
                 using (Stream stream = task.Data)
                 using (Image img = Image.FromStream(stream))
                 {
-                    task.Data = SaveImage(task.Info.Settings, img, task.Info.Settings.ImageFormat2);
-                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.Settings.ImageFormat2.GetDescription());
+                    task.Data = SaveImage(task.Info.Settings, img, task.Info.Settings.ImageSettings.ImageFormat2);
+                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.Settings.ImageSettings.ImageFormat2.GetDescription());
                 }
             }
         }
@@ -85,26 +85,26 @@ namespace ShareX
             switch (scaleType)
             {
                 case ImageScaleType.Percentage:
-                    width = img.Width * (taskSettings.ImageScalePercentageWidth / 100f);
-                    height = img.Height * (taskSettings.ImageScalePercentageHeight / 100f);
+                    width = img.Width * (taskSettings.ImageSettings.ImageScalePercentageWidth / 100f);
+                    height = img.Height * (taskSettings.ImageSettings.ImageScalePercentageHeight / 100f);
                     break;
                 case ImageScaleType.Width:
-                    width = taskSettings.ImageScaleToWidth;
-                    height = taskSettings.ImageKeepAspectRatio ? img.Height * (width / img.Width) : img.Height;
+                    width = taskSettings.ImageSettings.ImageScaleToWidth;
+                    height = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Height * (width / img.Width) : img.Height;
                     break;
                 case ImageScaleType.Height:
-                    height = taskSettings.ImageScaleToHeight;
-                    width = taskSettings.ImageKeepAspectRatio ? img.Width * (height / img.Height) : img.Width;
+                    height = taskSettings.ImageSettings.ImageScaleToHeight;
+                    width = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Width * (height / img.Height) : img.Width;
                     break;
                 case ImageScaleType.Specific:
-                    width = taskSettings.ImageScaleSpecificWidth;
-                    height = taskSettings.ImageScaleSpecificHeight;
+                    width = taskSettings.ImageSettings.ImageScaleSpecificWidth;
+                    height = taskSettings.ImageSettings.ImageScaleSpecificHeight;
                     break;
             }
 
             if (width > 0 && height > 0)
             {
-                return CaptureHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageUseSmoothScaling);
+                return CaptureHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageSettings.ImageUseSmoothScaling);
             }
 
             return img;
@@ -122,10 +122,10 @@ namespace ShareX
                     img.Save(stream, ImageFormat.Png);
                     break;
                 case EImageFormat.JPEG:
-                    img.SaveJPG(stream, taskSettings.ImageJPEGQuality, true);
+                    img.SaveJPG(stream, taskSettings.ImageSettings.ImageJPEGQuality, true);
                     break;
                 case EImageFormat.GIF:
-                    img.SaveGIF(stream, taskSettings.ImageGIFQuality);
+                    img.SaveGIF(stream, taskSettings.ImageSettings.ImageGIFQuality);
                     break;
                 case EImageFormat.BMP:
                     img.Save(stream, ImageFormat.Bmp);
@@ -142,18 +142,18 @@ namespace ShareX
         {
             NameParser nameParser = new NameParser(NameParserType.FileName)
             {
-                AutoIncrementNumber = taskSettings.AutoIncrementNumber,
+                AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber,
                 MaxNameLength = 100
             };
 
-            string filename = nameParser.Parse(taskSettings.NameFormatPattern);
+            string filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPattern);
 
             if (!string.IsNullOrEmpty(extension))
             {
                 filename += "." + extension.TrimStart('.');
             }
 
-            taskSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
@@ -165,7 +165,7 @@ namespace ShareX
             NameParser nameParser = new NameParser(NameParserType.FileName);
             nameParser.MaxNameLength = 100;
             nameParser.Picture = image;
-            nameParser.AutoIncrementNumber = taskSettings.AutoIncrementNumber;
+            nameParser.AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber;
 
             ImageTag imageTag = image.Tag as ImageTag;
 
@@ -176,14 +176,14 @@ namespace ShareX
 
             if (string.IsNullOrEmpty(nameParser.WindowText))
             {
-                filename = nameParser.Parse(taskSettings.NameFormatPattern) + ".bmp";
+                filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPattern) + ".bmp";
             }
             else
             {
-                filename = nameParser.Parse(taskSettings.NameFormatPatternActiveWindow) + ".bmp";
+                filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPatternActiveWindow) + ".bmp";
             }
 
-            taskSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
@@ -243,8 +243,8 @@ namespace ShareX
         public static Image DrawShadow(TaskSettings taskSettings, Image img)
         {
             Point offsetChange;
-            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, taskSettings.ShadowDarkness, taskSettings.ShadowSize,
-                taskSettings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
+            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, taskSettings.ImageSettings.ShadowDarkness, taskSettings.ImageSettings.ShadowSize,
+                taskSettings.ImageSettings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
         }
 
         public static void AddDefaultExternalPrograms(TaskSettings taskSettings)
@@ -293,7 +293,7 @@ namespace ShareX
             using (RectangleRegion surface = new RectangleRegion())
             {
                 surface.AreaManager.WindowCaptureMode = true;
-                surface.Config = taskSettings.SurfaceOptions;
+                surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
                 surface.Config.QuickCrop = true;
                 surface.Prepare();
                 surface.ShowDialog();
