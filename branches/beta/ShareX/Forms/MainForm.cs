@@ -98,7 +98,7 @@ namespace ShareX
             AddEnumItems<UrlShortenerType>(x => Program.Settings.Workflow.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
             AddEnumItems<SocialNetworkingService>(x => Program.Settings.Workflow.SocialNetworkingServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
 
-            tsbDebug.Visible = Program.IsDebug;
+            tsmiDebug.Visible = Program.IsDebug;
 
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
@@ -738,7 +738,7 @@ namespace ShareX
 
         private void tsmiHelpDebug_Click(object sender, EventArgs e)
         {
-            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
+            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger) { Icon = this.Icon };
             dlg.Show();
         }
 
@@ -1027,8 +1027,6 @@ namespace ShareX
         }
 
         #endregion UploadInfoMenu events
-
-
 
         #endregion Form events
     }

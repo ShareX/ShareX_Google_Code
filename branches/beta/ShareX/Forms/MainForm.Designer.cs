@@ -83,13 +83,6 @@ namespace ShareX
             this.tsmiSocialServices = new System.Windows.Forms.ToolStripMenuItem();
             this.tssDestinations1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiUploadersConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbDebug = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmiTestImageUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestTextUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestFileUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tssMain1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,9 +95,16 @@ namespace ShareX
             this.tsmiWorkflows = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDefaultWorkflowSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddbHelp = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsmiDebug = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestImageUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestTextUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestFileUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelpDebug = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbDonate = new System.Windows.Forms.ToolStripButton();
+            this.tsmiDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lblSplitter2 = new System.Windows.Forms.Label();
             this.lblSplitter = new System.Windows.Forms.Label();
@@ -228,15 +228,13 @@ namespace ShareX
             this.tsddbAfterCaptureTasks,
             this.tsddbAfterUploadTasks,
             this.tsddbDestinations,
-            this.tsbDebug,
             this.tssMain1,
             this.tsddbTools,
             this.tsbScreenshotsFolder,
             this.tsbHistory,
             this.tsbImageHistory,
             this.tsbSettings,
-            this.tsddbHelp,
-            this.tsbDonate});
+            this.tsddbHelp});
             this.tsMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
@@ -485,70 +483,6 @@ namespace ShareX
             this.tsmiUploadersConfig.Text = "Outputs configuration...";
             this.tsmiUploadersConfig.Click += new System.EventHandler(this.tsddbUploadersConfig_Click);
             // 
-            // tsbDebug
-            // 
-            this.tsbDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiTestImageUpload,
-            this.tsmiTestTextUpload,
-            this.tsmiTestFileUpload,
-            this.tsmiTestURLShortener,
-            this.tsmiTestUploaders,
-            this.tsmiTestShapeCapture});
-            this.tsbDebug.Image = global::ShareX.Properties.Resources.block;
-            this.tsbDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDebug.Name = "tsbDebug";
-            this.tsbDebug.Size = new System.Drawing.Size(147, 20);
-            this.tsbDebug.Text = "Debug";
-            // 
-            // tsmiTestImageUpload
-            // 
-            this.tsmiTestImageUpload.Image = global::ShareX.Properties.Resources.image;
-            this.tsmiTestImageUpload.Name = "tsmiTestImageUpload";
-            this.tsmiTestImageUpload.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestImageUpload.Text = "Test image upload";
-            this.tsmiTestImageUpload.Click += new System.EventHandler(this.tsmiTestImageUpload_Click);
-            // 
-            // tsmiTestTextUpload
-            // 
-            this.tsmiTestTextUpload.Image = global::ShareX.Properties.Resources.notebook;
-            this.tsmiTestTextUpload.Name = "tsmiTestTextUpload";
-            this.tsmiTestTextUpload.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestTextUpload.Text = "Test text upload";
-            this.tsmiTestTextUpload.Click += new System.EventHandler(this.tsmiTestTextUpload_Click);
-            // 
-            // tsmiTestFileUpload
-            // 
-            this.tsmiTestFileUpload.Image = global::ShareX.Properties.Resources.application_block;
-            this.tsmiTestFileUpload.Name = "tsmiTestFileUpload";
-            this.tsmiTestFileUpload.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestFileUpload.Text = "Test file upload";
-            this.tsmiTestFileUpload.Click += new System.EventHandler(this.tsmiTestFileUpload_Click);
-            // 
-            // tsmiTestURLShortener
-            // 
-            this.tsmiTestURLShortener.Image = global::ShareX.Properties.Resources.edit_scale;
-            this.tsmiTestURLShortener.Name = "tsmiTestURLShortener";
-            this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestURLShortener.Text = "Test URL shortener";
-            this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
-            // 
-            // tsmiTestUploaders
-            // 
-            this.tsmiTestUploaders.Image = global::ShareX.Properties.Resources.application_browser;
-            this.tsmiTestUploaders.Name = "tsmiTestUploaders";
-            this.tsmiTestUploaders.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestUploaders.Text = "Test uploaders";
-            this.tsmiTestUploaders.Click += new System.EventHandler(this.tsmiTestUploaders_Click);
-            // 
-            // tsmiTestShapeCapture
-            // 
-            this.tsmiTestShapeCapture.Image = global::ShareX.Properties.Resources.camera;
-            this.tsmiTestShapeCapture.Name = "tsmiTestShapeCapture";
-            this.tsmiTestShapeCapture.Size = new System.Drawing.Size(173, 22);
-            this.tsmiTestShapeCapture.Text = "Test shape capture";
-            this.tsmiTestShapeCapture.Click += new System.EventHandler(this.tsmiTestShapeCapture_Click);
-            // 
             // tssMain1
             // 
             this.tssMain1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
@@ -654,14 +588,80 @@ namespace ShareX
             // tsddbHelp
             // 
             this.tsddbHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAbout,
-            this.tsmiHelpDebug});
+            this.tsmiDebug,
+            this.tsmiDonate,
+            this.tsmiHelpDebug,
+            this.tsmiAbout});
             this.tsddbHelp.Image = global::ShareX.Properties.Resources.help;
             this.tsddbHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddbHelp.Name = "tsddbHelp";
             this.tsddbHelp.Size = new System.Drawing.Size(147, 20);
             this.tsddbHelp.Text = "Help";
+            // 
+            // tsmiDebug
+            // 
+            this.tsmiDebug.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTestImageUpload,
+            this.tsmiTestTextUpload,
+            this.tsmiTestFileUpload,
+            this.tsmiTestURLShortener,
+            this.tsmiTestUploaders,
+            this.tsmiTestShapeCapture});
+            this.tsmiDebug.Image = global::ShareX.Properties.Resources.block;
+            this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsmiDebug.Name = "tsmiDebug";
+            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDebug.Text = "Debug";
+            // 
+            // tsmiTestImageUpload
+            // 
+            this.tsmiTestImageUpload.Image = global::ShareX.Properties.Resources.image;
+            this.tsmiTestImageUpload.Name = "tsmiTestImageUpload";
+            this.tsmiTestImageUpload.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestImageUpload.Text = "Test image upload";
+            this.tsmiTestImageUpload.Click += new System.EventHandler(this.tsmiTestImageUpload_Click);
+            // 
+            // tsmiTestTextUpload
+            // 
+            this.tsmiTestTextUpload.Image = global::ShareX.Properties.Resources.notebook;
+            this.tsmiTestTextUpload.Name = "tsmiTestTextUpload";
+            this.tsmiTestTextUpload.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestTextUpload.Text = "Test text upload";
+            this.tsmiTestTextUpload.Click += new System.EventHandler(this.tsmiTestTextUpload_Click);
+            // 
+            // tsmiTestFileUpload
+            // 
+            this.tsmiTestFileUpload.Image = global::ShareX.Properties.Resources.application_block;
+            this.tsmiTestFileUpload.Name = "tsmiTestFileUpload";
+            this.tsmiTestFileUpload.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestFileUpload.Text = "Test file upload";
+            this.tsmiTestFileUpload.Click += new System.EventHandler(this.tsmiTestFileUpload_Click);
+            // 
+            // tsmiTestURLShortener
+            // 
+            this.tsmiTestURLShortener.Image = global::ShareX.Properties.Resources.edit_scale;
+            this.tsmiTestURLShortener.Name = "tsmiTestURLShortener";
+            this.tsmiTestURLShortener.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestURLShortener.Text = "Test URL shortener";
+            this.tsmiTestURLShortener.Click += new System.EventHandler(this.tsmiTestURLShortener_Click);
+            // 
+            // tsmiTestUploaders
+            // 
+            this.tsmiTestUploaders.Image = global::ShareX.Properties.Resources.application_browser;
+            this.tsmiTestUploaders.Name = "tsmiTestUploaders";
+            this.tsmiTestUploaders.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestUploaders.Text = "Test uploaders";
+            this.tsmiTestUploaders.Click += new System.EventHandler(this.tsmiTestUploaders_Click);
+            // 
+            // tsmiTestShapeCapture
+            // 
+            this.tsmiTestShapeCapture.Image = global::ShareX.Properties.Resources.camera;
+            this.tsmiTestShapeCapture.Name = "tsmiTestShapeCapture";
+            this.tsmiTestShapeCapture.Size = new System.Drawing.Size(173, 22);
+            this.tsmiTestShapeCapture.Text = "Test shape capture";
+            this.tsmiTestShapeCapture.Click += new System.EventHandler(this.tsmiTestShapeCapture_Click);
             // 
             // tsmiAbout
             // 
@@ -675,21 +675,21 @@ namespace ShareX
             // 
             // tsmiHelpDebug
             // 
-            this.tsmiHelpDebug.Image = global::ShareX.Properties.Resources.bug_go;
+            this.tsmiHelpDebug.Image = global::ShareX.Properties.Resources.bug_delete;
             this.tsmiHelpDebug.Name = "tsmiHelpDebug";
             this.tsmiHelpDebug.Size = new System.Drawing.Size(152, 22);
-            this.tsmiHelpDebug.Text = "Debug...";
+            this.tsmiHelpDebug.Text = "Debug Log...";
             this.tsmiHelpDebug.Click += new System.EventHandler(this.tsmiHelpDebug_Click);
             // 
-            // tsbDonate
+            // tsmiDonate
             // 
-            this.tsbDonate.Image = global::ShareX.Properties.Resources.present;
-            this.tsbDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsbDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDonate.Name = "tsbDonate";
-            this.tsbDonate.Size = new System.Drawing.Size(147, 20);
-            this.tsbDonate.Text = "Donate...";
-            this.tsbDonate.Click += new System.EventHandler(this.tsbDonate_Click);
+            this.tsmiDonate.Image = global::ShareX.Properties.Resources.present;
+            this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsmiDonate.Name = "tsmiDonate";
+            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDonate.Text = "Donate...";
+            this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
             // scMain
             // 
@@ -1615,14 +1615,8 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayPolygon;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayFreeHand;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayEllipse;
-        private System.Windows.Forms.ToolStripDropDownButton tsbDebug;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestImageUpload;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestTextUpload;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestShapeCapture;
         private System.Windows.Forms.ToolStripMenuItem tsmiLastRegion;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayLastRegion;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestFileUpload;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDestinations;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageUploaders;
@@ -1686,10 +1680,8 @@ namespace ShareX
         private System.Windows.Forms.ToolStripDropDownButton tsddbTools;
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenColorPicker;
         private System.Windows.Forms.ToolStripMenuItem tsmiClearList;
-        private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
         private System.Windows.Forms.ToolStripMenuItem tsmiScreenRecorder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayScreenRecorder;
-        private System.Windows.Forms.ToolStripButton tsbDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiHashCheck;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayHashCheck;
@@ -1711,5 +1703,13 @@ namespace ShareX
         private System.Windows.Forms.ToolStripDropDownButton tsddbHelp;
         private System.Windows.Forms.ToolStripMenuItem ssToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelpDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDonate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDebug;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestImageUpload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestTextUpload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestFileUpload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestShapeCapture;
     }
 }

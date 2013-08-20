@@ -32,18 +32,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ShareX
+namespace HelpersLib
 {
-    public partial class WorkflowsForm : Form
+    public partial class DebugForm : Form
     {
-        public WorkflowsForm()
+        public DebugForm(string appName, Logger MyLogger)
         {
             InitializeComponent();
 
-            if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
-            {
-                hmHotkeys.PrepareHotkeys(Program.MainForm.HotkeyManager);
-            }
+            this.Text = appName + " - Debug log";
+            txtDebugLog.Text = MyLogger.Messages.ToString();
+            txtDebugLog.SelectionStart = txtDebugLog.TextLength;
+            txtDebugLog.ScrollToCaret();
         }
     }
 }

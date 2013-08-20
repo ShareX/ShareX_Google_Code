@@ -37,6 +37,7 @@
             this.txtDebugLog.Location = new System.Drawing.Point(0, 0);
             this.txtDebugLog.Multiline = true;
             this.txtDebugLog.Name = "txtDebugLog";
+            this.txtDebugLog.ReadOnly = true;
             this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtDebugLog.Size = new System.Drawing.Size(536, 513);
             this.txtDebugLog.TabIndex = 1;
@@ -50,6 +51,7 @@
             this.Controls.Add(this.txtDebugLog);
             this.MinimumSize = new System.Drawing.Size(552, 552);
             this.Name = "DebugForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Debug Log";
             this.ResumeLayout(false);
             this.PerformLayout();
