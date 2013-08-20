@@ -159,14 +159,6 @@
             this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
-            this.tpWatchFolders = new System.Windows.Forms.TabPage();
-            this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
-            this.lvWatchFolderList = new System.Windows.Forms.ListView();
-            this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderFilter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnWatchFolderRemove = new System.Windows.Forms.Button();
-            this.btnWatchFolderAdd = new System.Windows.Forms.Button();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.tcHotkeySettings.SuspendLayout();
@@ -204,7 +196,6 @@
             this.tabControl1.SuspendLayout();
             this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
-            this.tpWatchFolders.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -403,7 +394,6 @@
             this.tcHotkeySettings.Controls.Add(this.tpCapture);
             this.tcHotkeySettings.Controls.Add(this.tpActions2);
             this.tcHotkeySettings.Controls.Add(this.tpUpload);
-            this.tcHotkeySettings.Controls.Add(this.tpWatchFolders);
             this.tcHotkeySettings.Controls.Add(this.tpAdvanced);
             this.tcHotkeySettings.Location = new System.Drawing.Point(8, 8);
             this.tcHotkeySettings.Name = "tcHotkeySettings";
@@ -1764,79 +1754,6 @@
             this.cbClipboardUploadExcludeImageEffects.UseVisualStyleBackColor = true;
             this.cbClipboardUploadExcludeImageEffects.CheckedChanged += new System.EventHandler(this.cbClipboardUploadExcludeImageEffects_CheckedChanged);
             // 
-            // tpWatchFolders
-            // 
-            this.tpWatchFolders.Controls.Add(this.cbWatchFolderEnabled);
-            this.tpWatchFolders.Controls.Add(this.lvWatchFolderList);
-            this.tpWatchFolders.Controls.Add(this.btnWatchFolderRemove);
-            this.tpWatchFolders.Controls.Add(this.btnWatchFolderAdd);
-            this.tpWatchFolders.Location = new System.Drawing.Point(4, 22);
-            this.tpWatchFolders.Name = "tpWatchFolders";
-            this.tpWatchFolders.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWatchFolders.Size = new System.Drawing.Size(518, 336);
-            this.tpWatchFolders.TabIndex = 5;
-            this.tpWatchFolders.Text = "Watch folders";
-            this.tpWatchFolders.UseVisualStyleBackColor = true;
-            // 
-            // cbWatchFolderEnabled
-            // 
-            this.cbWatchFolderEnabled.AutoSize = true;
-            this.cbWatchFolderEnabled.Location = new System.Drawing.Point(8, 8);
-            this.cbWatchFolderEnabled.Name = "cbWatchFolderEnabled";
-            this.cbWatchFolderEnabled.Size = new System.Drawing.Size(266, 17);
-            this.cbWatchFolderEnabled.TabIndex = 8;
-            this.cbWatchFolderEnabled.Text = "Watch folders and if new file created then upload it";
-            this.cbWatchFolderEnabled.UseVisualStyleBackColor = true;
-            this.cbWatchFolderEnabled.CheckedChanged += new System.EventHandler(this.cbWatchFolderEnabled_CheckedChanged);
-            // 
-            // lvWatchFolderList
-            // 
-            this.lvWatchFolderList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chWatchFolderFolderPath,
-            this.chWatchFolderFilter,
-            this.chWatchFolderIncludeSubdirectories});
-            this.lvWatchFolderList.FullRowSelect = true;
-            this.lvWatchFolderList.Location = new System.Drawing.Point(8, 64);
-            this.lvWatchFolderList.Name = "lvWatchFolderList";
-            this.lvWatchFolderList.Size = new System.Drawing.Size(472, 208);
-            this.lvWatchFolderList.TabIndex = 11;
-            this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
-            this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
-            // 
-            // chWatchFolderFolderPath
-            // 
-            this.chWatchFolderFolderPath.Text = "Folder path";
-            this.chWatchFolderFolderPath.Width = 300;
-            // 
-            // chWatchFolderFilter
-            // 
-            this.chWatchFolderFilter.Text = "Filter";
-            this.chWatchFolderFilter.Width = 100;
-            // 
-            // chWatchFolderIncludeSubdirectories
-            // 
-            this.chWatchFolderIncludeSubdirectories.Text = "Include subdirectories";
-            // 
-            // btnWatchFolderRemove
-            // 
-            this.btnWatchFolderRemove.Location = new System.Drawing.Point(88, 32);
-            this.btnWatchFolderRemove.Name = "btnWatchFolderRemove";
-            this.btnWatchFolderRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnWatchFolderRemove.TabIndex = 10;
-            this.btnWatchFolderRemove.Text = "Remove";
-            this.btnWatchFolderRemove.UseVisualStyleBackColor = true;
-            this.btnWatchFolderRemove.Click += new System.EventHandler(this.btnWatchFolderRemove_Click);
-            // 
-            // btnWatchFolderAdd
-            // 
-            this.btnWatchFolderAdd.Location = new System.Drawing.Point(8, 32);
-            this.btnWatchFolderAdd.Name = "btnWatchFolderAdd";
-            this.btnWatchFolderAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnWatchFolderAdd.TabIndex = 9;
-            this.btnWatchFolderAdd.Text = "Add";
-            this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
-            this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
-            // 
             // tpAdvanced
             // 
             this.tpAdvanced.Controls.Add(this.pgTaskSettings);
@@ -1916,8 +1833,6 @@
             this.tpUploadNamePattern.PerformLayout();
             this.tpUploadClipboard.ResumeLayout(false);
             this.tpUploadClipboard.PerformLayout();
-            this.tpWatchFolders.ResumeLayout(false);
-            this.tpWatchFolders.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -2055,14 +1970,6 @@
         private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
         private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
-        private System.Windows.Forms.TabPage tpWatchFolders;
-        private System.Windows.Forms.CheckBox cbWatchFolderEnabled;
-        private System.Windows.Forms.ListView lvWatchFolderList;
-        private System.Windows.Forms.ColumnHeader chWatchFolderFolderPath;
-        private System.Windows.Forms.ColumnHeader chWatchFolderFilter;
-        private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
-        private System.Windows.Forms.Button btnWatchFolderRemove;
-        private System.Windows.Forms.Button btnWatchFolderAdd;
         private System.Windows.Forms.TabPage tpAdvanced;
         private System.Windows.Forms.PropertyGrid pgTaskSettings;
 

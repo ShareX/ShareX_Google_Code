@@ -266,7 +266,7 @@ namespace ShareX
 
         public void Upload()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.Settings.DefaultTaskSettings);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.Settings.Workflow);
         }
 
         #endregion Other

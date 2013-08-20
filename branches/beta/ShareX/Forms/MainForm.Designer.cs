@@ -611,8 +611,8 @@ namespace ShareX
             // 
             this.tsbSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiApplicationSettings,
-            this.tsmiDefaultWorkflowSettings,
-            this.tsmiWorkflows});
+            this.tsmiWorkflows,
+            this.tsmiDefaultWorkflowSettings});
             this.tsbSettings.Image = global::ShareX.Properties.Resources.application_form;
             this.tsbSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsbSettings.ImageTransparentColor = System.Drawing.Color.Magenta;

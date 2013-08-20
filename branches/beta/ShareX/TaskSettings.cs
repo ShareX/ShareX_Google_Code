@@ -38,10 +38,10 @@ namespace ShareX
     public class TaskSettings
     {
         public bool UseDefaultAfterCaptureJob;
-        public AfterCaptureTasks AfterCaptureJob;
+        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
 
         public bool UseDefaultAfterUploadJob;
-        public AfterUploadTasks AfterUploadJob;
+        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
 
         public bool UseDefaultDestinations;
         public ImageDestination ImageDestination;
@@ -140,13 +140,6 @@ namespace ShareX
 
         #endregion Upload / Clipboard upload
 
-        #region Upload / Watch folder
-
-        public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
-
-        #endregion Upload / Watch folder
-
         #region ScreenRecord Form
 
         public int ScreenRecordFPS = 5;
@@ -189,21 +182,21 @@ namespace ShareX
             {
                 if (UseDefaultAfterCaptureJob || forceDefaultSettings)
                 {
-                    AfterCaptureJob = Program.Settings.AfterCaptureTasks;
+                    AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob;
                 }
 
                 if (UseDefaultAfterUploadJob || forceDefaultSettings)
                 {
-                    AfterUploadJob = Program.Settings.AfterUploadTasks;
+                    AfterUploadJob = Program.Settings.Workflow.AfterUploadJob;
                 }
 
                 if (UseDefaultDestinations || forceDefaultSettings)
                 {
-                    ImageDestination = Program.Settings.ImageUploaderDestination;
-                    TextDestination = Program.Settings.TextUploaderDestination;
-                    FileDestination = Program.Settings.FileUploaderDestination;
-                    URLShortenerDestination = Program.Settings.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = Program.Settings.SocialServiceDestination;
+                    ImageDestination = Program.Settings.Workflow.ImageDestination;
+                    TextDestination = Program.Settings.Workflow.TextDestination;
+                    FileDestination = Program.Settings.Workflow.FileDestination;
+                    URLShortenerDestination = Program.Settings.Workflow.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = Program.Settings.Workflow.SocialNetworkingServiceDestination;
                 }
 
                 return true;

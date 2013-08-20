@@ -89,7 +89,7 @@ namespace ShareX
                 {
                     TaskSettings taskSettings = new TaskSettings()
                     {
-                        AfterCaptureJob = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.AnnotateImage),
+                        AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.AnnotateImage),
                         DisableNotifications = true
                     };
 

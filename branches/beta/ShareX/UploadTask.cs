@@ -214,7 +214,7 @@ namespace ShareX
         {
             Info.StartTime = DateTime.UtcNow;
 
-            DoThreadJob(Info.Settings);
+            DoThreadJob();
 
             if (Info.IsUploadJob)
             {
@@ -224,7 +224,7 @@ namespace ShareX
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     Program.Settings.ShowUploadWarning = false;
-                    Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.UploadImageToHost);
+                    Program.Settings.Workflow.AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
                     RequestSettingUpdate = true;
                     Stop();
                 }
@@ -320,7 +320,7 @@ namespace ShareX
             return isError;
         }
 
-        private void DoThreadJob(TaskSettings taskSettings)
+        private void DoThreadJob()
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
@@ -337,7 +337,7 @@ namespace ShareX
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
                 {
-                    tempImage = TaskHelper.DrawShadow(taskSettings, tempImage);
+                    tempImage = TaskHelper.DrawShadow(Info.Settings, tempImage);
                 }
 
                 if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
@@ -361,7 +361,7 @@ namespace ShareX
                 {
                     using (tempImage)
                     {
-                        ImageData imageData = TaskHelper.PrepareImage(tempImage, taskSettings);
+                        ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.Settings);
                         Data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 

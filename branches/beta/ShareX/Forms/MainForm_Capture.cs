@@ -425,7 +425,7 @@ namespace ShareX
 
         private void tsmiFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Screen, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Screen, Program.Settings.Workflow);
         }
 
         private void tsddbCapture_DropDownOpening(object sender, EventArgs e)
@@ -439,7 +439,7 @@ namespace ShareX
             WindowInfo wi = tsi.Tag as WindowInfo;
             if (wi != null)
             {
-                CaptureWindow(wi.Handle, Program.Settings.DefaultTaskSettings);
+                CaptureWindow(wi.Handle, Program.Settings.Workflow);
             }
         }
 
@@ -449,53 +449,53 @@ namespace ShareX
             Rectangle rectangle = (Rectangle)tsi.Tag;
             if (!rectangle.IsEmpty)
             {
-                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.DefaultTaskSettings);
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.Workflow);
             }
         }
 
         private void tsmiWindowRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RectangleWindow, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.RectangleWindow, Program.Settings.Workflow);
         }
 
         private void tsmiRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Rectangle, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Rectangle, Program.Settings.Workflow);
         }
 
         private void tsmiRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RoundedRectangle, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.RoundedRectangle, Program.Settings.Workflow);
         }
 
         private void tsmiEllipse_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Ellipse, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Ellipse, Program.Settings.Workflow);
         }
 
         private void tsmiTriangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Triangle, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Triangle, Program.Settings.Workflow);
         }
 
         private void tsmiDiamond_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Diamond, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Diamond, Program.Settings.Workflow);
         }
 
         private void tsmiPolygon_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Polygon, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Polygon, Program.Settings.Workflow);
         }
 
         private void tsmiFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Freehand, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.Freehand, Program.Settings.Workflow);
         }
 
         private void tsmiLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.LastRegion, Program.Settings.DefaultTaskSettings);
+            CaptureScreenshot(CaptureType.LastRegion, Program.Settings.Workflow);
         }
 
         #endregion Menu events
@@ -504,7 +504,7 @@ namespace ShareX
 
         private void tsmiTrayFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Screen, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Screen, Program.Settings.Workflow, false);
         }
 
         private void tsmiCapture_DropDownOpening(object sender, EventArgs e)
@@ -518,7 +518,7 @@ namespace ShareX
             WindowInfo wi = tsi.Tag as WindowInfo;
             if (wi != null)
             {
-                CaptureWindow(wi.Handle, Program.Settings.DefaultTaskSettings, false);
+                CaptureWindow(wi.Handle, Program.Settings.Workflow, false);
             }
         }
 
@@ -528,53 +528,53 @@ namespace ShareX
             Rectangle rectangle = (Rectangle)tsi.Tag;
             if (!rectangle.IsEmpty)
             {
-                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.DefaultTaskSettings, false);
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.Settings.Workflow, false);
             }
         }
 
         private void tsmiTrayWindowRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RectangleWindow, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.RectangleWindow, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Rectangle, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Rectangle, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RoundedRectangle, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.RoundedRectangle, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayEllipse_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Ellipse, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Ellipse, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayTriangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Triangle, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Triangle, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayDiamond_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Diamond, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Diamond, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayPolygon_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Polygon, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Polygon, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Freehand, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.Freehand, Program.Settings.Workflow, false);
         }
 
         private void tsmiTrayLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.LastRegion, Program.Settings.DefaultTaskSettings, false);
+            CaptureScreenshot(CaptureType.LastRegion, Program.Settings.Workflow, false);
         }
 
         #endregion Tray events

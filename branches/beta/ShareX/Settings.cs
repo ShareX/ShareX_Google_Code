@@ -37,13 +37,6 @@ namespace ShareX
     {
         #region Main Form
 
-        public AfterCaptureTasks AfterCaptureTasks = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
-        public AfterUploadTasks AfterUploadTasks = AfterUploadTasks.CopyURLToClipboard;
-        public ImageDestination ImageUploaderDestination = ImageDestination.Imgur;
-        public TextDestination TextUploaderDestination = TextDestination.Pastebin;
-        public FileDestination FileUploaderDestination = FileDestination.Dropbox;
-        public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
-        public SocialNetworkingService SocialServiceDestination = SocialNetworkingService.Twitter;
         public bool ShowMenu = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
@@ -88,7 +81,7 @@ namespace ShareX
         #region Hotkeys
 
         public List<HotkeySetting> HotkeyList = new List<HotkeySetting>();
-        public TaskSettings DefaultTaskSettings = new TaskSettings();
+        public TaskSettings Workflow = new TaskSettings();
 
         #endregion Hotkeys
 
@@ -115,5 +108,12 @@ namespace ShareX
         public bool IfUploadFailRetryOnce = false;
 
         #endregion Upload / General
+
+        #region Upload / Watch folder
+
+        public bool WatchFolderEnabled = false;
+        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+
+        #endregion Upload / Watch folder
     }
 }
