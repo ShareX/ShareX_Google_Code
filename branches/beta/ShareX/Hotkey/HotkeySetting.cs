@@ -33,13 +33,9 @@ namespace ShareX
 {
     public class HotkeySetting
     {
-        public string Description { get; set; }
-
         public Keys Hotkey { get; set; }
 
         public Keys HotkeyDefault { get; set; }
-
-        public EHotkey Job { get; set; }
 
         public TaskSettings TaskSettings { get; set; }
 
@@ -56,7 +52,7 @@ namespace ShareX
         {
             if (Program.Settings != null)
             {
-                TaskSettings = Program.Settings.Workflow.Copy();
+                TaskSettings = Program.DefaultTaskSettings.Copy();
             }
             else
             {
@@ -68,8 +64,8 @@ namespace ShareX
         public HotkeySetting(EHotkey job, Keys hotkey = Keys.None)
             : this()
         {
-            Job = job;
-            Description = job.GetDescription();
+            TaskSettings.Job = job;
+            TaskSettings.Description = job.GetDescription();
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
         }

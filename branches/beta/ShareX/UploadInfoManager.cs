@@ -221,9 +221,12 @@ namespace ShareX
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
         }
 
-        internal void CopyUserFormat()
+        internal void CopyCustomFormat(string format)
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, x.Info.Settings.UploadSettings.ClipboardFormat)));
+            if (!string.IsNullOrEmpty(format))
+            {
+                if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
+            }
         }
 
         #endregion Copy
@@ -266,7 +269,7 @@ namespace ShareX
 
         public void Upload()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.Settings.Workflow);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.DefaultTaskSettings);
         }
 
         #endregion Other

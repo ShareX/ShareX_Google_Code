@@ -230,6 +230,7 @@ namespace ShareX
         public static MainForm MainForm;
         public static ManualResetEvent SettingsResetEvent;
         public static ManualResetEvent UploaderSettingsResetEvent;
+        public static TaskSettings DefaultTaskSettings;
 
         [STAThread]
         private static void Main(string[] args)
@@ -336,6 +337,7 @@ namespace ShareX
         public static void LoadProgramSettings()
         {
             Settings = Settings.Load(SettingsFilePath);
+            DefaultTaskSettings = Settings.DefaultTaskSettings;
         }
 
         public static void LoadUploadersConfig()
@@ -411,7 +413,7 @@ namespace ShareX
                         MainForm.ShowActivate();
                     }
 
-                    MainForm.UseCommandLineArgs(args.CommandLineArgs, Program.Settings.Workflow);
+                    MainForm.UseCommandLineArgs(args.CommandLineArgs);
                 };
 
                 MainForm.InvokeSafe(d);

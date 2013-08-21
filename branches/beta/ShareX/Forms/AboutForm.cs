@@ -97,7 +97,7 @@ namespace ShareX
             {
                 if (assembly.Location.StartsWith(directoryPath, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    sb.AppendLine(assembly.ManifestModule.Name);
+                    sb.AppendLine(assembly.ManifestModule.FullyQualifiedName);
                 }
             }
             MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);

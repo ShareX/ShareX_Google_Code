@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AviWriter.cs" />
+    <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ClipboardHelper.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
@@ -85,6 +86,12 @@
     </Compile>
     <Compile Include="Debug\DebugTimer.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Forms\ClipboardFormatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClipboardFormatForm.Designer.cs">
+      <DependentUpon>ClipboardFormatForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HashCheckForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
       <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClipboardFormatForm.resx">
+      <DependentUpon>ClipboardFormatForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>

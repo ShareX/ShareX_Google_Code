@@ -80,8 +80,8 @@ namespace ShareX
 
         #region Hotkeys
 
-        public List<HotkeySetting> HotkeyList = new List<HotkeySetting>();
-        public TaskSettings Workflow = new TaskSettings(true);
+        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+        public TaskSettings DefaultTaskSettings = new TaskSettings(true);
 
         #endregion Hotkeys
 
@@ -106,6 +106,8 @@ namespace ShareX
         public int UploadLimit = 5;
         public int BufferSizePower = 5;
         public bool IfUploadFailRetryOnce = false;
+
+        public List<ClipboardFormat> ClipboardFormats = new List<ClipboardFormat>();
 
         #endregion Upload / General
 

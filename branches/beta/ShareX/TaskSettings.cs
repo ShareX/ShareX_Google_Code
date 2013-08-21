@@ -128,7 +128,6 @@ namespace ShareX
         public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
         public int AutoIncrementNumber = 0;
         public bool FileUploadUseNamePattern = false;
-        public string ClipboardFormat = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>";
 
         #endregion Upload / Name pattern
 
@@ -144,6 +143,9 @@ namespace ShareX
 
     public class TaskSettings
     {
+        public string Description;
+        public EHotkey Job;
+
         public bool UseDefaultAfterCaptureJob;
         public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
 
@@ -196,26 +198,26 @@ namespace ShareX
         {
             if (Program.Settings != null)
             {
+                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
+
                 if (UseDefaultAfterCaptureJob || forceDefaultSettings)
                 {
-                    AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob;
+                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
                 }
 
                 if (UseDefaultAfterUploadJob || forceDefaultSettings)
                 {
-                    AfterUploadJob = Program.Settings.Workflow.AfterUploadJob;
+                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
                 }
 
                 if (UseDefaultDestinations || forceDefaultSettings)
                 {
-                    ImageDestination = Program.Settings.Workflow.ImageDestination;
-                    TextDestination = Program.Settings.Workflow.TextDestination;
-                    FileDestination = Program.Settings.Workflow.FileDestination;
-                    URLShortenerDestination = Program.Settings.Workflow.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = Program.Settings.Workflow.SocialNetworkingServiceDestination;
+                    ImageDestination = defaultWorkflow.ImageDestination;
+                    TextDestination = defaultWorkflow.TextDestination;
+                    FileDestination = defaultWorkflow.FileDestination;
+                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
                 }
-
-                TaskSettings defaultWorkflow = Program.Settings.Workflow.Copy();
 
                 if (UseDefaultImageSettings || forceDefaultSettings)
                 {
@@ -251,11 +253,6 @@ namespace ShareX
                 if (attr == null) continue;
                 prop.SetValue(self, attr.Value);
             }
-        }
-
-        public TaskSettings Clone()
-        {
-            return (TaskSettings)MemberwiseClone();
         }
     }
 }

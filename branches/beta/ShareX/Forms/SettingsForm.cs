@@ -92,11 +92,17 @@ namespace ShareX
 
             for (int i = 0; i < MaxBufferSizePower; i++)
             {
-                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " kB");
+                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " KiB");
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
             cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
+
+            // Upload / Clipboard formats
+            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+            {
+                AddClipboardFormat(cf);
+            }
 
             // Upload / Watch folder
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
@@ -327,17 +333,7 @@ namespace ShareX
 
         #endregion Proxy
 
-        private void btnDefaultHotkeySettings_Click(object sender, EventArgs e)
-        {
-            using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
-            {
-                Description = "Default workflow settings",
-                TaskSettings = Program.Settings.Workflow
-            }))
-            {
-                dlg.ShowDialog();
-            }
-        }
+        #region Upload / Watch folder
 
         private void btnWatchFolderAdd_Click(object sender, EventArgs e)
         {
@@ -346,7 +342,7 @@ namespace ShareX
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.Workflow);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
                     Program.Settings.WatchFolderList.Add(watchFolder);
                     AddWatchFolder(watchFolder);
 
@@ -399,5 +395,62 @@ namespace ShareX
                 }
             }
         }
+
+        #endregion Upload / Watch folder
+
+        #region Upload / Clipboard
+
+        private void AddClipboardFormat(ClipboardFormat cf)
+        {
+            ListViewItem lvi = new ListViewItem(cf.Description ?? "");
+            lvi.Tag = cf;
+            lvi.SubItems.Add(cf.Format ?? "");
+            lvClipboardFormats.Items.Add(lvi);
+        }
+
+        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
+                using (ClipboardFormatForm form = new ClipboardFormatForm(cf))
+                {
+                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        lvi = new ListViewItem(form.ClipboardFormat.Description ?? "");
+                        lvi.Tag = form.ClipboardFormat;
+                        lvi.SubItems.Add(form.ClipboardFormat.Format ?? "");
+                    }
+                }
+            }
+        }
+
+        private void btnAddClipboardFormat_Click(object sender, EventArgs e)
+        {
+            using (ClipboardFormatForm form = new ClipboardFormatForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    ClipboardFormat cf = form.ClipboardFormat;
+                    Program.Settings.ClipboardFormats.Add(cf);
+                    AddClipboardFormat(cf);
+                }
+            }
+        }
+
+        private void btnClipboardFormatRemove_Click(object sender, EventArgs e)
+        {
+            if (lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
+
+                Program.Settings.ClipboardFormats.Remove(cf);
+                lvClipboardFormats.Items.Remove(lvi);
+            }
+        }
+
+        #endregion Upload / Clipboard
     }
 }

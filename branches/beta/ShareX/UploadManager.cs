@@ -119,7 +119,7 @@ namespace ShareX
 
                 if (taskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks)
                 {
-                    tasks = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
+                    tasks = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
 
                     if (taskSettings.UploadSettings.ClipboardUploadExcludeImageEffects)
                     {
