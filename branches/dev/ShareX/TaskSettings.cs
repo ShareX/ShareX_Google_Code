@@ -143,8 +143,8 @@ namespace ShareX
 
     public class TaskSettings
     {
-        public string Description { get; set; }
-        public EHotkey Job { get; set; }
+        public string Description;
+        public EHotkey Job;
 
         public bool UseDefaultAfterCaptureJob;
         public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
@@ -198,26 +198,26 @@ namespace ShareX
         {
             if (Program.Settings != null)
             {
+                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
+
                 if (UseDefaultAfterCaptureJob || forceDefaultSettings)
                 {
-                    AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob;
+                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
                 }
 
                 if (UseDefaultAfterUploadJob || forceDefaultSettings)
                 {
-                    AfterUploadJob = Program.DefaultTaskSettings.AfterUploadJob;
+                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
                 }
 
                 if (UseDefaultDestinations || forceDefaultSettings)
                 {
-                    ImageDestination = Program.DefaultTaskSettings.ImageDestination;
-                    TextDestination = Program.DefaultTaskSettings.TextDestination;
-                    FileDestination = Program.DefaultTaskSettings.FileDestination;
-                    URLShortenerDestination = Program.DefaultTaskSettings.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = Program.DefaultTaskSettings.SocialNetworkingServiceDestination;
+                    ImageDestination = defaultWorkflow.ImageDestination;
+                    TextDestination = defaultWorkflow.TextDestination;
+                    FileDestination = defaultWorkflow.FileDestination;
+                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
                 }
-
-                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
 
                 if (UseDefaultImageSettings || forceDefaultSettings)
                 {
@@ -253,11 +253,6 @@ namespace ShareX
                 if (attr == null) continue;
                 prop.SetValue(self, attr.Value);
             }
-        }
-
-        public TaskSettings Clone()
-        {
-            return (TaskSettings)MemberwiseClone();
         }
     }
 }

@@ -42,12 +42,12 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            if (Program.Settings.HotkeyList == null)
+            if (Program.Settings.Hotkeys == null)
             {
-                Program.Settings.HotkeyList = new List<HotkeySetting>();
+                Program.Settings.Hotkeys = new List<HotkeySetting>();
             }
 
-            HotkeyManager = new HotkeyManager(this, Program.Settings.HotkeyList, HandleHotkeys);
+            HotkeyManager = new HotkeyManager(this, Program.Settings.Hotkeys, HandleHotkeys);
             HotkeyManager.RunHotkeys();
 
             string failedHotkeys;

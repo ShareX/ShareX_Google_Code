@@ -65,15 +65,15 @@ namespace ShareX
 
         public static void PrepareFileImage(UploadTask task)
         {
-            int sizeLimit = task.Info.Settings.ImageSettings.ImageSizeLimit * 1000;
+            int sizeLimit = task.Info.TaskSettings.ImageSettings.ImageSizeLimit * 1000;
 
             if (sizeLimit > 0 && task.Data.Length > sizeLimit)
             {
                 using (Stream stream = task.Data)
                 using (Image img = Image.FromStream(stream))
                 {
-                    task.Data = SaveImage(task.Info.Settings, img, task.Info.Settings.ImageSettings.ImageFormat2);
-                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.Settings.ImageSettings.ImageFormat2.GetDescription());
+                    task.Data = SaveImage(task.Info.TaskSettings, img, task.Info.TaskSettings.ImageSettings.ImageFormat2);
+                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.TaskSettings.ImageSettings.ImageFormat2.GetDescription());
                 }
             }
         }

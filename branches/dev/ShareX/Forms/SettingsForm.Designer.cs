@@ -80,7 +80,7 @@
             this.gbClipboardFormats = new System.Windows.Forms.GroupBox();
             this.btnClipboardFormatRemove = new System.Windows.Forms.Button();
             this.btnClipboardFormatAdd = new System.Windows.Forms.Button();
-            this.lvClipboardFormats = new System.Windows.Forms.ListView();
+            this.lvClipboardFormats = new HelpersLib.MyListView();
             this.chDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chFormat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
@@ -882,7 +882,7 @@
         private System.Windows.Forms.GroupBox gbClipboardFormats;
         private System.Windows.Forms.Button btnClipboardFormatRemove;
         private System.Windows.Forms.Button btnClipboardFormatAdd;
-        private System.Windows.Forms.ListView lvClipboardFormats;
+        private HelpersLib.MyListView lvClipboardFormats;
         private System.Windows.Forms.ColumnHeader chDescription;
         private System.Windows.Forms.ColumnHeader chFormat;
     }

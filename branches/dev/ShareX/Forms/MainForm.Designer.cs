@@ -1100,7 +1100,7 @@ namespace ShareX
             this.tsmiTrayWorkflows.Name = "tsmiTrayWorkflows";
             this.tsmiTrayWorkflows.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayWorkflows.Text = "Hotkey settings...";
-            this.tsmiTrayWorkflows.Click += new System.EventHandler(this.tsmiTrayWorkflows_Click);
+            this.tsmiTrayWorkflows.Click += new System.EventHandler(this.tsmiWorkflows_Click);
             // 
             // tsmiTrayDefaultWorkflowSettings
             // 
@@ -1108,7 +1108,7 @@ namespace ShareX
             this.tsmiTrayDefaultWorkflowSettings.Name = "tsmiTrayDefaultWorkflowSettings";
             this.tsmiTrayDefaultWorkflowSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayDefaultWorkflowSettings.Text = "Task settings...";
-            this.tsmiTrayDefaultWorkflowSettings.Click += new System.EventHandler(this.tsmiTrayDefaultWorkflowSettings_Click);
+            this.tsmiTrayDefaultWorkflowSettings.Click += new System.EventHandler(this.tsmiDefaultWorkflowSettings_Click);
             // 
             // tsmiTrayTools
             // 
