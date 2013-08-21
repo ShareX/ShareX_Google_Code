@@ -281,6 +281,15 @@ namespace ShareX
                             tsmiCopyFileNameWithExtension.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
                             tsmiCopyFolder.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
 
+                            tsmiCopyCustomFormat.DropDownItems.Clear();
+                            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+                            {
+                                ToolStripMenuItem tsmiClipboardFormat = new ToolStripMenuItem(cf.Description);
+                                tsmiClipboardFormat.Tag = cf;
+                                tsmiClipboardFormat.Click += tsmiClipboardFormat_Click;
+                                tsmiCopyCustomFormat.DropDownItems.Add(tsmiClipboardFormat);
+                            }
+
                             if (!scMain.Panel2Collapsed)
                             {
                                 if (uim.SelectedItems[0].IsImageFile)
@@ -309,6 +318,13 @@ namespace ShareX
             cmsUploadInfo.ResumeLayout();
         }
 
+        void tsmiClipboardFormat_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmiClipboardFormat = sender as ToolStripMenuItem;
+            ClipboardFormat cf = tsmiClipboardFormat.Tag as ClipboardFormat;
+            uim.CopyCustomFormat(cf.Format);
+        }
+
         private void LoadSettings()
         {
             niTray.Icon = Resources.sharex_16px_6;
@@ -327,6 +343,15 @@ namespace ShareX
             }
 
             UpdatePreviewSplitter();
+
+            if (Program.Settings.ClipboardFormats.Count == 0)
+            {
+                Program.Settings.ClipboardFormats.Add(new ClipboardFormat()
+                {
+                    Description = "HTML link",
+                    Format = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>"
+                });
+            }
 
             if (Program.Settings.WatchFolderEnabled)
             {

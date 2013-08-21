@@ -221,9 +221,12 @@ namespace ShareX
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
         }
 
-        internal void CopyUserFormat()
+        internal void CopyCustomFormat(string format)
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, Program.Settings.ClipboardFormat)));
+            if (!string.IsNullOrEmpty(format))
+            {
+                if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
+            }
         }
 
         #endregion Copy
