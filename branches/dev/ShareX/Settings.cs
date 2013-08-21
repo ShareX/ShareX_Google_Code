@@ -107,6 +107,8 @@ namespace ShareX
         public int BufferSizePower = 5;
         public bool IfUploadFailRetryOnce = false;
 
+        public string ClipboardFormat = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>";
+
         #endregion Upload / General
 
         #region Upload / Watch folder

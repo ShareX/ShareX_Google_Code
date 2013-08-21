@@ -585,9 +585,9 @@
             this.cbIfUploadFailRetryOnce.AutoSize = true;
             this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 80);
             this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
-            this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(192, 17);
+            this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(223, 17);
             this.cbIfUploadFailRetryOnce.TabIndex = 11;
-            this.cbIfUploadFailRetryOnce.Text = "If upload fail then retry upload once";
+            this.cbIfUploadFailRetryOnce.Text = "If upload fails then retry upload once more";
             this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
             // 
             // nudUploadLimit
