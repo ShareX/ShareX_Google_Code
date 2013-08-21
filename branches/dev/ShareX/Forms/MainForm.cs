@@ -716,10 +716,10 @@ namespace ShareX
         {
             using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
             {
-                Description = "Default",
                 TaskSettings = Program.Settings.Workflow
             }))
             {
+                dlg.TreatAsDefault();
                 dlg.ShowDialog();
             }
         }

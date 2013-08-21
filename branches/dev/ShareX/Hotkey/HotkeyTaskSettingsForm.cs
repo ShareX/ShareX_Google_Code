@@ -49,11 +49,6 @@ namespace ShareX
             Icon = Resources.ShareX;
             Setting = hotkeySetting;
 
-            if (hotkeySetting.Description == "Default")
-            {
-                tcHotkeySettings.TabPages.Remove(tpTask);
-            }
-
             tbDescription.Text = hotkeySetting.Description;
             Text = Application.ProductName + " - " + hotkeySetting.Description + " - workflow settings";
             cbUseDefaultAfterCaptureSettings.Checked = hotkeySetting.TaskSettings.UseDefaultAfterCaptureJob;
@@ -798,6 +793,16 @@ namespace ShareX
         {
             Setting.TaskSettings.UseDefaultUploadSettings = chkUseDefaultUploadSettings.Checked;
             tcUpload.Enabled = !Setting.TaskSettings.UseDefaultUploadSettings;
+        }
+
+        internal void TreatAsDefault()
+        {
+            Text = Application.ProductName + " - Task settings";
+            tcHotkeySettings.TabPages.Remove(tpTask);
+            chkUseDefaultImageSettings.Enabled = false;
+            chkUseDefaultCaptureSettings.Enabled = false;
+            chkUseDefaultActions.Enabled = false;
+            chkUseDefaultUploadSettings.Enabled = false;
         }
     }
 }
