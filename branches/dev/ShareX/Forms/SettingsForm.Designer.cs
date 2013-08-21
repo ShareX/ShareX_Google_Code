@@ -688,6 +688,7 @@
             this.lvClipboardFormats.TabIndex = 12;
             this.lvClipboardFormats.UseCompatibleStateImageBehavior = false;
             this.lvClipboardFormats.View = System.Windows.Forms.View.Details;
+            this.lvClipboardFormats.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvClipboardFormats_MouseDoubleClick);
             // 
             // chDescription
             // 

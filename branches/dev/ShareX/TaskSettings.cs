@@ -143,6 +143,9 @@ namespace ShareX
 
     public class TaskSettings
     {
+        public string Description { get; set; }
+        public EHotkey Job { get; set; }
+
         public bool UseDefaultAfterCaptureJob;
         public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
 
@@ -197,24 +200,24 @@ namespace ShareX
             {
                 if (UseDefaultAfterCaptureJob || forceDefaultSettings)
                 {
-                    AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob;
+                    AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob;
                 }
 
                 if (UseDefaultAfterUploadJob || forceDefaultSettings)
                 {
-                    AfterUploadJob = Program.Settings.Workflow.AfterUploadJob;
+                    AfterUploadJob = Program.DefaultTaskSettings.AfterUploadJob;
                 }
 
                 if (UseDefaultDestinations || forceDefaultSettings)
                 {
-                    ImageDestination = Program.Settings.Workflow.ImageDestination;
-                    TextDestination = Program.Settings.Workflow.TextDestination;
-                    FileDestination = Program.Settings.Workflow.FileDestination;
-                    URLShortenerDestination = Program.Settings.Workflow.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = Program.Settings.Workflow.SocialNetworkingServiceDestination;
+                    ImageDestination = Program.DefaultTaskSettings.ImageDestination;
+                    TextDestination = Program.DefaultTaskSettings.TextDestination;
+                    FileDestination = Program.DefaultTaskSettings.FileDestination;
+                    URLShortenerDestination = Program.DefaultTaskSettings.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = Program.DefaultTaskSettings.SocialNetworkingServiceDestination;
                 }
 
-                TaskSettings defaultWorkflow = Program.Settings.Workflow.Copy();
+                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
 
                 if (UseDefaultImageSettings || forceDefaultSettings)
                 {

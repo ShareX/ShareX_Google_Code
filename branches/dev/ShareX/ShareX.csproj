@@ -12,7 +12,7 @@
     <AssemblyName>ShareX</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Resources\ShareX.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ShareXIcon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -444,6 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

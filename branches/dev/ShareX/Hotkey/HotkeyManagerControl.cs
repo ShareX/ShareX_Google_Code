@@ -125,7 +125,7 @@ namespace ShareX
         {
             if (Selected != null)
             {
-                using (HotkeyTaskSettingsForm taskSettingsForm = new HotkeyTaskSettingsForm(Selected.Setting))
+                using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(Selected.Setting.TaskSettings))
                 {
                     if (taskSettingsForm.ShowDialog() == DialogResult.OK)
                     {

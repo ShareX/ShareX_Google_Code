@@ -190,6 +190,8 @@ namespace ShareX
             this.tsmiCopyForumImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyForumLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tssCopy4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCopyCustomFormat = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCopyFilePath = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
@@ -205,8 +207,6 @@ namespace ShareX
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyCustomFormat = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -498,7 +498,7 @@ namespace ShareX
             // 
             // tsmiUploadersConfig
             // 
-            this.tsmiUploadersConfig.Image = global::ShareX.Properties.Resources.hammer__arrow;
+            this.tsmiUploadersConfig.Image = global::ShareX.Properties.Resources.hammer_arrow;
             this.tsmiUploadersConfig.Name = "tsmiUploadersConfig";
             this.tsmiUploadersConfig.Size = new System.Drawing.Size(188, 22);
             this.tsmiUploadersConfig.Text = "Destination settings...";
@@ -514,7 +514,7 @@ namespace ShareX
             // 
             // tsmiDefaultWorkflowSettings
             // 
-            this.tsmiDefaultWorkflowSettings.Image = global::ShareX.Properties.Resources.hammer__pencil;
+            this.tsmiDefaultWorkflowSettings.Image = global::ShareX.Properties.Resources.hammer_pencil;
             this.tsmiDefaultWorkflowSettings.Name = "tsmiDefaultWorkflowSettings";
             this.tsmiDefaultWorkflowSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiDefaultWorkflowSettings.Text = "Task settings...";
@@ -1084,11 +1084,11 @@ namespace ShareX
             this.tsmiTrayApplicationSettings.Name = "tsmiTrayApplicationSettings";
             this.tsmiTrayApplicationSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayApplicationSettings.Text = "Application settings...";
-            this.tsmiTrayApplicationSettings.Click += new System.EventHandler(this.tsmiTrayApplicationSettings_Click);
+            this.tsmiTrayApplicationSettings.Click += new System.EventHandler(this.tsmiApplicationSettings_Click);
             // 
             // tsmiTrayUploadersConfig
             // 
-            this.tsmiTrayUploadersConfig.Image = global::ShareX.Properties.Resources.hammer__arrow;
+            this.tsmiTrayUploadersConfig.Image = global::ShareX.Properties.Resources.hammer_arrow;
             this.tsmiTrayUploadersConfig.Name = "tsmiTrayUploadersConfig";
             this.tsmiTrayUploadersConfig.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayUploadersConfig.Text = "Destination settings...";
@@ -1104,7 +1104,7 @@ namespace ShareX
             // 
             // tsmiTrayDefaultWorkflowSettings
             // 
-            this.tsmiTrayDefaultWorkflowSettings.Image = global::ShareX.Properties.Resources.hammer__pencil;
+            this.tsmiTrayDefaultWorkflowSettings.Image = global::ShareX.Properties.Resources.hammer_pencil;
             this.tsmiTrayDefaultWorkflowSettings.Name = "tsmiTrayDefaultWorkflowSettings";
             this.tsmiTrayDefaultWorkflowSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayDefaultWorkflowSettings.Text = "Task settings...";
@@ -1207,7 +1207,7 @@ namespace ShareX
             this.tsmiShowPreview});
             this.cmsUploadInfo.Name = "cmsHistory";
             this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(159, 280);
+            this.cmsUploadInfo.Size = new System.Drawing.Size(159, 258);
             // 
             // tsmiStopUpload
             // 
@@ -1418,6 +1418,17 @@ namespace ShareX
             this.tssCopy4.Name = "tssCopy4";
             this.tssCopy4.Size = new System.Drawing.Size(230, 6);
             // 
+            // tsmiCopyCustomFormat
+            // 
+            this.tsmiCopyCustomFormat.Name = "tsmiCopyCustomFormat";
+            this.tsmiCopyCustomFormat.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyCustomFormat.Text = "Custom format";
+            // 
+            // tssCopy5
+            // 
+            this.tssCopy5.Name = "tssCopy5";
+            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
+            // 
             // tsmiCopyFilePath
             // 
             this.tsmiCopyFilePath.Name = "tsmiCopyFilePath";
@@ -1518,17 +1529,6 @@ namespace ShareX
             this.ssToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ssToolStripMenuItem.Text = "ss";
             // 
-            // tssCopy5
-            // 
-            this.tssCopy5.Name = "tssCopy5";
-            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmiCopyCustomFormat
-            // 
-            this.tsmiCopyCustomFormat.Name = "tsmiCopyCustomFormat";
-            this.tsmiCopyCustomFormat.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyCustomFormat.Text = "Custom format";
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1538,6 +1538,7 @@ namespace ShareX
             this.Controls.Add(this.scMain);
             this.Controls.Add(this.tsMain);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(910, 400);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

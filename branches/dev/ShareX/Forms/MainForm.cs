@@ -73,7 +73,7 @@ namespace ShareX
 
             DebugHelper.WriteLine("Startup time: {0} ms", Program.StartTimer.ElapsedMilliseconds);
 
-            UseCommandLineArgs(Environment.GetCommandLineArgs(), Program.Settings.Workflow);
+            UseCommandLineArgs(Environment.GetCommandLineArgs());
         }
 
         private void AfterShownJobs()
@@ -88,15 +88,15 @@ namespace ShareX
             Text = Program.Title;
             Icon = Resources.ShareX;
 
-            AddMultiEnumItems<AfterCaptureTasks>(x => Program.Settings.Workflow.AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob.Swap(x),
+            AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            AddMultiEnumItems<AfterUploadTasks>(x => Program.Settings.Workflow.AfterUploadJob = Program.Settings.Workflow.AfterUploadJob.Swap(x),
+            AddMultiEnumItems<AfterUploadTasks>(x => Program.DefaultTaskSettings.AfterUploadJob = Program.DefaultTaskSettings.AfterUploadJob.Swap(x),
                 tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
-            AddEnumItems<ImageDestination>(x => Program.Settings.Workflow.ImageDestination = x, tsmiImageUploaders, tsmiTrayImageUploaders);
-            AddEnumItems<TextDestination>(x => Program.Settings.Workflow.TextDestination = x, tsmiTextUploaders, tsmiTrayTextUploaders);
-            AddEnumItems<FileDestination>(x => Program.Settings.Workflow.FileDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
-            AddEnumItems<UrlShortenerType>(x => Program.Settings.Workflow.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
-            AddEnumItems<SocialNetworkingService>(x => Program.Settings.Workflow.SocialNetworkingServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
+            AddEnumItems<ImageDestination>(x => Program.DefaultTaskSettings.ImageDestination = x, tsmiImageUploaders, tsmiTrayImageUploaders);
+            AddEnumItems<TextDestination>(x => Program.DefaultTaskSettings.TextDestination = x, tsmiTextUploaders, tsmiTrayTextUploaders);
+            AddEnumItems<FileDestination>(x => Program.DefaultTaskSettings.FileDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
+            AddEnumItems<UrlShortenerType>(x => Program.DefaultTaskSettings.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
+            AddEnumItems<SocialNetworkingService>(x => Program.DefaultTaskSettings.SocialNetworkingServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
 
             tsmiDebug.Visible = Program.IsDebug;
 
@@ -318,7 +318,7 @@ namespace ShareX
             cmsUploadInfo.ResumeLayout();
         }
 
-        void tsmiClipboardFormat_Click(object sender, EventArgs e)
+        private void tsmiClipboardFormat_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmiClipboardFormat = sender as ToolStripMenuItem;
             ClipboardFormat cf = tsmiClipboardFormat.Tag as ClipboardFormat;
@@ -348,7 +348,7 @@ namespace ShareX
             {
                 Program.Settings.ClipboardFormats.Add(new ClipboardFormat()
                 {
-                    Description = "HTML link",
+                    Description = "HTML linked image",
                     Format = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>"
                 });
             }
@@ -357,7 +357,7 @@ namespace ShareX
             {
                 foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
                 {
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.Workflow);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
                     watchFolder.Enable();
                 }
             }
@@ -365,30 +365,30 @@ namespace ShareX
 
         public void UpdateMainFormSettings()
         {
-            SetMultiEnumChecked(Program.Settings.Workflow.AfterCaptureJob, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            SetMultiEnumChecked(Program.Settings.Workflow.AfterUploadJob, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
-            SetEnumChecked(Program.Settings.Workflow.ImageDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
-            SetEnumChecked(Program.Settings.Workflow.TextDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
-            SetEnumChecked(Program.Settings.Workflow.FileDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
-            SetEnumChecked(Program.Settings.Workflow.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
-            SetEnumChecked(Program.Settings.Workflow.SocialNetworkingServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
+            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterCaptureJob, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
+            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterUploadJob, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
+            SetEnumChecked(Program.DefaultTaskSettings.ImageDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.TextDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.FileDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
+            SetEnumChecked(Program.DefaultTaskSettings.SocialNetworkingServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
         }
 
         private void UpdateUploaderMenuNames()
         {
-            string imageUploader = Program.Settings.Workflow.ImageDestination == ImageDestination.FileUploader ?
-                Program.Settings.Workflow.FileDestination.GetDescription() : Program.Settings.Workflow.ImageDestination.GetDescription();
+            string imageUploader = Program.DefaultTaskSettings.ImageDestination == ImageDestination.FileUploader ?
+                Program.DefaultTaskSettings.FileDestination.GetDescription() : Program.DefaultTaskSettings.ImageDestination.GetDescription();
             tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + imageUploader;
 
-            string textUploader = Program.Settings.Workflow.TextDestination == TextDestination.FileUploader ?
-                Program.Settings.Workflow.FileDestination.GetDescription() : Program.Settings.Workflow.TextDestination.GetDescription();
+            string textUploader = Program.DefaultTaskSettings.TextDestination == TextDestination.FileUploader ?
+                Program.DefaultTaskSettings.FileDestination.GetDescription() : Program.DefaultTaskSettings.TextDestination.GetDescription();
             tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + textUploader;
 
-            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.Settings.Workflow.FileDestination.GetDescription();
+            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.DefaultTaskSettings.FileDestination.GetDescription();
 
-            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.Workflow.URLShortenerDestination.GetDescription();
+            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.DefaultTaskSettings.URLShortenerDestination.GetDescription();
 
-            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking service: " + Program.Settings.Workflow.SocialNetworkingServiceDestination.GetDescription();
+            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking service: " + Program.DefaultTaskSettings.SocialNetworkingServiceDestination.GetDescription();
         }
 
         private void CheckUpdate()
@@ -429,8 +429,10 @@ namespace ShareX
             Close();
         }
 
-        public void UseCommandLineArgs(string[] args, TaskSettings taskSettings)
+        public void UseCommandLineArgs(string[] args, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = Program.DefaultTaskSettings;
+
             if (args != null && args.Length > 1)
             {
                 for (int i = 1; i < args.Length; i++)
@@ -605,17 +607,17 @@ namespace ShareX
 
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
-            UploadManager.DragDropUpload(e.Data, Program.Settings.Workflow);
+            UploadManager.DragDropUpload(e.Data, Program.DefaultTaskSettings);
         }
 
         private void tsbClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer(Program.Settings.Workflow);
+            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
         }
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile(Program.Settings.Workflow);
+            UploadManager.UploadFile(Program.DefaultTaskSettings);
         }
 
         private void tsddbDestinations_DropDownOpened(object sender, EventArgs e)
@@ -642,7 +644,7 @@ namespace ShareX
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadText(Program.ApplicationName + " text upload test", Program.Settings.Workflow);
+            UploadManager.UploadText(Program.ApplicationName + " text upload test", Program.DefaultTaskSettings);
         }
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
@@ -652,7 +654,7 @@ namespace ShareX
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
         {
-            UploadManager.ShortenURL(Links.URL_WEBSITE, Program.Settings.Workflow);
+            UploadManager.ShortenURL(Links.URL_WEBSITE, Program.DefaultTaskSettings);
         }
 
         private void tsmiTestUploaders_Click(object sender, EventArgs e)
@@ -666,17 +668,17 @@ namespace ShareX
 
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
-            new RegionCapturePreview(Program.Settings.Workflow.CaptureSettings.SurfaceOptions).Show();
+            new RegionCapturePreview(Program.DefaultTaskSettings.CaptureSettings.SurfaceOptions).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            DoScreenRecorder(Program.Settings.Workflow);
+            DoScreenRecorder(Program.DefaultTaskSettings);
         }
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
         {
-            OpenAutoCapture(Program.Settings.Workflow);
+            OpenAutoCapture(Program.DefaultTaskSettings);
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
@@ -739,10 +741,7 @@ namespace ShareX
 
         private void tsmiDefaultWorkflowSettings_Click(object sender, EventArgs e)
         {
-            using (HotkeyTaskSettingsForm dlg = new HotkeyTaskSettingsForm(new HotkeySetting()
-            {
-                TaskSettings = Program.Settings.Workflow
-            }))
+            using (TaskSettingsForm dlg = new TaskSettingsForm(Program.DefaultTaskSettings))
             {
                 dlg.TreatAsDefault();
                 dlg.ShowDialog();
@@ -818,7 +817,7 @@ namespace ShareX
                     uim.CopyURL();
                     break;
                 case Keys.Control | Keys.V:
-                    UploadManager.ClipboardUploadWithContentViewer(Program.Settings.Workflow);
+                    UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
                     break;
                 case Keys.Delete:
                     RemoveSelectedItems();
@@ -835,7 +834,7 @@ namespace ShareX
             switch (e.Button)
             {
                 case MouseButtons.Middle:
-                    CaptureScreenshot(CaptureType.Rectangle, Program.Settings.Workflow, false);
+                    CaptureScreenshot(CaptureType.Rectangle, Program.DefaultTaskSettings, false);
                     break;
             }
         }
@@ -861,11 +860,6 @@ namespace ShareX
         private void tsmiTrayExit_Click(object sender, EventArgs e)
         {
             ForceClose();
-        }
-
-        private void tsmiTrayApplicationSettings_Click(object sender, EventArgs e)
-        {
-            tsmiApplicationSettings_Click(sender, e);
         }
 
         private void tsmiTrayWorkflows_Click(object sender, EventArgs e)
@@ -1030,12 +1024,12 @@ namespace ShareX
 
         private void tsmiClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer(Program.Settings.Workflow);
+            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile(Program.Settings.Workflow);
+            UploadManager.UploadFile(Program.DefaultTaskSettings);
         }
 
         private void tsmiHideMenu_Click(object sender, EventArgs e)

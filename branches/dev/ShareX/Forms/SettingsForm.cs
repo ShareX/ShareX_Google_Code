@@ -342,7 +342,7 @@ namespace ShareX
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.Settings.Workflow);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
                     Program.Settings.WatchFolderList.Add(watchFolder);
                     AddWatchFolder(watchFolder);
 
@@ -406,6 +406,24 @@ namespace ShareX
             lvi.Tag = cf;
             lvi.SubItems.Add(cf.Format ?? "");
             lvClipboardFormats.Items.Add(lvi);
+        }
+
+        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
+                using (ClipboardFormatForm form = new ClipboardFormatForm(cf))
+                {
+                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        lvi = new ListViewItem(form.ClipboardFormat.Description ?? "");
+                        lvi.Tag = form.ClipboardFormat;
+                        lvi.SubItems.Add(form.ClipboardFormat.Format ?? "");
+                    }
+                }
+            }
         }
 
         private void btnAddClipboardFormat_Click(object sender, EventArgs e)

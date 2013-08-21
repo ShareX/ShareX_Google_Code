@@ -1,6 +1,6 @@
 ﻿namespace ShareX
 {
-    partial class HotkeyTaskSettingsForm
+    partial class TaskSettingsForm
     {
         /// <summary>
         /// Required designer variable.

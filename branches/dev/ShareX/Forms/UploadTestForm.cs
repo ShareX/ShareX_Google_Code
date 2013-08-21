@@ -96,7 +96,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.Settings.Workflow);
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.DefaultTaskSettings);
                 task.Info.Settings.ImageDestination = uploader;
 
                 lvi.Tag = task;
@@ -114,7 +114,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateTextUploaderTask(TestText, Program.Settings.Workflow);
+                UploadTask task = UploadTask.CreateTextUploaderTask(TestText, Program.DefaultTaskSettings);
                 task.Info.Settings.TextDestination = uploader;
 
                 lvi.Tag = task;
@@ -134,7 +134,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.Settings.Workflow);
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.DefaultTaskSettings);
                 task.Info.Settings.ImageDestination = ImageDestination.FileUploader;
                 task.Info.Settings.FileDestination = uploader;
 
@@ -147,7 +147,7 @@ namespace ShareX
             {
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL, Program.Settings.Workflow);
+                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL, Program.DefaultTaskSettings);
                 task.Info.Settings.URLShortenerDestination = uploader;
 
                 lvi.Tag = task;

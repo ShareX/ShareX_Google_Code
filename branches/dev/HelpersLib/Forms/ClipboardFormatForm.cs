@@ -30,6 +30,7 @@ namespace HelpersLib
 {
     public partial class ClipboardFormatForm : Form
     {
+        private ContextMenuStrip cmsFormatPattern;
         public ClipboardFormat ClipboardFormat { get; private set; }
 
         public ClipboardFormatForm()
@@ -43,6 +44,7 @@ namespace HelpersLib
             ClipboardFormat = cbf;
             txtDescription.Text = cbf.Description ?? "";
             txtFormat.Text = cbf.Format ?? "";
+            cmsFormatPattern = NameParser.CreateCodesMenu(txtFormat, ReplacementVariables.n);
         }
 
         private void btnOK_Click(object sender, EventArgs e)

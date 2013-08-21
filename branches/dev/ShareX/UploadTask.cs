@@ -224,7 +224,7 @@ namespace ShareX
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     Program.Settings.ShowUploadWarning = false;
-                    Program.Settings.Workflow.AfterCaptureJob = Program.Settings.Workflow.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
+                    Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
                     RequestSettingUpdate = true;
                     Stop();
                 }
