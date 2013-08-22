@@ -38,26 +38,26 @@ namespace ShareX
     {
         private const int PropertyTagSoftwareUsed = 0x0131;
 
-        public static ImageData PrepareImage(Image img)
+        public static ImageData PrepareImage(Image img, TaskSettings taskSettings)
         {
             ImageData imageData = new ImageData();
 
-            if (Program.Settings.ImageAutoResize)
+            if (taskSettings.ImageSettings.ImageAutoResize)
             {
-                img = ResizeImage(img, Program.Settings.ImageScaleType);
+                img = ResizeImage(taskSettings, img, taskSettings.ImageSettings.ImageScaleType);
             }
 
-            imageData.ImageStream = SaveImage(img, Program.Settings.ImageFormat);
+            imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat);
 
-            int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
-            if (Program.Settings.ImageFormat != Program.Settings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
+            int sizeLimit = taskSettings.ImageSettings.ImageSizeLimit * 1000;
+            if (taskSettings.ImageSettings.ImageFormat != taskSettings.ImageSettings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
             {
-                imageData.ImageStream = SaveImage(img, Program.Settings.ImageFormat2);
-                imageData.ImageFormat = Program.Settings.ImageFormat2;
+                imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat2);
+                imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat2;
             }
             else
             {
-                imageData.ImageFormat = Program.Settings.ImageFormat;
+                imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat;
             }
 
             return imageData;
@@ -65,52 +65,52 @@ namespace ShareX
 
         public static void PrepareFileImage(UploadTask task)
         {
-            int sizeLimit = Program.Settings.ImageSizeLimit * 1000;
+            int sizeLimit = task.Info.TaskSettings.ImageSettings.ImageSizeLimit * 1000;
 
             if (sizeLimit > 0 && task.Data.Length > sizeLimit)
             {
                 using (Stream stream = task.Data)
                 using (Image img = Image.FromStream(stream))
                 {
-                    task.Data = SaveImage(img, Program.Settings.ImageFormat2);
-                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, Program.Settings.ImageFormat2.GetDescription());
+                    task.Data = SaveImage(task.Info.TaskSettings, img, task.Info.TaskSettings.ImageSettings.ImageFormat2);
+                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.TaskSettings.ImageSettings.ImageFormat2.GetDescription());
                 }
             }
         }
 
-        private static Image ResizeImage(Image img, ImageScaleType scaleType)
+        private static Image ResizeImage(TaskSettings taskSettings, Image img, ImageScaleType scaleType)
         {
             float width = 0, height = 0;
 
             switch (scaleType)
             {
                 case ImageScaleType.Percentage:
-                    width = img.Width * (Program.Settings.ImageScalePercentageWidth / 100f);
-                    height = img.Height * (Program.Settings.ImageScalePercentageHeight / 100f);
+                    width = img.Width * (taskSettings.ImageSettings.ImageScalePercentageWidth / 100f);
+                    height = img.Height * (taskSettings.ImageSettings.ImageScalePercentageHeight / 100f);
                     break;
                 case ImageScaleType.Width:
-                    width = Program.Settings.ImageScaleToWidth;
-                    height = Program.Settings.ImageKeepAspectRatio ? img.Height * (width / img.Width) : img.Height;
+                    width = taskSettings.ImageSettings.ImageScaleToWidth;
+                    height = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Height * (width / img.Width) : img.Height;
                     break;
                 case ImageScaleType.Height:
-                    height = Program.Settings.ImageScaleToHeight;
-                    width = Program.Settings.ImageKeepAspectRatio ? img.Width * (height / img.Height) : img.Width;
+                    height = taskSettings.ImageSettings.ImageScaleToHeight;
+                    width = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Width * (height / img.Height) : img.Width;
                     break;
                 case ImageScaleType.Specific:
-                    width = Program.Settings.ImageScaleSpecificWidth;
-                    height = Program.Settings.ImageScaleSpecificHeight;
+                    width = taskSettings.ImageSettings.ImageScaleSpecificWidth;
+                    height = taskSettings.ImageSettings.ImageScaleSpecificHeight;
                     break;
             }
 
             if (width > 0 && height > 0)
             {
-                return CaptureHelpers.ResizeImage(img, (int)width, (int)height, Program.Settings.ImageUseSmoothScaling);
+                return CaptureHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageSettings.ImageUseSmoothScaling);
             }
 
             return img;
         }
 
-        private static MemoryStream SaveImage(Image img, EImageFormat imageFormat)
+        private static MemoryStream SaveImage(TaskSettings taskSettings, Image img, EImageFormat imageFormat)
         {
             CaptureHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
 
@@ -122,10 +122,10 @@ namespace ShareX
                     img.Save(stream, ImageFormat.Png);
                     break;
                 case EImageFormat.JPEG:
-                    img.SaveJPG(stream, Program.Settings.ImageJPEGQuality, true);
+                    img.SaveJPG(stream, taskSettings.ImageSettings.ImageJPEGQuality, true);
                     break;
                 case EImageFormat.GIF:
-                    img.SaveGIF(stream, Program.Settings.ImageGIFQuality);
+                    img.SaveGIF(stream, taskSettings.ImageSettings.ImageGIFQuality);
                     break;
                 case EImageFormat.BMP:
                     img.Save(stream, ImageFormat.Bmp);
@@ -138,34 +138,34 @@ namespace ShareX
             return stream;
         }
 
-        public static string GetFilename(string extension = "")
+        public static string GetFilename(TaskSettings taskSettings, string extension = "")
         {
             NameParser nameParser = new NameParser(NameParserType.FileName)
             {
-                AutoIncrementNumber = Program.Settings.AutoIncrementNumber,
+                AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber,
                 MaxNameLength = 100
             };
 
-            string filename = nameParser.Parse(Program.Settings.NameFormatPattern);
+            string filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPattern);
 
             if (!string.IsNullOrEmpty(extension))
             {
                 filename += "." + extension.TrimStart('.');
             }
 
-            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
 
-        public static string GetImageFilename(Image image)
+        public static string GetImageFilename(TaskSettings taskSettings, Image image)
         {
             string filename;
 
             NameParser nameParser = new NameParser(NameParserType.FileName);
             nameParser.MaxNameLength = 100;
             nameParser.Picture = image;
-            nameParser.AutoIncrementNumber = Program.Settings.AutoIncrementNumber;
+            nameParser.AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber;
 
             ImageTag imageTag = image.Tag as ImageTag;
 
@@ -176,14 +176,14 @@ namespace ShareX
 
             if (string.IsNullOrEmpty(nameParser.WindowText))
             {
-                filename = nameParser.Parse(Program.Settings.NameFormatPattern) + ".bmp";
+                filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPattern) + ".bmp";
             }
             else
             {
-                filename = nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow) + ".bmp";
+                filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPatternActiveWindow) + ".bmp";
             }
 
-            Program.Settings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
@@ -240,60 +240,60 @@ namespace ShareX
             Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(img));
         }
 
-        public static Image DrawShadow(Image img)
+        public static Image DrawShadow(TaskSettings taskSettings, Image img)
         {
             Point offsetChange;
-            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Program.Settings.ShadowDarkness, Program.Settings.ShadowSize,
-                Program.Settings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
+            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, taskSettings.ImageSettings.ShadowDarkness, taskSettings.ImageSettings.ShadowSize,
+                taskSettings.ImageSettings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
         }
 
-        public static void AddDefaultExternalPrograms()
+        public static void AddDefaultExternalPrograms(TaskSettings taskSettings)
         {
-            if (Program.Settings.ExternalPrograms == null)
+            if (taskSettings.ExternalPrograms == null)
             {
-                Program.Settings.ExternalPrograms = new List<ExternalProgram>();
+                taskSettings.ExternalPrograms = new List<ExternalProgram>();
             }
 
-            AddExternalProgramFromRegistry("Paint", "mspaint.exe");
-            AddExternalProgramFromRegistry("Paint.NET", "PaintDotNet.exe");
-            AddExternalProgramFromRegistry("Adobe Photoshop", "Photoshop.exe");
-            AddExternalProgramFromRegistry("IrfanView", "i_view32.exe");
-            AddExternalProgramFromRegistry("XnView", "xnview.exe");
-            AddExternalProgramFromFile("OptiPNG", "optipng.exe");
+            AddExternalProgramFromRegistry(taskSettings, "Paint", "mspaint.exe");
+            AddExternalProgramFromRegistry(taskSettings, "Paint.NET", "PaintDotNet.exe");
+            AddExternalProgramFromRegistry(taskSettings, "Adobe Photoshop", "Photoshop.exe");
+            AddExternalProgramFromRegistry(taskSettings, "IrfanView", "i_view32.exe");
+            AddExternalProgramFromRegistry(taskSettings, "XnView", "xnview.exe");
+            AddExternalProgramFromFile(taskSettings, "OptiPNG", "optipng.exe");
         }
 
-        private static void AddExternalProgramFromFile(string name, string filename, string args = "")
+        private static void AddExternalProgramFromFile(TaskSettings taskSettings, string name, string filename, string args = "")
         {
-            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
+            if (!taskSettings.ExternalPrograms.Exists(x => x.Name == name))
             {
                 if (File.Exists(filename))
                 {
                     DebugHelper.WriteLine("Found program: " + filename);
 
-                    Program.Settings.ExternalPrograms.Add(new ExternalProgram(name, filename, args));
+                    taskSettings.ExternalPrograms.Add(new ExternalProgram(name, filename, args));
                 }
             }
         }
 
-        private static void AddExternalProgramFromRegistry(string name, string filename)
+        private static void AddExternalProgramFromRegistry(TaskSettings taskSettings, string name, string filename)
         {
-            if (!Program.Settings.ExternalPrograms.Exists(x => x.Name == name))
+            if (!taskSettings.ExternalPrograms.Exists(x => x.Name == name))
             {
                 ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
 
                 if (externalProgram != null)
                 {
-                    Program.Settings.ExternalPrograms.Add(externalProgram);
+                    taskSettings.ExternalPrograms.Add(externalProgram);
                 }
             }
         }
 
-        public static bool SelectRegion(out Rectangle rect)
+        public static bool SelectRegion(TaskSettings taskSettings, out Rectangle rect)
         {
             using (RectangleRegion surface = new RectangleRegion())
             {
                 surface.AreaManager.WindowCaptureMode = true;
-                surface.Config = Program.Settings.SurfaceOptions;
+                surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
                 surface.Config.QuickCrop = true;
                 surface.Prepare();
                 surface.ShowDialog();

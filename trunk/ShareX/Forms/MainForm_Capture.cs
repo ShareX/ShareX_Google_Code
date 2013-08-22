@@ -42,12 +42,12 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            if (Program.Settings.HotkeyList == null)
+            if (Program.Settings.Hotkeys == null)
             {
-                Program.Settings.HotkeyList = new List<HotkeySetting>();
+                Program.Settings.Hotkeys = new List<HotkeySetting>();
             }
 
-            HotkeyManager = new HotkeyManager(this, Program.Settings.HotkeyList, HandleHotkeys);
+            HotkeyManager = new HotkeyManager(this, Program.Settings.Hotkeys, HandleHotkeys);
             HotkeyManager.RunHotkeys();
 
             string failedHotkeys;
@@ -62,74 +62,74 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
-            TaskSettings taskSettings = hotkeySetting.TaskSettings.Clone();
+            TaskSettings taskSettings = hotkeySetting.TaskSettings.Copy();
             taskSettings.SetDefaultSettings();
 
-            switch (hotkeySetting.Job)
+            switch (hotkeySetting.TaskSettings.Job)
             {
                 case EHotkey.ClipboardUpload:
-                    UploadManager.ClipboardUpload();
+                    UploadManager.ClipboardUpload(taskSettings);
                     break;
                 case EHotkey.FileUpload:
-                    UploadManager.UploadFile();
+                    UploadManager.UploadFile(taskSettings);
                     break;
                 case EHotkey.PrintScreen:
-                    CaptureScreenshot(CaptureType.Screen, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Screen, taskSettings, false);
                     break;
                 case EHotkey.ActiveWindow:
-                    CaptureScreenshot(CaptureType.ActiveWindow, false, taskSettings);
+                    CaptureScreenshot(CaptureType.ActiveWindow, taskSettings, false);
                     break;
                 case EHotkey.ActiveMonitor:
-                    CaptureScreenshot(CaptureType.ActiveMonitor, false, taskSettings);
+                    CaptureScreenshot(CaptureType.ActiveMonitor, taskSettings, false);
                     break;
                 case EHotkey.WindowRectangle:
-                    CaptureScreenshot(CaptureType.RectangleWindow, false, taskSettings);
+                    CaptureScreenshot(CaptureType.RectangleWindow, taskSettings, false);
                     break;
                 case EHotkey.RectangleRegion:
-                    CaptureScreenshot(CaptureType.Rectangle, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Rectangle, taskSettings, false);
                     break;
                 case EHotkey.RoundedRectangleRegion:
-                    CaptureScreenshot(CaptureType.RoundedRectangle, false, taskSettings);
+                    CaptureScreenshot(CaptureType.RoundedRectangle, taskSettings, false);
                     break;
                 case EHotkey.EllipseRegion:
-                    CaptureScreenshot(CaptureType.Ellipse, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Ellipse, taskSettings, false);
                     break;
                 case EHotkey.TriangleRegion:
-                    CaptureScreenshot(CaptureType.Triangle, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Triangle, taskSettings, false);
                     break;
                 case EHotkey.DiamondRegion:
-                    CaptureScreenshot(CaptureType.Diamond, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Diamond, taskSettings, false);
                     break;
                 case EHotkey.PolygonRegion:
-                    CaptureScreenshot(CaptureType.Polygon, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Polygon, taskSettings, false);
                     break;
                 case EHotkey.FreeHandRegion:
-                    CaptureScreenshot(CaptureType.Freehand, false, taskSettings);
+                    CaptureScreenshot(CaptureType.Freehand, taskSettings, false);
                     break;
                 case EHotkey.LastRegion:
-                    CaptureScreenshot(CaptureType.LastRegion, false, taskSettings);
+                    CaptureScreenshot(CaptureType.LastRegion, taskSettings, false);
                     break;
                 case EHotkey.ScreenRecorder:
-                    DoScreenRecorder(true);
+                    DoScreenRecorder(taskSettings, true);
                     break;
                 case EHotkey.AutoCapture:
-                    OpenAutoCapture();
+                    OpenAutoCapture(taskSettings);
                     break;
             }
         }
 
-        public void CaptureScreenshot(CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
+        public void CaptureScreenshot(CaptureType captureType, TaskSettings taskSettings, bool autoHideForm = true)
         {
             switch (captureType)
             {
                 case CaptureType.Screen:
-                    DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, autoHideForm, taskSettings);
+                    DoCapture(Screenshot.CaptureFullscreen, CaptureType.Screen, taskSettings, autoHideForm);
                     break;
                 case CaptureType.ActiveWindow:
-                    CaptureActiveWindow(autoHideForm, taskSettings);
+                    CaptureActiveWindow(taskSettings, autoHideForm);
                     break;
                 case CaptureType.ActiveMonitor:
-                    DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, autoHideForm, taskSettings);
+                    DoCapture(Screenshot.CaptureActiveMonitor, CaptureType.ActiveMonitor, taskSettings, autoHideForm);
                     break;
                 case CaptureType.RectangleWindow:
                 case CaptureType.Rectangle:
@@ -139,31 +139,31 @@ namespace ShareX
                 case CaptureType.Diamond:
                 case CaptureType.Polygon:
                 case CaptureType.Freehand:
-                    CaptureRegion(captureType, autoHideForm, taskSettings);
+                    CaptureRegion(captureType, taskSettings, autoHideForm);
                     break;
                 case CaptureType.LastRegion:
-                    CaptureLastRegion(autoHideForm, taskSettings);
+                    CaptureLastRegion(taskSettings, autoHideForm);
                     break;
             }
         }
 
-        private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void DoCapture(ScreenCaptureDelegate capture, CaptureType captureType, TaskSettings taskSettings, bool autoHideForm = true)
         {
-            if (Program.Settings.IsDelayScreenshot && Program.Settings.DelayScreenshot > 0)
+            if (taskSettings.CaptureSettings.IsDelayScreenshot && taskSettings.CaptureSettings.DelayScreenshot > 0)
             {
-                int sleep = (int)(Program.Settings.DelayScreenshot * 1000);
+                int sleep = (int)(taskSettings.CaptureSettings.DelayScreenshot * 1000);
                 BackgroundWorker bw = new BackgroundWorker();
                 bw.DoWork += (sender, e) => Thread.Sleep(sleep);
-                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, autoHideForm, taskSettings);
+                bw.RunWorkerCompleted += (sender, e) => DoCaptureWork(capture, captureType, taskSettings, autoHideForm);
                 bw.RunWorkerAsync();
             }
             else
             {
-                DoCaptureWork(capture, captureType, autoHideForm, taskSettings);
+                DoCaptureWork(capture, captureType, taskSettings, autoHideForm);
             }
         }
 
-        private void DoCaptureWork(ScreenCaptureDelegate capture, CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void DoCaptureWork(ScreenCaptureDelegate capture, CaptureType captureType, TaskSettings taskSettings, bool autoHideForm = true)
         {
             if (autoHideForm)
             {
@@ -175,11 +175,11 @@ namespace ShareX
 
             try
             {
-                Screenshot.CaptureCursor = Program.Settings.ShowCursor;
-                Screenshot.CaptureShadow = Program.Settings.CaptureShadow;
-                Screenshot.ShadowOffset = Program.Settings.CaptureShadowOffset;
-                Screenshot.CaptureClientArea = Program.Settings.CaptureClientArea;
-                Screenshot.AutoHideTaskbar = Program.Settings.CaptureAutoHideTaskbar;
+                Screenshot.CaptureCursor = taskSettings.CaptureSettings.ShowCursor;
+                Screenshot.CaptureShadow = taskSettings.CaptureSettings.CaptureShadow;
+                Screenshot.ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset;
+                Screenshot.CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea;
+                Screenshot.AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar;
 
                 img = capture();
 
@@ -203,18 +203,13 @@ namespace ShareX
             }
         }
 
-        private void AfterCapture(Image img, CaptureType captureType, TaskSettings taskSettings = null)
+        private void AfterCapture(Image img, CaptureType captureType, TaskSettings taskSettings)
         {
             if (img != null)
             {
-                if (taskSettings == null)
+                if (taskSettings.ImageSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
                 {
-                    taskSettings = new TaskSettings(true);
-                }
-
-                if (Program.Settings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
-                {
-                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder | AfterCaptureTasks.AddShadow);
+                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                 }
 
                 if (Program.Settings.ShowAfterCaptureTasksForm)
@@ -248,14 +243,14 @@ namespace ShareX
                 CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
         }
 
-        private void CaptureActiveWindow(bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void CaptureActiveWindow(TaskSettings taskSettings, bool autoHideForm = true)
         {
             DoCapture(() =>
             {
                 Image img = null;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
 
-                if (Program.Settings.CaptureTransparent && !Program.Settings.CaptureClientArea)
+                if (taskSettings.CaptureSettings.CaptureTransparent && !taskSettings.CaptureSettings.CaptureClientArea)
                 {
                     img = Screenshot.CaptureActiveWindowTransparent();
                 }
@@ -267,10 +262,10 @@ namespace ShareX
                 img.Tag = new ImageTag() { ActiveWindowTitle = activeWindowTitle };
 
                 return img;
-            }, CaptureType.ActiveWindow, autoHideForm, taskSettings);
+            }, CaptureType.ActiveWindow, taskSettings, autoHideForm);
         }
 
-        private void CaptureWindow(IntPtr handle, bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void CaptureWindow(IntPtr handle, TaskSettings taskSettings, bool autoHideForm = true)
         {
             autoHideForm = autoHideForm && handle != this.Handle;
 
@@ -284,7 +279,7 @@ namespace ShareX
                 NativeMethods.SetForegroundWindow(handle);
                 Thread.Sleep(250);
 
-                if (Program.Settings.CaptureTransparent && !Program.Settings.CaptureClientArea)
+                if (taskSettings.CaptureSettings.CaptureTransparent && !taskSettings.CaptureSettings.CaptureClientArea)
                 {
                     return Screenshot.CaptureWindowTransparent(handle);
                 }
@@ -292,10 +287,10 @@ namespace ShareX
                 {
                     return Screenshot.CaptureWindow(handle);
                 }
-            }, CaptureType.Window, autoHideForm, taskSettings);
+            }, CaptureType.Window, taskSettings, autoHideForm);
         }
 
-        private void CaptureRegion(CaptureType captureType, bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void CaptureRegion(CaptureType captureType, TaskSettings taskSettings, bool autoHideForm = true)
         {
             Surface surface;
 
@@ -335,7 +330,7 @@ namespace ShareX
                 Image img = null;
                 Image screenshot = Screenshot.CaptureFullscreen();
 
-                surface.Config = Program.Settings.SurfaceOptions;
+                surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
                 surface.SurfaceImage = screenshot;
                 surface.Prepare();
                 surface.ShowDialog();
@@ -353,10 +348,10 @@ namespace ShareX
                 surface.Dispose();
 
                 return img;
-            }, captureType, autoHideForm, taskSettings);
+            }, captureType, taskSettings, autoHideForm);
         }
 
-        private void CaptureLastRegion(bool autoHideForm = true, TaskSettings taskSettings = null)
+        private void CaptureLastRegion(TaskSettings taskSettings, bool autoHideForm = true)
         {
             if (Surface.LastRegionFillPath != null)
             {
@@ -364,13 +359,13 @@ namespace ShareX
                 {
                     using (Image screenshot = Screenshot.CaptureFullscreen())
                     {
-                        return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, Program.Settings.SurfaceOptions);
+                        return ShapeCaptureHelpers.GetRegionImage(screenshot, Surface.LastRegionFillPath, Surface.LastRegionDrawPath, taskSettings.CaptureSettings.SurfaceOptions);
                     }
-                }, CaptureType.LastRegion, autoHideForm, taskSettings);
+                }, CaptureType.LastRegion, taskSettings, autoHideForm);
             }
             else
             {
-                CaptureRegion(CaptureType.Rectangle, autoHideForm);
+                CaptureRegion(CaptureType.Rectangle, taskSettings, autoHideForm);
             }
         }
 
@@ -430,7 +425,7 @@ namespace ShareX
 
         private void tsmiFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Screen);
+            CaptureScreenshot(CaptureType.Screen, Program.DefaultTaskSettings);
         }
 
         private void tsddbCapture_DropDownOpening(object sender, EventArgs e)
@@ -444,7 +439,7 @@ namespace ShareX
             WindowInfo wi = tsi.Tag as WindowInfo;
             if (wi != null)
             {
-                CaptureWindow(wi.Handle);
+                CaptureWindow(wi.Handle, Program.DefaultTaskSettings);
             }
         }
 
@@ -454,53 +449,53 @@ namespace ShareX
             Rectangle rectangle = (Rectangle)tsi.Tag;
             if (!rectangle.IsEmpty)
             {
-                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor);
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.DefaultTaskSettings);
             }
         }
 
         private void tsmiWindowRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RectangleWindow);
+            CaptureScreenshot(CaptureType.RectangleWindow, Program.DefaultTaskSettings);
         }
 
         private void tsmiRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Rectangle);
+            CaptureScreenshot(CaptureType.Rectangle, Program.DefaultTaskSettings);
         }
 
         private void tsmiRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RoundedRectangle);
+            CaptureScreenshot(CaptureType.RoundedRectangle, Program.DefaultTaskSettings);
         }
 
         private void tsmiEllipse_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Ellipse);
+            CaptureScreenshot(CaptureType.Ellipse, Program.DefaultTaskSettings);
         }
 
         private void tsmiTriangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Triangle);
+            CaptureScreenshot(CaptureType.Triangle, Program.DefaultTaskSettings);
         }
 
         private void tsmiDiamond_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Diamond);
+            CaptureScreenshot(CaptureType.Diamond, Program.DefaultTaskSettings);
         }
 
         private void tsmiPolygon_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Polygon);
+            CaptureScreenshot(CaptureType.Polygon, Program.DefaultTaskSettings);
         }
 
         private void tsmiFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Freehand);
+            CaptureScreenshot(CaptureType.Freehand, Program.DefaultTaskSettings);
         }
 
         private void tsmiLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.LastRegion);
+            CaptureScreenshot(CaptureType.LastRegion, Program.DefaultTaskSettings);
         }
 
         #endregion Menu events
@@ -509,7 +504,7 @@ namespace ShareX
 
         private void tsmiTrayFullscreen_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Screen, false);
+            CaptureScreenshot(CaptureType.Screen, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiCapture_DropDownOpening(object sender, EventArgs e)
@@ -523,7 +518,7 @@ namespace ShareX
             WindowInfo wi = tsi.Tag as WindowInfo;
             if (wi != null)
             {
-                CaptureWindow(wi.Handle, false);
+                CaptureWindow(wi.Handle, Program.DefaultTaskSettings, false);
             }
         }
 
@@ -533,53 +528,53 @@ namespace ShareX
             Rectangle rectangle = (Rectangle)tsi.Tag;
             if (!rectangle.IsEmpty)
             {
-                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, false);
+                DoCapture(() => Screenshot.CaptureRectangle(rectangle), CaptureType.Monitor, Program.DefaultTaskSettings, false);
             }
         }
 
         private void tsmiTrayWindowRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RectangleWindow, false);
+            CaptureScreenshot(CaptureType.RectangleWindow, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Rectangle, false);
+            CaptureScreenshot(CaptureType.Rectangle, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayRoundedRectangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.RoundedRectangle, false);
+            CaptureScreenshot(CaptureType.RoundedRectangle, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayEllipse_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Ellipse, false);
+            CaptureScreenshot(CaptureType.Ellipse, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayTriangle_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Triangle, false);
+            CaptureScreenshot(CaptureType.Triangle, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayDiamond_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Diamond, false);
+            CaptureScreenshot(CaptureType.Diamond, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayPolygon_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Polygon, false);
+            CaptureScreenshot(CaptureType.Polygon, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayFreeHand_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.Freehand, false);
+            CaptureScreenshot(CaptureType.Freehand, Program.DefaultTaskSettings, false);
         }
 
         private void tsmiTrayLastRegion_Click(object sender, EventArgs e)
         {
-            CaptureScreenshot(CaptureType.LastRegion, false);
+            CaptureScreenshot(CaptureType.LastRegion, Program.DefaultTaskSettings, false);
         }
 
         #endregion Tray events

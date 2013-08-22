@@ -73,11 +73,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AviWriter.cs" />
+    <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ClipboardHelper.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />
-    <Compile Include="DebugTimer.cs" />
+    <Compile Include="Debug\DebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\DebugForm.Designer.cs">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Debug\DebugTimer.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Forms\ClipboardFormatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClipboardFormatForm.Designer.cs">
+      <DependentUpon>ClipboardFormatForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HashCheckForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,7 +226,7 @@
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="SingleInstanceApplication\ApplicationInstanceManager.cs" />
     <Compile Include="SingleInstanceApplication\InstanceProxy.cs" />
-    <Compile Include="DebugHelper.cs" />
+    <Compile Include="Debug\DebugHelper.cs" />
     <Compile Include="UpdateChecker\UpdateCheckerLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -266,8 +280,14 @@
     <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
+    <EmbeddedResource Include="Debug\DebugForm.resx">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
       <DependentUpon>ClipboardContentViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClipboardFormatForm.resx">
+      <DependentUpon>ClipboardFormatForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>
@@ -329,10 +349,10 @@
     <None Include="Resources\Loading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ShareX.ico" />
+    <None Include="Resources\crosshair.cur" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\crosshair.cur" />
+    <None Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

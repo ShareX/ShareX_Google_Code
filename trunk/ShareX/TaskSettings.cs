@@ -23,71 +23,233 @@
 
 #endregion License Information (GPL v3)
 
-using System;
+using HelpersLib;
+using ScreenCapture;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using System.Drawing;
 using UploadersLib;
 
 namespace ShareX
 {
     public class TaskSettings
     {
-        public bool UseDefaultAfterCaptureJob { get; set; }
-        public AfterCaptureTasks AfterCaptureJob { get; set; }
+        public string Description;
+        public EHotkey Job;
 
-        public bool UseDefaultAfterUploadJob { get; set; }
-        public AfterUploadTasks AfterUploadJob { get; set; }
+        public bool UseDefaultAfterCaptureJob = true;
+        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
 
-        public bool UseDefaultDestinations { get; set; }
-        public ImageDestination ImageDestination { get; set; }
-        public TextDestination TextDestination { get; set; }
-        public FileDestination FileDestination { get; set; }
-        public UrlShortenerType URLShortenerDestination { get; set; }
-        public SocialNetworkingService SocialNetworkingServiceDestination { get; set; }
+        public bool UseDefaultAfterUploadJob = true;
+        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
 
+        public bool UseDefaultDestinations = true;
+        public ImageDestination ImageDestination = ImageDestination.Imgur;
+        public TextDestination TextDestination = TextDestination.Pastebin;
+        public FileDestination FileDestination = FileDestination.Dropbox;
+        public UrlShortenerType URLShortenerDestination = UrlShortenerType.BITLY;
+        public SocialNetworkingService SocialNetworkingServiceDestination = SocialNetworkingService.Twitter;
+
+        public bool UseDefaultImageSettings = true;
+        public TaskSettingsImage ImageSettings = new TaskSettingsImage();
+
+        public bool UseDefaultCaptureSettings = true;
+        public TaskSettingsCapture CaptureSettings = new TaskSettingsCapture();
+
+        public bool UseDefaultUploadSettings = true;
+        public TaskSettingsUpload UploadSettings = new TaskSettingsUpload();
+
+        public bool UseDefaultActions = true;
+        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
+
+        public bool UseDefaultAdvancedSettings = true;
+        public TaskSettingsAdvanced AdvancedSettings = new TaskSettingsAdvanced();
+
+        public TaskSettings()
+        {
+            SetDefaultSettings();
+        }
+
+        public void SetDefaultSettings()
+        {
+            if (Program.DefaultTaskSettings != null)
+            {
+                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
+
+                if (UseDefaultAfterCaptureJob)
+                {
+                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
+                }
+
+                if (UseDefaultAfterUploadJob)
+                {
+                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
+                }
+
+                if (UseDefaultDestinations)
+                {
+                    ImageDestination = defaultWorkflow.ImageDestination;
+                    TextDestination = defaultWorkflow.TextDestination;
+                    FileDestination = defaultWorkflow.FileDestination;
+                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
+                }
+
+                if (UseDefaultImageSettings)
+                {
+                    ImageSettings = defaultWorkflow.ImageSettings;
+                }
+
+                if (UseDefaultCaptureSettings)
+                {
+                    CaptureSettings = defaultWorkflow.CaptureSettings;
+                }
+                if (UseDefaultUploadSettings)
+                {
+                    UploadSettings = defaultWorkflow.UploadSettings;
+                }
+
+                if (UseDefaultActions)
+                {
+                    ExternalPrograms = defaultWorkflow.ExternalPrograms;
+                }
+
+                if (UseDefaultAdvancedSettings)
+                {
+                    AdvancedSettings = defaultWorkflow.AdvancedSettings;
+                }
+            }
+        }
+    }
+
+    public class TaskSettingsImage
+    {
+        #region Image / Quality
+
+        public EImageFormat ImageFormat = EImageFormat.PNG;
+        public int ImageJPEGQuality = 90;
+        public GIFQuality ImageGIFQuality = GIFQuality.Default;
+        public int ImageSizeLimit = 1024;
+        public EImageFormat ImageFormat2 = EImageFormat.JPEG;
+        public bool UseImageFormat2FileUpload = false;
+
+        #endregion Image / Quality
+
+        #region Image / Resize
+
+        public bool ImageAutoResize = false;
+        public bool ImageKeepAspectRatio = false;
+        public bool ImageUseSmoothScaling = true;
+        public ImageScaleType ImageScaleType = ImageScaleType.Percentage;
+        public int ImageScalePercentageWidth = 100;
+        public int ImageScalePercentageHeight = 100;
+        public int ImageScaleToWidth = 100;
+        public int ImageScaleToHeight = 100;
+        public int ImageScaleSpecificWidth = 100;
+        public int ImageScaleSpecificHeight = 100;
+
+        #endregion Image / Resize
+
+        #region Image / Effects
+
+        public WatermarkConfig WatermarkConfig = new WatermarkConfig();
+
+        public bool ImageEffectOnlyRegionCapture = true;
+        public BorderType BorderType = BorderType.Outside;
+        public XmlColor BorderColor = Color.Black;
+        public int BorderSize = 1;
+        public float ShadowDarkness = 0.6f;
+        public int ShadowSize = 9;
+        public Point ShadowOffset = new Point(0, 0);
+
+        #endregion Image / Effects
+    }
+
+    public class TaskSettingsCapture
+    {
+        #region Capture / General
+
+        public bool ShowCursor = false;
+        public bool CaptureTransparent = true;
+        public bool CaptureShadow = true;
+        public int CaptureShadowOffset = 20;
+        public bool CaptureClientArea = false;
+        public bool IsDelayScreenshot = false;
+        public decimal DelayScreenshot = 2.0m;
+        public bool CaptureAutoHideTaskbar = false;
+
+        #endregion Capture / General
+
+        #region Capture / Shape capture
+
+        public SurfaceOptions SurfaceOptions = new SurfaceOptions();
+
+        #endregion Capture / Shape capture
+
+        #region Capture / Screen recorder
+
+        public bool ScreenRecorderHotkeyStartInstantly = false;
+
+        #endregion Capture / Screen recorder
+
+        #region Capture / ScreenRecord Form
+
+        public int ScreenRecordFPS = 5;
+        public bool ScreenRecordFixedDuration = true;
+        public float ScreenRecordDuration = 3f;
+        public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
+        public bool ScreenRecordAutoUpload = true;
+
+        public string ScreenRecordCommandLinePath = "x264.exe";
+        public string ScreenRecordCommandLineArgs = "--output %output %input";
+        public string ScreenRecordCommandLineOutputExtension = "mp4";
+
+        #endregion Capture / ScreenRecord Form
+    }
+
+    public class TaskSettingsUpload
+    {
+        #region Upload / Name pattern
+
+        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
+        public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
+        public int AutoIncrementNumber = 0;
+        public bool FileUploadUseNamePattern = false;
+
+        #endregion Upload / Name pattern
+
+        #region Upload / Clipboard upload
+
+        public bool ShowClipboardContentViewer = true;
+        public bool ClipboardUploadAutoDetectURL = true;
+        public bool ClipboardUploadUseAfterCaptureTasks = false;
+        public bool ClipboardUploadExcludeImageEffects = true;
+
+        #endregion Upload / Clipboard upload
+    }
+
+    public class TaskSettingsAdvanced
+    {
+        #region Interaction
+
+        [Category("Interaction"), DefaultValue(false), Description("Disable notifications.")]
         public bool DisableNotifications { get; set; }
 
-        public TaskSettings(bool useDefaultSettings = false)
+        #endregion Interaction
+
+        #region Upload Text
+
+        [Category("Upload Text"), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
+        public string TextFormat { get; set; }
+
+        [Category("Upload Text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
+        public string TextFileExtension { get; set; }
+
+        #endregion Upload Text
+
+        public TaskSettingsAdvanced()
         {
-            SetDefaultSettings(true);
-            UseDefaultAfterCaptureJob = useDefaultSettings;
-            UseDefaultAfterUploadJob = useDefaultSettings;
-            UseDefaultDestinations = useDefaultSettings;
-        }
-
-        public bool SetDefaultSettings(bool forceDefaultSettings = false)
-        {
-            if (Program.Settings != null)
-            {
-                if (UseDefaultAfterCaptureJob || forceDefaultSettings)
-                {
-                    AfterCaptureJob = Program.Settings.AfterCaptureTasks;
-                }
-
-                if (UseDefaultAfterUploadJob || forceDefaultSettings)
-                {
-                    AfterUploadJob = Program.Settings.AfterUploadTasks;
-                }
-
-                if (UseDefaultDestinations || forceDefaultSettings)
-                {
-                    ImageDestination = Program.Settings.ImageUploaderDestination;
-                    TextDestination = Program.Settings.TextUploaderDestination;
-                    FileDestination = Program.Settings.FileUploaderDestination;
-                    URLShortenerDestination = Program.Settings.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = Program.Settings.SocialServiceDestination;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public TaskSettings Clone()
-        {
-            return (TaskSettings)MemberwiseClone();
+            Helpers.ApplyDefaultPropertyValues(this);
         }
     }
 }

@@ -240,6 +240,7 @@
     <Compile Include="ImageUploaders\Imgur_v3.cs" />
     <Compile Include="ImageUploaders\Picasa.cs" />
     <Compile Include="TextUploaders\CustomTextUploader.cs" />
+    <Compile Include="TextUploaders\Gist.cs" />
     <Compile Include="TextUploaders\Paste_ee.cs" />
     <Compile Include="UploadResult.cs" />
     <Compile Include="GUI\TwitterMsg.cs">
@@ -365,6 +366,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ShareXIcon.ico" />
     <EmbeddedResource Include="ApiKeys\jira_sharex.pfx" />
     <None Include="Resources\jira.png" />
     <None Include="Resources\Picasa.ico" />

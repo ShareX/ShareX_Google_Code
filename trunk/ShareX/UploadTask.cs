@@ -75,15 +75,15 @@ namespace ShareX
 
         #region Constructors
 
-        private UploadTask()
+        private UploadTask(TaskSettings taskSettings)
         {
             Status = TaskStatus.InQueue;
-            Info = new TaskInfo();
+            Info = new TaskInfo(taskSettings);
         }
 
-        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName)
+        public static UploadTask CreateDataUploaderTask(EDataType dataType, Stream stream, string fileName, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.DataUpload;
             task.Info.DataType = dataType;
             task.Info.FileName = fileName;
@@ -91,23 +91,23 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateFileUploaderTask(string filePath)
+        public static UploadTask CreateFileUploaderTask(string filePath, TaskSettings taskSettings)
         {
             EDataType dataType = Helpers.FindDataType(filePath);
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.FileUpload;
             task.Info.DataType = dataType;
             task.Info.FilePath = filePath;
 
-            if (Program.Settings.FileUploadUseNamePattern)
+            if (task.Info.TaskSettings.UploadSettings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
-                task.Info.FileName = TaskHelper.GetFilename(ext);
+                task.Info.FileName = TaskHelper.GetFilename(task.Info.TaskSettings, ext);
             }
 
             task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-            if (dataType == EDataType.Image && Program.Settings.UseImageFormat2FileUpload)
+            if (dataType == EDataType.Image && task.Info.TaskSettings.ImageSettings.UseImageFormat2FileUpload)
             {
                 TaskHelper.PrepareFileImage(task);
             }
@@ -115,35 +115,30 @@ namespace ShareX
             return task;
         }
 
-        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings = null)
+        public static UploadTask CreateImageUploaderTask(Image image, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
-
-            if (taskSettings != null)
-            {
-                task.Info.Settings = taskSettings;
-            }
+            UploadTask task = new UploadTask(taskSettings);
 
             task.Info.Job = TaskJob.ImageJob;
             task.Info.DataType = EDataType.Image;
-            task.Info.FileName = TaskHelper.GetImageFilename(image);
+            task.Info.FileName = TaskHelper.GetImageFilename(taskSettings, image);
             task.tempImage = image;
             return task;
         }
 
-        public static UploadTask CreateTextUploaderTask(string text)
+        public static UploadTask CreateTextUploaderTask(string text, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename("txt");
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
             task.tempText = text;
             return task;
         }
 
-        public static UploadTask CreateURLShortenerTask(string url)
+        public static UploadTask CreateURLShortenerTask(string url, TaskSettings taskSettings)
         {
-            UploadTask task = new UploadTask();
+            UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.ShortenURL;
             task.Info.DataType = EDataType.URL;
             task.Info.FileName = "URL shorten";
@@ -229,7 +224,7 @@ namespace ShareX
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     Program.Settings.ShowUploadWarning = false;
-                    Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.UploadImageToHost);
+                    Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.UploadImageToHost);
                     RequestSettingUpdate = true;
                     Stop();
                 }
@@ -329,55 +324,55 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Program.Settings.WatermarkConfig != null)
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
                 {
-                    WatermarkManager watermarkManager = new WatermarkManager(Program.Settings.WatermarkConfig);
+                    WatermarkManager watermarkManager = new WatermarkManager(Info.TaskSettings.ImageSettings.WatermarkConfig);
                     watermarkManager.ApplyWatermark(tempImage);
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
                 {
-                    tempImage = CaptureHelpers.DrawBorder(tempImage, Program.Settings.BorderType, Program.Settings.BorderColor, Program.Settings.BorderSize);
+                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
                 {
-                    tempImage = TaskHelper.DrawShadow(tempImage);
+                    tempImage = TaskHelper.DrawShadow(Info.TaskSettings, tempImage);
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
                 {
                     tempImage = TaskHelper.AnnotateImage(tempImage);
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
                 {
                     ClipboardHelper.CopyImage(tempImage);
                     DebugHelper.WriteLine("CopyImageToClipboard");
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
+                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
                 {
                     new PrintForm(tempImage, new PrintSettings()).ShowDialog();
                 }
 
-                if (Info.Settings.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog,
+                if (Info.TaskSettings.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog,
                     AfterCaptureTasks.UploadImageToHost))
                 {
                     using (tempImage)
                     {
-                        ImageData imageData = TaskHelper.PrepareImage(tempImage);
+                        ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.TaskSettings);
                         Data = imageData.ImageStream;
                         Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
+                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
                         {
                             Info.FilePath = Path.Combine(Program.ScreenshotsPath, Info.FileName);
                             imageData.Write(Info.FilePath);
                             DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
                         }
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFileWithDialog))
+                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFileWithDialog))
                         {
                             using (SaveFileDialog sfd = new SaveFileDialog())
                             {
@@ -396,20 +391,20 @@ namespace ShareX
                             }
                         }
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
+                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
                             File.Exists(Info.FilePath))
                         {
                             ClipboardHelper.CopyFile(Info.FilePath);
                         }
-                        else if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
+                        else if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
                         {
                             ClipboardHelper.CopyText(Info.FilePath);
                         }
 
-                        if (Info.Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Program.Settings.ExternalPrograms != null &&
+                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.TaskSettings.ExternalPrograms != null &&
                             !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
                         {
-                            var actions = Program.Settings.ExternalPrograms.Where(x => x.IsActive);
+                            var actions = Info.TaskSettings.ExternalPrograms.Where(x => x.IsActive);
 
                             if (actions.Count() > 0)
                             {
@@ -443,7 +438,7 @@ namespace ShareX
 
         private void DoAfterUploadJobs()
         {
-            if (Info.Settings.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
+            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
             {
                 UploadResult result = ShortenURL(Info.Result.URL);
 
@@ -453,7 +448,7 @@ namespace ShareX
                 }
             }
 
-            if (Info.Settings.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
+            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
             {
                 OAuthInfo twitterOAuth = Program.UploadersConfig.TwitterOAuthInfoList.ReturnIfValidIndex(Program.UploadersConfig.TwitterSelectedAccount);
 
@@ -468,12 +463,12 @@ namespace ShareX
                 }
             }
 
-            if (Info.Settings.AfterUploadJob.HasFlag(AfterUploadTasks.SendURLWithEmail))
+            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.SendURLWithEmail))
             {
                 using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
                     Program.UploadersConfig.EmailDefaultSubject, Info.Result.ToString()))
                 {
-                    emailForm.Icon = Resources.ShareX;
+                    emailForm.Icon = Resources.ShareXIcon;
 
                     if (emailForm.ShowDialog() == DialogResult.OK)
                     {
@@ -495,7 +490,7 @@ namespace ShareX
                 }
             }
 
-            if (Info.Settings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
             {
                 string url = Info.Result.ToString();
 
@@ -510,7 +505,7 @@ namespace ShareX
         {
             ImageUploader imageUploader = null;
 
-            switch (Info.Settings.ImageDestination)
+            switch (Info.TaskSettings.ImageDestination)
             {
                 case ImageDestination.ImageShack:
                     imageUploader = new ImageShackUploader(ApiKeys.ImageShackKey, Program.UploadersConfig.ImageShackAccountType,
@@ -602,25 +597,30 @@ namespace ShareX
         {
             TextUploader textUploader = null;
 
-            switch (Info.Settings.TextDestination)
+            switch (Info.TaskSettings.TextDestination)
             {
                 case TextDestination.Pastebin:
-                    textUploader = new Pastebin(ApiKeys.PastebinKey, Program.UploadersConfig.PastebinSettings);
+                    PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
+                    settings.TextFormat = this.Info.TaskSettings.AdvancedSettings.TextFormat;
+                    textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey);
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2();
+                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new Slexy();
+                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Pastee:
-                    textUploader = new Pastee();
+                    textUploader = new Pastee() { Lexer = Info.TaskSettings.AdvancedSettings.TextFormat };
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);
+                    break;
+                case TextDestination.Gist:
+                    textUploader = new Gist();
                     break;
                 case TextDestination.CustomTextUploader:
                     if (Program.UploadersConfig.CustomUploadersList.IsValidIndex(Program.UploadersConfig.CustomTextUploaderSelected))
@@ -643,7 +643,7 @@ namespace ShareX
         {
             FileUploader fileUploader = null;
 
-            switch (Info.Settings.FileDestination)
+            switch (Info.TaskSettings.FileDestination)
             {
                 case FileDestination.Dropbox:
                     NameParser parser = new NameParser(NameParserType.URL);
@@ -734,7 +734,7 @@ namespace ShareX
                     using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
                         Program.UploadersConfig.EmailDefaultSubject, Program.UploadersConfig.EmailDefaultBody))
                     {
-                        emailForm.Icon = Resources.ShareX;
+                        emailForm.Icon = Resources.ShareXIcon;
 
                         if (emailForm.ShowDialog() == DialogResult.OK)
                         {
@@ -778,7 +778,7 @@ namespace ShareX
         {
             URLShortener urlShortener = null;
 
-            switch (Info.Settings.URLShortenerDestination)
+            switch (Info.TaskSettings.URLShortenerDestination)
             {
                 case UrlShortenerType.BITLY:
                     urlShortener = new BitlyURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);

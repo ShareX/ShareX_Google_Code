@@ -28,8 +28,6 @@ using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -71,7 +69,7 @@ namespace ShareX
 
             IsReady = true;
 
-            DebugHelper.WriteLine("Startup time: {0}ms", Program.StartTimer.ElapsedMilliseconds);
+            DebugHelper.WriteLine("Startup time: {0} ms", Program.StartTimer.ElapsedMilliseconds);
 
             UseCommandLineArgs(Environment.GetCommandLineArgs());
         }
@@ -86,19 +84,19 @@ namespace ShareX
             InitializeComponent();
 
             Text = Program.Title;
-            Icon = Resources.ShareX;
+            Icon = Resources.ShareXIcon;
 
-            AddMultiEnumItems<AfterCaptureTasks>(x => Program.Settings.AfterCaptureTasks = Program.Settings.AfterCaptureTasks.Swap(x),
+            AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            AddMultiEnumItems<AfterUploadTasks>(x => Program.Settings.AfterUploadTasks = Program.Settings.AfterUploadTasks.Swap(x),
+            AddMultiEnumItems<AfterUploadTasks>(x => Program.DefaultTaskSettings.AfterUploadJob = Program.DefaultTaskSettings.AfterUploadJob.Swap(x),
                 tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
-            AddEnumItems<ImageDestination>(x => Program.Settings.ImageUploaderDestination = x, tsmiImageUploaders, tsmiTrayImageUploaders);
-            AddEnumItems<TextDestination>(x => Program.Settings.TextUploaderDestination = x, tsmiTextUploaders, tsmiTrayTextUploaders);
-            AddEnumItems<FileDestination>(x => Program.Settings.FileUploaderDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
-            AddEnumItems<UrlShortenerType>(x => Program.Settings.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
-            AddEnumItems<SocialNetworkingService>(x => Program.Settings.SocialServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
+            AddEnumItems<ImageDestination>(x => Program.DefaultTaskSettings.ImageDestination = x, tsmiImageUploaders, tsmiTrayImageUploaders);
+            AddEnumItems<TextDestination>(x => Program.DefaultTaskSettings.TextDestination = x, tsmiTextUploaders, tsmiTrayTextUploaders);
+            AddEnumItems<FileDestination>(x => Program.DefaultTaskSettings.FileDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
+            AddEnumItems<UrlShortenerType>(x => Program.DefaultTaskSettings.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
+            AddEnumItems<SocialNetworkingService>(x => Program.DefaultTaskSettings.SocialNetworkingServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
 
-            tsbDebug.Visible = Program.IsDebug;
+            tsmiDebug.Visible = Program.IsDebug;
 
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
@@ -157,9 +155,9 @@ namespace ShareX
             }
         }
 
-        private void SetEnumChecked<T>(T value, params ToolStripDropDownItem[] parents)
+        private void SetEnumChecked(Enum value, params ToolStripDropDownItem[] parents)
         {
-            int index = Helpers.GetEnumMemberIndex(value);
+            int index = value.GetIndex();
 
             foreach (ToolStripDropDownItem parent in parents)
             {
@@ -281,6 +279,15 @@ namespace ShareX
                             tsmiCopyFileNameWithExtension.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
                             tsmiCopyFolder.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
 
+                            tsmiCopyCustomFormat.DropDownItems.Clear();
+                            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+                            {
+                                ToolStripMenuItem tsmiClipboardFormat = new ToolStripMenuItem(cf.Description);
+                                tsmiClipboardFormat.Tag = cf;
+                                tsmiClipboardFormat.Click += tsmiClipboardFormat_Click;
+                                tsmiCopyCustomFormat.DropDownItems.Add(tsmiClipboardFormat);
+                            }
+
                             if (!scMain.Panel2Collapsed)
                             {
                                 if (uim.SelectedItems[0].IsImageFile)
@@ -309,6 +316,13 @@ namespace ShareX
             cmsUploadInfo.ResumeLayout();
         }
 
+        private void tsmiClipboardFormat_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmiClipboardFormat = sender as ToolStripMenuItem;
+            ClipboardFormat cf = tsmiClipboardFormat.Tag as ClipboardFormat;
+            uim.CopyCustomFormat(cf.Format);
+        }
+
         private void LoadSettings()
         {
             niTray.Icon = Resources.sharex_16px_6;
@@ -328,11 +342,20 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
+            if (Program.Settings.ClipboardFormats.Count == 0)
+            {
+                Program.Settings.ClipboardFormats.Add(new ClipboardFormat()
+                {
+                    Description = "HTML linked image",
+                    Format = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>"
+                });
+            }
+
             if (Program.Settings.WatchFolderEnabled)
             {
                 foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
                 {
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
                     watchFolder.Enable();
                 }
             }
@@ -340,30 +363,30 @@ namespace ShareX
 
         public void UpdateMainFormSettings()
         {
-            SetMultiEnumChecked(Program.Settings.AfterCaptureTasks, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
-            SetMultiEnumChecked(Program.Settings.AfterUploadTasks, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
-            SetEnumChecked(Program.Settings.ImageUploaderDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
-            SetEnumChecked(Program.Settings.TextUploaderDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
-            SetEnumChecked(Program.Settings.FileUploaderDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
-            SetEnumChecked(Program.Settings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
-            SetEnumChecked(Program.Settings.SocialServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
+            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterCaptureJob, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
+            SetMultiEnumChecked(Program.DefaultTaskSettings.AfterUploadJob, tsddbAfterUploadTasks, tsmiTrayAfterUploadTasks);
+            SetEnumChecked(Program.DefaultTaskSettings.ImageDestination, tsmiImageUploaders, tsmiTrayImageUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.TextDestination, tsmiTextUploaders, tsmiTrayTextUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.FileDestination, tsmiFileUploaders, tsmiTrayFileUploaders);
+            SetEnumChecked(Program.DefaultTaskSettings.URLShortenerDestination, tsmiURLShorteners, tsmiTrayURLShorteners);
+            SetEnumChecked(Program.DefaultTaskSettings.SocialNetworkingServiceDestination, tsmiSocialServices, tsmiTraySocialServices);
         }
 
         private void UpdateUploaderMenuNames()
         {
-            string imageUploader = Program.Settings.ImageUploaderDestination == ImageDestination.FileUploader ?
-                Program.Settings.FileUploaderDestination.GetDescription() : Program.Settings.ImageUploaderDestination.GetDescription();
+            string imageUploader = Program.DefaultTaskSettings.ImageDestination == ImageDestination.FileUploader ?
+                Program.DefaultTaskSettings.FileDestination.GetDescription() : Program.DefaultTaskSettings.ImageDestination.GetDescription();
             tsmiImageUploaders.Text = tsmiTrayImageUploaders.Text = "Image uploader: " + imageUploader;
 
-            string textUploader = Program.Settings.TextUploaderDestination == TextDestination.FileUploader ?
-                Program.Settings.FileUploaderDestination.GetDescription() : Program.Settings.TextUploaderDestination.GetDescription();
+            string textUploader = Program.DefaultTaskSettings.TextDestination == TextDestination.FileUploader ?
+                Program.DefaultTaskSettings.FileDestination.GetDescription() : Program.DefaultTaskSettings.TextDestination.GetDescription();
             tsmiTextUploaders.Text = tsmiTrayTextUploaders.Text = "Text uploader: " + textUploader;
 
-            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.Settings.FileUploaderDestination.GetDescription();
+            tsmiFileUploaders.Text = tsmiTrayFileUploaders.Text = "File uploader: " + Program.DefaultTaskSettings.FileDestination.GetDescription();
 
-            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.Settings.URLShortenerDestination.GetDescription();
+            tsmiURLShorteners.Text = tsmiTrayURLShorteners.Text = "URL shortener: " + Program.DefaultTaskSettings.URLShortenerDestination.GetDescription();
 
-            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking service: " + Program.Settings.SocialServiceDestination.GetDescription();
+            tsmiSocialServices.Text = tsmiTraySocialServices.Text = "Social networking service: " + Program.DefaultTaskSettings.SocialNetworkingServiceDestination.GetDescription();
         }
 
         private void CheckUpdate()
@@ -404,19 +427,21 @@ namespace ShareX
             Close();
         }
 
-        public void UseCommandLineArgs(string[] args)
+        public void UseCommandLineArgs(string[] args, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = Program.DefaultTaskSettings;
+
             if (args != null && args.Length > 1)
             {
                 for (int i = 1; i < args.Length; i++)
                 {
                     if (args[i].Equals("-clipboardupload", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        UploadManager.ClipboardUpload();
+                        UploadManager.ClipboardUpload(taskSettings);
                     }
                     else if (args[i][0] != '-')
                     {
-                        UploadManager.UploadFile(args[i]);
+                        UploadManager.UploadFile(args[i], taskSettings);
                     }
                 }
             }
@@ -485,7 +510,7 @@ namespace ShareX
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
-        private void DoScreenRecorder(bool isHotkey = false)
+        private void DoScreenRecorder(TaskSettings taskSettings, bool isHotkey = false)
         {
             ScreenRecordForm form = ScreenRecordForm.Instance;
 
@@ -495,7 +520,9 @@ namespace ShareX
             }
             else
             {
-                if (isHotkey && Program.Settings.ScreenRecorderHotkeyStartInstantly)
+                form.LoadSettings();
+
+                if (isHotkey && taskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly)
                 {
                     if (form.Visible)
                     {
@@ -514,10 +541,9 @@ namespace ShareX
             }
         }
 
-        private void OpenAutoCapture()
+        private void OpenAutoCapture(TaskSettings taskSettings)
         {
-            AutoCapture autoCaptureForm = new AutoCapture();
-            autoCaptureForm.Icon = Icon;
+            AutoCapture autoCaptureForm = new AutoCapture(taskSettings);
             autoCaptureForm.Show();
         }
 
@@ -580,17 +606,17 @@ namespace ShareX
 
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
-            UploadManager.DragDropUpload(e.Data);
+            UploadManager.DragDropUpload(e.Data, Program.DefaultTaskSettings);
         }
 
         private void tsbClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
         }
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile();
+            UploadManager.UploadFile(Program.DefaultTaskSettings);
         }
 
         private void tsddbDestinations_DropDownOpened(object sender, EventArgs e)
@@ -605,7 +631,7 @@ namespace ShareX
                 Program.UploaderSettingsResetEvent.WaitOne();
             }
 
-            UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys()) { Icon = this.Icon };
+            UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys());
             uploadersConfigForm.ShowDialog();
             uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
         }
@@ -617,7 +643,7 @@ namespace ShareX
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadText(Program.ApplicationName + " text upload test");
+            UploadManager.UploadText(Program.ApplicationName + " text upload test", Program.DefaultTaskSettings);
         }
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
@@ -627,38 +653,36 @@ namespace ShareX
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
         {
-            UploadManager.ShortenURL(Links.URL_WEBSITE);
+            UploadManager.ShortenURL(Links.URL_WEBSITE, Program.DefaultTaskSettings);
         }
 
         private void tsmiTestUploaders_Click(object sender, EventArgs e)
         {
             using (UploadTestForm form = new UploadTestForm())
             {
-                form.Icon = Icon;
                 form.ShowDialog();
             }
         }
 
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
-            new RegionCapturePreview(Program.Settings.SurfaceOptions).Show();
+            new RegionCapturePreview(Program.DefaultTaskSettings.CaptureSettings.SurfaceOptions).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            DoScreenRecorder();
+            DoScreenRecorder(Program.DefaultTaskSettings);
         }
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
         {
-            OpenAutoCapture();
+            OpenAutoCapture(Program.DefaultTaskSettings);
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
         {
             using (DialogColor colorForm = new DialogColor())
             {
-                colorForm.Icon = Icon;
                 colorForm.ScreenPicker = true;
                 colorForm.ShowDialog();
             }
@@ -667,7 +691,6 @@ namespace ShareX
         private void tsmiHashCheck_Click(object sender, EventArgs e)
         {
             HashCheckForm hashCheckForm = new HashCheckForm();
-            hashCheckForm.Icon = Icon;
             hashCheckForm.Show();
         }
 
@@ -683,7 +706,6 @@ namespace ShareX
             using (HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath))
             {
                 Program.Settings.HistoryWindowState.AutoHandleFormState(historyForm);
-                historyForm.Icon = Icon;
                 historyForm.Text = "ShareX - History: " + Program.HistoryFilePath;
                 historyForm.ShowDialog();
             }
@@ -697,7 +719,6 @@ namespace ShareX
                 Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount))
             {
                 Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
-                imageHistoryForm.Icon = Icon;
                 imageHistoryForm.Text = "ShareX - Image history: " + Program.HistoryFilePath;
                 imageHistoryForm.ShowDialog();
 
@@ -707,16 +728,35 @@ namespace ShareX
             }
         }
 
-        private void tsbSettings_Click(object sender, EventArgs e)
+        private void tsbAbout_Click(object sender, EventArgs e)
         {
-            new SettingsForm() { Icon = this.Icon }.ShowDialog();
+            new AboutForm().ShowDialog();
+        }
+
+        private void tsmiDefaultWorkflowSettings_Click(object sender, EventArgs e)
+        {
+            using (TaskSettingsForm dlg = new TaskSettingsForm(Program.DefaultTaskSettings, true))
+            {
+                dlg.ShowDialog();
+            }
+        }
+
+        private void tsmiWorkflows_Click(object sender, EventArgs e)
+        {
+            new HotkeySettingsForm().Show();
+        }
+
+        private void tsmiApplicationSettings_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog();
             UploadManager.UpdateProxySettings();
             Program.Settings.SaveAsync();
         }
 
-        private void tsbAbout_Click(object sender, EventArgs e)
+        private void tsmiHelpDebug_Click(object sender, EventArgs e)
         {
-            new AboutForm() { Icon = this.Icon }.ShowDialog();
+            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
+            dlg.Show();
         }
 
         private void tsbDonate_Click(object sender, EventArgs e)
@@ -770,7 +810,7 @@ namespace ShareX
                     uim.CopyURL();
                     break;
                 case Keys.Control | Keys.V:
-                    UploadManager.ClipboardUploadWithContentViewer();
+                    UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
                     break;
                 case Keys.Delete:
                     RemoveSelectedItems();
@@ -787,7 +827,7 @@ namespace ShareX
             switch (e.Button)
             {
                 case MouseButtons.Middle:
-                    CaptureScreenshot(CaptureType.Rectangle, false);
+                    CaptureScreenshot(CaptureType.Rectangle, Program.DefaultTaskSettings, false);
                     break;
             }
         }
@@ -967,12 +1007,12 @@ namespace ShareX
 
         private void tsmiClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile();
+            UploadManager.UploadFile(Program.DefaultTaskSettings);
         }
 
         private void tsmiHideMenu_Click(object sender, EventArgs e)

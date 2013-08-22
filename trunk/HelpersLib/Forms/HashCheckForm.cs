@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace HelpersLib
         public HashCheckForm()
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             cbHashType.Items.AddRange(Helpers.GetEnumDescriptions<HashType>());
             cbHashType.SelectedIndex = (int)HashType.SHA1;

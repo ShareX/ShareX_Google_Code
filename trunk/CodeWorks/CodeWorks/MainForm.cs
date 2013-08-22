@@ -38,18 +38,17 @@ namespace CodeWorks
 {
     public partial class MainForm : Form
     {
-        private string[] ignoreFolders = new string[] { "bin", "obj", "Properties", "GreenshotImageEditor", "AviFile" };
-        private string[] ignoreFiles = new string[] { };
-        private string[] ignoreFilenamesEndsWith = new string[] { ".designer.cs" };
-        private string[] allowFilenamesEndsWith = new string[] { ".cs" };
-
-        private string licenseText;
+        private readonly string folderPath = Path.GetFullPath(@"..\..\..\..\..\trunk");
+        private readonly string[] ignoreFolders = new string[] { "bin", "obj", "Properties", "GreenshotImageEditor", "AviFile" };
+        private readonly string[] ignoreFiles = new string[] { };
+        private readonly string[] ignoreFilenamesEndsWith = new string[] { ".designer.cs" };
+        private readonly string[] allowFilenamesEndsWith = new string[] { ".cs" };
+        private readonly string licenseText = Resources.ShareXLicense;
 
         public MainForm()
         {
             InitializeComponent();
-            licenseText = Resources.ShareXLicense;
-            txtFolderPath.Text = Path.GetFullPath(@"..\..\..\..\..");
+            txtFolderPath.Text = folderPath;
         }
 
         private void btnFindRegionAreas_Click(object sender, EventArgs e)

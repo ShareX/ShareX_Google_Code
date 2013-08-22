@@ -24,13 +24,11 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ScreenCapture;
+using ShareX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using UploadersLib;
 
@@ -38,24 +36,14 @@ namespace ShareX
 {
     public partial class SettingsForm : Form
     {
-        private const int MaxBufferSizePower = 14;
-
         private bool loaded;
-        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow, cmsSaveImageSubFolderPattern;
+        private const int MaxBufferSizePower = 14;
+        private ContextMenuStrip cmsSaveImageSubFolderPattern;
 
         public SettingsForm()
         {
             InitializeComponent();
             LoadSettings();
-
-            if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
-            {
-                hmHotkeys.PrepareHotkeys(Program.MainForm.HotkeyManager);
-            }
-            else
-            {
-                tcSettings.TabPages.Remove(tpHotkeys);
-            }
 
             loaded = true;
         }
@@ -63,6 +51,7 @@ namespace ShareX
         private void LoadSettings()
         {
             Text = Program.Title + " - Settings";
+            Icon = Resources.ShareXIcon;
 
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;
@@ -86,103 +75,33 @@ namespace ShareX
             txtSaveImageSubFolderPattern.Text = Program.Settings.SaveImageSubFolderPattern;
             cmsSaveImageSubFolderPattern = NameParser.CreateCodesMenu(txtSaveImageSubFolderPattern, ReplacementVariables.n);
 
-            // Image - Quality
-            cbImageFormat.SelectedIndex = (int)Program.Settings.ImageFormat;
-            nudImageJPEGQuality.Value = Program.Settings.ImageJPEGQuality;
-            cbImageGIFQuality.SelectedIndex = (int)Program.Settings.ImageGIFQuality;
-            nudUseImageFormat2After.Value = Program.Settings.ImageSizeLimit;
-            cbImageFormat2.SelectedIndex = (int)Program.Settings.ImageFormat2;
-            cbUseImageFormat2FileUpload.Checked = Program.Settings.UseImageFormat2FileUpload;
-
-            // Image - Resize
-            cbImageAutoResize.Checked = Program.Settings.ImageAutoResize;
-            cbImageKeepAspectRatio.Checked = Program.Settings.ImageKeepAspectRatio;
-            cbImageUseSmoothScaling.Checked = Program.Settings.ImageUseSmoothScaling;
-
-            switch (Program.Settings.ImageScaleType)
-            {
-                case ImageScaleType.Percentage:
-                    rbImageScaleTypePercentage.Checked = true;
-                    break;
-                case ImageScaleType.Width:
-                    rbImageScaleTypeToWidth.Checked = true;
-                    break;
-                case ImageScaleType.Height:
-                    rbImageScaleTypeToHeight.Checked = true;
-                    break;
-                case ImageScaleType.Specific:
-                    rbImageScaleTypeSpecific.Checked = true;
-                    break;
-            }
-
-            nudImageScalePercentageWidth.Value = Program.Settings.ImageScalePercentageWidth;
-            nudImageScalePercentageHeight.Value = Program.Settings.ImageScalePercentageHeight;
-            nudImageScaleToWidth.Value = Program.Settings.ImageScaleToWidth;
-            nudImageScaleToHeight.Value = Program.Settings.ImageScaleToHeight;
-            nudImageScaleSpecificWidth.Value = Program.Settings.ImageScaleSpecificWidth;
-            nudImageScaleSpecificHeight.Value = Program.Settings.ImageScaleSpecificHeight;
-
-            // Image - Effects
-            cbImageEffectOnlyRegionCapture.Checked = Program.Settings.ImageEffectOnlyRegionCapture;
-            btnBorderColor.BackColor = Program.Settings.BorderColor;
-            nudBorderSize.Value = Program.Settings.BorderSize;
-            nudImageShadowDarkness.Value = (decimal)Program.Settings.ShadowDarkness;
-            nudImageShadowSize.Value = Program.Settings.ShadowSize;
-
-            // Capture
-            cbShowCursor.Checked = Program.Settings.ShowCursor;
-            cbCaptureTransparent.Checked = Program.Settings.CaptureTransparent;
-            cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
-            cbCaptureShadow.Checked = Program.Settings.CaptureShadow;
-            nudCaptureShadowOffset.Value = Program.Settings.CaptureShadowOffset;
-            cbCaptureClientArea.Checked = Program.Settings.CaptureClientArea;
-            cbScreenshotDelay.Checked = Program.Settings.IsDelayScreenshot;
-            nudScreenshotDelay.Value = Program.Settings.DelayScreenshot;
-            cbCaptureAutoHideTaskbar.Checked = Program.Settings.CaptureAutoHideTaskbar;
-
-            if (Program.Settings.SurfaceOptions == null) Program.Settings.SurfaceOptions = new SurfaceOptions();
-            cbDrawBorder.Checked = Program.Settings.SurfaceOptions.DrawBorder;
-            cbDrawCheckerboard.Checked = Program.Settings.SurfaceOptions.DrawChecker;
-            cbQuickCrop.Checked = Program.Settings.SurfaceOptions.QuickCrop;
-            cbFixedShapeSize.Checked = Program.Settings.SurfaceOptions.IsFixedSize;
-            nudFixedShapeSizeWidth.Value = Program.Settings.SurfaceOptions.FixedSize.Width;
-            nudFixedShapeSizeHeight.Value = Program.Settings.SurfaceOptions.FixedSize.Height;
-            cbShapeIncludeControls.Checked = Program.Settings.SurfaceOptions.IncludeControls;
-            cbShapeForceWindowCapture.Checked = Program.Settings.SurfaceOptions.ForceWindowCapture;
-
-            cbScreenRecorderHotkeyStartInstantly.Checked = Program.Settings.ScreenRecorderHotkeyStartInstantly;
-
-            // Actions
-            TaskHelper.AddDefaultExternalPrograms();
-
-            foreach (ExternalProgram fileAction in Program.Settings.ExternalPrograms)
-            {
-                AddFileAction(fileAction);
-            }
+            // Proxy
+            cbProxyMethod.Items.AddRange(Enum.GetNames(typeof(ProxyMethod)));
+            cbProxyType.Items.AddRange(Helpers.GetEnumDescriptions<ProxyType>());
+            cbProxyMethod.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyMethod;
+            txtProxyUsername.Text = Program.Settings.ProxySettings.Username;
+            txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
+            txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
+            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
+            cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
+            UpdateProxyControls();
 
             // Upload / General
             nudUploadLimit.Value = Program.Settings.UploadLimit;
 
             for (int i = 0; i < MaxBufferSizePower; i++)
             {
-                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " kB");
+                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " KiB");
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
             cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
 
-            // Upload / Name pattern
-            txtNameFormatPattern.Text = Program.Settings.NameFormatPattern;
-            txtNameFormatPatternActiveWindow.Text = Program.Settings.NameFormatPatternActiveWindow;
-            cmsNameFormatPattern = NameParser.CreateCodesMenu(txtNameFormatPattern, ReplacementVariables.n);
-            cmsNameFormatPatternActiveWindow = NameParser.CreateCodesMenu(txtNameFormatPatternActiveWindow, ReplacementVariables.n);
-            cbFileUploadUseNamePattern.Checked = Program.Settings.FileUploadUseNamePattern;
-
-            // Upload / Clipboard upload
-            cbShowClipboardContentViewer.Checked = Program.Settings.ShowClipboardContentViewer;
-            cbClipboardUploadAutoDetectURL.Checked = Program.Settings.ClipboardUploadAutoDetectURL;
-            cbClipboardUploadUseAfterCaptureTasks.Checked = Program.Settings.ClipboardUploadUseAfterCaptureTasks;
-            cbClipboardUploadExcludeImageEffects.Checked = Program.Settings.ClipboardUploadExcludeImageEffects;
+            // Upload / Clipboard formats
+            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+            {
+                AddClipboardFormat(cf);
+            }
 
             // Upload / Watch folder
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
@@ -198,21 +117,6 @@ namespace ShareX
                     AddWatchFolder(watchFolder);
                 }
             }
-
-            // Proxy
-            cbProxyMethod.Items.AddRange(Enum.GetNames(typeof(ProxyMethod)));
-            cbProxyType.Items.AddRange(Helpers.GetEnumDescriptions<ProxyType>());
-            cbProxyMethod.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyMethod;
-            txtProxyUsername.Text = Program.Settings.ProxySettings.Username;
-            txtProxyPassword.Text = Program.Settings.ProxySettings.Password;
-            txtProxyHost.Text = Program.Settings.ProxySettings.Host ?? string.Empty;
-            nudProxyPort.Value = Program.Settings.ProxySettings.Port;
-            cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
-            UpdateProxyControls();
-
-            // Debug
-            txtDebugLog.Text = Program.MyLogger.Messages.ToString();
-            txtDebugLog.ScrollToCaret();
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
@@ -224,25 +128,6 @@ namespace ShareX
         private void SettingsForm_Resize(object sender, EventArgs e)
         {
             Refresh();
-        }
-
-        private void AddFileAction(ExternalProgram fileAction)
-        {
-            ListViewItem lvi = new ListViewItem(fileAction.Name ?? "");
-            lvi.Tag = fileAction;
-            lvi.Checked = fileAction.IsActive;
-            lvi.SubItems.Add(fileAction.Path ?? "");
-            lvi.SubItems.Add(fileAction.Args ?? "");
-            lvActions.Items.Add(lvi);
-        }
-
-        private void AddWatchFolder(WatchFolder watchFolder)
-        {
-            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
-            lvi.Tag = watchFolder;
-            lvi.SubItems.Add(watchFolder.Filter ?? "");
-            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
-            lvWatchFolderList.Items.Add(lvi);
         }
 
         private void UpdateProxyControls()
@@ -259,14 +144,6 @@ namespace ShareX
                     txtProxyUsername.Enabled = txtProxyPassword.Enabled = true;
                     txtProxyHost.Enabled = nudProxyPort.Enabled = cbProxyType.Enabled = false;
                     break;
-            }
-        }
-
-        private void tcSettings_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcSettings.SelectedTab == tpHotkeys)
-            {
-                hmHotkeys.Focus();
             }
         }
 
@@ -411,479 +288,6 @@ namespace ShareX
 
         #endregion Paths
 
-        #region Image / Quality
-
-        private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageFormat = (EImageFormat)cbImageFormat.SelectedIndex;
-        }
-
-        private void nudImageJPEGQuality_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageJPEGQuality = (int)nudImageJPEGQuality.Value;
-        }
-
-        private void cbImageGIFQuality_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageGIFQuality = (GIFQuality)cbImageGIFQuality.SelectedIndex;
-        }
-
-        private void nudUseImageFormat2After_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageSizeLimit = (int)nudUseImageFormat2After.Value;
-        }
-
-        private void cbImageFormat2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageFormat2 = (EImageFormat)cbImageFormat2.SelectedIndex;
-        }
-
-        private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UseImageFormat2FileUpload = cbUseImageFormat2FileUpload.Checked;
-        }
-
-        #endregion Image / Quality
-
-        #region Image / Resize
-
-        private void cbImageAutoResize_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageAutoResize = cbImageAutoResize.Checked;
-        }
-
-        private void cbImageKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageKeepAspectRatio = cbImageKeepAspectRatio.Checked;
-
-            if (Program.Settings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageHeight.Value = nudImageScalePercentageWidth.Value;
-            }
-        }
-
-        private void cbImageUseSmoothScaling_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageUseSmoothScaling = cbImageUseSmoothScaling.Checked;
-        }
-
-        private void CheckImageScaleType()
-        {
-            bool aspectRatioEnabled = true;
-
-            if (rbImageScaleTypePercentage.Checked)
-            {
-                Program.Settings.ImageScaleType = ImageScaleType.Percentage;
-            }
-            else if (rbImageScaleTypeToWidth.Checked)
-            {
-                Program.Settings.ImageScaleType = ImageScaleType.Width;
-            }
-            else if (rbImageScaleTypeToHeight.Checked)
-            {
-                Program.Settings.ImageScaleType = ImageScaleType.Height;
-            }
-            else if (rbImageScaleTypeSpecific.Checked)
-            {
-                Program.Settings.ImageScaleType = ImageScaleType.Specific;
-                aspectRatioEnabled = false;
-            }
-
-            cbImageKeepAspectRatio.Enabled = aspectRatioEnabled;
-        }
-
-        private void rbImageScaleTypePercentage_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeToWidth_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeToHeight_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeSpecific_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void nudImageScalePercentageWidth_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScalePercentageWidth = (int)nudImageScalePercentageWidth.Value;
-
-            if (Program.Settings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageHeight.Value = Program.Settings.ImageScalePercentageWidth;
-            }
-        }
-
-        private void nudImageScalePercentageHeight_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScalePercentageHeight = (int)nudImageScalePercentageHeight.Value;
-
-            if (Program.Settings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageWidth.Value = Program.Settings.ImageScalePercentageHeight;
-            }
-        }
-
-        private void nudImageScaleToWidth_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
-        }
-
-        private void nudImageScaleToHeight_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
-        }
-
-        private void nudImageScaleSpecificWidth_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
-        }
-
-        private void nudImageScaleSpecificHeight_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
-        }
-
-        #endregion Image / Resize
-
-        #region Image / Effects
-
-        private void btnWatermarkSettings_Click(object sender, EventArgs e)
-        {
-            using (WatermarkUI watermarkForm = new WatermarkUI(Program.Settings.WatermarkConfig))
-            {
-                watermarkForm.Icon = Icon;
-                watermarkForm.ShowDialog();
-            }
-        }
-
-        private void cbImageEffectOnlyRectangleCapture_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
-        }
-
-        private void btnBorderColor_Click(object sender, EventArgs e)
-        {
-            using (DialogColor dColor = new DialogColor(Program.Settings.BorderColor))
-            {
-                if (dColor.ShowDialog() == DialogResult.OK)
-                {
-                    Program.Settings.BorderColor = dColor.Color;
-                    btnBorderColor.BackColor = dColor.Color;
-                }
-            }
-        }
-
-        private void nudBorderSize_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.BorderSize = (int)nudBorderSize.Value;
-        }
-
-        private void nudImageShadowDarkness_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ShadowDarkness = (float)nudImageShadowDarkness.Value;
-        }
-
-        private void nudImageShadowSize_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ShadowSize = (int)nudImageShadowSize.Value;
-        }
-
-        #endregion Image / Effects
-
-        #region Capture / General
-
-        private void cbShowCursor_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ShowCursor = cbShowCursor.Checked;
-        }
-
-        private void cbCaptureTransparent_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureTransparent = cbCaptureTransparent.Checked;
-            cbCaptureShadow.Enabled = Program.Settings.CaptureTransparent;
-        }
-
-        private void cbCaptureShadow_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureShadow = cbCaptureShadow.Checked;
-        }
-
-        private void nudCaptureShadowOffset_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureShadowOffset = (int)nudCaptureShadowOffset.Value;
-        }
-
-        private void cbCaptureClientArea_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureClientArea = cbCaptureClientArea.Checked;
-        }
-
-        private void cbScreenshotDelay_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.IsDelayScreenshot = cbScreenshotDelay.Checked;
-        }
-
-        private void nudScreenshotDelay_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.DelayScreenshot = nudScreenshotDelay.Value;
-        }
-
-        private void cbCaptureAutoHideTaskbar_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.CaptureAutoHideTaskbar = cbCaptureAutoHideTaskbar.Checked;
-        }
-
-        #endregion Capture / General
-
-        #region Capture / Shape capture
-
-        private void cbDrawBorder_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.DrawBorder = cbDrawBorder.Checked;
-        }
-
-        private void cbDrawCheckerboard_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.DrawChecker = cbDrawCheckerboard.Checked;
-        }
-
-        private void cbQuickCrop_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.QuickCrop = cbQuickCrop.Checked;
-        }
-
-        private void cbFixedShapeSize_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.IsFixedSize = cbFixedShapeSize.Checked;
-        }
-
-        private void nudFixedShapeSizeWidth_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.FixedSize = new Size((int)nudFixedShapeSizeWidth.Value, Program.Settings.SurfaceOptions.FixedSize.Height);
-        }
-
-        private void nudFixedShapeSizeHeight_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.FixedSize = new Size(Program.Settings.SurfaceOptions.FixedSize.Width, (int)nudFixedShapeSizeHeight.Value);
-        }
-
-        private void cbShapeIncludeControls_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.IncludeControls = cbShapeIncludeControls.Checked;
-        }
-
-        private void cbShapeForceWindowCapture_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SurfaceOptions.ForceWindowCapture = cbShapeForceWindowCapture.Checked;
-        }
-
-        private void btnOpenCapturingShapesWiki_Click(object sender, EventArgs e)
-        {
-            Helpers.LoadBrowserAsync(Links.URL_WIKI_CapturingShapes);
-        }
-
-        #endregion Capture / Shape capture
-
-        #region Capture / Screen recorder
-
-        private void cbScreenRecorderHotkeyStartInstantly_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ScreenRecorderHotkeyStartInstantly = cbScreenRecorderHotkeyStartInstantly.Checked;
-        }
-
-        #endregion Capture / Screen recorder
-
-        #region Actions
-
-        private void btnActionsAdd_Click(object sender, EventArgs e)
-        {
-            using (ExternalProgramForm form = new ExternalProgramForm())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    ExternalProgram fileAction = form.FileAction;
-                    fileAction.IsActive = true;
-                    Program.Settings.ExternalPrograms.Add(fileAction);
-                    AddFileAction(fileAction);
-                }
-            }
-        }
-
-        private void btnActionsEdit_Click(object sender, EventArgs e)
-        {
-            if (lvActions.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvActions.SelectedItems[0];
-                ExternalProgram fileAction = lvi.Tag as ExternalProgram;
-
-                using (ExternalProgramForm form = new ExternalProgramForm(fileAction))
-                {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        lvi.Text = fileAction.Name ?? "";
-                        lvi.SubItems[1].Text = fileAction.Path ?? "";
-                        lvi.SubItems[2].Text = fileAction.Args ?? "";
-                    }
-                }
-            }
-        }
-
-        private void btnActionsRemove_Click(object sender, EventArgs e)
-        {
-            if (lvActions.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvActions.SelectedItems[0];
-                ExternalProgram fileAction = lvi.Tag as ExternalProgram;
-
-                Program.Settings.ExternalPrograms.Remove(fileAction);
-                lvActions.Items.Remove(lvi);
-            }
-        }
-
-        private void lvActions_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            ExternalProgram fileAction = e.Item.Tag as ExternalProgram;
-            fileAction.IsActive = e.Item.Checked;
-        }
-
-        #endregion Actions
-
-        #region Upload / General
-
-        private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
-        {
-            Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
-        }
-
-        private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
-        }
-
-        private void cbIfUploadFailRetryOnce_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.IfUploadFailRetryOnce = cbIfUploadFailRetryOnce.Checked;
-        }
-
-        #endregion Upload / General
-
-        #region Upload / Name pattern
-
-        private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
-        {
-            Program.Settings.AutoIncrementNumber = 0;
-        }
-
-        private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.NameFormatPattern = txtNameFormatPattern.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber };
-            lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(Program.Settings.NameFormatPattern);
-        }
-
-        private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
-        {
-            Program.Settings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = Program.Settings.AutoIncrementNumber, WindowText = Text };
-            lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(Program.Settings.NameFormatPatternActiveWindow);
-        }
-
-        private void cbFileUploadUseNamePattern_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.FileUploadUseNamePattern = cbFileUploadUseNamePattern.Checked;
-        }
-
-        #endregion Upload / Name pattern
-
-        #region Upload / Clipboard upload
-
-        private void cbShowClipboardContentViewer_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
-        }
-
-        private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
-        }
-
-        private void cbClipboardUploadUseAfterCaptureTasks_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadUseAfterCaptureTasks = cbClipboardUploadUseAfterCaptureTasks.Checked;
-        }
-
-        private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
-        }
-
-        #endregion Upload / Clipboard upload
-
-        #region Upload / Watch folder
-
-        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded)
-            {
-                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
-
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
-                {
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                    else
-                    {
-                        watchFolder.Dispose();
-                    }
-                }
-            }
-        }
-
-        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
-        {
-            using (WatchFolderForm form = new WatchFolderForm())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path);
-                    Program.Settings.WatchFolderList.Add(watchFolder);
-                    AddWatchFolder(watchFolder);
-
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                }
-            }
-        }
-
-        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
-        {
-            if (lvWatchFolderList.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
-                WatchFolder watchFolder = lvi.Tag as WatchFolder;
-
-                Program.Settings.WatchFolderList.Remove(watchFolder);
-                lvWatchFolderList.Items.Remove(lvi);
-                watchFolder.Dispose();
-            }
-        }
-
-        #endregion Upload / Watch folder
-
         #region Proxy
 
         private void cbProxyMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -927,5 +331,124 @@ namespace ShareX
         }
 
         #endregion Proxy
+
+        #region Upload / Watch folder
+
+        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        {
+            using (WatchFolderForm form = new WatchFolderForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    WatchFolder watchFolder = form.WatchFolder;
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
+                    Program.Settings.WatchFolderList.Add(watchFolder);
+                    AddWatchFolder(watchFolder);
+
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                }
+            }
+        }
+
+        private void AddWatchFolder(WatchFolder watchFolder)
+        {
+            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
+            lvi.Tag = watchFolder;
+            lvi.SubItems.Add(watchFolder.Filter ?? "");
+            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
+            lvWatchFolderList.Items.Add(lvi);
+        }
+
+        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        {
+            if (lvWatchFolderList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
+                WatchFolder watchFolder = lvi.Tag as WatchFolder;
+
+                Program.Settings.WatchFolderList.Remove(watchFolder);
+                lvWatchFolderList.Items.Remove(lvi);
+                watchFolder.Dispose();
+            }
+        }
+
+        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
+
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                {
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                    else
+                    {
+                        watchFolder.Dispose();
+                    }
+                }
+            }
+        }
+
+        #endregion Upload / Watch folder
+
+        #region Upload / Clipboard
+
+        private void AddClipboardFormat(ClipboardFormat cf)
+        {
+            ListViewItem lvi = new ListViewItem(cf.Description ?? "");
+            lvi.Tag = cf;
+            lvi.SubItems.Add(cf.Format ?? "");
+            lvClipboardFormats.Items.Add(lvi);
+        }
+
+        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
+                using (ClipboardFormatForm form = new ClipboardFormatForm(cf))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        lvi.Text = form.ClipboardFormat.Description ?? "";
+                        lvi.Tag = form.ClipboardFormat;
+                        lvi.SubItems[1].Text = form.ClipboardFormat.Format ?? "";
+                    }
+                }
+            }
+        }
+
+        private void btnAddClipboardFormat_Click(object sender, EventArgs e)
+        {
+            using (ClipboardFormatForm form = new ClipboardFormatForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    ClipboardFormat cf = form.ClipboardFormat;
+                    Program.Settings.ClipboardFormats.Add(cf);
+                    AddClipboardFormat(cf);
+                }
+            }
+        }
+
+        private void btnClipboardFormatRemove_Click(object sender, EventArgs e)
+        {
+            if (lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                ClipboardFormat cf = lvi.Tag as ClipboardFormat;
+                Program.Settings.ClipboardFormats.Remove(cf);
+                lvClipboardFormats.Items.Remove(lvi);
+            }
+        }
+
+        #endregion Upload / Clipboard
     }
 }

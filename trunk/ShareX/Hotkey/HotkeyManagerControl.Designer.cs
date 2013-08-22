@@ -37,14 +37,17 @@
             // 
             // flpHotkeys
             // 
-            this.flpHotkeys.AutoSize = true;
+            this.flpHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpHotkeys.AutoScroll = true;
             this.flpHotkeys.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpHotkeys.Location = new System.Drawing.Point(0, 34);
+            this.flpHotkeys.Location = new System.Drawing.Point(8, 34);
             this.flpHotkeys.Name = "flpHotkeys";
-            this.flpHotkeys.Padding = new System.Windows.Forms.Padding(10);
             this.flpHotkeys.Size = new System.Drawing.Size(480, 310);
             this.flpHotkeys.TabIndex = 0;
             this.flpHotkeys.WrapContents = false;
+            this.flpHotkeys.Layout += new System.Windows.Forms.LayoutEventHandler(this.flpHotkeys_Layout);
             // 
             // btnAdd
             // 
@@ -79,9 +82,9 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(336, 8);
+            this.btnReset.Location = new System.Drawing.Point(344, 8);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(147, 23);
+            this.btnReset.Size = new System.Drawing.Size(144, 23);
             this.btnReset.TabIndex = 3;
             this.btnReset.Text = "Restore default hotkeys";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -91,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.flpHotkeys);
             this.Controls.Add(this.btnEdit);
@@ -100,7 +103,6 @@
             this.Name = "HotkeyManagerControl";
             this.Size = new System.Drawing.Size(495, 349);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

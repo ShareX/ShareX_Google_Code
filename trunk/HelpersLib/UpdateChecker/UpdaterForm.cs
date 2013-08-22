@@ -56,7 +56,7 @@ namespace HelpersLib
         public UpdaterForm()
         {
             InitializeComponent();
-            Icon = Resources.ShareX;
+            Icon = Resources.ShareXIcon;
 
             fillRect = new Rectangle(0, 0, ClientSize.Width, ClientSize.Height);
 

@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -66,7 +65,7 @@ namespace ShareX
 
         public void AddHotkey(HotkeySetting hotkeySetting)
         {
-            AddHotkey(hotkeySetting, hotkeySetting.Description + "_" + hotkeySetting.Job + "_" + hotkeySetting.Hotkey);
+            AddHotkey(hotkeySetting, hotkeySetting.TaskSettings.Description + "_" + hotkeySetting.TaskSettings.Job + "_" + hotkeySetting.Hotkey);
         }
 
         private void AddHotkey(HotkeySetting hotkeySetting, string tag)
@@ -96,7 +95,7 @@ namespace ShareX
             var failedHotkeysList = Hotkeys.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
             if (status = failedHotkeysList.Count() > 0)
             {
-                failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.Description + ": " + x.ToString()).ToArray());
+                failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.Description + ": " + x.ToString()).ToArray());
             }
             return status;
         }

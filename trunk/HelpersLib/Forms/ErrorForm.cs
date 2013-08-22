@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -45,6 +46,7 @@ namespace HelpersLib
         public ErrorForm(string productName, string errorMessage, string errorString, Logger logger, string logPath, string bugReportPath)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             ApplicationName = productName;
             Logger = logger;

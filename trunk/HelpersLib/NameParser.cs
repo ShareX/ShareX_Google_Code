@@ -111,7 +111,9 @@ namespace HelpersLib
         public string WindowText { get; set; } // %t
         public DateTime CustomDate { get; set; }
 
-        protected NameParser() { }
+        protected NameParser()
+        {
+        }
 
         public NameParser(NameParserType nameParserType)
         {

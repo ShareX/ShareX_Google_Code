@@ -124,6 +124,7 @@
             this.tpFileUploaders = new System.Windows.Forms.TabPage();
             this.tcFileUploaders = new System.Windows.Forms.TabControl();
             this.tpDropbox = new System.Windows.Forms.TabPage();
+            this.cbDropboxShortURL = new System.Windows.Forms.CheckBox();
             this.cbDropboxAutoCreateShareableLink = new System.Windows.Forms.CheckBox();
             this.btnDropboxShowFiles = new System.Windows.Forms.Button();
             this.btnDropboxCompleteAuth = new System.Windows.Forms.Button();
@@ -305,7 +306,6 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.cbDropboxShortURL = new System.Windows.Forms.CheckBox();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -1369,6 +1369,17 @@
             this.tpDropbox.TabIndex = 0;
             this.tpDropbox.Text = "Dropbox";
             this.tpDropbox.UseVisualStyleBackColor = true;
+            // 
+            // cbDropboxShortURL
+            // 
+            this.cbDropboxShortURL.AutoSize = true;
+            this.cbDropboxShortURL.Location = new System.Drawing.Point(160, 152);
+            this.cbDropboxShortURL.Name = "cbDropboxShortURL";
+            this.cbDropboxShortURL.Size = new System.Drawing.Size(137, 17);
+            this.cbDropboxShortURL.TabIndex = 20;
+            this.cbDropboxShortURL.Text = "Shorten shareable URL";
+            this.cbDropboxShortURL.UseVisualStyleBackColor = true;
+            this.cbDropboxShortURL.CheckedChanged += new System.EventHandler(this.cbDropboxShortURL_CheckedChanged);
             // 
             // cbDropboxAutoCreateShareableLink
             // 
@@ -3253,21 +3264,11 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // cbDropboxShortURL
-            // 
-            this.cbDropboxShortURL.AutoSize = true;
-            this.cbDropboxShortURL.Location = new System.Drawing.Point(160, 152);
-            this.cbDropboxShortURL.Name = "cbDropboxShortURL";
-            this.cbDropboxShortURL.Size = new System.Drawing.Size(137, 17);
-            this.cbDropboxShortURL.TabIndex = 20;
-            this.cbDropboxShortURL.Text = "Shorten shareable URL";
-            this.cbDropboxShortURL.UseVisualStyleBackColor = true;
-            this.cbDropboxShortURL.CheckedChanged += new System.EventHandler(this.cbDropboxShortURL_CheckedChanged);
-            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(832, 539);
             this.Controls.Add(this.tcUploaders);
             this.MinimumSize = new System.Drawing.Size(840, 572);

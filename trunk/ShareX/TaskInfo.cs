@@ -34,7 +34,7 @@ namespace ShareX
 {
     public class TaskInfo
     {
-        public TaskSettings Settings { get; set; }
+        public TaskSettings TaskSettings { get; set; }
 
         public string Status { get; set; }
         public TaskJob Job { get; set; }
@@ -43,7 +43,7 @@ namespace ShareX
         {
             get
             {
-                return Job != TaskJob.ImageJob || Settings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost);
+                return Job != TaskJob.ImageJob || TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost);
             }
         }
 
@@ -71,8 +71,8 @@ namespace ShareX
         {
             get
             {
-                if ((DataType == EDataType.Image && Settings.ImageDestination == ImageDestination.FileUploader) ||
-                    (DataType == EDataType.Text && Settings.TextDestination == TextDestination.FileUploader))
+                if ((DataType == EDataType.Image && TaskSettings.ImageDestination == ImageDestination.FileUploader) ||
+                    (DataType == EDataType.Text && TaskSettings.TextDestination == TextDestination.FileUploader))
                 {
                     return EDataType.File;
                 }
@@ -88,13 +88,13 @@ namespace ShareX
                 switch (UploadDestination)
                 {
                     case EDataType.Image:
-                        return Settings.ImageDestination.GetDescription();
+                        return TaskSettings.ImageDestination.GetDescription();
                     case EDataType.Text:
-                        return Settings.TextDestination.GetDescription();
+                        return TaskSettings.TextDestination.GetDescription();
                     case EDataType.File:
-                        return Settings.FileDestination.GetDescription();
+                        return TaskSettings.FileDestination.GetDescription();
                     case EDataType.URL:
-                        return Settings.URLShortenerDestination.GetDescription();
+                        return TaskSettings.URLShortenerDestination.GetDescription();
                 }
 
                 return string.Empty;
@@ -111,9 +111,14 @@ namespace ShareX
 
         public UploadResult Result { get; set; }
 
-        public TaskInfo()
+        public TaskInfo(TaskSettings taskSettings)
         {
-            Settings = new TaskSettings();
+            if (taskSettings == null)
+            {
+                taskSettings = new TaskSettings();
+            }
+
+            TaskSettings = taskSettings;
             Result = new UploadResult();
         }
 

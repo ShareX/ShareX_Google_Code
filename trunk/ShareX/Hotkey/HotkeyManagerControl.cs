@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ShareX
@@ -55,6 +56,7 @@ namespace ShareX
             foreach (HotkeySetting setting in manager.Hotkeys)
             {
                 HotkeySelectionControl control = new HotkeySelectionControl(setting);
+                control.Margin = new Padding(0, 0, 0, 2);
                 control.SelectedChanged += control_SelectedChanged;
                 control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
                 flpHotkeys.Controls.Add(control);
@@ -97,6 +99,7 @@ namespace ShareX
             HotkeySetting hotkeySetting = new HotkeySetting();
             manager.Hotkeys.Add(hotkeySetting);
             HotkeySelectionControl control = new HotkeySelectionControl(hotkeySetting);
+            control.Margin = new Padding(0, 0, 0, 2);
             control.Selected = true;
             control.SelectedChanged += control_SelectedChanged;
             control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
@@ -122,7 +125,7 @@ namespace ShareX
         {
             if (Selected != null)
             {
-                using (HotkeyTaskSettingsForm taskSettingsForm = new HotkeyTaskSettingsForm(Selected.Setting))
+                using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(Selected.Setting.TaskSettings))
                 {
                     if (taskSettingsForm.ShowDialog() == DialogResult.OK)
                     {
@@ -142,6 +145,14 @@ namespace ShareX
             manager.ResetHotkeys();
             manager.RunHotkeys();
             AddControls();
+        }
+
+        private void flpHotkeys_Layout(object sender, LayoutEventArgs e)
+        {
+            foreach (Control control in flpHotkeys.Controls)
+            {
+                control.ClientSize = new Size(flpHotkeys.ClientSize.Width, control.ClientSize.Height);
+            }
         }
     }
 }

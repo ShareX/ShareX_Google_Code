@@ -25,7 +25,6 @@
 
 using HelpersLib;
 using Newtonsoft.Json;
-using System;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -33,13 +32,9 @@ namespace ShareX
 {
     public class HotkeySetting
     {
-        public string Description { get; set; }
-
         public Keys Hotkey { get; set; }
 
         public Keys HotkeyDefault { get; set; }
-
-        public EHotkey Job { get; set; }
 
         public TaskSettings TaskSettings { get; set; }
 
@@ -54,15 +49,15 @@ namespace ShareX
 
         public HotkeySetting()
         {
-            TaskSettings = new TaskSettings(true);
+            TaskSettings = new TaskSettings();
             HotkeyStatus = HotkeyStatus.NotConfigured;
         }
 
         public HotkeySetting(EHotkey job, Keys hotkey = Keys.None)
             : this()
         {
-            Job = job;
-            Description = job.GetDescription();
+            TaskSettings.Job = job;
+            TaskSettings.Description = job.GetDescription();
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
         }

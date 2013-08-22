@@ -196,8 +196,6 @@ namespace ShareX
 
         #endregion Paths
 
-        public static Settings Settings { get; private set; }
-        public static UploadersConfig UploadersConfig { get; private set; }
         public static bool IsMultiInstance { get; private set; }
         public static bool IsPortable { get; private set; }
         public static bool IsSilentRun { get; private set; }
@@ -227,9 +225,12 @@ namespace ShareX
             }
         }
 
-        public static MainForm MainForm;
-        public static ManualResetEvent SettingsResetEvent;
-        public static ManualResetEvent UploaderSettingsResetEvent;
+        public static MainForm MainForm { get; private set; }
+        public static Settings Settings { get; private set; }
+        public static TaskSettings DefaultTaskSettings { get; private set; }
+        public static UploadersConfig UploadersConfig { get; private set; }
+        public static ManualResetEvent SettingsResetEvent { get; private set; }
+        public static ManualResetEvent UploaderSettingsResetEvent { get; private set; }
 
         [STAThread]
         private static void Main(string[] args)
@@ -336,6 +337,7 @@ namespace ShareX
         public static void LoadProgramSettings()
         {
             Settings = Settings.Load(SettingsFilePath);
+            DefaultTaskSettings = Settings.DefaultTaskSettings;
         }
 
         public static void LoadUploadersConfig()
