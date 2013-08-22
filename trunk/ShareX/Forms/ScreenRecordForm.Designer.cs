@@ -177,7 +177,7 @@
             this.cbAutoUploadGIF.TabIndex = 10;
             this.cbAutoUploadGIF.Text = "Auto upload";
             this.cbAutoUploadGIF.UseVisualStyleBackColor = true;
-            this.cbAutoUploadGIF.CheckedChanged += new System.EventHandler(this.cbAutoUploadGIF_CheckedChanged);
+            this.cbAutoUploadGIF.CheckedChanged += new System.EventHandler(this.cbAutoUpload_CheckedChanged);
             // 
             // pbEncoding
             // 

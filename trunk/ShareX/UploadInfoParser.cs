@@ -45,6 +45,7 @@ namespace HelpersLib
                 pattern = pattern.Replace("%url", info.Result.URL);
                 pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
                 pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
+                pattern = pattern.Replace("%deletionurl", info.Result.DeletionURL);
                 pattern = pattern.Replace("%localpath", info.FilePath);
             }
 
