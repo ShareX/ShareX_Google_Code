@@ -221,9 +221,12 @@ namespace ShareX
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
         }
 
-        internal void CopyUserFormat()
+        public void CopyCustomFormat(string format)
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, Program.Settings.ClipboardFormat)));
+            if (!string.IsNullOrEmpty(format) && IsSelectedItemsValid())
+            {
+                CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
+            }
         }
 
         #endregion Copy
@@ -245,7 +248,6 @@ namespace ShareX
                 {
                     using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES))
                     {
-                        form.Icon = Resources.ShareX;
                         form.ShowDialog();
                     }
                 }
@@ -258,7 +260,7 @@ namespace ShareX
             {
                 using (ResponseForm form = new ResponseForm(SelectedItems[0].Info.Result.Response))
                 {
-                    form.Icon = Resources.ShareX;
+                    form.Icon = Resources.ShareXIcon;
                     form.ShowDialog();
                 }
             }
@@ -266,7 +268,7 @@ namespace ShareX
 
         public void Upload()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath, Program.DefaultTaskSettings);
         }
 
         #endregion Other

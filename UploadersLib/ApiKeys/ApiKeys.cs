@@ -23,8 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using System;
-
 namespace UploadersLib
 {
     public static class ApiKeys

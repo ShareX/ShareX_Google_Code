@@ -96,7 +96,7 @@ namespace UploadersLib
 
         public LocalhostAccount()
         {
-            ApplyDefaultValues(this);
+            Helpers.ApplyDefaultPropertyValues(this);
         }
 
         public LocalhostAccount(string name)
@@ -187,16 +187,6 @@ namespace UploadersLib
             }
 
             return Helpers.CombineURL(LocalhostAddress, this.GetSubFolderPath(), fileName);
-        }
-
-        public static void ApplyDefaultValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr == null) continue;
-                prop.SetValue(self, attr.Value);
-            }
         }
 
         public override string ToString()

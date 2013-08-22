@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -35,6 +36,7 @@ namespace HelpersLib
         public static string GetDescription(this Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
+
             if (fi != null)
             {
                 DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
@@ -44,22 +46,21 @@ namespace HelpersLib
             return value.ToString();
         }
 
-        public static string GetCategory(this Enum value)
+        public static int GetIndex(this Enum value)
         {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            if (fi != null)
-            {
-                CategoryAttribute[] attributes = (CategoryAttribute[])fi.GetCustomAttributes(typeof(CategoryAttribute), false);
-                return (attributes.Length > 0) ? attributes[0].Category : value.ToString();
-            }
-
-            return value.ToString();
+            Array values = Enum.GetValues(value.GetType());
+            return Array.IndexOf(values, value);
         }
 
-        public static bool HasFlag<T>(this Enum value, T flag)
+        public static IEnumerable<T> GetFlags<T>(this Enum value)
+        {
+            return Enum.GetValues(value.GetType()).OfType<T>().Where(x => Convert.ToUInt64(x) != 0 && value.HasFlag(x));
+        }
+
+        public static bool HasFlag<T>(this Enum value, params T[] flags)
         {
             ulong keysVal = Convert.ToUInt64(value);
-            ulong flagVal = Convert.ToUInt64(flag);
+            ulong flagVal = flags.Select(x => Convert.ToUInt64(x)).Aggregate((x, next) => x | next);
             return (keysVal & flagVal) == flagVal;
         }
 
@@ -73,28 +74,25 @@ namespace HelpersLib
             return flags.All(x => value.HasFlag(x));
         }
 
-        public static T Add<T>(this Enum value, T flag)
+        public static T Add<T>(this Enum value, params T[] flags)
         {
             ulong keysVal = Convert.ToUInt64(value);
-            ulong flagVal = Convert.ToUInt64(flag);
-            return (T)Enum.ToObject(typeof(T), keysVal | flagVal);
+            ulong flagVal = flags.Select(x => Convert.ToUInt64(x)).Aggregate(keysVal, (x, next) => x | next);
+            return (T)Enum.ToObject(typeof(T), flagVal);
         }
 
-        public static T Remove<T>(this Enum value, T flag)
+        public static T Remove<T>(this Enum value, params T[] flags)
         {
             ulong keysVal = Convert.ToUInt64(value);
-            ulong flagVal = Convert.ToUInt64(flag);
+            ulong flagVal = flags.Select(x => Convert.ToUInt64(x)).Aggregate((x, next) => x | next);
             return (T)Enum.ToObject(typeof(T), keysVal & ~flagVal);
         }
 
-        public static T Swap<T>(this Enum value, T flag)
+        public static T Swap<T>(this Enum value, params T[] flags)
         {
-            if (value.HasFlag(flag))
-            {
-                return value.Remove(flag);
-            }
-
-            return value.Add(flag);
+            ulong keysVal = Convert.ToUInt64(value);
+            ulong flagVal = flags.Select(x => Convert.ToUInt64(x)).Aggregate((x, next) => x | next);
+            return (T)Enum.ToObject(typeof(T), keysVal ^ flagVal);
         }
     }
 }

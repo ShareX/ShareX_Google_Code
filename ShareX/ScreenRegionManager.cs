@@ -26,7 +26,6 @@
 using HelpersLib;
 using System;
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace ShareX
 {

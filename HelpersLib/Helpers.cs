@@ -25,7 +25,6 @@
 
 using Microsoft.Win32;
 using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -253,12 +252,6 @@ namespace HelpersLib
         public static int GetEnumLength<T>()
         {
             return Enum.GetValues(typeof(T)).Length;
-        }
-
-        public static int GetEnumMemberIndex<T>(T value)
-        {
-            T[] values = (T[])Enum.GetValues(typeof(T));
-            return Array.IndexOf(values, value);
         }
 
         public static string Encode(string text, string unreservedCharacters)
@@ -758,6 +751,15 @@ namespace HelpersLib
             rect.Width += rect.Width & 1;
             rect.Height += rect.Height & 1;
             return rect;
+        }
+
+        public static void ApplyDefaultPropertyValues(object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr != null) prop.SetValue(self, attr.Value);
+            }
         }
     }
 }

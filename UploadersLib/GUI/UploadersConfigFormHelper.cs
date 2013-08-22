@@ -831,7 +831,6 @@ namespace UploadersLib
             if (CheckFTPAccounts())
             {
                 FTPClientForm ftpclient = new FTPClientForm((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]);
-                ftpclient.Icon = Icon;
                 ftpclient.Show();
             }
         }

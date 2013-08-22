@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ShareX.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -64,7 +63,7 @@ namespace ShareX
         {
             InitializeComponent();
             Setting = setting;
-            lblHotkeyDescription.Text = setting.Description;
+            lblHotkeyDescription.Text = setting.TaskSettings.Description;
             btnSetHotkey.Text = new KeyInfo(Setting.Hotkey).ToString();
             UpdateHotkeyStatus();
         }
@@ -101,7 +100,7 @@ namespace ShareX
 
         public void UpdateDescription()
         {
-            lblHotkeyDescription.Text = Setting.Description;
+            lblHotkeyDescription.Text = Setting.TaskSettings.Description;
         }
 
         protected void OnHotkeyChanged()

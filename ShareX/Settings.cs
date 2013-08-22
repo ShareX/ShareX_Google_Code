@@ -24,12 +24,9 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ScreenCapture;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using UploadersLib;
-using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
@@ -37,13 +34,6 @@ namespace ShareX
     {
         #region Main Form
 
-        public AfterCaptureTasks AfterCaptureTasks = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
-        public AfterUploadTasks AfterUploadTasks = AfterUploadTasks.CopyURLToClipboard;
-        public ImageDestination ImageUploaderDestination = ImageDestination.Imgur;
-        public TextDestination TextUploaderDestination = TextDestination.Pastebin;
-        public FileDestination FileUploaderDestination = FileDestination.Dropbox;
-        public UrlShortenerType URLShortenerDestination = UrlShortenerType.Google;
-        public SocialNetworkingService SocialServiceDestination = SocialNetworkingService.Twitter;
         public bool ShowMenu = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
@@ -87,114 +77,10 @@ namespace ShareX
 
         #region Hotkeys
 
-        public List<HotkeySetting> HotkeyList = new List<HotkeySetting>();
+        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+        public TaskSettings DefaultTaskSettings = new TaskSettings();
 
         #endregion Hotkeys
-
-        #region Image / Quality
-
-        public EImageFormat ImageFormat = EImageFormat.PNG;
-        public int ImageJPEGQuality = 90;
-        public GIFQuality ImageGIFQuality = GIFQuality.Default;
-        public int ImageSizeLimit = 1024;
-        public EImageFormat ImageFormat2 = EImageFormat.JPEG;
-        public bool UseImageFormat2FileUpload = false;
-
-        #endregion Image / Quality
-
-        #region Image / Resize
-
-        public bool ImageAutoResize = false;
-        public bool ImageKeepAspectRatio = false;
-        public bool ImageUseSmoothScaling = true;
-        public ImageScaleType ImageScaleType = ImageScaleType.Percentage;
-        public int ImageScalePercentageWidth = 100;
-        public int ImageScalePercentageHeight = 100;
-        public int ImageScaleToWidth = 100;
-        public int ImageScaleToHeight = 100;
-        public int ImageScaleSpecificWidth = 100;
-        public int ImageScaleSpecificHeight = 100;
-
-        #endregion Image / Resize
-
-        #region Image / Effects
-
-        public WatermarkConfig WatermarkConfig = new WatermarkConfig();
-
-        public bool ImageEffectOnlyRegionCapture = true;
-        public BorderType BorderType = BorderType.Outside;
-        public XmlColor BorderColor = Color.Black;
-        public int BorderSize = 1;
-        public float ShadowDarkness = 0.6f;
-        public int ShadowSize = 9;
-        public Point ShadowOffset = new Point(0, 0);
-
-        #endregion Image / Effects
-
-        #region Capture / General
-
-        public bool ShowCursor = false;
-        public bool CaptureTransparent = true;
-        public bool CaptureShadow = true;
-        public int CaptureShadowOffset = 20;
-        public bool CaptureClientArea = false;
-        public bool IsDelayScreenshot = false;
-        public decimal DelayScreenshot = 2.0m;
-        public bool CaptureAutoHideTaskbar = false;
-
-        #endregion Capture / General
-
-        #region Capture / Shape capture
-
-        public SurfaceOptions SurfaceOptions = new SurfaceOptions();
-
-        #endregion Capture / Shape capture
-
-        #region Capture / Screen recorder
-
-        public bool ScreenRecorderHotkeyStartInstantly = false;
-
-        #endregion Capture / Screen recorder
-
-        #region Actions
-
-        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
-
-        #endregion Actions
-
-        #region Upload / General
-
-        public int UploadLimit = 5;
-        public int BufferSizePower = 5;
-        public bool IfUploadFailRetryOnce = false;
-
-        #endregion Upload / General
-
-        #region Upload / Name pattern
-
-        public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
-        public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
-        public int AutoIncrementNumber = 0;
-        public bool FileUploadUseNamePattern = false;
-        public string ClipboardFormat = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>";
-
-        #endregion Upload / Name pattern
-
-        #region Upload / Clipboard upload
-
-        public bool ShowClipboardContentViewer = true;
-        public bool ClipboardUploadAutoDetectURL = true;
-        public bool ClipboardUploadUseAfterCaptureTasks = false;
-        public bool ClipboardUploadExcludeImageEffects = true;
-
-        #endregion Upload / Clipboard upload
-
-        #region Upload / Watch folder
-
-        public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
-
-        #endregion Upload / Watch folder
 
         #region Proxy
 
@@ -204,20 +90,6 @@ namespace ShareX
 
         #endregion Settings Form
 
-        #region ScreenRecord Form
-
-        public int ScreenRecordFPS = 5;
-        public bool ScreenRecordFixedDuration = true;
-        public float ScreenRecordDuration = 3f;
-        public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
-        public bool ScreenRecordAutoUpload = true;
-
-        public string ScreenRecordCommandLinePath = "x264.exe";
-        public string ScreenRecordCommandLineArgs = "--output %output %input";
-        public string ScreenRecordCommandLineOutputExtension = "mp4";
-
-        #endregion ScreenRecord Form
-
         #region AutoCapture Form
 
         public decimal AutoCaptureRepeatTime = 60;
@@ -225,5 +97,22 @@ namespace ShareX
         public bool AutoCaptureWaitUpload = true;
 
         #endregion AutoCapture Form
+
+        #region Upload / General
+
+        public int UploadLimit = 5;
+        public int BufferSizePower = 5;
+        public bool IfUploadFailRetryOnce = false;
+
+        public List<ClipboardFormat> ClipboardFormats = new List<ClipboardFormat>();
+
+        #endregion Upload / General
+
+        #region Upload / Watch folder
+
+        public bool WatchFolderEnabled = false;
+        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+
+        #endregion Upload / Watch folder
     }
 }

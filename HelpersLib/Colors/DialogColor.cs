@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -40,8 +41,8 @@ namespace HelpersLib
         private bool dialogChanged;
 
         public DialogColor()
+            : this(Color.Empty)
         {
-            Initialize(Color.Empty);
         }
 
         public DialogColor(Color currentColor)
@@ -52,6 +53,7 @@ namespace HelpersLib
         private void Initialize(Color currentColor)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             foreach (Control cntrl in this.Controls)
             {

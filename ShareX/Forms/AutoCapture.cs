@@ -42,10 +42,13 @@ namespace ShareX
         private int delay, count, timeleft, percentage;
         private bool waitUploads;
         private Stopwatch stopwatch = new Stopwatch();
+        private TaskSettings taskSettings;
 
-        public AutoCapture()
+        public AutoCapture(TaskSettings taskSettings)
         {
             InitializeComponent();
+            this.taskSettings = taskSettings;
+            Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.clock_plus.GetHicon());
 
             timer = new Timer();
@@ -85,21 +88,21 @@ namespace ShareX
 
                 if (img != null)
                 {
-                    TaskSettings taskSettings = new TaskSettings()
-                    {
-                        AfterCaptureJob = Program.Settings.AfterCaptureTasks.Remove(AfterCaptureTasks.AnnotateImage),
-                        DisableNotifications = true
-                    };
+                    TaskSettings taskSettings = new TaskSettings();
+                    taskSettings.UseDefaultAfterCaptureJob = false;
+                    taskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AnnotateImage);
+                    taskSettings.UseDefaultAdvancedSettings = false;
+                    taskSettings.AdvancedSettings.DisableNotifications = true;
 
                     UploadManager.RunImageTask(img, taskSettings);
                 }
             }
         }
 
-        private void SelectRegion()
+        private void SelectRegion(TaskSettings taskSettings)
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(out rect))
+            if (TaskHelper.SelectRegion(taskSettings, out rect))
             {
                 UpdateRegion(rect);
             }
@@ -158,7 +161,7 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SelectRegion();
+            SelectRegion(taskSettings);
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)

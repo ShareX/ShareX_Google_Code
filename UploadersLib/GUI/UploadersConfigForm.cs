@@ -31,6 +31,7 @@ using System.Windows.Forms;
 using UploadersLib.FileUploaders;
 using UploadersLib.HelperClasses;
 using UploadersLib.ImageUploaders;
+using UploadersLib.Properties;
 
 namespace UploadersLib
 {
@@ -43,6 +44,7 @@ namespace UploadersLib
         public UploadersConfigForm(UploadersConfig uploadersConfig, UploadersAPIKeys uploadersAPIKeys)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
             ControlSettings();
             CreateUserControlEvents();
             LoadSettings(uploadersConfig);
@@ -993,7 +995,6 @@ namespace UploadersLib
             {
                 using (ResponseForm form = new ResponseForm(response))
                 {
-                    form.Icon = Icon;
                     form.ShowDialog();
                 }
             }

@@ -12,7 +12,7 @@
     <AssemblyName>ShareX</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Resources\ShareX.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ShareXIcon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -169,11 +169,11 @@
     <Compile Include="Hotkey\HotkeySelectionControl.Designer.cs">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hotkey\HotkeyTaskSettingsForm.cs">
+    <Compile Include="Forms\TaskSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hotkey\HotkeyTaskSettingsForm.Designer.cs">
-      <DependentUpon>HotkeyTaskSettingsForm.cs</DependentUpon>
+    <Compile Include="Forms\TaskSettingsForm.Designer.cs">
+      <DependentUpon>TaskSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Hotkey\KeyInfo.cs" />
     <Compile Include="ImageData.cs" />
@@ -191,6 +191,12 @@
     <Compile Include="TaskSettings.cs" />
     <Compile Include="UploadInfoParser.cs" />
     <Compile Include="UploadInfoStatus.cs" />
+    <Compile Include="Forms\HotkeySettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HotkeySettingsForm.Designer.cs">
+      <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,8 +236,8 @@
     <EmbeddedResource Include="Hotkey\HotkeySelectionControl.resx">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hotkey\HotkeyTaskSettingsForm.resx">
-      <DependentUpon>HotkeyTaskSettingsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\TaskSettingsForm.resx">
+      <DependentUpon>TaskSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -248,6 +254,9 @@
     <Compile Include="UploadManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TaskInfo.cs" />
+    <EmbeddedResource Include="Forms\HotkeySettingsForm.resx">
+      <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">
@@ -277,7 +286,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Resources\ShareX.ico" />
     <None Include="Resources\ShareXLogo.png" />
     <None Include="Resources\Window.png" />
     <None Include="Resources\RoundedRectangle.png" />
@@ -368,13 +376,7 @@
     <None Include="Resources\clock--plus.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\layer-select-point.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\layer-shape-curve.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\layer-shape-polyline.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape-ellipse.png" />
@@ -384,9 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape-polygon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\layer-shade.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape.png" />
@@ -404,13 +403,31 @@
     <None Include="Resources\layer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\layer-flip.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\layers-arrange.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\control-record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hammer-screwdriver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hammer--arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hammer--pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hammer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using HistoryLib.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -45,6 +46,7 @@ namespace HistoryLib
         public HistoryForm(string historyPath, int maxItemCount = -1)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;
