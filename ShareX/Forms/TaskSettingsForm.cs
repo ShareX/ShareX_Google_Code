@@ -177,7 +177,7 @@ namespace ShareX
             cbClipboardUploadExcludeImageEffects.Checked = TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects;
 
             // Advanced
-            pgTaskSettings.SelectedObject = TaskSettings;
+            pgTaskSettings.SelectedObject = TaskSettings.AdvancedSettings;
 
             UpdateDefaultSettingVisibility();
         }
