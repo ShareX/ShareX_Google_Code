@@ -38,44 +38,48 @@ namespace ShareX
 {
     public partial class ScreenRecordForm : Form
     {
+        public static TaskSettings TaskSettings { get; set; }
         public Rectangle CaptureRectangle { get; private set; }
 
         private static ScreenRecordForm instance;
-        private static TaskSettings taskSettings;
 
-        public static ScreenRecordForm Instance(TaskSettings taskSettings)
+        public static ScreenRecordForm Instance
         {
-            ScreenRecordForm.taskSettings = taskSettings;
-            if (instance == null || instance.IsDisposed)
+            get
             {
-                instance = new ScreenRecordForm(taskSettings);
-            }
+                if (instance == null || instance.IsDisposed)
+                {
+                    instance = new ScreenRecordForm();
+                }
 
-            return instance;
+                return instance;
+            }
         }
 
         public bool IsRecording { get; private set; }
 
         private ScreenRecorder screenRecorder = null;
 
-        private ScreenRecordForm(TaskSettings taskSettings)
+        private ScreenRecordForm()
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
+        }
 
-            lblRegion.Text = CaptureRectangle.ToString();
-            nudFPS.Value = taskSettings.CaptureSettings.ScreenRecordFPS;
-            cbFixedDuration.Checked = taskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Enabled = taskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Value = (decimal)taskSettings.CaptureSettings.ScreenRecordDuration;
+        public void LoadSettings()
+        {
+            nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
+            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
             cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
-            cbOutput.SelectedIndex = (int)taskSettings.CaptureSettings.ScreenRecordOutput;
-            cbAutoUploadGIF.Checked = taskSettings.CaptureSettings.ScreenRecordAutoUpload;
+            cbOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
+            cbAutoUploadGIF.Checked = TaskSettings.CaptureSettings.ScreenRecordAutoUpload;
 
-            Screenshot.CaptureCursor = taskSettings.CaptureSettings.ShowCursor;
+            Screenshot.CaptureCursor = TaskSettings.CaptureSettings.ShowCursor;
 
-            SelectRegion(taskSettings);
+            SelectRegion(TaskSettings);
         }
 
         private void SelectRegion(TaskSettings taskSettings)
@@ -92,10 +96,10 @@ namespace ShareX
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            StartRecording(taskSettings);
+            StartRecording();
         }
 
-        public async void StartRecording(TaskSettings taskSettings)
+        public async void StartRecording()
         {
             if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
             {
@@ -120,18 +124,18 @@ namespace ShareX
 
                     await TaskEx.Run(() =>
                     {
-                        if (taskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVI)
+                        if (TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVI)
                         {
-                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(taskSettings, "avi"));
+                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, "avi"));
                         }
                         else
                         {
                             path = Program.ScreenRecorderCacheFilePath;
                         }
 
-                        float duration = taskSettings.CaptureSettings.ScreenRecordFixedDuration ? taskSettings.CaptureSettings.ScreenRecordDuration : 0;
+                        float duration = TaskSettings.CaptureSettings.ScreenRecordFixedDuration ? TaskSettings.CaptureSettings.ScreenRecordDuration : 0;
 
-                        screenRecorder = new ScreenRecorder(taskSettings.CaptureSettings.ScreenRecordFPS, duration, CaptureRectangle, path, taskSettings.CaptureSettings.ScreenRecordOutput);
+                        screenRecorder = new ScreenRecorder(TaskSettings.CaptureSettings.ScreenRecordFPS, duration, CaptureRectangle, path, TaskSettings.CaptureSettings.ScreenRecordOutput);
 
                         Thread.Sleep(1000);
                         screenRegionManager.ChangeColor();
@@ -152,7 +156,7 @@ namespace ShareX
                     niTray.Visible = false;
                 }
 
-                if (screenRecorder != null && taskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
+                if (screenRecorder != null && TaskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
                     screenRecorder.EncodingProgressChanged += screenRecorder_EncodingProgressChanged;
 
@@ -160,15 +164,15 @@ namespace ShareX
                     {
                         Stopwatch timer = Stopwatch.StartNew();
 
-                        switch (taskSettings.CaptureSettings.ScreenRecordOutput)
+                        switch (TaskSettings.CaptureSettings.ScreenRecordOutput)
                         {
                             case ScreenRecordOutput.GIF:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(taskSettings, "gif"));
-                                screenRecorder.SaveAsGIF(path, taskSettings.ImageSettings.ImageGIFQuality);
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, "gif"));
+                                screenRecorder.SaveAsGIF(path, TaskSettings.ImageSettings.ImageGIFQuality);
                                 break;
                             case ScreenRecordOutput.AVICommandLine:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(taskSettings, taskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension));
-                                screenRecorder.EncodeUsingCommandLine(path, taskSettings.CaptureSettings.ScreenRecordCommandLinePath, taskSettings.CaptureSettings.ScreenRecordCommandLineArgs);
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension));
+                                screenRecorder.EncodeUsingCommandLine(path, TaskSettings.CaptureSettings.ScreenRecordCommandLinePath, TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs);
                                 break;
                         }
                     });
@@ -178,7 +182,7 @@ namespace ShareX
             {
                 if (screenRecorder != null)
                 {
-                    if (taskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine &&
+                    if (TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine &&
                         !string.IsNullOrEmpty(screenRecorder.CachePath) && File.Exists(screenRecorder.CachePath))
                     {
                         File.Delete(screenRecorder.CachePath);
@@ -189,9 +193,9 @@ namespace ShareX
                 }
             }
 
-            if (taskSettings.CaptureSettings.ScreenRecordAutoUpload)
+            if (TaskSettings.CaptureSettings.ScreenRecordAutoUpload)
             {
-                UploadManager.UploadFile(path, taskSettings);
+                UploadManager.UploadFile(path, TaskSettings);
             }
             else
             {
@@ -229,34 +233,34 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SelectRegion(taskSettings);
+            SelectRegion(TaskSettings);
         }
 
         private void nudFPS_ValueChanged(object sender, EventArgs e)
         {
-            taskSettings.CaptureSettings.ScreenRecordFPS = (int)nudFPS.Value;
+            TaskSettings.CaptureSettings.ScreenRecordFPS = (int)nudFPS.Value;
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)
         {
-            taskSettings.CaptureSettings.ScreenRecordDuration = (float)nudDuration.Value;
+            TaskSettings.CaptureSettings.ScreenRecordDuration = (float)nudDuration.Value;
         }
 
         private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            taskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
+            TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
 
-            btnSettings.Visible = taskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
+            btnSettings.Visible = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
         }
 
         private void cbAutoUploadGIF_CheckedChanged(object sender, EventArgs e)
         {
-            taskSettings.CaptureSettings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
+            TaskSettings.CaptureSettings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            using (ScreenRecordCommandLineForm form = new ScreenRecordCommandLineForm(taskSettings))
+            using (ScreenRecordCommandLineForm form = new ScreenRecordCommandLineForm(TaskSettings))
             {
                 form.Icon = Icon;
                 form.ShowDialog();
@@ -265,8 +269,8 @@ namespace ShareX
 
         private void cbFixedDuration_CheckedChanged(object sender, EventArgs e)
         {
-            taskSettings.CaptureSettings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
-            nudDuration.Enabled = taskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            TaskSettings.CaptureSettings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
+            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
         }
 
         private void niTray_MouseClick(object sender, MouseEventArgs e)
