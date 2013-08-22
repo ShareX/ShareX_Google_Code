@@ -41,14 +41,14 @@
             // 
             this.txtFormat.Location = new System.Drawing.Point(88, 36);
             this.txtFormat.Name = "txtFormat";
-            this.txtFormat.Size = new System.Drawing.Size(288, 20);
+            this.txtFormat.Size = new System.Drawing.Size(304, 20);
             this.txtFormat.TabIndex = 10;
             // 
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(88, 12);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(288, 20);
+            this.txtDescription.Size = new System.Drawing.Size(304, 20);
             this.txtDescription.TabIndex = 9;
             // 
             // lblFilter
@@ -74,14 +74,14 @@
             this.lblFilterExample.AutoSize = true;
             this.lblFilterExample.Location = new System.Drawing.Point(88, 60);
             this.lblFilterExample.Name = "lblFilterExample";
-            this.lblFilterExample.Size = new System.Drawing.Size(243, 13);
+            this.lblFilterExample.Size = new System.Drawing.Size(302, 13);
             this.lblFilterExample.TabIndex = 12;
-            this.lblFilterExample.Text = "Acceptable variables: %url %shorturl %thumbnailurl";
+            this.lblFilterExample.Text = "Acceptable variables: %url %shorturl %thumbnailurl %deletionurl";
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(296, 88);
+            this.btnCancel.Location = new System.Drawing.Point(316, 88);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
             this.btnCancel.TabIndex = 15;
@@ -92,7 +92,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(208, 88);
+            this.btnOK.Location = new System.Drawing.Point(228, 88);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
             this.btnOK.TabIndex = 14;
@@ -100,11 +100,11 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // WatchFolderForm
+            // ClipboardFormatForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 121);
+            this.ClientSize = new System.Drawing.Size(404, 121);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblFilterExample);
@@ -115,8 +115,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(400, 160);
-            this.Name = "WatchFolderForm";
+            this.MinimumSize = new System.Drawing.Size(420, 160);
+            this.Name = "ClipboardFormatForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clipboard format";
             this.ResumeLayout(false);

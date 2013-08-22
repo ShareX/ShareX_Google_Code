@@ -253,7 +253,7 @@ namespace ShareX
             btnSettings.Visible = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
         }
 
-        private void cbAutoUploadGIF_CheckedChanged(object sender, EventArgs e)
+        private void cbAutoUpload_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.CaptureSettings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
         }
