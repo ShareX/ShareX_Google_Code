@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.ComponentModel;
 
 namespace UploadersLib
@@ -171,17 +172,7 @@ namespace UploadersLib
 
         public UploadersAPIKeys()
         {
-            ApplyDefaultValues(this);
-        }
-
-        public static void ApplyDefaultValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr == null) continue;
-                prop.SetValue(self, attr.Value);
-            }
+            Helpers.ApplyDefaultPropertyValues(this);
         }
     }
 }

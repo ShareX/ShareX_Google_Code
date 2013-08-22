@@ -61,7 +61,7 @@ namespace ShareX
         private ScreenRecordForm(TaskSettings taskSettings)
         {
             InitializeComponent();
-            Icon = Resources.ShareX;
+            Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
 
             lblRegion.Text = CaptureRectangle.ToString();

@@ -42,7 +42,7 @@ namespace ShareX
         public TaskSettingsForm(TaskSettings hotkeySetting)
         {
             InitializeComponent();
-            Icon = Resources.ShareX;
+            Icon = Resources.ShareXIcon;
             TaskSettings = hotkeySetting;
 
             tbDescription.Text = TaskSettings.Description;

@@ -349,10 +349,10 @@
     <None Include="Resources\Loading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ShareX.ico" />
+    <None Include="Resources\crosshair.cur" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\crosshair.cur" />
+    <None Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

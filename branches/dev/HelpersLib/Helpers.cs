@@ -752,5 +752,14 @@ namespace HelpersLib
             rect.Height += rect.Height & 1;
             return rect;
         }
+
+        public static void ApplyDefaultPropertyValues(object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr != null) prop.SetValue(self, attr.Value);
+            }
+        }
     }
 }

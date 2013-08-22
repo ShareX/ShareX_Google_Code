@@ -78,7 +78,7 @@ namespace ShareX
         #region Hotkeys
 
         public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
-        public TaskSettings DefaultTaskSettings = new TaskSettings(true);
+        public TaskSettings DefaultTaskSettings = new TaskSettings();
 
         #endregion Hotkeys
 

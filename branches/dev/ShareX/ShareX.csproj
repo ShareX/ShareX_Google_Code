@@ -286,7 +286,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Resources\ShareX.ico" />
     <None Include="Resources\ShareXLogo.png" />
     <None Include="Resources\Window.png" />
     <None Include="Resources\RoundedRectangle.png" />
@@ -377,13 +376,7 @@
     <None Include="Resources\clock--plus.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\layer-select-point.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\layer-shape-curve.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\layer-shape-polyline.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape-ellipse.png" />
@@ -393,9 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape-polygon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\layer-shade.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\layer-shape.png" />
@@ -413,19 +403,10 @@
     <None Include="Resources\layer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\layer-flip.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\layers-arrange.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\control-record.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bug_delete.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hammer-screwdriver.png" />
@@ -446,7 +427,7 @@
     <None Include="Resources\bug.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ShareXIcon.ico" />
+    <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

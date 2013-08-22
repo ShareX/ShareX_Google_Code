@@ -131,7 +131,7 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.TextFileExtension);
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
             task.tempText = text;
             return task;
         }
@@ -468,7 +468,7 @@ namespace ShareX
                 using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
                     Program.UploadersConfig.EmailDefaultSubject, Info.Result.ToString()))
                 {
-                    emailForm.Icon = Resources.ShareX;
+                    emailForm.Icon = Resources.ShareXIcon;
 
                     if (emailForm.ShowDialog() == DialogResult.OK)
                     {
@@ -601,20 +601,20 @@ namespace ShareX
             {
                 case TextDestination.Pastebin:
                     PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
-                    settings.TextFormat = this.Info.TaskSettings.TextFormat;
+                    settings.TextFormat = this.Info.TaskSettings.AdvancedSettings.TextFormat;
                     textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.TaskSettings.TextFormat });
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.TaskSettings.TextFormat });
+                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.TaskSettings.TextFormat });
+                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Pastee:
-                    textUploader = new Pastee() { Lexer = Info.TaskSettings.TextFormat };
+                    textUploader = new Pastee() { Lexer = Info.TaskSettings.AdvancedSettings.TextFormat };
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);
@@ -734,7 +734,7 @@ namespace ShareX
                     using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
                         Program.UploadersConfig.EmailDefaultSubject, Program.UploadersConfig.EmailDefaultBody))
                     {
-                        emailForm.Icon = Resources.ShareX;
+                        emailForm.Icon = Resources.ShareXIcon;
 
                         if (emailForm.ShowDialog() == DialogResult.OK)
                         {

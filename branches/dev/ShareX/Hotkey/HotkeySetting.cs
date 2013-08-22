@@ -49,14 +49,7 @@ namespace ShareX
 
         public HotkeySetting()
         {
-            if (Program.Settings != null)
-            {
-                TaskSettings = Program.DefaultTaskSettings.Copy();
-            }
-            else
-            {
-                TaskSettings = new TaskSettings(true);
-            }
+            TaskSettings = new TaskSettings();
             HotkeyStatus = HotkeyStatus.NotConfigured;
         }
 

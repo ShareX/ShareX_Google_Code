@@ -221,11 +221,11 @@ namespace ShareX
             if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
         }
 
-        internal void CopyCustomFormat(string format)
+        public void CopyCustomFormat(string format)
         {
-            if (!string.IsNullOrEmpty(format))
+            if (!string.IsNullOrEmpty(format) && IsSelectedItemsValid())
             {
-                if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
+                CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
             }
         }
 
@@ -248,7 +248,7 @@ namespace ShareX
                 {
                     using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES))
                     {
-                        form.Icon = Resources.ShareX;
+                        form.Icon = Resources.ShareXIcon;
                         form.ShowDialog();
                     }
                 }
@@ -261,7 +261,7 @@ namespace ShareX
             {
                 using (ResponseForm form = new ResponseForm(SelectedItems[0].Info.Result.Response))
                 {
-                    form.Icon = Resources.ShareX;
+                    form.Icon = Resources.ShareXIcon;
                     form.ShowDialog();
                 }
             }

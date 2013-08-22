@@ -32,6 +32,96 @@ using UploadersLib;
 
 namespace ShareX
 {
+    public class TaskSettings
+    {
+        public string Description;
+        public EHotkey Job;
+
+        public bool UseDefaultAfterCaptureJob = true;
+        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
+
+        public bool UseDefaultAfterUploadJob = true;
+        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
+
+        public bool UseDefaultDestinations = true;
+        public ImageDestination ImageDestination = ImageDestination.Imgur;
+        public TextDestination TextDestination = TextDestination.Pastebin;
+        public FileDestination FileDestination = FileDestination.Dropbox;
+        public UrlShortenerType URLShortenerDestination = UrlShortenerType.BITLY;
+        public SocialNetworkingService SocialNetworkingServiceDestination = SocialNetworkingService.Twitter;
+
+        public bool UseDefaultImageSettings = true;
+        public TaskSettingsImage ImageSettings = new TaskSettingsImage();
+
+        public bool UseDefaultCaptureSettings = true;
+        public TaskSettingsCapture CaptureSettings = new TaskSettingsCapture();
+
+        public bool UseDefaultUploadSettings = true;
+        public TaskSettingsUpload UploadSettings = new TaskSettingsUpload();
+
+        public bool UseDefaultActions = true;
+        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
+
+        public bool UseDefaultAdvancedSettings = true;
+        public TaskSettingsAdvanced AdvancedSettings = new TaskSettingsAdvanced();
+
+        public TaskSettings()
+        {
+            SetDefaultSettings();
+        }
+
+        public void SetDefaultSettings()
+        {
+            if (Program.DefaultTaskSettings != null)
+            {
+                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
+
+                if (UseDefaultAfterCaptureJob)
+                {
+                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
+                }
+
+                if (UseDefaultAfterUploadJob)
+                {
+                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
+                }
+
+                if (UseDefaultDestinations)
+                {
+                    ImageDestination = defaultWorkflow.ImageDestination;
+                    TextDestination = defaultWorkflow.TextDestination;
+                    FileDestination = defaultWorkflow.FileDestination;
+                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
+                }
+
+                if (UseDefaultImageSettings)
+                {
+                    ImageSettings = defaultWorkflow.ImageSettings;
+                }
+
+                if (UseDefaultCaptureSettings)
+                {
+                    CaptureSettings = defaultWorkflow.CaptureSettings;
+                }
+                if (UseDefaultUploadSettings)
+                {
+                    UploadSettings = defaultWorkflow.UploadSettings;
+                }
+
+                if (UseDefaultActions)
+                {
+                    ExternalPrograms = defaultWorkflow.ExternalPrograms;
+                }
+
+                if (UseDefaultAdvancedSettings)
+                {
+                    AdvancedSettings = defaultWorkflow.AdvancedSettings;
+                }
+            }
+        }
+    }
+
     public class TaskSettingsImage
     {
         #region Image / Quality
@@ -138,40 +228,16 @@ namespace ShareX
         #endregion Upload / Clipboard upload
     }
 
-    public class TaskSettings
+    public class TaskSettingsAdvanced
     {
-        public string Description;
-        public EHotkey Job;
-
-        public bool UseDefaultAfterCaptureJob;
-        public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
-
-        public bool UseDefaultAfterUploadJob;
-        public AfterUploadTasks AfterUploadJob = AfterUploadTasks.CopyURLToClipboard;
-
-        public bool UseDefaultDestinations;
-        public ImageDestination ImageDestination;
-        public TextDestination TextDestination;
-        public FileDestination FileDestination;
-        public UrlShortenerType URLShortenerDestination;
-        public SocialNetworkingService SocialNetworkingServiceDestination;
-
-        public bool UseDefaultImageSettings = true;
-        public TaskSettingsImage ImageSettings = new TaskSettingsImage();
-
-        public bool UseDefaultCaptureSettings = true;
-        public TaskSettingsCapture CaptureSettings = new TaskSettingsCapture();
-
-        public bool UseDefaultActions = true;
-        public TaskSettingsUpload UploadSettings = new TaskSettingsUpload();
-
-        public bool UseDefaultUploadSettings = true;
-        public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
-
-        #region Advanced
+        #region Interaction
 
         [Category("Interaction"), DefaultValue(false), Description("Disable notifications.")]
         public bool DisableNotifications { get; set; }
+
+        #endregion Interaction
+
+        #region Upload Text
 
         [Category("Upload Text"), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
         public string TextFormat { get; set; }
@@ -179,77 +245,11 @@ namespace ShareX
         [Category("Upload Text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
         public string TextFileExtension { get; set; }
 
-        #endregion Advanced
+        #endregion Upload Text
 
-        public TaskSettings(bool useDefaultSettings = false)
+        public TaskSettingsAdvanced()
         {
-            ApplyDefaultValues(this);
-            SetDefaultSettings(true);
-            UseDefaultAfterCaptureJob = useDefaultSettings;
-            UseDefaultAfterUploadJob = useDefaultSettings;
-            UseDefaultDestinations = useDefaultSettings;
-            UseDefaultImageSettings = useDefaultSettings;
-        }
-
-        public bool SetDefaultSettings(bool forceDefaultSettings = false)
-        {
-            if (Program.Settings != null)
-            {
-                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
-
-                if (UseDefaultAfterCaptureJob || forceDefaultSettings)
-                {
-                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
-                }
-
-                if (UseDefaultAfterUploadJob || forceDefaultSettings)
-                {
-                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
-                }
-
-                if (UseDefaultDestinations || forceDefaultSettings)
-                {
-                    ImageDestination = defaultWorkflow.ImageDestination;
-                    TextDestination = defaultWorkflow.TextDestination;
-                    FileDestination = defaultWorkflow.FileDestination;
-                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
-                }
-
-                if (UseDefaultImageSettings || forceDefaultSettings)
-                {
-                    ImageSettings = defaultWorkflow.ImageSettings;
-                }
-
-                if (UseDefaultCaptureSettings || forceDefaultSettings)
-                {
-                    CaptureSettings = defaultWorkflow.CaptureSettings;
-                }
-
-                if (UseDefaultActions || forceDefaultSettings)
-                {
-                    ExternalPrograms = defaultWorkflow.ExternalPrograms;
-                }
-
-                if (UseDefaultUploadSettings || forceDefaultSettings)
-                {
-                    UploadSettings = defaultWorkflow.UploadSettings;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public static void ApplyDefaultValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr == null) continue;
-                prop.SetValue(self, attr.Value);
-            }
+            Helpers.ApplyDefaultPropertyValues(this);
         }
     }
 }

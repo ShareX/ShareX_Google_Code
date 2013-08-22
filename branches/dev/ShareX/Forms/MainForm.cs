@@ -84,7 +84,7 @@ namespace ShareX
             InitializeComponent();
 
             Text = Program.Title;
-            Icon = Resources.ShareX;
+            Icon = Resources.ShareXIcon;
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);

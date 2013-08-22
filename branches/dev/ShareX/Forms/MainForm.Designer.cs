@@ -478,9 +478,9 @@ namespace ShareX
             // 
             this.tsddbSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiApplicationSettings,
-            this.tsmiUploadersConfig,
+            this.tsmiDefaultWorkflowSettings,
             this.tsmiWorkflows,
-            this.tsmiDefaultWorkflowSettings});
+            this.tsmiUploadersConfig});
             this.tsddbSettings.Image = global::ShareX.Properties.Resources.application_form;
             this.tsddbSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -581,10 +581,10 @@ namespace ShareX
             // tsddbHelp
             // 
             this.tsddbHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiDebug,
+            this.tsmiAbout,
             this.tsmiDonate,
             this.tsmiHelpDebug,
-            this.tsmiAbout});
+            this.tsmiDebug});
             this.tsddbHelp.Image = global::ShareX.Properties.Resources.question_button;
             this.tsddbHelp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -605,7 +605,7 @@ namespace ShareX
             this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(141, 22);
+            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
             this.tsmiDebug.Text = "Debug";
             // 
             // tsmiTestImageUpload
@@ -662,7 +662,7 @@ namespace ShareX
             this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(141, 22);
+            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
             this.tsmiDonate.Text = "Donate...";
             this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
@@ -670,8 +670,8 @@ namespace ShareX
             // 
             this.tsmiHelpDebug.Image = global::ShareX.Properties.Resources.bug;
             this.tsmiHelpDebug.Name = "tsmiHelpDebug";
-            this.tsmiHelpDebug.Size = new System.Drawing.Size(141, 22);
-            this.tsmiHelpDebug.Text = "Debug Log...";
+            this.tsmiHelpDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiHelpDebug.Text = "Debug log...";
             this.tsmiHelpDebug.Click += new System.EventHandler(this.tsmiHelpDebug_Click);
             // 
             // tsmiAbout
@@ -680,7 +680,7 @@ namespace ShareX
             this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(141, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
             this.tsmiAbout.Text = "About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
