@@ -28,8 +28,6 @@ using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;

@@ -24,13 +24,10 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ScreenCapture;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using UploadersLib;
 

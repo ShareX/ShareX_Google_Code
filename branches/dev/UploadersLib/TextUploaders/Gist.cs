@@ -23,8 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.TextUploaders
@@ -53,7 +53,7 @@ namespace UploadersLib.TextUploaders
                 string response = SendPostRequestJSON(GistUploadUrl, argsJson);
                 if (response != null)
                 {
-                    var gistReturnType = new {html_url = ""};
+                    var gistReturnType = new { html_url = "" };
                     var gistReturnObject = JsonConvert.DeserializeAnonymousType(response, gistReturnType);
                     ur.URL = gistReturnObject.html_url;
                 }

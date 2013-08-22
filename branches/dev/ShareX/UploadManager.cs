@@ -30,7 +30,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using UploadersLib;
-using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
