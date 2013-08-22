@@ -601,7 +601,10 @@ namespace ShareX
             {
                 case TextDestination.Pastebin:
                     PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
-                    settings.TextFormat = this.Info.TaskSettings.AdvancedSettings.TextFormat;
+                    if (string.IsNullOrEmpty(settings.TextFormat))
+                    {
+                        settings.TextFormat = this.Info.TaskSettings.AdvancedSettings.TextFormat;
+                    }
                     textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
