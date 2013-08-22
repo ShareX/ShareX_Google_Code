@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.Windows.Forms;
+using UploadersLib.Properties;
 
 namespace UploadersLib
 {
@@ -36,6 +37,7 @@ namespace UploadersLib
         public ResponseForm(string response)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
             Response = response;
             txtSource.Text = Response;
         }

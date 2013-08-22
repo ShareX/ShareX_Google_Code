@@ -23,15 +23,17 @@
 
 #endregion License Information (GPL v3)
 
+using ShareX.Properties;
 using System.Windows.Forms;
 
 namespace ShareX
 {
-    public partial class WorkflowsForm : Form
+    public partial class HotkeySettingsForm : Form
     {
-        public WorkflowsForm()
+        public HotkeySettingsForm()
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
             {

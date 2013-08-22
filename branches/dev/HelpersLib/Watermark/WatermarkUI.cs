@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -40,6 +41,7 @@ namespace HelpersLib
         public WatermarkUI(WatermarkConfig config = null)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             if (config == null)
             {
@@ -132,9 +134,8 @@ namespace HelpersLib
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
         {
-            using (var gradient = new GradientMaker(Config.GradientMakerOptions))
+            using (GradientMaker gradient = new GradientMaker(Config.GradientMakerOptions))
             {
-                gradient.Icon = Icon;
                 if (gradient.ShowDialog() == DialogResult.OK)
                 {
                     Config.GradientMakerOptions = gradient.Options;

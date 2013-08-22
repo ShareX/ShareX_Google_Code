@@ -33,6 +33,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using UploadersLib.Properties;
 
 namespace UploadersLib
 {
@@ -49,6 +50,7 @@ namespace UploadersLib
         public FTPClientForm(FTPAccount account)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             lblStatus.Text = string.Empty;
             lvFTPList.SubItemEndEditing += new SubItemEndEditingEventHandler(lvFTPList_SubItemEndEditing);

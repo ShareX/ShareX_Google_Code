@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using HistoryLib.Properties;
 using Manina.Windows.Forms;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,7 @@ namespace HistoryLib
         public ImageHistoryForm(string historyPath, int viewMode, Size thumbnailSize, int maxItemCount = -1)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;

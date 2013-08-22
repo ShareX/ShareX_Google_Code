@@ -36,24 +36,38 @@ namespace ShareX
 {
     public partial class TaskSettingsForm : Form
     {
-        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
-        public TaskSettings TaskSettings { get; set; }
+        public TaskSettings TaskSettings { get; private set; }
+        public bool IsDefault { get; private set; }
 
-        public TaskSettingsForm(TaskSettings hotkeySetting)
+        private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
+
+        public TaskSettingsForm(TaskSettings hotkeySetting, bool isDefault = false)
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
             TaskSettings = hotkeySetting;
+            IsDefault = isDefault;
 
-            tbDescription.Text = TaskSettings.Description;
-            Text = Application.ProductName + " - " + TaskSettings.Description + " - workflow settings";
-            cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
-            cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;
-            cbUseDefaultDestinationSettings.Checked = TaskSettings.UseDefaultDestinations;
-            chkUseDefaultImageSettings.Checked = TaskSettings.UseDefaultImageSettings;
-            chkUseDefaultCaptureSettings.Checked = TaskSettings.UseDefaultCaptureSettings;
-            chkUseDefaultActions.Checked = TaskSettings.UseDefaultActions;
-            chkUseDefaultUploadSettings.Checked = TaskSettings.UseDefaultUploadSettings;
+            if (IsDefault)
+            {
+                Text = Application.ProductName + " - Task settings";
+                tcHotkeySettings.TabPages.Remove(tpTask);
+                chkUseDefaultImageSettings.Visible = chkUseDefaultCaptureSettings.Visible = chkUseDefaultActions.Visible =
+                    chkUseDefaultUploadSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
+            }
+            else
+            {
+                Text = Application.ProductName + " - " + TaskSettings.Description + " - Workflow settings";
+                tbDescription.Text = TaskSettings.Description;
+                cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
+                cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;
+                cbUseDefaultDestinationSettings.Checked = TaskSettings.UseDefaultDestinations;
+                chkUseDefaultImageSettings.Checked = TaskSettings.UseDefaultImageSettings;
+                chkUseDefaultCaptureSettings.Checked = TaskSettings.UseDefaultCaptureSettings;
+                chkUseDefaultActions.Checked = TaskSettings.UseDefaultActions;
+                chkUseDefaultUploadSettings.Checked = TaskSettings.UseDefaultUploadSettings;
+                chkUseDefaultAdvancedSettings.Checked = TaskSettings.UseDefaultAdvancedSettings;
+            }
 
             AddEnumItems<EHotkey>(x => TaskSettings.Job = x, cmsTask);
             AddMultiEnumItems<AfterCaptureTasks>(x => TaskSettings.AfterCaptureJob = TaskSettings.AfterCaptureJob.Swap(x), cmsAfterCapture);
@@ -164,6 +178,8 @@ namespace ShareX
 
             // Advanced
             pgTaskSettings.SelectedObject = TaskSettings;
+
+            UpdateDefaultSettingVisibility();
         }
 
         private void tbDescription_TextChanged(object sender, EventArgs e)
@@ -549,7 +565,6 @@ namespace ShareX
         {
             using (WatermarkUI watermarkForm = new WatermarkUI(TaskSettings.ImageSettings.WatermarkConfig))
             {
-                watermarkForm.Icon = Icon;
                 watermarkForm.ShowDialog();
             }
         }
@@ -770,35 +785,43 @@ namespace ShareX
         private void chkUseDefaultImageSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultImageSettings = chkUseDefaultImageSettings.Checked;
-            tcImage.Enabled = !TaskSettings.UseDefaultImageSettings;
+            UpdateDefaultSettingVisibility();
         }
 
         private void chkUseDefaultCaptureSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultCaptureSettings = chkUseDefaultCaptureSettings.Checked;
-            tcImage.Enabled = !TaskSettings.UseDefaultCaptureSettings;
+            UpdateDefaultSettingVisibility();
         }
 
         private void chkUseDefaultActions_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultActions = chkUseDefaultActions.Checked;
-            tpActions.Enabled = !TaskSettings.UseDefaultActions;
+            UpdateDefaultSettingVisibility();
         }
 
         private void chkUseDefaultUploadSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultUploadSettings = chkUseDefaultUploadSettings.Checked;
-            tcUpload.Enabled = !TaskSettings.UseDefaultUploadSettings;
+            UpdateDefaultSettingVisibility();
         }
 
-        internal void TreatAsDefault()
+        private void chkUseDefaultAdvancedSettings_CheckedChanged(object sender, EventArgs e)
         {
-            Text = Application.ProductName + " - Task settings";
-            tcHotkeySettings.TabPages.Remove(tpTask);
-            chkUseDefaultImageSettings.Enabled = false;
-            chkUseDefaultCaptureSettings.Enabled = false;
-            chkUseDefaultActions.Enabled = false;
-            chkUseDefaultUploadSettings.Enabled = false;
+            TaskSettings.UseDefaultAdvancedSettings = chkUseDefaultAdvancedSettings.Checked;
+            UpdateDefaultSettingVisibility();
+        }
+
+        private void UpdateDefaultSettingVisibility()
+        {
+            if (!IsDefault)
+            {
+                tcImage.Enabled = !TaskSettings.UseDefaultImageSettings;
+                tcCapture.Enabled = !TaskSettings.UseDefaultCaptureSettings;
+                pActions.Enabled = !TaskSettings.UseDefaultActions;
+                tcUpload.Enabled = !TaskSettings.UseDefaultUploadSettings;
+                pgTaskSettings.Enabled = !TaskSettings.UseDefaultAdvancedSettings;
+            }
         }
     }
 }

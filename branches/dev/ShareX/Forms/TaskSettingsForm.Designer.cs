@@ -54,6 +54,7 @@
             this.tcHotkeySettings = new System.Windows.Forms.TabControl();
             this.tpTask = new System.Windows.Forms.TabPage();
             this.tpImage = new System.Windows.Forms.TabPage();
+            this.chkUseDefaultImageSettings = new System.Windows.Forms.CheckBox();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
             this.cbUseImageFormat2FileUpload = new System.Windows.Forms.CheckBox();
@@ -110,6 +111,7 @@
             this.lblBorderSize = new System.Windows.Forms.Label();
             this.lblBorderColor = new System.Windows.Forms.Label();
             this.tpCapture = new System.Windows.Forms.TabPage();
+            this.chkUseDefaultCaptureSettings = new System.Windows.Forms.CheckBox();
             this.tcCapture = new System.Windows.Forms.TabControl();
             this.tpCaptureGeneral = new System.Windows.Forms.TabPage();
             this.cbCaptureAutoHideTaskbar = new System.Windows.Forms.CheckBox();
@@ -136,6 +138,7 @@
             this.tpScreenRecorder = new System.Windows.Forms.TabPage();
             this.cbScreenRecorderHotkeyStartInstantly = new System.Windows.Forms.CheckBox();
             this.tpActions = new System.Windows.Forms.TabPage();
+            this.chkUseDefaultActions = new System.Windows.Forms.CheckBox();
             this.btnActionsEdit = new System.Windows.Forms.Button();
             this.btnActionsRemove = new System.Windows.Forms.Button();
             this.btnActionsAdd = new System.Windows.Forms.Button();
@@ -144,6 +147,7 @@
             this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpUpload = new System.Windows.Forms.TabPage();
+            this.chkUseDefaultUploadSettings = new System.Windows.Forms.CheckBox();
             this.tcUpload = new System.Windows.Forms.TabControl();
             this.tpUploadNamePattern = new System.Windows.Forms.TabPage();
             this.cbFileUploadUseNamePattern = new System.Windows.Forms.CheckBox();
@@ -161,10 +165,8 @@
             this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
-            this.chkUseDefaultImageSettings = new System.Windows.Forms.CheckBox();
-            this.chkUseDefaultCaptureSettings = new System.Windows.Forms.CheckBox();
-            this.chkUseDefaultActions = new System.Windows.Forms.CheckBox();
-            this.chkUseDefaultUploadSettings = new System.Windows.Forms.CheckBox();
+            this.pActions = new System.Windows.Forms.Panel();
+            this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpImage.SuspendLayout();
@@ -201,6 +203,7 @@
             this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
+            this.pActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -352,7 +355,7 @@
             // 
             this.btnOK.Location = new System.Drawing.Point(456, 400);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(80, 23);
+            this.btnOK.Size = new System.Drawing.Size(80, 24);
             this.btnOK.TabIndex = 9;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -393,6 +396,9 @@
             // 
             // tcHotkeySettings
             // 
+            this.tcHotkeySettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tcHotkeySettings.Controls.Add(this.tpTask);
             this.tcHotkeySettings.Controls.Add(this.tpImage);
             this.tcHotkeySettings.Controls.Add(this.tpCapture);
@@ -402,7 +408,7 @@
             this.tcHotkeySettings.Location = new System.Drawing.Point(8, 8);
             this.tcHotkeySettings.Name = "tcHotkeySettings";
             this.tcHotkeySettings.SelectedIndex = 0;
-            this.tcHotkeySettings.Size = new System.Drawing.Size(526, 384);
+            this.tcHotkeySettings.Size = new System.Drawing.Size(528, 384);
             this.tcHotkeySettings.TabIndex = 19;
             // 
             // tpTask
@@ -423,33 +429,48 @@
             this.tpTask.Location = new System.Drawing.Point(4, 22);
             this.tpTask.Name = "tpTask";
             this.tpTask.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTask.Size = new System.Drawing.Size(518, 358);
+            this.tpTask.Size = new System.Drawing.Size(520, 358);
             this.tpTask.TabIndex = 2;
             this.tpTask.Text = "Task";
             this.tpTask.UseVisualStyleBackColor = true;
             // 
             // tpImage
             // 
-            this.tpImage.Controls.Add(this.chkUseDefaultImageSettings);
             this.tpImage.Controls.Add(this.tcImage);
+            this.tpImage.Controls.Add(this.chkUseDefaultImageSettings);
             this.tpImage.Location = new System.Drawing.Point(4, 22);
             this.tpImage.Name = "tpImage";
             this.tpImage.Padding = new System.Windows.Forms.Padding(3);
-            this.tpImage.Size = new System.Drawing.Size(518, 358);
+            this.tpImage.Size = new System.Drawing.Size(520, 358);
             this.tpImage.TabIndex = 0;
             this.tpImage.Text = "Image";
             this.tpImage.UseVisualStyleBackColor = true;
+            // 
+            // chkUseDefaultImageSettings
+            // 
+            this.chkUseDefaultImageSettings.AutoSize = true;
+            this.chkUseDefaultImageSettings.Checked = true;
+            this.chkUseDefaultImageSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultImageSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultImageSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultImageSettings.Name = "chkUseDefaultImageSettings";
+            this.chkUseDefaultImageSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultImageSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultImageSettings.TabIndex = 2;
+            this.chkUseDefaultImageSettings.Text = "Use default image settings";
+            this.chkUseDefaultImageSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultImageSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultImageSettings_CheckedChanged);
             // 
             // tcImage
             // 
             this.tcImage.Controls.Add(this.tpQuality);
             this.tcImage.Controls.Add(this.tpResize);
             this.tcImage.Controls.Add(this.tpEffects);
-            this.tcImage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tcImage.Location = new System.Drawing.Point(3, 32);
+            this.tcImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcImage.Location = new System.Drawing.Point(3, 30);
             this.tcImage.Name = "tcImage";
             this.tcImage.SelectedIndex = 0;
-            this.tcImage.Size = new System.Drawing.Size(512, 323);
+            this.tcImage.Size = new System.Drawing.Size(514, 325);
             this.tcImage.TabIndex = 1;
             // 
             // tpQuality
@@ -470,7 +491,7 @@
             this.tpQuality.Location = new System.Drawing.Point(4, 22);
             this.tpQuality.Name = "tpQuality";
             this.tpQuality.Padding = new System.Windows.Forms.Padding(3);
-            this.tpQuality.Size = new System.Drawing.Size(504, 297);
+            this.tpQuality.Size = new System.Drawing.Size(506, 299);
             this.tpQuality.TabIndex = 0;
             this.tpQuality.Text = "Quality";
             this.tpQuality.UseVisualStyleBackColor = true;
@@ -1174,26 +1195,41 @@
             // 
             // tpCapture
             // 
-            this.tpCapture.Controls.Add(this.chkUseDefaultCaptureSettings);
             this.tpCapture.Controls.Add(this.tcCapture);
+            this.tpCapture.Controls.Add(this.chkUseDefaultCaptureSettings);
             this.tpCapture.Location = new System.Drawing.Point(4, 22);
             this.tpCapture.Name = "tpCapture";
             this.tpCapture.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCapture.Size = new System.Drawing.Size(518, 358);
+            this.tpCapture.Size = new System.Drawing.Size(520, 358);
             this.tpCapture.TabIndex = 1;
             this.tpCapture.Text = "Capture";
             this.tpCapture.UseVisualStyleBackColor = true;
+            // 
+            // chkUseDefaultCaptureSettings
+            // 
+            this.chkUseDefaultCaptureSettings.AutoSize = true;
+            this.chkUseDefaultCaptureSettings.Checked = true;
+            this.chkUseDefaultCaptureSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultCaptureSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultCaptureSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultCaptureSettings.Name = "chkUseDefaultCaptureSettings";
+            this.chkUseDefaultCaptureSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultCaptureSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultCaptureSettings.TabIndex = 2;
+            this.chkUseDefaultCaptureSettings.Text = "Use default capture settings";
+            this.chkUseDefaultCaptureSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultCaptureSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultCaptureSettings_CheckedChanged);
             // 
             // tcCapture
             // 
             this.tcCapture.Controls.Add(this.tpCaptureGeneral);
             this.tcCapture.Controls.Add(this.tpCaptureShape);
             this.tcCapture.Controls.Add(this.tpScreenRecorder);
-            this.tcCapture.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tcCapture.Location = new System.Drawing.Point(3, 32);
+            this.tcCapture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcCapture.Location = new System.Drawing.Point(3, 30);
             this.tcCapture.Name = "tcCapture";
             this.tcCapture.SelectedIndex = 0;
-            this.tcCapture.Size = new System.Drawing.Size(512, 323);
+            this.tcCapture.Size = new System.Drawing.Size(514, 325);
             this.tcCapture.TabIndex = 1;
             // 
             // tpCaptureGeneral
@@ -1210,7 +1246,7 @@
             this.tpCaptureGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureGeneral.Name = "tpCaptureGeneral";
             this.tpCaptureGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCaptureGeneral.Size = new System.Drawing.Size(504, 304);
+            this.tpCaptureGeneral.Size = new System.Drawing.Size(506, 299);
             this.tpCaptureGeneral.TabIndex = 0;
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
@@ -1345,7 +1381,7 @@
             this.tpCaptureShape.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureShape.Name = "tpCaptureShape";
             this.tpCaptureShape.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCaptureShape.Size = new System.Drawing.Size(504, 304);
+            this.tpCaptureShape.Size = new System.Drawing.Size(504, 297);
             this.tpCaptureShape.TabIndex = 1;
             this.tpCaptureShape.Text = "Shape capture";
             this.tpCaptureShape.UseVisualStyleBackColor = true;
@@ -1513,24 +1549,36 @@
             this.cbScreenRecorderHotkeyStartInstantly.UseVisualStyleBackColor = true;
             this.cbScreenRecorderHotkeyStartInstantly.CheckedChanged += new System.EventHandler(this.cbScreenRecorderHotkeyStartInstantly_CheckedChanged);
             // 
-            // tpActions2
+            // tpActions
             // 
+            this.tpActions.Controls.Add(this.pActions);
             this.tpActions.Controls.Add(this.chkUseDefaultActions);
-            this.tpActions.Controls.Add(this.btnActionsEdit);
-            this.tpActions.Controls.Add(this.btnActionsRemove);
-            this.tpActions.Controls.Add(this.btnActionsAdd);
-            this.tpActions.Controls.Add(this.lvActions);
             this.tpActions.Location = new System.Drawing.Point(4, 22);
-            this.tpActions.Name = "tpActions2";
+            this.tpActions.Name = "tpActions";
             this.tpActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpActions.Size = new System.Drawing.Size(518, 358);
+            this.tpActions.Size = new System.Drawing.Size(520, 358);
             this.tpActions.TabIndex = 3;
             this.tpActions.Text = "Actions";
             this.tpActions.UseVisualStyleBackColor = true;
             // 
+            // chkUseDefaultActions
+            // 
+            this.chkUseDefaultActions.AutoSize = true;
+            this.chkUseDefaultActions.Checked = true;
+            this.chkUseDefaultActions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultActions.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultActions.Name = "chkUseDefaultActions";
+            this.chkUseDefaultActions.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultActions.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultActions.TabIndex = 8;
+            this.chkUseDefaultActions.Text = "Use default actions";
+            this.chkUseDefaultActions.UseVisualStyleBackColor = true;
+            this.chkUseDefaultActions.CheckedChanged += new System.EventHandler(this.chkUseDefaultActions_CheckedChanged);
+            // 
             // btnActionsEdit
             // 
-            this.btnActionsEdit.Location = new System.Drawing.Point(88, 32);
+            this.btnActionsEdit.Location = new System.Drawing.Point(88, 8);
             this.btnActionsEdit.Name = "btnActionsEdit";
             this.btnActionsEdit.Size = new System.Drawing.Size(75, 23);
             this.btnActionsEdit.TabIndex = 5;
@@ -1540,7 +1588,7 @@
             // 
             // btnActionsRemove
             // 
-            this.btnActionsRemove.Location = new System.Drawing.Point(168, 32);
+            this.btnActionsRemove.Location = new System.Drawing.Point(168, 8);
             this.btnActionsRemove.Name = "btnActionsRemove";
             this.btnActionsRemove.Size = new System.Drawing.Size(75, 23);
             this.btnActionsRemove.TabIndex = 6;
@@ -1550,7 +1598,7 @@
             // 
             // btnActionsAdd
             // 
-            this.btnActionsAdd.Location = new System.Drawing.Point(8, 32);
+            this.btnActionsAdd.Location = new System.Drawing.Point(8, 8);
             this.btnActionsAdd.Name = "btnActionsAdd";
             this.btnActionsAdd.Size = new System.Drawing.Size(75, 23);
             this.btnActionsAdd.TabIndex = 4;
@@ -1566,7 +1614,7 @@
             this.chActionsPath,
             this.chActionsArgs});
             this.lvActions.FullRowSelect = true;
-            this.lvActions.Location = new System.Drawing.Point(8, 64);
+            this.lvActions.Location = new System.Drawing.Point(8, 40);
             this.lvActions.MultiSelect = false;
             this.lvActions.Name = "lvActions";
             this.lvActions.Size = new System.Drawing.Size(488, 264);
@@ -1592,25 +1640,40 @@
             // 
             // tpUpload
             // 
-            this.tpUpload.Controls.Add(this.chkUseDefaultUploadSettings);
             this.tpUpload.Controls.Add(this.tcUpload);
+            this.tpUpload.Controls.Add(this.chkUseDefaultUploadSettings);
             this.tpUpload.Location = new System.Drawing.Point(4, 22);
             this.tpUpload.Name = "tpUpload";
             this.tpUpload.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUpload.Size = new System.Drawing.Size(518, 358);
+            this.tpUpload.Size = new System.Drawing.Size(520, 358);
             this.tpUpload.TabIndex = 4;
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
+            // 
+            // chkUseDefaultUploadSettings
+            // 
+            this.chkUseDefaultUploadSettings.AutoSize = true;
+            this.chkUseDefaultUploadSettings.Checked = true;
+            this.chkUseDefaultUploadSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultUploadSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultUploadSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultUploadSettings.Name = "chkUseDefaultUploadSettings";
+            this.chkUseDefaultUploadSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultUploadSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultUploadSettings.TabIndex = 2;
+            this.chkUseDefaultUploadSettings.Text = "Use default upload settings";
+            this.chkUseDefaultUploadSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultUploadSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultUploadSettings_CheckedChanged);
             // 
             // tcUpload
             // 
             this.tcUpload.Controls.Add(this.tpUploadNamePattern);
             this.tcUpload.Controls.Add(this.tpUploadClipboard);
-            this.tcUpload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tcUpload.Location = new System.Drawing.Point(3, 32);
+            this.tcUpload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcUpload.Location = new System.Drawing.Point(3, 30);
             this.tcUpload.Name = "tcUpload";
             this.tcUpload.SelectedIndex = 0;
-            this.tcUpload.Size = new System.Drawing.Size(512, 323);
+            this.tcUpload.Size = new System.Drawing.Size(514, 325);
             this.tcUpload.TabIndex = 1;
             // 
             // tpUploadNamePattern
@@ -1626,7 +1689,7 @@
             this.tpUploadNamePattern.Location = new System.Drawing.Point(4, 22);
             this.tpUploadNamePattern.Name = "tpUploadNamePattern";
             this.tpUploadNamePattern.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUploadNamePattern.Size = new System.Drawing.Size(504, 297);
+            this.tpUploadNamePattern.Size = new System.Drawing.Size(506, 299);
             this.tpUploadNamePattern.TabIndex = 1;
             this.tpUploadNamePattern.Text = "Name pattern";
             this.tpUploadNamePattern.UseVisualStyleBackColor = true;
@@ -1713,7 +1776,7 @@
             this.tpUploadClipboard.Location = new System.Drawing.Point(4, 22);
             this.tpUploadClipboard.Name = "tpUploadClipboard";
             this.tpUploadClipboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUploadClipboard.Size = new System.Drawing.Size(504, 304);
+            this.tpUploadClipboard.Size = new System.Drawing.Size(504, 297);
             this.tpUploadClipboard.TabIndex = 2;
             this.tpUploadClipboard.Text = "Clipboard upload";
             this.tpUploadClipboard.UseVisualStyleBackColor = true;
@@ -1765,10 +1828,11 @@
             // tpAdvanced
             // 
             this.tpAdvanced.Controls.Add(this.pgTaskSettings);
+            this.tpAdvanced.Controls.Add(this.chkUseDefaultAdvancedSettings);
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(518, 358);
+            this.tpAdvanced.Size = new System.Drawing.Size(520, 358);
             this.tpAdvanced.TabIndex = 6;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -1776,74 +1840,52 @@
             // pgTaskSettings
             // 
             this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgTaskSettings.Location = new System.Drawing.Point(3, 3);
+            this.pgTaskSettings.Location = new System.Drawing.Point(3, 30);
             this.pgTaskSettings.Name = "pgTaskSettings";
-            this.pgTaskSettings.Size = new System.Drawing.Size(512, 352);
+            this.pgTaskSettings.Size = new System.Drawing.Size(514, 325);
             this.pgTaskSettings.TabIndex = 0;
+            this.pgTaskSettings.ToolbarVisible = false;
             // 
-            // chkUseDefaultImageSettings
+            // pActions
             // 
-            this.chkUseDefaultImageSettings.AutoSize = true;
-            this.chkUseDefaultImageSettings.Checked = true;
-            this.chkUseDefaultImageSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultImageSettings.Location = new System.Drawing.Point(8, 8);
-            this.chkUseDefaultImageSettings.Name = "chkUseDefaultImageSettings";
-            this.chkUseDefaultImageSettings.Size = new System.Drawing.Size(150, 17);
-            this.chkUseDefaultImageSettings.TabIndex = 2;
-            this.chkUseDefaultImageSettings.Text = "Use default image settings";
-            this.chkUseDefaultImageSettings.UseVisualStyleBackColor = true;
-            this.chkUseDefaultImageSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultImageSettings_CheckedChanged);
+            this.pActions.Controls.Add(this.btnActionsAdd);
+            this.pActions.Controls.Add(this.lvActions);
+            this.pActions.Controls.Add(this.btnActionsEdit);
+            this.pActions.Controls.Add(this.btnActionsRemove);
+            this.pActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pActions.Location = new System.Drawing.Point(3, 30);
+            this.pActions.Margin = new System.Windows.Forms.Padding(0);
+            this.pActions.Name = "pActions";
+            this.pActions.Size = new System.Drawing.Size(514, 325);
+            this.pActions.TabIndex = 9;
             // 
-            // chkUseDefaultCaptureSettings
+            // chkUseDefaultAdvancedSettings
             // 
-            this.chkUseDefaultCaptureSettings.AutoSize = true;
-            this.chkUseDefaultCaptureSettings.Checked = true;
-            this.chkUseDefaultCaptureSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultCaptureSettings.Location = new System.Drawing.Point(8, 8);
-            this.chkUseDefaultCaptureSettings.Name = "chkUseDefaultCaptureSettings";
-            this.chkUseDefaultCaptureSettings.Size = new System.Drawing.Size(158, 17);
-            this.chkUseDefaultCaptureSettings.TabIndex = 2;
-            this.chkUseDefaultCaptureSettings.Text = "Use default capture settings";
-            this.chkUseDefaultCaptureSettings.UseVisualStyleBackColor = true;
-            this.chkUseDefaultCaptureSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultCaptureSettings_CheckedChanged);
+            this.chkUseDefaultAdvancedSettings.AutoSize = true;
+            this.chkUseDefaultAdvancedSettings.Checked = true;
+            this.chkUseDefaultAdvancedSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultAdvancedSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultAdvancedSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultAdvancedSettings.Name = "chkUseDefaultAdvancedSettings";
+            this.chkUseDefaultAdvancedSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultAdvancedSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultAdvancedSettings.TabIndex = 3;
+            this.chkUseDefaultAdvancedSettings.Text = "Use default advanced settings";
+            this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
-            // chkUseDefaultActions
-            // 
-            this.chkUseDefaultActions.AutoSize = true;
-            this.chkUseDefaultActions.Checked = true;
-            this.chkUseDefaultActions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultActions.Location = new System.Drawing.Point(8, 8);
-            this.chkUseDefaultActions.Name = "chkUseDefaultActions";
-            this.chkUseDefaultActions.Size = new System.Drawing.Size(117, 17);
-            this.chkUseDefaultActions.TabIndex = 8;
-            this.chkUseDefaultActions.Text = "Use default actions";
-            this.chkUseDefaultActions.UseVisualStyleBackColor = true;
-            this.chkUseDefaultActions.CheckedChanged += new System.EventHandler(this.chkUseDefaultActions_CheckedChanged);
-            // 
-            // chkUseDefaultUploadSettings
-            // 
-            this.chkUseDefaultUploadSettings.AutoSize = true;
-            this.chkUseDefaultUploadSettings.Checked = true;
-            this.chkUseDefaultUploadSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultUploadSettings.Location = new System.Drawing.Point(8, 8);
-            this.chkUseDefaultUploadSettings.Name = "chkUseDefaultUploadSettings";
-            this.chkUseDefaultUploadSettings.Size = new System.Drawing.Size(154, 17);
-            this.chkUseDefaultUploadSettings.TabIndex = 2;
-            this.chkUseDefaultUploadSettings.Text = "Use default upload settings";
-            this.chkUseDefaultUploadSettings.UseVisualStyleBackColor = true;
-            this.chkUseDefaultUploadSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultUploadSettings_CheckedChanged);
-            // 
-            // HotkeyTaskSettingsForm
+            // TaskSettingsForm
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 429);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(544, 430);
             this.Controls.Add(this.tcHotkeySettings);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimumSize = new System.Drawing.Size(560, 468);
-            this.Name = "HotkeyTaskSettingsForm";
+            this.Name = "TaskSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Workflow settings";
             this.tcHotkeySettings.ResumeLayout(false);
@@ -1898,6 +1940,8 @@
             this.tpUploadClipboard.ResumeLayout(false);
             this.tpUploadClipboard.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
+            this.tpAdvanced.PerformLayout();
+            this.pActions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2040,6 +2084,8 @@
         private System.Windows.Forms.CheckBox chkUseDefaultCaptureSettings;
         private System.Windows.Forms.CheckBox chkUseDefaultActions;
         private System.Windows.Forms.CheckBox chkUseDefaultUploadSettings;
+        private System.Windows.Forms.Panel pActions;
+        private System.Windows.Forms.CheckBox chkUseDefaultAdvancedSettings;
 
 
 

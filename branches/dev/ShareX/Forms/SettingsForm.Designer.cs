@@ -126,7 +126,7 @@
             this.tcSettings.Location = new System.Drawing.Point(3, 3);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(530, 507);
+            this.tcSettings.Size = new System.Drawing.Size(530, 334);
             this.tcSettings.TabIndex = 0;
             // 
             // tpGeneral
@@ -145,7 +145,7 @@
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGeneral.Size = new System.Drawing.Size(522, 481);
+            this.tpGeneral.Size = new System.Drawing.Size(522, 308);
             this.tpGeneral.TabIndex = 0;
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             this.tpPaths.Location = new System.Drawing.Point(4, 22);
             this.tpPaths.Name = "tpPaths";
             this.tpPaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPaths.Size = new System.Drawing.Size(522, 481);
+            this.tpPaths.Size = new System.Drawing.Size(522, 308);
             this.tpPaths.TabIndex = 1;
             this.tpPaths.Text = "Paths";
             this.tpPaths.UseVisualStyleBackColor = true;
@@ -432,7 +432,7 @@
             this.tpProxy.Location = new System.Drawing.Point(4, 22);
             this.tpProxy.Name = "tpProxy";
             this.tpProxy.Padding = new System.Windows.Forms.Padding(5);
-            this.tpProxy.Size = new System.Drawing.Size(522, 481);
+            this.tpProxy.Size = new System.Drawing.Size(522, 308);
             this.tpProxy.TabIndex = 7;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
@@ -572,7 +572,7 @@
             this.tpUpload.Location = new System.Drawing.Point(4, 22);
             this.tpUpload.Name = "tpUpload";
             this.tpUpload.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUpload.Size = new System.Drawing.Size(522, 481);
+            this.tpUpload.Size = new System.Drawing.Size(522, 308);
             this.tpUpload.TabIndex = 9;
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
@@ -682,6 +682,7 @@
             this.lvClipboardFormats.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chDescription,
             this.chFormat});
+            this.lvClipboardFormats.FullRowSelect = true;
             this.lvClipboardFormats.Location = new System.Drawing.Point(8, 48);
             this.lvClipboardFormats.Name = "lvClipboardFormats";
             this.lvClipboardFormats.Size = new System.Drawing.Size(472, 104);
@@ -719,7 +720,7 @@
             this.tpWatchFolders.Location = new System.Drawing.Point(4, 22);
             this.tpWatchFolders.Name = "tpWatchFolders";
             this.tpWatchFolders.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWatchFolders.Size = new System.Drawing.Size(522, 481);
+            this.tpWatchFolders.Size = new System.Drawing.Size(522, 308);
             this.tpWatchFolders.TabIndex = 10;
             this.tpWatchFolders.Text = "Watch folders";
             this.tpWatchFolders.UseVisualStyleBackColor = true;
@@ -788,10 +789,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 513);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(536, 340);
             this.Controls.Add(this.tcSettings);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(552, 552);
+            this.MinimumSize = new System.Drawing.Size(552, 300);
             this.Name = "SettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

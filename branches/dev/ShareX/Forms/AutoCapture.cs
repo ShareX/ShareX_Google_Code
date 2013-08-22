@@ -48,6 +48,7 @@ namespace ShareX
         {
             InitializeComponent();
             this.taskSettings = taskSettings;
+            Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.clock_plus.GetHicon());
 
             timer = new Timer();

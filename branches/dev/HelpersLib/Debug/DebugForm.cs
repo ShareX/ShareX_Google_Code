@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -33,7 +34,8 @@ namespace HelpersLib
         {
             InitializeComponent();
 
-            this.Text = appName + " - Debug log";
+            Text = appName + " - Debug log";
+            Icon = Resources.ShareXIcon;
             txtDebugLog.Text = MyLogger.Messages.ToString();
             txtDebugLog.SelectionStart = txtDebugLog.TextLength;
             txtDebugLog.ScrollToCaret();

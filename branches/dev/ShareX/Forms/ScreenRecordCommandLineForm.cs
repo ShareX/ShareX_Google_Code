@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ShareX.Properties;
 using System;
 using System.Windows.Forms;
 
@@ -36,6 +37,7 @@ namespace ShareX
         public ScreenRecordCommandLineForm(TaskSettings taskSettings)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
             this.taskSettings = taskSettings;
 
             tbCommandLinePath.Text = taskSettings.CaptureSettings.ScreenRecordCommandLinePath;

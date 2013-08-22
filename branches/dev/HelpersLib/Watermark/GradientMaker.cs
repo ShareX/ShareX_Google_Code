@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -49,6 +50,7 @@ namespace HelpersLib
         public GradientMaker(GradientMakerSettings options)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             Options = options;
             if (Options.BrushDataList.Count == 0)

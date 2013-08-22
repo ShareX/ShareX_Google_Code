@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ShareX.Properties;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -42,6 +43,7 @@ namespace ShareX
         {
             InitializeComponent();
             Text = Program.FullTitle;
+            Icon = Resources.ShareXIcon;
             lblProductName.Text = Program.FullTitle;
             lblCopyright.Text = Program.AssemblyCopyright;
 

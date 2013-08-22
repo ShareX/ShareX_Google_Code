@@ -61,6 +61,7 @@ namespace ShareX
         public UploadTestForm()
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
 
             if (TestImage == null)
             {

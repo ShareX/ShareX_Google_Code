@@ -262,7 +262,6 @@ namespace ShareX
         {
             using (ScreenRecordCommandLineForm form = new ScreenRecordCommandLineForm(TaskSettings))
             {
-                form.Icon = Icon;
                 form.ShowDialog();
             }
         }

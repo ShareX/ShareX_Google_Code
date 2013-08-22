@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ShareX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -50,6 +51,7 @@ namespace ShareX
         private void LoadSettings()
         {
             Text = Program.Title + " - Settings";
+            Icon = Resources.ShareXIcon;
 
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;

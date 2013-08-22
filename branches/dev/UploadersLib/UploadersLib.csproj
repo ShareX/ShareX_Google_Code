@@ -366,6 +366,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\ShareXIcon.ico" />
     <EmbeddedResource Include="ApiKeys\jira_sharex.pfx" />
     <None Include="Resources\jira.png" />
     <None Include="Resources\Picasa.ico" />

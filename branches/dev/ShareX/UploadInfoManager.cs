@@ -248,7 +248,6 @@ namespace ShareX
                 {
                     using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, Program.MyLogger, Program.LogFilePath, Links.URL_ISSUES))
                     {
-                        form.Icon = Resources.ShareXIcon;
                         form.ShowDialog();
                     }
                 }

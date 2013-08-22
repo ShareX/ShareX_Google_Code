@@ -544,7 +544,6 @@ namespace ShareX
         private void OpenAutoCapture(TaskSettings taskSettings)
         {
             AutoCapture autoCaptureForm = new AutoCapture(taskSettings);
-            autoCaptureForm.Icon = Icon;
             autoCaptureForm.Show();
         }
 
@@ -632,7 +631,7 @@ namespace ShareX
                 Program.UploaderSettingsResetEvent.WaitOne();
             }
 
-            UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys()) { Icon = this.Icon };
+            UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys());
             uploadersConfigForm.ShowDialog();
             uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
         }
@@ -661,7 +660,6 @@ namespace ShareX
         {
             using (UploadTestForm form = new UploadTestForm())
             {
-                form.Icon = Icon;
                 form.ShowDialog();
             }
         }
@@ -685,7 +683,6 @@ namespace ShareX
         {
             using (DialogColor colorForm = new DialogColor())
             {
-                colorForm.Icon = Icon;
                 colorForm.ScreenPicker = true;
                 colorForm.ShowDialog();
             }
@@ -694,7 +691,6 @@ namespace ShareX
         private void tsmiHashCheck_Click(object sender, EventArgs e)
         {
             HashCheckForm hashCheckForm = new HashCheckForm();
-            hashCheckForm.Icon = Icon;
             hashCheckForm.Show();
         }
 
@@ -710,7 +706,6 @@ namespace ShareX
             using (HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath))
             {
                 Program.Settings.HistoryWindowState.AutoHandleFormState(historyForm);
-                historyForm.Icon = Icon;
                 historyForm.Text = "ShareX - History: " + Program.HistoryFilePath;
                 historyForm.ShowDialog();
             }
@@ -724,7 +719,6 @@ namespace ShareX
                 Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount))
             {
                 Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
-                imageHistoryForm.Icon = Icon;
                 imageHistoryForm.Text = "ShareX - Image history: " + Program.HistoryFilePath;
                 imageHistoryForm.ShowDialog();
 
@@ -736,33 +730,32 @@ namespace ShareX
 
         private void tsbAbout_Click(object sender, EventArgs e)
         {
-            new AboutForm() { Icon = this.Icon }.ShowDialog();
+            new AboutForm().ShowDialog();
         }
 
         private void tsmiDefaultWorkflowSettings_Click(object sender, EventArgs e)
         {
-            using (TaskSettingsForm dlg = new TaskSettingsForm(Program.DefaultTaskSettings))
+            using (TaskSettingsForm dlg = new TaskSettingsForm(Program.DefaultTaskSettings, true))
             {
-                dlg.TreatAsDefault();
                 dlg.ShowDialog();
             }
         }
 
         private void tsmiWorkflows_Click(object sender, EventArgs e)
         {
-            new WorkflowsForm() { Icon = this.Icon }.Show();
+            new HotkeySettingsForm().Show();
         }
 
         private void tsmiApplicationSettings_Click(object sender, EventArgs e)
         {
-            new SettingsForm() { Icon = this.Icon }.ShowDialog();
+            new SettingsForm().ShowDialog();
             UploadManager.UpdateProxySettings();
             Program.Settings.SaveAsync();
         }
 
         private void tsmiHelpDebug_Click(object sender, EventArgs e)
         {
-            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger) { Icon = this.Icon };
+            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
             dlg.Show();
         }
 
