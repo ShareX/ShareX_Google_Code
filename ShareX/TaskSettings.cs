@@ -200,23 +200,16 @@ namespace ShareX
 
         #region Capture / Screen recorder
 
-        public bool ScreenRecorderHotkeyStartInstantly = false;
-
-        #endregion Capture / Screen recorder
-
-        #region Capture / ScreenRecord Form
-
         public int ScreenRecordFPS = 5;
         public bool ScreenRecordFixedDuration = true;
         public float ScreenRecordDuration = 3f;
         public ScreenRecordOutput ScreenRecordOutput = ScreenRecordOutput.GIF;
-        public bool ScreenRecordAutoUpload = true;
 
         public string ScreenRecordCommandLinePath = "x264.exe";
         public string ScreenRecordCommandLineArgs = "--output %output %input";
         public string ScreenRecordCommandLineOutputExtension = "mp4";
 
-        #endregion Capture / ScreenRecord Form
+        #endregion Capture / Screen recorder
     }
 
     public class TaskSettingsUpload

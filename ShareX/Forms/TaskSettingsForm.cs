@@ -154,7 +154,19 @@ namespace ShareX
             cbShapeIncludeControls.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls;
             cbShapeForceWindowCapture.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture;
 
-            cbScreenRecorderHotkeyStartInstantly.Checked = TaskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly;
+            // Capture / Screencast 
+
+            nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
+            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
+            
+            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
+            cbOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
+            tbCommandLinePath.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLinePath;
+            tbCommandLineArgs.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs;
+            tbCommandLineOutputExtension.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension;
 
             // Actions
             TaskHelper.AddDefaultExternalPrograms(TaskSettings);
@@ -673,11 +685,6 @@ namespace ShareX
             TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize = cbFixedShapeSize.Checked;
         }
 
-        private void cbScreenRecorderHotkeyStartInstantly_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecorderHotkeyStartInstantly = cbScreenRecorderHotkeyStartInstantly.Checked;
-        }
-
         private void btnActionsEdit_Click(object sender, EventArgs e)
         {
             if (lvActions.SelectedItems.Count > 0)
@@ -823,6 +830,44 @@ namespace ShareX
                 tcUpload.Enabled = !TaskSettings.UseDefaultUploadSettings;
                 pgTaskSettings.Enabled = !TaskSettings.UseDefaultAdvancedSettings;
             }
+        }
+
+        private void btnBrowseCommandLinePath_Click(object sender, EventArgs e)
+        {
+            Helpers.BrowseFile("ShareX - Choose encoder path", tbCommandLinePath, Program.StartupPath);
+            TaskSettings.CaptureSettings.ScreenRecordCommandLinePath = tbCommandLinePath.Text;
+        }
+
+        private void tbCommandLineArgs_TextChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs = tbCommandLineArgs.Text;
+        }
+
+        private void tbCommandLineOutputExtension_TextChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension = tbCommandLineOutputExtension.Text;
+        }
+
+        private void nudFPS_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordFPS = (int)nudFPS.Value;
+        }
+
+        private void nudDuration_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordDuration = (float)nudDuration.Value;
+        }
+
+        private void cbFixedDuration_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
+            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+        }
+
+        private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
+            gbCommandLineEncoderSettings.Enabled = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
         }
     }
 }
