@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using Newtonsoft.Json;
 using ScreenCapture;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,8 +35,8 @@ namespace ShareX
 {
     public class TaskSettings
     {
-        public string Description;
-        public EHotkey Job;
+        public string Description = string.Empty;
+        public HotkeyType Job = HotkeyType.None;
 
         public bool UseDefaultAfterCaptureJob = true;
         public AfterCaptureTasks AfterCaptureJob = AfterCaptureTasks.SaveImageToFile | AfterCaptureTasks.UploadImageToHost;
@@ -65,58 +66,69 @@ namespace ShareX
         public bool UseDefaultAdvancedSettings = true;
         public TaskSettingsAdvanced AdvancedSettings = new TaskSettingsAdvanced();
 
+        [JsonIgnore]
+        public TaskSettings TaskSettingsReference { get; private set; }
+
         public TaskSettings()
         {
             SetDefaultSettings();
         }
 
-        public void SetDefaultSettings()
+        public static TaskSettings GetSafeTaskSettings(TaskSettings taskSettings)
+        {
+            TaskSettings taskSettingsCopy = taskSettings.Copy();
+            taskSettingsCopy.TaskSettingsReference = taskSettings;
+            taskSettingsCopy.SetDefaultSettings();
+            return taskSettingsCopy;
+        }
+
+        private void SetDefaultSettings()
         {
             if (Program.DefaultTaskSettings != null)
             {
-                TaskSettings defaultWorkflow = Program.DefaultTaskSettings.Copy();
+                TaskSettings defaultTaskSettings = Program.DefaultTaskSettings.Copy();
 
                 if (UseDefaultAfterCaptureJob)
                 {
-                    AfterCaptureJob = defaultWorkflow.AfterCaptureJob;
+                    AfterCaptureJob = defaultTaskSettings.AfterCaptureJob;
                 }
 
                 if (UseDefaultAfterUploadJob)
                 {
-                    AfterUploadJob = defaultWorkflow.AfterUploadJob;
+                    AfterUploadJob = defaultTaskSettings.AfterUploadJob;
                 }
 
                 if (UseDefaultDestinations)
                 {
-                    ImageDestination = defaultWorkflow.ImageDestination;
-                    TextDestination = defaultWorkflow.TextDestination;
-                    FileDestination = defaultWorkflow.FileDestination;
-                    URLShortenerDestination = defaultWorkflow.URLShortenerDestination;
-                    SocialNetworkingServiceDestination = defaultWorkflow.SocialNetworkingServiceDestination;
+                    ImageDestination = defaultTaskSettings.ImageDestination;
+                    TextDestination = defaultTaskSettings.TextDestination;
+                    FileDestination = defaultTaskSettings.FileDestination;
+                    URLShortenerDestination = defaultTaskSettings.URLShortenerDestination;
+                    SocialNetworkingServiceDestination = defaultTaskSettings.SocialNetworkingServiceDestination;
                 }
 
                 if (UseDefaultImageSettings)
                 {
-                    ImageSettings = defaultWorkflow.ImageSettings;
+                    ImageSettings = defaultTaskSettings.ImageSettings;
                 }
 
                 if (UseDefaultCaptureSettings)
                 {
-                    CaptureSettings = defaultWorkflow.CaptureSettings;
+                    CaptureSettings = defaultTaskSettings.CaptureSettings;
                 }
                 if (UseDefaultUploadSettings)
                 {
-                    UploadSettings = defaultWorkflow.UploadSettings;
+                    UploadSettings = defaultTaskSettings.UploadSettings;
                 }
 
                 if (UseDefaultActions)
                 {
-                    ExternalPrograms = defaultWorkflow.ExternalPrograms;
+                    ExternalPrograms = defaultTaskSettings.ExternalPrograms;
                 }
 
                 if (UseDefaultAdvancedSettings)
                 {
-                    AdvancedSettings = defaultWorkflow.AdvancedSettings;
+                    AdvancedSettings = defaultTaskSettings.AdvancedSettings;
                 }
             }
         }

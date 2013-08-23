@@ -88,6 +88,7 @@ namespace ShareX
 
                 if (img != null)
                 {
+                    // TODO: Must use hotkey task settings
                     TaskSettings taskSettings = new TaskSettings();
                     taskSettings.UseDefaultAfterCaptureJob = false;
                     taskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AnnotateImage);
