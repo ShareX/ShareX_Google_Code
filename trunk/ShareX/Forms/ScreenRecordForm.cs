@@ -69,14 +69,6 @@ namespace ShareX
 
         public void LoadSettings()
         {
-            nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
-            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
-            cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
-            cbOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
-            cbAutoUploadGIF.Checked = TaskSettings.CaptureSettings.ScreenRecordAutoUpload;
-
             Screenshot.CaptureCursor = TaskSettings.CaptureSettings.ShowCursor;
 
             SelectRegion(TaskSettings);
@@ -193,7 +185,7 @@ namespace ShareX
                 }
             }
 
-            if (TaskSettings.CaptureSettings.ScreenRecordAutoUpload)
+            if (TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost))
             {
                 UploadManager.UploadFile(path, TaskSettings);
             }
@@ -206,6 +198,7 @@ namespace ShareX
             btnRecord.Enabled = true;
             btnRecord.Visible = true;
             IsRecording = false;
+            Close();
         }
 
         private void screenRecorder_EncodingProgressChanged(int progress)
@@ -234,42 +227,6 @@ namespace ShareX
         private void btnRegion_Click(object sender, EventArgs e)
         {
             SelectRegion(TaskSettings);
-        }
-
-        private void nudFPS_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordFPS = (int)nudFPS.Value;
-        }
-
-        private void nudDuration_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordDuration = (float)nudDuration.Value;
-        }
-
-        private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
-
-            btnSettings.Visible = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
-        }
-
-        private void cbAutoUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordAutoUpload = cbAutoUploadGIF.Checked;
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            using (ScreenRecordCommandLineForm form = new ScreenRecordCommandLineForm(TaskSettings))
-            {
-                form.ShowDialog();
-            }
-        }
-
-        private void cbFixedDuration_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
-            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
         }
 
         private void niTray_MouseClick(object sender, MouseEventArgs e)
