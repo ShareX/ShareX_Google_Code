@@ -119,8 +119,10 @@ namespace ShareX
         LastRegion
     }
 
-    public enum EHotkey
+    public enum HotkeyType
     {
+        [Description("None")]
+        None,
         [Description("Clipboard Upload")]
         ClipboardUpload,
         [Description("File Upload")]

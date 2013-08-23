@@ -53,7 +53,7 @@ namespace ShareX
             HotkeyStatus = HotkeyStatus.NotConfigured;
         }
 
-        public HotkeySetting(EHotkey job, Keys hotkey = Keys.None)
+        public HotkeySetting(HotkeyType job, Keys hotkey = Keys.None)
             : this()
         {
             TaskSettings.Job = job;

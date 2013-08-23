@@ -69,7 +69,7 @@ namespace ShareX
                 chkUseDefaultAdvancedSettings.Checked = TaskSettings.UseDefaultAdvancedSettings;
             }
 
-            AddEnumItems<EHotkey>(x => TaskSettings.Job = x, cmsTask);
+            AddEnumItems<HotkeyType>(x => TaskSettings.Job = x, cmsTask);
             AddMultiEnumItems<AfterCaptureTasks>(x => TaskSettings.AfterCaptureJob = TaskSettings.AfterCaptureJob.Swap(x), cmsAfterCapture);
             AddMultiEnumItems<AfterUploadTasks>(x => TaskSettings.AfterUploadJob = TaskSettings.AfterUploadJob.Swap(x), cmsAfterUpload);
             AddEnumItems<ImageDestination>(x => TaskSettings.ImageDestination = x, cmsImageUploaders);
@@ -78,6 +78,7 @@ namespace ShareX
             AddEnumItems<UrlShortenerType>(x => TaskSettings.URLShortenerDestination = x, cmsURLShorteners);
             AddEnumItems<SocialNetworkingService>(x => TaskSettings.SocialNetworkingServiceDestination = x, cmsSocialNetworkingServices);
 
+            SetEnumChecked(TaskSettings.Job, cmsTask);
             SetMultiEnumChecked(TaskSettings.AfterCaptureJob, cmsAfterCapture);
             SetMultiEnumChecked(TaskSettings.AfterUploadJob, cmsAfterUpload);
             SetEnumChecked(TaskSettings.ImageDestination, cmsImageUploaders);

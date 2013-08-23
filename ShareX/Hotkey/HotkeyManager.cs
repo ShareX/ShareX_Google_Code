@@ -109,22 +109,22 @@ namespace ShareX
 
             Hotkeys.AddRange(new HotkeySetting[]
             {
-                new HotkeySetting(EHotkey.ClipboardUpload, Keys.Control | Keys.PageUp),
-                new HotkeySetting(EHotkey.FileUpload, Keys.Shift | Keys.PageUp),
-                new HotkeySetting(EHotkey.PrintScreen, Keys.PrintScreen),
-                new HotkeySetting(EHotkey.ActiveWindow, Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.WindowRectangle, Keys.Shift | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.RectangleRegion, Keys.Control | Keys.PrintScreen),
-                new HotkeySetting(EHotkey.RoundedRectangleRegion),
-                new HotkeySetting(EHotkey.EllipseRegion),
-                new HotkeySetting(EHotkey.TriangleRegion),
-                new HotkeySetting(EHotkey.DiamondRegion),
-                new HotkeySetting(EHotkey.PolygonRegion),
-                new HotkeySetting(EHotkey.FreeHandRegion),
-                new HotkeySetting(EHotkey.LastRegion),
-                new HotkeySetting(EHotkey.ScreenRecorder),
-                new HotkeySetting(EHotkey.AutoCapture)
+                new HotkeySetting(HotkeyType.ClipboardUpload, Keys.Control | Keys.PageUp),
+                new HotkeySetting(HotkeyType.FileUpload, Keys.Shift | Keys.PageUp),
+                new HotkeySetting(HotkeyType.PrintScreen, Keys.PrintScreen),
+                new HotkeySetting(HotkeyType.ActiveWindow, Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(HotkeyType.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
+                new HotkeySetting(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
+                new HotkeySetting(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
+                new HotkeySetting(HotkeyType.RoundedRectangleRegion),
+                new HotkeySetting(HotkeyType.EllipseRegion),
+                new HotkeySetting(HotkeyType.TriangleRegion),
+                new HotkeySetting(HotkeyType.DiamondRegion),
+                new HotkeySetting(HotkeyType.PolygonRegion),
+                new HotkeySetting(HotkeyType.FreeHandRegion),
+                new HotkeySetting(HotkeyType.LastRegion),
+                new HotkeySetting(HotkeyType.ScreenRecorder),
+                new HotkeySetting(HotkeyType.AutoCapture)
             });
         }
     }
