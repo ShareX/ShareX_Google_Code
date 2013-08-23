@@ -181,7 +181,7 @@ namespace ShareX
     {
         #region Capture / General
 
-        public bool ShowCursor = false;
+        public bool ShowCursor = true;
         public bool CaptureTransparent = true;
         public bool CaptureShadow = true;
         public int CaptureShadowOffset = 20;
