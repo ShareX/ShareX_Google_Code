@@ -203,6 +203,7 @@ namespace ScreenCapture
                     }
 
                     gifEncoder.Finish();
+                    Helpers.CreateDirectoryIfNotExist(path);
                     gifEncoder.Save(path);
                 }
             }
@@ -212,6 +213,7 @@ namespace ScreenCapture
         {
             if (!string.IsNullOrEmpty(CachePath) && File.Exists(CachePath) && !string.IsNullOrEmpty(encoderPath) && File.Exists(encoderPath))
             {
+                Helpers.CreateDirectoryIfNotExist(output);
                 OnEncodingProgressChanged(-1);
 
                 using (Process process = new Process())
