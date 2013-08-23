@@ -42,12 +42,10 @@ namespace ShareX
         private int delay, count, timeleft, percentage;
         private bool waitUploads;
         private Stopwatch stopwatch = new Stopwatch();
-        private TaskSettings taskSettings;
 
-        public AutoCapture(TaskSettings taskSettings)
+        public AutoCapture()
         {
             InitializeComponent();
-            this.taskSettings = taskSettings;
             Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.clock_plus.GetHicon());
 
@@ -88,8 +86,7 @@ namespace ShareX
 
                 if (img != null)
                 {
-                    // TODO: Must use hotkey task settings
-                    TaskSettings taskSettings = new TaskSettings();
+                    TaskSettings taskSettings = Program.Settings.DefaultTaskSettings.Copy();
                     taskSettings.UseDefaultAfterCaptureJob = false;
                     taskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AnnotateImage);
                     taskSettings.UseDefaultAdvancedSettings = false;
@@ -162,7 +159,7 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SelectRegion(taskSettings);
+            SelectRegion(Program.DefaultTaskSettings);
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)

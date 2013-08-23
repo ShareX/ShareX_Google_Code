@@ -535,9 +535,9 @@ namespace ShareX
             }
         }
 
-        private void OpenAutoCapture(TaskSettings taskSettings)
+        private void OpenAutoCapture()
         {
-            AutoCapture autoCaptureForm = new AutoCapture(taskSettings);
+            AutoCapture autoCaptureForm = new AutoCapture();
             autoCaptureForm.Show();
         }
 
@@ -670,7 +670,7 @@ namespace ShareX
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
         {
-            OpenAutoCapture(Program.DefaultTaskSettings);
+            OpenAutoCapture();
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)

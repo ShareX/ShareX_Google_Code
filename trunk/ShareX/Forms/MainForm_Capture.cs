@@ -112,7 +112,7 @@ namespace ShareX
                     DoScreenRecorder(taskSettings, true);
                     break;
                 case HotkeyType.AutoCapture:
-                    OpenAutoCapture(taskSettings);
+                    OpenAutoCapture();
                     break;
             }
         }
