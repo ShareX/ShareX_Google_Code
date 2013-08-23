@@ -36,32 +36,43 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public class ScreenRecordForm : ApplicationContext
+    public class ScreenRecordForm : TrayForm
     {
-        private NotifyIcon niTray = new NotifyIcon();
         public Rectangle CaptureRectangle { get; private set; }
+        public bool IsRecording { get; private set; }
+
         private static ScreenRecordForm instance;
 
         public static ScreenRecordForm Instance
         {
             get
             {
-                if (instance == null)
+                if (instance == null || instance.IsDisposed)
                 {
                     instance = new ScreenRecordForm();
+                    instance.Show();
                 }
 
                 return instance;
             }
         }
 
-        public bool IsRecording { get; private set; }
-
         private ScreenRecorder screenRecorder = null;
 
         private ScreenRecordForm()
         {
-            niTray.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
+            TrayIcon.Text = "ShareX - Screen recording";
+            TrayIcon.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
+            TrayIcon.MouseClick += TrayIcon_MouseClick;
+            TrayIcon.Visible = true;
+        }
+
+        private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                StopRecording();
+            }
         }
 
         private void SelectRegion(TaskSettings taskSettings)
@@ -111,18 +122,13 @@ namespace ShareX
                         Thread.Sleep(1000);
                         screenRegionManager.ChangeColor();
 
-                        if (duration <= 0)
-                        {
-                            niTray.Visible = true;
-                        }
-
                         screenRecorder.StartRecording();
                     });
                 }
 
-                if (niTray.Visible)
+                if (TrayIcon.Visible)
                 {
-                    niTray.Visible = false;
+                    TrayIcon.Visible = false;
                 }
 
                 if (screenRecorder != null && TaskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
@@ -172,23 +178,15 @@ namespace ShareX
             IsRecording = false;
         }
 
-        private void niTray_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                StopRecording();
-            }
-        }
-
         public void StopRecording()
         {
             if (IsRecording && screenRecorder != null)
             {
                 screenRecorder.StopRecording();
 
-                if (niTray.Visible)
+                if (TrayIcon.Visible)
                 {
-                    niTray.Visible = false;
+                    TrayIcon.Visible = false;
                 }
             }
         }

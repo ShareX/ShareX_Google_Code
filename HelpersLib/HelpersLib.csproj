@@ -101,6 +101,9 @@
     <Compile Include="Forms\MyMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\TrayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\WatchFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
