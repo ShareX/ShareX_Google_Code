@@ -36,18 +36,17 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public partial class ScreenRecordForm : Form
+    public class ScreenRecordForm : ApplicationContext
     {
-        public static TaskSettings TaskSettings { get; set; }
+        private NotifyIcon niTray = new NotifyIcon();
         public Rectangle CaptureRectangle { get; private set; }
-
         private static ScreenRecordForm instance;
 
         public static ScreenRecordForm Instance
         {
             get
             {
-                if (instance == null || instance.IsDisposed)
+                if (instance == null)
                 {
                     instance = new ScreenRecordForm();
                 }
@@ -62,16 +61,7 @@ namespace ShareX
 
         private ScreenRecordForm()
         {
-            InitializeComponent();
-            Icon = Resources.ShareXIcon;
             niTray.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
-        }
-
-        public void LoadSettings()
-        {
-            Screenshot.CaptureCursor = TaskSettings.CaptureSettings.ShowCursor;
-
-            SelectRegion(TaskSettings);
         }
 
         private void SelectRegion(TaskSettings taskSettings)
@@ -80,31 +70,20 @@ namespace ShareX
             if (TaskHelper.SelectRegion(taskSettings, out rect) && !rect.IsEmpty)
             {
                 CaptureRectangle = Helpers.EvenRectangleSize(rect);
-                lblRegion.Text = string.Format("X: {0}, Y: {1}, Width: {2}, Height: {3}", CaptureRectangle.X, CaptureRectangle.Y,
-                    CaptureRectangle.Width, CaptureRectangle.Height);
-                btnRecord.Enabled = true;
             }
         }
 
-        private void btnRecord_Click(object sender, EventArgs e)
+        public async void StartRecording(TaskSettings TaskSettings)
         {
-            StartRecording();
-        }
+            SelectRegion(TaskSettings);
+            Screenshot.CaptureCursor = TaskSettings.CaptureSettings.ShowCursor;
 
-        public async void StartRecording()
-        {
             if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
             {
-                if (!Visible) this.ShowActivate();
                 return;
             }
 
             IsRecording = true;
-            if (Visible) Hide();
-            btnRecord.Enabled = false;
-            btnRecord.Visible = false;
-            pbEncoding.Visible = true;
-            pbEncoding.Value = 0;
 
             string path = "";
 
@@ -134,14 +113,12 @@ namespace ShareX
 
                         if (duration <= 0)
                         {
-                            this.InvokeSafe(() => niTray.Visible = true);
+                            niTray.Visible = true;
                         }
 
                         screenRecorder.StartRecording();
                     });
                 }
-
-                this.ShowActivate();
 
                 if (niTray.Visible)
                 {
@@ -150,8 +127,6 @@ namespace ShareX
 
                 if (screenRecorder != null && TaskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
-                    screenRecorder.EncodingProgressChanged += screenRecorder_EncodingProgressChanged;
-
                     await TaskEx.Run(() =>
                     {
                         Stopwatch timer = Stopwatch.StartNew();
@@ -194,39 +169,7 @@ namespace ShareX
                 TaskHelper.ShowResultNotifications(path);
             }
 
-            pbEncoding.Visible = false;
-            btnRecord.Enabled = true;
-            btnRecord.Visible = true;
             IsRecording = false;
-            Close();
-        }
-
-        private void screenRecorder_EncodingProgressChanged(int progress)
-        {
-            this.InvokeSafe(() =>
-            {
-                if (progress == -1)
-                {
-                    if (pbEncoding.Style != ProgressBarStyle.Marquee)
-                    {
-                        pbEncoding.Style = ProgressBarStyle.Marquee;
-                    }
-                }
-                else
-                {
-                    if (pbEncoding.Style != ProgressBarStyle.Blocks)
-                    {
-                        pbEncoding.Style = ProgressBarStyle.Blocks;
-                    }
-
-                    pbEncoding.Value = progress;
-                }
-            });
-        }
-
-        private void btnRegion_Click(object sender, EventArgs e)
-        {
-            SelectRegion(TaskSettings);
         }
 
         private void niTray_MouseClick(object sender, MouseEventArgs e)

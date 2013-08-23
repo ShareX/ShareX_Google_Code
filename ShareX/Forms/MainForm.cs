@@ -512,7 +512,6 @@ namespace ShareX
 
         private void DoScreenRecorder(TaskSettings taskSettings, bool isHotkey = false)
         {
-            ScreenRecordForm.TaskSettings = taskSettings;
             ScreenRecordForm form = ScreenRecordForm.Instance;
 
             if (form.IsRecording)
@@ -521,17 +520,7 @@ namespace ShareX
             }
             else
             {
-                form.LoadSettings();
-
-                if (form.Visible)
-                {
-                    form.ShowActivate();
-                }
-                else
-                {
-                    form.Show();
-                    form.StartRecording();
-                }
+                form.StartRecording(taskSettings);
             }
         }
 
