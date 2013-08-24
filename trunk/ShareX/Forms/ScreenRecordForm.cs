@@ -62,9 +62,7 @@ namespace ShareX
         private ScreenRecordForm()
         {
             TrayIcon.Text = "ShareX - Screen recording";
-            TrayIcon.Icon = Icon.FromHandle(Resources.control_record.GetHicon());
             TrayIcon.MouseClick += TrayIcon_MouseClick;
-            TrayIcon.Visible = true;
         }
 
         private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
@@ -96,6 +94,9 @@ namespace ShareX
 
             IsRecording = true;
 
+            TrayIcon.Icon = Icon.FromHandle(Resources.control_record_yellow.GetHicon());
+            TrayIcon.Visible = true;
+
             string path = "";
 
             try
@@ -117,22 +118,22 @@ namespace ShareX
 
                         float duration = TaskSettings.CaptureSettings.ScreenRecordFixedDuration ? TaskSettings.CaptureSettings.ScreenRecordDuration : 0;
 
-                        screenRecorder = new ScreenRecorder(TaskSettings.CaptureSettings.ScreenRecordFPS, duration, CaptureRectangle, path, TaskSettings.CaptureSettings.ScreenRecordOutput);
+                        screenRecorder = new ScreenRecorder(TaskSettings.CaptureSettings.ScreenRecordFPS, duration, CaptureRectangle, path,
+                            TaskSettings.CaptureSettings.ScreenRecordOutput);
 
                         Thread.Sleep(1000);
                         screenRegionManager.ChangeColor();
+
+                        this.InvokeSafe(() => TrayIcon.Icon = Icon.FromHandle(Resources.control_record.GetHicon()));
 
                         screenRecorder.StartRecording();
                     });
                 }
 
-                if (TrayIcon.Visible)
-                {
-                    TrayIcon.Visible = false;
-                }
-
                 if (screenRecorder != null && TaskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
+                    TrayIcon.Icon = Icon.FromHandle(Resources.camcorder__pencil.GetHicon());
+
                     await TaskEx.Run(() =>
                     {
                         Stopwatch timer = Stopwatch.StartNew();
@@ -144,8 +145,10 @@ namespace ShareX
                                 screenRecorder.SaveAsGIF(path, TaskSettings.ImageSettings.ImageGIFQuality);
                                 break;
                             case ScreenRecordOutput.AVICommandLine:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension));
-                                screenRecorder.EncodeUsingCommandLine(path, TaskSettings.CaptureSettings.ScreenRecordCommandLinePath, TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs);
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings,
+                                    TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension));
+                                screenRecorder.EncodeUsingCommandLine(path, TaskSettings.CaptureSettings.ScreenRecordCommandLinePath,
+                                    TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs);
                                 break;
                         }
                     });
@@ -163,6 +166,11 @@ namespace ShareX
 
                     screenRecorder.Dispose();
                     screenRecorder = null;
+                }
+
+                if (TrayIcon.Visible)
+                {
+                    TrayIcon.Visible = false;
                 }
             }
 
@@ -183,11 +191,6 @@ namespace ShareX
             if (IsRecording && screenRecorder != null)
             {
                 screenRecorder.StopRecording();
-
-                if (TrayIcon.Visible)
-                {
-                    TrayIcon.Visible = false;
-                }
             }
         }
     }

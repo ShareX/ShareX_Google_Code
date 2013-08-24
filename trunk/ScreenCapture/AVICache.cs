@@ -26,6 +26,7 @@
 using HelpersLib;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -108,6 +109,11 @@ namespace ScreenCapture
         {
             if (IsWorking)
             {
+                /*if (imageQueue.Count > 0)
+                {
+                    Debug.WriteLine("ImageQueue count: " + imageQueue.Count);
+                }*/
+
                 imageQueue.Add(img);
             }
         }
