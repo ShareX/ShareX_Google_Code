@@ -492,11 +492,11 @@ namespace ShareX
 
             if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
             {
-                string url = Info.Result.ToString();
+                string txt = new UploadInfoParser().Parse(Info, Info.TaskSettings.AdvancedSettings.ClipboardContentFormat);
 
-                if (!string.IsNullOrEmpty(url))
+                if (!string.IsNullOrEmpty(txt))
                 {
-                    ClipboardHelper.CopyText(url);
+                    ClipboardHelper.CopyText(txt);
                 }
             }
         }

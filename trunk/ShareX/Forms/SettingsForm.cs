@@ -98,7 +98,7 @@ namespace ShareX
             cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
 
             // Upload / Clipboard formats
-            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+            foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
             {
                 AddClipboardFormat(cf);
             }
@@ -432,7 +432,7 @@ namespace ShareX
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     ClipboardFormat cf = form.ClipboardFormat;
-                    Program.Settings.ClipboardFormats.Add(cf);
+                    Program.Settings.ClipboardContentFormats.Add(cf);
                     AddClipboardFormat(cf);
                 }
             }
@@ -444,7 +444,7 @@ namespace ShareX
             {
                 ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
                 ClipboardFormat cf = lvi.Tag as ClipboardFormat;
-                Program.Settings.ClipboardFormats.Remove(cf);
+                Program.Settings.ClipboardContentFormats.Remove(cf);
                 lvClipboardFormats.Items.Remove(lvi);
             }
         }

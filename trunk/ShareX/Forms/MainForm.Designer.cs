@@ -388,7 +388,7 @@ namespace ShareX
             this.tsmiScreenRecorder.Image = global::ShareX.Properties.Resources.camcorder_image;
             this.tsmiScreenRecorder.Name = "tsmiScreenRecorder";
             this.tsmiScreenRecorder.Size = new System.Drawing.Size(181, 22);
-            this.tsmiScreenRecorder.Text = "Screen Recorder...";
+            this.tsmiScreenRecorder.Text = "Screen Recorder";
             this.tsmiScreenRecorder.Click += new System.EventHandler(this.tsmiScreenRecorderGIF_Click);
             // 
             // tsmiAutoCapture
@@ -598,7 +598,7 @@ namespace ShareX
             this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(138, 22);
             this.tsmiAbout.Text = "About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
@@ -608,7 +608,7 @@ namespace ShareX
             this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDonate.Size = new System.Drawing.Size(138, 22);
             this.tsmiDonate.Text = "Donate...";
             this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
@@ -616,7 +616,7 @@ namespace ShareX
             // 
             this.tsmiHelpDebug.Image = global::ShareX.Properties.Resources.bug;
             this.tsmiHelpDebug.Name = "tsmiHelpDebug";
-            this.tsmiHelpDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiHelpDebug.Size = new System.Drawing.Size(138, 22);
             this.tsmiHelpDebug.Text = "Debug log...";
             this.tsmiHelpDebug.Click += new System.EventHandler(this.tsmiHelpDebug_Click);
             // 
@@ -633,7 +633,7 @@ namespace ShareX
             this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDebug.Size = new System.Drawing.Size(138, 22);
             this.tsmiDebug.Text = "Debug";
             // 
             // tsmiTestImageUpload

@@ -24,29 +24,35 @@
 #endregion License Information (GPL v3)
 
 using ShareX;
+using System.IO;
 
 namespace HelpersLib
 {
     public class UploadInfoParser : NameParser
     {
-        public const string HTMLLink = "<a href=\"%url\">%url</a>";
-        public const string HTMLImage = "<img src=\"%url\"/>";
-        public const string HTMLLinkedImage = "<a href=\"%url\"><img src=\"%thumbnailurl\"/></a>";
-        public const string ForumLink = "[url]%url[/url]";
-        public const string ForumImage = "[img]%url[/img]";
-        public const string ForumLinkedImage = "[url=%url][img]%thumbnailurl[/img][/url]";
+        public const string HTMLLink = "<a href=\"$url\">$url</a>";
+        public const string HTMLImage = "<img src=\"$url\"/>";
+        public const string HTMLLinkedImage = "<a href=\"$url\"><img src=\"$thumbnailurl\"/></a>";
+        public const string ForumLink = "[url]$url[/url]";
+        public const string ForumImage = "[img]$url[/img]";
+        public const string ForumLinkedImage = "[url=$url][img]$thumbnailurl[/img][/url]";
 
         public string Parse(TaskInfo info, string pattern)
         {
-            pattern = base.Parse(pattern);
-
             if (info != null)
             {
-                pattern = pattern.Replace("%url", info.Result.URL);
-                pattern = pattern.Replace("%shorturl", info.Result.ShortenedURL);
-                pattern = pattern.Replace("%thumbnailurl", info.Result.ThumbnailURL);
-                pattern = pattern.Replace("%deletionurl", info.Result.DeletionURL);
-                pattern = pattern.Replace("%localpath", info.FilePath);
+                pattern = base.Parse(pattern);
+
+                pattern = pattern.Replace("$url", info.Result.URL);
+                pattern = pattern.Replace("$shorturl", info.Result.ShortenedURL);
+                pattern = pattern.Replace("$thumbnailurl", info.Result.ThumbnailURL);
+                pattern = pattern.Replace("$deletionurl", info.Result.DeletionURL);
+
+                pattern = pattern.Replace("$folderpath", Path.GetDirectoryName(info.FilePath));
+                pattern = pattern.Replace("$foldername", Path.GetFileName(Path.GetDirectoryName(info.FilePath)));
+                pattern = pattern.Replace("$filepath", info.FilePath);
+                pattern = pattern.Replace("$filename", info.FileName);
+                pattern = pattern.Replace("$filenamenoext", Path.GetFileNameWithoutExtension(info.FilePath));
             }
 
             return pattern;

@@ -280,7 +280,7 @@ namespace ShareX
                             tsmiCopyFolder.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
 
                             tsmiCopyCustomFormat.DropDownItems.Clear();
-                            foreach (ClipboardFormat cf in Program.Settings.ClipboardFormats)
+                            foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
                             {
                                 ToolStripMenuItem tsmiClipboardFormat = new ToolStripMenuItem(cf.Description);
                                 tsmiClipboardFormat.Tag = cf;
@@ -342,12 +342,12 @@ namespace ShareX
 
             UpdatePreviewSplitter();
 
-            if (Program.Settings.ClipboardFormats.Count == 0)
+            if (Program.Settings.ClipboardContentFormats.Count == 0)
             {
-                Program.Settings.ClipboardFormats.Add(new ClipboardFormat()
+                Program.Settings.ClipboardContentFormats.Add(new ClipboardFormat()
                 {
                     Description = "HTML linked image",
-                    Format = "<a href=\"%url\"><img src=\"%thumbnailurl\" alt=\"\" title\"\" /></a>"
+                    Format = "<a href=\"$url\"><img src=\"$thumbnailurl\" alt=\"\" title\"\" /></a>"
                 });
             }
 
