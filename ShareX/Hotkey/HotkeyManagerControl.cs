@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -53,13 +54,9 @@ namespace ShareX
         {
             flpHotkeys.Controls.Clear();
 
-            foreach (HotkeySetting setting in manager.Hotkeys)
+            foreach (HotkeySetting hotkeySetting in manager.Hotkeys)
             {
-                HotkeySelectionControl control = new HotkeySelectionControl(setting);
-                control.Margin = new Padding(0, 0, 0, 2);
-                control.SelectedChanged += control_SelectedChanged;
-                control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
-                flpHotkeys.Controls.Add(control);
+                AddHotkeySelectionControl(hotkeySetting);
             }
         }
 
@@ -94,16 +91,55 @@ namespace ShareX
             manager.UpdateHotkey(control.Setting);
         }
 
+        private HotkeySelectionControl AddHotkeySelectionControl(HotkeySetting hotkeySetting)
+        {
+            HotkeySelectionControl control = new HotkeySelectionControl(hotkeySetting);
+            control.Margin = new Padding(0, 0, 0, 2);
+            control.SelectedChanged += control_SelectedChanged;
+            control.HotkeyChanged += control_HotkeyChanged;
+            control.LabelDoubleClick += control_LabelDoubleClick;
+            flpHotkeys.Controls.Add(control);
+            return control;
+        }
+
+        private void Edit(HotkeySelectionControl selectionControl)
+        {
+            using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(selectionControl.Setting.TaskSettings))
+            {
+                if (taskSettingsForm.ShowDialog() == DialogResult.OK)
+                {
+                    selectionControl.UpdateDescription();
+                }
+            }
+        }
+
+        private void control_LabelDoubleClick(object sender, EventArgs e)
+        {
+            Edit((HotkeySelectionControl)sender);
+        }
+
+        private void EditSelected()
+        {
+            if (Selected != null)
+            {
+                Edit(Selected);
+            }
+        }
+
+        private void flpHotkeys_Layout(object sender, LayoutEventArgs e)
+        {
+            foreach (Control control in flpHotkeys.Controls)
+            {
+                control.ClientSize = new Size(flpHotkeys.ClientSize.Width, control.ClientSize.Height);
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             HotkeySetting hotkeySetting = new HotkeySetting();
             manager.Hotkeys.Add(hotkeySetting);
-            HotkeySelectionControl control = new HotkeySelectionControl(hotkeySetting);
-            control.Margin = new Padding(0, 0, 0, 2);
+            HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
             control.Selected = true;
-            control.SelectedChanged += control_SelectedChanged;
-            control.HotkeyChanged += new EventHandler(control_HotkeyChanged);
-            flpHotkeys.Controls.Add(control);
             Selected = control;
             UpdateCheckStates();
             control.Focus();
@@ -121,23 +157,24 @@ namespace ShareX
             }
         }
 
-        private void EditSelected()
-        {
-            if (Selected != null)
-            {
-                using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(Selected.Setting.TaskSettings))
-                {
-                    if (taskSettingsForm.ShowDialog() == DialogResult.OK)
-                    {
-                        Selected.UpdateDescription();
-                    }
-                }
-            }
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             EditSelected();
+        }
+
+        private void btnDuplicate_Click(object sender, EventArgs e)
+        {
+            if (Selected != null)
+            {
+                HotkeySetting hotkeySetting = new HotkeySetting();
+                hotkeySetting.TaskSettings = Selected.Setting.TaskSettings.Copy();
+                manager.Hotkeys.Add(hotkeySetting);
+                HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
+                control.Selected = true;
+                Selected = control;
+                UpdateCheckStates();
+                control.Focus();
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -145,14 +182,6 @@ namespace ShareX
             manager.ResetHotkeys();
             manager.RunHotkeys();
             AddControls();
-        }
-
-        private void flpHotkeys_Layout(object sender, LayoutEventArgs e)
-        {
-            foreach (Control control in flpHotkeys.Controls)
-            {
-                control.ClientSize = new Size(flpHotkeys.ClientSize.Width, control.ClientSize.Height);
-            }
         }
     }
 }

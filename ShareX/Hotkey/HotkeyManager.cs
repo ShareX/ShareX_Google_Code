@@ -71,13 +71,11 @@ namespace ShareX
         private void AddHotkey(HotkeySetting hotkeySetting, string tag)
         {
             hotkeySetting.Tag = tag;
-            hotkeySetting.UpdateMenuItemShortcut();
             hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), tag);
         }
 
         public HotkeyStatus UpdateHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeySetting.UpdateMenuItemShortcut();
             hotkeySetting.HotkeyStatus = hotkeyForm.ChangeHotkey(hotkeySetting.Tag, hotkeySetting.Hotkey, () => triggerAction(hotkeySetting));
             return hotkeySetting.HotkeyStatus;
         }
