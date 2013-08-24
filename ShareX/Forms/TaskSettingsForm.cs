@@ -57,7 +57,7 @@ namespace ShareX
             }
             else
             {
-                Text = Application.ProductName + " - " + TaskSettings.Description + " - workflow settings";
+                Text = Application.ProductName + " - Task settings for " + TaskSettings.Description;
                 tbDescription.Text = TaskSettings.Description;
                 cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
                 cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;

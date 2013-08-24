@@ -32,7 +32,7 @@
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.lblFolderPath = new System.Windows.Forms.Label();
-            this.lblFilterExample = new System.Windows.Forms.Label();
+            this.lblExample = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -69,19 +69,18 @@
             this.lblFolderPath.TabIndex = 7;
             this.lblFolderPath.Text = "Description:";
             // 
-            // lblFilterExample
+            // lblExample
             // 
-            this.lblFilterExample.AutoSize = true;
-            this.lblFilterExample.Location = new System.Drawing.Point(88, 60);
-            this.lblFilterExample.Name = "lblFilterExample";
-            this.lblFilterExample.Size = new System.Drawing.Size(302, 13);
-            this.lblFilterExample.TabIndex = 12;
-            this.lblFilterExample.Text = "Acceptable variables: %url %shorturl %thumbnailurl %deletionurl";
+            this.lblExample.Location = new System.Drawing.Point(88, 60);
+            this.lblExample.Name = "lblExample";
+            this.lblExample.Size = new System.Drawing.Size(302, 52);
+            this.lblExample.TabIndex = 12;
+            this.lblExample.Text = "Acceptable variables: %url %shorturl %thumbnailurl %deletionurl";
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(316, 88);
+            this.btnCancel.Location = new System.Drawing.Point(316, 120);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
             this.btnCancel.TabIndex = 15;
@@ -92,7 +91,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(228, 88);
+            this.btnOK.Location = new System.Drawing.Point(228, 120);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
             this.btnOK.TabIndex = 14;
@@ -104,10 +103,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 121);
+            this.ClientSize = new System.Drawing.Size(404, 153);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.lblFilterExample);
+            this.Controls.Add(this.lblExample);
             this.Controls.Add(this.txtFormat);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.lblFilter);
@@ -115,10 +114,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(420, 160);
+            this.MinimumSize = new System.Drawing.Size(420, 192);
             this.Name = "ClipboardFormatForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Clipboard format";
+            this.Text = "Clipboard conent format";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,7 +129,7 @@
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.Label lblFolderPath;
-        private System.Windows.Forms.Label lblFilterExample;
+        private System.Windows.Forms.Label lblExample;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
     }

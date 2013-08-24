@@ -45,6 +45,7 @@ namespace HelpersLib
             txtDescription.Text = cbf.Description ?? "";
             txtFormat.Text = cbf.Format ?? "";
             cmsFormatPattern = NameParser.CreateCodesMenu(txtFormat, ReplacementVariables.n);
+            lblExample.Text = ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

@@ -76,6 +76,7 @@
     <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ClipboardHelper.cs" />
     <Compile Include="ColorBgra.cs" />
+    <Compile Include="ComponentModelStrings.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />
     <Compile Include="Debug\DebugForm.cs">
