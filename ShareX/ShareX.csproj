@@ -415,6 +415,8 @@
     <None Include="Resources\keyboard--pencil.png" />
     <None Include="Resources\globe--pencil.png" />
     <None Include="Resources\application--pencil.png" />
+    <None Include="Resources\camcorder--pencil.png" />
+    <None Include="Resources\control-record-yellow.png" />
     <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
