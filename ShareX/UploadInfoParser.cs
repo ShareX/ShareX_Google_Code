@@ -53,6 +53,8 @@ namespace HelpersLib
                 pattern = pattern.Replace("$filepath", info.FilePath);
                 pattern = pattern.Replace("$filename", info.FileName);
                 pattern = pattern.Replace("$filenamenoext", Path.GetFileNameWithoutExtension(info.FilePath));
+
+                pattern = pattern.Replace("$result", info.Result.ToSummaryString());
             }
 
             return pattern;

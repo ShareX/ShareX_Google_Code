@@ -50,7 +50,6 @@ namespace UploadersLib.FileUploaders
             {
                 if (TransferData(stream, fs))
                 {
-                    result.LocalFilePath = filePath;
                     result.URL = account.GetUriPath(Path.GetFileName(fileName));
                 }
             }
