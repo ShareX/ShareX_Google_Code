@@ -104,7 +104,7 @@ namespace ShareX
         public int BufferSizePower = 5;
         public bool IfUploadFailRetryOnce = false;
 
-        public List<ClipboardFormat> ClipboardFormats = new List<ClipboardFormat>();
+        public List<ClipboardFormat> ClipboardContentFormats = new List<ClipboardFormat>();
 
         #endregion Upload / General
 

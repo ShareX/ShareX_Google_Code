@@ -252,6 +252,9 @@ namespace ShareX
 
         #endregion Upload Text
 
+        [Category("After capture / Clipboard"), DefaultValue("$url"), Description("Clipboard content format after uploading. Supported variables: %url, %shorturl, %thumbnailurl")]
+        public string ClipboardContentFormat { get; set; }
+
         public TaskSettingsAdvanced()
         {
             Helpers.ApplyDefaultPropertyValues(this);
