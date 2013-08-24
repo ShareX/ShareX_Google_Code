@@ -492,7 +492,16 @@ namespace ShareX
 
             if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
             {
-                string txt = new UploadInfoParser().Parse(Info, Info.TaskSettings.AdvancedSettings.ClipboardContentFormat);
+                string txt;
+
+                if (!string.IsNullOrEmpty(Info.TaskSettings.AdvancedSettings.ClipboardContentFormat))
+                {
+                    txt = new UploadInfoParser().Parse(Info, Info.TaskSettings.AdvancedSettings.ClipboardContentFormat);
+                }
+                else
+                {
+                    txt = Info.Result.ToString();
+                }
 
                 if (!string.IsNullOrEmpty(txt))
                 {

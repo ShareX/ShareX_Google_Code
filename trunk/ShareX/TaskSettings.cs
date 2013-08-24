@@ -252,7 +252,7 @@ namespace ShareX
 
         #endregion Upload Text
 
-        [Category("After capture / Clipboard"), DefaultValue("$url"), Description("Clipboard content format after uploading. Supported variables: %url, %shorturl, %thumbnailurl")]
+        [Category("After capture / Clipboard"), DefaultValue("$url"), Description("Clipboard content format after uploading. Supported variables: $url, $shorturl, $thumbnailurl, $deletionurl, $folderpath, $foldername, $filepath, $filename and other variables such as %y-%m-%d etc.")]
         public string ClipboardContentFormat { get; set; }
 
         public TaskSettingsAdvanced()

@@ -35,7 +35,6 @@ namespace UploadersLib.HelperClasses
         public string ThumbnailURL { get; set; }
         public string DeletionURL { get; set; }
         public string ShortenedURL { get; set; }
-        public string LocalFilePath { get; set; }
 
         private bool isSuccess;
         public bool IsSuccess
@@ -104,7 +103,6 @@ namespace UploadersLib.HelperClasses
             sb.AppendLine("Thumbnail URL: " + this.ThumbnailURL);
             sb.AppendLine("Shortened URL: " + this.ShortenedURL);
             sb.AppendLine("Deletion URL: " + this.DeletionURL);
-            sb.AppendLine("Local File Path: " + this.LocalFilePath);
             return sb.ToString();
         }
     }

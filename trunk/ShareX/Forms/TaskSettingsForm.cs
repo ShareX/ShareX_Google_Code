@@ -57,7 +57,7 @@ namespace ShareX
             }
             else
             {
-                Text = Application.ProductName + " - " + TaskSettings.Description + " - Workflow settings";
+                Text = Application.ProductName + " - " + TaskSettings.Description + " - workflow settings";
                 tbDescription.Text = TaskSettings.Description;
                 cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
                 cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;
@@ -154,13 +154,13 @@ namespace ShareX
             cbShapeIncludeControls.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls;
             cbShapeForceWindowCapture.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture;
 
-            // Capture / Screencast 
+            // Capture / Screencast
 
             nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
             cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
             nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
             nudDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
-            
+
             cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
             cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
             cbOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
