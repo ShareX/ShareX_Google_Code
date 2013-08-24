@@ -237,22 +237,22 @@ namespace ShareX
     {
         #region Interaction
 
-        [Category("Interaction"), DefaultValue(false), Description("Disable notifications.")]
+        [Category(ComponentModelStrings.Interaction), DefaultValue(false), Description(ComponentModelStrings.Interaction_DisableNotifications)]
         public bool DisableNotifications { get; set; }
 
         #endregion Interaction
 
         #region Upload Text
 
-        [Category("Upload Text"), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
-        public string TextFormat { get; set; }
-
-        [Category("Upload Text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
+        [Category(ComponentModelStrings.UploadText), DefaultValue("txt"), Description(ComponentModelStrings.UploadText_TextFileExtension)]
         public string TextFileExtension { get; set; }
+
+        [Category(ComponentModelStrings.UploadText), DefaultValue("text"), Description(ComponentModelStrings.UploadText_TextFormat)]
+        public string TextFormat { get; set; }
 
         #endregion Upload Text
 
-        [Category("After capture / Clipboard"), DefaultValue("$url"), Description("Clipboard content format after uploading. Supported variables: $url, $shorturl, $thumbnailurl, $deletionurl, $folderpath, $foldername, $filepath, $filename and other variables such as %y-%m-%d etc.")]
+        [Category(ComponentModelStrings.AfterCaptureClipboard), DefaultValue(""), Description(ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat)]
         public string ClipboardContentFormat { get; set; }
 
         public TaskSettingsAdvanced()
