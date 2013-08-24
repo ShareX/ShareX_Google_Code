@@ -44,9 +44,6 @@ namespace ShareX
         [XmlIgnore, JsonIgnore]
         public string Tag { get; set; }
 
-        [XmlIgnore, JsonIgnore]
-        public ToolStripMenuItem MenuItem { get; set; }
-
         public HotkeySetting()
         {
             TaskSettings = new TaskSettings();
@@ -60,14 +57,6 @@ namespace ShareX
             TaskSettings.Description = job.GetDescription();
             Hotkey = hotkey;
             HotkeyDefault = hotkey;
-        }
-
-        public void UpdateMenuItemShortcut()
-        {
-            if (MenuItem != null)
-            {
-                MenuItem.ShortcutKeyDisplayString = new KeyInfo(Hotkey).ToString();
-            }
         }
 
         public override string ToString()

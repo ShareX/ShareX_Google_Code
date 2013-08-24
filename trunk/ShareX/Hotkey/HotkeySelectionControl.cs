@@ -34,6 +34,7 @@ namespace ShareX
     {
         public event EventHandler HotkeyChanged;
         public event EventHandler SelectedChanged;
+        public event EventHandler LabelDoubleClick;
 
         public HotkeySetting Setting { get; set; }
 
@@ -107,7 +108,7 @@ namespace ShareX
         {
             if (HotkeyChanged != null)
             {
-                HotkeyChanged(this, null);
+                HotkeyChanged(this, EventArgs.Empty);
             }
         }
 
@@ -115,7 +116,15 @@ namespace ShareX
         {
             if (SelectedChanged != null)
             {
-                SelectedChanged(this, null);
+                SelectedChanged(this, EventArgs.Empty);
+            }
+        }
+
+        protected void OnLabelDoubleClick()
+        {
+            if (LabelDoubleClick != null)
+            {
+                LabelDoubleClick(this, EventArgs.Empty);
             }
         }
 
@@ -142,6 +151,14 @@ namespace ShareX
                 Selected = true;
                 OnSelectedChanged();
                 Focus();
+            }
+        }
+
+        private void lblHotkeyDescription_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                OnLabelDoubleClick();
             }
         }
     }
