@@ -121,24 +121,24 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="cmsAfterUpload.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>172, 17</value>
+    <value>160, 17</value>
   </metadata>
   <metadata name="cmsImageUploaders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>327, 17</value>
+    <value>299, 17</value>
   </metadata>
   <metadata name="cmsTextUploaders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>482, 17</value>
+    <value>462, 17</value>
   </metadata>
   <metadata name="cmsFileUploaders.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>637, 17</value>
+    <value>613, 17</value>
   </metadata>
   <metadata name="cmsURLShorteners.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>792, 17</value>
+    <value>760, 17</value>
   </metadata>
   <metadata name="cmsSocialNetworkingServices.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>947, 17</value>
+    <value>914, 17</value>
   </metadata>
   <metadata name="cmsTask.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1102, 17</value>
+    <value>17, 56</value>
   </metadata>
 </root>
