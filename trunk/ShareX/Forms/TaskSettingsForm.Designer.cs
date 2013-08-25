@@ -1454,9 +1454,9 @@
             this.cbCaptureMultipleShapes.AutoSize = true;
             this.cbCaptureMultipleShapes.Location = new System.Drawing.Point(16, 16);
             this.cbCaptureMultipleShapes.Name = "cbCaptureMultipleShapes";
-            this.cbCaptureMultipleShapes.Size = new System.Drawing.Size(138, 17);
+            this.cbCaptureMultipleShapes.Size = new System.Drawing.Size(190, 17);
             this.cbCaptureMultipleShapes.TabIndex = 3;
-            this.cbCaptureMultipleShapes.Text = "Capture multiple shapes";
+            this.cbCaptureMultipleShapes.Text = "Allow moving and resizing shape(s)";
             this.cbCaptureMultipleShapes.UseVisualStyleBackColor = true;
             this.cbCaptureMultipleShapes.CheckedChanged += new System.EventHandler(this.cbQuickCrop_CheckedChanged);
             // 
@@ -1488,9 +1488,9 @@
             this.cbDrawCheckerboard.AutoSize = true;
             this.cbDrawCheckerboard.Location = new System.Drawing.Point(16, 40);
             this.cbDrawCheckerboard.Name = "cbDrawCheckerboard";
-            this.cbDrawCheckerboard.Size = new System.Drawing.Size(287, 17);
+            this.cbDrawCheckerboard.Size = new System.Drawing.Size(290, 17);
             this.cbDrawCheckerboard.TabIndex = 2;
-            this.cbDrawCheckerboard.Text = "Draw checkerboard pattern replacing transparent areas";
+            this.cbDrawCheckerboard.Text = "Draw checkerboard pattern instead of transparent areas";
             this.cbDrawCheckerboard.UseVisualStyleBackColor = true;
             this.cbDrawCheckerboard.CheckedChanged += new System.EventHandler(this.cbDrawCheckerboard_CheckedChanged);
             // 
