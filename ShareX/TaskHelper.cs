@@ -294,7 +294,7 @@ namespace ShareX
             {
                 surface.AreaManager.WindowCaptureMode = true;
                 surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
-                surface.Config.CaptureMultipleShapes = false;
+                surface.Config.AllowMoveResize = false;
                 surface.Prepare();
                 surface.ShowDialog();
 

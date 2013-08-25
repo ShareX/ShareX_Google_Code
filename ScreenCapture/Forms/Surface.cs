@@ -144,7 +144,7 @@ namespace ScreenCapture
                     Close(SurfaceResult.Region);
                     break;
                 case Keys.Q:
-                    Config.CaptureMultipleShapes = !Config.CaptureMultipleShapes;
+                    Config.AllowMoveResize = !Config.AllowMoveResize;
                     break;
             }
         }
