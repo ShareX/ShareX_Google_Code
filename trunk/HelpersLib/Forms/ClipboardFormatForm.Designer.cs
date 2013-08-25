@@ -75,7 +75,6 @@
             this.lblExample.Name = "lblExample";
             this.lblExample.Size = new System.Drawing.Size(302, 52);
             this.lblExample.TabIndex = 12;
-            this.lblExample.Text = "Acceptable variables: %url %shorturl %thumbnailurl %deletionurl";
             // 
             // btnCancel
             // 
@@ -117,7 +116,7 @@
             this.MinimumSize = new System.Drawing.Size(420, 192);
             this.Name = "ClipboardFormatForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Clipboard conent format";
+            this.Text = "Clipboard content format";
             this.ResumeLayout(false);
             this.PerformLayout();
 

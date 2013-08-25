@@ -1,4 +1,12 @@
-﻿ShareX 8.0.0.463 - 2013-08-12
+﻿ShareX 8.1 r540 - 2013-08-25
+
+Redesigned main configuration with simplified settings
+Expanded task settings with more options to customize per hotkey
+Support custom formats for clipboard content 
+Improved screen recorder
+Automatic mode for proxy configuration
+
+ShareX 8.0 r463 - 2013-08-12
 
 Ability to create custom hotkeys with task settings
 Unlimited screen recorder support
