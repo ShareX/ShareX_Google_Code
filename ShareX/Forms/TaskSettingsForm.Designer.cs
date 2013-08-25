@@ -230,6 +230,7 @@
             this.btnAfterCapture.TabIndex = 2;
             this.btnAfterCapture.Text = "After capture...";
             this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterCapture.UseMnemonic = false;
             this.btnAfterCapture.UseVisualStyleBackColor = true;
             this.btnAfterCapture.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAfterCapture_MouseClick);
             // 
@@ -246,6 +247,7 @@
             this.btnAfterUpload.TabIndex = 3;
             this.btnAfterUpload.Text = "After upload...";
             this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterUpload.UseMnemonic = false;
             this.btnAfterUpload.UseVisualStyleBackColor = true;
             this.btnAfterUpload.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAfterUpload_MouseClick);
             // 
@@ -257,6 +259,7 @@
             this.btnImageUploaders.TabIndex = 4;
             this.btnImageUploaders.Text = "Image uploaders";
             this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImageUploaders.UseMnemonic = false;
             this.btnImageUploaders.UseVisualStyleBackColor = true;
             this.btnImageUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnImageUploaders_MouseClick);
             // 
@@ -268,6 +271,7 @@
             this.btnTextUploaders.TabIndex = 5;
             this.btnTextUploaders.Text = "Text uploaders";
             this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTextUploaders.UseMnemonic = false;
             this.btnTextUploaders.UseVisualStyleBackColor = true;
             this.btnTextUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnTextUploaders_MouseClick);
             // 
@@ -279,6 +283,7 @@
             this.btnFileUploaders.TabIndex = 6;
             this.btnFileUploaders.Text = "File uploaders";
             this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFileUploaders.UseMnemonic = false;
             this.btnFileUploaders.UseVisualStyleBackColor = true;
             this.btnFileUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnFileUploaders_MouseClick);
             // 
@@ -290,6 +295,7 @@
             this.btnURLShorteners.TabIndex = 7;
             this.btnURLShorteners.Text = "URL shorteners";
             this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnURLShorteners.UseMnemonic = false;
             this.btnURLShorteners.UseVisualStyleBackColor = true;
             this.btnURLShorteners.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnURLShorteners_MouseClick);
             // 
@@ -301,6 +307,7 @@
             this.btnSocialNetworkingServices.TabIndex = 8;
             this.btnSocialNetworkingServices.Text = "Social networking services";
             this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSocialNetworkingServices.UseMnemonic = false;
             this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
             this.btnSocialNetworkingServices.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSocialNetworkingServices_MouseClick);
             // 
@@ -332,7 +339,7 @@
             // cmsSocialNetworkingServices
             // 
             this.cmsSocialNetworkingServices.Name = "cmsAfterCapture";
-            this.cmsSocialNetworkingServices.Size = new System.Drawing.Size(61, 4);
+            this.cmsSocialNetworkingServices.Size = new System.Drawing.Size(153, 26);
             // 
             // cbUseDefaultAfterCaptureSettings
             // 
@@ -392,6 +399,7 @@
             this.btnTask.TabIndex = 1;
             this.btnTask.Text = "Task...";
             this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTask.UseMnemonic = false;
             this.btnTask.UseVisualStyleBackColor = true;
             this.btnTask.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnTask_MouseClick);
             // 
@@ -1011,7 +1019,7 @@
             this.tpEffects.Location = new System.Drawing.Point(4, 22);
             this.tpEffects.Name = "tpEffects";
             this.tpEffects.Padding = new System.Windows.Forms.Padding(3);
-            this.tpEffects.Size = new System.Drawing.Size(506, 321);
+            this.tpEffects.Size = new System.Drawing.Size(506, 301);
             this.tpEffects.TabIndex = 2;
             this.tpEffects.Text = "Effects";
             this.tpEffects.UseVisualStyleBackColor = true;
@@ -1204,7 +1212,7 @@
             this.tpCapture.Location = new System.Drawing.Point(4, 22);
             this.tpCapture.Name = "tpCapture";
             this.tpCapture.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCapture.Size = new System.Drawing.Size(520, 380);
+            this.tpCapture.Size = new System.Drawing.Size(520, 360);
             this.tpCapture.TabIndex = 1;
             this.tpCapture.Text = "Capture";
             this.tpCapture.UseVisualStyleBackColor = true;
@@ -1218,7 +1226,7 @@
             this.tcCapture.Location = new System.Drawing.Point(3, 30);
             this.tcCapture.Name = "tcCapture";
             this.tcCapture.SelectedIndex = 0;
-            this.tcCapture.Size = new System.Drawing.Size(514, 347);
+            this.tcCapture.Size = new System.Drawing.Size(514, 327);
             this.tcCapture.TabIndex = 1;
             // 
             // tpCaptureGeneral
@@ -1235,7 +1243,7 @@
             this.tpCaptureGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureGeneral.Name = "tpCaptureGeneral";
             this.tpCaptureGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCaptureGeneral.Size = new System.Drawing.Size(506, 321);
+            this.tpCaptureGeneral.Size = new System.Drawing.Size(506, 301);
             this.tpCaptureGeneral.TabIndex = 0;
             this.tpCaptureGeneral.Text = "General";
             this.tpCaptureGeneral.UseVisualStyleBackColor = true;
@@ -1733,7 +1741,7 @@
             this.tpActions.Location = new System.Drawing.Point(4, 22);
             this.tpActions.Name = "tpActions";
             this.tpActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tpActions.Size = new System.Drawing.Size(520, 380);
+            this.tpActions.Size = new System.Drawing.Size(520, 360);
             this.tpActions.TabIndex = 3;
             this.tpActions.Text = "Actions";
             this.tpActions.UseVisualStyleBackColor = true;
@@ -1748,7 +1756,7 @@
             this.pActions.Location = new System.Drawing.Point(3, 30);
             this.pActions.Margin = new System.Windows.Forms.Padding(0);
             this.pActions.Name = "pActions";
-            this.pActions.Size = new System.Drawing.Size(514, 347);
+            this.pActions.Size = new System.Drawing.Size(514, 327);
             this.pActions.TabIndex = 9;
             // 
             // btnActionsAdd
@@ -1835,7 +1843,7 @@
             this.tpUpload.Location = new System.Drawing.Point(4, 22);
             this.tpUpload.Name = "tpUpload";
             this.tpUpload.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUpload.Size = new System.Drawing.Size(520, 380);
+            this.tpUpload.Size = new System.Drawing.Size(520, 360);
             this.tpUpload.TabIndex = 4;
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
@@ -1848,7 +1856,7 @@
             this.tcUpload.Location = new System.Drawing.Point(3, 30);
             this.tcUpload.Name = "tcUpload";
             this.tcUpload.SelectedIndex = 0;
-            this.tcUpload.Size = new System.Drawing.Size(514, 347);
+            this.tcUpload.Size = new System.Drawing.Size(514, 327);
             this.tcUpload.TabIndex = 1;
             // 
             // tpUploadNamePattern
@@ -1864,7 +1872,7 @@
             this.tpUploadNamePattern.Location = new System.Drawing.Point(4, 22);
             this.tpUploadNamePattern.Name = "tpUploadNamePattern";
             this.tpUploadNamePattern.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUploadNamePattern.Size = new System.Drawing.Size(506, 321);
+            this.tpUploadNamePattern.Size = new System.Drawing.Size(506, 301);
             this.tpUploadNamePattern.TabIndex = 1;
             this.tpUploadNamePattern.Text = "Name pattern";
             this.tpUploadNamePattern.UseVisualStyleBackColor = true;
@@ -2022,7 +2030,7 @@
             this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tpAdvanced.Name = "tpAdvanced";
             this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(520, 380);
+            this.tpAdvanced.Size = new System.Drawing.Size(520, 360);
             this.tpAdvanced.TabIndex = 6;
             this.tpAdvanced.Text = "Advanced";
             this.tpAdvanced.UseVisualStyleBackColor = true;
@@ -2032,7 +2040,7 @@
             this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgTaskSettings.Location = new System.Drawing.Point(3, 30);
             this.pgTaskSettings.Name = "pgTaskSettings";
-            this.pgTaskSettings.Size = new System.Drawing.Size(514, 347);
+            this.pgTaskSettings.Size = new System.Drawing.Size(514, 327);
             this.pgTaskSettings.TabIndex = 0;
             this.pgTaskSettings.ToolbarVisible = false;
             // 

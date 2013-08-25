@@ -305,7 +305,7 @@ namespace ShareX
 
         private void AddEnumItems<T>(Action<T> selectedEnum, params ToolStripDropDown[] parents)
         {
-            string[] enums = Helpers.GetEnumDescriptions<T>();
+            string[] enums = Helpers.GetEnumDescriptions<T>().Select(x => x.Replace("&", "&&")).ToArray();
 
             foreach (ToolStripDropDown parent in parents)
             {
@@ -348,7 +348,7 @@ namespace ShareX
 
         private void AddMultiEnumItems<T>(Action<T> selectedEnum, params ToolStripDropDown[] parents)
         {
-            string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Skip(1).Select(x => x.GetDescription()).ToArray();
+            string[] enums = Enum.GetValues(typeof(T)).Cast<Enum>().Skip(1).Select(x => x.GetDescription().Replace("&", "&&")).ToArray();
 
             foreach (ToolStripDropDown parent in parents)
             {
