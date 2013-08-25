@@ -36,9 +36,9 @@
             // btnSetHotkey
             // 
             this.btnSetHotkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSetHotkey.Location = new System.Drawing.Point(288, 0);
+            this.btnSetHotkey.Location = new System.Drawing.Point(259, 0);
             this.btnSetHotkey.Name = "btnSetHotkey";
-            this.btnSetHotkey.Size = new System.Drawing.Size(195, 23);
+            this.btnSetHotkey.Size = new System.Drawing.Size(192, 23);
             this.btnSetHotkey.TabIndex = 1;
             this.btnSetHotkey.Text = "Ctrl + Shift + Alt + Print Screen";
             this.btnSetHotkey.UseVisualStyleBackColor = true;
@@ -46,9 +46,10 @@
             // 
             // lblIsHotkeyActive
             // 
+            this.lblIsHotkeyActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIsHotkeyActive.BackColor = System.Drawing.Color.IndianRed;
             this.lblIsHotkeyActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblIsHotkeyActive.Location = new System.Drawing.Point(0, 1);
+            this.lblIsHotkeyActive.Location = new System.Drawing.Point(456, 1);
             this.lblIsHotkeyActive.Name = "lblIsHotkeyActive";
             this.lblIsHotkeyActive.Size = new System.Drawing.Size(24, 21);
             this.lblIsHotkeyActive.TabIndex = 2;
@@ -58,12 +59,13 @@
             this.lblHotkeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHotkeyDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblHotkeyDescription.Location = new System.Drawing.Point(32, 1);
+            this.lblHotkeyDescription.Location = new System.Drawing.Point(0, 1);
             this.lblHotkeyDescription.Name = "lblHotkeyDescription";
-            this.lblHotkeyDescription.Size = new System.Drawing.Size(248, 21);
+            this.lblHotkeyDescription.Size = new System.Drawing.Size(254, 21);
             this.lblHotkeyDescription.TabIndex = 0;
             this.lblHotkeyDescription.Text = "Description";
             this.lblHotkeyDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHotkeyDescription.UseMnemonic = false;
             this.lblHotkeyDescription.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblHotkeyDescription_MouseClick);
             this.lblHotkeyDescription.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblHotkeyDescription_MouseDoubleClick);
             this.lblHotkeyDescription.MouseEnter += new System.EventHandler(this.lblHotkeyDescription_MouseEnter);
@@ -78,7 +80,7 @@
             this.Controls.Add(this.lblHotkeyDescription);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "HotkeySelectionControl";
-            this.Size = new System.Drawing.Size(483, 23);
+            this.Size = new System.Drawing.Size(480, 23);
             this.ResumeLayout(false);
 
         }

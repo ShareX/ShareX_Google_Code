@@ -62,6 +62,7 @@
             // 
             // btnRemove
             // 
+            this.btnRemove.Enabled = false;
             this.btnRemove.Location = new System.Drawing.Point(152, 8);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(72, 23);
@@ -72,6 +73,7 @@
             // 
             // btnEdit
             // 
+            this.btnEdit.Enabled = false;
             this.btnEdit.Location = new System.Drawing.Point(80, 8);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(72, 23);
@@ -93,6 +95,7 @@
             // 
             // btnDuplicate
             // 
+            this.btnDuplicate.Enabled = false;
             this.btnDuplicate.Location = new System.Drawing.Point(224, 8);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(72, 23);
