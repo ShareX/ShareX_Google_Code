@@ -129,7 +129,7 @@
             this.lblFixedShapeSizeHeight = new System.Windows.Forms.Label();
             this.cbDrawBorder = new System.Windows.Forms.CheckBox();
             this.lblFixedShapeSizeWidth = new System.Windows.Forms.Label();
-            this.cbQuickCrop = new System.Windows.Forms.CheckBox();
+            this.cbCaptureMultipleShapes = new System.Windows.Forms.CheckBox();
             this.nudFixedShapeSizeHeight = new System.Windows.Forms.NumericUpDown();
             this.cbDrawCheckerboard = new System.Windows.Forms.CheckBox();
             this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
@@ -1375,7 +1375,7 @@
             this.tpCaptureShape.Controls.Add(this.lblFixedShapeSizeHeight);
             this.tpCaptureShape.Controls.Add(this.cbDrawBorder);
             this.tpCaptureShape.Controls.Add(this.lblFixedShapeSizeWidth);
-            this.tpCaptureShape.Controls.Add(this.cbQuickCrop);
+            this.tpCaptureShape.Controls.Add(this.cbCaptureMultipleShapes);
             this.tpCaptureShape.Controls.Add(this.nudFixedShapeSizeHeight);
             this.tpCaptureShape.Controls.Add(this.cbDrawCheckerboard);
             this.tpCaptureShape.Controls.Add(this.nudFixedShapeSizeWidth);
@@ -1432,7 +1432,7 @@
             // cbDrawBorder
             // 
             this.cbDrawBorder.AutoSize = true;
-            this.cbDrawBorder.Location = new System.Drawing.Point(16, 16);
+            this.cbDrawBorder.Location = new System.Drawing.Point(16, 64);
             this.cbDrawBorder.Name = "cbDrawBorder";
             this.cbDrawBorder.Size = new System.Drawing.Size(170, 17);
             this.cbDrawBorder.TabIndex = 1;
@@ -1449,17 +1449,16 @@
             this.lblFixedShapeSizeWidth.TabIndex = 5;
             this.lblFixedShapeSizeWidth.Text = "Width:";
             // 
-            // cbQuickCrop
+            // cbCaptureMultipleShapes
             // 
-            this.cbQuickCrop.AutoSize = true;
-            this.cbQuickCrop.Location = new System.Drawing.Point(16, 64);
-            this.cbQuickCrop.Name = "cbQuickCrop";
-            this.cbQuickCrop.Size = new System.Drawing.Size(455, 17);
-            this.cbQuickCrop.TabIndex = 3;
-            this.cbQuickCrop.Text = "Complete capture as soon as the mouse button is released, except when capturing p" +
-    "olygon";
-            this.cbQuickCrop.UseVisualStyleBackColor = true;
-            this.cbQuickCrop.CheckedChanged += new System.EventHandler(this.cbQuickCrop_CheckedChanged);
+            this.cbCaptureMultipleShapes.AutoSize = true;
+            this.cbCaptureMultipleShapes.Location = new System.Drawing.Point(16, 16);
+            this.cbCaptureMultipleShapes.Name = "cbCaptureMultipleShapes";
+            this.cbCaptureMultipleShapes.Size = new System.Drawing.Size(138, 17);
+            this.cbCaptureMultipleShapes.TabIndex = 3;
+            this.cbCaptureMultipleShapes.Text = "Capture multiple shapes";
+            this.cbCaptureMultipleShapes.UseVisualStyleBackColor = true;
+            this.cbCaptureMultipleShapes.CheckedChanged += new System.EventHandler(this.cbQuickCrop_CheckedChanged);
             // 
             // nudFixedShapeSizeHeight
             // 
@@ -2241,7 +2240,7 @@
         private System.Windows.Forms.Label lblFixedShapeSizeHeight;
         private System.Windows.Forms.CheckBox cbDrawBorder;
         private System.Windows.Forms.Label lblFixedShapeSizeWidth;
-        private System.Windows.Forms.CheckBox cbQuickCrop;
+        private System.Windows.Forms.CheckBox cbCaptureMultipleShapes;
         private System.Windows.Forms.NumericUpDown nudFixedShapeSizeHeight;
         private System.Windows.Forms.CheckBox cbDrawCheckerboard;
         private System.Windows.Forms.NumericUpDown nudFixedShapeSizeWidth;
