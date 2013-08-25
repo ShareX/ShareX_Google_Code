@@ -92,6 +92,7 @@
             this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
+            this.btnClipboardFormatEdit = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -647,6 +648,7 @@
             // 
             // gbClipboardFormats
             // 
+            this.gbClipboardFormats.Controls.Add(this.btnClipboardFormatEdit);
             this.gbClipboardFormats.Controls.Add(this.btnClipboardFormatRemove);
             this.gbClipboardFormats.Controls.Add(this.btnClipboardFormatAdd);
             this.gbClipboardFormats.Controls.Add(this.lvClipboardFormats);
@@ -659,9 +661,9 @@
             // 
             // btnClipboardFormatRemove
             // 
-            this.btnClipboardFormatRemove.Location = new System.Drawing.Point(88, 16);
+            this.btnClipboardFormatRemove.Location = new System.Drawing.Point(168, 16);
             this.btnClipboardFormatRemove.Name = "btnClipboardFormatRemove";
-            this.btnClipboardFormatRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnClipboardFormatRemove.Size = new System.Drawing.Size(72, 23);
             this.btnClipboardFormatRemove.TabIndex = 14;
             this.btnClipboardFormatRemove.Text = "Remove";
             this.btnClipboardFormatRemove.UseVisualStyleBackColor = true;
@@ -671,7 +673,7 @@
             // 
             this.btnClipboardFormatAdd.Location = new System.Drawing.Point(8, 16);
             this.btnClipboardFormatAdd.Name = "btnClipboardFormatAdd";
-            this.btnClipboardFormatAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnClipboardFormatAdd.Size = new System.Drawing.Size(72, 23);
             this.btnClipboardFormatAdd.TabIndex = 13;
             this.btnClipboardFormatAdd.Text = "Add...";
             this.btnClipboardFormatAdd.UseVisualStyleBackColor = true;
@@ -785,6 +787,16 @@
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
             // 
+            // btnClipboardFormatEdit
+            // 
+            this.btnClipboardFormatEdit.Location = new System.Drawing.Point(88, 16);
+            this.btnClipboardFormatEdit.Name = "btnClipboardFormatEdit";
+            this.btnClipboardFormatEdit.Size = new System.Drawing.Size(72, 23);
+            this.btnClipboardFormatEdit.TabIndex = 15;
+            this.btnClipboardFormatEdit.Text = "Edit...";
+            this.btnClipboardFormatEdit.UseVisualStyleBackColor = true;
+            this.btnClipboardFormatEdit.Click += new System.EventHandler(this.btnClipboardFormatEdit_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -887,5 +899,6 @@
         private HelpersLib.MyListView lvClipboardFormats;
         private System.Windows.Forms.ColumnHeader chDescription;
         private System.Windows.Forms.ColumnHeader chFormat;
+        private System.Windows.Forms.Button btnClipboardFormatEdit;
     }
 }
