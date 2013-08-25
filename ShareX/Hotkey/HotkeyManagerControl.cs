@@ -106,10 +106,8 @@ namespace ShareX
         {
             using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(selectionControl.Setting.TaskSettings))
             {
-                if (taskSettingsForm.ShowDialog() == DialogResult.OK)
-                {
-                    selectionControl.UpdateDescription();
-                }
+                taskSettingsForm.ShowDialog();
+                selectionControl.UpdateDescription();
             }
         }
 
