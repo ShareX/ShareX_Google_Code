@@ -407,9 +407,9 @@ namespace ShareX
             lvClipboardFormats.Items.Add(lvi);
         }
 
-        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ClipboardFormatsEditSelected()
         {
-            if (e.Button == MouseButtons.Left && lvClipboardFormats.SelectedItems.Count > 0)
+            if (lvClipboardFormats.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
                 ClipboardFormat cf = lvi.Tag as ClipboardFormat;
@@ -425,6 +425,14 @@ namespace ShareX
             }
         }
 
+        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ClipboardFormatsEditSelected();
+            }
+        }
+
         private void btnAddClipboardFormat_Click(object sender, EventArgs e)
         {
             using (ClipboardFormatForm form = new ClipboardFormatForm())
@@ -436,6 +444,11 @@ namespace ShareX
                     AddClipboardFormat(cf);
                 }
             }
+        }
+
+        private void btnClipboardFormatEdit_Click(object sender, EventArgs e)
+        {
+            ClipboardFormatsEditSelected();
         }
 
         private void btnClipboardFormatRemove_Click(object sender, EventArgs e)
