@@ -35,7 +35,7 @@ namespace ShareX
             InitializeComponent();
             Icon = Resources.ShareXIcon;
 
-            if (Program.IsHotkeysAllowed && Program.MainForm.HotkeyManager != null)
+            if (Program.MainForm.HotkeyManager != null)
             {
                 hmHotkeys.PrepareHotkeys(Program.MainForm.HotkeyManager);
             }

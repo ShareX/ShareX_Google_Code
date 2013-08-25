@@ -50,7 +50,7 @@
             this.MinimumSize = new System.Drawing.Size(550, 300);
             this.Name = "HotkeySettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ShareX - Workflows";
+            this.Text = "ShareX - Hotkey settings";
             this.ResumeLayout(false);
 
         }

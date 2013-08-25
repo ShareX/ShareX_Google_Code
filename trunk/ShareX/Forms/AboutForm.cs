@@ -91,20 +91,6 @@ namespace ShareX
             Helpers.LoadBrowserAsync(Links.URL_MIKE);
         }
 
-        private void btnShowLoadedAssemblies_Click(object sender, EventArgs e)
-        {
-            string directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            StringBuilder sb = new StringBuilder();
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                if (assembly.Location.StartsWith(directoryPath, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    sb.AppendLine(assembly.ManifestModule.FullyQualifiedName);
-                }
-            }
-            MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         #region Animation
 
         private const int w = 200;
