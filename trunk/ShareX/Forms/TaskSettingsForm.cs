@@ -147,7 +147,7 @@ namespace ShareX
             if (TaskSettings.CaptureSettings.SurfaceOptions == null) TaskSettings.CaptureSettings.SurfaceOptions = new SurfaceOptions();
             cbDrawBorder.Checked = TaskSettings.CaptureSettings.SurfaceOptions.DrawBorder;
             cbDrawCheckerboard.Checked = TaskSettings.CaptureSettings.SurfaceOptions.DrawChecker;
-            cbQuickCrop.Checked = TaskSettings.CaptureSettings.SurfaceOptions.QuickCrop;
+            cbCaptureMultipleShapes.Checked = TaskSettings.CaptureSettings.SurfaceOptions.CaptureMultipleShapes;
             cbFixedShapeSize.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize;
             nudFixedShapeSizeWidth.Value = TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Width;
             nudFixedShapeSizeHeight.Value = TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Height;
@@ -662,7 +662,7 @@ namespace ShareX
 
         private void cbQuickCrop_CheckedChanged(object sender, EventArgs e)
         {
-            TaskSettings.CaptureSettings.SurfaceOptions.QuickCrop = cbQuickCrop.Checked;
+            TaskSettings.CaptureSettings.SurfaceOptions.CaptureMultipleShapes = cbCaptureMultipleShapes.Checked;
         }
 
         private void nudFixedShapeSizeHeight_ValueChanged(object sender, EventArgs e)

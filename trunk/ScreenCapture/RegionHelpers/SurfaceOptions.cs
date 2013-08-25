@@ -45,8 +45,8 @@ namespace ScreenCapture
         [DefaultValue(false), Description("Draw checkerboard pattern replacing transparent areas.")]
         public bool DrawChecker { get; set; }
 
-        [DefaultValue(false), Description("Complete capture as soon as the mouse button is released, except when capturing polygon.")]
-        public bool QuickCrop { get; set; }
+        [DefaultValue(true), Description("Complete capture as soon as the mouse button is released, except when capturing polygon.")]
+        public bool CaptureMultipleShapes { get; set; }
 
         [DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
         public bool ForceWindowCapture { get; set; }
@@ -74,7 +74,7 @@ namespace ScreenCapture
 
             DrawBorder = false;
             DrawChecker = false;
-            QuickCrop = false;
+            CaptureMultipleShapes = true;
 
             MinMoveSpeed = 1;
             MaxMoveSpeed = 5;

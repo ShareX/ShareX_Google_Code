@@ -144,7 +144,7 @@ namespace ScreenCapture
                     Close(SurfaceResult.Region);
                     break;
                 case Keys.Q:
-                    Config.QuickCrop = !Config.QuickCrop;
+                    Config.CaptureMultipleShapes = !Config.CaptureMultipleShapes;
                     break;
             }
         }
