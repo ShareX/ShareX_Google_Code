@@ -54,18 +54,16 @@ namespace ShareX
         private void AfterLoadJobs()
         {
             LoadSettings();
+            InitHotkeys();
 
-            if (Program.IsHotkeysAllowed)
-            {
-                InitHotkeys();
-            }
-
+#if !DEBUG
             if (Program.Settings.AutoCheckUpdate)
             {
                 Thread updateThread = new Thread(CheckUpdate);
                 updateThread.IsBackground = true;
                 updateThread.Start();
             }
+#endif
 
             IsReady = true;
 
@@ -95,8 +93,6 @@ namespace ShareX
             AddEnumItems<FileDestination>(x => Program.DefaultTaskSettings.FileDestination = x, tsmiFileUploaders, tsmiTrayFileUploaders);
             AddEnumItems<UrlShortenerType>(x => Program.DefaultTaskSettings.URLShortenerDestination = x, tsmiURLShorteners, tsmiTrayURLShorteners);
             AddEnumItems<SocialNetworkingService>(x => Program.DefaultTaskSettings.SocialNetworkingServiceDestination = x, tsmiSocialServices, tsmiTraySocialServices);
-
-            tsmiDebug.Visible = Program.IsDebug;
 
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
@@ -301,7 +297,7 @@ namespace ShareX
                             }
                         }
 
-                        if ((uim.SelectedItems[0].Info.Result.IsError || Program.IsDebug) && !string.IsNullOrEmpty(uim.SelectedItems[0].Info.Result.Response))
+                        if (uim.SelectedItems[0].Info.Result.IsError && !string.IsNullOrEmpty(uim.SelectedItems[0].Info.Result.Response))
                         {
                             tsmiShowResponse.Visible = true;
                         }
@@ -607,16 +603,10 @@ namespace ShareX
             UpdateDestinationStates();
         }
 
-        private void tsddbUploadersConfig_Click(object sender, EventArgs e)
+        private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            if (Program.UploadersConfig == null)
-            {
-                Program.UploaderSettingsResetEvent.WaitOne();
-            }
-
-            UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys());
-            uploadersConfigForm.ShowDialog();
-            uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
+            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
+            dlg.Show();
         }
 
         private void tsmiTestImageUpload_Click(object sender, EventArgs e)
@@ -660,6 +650,47 @@ namespace ShareX
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
         {
             OpenAutoCapture();
+        }
+
+        private void tsbApplicationSettings_Click(object sender, EventArgs e)
+        {
+            using (SettingsForm settingsForm = new SettingsForm())
+            {
+                settingsForm.ShowDialog();
+            }
+
+            UploadManager.UpdateProxySettings();
+            Program.Settings.SaveAsync();
+        }
+
+        private void tsbTaskSettings_Click(object sender, EventArgs e)
+        {
+            using (TaskSettingsForm taskSettingsForm = new TaskSettingsForm(Program.DefaultTaskSettings, true))
+            {
+                taskSettingsForm.ShowDialog();
+            }
+        }
+
+        private void tsbHotkeySettings_Click(object sender, EventArgs e)
+        {
+            using (HotkeySettingsForm hotkeySettingsForm = new HotkeySettingsForm())
+            {
+                hotkeySettingsForm.ShowDialog();
+            }
+        }
+
+        private void tsbDestinationSettings_Click(object sender, EventArgs e)
+        {
+            if (Program.UploadersConfig == null)
+            {
+                Program.UploaderSettingsResetEvent.WaitOne();
+            }
+
+            using (UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys()))
+            {
+                uploadersConfigForm.ShowDialog();
+                uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
+            }
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
@@ -714,32 +745,6 @@ namespace ShareX
         private void tsbAbout_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
-        }
-
-        private void tsmiDefaultWorkflowSettings_Click(object sender, EventArgs e)
-        {
-            using (TaskSettingsForm dlg = new TaskSettingsForm(Program.DefaultTaskSettings, true))
-            {
-                dlg.ShowDialog();
-            }
-        }
-
-        private void tsmiWorkflows_Click(object sender, EventArgs e)
-        {
-            new HotkeySettingsForm().Show();
-        }
-
-        private void tsmiApplicationSettings_Click(object sender, EventArgs e)
-        {
-            new SettingsForm().ShowDialog();
-            UploadManager.UpdateProxySettings();
-            Program.Settings.SaveAsync();
-        }
-
-        private void tsmiHelpDebug_Click(object sender, EventArgs e)
-        {
-            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
-            dlg.Show();
         }
 
         private void tsbDonate_Click(object sender, EventArgs e)

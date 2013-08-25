@@ -24,6 +24,10 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib.Properties;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -39,6 +43,20 @@ namespace HelpersLib
             txtDebugLog.Text = MyLogger.Messages.ToString();
             txtDebugLog.SelectionStart = txtDebugLog.TextLength;
             txtDebugLog.ScrollToCaret();
+        }
+
+        private void btnLoadedAssemblies_Click(object sender, EventArgs e)
+        {
+            string directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            StringBuilder sb = new StringBuilder();
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (assembly.Location.StartsWith(directoryPath, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    sb.AppendLine(assembly.ManifestModule.Name);
+                }
+            }
+            MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

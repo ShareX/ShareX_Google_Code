@@ -29,30 +29,44 @@
         private void InitializeComponent()
         {
             this.txtDebugLog = new System.Windows.Forms.TextBox();
+            this.btnLoadedAssemblies = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtDebugLog
             // 
-            this.txtDebugLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDebugLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDebugLog.Location = new System.Drawing.Point(0, 0);
             this.txtDebugLog.Multiline = true;
             this.txtDebugLog.Name = "txtDebugLog";
             this.txtDebugLog.ReadOnly = true;
             this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebugLog.Size = new System.Drawing.Size(536, 513);
+            this.txtDebugLog.Size = new System.Drawing.Size(536, 483);
             this.txtDebugLog.TabIndex = 1;
             this.txtDebugLog.WordWrap = false;
+            // 
+            // btnLoadedAssemblies
+            // 
+            this.btnLoadedAssemblies.Location = new System.Drawing.Point(8, 488);
+            this.btnLoadedAssemblies.Name = "btnLoadedAssemblies";
+            this.btnLoadedAssemblies.Size = new System.Drawing.Size(120, 23);
+            this.btnLoadedAssemblies.TabIndex = 2;
+            this.btnLoadedAssemblies.Text = "Loaded assemblies";
+            this.btnLoadedAssemblies.UseVisualStyleBackColor = true;
+            this.btnLoadedAssemblies.Click += new System.EventHandler(this.btnLoadedAssemblies_Click);
             // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 513);
+            this.ClientSize = new System.Drawing.Size(536, 517);
+            this.Controls.Add(this.btnLoadedAssemblies);
             this.Controls.Add(this.txtDebugLog);
             this.MinimumSize = new System.Drawing.Size(552, 552);
             this.Name = "DebugForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Debug Log";
+            this.Text = "Debug log";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -61,5 +75,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtDebugLog;
+        private System.Windows.Forms.Button btnLoadedAssemblies;
     }
 }

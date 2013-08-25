@@ -199,8 +199,6 @@ namespace ShareX
         public static bool IsMultiInstance { get; private set; }
         public static bool IsPortable { get; private set; }
         public static bool IsSilentRun { get; private set; }
-        public static bool IsDebug { get; private set; }
-        public static bool IsHotkeysAllowed { get; private set; }
         public static bool IsSandbox { get; private set; }
         public static Stopwatch StartTimer { get; private set; }
         public static Logger MyLogger { get; private set; }
@@ -277,14 +275,6 @@ namespace ShareX
                         Directory.CreateDirectory(PersonalPath);
                     }
                 }
-
-#if DEBUG
-                IsDebug = true;
-#else
-                IsDebug = CLIHelper.CheckArgs(args, "debug", "d");
-#endif
-
-                IsHotkeysAllowed = !CLIHelper.CheckArgs(args, "nohotkeys");
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
