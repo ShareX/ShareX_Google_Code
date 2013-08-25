@@ -60,6 +60,11 @@ namespace ShareX
             }
         }
 
+        private void UpdateButtons()
+        {
+            btnEdit.Enabled = btnRemove.Enabled = btnDuplicate.Enabled = Selected != null;
+        }
+
         private HotkeySelectionControl FindSelectionControl(HotkeySetting hotkeySetting)
         {
             foreach (Control control in flpHotkeys.Controls)
@@ -74,6 +79,7 @@ namespace ShareX
         private void control_SelectedChanged(object sender, EventArgs e)
         {
             Selected = (HotkeySelectionControl)sender;
+            UpdateButtons();
             UpdateCheckStates();
         }
 
@@ -139,6 +145,7 @@ namespace ShareX
             HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
             control.Selected = true;
             Selected = control;
+            UpdateButtons();
             UpdateCheckStates();
             control.Focus();
             EditSelected();
@@ -152,6 +159,7 @@ namespace ShareX
                 HotkeySelectionControl hsc = FindSelectionControl(Selected.Setting);
                 if (hsc != null) flpHotkeys.Controls.Remove(hsc);
                 Selected = null;
+                UpdateButtons();
             }
         }
 
