@@ -24,10 +24,12 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture;
 using ShareX.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using UploadersLib;
@@ -86,7 +88,8 @@ namespace ShareX
             cbProxyType.SelectedIndex = (int)Program.Settings.ProxySettings.ProxyType;
             UpdateProxyControls();
 
-            // Upload / General
+            // Upload
+            cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
             nudUploadLimit.Value = Program.Settings.UploadLimit;
 
             for (int i = 0; i < MaxBufferSizePower; i++)
@@ -95,15 +98,16 @@ namespace ShareX
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);
-            cbIfUploadFailRetryOnce.Checked = Program.Settings.IfUploadFailRetryOnce;
 
-            // Upload / Clipboard formats
             foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
             {
                 AddClipboardFormat(cf);
             }
 
-            // Upload / Watch folder
+            // Print
+            cbDontShowPrintSettingDialog.Checked = Program.Settings.DontShowPrintSettingsDialog;
+
+            // Watch folders
             cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
 
             if (Program.Settings.WatchFolderList == null)
@@ -332,72 +336,22 @@ namespace ShareX
 
         #endregion Proxy
 
-        #region Upload / Watch folder
+        #region Upload
 
-        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        private void cbIfUploadFailRetryOnce_CheckedChanged(object sender, EventArgs e)
         {
-            using (WatchFolderForm form = new WatchFolderForm())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
-                    Program.Settings.WatchFolderList.Add(watchFolder);
-                    AddWatchFolder(watchFolder);
-
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                }
-            }
+            Program.Settings.IfUploadFailRetryOnce = cbIfUploadFailRetryOnce.Checked;
         }
 
-        private void AddWatchFolder(WatchFolder watchFolder)
+        private void nudUploadLimit_ValueChanged(object sender, EventArgs e)
         {
-            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
-            lvi.Tag = watchFolder;
-            lvi.SubItems.Add(watchFolder.Filter ?? "");
-            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
-            lvWatchFolderList.Items.Add(lvi);
+            Program.Settings.UploadLimit = (int)nudUploadLimit.Value;
         }
 
-        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        private void cbBufferSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvWatchFolderList.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
-                WatchFolder watchFolder = lvi.Tag as WatchFolder;
-
-                Program.Settings.WatchFolderList.Remove(watchFolder);
-                lvWatchFolderList.Items.Remove(lvi);
-                watchFolder.Dispose();
-            }
+            Program.Settings.BufferSizePower = cbBufferSize.SelectedIndex;
         }
-
-        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded)
-            {
-                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
-
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
-                {
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                    else
-                    {
-                        watchFolder.Dispose();
-                    }
-                }
-            }
-        }
-
-        #endregion Upload / Watch folder
-
-        #region Upload / Clipboard
 
         private void AddClipboardFormat(ClipboardFormat cf)
         {
@@ -462,6 +416,89 @@ namespace ShareX
             }
         }
 
-        #endregion Upload / Clipboard
+        #endregion Upload
+
+        #region Print
+
+        private void cbDontShowPrintSettingDialog_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.DontShowPrintSettingsDialog = cbDontShowPrintSettingDialog.Checked;
+        }
+
+        private void btnShowImagePrintSettings_Click(object sender, EventArgs e)
+        {
+            using (Image testImage = Screenshot.CaptureActiveMonitor())
+            using (PrintForm printForm = new PrintForm(testImage, Program.Settings.PrintSettings, true))
+            {
+                printForm.ShowDialog();
+            }
+        }
+
+        #endregion Print
+
+        #region Watch folders
+
+        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        {
+            using (WatchFolderForm form = new WatchFolderForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    WatchFolder watchFolder = form.WatchFolder;
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
+                    Program.Settings.WatchFolderList.Add(watchFolder);
+                    AddWatchFolder(watchFolder);
+
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                }
+            }
+        }
+
+        private void AddWatchFolder(WatchFolder watchFolder)
+        {
+            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
+            lvi.Tag = watchFolder;
+            lvi.SubItems.Add(watchFolder.Filter ?? "");
+            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
+            lvWatchFolderList.Items.Add(lvi);
+        }
+
+        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        {
+            if (lvWatchFolderList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
+                WatchFolder watchFolder = lvi.Tag as WatchFolder;
+
+                Program.Settings.WatchFolderList.Remove(watchFolder);
+                lvWatchFolderList.Items.Remove(lvi);
+                watchFolder.Dispose();
+            }
+        }
+
+        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
+
+                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+                {
+                    if (Program.Settings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                    else
+                    {
+                        watchFolder.Dispose();
+                    }
+                }
+            }
+        }
+
+        #endregion Watch folders
     }
 }

@@ -78,12 +78,16 @@
             this.lblBufferSize = new System.Windows.Forms.Label();
             this.cbBufferSize = new System.Windows.Forms.ComboBox();
             this.gbClipboardFormats = new System.Windows.Forms.GroupBox();
+            this.btnClipboardFormatEdit = new System.Windows.Forms.Button();
             this.btnClipboardFormatRemove = new System.Windows.Forms.Button();
             this.btnClipboardFormatAdd = new System.Windows.Forms.Button();
             this.lvClipboardFormats = new HelpersLib.MyListView();
             this.chDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chFormat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbIfUploadFailRetryOnce = new System.Windows.Forms.CheckBox();
+            this.tpPrint = new System.Windows.Forms.TabPage();
+            this.cbDontShowPrintSettingDialog = new System.Windows.Forms.CheckBox();
+            this.btnShowImagePrintSettings = new System.Windows.Forms.Button();
             this.tpWatchFolders = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
@@ -92,7 +96,6 @@
             this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
-            this.btnClipboardFormatEdit = new System.Windows.Forms.Button();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -102,6 +105,7 @@
             this.gbBandwidth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.gbClipboardFormats.SuspendLayout();
+            this.tpPrint.SuspendLayout();
             this.tpWatchFolders.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,6 +126,7 @@
             this.tcSettings.Controls.Add(this.tpPaths);
             this.tcSettings.Controls.Add(this.tpProxy);
             this.tcSettings.Controls.Add(this.tpUpload);
+            this.tcSettings.Controls.Add(this.tpPrint);
             this.tcSettings.Controls.Add(this.tpWatchFolders);
             this.tcSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcSettings.Location = new System.Drawing.Point(3, 3);
@@ -585,7 +590,7 @@
             this.gbBandwidth.Controls.Add(this.lblUploadLimitHint);
             this.gbBandwidth.Controls.Add(this.lblBufferSize);
             this.gbBandwidth.Controls.Add(this.cbBufferSize);
-            this.gbBandwidth.Location = new System.Drawing.Point(8, 32);
+            this.gbBandwidth.Location = new System.Drawing.Point(16, 40);
             this.gbBandwidth.Name = "gbBandwidth";
             this.gbBandwidth.Size = new System.Drawing.Size(488, 88);
             this.gbBandwidth.TabIndex = 14;
@@ -618,6 +623,7 @@
             0,
             0,
             0});
+            this.nudUploadLimit.ValueChanged += new System.EventHandler(this.nudUploadLimit_ValueChanged);
             // 
             // lblUploadLimitHint
             // 
@@ -645,6 +651,7 @@
             this.cbBufferSize.Name = "cbBufferSize";
             this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
             this.cbBufferSize.TabIndex = 10;
+            this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
             // 
             // gbClipboardFormats
             // 
@@ -652,12 +659,22 @@
             this.gbClipboardFormats.Controls.Add(this.btnClipboardFormatRemove);
             this.gbClipboardFormats.Controls.Add(this.btnClipboardFormatAdd);
             this.gbClipboardFormats.Controls.Add(this.lvClipboardFormats);
-            this.gbClipboardFormats.Location = new System.Drawing.Point(8, 128);
+            this.gbClipboardFormats.Location = new System.Drawing.Point(16, 136);
             this.gbClipboardFormats.Name = "gbClipboardFormats";
             this.gbClipboardFormats.Size = new System.Drawing.Size(488, 160);
             this.gbClipboardFormats.TabIndex = 13;
             this.gbClipboardFormats.TabStop = false;
             this.gbClipboardFormats.Text = "Clipboard Formats";
+            // 
+            // btnClipboardFormatEdit
+            // 
+            this.btnClipboardFormatEdit.Location = new System.Drawing.Point(88, 16);
+            this.btnClipboardFormatEdit.Name = "btnClipboardFormatEdit";
+            this.btnClipboardFormatEdit.Size = new System.Drawing.Size(72, 23);
+            this.btnClipboardFormatEdit.TabIndex = 15;
+            this.btnClipboardFormatEdit.Text = "Edit...";
+            this.btnClipboardFormatEdit.UseVisualStyleBackColor = true;
+            this.btnClipboardFormatEdit.Click += new System.EventHandler(this.btnClipboardFormatEdit_Click);
             // 
             // btnClipboardFormatRemove
             // 
@@ -706,12 +723,46 @@
             // cbIfUploadFailRetryOnce
             // 
             this.cbIfUploadFailRetryOnce.AutoSize = true;
-            this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(8, 8);
+            this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 16);
             this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
             this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(223, 17);
             this.cbIfUploadFailRetryOnce.TabIndex = 11;
             this.cbIfUploadFailRetryOnce.Text = "If upload fails then retry upload once more";
             this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
+            this.cbIfUploadFailRetryOnce.CheckedChanged += new System.EventHandler(this.cbIfUploadFailRetryOnce_CheckedChanged);
+            // 
+            // tpPrint
+            // 
+            this.tpPrint.Controls.Add(this.cbDontShowPrintSettingDialog);
+            this.tpPrint.Controls.Add(this.btnShowImagePrintSettings);
+            this.tpPrint.Location = new System.Drawing.Point(4, 22);
+            this.tpPrint.Name = "tpPrint";
+            this.tpPrint.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPrint.Size = new System.Drawing.Size(522, 308);
+            this.tpPrint.TabIndex = 11;
+            this.tpPrint.Text = "Print";
+            this.tpPrint.UseVisualStyleBackColor = true;
+            // 
+            // cbDontShowPrintSettingDialog
+            // 
+            this.cbDontShowPrintSettingDialog.AutoSize = true;
+            this.cbDontShowPrintSettingDialog.Location = new System.Drawing.Point(16, 16);
+            this.cbDontShowPrintSettingDialog.Name = "cbDontShowPrintSettingDialog";
+            this.cbDontShowPrintSettingDialog.Size = new System.Drawing.Size(172, 17);
+            this.cbDontShowPrintSettingDialog.TabIndex = 1;
+            this.cbDontShowPrintSettingDialog.Text = "Don\'t show print settings dialog";
+            this.cbDontShowPrintSettingDialog.UseVisualStyleBackColor = true;
+            this.cbDontShowPrintSettingDialog.CheckedChanged += new System.EventHandler(this.cbDontShowPrintSettingDialog_CheckedChanged);
+            // 
+            // btnShowImagePrintSettings
+            // 
+            this.btnShowImagePrintSettings.Location = new System.Drawing.Point(16, 40);
+            this.btnShowImagePrintSettings.Name = "btnShowImagePrintSettings";
+            this.btnShowImagePrintSettings.Size = new System.Drawing.Size(168, 23);
+            this.btnShowImagePrintSettings.TabIndex = 0;
+            this.btnShowImagePrintSettings.Text = "Show image print settings...";
+            this.btnShowImagePrintSettings.UseVisualStyleBackColor = true;
+            this.btnShowImagePrintSettings.Click += new System.EventHandler(this.btnShowImagePrintSettings_Click);
             // 
             // tpWatchFolders
             // 
@@ -730,7 +781,7 @@
             // cbWatchFolderEnabled
             // 
             this.cbWatchFolderEnabled.AutoSize = true;
-            this.cbWatchFolderEnabled.Location = new System.Drawing.Point(8, 8);
+            this.cbWatchFolderEnabled.Location = new System.Drawing.Point(16, 16);
             this.cbWatchFolderEnabled.Name = "cbWatchFolderEnabled";
             this.cbWatchFolderEnabled.Size = new System.Drawing.Size(266, 17);
             this.cbWatchFolderEnabled.TabIndex = 12;
@@ -745,9 +796,9 @@
             this.chWatchFolderFilter,
             this.chWatchFolderIncludeSubdirectories});
             this.lvWatchFolderList.FullRowSelect = true;
-            this.lvWatchFolderList.Location = new System.Drawing.Point(8, 64);
+            this.lvWatchFolderList.Location = new System.Drawing.Point(16, 72);
             this.lvWatchFolderList.Name = "lvWatchFolderList";
-            this.lvWatchFolderList.Size = new System.Drawing.Size(504, 208);
+            this.lvWatchFolderList.Size = new System.Drawing.Size(496, 208);
             this.lvWatchFolderList.TabIndex = 15;
             this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
             this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
@@ -769,7 +820,7 @@
             // 
             // btnWatchFolderRemove
             // 
-            this.btnWatchFolderRemove.Location = new System.Drawing.Point(88, 32);
+            this.btnWatchFolderRemove.Location = new System.Drawing.Point(96, 40);
             this.btnWatchFolderRemove.Name = "btnWatchFolderRemove";
             this.btnWatchFolderRemove.Size = new System.Drawing.Size(75, 23);
             this.btnWatchFolderRemove.TabIndex = 14;
@@ -779,23 +830,13 @@
             // 
             // btnWatchFolderAdd
             // 
-            this.btnWatchFolderAdd.Location = new System.Drawing.Point(8, 32);
+            this.btnWatchFolderAdd.Location = new System.Drawing.Point(16, 40);
             this.btnWatchFolderAdd.Name = "btnWatchFolderAdd";
             this.btnWatchFolderAdd.Size = new System.Drawing.Size(75, 23);
             this.btnWatchFolderAdd.TabIndex = 13;
-            this.btnWatchFolderAdd.Text = "Add";
+            this.btnWatchFolderAdd.Text = "Add...";
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
-            // 
-            // btnClipboardFormatEdit
-            // 
-            this.btnClipboardFormatEdit.Location = new System.Drawing.Point(88, 16);
-            this.btnClipboardFormatEdit.Name = "btnClipboardFormatEdit";
-            this.btnClipboardFormatEdit.Size = new System.Drawing.Size(72, 23);
-            this.btnClipboardFormatEdit.TabIndex = 15;
-            this.btnClipboardFormatEdit.Text = "Edit...";
-            this.btnClipboardFormatEdit.UseVisualStyleBackColor = true;
-            this.btnClipboardFormatEdit.Click += new System.EventHandler(this.btnClipboardFormatEdit_Click);
             // 
             // SettingsForm
             // 
@@ -827,6 +868,8 @@
             this.gbBandwidth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).EndInit();
             this.gbClipboardFormats.ResumeLayout(false);
+            this.tpPrint.ResumeLayout(false);
+            this.tpPrint.PerformLayout();
             this.tpWatchFolders.ResumeLayout(false);
             this.tpWatchFolders.PerformLayout();
             this.ResumeLayout(false);
@@ -900,5 +943,8 @@
         private System.Windows.Forms.ColumnHeader chDescription;
         private System.Windows.Forms.ColumnHeader chFormat;
         private System.Windows.Forms.Button btnClipboardFormatEdit;
+        private System.Windows.Forms.TabPage tpPrint;
+        private System.Windows.Forms.CheckBox cbDontShowPrintSettingDialog;
+        private System.Windows.Forms.Button btnShowImagePrintSettings;
     }
 }
