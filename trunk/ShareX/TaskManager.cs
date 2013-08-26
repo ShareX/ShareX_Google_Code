@@ -289,7 +289,14 @@ namespace ShareX
 
                                 if (!info.TaskSettings.AdvancedSettings.DisableNotifications)
                                 {
-                                    TaskHelper.ShowResultNotifications(result);
+                                    string balloonTipText = result;
+
+                                    if (!string.IsNullOrEmpty(info.TaskSettings.AdvancedSettings.BalloonTipContentFormat))
+                                    {
+                                        balloonTipText = new UploadInfoParser().Parse(info, info.TaskSettings.AdvancedSettings.BalloonTipContentFormat);
+                                    }
+
+                                    TaskHelper.ShowResultNotifications(balloonTipText);
                                 }
                             }
                         }

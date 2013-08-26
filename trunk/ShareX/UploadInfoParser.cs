@@ -39,22 +39,26 @@ namespace HelpersLib
 
         public string Parse(TaskInfo info, string pattern)
         {
-            if (info != null)
+            if (info != null && info.Result != null && !string.IsNullOrEmpty(pattern))
             {
                 pattern = base.Parse(pattern);
 
-                pattern = pattern.Replace("$url", info.Result.URL);
-                pattern = pattern.Replace("$shorturl", info.Result.ShortenedURL);
-                pattern = pattern.Replace("$thumbnailurl", info.Result.ThumbnailURL);
-                pattern = pattern.Replace("$deletionurl", info.Result.DeletionURL);
+                pattern = pattern.Replace("$result", info.Result.ToString());
+                pattern = pattern.Replace("$url", info.Result.URL ?? "");
+                pattern = pattern.Replace("$shorturl", info.Result.ShortenedURL ?? "");
+                pattern = pattern.Replace("$thumbnailurl", info.Result.ThumbnailURL ?? "");
+                pattern = pattern.Replace("$deletionurl", info.Result.DeletionURL ?? "");
 
-                pattern = pattern.Replace("$folderpath", Path.GetDirectoryName(info.FilePath));
-                pattern = pattern.Replace("$foldername", Path.GetFileName(Path.GetDirectoryName(info.FilePath)));
-                pattern = pattern.Replace("$filepath", info.FilePath);
-                pattern = pattern.Replace("$filename", info.FileName);
-                pattern = pattern.Replace("$filenamenoext", Path.GetFileNameWithoutExtension(info.FilePath));
+                if (!string.IsNullOrEmpty(info.FilePath))
+                {
+                    pattern = pattern.Replace("$filepath", info.FilePath);
+                    pattern = pattern.Replace("$filename", Path.GetFileName(info.FilePath));
+                    pattern = pattern.Replace("$filenamenoext", Path.GetFileNameWithoutExtension(info.FilePath));
+                    pattern = pattern.Replace("$folderpath", Path.GetDirectoryName(info.FilePath));
+                    pattern = pattern.Replace("$foldername", Path.GetFileName(Path.GetDirectoryName(info.FilePath)));
+                }
 
-                pattern = pattern.Replace("$result", info.Result.ToSummaryString());
+                pattern = pattern.Replace("$uploadtime", ((int)info.UploadDuration.TotalMilliseconds).ToString());
             }
 
             return pattern;

@@ -252,8 +252,12 @@ namespace ShareX
 
         #endregion Upload Text
 
-        [Category(ComponentModelStrings.AfterCaptureClipboard), DefaultValue(""), Description(ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat)]
+        [Category(ComponentModelStrings.CategoryAfterCapture), DefaultValue(""),
+        Description(ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat)]
         public string ClipboardContentFormat { get; set; }
+
+        [Category(ComponentModelStrings.CategoryAfterUpload), DefaultValue(""), Description("")]
+        public string BalloonTipContentFormat { get; set; }
 
         public TaskSettingsAdvanced()
         {
