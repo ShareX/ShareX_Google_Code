@@ -32,8 +32,9 @@ namespace HelpersLib
 {
     public static class ComponentModelStrings
     {
-        public const string AfterCaptureClipboard = "After capture / clipboard";
-        public const string AfterCaptureClipboard_ClipboardContentFormat = "Clipboard content format after uploading. Supported variables: $url, $shorturl, $thumbnailurl, $deletionurl, $folderpath, $foldername, $filepath, $filename and other variables such as %y-%m-%d etc.";
+        public const string CategoryAfterCapture = "After capture";
+        public const string CategoryAfterUpload = "After upload";
+        public const string AfterCaptureClipboard_ClipboardContentFormat = "Clipboard content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.";
         public const string Interaction = "Interaction";
         public const string Interaction_DisableNotifications = "Disable notifications";
         public const string UploadText = "Upload text";
