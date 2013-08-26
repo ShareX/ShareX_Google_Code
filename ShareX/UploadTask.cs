@@ -353,7 +353,19 @@ namespace ShareX
 
                 if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
                 {
-                    new PrintForm(tempImage, new PrintSettings()).ShowDialog();
+                    if (Program.Settings.DontShowPrintSettingsDialog)
+                    {
+                        PrintHelper printHelper = new PrintHelper(tempImage);
+                        printHelper.Settings = Program.Settings.PrintSettings;
+                        printHelper.Print();
+                    }
+                    else
+                    {
+                        using (PrintForm printForm = new PrintForm(tempImage, Program.Settings.PrintSettings))
+                        {
+                            printForm.ShowDialog();
+                        }
+                    }
                 }
 
                 if (Info.TaskSettings.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog,

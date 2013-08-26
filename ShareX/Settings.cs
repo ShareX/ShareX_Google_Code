@@ -32,20 +32,18 @@ namespace ShareX
 {
     public class Settings : SettingsBase<Settings>
     {
+        public TaskSettings DefaultTaskSettings = new TaskSettings();
+        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+
+        public string FileUploadDefaultDirectory = "";
+        public bool ShowUploadWarning = true; // First time upload warning
+        public bool ShowMultiUploadWarning = true; // More than 10 files upload warning
+
         #region Main Form
 
         public bool ShowMenu = true;
         public bool IsPreviewCollapsed = true;
         public int PreviewSplitterDistance = 0;
-        public string FileUploadDefaultDirectory = "";
-        public bool ShowUploadWarning = true; // First time upload warning
-        public bool ShowMultiUploadWarning = true; // More than 10 files upload warning
-
-        public WindowState HistoryWindowState = new WindowState();
-        public WindowState ImageHistoryWindowState = new WindowState();
-        public int ImageHistoryMaxItemCount = 100;
-        public int ImageHistoryViewMode = 3;
-        public Size ImageHistoryThumbnailSize = new Size(100, 100);
 
         #endregion Main Form
 
@@ -75,20 +73,46 @@ namespace ShareX
 
         #endregion Paths
 
-        #region Hotkeys
-
-        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
-        public TaskSettings DefaultTaskSettings = new TaskSettings();
-
-        #endregion Hotkeys
-
         #region Proxy
 
         public ProxyInfo ProxySettings = new ProxyInfo();
 
         #endregion Proxy
 
+        #region Upload
+
+        public bool IfUploadFailRetryOnce = false;
+        public int UploadLimit = 5;
+        public int BufferSizePower = 5;
+        public List<ClipboardFormat> ClipboardContentFormats = new List<ClipboardFormat>();
+
+        #endregion Upload
+
+        #region Print
+
+        public bool DontShowPrintSettingsDialog = false;
+        public PrintSettings PrintSettings = new PrintSettings();
+
+        #endregion Print
+
+        #region Watch folders
+
+        public bool WatchFolderEnabled = false;
+        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+
+        #endregion Watch folders
+
         #endregion Settings Form
+
+        #region History Form
+
+        public WindowState HistoryWindowState = new WindowState();
+        public WindowState ImageHistoryWindowState = new WindowState();
+        public int ImageHistoryMaxItemCount = 100;
+        public int ImageHistoryViewMode = 3;
+        public Size ImageHistoryThumbnailSize = new Size(100, 100);
+
+        #endregion History Form
 
         #region AutoCapture Form
 
@@ -97,22 +121,5 @@ namespace ShareX
         public bool AutoCaptureWaitUpload = true;
 
         #endregion AutoCapture Form
-
-        #region Upload / General
-
-        public int UploadLimit = 5;
-        public int BufferSizePower = 5;
-        public bool IfUploadFailRetryOnce = false;
-
-        public List<ClipboardFormat> ClipboardContentFormats = new List<ClipboardFormat>();
-
-        #endregion Upload / General
-
-        #region Upload / Watch folder
-
-        public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
-
-        #endregion Upload / Watch folder
     }
 }

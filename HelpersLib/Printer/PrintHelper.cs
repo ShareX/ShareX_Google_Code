@@ -30,8 +30,6 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public enum PrintType { Image, Text }
-
     public class PrintHelper
     {
         public PrintType PrintType { get; private set; }
@@ -41,7 +39,11 @@ namespace HelpersLib
 
         public bool Printable
         {
-            get { return (PrintType == PrintType.Image && Image != null) || (PrintType == PrintType.Text && !string.IsNullOrEmpty(Text) && Settings.TextFont != null); }
+            get
+            {
+                return Settings != null && ((PrintType == PrintType.Image && Image != null) ||
+                    (PrintType == PrintType.Text && !string.IsNullOrEmpty(Text) && Settings.TextFont != null));
+            }
         }
 
         private PrintDocument printDocument;

@@ -34,11 +34,12 @@ namespace HelpersLib
         private PrintHelper printHelper;
         private PrintSettings printSettings;
 
-        public PrintForm(Image img, PrintSettings settings)
+        public PrintForm(Image img, PrintSettings settings, bool previewOnly = false)
         {
             InitializeComponent();
             printHelper = new PrintHelper(img);
             printHelper.Settings = printSettings = settings;
+            btnPrint.Enabled = !previewOnly;
             LoadSettings();
         }
 
@@ -49,7 +50,6 @@ namespace HelpersLib
             cbAutoScale.Checked = printSettings.AutoScaleImage;
             cbAllowEnlarge.Checked = printSettings.AllowEnlargeImage;
             cbCenterImage.Checked = printSettings.CenterImage;
-
             cbAllowEnlarge.Enabled = printSettings.AutoScaleImage;
             cbCenterImage.Enabled = printSettings.AutoScaleImage;
         }
@@ -85,7 +85,6 @@ namespace HelpersLib
         private void cbAutoScale_CheckedChanged(object sender, EventArgs e)
         {
             printSettings.AutoScaleImage = cbAutoScale.Checked;
-
             cbAllowEnlarge.Enabled = printSettings.AutoScaleImage;
             cbCenterImage.Enabled = printSettings.AutoScaleImage;
         }

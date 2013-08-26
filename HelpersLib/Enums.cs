@@ -228,4 +228,9 @@ namespace HelpersLib
     {
         Registered, Failed, NotConfigured
     }
+
+    public enum PrintType
+    {
+        Image, Text
+    }
 }

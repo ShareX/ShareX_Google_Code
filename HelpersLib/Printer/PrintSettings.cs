@@ -39,7 +39,7 @@ namespace HelpersLib
 
         public PrintSettings()
         {
-            Margin = 10;
+            Margin = 5;
             AutoRotateImage = true;
             AutoScaleImage = true;
             AllowEnlargeImage = false;

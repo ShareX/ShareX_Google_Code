@@ -159,6 +159,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "PrintForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Print options";
             ((System.ComponentModel.ISupportInitialize)(this.nudMargin)).EndInit();
             this.ResumeLayout(false);
