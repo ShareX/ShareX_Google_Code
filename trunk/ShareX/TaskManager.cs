@@ -296,7 +296,16 @@ namespace ShareX
                                         balloonTipText = new UploadInfoParser().Parse(info, info.TaskSettings.AdvancedSettings.BalloonTipContentFormat);
                                     }
 
-                                    TaskHelper.ShowResultNotifications(balloonTipText);
+                                    if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
+                                    {
+                                        Program.MainForm.niTray.Tag = result;
+                                        Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", balloonTipText, ToolTipIcon.Info);
+                                    }
+
+                                    if (Program.Settings.PlaySoundAfterUpload)
+                                    {
+                                        SystemSounds.Exclamation.Play();
+                                    }
                                 }
                             }
                         }
