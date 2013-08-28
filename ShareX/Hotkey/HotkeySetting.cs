@@ -36,6 +36,14 @@ namespace ShareX
 
         public TaskSettings TaskSettings { get; set; }
 
+        public KeyInfo HotkeyInfo
+        {
+            get
+            {
+                return new KeyInfo(Hotkey);
+            }
+        }
+
         [JsonIgnore]
         public HotkeyStatus HotkeyStatus { get; set; }
 
@@ -59,7 +67,7 @@ namespace ShareX
 
         public override string ToString()
         {
-            return new KeyInfo(Hotkey).ToString();
+            return HotkeyInfo.ToString();
         }
     }
 }

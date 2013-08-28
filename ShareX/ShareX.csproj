@@ -143,12 +143,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Hotkey\HotkeyInfo.cs" />
-    <Compile Include="Hotkey\HotkeyInputForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Hotkey\HotkeyInputForm.Designer.cs">
-      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Hotkey\HotkeyManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,9 +206,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadTestForm.resx">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Hotkey\HotkeyInputForm.resx">
-      <DependentUpon>HotkeyInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hotkey\HotkeyManagerControl.resx">
       <DependentUpon>HotkeyManagerControl.cs</DependentUpon>

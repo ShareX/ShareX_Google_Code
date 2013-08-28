@@ -40,5 +40,10 @@ namespace ShareX
                 hmHotkeys.PrepareHotkeys(Program.HotkeyManager);
             }
         }
+
+        private void HotkeySettingsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.MainForm.IgnoreHotkeys = false;
+        }
     }
 }

@@ -46,7 +46,7 @@
             this.flpHotkeys.Location = new System.Drawing.Point(8, 35);
             this.flpHotkeys.Name = "flpHotkeys";
             this.flpHotkeys.Size = new System.Drawing.Size(481, 309);
-            this.flpHotkeys.TabIndex = 0;
+            this.flpHotkeys.TabIndex = 5;
             this.flpHotkeys.WrapContents = false;
             this.flpHotkeys.Layout += new System.Windows.Forms.LayoutEventHandler(this.flpHotkeys_Layout);
             // 
@@ -66,7 +66,7 @@
             this.btnRemove.Location = new System.Drawing.Point(152, 8);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(72, 23);
-            this.btnRemove.TabIndex = 1;
+            this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -77,7 +77,7 @@
             this.btnEdit.Location = new System.Drawing.Point(80, 8);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(72, 23);
-            this.btnEdit.TabIndex = 2;
+            this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Edit...";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -88,7 +88,7 @@
             this.btnReset.Location = new System.Drawing.Point(345, 8);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(144, 23);
-            this.btnReset.TabIndex = 3;
+            this.btnReset.TabIndex = 4;
             this.btnReset.Text = "Restore default hotkeys";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -99,7 +99,7 @@
             this.btnDuplicate.Location = new System.Drawing.Point(224, 8);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(72, 23);
-            this.btnDuplicate.TabIndex = 4;
+            this.btnDuplicate.TabIndex = 3;
             this.btnDuplicate.Text = "Duplicate";
             this.btnDuplicate.UseVisualStyleBackColor = true;
             this.btnDuplicate.Click += new System.EventHandler(this.btnDuplicate_Click);
