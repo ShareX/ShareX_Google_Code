@@ -66,6 +66,7 @@ namespace ShareX
         {
             SelectedKey = key;
             KeyDefault = keyDefault;
+            btnReset.Visible = keyDefault != Keys.None;
         }
 
         private void AddKeys()

@@ -70,7 +70,7 @@ namespace ShareX
                 return HotkeyStatus.Failed;
             }
 
-            string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + (int)hotkey;
+            string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + tag;
 
             ushort id = NativeMethods.GlobalAddAtom(atomName);
 

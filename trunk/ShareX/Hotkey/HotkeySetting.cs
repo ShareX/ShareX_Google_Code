@@ -38,16 +38,17 @@ namespace ShareX
 
         public TaskSettings TaskSettings { get; set; }
 
-        [XmlIgnore, JsonIgnore]
+        [JsonIgnore]
         public HotkeyStatus HotkeyStatus { get; set; }
 
-        [XmlIgnore, JsonIgnore]
-        public string Tag { get; set; }
+        [JsonIgnore]
+        public string UniqueID { get; private set; }
 
         public HotkeySetting()
         {
             TaskSettings = new TaskSettings();
             HotkeyStatus = HotkeyStatus.NotConfigured;
+            UniqueID = Helpers.GetUniqueID();
         }
 
         public HotkeySetting(HotkeyType job, Keys hotkey = Keys.None)
