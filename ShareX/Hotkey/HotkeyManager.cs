@@ -114,15 +114,7 @@ namespace ShareX
                 new HotkeySetting(HotkeyType.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
                 new HotkeySetting(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
                 new HotkeySetting(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.RoundedRectangleRegion),
-                new HotkeySetting(HotkeyType.EllipseRegion),
-                new HotkeySetting(HotkeyType.TriangleRegion),
-                new HotkeySetting(HotkeyType.DiamondRegion),
-                new HotkeySetting(HotkeyType.PolygonRegion),
-                new HotkeySetting(HotkeyType.FreeHandRegion),
-                new HotkeySetting(HotkeyType.LastRegion),
-                new HotkeySetting(HotkeyType.ScreenRecorder),
-                new HotkeySetting(HotkeyType.AutoCapture)
+                new HotkeySetting(HotkeyType.ScreenRecorder, Keys.Shift | Keys.F11)
             });
         }
     }
