@@ -51,6 +51,7 @@
             this.Name = "HotkeySettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Hotkey settings";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HotkeySettingsForm_FormClosed);
             this.ResumeLayout(false);
 
         }

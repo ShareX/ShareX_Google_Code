@@ -60,48 +60,139 @@ namespace ShareX
             }
         }
 
+        public bool Editing { get; private set; }
+
         public HotkeySelectionControl(HotkeySetting setting)
         {
             InitializeComponent();
             Setting = setting;
-            lblHotkeyDescription.Text = setting.TaskSettings.Description;
-            btnSetHotkey.Text = new KeyInfo(Setting.Hotkey).ToString();
+            UpdateDescription();
+            UpdateHotkeyText();
             UpdateHotkeyStatus();
         }
 
-        private void btnSetHotkey_Click(object sender, EventArgs e)
+        public void UpdateDescription()
         {
-            using (HotkeyInputForm inputForm = new HotkeyInputForm(Setting.Hotkey))
-            {
-                if (inputForm.ShowDialog() == DialogResult.OK)
-                {
-                    Setting.Hotkey = inputForm.SelectedKey;
-                    btnSetHotkey.Text = new KeyInfo(Setting.Hotkey).ToString();
-                    OnHotkeyChanged();
-                    UpdateHotkeyStatus();
-                }
-            }
+            lblHotkeyDescription.Text = Setting.TaskSettings.Description;
+        }
+
+        private void UpdateHotkeyText()
+        {
+            btnHotkey.Text = Setting.HotkeyInfo.ToString();
         }
 
         private void UpdateHotkeyStatus()
         {
             switch (Setting.HotkeyStatus)
             {
-                case HotkeyStatus.Failed:
-                    lblIsHotkeyActive.BackColor = Color.IndianRed;
-                    break;
+                default:
                 case HotkeyStatus.NotConfigured:
-                    lblIsHotkeyActive.BackColor = Color.LightGoldenrodYellow;
+                    lblHotkeyStatus.BackColor = Color.LightGoldenrodYellow;
+                    break;
+                case HotkeyStatus.Failed:
+                    lblHotkeyStatus.BackColor = Color.IndianRed;
                     break;
                 case HotkeyStatus.Registered:
-                    lblIsHotkeyActive.BackColor = Color.PaleGreen;
+                    lblHotkeyStatus.BackColor = Color.PaleGreen;
                     break;
             }
         }
 
-        public void UpdateDescription()
+        private void btnHotkey_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            lblHotkeyDescription.Text = Setting.TaskSettings.Description;
+            if (Editing)
+            {
+                // For handle Tab key etc.
+                e.IsInputKey = true;
+            }
+        }
+
+        private void btnHotkey_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+
+            if (Editing)
+            {
+                if (e.KeyData == Keys.Escape)
+                {
+                    Setting.Hotkey = Keys.None;
+                    StopEditing();
+                }
+                else if (e.KeyData == Keys.Enter)
+                {
+                    StopEditing();
+                }
+                else
+                {
+                    Setting.Hotkey = e.KeyData;
+                    UpdateHotkeyText();
+                }
+            }
+        }
+
+        private void btnHotkey_KeyUp(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+
+            if (Editing)
+            {
+                // PrintScreen not trigger KeyDown event
+                if (e.KeyCode == Keys.PrintScreen)
+                {
+                    Setting.Hotkey = e.KeyData;
+                    UpdateHotkeyText();
+                }
+            }
+        }
+
+        private void btnHotkey_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (Editing)
+            {
+                StopEditing();
+            }
+            else
+            {
+                StartEditing();
+            }
+        }
+
+        private void btnHotkey_Leave(object sender, EventArgs e)
+        {
+            StopEditing();
+        }
+
+        private void StartEditing()
+        {
+            Editing = true;
+
+            Program.MainForm.IgnoreHotkeys = true;
+
+            btnHotkey.BackColor = Color.FromArgb(225, 255, 225);
+            btnHotkey.Text = "Select a hotkey...";
+
+            Setting.Hotkey = Keys.None;
+            OnHotkeyChanged();
+            UpdateHotkeyStatus();
+        }
+
+        private void StopEditing()
+        {
+            Editing = false;
+
+            Program.MainForm.IgnoreHotkeys = false;
+
+            if (Setting.HotkeyInfo.IsOnlyModifiers)
+            {
+                Setting.Hotkey = Keys.None;
+            }
+
+            btnHotkey.BackColor = SystemColors.Control;
+            btnHotkey.UseVisualStyleBackColor = true;
+
+            OnHotkeyChanged();
+            UpdateHotkeyStatus();
+            UpdateHotkeyText();
         }
 
         protected void OnHotkeyChanged()

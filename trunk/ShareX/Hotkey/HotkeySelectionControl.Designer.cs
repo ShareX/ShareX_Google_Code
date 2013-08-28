@@ -28,36 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSetHotkey = new System.Windows.Forms.Button();
-            this.lblIsHotkeyActive = new System.Windows.Forms.Label();
+            this.lblHotkeyStatus = new System.Windows.Forms.Label();
             this.lblHotkeyDescription = new System.Windows.Forms.Label();
+            this.btnHotkey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnSetHotkey
+            // lblHotkeyStatus
             // 
-            this.btnSetHotkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSetHotkey.Location = new System.Drawing.Point(259, 0);
-            this.btnSetHotkey.Name = "btnSetHotkey";
-            this.btnSetHotkey.Size = new System.Drawing.Size(192, 23);
-            this.btnSetHotkey.TabIndex = 1;
-            this.btnSetHotkey.Text = "Ctrl + Shift + Alt + Print Screen";
-            this.btnSetHotkey.UseVisualStyleBackColor = true;
-            this.btnSetHotkey.Click += new System.EventHandler(this.btnSetHotkey_Click);
-            // 
-            // lblIsHotkeyActive
-            // 
-            this.lblIsHotkeyActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblIsHotkeyActive.BackColor = System.Drawing.Color.IndianRed;
-            this.lblIsHotkeyActive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblIsHotkeyActive.Location = new System.Drawing.Point(456, 1);
-            this.lblIsHotkeyActive.Name = "lblIsHotkeyActive";
-            this.lblIsHotkeyActive.Size = new System.Drawing.Size(24, 21);
-            this.lblIsHotkeyActive.TabIndex = 2;
+            this.lblHotkeyStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHotkeyStatus.BackColor = System.Drawing.Color.IndianRed;
+            this.lblHotkeyStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblHotkeyStatus.Location = new System.Drawing.Point(456, 1);
+            this.lblHotkeyStatus.Name = "lblHotkeyStatus";
+            this.lblHotkeyStatus.Size = new System.Drawing.Size(24, 21);
+            this.lblHotkeyStatus.TabIndex = 2;
             // 
             // lblHotkeyDescription
             // 
             this.lblHotkeyDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHotkeyDescription.BackColor = System.Drawing.Color.White;
             this.lblHotkeyDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHotkeyDescription.Location = new System.Drawing.Point(0, 1);
             this.lblHotkeyDescription.Name = "lblHotkeyDescription";
@@ -71,12 +61,27 @@
             this.lblHotkeyDescription.MouseEnter += new System.EventHandler(this.lblHotkeyDescription_MouseEnter);
             this.lblHotkeyDescription.MouseLeave += new System.EventHandler(this.lblHotkeyDescription_MouseLeave);
             // 
+            // btnHotkey
+            // 
+            this.btnHotkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHotkey.Location = new System.Drawing.Point(259, 0);
+            this.btnHotkey.Name = "btnHotkey";
+            this.btnHotkey.Size = new System.Drawing.Size(192, 23);
+            this.btnHotkey.TabIndex = 3;
+            this.btnHotkey.Text = "Hotkey";
+            this.btnHotkey.UseVisualStyleBackColor = true;
+            this.btnHotkey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnHotkey_KeyDown);
+            this.btnHotkey.KeyUp += new System.Windows.Forms.KeyEventHandler(this.btnHotkey_KeyUp);
+            this.btnHotkey.Leave += new System.EventHandler(this.btnHotkey_Leave);
+            this.btnHotkey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnHotkey_MouseClick);
+            this.btnHotkey.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.btnHotkey_PreviewKeyDown);
+            // 
             // HotkeySelectionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lblIsHotkeyActive);
-            this.Controls.Add(this.btnSetHotkey);
+            this.Controls.Add(this.btnHotkey);
+            this.Controls.Add(this.lblHotkeyStatus);
             this.Controls.Add(this.lblHotkeyDescription);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "HotkeySelectionControl";
@@ -87,8 +92,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnSetHotkey;
-        private System.Windows.Forms.Label lblIsHotkeyActive;
+        private System.Windows.Forms.Label lblHotkeyStatus;
         private System.Windows.Forms.Label lblHotkeyDescription;
+        private System.Windows.Forms.Label lblHotkey;
+        private System.Windows.Forms.Button btnHotkey;
     }
 }
