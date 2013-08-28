@@ -42,11 +42,6 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            if (Program.Settings.Hotkeys == null)
-            {
-                Program.Settings.Hotkeys = new List<HotkeySetting>();
-            }
-
             HotkeyManager = new HotkeyManager(this, Program.Settings.Hotkeys, HandleHotkeys);
             HotkeyManager.RunHotkeys();
 
@@ -62,6 +57,8 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
+            if (hotkeySetting.TaskSettings.Job == HotkeyType.None) return;
+
             TaskSettings taskSettings = TaskSettings.GetSafeTaskSettings(hotkeySetting.TaskSettings);
 
             switch (hotkeySetting.TaskSettings.Job)

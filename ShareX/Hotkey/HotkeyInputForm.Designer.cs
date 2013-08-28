@@ -100,7 +100,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(152, 48);
+            this.btnReset.Location = new System.Drawing.Point(224, 48);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(64, 23);
             this.btnReset.TabIndex = 6;
@@ -110,7 +110,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(224, 48);
+            this.btnClear.Location = new System.Drawing.Point(152, 48);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(64, 23);
             this.btnClear.TabIndex = 7;
@@ -123,7 +123,7 @@
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 84);
+            this.ClientSize = new System.Drawing.Size(297, 83);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCancel);

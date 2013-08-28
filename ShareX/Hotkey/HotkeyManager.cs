@@ -34,7 +34,7 @@ namespace ShareX
 
     public class HotkeyManager
     {
-        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+        public List<HotkeySetting> Hotkeys { get; private set; }
 
         private HotkeyForm hotkeyForm;
         private HotkeyTriggerEventHandler triggerAction;
@@ -63,26 +63,20 @@ namespace ShareX
             }
         }
 
-        public void AddHotkey(HotkeySetting hotkeySetting)
+        private void AddHotkey(HotkeySetting hotkeySetting)
         {
-            AddHotkey(hotkeySetting, hotkeySetting.TaskSettings.Description + "_" + hotkeySetting.TaskSettings.Job + "_" + hotkeySetting.Hotkey);
-        }
-
-        private void AddHotkey(HotkeySetting hotkeySetting, string tag)
-        {
-            hotkeySetting.Tag = tag;
-            hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), tag);
+            hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), hotkeySetting.UniqueID);
         }
 
         public HotkeyStatus UpdateHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeySetting.HotkeyStatus = hotkeyForm.ChangeHotkey(hotkeySetting.Tag, hotkeySetting.Hotkey, () => triggerAction(hotkeySetting));
+            hotkeySetting.HotkeyStatus = hotkeyForm.ChangeHotkey(hotkeySetting.UniqueID, hotkeySetting.Hotkey, () => triggerAction(hotkeySetting));
             return hotkeySetting.HotkeyStatus;
         }
 
         public void RemoveHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeyForm.UnregisterHotkey(hotkeySetting.Tag);
+            hotkeyForm.UnregisterHotkey(hotkeySetting.UniqueID);
             Hotkeys.Remove(hotkeySetting);
         }
 
@@ -105,7 +99,12 @@ namespace ShareX
                 RemoveHotkey(Hotkeys[i]);
             }
 
-            Hotkeys.AddRange(new HotkeySetting[]
+            Hotkeys.AddRange(GetDefaultHotkeyList());
+        }
+
+        public HotkeySetting[] GetDefaultHotkeyList()
+        {
+            return new HotkeySetting[]
             {
                 new HotkeySetting(HotkeyType.ClipboardUpload, Keys.Control | Keys.PageUp),
                 new HotkeySetting(HotkeyType.FileUpload, Keys.Shift | Keys.PageUp),
@@ -115,7 +114,7 @@ namespace ShareX
                 new HotkeySetting(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
                 new HotkeySetting(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
                 new HotkeySetting(HotkeyType.ScreenRecorder, Keys.Shift | Keys.F11)
-            });
+            };
         }
     }
 }

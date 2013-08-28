@@ -761,5 +761,10 @@ namespace HelpersLib
                 if (attr != null) prop.SetValue(self, attr.Value);
             }
         }
+
+        public static string GetUniqueID()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
     }
 }
