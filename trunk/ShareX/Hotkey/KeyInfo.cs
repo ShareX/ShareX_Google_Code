@@ -126,7 +126,7 @@ namespace ShareX
             {
                 text += "...";
             }
-            else if (KeyCode == Keys.PageDown)
+            else if (KeyCode == Keys.Next)
             {
                 text += "Page Down";
             }

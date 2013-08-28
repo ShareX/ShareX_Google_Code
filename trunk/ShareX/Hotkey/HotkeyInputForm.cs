@@ -27,6 +27,7 @@ using HelpersLib;
 using ShareX.Properties;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ShareX
@@ -93,7 +94,7 @@ namespace ShareX
         {
             if (SelectedKey == Keys.None)
             {
-                tbHotkey.Text = "Select hotkey...";
+                tbHotkey.Text = "Click here to select hotkey";
             }
             else
             {
@@ -128,12 +129,14 @@ namespace ShareX
         private void tbHotkey_Enter(object sender, EventArgs e)
         {
             Program.MainForm.IgnoreHotkeys = true;
+            tbHotkey.BackColor = Color.FromArgb(225, 255, 225);
             tbHotkey.Text = string.Empty;
         }
 
         private void tbHotkey_Leave(object sender, EventArgs e)
         {
             Program.MainForm.IgnoreHotkeys = false;
+            tbHotkey.BackColor = Color.White;
             UpdateTextBox();
         }
     }

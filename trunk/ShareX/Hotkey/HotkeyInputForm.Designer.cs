@@ -77,13 +77,15 @@
             // 
             // tbHotkey
             // 
+            this.tbHotkey.BackColor = System.Drawing.Color.White;
             this.tbHotkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbHotkey.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tbHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tbHotkey.Location = new System.Drawing.Point(8, 16);
             this.tbHotkey.Name = "tbHotkey";
             this.tbHotkey.Size = new System.Drawing.Size(280, 22);
             this.tbHotkey.TabIndex = 8;
-            this.tbHotkey.Text = "Select hotkey...";
+            this.tbHotkey.Text = "Click here to select hotkey";
             this.tbHotkey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbHotkey.Enter += new System.EventHandler(this.tbHotkey_Enter);
             this.tbHotkey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbHotkey_KeyDown);
