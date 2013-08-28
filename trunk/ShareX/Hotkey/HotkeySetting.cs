@@ -34,8 +34,6 @@ namespace ShareX
     {
         public Keys Hotkey { get; set; }
 
-        public Keys HotkeyDefault { get; set; }
-
         public TaskSettings TaskSettings { get; set; }
 
         [JsonIgnore]
@@ -57,7 +55,6 @@ namespace ShareX
             TaskSettings.Job = job;
             TaskSettings.Description = job.GetDescription();
             Hotkey = hotkey;
-            HotkeyDefault = hotkey;
         }
 
         public override string ToString()
