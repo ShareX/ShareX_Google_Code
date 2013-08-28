@@ -51,9 +51,9 @@ namespace ShareX
 
                 this.InvokeSafe(() =>
                 {
-                    HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
-                    HotkeyManager.RunHotkeys();
-                    HotkeyManager.ShowFailedHotkeys();
+                    Program.HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
+                    Program.HotkeyManager.RunHotkeys();
+                    Program.HotkeyManager.ShowFailedHotkeys();
                 });
             });
         }

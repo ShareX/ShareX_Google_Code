@@ -31,7 +31,7 @@ namespace ShareX
 {
     public class KeyInfo
     {
-        public Keys Key { get; set; }
+        public Keys Key { get; private set; }
 
         public Keys KeyCode
         {
@@ -46,14 +46,6 @@ namespace ShareX
             get
             {
                 return Key & Keys.Modifiers;
-            }
-        }
-
-        public bool Alt
-        {
-            get
-            {
-                return (Key & Keys.Alt) == Keys.Alt;
             }
         }
 
@@ -73,6 +65,14 @@ namespace ShareX
             }
         }
 
+        public bool Alt
+        {
+            get
+            {
+                return (Key & Keys.Alt) == Keys.Alt;
+            }
+        }
+
         public Modifiers ModifiersEnum
         {
             get
@@ -84,6 +84,14 @@ namespace ShareX
                 if (Shift) modifiers |= Modifiers.Shift;
 
                 return modifiers;
+            }
+        }
+
+        public bool IsOnlyModifiers
+        {
+            get
+            {
+                return KeyCode == Keys.ControlKey || KeyCode == Keys.ShiftKey || KeyCode == Keys.Menu;
             }
         }
 
@@ -114,7 +122,11 @@ namespace ShareX
                 }
             }
 
-            if (KeyCode == Keys.PageDown)
+            if (IsOnlyModifiers)
+            {
+                text += "...";
+            }
+            else if (KeyCode == Keys.PageDown)
             {
                 text += "Page Down";
             }
