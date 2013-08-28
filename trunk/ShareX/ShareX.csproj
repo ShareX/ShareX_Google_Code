@@ -136,6 +136,7 @@
     <Compile Include="Forms\UploadTestForm.Designer.cs">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HotkeySettings.cs" />
     <Compile Include="Hotkey\HotkeyManager.cs" />
     <Compile Include="Hotkey\HotkeySetting.cs" />
     <Compile Include="Hotkey\HotkeyForm.cs">

@@ -33,7 +33,6 @@ namespace ShareX
     public class Settings : SettingsBase<Settings>
     {
         public readonly TaskSettings DefaultTaskSettings = new TaskSettings();
-        public readonly List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
 
         public string FileUploadDefaultDirectory = "";
         public bool ShowUploadWarning = true; // First time upload warning

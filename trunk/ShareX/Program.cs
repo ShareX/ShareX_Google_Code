@@ -65,6 +65,7 @@ namespace ShareX
         private static readonly string PersonalPathConfig = Path.Combine(StartupPath, "PersonalPath.cfg");
         private static readonly string SettingsFileName = ApplicationName + "Settings.json";
         private static readonly string UploadersConfigFileName = "UploadersConfig.json";
+        private static readonly string HotkeySettingsFileName = "HotkeySettings.json";
         private static readonly string LogFileName = ApplicationName + "-Log-{0:yyyy-MM}.txt";
 
         public static string CustomPersonalPath { get; private set; }
@@ -107,6 +108,19 @@ namespace ShareX
                     }
 
                     return Path.Combine(PersonalPath, UploadersConfigFileName);
+                }
+
+                return null;
+            }
+        }
+
+        public static string HotkeySettingsFilePath
+        {
+            get
+            {
+                if (!IsSandbox)
+                {
+                    return Path.Combine(PersonalPath, HotkeySettingsFileName);
                 }
 
                 return null;
@@ -227,8 +241,10 @@ namespace ShareX
         public static Settings Settings { get; private set; }
         public static TaskSettings DefaultTaskSettings { get; private set; }
         public static UploadersConfig UploadersConfig { get; private set; }
+        public static HotkeySettings HotkeySettings { get; private set; }
         public static ManualResetEvent SettingsResetEvent { get; private set; }
         public static ManualResetEvent UploaderSettingsResetEvent { get; private set; }
+        public static ManualResetEvent HotkeySettingsResetEvent { get; private set; }
 
         [STAThread]
         private static void Main(string[] args)
@@ -288,6 +304,7 @@ namespace ShareX
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
+                HotkeySettingsResetEvent = new ManualResetEvent(false);
                 ThreadPool.QueueUserWorkItem(state => LoadSettings());
 
                 MyLogger.WriteLine("new MainForm() started");
@@ -322,6 +339,8 @@ namespace ShareX
             SettingsResetEvent.Set();
             LoadUploadersConfig();
             UploaderSettingsResetEvent.Set();
+            LoadHotkeySettings();
+            HotkeySettingsResetEvent.Set();
         }
 
         public static void LoadProgramSettings()
@@ -335,10 +354,16 @@ namespace ShareX
             UploadersConfig = UploadersConfig.Load(UploadersConfigFilePath);
         }
 
+        public static void LoadHotkeySettings()
+        {
+            HotkeySettings = HotkeySettings.Load(HotkeySettingsFilePath);
+        }
+
         public static void SaveSettings()
         {
             Settings.Save();
             UploadersConfig.Save();
+            HotkeySettings.Save();
         }
 
         public static void BackupSettings()

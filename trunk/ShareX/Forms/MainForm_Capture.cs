@@ -42,17 +42,20 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            HotkeyManager = new HotkeyManager(this, Program.Settings.Hotkeys, HandleHotkeys);
-            HotkeyManager.RunHotkeys();
-
-            string failedHotkeys;
-
-            if (HotkeyManager.IsHotkeyRegisterFailed(out failedHotkeys))
+            TaskEx.Run(() =>
             {
-                MessageBox.Show("Unable to register hotkey(s):\r\n\r\n" + failedHotkeys +
-                    "\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
-                    "Hotkey register failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                if (Program.HotkeySettings == null)
+                {
+                    Program.HotkeySettingsResetEvent.WaitOne();
+                }
+
+                this.InvokeSafe(() =>
+                {
+                    HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
+                    HotkeyManager.RunHotkeys();
+                    HotkeyManager.ShowFailedHotkeys();
+                });
+            });
         }
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
@@ -235,8 +238,8 @@ namespace ShareX
 
         private bool IsRegionCapture(CaptureType captureType)
         {
-            return captureType.HasFlagAny(CaptureType.RectangleWindow, CaptureType.Rectangle, CaptureType.RoundedRectangle, CaptureType.Ellipse, CaptureType.Triangle,
-                CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
+            return captureType.HasFlagAny(CaptureType.RectangleWindow, CaptureType.Rectangle, CaptureType.RoundedRectangle, CaptureType.Ellipse,
+                CaptureType.Triangle, CaptureType.Diamond, CaptureType.Polygon, CaptureType.Freehand, CaptureType.LastRegion);
         }
 
         private void CaptureActiveWindow(TaskSettings taskSettings, bool autoHideForm = true)
