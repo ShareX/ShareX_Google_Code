@@ -28,55 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbControl = new System.Windows.Forms.CheckBox();
-            this.cbShift = new System.Windows.Forms.CheckBox();
-            this.cbAlt = new System.Windows.Forms.CheckBox();
-            this.cbKeys = new System.Windows.Forms.ComboBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.tbHotkey = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // cbControl
-            // 
-            this.cbControl.AutoSize = true;
-            this.cbControl.Location = new System.Drawing.Point(16, 16);
-            this.cbControl.Name = "cbControl";
-            this.cbControl.Size = new System.Drawing.Size(41, 17);
-            this.cbControl.TabIndex = 0;
-            this.cbControl.Text = "Ctrl";
-            this.cbControl.UseVisualStyleBackColor = true;
-            // 
-            // cbShift
-            // 
-            this.cbShift.AutoSize = true;
-            this.cbShift.Location = new System.Drawing.Point(63, 16);
-            this.cbShift.Name = "cbShift";
-            this.cbShift.Size = new System.Drawing.Size(47, 17);
-            this.cbShift.TabIndex = 1;
-            this.cbShift.Text = "Shift";
-            this.cbShift.UseVisualStyleBackColor = true;
-            // 
-            // cbAlt
-            // 
-            this.cbAlt.AutoSize = true;
-            this.cbAlt.Location = new System.Drawing.Point(116, 16);
-            this.cbAlt.Name = "cbAlt";
-            this.cbAlt.Size = new System.Drawing.Size(38, 17);
-            this.cbAlt.TabIndex = 2;
-            this.cbAlt.Text = "Alt";
-            this.cbAlt.UseVisualStyleBackColor = true;
-            // 
-            // cbKeys
-            // 
-            this.cbKeys.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbKeys.FormattingEnabled = true;
-            this.cbKeys.Location = new System.Drawing.Point(160, 14);
-            this.cbKeys.MaxDropDownItems = 30;
-            this.cbKeys.Name = "cbKeys";
-            this.cbKeys.Size = new System.Drawing.Size(128, 21);
-            this.cbKeys.TabIndex = 3;
             // 
             // btnOK
             // 
@@ -118,20 +75,32 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // tbHotkey
+            // 
+            this.tbHotkey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tbHotkey.Location = new System.Drawing.Point(8, 16);
+            this.tbHotkey.Name = "tbHotkey";
+            this.tbHotkey.Size = new System.Drawing.Size(280, 22);
+            this.tbHotkey.TabIndex = 8;
+            this.tbHotkey.Text = "Select hotkey...";
+            this.tbHotkey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbHotkey.Enter += new System.EventHandler(this.tbHotkey_Enter);
+            this.tbHotkey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbHotkey_KeyDown);
+            this.tbHotkey.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbHotkey_KeyUp);
+            this.tbHotkey.Leave += new System.EventHandler(this.tbHotkey_Leave);
+            this.tbHotkey.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tbHotkey_PreviewKeyDown);
+            // 
             // HotkeyInputForm
             // 
-            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 83);
+            this.Controls.Add(this.tbHotkey);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.cbKeys);
-            this.Controls.Add(this.cbAlt);
-            this.Controls.Add(this.cbShift);
-            this.Controls.Add(this.cbControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "HotkeyInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -143,13 +112,10 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cbControl;
-        private System.Windows.Forms.CheckBox cbShift;
-        private System.Windows.Forms.CheckBox cbAlt;
-        private System.Windows.Forms.ComboBox cbKeys;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox tbHotkey;
     }
 }

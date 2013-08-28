@@ -40,8 +40,6 @@ namespace ShareX
     {
         public bool IsReady { get; private set; }
 
-        public HotkeyManager HotkeyManager { get; private set; }
-
         private bool forceClose;
         private UploadInfoManager uim;
 

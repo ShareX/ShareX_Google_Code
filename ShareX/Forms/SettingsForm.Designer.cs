@@ -235,9 +235,9 @@
             this.cbStartWithWindows.AutoSize = true;
             this.cbStartWithWindows.Location = new System.Drawing.Point(16, 40);
             this.cbStartWithWindows.Name = "cbStartWithWindows";
-            this.cbStartWithWindows.Size = new System.Drawing.Size(183, 17);
+            this.cbStartWithWindows.Size = new System.Drawing.Size(188, 17);
             this.cbStartWithWindows.TabIndex = 1;
-            this.cbStartWithWindows.Text = "Start ShareX on Windows startup";
+            this.cbStartWithWindows.Text = "Run ShareX when Windows starts";
             this.cbStartWithWindows.UseVisualStyleBackColor = true;
             this.cbStartWithWindows.CheckedChanged += new System.EventHandler(this.cbStartWithWindows_CheckedChanged);
             // 
