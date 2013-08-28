@@ -44,20 +44,16 @@ namespace ShareX
             }
         }
 
-        public Keys DefaultKey { get; set; }
-
         private HotkeyInputForm()
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
         }
 
-        public HotkeyInputForm(Keys key, Keys defaultKey)
+        public HotkeyInputForm(Keys key)
             : this()
         {
             SelectedKey = key;
-            DefaultKey = defaultKey;
-            btnReset.Visible = defaultKey != Keys.None;
             UpdateTextBox();
         }
 
@@ -76,12 +72,6 @@ namespace ShareX
         {
             Program.MainForm.IgnoreHotkeys = false;
             DialogResult = DialogResult.Cancel;
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            SelectedKey = DefaultKey;
-            UpdateTextBox();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -138,6 +128,11 @@ namespace ShareX
             Program.MainForm.IgnoreHotkeys = false;
             tbHotkey.BackColor = Color.White;
             UpdateTextBox();
+        }
+
+        private void HotkeyInputForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            btnOK.Focus();
         }
     }
 }

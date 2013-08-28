@@ -71,7 +71,7 @@ namespace ShareX
 
         private void btnSetHotkey_Click(object sender, EventArgs e)
         {
-            using (HotkeyInputForm inputForm = new HotkeyInputForm(Setting.Hotkey, Setting.HotkeyDefault))
+            using (HotkeyInputForm inputForm = new HotkeyInputForm(Setting.Hotkey))
             {
                 if (inputForm.ShowDialog() == DialogResult.OK)
                 {
