@@ -63,6 +63,20 @@ namespace ShareX
             }
         }
 
+        public void ShowFailedHotkeys()
+        {
+            IEnumerable<HotkeySetting> failedHotkeysList = Hotkeys.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
+
+            if (failedHotkeysList.Count() > 0)
+            {
+                string failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.Description + ": " + x.ToString()).ToArray());
+
+                MessageBox.Show("Unable to register hotkey(s):\r\n\r\n" + failedHotkeys +
+                    "\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
+                    "ShareX - Hotkey register failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void AddHotkey(HotkeySetting hotkeySetting)
         {
             hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), hotkeySetting.UniqueID);
@@ -78,18 +92,6 @@ namespace ShareX
         {
             hotkeyForm.UnregisterHotkey(hotkeySetting.UniqueID);
             Hotkeys.Remove(hotkeySetting);
-        }
-
-        public bool IsHotkeyRegisterFailed(out string failedHotkeys)
-        {
-            failedHotkeys = null;
-            bool status = false;
-            var failedHotkeysList = Hotkeys.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
-            if (status = failedHotkeysList.Count() > 0)
-            {
-                failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.Description + ": " + x.ToString()).ToArray());
-            }
-            return status;
         }
 
         public void ResetHotkeys()

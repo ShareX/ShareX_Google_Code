@@ -86,6 +86,7 @@ namespace ShareX
             this.tsbTaskSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbHotkeySettings = new System.Windows.Forms.ToolStripButton();
             this.tsbDestinationSettings = new System.Windows.Forms.ToolStripButton();
+            this.tssMain2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHashCheck = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,6 +147,11 @@ namespace ShareX
             this.tsmiTrayURLShorteners = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTraySocialServices = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiTrayApplicationSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayTaskSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayHotkeySettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayDestinationSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayTools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayHashCheck = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,7 +160,7 @@ namespace ShareX
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssTray2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tssTray3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiStopUpload = new System.Windows.Forms.ToolStripMenuItem();
@@ -201,12 +207,6 @@ namespace ShareX
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssMain2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiTrayApplicationSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayTaskSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayHotkeySettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayDestinationSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssTray3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -517,6 +517,12 @@ namespace ShareX
             this.tsbDestinationSettings.Size = new System.Drawing.Size(147, 20);
             this.tsbDestinationSettings.Text = "Destination settings...";
             this.tsbDestinationSettings.Click += new System.EventHandler(this.tsbDestinationSettings_Click);
+            // 
+            // tssMain2
+            // 
+            this.tssMain2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.tssMain2.Name = "tssMain2";
+            this.tssMain2.Size = new System.Drawing.Size(147, 6);
             // 
             // tsddbTools
             // 
@@ -1068,6 +1074,43 @@ namespace ShareX
             this.tssTray1.Name = "tssTray1";
             this.tssTray1.Size = new System.Drawing.Size(185, 6);
             // 
+            // tsmiTrayApplicationSettings
+            // 
+            this.tsmiTrayApplicationSettings.Image = global::ShareX.Properties.Resources.application__pencil;
+            this.tsmiTrayApplicationSettings.Name = "tsmiTrayApplicationSettings";
+            this.tsmiTrayApplicationSettings.Size = new System.Drawing.Size(188, 22);
+            this.tsmiTrayApplicationSettings.Text = "Application settings...";
+            this.tsmiTrayApplicationSettings.Click += new System.EventHandler(this.tsbApplicationSettings_Click);
+            // 
+            // tsmiTrayTaskSettings
+            // 
+            this.tsmiTrayTaskSettings.Image = global::ShareX.Properties.Resources.hammer_pencil;
+            this.tsmiTrayTaskSettings.Name = "tsmiTrayTaskSettings";
+            this.tsmiTrayTaskSettings.Size = new System.Drawing.Size(188, 22);
+            this.tsmiTrayTaskSettings.Text = "Task settings...";
+            this.tsmiTrayTaskSettings.Click += new System.EventHandler(this.tsbTaskSettings_Click);
+            // 
+            // tsmiTrayHotkeySettings
+            // 
+            this.tsmiTrayHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard__pencil;
+            this.tsmiTrayHotkeySettings.Name = "tsmiTrayHotkeySettings";
+            this.tsmiTrayHotkeySettings.Size = new System.Drawing.Size(188, 22);
+            this.tsmiTrayHotkeySettings.Text = "Hotkey settings...";
+            this.tsmiTrayHotkeySettings.Click += new System.EventHandler(this.tsbHotkeySettings_Click);
+            // 
+            // tsmiTrayDestinationSettings
+            // 
+            this.tsmiTrayDestinationSettings.Image = global::ShareX.Properties.Resources.globe__pencil;
+            this.tsmiTrayDestinationSettings.Name = "tsmiTrayDestinationSettings";
+            this.tsmiTrayDestinationSettings.Size = new System.Drawing.Size(188, 22);
+            this.tsmiTrayDestinationSettings.Text = "Destination settings...";
+            this.tsmiTrayDestinationSettings.Click += new System.EventHandler(this.tsbDestinationSettings_Click);
+            // 
+            // tssTray2
+            // 
+            this.tssTray2.Name = "tssTray2";
+            this.tssTray2.Size = new System.Drawing.Size(185, 6);
+            // 
             // tsmiTrayTools
             // 
             this.tsmiTrayTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1134,10 +1177,10 @@ namespace ShareX
             this.tsmiTrayDonate.Text = "Donate...";
             this.tsmiTrayDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
-            // tssTray2
+            // tssTray3
             // 
-            this.tssTray2.Name = "tssTray2";
-            this.tssTray2.Size = new System.Drawing.Size(185, 6);
+            this.tssTray3.Name = "tssTray3";
+            this.tssTray3.Size = new System.Drawing.Size(185, 6);
             // 
             // tsmiTrayExit
             // 
@@ -1486,49 +1529,6 @@ namespace ShareX
             this.ssToolStripMenuItem.Name = "ssToolStripMenuItem";
             this.ssToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ssToolStripMenuItem.Text = "ss";
-            // 
-            // tssMain2
-            // 
-            this.tssMain2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.tssMain2.Name = "tssMain2";
-            this.tssMain2.Size = new System.Drawing.Size(147, 6);
-            // 
-            // tsmiTrayApplicationSettings
-            // 
-            this.tsmiTrayApplicationSettings.Image = global::ShareX.Properties.Resources.application__pencil;
-            this.tsmiTrayApplicationSettings.Name = "tsmiTrayApplicationSettings";
-            this.tsmiTrayApplicationSettings.Size = new System.Drawing.Size(188, 22);
-            this.tsmiTrayApplicationSettings.Text = "Application settings...";
-            this.tsmiTrayApplicationSettings.Click += new System.EventHandler(this.tsbApplicationSettings_Click);
-            // 
-            // tsmiTrayTaskSettings
-            // 
-            this.tsmiTrayTaskSettings.Image = global::ShareX.Properties.Resources.hammer_pencil;
-            this.tsmiTrayTaskSettings.Name = "tsmiTrayTaskSettings";
-            this.tsmiTrayTaskSettings.Size = new System.Drawing.Size(188, 22);
-            this.tsmiTrayTaskSettings.Text = "Task settings...";
-            this.tsmiTrayTaskSettings.Click += new System.EventHandler(this.tsbTaskSettings_Click);
-            // 
-            // tsmiTrayHotkeySettings
-            // 
-            this.tsmiTrayHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard__pencil;
-            this.tsmiTrayHotkeySettings.Name = "tsmiTrayHotkeySettings";
-            this.tsmiTrayHotkeySettings.Size = new System.Drawing.Size(188, 22);
-            this.tsmiTrayHotkeySettings.Text = "Hotkey settings...";
-            this.tsmiTrayHotkeySettings.Click += new System.EventHandler(this.tsbHotkeySettings_Click);
-            // 
-            // tsmiTrayDestinationSettings
-            // 
-            this.tsmiTrayDestinationSettings.Image = global::ShareX.Properties.Resources.globe__pencil;
-            this.tsmiTrayDestinationSettings.Name = "tsmiTrayDestinationSettings";
-            this.tsmiTrayDestinationSettings.Size = new System.Drawing.Size(188, 22);
-            this.tsmiTrayDestinationSettings.Text = "Destination settings...";
-            this.tsmiTrayDestinationSettings.Click += new System.EventHandler(this.tsbDestinationSettings_Click);
-            // 
-            // tssTray3
-            // 
-            this.tssTray3.Name = "tssTray3";
-            this.tssTray3.Size = new System.Drawing.Size(185, 6);
             // 
             // MainForm
             // 

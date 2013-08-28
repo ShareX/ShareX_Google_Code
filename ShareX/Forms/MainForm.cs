@@ -673,9 +673,15 @@ namespace ShareX
 
         private void tsbHotkeySettings_Click(object sender, EventArgs e)
         {
+            if (Program.HotkeySettings == null)
+            {
+                Program.HotkeySettingsResetEvent.WaitOne();
+            }
+
             using (HotkeySettingsForm hotkeySettingsForm = new HotkeySettingsForm())
             {
                 hotkeySettingsForm.ShowDialog();
+                Program.HotkeySettings.SaveAsync();
             }
         }
 
