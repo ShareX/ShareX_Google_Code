@@ -117,8 +117,6 @@ namespace UploadersLib
 
         public void LoadSettings(UploadersConfig uploadersConfig)
         {
-            Config = uploadersConfig;
-
             #region Image uploaders
 
             // ImageShack

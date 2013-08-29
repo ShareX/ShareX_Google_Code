@@ -94,7 +94,6 @@
 
         private System.Windows.Forms.Label lblHotkeyStatus;
         private System.Windows.Forms.Label lblHotkeyDescription;
-        private System.Windows.Forms.Label lblHotkey;
         private System.Windows.Forms.Button btnHotkey;
     }
 }

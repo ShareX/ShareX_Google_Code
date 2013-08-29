@@ -173,7 +173,7 @@ namespace ShareX
             if (Selected != null)
             {
                 HotkeySetting hotkeySetting = new HotkeySetting();
-                hotkeySetting.TaskSettings = Selected.Setting.TaskSettings.Copy();
+                hotkeySetting.TaskSettings = ReflectionCloner.DeepFieldClone(Selected.Setting.TaskSettings);
                 manager.Hotkeys.Add(hotkeySetting);
                 HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
                 control.Selected = true;

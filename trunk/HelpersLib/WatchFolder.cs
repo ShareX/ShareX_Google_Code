@@ -33,16 +33,16 @@ namespace HelpersLib
 {
     public class WatchFolder : IDisposable
     {
-        protected SynchronizationContext context;
-        protected FileSystemWatcher fileWatcher;
-        protected List<WatchFolderDuplicateEventTimer> timers = new List<WatchFolderDuplicateEventTimer>();
-
         public string FolderPath { get; set; }
         public string Filter { get; set; }
         public bool IncludeSubdirectories { get; set; }
 
         public delegate void FileWatcherTriggerEventHandler(string path);
         public event FileWatcherTriggerEventHandler FileWatcherTrigger;
+
+        private SynchronizationContext context;
+        private FileSystemWatcher fileWatcher;
+        private List<WatchFolderDuplicateEventTimer> timers = new List<WatchFolderDuplicateEventTimer>();
 
         public virtual void Enable()
         {

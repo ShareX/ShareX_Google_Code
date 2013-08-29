@@ -363,9 +363,9 @@ namespace ShareX
 
         public static void SaveSettings()
         {
-            Settings.Save();
-            UploadersConfig.Save();
-            HotkeySettings.Save();
+            Settings.Save(SettingsFilePath);
+            UploadersConfig.Save(UploadersConfigFilePath);
+            HotkeySettings.Save(HotkeySettingsFilePath);
         }
 
         public static void BackupSettings()

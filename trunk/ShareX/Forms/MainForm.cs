@@ -690,6 +690,8 @@ namespace ShareX
             {
                 taskSettingsForm.ShowDialog();
             }
+
+            Program.Settings.SaveAsync();
         }
 
         private void tsbHotkeySettings_Click(object sender, EventArgs e)
@@ -702,8 +704,9 @@ namespace ShareX
             using (HotkeySettingsForm hotkeySettingsForm = new HotkeySettingsForm())
             {
                 hotkeySettingsForm.ShowDialog();
-                Program.HotkeySettings.SaveAsync();
             }
+
+            Program.HotkeySettings.SaveAsync();
         }
 
         private void tsbDestinationSettings_Click(object sender, EventArgs e)
@@ -716,8 +719,9 @@ namespace ShareX
             using (UploadersConfigForm uploadersConfigForm = new UploadersConfigForm(Program.UploadersConfig, new UploadersAPIKeys()))
             {
                 uploadersConfigForm.ShowDialog();
-                uploadersConfigForm.Config.SaveAsync(Program.UploadersConfigFilePath);
             }
+
+            Program.UploadersConfig.SaveAsync(Program.UploadersConfigFilePath);
         }
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
