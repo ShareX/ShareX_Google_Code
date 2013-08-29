@@ -28,6 +28,7 @@ using HistoryLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -344,14 +345,36 @@ namespace ShareX
                     Format = "<a href=\"$url\"><img src=\"$thumbnailurl\" alt=\"\" title\"\" /></a>"
                 });
             }
+        }
 
-            if (Program.Settings.WatchFolderEnabled)
-            {
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
+        private class WatchFolderWithTaskSettings
+        {
+            public WatchFolder WatchFolder { get; set; }
+            public TaskSettings TaskSettings { get; set; }
+        }
+
+        private void HandleWatchFolder()
+        {
+            IEnumerable<WatchFolderWithTaskSettings> watchFolders = Program.HotkeySettings.Hotkeys.Where(x => x.TaskSettings.WatchFolderEnabled).
+                SelectMany(hotkeySetting => hotkeySetting.TaskSettings.WatchFolderList, (hotkeySetting, watchFolder) => new WatchFolderWithTaskSettings
                 {
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
-                    watchFolder.Enable();
-                }
+                    WatchFolder = watchFolder,
+                    TaskSettings = hotkeySetting.TaskSettings
+                });
+
+            if (Program.DefaultTaskSettings.WatchFolderEnabled)
+            {
+                watchFolders = Program.DefaultTaskSettings.WatchFolderList.Select(watchFolder => new WatchFolderWithTaskSettings
+                {
+                    WatchFolder = watchFolder,
+                    TaskSettings = Program.DefaultTaskSettings
+                }).Concat(watchFolders);
+            }
+
+            foreach (WatchFolderWithTaskSettings x in watchFolders)
+            {
+                x.WatchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, x.TaskSettings);
+                x.WatchFolder.Enable();
             }
         }
 

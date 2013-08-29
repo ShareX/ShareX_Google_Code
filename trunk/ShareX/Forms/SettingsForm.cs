@@ -106,7 +106,6 @@ namespace ShareX
 
             // Print
             cbDontShowPrintSettingDialog.Checked = Program.Settings.DontShowPrintSettingsDialog;
-
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)

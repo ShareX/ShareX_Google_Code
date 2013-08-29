@@ -54,6 +54,8 @@ namespace ShareX
                     Program.HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
                     Program.HotkeyManager.RunHotkeys();
                     Program.HotkeyManager.ShowFailedHotkeys();
+
+                    HandleWatchFolder();
                 });
             });
         }
