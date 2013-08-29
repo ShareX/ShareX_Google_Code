@@ -45,6 +45,7 @@ namespace UploadersLib
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
+            Config = uploadersConfig;
             ControlSettings();
             CreateUserControlEvents();
             LoadSettings(uploadersConfig);
