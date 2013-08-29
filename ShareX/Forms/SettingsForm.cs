@@ -107,20 +107,6 @@ namespace ShareX
             // Print
             cbDontShowPrintSettingDialog.Checked = Program.Settings.DontShowPrintSettingsDialog;
 
-            // Watch folders
-            cbWatchFolderEnabled.Checked = Program.Settings.WatchFolderEnabled;
-
-            if (Program.Settings.WatchFolderList == null)
-            {
-                Program.Settings.WatchFolderList = new List<WatchFolder>();
-            }
-            else
-            {
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
-                {
-                    AddWatchFolder(watchFolder);
-                }
-            }
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)
@@ -435,70 +421,5 @@ namespace ShareX
         }
 
         #endregion Print
-
-        #region Watch folders
-
-        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
-        {
-            using (WatchFolderForm form = new WatchFolderForm())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
-                    Program.Settings.WatchFolderList.Add(watchFolder);
-                    AddWatchFolder(watchFolder);
-
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                }
-            }
-        }
-
-        private void AddWatchFolder(WatchFolder watchFolder)
-        {
-            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
-            lvi.Tag = watchFolder;
-            lvi.SubItems.Add(watchFolder.Filter ?? "");
-            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
-            lvWatchFolderList.Items.Add(lvi);
-        }
-
-        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
-        {
-            if (lvWatchFolderList.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
-                WatchFolder watchFolder = lvi.Tag as WatchFolder;
-
-                Program.Settings.WatchFolderList.Remove(watchFolder);
-                lvWatchFolderList.Items.Remove(lvi);
-                watchFolder.Dispose();
-            }
-        }
-
-        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            if (loaded)
-            {
-                Program.Settings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
-
-                foreach (WatchFolder watchFolder in Program.Settings.WatchFolderList)
-                {
-                    if (Program.Settings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                    else
-                    {
-                        watchFolder.Dispose();
-                    }
-                }
-            }
-        }
-
-        #endregion Watch folders
     }
 }

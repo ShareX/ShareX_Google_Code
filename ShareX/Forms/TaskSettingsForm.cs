@@ -27,6 +27,7 @@ using HelpersLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace ShareX
 {
     public partial class TaskSettingsForm : Form
     {
+        private bool loaded;
         public TaskSettings TaskSettings { get; private set; }
         public bool IsDefault { get; private set; }
 
@@ -189,10 +191,26 @@ namespace ShareX
             cbClipboardUploadUseAfterCaptureTasks.Checked = TaskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks;
             cbClipboardUploadExcludeImageEffects.Checked = TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects;
 
+            // Watch folders
+            cbWatchFolderEnabled.Checked = TaskSettings.WatchFolderEnabled;
+
+            if (TaskSettings.WatchFolderList == null)
+            {
+                TaskSettings.WatchFolderList = new List<WatchFolder>();
+            }
+            else
+            {
+                foreach (WatchFolder watchFolder in TaskSettings.WatchFolderList)
+                {
+                    AddWatchFolder(watchFolder);
+                }
+            }
+
             // Advanced
             pgTaskSettings.SelectedObject = TaskSettings.AdvancedSettings;
 
             UpdateDefaultSettingVisibility();
+            loaded = true;
         }
 
         private void tbDescription_TextChanged(object sender, EventArgs e)
@@ -868,6 +886,67 @@ namespace ShareX
         {
             TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
             gbCommandLineEncoderSettings.Enabled = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
+        }
+
+        private void btnWatchFolderAdd_Click(object sender, EventArgs e)
+        {
+            using (WatchFolderForm form = new WatchFolderForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    WatchFolder watchFolder = form.WatchFolder;
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
+                    TaskSettings.WatchFolderList.Add(watchFolder);
+                    AddWatchFolder(watchFolder);
+
+                    if (TaskSettings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                }
+            }
+        }
+
+        private void AddWatchFolder(WatchFolder watchFolder)
+        {
+            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
+            lvi.Tag = watchFolder;
+            lvi.SubItems.Add(watchFolder.Filter ?? "");
+            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
+            lvWatchFolderList.Items.Add(lvi);
+        }
+
+        private void btnWatchFolderRemove_Click(object sender, EventArgs e)
+        {
+            if (lvWatchFolderList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
+                WatchFolder watchFolder = lvi.Tag as WatchFolder;
+
+                TaskSettings.WatchFolderList.Remove(watchFolder);
+                lvWatchFolderList.Items.Remove(lvi);
+                watchFolder.Dispose();
+            }
+        }
+
+        private void cbWatchFolderEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (loaded)
+            {
+                TaskSettings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
+
+                foreach (WatchFolder watchFolder in TaskSettings.WatchFolderList)
+                {
+                    if (TaskSettings.WatchFolderEnabled)
+                    {
+                        watchFolder.Enable();
+                    }
+                    else
+                    {
+                        watchFolder.Dispose();
+                    }
+                }
+            }
         }
     }
 }

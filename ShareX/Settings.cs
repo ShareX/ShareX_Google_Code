@@ -94,13 +94,6 @@ namespace ShareX
 
         #endregion Print
 
-        #region Watch folders
-
-        public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
-
-        #endregion Watch folders
-
         #endregion Settings Form
 
         #region History Form
