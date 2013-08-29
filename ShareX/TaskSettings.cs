@@ -75,7 +75,7 @@ namespace ShareX
         public static TaskSettings GetDefaultTaskSettings()
         {
             TaskSettings taskSettings = new TaskSettings();
-            TaskSettings.GetDefaultTaskSettings();
+            taskSettings.SetDefaultSettings();
             return taskSettings;
         }
 
