@@ -359,21 +359,6 @@ namespace ShareX
         public static void LoadHotkeySettings()
         {
             HotkeySettings = HotkeySettings.Load(HotkeySettingsFilePath);
-
-            List<WatchFolder> watchFolders = new List<WatchFolder>();
-            foreach (HotkeySetting hotkey in Program.HotkeySettings.Hotkeys)
-            {
-                if (hotkey.TaskSettings.WatchFolderEnabled)
-                {
-                    watchFolders.Union(hotkey.TaskSettings.WatchFolderList);
-                }
-            }
-
-            foreach (WatchFolder watchFolder in watchFolders)
-            {
-                watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
-                watchFolder.Enable();
-            }
         }
 
         public static void SaveSettings()

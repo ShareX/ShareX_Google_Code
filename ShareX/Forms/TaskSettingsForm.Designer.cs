@@ -178,9 +178,6 @@
             this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
             this.chkUseDefaultUploadSettings = new System.Windows.Forms.CheckBox();
             this.tpWatchFolders = new System.Windows.Forms.TabPage();
-            this.tpAdvanced = new System.Windows.Forms.TabPage();
-            this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
-            this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
             this.lvWatchFolderList = new System.Windows.Forms.ListView();
             this.chWatchFolderFolderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -188,6 +185,9 @@
             this.chWatchFolderIncludeSubdirectories = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnWatchFolderRemove = new System.Windows.Forms.Button();
             this.btnWatchFolderAdd = new System.Windows.Forms.Button();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
+            this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpImage.SuspendLayout();
@@ -1790,7 +1790,7 @@
             this.lvActions.Location = new System.Drawing.Point(8, 40);
             this.lvActions.MultiSelect = false;
             this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(488, 264);
+            this.lvActions.Size = new System.Drawing.Size(496, 280);
             this.lvActions.TabIndex = 7;
             this.lvActions.UseCompatibleStateImageBehavior = false;
             this.lvActions.View = System.Windows.Forms.View.Details;
@@ -2047,42 +2047,6 @@
             this.tpWatchFolders.Text = "Watch folders";
             this.tpWatchFolders.UseVisualStyleBackColor = true;
             // 
-            // tpAdvanced
-            // 
-            this.tpAdvanced.Controls.Add(this.pgTaskSettings);
-            this.tpAdvanced.Controls.Add(this.chkUseDefaultAdvancedSettings);
-            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
-            this.tpAdvanced.Name = "tpAdvanced";
-            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAdvanced.Size = new System.Drawing.Size(520, 360);
-            this.tpAdvanced.TabIndex = 6;
-            this.tpAdvanced.Text = "Advanced";
-            this.tpAdvanced.UseVisualStyleBackColor = true;
-            // 
-            // pgTaskSettings
-            // 
-            this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgTaskSettings.Location = new System.Drawing.Point(3, 30);
-            this.pgTaskSettings.Name = "pgTaskSettings";
-            this.pgTaskSettings.Size = new System.Drawing.Size(514, 327);
-            this.pgTaskSettings.TabIndex = 0;
-            this.pgTaskSettings.ToolbarVisible = false;
-            // 
-            // chkUseDefaultAdvancedSettings
-            // 
-            this.chkUseDefaultAdvancedSettings.AutoSize = true;
-            this.chkUseDefaultAdvancedSettings.Checked = true;
-            this.chkUseDefaultAdvancedSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultAdvancedSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkUseDefaultAdvancedSettings.Location = new System.Drawing.Point(3, 3);
-            this.chkUseDefaultAdvancedSettings.Name = "chkUseDefaultAdvancedSettings";
-            this.chkUseDefaultAdvancedSettings.Padding = new System.Windows.Forms.Padding(5);
-            this.chkUseDefaultAdvancedSettings.Size = new System.Drawing.Size(514, 27);
-            this.chkUseDefaultAdvancedSettings.TabIndex = 3;
-            this.chkUseDefaultAdvancedSettings.Text = "Use default advanced settings";
-            this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
-            this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
-            // 
             // cbWatchFolderEnabled
             // 
             this.cbWatchFolderEnabled.AutoSize = true;
@@ -2103,7 +2067,7 @@
             this.lvWatchFolderList.FullRowSelect = true;
             this.lvWatchFolderList.Location = new System.Drawing.Point(8, 64);
             this.lvWatchFolderList.Name = "lvWatchFolderList";
-            this.lvWatchFolderList.Size = new System.Drawing.Size(496, 208);
+            this.lvWatchFolderList.Size = new System.Drawing.Size(504, 288);
             this.lvWatchFolderList.TabIndex = 19;
             this.lvWatchFolderList.UseCompatibleStateImageBehavior = false;
             this.lvWatchFolderList.View = System.Windows.Forms.View.Details;
@@ -2142,6 +2106,42 @@
             this.btnWatchFolderAdd.Text = "Add...";
             this.btnWatchFolderAdd.UseVisualStyleBackColor = true;
             this.btnWatchFolderAdd.Click += new System.EventHandler(this.btnWatchFolderAdd_Click);
+            // 
+            // tpAdvanced
+            // 
+            this.tpAdvanced.Controls.Add(this.pgTaskSettings);
+            this.tpAdvanced.Controls.Add(this.chkUseDefaultAdvancedSettings);
+            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvanced.Name = "tpAdvanced";
+            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAdvanced.Size = new System.Drawing.Size(520, 360);
+            this.tpAdvanced.TabIndex = 6;
+            this.tpAdvanced.Text = "Advanced";
+            this.tpAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // pgTaskSettings
+            // 
+            this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgTaskSettings.Location = new System.Drawing.Point(3, 30);
+            this.pgTaskSettings.Name = "pgTaskSettings";
+            this.pgTaskSettings.Size = new System.Drawing.Size(514, 327);
+            this.pgTaskSettings.TabIndex = 0;
+            this.pgTaskSettings.ToolbarVisible = false;
+            // 
+            // chkUseDefaultAdvancedSettings
+            // 
+            this.chkUseDefaultAdvancedSettings.AutoSize = true;
+            this.chkUseDefaultAdvancedSettings.Checked = true;
+            this.chkUseDefaultAdvancedSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultAdvancedSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultAdvancedSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultAdvancedSettings.Name = "chkUseDefaultAdvancedSettings";
+            this.chkUseDefaultAdvancedSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultAdvancedSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultAdvancedSettings.TabIndex = 3;
+            this.chkUseDefaultAdvancedSettings.Text = "Use default advanced settings";
+            this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
             // TaskSettingsForm
             // 

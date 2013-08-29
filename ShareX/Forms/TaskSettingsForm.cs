@@ -37,11 +37,11 @@ namespace ShareX
 {
     public partial class TaskSettingsForm : Form
     {
-        private bool loaded;
         public TaskSettings TaskSettings { get; private set; }
         public bool IsDefault { get; private set; }
 
         private ContextMenuStrip cmsNameFormatPattern, cmsNameFormatPatternActiveWindow;
+        private bool loaded;
 
         public TaskSettingsForm(TaskSettings hotkeySetting, bool isDefault = false)
         {
@@ -895,7 +895,7 @@ namespace ShareX
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, Program.DefaultTaskSettings);
+                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, TaskSettings);
                     TaskSettings.WatchFolderList.Add(watchFolder);
                     AddWatchFolder(watchFolder);
 
