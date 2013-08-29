@@ -86,7 +86,7 @@ namespace ShareX
 
                 if (img != null)
                 {
-                    TaskSettings taskSettings = new TaskSettings();
+                    TaskSettings taskSettings = TaskSettings.GetDefaultTaskSettings();
                     taskSettings.UseDefaultAfterCaptureJob = false;
                     taskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AnnotateImage);
                     taskSettings.UseDefaultAdvancedSettings = false;
