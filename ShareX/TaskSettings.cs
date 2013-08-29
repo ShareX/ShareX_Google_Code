@@ -72,9 +72,11 @@ namespace ShareX
         [JsonIgnore]
         public TaskSettings TaskSettingsReference { get; private set; }
 
-        public TaskSettings()
+        public static TaskSettings GetDefaultTaskSettings()
         {
-            SetDefaultSettings();
+            TaskSettings taskSettings = new TaskSettings();
+            TaskSettings.GetDefaultTaskSettings();
+            return taskSettings;
         }
 
         public static TaskSettings GetSafeTaskSettings(TaskSettings taskSettings)

@@ -52,7 +52,6 @@ namespace ShareX
 
         public HotkeySetting()
         {
-            TaskSettings = new TaskSettings();
             HotkeyStatus = HotkeyStatus.NotConfigured;
             UniqueID = Helpers.GetUniqueID();
         }
@@ -60,6 +59,7 @@ namespace ShareX
         public HotkeySetting(HotkeyType job, Keys hotkey = Keys.None)
             : this()
         {
+            TaskSettings = TaskSettings.GetDefaultTaskSettings();
             TaskSettings.Job = job;
             TaskSettings.Description = job.GetDescription();
             Hotkey = hotkey;

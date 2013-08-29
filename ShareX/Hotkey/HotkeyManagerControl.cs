@@ -141,6 +141,7 @@ namespace ShareX
         private void btnAdd_Click(object sender, EventArgs e)
         {
             HotkeySetting hotkeySetting = new HotkeySetting();
+            hotkeySetting.TaskSettings = TaskSettings.GetDefaultTaskSettings();
             manager.Hotkeys.Add(hotkeySetting);
             HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
             control.Selected = true;

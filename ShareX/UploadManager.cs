@@ -204,7 +204,10 @@ namespace ShareX
         {
             if (imageJob != AfterCaptureTasks.None)
             {
-                TaskSettings taskSettings = new TaskSettings() { UseDefaultAfterCaptureJob = false, AfterCaptureJob = imageJob };
+                TaskSettings taskSettings = TaskSettings.GetDefaultTaskSettings();
+                taskSettings.UseDefaultAfterCaptureJob = false;
+                taskSettings.AfterCaptureJob = imageJob;
+
                 RunImageTask(img, taskSettings);
             }
         }
@@ -213,7 +216,9 @@ namespace ShareX
         {
             if (img != null)
             {
-                TaskSettings taskSettings = new TaskSettings() { UseDefaultDestinations = false, ImageDestination = imageDestination };
+                TaskSettings taskSettings = TaskSettings.GetDefaultTaskSettings();
+                taskSettings.UseDefaultDestinations = false;
+                taskSettings.ImageDestination = imageDestination;
                 RunImageTask(img, taskSettings);
             }
         }

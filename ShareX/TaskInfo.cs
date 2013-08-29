@@ -115,7 +115,7 @@ namespace ShareX
         {
             if (taskSettings == null)
             {
-                taskSettings = new TaskSettings();
+                taskSettings = TaskSettings.GetDefaultTaskSettings();
             }
 
             TaskSettings = taskSettings;
