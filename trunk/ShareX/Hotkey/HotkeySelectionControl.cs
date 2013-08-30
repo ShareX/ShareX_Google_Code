@@ -83,7 +83,7 @@ namespace ShareX
 
         private void UpdateHotkeyStatus()
         {
-            switch (Setting.HotkeyStatus)
+            switch (Setting.HotkeyInfo.Status)
             {
                 default:
                 case HotkeyStatus.NotConfigured:
@@ -115,7 +115,7 @@ namespace ShareX
             {
                 if (e.KeyData == Keys.Escape)
                 {
-                    Setting.Hotkey = Keys.None;
+                    Setting.HotkeyInfo.Hotkey = Keys.None;
                     StopEditing();
                 }
                 else if (e.KeyData == Keys.Enter)
@@ -124,7 +124,7 @@ namespace ShareX
                 }
                 else
                 {
-                    Setting.Hotkey = e.KeyData;
+                    Setting.HotkeyInfo.Hotkey = e.KeyData;
                     UpdateHotkeyText();
                 }
             }
@@ -139,7 +139,7 @@ namespace ShareX
                 // PrintScreen not trigger KeyDown event
                 if (e.KeyCode == Keys.PrintScreen)
                 {
-                    Setting.Hotkey = e.KeyData;
+                    Setting.HotkeyInfo.Hotkey = e.KeyData;
                     UpdateHotkeyText();
                 }
             }
@@ -171,7 +171,7 @@ namespace ShareX
             btnHotkey.BackColor = Color.FromArgb(225, 255, 225);
             btnHotkey.Text = "Select a hotkey...";
 
-            Setting.Hotkey = Keys.None;
+            Setting.HotkeyInfo.Hotkey = Keys.None;
             OnHotkeyChanged();
             UpdateHotkeyStatus();
         }
@@ -184,7 +184,7 @@ namespace ShareX
 
             if (Setting.HotkeyInfo.IsOnlyModifiers)
             {
-                Setting.Hotkey = Keys.None;
+                Setting.HotkeyInfo.Hotkey = Keys.None;
             }
 
             btnHotkey.BackColor = SystemColors.Control;

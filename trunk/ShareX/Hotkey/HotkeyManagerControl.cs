@@ -156,7 +156,7 @@ namespace ShareX
         {
             if (Selected != null)
             {
-                manager.RemoveHotkey(Selected.Setting);
+                manager.UnregisterHotkey(Selected.Setting);
                 HotkeySelectionControl hsc = FindSelectionControl(Selected.Setting);
                 if (hsc != null) flpHotkeys.Controls.Remove(hsc);
                 Selected = null;

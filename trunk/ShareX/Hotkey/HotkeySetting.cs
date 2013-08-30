@@ -32,42 +32,20 @@ namespace ShareX
 {
     public class HotkeySetting
     {
-        public Keys Hotkey { get; set; }
+        public HotkeyInfo HotkeyInfo { get; set; }
 
         public TaskSettings TaskSettings { get; set; }
 
-        public KeyInfo HotkeyInfo
-        {
-            get
-            {
-                return new KeyInfo(Hotkey);
-            }
-        }
-
-        [JsonIgnore]
-        public HotkeyStatus HotkeyStatus { get; set; }
-
-        [JsonIgnore]
-        public string UniqueID { get; private set; }
-
         public HotkeySetting()
         {
-            HotkeyStatus = HotkeyStatus.NotConfigured;
-            UniqueID = Helpers.GetUniqueID();
         }
 
         public HotkeySetting(HotkeyType job, Keys hotkey = Keys.None)
-            : this()
         {
             TaskSettings = TaskSettings.GetDefaultTaskSettings();
             TaskSettings.Job = job;
             TaskSettings.Description = job.GetDescription();
-            Hotkey = hotkey;
-        }
-
-        public override string ToString()
-        {
-            return HotkeyInfo.ToString();
+            HotkeyInfo = new HotkeyInfo { Hotkey = hotkey };
         }
     }
 }

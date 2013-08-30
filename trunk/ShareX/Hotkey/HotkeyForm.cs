@@ -55,45 +55,64 @@ namespace ShareX
             repeatLimitTimer = Stopwatch.StartNew();
         }
 
-        public HotkeyStatus RegisterHotkey(Keys hotkey, Action hotkeyPress, string tag)
+        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress)
         {
-            KeyInfo keyInfo = new KeyInfo(hotkey);
+            string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + "_" + (uint)hotkey;
 
-            if (keyInfo.KeyCode == Keys.None)
+            return RegisterHotkey(hotkey, hotkeyPress, atomName);
+        }
+
+        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, string atomName)
+        {
+            ushort id = NativeMethods.GlobalAddAtom(atomName);
+
+            return RegisterHotkey(hotkey, hotkeyPress, id);
+        }
+
+        public HotkeyInfo RegisterHotkey(HotkeyInfo hotkeyInfo)
+        {
+            return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress, hotkeyInfo.ID);
+        }
+
+        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, ushort id)
+        {
+            HotkeyInfo hotkeyInfo = new HotkeyInfo(id, hotkey, hotkeyPress);
+
+            if (!hotkeyInfo.IsValidKey)
             {
-                return HotkeyStatus.NotConfigured;
+                hotkeyInfo.Status = HotkeyStatus.NotConfigured;
+                return hotkeyInfo;
+            }
+
+            if (id == 0)
+            {
+                DebugHelper.WriteLine("Unable to generate unique hotkey ID: " + new KeyInfo(hotkey));
+                hotkeyInfo.Status = HotkeyStatus.Failed;
+                return hotkeyInfo;
             }
 
             if (IsHotkeyExist(hotkey))
             {
-                DebugHelper.WriteLine("Hotkey already exist: " + keyInfo);
-                return HotkeyStatus.Failed;
+                DebugHelper.WriteLine("Hotkey already exist: " + hotkeyInfo);
+                hotkeyInfo.Status = HotkeyStatus.Failed;
+                return hotkeyInfo;
             }
 
-            string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + tag;
-
-            ushort id = NativeMethods.GlobalAddAtom(atomName);
-
-            if (id == 0)
-            {
-                DebugHelper.WriteLine("Unable to generate unique hotkey ID. Error code: " + Marshal.GetLastWin32Error());
-                return HotkeyStatus.Failed;
-            }
-
-            if (!NativeMethods.RegisterHotKey(Handle, (int)id, (uint)keyInfo.ModifiersEnum, (uint)keyInfo.KeyCode))
+            if (!NativeMethods.RegisterHotKey(Handle, (int)id, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
             {
                 NativeMethods.GlobalDeleteAtom(id);
-                DebugHelper.WriteLine("Unable to register hotkey: {0}\r\nError code: {1}", keyInfo, Marshal.GetLastWin32Error());
-                return HotkeyStatus.Failed;
+                DebugHelper.WriteLine("Unable to register hotkey: " + hotkeyInfo);
+                hotkeyInfo.Status = HotkeyStatus.Failed;
+                return hotkeyInfo;
             }
 
-            HotkeyInfo hotkeyInfo = new HotkeyInfo(id, hotkey, hotkeyPress, tag);
             HotkeyList.Add(hotkeyInfo);
 
-            return HotkeyStatus.Registered;
+            hotkeyInfo.Status = HotkeyStatus.Registered;
+            return hotkeyInfo;
         }
 
-        public bool UnregisterHotkey(ushort id)
+        private bool UnregisterHotkey(ushort id)
         {
             bool result = false;
 
@@ -118,29 +137,10 @@ namespace ShareX
             return false;
         }
 
-        public bool UnregisterHotkey(Keys key)
+        public HotkeyInfo UpdateHotkey(HotkeyInfo hotkeyInfo)
         {
-            HotkeyInfo hotkeyInfo = GetHotkeyInfoFromKey(key);
-
-            return UnregisterHotkey(hotkeyInfo);
-        }
-
-        public bool UnregisterHotkey(string tag)
-        {
-            HotkeyInfo hi = GetHotkeyInfoFromTag(tag);
-
-            if (hi != null)
-            {
-                return UnregisterHotkey(hi);
-            }
-
-            return false;
-        }
-
-        public HotkeyStatus ChangeHotkey(string tag, Keys newHotkey, Action hotkeyPress = null)
-        {
-            UnregisterHotkey(tag);
-            return RegisterHotkey(newHotkey, hotkeyPress, tag);
+            UnregisterHotkey(hotkeyInfo);
+            return RegisterHotkey(hotkeyInfo);
         }
 
         public void UnregisterAllHotkeys()
@@ -153,17 +153,7 @@ namespace ShareX
 
         public bool IsHotkeyExist(Keys key)
         {
-            return HotkeyList.Any(x => x.Key == key);
-        }
-
-        public HotkeyInfo GetHotkeyInfoFromKey(Keys key)
-        {
-            return HotkeyList.FirstOrDefault(x => x.Key == key);
-        }
-
-        public HotkeyInfo GetHotkeyInfoFromTag(string tag)
-        {
-            return HotkeyList.FirstOrDefault(x => x.Tag == tag);
+            return HotkeyList.Any(x => x.Hotkey == key);
         }
 
         public HotkeyInfo GetHotkeyInfoFromID(ushort id)
@@ -184,7 +174,7 @@ namespace ShareX
                         hotkey.HotkeyPress();
                     }
 
-                    OnKeyPressed(new KeyEventArgs(hotkey.Key));
+                    OnKeyPressed(new KeyEventArgs(hotkey.Hotkey));
                 }
 
                 return;

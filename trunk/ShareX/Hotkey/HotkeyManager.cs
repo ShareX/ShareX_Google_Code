@@ -54,18 +54,18 @@ namespace ShareX
 
         public void RunHotkeys()
         {
-            foreach (HotkeySetting hotkey in Hotkeys)
+            foreach (HotkeySetting hotkeySetting in Hotkeys)
             {
-                if (hotkey.HotkeyStatus != HotkeyStatus.Registered)
+                if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered)
                 {
-                    AddHotkey(hotkey);
+                    RegisterHotkey(hotkeySetting);
                 }
             }
         }
 
         public void ShowFailedHotkeys()
         {
-            IEnumerable<HotkeySetting> failedHotkeysList = Hotkeys.Where(x => x.HotkeyStatus == HotkeyStatus.Failed);
+            IEnumerable<HotkeySetting> failedHotkeysList = Hotkeys.Where(x => x.HotkeyInfo.Status == HotkeyStatus.Failed);
 
             if (failedHotkeysList.Count() > 0)
             {
@@ -77,20 +77,19 @@ namespace ShareX
             }
         }
 
-        private void AddHotkey(HotkeySetting hotkeySetting)
+        private void RegisterHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeySetting.HotkeyStatus = hotkeyForm.RegisterHotkey(hotkeySetting.Hotkey, () => triggerAction(hotkeySetting), hotkeySetting.UniqueID);
+            hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo.Hotkey, () => triggerAction(hotkeySetting), Helpers.GetUniqueID());
         }
 
-        public HotkeyStatus UpdateHotkey(HotkeySetting hotkeySetting)
+        public HotkeyInfo UpdateHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeySetting.HotkeyStatus = hotkeyForm.ChangeHotkey(hotkeySetting.UniqueID, hotkeySetting.Hotkey, () => triggerAction(hotkeySetting));
-            return hotkeySetting.HotkeyStatus;
+            return hotkeyForm.UpdateHotkey(hotkeySetting.HotkeyInfo);
         }
 
-        public void RemoveHotkey(HotkeySetting hotkeySetting)
+        public void UnregisterHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeyForm.UnregisterHotkey(hotkeySetting.UniqueID);
+            hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
             Hotkeys.Remove(hotkeySetting);
         }
 
@@ -98,7 +97,7 @@ namespace ShareX
         {
             for (int i = Hotkeys.Count - 1; i >= 0; i--)
             {
-                RemoveHotkey(Hotkeys[i]);
+                UnregisterHotkey(Hotkeys[i]);
             }
 
             Hotkeys.AddRange(GetDefaultHotkeyList());

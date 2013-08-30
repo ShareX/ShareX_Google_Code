@@ -156,4 +156,9 @@ namespace ShareX
         [Description("Auto Capture")]
         AutoCapture
     }
+
+    public enum HotkeyStatus
+    {
+        Registered, Failed, NotConfigured
+    }
 }
