@@ -224,11 +224,6 @@ namespace HelpersLib
         UpToDate
     }
 
-    public enum HotkeyStatus
-    {
-        Registered, Failed, NotConfigured
-    }
-
     public enum PrintType
     {
         Image, Text
