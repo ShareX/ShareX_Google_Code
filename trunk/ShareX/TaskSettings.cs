@@ -81,7 +81,7 @@ namespace ShareX
 
         public static TaskSettings GetSafeTaskSettings(TaskSettings taskSettings)
         {
-            TaskSettings taskSettingsCopy = ReflectionCloner.DeepFieldClone(taskSettings);
+            TaskSettings taskSettingsCopy = taskSettings.Copy();
             taskSettingsCopy.TaskSettingsReference = taskSettings;
             taskSettingsCopy.SetDefaultSettings();
             return taskSettingsCopy;
@@ -91,7 +91,7 @@ namespace ShareX
         {
             if (Program.DefaultTaskSettings != null)
             {
-                TaskSettings defaultTaskSettings = ReflectionCloner.DeepFieldClone(Program.DefaultTaskSettings);
+                TaskSettings defaultTaskSettings = Program.DefaultTaskSettings.Copy();
 
                 if (UseDefaultAfterCaptureJob)
                 {
