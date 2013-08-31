@@ -52,14 +52,11 @@ namespace ShareX
             }
         }
 
-        public void RunHotkeys()
+        public void RegisterAllHotkeys()
         {
             foreach (HotkeySetting hotkeySetting in Hotkeys)
             {
-                if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered)
-                {
-                    RegisterHotkey(hotkeySetting);
-                }
+                RegisterHotkey(hotkeySetting);
             }
         }
 
@@ -79,17 +76,30 @@ namespace ShareX
 
         private void RegisterHotkey(HotkeySetting hotkeySetting)
         {
-            hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo.Hotkey, () => triggerAction(hotkeySetting), Helpers.GetUniqueID());
+            if (hotkeySetting.HotkeyInfo.HotkeyPress == null)
+            {
+                hotkeySetting.HotkeyInfo.HotkeyPress = () => triggerAction(hotkeySetting);
+            }
+
+            hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
+
+            if (!Hotkeys.Contains(hotkeySetting))
+            {
+                Hotkeys.Add(hotkeySetting);
+            }
         }
 
-        public HotkeyInfo UpdateHotkey(HotkeySetting hotkeySetting)
+        public void UpdateHotkey(HotkeySetting hotkeySetting)
         {
-            return hotkeyForm.UpdateHotkey(hotkeySetting.HotkeyInfo);
+            hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
+
+            RegisterHotkey(hotkeySetting);
         }
 
         public void UnregisterHotkey(HotkeySetting hotkeySetting)
         {
             hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
+
             Hotkeys.Remove(hotkeySetting);
         }
 

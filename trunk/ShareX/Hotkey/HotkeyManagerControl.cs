@@ -187,7 +187,7 @@ namespace ShareX
         private void btnReset_Click(object sender, EventArgs e)
         {
             manager.ResetHotkeys();
-            manager.RunHotkeys();
+            manager.RegisterAllHotkeys();
             AddControls();
         }
     }

@@ -33,13 +33,13 @@ namespace ShareX
 {
     public class HotkeyInfo
     {
-        [JsonIgnore]
-        public ushort ID { get; set; }
-
         public Keys Hotkey { get; set; }
 
         [JsonIgnore]
         public Action HotkeyPress { get; set; }
+
+        [JsonIgnore]
+        public ushort ID { get; set; }
 
         [JsonIgnore]
         public HotkeyStatus Status { get; set; }
@@ -119,12 +119,17 @@ namespace ShareX
             Status = HotkeyStatus.NotConfigured;
         }
 
-        public HotkeyInfo(ushort id, Keys key, Action hotkeyPress)
+        public HotkeyInfo(Keys hotkey)
             : this()
         {
-            ID = id;
-            Hotkey = key;
+            Hotkey = hotkey;
+        }
+
+        public HotkeyInfo(Keys hotkey, Action hotkeyPress, ushort id)
+            : this(hotkey)
+        {
             HotkeyPress = hotkeyPress;
+            ID = id;
         }
 
         public override string ToString()

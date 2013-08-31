@@ -52,7 +52,7 @@ namespace ShareX
                 this.InvokeSafe(() =>
                 {
                     Program.HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
-                    Program.HotkeyManager.RunHotkeys();
+                    Program.HotkeyManager.RegisterAllHotkeys();
                     Program.HotkeyManager.ShowFailedHotkeys();
 
                     HandleWatchFolder();

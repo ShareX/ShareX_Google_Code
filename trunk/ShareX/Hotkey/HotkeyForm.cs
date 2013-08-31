@@ -55,28 +55,38 @@ namespace ShareX
             repeatLimitTimer = Stopwatch.StartNew();
         }
 
-        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress)
+        public HotkeyInfo RegisterHotkey(HotkeyInfo hotkeyInfo)
         {
-            string atomName = Thread.CurrentThread.ManagedThreadId.ToString("X8") + "_" + (uint)hotkey;
+            if (hotkeyInfo != null && hotkeyInfo.Status != HotkeyStatus.Registered)
+            {
+                if (hotkeyInfo.ID > 0)
+                {
+                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress, hotkeyInfo.ID);
+                }
+                else
+                {
+                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress);
+                }
+            }
 
-            return RegisterHotkey(hotkey, hotkeyPress, atomName);
+            return hotkeyInfo;
         }
 
-        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, string atomName)
+        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress)
+        {
+            return RegisterHotkey(hotkey, hotkeyPress, Helpers.GetUniqueID());
+        }
+
+        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, string atomName)
         {
             ushort id = NativeMethods.GlobalAddAtom(atomName);
 
             return RegisterHotkey(hotkey, hotkeyPress, id);
         }
 
-        public HotkeyInfo RegisterHotkey(HotkeyInfo hotkeyInfo)
+        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, ushort id)
         {
-            return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress, hotkeyInfo.ID);
-        }
-
-        public HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, ushort id)
-        {
-            HotkeyInfo hotkeyInfo = new HotkeyInfo(id, hotkey, hotkeyPress);
+            HotkeyInfo hotkeyInfo = new HotkeyInfo(hotkey, hotkeyPress, id);
 
             if (!hotkeyInfo.IsValidKey)
             {
@@ -86,7 +96,7 @@ namespace ShareX
 
             if (id == 0)
             {
-                DebugHelper.WriteLine("Unable to generate unique hotkey ID: " + new KeyInfo(hotkey));
+                DebugHelper.WriteLine("Unable to generate unique hotkey ID: " + hotkeyInfo);
                 hotkeyInfo.Status = HotkeyStatus.Failed;
                 return hotkeyInfo;
             }
@@ -112,6 +122,28 @@ namespace ShareX
             return hotkeyInfo;
         }
 
+        public bool UnregisterHotkey(HotkeyInfo hotkeyInfo)
+        {
+            if (hotkeyInfo != null)
+            {
+                bool result = UnregisterHotkey(hotkeyInfo.ID);
+
+                if (result)
+                {
+                    hotkeyInfo.Status = HotkeyStatus.NotConfigured;
+                }
+                else
+                {
+                    hotkeyInfo.Status = HotkeyStatus.Failed;
+                }
+
+                HotkeyList.Remove(hotkeyInfo);
+                return result;
+            }
+
+            return false;
+        }
+
         private bool UnregisterHotkey(ushort id)
         {
             bool result = false;
@@ -123,18 +155,6 @@ namespace ShareX
             }
 
             return result;
-        }
-
-        public bool UnregisterHotkey(HotkeyInfo hotkeyInfo)
-        {
-            if (hotkeyInfo != null)
-            {
-                bool result = UnregisterHotkey(hotkeyInfo.ID);
-                HotkeyList.Remove(hotkeyInfo);
-                return result;
-            }
-
-            return false;
         }
 
         public HotkeyInfo UpdateHotkey(HotkeyInfo hotkeyInfo)
@@ -156,7 +176,7 @@ namespace ShareX
             return HotkeyList.Any(x => x.Hotkey == key);
         }
 
-        public HotkeyInfo GetHotkeyInfoFromID(ushort id)
+        private HotkeyInfo GetHotkeyInfoFromID(ushort id)
         {
             return HotkeyList.FirstOrDefault(x => x.ID == id);
         }

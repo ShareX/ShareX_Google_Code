@@ -118,8 +118,9 @@ namespace ShareX
                     Setting.HotkeyInfo.Hotkey = Keys.None;
                     StopEditing();
                 }
-                else if (e.KeyData == Keys.Enter)
+                else if (new HotkeyInfo(e.KeyData).IsValidKey)
                 {
+                    Setting.HotkeyInfo.Hotkey = e.KeyData;
                     StopEditing();
                 }
                 else
@@ -140,7 +141,7 @@ namespace ShareX
                 if (e.KeyCode == Keys.PrintScreen)
                 {
                     Setting.HotkeyInfo.Hotkey = e.KeyData;
-                    UpdateHotkeyText();
+                    StopEditing();
                 }
             }
         }
