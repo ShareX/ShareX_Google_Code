@@ -161,7 +161,6 @@
     <Compile Include="Forms\TaskSettingsForm.Designer.cs">
       <DependentUpon>TaskSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hotkey\KeyInfo.cs" />
     <Compile Include="ImageData.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
