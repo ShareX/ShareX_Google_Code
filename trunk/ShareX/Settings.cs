@@ -32,7 +32,7 @@ namespace ShareX
 {
     public class Settings : SettingsBase<Settings>
     {
-        public readonly TaskSettings DefaultTaskSettings = new TaskSettings();
+        public TaskSettings DefaultTaskSettings = new TaskSettings();
 
         public string FileUploadDefaultDirectory = "";
         public bool ShowUploadWarning = true; // First time upload warning

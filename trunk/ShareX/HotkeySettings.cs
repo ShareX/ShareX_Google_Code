@@ -33,6 +33,6 @@ namespace ShareX
 {
     public class HotkeySettings : SettingsBase<HotkeySettings>
     {
-        public readonly List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
     }
 }

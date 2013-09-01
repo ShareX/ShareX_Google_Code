@@ -25,8 +25,11 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
@@ -101,6 +104,7 @@ namespace HelpersLib
                     JsonWriter jsonWriter = new JsonTextWriter(streamWriter);
                     jsonWriter.Formatting = Formatting.Indented;
                     JsonSerializer serializer = new JsonSerializer();
+                    serializer.ContractResolver = new WritablePropertiesOnlyResolver();
                     serializer.Converters.Add(new StringEnumConverter());
                     serializer.Serialize(jsonWriter, obj);
                     jsonWriter.Flush();
@@ -174,6 +178,15 @@ namespace HelpersLib
             }
 
             return settings;
+        }
+    }
+
+    internal class WritablePropertiesOnlyResolver : DefaultContractResolver
+    {
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            IList<JsonProperty> props = base.CreateProperties(type, memberSerialization);
+            return props.Where(p => p.Writable).ToList();
         }
     }
 }
