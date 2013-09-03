@@ -118,7 +118,7 @@ namespace ShareX
                     Setting.HotkeyInfo.Hotkey = Keys.None;
                     StopEditing();
                 }
-                else if (new HotkeyInfo(e.KeyData).IsValidKey)
+                else if (new HotkeyInfo(e.KeyData).IsValidHotkey)
                 {
                     Setting.HotkeyInfo.Hotkey = e.KeyData;
                     StopEditing();

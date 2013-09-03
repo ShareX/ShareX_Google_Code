@@ -88,7 +88,7 @@ namespace ShareX
         {
             HotkeyInfo hotkeyInfo = new HotkeyInfo(hotkey, hotkeyPress, id);
 
-            if (!hotkeyInfo.IsValidKey)
+            if (!hotkeyInfo.IsValidHotkey)
             {
                 hotkeyInfo.Status = HotkeyStatus.NotConfigured;
                 return hotkeyInfo;
