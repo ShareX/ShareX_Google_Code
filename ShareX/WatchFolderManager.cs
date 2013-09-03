@@ -31,7 +31,7 @@ using System.Text;
 
 namespace ShareX
 {
-    public class WatchFolderManager
+    public class WatchFolderManager : IDisposable
     {
         public List<WatchFolder> WatchFolders { get; private set; }
 
@@ -115,6 +115,20 @@ namespace ShareX
                 else
                 {
                     watchFolder.Dispose();
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            if (WatchFolders != null)
+            {
+                foreach (WatchFolder watchFolder in WatchFolders)
+                {
+                    if (watchFolder != null)
+                    {
+                        watchFolder.Dispose();
+                    }
                 }
             }
         }

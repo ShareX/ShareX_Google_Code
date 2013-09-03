@@ -321,6 +321,7 @@ namespace ShareX
 
                 Application.Run(MainForm);
 
+                if (WatchFolderManager != null) WatchFolderManager.Dispose();
                 SaveSettings();
                 BackupSettings();
 
