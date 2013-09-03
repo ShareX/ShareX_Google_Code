@@ -69,6 +69,16 @@ namespace ShareX
         public bool WatchFolderEnabled = false;
         public List<WatchFolderSetting> WatchFolderList = new List<WatchFolderSetting>();
 
+        public bool IsUsingDefaultSettings
+        {
+            get
+            {
+                return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && UseDefaultImageSettings &&
+                    UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions && UseDefaultAdvancedSettings &&
+                    !WatchFolderEnabled;
+            }
+        }
+
         [JsonIgnore]
         public TaskSettings TaskSettingsReference { get; private set; }
 
