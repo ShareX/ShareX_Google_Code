@@ -67,7 +67,7 @@ namespace ShareX
         public TaskSettingsAdvanced AdvancedSettings = new TaskSettingsAdvanced();
 
         public bool WatchFolderEnabled = false;
-        public List<WatchFolder> WatchFolderList = new List<WatchFolder>();
+        public List<WatchFolderSetting> WatchFolderList = new List<WatchFolderSetting>();
 
         [JsonIgnore]
         public TaskSettings TaskSettingsReference { get; private set; }

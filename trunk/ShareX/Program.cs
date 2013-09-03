@@ -247,6 +247,7 @@ namespace ShareX
         public static ManualResetEvent UploaderSettingsResetEvent { get; private set; }
         public static ManualResetEvent HotkeySettingsResetEvent { get; private set; }
         public static HotkeyManager HotkeyManager { get; set; }
+        public static WatchFolderManager WatchFolderManager { get; set; }
 
         [STAThread]
         private static void Main(string[] args)

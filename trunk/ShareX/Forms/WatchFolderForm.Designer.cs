@@ -1,4 +1,4 @@
-﻿namespace HelpersLib
+﻿namespace ShareX
 {
     partial class WatchFolderForm
     {

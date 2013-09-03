@@ -136,6 +136,12 @@
     <Compile Include="Forms\UploadTestForm.Designer.cs">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WatchFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WatchFolderForm.Designer.cs">
+      <DependentUpon>WatchFolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotkeySettings.cs" />
     <Compile Include="Hotkey\HotkeyManager.cs" />
     <Compile Include="Hotkey\HotkeySetting.cs" />
@@ -182,6 +188,9 @@
     <Compile Include="Forms\HotkeySettingsForm.Designer.cs">
       <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WatchFolder.cs" />
+    <Compile Include="WatchFolderManager.cs" />
+    <Compile Include="WatchFolderSetting.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadTestForm.resx">
       <DependentUpon>UploadTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WatchFolderForm.resx">
+      <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hotkey\HotkeyManagerControl.resx">
       <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
