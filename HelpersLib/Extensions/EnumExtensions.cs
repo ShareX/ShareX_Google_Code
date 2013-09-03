@@ -69,11 +69,6 @@ namespace HelpersLib
             return flags.Any(x => value.HasFlag(x));
         }
 
-        public static bool HasFlagAll<T>(this Enum value, params T[] flags)
-        {
-            return flags.All(x => value.HasFlag(x));
-        }
-
         public static T Add<T>(this Enum value, params T[] flags)
         {
             ulong keysVal = Convert.ToUInt64(value);

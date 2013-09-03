@@ -64,7 +64,7 @@ namespace ShareX
         {
             get
             {
-                return (Hotkey & Keys.Control) == Keys.Control;
+                return Hotkey.HasFlag(Keys.Control);
             }
         }
 
@@ -72,7 +72,7 @@ namespace ShareX
         {
             get
             {
-                return (Hotkey & Keys.Shift) == Keys.Shift;
+                return Hotkey.HasFlag(Keys.Shift);
             }
         }
 
@@ -80,7 +80,7 @@ namespace ShareX
         {
             get
             {
-                return (Hotkey & Keys.Alt) == Keys.Alt;
+                return Hotkey.HasFlag(Keys.Alt);
             }
         }
 
@@ -93,6 +93,7 @@ namespace ShareX
                 if (Alt) modifiers |= Modifiers.Alt;
                 if (Control) modifiers |= Modifiers.Control;
                 if (Shift) modifiers |= Modifiers.Shift;
+                //if (Win) modifiers |= Modifiers.Win;
 
                 return modifiers;
             }
@@ -106,7 +107,7 @@ namespace ShareX
             }
         }
 
-        public bool IsValidKey
+        public bool IsValidHotkey
         {
             get
             {
@@ -158,17 +159,33 @@ namespace ShareX
             {
                 text += "...";
             }
-            else if (KeyCode == Keys.Next)
-            {
-                text += "Page Down";
-            }
             else if (KeyCode == Keys.Back)
             {
                 text += "Backspace";
             }
+            else if (KeyCode == Keys.Return)
+            {
+                text += "Enter";
+            }
+            else if (KeyCode == Keys.Capital)
+            {
+                text += "Caps Lock";
+            }
+            else if (KeyCode == Keys.Next)
+            {
+                text += "Page Down";
+            }
+            else if (KeyCode == Keys.Scroll)
+            {
+                text += "Scroll Lock";
+            }
             else if (KeyCode >= Keys.D0 && KeyCode <= Keys.D9)
             {
                 text += (KeyCode - Keys.D0).ToString();
+            }
+            else if (KeyCode >= Keys.NumPad0 && KeyCode <= Keys.NumPad9)
+            {
+                text += "Numpad " + (KeyCode - Keys.NumPad0).ToString();
             }
             else
             {
