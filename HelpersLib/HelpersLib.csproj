@@ -75,9 +75,6 @@
     <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ClipboardHelper.cs" />
-    <Compile Include="Cloning\ClonerHelpers.cs" />
-    <Compile Include="Cloning\ICloneFactory.cs" />
-    <Compile Include="Cloning\SerializationCloner.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="ComponentModelStrings.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
@@ -89,7 +86,7 @@
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Debug\DebugTimer.cs" />
-    <Compile Include="Cloning\ObjectExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Forms\ClipboardFormatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,12 +104,6 @@
     </Compile>
     <Compile Include="Forms\TrayForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\WatchFolderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\WatchFolderForm.Designer.cs">
-      <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GIF\AnimatedGif.cs" />
     <Compile Include="CaptureHelpers.cs" />
@@ -170,7 +161,6 @@
     <Compile Include="GIF\Quantizer.cs" />
     <Compile Include="ImageTag.cs" />
     <Compile Include="Native\FolderSelectDialog.cs" />
-    <Compile Include="Cloning\ReflectionCloner.cs" />
     <Compile Include="SettingsBase.cs" />
     <Compile Include="ShortcutHelper.cs" />
     <Compile Include="StringLineReader.cs" />
@@ -266,7 +256,6 @@
     <Compile Include="UpdateChecker\UpdateChecker.cs" />
     <Compile Include="UpdateChecker\UpdateInfo.cs" />
     <Compile Include="Links.cs" />
-    <Compile Include="WatchFolder.cs" />
     <Compile Include="Watermark\GradientMaker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,9 +291,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WatchFolderForm.resx">
-      <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateChecker\UpdaterForm.resx">
       <DependentUpon>UpdaterForm.cs</DependentUpon>

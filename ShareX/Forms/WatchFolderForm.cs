@@ -23,21 +23,22 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Windows.Forms;
 
-namespace HelpersLib
+namespace ShareX
 {
     public partial class WatchFolderForm : Form
     {
-        public WatchFolder WatchFolder { get; private set; }
+        public WatchFolderSetting WatchFolder { get; private set; }
 
         public WatchFolderForm()
-            : this(new WatchFolder())
+            : this(new WatchFolderSetting())
         {
         }
 
-        public WatchFolderForm(WatchFolder watchFolder)
+        public WatchFolderForm(WatchFolderSetting watchFolder)
         {
             WatchFolder = watchFolder;
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace HelpersLib
 
         private void btnPathBrowse_Click(object sender, EventArgs e)
         {
-            Helpers.BrowseFolder(Application.ProductName + " - Choose folder path", txtFolderPath);
+            Helpers.BrowseFolder("ShareX - Choose folder path", txtFolderPath);
         }
 
         private void btnOK_Click(object sender, EventArgs e)

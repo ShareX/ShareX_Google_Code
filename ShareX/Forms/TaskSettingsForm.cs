@@ -196,11 +196,11 @@ namespace ShareX
 
             if (TaskSettings.WatchFolderList == null)
             {
-                TaskSettings.WatchFolderList = new List<WatchFolder>();
+                TaskSettings.WatchFolderList = new List<WatchFolderSetting>();
             }
             else
             {
-                foreach (WatchFolder watchFolder in TaskSettings.WatchFolderList)
+                foreach (WatchFolderSetting watchFolder in TaskSettings.WatchFolderList)
                 {
                     AddWatchFolder(watchFolder);
                 }
@@ -894,26 +894,23 @@ namespace ShareX
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    WatchFolder watchFolder = form.WatchFolder;
-                    watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, TaskSettings);
-                    TaskSettings.WatchFolderList.Add(watchFolder);
-                    AddWatchFolder(watchFolder);
-
-                    if (TaskSettings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
+                    AddWatchFolder(form.WatchFolder);
                 }
             }
         }
 
-        private void AddWatchFolder(WatchFolder watchFolder)
+        private void AddWatchFolder(WatchFolderSetting watchFolderSetting)
         {
-            ListViewItem lvi = new ListViewItem(watchFolder.FolderPath ?? "");
-            lvi.Tag = watchFolder;
-            lvi.SubItems.Add(watchFolder.Filter ?? "");
-            lvi.SubItems.Add(watchFolder.IncludeSubdirectories.ToString());
-            lvWatchFolderList.Items.Add(lvi);
+            if (watchFolderSetting != null)
+            {
+                Program.WatchFolderManager.AddWatchFolder(watchFolderSetting, TaskSettings);
+
+                ListViewItem lvi = new ListViewItem(watchFolderSetting.FolderPath ?? "");
+                lvi.Tag = watchFolderSetting;
+                lvi.SubItems.Add(watchFolderSetting.Filter ?? "");
+                lvi.SubItems.Add(watchFolderSetting.IncludeSubdirectories.ToString());
+                lvWatchFolderList.Items.Add(lvi);
+            }
         }
 
         private void btnWatchFolderRemove_Click(object sender, EventArgs e)
@@ -921,11 +918,9 @@ namespace ShareX
             if (lvWatchFolderList.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvWatchFolderList.SelectedItems[0];
-                WatchFolder watchFolder = lvi.Tag as WatchFolder;
-
-                TaskSettings.WatchFolderList.Remove(watchFolder);
+                WatchFolderSetting watchFolderSetting = lvi.Tag as WatchFolderSetting;
+                Program.WatchFolderManager.RemoveWatchFolder(watchFolderSetting);
                 lvWatchFolderList.Items.Remove(lvi);
-                watchFolder.Dispose();
             }
         }
 
@@ -935,16 +930,9 @@ namespace ShareX
             {
                 TaskSettings.WatchFolderEnabled = cbWatchFolderEnabled.Checked;
 
-                foreach (WatchFolder watchFolder in TaskSettings.WatchFolderList)
+                foreach (WatchFolderSetting watchFolderSetting in TaskSettings.WatchFolderList)
                 {
-                    if (TaskSettings.WatchFolderEnabled)
-                    {
-                        watchFolder.Enable();
-                    }
-                    else
-                    {
-                        watchFolder.Dispose();
-                    }
+                    Program.WatchFolderManager.UpdateWatchFolderState(watchFolderSetting);
                 }
             }
         }

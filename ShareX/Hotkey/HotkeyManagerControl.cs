@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -175,6 +176,8 @@ namespace ShareX
             {
                 HotkeySetting hotkeySetting = new HotkeySetting();
                 hotkeySetting.TaskSettings = Selected.Setting.TaskSettings.Copy();
+                hotkeySetting.TaskSettings.WatchFolderEnabled = false;
+                hotkeySetting.TaskSettings.WatchFolderList = new List<WatchFolderSetting>();
                 manager.Hotkeys.Add(hotkeySetting);
                 HotkeySelectionControl control = AddHotkeySelectionControl(hotkeySetting);
                 control.Selected = true;

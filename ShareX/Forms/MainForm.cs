@@ -347,37 +347,6 @@ namespace ShareX
             }
         }
 
-        private class WatchFolderWithTaskSettings
-        {
-            public WatchFolder WatchFolder { get; set; }
-            public TaskSettings TaskSettings { get; set; }
-        }
-
-        private void HandleWatchFolder()
-        {
-            IEnumerable<WatchFolderWithTaskSettings> watchFolders = Program.HotkeySettings.Hotkeys.Where(x => x.TaskSettings.WatchFolderEnabled).
-                SelectMany(hotkeySetting => hotkeySetting.TaskSettings.WatchFolderList, (hotkeySetting, watchFolder) => new WatchFolderWithTaskSettings
-                {
-                    WatchFolder = watchFolder,
-                    TaskSettings = hotkeySetting.TaskSettings
-                });
-
-            if (Program.DefaultTaskSettings.WatchFolderEnabled)
-            {
-                watchFolders = Program.DefaultTaskSettings.WatchFolderList.Select(watchFolder => new WatchFolderWithTaskSettings
-                {
-                    WatchFolder = watchFolder,
-                    TaskSettings = Program.DefaultTaskSettings
-                }).Concat(watchFolders);
-            }
-
-            foreach (WatchFolderWithTaskSettings x in watchFolders)
-            {
-                x.WatchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, x.TaskSettings);
-                x.WatchFolder.Enable();
-            }
-        }
-
         public void UpdateMainFormSettings()
         {
             SetMultiEnumChecked(Program.DefaultTaskSettings.AfterCaptureJob, tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
