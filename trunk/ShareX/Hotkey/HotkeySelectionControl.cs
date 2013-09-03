@@ -73,7 +73,14 @@ namespace ShareX
 
         public void UpdateDescription()
         {
-            lblHotkeyDescription.Text = Setting.TaskSettings.Description;
+            string description = Setting.TaskSettings.Description;
+
+            if (Setting.TaskSettings.IsUsingDefaultSettings)
+            {
+                description += " - Default";
+            }
+
+            lblHotkeyDescription.Text = description;
         }
 
         private void UpdateHotkeyText()
