@@ -42,14 +42,14 @@
             this.txtFormat.Location = new System.Drawing.Point(88, 36);
             this.txtFormat.Name = "txtFormat";
             this.txtFormat.Size = new System.Drawing.Size(304, 20);
-            this.txtFormat.TabIndex = 10;
+            this.txtFormat.TabIndex = 3;
             // 
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(88, 12);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(304, 20);
-            this.txtDescription.TabIndex = 9;
+            this.txtDescription.TabIndex = 1;
             // 
             // lblFilter
             // 
@@ -57,7 +57,7 @@
             this.lblFilter.Location = new System.Drawing.Point(16, 40);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(42, 13);
-            this.lblFilter.TabIndex = 8;
+            this.lblFilter.TabIndex = 2;
             this.lblFilter.Text = "Format:";
             // 
             // lblFolderPath
@@ -66,7 +66,7 @@
             this.lblFolderPath.Location = new System.Drawing.Point(16, 16);
             this.lblFolderPath.Name = "lblFolderPath";
             this.lblFolderPath.Size = new System.Drawing.Size(63, 13);
-            this.lblFolderPath.TabIndex = 7;
+            this.lblFolderPath.TabIndex = 0;
             this.lblFolderPath.Text = "Description:";
             // 
             // lblExample
@@ -74,7 +74,7 @@
             this.lblExample.Location = new System.Drawing.Point(88, 60);
             this.lblExample.Name = "lblExample";
             this.lblExample.Size = new System.Drawing.Size(302, 52);
-            this.lblExample.TabIndex = 12;
+            this.lblExample.TabIndex = 4;
             // 
             // btnCancel
             // 
@@ -82,7 +82,7 @@
             this.btnCancel.Location = new System.Drawing.Point(316, 120);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -93,7 +93,7 @@
             this.btnOK.Location = new System.Drawing.Point(228, 120);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
-            this.btnOK.TabIndex = 14;
+            this.btnOK.TabIndex = 5;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);

@@ -429,7 +429,7 @@
             this.tpProxy.Name = "tpProxy";
             this.tpProxy.Padding = new System.Windows.Forms.Padding(5);
             this.tpProxy.Size = new System.Drawing.Size(522, 308);
-            this.tpProxy.TabIndex = 7;
+            this.tpProxy.TabIndex = 2;
             this.tpProxy.Text = "Proxy";
             this.tpProxy.UseVisualStyleBackColor = true;
             // 
@@ -569,7 +569,7 @@
             this.tpUpload.Name = "tpUpload";
             this.tpUpload.Padding = new System.Windows.Forms.Padding(3);
             this.tpUpload.Size = new System.Drawing.Size(522, 308);
-            this.tpUpload.TabIndex = 9;
+            this.tpUpload.TabIndex = 3;
             this.tpUpload.Text = "Upload";
             this.tpUpload.UseVisualStyleBackColor = true;
             // 
@@ -583,7 +583,7 @@
             this.gbBandwidth.Location = new System.Drawing.Point(16, 40);
             this.gbBandwidth.Name = "gbBandwidth";
             this.gbBandwidth.Size = new System.Drawing.Size(488, 88);
-            this.gbBandwidth.TabIndex = 14;
+            this.gbBandwidth.TabIndex = 1;
             this.gbBandwidth.TabStop = false;
             this.gbBandwidth.Text = "Bandwidth";
             // 
@@ -593,7 +593,7 @@
             this.lblUploadLimit.Location = new System.Drawing.Point(16, 24);
             this.lblUploadLimit.Name = "lblUploadLimit";
             this.lblUploadLimit.Size = new System.Drawing.Size(128, 13);
-            this.lblUploadLimit.TabIndex = 6;
+            this.lblUploadLimit.TabIndex = 0;
             this.lblUploadLimit.Text = "Simultaneous upload limit:";
             // 
             // nudUploadLimit
@@ -606,7 +606,7 @@
             0});
             this.nudUploadLimit.Name = "nudUploadLimit";
             this.nudUploadLimit.Size = new System.Drawing.Size(56, 20);
-            this.nudUploadLimit.TabIndex = 7;
+            this.nudUploadLimit.TabIndex = 1;
             this.nudUploadLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudUploadLimit.Value = new decimal(new int[] {
             5,
@@ -621,7 +621,7 @@
             this.lblUploadLimitHint.Location = new System.Drawing.Point(212, 24);
             this.lblUploadLimitHint.Name = "lblUploadLimitHint";
             this.lblUploadLimitHint.Size = new System.Drawing.Size(90, 13);
-            this.lblUploadLimitHint.TabIndex = 8;
+            this.lblUploadLimitHint.TabIndex = 2;
             this.lblUploadLimitHint.Text = "0 - 25 (0 disables)";
             // 
             // lblBufferSize
@@ -630,7 +630,7 @@
             this.lblBufferSize.Location = new System.Drawing.Point(16, 56);
             this.lblBufferSize.Name = "lblBufferSize";
             this.lblBufferSize.Size = new System.Drawing.Size(59, 13);
-            this.lblBufferSize.TabIndex = 9;
+            this.lblBufferSize.TabIndex = 3;
             this.lblBufferSize.Text = "Buffer size:";
             // 
             // cbBufferSize
@@ -640,7 +640,7 @@
             this.cbBufferSize.Location = new System.Drawing.Point(76, 52);
             this.cbBufferSize.Name = "cbBufferSize";
             this.cbBufferSize.Size = new System.Drawing.Size(76, 21);
-            this.cbBufferSize.TabIndex = 10;
+            this.cbBufferSize.TabIndex = 4;
             this.cbBufferSize.SelectedIndexChanged += new System.EventHandler(this.cbBufferSize_SelectedIndexChanged);
             // 
             // gbClipboardFormats
@@ -652,7 +652,7 @@
             this.gbClipboardFormats.Location = new System.Drawing.Point(16, 136);
             this.gbClipboardFormats.Name = "gbClipboardFormats";
             this.gbClipboardFormats.Size = new System.Drawing.Size(488, 160);
-            this.gbClipboardFormats.TabIndex = 13;
+            this.gbClipboardFormats.TabIndex = 2;
             this.gbClipboardFormats.TabStop = false;
             this.gbClipboardFormats.Text = "Clipboard Formats";
             // 
@@ -661,7 +661,7 @@
             this.btnClipboardFormatEdit.Location = new System.Drawing.Point(88, 16);
             this.btnClipboardFormatEdit.Name = "btnClipboardFormatEdit";
             this.btnClipboardFormatEdit.Size = new System.Drawing.Size(72, 23);
-            this.btnClipboardFormatEdit.TabIndex = 15;
+            this.btnClipboardFormatEdit.TabIndex = 1;
             this.btnClipboardFormatEdit.Text = "Edit...";
             this.btnClipboardFormatEdit.UseVisualStyleBackColor = true;
             this.btnClipboardFormatEdit.Click += new System.EventHandler(this.btnClipboardFormatEdit_Click);
@@ -671,7 +671,7 @@
             this.btnClipboardFormatRemove.Location = new System.Drawing.Point(168, 16);
             this.btnClipboardFormatRemove.Name = "btnClipboardFormatRemove";
             this.btnClipboardFormatRemove.Size = new System.Drawing.Size(72, 23);
-            this.btnClipboardFormatRemove.TabIndex = 14;
+            this.btnClipboardFormatRemove.TabIndex = 2;
             this.btnClipboardFormatRemove.Text = "Remove";
             this.btnClipboardFormatRemove.UseVisualStyleBackColor = true;
             this.btnClipboardFormatRemove.Click += new System.EventHandler(this.btnClipboardFormatRemove_Click);
@@ -681,7 +681,7 @@
             this.btnClipboardFormatAdd.Location = new System.Drawing.Point(8, 16);
             this.btnClipboardFormatAdd.Name = "btnClipboardFormatAdd";
             this.btnClipboardFormatAdd.Size = new System.Drawing.Size(72, 23);
-            this.btnClipboardFormatAdd.TabIndex = 13;
+            this.btnClipboardFormatAdd.TabIndex = 0;
             this.btnClipboardFormatAdd.Text = "Add...";
             this.btnClipboardFormatAdd.UseVisualStyleBackColor = true;
             this.btnClipboardFormatAdd.Click += new System.EventHandler(this.btnAddClipboardFormat_Click);
@@ -695,7 +695,7 @@
             this.lvClipboardFormats.Location = new System.Drawing.Point(8, 48);
             this.lvClipboardFormats.Name = "lvClipboardFormats";
             this.lvClipboardFormats.Size = new System.Drawing.Size(472, 104);
-            this.lvClipboardFormats.TabIndex = 12;
+            this.lvClipboardFormats.TabIndex = 3;
             this.lvClipboardFormats.UseCompatibleStateImageBehavior = false;
             this.lvClipboardFormats.View = System.Windows.Forms.View.Details;
             this.lvClipboardFormats.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvClipboardFormats_MouseDoubleClick);
@@ -716,7 +716,7 @@
             this.cbIfUploadFailRetryOnce.Location = new System.Drawing.Point(16, 16);
             this.cbIfUploadFailRetryOnce.Name = "cbIfUploadFailRetryOnce";
             this.cbIfUploadFailRetryOnce.Size = new System.Drawing.Size(223, 17);
-            this.cbIfUploadFailRetryOnce.TabIndex = 11;
+            this.cbIfUploadFailRetryOnce.TabIndex = 0;
             this.cbIfUploadFailRetryOnce.Text = "If upload fails then retry upload once more";
             this.cbIfUploadFailRetryOnce.UseVisualStyleBackColor = true;
             this.cbIfUploadFailRetryOnce.CheckedChanged += new System.EventHandler(this.cbIfUploadFailRetryOnce_CheckedChanged);
@@ -729,7 +729,7 @@
             this.tpPrint.Name = "tpPrint";
             this.tpPrint.Padding = new System.Windows.Forms.Padding(3);
             this.tpPrint.Size = new System.Drawing.Size(522, 308);
-            this.tpPrint.TabIndex = 11;
+            this.tpPrint.TabIndex = 4;
             this.tpPrint.Text = "Print";
             this.tpPrint.UseVisualStyleBackColor = true;
             // 
@@ -739,7 +739,7 @@
             this.cbDontShowPrintSettingDialog.Location = new System.Drawing.Point(16, 16);
             this.cbDontShowPrintSettingDialog.Name = "cbDontShowPrintSettingDialog";
             this.cbDontShowPrintSettingDialog.Size = new System.Drawing.Size(172, 17);
-            this.cbDontShowPrintSettingDialog.TabIndex = 1;
+            this.cbDontShowPrintSettingDialog.TabIndex = 0;
             this.cbDontShowPrintSettingDialog.Text = "Don\'t show print settings dialog";
             this.cbDontShowPrintSettingDialog.UseVisualStyleBackColor = true;
             this.cbDontShowPrintSettingDialog.CheckedChanged += new System.EventHandler(this.cbDontShowPrintSettingDialog_CheckedChanged);
@@ -749,7 +749,7 @@
             this.btnShowImagePrintSettings.Location = new System.Drawing.Point(16, 40);
             this.btnShowImagePrintSettings.Name = "btnShowImagePrintSettings";
             this.btnShowImagePrintSettings.Size = new System.Drawing.Size(168, 23);
-            this.btnShowImagePrintSettings.TabIndex = 0;
+            this.btnShowImagePrintSettings.TabIndex = 1;
             this.btnShowImagePrintSettings.Text = "Show image print settings...";
             this.btnShowImagePrintSettings.UseVisualStyleBackColor = true;
             this.btnShowImagePrintSettings.Click += new System.EventHandler(this.btnShowImagePrintSettings_Click);

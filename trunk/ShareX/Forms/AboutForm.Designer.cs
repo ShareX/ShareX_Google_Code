@@ -73,7 +73,7 @@
             this.lblProjectPage.Location = new System.Drawing.Point(16, 64);
             this.lblProjectPage.Name = "lblProjectPage";
             this.lblProjectPage.Size = new System.Drawing.Size(67, 13);
-            this.lblProjectPage.TabIndex = 2;
+            this.lblProjectPage.TabIndex = 4;
             this.lblProjectPage.Text = "Project page";
             this.lblProjectPage.Click += new System.EventHandler(this.lblProjectPage_Click);
             // 
@@ -85,7 +85,7 @@
             this.lblCopyright.Location = new System.Drawing.Point(16, 272);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(51, 13);
-            this.lblCopyright.TabIndex = 7;
+            this.lblCopyright.TabIndex = 8;
             this.lblCopyright.Text = "Copyright";
             this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -97,7 +97,7 @@
             this.lblCredits.Location = new System.Drawing.Point(16, 144);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new System.Drawing.Size(348, 117);
-            this.lblCredits.TabIndex = 6;
+            this.lblCredits.TabIndex = 7;
             this.lblCredits.Text = resources.GetString("lblCredits.Text");
             // 
             // lblBugs
@@ -110,7 +110,7 @@
             this.lblBugs.Location = new System.Drawing.Point(88, 64);
             this.lblBugs.Name = "lblBugs";
             this.lblBugs.Size = new System.Drawing.Size(100, 13);
-            this.lblBugs.TabIndex = 3;
+            this.lblBugs.TabIndex = 5;
             this.lblBugs.Text = "Bugs / Suggestions";
             this.lblBugs.Click += new System.EventHandler(this.lblBugs_Click);
             // 
@@ -122,7 +122,7 @@
             this.lblBerk.Location = new System.Drawing.Point(88, 90);
             this.lblBerk.Name = "lblBerk";
             this.lblBerk.Size = new System.Drawing.Size(108, 13);
-            this.lblBerk.TabIndex = 4;
+            this.lblBerk.TabIndex = 1;
             this.lblBerk.Text = "Jaex (flexy123) - Berk";
             // 
             // pbTR
@@ -181,7 +181,7 @@
             this.lblMike.Location = new System.Drawing.Point(64, 114);
             this.lblMike.Name = "lblMike";
             this.lblMike.Size = new System.Drawing.Size(164, 13);
-            this.lblMike.TabIndex = 5;
+            this.lblMike.TabIndex = 6;
             this.lblMike.Text = "McoreD (mcored) - Mike Delpach";
             // 
             // cLogo
@@ -190,7 +190,7 @@
             this.cLogo.Location = new System.Drawing.Point(209, 0);
             this.cLogo.Name = "cLogo";
             this.cLogo.Size = new System.Drawing.Size(200, 200);
-            this.cLogo.TabIndex = 20;
+            this.cLogo.TabIndex = 2;
             this.cLogo.Draw += new HelpersLib.Canvas.DrawEventHandler(this.cLogo_Draw);
             this.cLogo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cLogo_MouseDown);
             this.cLogo.MouseLeave += new System.EventHandler(this.cLogo_MouseLeave);
@@ -201,7 +201,7 @@
             this.uclUpdate.Location = new System.Drawing.Point(16, 35);
             this.uclUpdate.Name = "uclUpdate";
             this.uclUpdate.Size = new System.Drawing.Size(224, 24);
-            this.uclUpdate.TabIndex = 1;
+            this.uclUpdate.TabIndex = 3;
             // 
             // pbBerkSteamURL
             // 

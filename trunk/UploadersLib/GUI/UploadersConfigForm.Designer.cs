@@ -655,7 +655,7 @@
             this.oauth2Imgur.Name = "oauth2Imgur";
             this.oauth2Imgur.Size = new System.Drawing.Size(328, 207);
             this.oauth2Imgur.Status = "Status: Login required.";
-            this.oauth2Imgur.TabIndex = 9;
+            this.oauth2Imgur.TabIndex = 6;
             this.oauth2Imgur.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2Imgur_OpenButtonClicked);
             this.oauth2Imgur.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2Imgur_CompleteButtonClicked);
             this.oauth2Imgur.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2Imgur_RefreshButtonClicked);
@@ -665,7 +665,7 @@
             this.txtImgurAlbumID.Location = new System.Drawing.Point(256, 84);
             this.txtImgurAlbumID.Name = "txtImgurAlbumID";
             this.txtImgurAlbumID.Size = new System.Drawing.Size(176, 20);
-            this.txtImgurAlbumID.TabIndex = 8;
+            this.txtImgurAlbumID.TabIndex = 4;
             this.txtImgurAlbumID.TextChanged += new System.EventHandler(this.txtImgurAlbumID_TextChanged);
             // 
             // lblImgurAlbumID
@@ -674,7 +674,7 @@
             this.lblImgurAlbumID.Location = new System.Drawing.Point(16, 88);
             this.lblImgurAlbumID.Name = "lblImgurAlbumID";
             this.lblImgurAlbumID.Size = new System.Drawing.Size(233, 13);
-            this.lblImgurAlbumID.TabIndex = 7;
+            this.lblImgurAlbumID.TabIndex = 3;
             this.lblImgurAlbumID.Text = "Album ID for upload (Empty = No album upload):";
             // 
             // lvImgurAlbumList
@@ -688,7 +688,7 @@
             this.lvImgurAlbumList.MultiSelect = false;
             this.lvImgurAlbumList.Name = "lvImgurAlbumList";
             this.lvImgurAlbumList.Size = new System.Drawing.Size(432, 312);
-            this.lvImgurAlbumList.TabIndex = 6;
+            this.lvImgurAlbumList.TabIndex = 7;
             this.lvImgurAlbumList.UseCompatibleStateImageBehavior = false;
             this.lvImgurAlbumList.View = System.Windows.Forms.View.Details;
             this.lvImgurAlbumList.SelectedIndexChanged += new System.EventHandler(this.lvImgurAlbumList_SelectedIndexChanged);
@@ -714,7 +714,7 @@
             this.btnImgurRefreshAlbumList.Location = new System.Drawing.Point(16, 112);
             this.btnImgurRefreshAlbumList.Name = "btnImgurRefreshAlbumList";
             this.btnImgurRefreshAlbumList.Size = new System.Drawing.Size(200, 23);
-            this.btnImgurRefreshAlbumList.TabIndex = 4;
+            this.btnImgurRefreshAlbumList.TabIndex = 5;
             this.btnImgurRefreshAlbumList.Text = "Refresh album list";
             this.btnImgurRefreshAlbumList.UseVisualStyleBackColor = true;
             this.btnImgurRefreshAlbumList.Click += new System.EventHandler(this.btnImgurRefreshAlbumList_Click);
@@ -1046,7 +1046,7 @@
             this.lblTwitPicTip.Location = new System.Drawing.Point(16, 16);
             this.lblTwitPicTip.Name = "lblTwitPicTip";
             this.lblTwitPicTip.Size = new System.Drawing.Size(343, 40);
-            this.lblTwitPicTip.TabIndex = 7;
+            this.lblTwitPicTip.TabIndex = 0;
             this.lblTwitPicTip.Text = "TwitPic using Twitter settings for authentication.\r\nOther Services -> Twitter";
             // 
             // chkTwitPicShowFull
@@ -1055,7 +1055,7 @@
             this.chkTwitPicShowFull.Location = new System.Drawing.Point(24, 104);
             this.chkTwitPicShowFull.Name = "chkTwitPicShowFull";
             this.chkTwitPicShowFull.Size = new System.Drawing.Size(94, 17);
-            this.chkTwitPicShowFull.TabIndex = 6;
+            this.chkTwitPicShowFull.TabIndex = 3;
             this.chkTwitPicShowFull.Text = "Show full URL";
             this.chkTwitPicShowFull.UseVisualStyleBackColor = true;
             this.chkTwitPicShowFull.CheckedChanged += new System.EventHandler(this.chkTwitPicShowFull_CheckedChanged);
@@ -1067,7 +1067,7 @@
             this.cboTwitPicThumbnailMode.Location = new System.Drawing.Point(112, 68);
             this.cboTwitPicThumbnailMode.Name = "cboTwitPicThumbnailMode";
             this.cboTwitPicThumbnailMode.Size = new System.Drawing.Size(144, 21);
-            this.cboTwitPicThumbnailMode.TabIndex = 5;
+            this.cboTwitPicThumbnailMode.TabIndex = 2;
             this.cboTwitPicThumbnailMode.SelectedIndexChanged += new System.EventHandler(this.cboTwitPicThumbnailMode_SelectedIndexChanged);
             // 
             // lblTwitPicThumbnailMode
@@ -1076,7 +1076,7 @@
             this.lblTwitPicThumbnailMode.Location = new System.Drawing.Point(24, 72);
             this.lblTwitPicThumbnailMode.Name = "lblTwitPicThumbnailMode";
             this.lblTwitPicThumbnailMode.Size = new System.Drawing.Size(82, 13);
-            this.lblTwitPicThumbnailMode.TabIndex = 4;
+            this.lblTwitPicThumbnailMode.TabIndex = 1;
             this.lblTwitPicThumbnailMode.Text = "Thumbnail type:";
             // 
             // tpTwitSnaps
@@ -1169,7 +1169,7 @@
             this.txtPicasaAlbumID.Location = new System.Drawing.Point(592, 16);
             this.txtPicasaAlbumID.Name = "txtPicasaAlbumID";
             this.txtPicasaAlbumID.Size = new System.Drawing.Size(176, 20);
-            this.txtPicasaAlbumID.TabIndex = 10;
+            this.txtPicasaAlbumID.TabIndex = 2;
             this.txtPicasaAlbumID.TextChanged += new System.EventHandler(this.txtPicasaAlbumID_TextChanged);
             // 
             // lblPicasaAlbumID
@@ -1178,7 +1178,7 @@
             this.lblPicasaAlbumID.Location = new System.Drawing.Point(352, 20);
             this.lblPicasaAlbumID.Name = "lblPicasaAlbumID";
             this.lblPicasaAlbumID.Size = new System.Drawing.Size(233, 13);
-            this.lblPicasaAlbumID.TabIndex = 9;
+            this.lblPicasaAlbumID.TabIndex = 1;
             this.lblPicasaAlbumID.Text = "Album ID for upload (Empty = No album upload):";
             // 
             // lvPicasaAlbumList
@@ -1192,7 +1192,7 @@
             this.lvPicasaAlbumList.MultiSelect = false;
             this.lvPicasaAlbumList.Name = "lvPicasaAlbumList";
             this.lvPicasaAlbumList.Size = new System.Drawing.Size(432, 312);
-            this.lvPicasaAlbumList.TabIndex = 8;
+            this.lvPicasaAlbumList.TabIndex = 4;
             this.lvPicasaAlbumList.UseCompatibleStateImageBehavior = false;
             this.lvPicasaAlbumList.View = System.Windows.Forms.View.Details;
             this.lvPicasaAlbumList.SelectedIndexChanged += new System.EventHandler(this.lvPicasaAlbumList_SelectedIndexChanged);
@@ -1218,7 +1218,7 @@
             this.btnPicasaRefreshAlbumList.Location = new System.Drawing.Point(352, 44);
             this.btnPicasaRefreshAlbumList.Name = "btnPicasaRefreshAlbumList";
             this.btnPicasaRefreshAlbumList.Size = new System.Drawing.Size(200, 23);
-            this.btnPicasaRefreshAlbumList.TabIndex = 7;
+            this.btnPicasaRefreshAlbumList.TabIndex = 3;
             this.btnPicasaRefreshAlbumList.Text = "Refresh album list";
             this.btnPicasaRefreshAlbumList.UseVisualStyleBackColor = true;
             this.btnPicasaRefreshAlbumList.Click += new System.EventHandler(this.btnPicasaRefreshAlbumList_Click);
@@ -1306,7 +1306,7 @@
             this.lblPaste_eeUserAPIKey.Location = new System.Drawing.Point(16, 24);
             this.lblPaste_eeUserAPIKey.Name = "lblPaste_eeUserAPIKey";
             this.lblPaste_eeUserAPIKey.Size = new System.Drawing.Size(72, 13);
-            this.lblPaste_eeUserAPIKey.TabIndex = 1;
+            this.lblPaste_eeUserAPIKey.TabIndex = 0;
             this.lblPaste_eeUserAPIKey.Text = "User API key:";
             // 
             // txtPaste_eeUserAPIKey
@@ -1314,7 +1314,7 @@
             this.txtPaste_eeUserAPIKey.Location = new System.Drawing.Point(96, 20);
             this.txtPaste_eeUserAPIKey.Name = "txtPaste_eeUserAPIKey";
             this.txtPaste_eeUserAPIKey.Size = new System.Drawing.Size(296, 20);
-            this.txtPaste_eeUserAPIKey.TabIndex = 0;
+            this.txtPaste_eeUserAPIKey.TabIndex = 1;
             this.txtPaste_eeUserAPIKey.TextChanged += new System.EventHandler(this.txtPaste_eeUserAPIKey_TextChanged);
             // 
             // tpFileUploaders
@@ -1376,7 +1376,7 @@
             this.cbDropboxShortURL.Location = new System.Drawing.Point(160, 152);
             this.cbDropboxShortURL.Name = "cbDropboxShortURL";
             this.cbDropboxShortURL.Size = new System.Drawing.Size(137, 17);
-            this.cbDropboxShortURL.TabIndex = 20;
+            this.cbDropboxShortURL.TabIndex = 8;
             this.cbDropboxShortURL.Text = "Shorten shareable URL";
             this.cbDropboxShortURL.UseVisualStyleBackColor = true;
             this.cbDropboxShortURL.CheckedChanged += new System.EventHandler(this.cbDropboxShortURL_CheckedChanged);
@@ -1442,7 +1442,7 @@
             this.lblDropboxStatus.Location = new System.Drawing.Point(16, 176);
             this.lblDropboxStatus.Name = "lblDropboxStatus";
             this.lblDropboxStatus.Size = new System.Drawing.Size(82, 16);
-            this.lblDropboxStatus.TabIndex = 8;
+            this.lblDropboxStatus.TabIndex = 9;
             this.lblDropboxStatus.Text = "Login status:";
             // 
             // lblDropboxPathTip
@@ -1488,7 +1488,7 @@
             this.tpGoogleDrive.Name = "tpGoogleDrive";
             this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
             this.tpGoogleDrive.Size = new System.Drawing.Size(804, 475);
-            this.tpGoogleDrive.TabIndex = 11;
+            this.tpGoogleDrive.TabIndex = 1;
             this.tpGoogleDrive.Text = "Google Drive";
             this.tpGoogleDrive.UseVisualStyleBackColor = true;
             // 
@@ -1516,7 +1516,7 @@
             this.tpBox.Name = "tpBox";
             this.tpBox.Padding = new System.Windows.Forms.Padding(3);
             this.tpBox.Size = new System.Drawing.Size(804, 475);
-            this.tpBox.TabIndex = 6;
+            this.tpBox.TabIndex = 2;
             this.tpBox.Text = "Box";
             this.tpBox.UseVisualStyleBackColor = true;
             // 
@@ -1525,7 +1525,7 @@
             this.txtBoxFolderID.Location = new System.Drawing.Point(128, 52);
             this.txtBoxFolderID.Name = "txtBoxFolderID";
             this.txtBoxFolderID.Size = new System.Drawing.Size(88, 20);
-            this.txtBoxFolderID.TabIndex = 12;
+            this.txtBoxFolderID.TabIndex = 3;
             this.txtBoxFolderID.TextChanged += new System.EventHandler(this.txtBoxFolderID_TextChanged);
             // 
             // lblBoxFolderID
@@ -1534,7 +1534,7 @@
             this.lblBoxFolderID.Location = new System.Drawing.Point(16, 56);
             this.lblBoxFolderID.Name = "lblBoxFolderID";
             this.lblBoxFolderID.Size = new System.Drawing.Size(103, 13);
-            this.lblBoxFolderID.TabIndex = 11;
+            this.lblBoxFolderID.TabIndex = 2;
             this.lblBoxFolderID.Text = "Folder ID for upload:";
             // 
             // btnBoxRefreshFolders
@@ -1542,7 +1542,7 @@
             this.btnBoxRefreshFolders.Location = new System.Drawing.Point(16, 80);
             this.btnBoxRefreshFolders.Name = "btnBoxRefreshFolders";
             this.btnBoxRefreshFolders.Size = new System.Drawing.Size(128, 23);
-            this.btnBoxRefreshFolders.TabIndex = 10;
+            this.btnBoxRefreshFolders.TabIndex = 4;
             this.btnBoxRefreshFolders.Text = "Refresh folders list";
             this.btnBoxRefreshFolders.UseVisualStyleBackColor = true;
             this.btnBoxRefreshFolders.Click += new System.EventHandler(this.btnBoxRefreshFolders_Click);
@@ -1552,7 +1552,7 @@
             this.tvBoxFolders.Location = new System.Drawing.Point(16, 112);
             this.tvBoxFolders.Name = "tvBoxFolders";
             this.tvBoxFolders.Size = new System.Drawing.Size(440, 312);
-            this.tvBoxFolders.TabIndex = 9;
+            this.tvBoxFolders.TabIndex = 5;
             this.tvBoxFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvBoxFolders_AfterSelect);
             // 
             // btnBoxCompleteAuth
@@ -1585,7 +1585,7 @@
             this.tpMinus.Name = "tpMinus";
             this.tpMinus.Padding = new System.Windows.Forms.Padding(3);
             this.tpMinus.Size = new System.Drawing.Size(804, 475);
-            this.tpMinus.TabIndex = 1;
+            this.tpMinus.TabIndex = 3;
             this.tpMinus.Text = "Minus";
             this.tpMinus.UseVisualStyleBackColor = true;
             // 
@@ -1609,7 +1609,7 @@
             this.btnAuthRefresh.Location = new System.Drawing.Point(552, 16);
             this.btnAuthRefresh.Name = "btnAuthRefresh";
             this.btnAuthRefresh.Size = new System.Drawing.Size(144, 24);
-            this.btnAuthRefresh.TabIndex = 4;
+            this.btnAuthRefresh.TabIndex = 3;
             this.btnAuthRefresh.Text = "Refresh Authorization";
             this.btnAuthRefresh.UseVisualStyleBackColor = true;
             this.btnAuthRefresh.Click += new System.EventHandler(this.btnAuthRefresh_Click);
@@ -1620,7 +1620,7 @@
             this.lblMinusPassword.Location = new System.Drawing.Point(8, 56);
             this.lblMinusPassword.Name = "lblMinusPassword";
             this.lblMinusPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblMinusPassword.TabIndex = 3;
+            this.lblMinusPassword.TabIndex = 4;
             this.lblMinusPassword.Text = "Password:";
             // 
             // lblMinusUsername
@@ -1645,14 +1645,14 @@
             this.txtMinusUsername.Location = new System.Drawing.Point(72, 20);
             this.txtMinusUsername.Name = "txtMinusUsername";
             this.txtMinusUsername.Size = new System.Drawing.Size(136, 20);
-            this.txtMinusUsername.TabIndex = 2;
+            this.txtMinusUsername.TabIndex = 1;
             // 
             // btnMinusAuth
             // 
             this.btnMinusAuth.Location = new System.Drawing.Point(400, 16);
             this.btnMinusAuth.Name = "btnMinusAuth";
             this.btnMinusAuth.Size = new System.Drawing.Size(144, 24);
-            this.btnMinusAuth.TabIndex = 1;
+            this.btnMinusAuth.TabIndex = 2;
             this.btnMinusAuth.Text = "Authorize";
             this.btnMinusAuth.UseVisualStyleBackColor = true;
             this.btnMinusAuth.Click += new System.EventHandler(this.btnMinusAuth_Click);
@@ -1679,7 +1679,7 @@
             this.lblMinusURLType.Location = new System.Drawing.Point(16, 56);
             this.lblMinusURLType.Name = "lblMinusURLType";
             this.lblMinusURLType.Size = new System.Drawing.Size(55, 13);
-            this.lblMinusURLType.TabIndex = 6;
+            this.lblMinusURLType.TabIndex = 4;
             this.lblMinusURLType.Text = "URL type:";
             // 
             // cbMinusURLType
@@ -1689,7 +1689,7 @@
             this.cbMinusURLType.Location = new System.Drawing.Point(80, 52);
             this.cbMinusURLType.Name = "cbMinusURLType";
             this.cbMinusURLType.Size = new System.Drawing.Size(88, 21);
-            this.cbMinusURLType.TabIndex = 5;
+            this.cbMinusURLType.TabIndex = 6;
             this.cbMinusURLType.SelectedIndexChanged += new System.EventHandler(this.cbMinusURLType_SelectedIndexChanged);
             // 
             // btnMinusReadFolderList
@@ -1698,7 +1698,7 @@
             this.btnMinusReadFolderList.Location = new System.Drawing.Point(512, 48);
             this.btnMinusReadFolderList.Name = "btnMinusReadFolderList";
             this.btnMinusReadFolderList.Size = new System.Drawing.Size(184, 23);
-            this.btnMinusReadFolderList.TabIndex = 4;
+            this.btnMinusReadFolderList.TabIndex = 5;
             this.btnMinusReadFolderList.Text = "Reload folder list";
             this.btnMinusReadFolderList.UseVisualStyleBackColor = true;
             this.btnMinusReadFolderList.Click += new System.EventHandler(this.btnMinusReadFolderList_Click);
@@ -1709,7 +1709,7 @@
             this.chkMinusPublic.Location = new System.Drawing.Point(416, 26);
             this.chkMinusPublic.Name = "chkMinusPublic";
             this.chkMinusPublic.Size = new System.Drawing.Size(55, 17);
-            this.chkMinusPublic.TabIndex = 1;
+            this.chkMinusPublic.TabIndex = 3;
             this.chkMinusPublic.Text = "Public";
             this.chkMinusPublic.UseVisualStyleBackColor = true;
             // 
@@ -1718,7 +1718,7 @@
             this.btnMinusFolderAdd.Location = new System.Drawing.Point(512, 16);
             this.btnMinusFolderAdd.Name = "btnMinusFolderAdd";
             this.btnMinusFolderAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnMinusFolderAdd.TabIndex = 2;
+            this.btnMinusFolderAdd.TabIndex = 0;
             this.btnMinusFolderAdd.Text = "Add folder";
             this.btnMinusFolderAdd.UseVisualStyleBackColor = true;
             this.btnMinusFolderAdd.Click += new System.EventHandler(this.btnMinusFolderAdd_Click);
@@ -1729,7 +1729,7 @@
             this.btnMinusFolderRemove.Location = new System.Drawing.Point(592, 16);
             this.btnMinusFolderRemove.Name = "btnMinusFolderRemove";
             this.btnMinusFolderRemove.Size = new System.Drawing.Size(104, 23);
-            this.btnMinusFolderRemove.TabIndex = 3;
+            this.btnMinusFolderRemove.TabIndex = 1;
             this.btnMinusFolderRemove.Text = "Remove folder";
             this.btnMinusFolderRemove.UseVisualStyleBackColor = true;
             this.btnMinusFolderRemove.Click += new System.EventHandler(this.btnMinusFolderRemove_Click);
@@ -1740,7 +1740,7 @@
             this.cboMinusFolders.Location = new System.Drawing.Point(16, 24);
             this.cboMinusFolders.Name = "cboMinusFolders";
             this.cboMinusFolders.Size = new System.Drawing.Size(392, 21);
-            this.cboMinusFolders.TabIndex = 0;
+            this.cboMinusFolders.TabIndex = 2;
             this.cboMinusFolders.SelectedIndexChanged += new System.EventHandler(this.cboMinusFolders_SelectedIndexChanged);
             // 
             // lblMinusAuthStatus
@@ -1762,7 +1762,7 @@
             this.tpFTP.Name = "tpFTP";
             this.tpFTP.Padding = new System.Windows.Forms.Padding(3);
             this.tpFTP.Size = new System.Drawing.Size(804, 475);
-            this.tpFTP.TabIndex = 2;
+            this.tpFTP.TabIndex = 4;
             this.tpFTP.Text = "FTP";
             this.tpFTP.UseVisualStyleBackColor = true;
             // 
@@ -1799,7 +1799,7 @@
             this.btnFtpClient.Location = new System.Drawing.Point(376, 8);
             this.btnFtpClient.Name = "btnFtpClient";
             this.btnFtpClient.Size = new System.Drawing.Size(64, 24);
-            this.btnFtpClient.TabIndex = 4;
+            this.btnFtpClient.TabIndex = 2;
             this.btnFtpClient.Text = "Client...";
             this.btnFtpClient.UseVisualStyleBackColor = true;
             this.btnFtpClient.Click += new System.EventHandler(this.btnFtpClient_Click);
@@ -1813,7 +1813,7 @@
             this.btnFTPExport.Location = new System.Drawing.Point(650, 8);
             this.btnFTPExport.Name = "btnFTPExport";
             this.btnFTPExport.Size = new System.Drawing.Size(127, 23);
-            this.btnFTPExport.TabIndex = 3;
+            this.btnFTPExport.TabIndex = 4;
             this.btnFTPExport.Text = "Export FTP Accounts...";
             this.btnFTPExport.UseVisualStyleBackColor = true;
             this.btnFTPExport.Click += new System.EventHandler(this.btnFTPExport_Click);
@@ -1827,7 +1827,7 @@
             this.btnFTPImport.Location = new System.Drawing.Point(514, 8);
             this.btnFTPImport.Name = "btnFTPImport";
             this.btnFTPImport.Size = new System.Drawing.Size(126, 23);
-            this.btnFTPImport.TabIndex = 2;
+            this.btnFTPImport.TabIndex = 3;
             this.btnFTPImport.Text = "Import FTP Accounts...";
             this.btnFTPImport.UseVisualStyleBackColor = true;
             this.btnFTPImport.Click += new System.EventHandler(this.btnFTPImport_Click);
@@ -1873,7 +1873,7 @@
             this.lblFtpFiles.Location = new System.Drawing.Point(29, 75);
             this.lblFtpFiles.Name = "lblFtpFiles";
             this.lblFtpFiles.Size = new System.Drawing.Size(28, 13);
-            this.lblFtpFiles.TabIndex = 7;
+            this.lblFtpFiles.TabIndex = 4;
             this.lblFtpFiles.Text = "Files";
             // 
             // lblFtpText
@@ -1882,7 +1882,7 @@
             this.lblFtpText.Location = new System.Drawing.Point(29, 49);
             this.lblFtpText.Name = "lblFtpText";
             this.lblFtpText.Size = new System.Drawing.Size(28, 13);
-            this.lblFtpText.TabIndex = 4;
+            this.lblFtpText.TabIndex = 2;
             this.lblFtpText.Text = "Text";
             // 
             // lblFtpImages
@@ -1901,7 +1901,7 @@
             this.cboFtpFiles.Location = new System.Drawing.Point(69, 69);
             this.cboFtpFiles.Name = "cboFtpFiles";
             this.cboFtpFiles.Size = new System.Drawing.Size(272, 21);
-            this.cboFtpFiles.TabIndex = 8;
+            this.cboFtpFiles.TabIndex = 5;
             this.cboFtpFiles.SelectedIndexChanged += new System.EventHandler(this.cboFtpFiles_SelectedIndexChanged);
             // 
             // cboFtpText
@@ -1911,7 +1911,7 @@
             this.cboFtpText.Location = new System.Drawing.Point(69, 45);
             this.cboFtpText.Name = "cboFtpText";
             this.cboFtpText.Size = new System.Drawing.Size(272, 21);
-            this.cboFtpText.TabIndex = 5;
+            this.cboFtpText.TabIndex = 3;
             this.cboFtpText.SelectedIndexChanged += new System.EventHandler(this.cboFtpText_SelectedIndexChanged);
             // 
             // cboFtpImages
@@ -1938,7 +1938,7 @@
             this.tpRapidShare.Name = "tpRapidShare";
             this.tpRapidShare.Padding = new System.Windows.Forms.Padding(3);
             this.tpRapidShare.Size = new System.Drawing.Size(804, 475);
-            this.tpRapidShare.TabIndex = 3;
+            this.tpRapidShare.TabIndex = 5;
             this.tpRapidShare.Text = "RapidShare";
             this.tpRapidShare.UseVisualStyleBackColor = true;
             // 
@@ -1947,7 +1947,7 @@
             this.txtRapidShareFolderID.Location = new System.Drawing.Point(128, 84);
             this.txtRapidShareFolderID.Name = "txtRapidShareFolderID";
             this.txtRapidShareFolderID.Size = new System.Drawing.Size(88, 20);
-            this.txtRapidShareFolderID.TabIndex = 8;
+            this.txtRapidShareFolderID.TabIndex = 5;
             this.txtRapidShareFolderID.TextChanged += new System.EventHandler(this.txtRapidShareFolderID_TextChanged);
             // 
             // lblRapidShareFolderID
@@ -1956,7 +1956,7 @@
             this.lblRapidShareFolderID.Location = new System.Drawing.Point(16, 88);
             this.lblRapidShareFolderID.Name = "lblRapidShareFolderID";
             this.lblRapidShareFolderID.Size = new System.Drawing.Size(103, 13);
-            this.lblRapidShareFolderID.TabIndex = 7;
+            this.lblRapidShareFolderID.TabIndex = 4;
             this.lblRapidShareFolderID.Text = "Folder ID for upload:";
             // 
             // btnRapidShareRefreshFolders
@@ -1974,7 +1974,7 @@
             this.tvRapidShareFolders.Location = new System.Drawing.Point(16, 144);
             this.tvRapidShareFolders.Name = "tvRapidShareFolders";
             this.tvRapidShareFolders.Size = new System.Drawing.Size(440, 312);
-            this.tvRapidShareFolders.TabIndex = 5;
+            this.tvRapidShareFolders.TabIndex = 7;
             this.tvRapidShareFolders.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvRapidShareFolders_AfterSelect);
             // 
             // lblRapidSharePassword
@@ -1983,7 +1983,7 @@
             this.lblRapidSharePassword.Location = new System.Drawing.Point(16, 56);
             this.lblRapidSharePassword.Name = "lblRapidSharePassword";
             this.lblRapidSharePassword.Size = new System.Drawing.Size(56, 13);
-            this.lblRapidSharePassword.TabIndex = 3;
+            this.lblRapidSharePassword.TabIndex = 2;
             this.lblRapidSharePassword.Text = "Password:";
             // 
             // lblRapidSharePremiumUsername
@@ -1992,7 +1992,7 @@
             this.lblRapidSharePremiumUsername.Location = new System.Drawing.Point(16, 24);
             this.lblRapidSharePremiumUsername.Name = "lblRapidSharePremiumUsername";
             this.lblRapidSharePremiumUsername.Size = new System.Drawing.Size(58, 13);
-            this.lblRapidSharePremiumUsername.TabIndex = 1;
+            this.lblRapidSharePremiumUsername.TabIndex = 0;
             this.lblRapidSharePremiumUsername.Text = "Username:";
             // 
             // txtRapidSharePassword
@@ -2001,7 +2001,7 @@
             this.txtRapidSharePassword.Name = "txtRapidSharePassword";
             this.txtRapidSharePassword.PasswordChar = '*';
             this.txtRapidSharePassword.Size = new System.Drawing.Size(136, 20);
-            this.txtRapidSharePassword.TabIndex = 4;
+            this.txtRapidSharePassword.TabIndex = 3;
             this.txtRapidSharePassword.TextChanged += new System.EventHandler(this.txtRapidSharePassword_TextChanged);
             // 
             // txtRapidShareUsername
@@ -2009,7 +2009,7 @@
             this.txtRapidShareUsername.Location = new System.Drawing.Point(80, 20);
             this.txtRapidShareUsername.Name = "txtRapidShareUsername";
             this.txtRapidShareUsername.Size = new System.Drawing.Size(136, 20);
-            this.txtRapidShareUsername.TabIndex = 2;
+            this.txtRapidShareUsername.TabIndex = 1;
             this.txtRapidShareUsername.TextChanged += new System.EventHandler(this.txtRapidShareUsername_TextChanged);
             // 
             // tpSendSpace
@@ -2024,7 +2024,7 @@
             this.tpSendSpace.Name = "tpSendSpace";
             this.tpSendSpace.Padding = new System.Windows.Forms.Padding(3);
             this.tpSendSpace.Size = new System.Drawing.Size(804, 475);
-            this.tpSendSpace.TabIndex = 4;
+            this.tpSendSpace.TabIndex = 6;
             this.tpSendSpace.Text = "SendSpace";
             this.tpSendSpace.UseVisualStyleBackColor = true;
             // 
@@ -2094,7 +2094,7 @@
             this.tpGe_tt.Name = "tpGe_tt";
             this.tpGe_tt.Padding = new System.Windows.Forms.Padding(3);
             this.tpGe_tt.Size = new System.Drawing.Size(804, 475);
-            this.tpGe_tt.TabIndex = 9;
+            this.tpGe_tt.TabIndex = 7;
             this.tpGe_tt.Text = "Ge.tt";
             this.tpGe_tt.UseVisualStyleBackColor = true;
             // 
@@ -2113,7 +2113,7 @@
             this.lblGe_ttPassword.Location = new System.Drawing.Point(24, 48);
             this.lblGe_ttPassword.Name = "lblGe_ttPassword";
             this.lblGe_ttPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblGe_ttPassword.TabIndex = 4;
+            this.lblGe_ttPassword.TabIndex = 2;
             this.lblGe_ttPassword.Text = "Password:";
             // 
             // lblGe_ttEmail
@@ -2122,7 +2122,7 @@
             this.lblGe_ttEmail.Location = new System.Drawing.Point(24, 24);
             this.lblGe_ttEmail.Name = "lblGe_ttEmail";
             this.lblGe_ttEmail.Size = new System.Drawing.Size(35, 13);
-            this.lblGe_ttEmail.TabIndex = 3;
+            this.lblGe_ttEmail.TabIndex = 0;
             this.lblGe_ttEmail.Text = "Email:";
             // 
             // btnGe_ttLogin
@@ -2130,7 +2130,7 @@
             this.btnGe_ttLogin.Location = new System.Drawing.Point(184, 72);
             this.btnGe_ttLogin.Name = "btnGe_ttLogin";
             this.btnGe_ttLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnGe_ttLogin.TabIndex = 2;
+            this.btnGe_ttLogin.TabIndex = 4;
             this.btnGe_ttLogin.Text = "Login";
             this.btnGe_ttLogin.UseVisualStyleBackColor = true;
             this.btnGe_ttLogin.Click += new System.EventHandler(this.btnGe_ttLogin_Click);
@@ -2141,14 +2141,14 @@
             this.txtGe_ttPassword.Name = "txtGe_ttPassword";
             this.txtGe_ttPassword.PasswordChar = '*';
             this.txtGe_ttPassword.Size = new System.Drawing.Size(168, 20);
-            this.txtGe_ttPassword.TabIndex = 1;
+            this.txtGe_ttPassword.TabIndex = 3;
             // 
             // txtGe_ttEmail
             // 
             this.txtGe_ttEmail.Location = new System.Drawing.Point(88, 20);
             this.txtGe_ttEmail.Name = "txtGe_ttEmail";
             this.txtGe_ttEmail.Size = new System.Drawing.Size(168, 20);
-            this.txtGe_ttEmail.TabIndex = 0;
+            this.txtGe_ttEmail.TabIndex = 1;
             // 
             // tpHostr
             // 
@@ -2161,7 +2161,7 @@
             this.tpHostr.Name = "tpHostr";
             this.tpHostr.Padding = new System.Windows.Forms.Padding(3);
             this.tpHostr.Size = new System.Drawing.Size(804, 475);
-            this.tpHostr.TabIndex = 10;
+            this.tpHostr.TabIndex = 8;
             this.tpHostr.Text = "Hostr";
             this.tpHostr.UseVisualStyleBackColor = true;
             // 
@@ -2171,7 +2171,7 @@
             this.cbLocalhostrDirectURL.Location = new System.Drawing.Point(26, 72);
             this.cbLocalhostrDirectURL.Name = "cbLocalhostrDirectURL";
             this.cbLocalhostrDirectURL.Size = new System.Drawing.Size(131, 17);
-            this.cbLocalhostrDirectURL.TabIndex = 9;
+            this.cbLocalhostrDirectURL.TabIndex = 4;
             this.cbLocalhostrDirectURL.Text = "Use direct URL if exist";
             this.cbLocalhostrDirectURL.UseVisualStyleBackColor = true;
             this.cbLocalhostrDirectURL.CheckedChanged += new System.EventHandler(this.cbLocalhostrDirectURL_CheckedChanged);
@@ -2182,7 +2182,7 @@
             this.lblLocalhostrPassword.Location = new System.Drawing.Point(24, 48);
             this.lblLocalhostrPassword.Name = "lblLocalhostrPassword";
             this.lblLocalhostrPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblLocalhostrPassword.TabIndex = 8;
+            this.lblLocalhostrPassword.TabIndex = 2;
             this.lblLocalhostrPassword.Text = "Password:";
             // 
             // lblLocalhostrEmail
@@ -2191,7 +2191,7 @@
             this.lblLocalhostrEmail.Location = new System.Drawing.Point(24, 24);
             this.lblLocalhostrEmail.Name = "lblLocalhostrEmail";
             this.lblLocalhostrEmail.Size = new System.Drawing.Size(35, 13);
-            this.lblLocalhostrEmail.TabIndex = 7;
+            this.lblLocalhostrEmail.TabIndex = 0;
             this.lblLocalhostrEmail.Text = "Email:";
             // 
             // txtLocalhostrPassword
@@ -2200,7 +2200,7 @@
             this.txtLocalhostrPassword.Name = "txtLocalhostrPassword";
             this.txtLocalhostrPassword.PasswordChar = '*';
             this.txtLocalhostrPassword.Size = new System.Drawing.Size(168, 20);
-            this.txtLocalhostrPassword.TabIndex = 6;
+            this.txtLocalhostrPassword.TabIndex = 3;
             this.txtLocalhostrPassword.TextChanged += new System.EventHandler(this.txtLocalhostrPassword_TextChanged);
             // 
             // txtLocalhostrEmail
@@ -2208,7 +2208,7 @@
             this.txtLocalhostrEmail.Location = new System.Drawing.Point(88, 20);
             this.txtLocalhostrEmail.Name = "txtLocalhostrEmail";
             this.txtLocalhostrEmail.Size = new System.Drawing.Size(168, 20);
-            this.txtLocalhostrEmail.TabIndex = 5;
+            this.txtLocalhostrEmail.TabIndex = 1;
             this.txtLocalhostrEmail.TextChanged += new System.EventHandler(this.txtLocalhostrEmail_TextChanged);
             // 
             // tpSharedFolder
@@ -2218,7 +2218,7 @@
             this.tpSharedFolder.Name = "tpSharedFolder";
             this.tpSharedFolder.Padding = new System.Windows.Forms.Padding(3);
             this.tpSharedFolder.Size = new System.Drawing.Size(804, 475);
-            this.tpSharedFolder.TabIndex = 7;
+            this.tpSharedFolder.TabIndex = 9;
             this.tpSharedFolder.Text = "Shared folder";
             this.tpSharedFolder.UseVisualStyleBackColor = true;
             // 
@@ -2344,7 +2344,7 @@
             this.tpEmail.Name = "tpEmail";
             this.tpEmail.Padding = new System.Windows.Forms.Padding(3);
             this.tpEmail.Size = new System.Drawing.Size(804, 475);
-            this.tpEmail.TabIndex = 8;
+            this.tpEmail.TabIndex = 10;
             this.tpEmail.Text = "Email";
             this.tpEmail.UseVisualStyleBackColor = true;
             // 
@@ -2354,7 +2354,7 @@
             this.chkEmailConfirm.Location = new System.Drawing.Point(216, 96);
             this.chkEmailConfirm.Name = "chkEmailConfirm";
             this.chkEmailConfirm.Size = new System.Drawing.Size(134, 17);
-            this.chkEmailConfirm.TabIndex = 10;
+            this.chkEmailConfirm.TabIndex = 9;
             this.chkEmailConfirm.Text = "Confirm before sending";
             this.chkEmailConfirm.UseVisualStyleBackColor = true;
             this.chkEmailConfirm.CheckedChanged += new System.EventHandler(this.chkEmailConfirm_CheckedChanged);
@@ -2374,7 +2374,7 @@
             this.lblEmailPassword.Location = new System.Drawing.Point(16, 64);
             this.lblEmailPassword.Name = "lblEmailPassword";
             this.lblEmailPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblEmailPassword.TabIndex = 7;
+            this.lblEmailPassword.TabIndex = 6;
             this.lblEmailPassword.Text = "Password:";
             // 
             // cbEmailRememberLastTo
@@ -2383,7 +2383,7 @@
             this.cbEmailRememberLastTo.Location = new System.Drawing.Point(16, 96);
             this.cbEmailRememberLastTo.Name = "cbEmailRememberLastTo";
             this.cbEmailRememberLastTo.Size = new System.Drawing.Size(179, 17);
-            this.cbEmailRememberLastTo.TabIndex = 9;
+            this.cbEmailRememberLastTo.TabIndex = 8;
             this.cbEmailRememberLastTo.Text = "Remember last recipient address";
             this.cbEmailRememberLastTo.UseVisualStyleBackColor = true;
             this.cbEmailRememberLastTo.CheckedChanged += new System.EventHandler(this.cbRememberLastToEmail_CheckedChanged);
@@ -2393,7 +2393,7 @@
             this.txtEmailFrom.Location = new System.Drawing.Point(96, 36);
             this.txtEmailFrom.Name = "txtEmailFrom";
             this.txtEmailFrom.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailFrom.TabIndex = 6;
+            this.txtEmailFrom.TabIndex = 5;
             this.txtEmailFrom.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // txtEmailPassword
@@ -2402,7 +2402,7 @@
             this.txtEmailPassword.Name = "txtEmailPassword";
             this.txtEmailPassword.PasswordChar = '*';
             this.txtEmailPassword.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailPassword.TabIndex = 8;
+            this.txtEmailPassword.TabIndex = 7;
             this.txtEmailPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // txtEmailDefaultBody
@@ -2411,7 +2411,7 @@
             this.txtEmailDefaultBody.Multiline = true;
             this.txtEmailDefaultBody.Name = "txtEmailDefaultBody";
             this.txtEmailDefaultBody.Size = new System.Drawing.Size(400, 128);
-            this.txtEmailDefaultBody.TabIndex = 14;
+            this.txtEmailDefaultBody.TabIndex = 13;
             this.txtEmailDefaultBody.TextChanged += new System.EventHandler(this.txtDefaultBody_TextChanged);
             // 
             // lblEmailFrom
@@ -2420,7 +2420,7 @@
             this.lblEmailFrom.Location = new System.Drawing.Point(16, 40);
             this.lblEmailFrom.Name = "lblEmailFrom";
             this.lblEmailFrom.Size = new System.Drawing.Size(35, 13);
-            this.lblEmailFrom.TabIndex = 5;
+            this.lblEmailFrom.TabIndex = 4;
             this.lblEmailFrom.Text = "Email:";
             // 
             // txtEmailSmtpServer
@@ -2428,7 +2428,7 @@
             this.txtEmailSmtpServer.Location = new System.Drawing.Point(96, 12);
             this.txtEmailSmtpServer.Name = "txtEmailSmtpServer";
             this.txtEmailSmtpServer.Size = new System.Drawing.Size(200, 20);
-            this.txtEmailSmtpServer.TabIndex = 3;
+            this.txtEmailSmtpServer.TabIndex = 1;
             this.txtEmailSmtpServer.TextChanged += new System.EventHandler(this.txtSmtpServer_TextChanged);
             // 
             // lblEmailDefaultSubject
@@ -2437,7 +2437,7 @@
             this.lblEmailDefaultSubject.Location = new System.Drawing.Point(16, 126);
             this.lblEmailDefaultSubject.Name = "lblEmailDefaultSubject";
             this.lblEmailDefaultSubject.Size = new System.Drawing.Size(81, 13);
-            this.lblEmailDefaultSubject.TabIndex = 11;
+            this.lblEmailDefaultSubject.TabIndex = 10;
             this.lblEmailDefaultSubject.Text = "Default subject:";
             // 
             // lblEmailDefaultBody
@@ -2446,7 +2446,7 @@
             this.lblEmailDefaultBody.Location = new System.Drawing.Point(16, 174);
             this.lblEmailDefaultBody.Name = "lblEmailDefaultBody";
             this.lblEmailDefaultBody.Size = new System.Drawing.Size(89, 13);
-            this.lblEmailDefaultBody.TabIndex = 13;
+            this.lblEmailDefaultBody.TabIndex = 12;
             this.lblEmailDefaultBody.Text = "Default message:";
             // 
             // nudEmailSmtpPort
@@ -2459,7 +2459,7 @@
             0});
             this.nudEmailSmtpPort.Name = "nudEmailSmtpPort";
             this.nudEmailSmtpPort.Size = new System.Drawing.Size(64, 20);
-            this.nudEmailSmtpPort.TabIndex = 4;
+            this.nudEmailSmtpPort.TabIndex = 3;
             this.nudEmailSmtpPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudEmailSmtpPort.Value = new decimal(new int[] {
             65535,
@@ -2474,7 +2474,7 @@
             this.lblEmailSmtpPort.Location = new System.Drawing.Point(304, 16);
             this.lblEmailSmtpPort.Name = "lblEmailSmtpPort";
             this.lblEmailSmtpPort.Size = new System.Drawing.Size(29, 13);
-            this.lblEmailSmtpPort.TabIndex = 1;
+            this.lblEmailSmtpPort.TabIndex = 2;
             this.lblEmailSmtpPort.Text = "Port:";
             // 
             // txtEmailDefaultSubject
@@ -2482,7 +2482,7 @@
             this.txtEmailDefaultSubject.Location = new System.Drawing.Point(16, 144);
             this.txtEmailDefaultSubject.Name = "txtEmailDefaultSubject";
             this.txtEmailDefaultSubject.Size = new System.Drawing.Size(400, 20);
-            this.txtEmailDefaultSubject.TabIndex = 12;
+            this.txtEmailDefaultSubject.TabIndex = 11;
             this.txtEmailDefaultSubject.TextChanged += new System.EventHandler(this.txtDefaultSubject_TextChanged);
             // 
             // tpJira
@@ -2494,7 +2494,7 @@
             this.tpJira.Location = new System.Drawing.Point(4, 22);
             this.tpJira.Name = "tpJira";
             this.tpJira.Size = new System.Drawing.Size(804, 475);
-            this.tpJira.TabIndex = 12;
+            this.tpJira.TabIndex = 11;
             this.tpJira.Text = "Atlassian Jira";
             this.tpJira.UseVisualStyleBackColor = true;
             // 
@@ -2503,7 +2503,7 @@
             this.txtJiraIssuePrefix.Location = new System.Drawing.Point(560, 226);
             this.txtJiraIssuePrefix.Name = "txtJiraIssuePrefix";
             this.txtJiraIssuePrefix.Size = new System.Drawing.Size(117, 20);
-            this.txtJiraIssuePrefix.TabIndex = 5;
+            this.txtJiraIssuePrefix.TabIndex = 3;
             this.txtJiraIssuePrefix.Text = "PROJECT-";
             this.txtJiraIssuePrefix.TextChanged += new System.EventHandler(this.txtJiraIssuePrefix_TextChanged);
             // 
@@ -2513,7 +2513,7 @@
             this.lblJiraIssuePrefix.Location = new System.Drawing.Point(473, 229);
             this.lblJiraIssuePrefix.Name = "lblJiraIssuePrefix";
             this.lblJiraIssuePrefix.Size = new System.Drawing.Size(81, 13);
-            this.lblJiraIssuePrefix.TabIndex = 4;
+            this.lblJiraIssuePrefix.TabIndex = 2;
             this.lblJiraIssuePrefix.Text = "Jira issue prefix:";
             // 
             // gpJiraServer
@@ -2524,7 +2524,7 @@
             this.gpJiraServer.Location = new System.Drawing.Point(13, 13);
             this.gpJiraServer.Name = "gpJiraServer";
             this.gpJiraServer.Size = new System.Drawing.Size(454, 358);
-            this.gpJiraServer.TabIndex = 3;
+            this.gpJiraServer.TabIndex = 0;
             this.gpJiraServer.TabStop = false;
             this.gpJiraServer.Text = "Jira server";
             // 
@@ -2537,7 +2537,7 @@
             this.txtJiraConfigHelp.ReadOnly = true;
             this.txtJiraConfigHelp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtJiraConfigHelp.Size = new System.Drawing.Size(440, 307);
-            this.txtJiraConfigHelp.TabIndex = 3;
+            this.txtJiraConfigHelp.TabIndex = 2;
             this.txtJiraConfigHelp.Text = "Template";
             // 
             // txtJiraHost
@@ -2565,7 +2565,7 @@
             this.oAuthJira.Name = "oAuthJira";
             this.oAuthJira.Size = new System.Drawing.Size(328, 207);
             this.oAuthJira.Status = "Status: Login required.";
-            this.oAuthJira.TabIndex = 2;
+            this.oAuthJira.TabIndex = 1;
             this.oAuthJira.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oAuthJira_OpenButtonClicked);
             this.oAuthJira.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oAuthJira_CompleteButtonClicked);
             this.oAuthJira.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oAuthJira_RefreshButtonClicked);
@@ -2725,7 +2725,7 @@
             this.lblCustomUploaderImageUploader.Location = new System.Drawing.Point(16, 392);
             this.lblCustomUploaderImageUploader.Name = "lblCustomUploaderImageUploader";
             this.lblCustomUploaderImageUploader.Size = new System.Drawing.Size(83, 13);
-            this.lblCustomUploaderImageUploader.TabIndex = 18;
+            this.lblCustomUploaderImageUploader.TabIndex = 21;
             this.lblCustomUploaderImageUploader.Text = "Image uploader:";
             // 
             // btnCustomUploaderFileUploaderTest
@@ -2733,7 +2733,7 @@
             this.btnCustomUploaderFileUploaderTest.Location = new System.Drawing.Point(264, 436);
             this.btnCustomUploaderFileUploaderTest.Name = "btnCustomUploaderFileUploaderTest";
             this.btnCustomUploaderFileUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderFileUploaderTest.TabIndex = 23;
+            this.btnCustomUploaderFileUploaderTest.TabIndex = 29;
             this.btnCustomUploaderFileUploaderTest.Text = "Test";
             this.btnCustomUploaderFileUploaderTest.UseVisualStyleBackColor = true;
             this.btnCustomUploaderFileUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderFileUploaderTest_Click);
@@ -2744,7 +2744,7 @@
             this.lblCustomUploaderFileUploader.Location = new System.Drawing.Point(16, 440);
             this.lblCustomUploaderFileUploader.Name = "lblCustomUploaderFileUploader";
             this.lblCustomUploaderFileUploader.Size = new System.Drawing.Size(70, 13);
-            this.lblCustomUploaderFileUploader.TabIndex = 20;
+            this.lblCustomUploaderFileUploader.TabIndex = 27;
             this.lblCustomUploaderFileUploader.Text = "File uploader:";
             // 
             // label1
@@ -2755,7 +2755,7 @@
             this.label1.Location = new System.Drawing.Point(688, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 24);
-            this.label1.TabIndex = 35;
+            this.label1.TabIndex = 6;
             this.label1.Text = "?";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ttHelpTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
@@ -2765,7 +2765,7 @@
             this.btnCustomUploaderImageUploaderTest.Location = new System.Drawing.Point(264, 388);
             this.btnCustomUploaderImageUploaderTest.Name = "btnCustomUploaderImageUploaderTest";
             this.btnCustomUploaderImageUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderImageUploaderTest.TabIndex = 12;
+            this.btnCustomUploaderImageUploaderTest.TabIndex = 23;
             this.btnCustomUploaderImageUploaderTest.Text = "Test";
             this.btnCustomUploaderImageUploaderTest.UseVisualStyleBackColor = true;
             this.btnCustomUploaderImageUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderImageUploaderTest_Click);
@@ -2778,7 +2778,7 @@
             this.lblCustomUploaderRequestTypeHelp.Location = new System.Drawing.Point(424, 22);
             this.lblCustomUploaderRequestTypeHelp.Name = "lblCustomUploaderRequestTypeHelp";
             this.lblCustomUploaderRequestTypeHelp.Size = new System.Drawing.Size(24, 24);
-            this.lblCustomUploaderRequestTypeHelp.TabIndex = 34;
+            this.lblCustomUploaderRequestTypeHelp.TabIndex = 4;
             this.lblCustomUploaderRequestTypeHelp.Text = "?";
             this.lblCustomUploaderRequestTypeHelp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ttHelpTip.SetToolTip(this.lblCustomUploaderRequestTypeHelp, resources.GetString("lblCustomUploaderRequestTypeHelp.ToolTip"));
@@ -2789,7 +2789,7 @@
             this.lblCustomUploaderTestResult.Location = new System.Drawing.Point(328, 384);
             this.lblCustomUploaderTestResult.Name = "lblCustomUploaderTestResult";
             this.lblCustomUploaderTestResult.Size = new System.Drawing.Size(59, 13);
-            this.lblCustomUploaderTestResult.TabIndex = 33;
+            this.lblCustomUploaderTestResult.TabIndex = 19;
             this.lblCustomUploaderTestResult.Text = "Test result:";
             // 
             // txtCustomUploaderDeletionURL
@@ -2797,7 +2797,7 @@
             this.txtCustomUploaderDeletionURL.Location = new System.Drawing.Point(536, 344);
             this.txtCustomUploaderDeletionURL.Name = "txtCustomUploaderDeletionURL";
             this.txtCustomUploaderDeletionURL.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderDeletionURL.TabIndex = 31;
+            this.txtCustomUploaderDeletionURL.TabIndex = 18;
             // 
             // cbCustomUploaderFileUploader
             // 
@@ -2806,7 +2806,7 @@
             this.cbCustomUploaderFileUploader.Location = new System.Drawing.Point(104, 436);
             this.cbCustomUploaderFileUploader.Name = "cbCustomUploaderFileUploader";
             this.cbCustomUploaderFileUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderFileUploader.TabIndex = 16;
+            this.cbCustomUploaderFileUploader.TabIndex = 28;
             this.cbCustomUploaderFileUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderFileUploader_SelectedIndexChanged);
             // 
             // lblCustomUploaderDeletionURL
@@ -2815,7 +2815,7 @@
             this.lblCustomUploaderDeletionURL.Location = new System.Drawing.Point(536, 328);
             this.lblCustomUploaderDeletionURL.Name = "lblCustomUploaderDeletionURL";
             this.lblCustomUploaderDeletionURL.Size = new System.Drawing.Size(74, 13);
-            this.lblCustomUploaderDeletionURL.TabIndex = 30;
+            this.lblCustomUploaderDeletionURL.TabIndex = 17;
             this.lblCustomUploaderDeletionURL.Text = "Deletion URL:";
             // 
             // btnCustomUploaderShowLastResponse
@@ -2824,7 +2824,7 @@
             this.btnCustomUploaderShowLastResponse.Location = new System.Drawing.Point(648, 376);
             this.btnCustomUploaderShowLastResponse.Name = "btnCustomUploaderShowLastResponse";
             this.btnCustomUploaderShowLastResponse.Size = new System.Drawing.Size(136, 23);
-            this.btnCustomUploaderShowLastResponse.TabIndex = 32;
+            this.btnCustomUploaderShowLastResponse.TabIndex = 20;
             this.btnCustomUploaderShowLastResponse.Text = "Show last response";
             this.btnCustomUploaderShowLastResponse.UseVisualStyleBackColor = true;
             this.btnCustomUploaderShowLastResponse.Click += new System.EventHandler(this.btnCustomUploaderShowLastResponse_Click);
@@ -2835,7 +2835,7 @@
             this.lblCustomUploaderResponseType.Location = new System.Drawing.Point(536, 8);
             this.lblCustomUploaderResponseType.Name = "lblCustomUploaderResponseType";
             this.lblCustomUploaderResponseType.Size = new System.Drawing.Size(81, 13);
-            this.lblCustomUploaderResponseType.TabIndex = 28;
+            this.lblCustomUploaderResponseType.TabIndex = 2;
             this.lblCustomUploaderResponseType.Text = "Response type:";
             // 
             // cbCustomUploaderURLShortener
@@ -2845,7 +2845,7 @@
             this.cbCustomUploaderURLShortener.Location = new System.Drawing.Point(104, 460);
             this.cbCustomUploaderURLShortener.Name = "cbCustomUploaderURLShortener";
             this.cbCustomUploaderURLShortener.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderURLShortener.TabIndex = 17;
+            this.cbCustomUploaderURLShortener.TabIndex = 32;
             this.cbCustomUploaderURLShortener.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderURLShortener_SelectedIndexChanged);
             // 
             // gbCustomUploaders
@@ -2888,7 +2888,7 @@
             this.btnCustomUploaderClear.Location = new System.Drawing.Point(152, 328);
             this.btnCustomUploaderClear.Name = "btnCustomUploaderClear";
             this.btnCustomUploaderClear.Size = new System.Drawing.Size(88, 24);
-            this.btnCustomUploaderClear.TabIndex = 7;
+            this.btnCustomUploaderClear.TabIndex = 5;
             this.btnCustomUploaderClear.Text = "Clear fields ->";
             this.btnCustomUploaderClear.UseVisualStyleBackColor = true;
             this.btnCustomUploaderClear.Click += new System.EventHandler(this.btnCustomUploaderClear_Click);
@@ -2926,7 +2926,7 @@
             this.lblCustomUploaderTextUploader.Location = new System.Drawing.Point(16, 416);
             this.lblCustomUploaderTextUploader.Name = "lblCustomUploaderTextUploader";
             this.lblCustomUploaderTextUploader.Size = new System.Drawing.Size(75, 13);
-            this.lblCustomUploaderTextUploader.TabIndex = 19;
+            this.lblCustomUploaderTextUploader.TabIndex = 24;
             this.lblCustomUploaderTextUploader.Text = "Text uploader:";
             // 
             // lblCustomUploaderRequestURL
@@ -2935,7 +2935,7 @@
             this.lblCustomUploaderRequestURL.Location = new System.Drawing.Point(272, 56);
             this.lblCustomUploaderRequestURL.Name = "lblCustomUploaderRequestURL";
             this.lblCustomUploaderRequestURL.Size = new System.Drawing.Size(75, 13);
-            this.lblCustomUploaderRequestURL.TabIndex = 1;
+            this.lblCustomUploaderRequestURL.TabIndex = 7;
             this.lblCustomUploaderRequestURL.Text = "Request URL:";
             // 
             // btnCustomUploaderURLShortenerTest
@@ -2943,7 +2943,7 @@
             this.btnCustomUploaderURLShortenerTest.Location = new System.Drawing.Point(264, 460);
             this.btnCustomUploaderURLShortenerTest.Name = "btnCustomUploaderURLShortenerTest";
             this.btnCustomUploaderURLShortenerTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderURLShortenerTest.TabIndex = 22;
+            this.btnCustomUploaderURLShortenerTest.TabIndex = 33;
             this.btnCustomUploaderURLShortenerTest.Text = "Test";
             this.btnCustomUploaderURLShortenerTest.UseVisualStyleBackColor = true;
             this.btnCustomUploaderURLShortenerTest.Click += new System.EventHandler(this.btnCustomUploaderURLShortenerTest_Click);
@@ -2958,7 +2958,7 @@
             this.gbCustomUploaderRegexp.Location = new System.Drawing.Point(536, 56);
             this.gbCustomUploaderRegexp.Name = "gbCustomUploaderRegexp";
             this.gbCustomUploaderRegexp.Size = new System.Drawing.Size(248, 184);
-            this.gbCustomUploaderRegexp.TabIndex = 5;
+            this.gbCustomUploaderRegexp.TabIndex = 11;
             this.gbCustomUploaderRegexp.TabStop = false;
             this.gbCustomUploaderRegexp.Text = "Regex from response";
             // 
@@ -3028,7 +3028,7 @@
             this.cbCustomUploaderTextUploader.Location = new System.Drawing.Point(104, 412);
             this.cbCustomUploaderTextUploader.Name = "cbCustomUploaderTextUploader";
             this.cbCustomUploaderTextUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderTextUploader.TabIndex = 15;
+            this.cbCustomUploaderTextUploader.TabIndex = 25;
             this.cbCustomUploaderTextUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderTextUploader_SelectedIndexChanged);
             // 
             // txtCustomUploaderThumbnailURL
@@ -3036,7 +3036,7 @@
             this.txtCustomUploaderThumbnailURL.Location = new System.Drawing.Point(536, 304);
             this.txtCustomUploaderThumbnailURL.Name = "txtCustomUploaderThumbnailURL";
             this.txtCustomUploaderThumbnailURL.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderThumbnailURL.TabIndex = 11;
+            this.txtCustomUploaderThumbnailURL.TabIndex = 16;
             // 
             // lblCustomUploaderURLShortener
             // 
@@ -3044,7 +3044,7 @@
             this.lblCustomUploaderURLShortener.Location = new System.Drawing.Point(16, 464);
             this.lblCustomUploaderURLShortener.Name = "lblCustomUploaderURLShortener";
             this.lblCustomUploaderURLShortener.Size = new System.Drawing.Size(79, 13);
-            this.lblCustomUploaderURLShortener.TabIndex = 21;
+            this.lblCustomUploaderURLShortener.TabIndex = 30;
             this.lblCustomUploaderURLShortener.Text = "URL shortener:";
             // 
             // cbCustomUploaderResponseType
@@ -3054,14 +3054,14 @@
             this.cbCustomUploaderResponseType.Location = new System.Drawing.Point(536, 24);
             this.cbCustomUploaderResponseType.Name = "cbCustomUploaderResponseType";
             this.cbCustomUploaderResponseType.Size = new System.Drawing.Size(144, 21);
-            this.cbCustomUploaderResponseType.TabIndex = 27;
+            this.cbCustomUploaderResponseType.TabIndex = 5;
             // 
             // btnCustomUploaderTextUploaderTest
             // 
             this.btnCustomUploaderTextUploaderTest.Location = new System.Drawing.Point(264, 412);
             this.btnCustomUploaderTextUploaderTest.Name = "btnCustomUploaderTextUploaderTest";
             this.btnCustomUploaderTextUploaderTest.Size = new System.Drawing.Size(48, 24);
-            this.btnCustomUploaderTextUploaderTest.TabIndex = 24;
+            this.btnCustomUploaderTextUploaderTest.TabIndex = 26;
             this.btnCustomUploaderTextUploaderTest.Text = "Test";
             this.btnCustomUploaderTextUploaderTest.UseVisualStyleBackColor = true;
             this.btnCustomUploaderTextUploaderTest.Click += new System.EventHandler(this.btnCustomUploaderTextUploaderTest_Click);
@@ -3071,7 +3071,7 @@
             this.txtCustomUploaderURL.Location = new System.Drawing.Point(536, 264);
             this.txtCustomUploaderURL.Name = "txtCustomUploaderURL";
             this.txtCustomUploaderURL.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderURL.TabIndex = 9;
+            this.txtCustomUploaderURL.TabIndex = 14;
             // 
             // cbCustomUploaderImageUploader
             // 
@@ -3080,7 +3080,7 @@
             this.cbCustomUploaderImageUploader.Location = new System.Drawing.Point(104, 388);
             this.cbCustomUploaderImageUploader.Name = "cbCustomUploaderImageUploader";
             this.cbCustomUploaderImageUploader.Size = new System.Drawing.Size(152, 21);
-            this.cbCustomUploaderImageUploader.TabIndex = 14;
+            this.cbCustomUploaderImageUploader.TabIndex = 22;
             this.cbCustomUploaderImageUploader.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderImageUploader_SelectedIndexChanged);
             // 
             // txtCustomUploaderRequestURL
@@ -3088,14 +3088,14 @@
             this.txtCustomUploaderRequestURL.Location = new System.Drawing.Point(272, 72);
             this.txtCustomUploaderRequestURL.Name = "txtCustomUploaderRequestURL";
             this.txtCustomUploaderRequestURL.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderRequestURL.TabIndex = 2;
+            this.txtCustomUploaderRequestURL.TabIndex = 8;
             // 
             // txtCustomUploaderLog
             // 
             this.txtCustomUploaderLog.Location = new System.Drawing.Point(328, 408);
             this.txtCustomUploaderLog.Name = "txtCustomUploaderLog";
             this.txtCustomUploaderLog.Size = new System.Drawing.Size(456, 72);
-            this.txtCustomUploaderLog.TabIndex = 7;
+            this.txtCustomUploaderLog.TabIndex = 31;
             this.txtCustomUploaderLog.Text = "";
             this.txtCustomUploaderLog.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtCustomUploaderLog_LinkClicked);
             // 
@@ -3105,7 +3105,7 @@
             this.lblCustomUploaderThumbnailURL.Location = new System.Drawing.Point(536, 288);
             this.lblCustomUploaderThumbnailURL.Name = "lblCustomUploaderThumbnailURL";
             this.lblCustomUploaderThumbnailURL.Size = new System.Drawing.Size(84, 13);
-            this.lblCustomUploaderThumbnailURL.TabIndex = 10;
+            this.lblCustomUploaderThumbnailURL.TabIndex = 15;
             this.lblCustomUploaderThumbnailURL.Text = "Thumbnail URL:";
             // 
             // lblCustomUploaderFileForm
@@ -3114,7 +3114,7 @@
             this.lblCustomUploaderFileForm.Location = new System.Drawing.Point(272, 96);
             this.lblCustomUploaderFileForm.Name = "lblCustomUploaderFileForm";
             this.lblCustomUploaderFileForm.Size = new System.Drawing.Size(78, 13);
-            this.lblCustomUploaderFileForm.TabIndex = 3;
+            this.lblCustomUploaderFileForm.TabIndex = 9;
             this.lblCustomUploaderFileForm.Text = "File form name:";
             // 
             // lblCustomUploaderRequestType
@@ -3123,7 +3123,7 @@
             this.lblCustomUploaderRequestType.Location = new System.Drawing.Point(272, 8);
             this.lblCustomUploaderRequestType.Name = "lblCustomUploaderRequestType";
             this.lblCustomUploaderRequestType.Size = new System.Drawing.Size(73, 13);
-            this.lblCustomUploaderRequestType.TabIndex = 26;
+            this.lblCustomUploaderRequestType.TabIndex = 1;
             this.lblCustomUploaderRequestType.Text = "Request type:";
             // 
             // cbCustomUploaderRequestType
@@ -3133,7 +3133,7 @@
             this.cbCustomUploaderRequestType.Location = new System.Drawing.Point(272, 24);
             this.cbCustomUploaderRequestType.Name = "cbCustomUploaderRequestType";
             this.cbCustomUploaderRequestType.Size = new System.Drawing.Size(144, 21);
-            this.cbCustomUploaderRequestType.TabIndex = 25;
+            this.cbCustomUploaderRequestType.TabIndex = 3;
             this.cbCustomUploaderRequestType.SelectedIndexChanged += new System.EventHandler(this.cbCustomUploaderRequestType_SelectedIndexChanged);
             // 
             // txtCustomUploaderFileForm
@@ -3141,7 +3141,7 @@
             this.txtCustomUploaderFileForm.Location = new System.Drawing.Point(272, 112);
             this.txtCustomUploaderFileForm.Name = "txtCustomUploaderFileForm";
             this.txtCustomUploaderFileForm.Size = new System.Drawing.Size(248, 20);
-            this.txtCustomUploaderFileForm.TabIndex = 4;
+            this.txtCustomUploaderFileForm.TabIndex = 10;
             // 
             // lblCustomUploaderURL
             // 
@@ -3149,7 +3149,7 @@
             this.lblCustomUploaderURL.Location = new System.Drawing.Point(536, 248);
             this.lblCustomUploaderURL.Name = "lblCustomUploaderURL";
             this.lblCustomUploaderURL.Size = new System.Drawing.Size(32, 13);
-            this.lblCustomUploaderURL.TabIndex = 8;
+            this.lblCustomUploaderURL.TabIndex = 13;
             this.lblCustomUploaderURL.Text = "URL:";
             // 
             // gbCustomUploaderArguments
@@ -3163,7 +3163,7 @@
             this.gbCustomUploaderArguments.Location = new System.Drawing.Point(272, 136);
             this.gbCustomUploaderArguments.Name = "gbCustomUploaderArguments";
             this.gbCustomUploaderArguments.Size = new System.Drawing.Size(248, 232);
-            this.gbCustomUploaderArguments.TabIndex = 6;
+            this.gbCustomUploaderArguments.TabIndex = 12;
             this.gbCustomUploaderArguments.TabStop = false;
             this.gbCustomUploaderArguments.Text = "Arguments";
             // 
