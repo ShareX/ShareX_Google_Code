@@ -37,17 +37,19 @@
             this.txtDebugLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDebugLog.Location = new System.Drawing.Point(0, 0);
+            this.txtDebugLog.BackColor = System.Drawing.Color.White;
+            this.txtDebugLog.Location = new System.Drawing.Point(8, 8);
             this.txtDebugLog.Multiline = true;
             this.txtDebugLog.Name = "txtDebugLog";
             this.txtDebugLog.ReadOnly = true;
             this.txtDebugLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDebugLog.Size = new System.Drawing.Size(536, 483);
+            this.txtDebugLog.Size = new System.Drawing.Size(744, 472);
             this.txtDebugLog.TabIndex = 1;
             this.txtDebugLog.WordWrap = false;
             // 
             // btnLoadedAssemblies
             // 
+            this.btnLoadedAssemblies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLoadedAssemblies.Location = new System.Drawing.Point(8, 488);
             this.btnLoadedAssemblies.Name = "btnLoadedAssemblies";
             this.btnLoadedAssemblies.Size = new System.Drawing.Size(120, 23);
@@ -60,13 +62,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 517);
+            this.ClientSize = new System.Drawing.Size(760, 518);
             this.Controls.Add(this.btnLoadedAssemblies);
             this.Controls.Add(this.txtDebugLog);
             this.MinimumSize = new System.Drawing.Size(552, 552);
             this.Name = "DebugForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Debug log";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ShareX - Debug log";
             this.ResumeLayout(false);
             this.PerformLayout();
 

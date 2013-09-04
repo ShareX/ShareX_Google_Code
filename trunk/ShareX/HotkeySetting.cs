@@ -49,5 +49,15 @@ namespace ShareX
             TaskSettings.Description = job.GetDescription();
             HotkeyInfo = new HotkeyInfo { Hotkey = hotkey };
         }
+
+        public override string ToString()
+        {
+            if (HotkeyInfo != null && TaskSettings != null)
+            {
+                return string.Format("Hotkey: {0}, Description: {1}, Job: {2}", HotkeyInfo, TaskSettings.Description, TaskSettings.Job);
+            }
+
+            return string.Empty;
+        }
     }
 }

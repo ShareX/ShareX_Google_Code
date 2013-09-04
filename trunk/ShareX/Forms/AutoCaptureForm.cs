@@ -33,7 +33,7 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public partial class AutoCapture : Form
+    public partial class AutoCaptureForm : Form
     {
         public bool IsRunning { get; private set; }
         public Rectangle CaptureRectangle { get; private set; }
@@ -43,7 +43,7 @@ namespace ShareX
         private bool waitUploads;
         private Stopwatch stopwatch = new Stopwatch();
 
-        public AutoCapture()
+        public AutoCaptureForm()
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;

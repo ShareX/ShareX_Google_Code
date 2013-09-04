@@ -93,11 +93,11 @@
     <Compile Include="Forms\AfterCaptureForm.Designer.cs">
       <DependentUpon>AfterCaptureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AutoCapture.cs">
+    <Compile Include="Forms\AutoCaptureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AutoCapture.Designer.cs">
-      <DependentUpon>AutoCapture.cs</DependentUpon>
+    <Compile Include="Forms\AutoCaptureForm.Designer.cs">
+      <DependentUpon>AutoCaptureForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExternalProgramForm.cs">
       <SubType>Form</SubType>
@@ -143,22 +143,22 @@
       <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HotkeySettings.cs" />
-    <Compile Include="Hotkey\HotkeyManager.cs" />
-    <Compile Include="Hotkey\HotkeySetting.cs" />
-    <Compile Include="Hotkey\HotkeyForm.cs">
+    <Compile Include="HotkeyManager.cs" />
+    <Compile Include="HotkeySetting.cs" />
+    <Compile Include="Forms\HotkeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hotkey\HotkeyInfo.cs" />
-    <Compile Include="Hotkey\HotkeyManagerControl.cs">
+    <Compile Include="HotkeyInfo.cs" />
+    <Compile Include="Controls\HotkeyManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Hotkey\HotkeyManagerControl.Designer.cs">
+    <Compile Include="Controls\HotkeyManagerControl.Designer.cs">
       <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hotkey\HotkeySelectionControl.cs">
+    <Compile Include="Controls\HotkeySelectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Hotkey\HotkeySelectionControl.Designer.cs">
+    <Compile Include="Controls\HotkeySelectionControl.Designer.cs">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TaskSettingsForm.cs">
@@ -197,8 +197,8 @@
     <EmbeddedResource Include="Forms\AfterCaptureForm.resx">
       <DependentUpon>AfterCaptureForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AutoCapture.resx">
-      <DependentUpon>AutoCapture.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AutoCaptureForm.resx">
+      <DependentUpon>AutoCaptureForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
@@ -218,10 +218,10 @@
     <EmbeddedResource Include="Forms\WatchFolderForm.resx">
       <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hotkey\HotkeyManagerControl.resx">
+    <EmbeddedResource Include="Controls\HotkeyManagerControl.resx">
       <DependentUpon>HotkeyManagerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hotkey\HotkeySelectionControl.resx">
+    <EmbeddedResource Include="Controls\HotkeySelectionControl.resx">
       <DependentUpon>HotkeySelectionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TaskSettingsForm.resx">

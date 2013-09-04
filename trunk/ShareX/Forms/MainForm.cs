@@ -512,7 +512,7 @@ namespace ShareX
 
         private void OpenAutoCapture()
         {
-            AutoCapture autoCaptureForm = new AutoCapture();
+            AutoCaptureForm autoCaptureForm = new AutoCaptureForm();
             autoCaptureForm.Show();
         }
 
@@ -595,7 +595,7 @@ namespace ShareX
 
         private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            DebugForm dlg = new DebugForm(Application.ProductName, Program.MyLogger);
+            DebugForm dlg = new DebugForm(Program.MyLogger);
             dlg.Show();
         }
 

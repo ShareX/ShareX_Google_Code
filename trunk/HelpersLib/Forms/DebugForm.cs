@@ -34,11 +34,10 @@ namespace HelpersLib
 {
     public partial class DebugForm : Form
     {
-        public DebugForm(string appName, Logger MyLogger)
+        public DebugForm(Logger MyLogger)
         {
             InitializeComponent();
 
-            Text = appName + " - Debug log";
             Icon = Resources.ShareXIcon;
             txtDebugLog.Text = MyLogger.Messages.ToString();
             txtDebugLog.SelectionStart = txtDebugLog.TextLength;

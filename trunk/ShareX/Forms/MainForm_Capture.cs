@@ -62,6 +62,8 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySetting hotkeySetting)
         {
+            DebugHelper.WriteLine(hotkeySetting.ToString());
+
             if (hotkeySetting.TaskSettings.Job == HotkeyType.None) return;
 
             TaskSettings taskSettings = TaskSettings.GetSafeTaskSettings(hotkeySetting.TaskSettings);

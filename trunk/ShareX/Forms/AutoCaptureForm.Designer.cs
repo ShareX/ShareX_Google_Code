@@ -1,6 +1,6 @@
 ﻿namespace ShareX
 {
-    partial class AutoCapture
+    partial class AutoCaptureForm
     {
         /// <summary>
         /// Required designer variable.
