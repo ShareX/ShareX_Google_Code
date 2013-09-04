@@ -41,7 +41,8 @@ namespace HelpersLib
     {
         public static bool Save(object obj, string filePath, SerializationType type, bool createBackup = true)
         {
-            DebugHelper.WriteLine("Settings save started: " + filePath);
+            string typeName = obj.GetType().Name;
+            DebugHelper.WriteLine("{0} save started: {1}", typeName, filePath);
 
             bool isSuccess = false;
 
@@ -71,18 +72,7 @@ namespace HelpersLib
             }
             finally
             {
-                string message;
-
-                if (isSuccess)
-                {
-                    message = "Settings save successful";
-                }
-                else
-                {
-                    message = "Settings save failed";
-                }
-
-                DebugHelper.WriteLine(string.Format("{0}: {1}", message, filePath));
+                DebugHelper.WriteLine("{0} save {1}: {2}", typeName, isSuccess ? "successful" : "failed", filePath);
             }
 
             return isSuccess;
@@ -114,9 +104,11 @@ namespace HelpersLib
 
         public static T Load<T>(string path, SerializationType type, bool checkBackup = true) where T : new()
         {
+            string typeName = typeof(T).Name;
+
             if (!string.IsNullOrEmpty(path))
             {
-                DebugHelper.WriteLine("Settings load started: " + path);
+                DebugHelper.WriteLine("{0} load started: {1}", typeName, path);
 
                 try
                 {
@@ -127,9 +119,9 @@ namespace HelpersLib
                             if (fs.Length > 0)
                             {
                                 T settings = Load<T>(fs, type);
-                                if (settings == null) throw new Exception("Settings object is null.");
+                                if (settings == null) throw new Exception(typeName + " object is null.");
 
-                                DebugHelper.WriteLine("Settings load finished: " + path);
+                                DebugHelper.WriteLine("{0} load finished: {1}", typeName, path);
 
                                 return settings;
                             }
@@ -138,7 +130,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Settings load failed");
+                    DebugHelper.WriteException(e, typeName + " load failed");
                 }
 
                 if (checkBackup)
@@ -147,7 +139,7 @@ namespace HelpersLib
                 }
             }
 
-            DebugHelper.WriteLine("Settings not found. Loading new instance.");
+            DebugHelper.WriteLine("{0} not found. Loading new instance.", typeName);
 
             return new T();
         }

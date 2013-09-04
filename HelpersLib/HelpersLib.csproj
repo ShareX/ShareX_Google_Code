@@ -79,10 +79,10 @@
     <Compile Include="ComponentModelStrings.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="CursorData.cs" />
-    <Compile Include="Debug\DebugForm.cs">
+    <Compile Include="Forms\DebugForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debug\DebugForm.Designer.cs">
+    <Compile Include="Forms\DebugForm.Designer.cs">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Debug\DebugTimer.cs" />
@@ -274,7 +274,7 @@
     <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
-    <EmbeddedResource Include="Debug\DebugForm.resx">
+    <EmbeddedResource Include="Forms\DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClipboardContentViewer.resx">
