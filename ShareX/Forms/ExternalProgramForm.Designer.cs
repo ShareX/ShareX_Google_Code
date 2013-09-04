@@ -54,7 +54,7 @@
             this.lblPath.Location = new System.Drawing.Point(16, 40);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(32, 13);
-            this.lblPath.TabIndex = 1;
+            this.lblPath.TabIndex = 2;
             this.lblPath.Text = "Path:";
             // 
             // lblArgs
@@ -63,7 +63,7 @@
             this.lblArgs.Location = new System.Drawing.Point(16, 64);
             this.lblArgs.Name = "lblArgs";
             this.lblArgs.Size = new System.Drawing.Size(60, 13);
-            this.lblArgs.TabIndex = 2;
+            this.lblArgs.TabIndex = 5;
             this.lblArgs.Text = "Arguments:";
             // 
             // txtName
@@ -71,28 +71,28 @@
             this.txtName.Location = new System.Drawing.Point(88, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(224, 20);
-            this.txtName.TabIndex = 3;
+            this.txtName.TabIndex = 1;
             // 
             // txtPath
             // 
             this.txtPath.Location = new System.Drawing.Point(88, 36);
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(176, 20);
-            this.txtPath.TabIndex = 4;
+            this.txtPath.TabIndex = 3;
             // 
             // txtArguments
             // 
             this.txtArguments.Location = new System.Drawing.Point(88, 60);
             this.txtArguments.Name = "txtArguments";
             this.txtArguments.Size = new System.Drawing.Size(224, 20);
-            this.txtArguments.TabIndex = 5;
+            this.txtArguments.TabIndex = 6;
             // 
             // btnPathBrowse
             // 
             this.btnPathBrowse.Location = new System.Drawing.Point(272, 35);
             this.btnPathBrowse.Name = "btnPathBrowse";
             this.btnPathBrowse.Size = new System.Drawing.Size(40, 23);
-            this.btnPathBrowse.TabIndex = 6;
+            this.btnPathBrowse.TabIndex = 4;
             this.btnPathBrowse.Text = "...";
             this.btnPathBrowse.UseVisualStyleBackColor = true;
             this.btnPathBrowse.Click += new System.EventHandler(this.btnPathBrowse_Click);
@@ -117,7 +117,7 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // FileActionForm
+            // ExternalProgramForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,7 +132,7 @@
             this.Controls.Add(this.lblPath);
             this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FileActionForm";
+            this.Name = "ExternalProgramForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "External program";
             this.ResumeLayout(false);

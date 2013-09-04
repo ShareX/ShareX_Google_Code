@@ -44,7 +44,7 @@
             this.btnPathBrowse.Location = new System.Drawing.Point(272, 11);
             this.btnPathBrowse.Name = "btnPathBrowse";
             this.btnPathBrowse.Size = new System.Drawing.Size(40, 23);
-            this.btnPathBrowse.TabIndex = 11;
+            this.btnPathBrowse.TabIndex = 2;
             this.btnPathBrowse.Text = "...";
             this.btnPathBrowse.UseVisualStyleBackColor = true;
             this.btnPathBrowse.Click += new System.EventHandler(this.btnPathBrowse_Click);
@@ -54,14 +54,14 @@
             this.txtFilter.Location = new System.Drawing.Point(88, 36);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(224, 20);
-            this.txtFilter.TabIndex = 10;
+            this.txtFilter.TabIndex = 4;
             // 
             // txtFolderPath
             // 
             this.txtFolderPath.Location = new System.Drawing.Point(88, 12);
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.Size = new System.Drawing.Size(176, 20);
-            this.txtFolderPath.TabIndex = 9;
+            this.txtFolderPath.TabIndex = 1;
             // 
             // lblFilter
             // 
@@ -69,7 +69,7 @@
             this.lblFilter.Location = new System.Drawing.Point(16, 40);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(32, 13);
-            this.lblFilter.TabIndex = 8;
+            this.lblFilter.TabIndex = 3;
             this.lblFilter.Text = "Filter:";
             // 
             // lblFolderPath
@@ -78,7 +78,7 @@
             this.lblFolderPath.Location = new System.Drawing.Point(16, 16);
             this.lblFolderPath.Name = "lblFolderPath";
             this.lblFolderPath.Size = new System.Drawing.Size(63, 13);
-            this.lblFolderPath.TabIndex = 7;
+            this.lblFolderPath.TabIndex = 0;
             this.lblFolderPath.Text = "Folder path:";
             // 
             // lblFilterExample
@@ -87,7 +87,7 @@
             this.lblFilterExample.Location = new System.Drawing.Point(88, 60);
             this.lblFilterExample.Name = "lblFilterExample";
             this.lblFilterExample.Size = new System.Drawing.Size(78, 13);
-            this.lblFilterExample.TabIndex = 12;
+            this.lblFilterExample.TabIndex = 5;
             this.lblFilterExample.Text = "Example: *.png";
             // 
             // cbIncludeSubdirectories
@@ -96,7 +96,7 @@
             this.cbIncludeSubdirectories.Location = new System.Drawing.Point(16, 88);
             this.cbIncludeSubdirectories.Name = "cbIncludeSubdirectories";
             this.cbIncludeSubdirectories.Size = new System.Drawing.Size(129, 17);
-            this.cbIncludeSubdirectories.TabIndex = 13;
+            this.cbIncludeSubdirectories.TabIndex = 6;
             this.cbIncludeSubdirectories.Text = "Include subdirectories";
             this.cbIncludeSubdirectories.UseVisualStyleBackColor = true;
             // 
@@ -105,7 +105,7 @@
             this.btnCancel.Location = new System.Drawing.Point(232, 120);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -115,7 +115,7 @@
             this.btnOK.Location = new System.Drawing.Point(144, 120);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 23);
-            this.btnOK.TabIndex = 14;
+            this.btnOK.TabIndex = 7;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);

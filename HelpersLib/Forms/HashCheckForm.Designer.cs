@@ -49,7 +49,7 @@
             this.txtFilePath.Location = new System.Drawing.Point(72, 12);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.Size = new System.Drawing.Size(280, 20);
-            this.txtFilePath.TabIndex = 0;
+            this.txtFilePath.TabIndex = 1;
             this.txtFilePath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtFilePath_DragDrop);
             this.txtFilePath.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtFilePath_DragEnter);
             // 
@@ -58,7 +58,7 @@
             this.btnFilePathBrowse.Location = new System.Drawing.Point(360, 10);
             this.btnFilePathBrowse.Name = "btnFilePathBrowse";
             this.btnFilePathBrowse.Size = new System.Drawing.Size(72, 24);
-            this.btnFilePathBrowse.TabIndex = 1;
+            this.btnFilePathBrowse.TabIndex = 2;
             this.btnFilePathBrowse.Text = "Browse...";
             this.btnFilePathBrowse.UseVisualStyleBackColor = true;
             this.btnFilePathBrowse.Click += new System.EventHandler(this.btnFilePathBrowse_Click);
@@ -69,7 +69,7 @@
             this.lblHashType.Location = new System.Drawing.Point(8, 48);
             this.lblHashType.Name = "lblHashType";
             this.lblHashType.Size = new System.Drawing.Size(58, 13);
-            this.lblHashType.TabIndex = 2;
+            this.lblHashType.TabIndex = 3;
             this.lblHashType.Text = "Hash type:";
             // 
             // lblProgress
@@ -78,7 +78,7 @@
             this.lblProgress.Location = new System.Drawing.Point(8, 80);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(51, 13);
-            this.lblProgress.TabIndex = 3;
+            this.lblProgress.TabIndex = 6;
             this.lblProgress.Text = "Progress:";
             // 
             // lblResult
@@ -87,7 +87,7 @@
             this.lblResult.Location = new System.Drawing.Point(8, 112);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(40, 13);
-            this.lblResult.TabIndex = 4;
+            this.lblResult.TabIndex = 9;
             this.lblResult.Text = "Result:";
             // 
             // lblTarget
@@ -96,7 +96,7 @@
             this.lblTarget.Location = new System.Drawing.Point(8, 144);
             this.lblTarget.Name = "lblTarget";
             this.lblTarget.Size = new System.Drawing.Size(41, 13);
-            this.lblTarget.TabIndex = 5;
+            this.lblTarget.TabIndex = 11;
             this.lblTarget.Text = "Target:";
             // 
             // lblProgressPercentage
@@ -105,7 +105,7 @@
             this.lblProgressPercentage.Location = new System.Drawing.Point(392, 80);
             this.lblProgressPercentage.Name = "lblProgressPercentage";
             this.lblProgressPercentage.Size = new System.Drawing.Size(21, 13);
-            this.lblProgressPercentage.TabIndex = 7;
+            this.lblProgressPercentage.TabIndex = 8;
             this.lblProgressPercentage.Text = "0%";
             // 
             // btnStartHashCheck
@@ -113,7 +113,7 @@
             this.btnStartHashCheck.Location = new System.Drawing.Point(168, 42);
             this.btnStartHashCheck.Name = "btnStartHashCheck";
             this.btnStartHashCheck.Size = new System.Drawing.Size(72, 24);
-            this.btnStartHashCheck.TabIndex = 8;
+            this.btnStartHashCheck.TabIndex = 5;
             this.btnStartHashCheck.Text = "Start";
             this.btnStartHashCheck.UseVisualStyleBackColor = true;
             this.btnStartHashCheck.Click += new System.EventHandler(this.btnStartHashCheck_Click);
@@ -125,14 +125,14 @@
             this.cbHashType.Location = new System.Drawing.Point(72, 44);
             this.cbHashType.Name = "cbHashType";
             this.cbHashType.Size = new System.Drawing.Size(88, 21);
-            this.cbHashType.TabIndex = 9;
+            this.cbHashType.TabIndex = 4;
             // 
             // pbProgress
             // 
             this.pbProgress.Location = new System.Drawing.Point(72, 74);
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.Size = new System.Drawing.Size(312, 24);
-            this.pbProgress.TabIndex = 10;
+            this.pbProgress.TabIndex = 7;
             // 
             // txtResult
             // 
@@ -140,7 +140,7 @@
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
             this.txtResult.Size = new System.Drawing.Size(360, 20);
-            this.txtResult.TabIndex = 11;
+            this.txtResult.TabIndex = 10;
             this.txtResult.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
             // txtTarget
@@ -157,7 +157,7 @@
             this.lblFile.Location = new System.Drawing.Point(8, 16);
             this.lblFile.Name = "lblFile";
             this.lblFile.Size = new System.Drawing.Size(50, 13);
-            this.lblFile.TabIndex = 13;
+            this.lblFile.TabIndex = 0;
             this.lblFile.Text = "File path:";
             // 
             // HashCheckForm

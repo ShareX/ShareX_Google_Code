@@ -601,7 +601,7 @@ namespace ShareX
             this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(121, 22);
             this.tsmiAbout.Text = "About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
@@ -611,7 +611,7 @@ namespace ShareX
             this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDonate.Size = new System.Drawing.Size(121, 22);
             this.tsmiDonate.Text = "Donate...";
             this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
@@ -629,7 +629,7 @@ namespace ShareX
             this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDebug.Size = new System.Drawing.Size(121, 22);
             this.tsmiDebug.Text = "Debug";
             // 
             // tsmiShowDebugLog
@@ -718,7 +718,7 @@ namespace ShareX
             this.lblSplitter2.Location = new System.Drawing.Point(783, 0);
             this.lblSplitter2.Name = "lblSplitter2";
             this.lblSplitter2.Size = new System.Drawing.Size(1, 392);
-            this.lblSplitter2.TabIndex = 3;
+            this.lblSplitter2.TabIndex = 2;
             // 
             // lblSplitter
             // 
@@ -727,7 +727,7 @@ namespace ShareX
             this.lblSplitter.Location = new System.Drawing.Point(0, 0);
             this.lblSplitter.Name = "lblSplitter";
             this.lblSplitter.Size = new System.Drawing.Size(1, 392);
-            this.lblSplitter.TabIndex = 2;
+            this.lblSplitter.TabIndex = 0;
             // 
             // lvUploads
             // 
@@ -751,7 +751,7 @@ namespace ShareX
             this.lvUploads.Name = "lvUploads";
             this.lvUploads.ShowItemToolTips = true;
             this.lvUploads.Size = new System.Drawing.Size(784, 392);
-            this.lvUploads.TabIndex = 0;
+            this.lvUploads.TabIndex = 1;
             this.lvUploads.UseCompatibleStateImageBehavior = false;
             this.lvUploads.View = System.Windows.Forms.View.Details;
             this.lvUploads.SelectedIndexChanged += new System.EventHandler(this.lvUploads_SelectedIndexChanged);
@@ -810,7 +810,7 @@ namespace ShareX
             this.lblSplitter3.Location = new System.Drawing.Point(0, 0);
             this.lblSplitter3.Name = "lblSplitter3";
             this.lblSplitter3.Size = new System.Drawing.Size(1, 100);
-            this.lblSplitter3.TabIndex = 3;
+            this.lblSplitter3.TabIndex = 0;
             // 
             // pbPreview
             // 
@@ -821,7 +821,7 @@ namespace ShareX
             this.pbPreview.Location = new System.Drawing.Point(0, 0);
             this.pbPreview.Name = "pbPreview";
             this.pbPreview.Size = new System.Drawing.Size(96, 100);
-            this.pbPreview.TabIndex = 0;
+            this.pbPreview.TabIndex = 1;
             // 
             // niTray
             // 

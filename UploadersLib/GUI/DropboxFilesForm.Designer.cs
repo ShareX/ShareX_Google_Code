@@ -55,7 +55,7 @@
             this.tsMenu.Margin = new System.Windows.Forms.Padding(2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Size = new System.Drawing.Size(555, 22);
-            this.tsMenu.TabIndex = 1;
+            this.tsMenu.TabIndex = 0;
             this.tsMenu.Text = "toolStrip1";
             // 
             // tsbSelectFolder
@@ -81,7 +81,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMain.Size = new System.Drawing.Size(559, 491);
-            this.tlpMain.TabIndex = 3;
+            this.tlpMain.TabIndex = 0;
             // 
             // lvDropboxFiles
             // 
@@ -97,7 +97,7 @@
             this.lvDropboxFiles.Location = new System.Drawing.Point(3, 29);
             this.lvDropboxFiles.Name = "lvDropboxFiles";
             this.lvDropboxFiles.Size = new System.Drawing.Size(553, 459);
-            this.lvDropboxFiles.TabIndex = 0;
+            this.lvDropboxFiles.TabIndex = 1;
             this.lvDropboxFiles.UseCompatibleStateImageBehavior = false;
             this.lvDropboxFiles.View = System.Windows.Forms.View.Details;
             this.lvDropboxFiles.SelectedIndexChanged += new System.EventHandler(this.lvDropboxFiles_SelectedIndexChanged);
@@ -128,7 +128,7 @@
             this.tsmiCreateDirectory});
             this.cmsDropbox.Name = "cmsDropbox";
             this.cmsDropbox.ShowImageMargin = false;
-            this.cmsDropbox.Size = new System.Drawing.Size(143, 136);
+            this.cmsDropbox.Size = new System.Drawing.Size(143, 114);
             this.cmsDropbox.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDropbox_Opening);
             // 
             // tsmiCopyPublicLink
