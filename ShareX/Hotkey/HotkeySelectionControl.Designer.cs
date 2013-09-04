@@ -49,6 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHotkeyDescription.BackColor = System.Drawing.Color.White;
             this.lblHotkeyDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblHotkeyDescription.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblHotkeyDescription.Location = new System.Drawing.Point(0, 1);
             this.lblHotkeyDescription.Name = "lblHotkeyDescription";
             this.lblHotkeyDescription.Size = new System.Drawing.Size(254, 21);

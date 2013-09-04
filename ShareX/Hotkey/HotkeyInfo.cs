@@ -141,7 +141,7 @@ namespace ShareX
             {
                 if (Control)
                 {
-                    text += "Control + ";
+                    text += "Ctrl + ";
                 }
 
                 if (Shift)

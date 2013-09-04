@@ -79,9 +79,6 @@ namespace ShareX
             }
         }
 
-        [JsonIgnore]
-        public TaskSettings TaskSettingsReference { get; private set; }
-
         public static TaskSettings GetDefaultTaskSettings()
         {
             TaskSettings taskSettings = new TaskSettings();
@@ -91,9 +88,20 @@ namespace ShareX
 
         public static TaskSettings GetSafeTaskSettings(TaskSettings taskSettings)
         {
-            TaskSettings taskSettingsCopy = taskSettings.Copy();
-            taskSettingsCopy.TaskSettingsReference = taskSettings;
-            taskSettingsCopy.SetDefaultSettings();
+            TaskSettings taskSettingsCopy;
+
+            if (taskSettings.IsUsingDefaultSettings && Program.DefaultTaskSettings != null)
+            {
+                taskSettingsCopy = Program.DefaultTaskSettings.Copy();
+                taskSettingsCopy.Description = taskSettings.Description;
+                taskSettingsCopy.Job = taskSettings.Job;
+            }
+            else
+            {
+                taskSettingsCopy = taskSettings.Copy();
+                taskSettingsCopy.SetDefaultSettings();
+            }
+
             return taskSettingsCopy;
         }
 
