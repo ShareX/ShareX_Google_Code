@@ -301,7 +301,15 @@ namespace ShareX
             {
                 default:
                 case CaptureType.Rectangle:
-                    surface = new RectangleRegion();
+                    if (taskSettings.AdvancedSettings.UseLightRectangleCrop)
+                    {
+                        CaptureLightRectangle(taskSettings, autoHideForm);
+                        return;
+                    }
+                    else
+                    {
+                        surface = new RectangleRegion();
+                    }
                     break;
                 case CaptureType.RectangleWindow:
                     RectangleRegion rectangleRegion = new RectangleRegion();
@@ -352,6 +360,35 @@ namespace ShareX
 
                 return img;
             }, captureType, taskSettings, autoHideForm);
+        }
+
+        private void CaptureLightRectangle(TaskSettings taskSettings, bool autoHideForm = true)
+        {
+            DoCapture(() =>
+            {
+                Image img = null;
+                Image screenshot = Screenshot.CaptureFullscreen();
+
+                using (RectangleLight rectangleLight = new RectangleLight(screenshot))
+                {
+                    if (rectangleLight.ShowDialog() == DialogResult.OK)
+                    {
+                        Rectangle rect = CaptureHelpers.ScreenToClient(rectangleLight.SelectionRectangle);
+
+                        if (rect.X == 0 && rect.Y == 0 && rect.Width == screenshot.Width && rect.Height == screenshot.Height)
+                        {
+                            return img = screenshot;
+                        }
+                        else
+                        {
+                            img = CaptureHelpers.CropImage(screenshot, rect);
+                            screenshot.Dispose();
+                        }
+                    }
+                }
+
+                return img;
+            }, CaptureType.Rectangle, taskSettings, autoHideForm);
         }
 
         private void CaptureLastRegion(TaskSettings taskSettings, bool autoHideForm = true)

@@ -33,7 +33,7 @@ using System.Windows.Forms;
 
 namespace ScreenCapture
 {
-    public class CropLight : Form
+    public class RectangleLight : Form
     {
         private Timer timer;
         private TextureBrush backgroundBrush;
@@ -44,12 +44,12 @@ namespace ScreenCapture
         public bool ShowRectangleInfo { get; set; }
         public Rectangle SelectionRectangle { get; private set; }
 
-        public CropLight()
+        public RectangleLight()
             : this(Screenshot.CaptureFullscreen())
         {
         }
 
-        public CropLight(Image backgroundImage)
+        public RectangleLight(Image backgroundImage)
         {
             InitializeComponent();
 
