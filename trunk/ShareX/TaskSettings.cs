@@ -258,29 +258,24 @@ namespace ShareX
 
     public class TaskSettingsAdvanced
     {
-        #region Interaction
-
-        [Category(ComponentModelStrings.Interaction), DefaultValue(false), Description(ComponentModelStrings.Interaction_DisableNotifications)]
-        public bool DisableNotifications { get; set; }
-
-        #endregion Interaction
-
-        #region Upload Text
-
-        [Category(ComponentModelStrings.UploadText), DefaultValue("txt"), Description(ComponentModelStrings.UploadText_TextFileExtension)]
-        public string TextFileExtension { get; set; }
-
-        [Category(ComponentModelStrings.UploadText), DefaultValue("text"), Description(ComponentModelStrings.UploadText_TextFormat)]
-        public string TextFormat { get; set; }
-
-        #endregion Upload Text
-
-        [Category(ComponentModelStrings.CategoryAfterCapture), DefaultValue(""),
-        Description(ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat)]
+        [Category("After upload"), DefaultValue(""),
+        Description("Clipboard content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.")]
         public string ClipboardContentFormat { get; set; }
 
-        [Category(ComponentModelStrings.CategoryAfterUpload), DefaultValue(""), Description("")]
+        [Category("After upload"), DefaultValue(""), Description("Balloon tip content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.")]
         public string BalloonTipContentFormat { get; set; }
+
+        [Category("Capture"), DefaultValue(false), Description("Light version of rectangle region for better performance.")]
+        public bool UseLightRectangleCrop { get; set; }
+
+        [Category("Interaction"), DefaultValue(false), Description("Disable notifications")]
+        public bool DisableNotifications { get; set; }
+
+        [Category("Upload text"), DefaultValue("txt"), Description("File extension when saving text to the local hard disk.")]
+        public string TextFileExtension { get; set; }
+
+        [Category("Upload text"), DefaultValue("text"), Description("Text format e.g. csharp, cpp, etc.")]
+        public string TextFormat { get; set; }
 
         public TaskSettingsAdvanced()
         {

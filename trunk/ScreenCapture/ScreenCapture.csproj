@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
-    <Compile Include="Forms\CropLight.cs">
+    <Compile Include="Forms\RectangleLight.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RegionCapturePreview.cs">

@@ -44,8 +44,8 @@ namespace HelpersLib
             ClipboardFormat = cbf;
             txtDescription.Text = cbf.Description ?? "";
             txtFormat.Text = cbf.Format ?? "";
-            cmsFormatPattern = NameParser.CreateCodesMenu(txtFormat, ReplacementVariables.n);
-            lblExample.Text = ComponentModelStrings.AfterCaptureClipboard_ClipboardContentFormat;
+            cmsFormatPattern = NameParser.CreateCodesMenu(txtFormat);
+            lblExample.Text = "Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.";
         }
 
         private void btnOK_Click(object sender, EventArgs e)
