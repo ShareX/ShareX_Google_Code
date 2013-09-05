@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -317,6 +318,11 @@ namespace HelpersLib
 
             form.BringToFront();
             form.Activate();
+        }
+
+        public static int WeekOfYear(this DateTime dateTime)
+        {
+            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
         }
     }
 }

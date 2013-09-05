@@ -376,10 +376,10 @@ namespace ShareX
 
         public static void BackupSettings()
         {
-            Helpers.BackupFileMonthly(ApplicationConfigFilePath, BackupFolder);
-            Helpers.BackupFileMonthly(HotkeysConfigFilePath, BackupFolder);
-            Helpers.BackupFileMonthly(UploadersConfigFilePath, BackupFolder);
-            Helpers.BackupFileMonthly(HistoryFilePath, BackupFolder);
+            Helpers.BackupFileWeekly(ApplicationConfigFilePath, BackupFolder);
+            Helpers.BackupFileWeekly(HotkeysConfigFilePath, BackupFolder);
+            Helpers.BackupFileWeekly(UploadersConfigFilePath, BackupFolder);
+            Helpers.BackupFileWeekly(HistoryFilePath, BackupFolder);
         }
 
         private static void CheckPersonalPathConfig()
