@@ -37,7 +37,7 @@ namespace ShareX
         public event EventHandler SelectedChanged;
         public event EventHandler LabelDoubleClick;
 
-        public HotkeySetting Setting { get; set; }
+        public HotkeySettings Setting { get; set; }
 
         private bool selected;
         public bool Selected
@@ -63,7 +63,7 @@ namespace ShareX
 
         public bool Editing { get; private set; }
 
-        public HotkeySelectionControl(HotkeySetting setting)
+        public HotkeySelectionControl(HotkeySettings setting)
         {
             InitializeComponent();
             Setting = setting;

@@ -23,41 +23,18 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
-using Newtonsoft.Json;
-using System.Windows.Forms;
-using System.Xml.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace ShareX
 {
-    public class HotkeySetting
+    public class WatchFolderSettings
     {
-        public HotkeyInfo HotkeyInfo { get; set; }
-
-        public TaskSettings TaskSettings { get; set; }
-
-        public HotkeySetting()
-        {
-            HotkeyInfo = new HotkeyInfo();
-        }
-
-        public HotkeySetting(HotkeyType job, Keys hotkey = Keys.None)
-            : this()
-        {
-            TaskSettings = TaskSettings.GetDefaultTaskSettings();
-            TaskSettings.Job = job;
-            TaskSettings.Description = job.GetDescription();
-            HotkeyInfo = new HotkeyInfo { Hotkey = hotkey };
-        }
-
-        public override string ToString()
-        {
-            if (HotkeyInfo != null && TaskSettings != null)
-            {
-                return string.Format("Hotkey: {0}, Description: {1}, Job: {2}", HotkeyInfo, TaskSettings.Description, TaskSettings.Job);
-            }
-
-            return string.Empty;
-        }
+        public string FolderPath { get; set; }
+        public string Filter { get; set; }
+        public bool IncludeSubdirectories { get; set; }
     }
 }

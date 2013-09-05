@@ -30,7 +30,7 @@ using UploadersLib;
 
 namespace ShareX
 {
-    public class Settings : SettingsBase<Settings>
+    public class ApplicationConfig : SettingsBase<ApplicationConfig>
     {
         public TaskSettings DefaultTaskSettings = new TaskSettings();
 

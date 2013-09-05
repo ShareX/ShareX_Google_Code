@@ -24,15 +24,40 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace ShareX
 {
-    public class HotkeySettings : SettingsBase<HotkeySettings>
+    public class HotkeySettings
     {
-        public List<HotkeySetting> Hotkeys = new List<HotkeySetting>();
+        public HotkeyInfo HotkeyInfo { get; set; }
+
+        public TaskSettings TaskSettings { get; set; }
+
+        public HotkeySettings()
+        {
+            HotkeyInfo = new HotkeyInfo();
+        }
+
+        public HotkeySettings(HotkeyType job, Keys hotkey = Keys.None)
+            : this()
+        {
+            TaskSettings = TaskSettings.GetDefaultTaskSettings();
+            TaskSettings.Job = job;
+            TaskSettings.Description = job.GetDescription();
+            HotkeyInfo = new HotkeyInfo { Hotkey = hotkey };
+        }
+
+        public override string ToString()
+        {
+            if (HotkeyInfo != null && TaskSettings != null)
+            {
+                return string.Format("Hotkey: {0}, Description: {1}, Job: {2}", HotkeyInfo, TaskSettings.Description, TaskSettings.Job);
+            }
+
+            return string.Empty;
+        }
     }
 }

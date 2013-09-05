@@ -36,7 +36,7 @@ namespace ShareX
 {
     public class WatchFolder : IDisposable
     {
-        public WatchFolderSetting Settings { get; set; }
+        public WatchFolderSettings Settings { get; set; }
         public TaskSettings TaskSettings { get; set; }
 
         public delegate void FileWatcherTriggerEventHandler(string path);
