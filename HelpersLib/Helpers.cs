@@ -746,6 +746,24 @@ namespace HelpersLib
             }
         }
 
+        public static void BackupFileWeekly(string filepath, string destinationFolder)
+        {
+            if (!string.IsNullOrEmpty(filepath) && File.Exists(filepath))
+            {
+                string filename = Path.GetFileNameWithoutExtension(filepath);
+                DateTime dateTime = DateTime.Now;
+                string extension = Path.GetExtension(filepath);
+                string newFilename = string.Format("{0}-{1:yyyy-MM}-W{2:00}{3}", filename, dateTime, dateTime.WeekOfYear(), extension);
+                string newFilepath = Path.Combine(destinationFolder, newFilename);
+
+                if (!File.Exists(newFilepath))
+                {
+                    Helpers.CreateDirectoryIfNotExist(newFilepath);
+                    File.Copy(filepath, newFilepath, false);
+                }
+            }
+        }
+
         public static Rectangle EvenRectangleSize(Rectangle rect)
         {
             rect.Width += rect.Width & 1;

@@ -240,7 +240,7 @@
     <Compile Include="UploadTask.cs" />
     <Compile Include="UploadInfoManager.cs" />
     <Compile Include="UploadManager.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="ApplicationConfig.cs" />
     <Compile Include="TaskInfo.cs" />
     <EmbeddedResource Include="Forms\HotkeySettingsForm.resx">
       <DependentUpon>HotkeySettingsForm.cs</DependentUpon>
