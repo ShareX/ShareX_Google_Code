@@ -31,14 +31,14 @@ namespace ShareX
 {
     public partial class WatchFolderForm : Form
     {
-        public WatchFolderSetting WatchFolder { get; private set; }
+        public WatchFolderSettings WatchFolder { get; private set; }
 
         public WatchFolderForm()
-            : this(new WatchFolderSetting())
+            : this(new WatchFolderSettings())
         {
         }
 
-        public WatchFolderForm(WatchFolderSetting watchFolder)
+        public WatchFolderForm(WatchFolderSettings watchFolder)
         {
             WatchFolder = watchFolder;
             InitializeComponent();

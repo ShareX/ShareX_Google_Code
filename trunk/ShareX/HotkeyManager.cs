@@ -30,16 +30,16 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public delegate void HotkeyTriggerEventHandler(HotkeySetting hotkeySetting);
+    public delegate void HotkeyTriggerEventHandler(HotkeySettings hotkeySetting);
 
     public class HotkeyManager
     {
-        public List<HotkeySetting> Hotkeys { get; private set; }
+        public List<HotkeySettings> Hotkeys { get; private set; }
 
         private HotkeyForm hotkeyForm;
         private HotkeyTriggerEventHandler triggerAction;
 
-        public HotkeyManager(HotkeyForm hotkeyForm, List<HotkeySetting> hotkeys, HotkeyTriggerEventHandler action)
+        public HotkeyManager(HotkeyForm hotkeyForm, List<HotkeySettings> hotkeys, HotkeyTriggerEventHandler action)
         {
             this.hotkeyForm = hotkeyForm;
             triggerAction = action;
@@ -54,7 +54,7 @@ namespace ShareX
 
         public void RegisterAllHotkeys()
         {
-            foreach (HotkeySetting hotkeySetting in Hotkeys)
+            foreach (HotkeySettings hotkeySetting in Hotkeys)
             {
                 RegisterHotkey(hotkeySetting);
             }
@@ -62,7 +62,7 @@ namespace ShareX
 
         public void ShowFailedHotkeys()
         {
-            IEnumerable<HotkeySetting> failedHotkeysList = Hotkeys.Where(x => x.HotkeyInfo.Status == HotkeyStatus.Failed);
+            IEnumerable<HotkeySettings> failedHotkeysList = Hotkeys.Where(x => x.HotkeyInfo.Status == HotkeyStatus.Failed);
 
             if (failedHotkeysList.Count() > 0)
             {
@@ -74,7 +74,7 @@ namespace ShareX
             }
         }
 
-        private void RegisterHotkey(HotkeySetting hotkeySetting)
+        private void RegisterHotkey(HotkeySettings hotkeySetting)
         {
             if (hotkeySetting.HotkeyInfo.HotkeyPress == null)
             {
@@ -89,14 +89,14 @@ namespace ShareX
             }
         }
 
-        public void UpdateHotkey(HotkeySetting hotkeySetting)
+        public void UpdateHotkey(HotkeySettings hotkeySetting)
         {
             hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
 
             RegisterHotkey(hotkeySetting);
         }
 
-        public void UnregisterHotkey(HotkeySetting hotkeySetting)
+        public void UnregisterHotkey(HotkeySettings hotkeySetting)
         {
             hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
 
@@ -113,18 +113,18 @@ namespace ShareX
             Hotkeys.AddRange(GetDefaultHotkeyList());
         }
 
-        public HotkeySetting[] GetDefaultHotkeyList()
+        public HotkeySettings[] GetDefaultHotkeyList()
         {
-            return new HotkeySetting[]
+            return new HotkeySettings[]
             {
-                new HotkeySetting(HotkeyType.ClipboardUpload, Keys.Control | Keys.PageUp),
-                new HotkeySetting(HotkeyType.FileUpload, Keys.Shift | Keys.PageUp),
-                new HotkeySetting(HotkeyType.PrintScreen, Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.ActiveWindow, Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
-                new HotkeySetting(HotkeyType.ScreenRecorder, Keys.Shift | Keys.F11)
+                new HotkeySettings(HotkeyType.ClipboardUpload, Keys.Control | Keys.PageUp),
+                new HotkeySettings(HotkeyType.FileUpload, Keys.Shift | Keys.PageUp),
+                new HotkeySettings(HotkeyType.PrintScreen, Keys.PrintScreen),
+                new HotkeySettings(HotkeyType.ActiveWindow, Keys.Alt | Keys.PrintScreen),
+                new HotkeySettings(HotkeyType.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
+                new HotkeySettings(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
+                new HotkeySettings(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
+                new HotkeySettings(HotkeyType.ScreenRecorder, Keys.Shift | Keys.F11)
             };
         }
     }

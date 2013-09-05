@@ -23,18 +23,16 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
+using System.Linq;
+using System.Text;
 
 namespace ShareX
 {
-    public class WatchFolderSetting
+    public class HotkeysConfig : SettingsBase<HotkeysConfig>
     {
-        public string FolderPath { get; set; }
-        public string Filter { get; set; }
-        public bool IncludeSubdirectories { get; set; }
+        public List<HotkeySettings> Hotkeys = new List<HotkeySettings>();
     }
 }

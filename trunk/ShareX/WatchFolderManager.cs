@@ -39,21 +39,21 @@ namespace ShareX
         {
             WatchFolders = new List<WatchFolder>();
 
-            foreach (WatchFolderSetting defaultWatchFolderSetting in Program.DefaultTaskSettings.WatchFolderList)
+            foreach (WatchFolderSettings defaultWatchFolderSetting in Program.DefaultTaskSettings.WatchFolderList)
             {
                 AddWatchFolder(defaultWatchFolderSetting, Program.DefaultTaskSettings);
             }
 
-            foreach (HotkeySetting hotkeySetting in Program.HotkeySettings.Hotkeys)
+            foreach (HotkeySettings hotkeySetting in Program.HotkeysConfig.Hotkeys)
             {
-                foreach (WatchFolderSetting watchFolderSetting in hotkeySetting.TaskSettings.WatchFolderList)
+                foreach (WatchFolderSettings watchFolderSetting in hotkeySetting.TaskSettings.WatchFolderList)
                 {
                     AddWatchFolder(watchFolderSetting, hotkeySetting.TaskSettings);
                 }
             }
         }
 
-        private WatchFolder FindWatchFolder(WatchFolderSetting watchFolderSetting)
+        private WatchFolder FindWatchFolder(WatchFolderSettings watchFolderSetting)
         {
             foreach (WatchFolder watchFolder in WatchFolders)
             {
@@ -66,12 +66,12 @@ namespace ShareX
             return null;
         }
 
-        private bool IsExist(WatchFolderSetting watchFolderSetting)
+        private bool IsExist(WatchFolderSettings watchFolderSetting)
         {
             return FindWatchFolder(watchFolderSetting) != null;
         }
 
-        public void AddWatchFolder(WatchFolderSetting watchFolderSetting, TaskSettings taskSettings)
+        public void AddWatchFolder(WatchFolderSettings watchFolderSetting, TaskSettings taskSettings)
         {
             if (!IsExist(watchFolderSetting))
             {
@@ -91,7 +91,7 @@ namespace ShareX
             }
         }
 
-        public void RemoveWatchFolder(WatchFolderSetting watchFolderSetting)
+        public void RemoveWatchFolder(WatchFolderSettings watchFolderSetting)
         {
             using (WatchFolder watchFolder = FindWatchFolder(watchFolderSetting))
             {
@@ -103,7 +103,7 @@ namespace ShareX
             }
         }
 
-        public void UpdateWatchFolderState(WatchFolderSetting watchFolderSetting)
+        public void UpdateWatchFolderState(WatchFolderSettings watchFolderSetting)
         {
             WatchFolder watchFolder = FindWatchFolder(watchFolderSetting);
             if (watchFolder != null)

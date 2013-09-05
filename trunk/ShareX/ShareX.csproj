@@ -142,9 +142,9 @@
     <Compile Include="Forms\WatchFolderForm.Designer.cs">
       <DependentUpon>WatchFolderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HotkeySettings.cs" />
+    <Compile Include="HotkeysConfig.cs" />
     <Compile Include="HotkeyManager.cs" />
-    <Compile Include="HotkeySetting.cs" />
+    <Compile Include="HotkeySettings.cs" />
     <Compile Include="Forms\HotkeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,7 +190,7 @@
     </Compile>
     <Compile Include="WatchFolder.cs" />
     <Compile Include="WatchFolderManager.cs" />
-    <Compile Include="WatchFolderSetting.cs" />
+    <Compile Include="WatchFolderSettings.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -42,6 +42,26 @@ namespace ShareX
         public static readonly string ApplicationName = Application.ProductName;
         public static readonly Version AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
+        public static string Title
+        {
+            get
+            {
+                string title = string.Format("{0} {1}.{2}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor);
+                if (IsPortable) title += " Portable";
+                return title;
+            }
+        }
+
+        public static string FullTitle
+        {
+            get
+            {
+                string title = string.Format("{0} {1}.{2}.{3} r{4}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor, AssemblyVersion.Build, AssemblyVersion.Revision);
+                if (IsPortable) title += " Portable";
+                return title;
+            }
+        }
+
         public static string AssemblyCopyright
         {
             get
@@ -64,9 +84,11 @@ namespace ShareX
         private static readonly string DefaultPersonalPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ApplicationName);
         private static readonly string PortablePersonalPath = Path.Combine(StartupPath, ApplicationName);
         private static readonly string PersonalPathConfig = Path.Combine(StartupPath, "PersonalPath.cfg");
-        private static readonly string SettingsFileName = ApplicationName + "Settings.json";
-        private static readonly string UploadersConfigFileName = "UploadersConfig.json";
-        private static readonly string HotkeySettingsFileName = "HotkeySettings.json";
+        private static readonly string ApplicationConfigFilename = "ApplicationConfig.json";
+        private static readonly string UploadersConfigFilename = "UploadersConfig.json";
+        private static readonly string HotkeysConfigFilename = "HotkeysConfig.json";
+        private static readonly string HistoryFilename = "History.xml";
+        private static readonly string OldHistoryFilename = "UploadersHistory.xml";
         private static readonly string LogFileName = ApplicationName + "-Log-{0:yyyy-MM}.txt";
 
         public static string CustomPersonalPath { get; private set; }
@@ -84,13 +106,13 @@ namespace ShareX
             }
         }
 
-        public static string SettingsFilePath
+        public static string ApplicationConfigFilePath
         {
             get
             {
                 if (!IsSandbox)
                 {
-                    return Path.Combine(PersonalPath, SettingsFileName);
+                    return Path.Combine(PersonalPath, ApplicationConfigFilename);
                 }
 
                 return null;
@@ -108,20 +130,20 @@ namespace ShareX
                         return Settings.CustomUploadersConfigPath;
                     }
 
-                    return Path.Combine(PersonalPath, UploadersConfigFileName);
+                    return Path.Combine(PersonalPath, UploadersConfigFilename);
                 }
 
                 return null;
             }
         }
 
-        public static string HotkeySettingsFilePath
+        public static string HotkeysConfigFilePath
         {
             get
             {
                 if (!IsSandbox)
                 {
-                    return Path.Combine(PersonalPath, HotkeySettingsFileName);
+                    return Path.Combine(PersonalPath, HotkeysConfigFilename);
                 }
 
                 return null;
@@ -137,7 +159,7 @@ namespace ShareX
                     return Settings.CustomHistoryPath;
                 }
 
-                return Path.Combine(PersonalPath, "History.xml");
+                return Path.Combine(PersonalPath, HistoryFilename);
             }
         }
 
@@ -150,7 +172,7 @@ namespace ShareX
                     return Settings.CustomHistoryPath;
                 }
 
-                return Path.Combine(PersonalPath, "UploadersHistory.xml");
+                return Path.Combine(PersonalPath, OldHistoryFilename);
             }
         }
 
@@ -215,37 +237,19 @@ namespace ShareX
         public static bool IsPortable { get; private set; }
         public static bool IsSilentRun { get; private set; }
         public static bool IsSandbox { get; private set; }
-        public static Stopwatch StartTimer { get; private set; }
-        public static Logger MyLogger { get; private set; }
 
-        public static string Title
-        {
-            get
-            {
-                string title = string.Format("{0} {1}.{2}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor);
-                if (IsPortable) title += " Portable";
-                return title;
-            }
-        }
-
-        public static string FullTitle
-        {
-            get
-            {
-                string title = string.Format("{0} {1}.{2}.{3} r{4}", ApplicationName, AssemblyVersion.Major, AssemblyVersion.Minor, AssemblyVersion.Build, AssemblyVersion.Revision);
-                if (IsPortable) title += " Portable";
-                return title;
-            }
-        }
-
-        public static MainForm MainForm { get; private set; }
-        public static Settings Settings { get; private set; }
+        public static ApplicationConfig Settings { get; private set; }
         public static TaskSettings DefaultTaskSettings { get; private set; }
         public static UploadersConfig UploadersConfig { get; private set; }
-        public static HotkeySettings HotkeySettings { get; private set; }
+        public static HotkeysConfig HotkeysConfig { get; private set; }
+
         public static ManualResetEvent SettingsResetEvent { get; private set; }
         public static ManualResetEvent UploaderSettingsResetEvent { get; private set; }
         public static ManualResetEvent HotkeySettingsResetEvent { get; private set; }
+
+        public static MainForm MainForm { get; private set; }
+        public static Stopwatch StartTimer { get; private set; }
+        public static Logger MyLogger { get; private set; }
         public static HotkeyManager HotkeyManager { get; set; }
         public static WatchFolderManager WatchFolderManager { get; set; }
 
@@ -349,7 +353,7 @@ namespace ShareX
 
         public static void LoadProgramSettings()
         {
-            Settings = Settings.Load(SettingsFilePath);
+            Settings = ApplicationConfig.Load(ApplicationConfigFilePath);
             DefaultTaskSettings = Settings.DefaultTaskSettings;
         }
 
@@ -360,19 +364,20 @@ namespace ShareX
 
         public static void LoadHotkeySettings()
         {
-            HotkeySettings = HotkeySettings.Load(HotkeySettingsFilePath);
+            HotkeysConfig = HotkeysConfig.Load(HotkeysConfigFilePath);
         }
 
         public static void SaveSettings()
         {
-            Settings.Save(SettingsFilePath);
+            Settings.Save(ApplicationConfigFilePath);
             UploadersConfig.Save(UploadersConfigFilePath);
-            HotkeySettings.Save(HotkeySettingsFilePath);
+            HotkeysConfig.Save(HotkeysConfigFilePath);
         }
 
         public static void BackupSettings()
         {
-            Helpers.BackupFileMonthly(SettingsFilePath, BackupFolder);
+            Helpers.BackupFileMonthly(ApplicationConfigFilePath, BackupFolder);
+            Helpers.BackupFileMonthly(HotkeysConfigFilePath, BackupFolder);
             Helpers.BackupFileMonthly(UploadersConfigFilePath, BackupFolder);
             Helpers.BackupFileMonthly(HistoryFilePath, BackupFolder);
         }

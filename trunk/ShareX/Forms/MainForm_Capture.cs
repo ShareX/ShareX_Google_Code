@@ -44,14 +44,14 @@ namespace ShareX
         {
             TaskEx.Run(() =>
             {
-                if (Program.HotkeySettings == null)
+                if (Program.HotkeysConfig == null)
                 {
                     Program.HotkeySettingsResetEvent.WaitOne();
                 }
 
                 this.InvokeSafe(() =>
                 {
-                    Program.HotkeyManager = new HotkeyManager(this, Program.HotkeySettings.Hotkeys, HandleHotkeys);
+                    Program.HotkeyManager = new HotkeyManager(this, Program.HotkeysConfig.Hotkeys, HandleHotkeys);
                     Program.HotkeyManager.RegisterAllHotkeys();
                     Program.HotkeyManager.ShowFailedHotkeys();
 
@@ -60,7 +60,7 @@ namespace ShareX
             });
         }
 
-        private void HandleHotkeys(HotkeySetting hotkeySetting)
+        private void HandleHotkeys(HotkeySettings hotkeySetting)
         {
             DebugHelper.WriteLine(hotkeySetting.ToString());
 
