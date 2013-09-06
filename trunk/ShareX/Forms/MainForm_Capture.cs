@@ -42,21 +42,23 @@ namespace ShareX
 
         private void InitHotkeys()
         {
-            TaskEx.Run(() =>
+            ThreadPool.QueueUserWorkItem(state =>
             {
                 if (Program.HotkeysConfig == null)
                 {
                     Program.HotkeySettingsResetEvent.WaitOne();
                 }
 
-                this.InvokeSafe(() =>
+                this.Invoke(new MethodInvoker(() =>
                 {
                     Program.HotkeyManager = new HotkeyManager(this, Program.HotkeysConfig.Hotkeys, HandleHotkeys);
                     Program.HotkeyManager.RegisterAllHotkeys();
                     Program.HotkeyManager.ShowFailedHotkeys();
+                    DebugHelper.WriteLine("HotkeyManager started");
 
                     Program.WatchFolderManager = new WatchFolderManager();
-                });
+                    DebugHelper.WriteLine("WatchFolderManager started");
+                }));
             });
         }
 
