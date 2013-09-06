@@ -107,6 +107,16 @@ namespace HelpersLib
             return EDataType.File;
         }
 
+        public static Image GetImageFromFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                return Image.FromStream(new MemoryStream(File.ReadAllBytes(filePath)));
+            }
+
+            return null;
+        }
+
         public static string AddZeroes(int number, int digits = 2)
         {
             return number.ToString().PadLeft(digits, '0');
