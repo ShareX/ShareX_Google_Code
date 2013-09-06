@@ -1,4 +1,5 @@
 #summary Supported Command Line Arguments
+#labels Phase-Support
 
 ==-multi or -m==
 Allows ShareX to load multiple instances. By default it not possible to use more than one ShareX instance.
@@ -13,16 +14,6 @@ ShareX loads to tray without showing the main window.
 ==-portable or -p==
 Loads ShareX in portable mode.
 In portable mode, the application will create a folder (if it doesn’t exist already) in its startup path to save configuration files and images.
-
-----
-
-==-debug or -d==
-Adds debug drop down menu to ShareX main window.
-
-----
-
-==-nohotkeys==
-Loads ShareX without registering hotkeys and a hides the hotkeys tab in settings window.
 
 ----
 
