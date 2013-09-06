@@ -40,29 +40,55 @@ namespace ScreenCapture
         private Image backgroundImage;
         private TextureBrush backgroundBrush;
         private Pen rectanglePen;
-        private Point positionOnClick, positionCurrent, positionOld;
+        private Point positionOnClick, positionOld;
         private bool isMouseDown;
 
+        public Rectangle ScreenRectangle { get; private set; }
+
+        public Rectangle ScreenRectangle0Based
+        {
+            get
+            {
+                return new Rectangle(0, 0, ScreenRectangle.Width, ScreenRectangle.Height);
+            }
+        }
+
         public Rectangle SelectionRectangle { get; private set; }
+
+        public Rectangle SelectionRectangle0Based
+        {
+            get
+            {
+                return new Rectangle(SelectionRectangle.X - ScreenRectangle.X, SelectionRectangle.Y - ScreenRectangle.Y,
+                    SelectionRectangle.Width, SelectionRectangle.Height);
+            }
+        }
+
+        public Point CurrentMousePosition { get; private set; }
+
+        public Point CurrentMousePosition0Based
+        {
+            get
+            {
+                return new Point(CurrentMousePosition.X - ScreenRectangle.X, CurrentMousePosition.Y - ScreenRectangle.Y);
+            }
+        }
+
         public bool ShowRectangleInfo { get; set; }
 
         public RectangleLight()
-            : this(Screenshot.CaptureFullscreen())
         {
-        }
+            backgroundImage = Screenshot.CaptureFullscreen();
+            backgroundBrush = new TextureBrush(backgroundImage);
+            rectanglePen = new Pen(Color.Red);
+            ScreenRectangle = CaptureHelpers.GetScreenBounds();
 
-        public RectangleLight(Image backgroundImage)
-        {
             InitializeComponent();
 
             using (MemoryStream cursorStream = new MemoryStream(Resources.Crosshair))
             {
                 Cursor = new Cursor(cursorStream);
             }
-
-            this.backgroundImage = backgroundImage;
-            backgroundBrush = new TextureBrush(backgroundImage);
-            rectanglePen = new Pen(Color.Red);
 
             timer = new Timer { Interval = 10 };
             timer.Tick += new EventHandler(timer_Tick);
@@ -91,10 +117,10 @@ namespace ScreenCapture
             this.SuspendLayout();
             this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.Bounds = CaptureHelpers.GetScreenBounds();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Bounds = ScreenRectangle;
             this.FormBorderStyle = FormBorderStyle.None;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.StartPosition = FormStartPosition.Manual;
             this.Text = "ShareX - Rectangle Capture Light";
 #if !DEBUG
             this.ShowInTaskbar = false;
@@ -124,7 +150,7 @@ namespace ScreenCapture
         {
             if (e.Button == MouseButtons.Left)
             {
-                positionOnClick = e.Location;
+                positionOnClick = CaptureHelpers.GetMousePosition();
                 isMouseDown = true;
             }
             else if (isMouseDown)
@@ -153,7 +179,7 @@ namespace ScreenCapture
 
         public Image GetAreaImage()
         {
-            Rectangle rect = CaptureHelpers.ScreenToClient(SelectionRectangle);
+            Rectangle rect = SelectionRectangle0Based;
 
             if (rect.Width > 0 && rect.Height > 0)
             {
@@ -170,12 +196,12 @@ namespace ScreenCapture
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            positionOld = positionCurrent;
-            positionCurrent = CaptureHelpers.GetZeroBasedMousePosition();
+            positionOld = CurrentMousePosition;
+            CurrentMousePosition = CaptureHelpers.GetMousePosition();
 
-            if (positionCurrent != positionOld)
+            if (CurrentMousePosition != positionOld)
             {
-                SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, positionCurrent.X, positionCurrent.Y);
+                SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, CurrentMousePosition.X, CurrentMousePosition.Y);
                 Refresh();
             }
         }
@@ -185,23 +211,23 @@ namespace ScreenCapture
             Graphics g = e.Graphics;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
             g.SmoothingMode = SmoothingMode.HighSpeed;
-            g.FillRectangle(backgroundBrush, Bounds);
-
-            if (ShowRectangleInfo)
-            {
-                int offset = 10;
-                Point position = CaptureHelpers.ScreenToClient(new Point(positionCurrent.X + offset, positionCurrent.Y + offset));
-
-                using (Font font = new Font("Arial", 17, FontStyle.Bold))
-                {
-                    CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
-                        SelectionRectangle.Width, SelectionRectangle.Height), position, font, Color.White, Color.Black, 3);
-                }
-            }
+            g.FillRectangle(backgroundBrush, ScreenRectangle0Based);
 
             if (isMouseDown)
             {
-                g.DrawRectangleProper(rectanglePen, SelectionRectangle);
+                if (ShowRectangleInfo)
+                {
+                    int offset = 10;
+                    Point position = new Point(CurrentMousePosition0Based.X + offset, CurrentMousePosition0Based.Y + offset);
+
+                    using (Font font = new Font("Arial", 17, FontStyle.Bold))
+                    {
+                        CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
+                            SelectionRectangle.Width, SelectionRectangle.Height), position, font, Color.White, Color.Black, 3);
+                    }
+                }
+
+                g.DrawRectangleProper(rectanglePen, SelectionRectangle0Based);
             }
         }
     }

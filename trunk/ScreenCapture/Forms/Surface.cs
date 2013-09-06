@@ -98,10 +98,10 @@ namespace ScreenCapture
             this.SuspendLayout();
             this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
+            this.StartPosition = FormStartPosition.Manual;
             this.Bounds = ScreenRectangle;
             this.FormBorderStyle = FormBorderStyle.None;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.StartPosition = FormStartPosition.Manual;
             this.Text = "ShareX - Region Capture";
 #if !DEBUG
             this.ShowInTaskbar = false;
