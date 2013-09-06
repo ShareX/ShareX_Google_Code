@@ -347,7 +347,6 @@ namespace ShareX
             SettingsResetEvent.Set();
             LoadUploadersConfig();
             UploaderSettingsResetEvent.Set();
-            Thread.Sleep(3000);
             LoadHotkeySettings();
             HotkeySettingsResetEvent.Set();
         }

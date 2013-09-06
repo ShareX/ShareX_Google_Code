@@ -83,10 +83,8 @@ namespace ScreenCapture
 
             borderPen = new Pen(Color.Black);
             borderDotPen = new Pen(Color.Black, 1);
-            borderDotPen.DashPattern = new float[] { 5, 5 };
             borderDotPen2 = new Pen(Color.White, 1);
             borderDotPen2.DashPattern = new float[] { 5, 5 };
-            borderDotPen2.DashOffset = 5;
             shadowBrush = new SolidBrush(Color.FromArgb(75, Color.Black));
             lightBrush = new SolidBrush(Color.FromArgb(10, Color.Black));
             nodeBackgroundBrush = new SolidBrush(Color.White);
@@ -154,6 +152,11 @@ namespace ScreenCapture
             {
                 Close(SurfaceResult.Region);
             }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //base.OnPaintBackground(e);
         }
 
         protected override void OnPaint(PaintEventArgs e)

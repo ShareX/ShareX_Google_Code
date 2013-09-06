@@ -115,8 +115,7 @@ namespace ScreenCapture
 
         protected override void Draw(Graphics g)
         {
-            borderDotPen.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
-            borderDotPen2.DashOffset = 5 + (float)timer.Elapsed.TotalSeconds * 10;
+            borderDotPen2.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
 
             if (Config.ShowCrosshair)
             {

@@ -27,6 +27,7 @@ using HelpersLib;
 using ScreenCapture.Properties;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -36,13 +37,6 @@ namespace ScreenCapture
 {
     public class RectangleLight : Form
     {
-        private Timer timer;
-        private Image backgroundImage;
-        private TextureBrush backgroundBrush;
-        private Pen rectanglePen;
-        private Point positionOnClick, positionOld;
-        private bool isMouseDown;
-
         public Rectangle ScreenRectangle { get; private set; }
 
         public Rectangle ScreenRectangle0Based
@@ -76,11 +70,22 @@ namespace ScreenCapture
 
         public bool ShowRectangleInfo { get; set; }
 
+        private Timer timer;
+        private Image backgroundImage;
+        private TextureBrush backgroundBrush;
+        private Pen borderDotPen, borderDotPen2;
+        private Point positionOnClick;
+        private bool isMouseDown;
+        private Stopwatch penTimer;
+
         public RectangleLight()
         {
             backgroundImage = Screenshot.CaptureFullscreen();
             backgroundBrush = new TextureBrush(backgroundImage);
-            rectanglePen = new Pen(Color.Red);
+            borderDotPen = new Pen(Color.Black, 1);
+            borderDotPen2 = new Pen(Color.White, 1);
+            borderDotPen2.DashPattern = new float[] { 5, 5 };
+            penTimer = Stopwatch.StartNew();
             ScreenRectangle = CaptureHelpers.GetScreenBounds();
 
             InitializeComponent();
@@ -107,7 +112,8 @@ namespace ScreenCapture
             if (timer != null) timer.Dispose();
             if (backgroundImage != null) backgroundImage.Dispose();
             if (backgroundBrush != null) backgroundBrush.Dispose();
-            if (rectanglePen != null) rectanglePen.Dispose();
+            if (borderDotPen != null) borderDotPen.Dispose();
+            if (borderDotPen2 != null) borderDotPen2.Dispose();
 
             base.Dispose(disposing);
         }
@@ -196,14 +202,14 @@ namespace ScreenCapture
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            positionOld = CurrentMousePosition;
             CurrentMousePosition = CaptureHelpers.GetMousePosition();
+            SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, CurrentMousePosition.X, CurrentMousePosition.Y);
+            Refresh();
+        }
 
-            if (CurrentMousePosition != positionOld)
-            {
-                SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, CurrentMousePosition.X, CurrentMousePosition.Y);
-                Refresh();
-            }
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            //base.OnPaintBackground(e);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -227,7 +233,9 @@ namespace ScreenCapture
                     }
                 }
 
-                g.DrawRectangleProper(rectanglePen, SelectionRectangle0Based);
+                g.DrawRectangleProper(borderDotPen, SelectionRectangle0Based);
+                borderDotPen2.DashOffset = (int)(penTimer.Elapsed.TotalMilliseconds / 100) % 10;
+                g.DrawRectangleProper(borderDotPen2, SelectionRectangle0Based);
             }
         }
     }
