@@ -48,9 +48,10 @@ namespace ShareX
         {
             InitControls();
             UpdateControls();
+            HandleCreated += MainForm_HandleCreated;
         }
 
-        private void AfterLoadJobs()
+        private void MainForm_HandleCreated(object sender, EventArgs e)
         {
             LoadSettings();
             InitHotkeys();
@@ -520,15 +521,10 @@ namespace ShareX
 
         protected override void SetVisibleCore(bool value)
         {
-            if (value && !IsHandleCreated)
+            if (value && !IsHandleCreated && Program.IsSilentRun && Program.Settings.ShowTray)
             {
-                if (Program.IsSilentRun && Program.Settings.ShowTray)
-                {
-                    CreateHandle();
-                    value = false;
-                }
-
-                AfterLoadJobs();
+                CreateHandle();
+                value = false;
             }
 
             base.SetVisibleCore(value);

@@ -314,9 +314,9 @@ namespace ShareX
                 HotkeySettingsResetEvent = new ManualResetEvent(false);
                 ThreadPool.QueueUserWorkItem(state => LoadSettings());
 
-                MyLogger.WriteLine("new MainForm() started");
+                MyLogger.WriteLine("MainForm init started");
                 MainForm = new MainForm();
-                MyLogger.WriteLine("new MainForm() finished");
+                MyLogger.WriteLine("MainForm init finished");
 
                 if (Settings == null)
                 {
@@ -347,6 +347,7 @@ namespace ShareX
             SettingsResetEvent.Set();
             LoadUploadersConfig();
             UploaderSettingsResetEvent.Set();
+            Thread.Sleep(3000);
             LoadHotkeySettings();
             HotkeySettingsResetEvent.Set();
         }
@@ -369,9 +370,9 @@ namespace ShareX
 
         public static void SaveSettings()
         {
-            Settings.Save(ApplicationConfigFilePath);
-            UploadersConfig.Save(UploadersConfigFilePath);
-            HotkeysConfig.Save(HotkeysConfigFilePath);
+            if (Settings != null) Settings.Save(ApplicationConfigFilePath);
+            if (UploadersConfig != null) UploadersConfig.Save(UploadersConfigFilePath);
+            if (HotkeysConfig != null) HotkeysConfig.Save(HotkeysConfigFilePath);
         }
 
         public static void BackupSettings()
