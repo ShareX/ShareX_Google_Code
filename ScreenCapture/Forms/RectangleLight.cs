@@ -26,6 +26,7 @@
 using HelpersLib;
 using ScreenCapture.Properties;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -36,13 +37,14 @@ namespace ScreenCapture
     public class RectangleLight : Form
     {
         private Timer timer;
+        private Image backgroundImage;
         private TextureBrush backgroundBrush;
         private Pen rectanglePen;
         private Point positionOnClick, positionCurrent, positionOld;
         private bool isMouseDown;
 
-        public bool ShowRectangleInfo { get; set; }
         public Rectangle SelectionRectangle { get; private set; }
+        public bool ShowRectangleInfo { get; set; }
 
         public RectangleLight()
             : this(Screenshot.CaptureFullscreen())
@@ -58,6 +60,7 @@ namespace ScreenCapture
                 Cursor = new Cursor(cursorStream);
             }
 
+            this.backgroundImage = backgroundImage;
             backgroundBrush = new TextureBrush(backgroundImage);
             rectanglePen = new Pen(Color.Red);
 
@@ -66,10 +69,103 @@ namespace ScreenCapture
             timer.Start();
         }
 
-        private void SimpleCrop_Shown(object sender, EventArgs e)
+        private IContainer components = null;
+
+        protected override void Dispose(bool disposing)
         {
-            BringToFront();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+
+            if (timer != null) timer.Dispose();
+            if (backgroundImage != null) backgroundImage.Dispose();
+            if (backgroundBrush != null) backgroundBrush.Dispose();
+            if (rectanglePen != null) rectanglePen.Dispose();
+
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.AutoScaleDimensions = new SizeF(6F, 13F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.Bounds = CaptureHelpers.GetScreenBounds();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Text = "ShareX - Rectangle Capture Light";
+#if !DEBUG
+            this.ShowInTaskbar = false;
+            this.TopMost = true;
+#endif
+            this.Shown += RectangleLight_Shown;
+            this.KeyUp += RectangleLight_KeyUp;
+            this.MouseDown += RectangleLight_MouseDown;
+            this.MouseUp += RectangleLight_MouseUp;
+            this.ResumeLayout(false);
+        }
+
+        private void RectangleLight_Shown(object sender, EventArgs e)
+        {
             Activate();
+        }
+
+        private void RectangleLight_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void RectangleLight_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                positionOnClick = e.Location;
+                isMouseDown = true;
+            }
+            else if (isMouseDown)
+            {
+                isMouseDown = false;
+                Refresh();
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        private void RectangleLight_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown && e.Button == MouseButtons.Left)
+            {
+                if (SelectionRectangle.Width > 0 && SelectionRectangle.Height > 0)
+                {
+                    DialogResult = DialogResult.OK;
+                }
+
+                Close();
+            }
+        }
+
+        public Image GetAreaImage()
+        {
+            Rectangle rect = CaptureHelpers.ScreenToClient(SelectionRectangle);
+
+            if (rect.Width > 0 && rect.Height > 0)
+            {
+                if (rect.X == 0 && rect.Y == 0 && rect.Width == backgroundImage.Width && rect.Height == backgroundImage.Height)
+                {
+                    return (Image)backgroundImage.Clone();
+                }
+
+                return CaptureHelpers.CropImage(backgroundImage, rect);
+            }
+
+            return null;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -84,45 +180,6 @@ namespace ScreenCapture
             }
         }
 
-        private void Crop_KeyDown(object sender, KeyEventArgs e)
-        {
-            Close();
-        }
-
-        private void Crop_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                positionOnClick = e.Location;
-                isMouseDown = true;
-            }
-            else
-            {
-                if (isMouseDown)
-                {
-                    isMouseDown = false;
-                    Refresh();
-                }
-                else
-                {
-                    Close();
-                }
-            }
-        }
-
-        private void Crop_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown && e.Button == MouseButtons.Left)
-            {
-                if (SelectionRectangle.Width > 0 && SelectionRectangle.Height > 0)
-                {
-                    DialogResult = DialogResult.OK;
-                }
-
-                Close();
-            }
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -134,8 +191,12 @@ namespace ScreenCapture
             {
                 int offset = 10;
                 Point position = CaptureHelpers.ScreenToClient(new Point(positionCurrent.X + offset, positionCurrent.Y + offset));
-                CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
-                    SelectionRectangle.Width, SelectionRectangle.Height), position, new Font("Arial", 17, FontStyle.Bold), Color.White, Color.Black, 3);
+
+                using (Font font = new Font("Arial", 17, FontStyle.Bold))
+                {
+                    CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
+                        SelectionRectangle.Width, SelectionRectangle.Height), position, font, Color.White, Color.Black, 3);
+                }
             }
 
             if (isMouseDown)
@@ -143,42 +204,5 @@ namespace ScreenCapture
                 g.DrawRectangleProper(rectanglePen, SelectionRectangle);
             }
         }
-
-        #region Windows Form Designer generated code
-
-        private System.ComponentModel.IContainer components = null;
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-
-            if (timer != null) timer.Dispose();
-            if (backgroundBrush != null) backgroundBrush.Dispose();
-            if (rectanglePen != null) rectanglePen.Dispose();
-
-            base.Dispose(disposing);
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.Name = "Crop";
-            this.Text = "Crop";
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Bounds = CaptureHelpers.GetScreenBounds();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.ShowInTaskbar = false;
-            this.TopMost = true;
-            this.KeyDown += new KeyEventHandler(this.Crop_KeyDown);
-            this.MouseDown += new MouseEventHandler(this.Crop_MouseDown);
-            this.MouseUp += new MouseEventHandler(this.Crop_MouseUp);
-            this.Shown += new EventHandler(SimpleCrop_Shown);
-            this.ResumeLayout(false);
-        }
-
-        #endregion Windows Form Designer generated code
     }
 }

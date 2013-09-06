@@ -91,26 +91,25 @@ namespace ScreenCapture
             lightBrush = new SolidBrush(Color.FromArgb(10, Color.Black));
             nodeBackgroundBrush = new SolidBrush(Color.White);
             textFont = new Font("Arial", 17, FontStyle.Bold);
-
-            Shown += new EventHandler(Surface_Shown);
-            KeyUp += new KeyEventHandler(Surface_KeyUp);
-            MouseDoubleClick += new MouseEventHandler(Surface_MouseDoubleClick);
         }
 
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new SizeF(6F, 13F);
+            this.AutoScaleMode = AutoScaleMode.Font;
             this.Bounds = ScreenRectangle;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.StartPosition = FormStartPosition.Manual;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.Text = "RegionCapture";
+            this.StartPosition = FormStartPosition.Manual;
+            this.Text = "ShareX - Region Capture";
 #if !DEBUG
             this.ShowInTaskbar = false;
             this.TopMost = true;
 #endif
+            this.Shown += new EventHandler(Surface_Shown);
+            this.KeyUp += new KeyEventHandler(Surface_KeyUp);
+            this.MouseDoubleClick += new MouseEventHandler(Surface_MouseDoubleClick);
             this.ResumeLayout(false);
         }
 

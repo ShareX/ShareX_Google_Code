@@ -306,6 +306,7 @@
     <None Include="Resources\gear.png" />
     <None Include="Resources\block.png" />
     <None Include="Resources\present.png" />
+    <None Include="..\ShareX Setup.cmd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

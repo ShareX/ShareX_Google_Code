@@ -367,23 +367,12 @@ namespace ShareX
             DoCapture(() =>
             {
                 Image img = null;
-                Image screenshot = Screenshot.CaptureFullscreen();
 
-                using (RectangleLight rectangleLight = new RectangleLight(screenshot))
+                using (RectangleLight rectangleLight = new RectangleLight())
                 {
                     if (rectangleLight.ShowDialog() == DialogResult.OK)
                     {
-                        Rectangle rect = CaptureHelpers.ScreenToClient(rectangleLight.SelectionRectangle);
-
-                        if (rect.X == 0 && rect.Y == 0 && rect.Width == screenshot.Width && rect.Height == screenshot.Height)
-                        {
-                            return img = screenshot;
-                        }
-                        else
-                        {
-                            img = CaptureHelpers.CropImage(screenshot, rect);
-                            screenshot.Dispose();
-                        }
+                        img = rectangleLight.GetAreaImage();
                     }
                 }
 
