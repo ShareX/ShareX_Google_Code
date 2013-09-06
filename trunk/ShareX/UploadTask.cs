@@ -324,117 +324,12 @@ namespace ShareX
         {
             if (Info.Job == TaskJob.ImageJob && tempImage != null)
             {
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
-                {
-                    WatermarkManager watermarkManager = new WatermarkManager(Info.TaskSettings.ImageSettings.WatermarkConfig);
-                    watermarkManager.ApplyWatermark(tempImage);
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
-                {
-                    tempImage = CaptureHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
-                {
-                    tempImage = TaskHelper.DrawShadow(Info.TaskSettings, tempImage);
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
-                {
-                    tempImage = TaskHelper.AnnotateImage(tempImage);
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
-                {
-                    ClipboardHelper.CopyImage(tempImage);
-                    DebugHelper.WriteLine("CopyImageToClipboard");
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
-                {
-                    if (Program.Settings.DontShowPrintSettingsDialog)
-                    {
-                        PrintHelper printHelper = new PrintHelper(tempImage);
-                        printHelper.Settings = Program.Settings.PrintSettings;
-                        printHelper.Print();
-                    }
-                    else
-                    {
-                        using (PrintForm printForm = new PrintForm(tempImage, Program.Settings.PrintSettings))
-                        {
-                            printForm.ShowDialog();
-                        }
-                    }
-                }
-
-                if (Info.TaskSettings.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog,
-                    AfterCaptureTasks.UploadImageToHost))
-                {
-                    using (tempImage)
-                    {
-                        ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.TaskSettings);
-                        Data = imageData.ImageStream;
-                        Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
-
-                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
-                        {
-                            Info.FilePath = Path.Combine(Program.ScreenshotsPath, Info.FileName);
-                            imageData.Write(Info.FilePath);
-                            DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
-                        }
-
-                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFileWithDialog))
-                        {
-                            using (SaveFileDialog sfd = new SaveFileDialog())
-                            {
-                                sfd.InitialDirectory = Program.ScreenshotsPath;
-                                sfd.FileName = Info.FileName;
-                                sfd.DefaultExt = Path.GetExtension(Info.FileName).Substring(1);
-                                sfd.Filter = string.Format("*{0}|*{0}|All files (*.*)|*.*", Path.GetExtension(Info.FileName));
-                                sfd.Title = "Choose a folder to save " + Path.GetFileName(Info.FileName);
-
-                                if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
-                                {
-                                    Info.FilePath = sfd.FileName;
-                                    imageData.Write(Info.FilePath);
-                                    DebugHelper.WriteLine("SaveImageToFileWithDialog: " + Info.FilePath);
-                                }
-                            }
-                        }
-
-                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
-                            File.Exists(Info.FilePath))
-                        {
-                            ClipboardHelper.CopyFile(Info.FilePath);
-                        }
-                        else if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
-                        {
-                            ClipboardHelper.CopyText(Info.FilePath);
-                        }
-
-                        if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.TaskSettings.ExternalPrograms != null &&
-                            !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
-                        {
-                            var actions = Info.TaskSettings.ExternalPrograms.Where(x => x.IsActive);
-
-                            if (actions.Count() > 0)
-                            {
-                                if (Data != null)
-                                {
-                                    Data.Dispose();
-                                }
-
-                                foreach (ExternalProgram fileAction in actions)
-                                {
-                                    fileAction.Run(Info.FilePath);
-                                }
-
-                                Data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                            }
-                        }
-                    }
-                }
+                DoAfterCaptureJobs();
+            }
+            else if (Info.DataType == EDataType.Image && tempImage == null)
+            {
+                tempImage = Helpers.GetImageFromFile(Info.FilePath);
+                DoAfterCaptureJobs();
             }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
@@ -445,6 +340,121 @@ namespace ShareX
             if (Info.IsUploadJob && Data != null && Data.CanSeek)
             {
                 Data.Position = 0;
+            }
+        }
+
+        private void DoAfterCaptureJobs()
+        {
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
+            {
+                WatermarkManager watermarkManager = new WatermarkManager(Info.TaskSettings.ImageSettings.WatermarkConfig);
+                watermarkManager.ApplyWatermark(tempImage);
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
+            {
+                tempImage = CaptureHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
+            {
+                tempImage = TaskHelper.DrawShadow(Info.TaskSettings, tempImage);
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
+            {
+                tempImage = TaskHelper.AnnotateImage(tempImage);
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
+            {
+                ClipboardHelper.CopyImage(tempImage);
+                DebugHelper.WriteLine("CopyImageToClipboard");
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SendImageToPrinter))
+            {
+                if (Program.Settings.DontShowPrintSettingsDialog)
+                {
+                    PrintHelper printHelper = new PrintHelper(tempImage);
+                    printHelper.Settings = Program.Settings.PrintSettings;
+                    printHelper.Print();
+                }
+                else
+                {
+                    using (PrintForm printForm = new PrintForm(tempImage, Program.Settings.PrintSettings))
+                    {
+                        printForm.ShowDialog();
+                    }
+                }
+            }
+
+            if (Info.TaskSettings.AfterCaptureJob.HasFlagAny(AfterCaptureTasks.SaveImageToFile, AfterCaptureTasks.SaveImageToFileWithDialog,
+                AfterCaptureTasks.UploadImageToHost))
+            {
+                using (tempImage)
+                {
+                    ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.TaskSettings);
+                    Data = imageData.ImageStream;
+                    Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
+
+                    if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFile))
+                    {
+                        Info.FilePath = Path.Combine(Program.ScreenshotsPath, Info.FileName);
+                        imageData.Write(Info.FilePath);
+                        DebugHelper.WriteLine("SaveImageToFile: " + Info.FilePath);
+                    }
+
+                    if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.SaveImageToFileWithDialog))
+                    {
+                        using (SaveFileDialog sfd = new SaveFileDialog())
+                        {
+                            sfd.InitialDirectory = Program.ScreenshotsPath;
+                            sfd.FileName = Info.FileName;
+                            sfd.DefaultExt = Path.GetExtension(Info.FileName).Substring(1);
+                            sfd.Filter = string.Format("*{0}|*{0}|All files (*.*)|*.*", Path.GetExtension(Info.FileName));
+                            sfd.Title = "Choose a folder to save " + Path.GetFileName(Info.FileName);
+
+                            if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
+                            {
+                                Info.FilePath = sfd.FileName;
+                                imageData.Write(Info.FilePath);
+                                DebugHelper.WriteLine("SaveImageToFileWithDialog: " + Info.FilePath);
+                            }
+                        }
+                    }
+
+                    if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
+                        File.Exists(Info.FilePath))
+                    {
+                        ClipboardHelper.CopyFile(Info.FilePath);
+                    }
+                    else if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
+                    {
+                        ClipboardHelper.CopyText(Info.FilePath);
+                    }
+
+                    if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.TaskSettings.ExternalPrograms != null &&
+                        !string.IsNullOrEmpty(Info.FilePath) && File.Exists(Info.FilePath))
+                    {
+                        var actions = Info.TaskSettings.ExternalPrograms.Where(x => x.IsActive);
+
+                        if (actions.Count() > 0)
+                        {
+                            if (Data != null)
+                            {
+                                Data.Dispose();
+                            }
+
+                            foreach (ExternalProgram fileAction in actions)
+                            {
+                                fileAction.Run(Info.FilePath);
+                            }
+
+                            Data = new FileStream(Info.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        }
+                    }
+                }
             }
         }
 

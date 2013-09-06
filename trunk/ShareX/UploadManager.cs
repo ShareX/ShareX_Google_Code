@@ -181,7 +181,7 @@ namespace ShareX
             else if (data.GetDataPresent(DataFormats.Bitmap, false))
             {
                 Image img = data.GetData(DataFormats.Bitmap, false) as Image;
-                RunImageTask(img);
+                RunImageTask(img, taskSettings);
             }
             else if (data.GetDataPresent(DataFormats.Text, false))
             {
