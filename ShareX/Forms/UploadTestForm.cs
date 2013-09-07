@@ -86,6 +86,8 @@ namespace ShareX
             ListViewGroup urlShortenersGroup = new ListViewGroup("URL Shorteners", HorizontalAlignment.Left);
             lvUploaders.Groups.AddRange(new[] { imageUploadersGroup, textUploadersGroup, fileUploadersGroup, urlShortenersGroup });
 
+            TaskSettings defaultTaskSettings = TaskSettings.GetDefaultTaskSettings();
+
             foreach (ImageDestination uploader in Enum.GetValues(typeof(ImageDestination)))
             {
                 switch (uploader)
@@ -97,7 +99,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.DefaultTaskSettings);
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), defaultTaskSettings);
                 task.Info.TaskSettings.ImageDestination = uploader;
 
                 lvi.Tag = task;
@@ -115,7 +117,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateTextUploaderTask(TestText, Program.DefaultTaskSettings);
+                UploadTask task = UploadTask.CreateTextUploaderTask(TestText, defaultTaskSettings);
                 task.Info.TaskSettings.TextDestination = uploader;
 
                 lvi.Tag = task;
@@ -135,7 +137,7 @@ namespace ShareX
 
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), Program.DefaultTaskSettings);
+                UploadTask task = UploadTask.CreateImageUploaderTask((Image)TestImage.Clone(), defaultTaskSettings);
                 task.Info.TaskSettings.ImageDestination = ImageDestination.FileUploader;
                 task.Info.TaskSettings.FileDestination = uploader;
 
@@ -148,7 +150,7 @@ namespace ShareX
             {
                 lvi = new ListViewItem(uploader.GetDescription());
 
-                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL, Program.DefaultTaskSettings);
+                UploadTask task = UploadTask.CreateURLShortenerTask(TestURL, defaultTaskSettings);
                 task.Info.TaskSettings.URLShortenerDestination = uploader;
 
                 lvi.Tag = task;

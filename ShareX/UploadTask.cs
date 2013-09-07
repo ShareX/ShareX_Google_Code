@@ -326,11 +326,6 @@ namespace ShareX
             {
                 DoAfterCaptureJobs();
             }
-            else if (Info.DataType == EDataType.Image && tempImage == null)
-            {
-                tempImage = Helpers.GetImageFromFile(Info.FilePath);
-                DoAfterCaptureJobs();
-            }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);

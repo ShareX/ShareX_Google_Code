@@ -35,8 +35,10 @@ namespace ShareX
 {
     public static class UploadManager
     {
-        public static void UploadFile(string filePath, TaskSettings taskSettings)
+        public static void UploadFile(string filePath, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (!string.IsNullOrEmpty(filePath))
             {
                 if (File.Exists(filePath))
@@ -52,8 +54,10 @@ namespace ShareX
             }
         }
 
-        public static void UploadFile(string[] files, TaskSettings taskSettings)
+        public static void UploadFile(string[] files, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (files != null && files.Length > 0)
             {
                 if (files.Length <= 10 || IsUploadConfirmed(files.Length))
@@ -82,8 +86,10 @@ namespace ShareX
             return true;
         }
 
-        public static void UploadFile(TaskSettings taskSettings)
+        public static void UploadFile(TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 if (!string.IsNullOrEmpty(Program.Settings.FileUploadDefaultDirectory) && Directory.Exists(Program.Settings.FileUploadDefaultDirectory))
@@ -109,8 +115,10 @@ namespace ShareX
             }
         }
 
-        public static void ClipboardUpload(TaskSettings taskSettings)
+        public static void ClipboardUpload(TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
@@ -151,8 +159,10 @@ namespace ShareX
             }
         }
 
-        public static void ClipboardUploadWithContentViewer(TaskSettings taskSettings)
+        public static void ClipboardUploadWithContentViewer(TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (taskSettings.UploadSettings.ShowClipboardContentViewer)
             {
                 using (ClipboardContentViewer ccv = new ClipboardContentViewer())
@@ -171,8 +181,10 @@ namespace ShareX
             }
         }
 
-        public static void DragDropUpload(IDataObject data, TaskSettings taskSettings)
+        public static void DragDropUpload(IDataObject data, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (data.GetDataPresent(DataFormats.FileDrop, false))
             {
                 string[] files = data.GetData(DataFormats.FileDrop, false) as string[];
@@ -192,6 +204,8 @@ namespace ShareX
 
         public static void RunImageTask(Image img, TaskSettings taskSettings)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (img != null && taskSettings != null)
             {
                 UploadTask task = UploadTask.CreateImageUploaderTask(img, taskSettings);
@@ -218,12 +232,15 @@ namespace ShareX
                 TaskSettings taskSettings = TaskSettings.GetDefaultTaskSettings();
                 taskSettings.UseDefaultDestinations = false;
                 taskSettings.ImageDestination = imageDestination;
+
                 RunImageTask(img, taskSettings);
             }
         }
 
-        public static void UploadText(string text, TaskSettings taskSettings)
+        public static void UploadText(string text, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (!string.IsNullOrEmpty(text))
             {
                 UploadTask task = UploadTask.CreateTextUploaderTask(text, taskSettings);
@@ -231,8 +248,10 @@ namespace ShareX
             }
         }
 
-        public static void UploadImageStream(Stream stream, string filename, TaskSettings taskSettings)
+        public static void UploadImageStream(Stream stream, string filename, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (stream != null && stream.Length > 0 && !string.IsNullOrEmpty(filename))
             {
                 UploadTask task = UploadTask.CreateDataUploaderTask(EDataType.Image, stream, filename, taskSettings);
@@ -240,8 +259,10 @@ namespace ShareX
             }
         }
 
-        public static void ShortenURL(string url, TaskSettings taskSettings)
+        public static void ShortenURL(string url, TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (!string.IsNullOrEmpty(url))
             {
                 UploadTask task = UploadTask.CreateURLShortenerTask(url, taskSettings);
