@@ -263,6 +263,9 @@ namespace ShareX
         [Category("After upload"), DefaultValue(""), Description("Balloon tip content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.")]
         public string BalloonTipContentFormat { get; set; }
 
+        [Category("After upload"), DefaultValue(false), Description("Show all possible clipboard content formats after the upload.")]
+        public bool ShowAfterUploadForm { get; set; }
+
         [Category("Capture"), DefaultValue(false), Description("Light version of rectangle region for better performance.")]
         public bool UseLightRectangleCrop { get; set; }
 
