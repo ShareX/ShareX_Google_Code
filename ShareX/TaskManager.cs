@@ -291,6 +291,12 @@ namespace ShareX
                                 {
                                     string balloonTipText = result;
 
+                                    if (info.TaskSettings.AdvancedSettings.ShowAfterUploadForm)
+                                    {
+                                        AfterUploadForm dlg = new AfterUploadForm(info) { Icon = Resources.ShareXIcon };
+                                        NativeMethods.ShowWindow(dlg.Handle, (int)WindowShowStyle.ShowNoActivate);
+                                    }
+
                                     if (!string.IsNullOrEmpty(info.TaskSettings.AdvancedSettings.BalloonTipContentFormat))
                                     {
                                         balloonTipText = new UploadInfoParser().Parse(info, info.TaskSettings.AdvancedSettings.BalloonTipContentFormat);

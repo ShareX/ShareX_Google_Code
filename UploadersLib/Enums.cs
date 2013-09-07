@@ -262,25 +262,25 @@ namespace UploadersLib
     public enum LinkFormatEnum
     {
         [Description("Full URL")]
-        FULL,
+        URL,
         [Description("Full Image for Forums")]
-        FULL_IMAGE_FORUMS,
+        ForumImage,
         [Description("Full Image as HTML")]
-        FULL_IMAGE_HTML,
+        HTMLImage,
         [Description("Full Image for Wiki")]
-        FULL_IMAGE_WIKI,
+        WikiImage,
         [Description("Full Image Link for MediaWiki")]
-        FULL_IMAGE_MEDIAWIKI,
+        WikiImage2,
         [Description("Shortened URL")]
-        FULL_TINYURL,
+        ShortenedURL,
         [Description("Linked Thumbnail for Forums")]
-        LINKED_THUMBNAIL,
+        ForumLinkedImage,
         [Description("Linked Thumbnail as HTML")]
-        LinkedThumbnailHtml,
+        HTMLLinkedImage,
         [Description("Linked Thumbnail for Wiki")]
-        LINKED_THUMBNAIL_WIKI,
+        WikiLinkedImage,
         [Description("Thumbnail")]
-        THUMBNAIL,
+        ThumbnailURL,
         [Description("Local File path")]
         LocalFilePath,
         [Description("Local File path as URI")]
