@@ -42,7 +42,7 @@ namespace HelpersLib
 
         public ImageViewer(string path)
         {
-            this.screenshot = Image.FromFile(path);
+            this.screenshot = Helpers.GetImageFromFile(path);
             InitializeComponent();
         }
 
@@ -58,7 +58,7 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(filepath) && File.Exists(filepath))
             {
-                using (Image img = Image.FromFile(filepath))
+                using (Image img = Helpers.GetImageFromFile(filepath))
                 {
                     ShowImage(img);
                 }
