@@ -97,7 +97,7 @@ namespace HelpersLib
 
         public void AddFrame(string path)
         {
-            using (Image img = Image.FromFile(path))
+            using (Image img = Helpers.GetImageFromFile(path))
             {
                 AddFrame(img);
             }

@@ -135,7 +135,7 @@ namespace HelpersLib
             {
                 try
                 {
-                    using (Image img = Image.FromFile(path))
+                    using (Image img = Helpers.GetImageFromFile(path))
                     {
                         return CopyImage(img);
                     }

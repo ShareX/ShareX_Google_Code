@@ -142,7 +142,7 @@ namespace HelpersLib
             {
                 if (img != null && !string.IsNullOrEmpty(imgPath) && File.Exists(imgPath))
                 {
-                    img2 = Image.FromFile(imgPath);
+                    img2 = Helpers.GetImageFromFile(imgPath);
 
                     int offset = (int)Config.WatermarkOffset;
                     int width = (int)(Config.WatermarkImageScale / 100f * img2.Width);

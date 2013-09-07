@@ -66,7 +66,7 @@ namespace HelpersLib
 
         public void AddFrame(string path, GIFQuality quality = GIFQuality.Default)
         {
-            using (Image img = Image.FromFile(path))
+            using (Image img = Helpers.GetImageFromFile(path))
             {
                 AddFrame(img, quality);
             }
