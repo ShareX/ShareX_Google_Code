@@ -98,7 +98,7 @@ namespace ShareX
             cbImageGIFQuality.SelectedIndex = (int)TaskSettings.ImageSettings.ImageGIFQuality;
             nudUseImageFormat2After.Value = TaskSettings.ImageSettings.ImageSizeLimit;
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
-            cbUseImageFormat2FileUpload.Checked = TaskSettings.ImageSettings.UseImageFormat2FileUpload;
+            cbUseImageFormat2FileUpload.Checked = TaskSettings.ImageSettings.ProcessImagesDuringFileUpload;
 
             // Image - Resize
             cbImageAutoResize.Checked = TaskSettings.ImageSettings.ImageAutoResize;
@@ -444,7 +444,7 @@ namespace ShareX
 
         private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
         {
-            TaskSettings.ImageSettings.UseImageFormat2FileUpload = cbUseImageFormat2FileUpload.Checked;
+            TaskSettings.ImageSettings.ProcessImagesDuringFileUpload = cbUseImageFormat2FileUpload.Checked;
         }
 
         private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)

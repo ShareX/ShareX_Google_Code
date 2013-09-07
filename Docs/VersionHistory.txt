@@ -1,4 +1,6 @@
-﻿ShareX 8.1 r540 - 2013-08-25
+﻿Rectangle Lite support in Advanced settings for slow computers
+
+ShareX 8.1 r573 - 2013-09-05
 
 Redesigned main configuration with simplified settings
 Expanded task settings with more options to customize per hotkey

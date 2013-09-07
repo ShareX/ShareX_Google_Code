@@ -166,7 +166,7 @@ namespace ShareX
         public GIFQuality ImageGIFQuality = GIFQuality.Default;
         public int ImageSizeLimit = 1024;
         public EImageFormat ImageFormat2 = EImageFormat.JPEG;
-        public bool UseImageFormat2FileUpload = false;
+        public bool ProcessImagesDuringFileUpload = false;
 
         #endregion Image / Quality
 
