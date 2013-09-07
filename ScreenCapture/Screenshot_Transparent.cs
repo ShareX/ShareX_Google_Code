@@ -214,7 +214,13 @@ namespace ScreenCapture
 
             if (source != rect)
             {
-                return CaptureHelpers.CropBitmap(bitmap, rect);
+                Bitmap croppedBitmap = CaptureHelpers.CropBitmap(bitmap, rect);
+
+                if (croppedBitmap != null)
+                {
+                    bitmap.Dispose();
+                    return croppedBitmap;
+                }
             }
 
             return bitmap;
