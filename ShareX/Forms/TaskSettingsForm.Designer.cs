@@ -55,7 +55,7 @@
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
-            this.cbUseImageFormat2FileUpload = new System.Windows.Forms.CheckBox();
+            this.chkProcessImagesDuringFileUpload = new System.Windows.Forms.CheckBox();
             this.lblImageFormat = new System.Windows.Forms.Label();
             this.lblUseImageFormat2AfterHint = new System.Windows.Forms.Label();
             this.cbImageFormat = new System.Windows.Forms.ComboBox();
@@ -173,9 +173,7 @@
             this.lblNameFormatPatternPreviewActiveWindow = new System.Windows.Forms.Label();
             this.tpUploadClipboard = new System.Windows.Forms.TabPage();
             this.cbShowClipboardContentViewer = new System.Windows.Forms.CheckBox();
-            this.cbClipboardUploadUseAfterCaptureTasks = new System.Windows.Forms.CheckBox();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
-            this.cbClipboardUploadExcludeImageEffects = new System.Windows.Forms.CheckBox();
             this.chkUseDefaultUploadSettings = new System.Windows.Forms.CheckBox();
             this.tpWatchFolders = new System.Windows.Forms.TabPage();
             this.cbWatchFolderEnabled = new System.Windows.Forms.CheckBox();
@@ -482,7 +480,7 @@
             // 
             // tpQuality
             // 
-            this.tpQuality.Controls.Add(this.cbUseImageFormat2FileUpload);
+            this.tpQuality.Controls.Add(this.chkProcessImagesDuringFileUpload);
             this.tpQuality.Controls.Add(this.lblImageFormat);
             this.tpQuality.Controls.Add(this.lblUseImageFormat2AfterHint);
             this.tpQuality.Controls.Add(this.cbImageFormat);
@@ -503,17 +501,16 @@
             this.tpQuality.Text = "Quality";
             this.tpQuality.UseVisualStyleBackColor = true;
             // 
-            // cbUseImageFormat2FileUpload
+            // chkProcessImagesDuringFileUpload
             // 
-            this.cbUseImageFormat2FileUpload.AutoSize = true;
-            this.cbUseImageFormat2FileUpload.Location = new System.Drawing.Point(16, 176);
-            this.cbUseImageFormat2FileUpload.Name = "cbUseImageFormat2FileUpload";
-            this.cbUseImageFormat2FileUpload.Size = new System.Drawing.Size(455, 17);
-            this.cbUseImageFormat2FileUpload.TabIndex = 12;
-            this.cbUseImageFormat2FileUpload.Text = "When doing file upload if file is image and size is bigger than limit then use \"I" +
-    "mage format 2\"";
-            this.cbUseImageFormat2FileUpload.UseVisualStyleBackColor = true;
-            this.cbUseImageFormat2FileUpload.CheckedChanged += new System.EventHandler(this.cbUseImageFormat2FileUpload_CheckedChanged);
+            this.chkProcessImagesDuringFileUpload.AutoSize = true;
+            this.chkProcessImagesDuringFileUpload.Location = new System.Drawing.Point(16, 176);
+            this.chkProcessImagesDuringFileUpload.Name = "chkProcessImagesDuringFileUpload";
+            this.chkProcessImagesDuringFileUpload.Size = new System.Drawing.Size(261, 17);
+            this.chkProcessImagesDuringFileUpload.TabIndex = 12;
+            this.chkProcessImagesDuringFileUpload.Text = "Process images during file upload and drag && drop";
+            this.chkProcessImagesDuringFileUpload.UseVisualStyleBackColor = true;
+            this.chkProcessImagesDuringFileUpload.CheckedChanged += new System.EventHandler(this.cbUseImageFormat2FileUpload_CheckedChanged);
             // 
             // lblImageFormat
             // 
@@ -1963,9 +1960,7 @@
             // tpUploadClipboard
             // 
             this.tpUploadClipboard.Controls.Add(this.cbShowClipboardContentViewer);
-            this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadUseAfterCaptureTasks);
             this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadAutoDetectURL);
-            this.tpUploadClipboard.Controls.Add(this.cbClipboardUploadExcludeImageEffects);
             this.tpUploadClipboard.Location = new System.Drawing.Point(4, 22);
             this.tpUploadClipboard.Name = "tpUploadClipboard";
             this.tpUploadClipboard.Padding = new System.Windows.Forms.Padding(3);
@@ -1985,17 +1980,6 @@
             this.cbShowClipboardContentViewer.UseVisualStyleBackColor = true;
             this.cbShowClipboardContentViewer.CheckedChanged += new System.EventHandler(this.cbShowClipboardContentViewer_CheckedChanged);
             // 
-            // cbClipboardUploadUseAfterCaptureTasks
-            // 
-            this.cbClipboardUploadUseAfterCaptureTasks.AutoSize = true;
-            this.cbClipboardUploadUseAfterCaptureTasks.Location = new System.Drawing.Point(16, 64);
-            this.cbClipboardUploadUseAfterCaptureTasks.Name = "cbClipboardUploadUseAfterCaptureTasks";
-            this.cbClipboardUploadUseAfterCaptureTasks.Size = new System.Drawing.Size(286, 17);
-            this.cbClipboardUploadUseAfterCaptureTasks.TabIndex = 2;
-            this.cbClipboardUploadUseAfterCaptureTasks.Text = "Use \"After capture tasks\" when doing clipboard upload";
-            this.cbClipboardUploadUseAfterCaptureTasks.UseVisualStyleBackColor = true;
-            this.cbClipboardUploadUseAfterCaptureTasks.CheckedChanged += new System.EventHandler(this.cbClipboardUploadUseAfterCaptureTasks_CheckedChanged);
-            // 
             // cbClipboardUploadAutoDetectURL
             // 
             this.cbClipboardUploadAutoDetectURL.AutoSize = true;
@@ -2006,17 +1990,6 @@
             this.cbClipboardUploadAutoDetectURL.Text = "Automatically detect URL when doing clipboard text upload and use URL shortener";
             this.cbClipboardUploadAutoDetectURL.UseVisualStyleBackColor = true;
             this.cbClipboardUploadAutoDetectURL.CheckedChanged += new System.EventHandler(this.cbClipboardUploadAutoDetectURL_CheckedChanged);
-            // 
-            // cbClipboardUploadExcludeImageEffects
-            // 
-            this.cbClipboardUploadExcludeImageEffects.AutoSize = true;
-            this.cbClipboardUploadExcludeImageEffects.Location = new System.Drawing.Point(16, 88);
-            this.cbClipboardUploadExcludeImageEffects.Name = "cbClipboardUploadExcludeImageEffects";
-            this.cbClipboardUploadExcludeImageEffects.Size = new System.Drawing.Size(395, 17);
-            this.cbClipboardUploadExcludeImageEffects.TabIndex = 3;
-            this.cbClipboardUploadExcludeImageEffects.Text = "Don\'t add image effects (Watermark, border etc.) when doing clipboard upload";
-            this.cbClipboardUploadExcludeImageEffects.UseVisualStyleBackColor = true;
-            this.cbClipboardUploadExcludeImageEffects.CheckedChanged += new System.EventHandler(this.cbClipboardUploadExcludeImageEffects_CheckedChanged);
             // 
             // chkUseDefaultUploadSettings
             // 
@@ -2248,7 +2221,7 @@
         private System.Windows.Forms.TabPage tpCapture;
         private System.Windows.Forms.TabControl tcImage;
         private System.Windows.Forms.TabPage tpQuality;
-        private System.Windows.Forms.CheckBox cbUseImageFormat2FileUpload;
+        private System.Windows.Forms.CheckBox chkProcessImagesDuringFileUpload;
         private System.Windows.Forms.Label lblImageFormat;
         private System.Windows.Forms.Label lblUseImageFormat2AfterHint;
         private System.Windows.Forms.ComboBox cbImageFormat;
@@ -2347,9 +2320,7 @@
         private System.Windows.Forms.Label lblNameFormatPatternPreviewActiveWindow;
         private System.Windows.Forms.TabPage tpUploadClipboard;
         private System.Windows.Forms.CheckBox cbShowClipboardContentViewer;
-        private System.Windows.Forms.CheckBox cbClipboardUploadUseAfterCaptureTasks;
         private System.Windows.Forms.CheckBox cbClipboardUploadAutoDetectURL;
-        private System.Windows.Forms.CheckBox cbClipboardUploadExcludeImageEffects;
         private System.Windows.Forms.TabPage tpAdvanced;
         private System.Windows.Forms.PropertyGrid pgTaskSettings;
         private System.Windows.Forms.CheckBox chkUseDefaultImageSettings;

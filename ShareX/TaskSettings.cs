@@ -250,8 +250,6 @@ namespace ShareX
 
         public bool ShowClipboardContentViewer = true;
         public bool ClipboardUploadAutoDetectURL = true;
-        public bool ClipboardUploadUseAfterCaptureTasks = false;
-        public bool ClipboardUploadExcludeImageEffects = true;
 
         #endregion Upload / Clipboard upload
     }

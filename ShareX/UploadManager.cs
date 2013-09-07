@@ -123,19 +123,8 @@ namespace ShareX
             {
                 Image img = Clipboard.GetImage();
 
-                if (taskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks)
-                {
-                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
-
-                    if (taskSettings.UploadSettings.ClipboardUploadExcludeImageEffects)
-                    {
-                        taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddWatermark, AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
-                    }
-                }
-                else
-                {
-                    taskSettings.AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
-                }
+                taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
+                taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Add(AfterCaptureTasks.UploadImageToHost);
 
                 UploadManager.RunImageTask(img, taskSettings);
             }
