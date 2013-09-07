@@ -98,7 +98,7 @@ namespace ShareX
             cbImageGIFQuality.SelectedIndex = (int)TaskSettings.ImageSettings.ImageGIFQuality;
             nudUseImageFormat2After.Value = TaskSettings.ImageSettings.ImageSizeLimit;
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
-            cbUseImageFormat2FileUpload.Checked = TaskSettings.ImageSettings.ProcessImagesDuringFileUpload;
+            chkProcessImagesDuringFileUpload.Checked = TaskSettings.ImageSettings.ProcessImagesDuringFileUpload;
 
             // Image - Resize
             cbImageAutoResize.Checked = TaskSettings.ImageSettings.ImageAutoResize;
@@ -188,8 +188,6 @@ namespace ShareX
             // Upload / Clipboard upload
             cbShowClipboardContentViewer.Checked = TaskSettings.UploadSettings.ShowClipboardContentViewer;
             cbClipboardUploadAutoDetectURL.Checked = TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL;
-            cbClipboardUploadUseAfterCaptureTasks.Checked = TaskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks;
-            cbClipboardUploadExcludeImageEffects.Checked = TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects;
 
             // Watch folders
             cbWatchFolderEnabled.Checked = TaskSettings.WatchFolderEnabled;
@@ -444,7 +442,7 @@ namespace ShareX
 
         private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
         {
-            TaskSettings.ImageSettings.ProcessImagesDuringFileUpload = cbUseImageFormat2FileUpload.Checked;
+            TaskSettings.ImageSettings.ProcessImagesDuringFileUpload = chkProcessImagesDuringFileUpload.Checked;
         }
 
         private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)
@@ -793,19 +791,9 @@ namespace ShareX
             TaskSettings.UploadSettings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
         }
 
-        private void cbClipboardUploadUseAfterCaptureTasks_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.UploadSettings.ClipboardUploadUseAfterCaptureTasks = cbClipboardUploadUseAfterCaptureTasks.Checked;
-        }
-
         private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
-        }
-
-        private void cbClipboardUploadExcludeImageEffects_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.UploadSettings.ClipboardUploadExcludeImageEffects = cbClipboardUploadExcludeImageEffects.Checked;
         }
 
         private void chkUseDefaultImageSettings_CheckedChanged(object sender, EventArgs e)

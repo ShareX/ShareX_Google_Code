@@ -1,9 +1,8 @@
-﻿Rectangle Lite support in Advanced settings for slow computers
+﻿ShareX 8.1.1 r584 - 2013-09-07
 
-ShareX 8.1 r573 - 2013-09-05
-
+Rectangle Lite support in Advanced settings for slow computers
 Redesigned main configuration with simplified settings
-Expanded task settings with more options to customize per hotkey
+Improved hotkey system to support all possible hotkey specific tasks 
 Support custom formats for clipboard content 
 Improved screen recorder
 Automatic mode for proxy configuration
