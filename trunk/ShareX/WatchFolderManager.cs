@@ -81,7 +81,11 @@ namespace ShareX
                 }
 
                 WatchFolder watchFolder = new WatchFolder() { Settings = watchFolderSetting, TaskSettings = taskSettings };
-                watchFolder.FileWatcherTrigger += path => UploadManager.UploadFile(path, taskSettings);
+                watchFolder.FileWatcherTrigger += path =>
+                {
+                    TaskSettings taskSettingsCopy = TaskSettings.GetSafeTaskSettings(taskSettings);
+                    UploadManager.UploadFile(path, taskSettings);
+                };
                 WatchFolders.Add(watchFolder);
 
                 if (taskSettings.WatchFolderEnabled)

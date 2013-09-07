@@ -414,21 +414,19 @@ namespace ShareX
             Close();
         }
 
-        public void UseCommandLineArgs(string[] args, TaskSettings taskSettings = null)
+        public void UseCommandLineArgs(string[] args)
         {
-            if (taskSettings == null) taskSettings = Program.DefaultTaskSettings;
-
             if (args != null && args.Length > 1)
             {
                 for (int i = 1; i < args.Length; i++)
                 {
                     if (args[i].Equals("-clipboardupload", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        UploadManager.ClipboardUpload(taskSettings);
+                        UploadManager.ClipboardUpload();
                     }
                     else if (args[i][0] != '-')
                     {
-                        UploadManager.UploadFile(args[i], taskSettings);
+                        UploadManager.UploadFile(args[i]);
                     }
                 }
             }
@@ -497,8 +495,10 @@ namespace ShareX
             lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
-        private void DoScreenRecorder(TaskSettings taskSettings, bool isHotkey = false)
+        private void DoScreenRecorder(TaskSettings taskSettings = null)
         {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             ScreenRecordForm form = ScreenRecordForm.Instance;
 
             if (form.IsRecording)
@@ -571,17 +571,17 @@ namespace ShareX
 
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
-            UploadManager.DragDropUpload(e.Data, Program.DefaultTaskSettings);
+            UploadManager.DragDropUpload(e.Data);
         }
 
         private void tsbClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
+            UploadManager.ClipboardUploadWithContentViewer();
         }
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile(Program.DefaultTaskSettings);
+            UploadManager.UploadFile();
         }
 
         private void tsddbDestinations_DropDownOpened(object sender, EventArgs e)
@@ -602,7 +602,7 @@ namespace ShareX
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadText(Program.ApplicationName + " text upload test", Program.DefaultTaskSettings);
+            UploadManager.UploadText(Program.ApplicationName + " text upload test");
         }
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
@@ -612,7 +612,7 @@ namespace ShareX
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
         {
-            UploadManager.ShortenURL(Links.URL_WEBSITE, Program.DefaultTaskSettings);
+            UploadManager.ShortenURL(Links.URL_WEBSITE);
         }
 
         private void tsmiTestUploaders_Click(object sender, EventArgs e)
@@ -630,7 +630,7 @@ namespace ShareX
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
         {
-            DoScreenRecorder(Program.DefaultTaskSettings);
+            DoScreenRecorder();
         }
 
         private void tsmiAutoCapture_Click(object sender, EventArgs e)
@@ -794,7 +794,7 @@ namespace ShareX
                     uim.CopyURL();
                     break;
                 case Keys.Control | Keys.V:
-                    UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
+                    UploadManager.ClipboardUploadWithContentViewer();
                     break;
                 case Keys.Delete:
                     RemoveSelectedItems();
@@ -811,7 +811,7 @@ namespace ShareX
             switch (e.Button)
             {
                 case MouseButtons.Middle:
-                    CaptureScreenshot(CaptureType.Rectangle, Program.DefaultTaskSettings, false);
+                    CaptureScreenshot(CaptureType.Rectangle, null, false);
                     break;
             }
         }
@@ -991,12 +991,12 @@ namespace ShareX
 
         private void tsmiClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer(Program.DefaultTaskSettings);
+            UploadManager.ClipboardUploadWithContentViewer();
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadFile(Program.DefaultTaskSettings);
+            UploadManager.UploadFile();
         }
 
         private void tsmiHideMenu_Click(object sender, EventArgs e)
