@@ -4,12 +4,13 @@
 #define MyAppVersion GetStringFileInfo(MyAppPath, "Assembly Version")
 #define MyAppPublisher "ShareX Developers"
 #define MyAppURL "http://code.google.com/p/sharex"
+#define MyAppId "82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC" 
 
 [Setup]
 AllowNoIcons=true
 AppCopyright=Copyright (C) 2008-2013 {#MyAppPublisher}
-AppId=82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC
-AppMutex=Global\82E6AC09-0FEF-4390-AD9F-0DD3F5561EFC
+AppId={#MyAppId}
+AppMutex=Global\{#MyAppId}
 AppName={#MyAppName}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
@@ -79,4 +80,46 @@ Root: "HKCU"; Subkey: "Software\Classes\Folder\shell\{#MyAppName}"; Flags: dontc
 function DesktopIconExists(): Boolean;
 begin
   Result := FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'));
+end;
+
+function GetUninstallString: string;
+var
+  sUnInstPath: string;
+  sUnInstallString: String;
+begin
+  Result := '';
+  sUnInstPath := ExpandConstant('Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1'); //Your App GUID/ID
+  sUnInstallString := '';
+  if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+    RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+  Result := sUnInstallString;
+end;
+
+function IsUpgrade: Boolean;
+begin
+  Result := (GetUninstallString <> '');
+end;
+
+function InitializeSetup: Boolean;
+var
+  V: Integer;
+  iResultCode: Integer;
+  sUnInstallString: string;
+begin
+  Result := True; // in case when no previous version is found
+  if RegValueExists(HKEY_LOCAL_MACHINE,'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString') then
+  begin
+//Your App GUID/ID
+    V := MsgBox(ExpandConstant('An older version of the app or ShareXmod was detected. Do you want to uninstall it?'), mbInformation, MB_YESNO); //Custom Message if App installed
+    if V = IDYES then
+    begin
+      sUnInstallString := GetUninstallString();
+      sUnInstallString :=  RemoveQuotes(sUnInstallString);
+      Exec(ExpandConstant(sUnInstallString), '', '', SW_SHOW, ewWaitUntilTerminated, iResultCode);
+      Result := True; //if you want to proceed after uninstall
+                //Exit; //if you want to quit after uninstall
+    end
+    else
+      Result := False; //when older version present and not uninstalled
+  end;
 end;
