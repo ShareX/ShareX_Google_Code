@@ -95,7 +95,7 @@ namespace ShareX
         {
             EDataType dataType = Helpers.FindDataType(filePath);
             UploadTask task = new UploadTask(taskSettings);
-            task.Info.Job = TaskJob.FileUpload;
+
             task.Info.DataType = dataType;
             task.Info.FilePath = filePath;
 
@@ -105,11 +105,15 @@ namespace ShareX
                 task.Info.FileName = TaskHelper.GetFilename(task.Info.TaskSettings, ext);
             }
 
-            task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-
-            if (dataType == EDataType.Image && task.Info.TaskSettings.ImageSettings.UseImageFormat2FileUpload)
+            if (task.Info.TaskSettings.ImageSettings.ProcessImagesDuringFileUpload && dataType == EDataType.Image)
             {
-                TaskHelper.PrepareFileImage(task);
+                task.Info.Job = TaskJob.ImageJob;
+                task.tempImage = Helpers.GetImageFromFile(filePath);
+            }
+            else
+            {
+                task.Info.Job = TaskJob.FileUpload;
+                task.Data = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             }
 
             return task;
