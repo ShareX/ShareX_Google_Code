@@ -36,6 +36,8 @@ namespace HelpersLib
         public const string ForumLink = "[url]$url[/url]";
         public const string ForumImage = "[img]$url[/img]";
         public const string ForumLinkedImage = "[url=$url][img]$thumbnailurl[/img][/url]";
+        public const string WikiImage = "[{$url}]";
+        public const string WikiLinkedImage = "[$url $thumbnailurl]";
 
         public string Parse(TaskInfo info, string pattern)
         {

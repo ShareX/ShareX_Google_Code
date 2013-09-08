@@ -269,8 +269,6 @@ namespace UploadersLib
         HTMLImage,
         [Description("Full Image for Wiki")]
         WikiImage,
-        [Description("Full Image Link for MediaWiki")]
-        WikiImage2,
         [Description("Shortened URL")]
         ShortenedURL,
         [Description("Linked Thumbnail for Forums")]
