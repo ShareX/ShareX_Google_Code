@@ -180,7 +180,7 @@ namespace ShareX
             }
             else
             {
-                TaskHelper.ShowResultNotifications(path);
+                TaskHelper.ShowResultNotifications(path, TaskSettings);
             }
 
             IsRecording = false;

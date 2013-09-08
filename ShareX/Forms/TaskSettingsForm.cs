@@ -54,8 +54,9 @@ namespace ShareX
             {
                 Text = Application.ProductName + " - Task settings";
                 tcHotkeySettings.TabPages.Remove(tpTask);
-                chkUseDefaultImageSettings.Visible = chkUseDefaultCaptureSettings.Visible = chkUseDefaultActions.Visible =
-                    chkUseDefaultUploadSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
+                chkUseDefaultGeneralSettings.Visible = chkUseDefaultImageSettings.Visible = chkUseDefaultCaptureSettings.Visible = chkUseDefaultActions.Visible =
+                       chkUseDefaultUploadSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
+                panelGeneral.BorderStyle = BorderStyle.None;
             }
             else
             {
@@ -64,6 +65,7 @@ namespace ShareX
                 cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
                 cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;
                 cbUseDefaultDestinationSettings.Checked = TaskSettings.UseDefaultDestinations;
+                chkUseDefaultGeneralSettings.Checked = TaskSettings.UseDefaultGeneralSettings;
                 chkUseDefaultImageSettings.Checked = TaskSettings.UseDefaultImageSettings;
                 chkUseDefaultCaptureSettings.Checked = TaskSettings.UseDefaultCaptureSettings;
                 chkUseDefaultActions.Checked = TaskSettings.UseDefaultActions;
@@ -91,6 +93,14 @@ namespace ShareX
 
             UpdateDestinationStates();
             UpdateUploaderMenuNames();
+
+            // General
+            cbShowAfterCaptureTasksForm.Checked = TaskSettings.GeneralSettings.ShowAfterCaptureTasksForm;
+            chkShowAfterUploadForm.Checked = TaskSettings.GeneralSettings.PlaySoundAfterUpload;
+            cbPlaySoundAfterCapture.Checked = TaskSettings.GeneralSettings.PlaySoundAfterCapture;
+            cbPlaySoundAfterUpload.Checked = TaskSettings.GeneralSettings.PlaySoundAfterUpload;
+            cbTrayBalloonTipAfterUpload.Checked = TaskSettings.GeneralSettings.TrayBalloonTipAfterUpload;
+            cbHistorySave.Checked = TaskSettings.GeneralSettings.SaveHistory;
 
             // Image - Quality
             cbImageFormat.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat;
@@ -796,6 +806,12 @@ namespace ShareX
             TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL = cbClipboardUploadAutoDetectURL.Checked;
         }
 
+        private void chkUseDefaultGeneralSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.UseDefaultGeneralSettings = chkUseDefaultGeneralSettings.Checked;
+            UpdateDefaultSettingVisibility();
+        }
+
         private void chkUseDefaultImageSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultImageSettings = chkUseDefaultImageSettings.Checked;
@@ -830,6 +846,7 @@ namespace ShareX
         {
             if (!IsDefault)
             {
+                panelGeneral.Enabled = !TaskSettings.UseDefaultGeneralSettings;
                 tcImage.Enabled = !TaskSettings.UseDefaultImageSettings;
                 tcCapture.Enabled = !TaskSettings.UseDefaultCaptureSettings;
                 pActions.Enabled = !TaskSettings.UseDefaultActions;
@@ -923,6 +940,36 @@ namespace ShareX
                     Program.WatchFolderManager.UpdateWatchFolderState(watchFolderSetting);
                 }
             }
+        }
+
+        private void cbShowAfterCaptureTasksForm_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.ShowAfterCaptureTasksForm = cbShowAfterCaptureTasksForm.Checked;
+        }
+
+        private void cbHistorySave_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.SaveHistory = cbHistorySave.Checked;
+        }
+
+        private void cbTrayBalloonTipAfterUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.TrayBalloonTipAfterUpload = cbTrayBalloonTipAfterUpload.Checked;
+        }
+
+        private void cbPlaySoundAfterUpload_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.PlaySoundAfterUpload = cbPlaySoundAfterUpload.Checked;
+        }
+
+        private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.PlaySoundAfterCapture = cbPlaySoundAfterCapture.Checked;
+        }
+
+        private void chkShowAfterUploadForm_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.GeneralSettings.ShowAfterUploadForm = chkShowAfterUploadForm.Checked;
         }
     }
 }

@@ -192,7 +192,7 @@ namespace ShareX
 
                 img = capture();
 
-                if (img != null && Program.Settings.PlaySoundAfterCapture)
+                if (img != null && taskSettings.GeneralSettings.PlaySoundAfterCapture)
                 {
                     Helpers.PlaySoundAsync(Resources.CameraSound);
                 }
@@ -221,7 +221,7 @@ namespace ShareX
                     taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddBorder, AfterCaptureTasks.AddShadow);
                 }
 
-                if (Program.Settings.ShowAfterCaptureTasksForm)
+                if (taskSettings.GeneralSettings.ShowAfterCaptureTasksForm)
                 {
                     using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, taskSettings.AfterCaptureJob))
                     {

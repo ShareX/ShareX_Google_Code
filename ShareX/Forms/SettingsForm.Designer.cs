@@ -28,16 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.cbShellContextMenu = new System.Windows.Forms.CheckBox();
-            this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
-            this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
-            this.cbHistorySave = new System.Windows.Forms.CheckBox();
-            this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
             this.cbCheckUpdates = new System.Windows.Forms.CheckBox();
-            this.lblGeneralSeparator = new System.Windows.Forms.Label();
             this.cbStartWithWindows = new System.Windows.Forms.CheckBox();
             this.cbShowTray = new System.Windows.Forms.CheckBox();
             this.cbSendToMenu = new System.Windows.Forms.CheckBox();
@@ -100,17 +94,6 @@
             this.tpPrint.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cbPlaySoundAfterUpload
-            // 
-            this.cbPlaySoundAfterUpload.AutoSize = true;
-            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(16, 208);
-            this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
-            this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(187, 17);
-            this.cbPlaySoundAfterUpload.TabIndex = 8;
-            this.cbPlaySoundAfterUpload.Text = "Play sound after task is completed";
-            this.cbPlaySoundAfterUpload.UseVisualStyleBackColor = true;
-            this.cbPlaySoundAfterUpload.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterUpload_CheckedChanged);
-            // 
             // tcSettings
             // 
             this.tcSettings.Controls.Add(this.tpGeneral);
@@ -128,16 +111,10 @@
             // tpGeneral
             // 
             this.tpGeneral.Controls.Add(this.cbShellContextMenu);
-            this.tpGeneral.Controls.Add(this.cbShowAfterCaptureTasksForm);
-            this.tpGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
-            this.tpGeneral.Controls.Add(this.cbHistorySave);
-            this.tpGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
             this.tpGeneral.Controls.Add(this.cbCheckUpdates);
-            this.tpGeneral.Controls.Add(this.lblGeneralSeparator);
             this.tpGeneral.Controls.Add(this.cbStartWithWindows);
             this.tpGeneral.Controls.Add(this.cbShowTray);
             this.tpGeneral.Controls.Add(this.cbSendToMenu);
-            this.tpGeneral.Controls.Add(this.cbPlaySoundAfterUpload);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -157,50 +134,6 @@
             this.cbShellContextMenu.UseVisualStyleBackColor = true;
             this.cbShellContextMenu.CheckedChanged += new System.EventHandler(this.cbShellContextMenu_CheckedChanged);
             // 
-            // cbShowAfterCaptureTasksForm
-            // 
-            this.cbShowAfterCaptureTasksForm.AutoSize = true;
-            this.cbShowAfterCaptureTasksForm.Location = new System.Drawing.Point(16, 160);
-            this.cbShowAfterCaptureTasksForm.Name = "cbShowAfterCaptureTasksForm";
-            this.cbShowAfterCaptureTasksForm.Size = new System.Drawing.Size(295, 17);
-            this.cbShowAfterCaptureTasksForm.TabIndex = 6;
-            this.cbShowAfterCaptureTasksForm.Text = "Show \"Post capture tasks\" window after capture is made";
-            this.cbShowAfterCaptureTasksForm.UseVisualStyleBackColor = true;
-            this.cbShowAfterCaptureTasksForm.CheckedChanged += new System.EventHandler(this.cbShowAfterCaptureTasksForm_CheckedChanged);
-            // 
-            // cbTrayBalloonTipAfterUpload
-            // 
-            this.cbTrayBalloonTipAfterUpload.AutoSize = true;
-            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(16, 232);
-            this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
-            this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(233, 17);
-            this.cbTrayBalloonTipAfterUpload.TabIndex = 9;
-            this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after task is completed";
-            this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
-            this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
-            // 
-            // cbHistorySave
-            // 
-            this.cbHistorySave.AutoSize = true;
-            this.cbHistorySave.Location = new System.Drawing.Point(16, 256);
-            this.cbHistorySave.Name = "cbHistorySave";
-            this.cbHistorySave.Size = new System.Drawing.Size(139, 17);
-            this.cbHistorySave.TabIndex = 10;
-            this.cbHistorySave.Text = "Save task info to history";
-            this.cbHistorySave.UseVisualStyleBackColor = true;
-            this.cbHistorySave.CheckedChanged += new System.EventHandler(this.cbHistorySave_CheckedChanged);
-            // 
-            // cbPlaySoundAfterCapture
-            // 
-            this.cbPlaySoundAfterCapture.AutoSize = true;
-            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(16, 184);
-            this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
-            this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
-            this.cbPlaySoundAfterCapture.TabIndex = 7;
-            this.cbPlaySoundAfterCapture.Text = "Play sound after capture is made";
-            this.cbPlaySoundAfterCapture.UseVisualStyleBackColor = true;
-            this.cbPlaySoundAfterCapture.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterCapture_CheckedChanged);
-            // 
             // cbCheckUpdates
             // 
             this.cbCheckUpdates.AutoSize = true;
@@ -211,14 +144,6 @@
             this.cbCheckUpdates.Text = "Automatically check updates at startup";
             this.cbCheckUpdates.UseVisualStyleBackColor = true;
             this.cbCheckUpdates.CheckedChanged += new System.EventHandler(this.cbCheckUpdates_CheckedChanged);
-            // 
-            // lblGeneralSeparator
-            // 
-            this.lblGeneralSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblGeneralSeparator.Location = new System.Drawing.Point(16, 144);
-            this.lblGeneralSeparator.Name = "lblGeneralSeparator";
-            this.lblGeneralSeparator.Size = new System.Drawing.Size(475, 2);
-            this.lblGeneralSeparator.TabIndex = 5;
             // 
             // cbStartWithWindows
             // 
@@ -792,14 +717,12 @@
 
         #endregion Windows Form Designer generated code
 
-        private System.Windows.Forms.CheckBox cbPlaySoundAfterUpload;
         private System.Windows.Forms.TabControl tcSettings;
         private System.Windows.Forms.TabPage tpGeneral;
         private System.Windows.Forms.TabPage tpProxy;
         private System.Windows.Forms.CheckBox cbSendToMenu;
         private System.Windows.Forms.TextBox txtCustomHistoryPath;
         private System.Windows.Forms.CheckBox cbUseCustomHistoryPath;
-        private System.Windows.Forms.CheckBox cbHistorySave;
         private System.Windows.Forms.Button btnBrowseCustomHistoryPath;
         private System.Windows.Forms.Button btnOpenPersonalFolder;
         private System.Windows.Forms.Button btnBrowseCustomUploadersConfigPath;
@@ -807,13 +730,11 @@
         private System.Windows.Forms.CheckBox cbUseCustomUploadersConfigPath;
         private System.Windows.Forms.Button btnLoadUploadersConfig;
         private System.Windows.Forms.CheckBox cbShowTray;
-        private System.Windows.Forms.Label lblGeneralSeparator;
         private System.Windows.Forms.CheckBox cbStartWithWindows;
         private System.Windows.Forms.Label lblSaveImageSubFolderPatternPreview;
         private System.Windows.Forms.TextBox txtSaveImageSubFolderPattern;
         private System.Windows.Forms.Label lblSaveImageSubFolderPattern;
         private System.Windows.Forms.CheckBox cbCheckUpdates;
-        private System.Windows.Forms.CheckBox cbPlaySoundAfterCapture;
         private System.Windows.Forms.CheckBox cbUseCustomScreenshotsPath;
         private System.Windows.Forms.TabPage tpPaths;
         private System.Windows.Forms.Button btnBrowseCustomScreenshotsPath;
@@ -828,8 +749,6 @@
         private System.Windows.Forms.TextBox txtProxyUsername;
         private System.Windows.Forms.ComboBox cbProxyType;
         private System.Windows.Forms.Label lblProxyType;
-        private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
-        private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
         private System.Windows.Forms.CheckBox cbShellContextMenu;
         private System.Windows.Forms.ComboBox cbProxyMethod;
         private System.Windows.Forms.Label lblProxyMethod;

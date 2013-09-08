@@ -188,17 +188,17 @@ namespace ShareX
             return filename;
         }
 
-        public static void ShowResultNotifications(string result)
+        public static void ShowResultNotifications(string result, TaskSettings taskSettings)
         {
             if (!string.IsNullOrEmpty(result))
             {
-                if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
+                if (taskSettings.GeneralSettings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
                 {
                     Program.MainForm.niTray.Tag = result;
                     Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", result, ToolTipIcon.Info);
                 }
 
-                if (Program.Settings.PlaySoundAfterUpload)
+                if (taskSettings.GeneralSettings.PlaySoundAfterUpload)
                 {
                     SystemSounds.Exclamation.Play();
                 }
