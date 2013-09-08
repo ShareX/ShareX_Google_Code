@@ -273,7 +273,7 @@ namespace ShareX
 
     public class TaskSettingsAdvanced
     {
-        [Category("General"), DefaultValue(false), Description("Write good description here")]
+        [Category("General"), DefaultValue(false), Description("Allow after capture tasks for image files by treating them as images when files are handled during clipboard upload, file upload, drag & drop, watch folder and other tasks.")]
         public bool ProcessImagesDuringFileUpload { get; set; }
 
         [Category("After upload"), DefaultValue(""),
