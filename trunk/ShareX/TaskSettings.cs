@@ -76,9 +76,9 @@ namespace ShareX
         {
             get
             {
-                return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && UseDefaultImageSettings &&
-                    UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions && UseDefaultAdvancedSettings &&
-                    !WatchFolderEnabled;
+                return UseDefaultGeneralSettings && UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations &&
+                    UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions &&
+                    UseDefaultAdvancedSettings && !WatchFolderEnabled;
             }
         }
 
@@ -167,11 +167,11 @@ namespace ShareX
 
     public class TaskSettingsGeneral
     {
-        public bool ShowAfterUploadForm = false;
-        public bool ShowAfterCaptureTasksForm = false;
         public bool PlaySoundAfterCapture = true;
         public bool PlaySoundAfterUpload = true;
         public bool TrayBalloonTipAfterUpload = true;
+        public bool ShowAfterCaptureTasksForm = false;
+        public bool ShowAfterUploadForm = false;
         public bool SaveHistory = true;
     }
 
@@ -184,7 +184,6 @@ namespace ShareX
         public GIFQuality ImageGIFQuality = GIFQuality.Default;
         public int ImageSizeLimit = 1024;
         public EImageFormat ImageFormat2 = EImageFormat.JPEG;
-        public bool ProcessImagesDuringFileUpload = false;
 
         #endregion Image / Quality
 
@@ -274,6 +273,9 @@ namespace ShareX
 
     public class TaskSettingsAdvanced
     {
+        [Category("General"), DefaultValue(false), Description("Write good description here")]
+        public bool ProcessImagesDuringFileUpload { get; set; }
+
         [Category("After upload"), DefaultValue(""),
         Description("Clipboard content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%m-%d etc.")]
         public string ClipboardContentFormat { get; set; }

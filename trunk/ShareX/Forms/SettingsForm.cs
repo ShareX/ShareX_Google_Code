@@ -62,7 +62,6 @@ namespace ShareX
             cbShellContextMenu.Checked = RegistryHelper.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
 
-
             // Paths
             cbUseCustomUploadersConfigPath.Checked = Program.Settings.UseCustomUploadersConfigPath;
             txtCustomUploadersConfigPath.Text = Program.Settings.CustomUploadersConfigPath;
