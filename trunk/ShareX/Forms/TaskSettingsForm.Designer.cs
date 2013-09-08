@@ -52,10 +52,17 @@
             this.cmsTask = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tcHotkeySettings = new System.Windows.Forms.TabControl();
             this.tpTask = new System.Windows.Forms.TabPage();
+            this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.chkShowAfterUploadForm = new System.Windows.Forms.CheckBox();
+            this.cbTrayBalloonTipAfterUpload = new System.Windows.Forms.CheckBox();
+            this.cbHistorySave = new System.Windows.Forms.CheckBox();
+            this.cbPlaySoundAfterCapture = new System.Windows.Forms.CheckBox();
+            this.cbPlaySoundAfterUpload = new System.Windows.Forms.CheckBox();
+            this.cbShowAfterCaptureTasksForm = new System.Windows.Forms.CheckBox();
+            this.chkProcessImagesDuringFileUpload = new System.Windows.Forms.CheckBox();
             this.tpImage = new System.Windows.Forms.TabPage();
             this.tcImage = new System.Windows.Forms.TabControl();
             this.tpQuality = new System.Windows.Forms.TabPage();
-            this.chkProcessImagesDuringFileUpload = new System.Windows.Forms.CheckBox();
             this.lblImageFormat = new System.Windows.Forms.Label();
             this.lblUseImageFormat2AfterHint = new System.Windows.Forms.Label();
             this.cbImageFormat = new System.Windows.Forms.ComboBox();
@@ -186,8 +193,11 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
+            this.panelGeneral = new System.Windows.Forms.Panel();
+            this.chkUseDefaultGeneralSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
+            this.tpGeneral.SuspendLayout();
             this.tpImage.SuspendLayout();
             this.tcImage.SuspendLayout();
             this.tpQuality.SuspendLayout();
@@ -227,6 +237,7 @@
             this.tpUploadClipboard.SuspendLayout();
             this.tpWatchFolders.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
+            this.panelGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -418,6 +429,7 @@
             // tcHotkeySettings
             // 
             this.tcHotkeySettings.Controls.Add(this.tpTask);
+            this.tcHotkeySettings.Controls.Add(this.tpGeneral);
             this.tcHotkeySettings.Controls.Add(this.tpImage);
             this.tcHotkeySettings.Controls.Add(this.tpCapture);
             this.tcHotkeySettings.Controls.Add(this.tpActions);
@@ -454,6 +466,95 @@
             this.tpTask.Text = "Task";
             this.tpTask.UseVisualStyleBackColor = true;
             // 
+            // tpGeneral
+            // 
+            this.tpGeneral.Controls.Add(this.panelGeneral);
+            this.tpGeneral.Controls.Add(this.chkUseDefaultGeneralSettings);
+            this.tpGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tpGeneral.Name = "tpGeneral";
+            this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tpGeneral.Size = new System.Drawing.Size(520, 360);
+            this.tpGeneral.TabIndex = 7;
+            this.tpGeneral.Text = "General";
+            this.tpGeneral.UseVisualStyleBackColor = true;
+            // 
+            // chkShowAfterUploadForm
+            // 
+            this.chkShowAfterUploadForm.AutoSize = true;
+            this.chkShowAfterUploadForm.Location = new System.Drawing.Point(8, 104);
+            this.chkShowAfterUploadForm.Name = "chkShowAfterUploadForm";
+            this.chkShowAfterUploadForm.Size = new System.Drawing.Size(271, 17);
+            this.chkShowAfterUploadForm.TabIndex = 18;
+            this.chkShowAfterUploadForm.Text = "Show \"After upload\" window after task is completed";
+            this.chkShowAfterUploadForm.UseVisualStyleBackColor = true;
+            this.chkShowAfterUploadForm.CheckedChanged += new System.EventHandler(this.chkShowAfterUploadForm_CheckedChanged);
+            // 
+            // cbTrayBalloonTipAfterUpload
+            // 
+            this.cbTrayBalloonTipAfterUpload.AutoSize = true;
+            this.cbTrayBalloonTipAfterUpload.Location = new System.Drawing.Point(8, 128);
+            this.cbTrayBalloonTipAfterUpload.Name = "cbTrayBalloonTipAfterUpload";
+            this.cbTrayBalloonTipAfterUpload.Size = new System.Drawing.Size(233, 17);
+            this.cbTrayBalloonTipAfterUpload.TabIndex = 16;
+            this.cbTrayBalloonTipAfterUpload.Text = "Show tray balloon tip after task is completed";
+            this.cbTrayBalloonTipAfterUpload.UseVisualStyleBackColor = true;
+            this.cbTrayBalloonTipAfterUpload.CheckedChanged += new System.EventHandler(this.cbTrayBalloonTipAfterUpload_CheckedChanged);
+            // 
+            // cbHistorySave
+            // 
+            this.cbHistorySave.AutoSize = true;
+            this.cbHistorySave.Location = new System.Drawing.Point(8, 152);
+            this.cbHistorySave.Name = "cbHistorySave";
+            this.cbHistorySave.Size = new System.Drawing.Size(139, 17);
+            this.cbHistorySave.TabIndex = 17;
+            this.cbHistorySave.Text = "Save task info to history";
+            this.cbHistorySave.UseVisualStyleBackColor = true;
+            this.cbHistorySave.CheckedChanged += new System.EventHandler(this.cbHistorySave_CheckedChanged);
+            // 
+            // cbPlaySoundAfterCapture
+            // 
+            this.cbPlaySoundAfterCapture.AutoSize = true;
+            this.cbPlaySoundAfterCapture.Location = new System.Drawing.Point(8, 32);
+            this.cbPlaySoundAfterCapture.Name = "cbPlaySoundAfterCapture";
+            this.cbPlaySoundAfterCapture.Size = new System.Drawing.Size(180, 17);
+            this.cbPlaySoundAfterCapture.TabIndex = 14;
+            this.cbPlaySoundAfterCapture.Text = "Play sound after capture is made";
+            this.cbPlaySoundAfterCapture.UseVisualStyleBackColor = true;
+            this.cbPlaySoundAfterCapture.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterCapture_CheckedChanged);
+            // 
+            // cbPlaySoundAfterUpload
+            // 
+            this.cbPlaySoundAfterUpload.AutoSize = true;
+            this.cbPlaySoundAfterUpload.Location = new System.Drawing.Point(8, 80);
+            this.cbPlaySoundAfterUpload.Name = "cbPlaySoundAfterUpload";
+            this.cbPlaySoundAfterUpload.Size = new System.Drawing.Size(187, 17);
+            this.cbPlaySoundAfterUpload.TabIndex = 15;
+            this.cbPlaySoundAfterUpload.Text = "Play sound after task is completed";
+            this.cbPlaySoundAfterUpload.UseVisualStyleBackColor = true;
+            this.cbPlaySoundAfterUpload.CheckedChanged += new System.EventHandler(this.cbPlaySoundAfterUpload_CheckedChanged);
+            // 
+            // cbShowAfterCaptureTasksForm
+            // 
+            this.cbShowAfterCaptureTasksForm.AutoSize = true;
+            this.cbShowAfterCaptureTasksForm.Location = new System.Drawing.Point(8, 56);
+            this.cbShowAfterCaptureTasksForm.Name = "cbShowAfterCaptureTasksForm";
+            this.cbShowAfterCaptureTasksForm.Size = new System.Drawing.Size(295, 17);
+            this.cbShowAfterCaptureTasksForm.TabIndex = 13;
+            this.cbShowAfterCaptureTasksForm.Text = "Show \"Post capture tasks\" window after capture is made";
+            this.cbShowAfterCaptureTasksForm.UseVisualStyleBackColor = true;
+            this.cbShowAfterCaptureTasksForm.CheckedChanged += new System.EventHandler(this.cbShowAfterCaptureTasksForm_CheckedChanged);
+            // 
+            // chkProcessImagesDuringFileUpload
+            // 
+            this.chkProcessImagesDuringFileUpload.AutoSize = true;
+            this.chkProcessImagesDuringFileUpload.Location = new System.Drawing.Point(8, 8);
+            this.chkProcessImagesDuringFileUpload.Name = "chkProcessImagesDuringFileUpload";
+            this.chkProcessImagesDuringFileUpload.Size = new System.Drawing.Size(261, 17);
+            this.chkProcessImagesDuringFileUpload.TabIndex = 12;
+            this.chkProcessImagesDuringFileUpload.Text = "Process images during file upload and drag && drop";
+            this.chkProcessImagesDuringFileUpload.UseVisualStyleBackColor = true;
+            this.chkProcessImagesDuringFileUpload.CheckedChanged += new System.EventHandler(this.cbUseImageFormat2FileUpload_CheckedChanged);
+            // 
             // tpImage
             // 
             this.tpImage.Controls.Add(this.tcImage);
@@ -480,7 +581,6 @@
             // 
             // tpQuality
             // 
-            this.tpQuality.Controls.Add(this.chkProcessImagesDuringFileUpload);
             this.tpQuality.Controls.Add(this.lblImageFormat);
             this.tpQuality.Controls.Add(this.lblUseImageFormat2AfterHint);
             this.tpQuality.Controls.Add(this.cbImageFormat);
@@ -500,17 +600,6 @@
             this.tpQuality.TabIndex = 0;
             this.tpQuality.Text = "Quality";
             this.tpQuality.UseVisualStyleBackColor = true;
-            // 
-            // chkProcessImagesDuringFileUpload
-            // 
-            this.chkProcessImagesDuringFileUpload.AutoSize = true;
-            this.chkProcessImagesDuringFileUpload.Location = new System.Drawing.Point(16, 176);
-            this.chkProcessImagesDuringFileUpload.Name = "chkProcessImagesDuringFileUpload";
-            this.chkProcessImagesDuringFileUpload.Size = new System.Drawing.Size(261, 17);
-            this.chkProcessImagesDuringFileUpload.TabIndex = 12;
-            this.chkProcessImagesDuringFileUpload.Text = "Process images during file upload and drag && drop";
-            this.chkProcessImagesDuringFileUpload.UseVisualStyleBackColor = true;
-            this.chkProcessImagesDuringFileUpload.CheckedChanged += new System.EventHandler(this.cbUseImageFormat2FileUpload_CheckedChanged);
             // 
             // lblImageFormat
             // 
@@ -2116,6 +2205,37 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
+            // panelGeneral
+            // 
+            this.panelGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelGeneral.Controls.Add(this.chkProcessImagesDuringFileUpload);
+            this.panelGeneral.Controls.Add(this.chkShowAfterUploadForm);
+            this.panelGeneral.Controls.Add(this.cbShowAfterCaptureTasksForm);
+            this.panelGeneral.Controls.Add(this.cbTrayBalloonTipAfterUpload);
+            this.panelGeneral.Controls.Add(this.cbPlaySoundAfterUpload);
+            this.panelGeneral.Controls.Add(this.cbHistorySave);
+            this.panelGeneral.Controls.Add(this.cbPlaySoundAfterCapture);
+            this.panelGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelGeneral.Location = new System.Drawing.Point(3, 30);
+            this.panelGeneral.Name = "panelGeneral";
+            this.panelGeneral.Size = new System.Drawing.Size(514, 327);
+            this.panelGeneral.TabIndex = 19;
+            // 
+            // chkUseDefaultGeneralSettings
+            // 
+            this.chkUseDefaultGeneralSettings.AutoSize = true;
+            this.chkUseDefaultGeneralSettings.Checked = true;
+            this.chkUseDefaultGeneralSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultGeneralSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultGeneralSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultGeneralSettings.Name = "chkUseDefaultGeneralSettings";
+            this.chkUseDefaultGeneralSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultGeneralSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultGeneralSettings.TabIndex = 20;
+            this.chkUseDefaultGeneralSettings.Text = "Use default general settings";
+            this.chkUseDefaultGeneralSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultGeneralSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultGeneralSettings_CheckedChanged);
+            // 
             // TaskSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2124,6 +2244,7 @@
             this.ClientSize = new System.Drawing.Size(534, 392);
             this.Controls.Add(this.tcHotkeySettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(550, 430);
             this.Name = "TaskSettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3);
@@ -2132,6 +2253,8 @@
             this.tcHotkeySettings.ResumeLayout(false);
             this.tpTask.ResumeLayout(false);
             this.tpTask.PerformLayout();
+            this.tpGeneral.ResumeLayout(false);
+            this.tpGeneral.PerformLayout();
             this.tpImage.ResumeLayout(false);
             this.tpImage.PerformLayout();
             this.tcImage.ResumeLayout(false);
@@ -2189,6 +2312,8 @@
             this.tpWatchFolders.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.tpAdvanced.PerformLayout();
+            this.panelGeneral.ResumeLayout(false);
+            this.panelGeneral.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2352,6 +2477,15 @@
         private System.Windows.Forms.ColumnHeader chWatchFolderIncludeSubdirectories;
         private System.Windows.Forms.Button btnWatchFolderRemove;
         private System.Windows.Forms.Button btnWatchFolderAdd;
+        private System.Windows.Forms.TabPage tpGeneral;
+        private System.Windows.Forms.CheckBox cbShowAfterCaptureTasksForm;
+        private System.Windows.Forms.CheckBox cbTrayBalloonTipAfterUpload;
+        private System.Windows.Forms.CheckBox cbHistorySave;
+        private System.Windows.Forms.CheckBox cbPlaySoundAfterCapture;
+        private System.Windows.Forms.CheckBox cbPlaySoundAfterUpload;
+        private System.Windows.Forms.CheckBox chkShowAfterUploadForm;
+        private System.Windows.Forms.CheckBox chkUseDefaultGeneralSettings;
+        private System.Windows.Forms.Panel panelGeneral;
 
 
 

@@ -61,11 +61,7 @@ namespace ShareX
             cbSendToMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo);
             cbShellContextMenu.Checked = RegistryHelper.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
-            cbShowAfterCaptureTasksForm.Checked = Program.Settings.ShowAfterCaptureTasksForm;
-            cbPlaySoundAfterCapture.Checked = Program.Settings.PlaySoundAfterCapture;
-            cbPlaySoundAfterUpload.Checked = Program.Settings.PlaySoundAfterUpload;
-            cbTrayBalloonTipAfterUpload.Checked = Program.Settings.TrayBalloonTipAfterUpload;
-            cbHistorySave.Checked = Program.Settings.SaveHistory;
+
 
             // Paths
             cbUseCustomUploadersConfigPath.Checked = Program.Settings.UseCustomUploadersConfigPath;
@@ -176,31 +172,6 @@ namespace ShareX
         private void cbCheckUpdates_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.AutoCheckUpdate = cbCheckUpdates.Checked;
-        }
-
-        private void cbShowAfterCaptureTasksForm_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.ShowAfterCaptureTasksForm = cbShowAfterCaptureTasksForm.Checked;
-        }
-
-        private void cbPlaySoundAfterCapture_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.PlaySoundAfterCapture = cbPlaySoundAfterCapture.Checked;
-        }
-
-        private void cbPlaySoundAfterUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.PlaySoundAfterUpload = cbPlaySoundAfterUpload.Checked;
-        }
-
-        private void cbTrayBalloonTipAfterUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.TrayBalloonTipAfterUpload = cbTrayBalloonTipAfterUpload.Checked;
-        }
-
-        private void cbHistorySave_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Settings.SaveHistory = cbHistorySave.Checked;
         }
 
         #endregion General

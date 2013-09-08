@@ -72,9 +72,12 @@ namespace ShareX
                 AddTreeNode(type.GetDescription(), GetUrlByType(type));
             }
 
-            foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
+            if (Helpers.IsImageFile(Info.Result.URL))
             {
-                AddTreeNode(cf.Description, parser.Parse(Info, cf.Format));
+                foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
+                {
+                    AddTreeNode(cf.Description, parser.Parse(Info, cf.Format));
+                }
             }
 
             tvMain.ExpandAll();
@@ -181,17 +184,17 @@ namespace ShareX
                 case LinkFormatEnum.ShortenedURL:
                     return Info.Result.ShortenedURL;
                 case LinkFormatEnum.ForumImage:
-                    return parser.Parse(Info, UploadInfoParser.ForumImage);
+                    return GetForumImage();
                 case LinkFormatEnum.HTMLImage:
-                    return parser.Parse(Info, UploadInfoParser.HTMLImage);
+                    return GetHTMLImage();
                 case LinkFormatEnum.WikiImage:
                     return GetWikiImage();
                 case LinkFormatEnum.WikiImage2:
                     return GetWikiImage2();
                 case LinkFormatEnum.ForumLinkedImage:
-                    return parser.Parse(Info, UploadInfoParser.ForumLinkedImage);
+                    return GetForumLinkedImagae();
                 case LinkFormatEnum.HTMLLinkedImage:
-                    return parser.Parse(Info, UploadInfoParser.HTMLLinkedImage);
+                    return GetHTMLLinkedImage();
                 case LinkFormatEnum.WikiLinkedImage:
                     return GetWikiLinkedImage();
                 case LinkFormatEnum.ThumbnailURL:
@@ -203,6 +206,24 @@ namespace ShareX
             }
 
             return Info.Result.URL;
+        }
+
+        public string GetForumImage()
+        {
+            if (!string.IsNullOrEmpty(Info.Result.URL) && Helpers.IsImageFile(Info.Result.URL))
+            {
+                return parser.Parse(Info, UploadInfoParser.ForumImage);
+            }
+            return string.Empty;
+        }
+
+        public string GetHTMLImage()
+        {
+            if (!string.IsNullOrEmpty(Info.Result.URL) && Helpers.IsImageFile(Info.Result.URL))
+            {
+                return parser.Parse(Info, UploadInfoParser.HTMLImage);
+            }
+            return string.Empty;
         }
 
         public string GetWikiImage()
@@ -217,7 +238,7 @@ namespace ShareX
 
         public string GetWikiImage2()
         {
-            if (string.IsNullOrEmpty(Info.Result.URL))
+            if (string.IsNullOrEmpty(Info.Result.URL) && Helpers.IsImageFile(Info.Result.URL))
                 return string.Empty;
             int index = Info.Result.URL.IndexOf("Image:");
             if (index < 0)
@@ -226,10 +247,28 @@ namespace ShareX
             return string.Format("[[Image:{0}]]", name);
         }
 
+        public string GetForumLinkedImagae()
+        {
+            if (!string.IsNullOrEmpty(Info.Result.URL) && Helpers.IsImageFile(Info.Result.URL))
+            {
+                return parser.Parse(Info, UploadInfoParser.ForumLinkedImage);
+            }
+            return string.Empty;
+        }
+
+        public string GetHTMLLinkedImage()
+        {
+            if (!string.IsNullOrEmpty(Info.Result.URL) && Helpers.IsImageFile(Info.Result.URL))
+            {
+                return parser.Parse(Info, UploadInfoParser.HTMLLinkedImage);
+            }
+            return string.Empty;
+        }
+
         public string GetWikiLinkedImage()
         {
             // e.g. [http://code.google.com http://code.google.com/images/code_sm.png]
-            if (!string.IsNullOrEmpty(Info.Result.URL) && !string.IsNullOrEmpty(Info.Result.ThumbnailURL))
+            if (!string.IsNullOrEmpty(Info.Result.URL) && !string.IsNullOrEmpty(Info.Result.ThumbnailURL) && Helpers.IsImageFile(Info.Result.URL))
             {
                 return string.Format("[{0} {1}]", Info.Result.URL, Info.Result.ThumbnailURL);
             }

@@ -250,7 +250,7 @@ namespace ShareX
                                 lvi.ImageIndex = 1;
                             }
 
-                            if (Program.Settings.PlaySoundAfterUpload)
+                            if (task.Info.TaskSettings.GeneralSettings.PlaySoundAfterUpload)
                             {
                                 SystemSounds.Asterisk.Play();
                             }
@@ -281,7 +281,7 @@ namespace ShareX
 
                             if (!task.IsStopped && !string.IsNullOrEmpty(result))
                             {
-                                if (Program.Settings.SaveHistory)
+                                if (task.Info.TaskSettings.GeneralSettings.SaveHistory)
                                 {
                                     HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
                                     HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
@@ -291,7 +291,7 @@ namespace ShareX
                                 {
                                     string balloonTipText = result;
 
-                                    if (info.TaskSettings.AdvancedSettings.ShowAfterUploadForm)
+                                    if (info.TaskSettings.GeneralSettings.ShowAfterUploadForm)
                                     {
                                         AfterUploadForm dlg = new AfterUploadForm(info);
                                         NativeMethods.ShowWindow(dlg.Handle, (int)WindowShowStyle.ShowNoActivate);
@@ -302,13 +302,13 @@ namespace ShareX
                                         balloonTipText = new UploadInfoParser().Parse(info, info.TaskSettings.AdvancedSettings.BalloonTipContentFormat);
                                     }
 
-                                    if (Program.Settings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
+                                    if (task.Info.TaskSettings.GeneralSettings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
                                     {
                                         Program.MainForm.niTray.Tag = result;
                                         Program.MainForm.niTray.ShowBalloonTip(5000, "ShareX - Task completed", balloonTipText, ToolTipIcon.Info);
                                     }
 
-                                    if (Program.Settings.PlaySoundAfterUpload)
+                                    if (task.Info.TaskSettings.GeneralSettings.PlaySoundAfterUpload)
                                     {
                                         SystemSounds.Exclamation.Play();
                                     }
