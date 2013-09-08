@@ -105,7 +105,7 @@ namespace ShareX
                 task.Info.FileName = TaskHelper.GetFilename(task.Info.TaskSettings, ext);
             }
 
-            if (task.Info.TaskSettings.ImageSettings.ProcessImagesDuringFileUpload && dataType == EDataType.Image)
+            if (task.Info.TaskSettings.AdvancedSettings.ProcessImagesDuringFileUpload && dataType == EDataType.Image)
             {
                 task.Info.Job = TaskJob.ImageJob;
                 task.tempImage = Helpers.GetImageFromFile(filePath);

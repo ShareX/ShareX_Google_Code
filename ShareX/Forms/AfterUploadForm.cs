@@ -176,6 +176,11 @@ namespace ShareX
             }
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         #region TaskInfo helper methods
 
         public string GetUrlByType(LinkFormatEnum type)

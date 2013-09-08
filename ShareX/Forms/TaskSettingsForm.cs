@@ -108,7 +108,6 @@ namespace ShareX
             cbImageGIFQuality.SelectedIndex = (int)TaskSettings.ImageSettings.ImageGIFQuality;
             nudUseImageFormat2After.Value = TaskSettings.ImageSettings.ImageSizeLimit;
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
-            chkProcessImagesDuringFileUpload.Checked = TaskSettings.ImageSettings.ProcessImagesDuringFileUpload;
 
             // Image - Resize
             cbImageAutoResize.Checked = TaskSettings.ImageSettings.ImageAutoResize;
@@ -167,7 +166,6 @@ namespace ShareX
             cbShapeForceWindowCapture.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture;
 
             // Capture / Screencast
-
             nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
             cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
             nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
@@ -448,11 +446,6 @@ namespace ShareX
             btnURLShorteners.Text = "URL shortener: " + TaskSettings.URLShortenerDestination.GetDescription();
 
             btnSocialNetworkingServices.Text = "Social networking service: " + TaskSettings.SocialNetworkingServiceDestination.GetDescription();
-        }
-
-        private void cbUseImageFormat2FileUpload_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ProcessImagesDuringFileUpload = chkProcessImagesDuringFileUpload.Checked;
         }
 
         private void cbImageFormat_SelectedIndexChanged(object sender, EventArgs e)
