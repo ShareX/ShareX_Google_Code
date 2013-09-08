@@ -44,6 +44,12 @@ namespace ShareX
 
         private UploadInfoParser parser = new UploadInfoParser();
 
+        private ListViewGroup lvgForums = new ListViewGroup("Forums");
+        private ListViewGroup lvgHtml = new ListViewGroup("HTML");
+        private ListViewGroup lvgWiki = new ListViewGroup("Wiki");
+        private ListViewGroup lvgLocal = new ListViewGroup("Local");
+        private ListViewGroup lvgCustom = new ListViewGroup("Custom");
+
         public AfterUploadForm(TaskInfo info)
         {
             InitializeComponent();
@@ -67,54 +73,62 @@ namespace ShareX
 
             Text = "ShareX - " + (isFileExist ? info.FilePath : info.FileName);
 
+            lvClipboardFormats.Groups.Add(lvgForums);
+            lvClipboardFormats.Groups.Add(lvgHtml);
+            lvClipboardFormats.Groups.Add(lvgWiki);
+            lvClipboardFormats.Groups.Add(lvgLocal);
+            lvClipboardFormats.Groups.Add(lvgCustom);
+
             foreach (LinkFormatEnum type in Enum.GetValues(typeof(LinkFormatEnum)))
             {
                 if (!Helpers.IsImageFile(Info.Result.URL) && type != LinkFormatEnum.URL && type != LinkFormatEnum.LocalFilePath && type != LinkFormatEnum.LocalFilePathUri)
                     continue;
 
-                AddTreeNode(type.GetDescription(), GetUrlByType(type));
+                AddFormat(type.GetDescription(), GetUrlByType(type));
             }
 
             if (Helpers.IsImageFile(Info.Result.URL))
             {
                 foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
                 {
-                    AddTreeNode(cf.Description, parser.Parse(Info, cf.Format));
+                    AddFormat(cf.Description, parser.Parse(Info, cf.Format), lvgCustom);
                 }
             }
-
-            tvMain.ExpandAll();
         }
 
-        private void AddTreeNode(string description, string text)
+        private void AddFormat(string description, string text, ListViewGroup group = null)
         {
             if (!string.IsNullOrEmpty(text))
             {
-                TreeNode tnUrl = new TreeNode(description);
-                tnUrl.Nodes.Add(text);
-                tvMain.Nodes.Add(tnUrl);
-            }
-        }
+                ListViewItem lvi = new ListViewItem(description);
 
-        private void tvMain_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            string text = null;
-
-            if (e.Node != null)
-            {
-                if (e.Node.Nodes.Count > 0)
+                if (group == null)
                 {
-                    text = e.Node.FirstNode.Text;
+                    if (description.Contains("HTML"))
+                    {
+                        lvi.Group = lvgHtml;
+                    }
+                    else if (description.Contains("Forums"))
+                    {
+                        lvi.Group = lvgForums;
+                    }
+                    else if (description.Contains("Local"))
+                    {
+                        lvi.Group = lvgLocal;
+                    }
+                    else if (description.Contains("Wiki"))
+                    {
+                        lvi.Group = lvgWiki;
+                    }
                 }
                 else
                 {
-                    text = e.Node.Text;
+                    lvi.Group = group;
                 }
-            }
 
-            if (!string.IsNullOrEmpty(text))
-            {
-                ClipboardHelper.CopyText(text);
+                lvi.SubItems.Add(text);
+                lvClipboardFormats.Items.Add(lvi);
+                lvClipboardFormats.FillLastColumn();
             }
         }
 
@@ -133,20 +147,23 @@ namespace ShareX
 
         private void btnCopyLink_Click(object sender, EventArgs e)
         {
-            string url = null;
+            if (lvClipboardFormats.Items.Count > 0)
+            {
+                string url = null;
 
-            if (tvMain.SelectedNode != null)
-            {
-                url = tvMain.SelectedNode.Text;
-            }
-            else if (tvMain.Nodes.Count > 0 && tvMain.Nodes[0].Nodes.Count > 0)
-            {
-                url = tvMain.Nodes[0].Nodes[0].Text;
-            }
+                if (lvClipboardFormats.SelectedItems.Count == 0)
+                {
+                    url = lvClipboardFormats.Items[0].SubItems[1].Text;
+                }
+                else if (lvClipboardFormats.SelectedItems.Count > 0)
+                {
+                    url = lvClipboardFormats.SelectedItems[0].Text;
+                }
 
-            if (!string.IsNullOrEmpty(url))
-            {
-                ClipboardHelper.CopyText(url);
+                if (!string.IsNullOrEmpty(url))
+                {
+                    ClipboardHelper.CopyText(url);
+                }
             }
         }
 
@@ -232,5 +249,18 @@ namespace ShareX
         }
 
         #endregion TaskInfo helper methods
+
+        private void lvClipboardFormats_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && lvClipboardFormats.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvClipboardFormats.SelectedItems[0];
+                string txt = lvi.SubItems[1].Text;
+                if (!string.IsNullOrEmpty(txt))
+                {
+                    ClipboardHelper.CopyText(txt);
+                }
+            }
+        }
     }
 }
