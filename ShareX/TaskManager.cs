@@ -293,7 +293,7 @@ namespace ShareX
 
                                     if (info.TaskSettings.AdvancedSettings.ShowAfterUploadForm)
                                     {
-                                        AfterUploadForm dlg = new AfterUploadForm(info) { Icon = Resources.ShareXIcon };
+                                        AfterUploadForm dlg = new AfterUploadForm(info);
                                         NativeMethods.ShowWindow(dlg.Handle, (int)WindowShowStyle.ShowNoActivate);
                                     }
 
