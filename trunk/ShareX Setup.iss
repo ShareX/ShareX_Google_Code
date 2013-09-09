@@ -81,3 +81,48 @@ function DesktopIconExists(): Boolean;
 begin
   Result := FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'));
 end;
+
+function GetUninstallString: string;
+var
+  sUnInstallString: String;
+begin
+  if not RegQueryStringValue(HKLM, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
+  if not RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
+  if not RegQueryStringValue(HKCU, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
+         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) 
+
+  Result := sUnInstallString;
+end;
+
+function GetInstalledAppName: string; 
+var
+  sAppName: string; 
+begin
+  if not RegQueryStringValue(HKLM, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
+  if not RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
+  if not RegQueryStringValue(HKCU, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
+         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) 
+  Result := sAppName;
+end;
+
+function InitializeSetup: Boolean;
+var
+  V: Integer;
+  iResultCode: Integer;
+  sUnInstallString: string;
+begin
+  Result := True;
+  if GetInstalledAppName() = 'ShareXmod' then
+  begin
+    V := MsgBox(ExpandConstant('ShareXmod was detected. Do you want to uninstall it?'), mbConfirmation, MB_YESNO); //Custom Message if App installed
+    if V = IDYES then
+    begin
+      sUnInstallString := GetUninstallString();
+      sUnInstallString :=  RemoveQuotes(sUnInstallString);
+      Exec(ExpandConstant(sUnInstallString), '/SILENT', '', SW_SHOW, ewWaitUntilTerminated, iResultCode);
+      Result := True;
+    end
+    else
+      Result := False;
+  end;
+end;
