@@ -432,8 +432,8 @@
             this.tcHotkeySettings.Controls.Add(this.tpImage);
             this.tcHotkeySettings.Controls.Add(this.tpCapture);
             this.tcHotkeySettings.Controls.Add(this.tpActions);
-            this.tcHotkeySettings.Controls.Add(this.tpUpload);
             this.tcHotkeySettings.Controls.Add(this.tpWatchFolders);
+            this.tcHotkeySettings.Controls.Add(this.tpUpload);
             this.tcHotkeySettings.Controls.Add(this.tpAdvanced);
             this.tcHotkeySettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcHotkeySettings.Location = new System.Drawing.Point(3, 3);
