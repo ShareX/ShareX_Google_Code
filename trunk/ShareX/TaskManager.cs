@@ -163,7 +163,14 @@ namespace ShareX
                 lvi.SubItems.Add(info.IsUploadJob ? info.UploaderHost : string.Empty);
                 lvi.SubItems.Add(string.Empty);
                 lvi.ImageIndex = 3;
-                ListViewControl.Items.Insert(0, lvi);
+                if (Program.Settings.ShowMostRecentTaskFirst)
+                {
+                    ListViewControl.Items.Insert(0, lvi);
+                }
+                else
+                {
+                    ListViewControl.Items.Add(lvi);
+                }
                 lvi.EnsureVisible();
                 ListViewControl.FillLastColumn();
             }
@@ -257,7 +264,7 @@ namespace ShareX
                         }
                         else
                         {
-                            DebugHelper.WriteLine("Task completed. Filename: {0}, URL: {1}, Duration: {2}ms",
+                            DebugHelper.WriteLine("Task completed. Filename: {0}, URL: {1}, Duration: {2} ms",
                                 info.FileName, info.Result.ToString(), (int)info.UploadDuration.TotalMilliseconds);
 
                             string result = info.Result.ToString();
