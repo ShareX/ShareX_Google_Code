@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using UploadersLib;
 
@@ -88,6 +89,16 @@ namespace ShareX
         public PrintSettings PrintSettings = new PrintSettings();
 
         #endregion Print
+
+        #region Advanced
+
+        [Category("Units"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
+        public bool BinaryUnits { get; set; }
+
+        [Category("Upload / Clipboard upload"), DefaultValue(true), Description("Show clipboard content viewer when using clipboard upload button in main window.")]
+        public bool ShowClipboardContentViewer { get; set; }
+
+        #endregion Advanced
 
         #endregion Settings Form
 

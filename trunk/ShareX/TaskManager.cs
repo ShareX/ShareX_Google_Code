@@ -163,7 +163,7 @@ namespace ShareX
                 lvi.SubItems.Add(info.IsUploadJob ? info.UploaderHost : string.Empty);
                 lvi.SubItems.Add(string.Empty);
                 lvi.ImageIndex = 3;
-                ListViewControl.Items.Add(lvi);
+                ListViewControl.Items.Insert(0, lvi);
                 lvi.EnsureVisible();
                 ListViewControl.FillLastColumn();
             }
@@ -205,11 +205,11 @@ namespace ShareX
                 if (lvi != null)
                 {
                     lvi.SubItems[1].Text = string.Format("{0:0.0}%", info.Progress.Percentage);
-                    lvi.SubItems[2].Text = string.Format("{0} / {1}", Helpers.ProperFileSize(info.Progress.Position), Helpers.ProperFileSize(info.Progress.Length));
+                    lvi.SubItems[2].Text = string.Format("{0} / {1}", Helpers.ProperFileSize(info.Progress.Position, "", Program.Settings.BinaryUnits), Helpers.ProperFileSize(info.Progress.Length, "", Program.Settings.BinaryUnits));
 
                     if (info.Progress.Speed > 0)
                     {
-                        lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, "/s");
+                        lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, "/s", Program.Settings.BinaryUnits);
                     }
 
                     lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);

@@ -101,6 +101,9 @@ namespace ShareX
 
             // Print
             cbDontShowPrintSettingDialog.Checked = Program.Settings.DontShowPrintSettingsDialog;
+
+            // Advanced
+            pgSettings.SelectedObject = Program.Settings;
         }
 
         private void SettingsForm_Shown(object sender, EventArgs e)

@@ -265,7 +265,6 @@ namespace ShareX
 
         #region Upload / Clipboard upload
 
-        public bool ShowClipboardContentViewer = true;
         public bool ClipboardUploadAutoDetectURL = true;
 
         #endregion Upload / Clipboard upload
