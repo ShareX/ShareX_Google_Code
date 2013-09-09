@@ -209,7 +209,6 @@ namespace ShareX
             cbFileUploadUseNamePattern.Checked = TaskSettings.UploadSettings.FileUploadUseNamePattern;
 
             // Upload / Clipboard upload
-            cbShowClipboardContentViewer.Checked = TaskSettings.UploadSettings.ShowClipboardContentViewer;
             cbClipboardUploadAutoDetectURL.Checked = TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL;
 
             // Advanced
@@ -968,11 +967,6 @@ namespace ShareX
             TaskSettings.UploadSettings.NameFormatPattern = txtNameFormatPattern.Text;
             NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = TaskSettings.UploadSettings.AutoIncrementNumber };
             lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(TaskSettings.UploadSettings.NameFormatPattern);
-        }
-
-        private void cbShowClipboardContentViewer_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.UploadSettings.ShowClipboardContentViewer = cbShowClipboardContentViewer.Checked;
         }
 
         private void cbClipboardUploadAutoDetectURL_CheckedChanged(object sender, EventArgs e)

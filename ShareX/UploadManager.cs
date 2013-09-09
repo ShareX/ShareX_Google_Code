@@ -152,7 +152,7 @@ namespace ShareX
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
 
-            if (taskSettings.UploadSettings.ShowClipboardContentViewer)
+            if (Program.Settings.ShowClipboardContentViewer)
             {
                 using (ClipboardContentViewer ccv = new ClipboardContentViewer())
                 {
@@ -161,7 +161,7 @@ namespace ShareX
                         UploadManager.ClipboardUpload(taskSettings);
                     }
 
-                    taskSettings.UploadSettings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
+                    Program.Settings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
                 }
             }
             else

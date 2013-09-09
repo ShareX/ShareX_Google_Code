@@ -82,6 +82,8 @@
             this.tpPrint = new System.Windows.Forms.TabPage();
             this.cbDontShowPrintSettingDialog = new System.Windows.Forms.CheckBox();
             this.btnShowImagePrintSettings = new System.Windows.Forms.Button();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.pgSettings = new System.Windows.Forms.PropertyGrid();
             this.tcSettings.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tpPaths.SuspendLayout();
@@ -92,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudUploadLimit)).BeginInit();
             this.gbClipboardFormats.SuspendLayout();
             this.tpPrint.SuspendLayout();
+            this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -101,6 +104,7 @@
             this.tcSettings.Controls.Add(this.tpProxy);
             this.tcSettings.Controls.Add(this.tpUpload);
             this.tcSettings.Controls.Add(this.tpPrint);
+            this.tcSettings.Controls.Add(this.tpAdvanced);
             this.tcSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcSettings.Location = new System.Drawing.Point(3, 3);
             this.tcSettings.Name = "tcSettings";
@@ -679,6 +683,25 @@
             this.btnShowImagePrintSettings.UseVisualStyleBackColor = true;
             this.btnShowImagePrintSettings.Click += new System.EventHandler(this.btnShowImagePrintSettings_Click);
             // 
+            // tpAdvanced
+            // 
+            this.tpAdvanced.Controls.Add(this.pgSettings);
+            this.tpAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tpAdvanced.Name = "tpAdvanced";
+            this.tpAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAdvanced.Size = new System.Drawing.Size(522, 308);
+            this.tpAdvanced.TabIndex = 5;
+            this.tpAdvanced.Text = "Advanced";
+            this.tpAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // pgSettings
+            // 
+            this.pgSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgSettings.Location = new System.Drawing.Point(3, 3);
+            this.pgSettings.Name = "pgSettings";
+            this.pgSettings.Size = new System.Drawing.Size(516, 302);
+            this.pgSettings.TabIndex = 0;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,6 +734,7 @@
             this.gbClipboardFormats.ResumeLayout(false);
             this.tpPrint.ResumeLayout(false);
             this.tpPrint.PerformLayout();
+            this.tpAdvanced.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -771,5 +795,7 @@
         private System.Windows.Forms.TabPage tpPrint;
         private System.Windows.Forms.CheckBox cbDontShowPrintSettingDialog;
         private System.Windows.Forms.Button btnShowImagePrintSettings;
+        private System.Windows.Forms.TabPage tpAdvanced;
+        private System.Windows.Forms.PropertyGrid pgSettings;
     }
 }
