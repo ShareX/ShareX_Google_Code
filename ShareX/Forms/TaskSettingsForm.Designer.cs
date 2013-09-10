@@ -131,16 +131,6 @@
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
             this.tpCaptureShape = new System.Windows.Forms.TabPage();
             this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
-            this.cbShapeForceWindowCapture = new System.Windows.Forms.CheckBox();
-            this.cbShapeIncludeControls = new System.Windows.Forms.CheckBox();
-            this.lblFixedShapeSizeHeight = new System.Windows.Forms.Label();
-            this.cbDrawBorder = new System.Windows.Forms.CheckBox();
-            this.lblFixedShapeSizeWidth = new System.Windows.Forms.Label();
-            this.cbCaptureMultipleShapes = new System.Windows.Forms.CheckBox();
-            this.nudFixedShapeSizeHeight = new System.Windows.Forms.NumericUpDown();
-            this.cbDrawCheckerboard = new System.Windows.Forms.CheckBox();
-            this.nudFixedShapeSizeWidth = new System.Windows.Forms.NumericUpDown();
-            this.cbFixedShapeSize = new System.Windows.Forms.CheckBox();
             this.tpScreenRecorder = new System.Windows.Forms.TabPage();
             this.cbOutput = new System.Windows.Forms.ComboBox();
             this.lblOutput = new System.Windows.Forms.Label();
@@ -193,6 +183,7 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
+            this.pgShapesCapture = new System.Windows.Forms.PropertyGrid();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -222,8 +213,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).BeginInit();
             this.tpCaptureShape.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).BeginInit();
             this.tpScreenRecorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDuration)).BeginInit();
@@ -1478,16 +1467,7 @@
             // tpCaptureShape
             // 
             this.tpCaptureShape.Controls.Add(this.btnOpenCapturingShapesWiki);
-            this.tpCaptureShape.Controls.Add(this.cbShapeForceWindowCapture);
-            this.tpCaptureShape.Controls.Add(this.cbShapeIncludeControls);
-            this.tpCaptureShape.Controls.Add(this.lblFixedShapeSizeHeight);
-            this.tpCaptureShape.Controls.Add(this.cbDrawBorder);
-            this.tpCaptureShape.Controls.Add(this.lblFixedShapeSizeWidth);
-            this.tpCaptureShape.Controls.Add(this.cbCaptureMultipleShapes);
-            this.tpCaptureShape.Controls.Add(this.nudFixedShapeSizeHeight);
-            this.tpCaptureShape.Controls.Add(this.cbDrawCheckerboard);
-            this.tpCaptureShape.Controls.Add(this.nudFixedShapeSizeWidth);
-            this.tpCaptureShape.Controls.Add(this.cbFixedShapeSize);
+            this.tpCaptureShape.Controls.Add(this.pgShapesCapture);
             this.tpCaptureShape.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureShape.Name = "tpCaptureShape";
             this.tpCaptureShape.Padding = new System.Windows.Forms.Padding(3);
@@ -1498,143 +1478,14 @@
             // 
             // btnOpenCapturingShapesWiki
             // 
-            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(408, 8);
+            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(408, 264);
             this.btnOpenCapturingShapesWiki.Name = "btnOpenCapturingShapesWiki";
             this.btnOpenCapturingShapesWiki.Size = new System.Drawing.Size(88, 24);
             this.btnOpenCapturingShapesWiki.TabIndex = 0;
             this.btnOpenCapturingShapesWiki.Text = "Tips && tricks...";
             this.btnOpenCapturingShapesWiki.UseVisualStyleBackColor = true;
+            this.btnOpenCapturingShapesWiki.Visible = false;
             this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
-            // 
-            // cbShapeForceWindowCapture
-            // 
-            this.cbShapeForceWindowCapture.AutoSize = true;
-            this.cbShapeForceWindowCapture.Location = new System.Drawing.Point(16, 176);
-            this.cbShapeForceWindowCapture.Name = "cbShapeForceWindowCapture";
-            this.cbShapeForceWindowCapture.Size = new System.Drawing.Size(287, 17);
-            this.cbShapeForceWindowCapture.TabIndex = 10;
-            this.cbShapeForceWindowCapture.Text = "Use window capture mode for all rectangle type shapes";
-            this.cbShapeForceWindowCapture.UseVisualStyleBackColor = true;
-            this.cbShapeForceWindowCapture.CheckedChanged += new System.EventHandler(this.cbShapeForceWindowCapture_CheckedChanged);
-            // 
-            // cbShapeIncludeControls
-            // 
-            this.cbShapeIncludeControls.AutoSize = true;
-            this.cbShapeIncludeControls.Location = new System.Drawing.Point(16, 152);
-            this.cbShapeIncludeControls.Name = "cbShapeIncludeControls";
-            this.cbShapeIncludeControls.Size = new System.Drawing.Size(329, 17);
-            this.cbShapeIncludeControls.TabIndex = 9;
-            this.cbShapeIncludeControls.Text = "Allow capturing controls in window capture (buttons, panels etc.)";
-            this.cbShapeIncludeControls.UseVisualStyleBackColor = true;
-            this.cbShapeIncludeControls.CheckedChanged += new System.EventHandler(this.cbShapeIncludeControls_CheckedChanged);
-            // 
-            // lblFixedShapeSizeHeight
-            // 
-            this.lblFixedShapeSizeHeight.AutoSize = true;
-            this.lblFixedShapeSizeHeight.Location = new System.Drawing.Point(160, 120);
-            this.lblFixedShapeSizeHeight.Name = "lblFixedShapeSizeHeight";
-            this.lblFixedShapeSizeHeight.Size = new System.Drawing.Size(41, 13);
-            this.lblFixedShapeSizeHeight.TabIndex = 7;
-            this.lblFixedShapeSizeHeight.Text = "Height:";
-            // 
-            // cbDrawBorder
-            // 
-            this.cbDrawBorder.AutoSize = true;
-            this.cbDrawBorder.Location = new System.Drawing.Point(16, 64);
-            this.cbDrawBorder.Name = "cbDrawBorder";
-            this.cbDrawBorder.Size = new System.Drawing.Size(170, 17);
-            this.cbDrawBorder.TabIndex = 3;
-            this.cbDrawBorder.Text = "Draw border around the shape";
-            this.cbDrawBorder.UseVisualStyleBackColor = true;
-            this.cbDrawBorder.CheckedChanged += new System.EventHandler(this.cbDrawBorder_CheckedChanged);
-            // 
-            // lblFixedShapeSizeWidth
-            // 
-            this.lblFixedShapeSizeWidth.AutoSize = true;
-            this.lblFixedShapeSizeWidth.Location = new System.Drawing.Point(44, 120);
-            this.lblFixedShapeSizeWidth.Name = "lblFixedShapeSizeWidth";
-            this.lblFixedShapeSizeWidth.Size = new System.Drawing.Size(38, 13);
-            this.lblFixedShapeSizeWidth.TabIndex = 5;
-            this.lblFixedShapeSizeWidth.Text = "Width:";
-            // 
-            // cbCaptureMultipleShapes
-            // 
-            this.cbCaptureMultipleShapes.AutoSize = true;
-            this.cbCaptureMultipleShapes.Location = new System.Drawing.Point(16, 16);
-            this.cbCaptureMultipleShapes.Name = "cbCaptureMultipleShapes";
-            this.cbCaptureMultipleShapes.Size = new System.Drawing.Size(190, 17);
-            this.cbCaptureMultipleShapes.TabIndex = 1;
-            this.cbCaptureMultipleShapes.Text = "Allow moving and resizing shape(s)";
-            this.cbCaptureMultipleShapes.UseVisualStyleBackColor = true;
-            this.cbCaptureMultipleShapes.CheckedChanged += new System.EventHandler(this.cbQuickCrop_CheckedChanged);
-            // 
-            // nudFixedShapeSizeHeight
-            // 
-            this.nudFixedShapeSizeHeight.Location = new System.Drawing.Point(208, 116);
-            this.nudFixedShapeSizeHeight.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeHeight.Name = "nudFixedShapeSizeHeight";
-            this.nudFixedShapeSizeHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedShapeSizeHeight.TabIndex = 8;
-            this.nudFixedShapeSizeHeight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeHeight.ValueChanged += new System.EventHandler(this.nudFixedShapeSizeHeight_ValueChanged);
-            // 
-            // cbDrawCheckerboard
-            // 
-            this.cbDrawCheckerboard.AutoSize = true;
-            this.cbDrawCheckerboard.Location = new System.Drawing.Point(16, 40);
-            this.cbDrawCheckerboard.Name = "cbDrawCheckerboard";
-            this.cbDrawCheckerboard.Size = new System.Drawing.Size(290, 17);
-            this.cbDrawCheckerboard.TabIndex = 2;
-            this.cbDrawCheckerboard.Text = "Draw checkerboard pattern instead of transparent areas";
-            this.cbDrawCheckerboard.UseVisualStyleBackColor = true;
-            this.cbDrawCheckerboard.CheckedChanged += new System.EventHandler(this.cbDrawCheckerboard_CheckedChanged);
-            // 
-            // nudFixedShapeSizeWidth
-            // 
-            this.nudFixedShapeSizeWidth.Location = new System.Drawing.Point(88, 116);
-            this.nudFixedShapeSizeWidth.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeWidth.Name = "nudFixedShapeSizeWidth";
-            this.nudFixedShapeSizeWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudFixedShapeSizeWidth.TabIndex = 6;
-            this.nudFixedShapeSizeWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudFixedShapeSizeWidth.ValueChanged += new System.EventHandler(this.nudFixedShapeSizeWidth_ValueChanged);
-            // 
-            // cbFixedShapeSize
-            // 
-            this.cbFixedShapeSize.AutoSize = true;
-            this.cbFixedShapeSize.Location = new System.Drawing.Point(16, 88);
-            this.cbFixedShapeSize.Name = "cbFixedShapeSize";
-            this.cbFixedShapeSize.Size = new System.Drawing.Size(107, 17);
-            this.cbFixedShapeSize.TabIndex = 4;
-            this.cbFixedShapeSize.Text = "Fixed shape size:";
-            this.cbFixedShapeSize.UseVisualStyleBackColor = true;
-            this.cbFixedShapeSize.CheckedChanged += new System.EventHandler(this.cbFixedShapeSize_CheckedChanged);
             // 
             // tpScreenRecorder
             // 
@@ -2210,6 +2061,16 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
+            // pgShapesCapture
+            // 
+            this.pgShapesCapture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgShapesCapture.Location = new System.Drawing.Point(3, 3);
+            this.pgShapesCapture.Name = "pgShapesCapture";
+            this.pgShapesCapture.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+            this.pgShapesCapture.Size = new System.Drawing.Size(500, 295);
+            this.pgShapesCapture.TabIndex = 11;
+            this.pgShapesCapture.ToolbarVisible = false;
+            // 
             // TaskSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2265,9 +2126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudScreenshotDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCaptureShadowOffset)).EndInit();
             this.tpCaptureShape.ResumeLayout(false);
-            this.tpCaptureShape.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudFixedShapeSizeWidth)).EndInit();
             this.tpScreenRecorder.ResumeLayout(false);
             this.tpScreenRecorder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFPS)).EndInit();
@@ -2385,16 +2243,6 @@
         private System.Windows.Forms.CheckBox cbCaptureTransparent;
         private System.Windows.Forms.TabPage tpCaptureShape;
         private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
-        private System.Windows.Forms.CheckBox cbShapeForceWindowCapture;
-        private System.Windows.Forms.CheckBox cbShapeIncludeControls;
-        private System.Windows.Forms.Label lblFixedShapeSizeHeight;
-        private System.Windows.Forms.CheckBox cbDrawBorder;
-        private System.Windows.Forms.Label lblFixedShapeSizeWidth;
-        private System.Windows.Forms.CheckBox cbCaptureMultipleShapes;
-        private System.Windows.Forms.NumericUpDown nudFixedShapeSizeHeight;
-        private System.Windows.Forms.CheckBox cbDrawCheckerboard;
-        private System.Windows.Forms.NumericUpDown nudFixedShapeSizeWidth;
-        private System.Windows.Forms.CheckBox cbFixedShapeSize;
         private System.Windows.Forms.TabPage tpScreenRecorder;
         private System.Windows.Forms.TabPage tpTask;
         private System.Windows.Forms.TabPage tpActions;
@@ -2458,6 +2306,7 @@
         private System.Windows.Forms.CheckBox chkShowAfterUploadForm;
         private System.Windows.Forms.CheckBox chkUseDefaultGeneralSettings;
         private System.Windows.Forms.Panel panelGeneral;
+        private System.Windows.Forms.PropertyGrid pgShapesCapture;
 
 
 

@@ -156,14 +156,7 @@ namespace ShareX
             cbCaptureAutoHideTaskbar.Checked = TaskSettings.CaptureSettings.CaptureAutoHideTaskbar;
 
             if (TaskSettings.CaptureSettings.SurfaceOptions == null) TaskSettings.CaptureSettings.SurfaceOptions = new SurfaceOptions();
-            cbDrawBorder.Checked = TaskSettings.CaptureSettings.SurfaceOptions.DrawBorder;
-            cbDrawCheckerboard.Checked = TaskSettings.CaptureSettings.SurfaceOptions.DrawChecker;
-            cbCaptureMultipleShapes.Checked = TaskSettings.CaptureSettings.SurfaceOptions.AllowMoveResize;
-            cbFixedShapeSize.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize;
-            nudFixedShapeSizeWidth.Value = TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Width;
-            nudFixedShapeSizeHeight.Value = TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Height;
-            cbShapeIncludeControls.Checked = TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls;
-            cbShapeForceWindowCapture.Checked = TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture;
+            pgShapesCapture.SelectedObject = TaskSettings.CaptureSettings.SurfaceOptions;
 
             // Capture / Screencast
             nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
@@ -731,46 +724,6 @@ namespace ShareX
         private void btnOpenCapturingShapesWiki_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_WIKI_CapturingShapes);
-        }
-
-        private void cbShapeForceWindowCapture_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.ForceWindowCapture = cbShapeForceWindowCapture.Checked;
-        }
-
-        private void cbShapeIncludeControls_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.IncludeControls = cbShapeIncludeControls.Checked;
-        }
-
-        private void cbDrawBorder_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.DrawBorder = cbDrawBorder.Checked;
-        }
-
-        private void cbQuickCrop_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.AllowMoveResize = cbCaptureMultipleShapes.Checked;
-        }
-
-        private void nudFixedShapeSizeHeight_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.FixedSize = new Size(TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Width, (int)nudFixedShapeSizeHeight.Value);
-        }
-
-        private void cbDrawCheckerboard_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.DrawChecker = cbDrawCheckerboard.Checked;
-        }
-
-        private void nudFixedShapeSizeWidth_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.FixedSize = new Size((int)nudFixedShapeSizeWidth.Value, TaskSettings.CaptureSettings.SurfaceOptions.FixedSize.Height);
-        }
-
-        private void cbFixedShapeSize_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.SurfaceOptions.IsFixedSize = cbFixedShapeSize.Checked;
         }
 
         private void btnBrowseCommandLinePath_Click(object sender, EventArgs e)
