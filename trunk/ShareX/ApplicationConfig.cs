@@ -38,6 +38,7 @@ namespace ShareX
         public string FileUploadDefaultDirectory = "";
         public bool ShowUploadWarning = true; // First time upload warning
         public bool ShowMultiUploadWarning = true; // More than 10 files upload warning
+        public int NameParserAutoIncrementNumber = 0;
 
         #region Main Form
 

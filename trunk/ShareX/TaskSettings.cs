@@ -72,11 +72,18 @@ namespace ShareX
         public bool WatchFolderEnabled = false;
         public List<WatchFolderSettings> WatchFolderList = new List<WatchFolderSettings>();
 
+        [JsonIgnore]
+        public TaskSettings TaskSettingsReference { get; private set; }
+
+        public TaskSettings()
+        {
+        }
+
         public bool IsUsingDefaultSettings
         {
             get
             {
-                return UseDefaultGeneralSettings && UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations &&
+                return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && UseDefaultGeneralSettings &&
                     UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions &&
                     UseDefaultAdvancedSettings && !WatchFolderEnabled;
             }
@@ -105,6 +112,7 @@ namespace ShareX
                 taskSettingsCopy.SetDefaultSettings();
             }
 
+            taskSettingsCopy.TaskSettingsReference = taskSettings;
             return taskSettingsCopy;
         }
 
@@ -258,7 +266,6 @@ namespace ShareX
 
         public string NameFormatPattern = "%y-%mo-%d_%h-%mi-%s"; // Test: %y %mo %mon %mon2 %d %h %mi %s %ms %w %w2 %pm %rn %ra %width %height %app %ver
         public string NameFormatPatternActiveWindow = "%t_%y-%mo-%d_%h-%mi-%s";
-        public int AutoIncrementNumber = 0;
         public bool FileUploadUseNamePattern = false;
 
         #endregion Upload / Name pattern

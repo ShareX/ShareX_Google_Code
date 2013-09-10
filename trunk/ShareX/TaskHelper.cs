@@ -142,7 +142,7 @@ namespace ShareX
         {
             NameParser nameParser = new NameParser(NameParserType.FileName)
             {
-                AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber,
+                AutoIncrementNumber = Program.Settings.NameParserAutoIncrementNumber,
                 MaxNameLength = 100
             };
 
@@ -153,7 +153,7 @@ namespace ShareX
                 filename += "." + extension.TrimStart('.');
             }
 
-            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            Program.Settings.NameParserAutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
@@ -165,7 +165,7 @@ namespace ShareX
             NameParser nameParser = new NameParser(NameParserType.FileName);
             nameParser.MaxNameLength = 100;
             nameParser.Picture = image;
-            nameParser.AutoIncrementNumber = taskSettings.UploadSettings.AutoIncrementNumber;
+            nameParser.AutoIncrementNumber = Program.Settings.NameParserAutoIncrementNumber;
 
             ImageTag imageTag = image.Tag as ImageTag;
 
@@ -183,7 +183,7 @@ namespace ShareX
                 filename = nameParser.Parse(taskSettings.UploadSettings.NameFormatPatternActiveWindow) + ".bmp";
             }
 
-            taskSettings.UploadSettings.AutoIncrementNumber = nameParser.AutoIncrementNumber;
+            Program.Settings.NameParserAutoIncrementNumber = nameParser.AutoIncrementNumber;
 
             return filename;
         }
