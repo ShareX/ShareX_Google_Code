@@ -953,19 +953,26 @@ namespace ShareX
         private void txtNameFormatPatternActiveWindow_TextChanged(object sender, EventArgs e)
         {
             TaskSettings.UploadSettings.NameFormatPatternActiveWindow = txtNameFormatPatternActiveWindow.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = TaskSettings.UploadSettings.AutoIncrementNumber, WindowText = Text };
+            NameParser nameParser = new NameParser(NameParserType.FileName)
+            {
+                AutoIncrementNumber = Program.Settings.NameParserAutoIncrementNumber,
+                WindowText = Text
+            };
             lblNameFormatPatternPreviewActiveWindow.Text = "Preview: " + nameParser.Parse(TaskSettings.UploadSettings.NameFormatPatternActiveWindow);
         }
 
         private void btnResetAutoIncrementNumber_Click(object sender, EventArgs e)
         {
-            TaskSettings.UploadSettings.AutoIncrementNumber = 0;
+            Program.Settings.NameParserAutoIncrementNumber = 0;
         }
 
         private void txtNameFormatPattern_TextChanged(object sender, EventArgs e)
         {
             TaskSettings.UploadSettings.NameFormatPattern = txtNameFormatPattern.Text;
-            NameParser nameParser = new NameParser(NameParserType.FileName) { AutoIncrementNumber = TaskSettings.UploadSettings.AutoIncrementNumber };
+            NameParser nameParser = new NameParser(NameParserType.FileName)
+            {
+                AutoIncrementNumber = Program.Settings.NameParserAutoIncrementNumber
+            };
             lblNameFormatPatternPreview.Text = "Preview: " + nameParser.Parse(TaskSettings.UploadSettings.NameFormatPattern);
         }
 

@@ -52,14 +52,14 @@
             this.pbPreview.FullscreenOnClick = true;
             this.pbPreview.Location = new System.Drawing.Point(8, 8);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(296, 219);
+            this.pbPreview.Size = new System.Drawing.Size(296, 283);
             this.pbPreview.TabIndex = 6;
             // 
             // btnCopyImage
             // 
             this.btnCopyImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCopyImage.AutoSize = true;
-            this.btnCopyImage.Location = new System.Drawing.Point(8, 235);
+            this.btnCopyImage.Location = new System.Drawing.Point(8, 299);
             this.btnCopyImage.Margin = new System.Windows.Forms.Padding(0);
             this.btnCopyImage.Name = "btnCopyImage";
             this.btnCopyImage.Size = new System.Drawing.Size(88, 32);
@@ -72,7 +72,7 @@
             // 
             this.btnCopyLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCopyLink.AutoSize = true;
-            this.btnCopyLink.Location = new System.Drawing.Point(96, 235);
+            this.btnCopyLink.Location = new System.Drawing.Point(96, 299);
             this.btnCopyLink.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnCopyLink.Name = "btnCopyLink";
             this.btnCopyLink.Size = new System.Drawing.Size(88, 32);
@@ -85,7 +85,7 @@
             // 
             this.btnOpenLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenLink.AutoSize = true;
-            this.btnOpenLink.Location = new System.Drawing.Point(184, 235);
+            this.btnOpenLink.Location = new System.Drawing.Point(184, 299);
             this.btnOpenLink.Margin = new System.Windows.Forms.Padding(0);
             this.btnOpenLink.Name = "btnOpenLink";
             this.btnOpenLink.Size = new System.Drawing.Size(88, 32);
@@ -98,7 +98,7 @@
             // 
             this.btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenFile.AutoSize = true;
-            this.btnOpenFile.Location = new System.Drawing.Point(272, 235);
+            this.btnOpenFile.Location = new System.Drawing.Point(272, 299);
             this.btnOpenFile.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(88, 32);
@@ -111,7 +111,7 @@
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOpenFolder.AutoSize = true;
-            this.btnOpenFolder.Location = new System.Drawing.Point(360, 235);
+            this.btnOpenFolder.Location = new System.Drawing.Point(360, 299);
             this.btnOpenFolder.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(88, 32);
@@ -129,7 +129,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(608, 235);
+            this.btnClose.Location = new System.Drawing.Point(608, 299);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(88, 32);
             this.btnClose.TabIndex = 5;
@@ -151,7 +151,7 @@
             this.lvClipboardFormats.GridLines = true;
             this.lvClipboardFormats.Location = new System.Drawing.Point(312, 8);
             this.lvClipboardFormats.Name = "lvClipboardFormats";
-            this.lvClipboardFormats.Size = new System.Drawing.Size(384, 219);
+            this.lvClipboardFormats.Size = new System.Drawing.Size(384, 283);
             this.lvClipboardFormats.TabIndex = 7;
             this.lvClipboardFormats.UseCompatibleStateImageBehavior = false;
             this.lvClipboardFormats.View = System.Windows.Forms.View.Details;
@@ -171,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 273);
+            this.ClientSize = new System.Drawing.Size(704, 338);
             this.Controls.Add(this.lvClipboardFormats);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOpenLink);
