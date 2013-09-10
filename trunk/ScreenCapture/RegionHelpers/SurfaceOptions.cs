@@ -45,8 +45,8 @@ namespace ScreenCapture
         [DefaultValue(false), Description("Draw checkerboard pattern replacing transparent areas.")]
         public bool DrawChecker { get; set; }
 
-        [DefaultValue(true), Description("Allow moving and resizing shape(s)")]
-        public bool AllowMoveResize { get; set; }
+        [DefaultValue(false), Description("Allow moving and resizing shape(s)")]
+        public bool AllowMoveResizeShapes { get; set; }
 
         [DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
         public bool ForceWindowCapture { get; set; }
@@ -68,19 +68,8 @@ namespace ScreenCapture
 
         public SurfaceOptions()
         {
-            ShowCrosshair = true;
-            ShowMagnifier = true;
-            ShowInfo = true;
-
-            DrawBorder = false;
-            DrawChecker = false;
-            AllowMoveResize = true;
-
-            MinMoveSpeed = 1;
-            MaxMoveSpeed = 5;
-
-            IsFixedSize = false;
             FixedSize = new Size(250, 250);
+            HelpersLib.Helpers.ApplyDefaultPropertyValues(this);
         }
     }
 }

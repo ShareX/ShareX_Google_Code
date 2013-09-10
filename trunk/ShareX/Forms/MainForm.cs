@@ -713,29 +713,38 @@ namespace ShareX
         {
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
 
-            using (HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath))
-            {
-                Program.Settings.HistoryWindowState.AutoHandleFormState(historyForm);
-                historyForm.Text = "ShareX - History: " + Program.HistoryFilePath;
-                historyForm.ShowDialog();
-            }
+            HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath);
+            Program.Settings.HistoryWindowState.AutoHandleFormState(historyForm);
+            historyForm.Text = "ShareX - History: " + Program.HistoryFilePath;
+            historyForm.FormClosing += historyForm_FormClosing;
+            historyForm.Show();
+        }
+
+        void historyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            HistoryForm historyForm = sender as HistoryForm;
+            historyForm.Dispose();
         }
 
         private void tsbImageHistory_Click(object sender, EventArgs e)
         {
             HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
 
-            using (ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath,
-                Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount))
-            {
-                Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
-                imageHistoryForm.Text = "ShareX - Image history: " + Program.HistoryFilePath;
-                imageHistoryForm.ShowDialog();
+            ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath,
+                            Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount);
+            Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
+            imageHistoryForm.Text = "ShareX - Image history: " + Program.HistoryFilePath;
+            imageHistoryForm.FormClosing += imageHistoryForm_FormClosing;
+            imageHistoryForm.Show();
+        }
 
-                Program.Settings.ImageHistoryViewMode = imageHistoryForm.ViewMode;
-                Program.Settings.ImageHistoryThumbnailSize = imageHistoryForm.ThumbnailSize;
-                Program.Settings.ImageHistoryMaxItemCount = imageHistoryForm.MaxItemCount;
-            }
+        private void imageHistoryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ImageHistoryForm imageHistoryForm = sender as ImageHistoryForm;
+            Program.Settings.ImageHistoryViewMode = imageHistoryForm.ViewMode;
+            Program.Settings.ImageHistoryThumbnailSize = imageHistoryForm.ThumbnailSize;
+            Program.Settings.ImageHistoryMaxItemCount = imageHistoryForm.MaxItemCount;
+            imageHistoryForm.Dispose();
         }
 
         private void tsbAbout_Click(object sender, EventArgs e)

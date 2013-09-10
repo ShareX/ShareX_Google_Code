@@ -234,7 +234,7 @@ namespace ScreenCapture
                         RemoveCurrentArea();
                         CheckHover();
                     }
-                    else if (!surface.Config.AllowMoveResize)
+                    else if (!surface.Config.AllowMoveResizeShapes)
                     {
                         surface.UpdateRegionPath();
                         surface.Close(SurfaceResult.Region);
@@ -250,7 +250,7 @@ namespace ScreenCapture
                     Areas.Add(CurrentHoverArea);
                     SelectedAreaIndex = Areas.Count - 1;
 
-                    if (!surface.Config.AllowMoveResize)
+                    if (!surface.Config.AllowMoveResizeShapes)
                     {
                         surface.UpdateRegionPath();
                         surface.Close(SurfaceResult.Region);
