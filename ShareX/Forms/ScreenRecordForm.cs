@@ -76,7 +76,7 @@ namespace ShareX
         private void SelectRegion(TaskSettings taskSettings)
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(taskSettings, out rect) && !rect.IsEmpty)
+            if (TaskHelper.SelectRegion(out rect) && !rect.IsEmpty)
             {
                 CaptureRectangle = Helpers.EvenRectangleSize(rect);
             }
