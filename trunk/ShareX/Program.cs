@@ -88,7 +88,6 @@ namespace ShareX
         private static readonly string UploadersConfigFilename = "UploadersConfig.json";
         private static readonly string HotkeysConfigFilename = "HotkeysConfig.json";
         private static readonly string HistoryFilename = "History.xml";
-        private static readonly string OldHistoryFilename = "UploadersHistory.xml";
         private static readonly string LogFileName = ApplicationName + "-Log-{0:yyyy-MM}.txt";
 
         public static string CustomPersonalPath { get; private set; }
@@ -160,19 +159,6 @@ namespace ShareX
                 }
 
                 return Path.Combine(PersonalPath, HistoryFilename);
-            }
-        }
-
-        public static string OldHistoryFilePath
-        {
-            get
-            {
-                if (Settings != null && Settings.UseCustomHistoryPath && !string.IsNullOrEmpty(Settings.CustomHistoryPath))
-                {
-                    return Settings.CustomHistoryPath;
-                }
-
-                return Path.Combine(PersonalPath, OldHistoryFilename);
             }
         }
 

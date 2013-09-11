@@ -127,8 +127,6 @@ namespace UploadersLib
             Shell32.SHFILEINFO shfi = new Shell32.SHFILEINFO();
             Shell32.SHGetFileInfo(null, Shell32.FILE_ATTRIBUTE_DIRECTORY, ref shfi, (uint)Marshal.SizeOf(shfi), flags);
 
-            Icon.FromHandle(shfi.hIcon); // Load the icon from an HICON handle
-
             // Now clone the icon, so that it can be successfully stored in an ImageList
             Icon icon = (Icon)Icon.FromHandle(shfi.hIcon).Clone();
 

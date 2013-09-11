@@ -94,7 +94,7 @@ namespace ShareX
 
             IsRecording = true;
 
-            TrayIcon.Icon = Icon.FromHandle(Resources.control_record_yellow.GetHicon());
+            TrayIcon.Icon = Resources.control_record_yellow.ToIcon();
             TrayIcon.Visible = true;
 
             string path = "";
@@ -124,7 +124,7 @@ namespace ShareX
                         Thread.Sleep(1000);
                         screenRegionManager.ChangeColor();
 
-                        this.InvokeSafe(() => TrayIcon.Icon = Icon.FromHandle(Resources.control_record.GetHicon()));
+                        this.InvokeSafe(() => TrayIcon.Icon = Resources.control_record.ToIcon());
 
                         screenRecorder.StartRecording();
                     });
@@ -132,7 +132,7 @@ namespace ShareX
 
                 if (screenRecorder != null && TaskSettings.CaptureSettings.ScreenRecordOutput != ScreenRecordOutput.AVI)
                 {
-                    TrayIcon.Icon = Icon.FromHandle(Resources.camcorder__pencil.GetHicon());
+                    TrayIcon.Icon = Resources.camcorder__pencil.ToIcon();
 
                     await TaskEx.Run(() =>
                     {

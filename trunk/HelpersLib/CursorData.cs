@@ -85,8 +85,9 @@ namespace HelpersLib
                 Point drawPosition = new Point(Position.X - cursorOffset.X, Position.Y - cursorOffset.Y);
 
                 using (Graphics g = Graphics.FromImage(img))
+                using (Icon icon = Icon.FromHandle(IconHandle))
                 {
-                    g.DrawIcon(Icon.FromHandle(IconHandle), drawPosition.X, drawPosition.Y);
+                    g.DrawIcon(icon, drawPosition.X, drawPosition.Y);
                 }
             }
         }

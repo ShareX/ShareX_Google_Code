@@ -80,7 +80,7 @@ namespace HelpersLib
             return new IntPtr(GetClassLong(hWnd, nIndex));
         }
 
-        public static Icon GetSmallApplicationIcon(IntPtr handle)
+        private static Icon GetSmallApplicationIcon(IntPtr handle)
         {
             IntPtr iconHandle = IntPtr.Zero;
 
@@ -109,7 +109,7 @@ namespace HelpersLib
             return null;
         }
 
-        public static Icon GetBigApplicationIcon(IntPtr handle)
+        private static Icon GetBigApplicationIcon(IntPtr handle)
         {
             IntPtr iconHandle = IntPtr.Zero;
 

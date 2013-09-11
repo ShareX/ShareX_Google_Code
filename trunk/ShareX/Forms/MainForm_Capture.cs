@@ -431,6 +431,7 @@ namespace ShareX
                             if (icon != null)
                             {
                                 tsi.Image = icon.ToBitmap();
+                                icon.DisposeHandle();
                             }
                         }
                     }

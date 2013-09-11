@@ -290,7 +290,6 @@ namespace ShareX
                             {
                                 if (task.Info.TaskSettings.GeneralSettings.SaveHistory)
                                 {
-                                    HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
                                     HistoryManager.AddHistoryItemAsync(Program.HistoryFilePath, info.GetHistoryItem());
                                 }
 
