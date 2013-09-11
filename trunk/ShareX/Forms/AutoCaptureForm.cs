@@ -97,10 +97,10 @@ namespace ShareX
             }
         }
 
-        private void SelectRegion(TaskSettings taskSettings)
+        private void SelectRegion()
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(taskSettings, out rect))
+            if (TaskHelper.SelectRegion(out rect))
             {
                 UpdateRegion(rect);
             }
@@ -159,7 +159,7 @@ namespace ShareX
 
         private void btnRegion_Click(object sender, EventArgs e)
         {
-            SelectRegion(Program.DefaultTaskSettings);
+            SelectRegion();
         }
 
         private void nudDuration_ValueChanged(object sender, EventArgs e)

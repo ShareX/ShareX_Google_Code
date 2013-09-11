@@ -31,7 +31,7 @@ namespace ScreenCapture
 {
     public class SurfaceOptions
     {
-        [DefaultValue(true), Description("Allowing to capture as soon as mouse released but disables be able to move and resize shape(s).")]
+        [DefaultValue(true), Description("Allow screenshot capture as soon as the mouse is released. This disables the ability to capture multiple shapes and to move and/or resize them.")]
         public bool QuickCrop { get; set; }
 
         [DefaultValue(true), Description("Show coordinate and size information.")]
@@ -46,7 +46,7 @@ namespace ScreenCapture
         [DefaultValue(false), Description("Result image will have border around the shape(s).")]
         public bool DrawBorder { get; set; }
 
-        [DefaultValue(false), Description("Result image will have checkerboard pattern in background (visible in transparent areas).")]
+        [DefaultValue(false), Description("Result image will have checkerboard pattern in background. This will be visible in transparent areas.")]
         public bool DrawChecker { get; set; }
 
         [DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
