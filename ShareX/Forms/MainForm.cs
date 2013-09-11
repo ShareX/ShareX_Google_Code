@@ -591,8 +591,8 @@ namespace ShareX
 
         private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            DebugForm dlg = new DebugForm(Program.MyLogger);
-            dlg.Show();
+            DebugForm debugForm = new DebugForm(Program.MyLogger);
+            debugForm.Show();
         }
 
         private void tsmiTestImageUpload_Click(object sender, EventArgs e)
@@ -711,40 +711,28 @@ namespace ShareX
 
         private void tsbHistory_Click(object sender, EventArgs e)
         {
-            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-
             HistoryForm historyForm = new HistoryForm(Program.HistoryFilePath);
             Program.Settings.HistoryWindowState.AutoHandleFormState(historyForm);
             historyForm.Text = "ShareX - History: " + Program.HistoryFilePath;
-            historyForm.FormClosing += historyForm_FormClosing;
             historyForm.Show();
-        }
-
-        void historyForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            HistoryForm historyForm = sender as HistoryForm;
-            historyForm.Dispose();
         }
 
         private void tsbImageHistory_Click(object sender, EventArgs e)
         {
-            HistoryManager.ConvertHistoryToNewFormat(Program.HistoryFilePath, Program.OldHistoryFilePath);
-
-            ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath,
-                            Program.Settings.ImageHistoryViewMode, Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount);
+            ImageHistoryForm imageHistoryForm = new ImageHistoryForm(Program.HistoryFilePath, Program.Settings.ImageHistoryViewMode,
+                Program.Settings.ImageHistoryThumbnailSize, Program.Settings.ImageHistoryMaxItemCount);
             Program.Settings.ImageHistoryWindowState.AutoHandleFormState(imageHistoryForm);
             imageHistoryForm.Text = "ShareX - Image history: " + Program.HistoryFilePath;
-            imageHistoryForm.FormClosing += imageHistoryForm_FormClosing;
+            imageHistoryForm.FormClosed += imageHistoryForm_FormClosed;
             imageHistoryForm.Show();
         }
 
-        private void imageHistoryForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void imageHistoryForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ImageHistoryForm imageHistoryForm = sender as ImageHistoryForm;
             Program.Settings.ImageHistoryViewMode = imageHistoryForm.ViewMode;
             Program.Settings.ImageHistoryThumbnailSize = imageHistoryForm.ThumbnailSize;
             Program.Settings.ImageHistoryMaxItemCount = imageHistoryForm.MaxItemCount;
-            imageHistoryForm.Dispose();
         }
 
         private void tsbAbout_Click(object sender, EventArgs e)

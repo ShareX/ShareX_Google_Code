@@ -67,7 +67,7 @@ namespace ScreenCapture
                 }
             }
 
-            if (!Config.AllowMoveResizeShapes && isAreaCreated && InputManager.IsMouseReleased(MouseButtons.Left))
+            if (!Config.QuickCrop && isAreaCreated && InputManager.IsMouseReleased(MouseButtons.Left))
             {
                 Close(SurfaceResult.Region);
             }

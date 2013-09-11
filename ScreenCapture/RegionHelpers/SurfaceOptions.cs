@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.ComponentModel;
 using System.Drawing;
 
@@ -30,23 +31,23 @@ namespace ScreenCapture
 {
     public class SurfaceOptions
     {
+        [DefaultValue(true), Description("Allowing to capture as soon as mouse released but disables be able to move and resize shape(s).")]
+        public bool QuickCrop { get; set; }
+
         [DefaultValue(true), Description("Show coordinate and size information.")]
         public bool ShowInfo { get; set; }
-
-        [DefaultValue(true), Description("Show screen wide crosshair.")]
-        public bool ShowCrosshair { get; set; }
 
         [DefaultValue(true), Description("Show magnifier.")]
         public bool ShowMagnifier { get; set; }
 
-        [DefaultValue(false), Description("Draw border around the shape.")]
+        [DefaultValue(true), Description("Show screen wide crosshair.")]
+        public bool ShowCrosshair { get; set; }
+
+        [DefaultValue(false), Description("Result image will have border around the shape(s).")]
         public bool DrawBorder { get; set; }
 
-        [DefaultValue(false), Description("Draw checkerboard pattern replacing transparent areas.")]
+        [DefaultValue(false), Description("Result image will have checkerboard pattern in background (visible in transparent areas).")]
         public bool DrawChecker { get; set; }
-
-        [DefaultValue(false), Description("Allow moving and resizing shape(s)")]
-        public bool AllowMoveResizeShapes { get; set; }
 
         [DefaultValue(false), Description("You can use window capture mode in all rectangle type shapes.")]
         public bool ForceWindowCapture { get; set; }
@@ -68,8 +69,7 @@ namespace ScreenCapture
 
         public SurfaceOptions()
         {
-            FixedSize = new Size(250, 250);
-            HelpersLib.Helpers.ApplyDefaultPropertyValues(this);
+            Helpers.ApplyDefaultPropertyValues(this);
         }
     }
 }

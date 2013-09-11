@@ -83,17 +83,5 @@ namespace HistoryLib
 
             ThreadPool.QueueUserWorkItem(thread);
         }
-
-        public static void ConvertHistoryToNewFormat(string newHistoryFilePath, string oldHistoryFilePath)
-        {
-            if (!File.Exists(newHistoryFilePath) && File.Exists(oldHistoryFilePath))
-            {
-                DebugHelper.WriteLine("Converting old history format to new format: " + newHistoryFilePath);
-                HistoryManager oldHistory = new HistoryManager(oldHistoryFilePath);
-                HistoryItem[] historyItems = oldHistory.GetHistoryItems().OrderBy(x => x.DateTimeUtc).ToArray();
-                HistoryManager newHistory = new HistoryManager(newHistoryFilePath);
-                newHistory.Manager.Append(historyItems);
-            }
-        }
     }
 }

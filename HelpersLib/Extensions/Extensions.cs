@@ -189,13 +189,6 @@ namespace HelpersLib
             return sb.ToString();
         }
 
-        public static Icon ToIcon(this Bitmap bmp)
-        {
-            IntPtr hicon = bmp.GetHicon();
-            Icon icon = Icon.FromHandle(hicon);
-            return icon;
-        }
-
         public static bool IsBetween(this byte num, int min, int max)
         {
             return num >= min && num <= max;
@@ -323,6 +316,20 @@ namespace HelpersLib
         public static int WeekOfYear(this DateTime dateTime)
         {
             return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+        }
+
+        public static Icon ToIcon(this Bitmap bmp)
+        {
+            IntPtr handle = bmp.GetHicon();
+            return Icon.FromHandle(handle);
+        }
+
+        public static void DisposeHandle(this Icon icon)
+        {
+            if (icon.Handle != IntPtr.Zero)
+            {
+                NativeMethods.DestroyIcon(icon.Handle);
+            }
         }
     }
 }

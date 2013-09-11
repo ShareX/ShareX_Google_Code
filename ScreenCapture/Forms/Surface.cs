@@ -141,7 +141,7 @@ namespace ScreenCapture
                     Close(SurfaceResult.Region);
                     break;
                 case Keys.Q:
-                    Config.AllowMoveResizeShapes = !Config.AllowMoveResizeShapes;
+                    Config.QuickCrop = !Config.QuickCrop;
                     break;
             }
         }
