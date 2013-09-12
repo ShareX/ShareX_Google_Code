@@ -66,7 +66,7 @@ namespace ShareX
 
             if (failedHotkeysList.Count() > 0)
             {
-                string failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.Description + ": " + x.ToString()).ToArray());
+                string failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.ToString() + ": " + x.HotkeyInfo.ToString()).ToArray());
 
                 MessageBox.Show("Unable to register hotkey(s):\r\n\r\n" + failedHotkeys +
                     "\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
@@ -91,9 +91,15 @@ namespace ShareX
 
         public void UpdateHotkey(HotkeySettings hotkeySetting)
         {
-            hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
+            if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
+            {
+                hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
+            }
 
-            RegisterHotkey(hotkeySetting);
+            if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered && hotkeySetting.HotkeyInfo.IsValidHotkey)
+            {
+                RegisterHotkey(hotkeySetting);
+            }
         }
 
         public void UnregisterHotkey(HotkeySettings hotkeySetting)

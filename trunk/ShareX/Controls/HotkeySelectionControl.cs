@@ -83,7 +83,7 @@ namespace ShareX
                 lblHotkeyDescription.Image = Resources.pencil;
             }
 
-            lblHotkeyDescription.Text = Setting.TaskSettings.Description;
+            lblHotkeyDescription.Text = Setting.TaskSettings.ToString();
         }
 
         private void UpdateHotkeyText()
@@ -170,7 +170,10 @@ namespace ShareX
 
         private void btnHotkey_Leave(object sender, EventArgs e)
         {
-            StopEditing();
+            if (Editing)
+            {
+                StopEditing();
+            }
         }
 
         private void StartEditing()

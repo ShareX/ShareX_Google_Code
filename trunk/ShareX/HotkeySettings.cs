@@ -46,8 +46,7 @@ namespace ShareX
         {
             TaskSettings = TaskSettings.GetDefaultTaskSettings();
             TaskSettings.Job = job;
-            TaskSettings.Description = job.GetDescription();
-            HotkeyInfo = new HotkeyInfo { Hotkey = hotkey };
+            HotkeyInfo = new HotkeyInfo(hotkey);
         }
 
         public override string ToString()
