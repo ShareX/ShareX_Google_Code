@@ -34,12 +34,15 @@ namespace HelpersLib
 {
     public partial class DebugForm : Form
     {
-        public DebugForm(Logger MyLogger)
+        private Logger logger;
+
+        public DebugForm(Logger logger)
         {
             InitializeComponent();
-
             Icon = Resources.ShareXIcon;
-            txtDebugLog.Text = MyLogger.Messages.ToString();
+            this.logger = logger;
+
+            txtDebugLog.Text = logger.Messages.ToString();
             txtDebugLog.SelectionStart = txtDebugLog.TextLength;
             txtDebugLog.ScrollToCaret();
         }
@@ -56,6 +59,31 @@ namespace HelpersLib
                 }
             }
             MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void UpdateText()
+        {
+            string text = logger.Messages.ToString();
+
+            if (text != txtDebugLog.Text)
+            {
+                int start = txtDebugLog.SelectionStart;
+                int len = txtDebugLog.SelectionLength;
+                txtDebugLog.Text = text;
+                txtDebugLog.SelectionStart = txtDebugLog.TextLength;
+                txtDebugLog.ScrollToCaret();
+                txtDebugLog.Select(start, len);
+            }
+        }
+
+        private void tUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateText();
+        }
+
+        private void cbAutoUpdateText_CheckedChanged(object sender, EventArgs e)
+        {
+            tUpdateTimer.Enabled = cbAutoUpdateText.Checked;
         }
     }
 }
