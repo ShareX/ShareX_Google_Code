@@ -113,10 +113,12 @@ namespace ShareX
 
         public void UnregisterAllHotkeys()
         {
-            foreach (HotkeySettings hotkeySetting in Hotkeys)
+            for (int i = Hotkeys.Count - 1; i >= 0; i--)
             {
-                UnregisterHotkey(hotkeySetting);
+                UnregisterHotkey(Hotkeys[i]);
             }
+
+            Hotkeys.Clear();
         }
 
         public void ShowFailedHotkeys()
@@ -135,11 +137,7 @@ namespace ShareX
 
         public void ResetHotkeys()
         {
-            for (int i = Hotkeys.Count - 1; i >= 0; i--)
-            {
-                UnregisterHotkey(Hotkeys[i]);
-            }
-
+            UnregisterAllHotkeys();
             Hotkeys.AddRange(GetDefaultHotkeyList());
         }
 
