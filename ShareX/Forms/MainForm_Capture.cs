@@ -428,10 +428,9 @@ namespace ShareX
                     {
                         using (Icon icon = window.Icon)
                         {
-                            if (icon != null)
+                            if (icon != null && icon.Width > 0 && icon.Height > 0)
                             {
                                 tsi.Image = icon.ToBitmap();
-                                icon.DisposeHandle();
                             }
                         }
                     }
