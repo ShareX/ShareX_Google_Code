@@ -95,7 +95,7 @@ namespace ShareX
         private void control_HotkeyChanged(object sender, EventArgs e)
         {
             HotkeySelectionControl control = (HotkeySelectionControl)sender;
-            manager.UpdateHotkey(control.Setting);
+            manager.RegisterHotkey(control.Setting);
         }
 
         private HotkeySelectionControl AddHotkeySelectionControl(HotkeySettings hotkeySetting)
