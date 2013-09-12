@@ -64,7 +64,7 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySettings hotkeySetting)
         {
-            DebugHelper.WriteLine(hotkeySetting.ToString());
+            DebugHelper.WriteLine("Hotkey triggered: " + hotkeySetting.ToString());
 
             if (hotkeySetting.TaskSettings.Job == HotkeyType.None) return;
 

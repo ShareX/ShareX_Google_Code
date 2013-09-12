@@ -52,11 +52,70 @@ namespace ShareX
             }
         }
 
+        public void RegisterHotkey(HotkeySettings hotkeySetting)
+        {
+            UnregisterHotkey(hotkeySetting);
+
+            if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered && hotkeySetting.HotkeyInfo.IsValidHotkey)
+            {
+                if (hotkeySetting.HotkeyInfo.HotkeyPress == null)
+                {
+                    hotkeySetting.HotkeyInfo.HotkeyPress = () => triggerAction(hotkeySetting);
+                }
+
+                hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
+
+                if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
+                {
+                    DebugHelper.WriteLine("Hotkey registered: " + hotkeySetting.ToString());
+                }
+                else if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Failed)
+                {
+                    DebugHelper.WriteLine("Hotkey register failed: " + hotkeySetting.ToString());
+                }
+
+                if (!Hotkeys.Contains(hotkeySetting))
+                {
+                    Hotkeys.Add(hotkeySetting);
+                }
+            }
+        }
+
         public void RegisterAllHotkeys()
         {
             foreach (HotkeySettings hotkeySetting in Hotkeys)
             {
                 RegisterHotkey(hotkeySetting);
+            }
+        }
+
+        public void UnregisterHotkey(HotkeySettings hotkeySetting)
+        {
+            if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
+            {
+                hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
+
+                if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.NotConfigured)
+                {
+                    DebugHelper.WriteLine("Hotkey unregistered: " + hotkeySetting.ToString());
+                }
+                else if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Failed)
+                {
+                    DebugHelper.WriteLine("Hotkey unregister failed: " + hotkeySetting.ToString());
+                }
+
+                if (Hotkeys.Contains(hotkeySetting))
+                {
+                    Hotkeys.Remove(hotkeySetting);
+                }
+            }
+        }
+
+        public void UnregisterAllHotkeys()
+        {
+            foreach (HotkeySettings hotkeySetting in Hotkeys)
+            {
+                UnregisterHotkey(hotkeySetting);
             }
         }
 
@@ -67,46 +126,11 @@ namespace ShareX
             if (failedHotkeysList.Count() > 0)
             {
                 string failedHotkeys = string.Join("\r\n", failedHotkeysList.Select(x => x.TaskSettings.ToString() + ": " + x.HotkeyInfo.ToString()).ToArray());
+                string text = string.Format("Unable to register hotkey{0}:\r\n\r\n{1}\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
+                    failedHotkeysList.Count() > 1 ? "s" : "", failedHotkeys);
 
-                MessageBox.Show("Unable to register hotkey(s):\r\n\r\n" + failedHotkeys +
-                    "\r\n\r\nPlease select a different hotkey or quit the conflicting application and reopen ShareX.",
-                    "ShareX - Hotkey register failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(text, "ShareX - Hotkey registration failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void RegisterHotkey(HotkeySettings hotkeySetting)
-        {
-            if (hotkeySetting.HotkeyInfo.HotkeyPress == null)
-            {
-                hotkeySetting.HotkeyInfo.HotkeyPress = () => triggerAction(hotkeySetting);
-            }
-
-            hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
-
-            if (!Hotkeys.Contains(hotkeySetting))
-            {
-                Hotkeys.Add(hotkeySetting);
-            }
-        }
-
-        public void UpdateHotkey(HotkeySettings hotkeySetting)
-        {
-            if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
-            {
-                hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
-            }
-
-            if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered && hotkeySetting.HotkeyInfo.IsValidHotkey)
-            {
-                RegisterHotkey(hotkeySetting);
-            }
-        }
-
-        public void UnregisterHotkey(HotkeySettings hotkeySetting)
-        {
-            hotkeyForm.UnregisterHotkey(hotkeySetting.HotkeyInfo);
-
-            Hotkeys.Remove(hotkeySetting);
         }
 
         public void ResetHotkeys()
@@ -119,7 +143,7 @@ namespace ShareX
             Hotkeys.AddRange(GetDefaultHotkeyList());
         }
 
-        public HotkeySettings[] GetDefaultHotkeyList()
+        private HotkeySettings[] GetDefaultHotkeyList()
         {
             return new HotkeySettings[]
             {
