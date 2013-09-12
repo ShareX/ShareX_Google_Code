@@ -79,6 +79,16 @@ namespace ShareX
         {
         }
 
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(Description))
+            {
+                return Description;
+            }
+
+            return Job.GetDescription();
+        }
+
         public bool IsUsingDefaultSettings
         {
             get

@@ -112,6 +112,7 @@ namespace ShareX
             {
                 NativeMethods.GlobalDeleteAtom(id);
                 DebugHelper.WriteLine("Unable to register hotkey: " + hotkeyInfo);
+                hotkeyInfo.ID = 0;
                 hotkeyInfo.Status = HotkeyStatus.Failed;
                 return hotkeyInfo;
             }
@@ -130,6 +131,7 @@ namespace ShareX
 
                 if (result)
                 {
+                    hotkeyInfo.ID = 0;
                     hotkeyInfo.Status = HotkeyStatus.NotConfigured;
                 }
                 else
@@ -151,7 +153,11 @@ namespace ShareX
             if (id > 0)
             {
                 result = NativeMethods.UnregisterHotKey(Handle, id);
-                NativeMethods.GlobalDeleteAtom(id);
+
+                if (result)
+                {
+                    NativeMethods.GlobalDeleteAtom(id);
+                }
             }
 
             return result;
