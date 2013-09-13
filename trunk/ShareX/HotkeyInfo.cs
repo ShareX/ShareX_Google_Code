@@ -36,9 +36,6 @@ namespace ShareX
         public Keys Hotkey { get; set; }
 
         [JsonIgnore]
-        public Action HotkeyPress { get; set; }
-
-        [JsonIgnore]
         public ushort ID { get; set; }
 
         [JsonIgnore]
@@ -126,10 +123,9 @@ namespace ShareX
             Hotkey = hotkey;
         }
 
-        public HotkeyInfo(Keys hotkey, Action hotkeyPress, ushort id)
+        public HotkeyInfo(Keys hotkey, ushort id)
             : this(hotkey)
         {
-            HotkeyPress = hotkeyPress;
             ID = id;
         }
 

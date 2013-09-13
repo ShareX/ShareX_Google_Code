@@ -36,22 +36,17 @@ namespace ShareX
 {
     public class HotkeyForm : Form
     {
-        public List<HotkeyInfo> HotkeyList { get; private set; }
-
         public bool IgnoreHotkeys { get; set; }
-
         public int HotkeyRepeatLimit { get; set; }
 
-        public delegate void HotkeyEventHandler(KeyEventArgs e);
+        public delegate void HotkeyEventHandler(ushort id, Keys key, Modifiers modifier);
         public event HotkeyEventHandler HotkeyPress;
 
         private Stopwatch repeatLimitTimer;
 
         public HotkeyForm()
         {
-            HotkeyList = new List<HotkeyInfo>();
             HotkeyRepeatLimit = 1000;
-
             repeatLimitTimer = Stopwatch.StartNew();
         }
 
@@ -61,32 +56,32 @@ namespace ShareX
             {
                 if (hotkeyInfo.ID > 0)
                 {
-                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress, hotkeyInfo.ID);
+                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.ID);
                 }
                 else
                 {
-                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.HotkeyPress);
+                    return RegisterHotkey(hotkeyInfo.Hotkey);
                 }
             }
 
             return hotkeyInfo;
         }
 
-        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress)
+        private HotkeyInfo RegisterHotkey(Keys hotkey)
         {
-            return RegisterHotkey(hotkey, hotkeyPress, Helpers.GetUniqueID());
+            return RegisterHotkey(hotkey, Helpers.GetUniqueID());
         }
 
-        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, string atomName)
+        private HotkeyInfo RegisterHotkey(Keys hotkey, string atomName)
         {
             ushort id = NativeMethods.GlobalAddAtom(atomName);
 
-            return RegisterHotkey(hotkey, hotkeyPress, id);
+            return RegisterHotkey(hotkey, id);
         }
 
-        private HotkeyInfo RegisterHotkey(Keys hotkey, Action hotkeyPress, ushort id)
+        private HotkeyInfo RegisterHotkey(Keys hotkey, ushort id)
         {
-            HotkeyInfo hotkeyInfo = new HotkeyInfo(hotkey, hotkeyPress, id);
+            HotkeyInfo hotkeyInfo = new HotkeyInfo(hotkey, id);
 
             if (!hotkeyInfo.IsValidHotkey)
             {
@@ -101,13 +96,6 @@ namespace ShareX
                 return hotkeyInfo;
             }
 
-            if (IsHotkeyExist(hotkey))
-            {
-                DebugHelper.WriteLine("Hotkey already exist: " + hotkeyInfo);
-                hotkeyInfo.Status = HotkeyStatus.Failed;
-                return hotkeyInfo;
-            }
-
             if (!NativeMethods.RegisterHotKey(Handle, (int)id, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
             {
                 NativeMethods.GlobalDeleteAtom(id);
@@ -116,8 +104,6 @@ namespace ShareX
                 hotkeyInfo.Status = HotkeyStatus.Failed;
                 return hotkeyInfo;
             }
-
-            HotkeyList.Add(hotkeyInfo);
 
             hotkeyInfo.Status = HotkeyStatus.Registered;
             return hotkeyInfo;
@@ -139,7 +125,6 @@ namespace ShareX
                     hotkeyInfo.Status = HotkeyStatus.Failed;
                 }
 
-                HotkeyList.Remove(hotkeyInfo);
                 return result;
             }
 
@@ -163,65 +148,26 @@ namespace ShareX
             return result;
         }
 
-        public HotkeyInfo UpdateHotkey(HotkeyInfo hotkeyInfo)
-        {
-            UnregisterHotkey(hotkeyInfo);
-            return RegisterHotkey(hotkeyInfo);
-        }
-
-        public void UnregisterAllHotkeys()
-        {
-            for (int i = 0; i < HotkeyList.Count; i++)
-            {
-                UnregisterHotkey(HotkeyList[i]);
-            }
-        }
-
-        public bool IsHotkeyExist(Keys key)
-        {
-            return HotkeyList.Any(x => x.Hotkey == key);
-        }
-
-        private HotkeyInfo GetHotkeyInfoFromID(ushort id)
-        {
-            return HotkeyList.FirstOrDefault(x => x.ID == id);
-        }
-
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (int)WindowsMessages.HOTKEY && !IgnoreHotkeys && CheckRepeatLimitTime())
             {
-                HotkeyInfo hotkey = GetHotkeyInfoFromID((ushort)m.WParam);
-
-                if (hotkey != null)
-                {
-                    if (hotkey.HotkeyPress != null)
-                    {
-                        hotkey.HotkeyPress();
-                    }
-
-                    OnKeyPressed(new KeyEventArgs(hotkey.Hotkey));
-                }
-
+                ushort id = (ushort)m.WParam;
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                Modifiers modifier = (Modifiers)((int)m.LParam & 0xFFFF);
+                OnKeyPressed(id, key, modifier);
                 return;
             }
 
             base.WndProc(ref m);
         }
 
-        protected void OnKeyPressed(KeyEventArgs e)
+        protected void OnKeyPressed(ushort id, Keys key, Modifiers modifier)
         {
             if (HotkeyPress != null)
             {
-                HotkeyPress(e);
+                HotkeyPress(id, key, modifier);
             }
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            UnregisterAllHotkeys();
-
-            base.OnClosed(e);
         }
 
         private bool CheckRepeatLimitTime()
