@@ -42,14 +42,19 @@ namespace ShareX
         public HotkeyManager(HotkeyForm hotkeyForm, List<HotkeySettings> hotkeys, HotkeyTriggerEventHandler action)
         {
             this.hotkeyForm = hotkeyForm;
-            triggerAction = action;
-
             Hotkeys = hotkeys;
+            triggerAction = action;
 
             if (Hotkeys.Count == 0)
             {
                 ResetHotkeys();
             }
+            else
+            {
+                RegisterAllHotkeys();
+            }
+
+            ShowFailedHotkeys();
         }
 
         public void RegisterHotkey(HotkeySettings hotkeySetting)
@@ -73,17 +78,17 @@ namespace ShareX
                 {
                     DebugHelper.WriteLine("Hotkey register failed: " + hotkeySetting.ToString());
                 }
+            }
 
-                if (!Hotkeys.Contains(hotkeySetting))
-                {
-                    Hotkeys.Add(hotkeySetting);
-                }
+            if (!Hotkeys.Contains(hotkeySetting))
+            {
+                Hotkeys.Add(hotkeySetting);
             }
         }
 
         public void RegisterAllHotkeys()
         {
-            foreach (HotkeySettings hotkeySetting in Hotkeys)
+            foreach (HotkeySettings hotkeySetting in Hotkeys.ToArray())
             {
                 RegisterHotkey(hotkeySetting);
             }
@@ -103,22 +108,17 @@ namespace ShareX
                 {
                     DebugHelper.WriteLine("Hotkey unregister failed: " + hotkeySetting.ToString());
                 }
-
-                if (Hotkeys.Contains(hotkeySetting))
-                {
-                    Hotkeys.Remove(hotkeySetting);
-                }
             }
+
+            Hotkeys.Remove(hotkeySetting);
         }
 
         public void UnregisterAllHotkeys()
         {
-            for (int i = Hotkeys.Count - 1; i >= 0; i--)
+            foreach (HotkeySettings hotkeySetting in Hotkeys.ToArray())
             {
-                UnregisterHotkey(Hotkeys[i]);
+                UnregisterHotkey(hotkeySetting);
             }
-
-            Hotkeys.Clear();
         }
 
         public void ShowFailedHotkeys()
@@ -139,6 +139,7 @@ namespace ShareX
         {
             UnregisterAllHotkeys();
             Hotkeys.AddRange(GetDefaultHotkeyList());
+            RegisterAllHotkeys();
         }
 
         private HotkeySettings[] GetDefaultHotkeyList()
