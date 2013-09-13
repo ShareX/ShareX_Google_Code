@@ -81,6 +81,8 @@ namespace ShareX
             }
         }
 
+        public bool Win { get; set; }
+
         public Modifiers ModifiersEnum
         {
             get
@@ -90,7 +92,7 @@ namespace ShareX
                 if (Alt) modifiers |= Modifiers.Alt;
                 if (Control) modifiers |= Modifiers.Control;
                 if (Shift) modifiers |= Modifiers.Shift;
-                //if (Win) modifiers |= Modifiers.Win;
+                if (Win) modifiers |= Modifiers.Win;
 
                 return modifiers;
             }
@@ -148,6 +150,11 @@ namespace ShareX
                 if (Alt)
                 {
                     text += "Alt + ";
+                }
+
+                if (Win)
+                {
+                    text += "Win + ";
                 }
             }
 

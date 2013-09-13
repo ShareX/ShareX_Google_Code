@@ -43,7 +43,7 @@ namespace ShareX
 
         private void HotkeySettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Program.MainForm.IgnoreHotkeys = false;
+            Program.HotkeyManager.IgnoreHotkeys = false;
         }
     }
 }
