@@ -51,7 +51,8 @@ namespace ShareX
 
                 this.Invoke(new MethodInvoker(() =>
                 {
-                    Program.HotkeyManager = new HotkeyManager(this, Program.HotkeysConfig.Hotkeys, HandleHotkeys);
+                    Program.HotkeyManager = new HotkeyManager(this, Program.HotkeysConfig.Hotkeys);
+                    Program.HotkeyManager.HotkeyTrigger += HandleHotkeys;
                     DebugHelper.WriteLine("HotkeyManager started");
 
                     Program.WatchFolderManager = new WatchFolderManager();

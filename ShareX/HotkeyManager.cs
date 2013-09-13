@@ -30,20 +30,22 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public delegate void HotkeyTriggerEventHandler(HotkeySettings hotkeySetting);
-
     public class HotkeyManager
     {
         public List<HotkeySettings> Hotkeys { get; private set; }
 
-        private HotkeyForm hotkeyForm;
-        private HotkeyTriggerEventHandler triggerAction;
+        public delegate void HotkeyTriggerEventHandler(HotkeySettings hotkeySetting);
+        public HotkeyTriggerEventHandler HotkeyTrigger;
 
-        public HotkeyManager(HotkeyForm hotkeyForm, List<HotkeySettings> hotkeys, HotkeyTriggerEventHandler action)
+        private HotkeyForm hotkeyForm;
+
+        public HotkeyManager(HotkeyForm form, List<HotkeySettings> hotkeys)
         {
-            this.hotkeyForm = hotkeyForm;
+            hotkeyForm = form;
+            hotkeyForm.HotkeyPress += hotkeyForm_HotkeyPress;
+            hotkeyForm.FormClosed += (sender, e) => UnregisterAllHotkeys(false);
+
             Hotkeys = hotkeys;
-            triggerAction = action;
 
             if (Hotkeys.Count == 0)
             {
@@ -57,17 +59,30 @@ namespace ShareX
             ShowFailedHotkeys();
         }
 
+        private void hotkeyForm_HotkeyPress(ushort id, Keys key, Modifiers modifier)
+        {
+            HotkeySettings hotkeySetting = Hotkeys.Find(x => x.HotkeyInfo.ID == id);
+
+            if (hotkeySetting != null)
+            {
+                OnHotkeyTrigger(hotkeySetting);
+            }
+        }
+
+        protected void OnHotkeyTrigger(HotkeySettings hotkeySetting)
+        {
+            if (HotkeyTrigger != null)
+            {
+                HotkeyTrigger(hotkeySetting);
+            }
+        }
+
         public void RegisterHotkey(HotkeySettings hotkeySetting)
         {
-            UnregisterHotkey(hotkeySetting);
+            UnregisterHotkey(hotkeySetting, false);
 
             if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered && hotkeySetting.HotkeyInfo.IsValidHotkey)
             {
-                if (hotkeySetting.HotkeyInfo.HotkeyPress == null)
-                {
-                    hotkeySetting.HotkeyInfo.HotkeyPress = () => triggerAction(hotkeySetting);
-                }
-
                 hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
 
                 if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
@@ -94,7 +109,7 @@ namespace ShareX
             }
         }
 
-        public void UnregisterHotkey(HotkeySettings hotkeySetting)
+        public void UnregisterHotkey(HotkeySettings hotkeySetting, bool removeFromList = true)
         {
             if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
             {
@@ -110,14 +125,17 @@ namespace ShareX
                 }
             }
 
-            Hotkeys.Remove(hotkeySetting);
+            if (removeFromList)
+            {
+                Hotkeys.Remove(hotkeySetting);
+            }
         }
 
-        public void UnregisterAllHotkeys()
+        public void UnregisterAllHotkeys(bool removeFromList = true)
         {
             foreach (HotkeySettings hotkeySetting in Hotkeys.ToArray())
             {
-                UnregisterHotkey(hotkeySetting);
+                UnregisterHotkey(hotkeySetting, removeFromList);
             }
         }
 
