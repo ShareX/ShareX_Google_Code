@@ -36,7 +36,6 @@ namespace ShareX
 {
     public class HotkeyForm : Form
     {
-        public bool IgnoreHotkeys { get; set; }
         public int HotkeyRepeatLimit { get; set; }
 
         public delegate void HotkeyEventHandler(ushort id, Keys key, Modifiers modifier);
@@ -50,107 +49,68 @@ namespace ShareX
             repeatLimitTimer = Stopwatch.StartNew();
         }
 
-        public HotkeyInfo RegisterHotkey(HotkeyInfo hotkeyInfo)
+        public void RegisterHotkey(HotkeyInfo hotkeyInfo)
         {
             if (hotkeyInfo != null && hotkeyInfo.Status != HotkeyStatus.Registered)
             {
-                if (hotkeyInfo.ID > 0)
+                if (!hotkeyInfo.IsValidHotkey)
                 {
-                    return RegisterHotkey(hotkeyInfo.Hotkey, hotkeyInfo.ID);
+                    hotkeyInfo.Status = HotkeyStatus.NotConfigured;
+                    return;
                 }
-                else
+
+                if (hotkeyInfo.ID == 0)
                 {
-                    return RegisterHotkey(hotkeyInfo.Hotkey);
+                    string uniqueID = Helpers.GetUniqueID();
+                    hotkeyInfo.ID = NativeMethods.GlobalAddAtom(uniqueID);
+
+                    if (hotkeyInfo.ID == 0)
+                    {
+                        DebugHelper.WriteLine("Unable to generate unique hotkey ID: " + hotkeyInfo);
+                        hotkeyInfo.Status = HotkeyStatus.Failed;
+                        return;
+                    }
                 }
+
+                if (!NativeMethods.RegisterHotKey(Handle, (int)hotkeyInfo.ID, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
+                {
+                    NativeMethods.GlobalDeleteAtom(hotkeyInfo.ID);
+                    DebugHelper.WriteLine("Unable to register hotkey: " + hotkeyInfo);
+                    hotkeyInfo.ID = 0;
+                    hotkeyInfo.Status = HotkeyStatus.Failed;
+                    return;
+                }
+
+                hotkeyInfo.Status = HotkeyStatus.Registered;
             }
-
-            return hotkeyInfo;
-        }
-
-        private HotkeyInfo RegisterHotkey(Keys hotkey)
-        {
-            return RegisterHotkey(hotkey, Helpers.GetUniqueID());
-        }
-
-        private HotkeyInfo RegisterHotkey(Keys hotkey, string atomName)
-        {
-            ushort id = NativeMethods.GlobalAddAtom(atomName);
-
-            return RegisterHotkey(hotkey, id);
-        }
-
-        private HotkeyInfo RegisterHotkey(Keys hotkey, ushort id)
-        {
-            HotkeyInfo hotkeyInfo = new HotkeyInfo(hotkey, id);
-
-            if (!hotkeyInfo.IsValidHotkey)
-            {
-                hotkeyInfo.Status = HotkeyStatus.NotConfigured;
-                return hotkeyInfo;
-            }
-
-            if (id == 0)
-            {
-                DebugHelper.WriteLine("Unable to generate unique hotkey ID: " + hotkeyInfo);
-                hotkeyInfo.Status = HotkeyStatus.Failed;
-                return hotkeyInfo;
-            }
-
-            if (!NativeMethods.RegisterHotKey(Handle, (int)id, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
-            {
-                NativeMethods.GlobalDeleteAtom(id);
-                DebugHelper.WriteLine("Unable to register hotkey: " + hotkeyInfo);
-                hotkeyInfo.ID = 0;
-                hotkeyInfo.Status = HotkeyStatus.Failed;
-                return hotkeyInfo;
-            }
-
-            hotkeyInfo.Status = HotkeyStatus.Registered;
-            return hotkeyInfo;
         }
 
         public bool UnregisterHotkey(HotkeyInfo hotkeyInfo)
         {
             if (hotkeyInfo != null)
             {
-                bool result = UnregisterHotkey(hotkeyInfo.ID);
-
-                if (result)
+                if (hotkeyInfo.ID > 0)
                 {
-                    hotkeyInfo.ID = 0;
-                    hotkeyInfo.Status = HotkeyStatus.NotConfigured;
-                }
-                else
-                {
-                    hotkeyInfo.Status = HotkeyStatus.Failed;
+                    bool result = NativeMethods.UnregisterHotKey(Handle, hotkeyInfo.ID);
+
+                    if (result)
+                    {
+                        NativeMethods.GlobalDeleteAtom(hotkeyInfo.ID);
+                        hotkeyInfo.ID = 0;
+                        hotkeyInfo.Status = HotkeyStatus.NotConfigured;
+                        return true;
+                    }
                 }
 
-                return result;
+                hotkeyInfo.Status = HotkeyStatus.Failed;
             }
 
             return false;
         }
 
-        private bool UnregisterHotkey(ushort id)
-        {
-            bool result = false;
-
-            if (id > 0)
-            {
-                result = NativeMethods.UnregisterHotKey(Handle, id);
-
-                if (result)
-                {
-                    NativeMethods.GlobalDeleteAtom(id);
-                }
-            }
-
-            return result;
-        }
-
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)WindowsMessages.HOTKEY && !IgnoreHotkeys && CheckRepeatLimitTime())
+            if (m.Msg == (int)WindowsMessages.HOTKEY && CheckRepeatLimitTime())
             {
                 ushort id = (ushort)m.WParam;
                 Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);

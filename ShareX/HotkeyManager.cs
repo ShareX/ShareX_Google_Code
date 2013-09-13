@@ -33,6 +33,7 @@ namespace ShareX
     public class HotkeyManager
     {
         public List<HotkeySettings> Hotkeys { get; private set; }
+        public bool IgnoreHotkeys { get; set; }
 
         public delegate void HotkeyTriggerEventHandler(HotkeySettings hotkeySetting);
         public HotkeyTriggerEventHandler HotkeyTrigger;
@@ -61,11 +62,14 @@ namespace ShareX
 
         private void hotkeyForm_HotkeyPress(ushort id, Keys key, Modifiers modifier)
         {
-            HotkeySettings hotkeySetting = Hotkeys.Find(x => x.HotkeyInfo.ID == id);
-
-            if (hotkeySetting != null)
+            if (!IgnoreHotkeys)
             {
-                OnHotkeyTrigger(hotkeySetting);
+                HotkeySettings hotkeySetting = Hotkeys.Find(x => x.HotkeyInfo.ID == id);
+
+                if (hotkeySetting != null)
+                {
+                    OnHotkeyTrigger(hotkeySetting);
+                }
             }
         }
 
@@ -83,7 +87,7 @@ namespace ShareX
 
             if (hotkeySetting.HotkeyInfo.Status != HotkeyStatus.Registered && hotkeySetting.HotkeyInfo.IsValidHotkey)
             {
-                hotkeySetting.HotkeyInfo = hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
+                hotkeyForm.RegisterHotkey(hotkeySetting.HotkeyInfo);
 
                 if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
                 {

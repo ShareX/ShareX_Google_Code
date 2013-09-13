@@ -180,7 +180,7 @@ namespace ShareX
         {
             Editing = true;
 
-            Program.MainForm.IgnoreHotkeys = true;
+            Program.HotkeyManager.IgnoreHotkeys = true;
 
             btnHotkey.BackColor = Color.FromArgb(225, 255, 225);
             btnHotkey.Text = "Select a hotkey...";
@@ -194,7 +194,9 @@ namespace ShareX
         {
             Editing = false;
 
-            Program.MainForm.IgnoreHotkeys = false;
+            Program.HotkeyManager.IgnoreHotkeys = false;
+
+            Setting.HotkeyInfo.Win = false;
 
             if (Setting.HotkeyInfo.IsOnlyModifiers)
             {
