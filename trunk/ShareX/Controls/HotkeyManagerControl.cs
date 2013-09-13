@@ -150,6 +150,7 @@ namespace ShareX
             UpdateButtons();
             UpdateCheckStates();
             control.Focus();
+            Update();
             EditSelected();
         }
 
@@ -190,7 +191,6 @@ namespace ShareX
         private void btnReset_Click(object sender, EventArgs e)
         {
             manager.ResetHotkeys();
-            manager.RegisterAllHotkeys();
             AddControls();
         }
     }
