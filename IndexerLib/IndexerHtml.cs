@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using IndexerLib.Properties;
 using System.IO;
 using System.Text;
@@ -33,7 +34,7 @@ namespace IndexerLib
     {
         public override string Index(string folderPath, IndexerSettings config)
         {
-            base.Index(folderPath, config);
+            string index = base.Index(folderPath, config);
 
             StringBuilder sbIndexHtml = new StringBuilder();
 
@@ -42,35 +43,35 @@ namespace IndexerLib
             sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(folderPath)));
             sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
             sbIndexHtml.AppendLine(HtmlHelper.BodyOpen);
-            sbIndexHtml.AppendLine(sbIndex.ToString());
+            sbIndexHtml.AppendLine(index);
             sbIndexHtml.AppendLine(HtmlHelper.BodyClose);
 
-            return sbIndexHtml.ToString().Trim();
+            return sbIndexHtml.ToString();
         }
 
         protected override void IndexFolder(FolderInfo dir, int level)
         {
-            level++;
-
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
 
             if (dir.Files.Count > 0)
             {
                 sbIndex.AppendLine();
-                sbIndex.AppendLine(HtmlHelper.BulletedListOpen);
+
+                string marginStyle = string.Format("margin-left:{0}px;", level * 30 - 10);
+                sbIndex.AppendLine(HtmlHelper.GetStartTag("ul", marginStyle));
 
                 foreach (FileInfo fi in dir.Files)
                 {
                     sbIndex.AppendLine(GetFileNameRow(fi, level));
                 }
 
-                sbIndex.AppendLine(HtmlHelper.BulletedListClose);
+                sbIndex.AppendLine(HtmlHelper.GetEndTag("ul"));
             }
 
             foreach (FolderInfo subdir in dir.Folders)
             {
                 sbIndex.AppendLine();
-                IndexFolder(subdir, level);
+                IndexFolder(subdir, level + 1);
             }
         }
 
@@ -81,7 +82,9 @@ namespace IndexerLib
 
         protected override string GetFolderNameRow(FolderInfo dir, int level)
         {
-            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), level);
+            int heading = (level + 1).Between(1, 4);
+            string marginStyle = level > 0 ? string.Format("margin-left:{0}px;", level * 30) : string.Empty;
+            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading, marginStyle);
         }
     }
 }

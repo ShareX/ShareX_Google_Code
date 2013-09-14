@@ -39,8 +39,6 @@ namespace IndexerLib
         public const string HeadClose = "</head>";
         public const string BodyOpen = "<body>";
         public const string BodyClose = "</body>\n</html>";
-        public const string BulletedListOpen = "<ul>";
-        public const string BulletedListClose = "</ul>";
         public const string NumberedListOpen = "<ol>";
         public const string NumberedListClose = "</ol>";
 
@@ -64,19 +62,41 @@ namespace IndexerLib
             return sb.ToString();
         }
 
-        public static string GetTitle(string title)
+        public static string GetStartTag(string tag, string style = "")
         {
-            return string.Format("<title>{0}</title>", Helpers.HtmlEncode(title));
+            string css = string.Empty;
+
+            if (!string.IsNullOrEmpty(style))
+            {
+                css = string.Format(" style=\"{0}\"", style);
+            }
+
+            return string.Format("<{0}{1}>", tag, css);
         }
 
-        public static string GetHeading(string text, int level)
+        public static string GetEndTag(string tag)
         {
-            return string.Format("<h{0}>{1}</h{0}>", level, Helpers.HtmlEncode(text));
+            return string.Format("</{0}>", tag);
         }
 
-        public static string GetListItem(string text)
+        public static string GetTag(string tag, string content, string style = "")
         {
-            return string.Format("<li>{0}</li>", Helpers.HtmlEncode(text));
+            return GetStartTag(tag, style) + Helpers.HtmlEncode(content) + GetEndTag(tag);
+        }
+
+        public static string GetTitle(string content, string style = "")
+        {
+            return GetTag("title", content, style);
+        }
+
+        public static string GetHeading(string content, int heading, string style = "")
+        {
+            return GetTag("h" + heading, content, style);
+        }
+
+        public static string GetListItem(string content, string style = "")
+        {
+            return GetTag("li", content, style);
         }
     }
 }
