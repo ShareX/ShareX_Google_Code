@@ -40,13 +40,15 @@ namespace IndexerLib
 
             sbIndexHtml.AppendLine(Resources.doctype_xhtml);
             sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
-            sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(folderPath)));
-            sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
-            sbIndexHtml.AppendLine(HtmlHelper.BodyOpen);
+            sbIndexHtml.AppendLine(HtmlHelper.Tag("title", "Index for " + Path.GetFileName(folderPath)));
+            sbIndexHtml.AppendLine(HtmlHelper.EndTag("head"));
+            sbIndexHtml.AppendLine(HtmlHelper.StartTag("body"));
             sbIndexHtml.AppendLine(index);
-            sbIndexHtml.AppendLine(HtmlHelper.BodyClose);
+            sbIndexHtml.AppendLine(HtmlHelper.EndTag("body"));
+            sbIndexHtml.AppendLine();
+            sbIndexHtml.AppendLine(HtmlHelper.EndTag("html"));
 
-            return sbIndexHtml.ToString();
+            return sbIndexHtml.ToString().Trim();
         }
 
         protected override void IndexFolder(FolderInfo dir, int level)

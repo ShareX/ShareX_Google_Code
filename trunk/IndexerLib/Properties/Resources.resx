@@ -124,12 +124,6 @@
   <data name="doctype_xhtml" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\doctype_xhtml.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="domCollapse_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\domCollapse.css;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="domCollapse_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\domCollapse.js;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="valid_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\valid_css.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
