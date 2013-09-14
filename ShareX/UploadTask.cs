@@ -136,17 +136,14 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
+            task.tempText = text;
 
             if (Directory.Exists(text))
             {
-                taskSettings.IndexerSettings.FolderPath = text;
-                task.tempText = Indexer.Run(taskSettings.IndexerSettings);
-                string ext = taskSettings.IndexerSettings.Output == IndexerOutput.Html ? "html" : "txt";
-                task.Info.FileName = TaskHelper.GetFilename(taskSettings, ext);
+                task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.IndexerSettings.Output.ToString().ToLower());
             }
             else
             {
-                task.tempText = text;
                 task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
             }
             return task;
@@ -344,6 +341,11 @@ namespace ShareX
             }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
+                if (Directory.Exists(tempText))
+                {
+                    Info.TaskSettings.IndexerSettings.FolderPath = tempText;
+                    tempText = Indexer.Run(Info.TaskSettings.IndexerSettings);
+                }
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
                 Data = new MemoryStream(byteArray);
             }

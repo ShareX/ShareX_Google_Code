@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using IndexerLib.Properties;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -42,11 +43,6 @@ namespace IndexerLib
         public const string NumberedListOpen = "<ol>";
         public const string NumberedListClose = "</ol>";
 
-        public static string GetDocType()
-        {
-            return GetText("doctype_xhtml.txt");
-        }
-
         public static string GetCssStyle(string filePath = "")
         {
             StringBuilder sb = new StringBuilder();
@@ -61,7 +57,7 @@ namespace IndexerLib
             }
             else
             {
-                sb.AppendLine(GetText("Default.css"));
+                sb.AppendLine(Resources.DefaultCss);
             }
 
             sb.AppendLine("</style>");
@@ -95,31 +91,6 @@ namespace IndexerLib
             }
 
             return line;
-        }
-
-        private static string GetText(string name)
-        {
-            string text = string.Empty;
-            try
-            {
-                Assembly oAsm = Assembly.GetExecutingAssembly();
-                string fileName = oAsm.GetManifestResourceNames().FirstOrDefault(x => x.Contains("." + name));
-
-                if (!string.IsNullOrEmpty(fileName))
-                {
-                    using (Stream oStrm = oAsm.GetManifestResourceStream(fileName))
-                    using (StreamReader oRdr = new StreamReader(oStrm))
-                    {
-                        text = oRdr.ReadToEnd();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-            }
-
-            return text;
         }
     }
 }

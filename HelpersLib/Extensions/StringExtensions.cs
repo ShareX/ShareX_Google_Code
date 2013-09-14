@@ -73,7 +73,7 @@ namespace HelpersLib
 
         public static string Repeat(this string str, int count)
         {
-            if (!string.IsNullOrEmpty(str))
+            if (!string.IsNullOrEmpty(str) && count > 0)
             {
                 StringBuilder sb = new StringBuilder(str.Length * count);
                 sb.Append(str, 0, count);
