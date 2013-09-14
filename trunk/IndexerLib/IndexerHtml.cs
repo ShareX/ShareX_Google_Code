@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using IndexerLib.Properties;
 using System.IO;
 using System.Text;
 
@@ -36,7 +37,7 @@ namespace IndexerLib
 
             StringBuilder sbIndexHtml = new StringBuilder();
 
-            sbIndexHtml.AppendLine(HtmlHelper.GetDocType());
+            sbIndexHtml.AppendLine(Resources.doctype_xhtml);
             sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
             sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(config.FolderPath)));
             sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
@@ -61,7 +62,7 @@ namespace IndexerLib
                 foreach (FileInfo fi in dir.Files)
                 {
                     sbIndex.AppendLine(GetFileNameRow(fi, level));
-                };
+                }
 
                 sbIndex.AppendLine(HtmlHelper.BulletedListClose);
             }

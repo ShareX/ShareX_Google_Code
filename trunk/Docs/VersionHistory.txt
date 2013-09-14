@@ -1,6 +1,8 @@
-﻿ShareX 8.1.1 r584 - 2013-09-07
-
+﻿Added support for indexing a folder during Clipboard Upload
 Rectangle Lite support in Advanced settings for slow computers
+
+ShareX 8.1 r573 - 2013-09-04
+
 Redesigned main configuration with simplified settings
 Improved hotkey system to support all possible hotkey specific tasks 
 Support custom formats for clipboard content 

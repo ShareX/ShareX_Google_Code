@@ -30,7 +30,7 @@ namespace IndexerLib
     public enum IndexerOutput
     {
         [Description("Text")]
-        Text,
+        Txt,
         [Description("HTML")]
         Html
     }

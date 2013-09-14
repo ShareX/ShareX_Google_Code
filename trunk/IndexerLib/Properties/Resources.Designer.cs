@@ -103,7 +103,7 @@ namespace IndexerLib.Properties {
         ///    text-align: center;
         ///    font-family: Aria [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Default {
+        internal static string DefaultCss {
             get {
                 return ResourceManager.GetString("Default", resourceCulture);
             }
