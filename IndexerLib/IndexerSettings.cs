@@ -34,6 +34,9 @@ namespace IndexerLib
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 
+        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden folders")]
+        public bool SkipHiddenFolders { get; set; }
+
         [Category("Indexer / Text"), DefaultValue("    "), Description("Padding text to show indentation in the folder hierarchy")]
         public string PaddingText { get; set; }
 
