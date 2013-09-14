@@ -68,16 +68,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\valid_css.txt" />
+    <None Include="Resources\valid_css.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\valid_xhtml.txt" />
+    <None Include="Resources\valid_xhtml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\doctype_xhtml.txt" />
+    <None Include="Resources\doctype_xhtml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Default.css" />
+    <None Include="Resources\Default.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\domCollapse.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\domCollapse.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

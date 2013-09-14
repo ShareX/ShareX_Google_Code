@@ -103,9 +103,9 @@ namespace IndexerLib.Properties {
         ///    text-align: center;
         ///    font-family: Aria [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DefaultCss {
+        internal static string Default_css {
             get {
-                return ResourceManager.GetString("Default", resourceCulture);
+                return ResourceManager.GetString("Default_css", resourceCulture);
             }
         }
         
@@ -118,6 +118,85 @@ namespace IndexerLib.Properties {
         internal static string doctype_xhtml {
             get {
                 return ResourceManager.GetString("doctype_xhtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .trigger
+        ///{
+        ///    cursor: pointer;
+        ///}
+        ///
+        ///.trigger:hover
+        ///{
+        ///    cursor: pointer;
+        ///    background-color: #336699;
+        ///}
+        ///
+        ///.expanded
+        ///{
+        ///    cursor: pointer;
+        ///}
+        ///
+        ///.expanded:hover
+        ///{
+        ///    cursor: pointer;
+        ///    background-color: #336699;
+        ///}
+        ///
+        ///.show
+        ///{
+        ///    position: static;
+        ///}
+        ///
+        ///.hide
+        ///{
+        ///    position: absolute;
+        ///    left: -999em;
+        ///    height: 1px;
+        ///    width: 100px;
+        ///    overflow: hidden;
+        ///}
+        ///
+        ///h2 img, h3 img, h4 img
+        ///{
+        ///    border: none;
+        ///    padding-right: .5em;
+        ///}
+        ///
+        ///a img
+        ///{
+        ///    border-style: none;
+        ///    c [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string domCollapse_css {
+            get {
+                return ResourceManager.GetString("domCollapse_css", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /*
+        ///* DOMcollapse
+        ///* Version 3.0
+        ///* released 06.12.2005
+        ///* Not for commercial reselling or use, unless consent given by the author
+        ///* Check for updates on http://onlinetools.org and http://wait-till-i.com
+        ///*
+        ///*/
+        ///
+        ///dc = {
+        ///    triggerElements: &apos;*&apos;, 	// elements to trigger the effect
+        ///    parentElementId: null, // ID of the parent element (keep null if none)
+        ///    uniqueCollapse: false, // is set to true only one element can be open at a time
+        ///
+        ///    // CSS class names
+        ///    trigger: &apos;trigger&apos;,
+        ///    triggeropen [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string domCollapse_js {
+            get {
+                return ResourceManager.GetString("domCollapse_js", resourceCulture);
             }
         }
         

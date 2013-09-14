@@ -39,6 +39,7 @@ namespace IndexerLib
             StringBuilder sbIndexHtml = new StringBuilder();
 
             sbIndexHtml.AppendLine(Resources.doctype_xhtml);
+            sbIndexHtml.AppendLine(HtmlHelper.GetDomCollapse());
             sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
             sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(folderPath)));
             sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
@@ -52,6 +53,11 @@ namespace IndexerLib
         protected override void IndexFolder(FolderInfo dir, int level)
         {
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
+
+            if (dir.HasParent && dir.HasFolders)
+            {
+                sbIndex.AppendLine(HtmlHelper.GetStartTag("div"));
+            }
 
             if (dir.Files.Count > 0)
             {
@@ -73,6 +79,11 @@ namespace IndexerLib
                 sbIndex.AppendLine();
                 IndexFolder(subdir, level + 1);
             }
+
+            if (dir.HasParent && dir.HasFolders)
+            {
+                sbIndex.AppendLine(HtmlHelper.GetEndTag("div"));
+            }
         }
 
         protected override string GetFileNameRow(FileInfo fi, int level)
@@ -82,9 +93,14 @@ namespace IndexerLib
 
         protected override string GetFolderNameRow(FolderInfo dir, int level)
         {
-            int heading = (level + 1).Between(1, 4);
+            int heading = (level + 1).Between(1, 6);
             string marginStyle = level > 0 ? string.Format("margin-left:{0}px;", level * 30) : string.Empty;
-            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading, marginStyle);
+            string className = string.Empty;
+            if (dir.Folders.Count > 0 || dir.Files.Count > 0)
+            {
+                className = "trigger";
+            }
+            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading, className, marginStyle);
         }
     }
 }
