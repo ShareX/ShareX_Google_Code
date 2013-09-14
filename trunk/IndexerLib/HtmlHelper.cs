@@ -78,22 +78,23 @@ namespace IndexerLib
             return sb.ToString();
         }
 
-        public static string GetStartTag(string tag, string className = "", string style = "")
+        public static string GetStartTag(string tag, string style = "", string otherFields = "")
         {
-            string cl = string.Empty;
             string css = string.Empty;
-
-            if (!string.IsNullOrEmpty(className))
-            {
-                cl = string.Format(" class=\"{0}\"", className);
-            }
 
             if (!string.IsNullOrEmpty(style))
             {
                 css = string.Format(" style=\"{0}\"", style);
             }
 
-            return string.Format("<{0}{1}{2}>", tag, cl, css);
+            string fields = string.Empty;
+
+            if (!string.IsNullOrEmpty(otherFields))
+            {
+                fields = " " + otherFields;
+            }
+
+            return string.Format("<{0}{2}{1}>", tag, fields, css);
         }
 
         public static string GetEndTag(string tag)
@@ -101,9 +102,9 @@ namespace IndexerLib
             return string.Format("</{0}>", tag);
         }
 
-        public static string GetTag(string tag, string content, string className, string style = "")
+        public static string GetTag(string tag, string content, string style = "", string otherFields = "")
         {
-            return GetStartTag(tag, className, style) + Helpers.HtmlEncode(content) + GetEndTag(tag);
+            return GetStartTag(tag, style, otherFields) + Helpers.HtmlEncode(content) + GetEndTag(tag);
         }
 
         public static string GetTitle(string content, string style = "")
@@ -111,9 +112,9 @@ namespace IndexerLib
             return GetTag("title", content, style);
         }
 
-        public static string GetHeading(string content, int heading, string className = "", string style = "")
+        public static string GetHeading(string content, int heading, string style = "", string otherFields = "")
         {
-            return GetTag("h" + heading, content, className, style);
+            return GetTag("h" + heading, content, style, otherFields);
         }
 
         public static string GetListItem(string content, string style = "")
