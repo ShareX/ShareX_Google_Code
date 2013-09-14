@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace IndexerLib
@@ -55,12 +56,37 @@ namespace IndexerLib
         {
             this.config = config;
 
-            FolderInfo folderInfo = new FolderInfo(folderPath);
-            folderInfo.Read();
+            FolderInfo folderInfo = GetFolderInfo(folderPath);
 
             IndexFolder(folderInfo);
 
             return sbIndex.ToString();
+        }
+
+        private FolderInfo GetFolderInfo(string folderPath)
+        {
+            FolderInfo folderInfo = new FolderInfo(folderPath);
+
+            foreach (DirectoryInfo directoryInfo in new DirectoryInfo(folderPath).GetDirectories())
+            {
+                if (config.SkipHiddenFolders && directoryInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                {
+                    continue;
+                }
+
+                FolderInfo subdir = GetFolderInfo(directoryInfo.FullName);
+                subdir.HasParent = true;
+                folderInfo.Folders.Add(subdir);
+            }
+
+            foreach (string fp in Directory.GetFiles(folderPath))
+            {
+                folderInfo.Files.Add(new FileInfo(fp));
+            }
+
+            folderInfo.Size = folderInfo.Folders.Sum(x => x.Size) + folderInfo.Files.Sum(x => x.Length);
+
+            return folderInfo;
         }
 
         protected abstract void IndexFolder(FolderInfo dir, int level = 0);

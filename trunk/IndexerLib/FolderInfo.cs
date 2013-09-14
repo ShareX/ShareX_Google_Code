@@ -31,17 +31,25 @@ namespace IndexerLib
 {
     public class FolderInfo
     {
-        public string FolderPath { get; private set; }
-        public long Size { get; private set; }
-        public List<FileInfo> Files { get; private set; }
-        public List<FolderInfo> Folders { get; private set; }
-        public bool HasParent { get; private set; }
+        public string FolderPath { get; set; }
+        public long Size { get; set; }
+        public List<FileInfo> Files { get; set; }
+        public List<FolderInfo> Folders { get; set; }
+        public bool HasParent { get; set; }
 
         public string FolderName
         {
             get
             {
                 return Path.GetFileName(FolderPath);
+            }
+        }
+
+        public bool HasFiles
+        {
+            get
+            {
+                return Files.Count > 0;
             }
         }
 
@@ -58,29 +66,6 @@ namespace IndexerLib
             FolderPath = folderPath;
             Files = new List<FileInfo>();
             Folders = new List<FolderInfo>();
-        }
-
-        public void Read()
-        {
-            Read(this);
-        }
-
-        private void Read(FolderInfo dir)
-        {
-            foreach (string dp in Directory.GetDirectories(dir.FolderPath))
-            {
-                FolderInfo subdir = new FolderInfo(dp);
-                subdir.Read();
-                subdir.HasParent = true;
-                dir.Folders.Add(subdir);
-            }
-
-            foreach (string fp in Directory.GetFiles(dir.FolderPath))
-            {
-                dir.Files.Add(new FileInfo(fp));
-            }
-
-            dir.Size = dir.Folders.Sum(x => x.Size) + dir.Files.Sum(x => x.Length);
         }
     }
 }
