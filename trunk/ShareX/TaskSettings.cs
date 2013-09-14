@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using IndexerLib;
 using Newtonsoft.Json;
 using ScreenCapture;
 using System.Collections.Generic;
@@ -66,6 +67,9 @@ namespace ShareX
         public bool UseDefaultActions = true;
         public List<ExternalProgram> ExternalPrograms = new List<ExternalProgram>();
 
+        public bool UseDefaultIndexerSettings = true;
+        public IndexerSettings IndexerSettings = new IndexerSettings();
+
         public bool UseDefaultAdvancedSettings = true;
         public TaskSettingsAdvanced AdvancedSettings = new TaskSettingsAdvanced();
 
@@ -95,7 +99,7 @@ namespace ShareX
             {
                 return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && UseDefaultGeneralSettings &&
                     UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions &&
-                    UseDefaultAdvancedSettings && !WatchFolderEnabled;
+                   UseDefaultIndexerSettings && UseDefaultAdvancedSettings && !WatchFolderEnabled;
             }
         }
 
@@ -173,6 +177,11 @@ namespace ShareX
                 if (UseDefaultActions)
                 {
                     ExternalPrograms = defaultTaskSettings.ExternalPrograms;
+                }
+
+                if (UseDefaultIndexerSettings)
+                {
+                    IndexerSettings = defaultTaskSettings.IndexerSettings;
                 }
 
                 if (UseDefaultAdvancedSettings)
