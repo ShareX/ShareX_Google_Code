@@ -39,7 +39,7 @@ namespace IndexerLib
             StringBuilder sbIndexHtml = new StringBuilder();
 
             sbIndexHtml.AppendLine(Resources.doctype_xhtml);
-            sbIndexHtml.AppendLine(HtmlHelper.GetDomCollapse());
+            //sbIndexHtml.AppendLine(HtmlHelper.GetDomCollapse());
             sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
             sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(folderPath)));
             sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
@@ -54,7 +54,7 @@ namespace IndexerLib
         {
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
 
-            string divStyle = string.Format("border-style:solid;border-width:0px 1px 1px 1px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin:0px {0}px 10px {0}px;padding-top:10px", level > 0 ? "10" : "0");
+            string divStyle = string.Format("border-style:solid;border-width:0px 1px 1px 1px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin:0px {0}px 10px {0}px;padding:20px 0px 0px 0px", level > 0 ? "10" : "0");
             sbIndex.AppendLine(HtmlHelper.GetStartTag("div", divStyle));
 
             if (dir.Files.Count > 0)
@@ -88,11 +88,11 @@ namespace IndexerLib
             int heading = (level + 1).Between(1, 4);
             string marginStyle = string.Format("margin:0px {0}px -10px {0}px;", level > 0 ? "10" : "0");
             string className = string.Empty;
-            if (dir.Folders.Count > 0 || dir.Files.Count > 0)
+            if (dir.HasParent)
             {
-                className = "trigger";
+                //className = "class=\"trigger\"";
             }
-            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading, className, marginStyle);
+            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading, marginStyle, className);
         }
     }
 }
