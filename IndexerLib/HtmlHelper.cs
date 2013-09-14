@@ -78,7 +78,7 @@ namespace IndexerLib
             return sb.ToString();
         }
 
-        public static string GetStartTag(string tag, string style = "", string otherFields = "")
+        public static string StartTag(string tag, string style = "", string otherFields = "")
         {
             string css = string.Empty;
 
@@ -97,29 +97,19 @@ namespace IndexerLib
             return string.Format("<{0}{2}{1}>", tag, fields, css);
         }
 
-        public static string GetEndTag(string tag)
+        public static string EndTag(string tag)
         {
             return string.Format("</{0}>", tag);
         }
 
-        public static string GetTag(string tag, string content, string style = "", string otherFields = "")
+        public static string Tag(string tag, string content, string style = "", string otherFields = "")
         {
-            return GetStartTag(tag, style, otherFields) + Helpers.HtmlEncode(content) + GetEndTag(tag);
+            return StartTag(tag, style, otherFields) + Helpers.HtmlEncode(content) + EndTag(tag);
         }
 
         public static string GetTitle(string content, string style = "")
         {
-            return GetTag("title", content, style);
-        }
-
-        public static string GetHeading(string content, int heading, string style = "", string otherFields = "")
-        {
-            return GetTag("h" + heading, content, style, otherFields);
-        }
-
-        public static string GetListItem(string content, string style = "")
-        {
-            return GetTag("li", content, style);
+            return Tag("title", content, style);
         }
     }
 }
