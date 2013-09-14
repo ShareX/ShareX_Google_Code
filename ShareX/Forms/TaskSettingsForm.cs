@@ -55,7 +55,7 @@ namespace ShareX
                 Text = Application.ProductName + " - Task settings";
                 tcHotkeySettings.TabPages.Remove(tpTask);
                 chkUseDefaultGeneralSettings.Visible = chkUseDefaultImageSettings.Visible = chkUseDefaultCaptureSettings.Visible = chkUseDefaultActions.Visible =
-                       chkUseDefaultUploadSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
+                       chkUseDefaultUploadSettings.Visible = chkUseDefaultIndexerSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
                 panelGeneral.BorderStyle = BorderStyle.None;
             }
             else
@@ -70,6 +70,7 @@ namespace ShareX
                 chkUseDefaultCaptureSettings.Checked = TaskSettings.UseDefaultCaptureSettings;
                 chkUseDefaultActions.Checked = TaskSettings.UseDefaultActions;
                 chkUseDefaultUploadSettings.Checked = TaskSettings.UseDefaultUploadSettings;
+                chkUseDefaultIndexerSettings.Checked = TaskSettings.UseDefaultIndexerSettings;
                 chkUseDefaultAdvancedSettings.Checked = TaskSettings.UseDefaultAdvancedSettings;
             }
 
@@ -204,6 +205,9 @@ namespace ShareX
             // Upload / Clipboard upload
             cbClipboardUploadAutoDetectURL.Checked = TaskSettings.UploadSettings.ClipboardUploadAutoDetectURL;
 
+            // Indexer
+            pgIndexerConfig.SelectedObject = TaskSettings.IndexerSettings;
+
             // Advanced
             pgTaskSettings.SelectedObject = TaskSettings.AdvancedSettings;
 
@@ -220,6 +224,7 @@ namespace ShareX
                 tcCapture.Enabled = !TaskSettings.UseDefaultCaptureSettings;
                 pActions.Enabled = !TaskSettings.UseDefaultActions;
                 tcUpload.Enabled = !TaskSettings.UseDefaultUploadSettings;
+                pgIndexerConfig.Enabled = !TaskSettings.UseDefaultIndexerSettings;
                 pgTaskSettings.Enabled = !TaskSettings.UseDefaultAdvancedSettings;
             }
         }
@@ -935,6 +940,16 @@ namespace ShareX
         }
 
         #endregion Upload
+
+        #region Indexer
+
+        private void chkUseDefaultIndexerSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.UseDefaultIndexerSettings = chkUseDefaultIndexerSettings.Checked;
+            UpdateDefaultSettingVisibility();
+        }
+
+        #endregion Indexer
 
         #region Advanced
 

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadersLib", "UploadersLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenshotImageEditor", "GreenshotImageEditor\GreenshotImageEditor.csproj", "{CD642BF4-D815-4D67-A0B5-C69F0B8231AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexerLib", "IndexerLib\IndexerLib.csproj", "{750C6F46-2C5A-4488-81D3-3B35CA50F3EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{CD642BF4-D815-4D67-A0B5-C69F0B8231AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD642BF4-D815-4D67-A0B5-C69F0B8231AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD642BF4-D815-4D67-A0B5-C69F0B8231AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{750C6F46-2C5A-4488-81D3-3B35CA50F3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{750C6F46-2C5A-4488-81D3-3B35CA50F3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{750C6F46-2C5A-4488-81D3-3B35CA50F3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{750C6F46-2C5A-4488-81D3-3B35CA50F3EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -131,6 +131,7 @@
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
             this.tpCaptureShape = new System.Windows.Forms.TabPage();
             this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
+            this.pgShapesCapture = new System.Windows.Forms.PropertyGrid();
             this.tpScreenRecorder = new System.Windows.Forms.TabPage();
             this.cbOutput = new System.Windows.Forms.ComboBox();
             this.lblOutput = new System.Windows.Forms.Label();
@@ -183,7 +184,9 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
-            this.pgShapesCapture = new System.Windows.Forms.PropertyGrid();
+            this.tpIndexer = new System.Windows.Forms.TabPage();
+            this.pgIndexerConfig = new System.Windows.Forms.PropertyGrid();
+            this.chkUseDefaultIndexerSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -225,6 +228,7 @@
             this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
+            this.tpIndexer.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -422,6 +426,7 @@
             this.tcHotkeySettings.Controls.Add(this.tpActions);
             this.tcHotkeySettings.Controls.Add(this.tpWatchFolders);
             this.tcHotkeySettings.Controls.Add(this.tpUpload);
+            this.tcHotkeySettings.Controls.Add(this.tpIndexer);
             this.tcHotkeySettings.Controls.Add(this.tpAdvanced);
             this.tcHotkeySettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcHotkeySettings.Location = new System.Drawing.Point(3, 3);
@@ -1487,6 +1492,16 @@
             this.btnOpenCapturingShapesWiki.Visible = false;
             this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
             // 
+            // pgShapesCapture
+            // 
+            this.pgShapesCapture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgShapesCapture.Location = new System.Drawing.Point(3, 3);
+            this.pgShapesCapture.Name = "pgShapesCapture";
+            this.pgShapesCapture.PropertySort = System.Windows.Forms.PropertySort.NoSort;
+            this.pgShapesCapture.Size = new System.Drawing.Size(500, 295);
+            this.pgShapesCapture.TabIndex = 11;
+            this.pgShapesCapture.ToolbarVisible = false;
+            // 
             // tpScreenRecorder
             // 
             this.tpScreenRecorder.Controls.Add(this.cbOutput);
@@ -2061,15 +2076,40 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
-            // pgShapesCapture
+            // tpIndexer
             // 
-            this.pgShapesCapture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgShapesCapture.Location = new System.Drawing.Point(3, 3);
-            this.pgShapesCapture.Name = "pgShapesCapture";
-            this.pgShapesCapture.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pgShapesCapture.Size = new System.Drawing.Size(500, 295);
-            this.pgShapesCapture.TabIndex = 11;
-            this.pgShapesCapture.ToolbarVisible = false;
+            this.tpIndexer.Controls.Add(this.pgIndexerConfig);
+            this.tpIndexer.Controls.Add(this.chkUseDefaultIndexerSettings);
+            this.tpIndexer.Location = new System.Drawing.Point(4, 22);
+            this.tpIndexer.Name = "tpIndexer";
+            this.tpIndexer.Padding = new System.Windows.Forms.Padding(3);
+            this.tpIndexer.Size = new System.Drawing.Size(520, 360);
+            this.tpIndexer.TabIndex = 8;
+            this.tpIndexer.Text = "Indexer";
+            this.tpIndexer.UseVisualStyleBackColor = true;
+            // 
+            // pgIndexerConfig
+            // 
+            this.pgIndexerConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgIndexerConfig.Location = new System.Drawing.Point(3, 30);
+            this.pgIndexerConfig.Name = "pgIndexerConfig";
+            this.pgIndexerConfig.Size = new System.Drawing.Size(514, 327);
+            this.pgIndexerConfig.TabIndex = 0;
+            // 
+            // chkUseDefaultIndexerSettings
+            // 
+            this.chkUseDefaultIndexerSettings.AutoSize = true;
+            this.chkUseDefaultIndexerSettings.Checked = true;
+            this.chkUseDefaultIndexerSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultIndexerSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultIndexerSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultIndexerSettings.Name = "chkUseDefaultIndexerSettings";
+            this.chkUseDefaultIndexerSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultIndexerSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultIndexerSettings.TabIndex = 1;
+            this.chkUseDefaultIndexerSettings.Text = "Use default indexer settings";
+            this.chkUseDefaultIndexerSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultIndexerSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultIndexerSettings_CheckedChanged);
             // 
             // TaskSettingsForm
             // 
@@ -2146,6 +2186,8 @@
             this.tpUploadClipboard.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.tpAdvanced.PerformLayout();
+            this.tpIndexer.ResumeLayout(false);
+            this.tpIndexer.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2307,6 +2349,9 @@
         private System.Windows.Forms.CheckBox chkUseDefaultGeneralSettings;
         private System.Windows.Forms.Panel panelGeneral;
         private System.Windows.Forms.PropertyGrid pgShapesCapture;
+        private System.Windows.Forms.TabPage tpIndexer;
+        private System.Windows.Forms.PropertyGrid pgIndexerConfig;
+        private System.Windows.Forms.CheckBox chkUseDefaultIndexerSettings;
 
 
 

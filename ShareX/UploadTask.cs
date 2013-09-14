@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using IndexerLib;
 using ShareX.Properties;
 using System;
 using System.Drawing;
@@ -135,8 +136,19 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
-            task.tempText = text;
+
+            if (Directory.Exists(text))
+            {
+                taskSettings.IndexerSettings.FolderPath = text;
+                task.tempText = Indexer.Run(taskSettings.IndexerSettings);
+                string ext = taskSettings.IndexerSettings.Output == IndexerOutput.Html ? "html" : "txt";
+                task.Info.FileName = TaskHelper.GetFilename(taskSettings, ext);
+            }
+            else
+            {
+                task.tempText = text;
+                task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
+            }
             return task;
         }
 
