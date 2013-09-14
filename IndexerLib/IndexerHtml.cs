@@ -31,15 +31,15 @@ namespace IndexerLib
 {
     public class IndexerHtml : Indexer
     {
-        public override string Index(IndexerSettings config)
+        public override string Index(string folderPath, IndexerSettings config)
         {
-            base.Index(config);
+            base.Index(folderPath, config);
 
             StringBuilder sbIndexHtml = new StringBuilder();
 
             sbIndexHtml.AppendLine(Resources.doctype_xhtml);
             sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
-            sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(config.FolderPath)));
+            sbIndexHtml.AppendLine(HtmlHelper.GetTitle("Index for " + Path.GetFileName(folderPath)));
             sbIndexHtml.AppendLine(HtmlHelper.HeadClose);
             sbIndexHtml.AppendLine(HtmlHelper.BodyOpen);
             sbIndexHtml.AppendLine(sbIndex.ToString());

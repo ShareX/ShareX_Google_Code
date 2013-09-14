@@ -39,6 +39,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Web;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -503,7 +504,7 @@ namespace HelpersLib
             string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
             int bytes = binary ? 1024 : 1000;
 
-            int place = Convert.ToInt32(Math.Floor(Math.Log(size, bytes)));
+            int place = size > 0 ? (int)Math.Floor(Math.Log(size, bytes)) : 0;
             double num = size / Math.Pow(bytes, place);
             string format = place == 0 ? "0" : "0.00";
             return num.ToString(format) + " " + (binary ? suf_binary[place] : suf_decimal[place]) + perUnit;
@@ -794,6 +795,28 @@ namespace HelpersLib
         public static string GetUniqueID()
         {
             return Guid.NewGuid().ToString("N");
+        }
+
+        public static string HtmlEncode(string text)
+        {
+            char[] chars = HttpUtility.HtmlEncode(text).ToCharArray();
+            StringBuilder result = new StringBuilder(chars.Length + (int)(chars.Length * 0.1));
+
+            foreach (char c in chars)
+            {
+                int value = Convert.ToInt32(c);
+
+                if (value > 127)
+                {
+                    result.AppendFormat("&#{0};", value);
+                }
+                else
+                {
+                    result.Append(c);
+                }
+            }
+
+            return result.ToString();
         }
     }
 }

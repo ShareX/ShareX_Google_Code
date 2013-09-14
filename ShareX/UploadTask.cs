@@ -343,8 +343,7 @@ namespace ShareX
             {
                 if (Directory.Exists(tempText))
                 {
-                    Info.TaskSettings.IndexerSettings.FolderPath = tempText;
-                    tempText = Indexer.Run(Info.TaskSettings.IndexerSettings);
+                    tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
                 }
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
                 Data = new MemoryStream(byteArray);

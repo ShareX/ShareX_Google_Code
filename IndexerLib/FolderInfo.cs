@@ -32,7 +32,7 @@ namespace IndexerLib
     public class FolderInfo
     {
         public string FolderPath { get; private set; }
-        public long Size { get; private set; }                          // number of Bytes
+        public long Size { get; private set; }
         public List<FileInfo> Files { get; private set; }
         public List<FolderInfo> Folders { get; private set; }
 
