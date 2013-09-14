@@ -186,6 +186,7 @@ namespace ShareX
             btnHotkey.Text = "Select a hotkey...";
 
             Setting.HotkeyInfo.Hotkey = Keys.None;
+            Setting.HotkeyInfo.Win = false;
             OnHotkeyChanged();
             UpdateHotkeyStatus();
         }
@@ -195,8 +196,6 @@ namespace ShareX
             Editing = false;
 
             Program.HotkeyManager.IgnoreHotkeys = false;
-
-            Setting.HotkeyInfo.Win = false;
 
             if (Setting.HotkeyInfo.IsOnlyModifiers)
             {

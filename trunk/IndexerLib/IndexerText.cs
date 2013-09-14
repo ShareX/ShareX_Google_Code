@@ -29,29 +29,31 @@ namespace IndexerLib
 {
     public class IndexerText : Indexer
     {
-        public override string Index(IndexerSettings config)
-        {
-            return base.Index(config); ;
-        }
-
         protected override void IndexFolder(FolderInfo dir, int level)
         {
-            level++;
-
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
-
-            if (dir.Files.Count > 0)
-                sbIndex.AppendLine();
-
-            foreach (FileInfo fi in dir.Files)
-            {
-                sbIndex.AppendLine(GetFileNameRow(fi, level));
-            };
 
             foreach (FolderInfo subdir in dir.Folders)
             {
-                sbIndex.AppendLine();
-                IndexFolder(subdir, level);
+                if (config.AddEmptyLineAfterFolders)
+                {
+                    sbIndex.AppendLine();
+                }
+
+                IndexFolder(subdir, level + 1);
+            }
+
+            if (dir.Files.Count > 0)
+            {
+                if (config.AddEmptyLineAfterFolders)
+                {
+                    sbIndex.AppendLine();
+                }
+
+                foreach (FileInfo fi in dir.Files)
+                {
+                    sbIndex.AppendLine(GetFileNameRow(fi, level + 1));
+                }
             }
         }
     }

@@ -32,9 +32,9 @@ namespace IndexerLib
     public abstract class Indexer
     {
         protected StringBuilder sbIndex = new StringBuilder();
-        private IndexerSettings Config = null;
+        protected IndexerSettings config = null;
 
-        public static string Run(IndexerSettings config)
+        public static string Run(string folderPath, IndexerSettings config)
         {
             Indexer indexer = null;
 
@@ -48,37 +48,39 @@ namespace IndexerLib
                     break;
             }
 
-            return indexer.Index(config);
+            return indexer.Index(folderPath, config);
         }
 
-        public virtual string Index(IndexerSettings config)
+        public virtual string Index(string folderPath, IndexerSettings config)
         {
-            Config = config;
-            FolderInfo dir = new FolderInfo(config.FolderPath);
-            dir.Read();
+            this.config = config;
 
-            IndexFolder(dir, 0);
+            FolderInfo folderInfo = new FolderInfo(folderPath);
+            folderInfo.Read();
+
+            IndexFolder(folderInfo);
 
             return sbIndex.ToString();
         }
 
-        protected abstract void IndexFolder(FolderInfo dir, int level);
+        protected abstract void IndexFolder(FolderInfo dir, int level = 0);
 
         protected virtual string GetFolderNameRow(FolderInfo dir, int level = 0)
         {
+            string text = string.Format("{0}{1}", config.PaddingText.Repeat(level), Path.GetFileName(dir.FolderPath));
+
             if (dir.Size > 0)
             {
-                return string.Format("{0} [{1}]", Config.PaddingText.Repeat(level) + Path.GetFileName(dir.FolderPath), Helpers.ProperFileSize(dir.Size, "", true));
+                text += string.Format(" [{0}]", Helpers.ProperFileSize(dir.Size, "", true));
             }
-            else
-            {
-                return Config.PaddingText.Repeat(level) + Path.GetFileName(dir.FolderPath);
-            }
+
+            return text;
         }
 
         protected virtual string GetFileNameRow(FileInfo fi, int level = 0)
         {
-            return string.Format("{0} [{1}]", Config.PaddingText.Repeat(level) + Path.GetFileName(fi.FullName), Helpers.ProperFileSize(fi.Length, "", true));
+            return string.Format("{0}{1} [{2}]", config.PaddingText.Repeat(level), Path.GetFileName(fi.FullName),
+                Helpers.ProperFileSize(fi.Length, "", true));
         }
     }
 }

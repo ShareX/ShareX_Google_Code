@@ -34,13 +34,19 @@ namespace IndexerLib
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 
-        [Category("Indexer / Text"), DefaultValue("  "), Description("Padding text to show indentation in the folder hierarchy")]
+        [Category("Indexer / Text"), DefaultValue("    "), Description("Padding text to show indentation in the folder hierarchy")]
         public string PaddingText { get; set; }
+
+        [Category("Indexer / Text"), DefaultValue(false), Description("Adds empty line after folders")]
+        public bool AddEmptyLineAfterFolders { get; set; }
 
         [Category("Indexer / XHTML"), Description("Cascading Style Sheet file path")]
         [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 
-        public string FolderPath = string.Empty;
+        public IndexerSettings()
+        {
+            Helpers.ApplyDefaultPropertyValues(this);
+        }
     }
 }

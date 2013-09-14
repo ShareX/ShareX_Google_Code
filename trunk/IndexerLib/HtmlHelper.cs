@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using IndexerLib.Properties;
 using System;
 using System.Diagnostics;
@@ -48,12 +49,10 @@ namespace IndexerLib
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("<style type=\"text/css\">");
+
             if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
-                using (StreamReader sr = new StreamReader(filePath))
-                {
-                    sb.AppendLine(sr.ReadToEnd());
-                }
+                sb.AppendLine(File.ReadAllText(filePath, Encoding.UTF8));
             }
             else
             {
@@ -67,30 +66,17 @@ namespace IndexerLib
 
         public static string GetTitle(string title)
         {
-            return string.Format("<title>{0}</title>", title);
+            return string.Format("<title>{0}</title>", Helpers.HtmlEncode(title));
         }
 
         public static string GetHeading(string text, int level)
         {
-            return string.Format("<h{0}>{1}</h{0}>", level, GetValidXhtmlLine(text));
+            return string.Format("<h{0}>{1}</h{0}>", level, Helpers.HtmlEncode(text));
         }
 
         public static string GetListItem(string text)
         {
-            return string.Format("<li>{0}</li>", GetValidXhtmlLine(text));
-        }
-
-        public static string GetValidXhtmlLine(string line)
-        {
-            if (line != null)
-            {
-                line = line.Replace("&", "&amp;");
-                line = line.Replace("™", "&trade;");
-                line = line.Replace("©", "&copy;");
-                line = line.Replace("®", "&reg;");
-            }
-
-            return line;
+            return string.Format("<li>{0}</li>", Helpers.HtmlEncode(text));
         }
     }
 }
