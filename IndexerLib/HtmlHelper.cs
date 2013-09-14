@@ -36,28 +36,6 @@ namespace IndexerLib
 {
     public static class HtmlHelper
     {
-        public const string HeadClose = "</head>";
-        public const string BodyOpen = "<body>";
-        public const string BodyClose = "</body>\n</html>";
-        public const string NumberedListOpen = "<ol>";
-        public const string NumberedListClose = "</ol>";
-
-        public static string GetDomCollapse()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<script type=\"text/javascript\">");
-            sb.AppendLine("// <![CDATA[");
-            sb.AppendLine(Resources.domCollapse_js);
-            sb.AppendLine("// ]]>");
-            sb.AppendLine("</script>");
-
-            sb.AppendLine("<style type=\"text/css\">");
-            sb.AppendLine(Resources.domCollapse_css);
-            sb.AppendLine("</style>");
-
-            return sb.ToString();
-        }
-
         public static string GetCssStyle(string filePath = "")
         {
             StringBuilder sb = new StringBuilder();
@@ -105,11 +83,6 @@ namespace IndexerLib
         public static string Tag(string tag, string content, string style = "", string otherFields = "")
         {
             return StartTag(tag, style, otherFields) + Helpers.HtmlEncode(content) + EndTag(tag);
-        }
-
-        public static string GetTitle(string content, string style = "")
-        {
-            return Tag("title", content, style);
         }
     }
 }

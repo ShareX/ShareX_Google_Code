@@ -118,7 +118,7 @@ begin
     if V = IDYES then
     begin
       sUnInstallString := GetUninstallString();
-      sUnInstallString :=  RemoveQuotes(sUnInstallString);
+      sUnInstallString := RemoveQuotes(sUnInstallString);
       Exec(ExpandConstant(sUnInstallString), '/SILENT', '', SW_SHOW, ewWaitUntilTerminated, iResultCode);
       Result := True;
     end
