@@ -85,7 +85,7 @@ namespace IndexerLib
 
         protected override string GetFolderNameRow(FolderInfo dir, int level)
         {
-            int heading = (level + 1).Between(1, 4);
+            int heading = (level + 1).Between(1, 6);
             string marginStyle = string.Format("margin:0px {0}px -10px {0}px;", level > 0 ? "10" : "0");
             string className = string.Empty;
             if (dir.HasParent)

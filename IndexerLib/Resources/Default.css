@@ -24,67 +24,47 @@ a:hover, a:active {
 
 ul {
     margin: 0px 0px 10px 0px;
+    padding-left: 30px;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     border: 1px solid #000000;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    padding: 4px 0px 4px 8px;
     margin: 0px;
-    color: white;
-    text-align: center;
+    color: #FFFFFF;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: normal;
+    text-shadow: 1px 1px 1px #000000;
+}
+
+h1 {
     background-color: #336699;
-    padding-top: 3px;
-    padding-bottom: 5px;
+    padding: 4px 0px 4px 0px;
+    text-align: center;
     font-size: x-large;
 }
 
 h2 {
-    border: 1px solid #000099;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 2px 0px 4px 8px;
-    margin: 0px;
-    color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #0070DF;
-    font-size: large;
-    font-weight: normal;
+    background-color: #3D7AAD;
 }
 
 h3 {
-    border: 1px solid #000099;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 2px 0px 4px 8px;
-    margin: 0px;
-    color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #0099FF;
-    font-size: large;
-    font-weight: normal;
+    background-color: #478FC2;
 }
 
 h4 {
-    border: 1px solid #000099;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 2px 0px 4px 8px;
-    margin: 0px;
-    color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #52A3D6;
+}
+
+h5 {
+    background-color: #5CB8EB;
+}
+
+h6 {
     background-color: #66CCFF;
-    font-size: large;
-    font-weight: normal;
-}
-
-.audioinfo {
-    color: #FF0000;
-}
-
-.audiolength {
-    color: #CC0000;
 }
 
 .filesize {
