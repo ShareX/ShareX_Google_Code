@@ -35,12 +35,21 @@ namespace IndexerLib
         public long Size { get; private set; }
         public List<FileInfo> Files { get; private set; }
         public List<FolderInfo> Folders { get; private set; }
+        public bool HasParent { get; private set; }
 
         public string FolderName
         {
             get
             {
                 return Path.GetFileName(FolderPath);
+            }
+        }
+
+        public bool HasFolders
+        {
+            get
+            {
+                return Folders.Count > 0;
             }
         }
 
@@ -62,6 +71,7 @@ namespace IndexerLib
             {
                 FolderInfo subdir = new FolderInfo(dp);
                 subdir.Read();
+                subdir.HasParent = true;
                 dir.Folders.Add(subdir);
             }
 

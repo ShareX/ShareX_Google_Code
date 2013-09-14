@@ -42,6 +42,22 @@ namespace IndexerLib
         public const string NumberedListOpen = "<ol>";
         public const string NumberedListClose = "</ol>";
 
+        public static string GetDomCollapse()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<script type=\"text/javascript\">");
+            sb.AppendLine("// <![CDATA[");
+            sb.AppendLine(Resources.domCollapse_js);
+            sb.AppendLine("// ]]>");
+            sb.AppendLine("</script>");
+
+            sb.AppendLine("<style type=\"text/css\">");
+            sb.AppendLine(Resources.domCollapse_css);
+            sb.AppendLine("</style>");
+
+            return sb.ToString();
+        }
+
         public static string GetCssStyle(string filePath = "")
         {
             StringBuilder sb = new StringBuilder();
@@ -54,7 +70,7 @@ namespace IndexerLib
             }
             else
             {
-                sb.AppendLine(Resources.DefaultCss);
+                sb.AppendLine(Resources.Default_css);
             }
 
             sb.AppendLine("</style>");
@@ -62,16 +78,22 @@ namespace IndexerLib
             return sb.ToString();
         }
 
-        public static string GetStartTag(string tag, string style = "")
+        public static string GetStartTag(string tag, string className = "", string style = "")
         {
+            string cl = string.Empty;
             string css = string.Empty;
+
+            if (!string.IsNullOrEmpty(className))
+            {
+                cl = string.Format(" class=\"{0}\"", className);
+            }
 
             if (!string.IsNullOrEmpty(style))
             {
                 css = string.Format(" style=\"{0}\"", style);
             }
 
-            return string.Format("<{0}{1}>", tag, css);
+            return string.Format("<{0}{1}{2}>", tag, cl, css);
         }
 
         public static string GetEndTag(string tag)
@@ -79,9 +101,9 @@ namespace IndexerLib
             return string.Format("</{0}>", tag);
         }
 
-        public static string GetTag(string tag, string content, string style = "")
+        public static string GetTag(string tag, string content, string className, string style = "")
         {
-            return GetStartTag(tag, style) + Helpers.HtmlEncode(content) + GetEndTag(tag);
+            return GetStartTag(tag, className, style) + Helpers.HtmlEncode(content) + GetEndTag(tag);
         }
 
         public static string GetTitle(string content, string style = "")
@@ -89,9 +111,9 @@ namespace IndexerLib
             return GetTag("title", content, style);
         }
 
-        public static string GetHeading(string content, int heading, string style = "")
+        public static string GetHeading(string content, int heading, string className = "", string style = "")
         {
-            return GetTag("h" + heading, content, style);
+            return GetTag("h" + heading, content, className, style);
         }
 
         public static string GetListItem(string content, string style = "")
