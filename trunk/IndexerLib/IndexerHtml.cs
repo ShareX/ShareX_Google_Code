@@ -54,18 +54,18 @@ namespace IndexerLib
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
 
             string divClass = level > 0 ? "FolderBorder" : "MainFolderBorder";
-            sbIndex.AppendLine(HtmlHelper.GetStartTag("div", "", "class=\"" + divClass + "\")"));
+            sbIndex.AppendLine(HtmlHelper.StartTag("div", "", "class=\"" + divClass + "\")"));
 
             if (dir.Files.Count > 0)
             {
-                sbIndex.AppendLine(HtmlHelper.GetStartTag("ul"));
+                sbIndex.AppendLine(HtmlHelper.StartTag("ul"));
 
                 foreach (FileInfo fi in dir.Files)
                 {
                     sbIndex.AppendLine(GetFileNameRow(fi, level));
                 }
 
-                sbIndex.AppendLine(HtmlHelper.GetEndTag("ul"));
+                sbIndex.AppendLine(HtmlHelper.EndTag("ul"));
             }
 
             foreach (FolderInfo subdir in dir.Folders)
@@ -74,18 +74,28 @@ namespace IndexerLib
                 IndexFolder(subdir, level + 1);
             }
 
-            sbIndex.AppendLine(HtmlHelper.GetEndTag("div"));
-        }
-
-        protected override string GetFileNameRow(FileInfo fi, int level)
-        {
-            return HtmlHelper.GetListItem(base.GetFileNameRow(fi));
+            sbIndex.AppendLine(HtmlHelper.EndTag("div"));
         }
 
         protected override string GetFolderNameRow(FolderInfo dir, int level)
         {
             int heading = (level + 1).Between(1, 6);
-            return HtmlHelper.GetHeading(base.GetFolderNameRow(dir), heading);
+
+            string size = string.Empty;
+
+            if (dir.Size > 0)
+            {
+                size = "  " + HtmlHelper.Tag("span", Helpers.ProperFileSize(dir.Size, "", true), "", "class=\"foldersize\")");
+            }
+
+            return HtmlHelper.StartTag("h" + heading) + Helpers.HtmlEncode(dir.FolderName) + size + HtmlHelper.EndTag("h" + heading);
+        }
+
+        protected override string GetFileNameRow(FileInfo fi, int level)
+        {
+            string size = " " + HtmlHelper.Tag("span", Helpers.ProperFileSize(fi.Length, "", true), "", "class=\"filesize\")");
+
+            return HtmlHelper.StartTag("li") + Helpers.HtmlEncode(fi.Name) + size + HtmlHelper.EndTag("li");
         }
     }
 }
