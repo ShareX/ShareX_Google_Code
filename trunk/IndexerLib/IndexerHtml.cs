@@ -54,17 +54,12 @@ namespace IndexerLib
         {
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
 
-            if (dir.HasParent && dir.HasFolders)
-            {
-                sbIndex.AppendLine(HtmlHelper.GetStartTag("div"));
-            }
+            string divStyle = string.Format("border-style:solid;border-width:0px 1px 1px 1px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin:0px {0}px 10px {0}px;padding-top:10px", level > 0 ? "10" : "0");
+            sbIndex.AppendLine(HtmlHelper.GetStartTag("div", divStyle));
 
             if (dir.Files.Count > 0)
             {
-                sbIndex.AppendLine();
-
-                string marginStyle = string.Format("margin-left:{0}px;", level * 30 - 10);
-                sbIndex.AppendLine(HtmlHelper.GetStartTag("ul", marginStyle));
+                sbIndex.AppendLine(HtmlHelper.GetStartTag("ul"));
 
                 foreach (FileInfo fi in dir.Files)
                 {
@@ -80,10 +75,7 @@ namespace IndexerLib
                 IndexFolder(subdir, level + 1);
             }
 
-            if (dir.HasParent && dir.HasFolders)
-            {
-                sbIndex.AppendLine(HtmlHelper.GetEndTag("div"));
-            }
+            sbIndex.AppendLine(HtmlHelper.GetEndTag("div"));
         }
 
         protected override string GetFileNameRow(FileInfo fi, int level)
@@ -93,8 +85,8 @@ namespace IndexerLib
 
         protected override string GetFolderNameRow(FolderInfo dir, int level)
         {
-            int heading = (level + 1).Between(1, 6);
-            string marginStyle = level > 0 ? string.Format("margin-left:{0}px;", level * 30) : string.Empty;
+            int heading = (level + 1).Between(1, 4);
+            string marginStyle = string.Format("margin:0px {0}px -10px {0}px;", level > 0 ? "10" : "0");
             string className = string.Empty;
             if (dir.Folders.Count > 0 || dir.Files.Count > 0)
             {

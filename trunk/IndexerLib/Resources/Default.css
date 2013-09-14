@@ -28,7 +28,8 @@ ul {
 
 h1 {
     border: 1px solid #000000;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     margin: 0px;
     color: white;
     text-align: center;
@@ -41,9 +42,10 @@ h1 {
 
 h2 {
     border: 1px solid #000099;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding: 2px 0px 4px 8px;
-    margin: 5px 0px 5px 0px;
+    margin: 0px;
     color: #FFFFFF;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #0070DF;
@@ -53,9 +55,10 @@ h2 {
 
 h3 {
     border: 1px solid #000099;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding: 2px 0px 4px 8px;
-    margin: 5px 0px 5px 0px;
+    margin: 0px;
     color: #FFFFFF;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #0099FF;
@@ -65,9 +68,10 @@ h3 {
 
 h4 {
     border: 1px solid #000099;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding: 2px 0px 4px 8px;
-    margin: 5px 0px 5px 0px;
+    margin: 0px;
     color: #FFFFFF;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #66CCFF;
