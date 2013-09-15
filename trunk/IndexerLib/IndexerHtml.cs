@@ -27,6 +27,7 @@ using HelpersLib;
 using IndexerLib.Properties;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace IndexerLib
 {
@@ -44,8 +45,13 @@ namespace IndexerLib
             sbIndexHtml.AppendLine(HtmlHelper.EndTag("head"));
             sbIndexHtml.AppendLine(HtmlHelper.StartTag("body"));
             sbIndexHtml.AppendLine(index);
+            sbIndexHtml.AppendLine("<br />");
+            sbIndexHtml.AppendLine(HtmlHelper.StartTag("div") + GetFooter() + HtmlHelper.EndTag("div"));
+            if (config.AddValidationIcons)
+            {
+                sbIndexHtml.AppendLine(Resources.valid_xhtml);
+            }
             sbIndexHtml.AppendLine(HtmlHelper.EndTag("body"));
-            sbIndexHtml.AppendLine();
             sbIndexHtml.AppendLine(HtmlHelper.EndTag("html"));
 
             return sbIndexHtml.ToString().Trim();
@@ -98,6 +104,11 @@ namespace IndexerLib
             string size = " " + HtmlHelper.Tag("span", Helpers.ProperFileSize(fi.Length, "", true), "", "class=\"filesize\"");
 
             return HtmlHelper.StartTag("li") + Helpers.HtmlEncode(fi.Name) + size + HtmlHelper.EndTag("li");
+        }
+
+        protected override string GetFooter()
+        {
+            return base.GetFooter() + string.Format("<a href=\"{0}\">Google code</a>.", Links.URL_WEBSITE);
         }
     }
 }
