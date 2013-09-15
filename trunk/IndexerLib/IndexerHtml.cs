@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using IndexerLib.Properties;
+using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -35,24 +36,18 @@ namespace IndexerLib
     {
         public override string Index(string folderPath, IndexerSettings config)
         {
-            string index = base.Index(folderPath, config);
-
             StringBuilder sbHtmlIndex = new StringBuilder();
-
             sbHtmlIndex.AppendLine(Resources.doctype_xhtml);
-            sbHtmlIndex.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
             sbHtmlIndex.AppendLine(HtmlHelper.Tag("title", "Index for " + Path.GetFileName(folderPath)));
+            sbHtmlIndex.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
             sbHtmlIndex.AppendLine(HtmlHelper.EndTag("head"));
             sbHtmlIndex.AppendLine(HtmlHelper.StartTag("body"));
+            string index = base.Index(folderPath, config).Trim();
             sbHtmlIndex.AppendLine(index);
-            sbHtmlIndex.AppendLine(HtmlHelper.StartTag("div") + "<br />" + GetFooter() + HtmlHelper.EndTag("div"));
-            if (config.AddValidationIcons)
-            {
-                sbHtmlIndex.AppendLine(Resources.valid_xhtml);
-            }
+            sbHtmlIndex.AppendLine(HtmlHelper.StartTag("div") + GetFooter() + HtmlHelper.EndTag("div"));
+            if (config.AddValidationIcons) sbHtmlIndex.AppendLine(Resources.valid_xhtml);
             sbHtmlIndex.AppendLine(HtmlHelper.EndTag("body"));
             sbHtmlIndex.AppendLine(HtmlHelper.EndTag("html"));
-
             return sbHtmlIndex.ToString().Trim();
         }
 
@@ -77,7 +72,6 @@ namespace IndexerLib
 
             foreach (FolderInfo subdir in dir.Folders)
             {
-                sbIndex.AppendLine();
                 IndexFolder(subdir, level + 1);
             }
 
@@ -107,7 +101,8 @@ namespace IndexerLib
 
         protected override string GetFooter()
         {
-            return base.GetFooter() + string.Format("<a href=\"{0}\">Google code</a>.", Links.URL_WEBSITE);
+            return string.Format("Generated on {0} using {1}", DateTime.UtcNow.ToString("yyyy-MM-dd 'at' HH:mm:ss 'UTC'"),
+                string.Format("<a href=\"{0}\">{1}</a>", Links.URL_WEBSITE, string.Format("{0} v{1}", Application.ProductName, Application.ProductVersion)));
         }
     }
 }
