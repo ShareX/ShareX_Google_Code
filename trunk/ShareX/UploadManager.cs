@@ -115,6 +115,18 @@ namespace ShareX
             }
         }
 
+        public static void IndexFolder(TaskSettings taskSettings = null)
+        {
+            using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+                    UploadText(dlg.SelectedPath, taskSettings);
+                }
+            }
+        }
+
         public static void ClipboardUpload(TaskSettings taskSettings = null)
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();

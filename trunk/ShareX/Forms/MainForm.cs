@@ -704,6 +704,11 @@ namespace ShareX
             hashCheckForm.Show();
         }
 
+        private void tsmiIndexFolder_Click(object sender, EventArgs e)
+        {
+            UploadManager.IndexFolder();
+        }
+
         private void tsbScreenshotsFolder_Click(object sender, EventArgs e)
         {
             Helpers.OpenFolder(Program.ScreenshotsPath);
