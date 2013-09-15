@@ -25,11 +25,25 @@
 
 using HelpersLib;
 using System.IO;
+using System.Text;
 
 namespace IndexerLib
 {
     public class IndexerText : Indexer
     {
+        public override string Index(string folderPath, IndexerLib.IndexerSettings config)
+        {
+            string index = base.Index(folderPath, config);
+
+            StringBuilder sbTxtIndex = new StringBuilder();
+            sbTxtIndex.AppendLine(index);
+            string footer = GetFooter();
+            sbTxtIndex.AppendLine("_".Repeat(footer.Length));
+            sbTxtIndex.AppendLine(footer);
+
+            return sbTxtIndex.ToString().Trim();
+        }
+
         protected override void IndexFolder(FolderInfo dir, int level)
         {
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
@@ -60,7 +74,7 @@ namespace IndexerLib
 
         protected override string GetFooter()
         {
-            return base.GetFooter() + Links.URL_WEBSITE;
+            return base.GetFooter() + Links.URL_WEBSITE + ".";
         }
     }
 }

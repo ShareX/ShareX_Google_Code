@@ -37,24 +37,23 @@ namespace IndexerLib
         {
             string index = base.Index(folderPath, config);
 
-            StringBuilder sbIndexHtml = new StringBuilder();
+            StringBuilder sbHtmlIndex = new StringBuilder();
 
-            sbIndexHtml.AppendLine(Resources.doctype_xhtml);
-            sbIndexHtml.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
-            sbIndexHtml.AppendLine(HtmlHelper.Tag("title", "Index for " + Path.GetFileName(folderPath)));
-            sbIndexHtml.AppendLine(HtmlHelper.EndTag("head"));
-            sbIndexHtml.AppendLine(HtmlHelper.StartTag("body"));
-            sbIndexHtml.AppendLine(index);
-            sbIndexHtml.AppendLine("<br />");
-            sbIndexHtml.AppendLine(HtmlHelper.StartTag("div") + GetFooter() + HtmlHelper.EndTag("div"));
+            sbHtmlIndex.AppendLine(Resources.doctype_xhtml);
+            sbHtmlIndex.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
+            sbHtmlIndex.AppendLine(HtmlHelper.Tag("title", "Index for " + Path.GetFileName(folderPath)));
+            sbHtmlIndex.AppendLine(HtmlHelper.EndTag("head"));
+            sbHtmlIndex.AppendLine(HtmlHelper.StartTag("body"));
+            sbHtmlIndex.AppendLine(index);
+            sbHtmlIndex.AppendLine(HtmlHelper.StartTag("div") + "<br />" + GetFooter() + HtmlHelper.EndTag("div"));
             if (config.AddValidationIcons)
             {
-                sbIndexHtml.AppendLine(Resources.valid_xhtml);
+                sbHtmlIndex.AppendLine(Resources.valid_xhtml);
             }
-            sbIndexHtml.AppendLine(HtmlHelper.EndTag("body"));
-            sbIndexHtml.AppendLine(HtmlHelper.EndTag("html"));
+            sbHtmlIndex.AppendLine(HtmlHelper.EndTag("body"));
+            sbHtmlIndex.AppendLine(HtmlHelper.EndTag("html"));
 
-            return sbIndexHtml.ToString().Trim();
+            return sbHtmlIndex.ToString().Trim();
         }
 
         protected override void IndexFolder(FolderInfo dir, int level)
