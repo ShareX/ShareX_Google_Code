@@ -47,6 +47,9 @@ namespace IndexerLib
         [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 
+        [Category("Indexer / XHTML"), DefaultValue(false), Description("Add W3C Validation Icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
+        public bool AddValidationIcons { get; set; }
+
         public IndexerSettings()
         {
             Helpers.ApplyDefaultPropertyValues(this);

@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System.IO;
 
 namespace IndexerLib
@@ -55,6 +56,11 @@ namespace IndexerLib
                     sbIndex.AppendLine(GetFileNameRow(fi, level + 1));
                 }
             }
+        }
+
+        protected override string GetFooter()
+        {
+            return base.GetFooter() + Links.URL_WEBSITE;
         }
     }
 }

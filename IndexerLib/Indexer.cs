@@ -24,9 +24,11 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace IndexerLib
 {
@@ -107,6 +109,13 @@ namespace IndexerLib
         {
             return string.Format("{0}{1} [{2}]", config.PaddingText.Repeat(level), Path.GetFileName(fi.FullName),
                 Helpers.ProperFileSize(fi.Length, "", true));
+        }
+
+        protected virtual string GetFooter()
+        {
+            return string.Format("Generated on {0} using {1}. Latest version can be downloaded from ",
+                DateTime.UtcNow.ToString("yyyy-MM-dd 'at' HH:mm:ss 'UTC'"),
+                string.Format("{0} v{1}", Application.ProductName, Application.ProductVersion));
         }
     }
 }
