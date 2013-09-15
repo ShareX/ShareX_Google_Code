@@ -39,7 +39,7 @@ namespace IndexerLib
             StringBuilder sbHtmlIndex = new StringBuilder();
             sbHtmlIndex.AppendLine(Resources.doctype_xhtml);
             sbHtmlIndex.AppendLine(HtmlHelper.Tag("title", "Index for " + Path.GetFileName(folderPath)));
-            sbHtmlIndex.AppendLine(HtmlHelper.GetCssStyle(config.CssFilePath));
+            sbHtmlIndex.AppendLine(HtmlHelper.GetCssStyle(config));
             sbHtmlIndex.AppendLine(HtmlHelper.EndTag("head"));
             sbHtmlIndex.AppendLine(HtmlHelper.StartTag("body"));
             string index = base.Index(folderPath, config).Trim();

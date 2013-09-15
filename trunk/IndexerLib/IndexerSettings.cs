@@ -31,6 +31,9 @@ namespace IndexerLib
 {
     public class IndexerSettings
     {
+        [Category("Indexer"), Browsable(false), Description("Working directory to store Indexer configuration files")]
+        public string WorkingDir { get; set; }
+
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 

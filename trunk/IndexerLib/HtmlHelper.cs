@@ -36,17 +36,24 @@ namespace IndexerLib
 {
     public static class HtmlHelper
     {
-        public static string GetCssStyle(string filePath = "")
+        public static string GetCssStyle(IndexerSettings config)
         {
             string css;
+            string filePath = Path.Combine(config.WorkingDir, Path.Combine("Indexer", "Default.css"));
 
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            if (File.Exists(filePath))
             {
                 css = File.ReadAllText(filePath, Encoding.UTF8);
+            }
+            else if (!string.IsNullOrEmpty(config.CssFilePath) && File.Exists(config.CssFilePath))
+            {
+                css = File.ReadAllText(config.CssFilePath, Encoding.UTF8);
             }
             else
             {
                 css = Resources.Default_css;
+                Helpers.CreateDirectoryIfNotExist(filePath);
+                File.WriteAllText(filePath, Resources.Default_css, Encoding.UTF8);
             }
 
             return string.Format("<style type=\"text/css\">\r\n{0}\r\n</style>", css);
