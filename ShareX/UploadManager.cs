@@ -117,12 +117,12 @@ namespace ShareX
 
         public static void IndexFolder(TaskSettings taskSettings = null)
         {
-            using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+            using (FolderSelectDialog dlg = new FolderSelectDialog())
             {
-                if (dlg.ShowDialog() == DialogResult.OK)
+                if (dlg.ShowDialog())
                 {
                     if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
-                    UploadText(dlg.SelectedPath, taskSettings);
+                    UploadText(dlg.FileName, taskSettings);
                 }
             }
         }

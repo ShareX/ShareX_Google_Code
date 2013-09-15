@@ -38,22 +38,18 @@ namespace IndexerLib
     {
         public static string GetCssStyle(string filePath = "")
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("<style type=\"text/css\">");
+            string css;
 
             if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
-                sb.AppendLine(File.ReadAllText(filePath, Encoding.UTF8));
+                css = File.ReadAllText(filePath, Encoding.UTF8);
             }
             else
             {
-                sb.AppendLine(Resources.Default_css);
+                css = Resources.Default_css;
             }
 
-            sb.AppendLine("</style>");
-
-            return sb.ToString();
+            return string.Format("<style type=\"text/css\">\r\n{0}\r\n</style>", css);
         }
 
         public static string StartTag(string tag, string style = "", string otherFields = "")

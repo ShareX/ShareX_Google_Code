@@ -7,19 +7,11 @@ img {
     border-style: none;
 }
 
-a:link {
+a:link, a:visited {
     color: #0066FF;
-    text-decoration: none;
-}
-
-a:visited {
-    font-weight: normal;
-    text-decoration: none;
-    color: #777777;
 }
 
 a:hover, a:active {
-    text-decoration: none;
 }
 
 ul {

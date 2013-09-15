@@ -33,14 +33,12 @@ namespace IndexerLib
     {
         public override string Index(string folderPath, IndexerLib.IndexerSettings config)
         {
-            string index = base.Index(folderPath, config);
-
             StringBuilder sbTxtIndex = new StringBuilder();
+            string index = base.Index(folderPath, config).Trim();
             sbTxtIndex.AppendLine(index);
             string footer = GetFooter();
             sbTxtIndex.AppendLine("_".Repeat(footer.Length));
             sbTxtIndex.AppendLine(footer);
-
             return sbTxtIndex.ToString().Trim();
         }
 
