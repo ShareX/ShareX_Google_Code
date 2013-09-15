@@ -181,12 +181,12 @@
             this.tpUploadClipboard = new System.Windows.Forms.TabPage();
             this.cbClipboardUploadAutoDetectURL = new System.Windows.Forms.CheckBox();
             this.chkUseDefaultUploadSettings = new System.Windows.Forms.CheckBox();
-            this.tpAdvanced = new System.Windows.Forms.TabPage();
-            this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
-            this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.tpIndexer = new System.Windows.Forms.TabPage();
             this.pgIndexerConfig = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultIndexerSettings = new System.Windows.Forms.CheckBox();
+            this.tpAdvanced = new System.Windows.Forms.TabPage();
+            this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
+            this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -227,8 +227,8 @@
             this.tcUpload.SuspendLayout();
             this.tpUploadNamePattern.SuspendLayout();
             this.tpUploadClipboard.SuspendLayout();
-            this.tpAdvanced.SuspendLayout();
             this.tpIndexer.SuspendLayout();
+            this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAfterCapture
@@ -2040,6 +2040,42 @@
             this.chkUseDefaultUploadSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultUploadSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultUploadSettings_CheckedChanged);
             // 
+            // tpIndexer
+            // 
+            this.tpIndexer.Controls.Add(this.pgIndexerConfig);
+            this.tpIndexer.Controls.Add(this.chkUseDefaultIndexerSettings);
+            this.tpIndexer.Location = new System.Drawing.Point(4, 22);
+            this.tpIndexer.Name = "tpIndexer";
+            this.tpIndexer.Padding = new System.Windows.Forms.Padding(3);
+            this.tpIndexer.Size = new System.Drawing.Size(520, 360);
+            this.tpIndexer.TabIndex = 8;
+            this.tpIndexer.Text = "Indexer";
+            this.tpIndexer.UseVisualStyleBackColor = true;
+            // 
+            // pgIndexerConfig
+            // 
+            this.pgIndexerConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgIndexerConfig.Location = new System.Drawing.Point(3, 30);
+            this.pgIndexerConfig.Name = "pgIndexerConfig";
+            this.pgIndexerConfig.Size = new System.Drawing.Size(514, 327);
+            this.pgIndexerConfig.TabIndex = 0;
+            this.pgIndexerConfig.ToolbarVisible = false;
+            // 
+            // chkUseDefaultIndexerSettings
+            // 
+            this.chkUseDefaultIndexerSettings.AutoSize = true;
+            this.chkUseDefaultIndexerSettings.Checked = true;
+            this.chkUseDefaultIndexerSettings.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultIndexerSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkUseDefaultIndexerSettings.Location = new System.Drawing.Point(3, 3);
+            this.chkUseDefaultIndexerSettings.Name = "chkUseDefaultIndexerSettings";
+            this.chkUseDefaultIndexerSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.chkUseDefaultIndexerSettings.Size = new System.Drawing.Size(514, 27);
+            this.chkUseDefaultIndexerSettings.TabIndex = 1;
+            this.chkUseDefaultIndexerSettings.Text = "Use default indexer settings";
+            this.chkUseDefaultIndexerSettings.UseVisualStyleBackColor = true;
+            this.chkUseDefaultIndexerSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultIndexerSettings_CheckedChanged);
+            // 
             // tpAdvanced
             // 
             this.tpAdvanced.Controls.Add(this.pgTaskSettings);
@@ -2075,41 +2111,6 @@
             this.chkUseDefaultAdvancedSettings.Text = "Use default advanced settings";
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
-            // 
-            // tpIndexer
-            // 
-            this.tpIndexer.Controls.Add(this.pgIndexerConfig);
-            this.tpIndexer.Controls.Add(this.chkUseDefaultIndexerSettings);
-            this.tpIndexer.Location = new System.Drawing.Point(4, 22);
-            this.tpIndexer.Name = "tpIndexer";
-            this.tpIndexer.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIndexer.Size = new System.Drawing.Size(520, 360);
-            this.tpIndexer.TabIndex = 8;
-            this.tpIndexer.Text = "Indexer";
-            this.tpIndexer.UseVisualStyleBackColor = true;
-            // 
-            // pgIndexerConfig
-            // 
-            this.pgIndexerConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgIndexerConfig.Location = new System.Drawing.Point(3, 30);
-            this.pgIndexerConfig.Name = "pgIndexerConfig";
-            this.pgIndexerConfig.Size = new System.Drawing.Size(514, 327);
-            this.pgIndexerConfig.TabIndex = 0;
-            // 
-            // chkUseDefaultIndexerSettings
-            // 
-            this.chkUseDefaultIndexerSettings.AutoSize = true;
-            this.chkUseDefaultIndexerSettings.Checked = true;
-            this.chkUseDefaultIndexerSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultIndexerSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkUseDefaultIndexerSettings.Location = new System.Drawing.Point(3, 3);
-            this.chkUseDefaultIndexerSettings.Name = "chkUseDefaultIndexerSettings";
-            this.chkUseDefaultIndexerSettings.Padding = new System.Windows.Forms.Padding(5);
-            this.chkUseDefaultIndexerSettings.Size = new System.Drawing.Size(514, 27);
-            this.chkUseDefaultIndexerSettings.TabIndex = 1;
-            this.chkUseDefaultIndexerSettings.Text = "Use default indexer settings";
-            this.chkUseDefaultIndexerSettings.UseVisualStyleBackColor = true;
-            this.chkUseDefaultIndexerSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultIndexerSettings_CheckedChanged);
             // 
             // TaskSettingsForm
             // 
@@ -2184,10 +2185,10 @@
             this.tpUploadNamePattern.PerformLayout();
             this.tpUploadClipboard.ResumeLayout(false);
             this.tpUploadClipboard.PerformLayout();
-            this.tpAdvanced.ResumeLayout(false);
-            this.tpAdvanced.PerformLayout();
             this.tpIndexer.ResumeLayout(false);
             this.tpIndexer.PerformLayout();
+            this.tpAdvanced.ResumeLayout(false);
+            this.tpAdvanced.PerformLayout();
             this.ResumeLayout(false);
 
         }

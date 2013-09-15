@@ -37,8 +37,11 @@ namespace IndexerLib
         [Category("Indexer"), DefaultValue(true), Description("Don't index hidden folders")]
         public bool SkipHiddenFolders { get; set; }
 
-        [Category("Indexer / Text"), DefaultValue("    "), Description("Padding text to show indentation in the folder hierarchy")]
-        public string PaddingText { get; set; }
+        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden files")]
+        public bool SkipHiddenFiles { get; set; }
+
+        [Category("Indexer / Text"), DefaultValue("|___"), Description("Padding text to show indentation in the folder hierarchy")]
+        public string IndentationText { get; set; }
 
         [Category("Indexer / Text"), DefaultValue(false), Description("Adds empty line after folders")]
         public bool AddEmptyLineAfterFolders { get; set; }
@@ -47,7 +50,7 @@ namespace IndexerLib
         [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 
-        [Category("Indexer / XHTML"), DefaultValue(false), Description("Add W3C Validation Icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
+        [Category("Indexer / XHTML"), DefaultValue(false), Description("Add W3C validation icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
         public bool AddValidationIcons { get; set; }
 
         public IndexerSettings()
