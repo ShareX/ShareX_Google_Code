@@ -68,22 +68,28 @@ namespace IndexerLib
         private FolderInfo GetFolderInfo(string folderPath)
         {
             FolderInfo folderInfo = new FolderInfo(folderPath);
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
 
-            foreach (DirectoryInfo directoryInfo in new DirectoryInfo(folderPath).GetDirectories())
+            foreach (DirectoryInfo directoryInfo in currentDirectoryInfo.GetDirectories())
             {
                 if (config.SkipHiddenFolders && directoryInfo.Attributes.HasFlag(FileAttributes.Hidden))
                 {
                     continue;
                 }
 
-                FolderInfo subdir = GetFolderInfo(directoryInfo.FullName);
-                subdir.HasParent = true;
-                folderInfo.Folders.Add(subdir);
+                FolderInfo subFolderInfo = GetFolderInfo(directoryInfo.FullName);
+                folderInfo.Folders.Add(subFolderInfo);
+                subFolderInfo.Parent = folderInfo;
             }
 
-            foreach (string fp in Directory.GetFiles(folderPath))
+            foreach (FileInfo fileInfo in currentDirectoryInfo.GetFiles())
             {
-                folderInfo.Files.Add(new FileInfo(fp));
+                if (config.SkipHiddenFiles && fileInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                {
+                    continue;
+                }
+
+                folderInfo.Files.Add(fileInfo);
             }
 
             folderInfo.Size = folderInfo.Folders.Sum(x => x.Size) + folderInfo.Files.Sum(x => x.Length);
@@ -95,7 +101,7 @@ namespace IndexerLib
 
         protected virtual string GetFolderNameRow(FolderInfo dir, int level = 0)
         {
-            string text = string.Format("{0}{1}", config.PaddingText.Repeat(level), Path.GetFileName(dir.FolderPath));
+            string text = string.Format("{0}{1}", config.IndentationText.Repeat(level), Path.GetFileName(dir.FolderPath));
 
             if (dir.Size > 0)
             {
@@ -107,7 +113,7 @@ namespace IndexerLib
 
         protected virtual string GetFileNameRow(FileInfo fi, int level = 0)
         {
-            return string.Format("{0}{1} [{2}]", config.PaddingText.Repeat(level), Path.GetFileName(fi.FullName),
+            return string.Format("{0}{1} [{2}]", config.IndentationText.Repeat(level), Path.GetFileName(fi.FullName),
                 Helpers.ProperFileSize(fi.Length, "", true));
         }
 

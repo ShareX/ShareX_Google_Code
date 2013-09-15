@@ -35,7 +35,7 @@ namespace IndexerLib
         public long Size { get; set; }
         public List<FileInfo> Files { get; set; }
         public List<FolderInfo> Folders { get; set; }
-        public bool HasParent { get; set; }
+        public FolderInfo Parent { get; set; }
 
         public string FolderName
         {
