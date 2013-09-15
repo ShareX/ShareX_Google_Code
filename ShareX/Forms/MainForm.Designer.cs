@@ -90,6 +90,7 @@ namespace ShareX
             this.tsddbTools = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHashCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiIndexFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbScreenshotsFolder = new System.Windows.Forms.ToolStripButton();
             this.tsbHistory = new System.Windows.Forms.ToolStripButton();
             this.tsbImageHistory = new System.Windows.Forms.ToolStripButton();
@@ -528,7 +529,8 @@ namespace ShareX
             // 
             this.tsddbTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiScreenColorPicker,
-            this.tsmiHashCheck});
+            this.tsmiHashCheck,
+            this.tsmiIndexFolder});
             this.tsddbTools.Image = global::ShareX.Properties.Resources.toolbox;
             this.tsddbTools.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsddbTools.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -551,6 +553,14 @@ namespace ShareX
             this.tsmiHashCheck.Size = new System.Drawing.Size(183, 22);
             this.tsmiHashCheck.Text = "Hash check...";
             this.tsmiHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
+            // 
+            // tsmiIndexFolder
+            // 
+            this.tsmiIndexFolder.Image = global::ShareX.Properties.Resources.folder_tree;
+            this.tsmiIndexFolder.Name = "tsmiIndexFolder";
+            this.tsmiIndexFolder.Size = new System.Drawing.Size(183, 22);
+            this.tsmiIndexFolder.Text = "Index folder...";
+            this.tsmiIndexFolder.Click += new System.EventHandler(this.tsmiIndexFolder_Click);
             // 
             // tsbScreenshotsFolder
             // 
@@ -1715,5 +1725,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayHotkeySettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDestinationSettings;
         private System.Windows.Forms.ToolStripSeparator tssTray3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiIndexFolder;
     }
 }
