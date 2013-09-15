@@ -56,7 +56,7 @@ namespace IndexerLib
             sbIndex.AppendLine(GetFolderNameRow(dir, level));
 
             string divClass = level > 0 ? "FolderBorder" : "MainFolderBorder";
-            sbIndex.AppendLine(HtmlHelper.StartTag("div", "", "class=\"" + divClass + "\")"));
+            sbIndex.AppendLine(HtmlHelper.StartTag("div", "", "class=\"" + divClass + "\""));
 
             if (dir.Files.Count > 0)
             {
@@ -87,7 +87,7 @@ namespace IndexerLib
 
             if (dir.Size > 0)
             {
-                size = "  " + HtmlHelper.Tag("span", Helpers.ProperFileSize(dir.Size, "", true), "", "class=\"foldersize\")");
+                size = "  " + HtmlHelper.Tag("span", Helpers.ProperFileSize(dir.Size, "", true), "", "class=\"foldersize\"");
             }
 
             return HtmlHelper.StartTag("h" + heading) + Helpers.HtmlEncode(dir.FolderName) + size + HtmlHelper.EndTag("h" + heading);
@@ -95,7 +95,7 @@ namespace IndexerLib
 
         protected override string GetFileNameRow(FileInfo fi, int level)
         {
-            string size = " " + HtmlHelper.Tag("span", Helpers.ProperFileSize(fi.Length, "", true), "", "class=\"filesize\")");
+            string size = " " + HtmlHelper.Tag("span", Helpers.ProperFileSize(fi.Length, "", true), "", "class=\"filesize\"");
 
             return HtmlHelper.StartTag("li") + Helpers.HtmlEncode(fi.Name) + size + HtmlHelper.EndTag("li");
         }
