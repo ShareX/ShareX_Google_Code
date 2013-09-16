@@ -299,7 +299,7 @@ namespace ShareX
 
                                     if (info.TaskSettings.GeneralSettings.ShowAfterUploadForm)
                                     {
-                                        AfterUploadForm dlg = new AfterUploadForm(info);
+                                        AfterUploadForm dlg = new AfterUploadForm(info, info.TaskSettings.AdvancedSettings.AutoCloseAfterUploadForm);
                                         NativeMethods.ShowWindow(dlg.Handle, (int)WindowShowStyle.ShowNoActivate);
                                     }
 

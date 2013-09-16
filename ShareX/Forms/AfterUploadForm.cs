@@ -50,12 +50,12 @@ namespace ShareX
         private ListViewGroup lvgLocal = new ListViewGroup("Local");
         private ListViewGroup lvgCustom = new ListViewGroup("Custom");
 
-        public AfterUploadForm(TaskInfo info)
+        public AfterUploadForm(TaskInfo info, bool autoClose = false)
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
             Info = info;
-            tmrClose.Start();
+            if (autoClose) tmrClose.Start();
 
             bool isFileExist = !string.IsNullOrEmpty(info.FilePath) && File.Exists(info.FilePath);
 
@@ -157,7 +157,7 @@ namespace ShareX
                 }
                 else if (lvClipboardFormats.SelectedItems.Count > 0)
                 {
-                    url = lvClipboardFormats.SelectedItems[0].Text;
+                    url = lvClipboardFormats.SelectedItems[0].SubItems[1].Text;
                 }
 
                 if (!string.IsNullOrEmpty(url))
