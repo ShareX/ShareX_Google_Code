@@ -136,16 +136,8 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
+            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
             task.tempText = text;
-
-            if (Directory.Exists(text))
-            {
-                task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.IndexerSettings.Output.ToString().ToLower());
-            }
-            else
-            {
-                task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
-            }
             return task;
         }
 
@@ -341,8 +333,9 @@ namespace ShareX
             }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
-                if (Directory.Exists(tempText))
+                if (Directory.Exists(tempText)) // TODO: Should be optional setting?
                 {
+                    Info.FileName = Path.ChangeExtension(Info.FileName, Info.TaskSettings.IndexerSettings.Output.ToString().ToLower());
                     tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
                 }
 
