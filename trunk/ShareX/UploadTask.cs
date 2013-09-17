@@ -336,6 +336,7 @@ namespace ShareX
                 if (tempText.Length <= 260 && Directory.Exists(tempText)) // TODO: Should be optional setting?
                 {
                     Info.FileName = Path.ChangeExtension(Info.FileName, Info.TaskSettings.IndexerSettings.Output.ToString().ToLower());
+                    Info.TaskSettings.IndexerSettings.BinaryUnits = Program.Settings.BinaryUnits;
                     tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
                 }
 

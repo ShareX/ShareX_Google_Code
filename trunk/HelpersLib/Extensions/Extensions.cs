@@ -332,13 +332,16 @@ namespace HelpersLib
             }
         }
 
-        public static string ToSizeString(this long size)
+        public static string ToSizeString(this long size, bool binary)
         {
-            string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
-            if (size < 1024) return Math.Max(size, 0) + " B";
-            int place = (int)Math.Floor(Math.Log(size, 1024));
-            double num = size / Math.Pow(1024, place);
-            return num.ToString("0.00") + " " + suf[place];
+            string[] suf_decimal = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+            string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
+            int bytes = binary ? 1024 : 1000;
+            size = Math.Max(size, 0);
+            if (size < bytes) return size + " B";
+            int place = (int)Math.Floor(Math.Log(size, bytes));
+            double num = size / Math.Pow(bytes, place);
+            return num.ToString("0.00") + " " + (binary ? suf_binary[place] : suf_decimal[place]);
         }
     }
 }
