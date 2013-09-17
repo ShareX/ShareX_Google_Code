@@ -86,7 +86,8 @@ namespace IndexerLib
 
             if (dir.Size > 0)
             {
-                size = "  " + HtmlHelper.Tag("span", dir.Size.ToSizeString(), "", "class=\"foldersize\"");
+                string folderInfoText = string.Format("{0} ({1} files, {2} folders)", dir.Size.ToSizeString(), dir.TotalFileCount, dir.TotalFolderCount);
+                size = "  " + HtmlHelper.Tag("span", folderInfoText, "", "class=\"foldersize\"");
             }
 
             return HtmlHelper.StartTag("h" + heading) + Helpers.HtmlEncode(dir.FolderName) + size + HtmlHelper.EndTag("h" + heading);
