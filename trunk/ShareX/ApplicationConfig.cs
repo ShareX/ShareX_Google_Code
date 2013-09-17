@@ -93,10 +93,10 @@ namespace ShareX
 
         #region Advanced
 
-        [Category("App"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
+        [Category("Application"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
         public bool BinaryUnits { get; set; }
 
-        [Category("App"), DefaultValue(true), Description("Show most recent task first.")]
+        [Category("Application"), DefaultValue(false), Description("Show most recent task first.")]
         public bool ShowMostRecentTaskFirst { get; set; }
 
         [Category("Upload / Clipboard upload"), DefaultValue(true), Description("Show clipboard content viewer when using clipboard upload button in main window.")]

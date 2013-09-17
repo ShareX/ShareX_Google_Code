@@ -31,9 +31,6 @@ namespace IndexerLib
 {
     public class IndexerSettings
     {
-        [Category("Indexer"), Browsable(false), Description("Working directory to store Indexer configuration files")]
-        public string WorkingDir { get; set; }
-
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 
@@ -49,7 +46,7 @@ namespace IndexerLib
         [Category("Indexer / Text"), DefaultValue(false), Description("Adds empty line after folders")]
         public bool AddEmptyLineAfterFolders { get; set; }
 
-        [Category("Indexer / XHTML"), Description("Cascading Style Sheet file path")]
+        [Category("Indexer / XHTML"), DefaultValue("IndexerDefault.css"), Description("Cascading Style Sheet file path")]
         [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 

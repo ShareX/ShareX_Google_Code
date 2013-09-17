@@ -343,12 +343,9 @@ namespace ShareX
             {
                 if (Directory.Exists(tempText))
                 {
-                    if (string.IsNullOrEmpty(Info.TaskSettings.IndexerSettings.WorkingDir))
-                    {
-                        Info.TaskSettings.IndexerSettings.WorkingDir = Program.PersonalPath;
-                    }
                     tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
                 }
+
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
                 Data = new MemoryStream(byteArray);
             }
