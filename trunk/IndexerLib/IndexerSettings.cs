@@ -32,9 +32,6 @@ namespace IndexerLib
 {
     public class IndexerSettings
     {
-        [JsonIgnore(), Browsable(false), Category("Indexer"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
-        public bool BinaryUnits { get; set; }
-
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 
@@ -56,6 +53,9 @@ namespace IndexerLib
 
         [Category("Indexer / XHTML"), DefaultValue(false), Description("Add W3C validation icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
         public bool AddValidationIcons { get; set; }
+
+        [JsonIgnore()]
+        public bool BinaryUnits;
 
         public IndexerSettings()
         {

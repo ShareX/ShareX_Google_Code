@@ -82,15 +82,32 @@ namespace IndexerLib
         {
             int heading = (level + 1).Between(1, 6);
 
-            string size = string.Empty;
+            string folderInfoText = string.Empty;
 
-            if (dir.Size > 0)
+            if (!dir.IsEmpty)
             {
-                string folderInfoText = string.Format("{0} ({1} files, {2} folders)", dir.Size.ToSizeString(config.BinaryUnits), dir.TotalFileCount, dir.TotalFolderCount);
-                size = "  " + HtmlHelper.Tag("span", folderInfoText, "", "class=\"foldersize\"");
+                folderInfoText = dir.Size.ToSizeString(config.BinaryUnits) + " (";
+
+                if (dir.TotalFileCount > 0)
+                {
+                    folderInfoText += dir.TotalFileCount + " file" + (dir.TotalFileCount > 1 ? "s" : "");
+                }
+
+                if (dir.TotalFolderCount > 0)
+                {
+                    if (dir.TotalFileCount > 0)
+                    {
+                        folderInfoText += ", ";
+                    }
+
+                    folderInfoText += dir.TotalFolderCount + " folder" + (dir.TotalFolderCount > 1 ? "s" : "");
+                }
+
+                folderInfoText += ")";
+                folderInfoText = "  " + HtmlHelper.Tag("span", folderInfoText, "", "class=\"foldersize\"");
             }
 
-            return HtmlHelper.StartTag("h" + heading) + Helpers.HtmlEncode(dir.FolderName) + size + HtmlHelper.EndTag("h" + heading);
+            return HtmlHelper.StartTag("h" + heading) + Helpers.HtmlEncode(dir.FolderName) + folderInfoText + HtmlHelper.EndTag("h" + heading);
         }
 
         protected override string GetFileNameRow(FileInfo fi, int level)
