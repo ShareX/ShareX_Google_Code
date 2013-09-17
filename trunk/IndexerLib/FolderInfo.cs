@@ -45,19 +45,19 @@ namespace IndexerLib
             }
         }
 
-        public bool HasFiles
+        public int TotalFileCount
         {
             get
             {
-                return Files.Count > 0;
+                return Files.Count + Folders.Sum(x => x.TotalFileCount);
             }
         }
 
-        public bool HasFolders
+        public int TotalFolderCount
         {
             get
             {
-                return Folders.Count > 0;
+                return Folders.Count + Folders.Sum(x => x.TotalFolderCount);
             }
         }
 
