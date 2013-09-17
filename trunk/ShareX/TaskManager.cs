@@ -212,11 +212,11 @@ namespace ShareX
                 if (lvi != null)
                 {
                     lvi.SubItems[1].Text = string.Format("{0:0.0}%", info.Progress.Percentage);
-                    lvi.SubItems[2].Text = string.Format("{0} / {1}", Helpers.ProperFileSize(info.Progress.Position, "", Program.Settings.BinaryUnits), Helpers.ProperFileSize(info.Progress.Length, "", Program.Settings.BinaryUnits));
+                    lvi.SubItems[2].Text = string.Format("{0} / {1}", info.Progress.Position.ToSizeString(), info.Progress.Length.ToSizeString());
 
                     if (info.Progress.Speed > 0)
                     {
-                        lvi.SubItems[3].Text = Helpers.ProperFileSize((long)info.Progress.Speed, "/s", Program.Settings.BinaryUnits);
+                        lvi.SubItems[3].Text = ((long)info.Progress.Speed).ToSizeString() + "/s";
                     }
 
                     lvi.SubItems[4].Text = Helpers.ProperTimeSpan(info.Progress.Elapsed);

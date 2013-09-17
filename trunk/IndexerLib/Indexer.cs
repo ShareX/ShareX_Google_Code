@@ -105,7 +105,7 @@ namespace IndexerLib
 
             if (dir.Size > 0)
             {
-                text += string.Format(" [{0}]", Helpers.ProperFileSize(dir.Size, "", true));
+                text += string.Format(" [{0}]", dir.Size.ToSizeString());
             }
 
             return text;
@@ -113,8 +113,7 @@ namespace IndexerLib
 
         protected virtual string GetFileNameRow(FileInfo fi, int level = 0)
         {
-            return string.Format("{0}{1} [{2}]", config.IndentationText.Repeat(level), Path.GetFileName(fi.FullName),
-                Helpers.ProperFileSize(fi.Length, "", true));
+            return string.Format("{0}{1} [{2}]", config.IndentationText.Repeat(level), Path.GetFileName(fi.FullName), fi.Length.ToSizeString());
         }
 
         protected virtual string GetFooter()

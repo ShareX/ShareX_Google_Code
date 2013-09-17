@@ -491,25 +491,6 @@ namespace HelpersLib
             return filepath;
         }
 
-        /// <summary>
-        /// Method to give file size with units e.g. 35 KiB or 40 kB/s
-        /// </summary>
-        /// <param name="size">Size in Bytes</param>
-        /// <param name="binary">Whether or not units should be binary or in decimal format</param>
-        /// <param name="perUnit">Per second symbol e.g. /s</param>
-        /// <returns>file size with units</returns>
-        public static string ProperFileSize(long size, string perUnit = "", bool binary = false)
-        {
-            string[] suf_decimal = { "B", "kB", "MB", "GB", "TB", "PB" };
-            string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
-            int bytes = binary ? 1024 : 1000;
-
-            int place = size > 0 ? (int)Math.Floor(Math.Log(size, bytes)) : 0;
-            double num = size / Math.Pow(bytes, place);
-            string format = place == 0 ? "0" : "0.00";
-            return num.ToString(format) + " " + (binary ? suf_binary[place] : suf_decimal[place]) + perUnit;
-        }
-
         public static string ProperTimeSpan(TimeSpan ts)
         {
             string time = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);

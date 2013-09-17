@@ -333,7 +333,7 @@ namespace ShareX
             }
             else if (Info.Job == TaskJob.TextUpload && !string.IsNullOrEmpty(tempText))
             {
-                if (Directory.Exists(tempText)) // TODO: Should be optional setting?
+                if (tempText.Length <= 260 && Directory.Exists(tempText)) // TODO: Should be optional setting?
                 {
                     Info.FileName = Path.ChangeExtension(Info.FileName, Info.TaskSettings.IndexerSettings.Output.ToString().ToLower());
                     tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
