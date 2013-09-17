@@ -86,7 +86,7 @@ namespace IndexerLib
 
             if (dir.Size > 0)
             {
-                string folderInfoText = string.Format("{0} ({1} files, {2} folders)", dir.Size.ToSizeString(), dir.TotalFileCount, dir.TotalFolderCount);
+                string folderInfoText = string.Format("{0} ({1} files, {2} folders)", dir.Size.ToSizeString(config.BinaryUnits), dir.TotalFileCount, dir.TotalFolderCount);
                 size = "  " + HtmlHelper.Tag("span", folderInfoText, "", "class=\"foldersize\"");
             }
 
@@ -95,7 +95,7 @@ namespace IndexerLib
 
         protected override string GetFileNameRow(FileInfo fi, int level)
         {
-            string size = " " + HtmlHelper.Tag("span", fi.Length.ToSizeString(), "", "class=\"filesize\"");
+            string size = " " + HtmlHelper.Tag("span", fi.Length.ToSizeString(config.BinaryUnits), "", "class=\"filesize\"");
 
             return HtmlHelper.StartTag("li") + Helpers.HtmlEncode(fi.Name) + size + HtmlHelper.EndTag("li");
         }

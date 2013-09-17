@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Drawing.Design;
 
@@ -31,6 +32,9 @@ namespace IndexerLib
 {
     public class IndexerSettings
     {
+        [JsonIgnore(), Browsable(false), Category("Indexer"), DefaultValue(false), Description("Calculate and show file sizes in binary units (KiB, MiB etc.)")]
+        public bool BinaryUnits { get; set; }
+
         [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
         public IndexerOutput Output { get; set; }
 
