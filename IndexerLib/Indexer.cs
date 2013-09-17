@@ -59,6 +59,7 @@ namespace IndexerLib
             this.config = config;
 
             FolderInfo folderInfo = GetFolderInfo(folderPath);
+            folderInfo.Update();
 
             IndexFolder(folderInfo);
 
@@ -91,8 +92,6 @@ namespace IndexerLib
 
                 folderInfo.Files.Add(fileInfo);
             }
-
-            folderInfo.Size = folderInfo.Folders.Sum(x => x.Size) + folderInfo.Files.Sum(x => x.Length);
 
             return folderInfo;
         }
