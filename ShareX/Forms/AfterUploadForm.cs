@@ -50,12 +50,12 @@ namespace ShareX
         private ListViewGroup lvgLocal = new ListViewGroup("Local");
         private ListViewGroup lvgCustom = new ListViewGroup("Custom");
 
-        public AfterUploadForm(TaskInfo info, bool autoClose = false)
+        public AfterUploadForm(TaskInfo info)
         {
             InitializeComponent();
             Icon = Resources.ShareXIcon;
             Info = info;
-            if (autoClose) tmrClose.Start();
+            if (Info.TaskSettings.AdvancedSettings.AutoCloseAfterUploadForm) tmrClose.Start();
 
             bool isFileExist = !string.IsNullOrEmpty(info.FilePath) && File.Exists(info.FilePath);
 
