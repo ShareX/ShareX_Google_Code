@@ -69,11 +69,16 @@ namespace IndexerLib
         protected override void IndexFolder(FolderInfo dir, int level = 0)
         {
             xmlWriter.WriteStartElement("Folder");
-            xmlWriter.WriteElementString("Name", dir.FolderName);
 
-            if (!dir.IsEmpty)
+            if (config.UseAttribute)
             {
-                xmlWriter.WriteElementString("Size", dir.Size.ToSizeString(config.BinaryUnits));
+                xmlWriter.WriteAttributeString("Name", dir.FolderName);
+                if (!dir.IsEmpty) xmlWriter.WriteAttributeString("Size", dir.Size.ToSizeString(config.BinaryUnits));
+            }
+            else
+            {
+                xmlWriter.WriteElementString("Name", dir.FolderName);
+                if (!dir.IsEmpty) xmlWriter.WriteElementString("Size", dir.Size.ToSizeString(config.BinaryUnits));
             }
 
             if (dir.Files.Count > 0)
@@ -83,8 +88,18 @@ namespace IndexerLib
                 foreach (FileInfo fi in dir.Files)
                 {
                     xmlWriter.WriteStartElement("File");
-                    xmlWriter.WriteElementString("Name", fi.Name);
-                    xmlWriter.WriteElementString("Size", fi.Length.ToSizeString(config.BinaryUnits));
+
+                    if (config.UseAttribute)
+                    {
+                        xmlWriter.WriteAttributeString("Name", fi.Name);
+                        xmlWriter.WriteAttributeString("Size", fi.Length.ToSizeString(config.BinaryUnits));
+                    }
+                    else
+                    {
+                        xmlWriter.WriteElementString("Name", fi.Name);
+                        xmlWriter.WriteElementString("Size", fi.Length.ToSizeString(config.BinaryUnits));
+                    }
+
                     xmlWriter.WriteEndElement();
                 }
 
