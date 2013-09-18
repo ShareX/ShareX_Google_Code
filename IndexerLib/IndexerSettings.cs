@@ -32,27 +32,30 @@ namespace IndexerLib
 {
     public class IndexerSettings
     {
-        [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type")]
+        [Category("Indexer"), DefaultValue(IndexerOutput.Html), Description("Indexer output type.")]
         public IndexerOutput Output { get; set; }
 
-        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden folders")]
+        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden folders.")]
         public bool SkipHiddenFolders { get; set; }
 
-        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden files")]
+        [Category("Indexer"), DefaultValue(true), Description("Don't index hidden files.")]
         public bool SkipHiddenFiles { get; set; }
 
-        [Category("Indexer / Text"), DefaultValue("|___"), Description("Padding text to show indentation in the folder hierarchy")]
+        [Category("Indexer / Text"), DefaultValue("|___"), Description("Padding text to show indentation in the folder hierarchy.")]
         public string IndentationText { get; set; }
 
-        [Category("Indexer / Text"), DefaultValue(false), Description("Adds empty line after folders")]
+        [Category("Indexer / Text"), DefaultValue(false), Description("Adds empty line after folders.")]
         public bool AddEmptyLineAfterFolders { get; set; }
 
-        [Category("Indexer / XHTML"), DefaultValue("IndexerDefault.css"), Description("Cascading Style Sheet file path")]
+        [Category("Indexer / HTML"), DefaultValue("IndexerDefault.css"), Description("Cascading Style Sheet file path.")]
         [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 
-        [Category("Indexer / XHTML"), DefaultValue(false), Description("Add W3C validation icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
+        [Category("Indexer / HTML"), DefaultValue(false), Description("Add W3C validation icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
         public bool AddValidationIcons { get; set; }
+
+        [Category("Indexer / XML"), DefaultValue(true), Description("Folder/File information (name, size etc.) will be written as attribute.")]
+        public bool UseAttribute { get; set; }
 
         [JsonIgnore()]
         public bool BinaryUnits;
