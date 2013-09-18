@@ -92,7 +92,7 @@ namespace IndexerLib
 
                 folderInfo.Files.Add(fileInfo);
             }
-
+            folderInfo.Files.Sort(new FileInfoComparer());
             return folderInfo;
         }
 
