@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
-    <Compile Include="FileInfoComparer.cs" />
     <Compile Include="HtmlHelper.cs" />
     <Compile Include="Indexer.cs" />
     <Compile Include="IndexerHtml.cs" />

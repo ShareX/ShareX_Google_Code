@@ -31,10 +31,15 @@ namespace IndexerLib
 {
     public class IndexerText : Indexer
     {
-        public override string Index(string folderPath, IndexerLib.IndexerSettings config)
+        public IndexerText(IndexerSettings indexerSettings)
+            : base(indexerSettings)
+        {
+        }
+
+        public override string Index(string folderPath)
         {
             StringBuilder sbTxtIndex = new StringBuilder();
-            string index = base.Index(folderPath, config).Trim();
+            string index = base.Index(folderPath).Trim();
             sbTxtIndex.AppendLine(index);
             string footer = GetFooter();
             sbTxtIndex.AppendLine("_".Repeat(footer.Length));
@@ -44,13 +49,13 @@ namespace IndexerLib
 
         protected override void IndexFolder(FolderInfo dir, int level)
         {
-            sbIndex.AppendLine(GetFolderNameRow(dir, level));
+            sbContent.AppendLine(GetFolderNameRow(dir, level));
 
             foreach (FolderInfo subdir in dir.Folders)
             {
                 if (config.AddEmptyLineAfterFolders)
                 {
-                    sbIndex.AppendLine();
+                    sbContent.AppendLine();
                 }
 
                 IndexFolder(subdir, level + 1);
@@ -60,19 +65,14 @@ namespace IndexerLib
             {
                 if (config.AddEmptyLineAfterFolders)
                 {
-                    sbIndex.AppendLine();
+                    sbContent.AppendLine();
                 }
 
                 foreach (FileInfo fi in dir.Files)
                 {
-                    sbIndex.AppendLine(GetFileNameRow(fi, level + 1));
+                    sbContent.AppendLine(GetFileNameRow(fi, level + 1));
                 }
             }
-        }
-
-        protected override string GetFooter()
-        {
-            return base.GetFooter() + Links.URL_WEBSITE + ".";
         }
     }
 }

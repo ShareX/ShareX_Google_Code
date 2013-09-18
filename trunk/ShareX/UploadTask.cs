@@ -337,7 +337,7 @@ namespace ShareX
                 {
                     Info.FileName = Path.ChangeExtension(Info.FileName, Info.TaskSettings.IndexerSettings.Output.ToString().ToLower());
                     Info.TaskSettings.IndexerSettings.BinaryUnits = Program.Settings.BinaryUnits;
-                    tempText = Indexer.Run(tempText, Info.TaskSettings.IndexerSettings);
+                    tempText = Indexer.Index(tempText, Info.TaskSettings.IndexerSettings);
                 }
 
                 byte[] byteArray = Encoding.UTF8.GetBytes(tempText);
