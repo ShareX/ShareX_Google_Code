@@ -26,7 +26,6 @@
 using HelpersLib;
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -54,6 +53,9 @@ namespace IndexerLib
                 case IndexerOutput.Txt:
                     indexer = new IndexerText(config);
                     break;
+                case IndexerOutput.Xml:
+                    indexer = new IndexerXml(config);
+                    break;
             }
 
             return indexer.Index(folderPath);
@@ -69,7 +71,7 @@ namespace IndexerLib
             return sbContent.ToString();
         }
 
-        private FolderInfo GetFolderInfo(string folderPath)
+        protected FolderInfo GetFolderInfo(string folderPath)
         {
             FolderInfo folderInfo = new FolderInfo(folderPath);
             DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
