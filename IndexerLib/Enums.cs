@@ -32,6 +32,8 @@ namespace IndexerLib
         [Description("Text")]
         Txt,
         [Description("HTML")]
-        Html
+        Html,
+        [Description("XML")]
+        Xml
     }
 }

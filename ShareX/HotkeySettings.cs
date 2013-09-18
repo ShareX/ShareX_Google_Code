@@ -23,10 +23,7 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
-using Newtonsoft.Json;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace ShareX
 {
