@@ -55,7 +55,7 @@ namespace ScreenCapture
                     if (AutoHideTaskbar && NativeMethods.GetTaskbarRectangle().IntersectsWith(rect))
                     {
                         isTaskbarHide = true;
-                        NativeMethods.SetTaskbarVisible(false);
+                        NativeMethods.SetTaskbarVisibility(false);
                     }
 
                     if (CaptureCursor)
@@ -138,7 +138,7 @@ namespace ScreenCapture
                 {
                     if (isTaskbarHide)
                     {
-                        NativeMethods.SetTaskbarVisible(true);
+                        NativeMethods.SetTaskbarVisibility(true);
                     }
 
                     if (whiteBackground != null) whiteBackground.Dispose();
