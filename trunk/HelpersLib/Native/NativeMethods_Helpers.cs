@@ -279,10 +279,29 @@ namespace HelpersLib
             return (Rectangle)abd.rc;
         }
 
-        public static void SetTaskbarVisible(bool visible)
+        public static void SetTaskbarVisibility(bool visible)
         {
             IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
-            NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+
+            if (taskbarHandle != IntPtr.Zero)
+            {
+                NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+            }
+
+            SetStartButtonVisibility(visible);
+        }
+
+        public static void SetStartButtonVisibility(bool visible)
+        {
+            if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
+            {
+                IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+
+                if (startHandle != IntPtr.Zero)
+                {
+                    NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                }
+            }
         }
 
         public static void TrimMemoryUse()
