@@ -279,29 +279,64 @@ namespace HelpersLib
             return (Rectangle)abd.rc;
         }
 
-        public static void SetTaskbarVisibility(bool visible)
+        public static bool SetTaskbarVisibilityIfIntersect(bool visible, Rectangle rect)
+        {
+            bool result = false;
+
+            IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
+
+            if (taskbarHandle != IntPtr.Zero)
+            {
+                Rectangle taskbarRect = NativeMethods.GetWindowRect(taskbarHandle);
+
+                if (rect.IntersectsWith(taskbarRect))
+                {
+                    NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                    result = true;
+                }
+
+                if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
+                {
+                    IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+
+                    if (startHandle != IntPtr.Zero)
+                    {
+                        Rectangle startRect = NativeMethods.GetWindowRect(startHandle);
+
+                        if (rect.IntersectsWith(startRect))
+                        {
+                            NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                            result = true;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static bool SetTaskbarVisibility(bool visible)
         {
             IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
 
             if (taskbarHandle != IntPtr.Zero)
             {
                 NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
-            }
 
-            SetStartButtonVisibility(visible);
-        }
-
-        public static void SetStartButtonVisibility(bool visible)
-        {
-            if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
-            {
-                IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
-
-                if (startHandle != IntPtr.Zero)
+                if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
                 {
-                    NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                    IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+
+                    if (startHandle != IntPtr.Zero)
+                    {
+                        NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                    }
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         public static void TrimMemoryUse()
