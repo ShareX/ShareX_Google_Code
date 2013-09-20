@@ -82,7 +82,9 @@
     <None Include="Resources\doctype_xhtml.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IndexerDefault.css" />
+    <None Include="IndexerDefault.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
