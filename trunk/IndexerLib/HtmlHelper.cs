@@ -36,14 +36,8 @@ namespace IndexerLib
         {
             string css;
 
-            if (!string.IsNullOrEmpty(filePath))
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
-                if (!File.Exists(filePath))
-                {
-                    Helpers.CreateDirectoryIfNotExist(filePath);
-                    File.WriteAllText(filePath, Resources.IndexerDefault, Encoding.UTF8);
-                }
-
                 css = File.ReadAllText(filePath, Encoding.UTF8);
             }
             else
