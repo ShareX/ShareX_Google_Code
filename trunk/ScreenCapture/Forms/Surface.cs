@@ -44,7 +44,6 @@ namespace ScreenCapture
         public int FPS { get; private set; }
         public Rectangle ScreenRectangle { get; private set; }
         public Rectangle ScreenRectangle0Based { get; private set; }
-        public string DebugText { get; set; }
         public SurfaceResult Result { get; private set; }
 
         protected List<DrawableObject> DrawableObjects { get; set; }
@@ -171,10 +170,11 @@ namespace ScreenCapture
 
             Draw(g);
 
-#if DEBUG
-            CheckFPS();
-            DrawInfo(g);
-#endif
+            if (Config.ShowFPS)
+            {
+                CheckFPS();
+                DrawInfo(g);
+            }
 
             Invalidate();
         }
@@ -258,26 +258,16 @@ namespace ScreenCapture
 
             if (timer.ElapsedMilliseconds >= 1000)
             {
-                FPS = frameCount;
+                FPS = (int)(frameCount / timer.Elapsed.TotalSeconds);
                 frameCount = 0;
                 timer.Reset();
                 timer.Start();
-                EverySecond();
             }
-        }
-
-        protected virtual void EverySecond()
-        {
         }
 
         private void DrawInfo(Graphics g)
         {
             string text = "FPS: " + FPS;
-
-            if (!string.IsNullOrEmpty(DebugText))
-            {
-                text += "\n" + DebugText;
-            }
 
             SizeF textSize = g.MeasureString(text, textFont);
 
