@@ -43,6 +43,9 @@ namespace ScreenCapture
         [DefaultValue(true), Description("Show screen wide crosshair.")]
         public bool ShowCrosshair { get; set; }
 
+        [DefaultValue(false), Description("Show frames per second.")]
+        public bool ShowFPS { get; set; }
+
         [DefaultValue(false), Description("Result image will have border around the shape(s).")]
         public bool DrawBorder { get; set; }
 
