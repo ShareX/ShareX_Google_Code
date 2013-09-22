@@ -71,34 +71,38 @@ namespace IndexerLib
             return sbContent.ToString();
         }
 
-        protected FolderInfo GetFolderInfo(string folderPath)
+        protected FolderInfo GetFolderInfo(string folderPath, int level = 0)
         {
             FolderInfo folderInfo = new FolderInfo(folderPath);
-            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
 
-            foreach (DirectoryInfo directoryInfo in currentDirectoryInfo.GetDirectories())
+            if (config.MaxDepthLevel == 0 || level < config.MaxDepthLevel)
             {
-                if (config.SkipHiddenFolders && directoryInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
+
+                foreach (DirectoryInfo directoryInfo in currentDirectoryInfo.GetDirectories())
                 {
-                    continue;
+                    if (config.SkipHiddenFolders && directoryInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                    {
+                        continue;
+                    }
+
+                    FolderInfo subFolderInfo = GetFolderInfo(directoryInfo.FullName, level + 1);
+                    folderInfo.Folders.Add(subFolderInfo);
+                    subFolderInfo.Parent = folderInfo;
                 }
 
-                FolderInfo subFolderInfo = GetFolderInfo(directoryInfo.FullName);
-                folderInfo.Folders.Add(subFolderInfo);
-                subFolderInfo.Parent = folderInfo;
-            }
-
-            foreach (FileInfo fileInfo in currentDirectoryInfo.GetFiles())
-            {
-                if (config.SkipHiddenFiles && fileInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                foreach (FileInfo fileInfo in currentDirectoryInfo.GetFiles())
                 {
-                    continue;
+                    if (config.SkipHiddenFiles && fileInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                    {
+                        continue;
+                    }
+
+                    folderInfo.Files.Add(fileInfo);
                 }
 
-                folderInfo.Files.Add(fileInfo);
+                folderInfo.Files.Sort((x, y) => x.Name.CompareTo(y.Name));
             }
-
-            folderInfo.Files.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             return folderInfo;
         }

@@ -41,6 +41,9 @@ namespace IndexerLib
         [Category("Indexer"), DefaultValue(true), Description("Don't index hidden files.")]
         public bool SkipHiddenFiles { get; set; }
 
+        [Category("Indexer"), DefaultValue(0), Description("Maximum folder depth level for indexing. 0 means unlimited.")]
+        public int MaxDepthLevel { get; set; }
+
         [Category("Indexer / Text"), DefaultValue("|___"), Description("Padding text to show indentation in the folder hierarchy.")]
         public string IndentationText { get; set; }
 

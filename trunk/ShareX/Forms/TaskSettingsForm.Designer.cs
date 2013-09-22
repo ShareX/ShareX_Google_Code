@@ -2057,6 +2057,7 @@
             this.pgIndexerConfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgIndexerConfig.Location = new System.Drawing.Point(3, 30);
             this.pgIndexerConfig.Name = "pgIndexerConfig";
+            this.pgIndexerConfig.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.pgIndexerConfig.Size = new System.Drawing.Size(514, 327);
             this.pgIndexerConfig.TabIndex = 0;
             this.pgIndexerConfig.ToolbarVisible = false;
