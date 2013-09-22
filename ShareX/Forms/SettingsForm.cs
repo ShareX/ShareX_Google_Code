@@ -56,9 +56,9 @@ namespace ShareX
 
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;
-            cbStartWithWindows.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.Startup); //RegistryHelper.CheckStartWithWindows();
-            cbSendToMenu.Checked = ShortcutHelper.CheckShortcut(Environment.SpecialFolder.SendTo);
-            cbShellContextMenu.Checked = RegistryHelper.CheckShellContextMenu();
+            cbStartWithWindows.Checked = ShortcutHelpers.CheckShortcut(Environment.SpecialFolder.Startup); //RegistryHelper.CheckStartWithWindows();
+            cbSendToMenu.Checked = ShortcutHelpers.CheckShortcut(Environment.SpecialFolder.SendTo);
+            cbShellContextMenu.Checked = RegistryHelpers.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
 
             // Paths
@@ -150,7 +150,7 @@ namespace ShareX
             if (loaded)
             {
                 //RegistryHelper.SetStartWithWindows(cbStartWithWindows.Checked);
-                ShortcutHelper.SetShortcut(cbStartWithWindows.Checked, Environment.SpecialFolder.Startup, "-silent");
+                ShortcutHelpers.SetShortcut(cbStartWithWindows.Checked, Environment.SpecialFolder.Startup, "-silent");
             }
         }
 
@@ -158,7 +158,7 @@ namespace ShareX
         {
             if (loaded)
             {
-                ShortcutHelper.SetShortcut(cbSendToMenu.Checked, Environment.SpecialFolder.SendTo);
+                ShortcutHelpers.SetShortcut(cbSendToMenu.Checked, Environment.SpecialFolder.SendTo);
             }
         }
 
@@ -166,7 +166,7 @@ namespace ShareX
         {
             if (loaded)
             {
-                RegistryHelper.SetShellContextMenu(cbShellContextMenu.Checked);
+                RegistryHelpers.SetShellContextMenu(cbShellContextMenu.Checked);
             }
         }
 

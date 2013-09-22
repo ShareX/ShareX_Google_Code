@@ -31,7 +31,7 @@ using File = System.IO.File;
 
 namespace HelpersLib
 {
-    public static class ShortcutHelper
+    public static class ShortcutHelpers
     {
         public static bool Create(string shortcutPath, string targetPath, string arguments = "")
         {

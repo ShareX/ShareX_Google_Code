@@ -156,7 +156,7 @@ namespace ScreenCapture
         {
             if (e.Button == MouseButtons.Left)
             {
-                positionOnClick = CaptureHelpers.GetMousePosition();
+                positionOnClick = CaptureHelpers.GetCursorPosition();
                 isMouseDown = true;
             }
             else if (isMouseDown)
@@ -194,7 +194,7 @@ namespace ScreenCapture
                     return (Image)backgroundImage.Clone();
                 }
 
-                return CaptureHelpers.CropImage(backgroundImage, rect);
+                return ImageHelpers.CropImage(backgroundImage, rect);
             }
 
             return null;
@@ -202,7 +202,7 @@ namespace ScreenCapture
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            CurrentMousePosition = CaptureHelpers.GetMousePosition();
+            CurrentMousePosition = CaptureHelpers.GetCursorPosition();
             SelectionRectangle = CaptureHelpers.CreateRectangle(positionOnClick.X, positionOnClick.Y, CurrentMousePosition.X, CurrentMousePosition.Y);
             Refresh();
         }
@@ -228,7 +228,7 @@ namespace ScreenCapture
 
                     using (Font font = new Font("Arial", 17, FontStyle.Bold))
                     {
-                        CaptureHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
+                        ImageHelpers.DrawTextWithOutline(g, string.Format("{0}, {1}\r\n{2} x {3}", SelectionRectangle.X, SelectionRectangle.Y,
                             SelectionRectangle.Width, SelectionRectangle.Height), position, font, Color.White, Color.Black, 3);
                     }
                 }

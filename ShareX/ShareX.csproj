@@ -180,6 +180,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageTag.cs" />
     <Compile Include="ScreenRegionManager.cs" />
     <Compile Include="TaskHelper.cs" />
     <Compile Include="Program.cs" />

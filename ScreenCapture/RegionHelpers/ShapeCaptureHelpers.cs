@@ -45,7 +45,7 @@ namespace ScreenCapture
                 using (GraphicsPath gp = (GraphicsPath)regionFillPath.Clone())
                 {
                     MoveGraphicsPath(gp, -Math.Max(0, regionArea.X), -Math.Max(0, regionArea.Y));
-                    img = CaptureHelpers.CropImage(surfaceImage, newRegionArea, gp);
+                    img = ImageHelpers.CropImage(surfaceImage, newRegionArea, gp);
 
                     if (options.DrawBorder)
                     {
@@ -63,14 +63,14 @@ namespace ScreenCapture
                         using (GraphicsPath gp2 = (GraphicsPath)gpOutline.Clone())
                         {
                             MoveGraphicsPath(gp2, -Math.Max(0, regionArea.X), -Math.Max(0, regionArea.Y));
-                            img = CaptureHelpers.DrawOutline(img, gp2);
+                            img = ImageHelpers.DrawOutline(img, gp2);
                         }
                     }
                 }
 
                 if (options.DrawChecker)
                 {
-                    img = CaptureHelpers.DrawCheckers(img);
+                    img = ImageHelpers.DrawCheckers(img);
                 }
 
                 return img;

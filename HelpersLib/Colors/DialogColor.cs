@@ -115,7 +115,7 @@ namespace HelpersLib
 
         private void UpdateColor(int x, int y)
         {
-            colorPicker.Color = Helpers.GetPixelColor(x, y);
+            colorPicker.Color = CaptureHelpers.GetPixelColor(x, y);
             txtX.Text = x.ToString();
             txtY.Text = y.ToString();
         }
@@ -141,11 +141,11 @@ namespace HelpersLib
         {
             if (sender is NumericUpDown)
             {
-                ClipboardHelper.CopyText(((NumericUpDown)sender).Value.ToString());
+                ClipboardHelpers.CopyText(((NumericUpDown)sender).Value.ToString());
             }
             else if (sender is TextBox)
             {
-                ClipboardHelper.CopyText(((TextBox)sender).Text);
+                ClipboardHelpers.CopyText(((TextBox)sender).Text);
             }
         }
 
@@ -170,7 +170,7 @@ namespace HelpersLib
 
         private void colorTimer_Tick(object sender, EventArgs e)
         {
-            Point position = Helpers.GetCursorPosition();
+            Point position = CaptureHelpers.GetCursorPosition();
             UpdateColor(position.X, position.Y);
         }
 

@@ -104,7 +104,7 @@ namespace ScreenCapture
 
                     Bitmap transparentImage;
 
-                    if (Helpers.IsImagesEqual(whiteBackground, whiteBackground2))
+                    if (ImageHelpers.IsImagesEqual(whiteBackground, whiteBackground2))
                     {
                         transparentImage = CreateTransparentImage(whiteBackground, blackBackground);
                         isTransparent = true;
@@ -213,7 +213,7 @@ namespace ScreenCapture
 
             if (source != rect)
             {
-                Bitmap croppedBitmap = CaptureHelpers.CropBitmap(bitmap, rect);
+                Bitmap croppedBitmap = ImageHelpers.CropBitmap(bitmap, rect);
 
                 if (croppedBitmap != null)
                 {
@@ -346,7 +346,7 @@ namespace ScreenCapture
 
             if (source != rect)
             {
-                return CaptureHelpers.CropBitmap(bitmap, rect);
+                return ImageHelpers.CropBitmap(bitmap, rect);
             }
 
             return bitmap;

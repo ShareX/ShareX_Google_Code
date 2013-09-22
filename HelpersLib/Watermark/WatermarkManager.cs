@@ -155,7 +155,7 @@ namespace HelpersLib
 
                     if (Config.WatermarkImageScale != 100)
                     {
-                        img2 = CaptureHelpers.ResizeImage(img2, width, height);
+                        img2 = ImageHelpers.ResizeImage(img2, width, height);
                     }
 
                     Point imgPos = FindPosition(Config.WatermarkPositionMode, offset, img.Size, img2.Size, 0);

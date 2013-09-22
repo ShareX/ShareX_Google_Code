@@ -541,7 +541,7 @@ namespace UploadersLib
 
             if (!string.IsNullOrEmpty(clipboard))
             {
-                ClipboardHelper.CopyText(clipboard);
+                ClipboardHelpers.CopyText(clipboard);
             }
         }
 

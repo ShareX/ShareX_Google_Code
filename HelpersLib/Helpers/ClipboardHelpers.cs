@@ -32,7 +32,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public static class ClipboardHelper
+    public static class ClipboardHelpers
     {
         private static readonly object ClipboardLock = new object();
 

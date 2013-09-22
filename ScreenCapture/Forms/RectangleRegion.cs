@@ -144,7 +144,7 @@ namespace ScreenCapture
 
                     if (Config.ShowInfo)
                     {
-                        CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
+                        ImageHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
                             totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
                         g.SmoothingMode = SmoothingMode.HighSpeed;
                     }
@@ -177,7 +177,7 @@ namespace ScreenCapture
                     {
                         if (area.IsValid())
                         {
-                            CaptureHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1}\nW:{2} H:{3}", area.X, area.Y, area.Width, area.Height),
+                            ImageHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1}\nW:{2} H:{3}", area.X, area.Y, area.Width, area.Height),
                                 new PointF(area.X + 5, area.Y + 5), textFont, Color.White, Color.Black);
                         }
                     }

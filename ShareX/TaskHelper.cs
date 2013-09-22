@@ -104,7 +104,7 @@ namespace ShareX
 
             if (width > 0 && height > 0)
             {
-                return CaptureHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageSettings.ImageUseSmoothScaling);
+                return ImageHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageSettings.ImageUseSmoothScaling);
             }
 
             return img;
@@ -112,7 +112,7 @@ namespace ShareX
 
         private static MemoryStream SaveImage(TaskSettings taskSettings, Image img, EImageFormat imageFormat)
         {
-            CaptureHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
+            ImageHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
 
             MemoryStream stream = new MemoryStream();
 
@@ -232,7 +232,7 @@ namespace ShareX
 
         private static void editor_ClipboardCopyRequested(Image img)
         {
-            Program.MainForm.InvokeSafe(() => ClipboardHelper.CopyImage(img));
+            Program.MainForm.InvokeSafe(() => ClipboardHelpers.CopyImage(img));
         }
 
         private static void editor_ImageUploadRequested(Image img)
@@ -279,7 +279,7 @@ namespace ShareX
         {
             if (!taskSettings.ExternalPrograms.Exists(x => x.Name == name))
             {
-                ExternalProgram externalProgram = RegistryHelper.FindProgram(name, filename);
+                ExternalProgram externalProgram = RegistryHelpers.FindProgram(name, filename);
 
                 if (externalProgram != null)
                 {
