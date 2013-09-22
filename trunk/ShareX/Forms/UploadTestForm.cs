@@ -322,7 +322,7 @@ namespace ShareX
 
                 if (urls.Count > 0)
                 {
-                    ClipboardHelper.CopyText(string.Join("\r\n", urls.ToArray()));
+                    ClipboardHelpers.CopyText(string.Join("\r\n", urls.ToArray()));
                 }
             }
         }

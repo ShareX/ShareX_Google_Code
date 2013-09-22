@@ -63,7 +63,7 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(urls))
                 {
-                    ClipboardHelper.CopyText(urls);
+                    ClipboardHelpers.CopyText(urls);
                 }
             }
         }
@@ -156,17 +156,17 @@ namespace ShareX
 
         public void CopyFile()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) ClipboardHelper.CopyFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) ClipboardHelpers.CopyFile(SelectedItems[0].Info.FilePath);
         }
 
         public void CopyImage()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ClipboardHelper.CopyImageFromFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ClipboardHelpers.CopyImageFromFile(SelectedItems[0].Info.FilePath);
         }
 
         public void CopyText()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsTextFile) ClipboardHelper.CopyTextFromFile(SelectedItems[0].Info.FilePath);
+            if (IsSelectedItemsValid() && SelectedItems[0].IsTextFile) ClipboardHelpers.CopyTextFromFile(SelectedItems[0].Info.FilePath);
         }
 
         public void CopyHTMLLink()

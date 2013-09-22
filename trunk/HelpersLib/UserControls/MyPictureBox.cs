@@ -130,7 +130,7 @@ namespace HelpersLib
             {
                 if (pbMain.BackgroundImage == null || pbMain.BackgroundImage.Size != pbMain.ClientSize)
                 {
-                    pbMain.BackgroundImage = CaptureHelpers.CreateCheckers(8, Color.LightGray, Color.White);
+                    pbMain.BackgroundImage = ImageHelpers.CreateCheckers(8, Color.LightGray, Color.White);
                 }
             }
             else

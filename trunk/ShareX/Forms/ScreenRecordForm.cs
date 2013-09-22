@@ -77,7 +77,7 @@ namespace ShareX
             Rectangle rect;
             if (TaskHelper.SelectRegion(out rect) && !rect.IsEmpty)
             {
-                CaptureRectangle = Helpers.EvenRectangleSize(rect);
+                CaptureRectangle = CaptureHelpers.EvenRectangleSize(rect);
             }
         }
 

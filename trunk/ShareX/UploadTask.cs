@@ -360,7 +360,7 @@ namespace ShareX
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
             {
-                tempImage = CaptureHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
+                tempImage = ImageHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
@@ -375,7 +375,7 @@ namespace ShareX
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
             {
-                ClipboardHelper.CopyImage(tempImage);
+                ClipboardHelpers.CopyImage(tempImage);
                 DebugHelper.WriteLine("CopyImageToClipboard");
             }
 
@@ -434,11 +434,11 @@ namespace ShareX
                     if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFileToClipboard) && !string.IsNullOrEmpty(Info.FilePath) &&
                         File.Exists(Info.FilePath))
                     {
-                        ClipboardHelper.CopyFile(Info.FilePath);
+                        ClipboardHelpers.CopyFile(Info.FilePath);
                     }
                     else if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard) && !string.IsNullOrEmpty(Info.FilePath))
                     {
-                        ClipboardHelper.CopyText(Info.FilePath);
+                        ClipboardHelpers.CopyText(Info.FilePath);
                     }
 
                     if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.PerformActions) && Info.TaskSettings.ExternalPrograms != null &&
@@ -534,7 +534,7 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(txt))
                 {
-                    ClipboardHelper.CopyText(txt);
+                    ClipboardHelpers.CopyText(txt);
                 }
             }
         }

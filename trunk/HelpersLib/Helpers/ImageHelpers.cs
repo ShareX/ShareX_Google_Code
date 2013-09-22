@@ -24,238 +24,18 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public static class CaptureHelpers
+    public static class ImageHelpers
     {
-        public static Rectangle GetScreenBounds()
-        {
-            return SystemInformation.VirtualScreen;
-        }
-
-        public static Rectangle GetScreenBounds2()
-        {
-            Point topLeft = Point.Empty;
-            Point bottomRight = Point.Empty;
-
-            foreach (Screen screen in Screen.AllScreens)
-            {
-                if (screen.Bounds.X < topLeft.X) topLeft.X = screen.Bounds.X;
-                if (screen.Bounds.Y < topLeft.Y) topLeft.Y = screen.Bounds.Y;
-                if ((screen.Bounds.X + screen.Bounds.Width) > bottomRight.X) bottomRight.X = screen.Bounds.X + screen.Bounds.Width;
-                if ((screen.Bounds.Y + screen.Bounds.Height) > bottomRight.Y) bottomRight.Y = screen.Bounds.Y + screen.Bounds.Height;
-            }
-
-            return new Rectangle(topLeft.X, topLeft.Y, bottomRight.X + Math.Abs(topLeft.X), bottomRight.Y + Math.Abs(topLeft.Y));
-        }
-
-        public static Rectangle GetScreenBounds3()
-        {
-            Point topLeft = Point.Empty;
-            Point bottomRight = Point.Empty;
-
-            foreach (Screen screen in Screen.AllScreens)
-            {
-                topLeft.X = Math.Min(topLeft.X, screen.Bounds.X);
-                topLeft.Y = Math.Min(topLeft.Y, screen.Bounds.Y);
-                bottomRight.X = Math.Max(bottomRight.X, screen.Bounds.Right);
-                bottomRight.Y = Math.Max(bottomRight.Y, screen.Bounds.Bottom);
-            }
-
-            return new Rectangle(topLeft.X, topLeft.Y, bottomRight.X + Math.Abs(topLeft.X), bottomRight.Y + Math.Abs(topLeft.Y));
-        }
-
-        public static Rectangle GetScreenBounds4()
-        {
-            return Screen.AllScreens.Aggregate(Rectangle.Empty, (current, screen) => Rectangle.Union(current, screen.Bounds));
-        }
-
-        public static Rectangle GetActiveScreenBounds()
-        {
-            return Screen.FromPoint(GetMousePosition()).Bounds;
-        }
-
-        public static Rectangle GetScreenBounds0Based()
-        {
-            return ScreenToClient(GetScreenBounds());
-        }
-
-        public static Point ScreenToClient(Point p)
-        {
-            int screenX = NativeMethods.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
-            int screenY = NativeMethods.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
-            return new Point(p.X - screenX, p.Y - screenY);
-        }
-
-        public static Rectangle ScreenToClient(Rectangle r)
-        {
-            return new Rectangle(ScreenToClient(r.Location), r.Size);
-        }
-
-        public static Point ClientToScreen(Point p)
-        {
-            int screenX = NativeMethods.GetSystemMetrics(SystemMetric.SM_XVIRTUALSCREEN);
-            int screenY = NativeMethods.GetSystemMetrics(SystemMetric.SM_YVIRTUALSCREEN);
-            return new Point(p.X + screenX, p.Y + screenY);
-        }
-
-        public static Rectangle ClientToScreen(Rectangle r)
-        {
-            return new Rectangle(ClientToScreen(r.Location), r.Size);
-        }
-
-        public static Point GetMousePosition()
-        {
-            POINT pt = new POINT();
-            NativeMethods.GetCursorPos(out pt);
-            return (Point)pt;
-        }
-
-        public static Point GetZeroBasedMousePosition()
-        {
-            return ScreenToClient(GetMousePosition());
-        }
-
-        public static Rectangle CreateRectangle(int x, int y, int x2, int y2)
-        {
-            int width, height;
-
-            if (x <= x2)
-            {
-                width = x2 - x + 1;
-            }
-            else
-            {
-                width = x - x2 + 1;
-                x = x2;
-            }
-
-            if (y <= y2)
-            {
-                height = y2 - y + 1;
-            }
-            else
-            {
-                height = y - y2 + 1;
-                y = y2;
-            }
-
-            return new Rectangle(x, y, width, height);
-        }
-
-        public static Rectangle CreateRectangle(Point pos, Point pos2)
-        {
-            return CreateRectangle(pos.X, pos.Y, pos2.X, pos2.Y);
-        }
-
-        public static Rectangle FixRectangle(int x, int y, int width, int height)
-        {
-            if (width < 0)
-            {
-                x += width;
-                width = -width;
-            }
-
-            if (height < 0)
-            {
-                y += height;
-                height = -height;
-            }
-
-            return new Rectangle(x, y, width, height);
-        }
-
-        public static Rectangle FixRectangle(Rectangle rect)
-        {
-            return FixRectangle(rect.X, rect.Y, rect.Width, rect.Height);
-        }
-
-        public static Point ProportionalPosition(Point pos, Point pos2)
-        {
-            Point newPosition = Point.Empty;
-            int min;
-
-            if (pos.X < pos2.X)
-            {
-                if (pos.Y < pos2.Y)
-                {
-                    min = Math.Min(pos2.X - pos.X, pos2.Y - pos.Y);
-                    newPosition.X = pos.X + min;
-                    newPosition.Y = pos.Y + min;
-                }
-                else
-                {
-                    min = Math.Min(pos2.X - pos.X, pos.Y - pos2.Y);
-                    newPosition.X = pos.X + min;
-                    newPosition.Y = pos.Y - min;
-                }
-            }
-            else
-            {
-                if (pos.Y > pos2.Y)
-                {
-                    min = Math.Min(pos.X - pos2.X, pos.Y - pos2.Y);
-                    newPosition.X = pos.X - min;
-                    newPosition.Y = pos.Y - min;
-                }
-                else
-                {
-                    min = Math.Min(pos.X - pos2.X, pos2.Y - pos.Y);
-                    newPosition.X = pos.X - min;
-                    newPosition.Y = pos.Y + min;
-                }
-            }
-
-            return newPosition;
-        }
-
-        public static Rectangle GetWindowRectangle(IntPtr handle, bool maximizeFix = true)
-        {
-            Rectangle rect = Rectangle.Empty;
-
-            if (NativeMethods.IsDWMEnabled())
-            {
-                Rectangle tempRect;
-
-                if (NativeMethods.GetExtendedFrameBounds(handle, out tempRect))
-                {
-                    rect = tempRect;
-                }
-            }
-
-            if (rect.IsEmpty)
-            {
-                rect = NativeMethods.GetWindowRect(handle);
-            }
-
-            if (maximizeFix && NativeMethods.IsZoomed(handle))
-            {
-                rect = NativeMethods.MaximizedWindowFix(handle, rect);
-            }
-
-            return rect;
-        }
-
-        public static Rectangle GetActiveWindowRectangle(bool maximizeFix = true)
-        {
-            IntPtr handle = NativeMethods.GetForegroundWindow();
-
-            if (handle.ToInt32() > 0)
-            {
-                return CaptureHelpers.GetWindowRectangle(handle);
-            }
-
-            return Rectangle.Empty;
-        }
-
         public static Image CropImage(Image img, Rectangle rect)
         {
             if (img != null && rect.X >= 0 && rect.Y >= 0 && rect.Width > 0 && rect.Height > 0 &&
@@ -557,6 +337,15 @@ namespace HelpersLib
             using (Brush textBrush = new SolidBrush(textColor))
             {
                 g.DrawString(text, font, textBrush, position.X, position.Y);
+            }
+        }
+
+        public static bool IsImagesEqual(Bitmap bmp1, Bitmap bmp2)
+        {
+            using (UnsafeBitmap unsafeBitmap1 = new UnsafeBitmap(bmp1))
+            using (UnsafeBitmap unsafeBitmap2 = new UnsafeBitmap(bmp2))
+            {
+                return unsafeBitmap1 == unsafeBitmap2;
             }
         }
 

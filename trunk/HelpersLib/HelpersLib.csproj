@@ -75,7 +75,7 @@
   <ItemGroup>
     <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardFormat.cs" />
-    <Compile Include="ClipboardHelper.cs" />
+    <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
     <Compile Include="FileNameEditors\CssFileNameEditor.cs" />
@@ -108,7 +108,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GIF\AnimatedGif.cs" />
-    <Compile Include="CaptureHelpers.cs" />
+    <Compile Include="Helpers\CaptureHelpers.cs" />
     <Compile Include="CLI\CLICommand.cs" />
     <Compile Include="CLI\CLICommandAction.cs" />
     <Compile Include="CLI\CLIHelper.cs" />
@@ -161,10 +161,10 @@
     <Compile Include="GIF\OctreeQuantizer.cs" />
     <Compile Include="GIF\PaletteQuantizer.cs" />
     <Compile Include="GIF\Quantizer.cs" />
-    <Compile Include="ImageTag.cs" />
+    <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="Native\FolderSelectDialog.cs" />
     <Compile Include="SettingsBase.cs" />
-    <Compile Include="ShortcutHelper.cs" />
+    <Compile Include="Helpers\ShortcutHelpers.cs" />
     <Compile Include="StringLineReader.cs" />
     <Compile Include="Native\TaskbarManager.cs" />
     <Compile Include="ThreadWorker.cs" />
@@ -219,7 +219,7 @@
       <DependentUpon>PrintTextForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Printer\PrintTextHelper.cs" />
-    <Compile Include="RegistryHelper.cs" />
+    <Compile Include="Helpers\RegistryHelpers.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="SingleInstanceApplication\ApplicationInstanceManager.cs" />
     <Compile Include="SingleInstanceApplication\InstanceProxy.cs" />
@@ -242,7 +242,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="FastDateTime.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="NameParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

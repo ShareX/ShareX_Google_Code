@@ -135,7 +135,7 @@ namespace ShareX
         {
             if (!string.IsNullOrEmpty(Info.FilePath) && Helpers.IsImageFile(Info.FilePath) && File.Exists(Info.FilePath))
             {
-                ClipboardHelper.CopyImageFromFile(Info.FilePath);
+                ClipboardHelpers.CopyImageFromFile(Info.FilePath);
             }
         }
 
@@ -156,7 +156,7 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(url))
                 {
-                    ClipboardHelper.CopyText(url);
+                    ClipboardHelpers.CopyText(url);
                 }
             }
         }
@@ -252,7 +252,7 @@ namespace ShareX
                 string txt = lvi.SubItems[1].Text;
                 if (!string.IsNullOrEmpty(txt))
                 {
-                    ClipboardHelper.CopyText(txt);
+                    ClipboardHelpers.CopyText(txt);
                 }
             }
         }

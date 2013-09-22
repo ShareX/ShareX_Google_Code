@@ -30,7 +30,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public static class RegistryHelper
+    public static class RegistryHelpers
     {
         private static readonly string WindowsStartupRun = @"Software\Microsoft\Windows\CurrentVersion\Run";
         private static readonly string ApplicationPath = string.Format("\"{0}\"", Application.ExecutablePath);

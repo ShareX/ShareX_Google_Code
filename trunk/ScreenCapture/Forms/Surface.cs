@@ -283,7 +283,7 @@ namespace ScreenCapture
                 position = CaptureHelpers.ScreenToClient(new Point(primaryScreen.X + offset, primaryScreen.Y + primaryScreen.Height - (int)textSize.Height - offset));
             }
 
-            CaptureHelpers.DrawTextWithOutline(g, text, position, textFont, Color.White, Color.Black);
+            ImageHelpers.DrawTextWithOutline(g, text, position, textFont, Color.White, Color.Black);
         }
 
         protected Rectangle CalculateAreaFromNodes()

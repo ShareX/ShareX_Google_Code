@@ -211,8 +211,8 @@ namespace HelpersLib
             {
                 if (fillBackground)
                 {
-                    Image img2 = CaptureHelpers.FillImageBackground(img, Color.White);
-                    CaptureHelpers.CopyMetadata(img, img2);
+                    Image img2 = ImageHelpers.FillImageBackground(img, Color.White);
+                    ImageHelpers.CopyMetadata(img, img2);
                     if (img != null) img.Dispose();
                     img = img2;
                 }
