@@ -34,18 +34,35 @@ namespace HelpersLib
 {
     public static class ClipboardHelpers
     {
+        private const int RetryTimes = 20, RetryDelay = 100;
+
         private static readonly object ClipboardLock = new object();
 
-        private static bool CopyData(object data)
+        private static bool CopyData(IDataObject data, bool copy = true)
         {
             if (data != null)
             {
                 lock (ClipboardLock)
                 {
-                    Clipboard.SetDataObject(data, true, 10, 200);
+                    Clipboard.SetDataObject(data, true, RetryTimes, RetryDelay);
                 }
 
                 return true;
+            }
+
+            return false;
+        }
+
+        public static bool Clear()
+        {
+            try
+            {
+                IDataObject data = new DataObject();
+                CopyData(data, false);
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e, "Clipboard clear failed.");
             }
 
             return false;
@@ -57,7 +74,7 @@ namespace HelpersLib
             {
                 try
                 {
-                    DataObject data = new DataObject();
+                    IDataObject data = new DataObject();
                     string dataFormat;
 
                     if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Major < 5)
@@ -74,7 +91,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Clipboard copy text");
+                    DebugHelper.WriteException(e, "Clipboard copy text failed.");
                 }
             }
 
@@ -87,8 +104,26 @@ namespace HelpersLib
             {
                 try
                 {
-                    DataObject data = new DataObject();
+                    IDataObject data = new DataObject();
+                    data.SetData(DataFormats.Bitmap, true, img);
+                    return CopyData(data);
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy image failed.");
+                }
+            }
 
+            return false;
+        }
+
+        public static bool CopyImageAlternative(Image img)
+        {
+            if (img != null)
+            {
+                try
+                {
+                    IDataObject data = new DataObject();
                     using (MemoryStream msPNG = new MemoryStream())
                     using (MemoryStream msBMP = new MemoryStream())
                     using (MemoryStream msDIB = new MemoryStream())
@@ -103,7 +138,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Clipboard copy image");
+                    DebugHelper.WriteException(e, "Clipboard copy image alternative failed.");
                 }
             }
 
@@ -114,15 +149,25 @@ namespace HelpersLib
         {
             if (!string.IsNullOrEmpty(path))
             {
+                return CopyFile(new string[] { path });
+            }
+
+            return false;
+        }
+
+        public static bool CopyFile(string[] paths)
+        {
+            if (paths != null && paths.Length > 0)
+            {
                 try
                 {
-                    DataObject data = new DataObject();
-                    data.SetFileDropList(new StringCollection() { path });
+                    IDataObject data = new DataObject();
+                    data.SetData(DataFormats.FileDrop, true, paths);
                     return CopyData(data);
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Clipboard copy file");
+                    DebugHelper.WriteException(e, "Clipboard copy file failed.");
                 }
             }
 
@@ -131,7 +176,7 @@ namespace HelpersLib
 
         public static bool CopyImageFromFile(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
                 try
                 {
@@ -142,7 +187,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Clipboard copy image file");
+                    DebugHelper.WriteException(e, "Clipboard copy image from file failed.");
                 }
             }
 
@@ -151,7 +196,7 @@ namespace HelpersLib
 
         public static bool CopyTextFromFile(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
                 try
                 {
@@ -160,7 +205,7 @@ namespace HelpersLib
                 }
                 catch (Exception e)
                 {
-                    DebugHelper.WriteException(e, "Clipboard copy text file");
+                    DebugHelper.WriteException(e, "Clipboard copy text from file failed.");
                 }
             }
 
