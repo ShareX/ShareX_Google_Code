@@ -309,6 +309,8 @@ namespace HelpersLib
 
         public static void DrawTextWithOutline(Graphics g, string text, PointF position, Font font, Color textColor, Color borderColor, int shadowOffset = 1)
         {
+            SmoothingMode tempMode = g.SmoothingMode;
+
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             using (GraphicsPath gp = new GraphicsPath())
@@ -325,6 +327,8 @@ namespace HelpersLib
                     g.FillPath(textBrush, gp);
                 }
             }
+
+            g.SmoothingMode = tempMode;
         }
 
         public static void DrawTextWithShadow(Graphics g, string text, PointF position, Font font, Color textColor, Color shadowColor, int shadowOffset = 1)

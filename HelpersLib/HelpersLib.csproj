@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardFormat.cs" />
+    <Compile Include="ColorMatrixManager.cs" />
     <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />

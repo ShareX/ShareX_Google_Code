@@ -31,6 +31,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -48,10 +49,10 @@ namespace ScreenCapture
 
         protected List<DrawableObject> DrawableObjects { get; set; }
 
-        protected TextureBrush backgroundBrush;
+        protected TextureBrush darkBackgroundBrush, lightBackgroundBrush;
         protected GraphicsPath regionFillPath, regionDrawPath;
         protected Pen borderPen, borderDotPen, borderDotPen2;
-        protected Brush shadowBrush, lightBrush, nodeBackgroundBrush;
+        protected Brush nodeBackgroundBrush;
         protected Font textFont;
         protected Stopwatch timer;
         protected int frameCount;
@@ -84,8 +85,6 @@ namespace ScreenCapture
             borderDotPen = new Pen(Color.Black, 1);
             borderDotPen2 = new Pen(Color.White, 1);
             borderDotPen2.DashPattern = new float[] { 5, 5 };
-            shadowBrush = new SolidBrush(Color.FromArgb(75, Color.Black));
-            lightBrush = new SolidBrush(Color.FromArgb(10, Color.Black));
             nodeBackgroundBrush = new SolidBrush(Color.White);
             textFont = new Font("Arial", 17, FontStyle.Bold);
         }
@@ -118,7 +117,15 @@ namespace ScreenCapture
                 SurfaceImage = Screenshot.CaptureFullscreen();
             }
 
-            backgroundBrush = new TextureBrush(SurfaceImage);
+            using (Image darkSurfaceImage = ColorMatrixManager.Contrast(-20).Apply(SurfaceImage))
+            {
+                darkBackgroundBrush = new TextureBrush(darkSurfaceImage);
+            }
+
+            using (Image lightSurfaceImage = ColorMatrixManager.Contrast(10).Apply(SurfaceImage))
+            {
+                lightBackgroundBrush = new TextureBrush(lightSurfaceImage);
+            }
         }
 
         private void Surface_Shown(object sender, EventArgs e)
@@ -166,7 +173,7 @@ namespace ScreenCapture
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.HighSpeed;
-            g.FillRectangle(backgroundBrush, ScreenRectangle0Based);
+            g.FillRectangle(darkBackgroundBrush, ScreenRectangle0Based);
 
             Draw(g);
 
@@ -336,12 +343,11 @@ namespace ScreenCapture
                 components.Dispose();
             }
 
-            if (backgroundBrush != null) backgroundBrush.Dispose();
+            if (darkBackgroundBrush != null) darkBackgroundBrush.Dispose();
+            if (lightBackgroundBrush != null) lightBackgroundBrush.Dispose();
             if (borderPen != null) borderPen.Dispose();
             if (borderDotPen != null) borderDotPen.Dispose();
             if (borderDotPen2 != null) borderDotPen2.Dispose();
-            if (shadowBrush != null) shadowBrush.Dispose();
-            if (lightBrush != null) lightBrush.Dispose();
             if (nodeBackgroundBrush != null) nodeBackgroundBrush.Dispose();
             if (textFont != null) textFont.Dispose();
 
