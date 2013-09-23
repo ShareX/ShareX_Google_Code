@@ -99,6 +99,9 @@ namespace ShareX
         [Category("Application"), DefaultValue(false), Description("Show most recent task first.")]
         public bool ShowMostRecentTaskFirst { get; set; }
 
+        [Category("Application"), DefaultValue(false), Description("By default copying \"Bitmap\" to clipboard. Alternative method copying \"PNG and DIB\" to clipboard.")]
+        public bool UseAlternativeClipboardCopyImage { get; set; }
+
         [Category("Upload / Clipboard upload"), DefaultValue(true), Description("Show clipboard content viewer when using clipboard upload button in main window.")]
         public bool ShowClipboardContentViewer { get; set; }
 

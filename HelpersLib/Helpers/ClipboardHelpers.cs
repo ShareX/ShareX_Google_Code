@@ -38,13 +38,15 @@ namespace HelpersLib
 
         private static readonly object ClipboardLock = new object();
 
+        public static bool UseAlternativeCopyImage = false;
+
         private static bool CopyData(IDataObject data, bool copy = true)
         {
             if (data != null)
             {
                 lock (ClipboardLock)
                 {
-                    Clipboard.SetDataObject(data, true, RetryTimes, RetryDelay);
+                    Clipboard.SetDataObject(data, copy, RetryTimes, RetryDelay);
                 }
 
                 return true;
@@ -100,6 +102,18 @@ namespace HelpersLib
 
         public static bool CopyImage(Image img)
         {
+            if (UseAlternativeCopyImage)
+            {
+                return CopyImageAlternative(img);
+            }
+            else
+            {
+                return CopyImageDefault(img);
+            }
+        }
+
+        private static bool CopyImageDefault(Image img)
+        {
             if (img != null)
             {
                 try
@@ -117,7 +131,7 @@ namespace HelpersLib
             return false;
         }
 
-        public static bool CopyImageAlternative(Image img)
+        private static bool CopyImageAlternative(Image img)
         {
             if (img != null)
             {
@@ -174,6 +188,24 @@ namespace HelpersLib
             return false;
         }
 
+        public static bool CopyTextFromFile(string path)
+        {
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
+            {
+                try
+                {
+                    string text = File.ReadAllText(path);
+                    return CopyText(text);
+                }
+                catch (Exception e)
+                {
+                    DebugHelper.WriteException(e, "Clipboard copy text from file failed.");
+                }
+            }
+
+            return false;
+        }
+
         public static bool CopyImageFromFile(string path)
         {
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
@@ -188,24 +220,6 @@ namespace HelpersLib
                 catch (Exception e)
                 {
                     DebugHelper.WriteException(e, "Clipboard copy image from file failed.");
-                }
-            }
-
-            return false;
-        }
-
-        public static bool CopyTextFromFile(string path)
-        {
-            if (!string.IsNullOrEmpty(path) && File.Exists(path))
-            {
-                try
-                {
-                    string text = File.ReadAllText(path);
-                    return CopyText(text);
-                }
-                catch (Exception e)
-                {
-                    DebugHelper.WriteException(e, "Clipboard copy text from file failed.");
                 }
             }
 
