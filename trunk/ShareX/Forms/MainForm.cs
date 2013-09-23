@@ -328,7 +328,7 @@ namespace ShareX
             UpdateMenu();
             UpdateUploaderMenuNames();
 
-            UploadManager.UpdateProxySettings();
+            AfterSettingsJobs();
 
             if (Program.Settings.PreviewSplitterDistance > 0)
             {
@@ -345,6 +345,12 @@ namespace ShareX
                     Format = "<a href=\"$url\"><img src=\"$thumbnailurl\" alt=\"\" title\"\" /></a>"
                 });
             }
+        }
+
+        private void AfterSettingsJobs()
+        {
+            Uploader.ProxyInfo = Program.Settings.ProxySettings;
+            ClipboardHelpers.UseAlternativeCopyImage = Program.Settings.UseAlternativeClipboardCopyImage;
         }
 
         public void UpdateMainFormSettings()
@@ -644,7 +650,7 @@ namespace ShareX
                 settingsForm.ShowDialog();
             }
 
-            UploadManager.UpdateProxySettings();
+            AfterSettingsJobs();
             Program.Settings.SaveAsync();
         }
 

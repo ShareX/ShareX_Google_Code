@@ -270,10 +270,5 @@ namespace ShareX
                 TaskManager.Start(task);
             }
         }
-
-        public static void UpdateProxySettings()
-        {
-            Uploader.ProxyInfo = Program.Settings.ProxySettings;
-        }
     }
 }
