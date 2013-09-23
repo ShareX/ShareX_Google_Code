@@ -29,6 +29,7 @@ using ScreenCapture;
 using ShareX.Properties;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using UpdateCheckerLib;
 using UploadersLib;

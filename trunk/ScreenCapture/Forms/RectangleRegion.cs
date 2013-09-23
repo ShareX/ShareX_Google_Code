@@ -117,51 +117,45 @@ namespace ScreenCapture
         {
             borderDotPen2.DashOffset = (float)timer.Elapsed.TotalSeconds * 10;
 
-            if (Config.ShowCrosshair)
-            {
-                DrawCrosshair(g);
-            }
-
             List<Rectangle> areas = AreaManager.GetValidAreas;
 
             if (areas.Count > 0 || !AreaManager.CurrentHoverArea.IsEmpty)
             {
                 UpdateRegionPath();
 
-                using (Region region = new Region(regionDrawPath))
+                if (areas.Count > 0)
                 {
-                    g.ExcludeClip(region);
-                    g.FillRectangle(shadowBrush, 0, 0, Width, Height);
-                    g.ResetClip();
-                }
-
-                g.DrawPath(borderPen, regionDrawPath);
-
-                if (areas.Count > 1)
-                {
-                    Rectangle totalArea = AreaManager.CombineAreas();
-                    g.DrawCrossRectangle(borderPen, totalArea, 15);
-
-                    if (Config.ShowInfo)
+                    using (Region region = new Region(regionDrawPath))
                     {
-                        ImageHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
-                            totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
-                        g.SmoothingMode = SmoothingMode.HighSpeed;
+                        g.Clip = region;
+                        g.FillRectangle(lightBackgroundBrush, ScreenRectangle0Based);
+                        g.ResetClip();
+                    }
+
+                    g.DrawPath(borderPen, regionDrawPath);
+
+                    if (areas.Count > 1)
+                    {
+                        Rectangle totalArea = AreaManager.CombineAreas();
+                        g.DrawCrossRectangle(borderPen, totalArea, 15);
+
+                        if (Config.ShowInfo)
+                        {
+                            ImageHelpers.DrawTextWithOutline(g, string.Format("X:{0} Y:{1} W:{2} H:{3}", totalArea.X, totalArea.Y,
+                                totalArea.Width, totalArea.Height), new PointF(totalArea.X + 5, totalArea.Y - 25), textFont, Color.White, Color.Black);
+                        }
                     }
                 }
 
                 if (AreaManager.IsCurrentHoverAreaValid)
                 {
-                    GraphicsPath hoverFillPath = new GraphicsPath() { FillMode = FillMode.Winding };
-                    AddShapePath(hoverFillPath, AreaManager.CurrentHoverArea);
+                    using (GraphicsPath hoverDrawPath = new GraphicsPath() { FillMode = FillMode.Winding })
+                    {
+                        AddShapePath(hoverDrawPath, AreaManager.CurrentHoverArea.SizeOffset(-1));
 
-                    g.FillPath(lightBrush, hoverFillPath);
-
-                    GraphicsPath hoverDrawPath = new GraphicsPath() { FillMode = FillMode.Winding };
-                    AddShapePath(hoverDrawPath, AreaManager.CurrentHoverArea.SizeOffset(-1));
-
-                    g.DrawPath(borderDotPen, hoverDrawPath);
-                    g.DrawPath(borderDotPen2, hoverDrawPath);
+                        g.DrawPath(borderDotPen, hoverDrawPath);
+                        g.DrawPath(borderDotPen2, hoverDrawPath);
+                    }
                 }
 
                 if (AreaManager.IsCurrentAreaValid)
@@ -181,18 +175,17 @@ namespace ScreenCapture
                                 new PointF(area.X + 5, area.Y + 5), textFont, Color.White, Color.Black);
                         }
                     }
-
-                    g.SmoothingMode = SmoothingMode.HighSpeed;
                 }
-            }
-            else
-            {
-                g.FillRectangle(shadowBrush, 0, 0, Width, Height);
             }
 
             if (Config.ShowMagnifier)
             {
                 DrawMagnifier(g);
+            }
+
+            if (Config.ShowCrosshair)
+            {
+                DrawCrosshair(g);
             }
         }
 

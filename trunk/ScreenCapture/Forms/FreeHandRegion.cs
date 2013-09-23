@@ -112,8 +112,8 @@ namespace ScreenCapture
 
                 using (Region region = new Region(regionFillPath))
                 {
-                    g.ExcludeClip(region);
-                    g.FillRectangle(shadowBrush, 0, 0, Width, Height);
+                    g.Clip = region;
+                    g.FillRectangle(lightBackgroundBrush, ScreenRectangle0Based);
                     g.ResetClip();
                 }
 
@@ -122,10 +122,6 @@ namespace ScreenCapture
                 g.DrawLine(borderDotPen, points[points.Count - 1], points[0]);
                 g.DrawLine(borderDotPen2, points[points.Count - 1], points[0]);
                 g.DrawRectangleProper(borderPen, currentArea);
-            }
-            else
-            {
-                g.FillRectangle(shadowBrush, 0, 0, Width, Height);
             }
 
             base.Draw(g);
