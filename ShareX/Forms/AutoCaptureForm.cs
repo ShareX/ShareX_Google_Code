@@ -100,7 +100,7 @@ namespace ShareX
         private void SelectRegion()
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(out rect))
+            if (TaskHelpers.SelectRegion(out rect))
             {
                 UpdateRegion(rect);
             }

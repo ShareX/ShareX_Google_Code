@@ -103,7 +103,7 @@ namespace ShareX
             if (task.Info.TaskSettings.UploadSettings.FileUploadUseNamePattern)
             {
                 string ext = Path.GetExtension(task.Info.FilePath);
-                task.Info.FileName = TaskHelper.GetFilename(task.Info.TaskSettings, ext);
+                task.Info.FileName = TaskHelpers.GetFilename(task.Info.TaskSettings, ext);
             }
 
             if (task.Info.TaskSettings.AdvancedSettings.ProcessImagesDuringFileUpload && dataType == EDataType.Image)
@@ -126,7 +126,7 @@ namespace ShareX
 
             task.Info.Job = TaskJob.ImageJob;
             task.Info.DataType = EDataType.Image;
-            task.Info.FileName = TaskHelper.GetImageFilename(taskSettings, image);
+            task.Info.FileName = TaskHelpers.GetImageFilename(taskSettings, image);
             task.tempImage = image;
             return task;
         }
@@ -136,7 +136,7 @@ namespace ShareX
             UploadTask task = new UploadTask(taskSettings);
             task.Info.Job = TaskJob.TextUpload;
             task.Info.DataType = EDataType.Text;
-            task.Info.FileName = TaskHelper.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
+            task.Info.FileName = TaskHelpers.GetFilename(taskSettings, taskSettings.AdvancedSettings.TextFileExtension);
             task.tempText = text;
             return task;
         }
@@ -365,12 +365,12 @@ namespace ShareX
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
             {
-                tempImage = TaskHelper.DrawShadow(Info.TaskSettings, tempImage);
+                tempImage = TaskHelpers.DrawShadow(Info.TaskSettings, tempImage);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
             {
-                tempImage = TaskHelper.AnnotateImage(tempImage);
+                tempImage = TaskHelpers.AnnotateImage(tempImage);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyImageToClipboard))
@@ -401,7 +401,12 @@ namespace ShareX
             {
                 using (tempImage)
                 {
-                    ImageData imageData = TaskHelper.PrepareImage(tempImage, Info.TaskSettings);
+                    if (Info.TaskSettings.ImageSettings.ImageAutoResize)
+                    {
+                        tempImage = TaskHelpers.ResizeImage(tempImage, Info.TaskSettings);
+                    }
+
+                    ImageData imageData = TaskHelpers.PrepareImage(tempImage, Info.TaskSettings);
                     Data = imageData.ImageStream;
                     Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
 

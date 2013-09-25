@@ -75,7 +75,7 @@ namespace ShareX
         private void SelectRegion(TaskSettings taskSettings)
         {
             Rectangle rect;
-            if (TaskHelper.SelectRegion(out rect) && !rect.IsEmpty)
+            if (TaskHelpers.SelectRegion(out rect) && !rect.IsEmpty)
             {
                 CaptureRectangle = CaptureHelpers.EvenRectangleSize(rect);
             }
@@ -108,7 +108,7 @@ namespace ShareX
                     {
                         if (TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVI)
                         {
-                            path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, "avi"));
+                            path = Path.Combine(Program.ScreenshotsPath, TaskHelpers.GetFilename(TaskSettings, "avi"));
                         }
                         else
                         {
@@ -140,11 +140,11 @@ namespace ShareX
                         switch (TaskSettings.CaptureSettings.ScreenRecordOutput)
                         {
                             case ScreenRecordOutput.GIF:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings, "gif"));
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelpers.GetFilename(TaskSettings, "gif"));
                                 screenRecorder.SaveAsGIF(path, TaskSettings.ImageSettings.ImageGIFQuality);
                                 break;
                             case ScreenRecordOutput.AVICommandLine:
-                                path = Path.Combine(Program.ScreenshotsPath, TaskHelper.GetFilename(TaskSettings,
+                                path = Path.Combine(Program.ScreenshotsPath, TaskHelpers.GetFilename(TaskSettings,
                                     TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension));
                                 screenRecorder.EncodeUsingCommandLine(path, TaskSettings.CaptureSettings.ScreenRecordCommandLinePath,
                                     TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs);
@@ -179,7 +179,7 @@ namespace ShareX
             }
             else
             {
-                TaskHelper.ShowResultNotifications(path, TaskSettings);
+                TaskHelpers.ShowResultNotifications(path, TaskSettings);
             }
 
             IsRecording = false;

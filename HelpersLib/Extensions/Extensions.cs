@@ -205,21 +205,11 @@ namespace HelpersLib
             rtb.Invalidate();
         }
 
-        public static void SaveJPG(this Image img, Stream stream, int quality, bool fillBackground)
+        public static void SaveJPG(this Image img, Stream stream, int quality)
         {
-            using (EncoderParameters encoderParameters = new EncoderParameters(1))
-            {
-                if (fillBackground)
-                {
-                    Image img2 = ImageHelpers.FillImageBackground(img, Color.White);
-                    ImageHelpers.CopyMetadata(img, img2);
-                    if (img != null) img.Dispose();
-                    img = img2;
-                }
-
-                encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
-                img.Save(stream, ImageFormat.Jpeg.GetCodecInfo(), encoderParameters);
-            }
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            img.Save(stream, ImageFormat.Jpeg.GetCodecInfo(), encoderParameters);
         }
 
         public static void SaveGIF(this Image img, Stream stream, GIFQuality quality)

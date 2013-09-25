@@ -34,55 +34,45 @@ using System.Windows.Forms;
 
 namespace ShareX
 {
-    public static class TaskHelper
+    public static class TaskHelpers
     {
         private const int PropertyTagSoftwareUsed = 0x0131;
 
         public static ImageData PrepareImage(Image img, TaskSettings taskSettings)
         {
             ImageData imageData = new ImageData();
+            imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat;
 
-            if (taskSettings.ImageSettings.ImageAutoResize)
+            if (taskSettings.ImageSettings.ImageFormat == EImageFormat.JPEG)
             {
-                img = ResizeImage(taskSettings, img, taskSettings.ImageSettings.ImageScaleType);
+                ImageHelpers.FillImageBackground(img, Color.White);
             }
 
-            imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat);
+            ImageHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
+
+            imageData.ImageStream = SaveImage(img, taskSettings.ImageSettings.ImageFormat, taskSettings);
 
             int sizeLimit = taskSettings.ImageSettings.ImageSizeLimit * 1000;
+
             if (taskSettings.ImageSettings.ImageFormat != taskSettings.ImageSettings.ImageFormat2 && sizeLimit > 0 && imageData.ImageStream.Length > sizeLimit)
             {
-                imageData.ImageStream = SaveImage(taskSettings, img, taskSettings.ImageSettings.ImageFormat2);
+                if (taskSettings.ImageSettings.ImageFormat2 == EImageFormat.JPEG)
+                {
+                    ImageHelpers.FillImageBackground(img, Color.White);
+                }
+
+                imageData.ImageStream = SaveImage(img, taskSettings.ImageSettings.ImageFormat2, taskSettings);
                 imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat2;
-            }
-            else
-            {
-                imageData.ImageFormat = taskSettings.ImageSettings.ImageFormat;
             }
 
             return imageData;
         }
 
-        public static void PrepareFileImage(UploadTask task)
-        {
-            int sizeLimit = task.Info.TaskSettings.ImageSettings.ImageSizeLimit * 1000;
-
-            if (sizeLimit > 0 && task.Data.Length > sizeLimit)
-            {
-                using (Stream stream = task.Data)
-                using (Image img = Image.FromStream(stream))
-                {
-                    task.Data = SaveImage(task.Info.TaskSettings, img, task.Info.TaskSettings.ImageSettings.ImageFormat2);
-                    task.Info.FileName = Path.ChangeExtension(task.Info.FileName, task.Info.TaskSettings.ImageSettings.ImageFormat2.GetDescription());
-                }
-            }
-        }
-
-        private static Image ResizeImage(TaskSettings taskSettings, Image img, ImageScaleType scaleType)
+        public static Image ResizeImage(Image img, TaskSettings taskSettings)
         {
             float width = 0, height = 0;
 
-            switch (scaleType)
+            switch (taskSettings.ImageSettings.ImageScaleType)
             {
                 case ImageScaleType.Percentage:
                     width = img.Width * (taskSettings.ImageSettings.ImageScalePercentageWidth / 100f);
@@ -110,10 +100,8 @@ namespace ShareX
             return img;
         }
 
-        private static MemoryStream SaveImage(TaskSettings taskSettings, Image img, EImageFormat imageFormat)
+        public static MemoryStream SaveImage(Image img, EImageFormat imageFormat, TaskSettings taskSettings)
         {
-            ImageHelpers.AddMetadata(img, PropertyTagSoftwareUsed, Program.ApplicationName);
-
             MemoryStream stream = new MemoryStream();
 
             switch (imageFormat)
@@ -122,7 +110,7 @@ namespace ShareX
                     img.Save(stream, ImageFormat.Png);
                     break;
                 case EImageFormat.JPEG:
-                    img.SaveJPG(stream, taskSettings.ImageSettings.ImageJPEGQuality, true);
+                    img.SaveJPG(stream, taskSettings.ImageSettings.ImageJPEGQuality);
                     break;
                 case EImageFormat.GIF:
                     img.SaveGIF(stream, taskSettings.ImageSettings.ImageGIFQuality);
@@ -218,8 +206,8 @@ namespace ShareX
             using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
             using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
             {
-                editor.ClipboardCopyRequested += editor_ClipboardCopyRequested;
-                editor.ImageUploadRequested += editor_ImageUploadRequested;
+                editor.ClipboardCopyRequested += x => Program.MainForm.InvokeSafe(() => ClipboardHelpers.CopyImage(x));
+                editor.ImageUploadRequested += x => Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(x));
 
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
@@ -228,16 +216,6 @@ namespace ShareX
             }
 
             return img;
-        }
-
-        private static void editor_ClipboardCopyRequested(Image img)
-        {
-            Program.MainForm.InvokeSafe(() => ClipboardHelpers.CopyImage(img));
-        }
-
-        private static void editor_ImageUploadRequested(Image img)
-        {
-            Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(img));
         }
 
         public static Image DrawShadow(TaskSettings taskSettings, Image img)
