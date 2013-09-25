@@ -166,12 +166,14 @@ namespace HelpersLib
             {
                 if (borderType == BorderType.Inside)
                 {
-                    bmp = new Bitmap(img);
+                    bmp = (Bitmap)img;
 
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
                         g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width, img.Height));
                     }
+
+                    return img;
                 }
                 else
                 {
@@ -180,9 +182,11 @@ namespace HelpersLib
 
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
-                        g.DrawImage(img, borderSize, borderSize, img.Width, img.Height);
+                        g.DrawImageUnscaled(img, borderSize, borderSize);
                         g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width + borderSize * 2, img.Height + borderSize * 2));
                     }
+
+                    img.Dispose();
                 }
             }
 

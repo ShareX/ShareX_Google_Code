@@ -51,30 +51,32 @@ namespace ShareX
     public enum AfterCaptureTasks
     {
         None = 0,
+        [Description("Resize image")]
+        ResizeImage = 1,
         [Description("Add watermark")]
-        AddWatermark = 1,
+        AddWatermark = 1 << 1,
         [Description("Add border")]
-        AddBorder = 1 << 1,
+        AddBorder = 1 << 2,
         [Description("Add shadow")]
-        AddShadow = 1 << 2,
+        AddShadow = 1 << 3,
         [Description("Annotate image")]
-        AnnotateImage = 1 << 3,
+        AnnotateImage = 1 << 4,
         [Description("Copy image to clipboard")]
-        CopyImageToClipboard = 1 << 4,
+        CopyImageToClipboard = 1 << 5,
         [Description("Print image")]
-        SendImageToPrinter = 1 << 5,
+        SendImageToPrinter = 1 << 6,
         [Description("Save image to file")]
-        SaveImageToFile = 1 << 6,
+        SaveImageToFile = 1 << 7,
         [Description("Save image to file as...")]
-        SaveImageToFileWithDialog = 1 << 7,
+        SaveImageToFileWithDialog = 1 << 8,
         [Description("Copy file to clipboard")]
-        CopyFileToClipboard = 1 << 8,
+        CopyFileToClipboard = 1 << 9,
         [Description("Copy file path to clipboard")]
-        CopyFilePathToClipboard = 1 << 9,
+        CopyFilePathToClipboard = 1 << 10,
         [Description("Perform actions")]
-        PerformActions = 1 << 10,
+        PerformActions = 1 << 11,
         [Description("Upload image to host")]
-        UploadImageToHost = 1 << 11
+        UploadImageToHost = 1 << 12
     }
 
     [Flags]

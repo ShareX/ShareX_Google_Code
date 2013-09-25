@@ -352,6 +352,11 @@ namespace ShareX
 
         private void DoAfterCaptureJobs()
         {
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.ResizeImage))
+            {
+                tempImage = TaskHelpers.ResizeImage(tempImage, Info.TaskSettings);
+            }
+
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
             {
                 WatermarkManager watermarkManager = new WatermarkManager(Info.TaskSettings.ImageSettings.WatermarkConfig);
@@ -401,11 +406,6 @@ namespace ShareX
             {
                 using (tempImage)
                 {
-                    if (Info.TaskSettings.ImageSettings.ImageAutoResize)
-                    {
-                        tempImage = TaskHelpers.ResizeImage(tempImage, Info.TaskSettings);
-                    }
-
                     ImageData imageData = TaskHelpers.PrepareImage(tempImage, Info.TaskSettings);
                     Data = imageData.ImageStream;
                     Info.FileName = Path.ChangeExtension(Info.FileName, imageData.ImageFormat.GetDescription());
