@@ -172,7 +172,7 @@ namespace ShareX
             tbCommandLineOutputExtension.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension;
 
             // Actions
-            TaskHelper.AddDefaultExternalPrograms(TaskSettings);
+            TaskHelpers.AddDefaultExternalPrograms(TaskSettings);
 
             foreach (ExternalProgram fileAction in TaskSettings.ExternalPrograms)
             {

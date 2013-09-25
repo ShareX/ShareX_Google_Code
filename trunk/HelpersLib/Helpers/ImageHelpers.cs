@@ -91,11 +91,6 @@ namespace HelpersLib
             return ResizeImage(img, 0, 0, width, height, highQualityScaling);
         }
 
-        public static Image ResizeImage(Image img, Rectangle rect, bool highQualityScaling = true)
-        {
-            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, highQualityScaling);
-        }
-
         public static Image ResizeImage(Image img, int x, int y, int width, int height, bool highQualityScaling = true)
         {
             if (img.Width == width && img.Height == height)
@@ -114,6 +109,7 @@ namespace HelpersLib
                 }
 
                 g.DrawImage(img, x, y, width, height);
+
                 img.Dispose();
             }
 
@@ -212,22 +208,22 @@ namespace HelpersLib
             return null;
         }
 
-        public static Image FillImageBackground(Image img, Color color)
+        public static void FillImageBackground(Image img, Color color)
         {
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
-
-            using (Graphics g = Graphics.FromImage(bmp))
+            using (Image tempImage = (Image)img.Clone())
             {
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
+                Bitmap bmp = (Bitmap)img;
 
-                g.Clear(color);
-                g.DrawImageUnscaled(img, 0, 0);
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = SmoothingMode.HighQuality;
+
+                    g.Clear(color);
+                    g.DrawImageUnscaled(tempImage, 0, 0);
+                }
             }
-
-            return bmp;
         }
 
         public static Image FillImageBackground(Image img, Color color, Color color2)
