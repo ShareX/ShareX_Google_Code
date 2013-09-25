@@ -110,7 +110,6 @@ namespace ShareX
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
 
             // Image - Resize
-            cbImageAutoResize.Checked = TaskSettings.ImageSettings.ImageAutoResize;
             cbImageKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageKeepAspectRatio;
             cbImageUseSmoothScaling.Checked = TaskSettings.ImageSettings.ImageUseSmoothScaling;
 
@@ -542,11 +541,6 @@ namespace ShareX
             {
                 nudImageScalePercentageHeight.Value = nudImageScalePercentageWidth.Value;
             }
-        }
-
-        private void cbImageAutoResize_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageAutoResize = cbImageAutoResize.Checked;
         }
 
         private void rbImageScaleTypePercentage_CheckedChanged(object sender, EventArgs e)

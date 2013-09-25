@@ -216,7 +216,6 @@ namespace ShareX
 
         #region Image / Resize
 
-        public bool ImageAutoResize = false;
         public bool ImageKeepAspectRatio = false;
         public bool ImageUseSmoothScaling = true;
         public ImageScaleType ImageScaleType = ImageScaleType.Percentage;

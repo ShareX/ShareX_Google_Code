@@ -79,7 +79,6 @@
             this.tpResize = new System.Windows.Forms.TabPage();
             this.cbImageUseSmoothScaling = new System.Windows.Forms.CheckBox();
             this.cbImageKeepAspectRatio = new System.Windows.Forms.CheckBox();
-            this.cbImageAutoResize = new System.Windows.Forms.CheckBox();
             this.gbImageScaleSettings = new System.Windows.Forms.GroupBox();
             this.rbImageScaleTypePercentage = new System.Windows.Forms.RadioButton();
             this.lblImageScaleToHeight2 = new System.Windows.Forms.Label();
@@ -759,7 +758,6 @@
             // 
             this.tpResize.Controls.Add(this.cbImageUseSmoothScaling);
             this.tpResize.Controls.Add(this.cbImageKeepAspectRatio);
-            this.tpResize.Controls.Add(this.cbImageAutoResize);
             this.tpResize.Controls.Add(this.gbImageScaleSettings);
             this.tpResize.Location = new System.Drawing.Point(4, 22);
             this.tpResize.Name = "tpResize";
@@ -772,7 +770,7 @@
             // cbImageUseSmoothScaling
             // 
             this.cbImageUseSmoothScaling.AutoSize = true;
-            this.cbImageUseSmoothScaling.Location = new System.Drawing.Point(16, 64);
+            this.cbImageUseSmoothScaling.Location = new System.Drawing.Point(224, 40);
             this.cbImageUseSmoothScaling.Name = "cbImageUseSmoothScaling";
             this.cbImageUseSmoothScaling.Size = new System.Drawing.Size(183, 17);
             this.cbImageUseSmoothScaling.TabIndex = 2;
@@ -783,24 +781,13 @@
             // cbImageKeepAspectRatio
             // 
             this.cbImageKeepAspectRatio.AutoSize = true;
-            this.cbImageKeepAspectRatio.Location = new System.Drawing.Point(16, 40);
+            this.cbImageKeepAspectRatio.Location = new System.Drawing.Point(224, 16);
             this.cbImageKeepAspectRatio.Name = "cbImageKeepAspectRatio";
             this.cbImageKeepAspectRatio.Size = new System.Drawing.Size(109, 17);
             this.cbImageKeepAspectRatio.TabIndex = 1;
             this.cbImageKeepAspectRatio.Text = "Keep aspect ratio";
             this.cbImageKeepAspectRatio.UseVisualStyleBackColor = true;
             this.cbImageKeepAspectRatio.CheckedChanged += new System.EventHandler(this.cbImageKeepAspectRatio_CheckedChanged);
-            // 
-            // cbImageAutoResize
-            // 
-            this.cbImageAutoResize.AutoSize = true;
-            this.cbImageAutoResize.Location = new System.Drawing.Point(16, 16);
-            this.cbImageAutoResize.Name = "cbImageAutoResize";
-            this.cbImageAutoResize.Size = new System.Drawing.Size(149, 17);
-            this.cbImageAutoResize.TabIndex = 0;
-            this.cbImageAutoResize.Text = "Automatically resize image";
-            this.cbImageAutoResize.UseVisualStyleBackColor = true;
-            this.cbImageAutoResize.CheckedChanged += new System.EventHandler(this.cbImageAutoResize_CheckedChanged);
             // 
             // gbImageScaleSettings
             // 
@@ -826,7 +813,7 @@
             this.gbImageScaleSettings.Controls.Add(this.lblImageScaleSpecificHeight);
             this.gbImageScaleSettings.Controls.Add(this.lblImageScaleSpecificWidth);
             this.gbImageScaleSettings.Controls.Add(this.nudImageScaleSpecificWidth);
-            this.gbImageScaleSettings.Location = new System.Drawing.Point(288, 8);
+            this.gbImageScaleSettings.Location = new System.Drawing.Point(8, 8);
             this.gbImageScaleSettings.Name = "gbImageScaleSettings";
             this.gbImageScaleSettings.Size = new System.Drawing.Size(200, 272);
             this.gbImageScaleSettings.TabIndex = 3;
@@ -2237,7 +2224,6 @@
         private System.Windows.Forms.TabPage tpResize;
         private System.Windows.Forms.CheckBox cbImageUseSmoothScaling;
         private System.Windows.Forms.CheckBox cbImageKeepAspectRatio;
-        private System.Windows.Forms.CheckBox cbImageAutoResize;
         private System.Windows.Forms.GroupBox gbImageScaleSettings;
         private System.Windows.Forms.RadioButton rbImageScaleTypePercentage;
         private System.Windows.Forms.Label lblImageScaleToHeight2;
