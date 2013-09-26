@@ -90,7 +90,7 @@ begin
   if not RegQueryStringValue(HKLM, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
   if not RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
   if not RegQueryStringValue(HKCU, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) then
-         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString) 
+         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'UninstallString', sUnInstallString)
 
   Result := sUnInstallString;
 end;
@@ -102,7 +102,8 @@ begin
   if not RegQueryStringValue(HKLM, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
   if not RegQueryStringValue(HKLM, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
   if not RegQueryStringValue(HKCU, 'Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) then
-         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName) 
+         RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppId}_is1', 'Inno Setup: Icon Group', sAppName)
+
   Result := sAppName;
 end;
 
