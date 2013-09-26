@@ -234,7 +234,6 @@ namespace ShareX
 
         public static MainForm MainForm { get; private set; }
         public static Stopwatch StartTimer { get; private set; }
-        public static Logger MyLogger { get; private set; }
         public static HotkeyManager HotkeyManager { get; set; }
         public static WatchFolderManager WatchFolderManager { get; set; }
 
@@ -287,21 +286,20 @@ namespace ShareX
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                MyLogger = new Logger();
-                DebugHelper.MyLogger = MyLogger;
-                MyLogger.WriteLine("{0} started", FullTitle);
-                MyLogger.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
-                MyLogger.WriteLine("Command line: " + Environment.CommandLine);
-                MyLogger.WriteLine("Personal path: " + PersonalPath);
+                DebugHelper.MyLogger = new Logger();
+                DebugHelper.WriteLine("{0} started", FullTitle);
+                DebugHelper.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
+                DebugHelper.WriteLine("Command line: " + Environment.CommandLine);
+                DebugHelper.WriteLine("Personal path: " + PersonalPath);
 
                 SettingsResetEvent = new ManualResetEvent(false);
                 UploaderSettingsResetEvent = new ManualResetEvent(false);
                 HotkeySettingsResetEvent = new ManualResetEvent(false);
                 ThreadPool.QueueUserWorkItem(state => LoadSettings());
 
-                MyLogger.WriteLine("MainForm init started");
+                DebugHelper.WriteLine("MainForm init started");
                 MainForm = new MainForm();
-                MyLogger.WriteLine("MainForm init finished");
+                DebugHelper.WriteLine("MainForm init finished");
 
                 if (Settings == null)
                 {
@@ -314,8 +312,8 @@ namespace ShareX
                 SaveSettings();
                 BackupSettings();
 
-                MyLogger.WriteLine("ShareX closing");
-                MyLogger.SaveLog(LogFilePath);
+                DebugHelper.WriteLine("ShareX closing");
+                DebugHelper.MyLogger.SaveLog(LogFilePath);
             }
             finally
             {
@@ -397,7 +395,10 @@ namespace ShareX
 
         private static void OnError(Exception e)
         {
-            new ErrorForm(Application.ProductName, e, MyLogger, LogFilePath, Links.URL_ISSUES).ShowDialog();
+            using (ErrorForm errorForm = new ErrorForm(Application.ProductName, e, DebugHelper.MyLogger, LogFilePath, Links.URL_ISSUES))
+            {
+                errorForm.ShowDialog();
+            }
         }
 
         private static void SingleInstanceCallback(object sender, InstanceCallbackEventArgs args)

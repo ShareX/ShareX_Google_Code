@@ -188,39 +188,39 @@ namespace UploadersLib.FileUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            JiraUpload up = new JiraUpload(this._jiraIssuePrefix, this.GetSummary);
-
-            DialogResult result = up.ShowDialog();
-            if (result == DialogResult.Cancel)
+            using (JiraUpload up = new JiraUpload(this._jiraIssuePrefix, this.GetSummary))
             {
-                return new UploadResult
+                if (up.ShowDialog() == DialogResult.Cancel)
+                {
+                    return new UploadResult
                     {
                         IsSuccess = true,
                         IsURLExpected = false
                     };
+                }
+
+                Uri uri = new Uri(this._jiraHost, string.Format(PathIssueAttachments, up.IssueId));
+                string query = OAuthManager.GenerateQuery(uri.ToString(), null, HttpMethod.Post, this.AuthInfo);
+
+                NameValueCollection headers = new NameValueCollection();
+                headers.Set("X-Atlassian-Token", "nocheck");
+
+                UploadResult res = this.UploadData(stream, query, fileName, "file", null, null, headers);
+                if (res.Response.Contains("errorMessages"))
+                {
+                    res.Errors.Add(res.Response);
+                }
+                else
+                {
+                    res.IsURLExpected = true;
+                    var anonType = new[] { new { thumbnail = "" } };
+                    var anonObject = JsonConvert.DeserializeAnonymousType(res.Response, anonType);
+                    res.ThumbnailURL = anonObject[0].thumbnail;
+                    res.URL = new Uri(this._jiraHost, string.Format(PathBrowseIssue, up.IssueId)).ToString();
+                }
+
+                return res;
             }
-
-            Uri uri = new Uri(this._jiraHost, string.Format(PathIssueAttachments, up.IssueId));
-            string query = OAuthManager.GenerateQuery(uri.ToString(), null, HttpMethod.Post, this.AuthInfo);
-
-            NameValueCollection headers = new NameValueCollection();
-            headers.Set("X-Atlassian-Token", "nocheck");
-
-            UploadResult res = this.UploadData(stream, query, fileName, "file", null, null, headers);
-            if (res.Response.Contains("errorMessages"))
-            {
-                res.Errors.Add(res.Response);
-            }
-            else
-            {
-                res.IsURLExpected = true;
-                var anonType = new[] { new { thumbnail = "" } };
-                var anonObject = JsonConvert.DeserializeAnonymousType(res.Response, anonType);
-                res.ThumbnailURL = anonObject[0].thumbnail;
-                res.URL = new Uri(this._jiraHost, string.Format(PathBrowseIssue, up.IssueId)).ToString();
-            }
-
-            return res;
         }
 
         private string GetSummary(string issueId)

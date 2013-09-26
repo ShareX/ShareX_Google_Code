@@ -149,7 +149,10 @@ namespace HelpersLib
 
         public static DialogResult Show(string text, string caption, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
-            return new MyMessageBox(text, caption, buttons).ShowDialog();
+            using (MyMessageBox messageBox = new MyMessageBox(text, caption, buttons))
+            {
+                return messageBox.ShowDialog();
+            }
         }
     }
 }

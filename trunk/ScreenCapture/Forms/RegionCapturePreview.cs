@@ -73,21 +73,26 @@ namespace ScreenCapture
         {
             pbResult.Image = null;
 
-            surface.Config = SurfaceConfig;
-            surface.SurfaceImage = screenshot;
-            surface.Prepare();
-            surface.ShowDialog();
-
-            if (surface.Result == SurfaceResult.Region)
+            try
             {
-                Result = surface.GetRegionImage();
-            }
-            else if (surface.Result == SurfaceResult.Fullscreen)
-            {
-                Result = screenshot;
-            }
+                surface.Config = SurfaceConfig;
+                surface.SurfaceImage = screenshot;
+                surface.Prepare();
+                surface.ShowDialog();
 
-            surface.Dispose();
+                if (surface.Result == SurfaceResult.Region)
+                {
+                    Result = surface.GetRegionImage();
+                }
+                else if (surface.Result == SurfaceResult.Fullscreen)
+                {
+                    Result = screenshot;
+                }
+            }
+            finally
+            {
+                surface.Dispose();
+            }
         }
 
         private void CaptureLastRegion()

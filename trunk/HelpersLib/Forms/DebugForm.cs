@@ -42,15 +42,41 @@ namespace HelpersLib
             Icon = Resources.ShareXIcon;
             this.logger = logger;
 
-            txtDebugLog.Text = logger.Messages.ToString();
+            txtDebugLog.Text = logger.ToString();
             txtDebugLog.SelectionStart = txtDebugLog.TextLength;
             txtDebugLog.ScrollToCaret();
+
+            logger.MessageAdded += logger_MessageAdded;
+        }
+
+        private void DebugForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            logger.MessageAdded -= logger_MessageAdded;
+        }
+
+        private void logger_MessageAdded(string message)
+        {
+            this.InvokeSafe(() => AppendMessage(message));
+        }
+
+        private void AppendMessage(string message)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                int start = txtDebugLog.SelectionStart;
+                int len = txtDebugLog.SelectionLength;
+                txtDebugLog.AppendText(message + Environment.NewLine);
+                if (len > 0)
+                {
+                    txtDebugLog.Select(start, len);
+                }
+            }
         }
 
         private void btnLoadedAssemblies_Click(object sender, EventArgs e)
         {
-            string directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             StringBuilder sb = new StringBuilder();
+            string directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (assembly.Location.StartsWith(directoryPath, StringComparison.InvariantCultureIgnoreCase))
@@ -58,32 +84,9 @@ namespace HelpersLib
                     sb.AppendLine(assembly.ManifestModule.Name);
                 }
             }
-            MessageBox.Show(sb.ToString(), "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            string assemblies = sb.ToString().Trim();
 
-        private void UpdateText()
-        {
-            string text = logger.Messages.ToString();
-
-            if (text != txtDebugLog.Text)
-            {
-                int start = txtDebugLog.SelectionStart;
-                int len = txtDebugLog.SelectionLength;
-                txtDebugLog.Text = text;
-                txtDebugLog.SelectionStart = txtDebugLog.TextLength;
-                txtDebugLog.ScrollToCaret();
-                txtDebugLog.Select(start, len);
-            }
-        }
-
-        private void tUpdateTimer_Tick(object sender, EventArgs e)
-        {
-            UpdateText();
-        }
-
-        private void cbAutoUpdateText_CheckedChanged(object sender, EventArgs e)
-        {
-            tUpdateTimer.Enabled = cbAutoUpdateText.Checked;
+            MessageBox.Show(assemblies, "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

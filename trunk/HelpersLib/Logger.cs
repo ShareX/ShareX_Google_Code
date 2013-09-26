@@ -35,8 +35,6 @@ namespace HelpersLib
         public delegate void MessageAddedEventHandler(string message);
         public event MessageAddedEventHandler MessageAdded;
 
-        public StringBuilder Messages { get; private set; }
-
         /// <summary>{0} = DateTime, {1} = Message</summary>
         public string MessageFormat { get; set; }
 
@@ -46,28 +44,36 @@ namespace HelpersLib
         /// <summary>{0} = Message, {1} = Elapsed miliseconds</summary>
         public string TimerMessageFormat { get; set; }
 
-        private readonly object thisLock = new object();
-
-        private int saveIndex;
+        private readonly object loggerLock = new object();
+        private StringBuilder sbMessages;
+        private int lastSaveIndex;
 
         public Logger()
         {
-            Messages = new StringBuilder(1024);
+            sbMessages = new StringBuilder(4096);
             MessageFormat = "{0:yyyy-MM-dd HH:mm:ss.fff} - {1}";
             ExceptionFormat = "{0}:\r\n{1}";
             TimerMessageFormat = "{0} - {1} ms";
         }
 
-        public void WriteLine(string message = null)
+        protected void OnMessageAdded(string message)
         {
-            lock (thisLock)
+            if (MessageAdded != null)
+            {
+                MessageAdded(message);
+            }
+        }
+
+        public void WriteLine(string message = "")
+        {
+            lock (loggerLock)
             {
                 if (!string.IsNullOrEmpty(message))
                 {
                     message = string.Format(MessageFormat, FastDateTime.Now, message);
                 }
 
-                Messages.AppendLine(message);
+                sbMessages.AppendLine(message);
                 Debug.WriteLine(message);
                 OnMessageAdded(message);
             }
@@ -100,42 +106,44 @@ namespace HelpersLib
 
         public void SaveLog(string filepath)
         {
-            lock (thisLock)
+            lock (loggerLock)
             {
-                string messages = GetNewMessages();
-
-                if (!string.IsNullOrEmpty(filepath) && !string.IsNullOrEmpty(messages))
+                if (sbMessages != null && sbMessages.Length > 0 && !string.IsNullOrEmpty(filepath))
                 {
-                    Helpers.CreateDirectoryIfNotExist(filepath);
+                    string messages = sbMessages.ToString(lastSaveIndex, sbMessages.Length - lastSaveIndex);
 
-                    File.AppendAllText(filepath, messages, Encoding.UTF8);
+                    if (!string.IsNullOrEmpty(messages))
+                    {
+                        Helpers.CreateDirectoryIfNotExist(filepath);
 
-                    saveIndex = Messages.Length;
+                        File.AppendAllText(filepath, messages, Encoding.UTF8);
+
+                        lastSaveIndex = sbMessages.Length;
+                    }
                 }
             }
         }
 
-        private string GetNewMessages()
+        public void Clear()
         {
-            if (Messages != null && Messages.Length > 0)
+            lock (loggerLock)
             {
-                return Messages.ToString(saveIndex, Messages.Length - saveIndex);
-            }
-
-            return null;
-        }
-
-        protected void OnMessageAdded(string message)
-        {
-            if (MessageAdded != null)
-            {
-                MessageAdded(message);
+                sbMessages.Length = 0;
+                lastSaveIndex = 0;
             }
         }
 
         public override string ToString()
         {
-            return Messages.ToString().Trim();
+            lock (loggerLock)
+            {
+                if (sbMessages != null && sbMessages.Length > 0)
+                {
+                    return sbMessages.ToString();
+                }
+
+                return null;
+            }
         }
     }
 
