@@ -596,7 +596,7 @@ namespace ShareX
 
         private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            DebugForm debugForm = new DebugForm(DebugHelper.MyLogger);
+            DebugForm debugForm = new DebugForm(DebugHelper.Logger);
             debugForm.Show();
         }
 

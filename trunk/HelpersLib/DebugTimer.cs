@@ -56,7 +56,7 @@ namespace HelpersLib
 
         public void WriteElapsedSeconds(string text = "")
         {
-            Write(text, timer.Elapsed.TotalSeconds + " seconds.");
+            Write(text, timer.Elapsed.TotalSeconds.ToString("0.000") + " seconds.");
         }
 
         public void WriteElapsedMiliseconds(string text = "")
