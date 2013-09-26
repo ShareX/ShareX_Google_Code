@@ -286,7 +286,6 @@ namespace ShareX
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                DebugHelper.MyLogger = new Logger();
                 DebugHelper.WriteLine("{0} started", FullTitle);
                 DebugHelper.WriteLine("Operating system: " + Environment.OSVersion.VersionString);
                 DebugHelper.WriteLine("Command line: " + Environment.CommandLine);
@@ -313,7 +312,7 @@ namespace ShareX
                 BackupSettings();
 
                 DebugHelper.WriteLine("ShareX closing");
-                DebugHelper.MyLogger.SaveLog(LogFilePath);
+                DebugHelper.Logger.SaveLog(LogFilePath);
             }
             finally
             {
@@ -395,7 +394,7 @@ namespace ShareX
 
         private static void OnError(Exception e)
         {
-            using (ErrorForm errorForm = new ErrorForm(Application.ProductName, e, DebugHelper.MyLogger, LogFilePath, Links.URL_ISSUES))
+            using (ErrorForm errorForm = new ErrorForm(Application.ProductName, e, DebugHelper.Logger, LogFilePath, Links.URL_ISSUES))
             {
                 errorForm.ShowDialog();
             }

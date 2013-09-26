@@ -88,7 +88,7 @@
     <Compile Include="Forms\DebugForm.Designer.cs">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug\DebugTimer.cs" />
+    <Compile Include="DebugTimer.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Forms\ClipboardFormatForm.cs">
       <SubType>Form</SubType>
@@ -224,7 +224,7 @@
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="SingleInstanceApplication\ApplicationInstanceManager.cs" />
     <Compile Include="SingleInstanceApplication\InstanceProxy.cs" />
-    <Compile Include="Debug\DebugHelper.cs" />
+    <Compile Include="DebugHelper.cs" />
     <Compile Include="UpdateChecker\UpdateCheckerLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>

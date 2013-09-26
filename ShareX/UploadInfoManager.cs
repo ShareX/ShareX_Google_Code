@@ -246,7 +246,7 @@ namespace ShareX
 
                 if (!string.IsNullOrEmpty(errors))
                 {
-                    using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, DebugHelper.MyLogger,
+                    using (ErrorForm form = new ErrorForm(Application.ProductName, "Upload errors", errors, DebugHelper.Logger,
                         Program.LogFilePath, Links.URL_ISSUES))
                     {
                         form.ShowDialog();

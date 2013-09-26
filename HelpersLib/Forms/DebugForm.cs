@@ -88,5 +88,10 @@ namespace HelpersLib
 
             MessageBox.Show(assemblies, "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void btnCopyAll_Click(object sender, EventArgs e)
+        {
+            ClipboardHelpers.CopyText(txtDebugLog.Text);
+        }
     }
 }

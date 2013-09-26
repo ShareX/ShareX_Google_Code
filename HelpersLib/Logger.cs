@@ -35,26 +35,9 @@ namespace HelpersLib
         public delegate void MessageAddedEventHandler(string message);
         public event MessageAddedEventHandler MessageAdded;
 
-        /// <summary>{0} = DateTime, {1} = Message</summary>
-        public string MessageFormat { get; set; }
-
-        /// <summary>{0} = Message, {1} = Exception</summary>
-        public string ExceptionFormat { get; set; }
-
-        /// <summary>{0} = Message, {1} = Elapsed miliseconds</summary>
-        public string TimerMessageFormat { get; set; }
-
         private readonly object loggerLock = new object();
-        private StringBuilder sbMessages;
-        private int lastSaveIndex;
-
-        public Logger()
-        {
-            sbMessages = new StringBuilder(4096);
-            MessageFormat = "{0:yyyy-MM-dd HH:mm:ss.fff} - {1}";
-            ExceptionFormat = "{0}:\r\n{1}";
-            TimerMessageFormat = "{0} - {1} ms";
-        }
+        private StringBuilder sbMessages = new StringBuilder(4096);
+        private int lastSaveIndex = 0;
 
         protected void OnMessageAdded(string message)
         {
@@ -70,7 +53,7 @@ namespace HelpersLib
             {
                 if (!string.IsNullOrEmpty(message))
                 {
-                    message = string.Format(MessageFormat, FastDateTime.Now, message);
+                    message = string.Format("{0:yyyy-MM-dd HH:mm:ss.fff} - {1}", FastDateTime.Now, message);
                 }
 
                 sbMessages.AppendLine(message);
@@ -86,22 +69,12 @@ namespace HelpersLib
 
         public void WriteException(string exception, string message = "Exception")
         {
-            WriteLine(string.Format(ExceptionFormat, message, exception));
+            WriteLine("{0}:{1}{2}", message, Environment.NewLine, exception);
         }
 
         public void WriteException(Exception exception, string message = "Exception")
         {
             WriteException(exception.ToString(), message);
-        }
-
-        public LoggerTimer StartTimer(string startMessage = null)
-        {
-            if (!string.IsNullOrEmpty(startMessage))
-            {
-                WriteLine(startMessage);
-            }
-
-            return new LoggerTimer(this, TimerMessageFormat);
         }
 
         public void SaveLog(string filepath)
@@ -144,25 +117,6 @@ namespace HelpersLib
 
                 return null;
             }
-        }
-    }
-
-    public class LoggerTimer
-    {
-        private Logger logger;
-        private string format;
-        private Stopwatch timer;
-
-        public LoggerTimer(Logger logger, string format)
-        {
-            this.logger = logger;
-            this.format = format;
-            timer = Stopwatch.StartNew();
-        }
-
-        public void WriteLineTime(string message = "Timer")
-        {
-            logger.WriteLine(format, message, timer.ElapsedMilliseconds);
         }
     }
 }
