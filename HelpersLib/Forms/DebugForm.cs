@@ -73,6 +73,12 @@ namespace HelpersLib
             }
         }
 
+        private void btnCopyAll_Click(object sender, EventArgs e)
+        {
+            string text = txtDebugLog.Text.Trim();
+            ClipboardHelpers.CopyText(text);
+        }
+
         private void btnLoadedAssemblies_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
@@ -87,11 +93,6 @@ namespace HelpersLib
             string assemblies = sb.ToString().Trim();
 
             MessageBox.Show(assemblies, "ShareX - Loaded assemblies", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnCopyAll_Click(object sender, EventArgs e)
-        {
-            ClipboardHelpers.CopyText(txtDebugLog.Text);
         }
     }
 }

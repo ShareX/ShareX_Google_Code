@@ -88,9 +88,7 @@ namespace HelpersLib
                     if (!string.IsNullOrEmpty(messages))
                     {
                         Helpers.CreateDirectoryIfNotExist(filepath);
-
                         File.AppendAllText(filepath, messages, Encoding.UTF8);
-
                         lastSaveIndex = sbMessages.Length;
                     }
                 }
