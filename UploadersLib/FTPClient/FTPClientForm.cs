@@ -284,13 +284,15 @@ namespace UploadersLib
 
         private void FTPCreateDirectory()
         {
-            InputBox ib = new InputBox { Text = "Create directory", Question = "Please enter the name of the directory which should be created:" };
-            ib.ShowDialog();
-            this.BringToFront();
-            if (ib.DialogResult == DialogResult.OK)
+            using (InputBox ib = new InputBox { Text = "Create directory", Question = "Please enter the name of the directory which should be created:" })
             {
-                FTPAdapter.MakeDirectory(Helpers.CombineURL(currentDirectory, ib.InputText));
-                RefreshDirectory();
+                ib.ShowDialog();
+                this.BringToFront();
+                if (ib.DialogResult == DialogResult.OK)
+                {
+                    FTPAdapter.MakeDirectory(Helpers.CombineURL(currentDirectory, ib.InputText));
+                    RefreshDirectory();
+                }
             }
         }
 

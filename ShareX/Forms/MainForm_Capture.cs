@@ -348,22 +348,27 @@ namespace ShareX
                 Image img = null;
                 Image screenshot = Screenshot.CaptureFullscreen();
 
-                surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
-                surface.SurfaceImage = screenshot;
-                surface.Prepare();
-                surface.ShowDialog();
-
-                if (surface.Result == SurfaceResult.Region)
+                try
                 {
-                    img = surface.GetRegionImage();
-                    screenshot.Dispose();
-                }
-                else if (surface.Result == SurfaceResult.Fullscreen)
-                {
-                    img = screenshot;
-                }
+                    surface.Config = taskSettings.CaptureSettings.SurfaceOptions;
+                    surface.SurfaceImage = screenshot;
+                    surface.Prepare();
+                    surface.ShowDialog();
 
-                surface.Dispose();
+                    if (surface.Result == SurfaceResult.Region)
+                    {
+                        img = surface.GetRegionImage();
+                        screenshot.Dispose();
+                    }
+                    else if (surface.Result == SurfaceResult.Fullscreen)
+                    {
+                        img = screenshot;
+                    }
+                }
+                finally
+                {
+                    surface.Dispose();
+                }
 
                 return img;
             }, captureType, taskSettings, autoHideForm);

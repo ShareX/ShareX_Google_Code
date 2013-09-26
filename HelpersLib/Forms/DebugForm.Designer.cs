@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtDebugLog = new System.Windows.Forms.TextBox();
             this.btnLoadedAssemblies = new System.Windows.Forms.Button();
-            this.tUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.cbAutoUpdateText = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtDebugLog
@@ -55,44 +52,24 @@
             this.btnLoadedAssemblies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLoadedAssemblies.Location = new System.Drawing.Point(8, 488);
             this.btnLoadedAssemblies.Name = "btnLoadedAssemblies";
-            this.btnLoadedAssemblies.Size = new System.Drawing.Size(120, 23);
+            this.btnLoadedAssemblies.Size = new System.Drawing.Size(136, 23);
             this.btnLoadedAssemblies.TabIndex = 2;
-            this.btnLoadedAssemblies.Text = "Loaded assemblies";
+            this.btnLoadedAssemblies.Text = "Loaded assemblies...";
             this.btnLoadedAssemblies.UseVisualStyleBackColor = true;
             this.btnLoadedAssemblies.Click += new System.EventHandler(this.btnLoadedAssemblies_Click);
-            // 
-            // tUpdateTimer
-            // 
-            this.tUpdateTimer.Enabled = true;
-            this.tUpdateTimer.Interval = 1000;
-            this.tUpdateTimer.Tick += new System.EventHandler(this.tUpdateTimer_Tick);
-            // 
-            // cbAutoUpdateText
-            // 
-            this.cbAutoUpdateText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbAutoUpdateText.AutoSize = true;
-            this.cbAutoUpdateText.Checked = true;
-            this.cbAutoUpdateText.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAutoUpdateText.Location = new System.Drawing.Point(648, 491);
-            this.cbAutoUpdateText.Name = "cbAutoUpdateText";
-            this.cbAutoUpdateText.Size = new System.Drawing.Size(104, 17);
-            this.cbAutoUpdateText.TabIndex = 3;
-            this.cbAutoUpdateText.Text = "Auto update text";
-            this.cbAutoUpdateText.UseVisualStyleBackColor = true;
-            this.cbAutoUpdateText.CheckedChanged += new System.EventHandler(this.cbAutoUpdateText_CheckedChanged);
             // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 518);
-            this.Controls.Add(this.cbAutoUpdateText);
             this.Controls.Add(this.btnLoadedAssemblies);
             this.Controls.Add(this.txtDebugLog);
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "DebugForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Debug log";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DebugForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,7 +79,5 @@
 
         private System.Windows.Forms.TextBox txtDebugLog;
         private System.Windows.Forms.Button btnLoadedAssemblies;
-        private System.Windows.Forms.Timer tUpdateTimer;
-        private System.Windows.Forms.CheckBox cbAutoUpdateText;
     }
 }

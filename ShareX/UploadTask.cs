@@ -388,9 +388,11 @@ namespace ShareX
             {
                 if (Program.Settings.DontShowPrintSettingsDialog)
                 {
-                    PrintHelper printHelper = new PrintHelper(tempImage);
-                    printHelper.Settings = Program.Settings.PrintSettings;
-                    printHelper.Print();
+                    using (PrintHelper printHelper = new PrintHelper(tempImage))
+                    {
+                        printHelper.Settings = Program.Settings.PrintSettings;
+                        printHelper.Print();
+                    }
                 }
                 else
                 {

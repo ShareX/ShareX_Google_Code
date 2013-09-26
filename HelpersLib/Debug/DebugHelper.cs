@@ -30,9 +30,9 @@ namespace HelpersLib
 {
     public static class DebugHelper
     {
-        public static Logger MyLogger { private get; set; }
+        public static Logger MyLogger { get; set; }
 
-        public static void WriteLine(string message)
+        public static void WriteLine(string message = "")
         {
             if (MyLogger != null)
             {
@@ -49,16 +49,21 @@ namespace HelpersLib
             WriteLine(string.Format(format, args));
         }
 
-        public static void WriteException(Exception e, string message = "Exception")
+        public static void WriteException(string exception, string message = "Exception")
         {
             if (MyLogger != null)
             {
-                MyLogger.WriteException(e, message);
+                MyLogger.WriteException(exception, message);
             }
             else
             {
-                Debug.WriteLine(e);
+                Debug.WriteLine(exception);
             }
+        }
+
+        public static void WriteException(Exception exception, string message = "Exception")
+        {
+            WriteException(exception.ToString(), message);
         }
     }
 }

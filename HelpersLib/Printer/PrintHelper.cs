@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
@@ -30,7 +31,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public class PrintHelper
+    public class PrintHelper : IDisposable
     {
         public PrintType PrintType { get; private set; }
         public Image Image { get; private set; }
@@ -77,6 +78,13 @@ namespace HelpersLib
             printDialog.UseEXDialog = true;
             printPreviewDialog = new PrintPreviewDialog();
             printPreviewDialog.Document = printDocument;
+        }
+
+        public void Dispose()
+        {
+            if (printDocument != null) printDocument.Dispose();
+            if (printDialog != null) printDialog.Dispose();
+            if (printPreviewDialog != null) printPreviewDialog.Dispose();
         }
 
         public void ShowPreview()

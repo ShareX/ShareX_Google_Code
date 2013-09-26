@@ -596,7 +596,7 @@ namespace ShareX
 
         private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            DebugForm debugForm = new DebugForm(Program.MyLogger);
+            DebugForm debugForm = new DebugForm(DebugHelper.MyLogger);
             debugForm.Show();
         }
 
@@ -747,7 +747,10 @@ namespace ShareX
 
         private void tsbAbout_Click(object sender, EventArgs e)
         {
-            new AboutForm().ShowDialog();
+            using (AboutForm aboutForm = new AboutForm())
+            {
+                aboutForm.ShowDialog();
+            }
         }
 
         private void tsbDonate_Click(object sender, EventArgs e)
