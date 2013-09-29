@@ -23,10 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using ShareX;
 using System.IO;
+using UploadersLib.HelperClasses;
 
-namespace HelpersLib
+namespace ShareX
 {
     public class UploadInfoParser : NameParser
     {
@@ -41,24 +43,25 @@ namespace HelpersLib
 
         public string Parse(TaskInfo info, string pattern)
         {
-            if (info != null && info.Result != null && !string.IsNullOrEmpty(pattern))
+            if (info != null && !string.IsNullOrEmpty(pattern))
             {
                 pattern = base.Parse(pattern);
 
-                pattern = pattern.Replace("$result", info.Result.ToString());
-                pattern = pattern.Replace("$url", info.Result.URL ?? "");
-                pattern = pattern.Replace("$shorturl", info.Result.ShortenedURL ?? "");
-                pattern = pattern.Replace("$thumbnailurl", info.Result.ThumbnailURL ?? "");
-                pattern = pattern.Replace("$deletionurl", info.Result.DeletionURL ?? "");
-
-                if (!string.IsNullOrEmpty(info.FilePath))
+                if (info.Result != null)
                 {
-                    pattern = pattern.Replace("$filepath", info.FilePath);
-                    pattern = pattern.Replace("$filename", Path.GetFileName(info.FilePath));
-                    pattern = pattern.Replace("$filenamenoext", Path.GetFileNameWithoutExtension(info.FilePath));
-                    pattern = pattern.Replace("$folderpath", Path.GetDirectoryName(info.FilePath));
-                    pattern = pattern.Replace("$foldername", Path.GetFileName(Path.GetDirectoryName(info.FilePath)));
+                    pattern = pattern.Replace("$result", info.Result.ToString());
+                    pattern = pattern.Replace("$url", info.Result.URL ?? "");
+                    pattern = pattern.Replace("$shorturl", info.Result.ShortenedURL ?? "");
+                    pattern = pattern.Replace("$thumbnailurl", info.Result.ThumbnailURL ?? "");
+                    pattern = pattern.Replace("$deletionurl", info.Result.DeletionURL ?? "");
                 }
+
+                pattern = pattern.Replace("$filenamenoext", !string.IsNullOrEmpty(info.FileName) ? Path.GetFileNameWithoutExtension(info.FileName) : "");
+                pattern = pattern.Replace("$filename", info.FileName ?? "");
+
+                pattern = pattern.Replace("$filepath", info.FilePath ?? "");
+                pattern = pattern.Replace("$folderpath", !string.IsNullOrEmpty(info.FilePath) ? Path.GetDirectoryName(info.FilePath) : "");
+                pattern = pattern.Replace("$foldername", !string.IsNullOrEmpty(info.FilePath) ? Path.GetFileName(Path.GetDirectoryName(info.FilePath)) : "");
 
                 pattern = pattern.Replace("$uploadtime", ((int)info.UploadDuration.TotalMilliseconds).ToString());
             }
