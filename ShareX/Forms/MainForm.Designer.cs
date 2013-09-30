@@ -156,6 +156,7 @@ namespace ShareX
             this.tsmiTrayTools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayScreenColorPicker = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayHashCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayIndexFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenshotsFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayImageHistory = new System.Windows.Forms.ToolStripMenuItem();
@@ -191,7 +192,6 @@ namespace ShareX
             this.tsmiCopyForumImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyForumLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tssCopy4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyCustomFormat = new System.Windows.Forms.ToolStripMenuItem();
             this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCopyFilePath = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
@@ -208,7 +208,6 @@ namespace ShareX
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTrayIndexFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -1149,6 +1148,14 @@ namespace ShareX
             this.tsmiTrayHashCheck.Text = "Hash check...";
             this.tsmiTrayHashCheck.Click += new System.EventHandler(this.tsmiHashCheck_Click);
             // 
+            // tsmiTrayIndexFolder
+            // 
+            this.tsmiTrayIndexFolder.Image = global::ShareX.Properties.Resources.folder_tree;
+            this.tsmiTrayIndexFolder.Name = "tsmiTrayIndexFolder";
+            this.tsmiTrayIndexFolder.Size = new System.Drawing.Size(183, 22);
+            this.tsmiTrayIndexFolder.Text = "Index folder...";
+            this.tsmiTrayIndexFolder.Click += new System.EventHandler(this.tsmiIndexFolder_Click);
+            // 
             // tsmiScreenshotsFolder
             // 
             this.tsmiScreenshotsFolder.Image = global::ShareX.Properties.Resources.folder_open_image;
@@ -1310,12 +1317,11 @@ namespace ShareX
             this.tsmiCopyForumImage,
             this.tsmiCopyForumLinkedImage,
             this.tssCopy4,
-            this.tsmiCopyCustomFormat,
-            this.tssCopy5,
             this.tsmiCopyFilePath,
             this.tsmiCopyFileName,
             this.tsmiCopyFileNameWithExtension,
-            this.tsmiCopyFolder});
+            this.tsmiCopyFolder,
+            this.tssCopy5});
             this.tsmiCopy.Name = "tsmiCopy";
             this.tsmiCopy.Size = new System.Drawing.Size(158, 22);
             this.tsmiCopy.Text = "Copy";
@@ -1431,16 +1437,11 @@ namespace ShareX
             this.tssCopy4.Name = "tssCopy4";
             this.tssCopy4.Size = new System.Drawing.Size(230, 6);
             // 
-            // tsmiCopyCustomFormat
-            // 
-            this.tsmiCopyCustomFormat.Name = "tsmiCopyCustomFormat";
-            this.tsmiCopyCustomFormat.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyCustomFormat.Text = "Custom format";
-            // 
             // tssCopy5
             // 
             this.tssCopy5.Name = "tssCopy5";
             this.tssCopy5.Size = new System.Drawing.Size(230, 6);
+            this.tssCopy5.Visible = false;
             // 
             // tsmiCopyFilePath
             // 
@@ -1541,14 +1542,6 @@ namespace ShareX
             this.ssToolStripMenuItem.Name = "ssToolStripMenuItem";
             this.ssToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ssToolStripMenuItem.Text = "ss";
-            // 
-            // tsmiTrayIndexFolder
-            // 
-            this.tsmiTrayIndexFolder.Image = global::ShareX.Properties.Resources.folder_tree;
-            this.tsmiTrayIndexFolder.Name = "tsmiTrayIndexFolder";
-            this.tsmiTrayIndexFolder.Size = new System.Drawing.Size(183, 22);
-            this.tsmiTrayIndexFolder.Text = "Index folder...";
-            this.tsmiTrayIndexFolder.Click += new System.EventHandler(this.tsmiIndexFolder_Click);
             // 
             // MainForm
             // 
@@ -1722,7 +1715,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTestURLShortener;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestUploaders;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestShapeCapture;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCopyCustomFormat;
         private System.Windows.Forms.ToolStripSeparator tssCopy5;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowDebugLog;
         private System.Windows.Forms.ToolStripButton tsbApplicationSettings;
