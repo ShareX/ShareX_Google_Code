@@ -274,13 +274,19 @@ namespace ShareX
                             tsmiCopyFileNameWithExtension.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
                             tsmiCopyFolder.Enabled = uim.SelectedItems.Any(x => x.IsFilePathValid);
 
-                            tsmiCopyCustomFormat.DropDownItems.Clear();
-                            foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
+                            CleanCustomClipboardFormats();
+
+                            if (Program.Settings.ClipboardContentFormats != null && Program.Settings.ClipboardContentFormats.Count > 0)
                             {
-                                ToolStripMenuItem tsmiClipboardFormat = new ToolStripMenuItem(cf.Description);
-                                tsmiClipboardFormat.Tag = cf;
-                                tsmiClipboardFormat.Click += tsmiClipboardFormat_Click;
-                                tsmiCopyCustomFormat.DropDownItems.Add(tsmiClipboardFormat);
+                                tssCopy5.Visible = true;
+
+                                foreach (ClipboardFormat cf in Program.Settings.ClipboardContentFormats)
+                                {
+                                    ToolStripMenuItem tsmiClipboardFormat = new ToolStripMenuItem(cf.Description);
+                                    tsmiClipboardFormat.Tag = cf;
+                                    tsmiClipboardFormat.Click += tsmiClipboardFormat_Click;
+                                    tsmiCopy.DropDownItems.Add(tsmiClipboardFormat);
+                                }
                             }
 
                             if (!scMain.Panel2Collapsed)
@@ -311,6 +317,21 @@ namespace ShareX
             cmsUploadInfo.ResumeLayout();
         }
 
+        private void CleanCustomClipboardFormats()
+        {
+            tssCopy5.Visible = false;
+
+            int tssCopy5Index = tsmiCopy.DropDownItems.IndexOf(tssCopy5);
+
+            while (tssCopy5Index < tsmiCopy.DropDownItems.Count - 1)
+            {
+                using (ToolStripItem tsi = tsmiCopy.DropDownItems[tsmiCopy.DropDownItems.Count - 1])
+                {
+                    tsmiCopy.DropDownItems.Remove(tsi);
+                }
+            }
+        }
+
         private void tsmiClipboardFormat_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmiClipboardFormat = sender as ToolStripMenuItem;
@@ -336,15 +357,6 @@ namespace ShareX
             }
 
             UpdatePreviewSplitter();
-
-            if (Program.Settings.ClipboardContentFormats.Count == 0)
-            {
-                Program.Settings.ClipboardContentFormats.Add(new ClipboardFormat()
-                {
-                    Description = "HTML linked image",
-                    Format = "<a href=\"$url\"><img src=\"$thumbnailurl\" alt=\"\" title\"\" /></a>"
-                });
-            }
         }
 
         private void AfterSettingsJobs()

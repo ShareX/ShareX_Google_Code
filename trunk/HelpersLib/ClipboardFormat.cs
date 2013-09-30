@@ -29,5 +29,15 @@ namespace HelpersLib
     {
         public string Description { get; set; }
         public string Format { get; set; }
+
+        public ClipboardFormat()
+        {
+        }
+
+        public ClipboardFormat(string description, string format)
+        {
+            Description = description;
+            Format = format;
+        }
     }
 }
