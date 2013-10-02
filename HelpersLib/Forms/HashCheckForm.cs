@@ -84,10 +84,16 @@ namespace HelpersLib
 
         private void txtResult_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResult.Text) && !string.IsNullOrEmpty(txtTarget.Text) &&
-                txtResult.Text.Equals(txtTarget.Text, StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(txtResult.Text) && !string.IsNullOrEmpty(txtTarget.Text))
             {
-                txtTarget.BackColor = Color.LightGreen;
+                if (txtResult.Text.Equals(txtTarget.Text, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    txtTarget.BackColor = Color.FromArgb(200, 255, 200);
+                }
+                else
+                {
+                    txtTarget.BackColor = Color.FromArgb(255, 200, 200);
+                }
             }
             else
             {
