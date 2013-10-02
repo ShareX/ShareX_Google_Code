@@ -115,6 +115,15 @@
     <Compile Include="FileUploaders\GoogleDrive.cs" />
     <Compile Include="FileUploaders\Jira.cs" />
     <Compile Include="FileUploaders\Hostr.cs" />
+    <Compile Include="FileUploaders\Mega.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\BigInteger.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\Crypto.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\Exceptions.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\Extensions.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\IWebClient.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\JsonSerialization.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\MegaAesCtrStream.cs" />
+    <Compile Include="FileUploaders\MegaApiClient\MegaApiClient.cs" />
     <Compile Include="FileUploaders\SFTP.cs" />
     <Compile Include="FileUploaders\Minus.cs" />
     <Compile Include="FileUploaders\SharedFolderUploader.cs" />
@@ -437,6 +446,7 @@
       <Name>HelpersLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

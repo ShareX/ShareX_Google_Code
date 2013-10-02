@@ -23,6 +23,10 @@
 
 #endregion License Information (GPL v3)
 
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using CG.Web.MegaApiClient;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -69,6 +73,7 @@ namespace UploadersLib
             fileUploadersImageList.Images.Add("SharedFolders", Resources.server_network);
             fileUploadersImageList.Images.Add("Email", Resources.mail);
             fileUploadersImageList.Images.Add("Jira", Resources.jira);
+            fileUploadersImageList.Images.Add("Mega", Resources.Mega);
             tcFileUploaders.ImageList = fileUploadersImageList;
 
             ImageList textUploadersImageList = new ImageList();
@@ -111,6 +116,7 @@ namespace UploadersLib
             tpPastebin.ImageKey = "Pastebin";
             tpGoogleURLShortener.ImageKey = "Google";
             tpTwitter.ImageKey = "Twitter";
+            tpMega.ImageKey = "Mega";
 
             cmsCustomUploaderArgValue = NameParser.CreateCodesMenu(txtCustomUploaderArgValue, ReplacementVariables.n);
         }
@@ -372,6 +378,10 @@ namespace UploadersLib
                 oAuthJira.Status = "Login successful.";
                 oAuthJira.LoginStatus = true;
             }
+
+            // Mega
+
+            this.ConfigureMegaTab(false);
 
             #endregion File uploaders
 

@@ -108,6 +108,8 @@ namespace UploadersLib
         Email,
         [Description("Jira")]
         Jira,
+        [Description("Mega.co.nz")]
+        Mega,
         [Description("Custom File Uploader")]
         CustomFileUploader
     }
