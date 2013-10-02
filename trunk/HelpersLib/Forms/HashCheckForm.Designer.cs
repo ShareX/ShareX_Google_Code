@@ -46,6 +46,7 @@
             // txtFilePath
             // 
             this.txtFilePath.AllowDrop = true;
+            this.txtFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFilePath.Location = new System.Drawing.Point(72, 12);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.Size = new System.Drawing.Size(280, 20);
@@ -136,6 +137,7 @@
             // 
             // txtResult
             // 
+            this.txtResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtResult.Location = new System.Drawing.Point(72, 108);
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
@@ -145,6 +147,7 @@
             // 
             // txtTarget
             // 
+            this.txtTarget.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTarget.Location = new System.Drawing.Point(72, 140);
             this.txtTarget.Name = "txtTarget";
             this.txtTarget.Size = new System.Drawing.Size(360, 20);
@@ -164,6 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(442, 171);
             this.Controls.Add(this.lblFile);
             this.Controls.Add(this.txtTarget);
@@ -179,6 +183,7 @@
             this.Controls.Add(this.btnFilePathBrowse);
             this.Controls.Add(this.txtFilePath);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "HashCheckForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hash check";
