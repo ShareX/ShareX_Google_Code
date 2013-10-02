@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using CG.Web.MegaApiClient;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -178,6 +179,12 @@ namespace UploadersLib
         public string JiraIssuePrefix = "PROJECT-";
         public OAuthInfo JiraOAuthInfo = null;
 
+        // Mega
+
+        public bool MegaAnonymousLogin = true;
+        public MegaApiClient.AuthInfos MegaAuthInfos = null;
+        public string MegaParentNodeId = null;
+
         #endregion File uploaders
 
         #region URL shorteners
@@ -306,6 +313,8 @@ namespace UploadersLib
                     return !string.IsNullOrEmpty(EmailSmtpServer) && EmailSmtpPort > 0 && !string.IsNullOrEmpty(EmailFrom) && !string.IsNullOrEmpty(EmailPassword);
                 case FileDestination.Jira:
                     return OAuthInfo.CheckOAuth(JiraOAuthInfo);
+                case FileDestination.Mega:
+                    return MegaAnonymousLogin || (MegaAuthInfos != null && MegaAuthInfos.Email != null && MegaAuthInfos.Hash != null && MegaAuthInfos.PasswordAesKey != null);
                 default:
                     return true;
             }

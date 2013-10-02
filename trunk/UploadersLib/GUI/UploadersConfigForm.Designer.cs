@@ -238,6 +238,18 @@
             this.txtJiraHost = new System.Windows.Forms.TextBox();
             this.lblJiraHost = new System.Windows.Forms.Label();
             this.oAuthJira = new UploadersLib.GUI.OAuth2Control();
+            this.tpMega = new System.Windows.Forms.TabPage();
+            this.atcMegaAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.lblMegaStatus = new System.Windows.Forms.Label();
+            this.pnlMegaLogin = new System.Windows.Forms.Panel();
+            this.lblMegaFolder = new System.Windows.Forms.Label();
+            this.cbMegaFolder = new System.Windows.Forms.ComboBox();
+            this.lblMegaEmail = new System.Windows.Forms.Label();
+            this.txtMegaEmail = new System.Windows.Forms.TextBox();
+            this.lblMegaPassword = new System.Windows.Forms.Label();
+            this.txtMegaPassword = new System.Windows.Forms.TextBox();
+            this.btnMegaLogin = new System.Windows.Forms.Button();
+            this.lblMegaStatusTitle = new System.Windows.Forms.Label();
             this.tpURLShorteners = new System.Windows.Forms.TabPage();
             this.tcURLShorteners = new System.Windows.Forms.TabControl();
             this.tpGoogleURLShortener = new System.Windows.Forms.TabPage();
@@ -349,6 +361,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudEmailSmtpPort)).BeginInit();
             this.tpJira.SuspendLayout();
             this.gpJiraServer.SuspendLayout();
+            this.tpMega.SuspendLayout();
+            this.pnlMegaLogin.SuspendLayout();
             this.tpURLShorteners.SuspendLayout();
             this.tcURLShorteners.SuspendLayout();
             this.tpGoogleURLShortener.SuspendLayout();
@@ -1342,6 +1356,7 @@
             this.tcFileUploaders.Controls.Add(this.tpSharedFolder);
             this.tcFileUploaders.Controls.Add(this.tpEmail);
             this.tcFileUploaders.Controls.Add(this.tpJira);
+            this.tcFileUploaders.Controls.Add(this.tpMega);
             this.tcFileUploaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcFileUploaders.Location = new System.Drawing.Point(3, 3);
             this.tcFileUploaders.Name = "tcFileUploaders";
@@ -2570,6 +2585,123 @@
             this.oAuthJira.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oAuthJira_CompleteButtonClicked);
             this.oAuthJira.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oAuthJira_RefreshButtonClicked);
             // 
+            // tpMega
+            // 
+            this.tpMega.Controls.Add(this.atcMegaAccountType);
+            this.tpMega.Controls.Add(this.lblMegaStatus);
+            this.tpMega.Controls.Add(this.pnlMegaLogin);
+            this.tpMega.Controls.Add(this.lblMegaStatusTitle);
+            this.tpMega.Location = new System.Drawing.Point(4, 22);
+            this.tpMega.Name = "tpMega";
+            this.tpMega.Size = new System.Drawing.Size(804, 475);
+            this.tpMega.TabIndex = 12;
+            this.tpMega.Text = "Mega.co.nz";
+            this.tpMega.UseVisualStyleBackColor = true;
+            // 
+            // atcMegaAccountType
+            // 
+            this.atcMegaAccountType.Location = new System.Drawing.Point(16, 34);
+            this.atcMegaAccountType.Name = "atcMegaAccountType";
+            this.atcMegaAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcMegaAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcMegaAccountType.TabIndex = 14;
+            // 
+            // lblMegaStatus
+            // 
+            this.lblMegaStatus.AutoSize = true;
+            this.lblMegaStatus.Location = new System.Drawing.Point(70, 17);
+            this.lblMegaStatus.Name = "lblMegaStatus";
+            this.lblMegaStatus.Size = new System.Drawing.Size(186, 13);
+            this.lblMegaStatus.TabIndex = 13;
+            this.lblMegaStatus.Text = "CONFIGURED / NOT CONFIGURED";
+            // 
+            // pnlMegaLogin
+            // 
+            this.pnlMegaLogin.Controls.Add(this.lblMegaFolder);
+            this.pnlMegaLogin.Controls.Add(this.cbMegaFolder);
+            this.pnlMegaLogin.Controls.Add(this.lblMegaEmail);
+            this.pnlMegaLogin.Controls.Add(this.txtMegaEmail);
+            this.pnlMegaLogin.Controls.Add(this.lblMegaPassword);
+            this.pnlMegaLogin.Controls.Add(this.txtMegaPassword);
+            this.pnlMegaLogin.Controls.Add(this.btnMegaLogin);
+            this.pnlMegaLogin.Location = new System.Drawing.Point(12, 67);
+            this.pnlMegaLogin.Name = "pnlMegaLogin";
+            this.pnlMegaLogin.Size = new System.Drawing.Size(378, 226);
+            this.pnlMegaLogin.TabIndex = 11;
+            // 
+            // lblMegaFolder
+            // 
+            this.lblMegaFolder.AutoSize = true;
+            this.lblMegaFolder.Location = new System.Drawing.Point(12, 104);
+            this.lblMegaFolder.Name = "lblMegaFolder";
+            this.lblMegaFolder.Size = new System.Drawing.Size(39, 13);
+            this.lblMegaFolder.TabIndex = 11;
+            this.lblMegaFolder.Text = "Folder:";
+            // 
+            // cbMegaFolder
+            // 
+            this.cbMegaFolder.DisplayMember = "DisplayName";
+            this.cbMegaFolder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMegaFolder.FormattingEnabled = true;
+            this.cbMegaFolder.Location = new System.Drawing.Point(76, 101);
+            this.cbMegaFolder.Name = "cbMegaFolder";
+            this.cbMegaFolder.Size = new System.Drawing.Size(168, 21);
+            this.cbMegaFolder.TabIndex = 10;
+            this.cbMegaFolder.ValueMember = "Node";
+            this.cbMegaFolder.SelectedIndexChanged += new System.EventHandler(this.cbMegaFolder_SelectedIndexChanged);
+            // 
+            // lblMegaEmail
+            // 
+            this.lblMegaEmail.AutoSize = true;
+            this.lblMegaEmail.Location = new System.Drawing.Point(12, 14);
+            this.lblMegaEmail.Name = "lblMegaEmail";
+            this.lblMegaEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblMegaEmail.TabIndex = 5;
+            this.lblMegaEmail.Text = "Email:";
+            // 
+            // txtMegaEmail
+            // 
+            this.txtMegaEmail.Location = new System.Drawing.Point(76, 10);
+            this.txtMegaEmail.Name = "txtMegaEmail";
+            this.txtMegaEmail.Size = new System.Drawing.Size(168, 20);
+            this.txtMegaEmail.TabIndex = 6;
+            // 
+            // lblMegaPassword
+            // 
+            this.lblMegaPassword.AutoSize = true;
+            this.lblMegaPassword.Location = new System.Drawing.Point(12, 38);
+            this.lblMegaPassword.Name = "lblMegaPassword";
+            this.lblMegaPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblMegaPassword.TabIndex = 7;
+            this.lblMegaPassword.Text = "Password:";
+            // 
+            // txtMegaPassword
+            // 
+            this.txtMegaPassword.Location = new System.Drawing.Point(76, 34);
+            this.txtMegaPassword.Name = "txtMegaPassword";
+            this.txtMegaPassword.PasswordChar = '*';
+            this.txtMegaPassword.Size = new System.Drawing.Size(168, 20);
+            this.txtMegaPassword.TabIndex = 8;
+            // 
+            // btnMegaLogin
+            // 
+            this.btnMegaLogin.Location = new System.Drawing.Point(169, 60);
+            this.btnMegaLogin.Name = "btnMegaLogin";
+            this.btnMegaLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnMegaLogin.TabIndex = 9;
+            this.btnMegaLogin.Text = "Login";
+            this.btnMegaLogin.UseVisualStyleBackColor = true;
+            this.btnMegaLogin.Click += new System.EventHandler(this.btnMegaLogin_Click);
+            // 
+            // lblMegaStatusTitle
+            // 
+            this.lblMegaStatusTitle.AutoSize = true;
+            this.lblMegaStatusTitle.Location = new System.Drawing.Point(24, 17);
+            this.lblMegaStatusTitle.Name = "lblMegaStatusTitle";
+            this.lblMegaStatusTitle.Size = new System.Drawing.Size(43, 13);
+            this.lblMegaStatusTitle.TabIndex = 12;
+            this.lblMegaStatusTitle.Text = "Status: ";
+            // 
             // tpURLShorteners
             // 
             this.tpURLShorteners.Controls.Add(this.tcURLShorteners);
@@ -3346,6 +3478,10 @@
             this.tpJira.PerformLayout();
             this.gpJiraServer.ResumeLayout(false);
             this.gpJiraServer.PerformLayout();
+            this.tpMega.ResumeLayout(false);
+            this.tpMega.PerformLayout();
+            this.pnlMegaLogin.ResumeLayout(false);
+            this.pnlMegaLogin.PerformLayout();
             this.tpURLShorteners.ResumeLayout(false);
             this.tcURLShorteners.ResumeLayout(false);
             this.tpGoogleURLShortener.ResumeLayout(false);
@@ -3642,5 +3778,17 @@
         private System.Windows.Forms.TextBox txtJiraIssuePrefix;
         private System.Windows.Forms.Label lblJiraIssuePrefix;
         private System.Windows.Forms.CheckBox cbDropboxShortURL;
+        private System.Windows.Forms.TabPage tpMega;
+        private System.Windows.Forms.Label lblMegaPassword;
+        private System.Windows.Forms.Label lblMegaEmail;
+        private System.Windows.Forms.Button btnMegaLogin;
+        private System.Windows.Forms.TextBox txtMegaPassword;
+        private System.Windows.Forms.TextBox txtMegaEmail;
+        private System.Windows.Forms.Panel pnlMegaLogin;
+        private System.Windows.Forms.Label lblMegaFolder;
+        private System.Windows.Forms.ComboBox cbMegaFolder;
+        private System.Windows.Forms.Label lblMegaStatusTitle;
+        private System.Windows.Forms.Label lblMegaStatus;
+        private GUI.AccountTypeControl atcMegaAccountType;
     }
 }

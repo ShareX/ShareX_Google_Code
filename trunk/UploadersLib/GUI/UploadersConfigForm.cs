@@ -23,6 +23,8 @@
 
 #endregion License Information (GPL v3)
 
+using System.Drawing;
+using CG.Web.MegaApiClient;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -1036,6 +1038,100 @@ namespace UploadersLib
         }
 
         #endregion Jira
+
+        #region Mega
+
+        private void ConfigureMegaTab(bool tryLogin)
+        {
+            Color OkColor = Color.Green;
+            Color NokColor = Color.DarkRed;
+
+            tpMega.Enabled = false;
+
+            atcMegaAccountType.AccountTypeChanged -= atcMegaAccountType_AccountTypeChanged;
+            atcMegaAccountType.SelectedAccountType = Config.MegaAnonymousLogin ? AccountType.Anonymous : AccountType.User;
+            atcMegaAccountType.AccountTypeChanged += atcMegaAccountType_AccountTypeChanged;
+
+            pnlMegaLogin.Enabled = !Config.MegaAnonymousLogin;
+
+            if (Config.MegaAuthInfos != null)
+            {
+                txtMegaEmail.Text = Config.MegaAuthInfos.Email;
+            }
+
+            if (Config.MegaAnonymousLogin)
+            {
+                lblMegaStatus.Text = "Configured (anonymous)";
+                lblMegaStatus.ForeColor = OkColor;
+            }
+            else if (Config.MegaAuthInfos == null)
+            {
+                lblMegaStatus.Text = "Not configured";
+                lblMegaStatus.ForeColor = NokColor;
+            }
+            else
+            {
+                cbMegaFolder.Items.Clear();
+
+                Mega mega = new Mega(Config.MegaAuthInfos);
+                if (!tryLogin || mega.TryLogin())
+                {
+                    lblMegaStatus.Text = "Configured";
+                    lblMegaStatus.ForeColor = OkColor;
+
+                    if (tryLogin)
+                    {
+                        Mega.DisplayNode[] nodes = mega.GetDisplayNodes().ToArray();
+                        cbMegaFolder.Items.AddRange(nodes);
+                        cbMegaFolder.SelectedItem = nodes.FirstOrDefault(n => n.Node != null && n.Node.Id == Config.MegaParentNodeId);
+                        if (cbMegaFolder.SelectedItem == null)
+                        {
+                            cbMegaFolder.SelectedItem = Mega.DisplayNode.EmptyNode;
+                        }
+                    }
+                }
+                else
+                {
+                    lblMegaStatus.Text = "Invalid authentication";
+                    lblMegaStatus.ForeColor = NokColor;
+                }
+            }
+
+            tpMega.Enabled = true;
+        }
+
+        private void atcMegaAccountType_AccountTypeChanged(AccountType accountType)
+        {
+            Config.MegaAnonymousLogin = accountType == AccountType.Anonymous;
+            Config.MegaAuthInfos = null;
+            Config.MegaParentNodeId = null;
+            txtMegaEmail.Text = null;
+            txtMegaPassword.Text = null;
+            this.ConfigureMegaTab(true);
+        }
+
+        private void btnMegaLogin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMegaEmail.Text) || string.IsNullOrEmpty(txtMegaPassword.Text))
+            {
+                return;
+            }
+
+            Config.MegaAuthInfos = MegaApiClient.GenerateAuthInfos(txtMegaEmail.Text, txtMegaPassword.Text);
+
+            this.ConfigureMegaTab(true);
+        }
+
+        private void cbMegaFolder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Mega.DisplayNode selectedNode = ((ComboBox)sender).SelectedItem as Mega.DisplayNode;
+            if (selectedNode != null)
+            {
+                Config.MegaParentNodeId = selectedNode == Mega.DisplayNode.EmptyNode ? null : selectedNode.Node.Id;
+            }
+        }
+
+        #endregion
 
         #endregion File Uploaders
 
