@@ -23,11 +23,11 @@
 
 #endregion License Information (GPL v3)
 
+using CG.Web.MegaApiClient;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CG.Web.MegaApiClient;
 using UploadersLib.HelperClasses;
 
 namespace UploadersLib.FileUploaders
@@ -50,6 +50,7 @@ namespace UploadersLib.FileUploaders
 
         public Mega(MegaApiClient.AuthInfos authInfos, string parentNodeId)
         {
+            AllowReportProgress = false;
             this._megaClient = new MegaApiClient(this);
             this._authInfos = authInfos;
             this._parentNodeId = parentNodeId;
@@ -130,7 +131,15 @@ namespace UploadersLib.FileUploaders
 
         public string PostRequestRaw(Uri url, Stream dataStream)
         {
-            return this.SendPostRequestStream(url.ToString(), dataStream, "application/octet-stream");
+            try
+            {
+                AllowReportProgress = true;
+                return this.SendPostRequestStream(url.ToString(), dataStream, "application/octet-stream");
+            }
+            finally
+            {
+                AllowReportProgress = false;
+            }
         }
 
         public Stream GetRequestRaw(Uri url)
@@ -138,7 +147,7 @@ namespace UploadersLib.FileUploaders
             throw new NotImplementedException();
         }
 
-        #endregion
+        #endregion IWebClient
 
         internal class DisplayNode
         {

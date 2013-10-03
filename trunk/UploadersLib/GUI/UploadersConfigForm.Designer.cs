@@ -318,6 +318,7 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.btnMegaRegister = new System.Windows.Forms.Button();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -1345,18 +1346,18 @@
             // tcFileUploaders
             // 
             this.tcFileUploaders.Controls.Add(this.tpDropbox);
-            this.tcFileUploaders.Controls.Add(this.tpGoogleDrive);
+            this.tcFileUploaders.Controls.Add(this.tpMega);
+            this.tcFileUploaders.Controls.Add(this.tpFTP);
             this.tcFileUploaders.Controls.Add(this.tpBox);
             this.tcFileUploaders.Controls.Add(this.tpMinus);
-            this.tcFileUploaders.Controls.Add(this.tpFTP);
             this.tcFileUploaders.Controls.Add(this.tpRapidShare);
             this.tcFileUploaders.Controls.Add(this.tpSendSpace);
             this.tcFileUploaders.Controls.Add(this.tpGe_tt);
             this.tcFileUploaders.Controls.Add(this.tpHostr);
+            this.tcFileUploaders.Controls.Add(this.tpGoogleDrive);
             this.tcFileUploaders.Controls.Add(this.tpSharedFolder);
             this.tcFileUploaders.Controls.Add(this.tpEmail);
             this.tcFileUploaders.Controls.Add(this.tpJira);
-            this.tcFileUploaders.Controls.Add(this.tpMega);
             this.tcFileUploaders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcFileUploaders.Location = new System.Drawing.Point(3, 3);
             this.tcFileUploaders.Name = "tcFileUploaders";
@@ -2595,7 +2596,7 @@
             this.tpMega.Name = "tpMega";
             this.tpMega.Size = new System.Drawing.Size(804, 475);
             this.tpMega.TabIndex = 12;
-            this.tpMega.Text = "Mega.co.nz";
+            this.tpMega.Text = "Mega";
             this.tpMega.UseVisualStyleBackColor = true;
             // 
             // atcMegaAccountType
@@ -2617,6 +2618,7 @@
             // 
             // pnlMegaLogin
             // 
+            this.pnlMegaLogin.Controls.Add(this.btnMegaRegister);
             this.pnlMegaLogin.Controls.Add(this.lblMegaFolder);
             this.pnlMegaLogin.Controls.Add(this.cbMegaFolder);
             this.pnlMegaLogin.Controls.Add(this.lblMegaEmail);
@@ -2643,9 +2645,9 @@
             this.cbMegaFolder.DisplayMember = "DisplayName";
             this.cbMegaFolder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMegaFolder.FormattingEnabled = true;
-            this.cbMegaFolder.Location = new System.Drawing.Point(76, 101);
+            this.cbMegaFolder.Location = new System.Drawing.Point(72, 100);
             this.cbMegaFolder.Name = "cbMegaFolder";
-            this.cbMegaFolder.Size = new System.Drawing.Size(168, 21);
+            this.cbMegaFolder.Size = new System.Drawing.Size(176, 21);
             this.cbMegaFolder.TabIndex = 10;
             this.cbMegaFolder.ValueMember = "Node";
             this.cbMegaFolder.SelectedIndexChanged += new System.EventHandler(this.cbMegaFolder_SelectedIndexChanged);
@@ -2661,9 +2663,9 @@
             // 
             // txtMegaEmail
             // 
-            this.txtMegaEmail.Location = new System.Drawing.Point(76, 10);
+            this.txtMegaEmail.Location = new System.Drawing.Point(72, 10);
             this.txtMegaEmail.Name = "txtMegaEmail";
-            this.txtMegaEmail.Size = new System.Drawing.Size(168, 20);
+            this.txtMegaEmail.Size = new System.Drawing.Size(176, 20);
             this.txtMegaEmail.TabIndex = 6;
             // 
             // lblMegaPassword
@@ -2677,17 +2679,17 @@
             // 
             // txtMegaPassword
             // 
-            this.txtMegaPassword.Location = new System.Drawing.Point(76, 34);
+            this.txtMegaPassword.Location = new System.Drawing.Point(72, 34);
             this.txtMegaPassword.Name = "txtMegaPassword";
             this.txtMegaPassword.PasswordChar = '*';
-            this.txtMegaPassword.Size = new System.Drawing.Size(168, 20);
+            this.txtMegaPassword.Size = new System.Drawing.Size(176, 20);
             this.txtMegaPassword.TabIndex = 8;
             // 
             // btnMegaLogin
             // 
-            this.btnMegaLogin.Location = new System.Drawing.Point(169, 60);
+            this.btnMegaLogin.Location = new System.Drawing.Point(168, 64);
             this.btnMegaLogin.Name = "btnMegaLogin";
-            this.btnMegaLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnMegaLogin.Size = new System.Drawing.Size(80, 24);
             this.btnMegaLogin.TabIndex = 9;
             this.btnMegaLogin.Text = "Login";
             this.btnMegaLogin.UseVisualStyleBackColor = true;
@@ -3396,6 +3398,16 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
+            // btnMegaRegister
+            // 
+            this.btnMegaRegister.Location = new System.Drawing.Point(264, 8);
+            this.btnMegaRegister.Name = "btnMegaRegister";
+            this.btnMegaRegister.Size = new System.Drawing.Size(96, 24);
+            this.btnMegaRegister.TabIndex = 15;
+            this.btnMegaRegister.Text = "Register...";
+            this.btnMegaRegister.UseVisualStyleBackColor = true;
+            this.btnMegaRegister.Click += new System.EventHandler(this.btnMegaRegister_Click);
+            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3790,5 +3802,6 @@
         private System.Windows.Forms.Label lblMegaStatusTitle;
         private System.Windows.Forms.Label lblMegaStatus;
         private GUI.AccountTypeControl atcMegaAccountType;
+        private System.Windows.Forms.Button btnMegaRegister;
     }
 }

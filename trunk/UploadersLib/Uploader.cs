@@ -49,7 +49,7 @@ namespace UploadersLib
         public List<string> Errors { get; private set; }
         public bool IsUploading { get; protected set; }
         public int BufferSize { get; set; }
-        public CookieCollection LastResponseCookies { get; private set; }
+        public bool AllowReportProgress { get; set; }
 
         protected bool stopUpload;
 
@@ -58,6 +58,7 @@ namespace UploadersLib
             Errors = new List<string>();
             IsUploading = false;
             BufferSize = 8192;
+            AllowReportProgress = true;
 
             ServicePointManager.DefaultConnectionLimit = 25;
             ServicePointManager.Expect100Continue = false;
@@ -407,7 +408,7 @@ namespace UploadersLib
             {
                 requestStream.Write(buffer, 0, bytesRead);
 
-                if (progress.UpdateProgress(bytesRead))
+                if (AllowReportProgress && progress.UpdateProgress(bytesRead))
                 {
                     OnProgressChanged(progress);
                 }
@@ -479,15 +480,6 @@ namespace UploadersLib
             {
                 using (response)
                 {
-                    if (response is HttpWebResponse)
-                    {
-                        LastResponseCookies = ((HttpWebResponse)response).Cookies;
-                    }
-                    else
-                    {
-                        LastResponseCookies = null;
-                    }
-
                     switch (responseType)
                     {
                         case ResponseType.Text:

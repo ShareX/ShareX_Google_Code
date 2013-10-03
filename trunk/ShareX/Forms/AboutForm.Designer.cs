@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblProjectPage = new System.Windows.Forms.Label();
-            this.lblCopyright = new System.Windows.Forms.Label();
-            this.lblCredits = new System.Windows.Forms.Label();
             this.lblBugs = new System.Windows.Forms.Label();
             this.lblBerk = new System.Windows.Forms.Label();
             this.pbTR = new System.Windows.Forms.PictureBox();
@@ -40,14 +38,21 @@
             this.pbMikeURL = new System.Windows.Forms.PictureBox();
             this.pbAU = new System.Windows.Forms.PictureBox();
             this.lblMike = new System.Windows.Forms.Label();
+            this.pbBerkSteamURL = new System.Windows.Forms.PictureBox();
+            this.rtbCredits = new System.Windows.Forms.RichTextBox();
+            this.lblGregoire = new System.Windows.Forms.Label();
+            this.pbGregoire = new System.Windows.Forms.PictureBox();
+            this.lblCommitters = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cLogo = new HelpersLib.Canvas();
             this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
-            this.pbBerkSteamURL = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkSteamURL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGregoire)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProductName
@@ -77,29 +82,6 @@
             this.lblProjectPage.Text = "Project page";
             this.lblProjectPage.Click += new System.EventHandler(this.lblProjectPage_Click);
             // 
-            // lblCopyright
-            // 
-            this.lblCopyright.AutoSize = true;
-            this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
-            this.lblCopyright.ForeColor = System.Drawing.Color.Black;
-            this.lblCopyright.Location = new System.Drawing.Point(16, 272);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(51, 13);
-            this.lblCopyright.TabIndex = 8;
-            this.lblCopyright.Text = "Copyright";
-            this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCredits
-            // 
-            this.lblCredits.AutoSize = true;
-            this.lblCredits.BackColor = System.Drawing.Color.Transparent;
-            this.lblCredits.ForeColor = System.Drawing.Color.Black;
-            this.lblCredits.Location = new System.Drawing.Point(16, 144);
-            this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(348, 117);
-            this.lblCredits.TabIndex = 7;
-            this.lblCredits.Text = resources.GetString("lblCredits.Text");
-            // 
             // lblBugs
             // 
             this.lblBugs.AutoSize = true;
@@ -119,7 +101,7 @@
             this.lblBerk.AutoSize = true;
             this.lblBerk.BackColor = System.Drawing.Color.Transparent;
             this.lblBerk.ForeColor = System.Drawing.Color.Black;
-            this.lblBerk.Location = new System.Drawing.Point(88, 90);
+            this.lblBerk.Location = new System.Drawing.Point(91, 88);
             this.lblBerk.Name = "lblBerk";
             this.lblBerk.Size = new System.Drawing.Size(108, 13);
             this.lblBerk.TabIndex = 1;
@@ -129,7 +111,7 @@
             // 
             this.pbTR.BackColor = System.Drawing.Color.Transparent;
             this.pbTR.Image = global::ShareX.Properties.Resources.tr;
-            this.pbTR.Location = new System.Drawing.Point(16, 88);
+            this.pbTR.Location = new System.Drawing.Point(19, 88);
             this.pbTR.Name = "pbTR";
             this.pbTR.Size = new System.Drawing.Size(16, 16);
             this.pbTR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -141,7 +123,7 @@
             this.pbBerkURL.BackColor = System.Drawing.Color.Transparent;
             this.pbBerkURL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbBerkURL.Image = global::ShareX.Properties.Resources.application_browser;
-            this.pbBerkURL.Location = new System.Drawing.Point(40, 88);
+            this.pbBerkURL.Location = new System.Drawing.Point(43, 88);
             this.pbBerkURL.Name = "pbBerkURL";
             this.pbBerkURL.Size = new System.Drawing.Size(16, 16);
             this.pbBerkURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -154,7 +136,7 @@
             this.pbMikeURL.BackColor = System.Drawing.Color.Transparent;
             this.pbMikeURL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbMikeURL.Image = global::ShareX.Properties.Resources.application_browser;
-            this.pbMikeURL.Location = new System.Drawing.Point(40, 112);
+            this.pbMikeURL.Location = new System.Drawing.Point(43, 112);
             this.pbMikeURL.Name = "pbMikeURL";
             this.pbMikeURL.Size = new System.Drawing.Size(16, 16);
             this.pbMikeURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -166,7 +148,7 @@
             // 
             this.pbAU.BackColor = System.Drawing.Color.Transparent;
             this.pbAU.Image = global::ShareX.Properties.Resources.au;
-            this.pbAU.Location = new System.Drawing.Point(16, 112);
+            this.pbAU.Location = new System.Drawing.Point(19, 112);
             this.pbAU.Name = "pbAU";
             this.pbAU.Size = new System.Drawing.Size(16, 16);
             this.pbAU.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -178,11 +160,77 @@
             this.lblMike.AutoSize = true;
             this.lblMike.BackColor = System.Drawing.Color.Transparent;
             this.lblMike.ForeColor = System.Drawing.Color.Black;
-            this.lblMike.Location = new System.Drawing.Point(64, 114);
+            this.lblMike.Location = new System.Drawing.Point(67, 112);
             this.lblMike.Name = "lblMike";
-            this.lblMike.Size = new System.Drawing.Size(164, 13);
+            this.lblMike.Size = new System.Drawing.Size(131, 13);
             this.lblMike.TabIndex = 6;
-            this.lblMike.Text = "McoreD (mcored) - Mike Delpach";
+            this.lblMike.Text = "mcored - Michael Delpach";
+            // 
+            // pbBerkSteamURL
+            // 
+            this.pbBerkSteamURL.BackColor = System.Drawing.Color.Transparent;
+            this.pbBerkSteamURL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbBerkSteamURL.Image = global::ShareX.Properties.Resources.steam;
+            this.pbBerkSteamURL.Location = new System.Drawing.Point(67, 88);
+            this.pbBerkSteamURL.Name = "pbBerkSteamURL";
+            this.pbBerkSteamURL.Size = new System.Drawing.Size(16, 16);
+            this.pbBerkSteamURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbBerkSteamURL.TabIndex = 21;
+            this.pbBerkSteamURL.TabStop = false;
+            this.pbBerkSteamURL.Click += new System.EventHandler(this.pbBerkSteamURL_Click);
+            // 
+            // rtbCredits
+            // 
+            this.rtbCredits.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rtbCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbCredits.Location = new System.Drawing.Point(16, 192);
+            this.rtbCredits.Name = "rtbCredits";
+            this.rtbCredits.Size = new System.Drawing.Size(328, 152);
+            this.rtbCredits.TabIndex = 22;
+            this.rtbCredits.Text = resources.GetString("rtbCredits.Text");
+            this.rtbCredits.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbCredits_LinkClicked);
+            // 
+            // lblGregoire
+            // 
+            this.lblGregoire.AutoSize = true;
+            this.lblGregoire.Location = new System.Drawing.Point(67, 160);
+            this.lblGregoire.Name = "lblGregoire";
+            this.lblGregoire.Size = new System.Drawing.Size(120, 13);
+            this.lblGregoire.TabIndex = 23;
+            this.lblGregoire.Text = "gpailler - Grégoire Pailler";
+            // 
+            // pbGregoire
+            // 
+            this.pbGregoire.BackColor = System.Drawing.Color.Transparent;
+            this.pbGregoire.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbGregoire.Image = global::ShareX.Properties.Resources.application_browser;
+            this.pbGregoire.Location = new System.Drawing.Point(43, 160);
+            this.pbGregoire.Name = "pbGregoire";
+            this.pbGregoire.Size = new System.Drawing.Size(16, 16);
+            this.pbGregoire.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbGregoire.TabIndex = 24;
+            this.pbGregoire.TabStop = false;
+            this.pbGregoire.Click += new System.EventHandler(this.pbGregoire_Click);
+            // 
+            // lblCommitters
+            // 
+            this.lblCommitters.AutoSize = true;
+            this.lblCommitters.Location = new System.Drawing.Point(16, 136);
+            this.lblCommitters.Name = "lblCommitters";
+            this.lblCommitters.Size = new System.Drawing.Size(61, 13);
+            this.lblCommitters.TabIndex = 25;
+            this.lblCommitters.Text = "Committers:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::ShareX.Properties.Resources.fr;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 160);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 26;
+            this.pictureBox1.TabStop = false;
             // 
             // cLogo
             // 
@@ -203,24 +251,16 @@
             this.uclUpdate.Size = new System.Drawing.Size(224, 24);
             this.uclUpdate.TabIndex = 3;
             // 
-            // pbBerkSteamURL
-            // 
-            this.pbBerkSteamURL.BackColor = System.Drawing.Color.Transparent;
-            this.pbBerkSteamURL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbBerkSteamURL.Image = global::ShareX.Properties.Resources.steam;
-            this.pbBerkSteamURL.Location = new System.Drawing.Point(64, 88);
-            this.pbBerkSteamURL.Name = "pbBerkSteamURL";
-            this.pbBerkSteamURL.Size = new System.Drawing.Size(16, 16);
-            this.pbBerkSteamURL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbBerkSteamURL.TabIndex = 21;
-            this.pbBerkSteamURL.TabStop = false;
-            this.pbBerkSteamURL.Click += new System.EventHandler(this.pbBerkSteamURL_Click);
-            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 294);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(395, 350);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblCommitters);
+            this.Controls.Add(this.pbGregoire);
+            this.Controls.Add(this.lblGregoire);
             this.Controls.Add(this.pbBerkSteamURL);
             this.Controls.Add(this.lblBerk);
             this.Controls.Add(this.lblMike);
@@ -231,10 +271,9 @@
             this.Controls.Add(this.pbBerkURL);
             this.Controls.Add(this.pbTR);
             this.Controls.Add(this.lblBugs);
-            this.Controls.Add(this.lblCopyright);
             this.Controls.Add(this.lblProjectPage);
             this.Controls.Add(this.lblProductName);
-            this.Controls.Add(this.lblCredits);
+            this.Controls.Add(this.rtbCredits);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "AboutForm";
@@ -247,6 +286,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMikeURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkSteamURL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGregoire)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,8 +297,6 @@
 
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblProjectPage;
-        private System.Windows.Forms.Label lblCopyright;
-        private System.Windows.Forms.Label lblCredits;
         private System.Windows.Forms.Label lblBugs;
         private System.Windows.Forms.Label lblBerk;
         private System.Windows.Forms.PictureBox pbTR;
@@ -268,5 +307,10 @@
         private UpdateCheckerLib.UpdateCheckerLabel uclUpdate;
         private HelpersLib.Canvas cLogo;
         private System.Windows.Forms.PictureBox pbBerkSteamURL;
+        private System.Windows.Forms.RichTextBox rtbCredits;
+        private System.Windows.Forms.Label lblGregoire;
+        private System.Windows.Forms.PictureBox pbGregoire;
+        private System.Windows.Forms.Label lblCommitters;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

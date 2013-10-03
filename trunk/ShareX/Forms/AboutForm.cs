@@ -26,6 +26,7 @@
 using HelpersLib;
 using ShareX.Properties;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -42,7 +43,7 @@ namespace ShareX
             Text = Program.FullTitle;
             Icon = Resources.ShareXIcon;
             lblProductName.Text = Program.FullTitle;
-            lblCopyright.Text = Program.AssemblyCopyright;
+            rtbCredits.Text += Program.AssemblyCopyright;
 
             UpdateChecker updateChecker = new UpdateChecker(Links.URL_UPDATE, Application.ProductName, Program.AssemblyVersion,
                 ReleaseChannelType.Stable, Uploader.ProxyInfo.GetWebProxy());
@@ -86,6 +87,16 @@ namespace ShareX
         private void pbMikeURL_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync(Links.URL_MIKE);
+        }
+
+        private void pbGregoire_Click(object sender, EventArgs e)
+        {
+            Helpers.LoadBrowserAsync(Links.URL_GREGOIRE);
+        }
+
+        private void rtbCredits_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Process.Start(e.LinkText);
         }
 
         #region Animation
