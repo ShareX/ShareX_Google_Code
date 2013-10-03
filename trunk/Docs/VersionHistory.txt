@@ -1,5 +1,14 @@
-﻿Added support for indexing a folder during Clipboard Upload
+﻿Added mega.co.nz file uploader support
+
+ShareX 8.2 r655 – 2013-09-26
+
+Added folder indexer with support for text, HTML and XML
+Option to change clipboard content format for wider software compatibility 
+New after capture task: Image resize 
+Added support for indexing a folder during Clipboard Upload
+Ability to use Windows modifier for hotkeys using configuration file
 Rectangle Lite support in Advanced settings for slow computers
+
 
 ShareX 8.1 r573 - 2013-09-04
 
