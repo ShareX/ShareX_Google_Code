@@ -32,132 +32,59 @@ namespace HelpersLib
 {
     public static class ColorMatrixManager
     {
+        #region Grayscale values
+
+        private const float rw = 0.212671f;
+        private const float gw = 0.715160f;
+        private const float bw = 0.072169f;
+
         /*
         private const float rw = 0.3086f;
         private const float gw = 0.6094f;
         private const float bw = 0.0820f;
         */
 
-        private const float rw = 0.212671f;
-        private const float gw = 0.715160f;
-        private const float bw = 0.072169f;
+        #endregion Grayscale values
 
         public static Image Apply(this ColorMatrix matrix, Image img)
         {
-            Bitmap bmp = new Bitmap(img.Width, img.Height, PixelFormat.Format32bppArgb);
+            Bitmap bmp = new Bitmap(img.Width, img.Height, img.PixelFormat);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
-            using (ImageAttributes imgattr = new ImageAttributes())
+            using (ImageAttributes ia = new ImageAttributes())
             {
-                imgattr.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgattr);
+                ia.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
             }
 
             return bmp;
         }
 
-        public static ColorMatrix IdentityMatrix
+        /// <param name="value">1 = No change (Min 0.1, Max 5.0)</param>
+        public static Image ChangeGamma(Image img, float value)
         {
-            get
-            {
-                ColorMatrix matrix = new ColorMatrix();
-                matrix[0, 0] = matrix[1, 1] = matrix[2, 2] = matrix[3, 3] = matrix[4, 4] = 1.0f;
-                return matrix;
-            }
-        }
+            value = value.Between(0.1f, 5.0f);
 
-        public static Image ChangeGamma(Image img, float gamma)
-        {
-            Bitmap bmp = new Bitmap(img.Width, img.Height, PixelFormat.Format32bppArgb);
-
-            gamma = gamma / 100 + 1;
-            gamma = gamma.Between(0.1f, 10.0f);
+            Bitmap bmp = new Bitmap(img.Width, img.Height, img.PixelFormat);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (ImageAttributes ia = new ImageAttributes())
             {
-                using (ImageAttributes imgattr = new ImageAttributes())
-                {
-                    imgattr.SetGamma(gamma, ColorAdjustType.Bitmap);
-                    g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgattr);
-                }
+                ia.SetGamma(value, ColorAdjustType.Bitmap);
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
             }
 
             return bmp;
         }
 
-        public static ColorMatrix Alpha(float percentage, float addition)
+        public static ColorMatrix Identity()
         {
-            float perc = 1 - percentage / 100;
-            float add = addition / 100;
-
             return new ColorMatrix(new[]{
                 new float[] {1, 0, 0, 0, 0},
                 new float[] {0, 1, 0, 0, 0},
                 new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, perc, 0},
-                new float[] {0, 0, 0, add, 1}});
-        }
-
-        public static ColorMatrix Brightness(float percentage)
-        {
-            float perc = percentage / 100;
-
-            return new ColorMatrix(new[]{
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {perc, perc, perc, 0, 1}});
-        }
-
-        public static ColorMatrix Colorize(Color color, float percentage)
-        {
-            float r = (float)color.R / 255;
-            float g = (float)color.G / 255;
-            float b = (float)color.B / 255;
-            float amount = percentage / 100;
-            float inv_amount = 1 - amount;
-
-            return new ColorMatrix(new[]{
-                new float[] {inv_amount + amount * r * rw, amount * g * rw, amount * b * rw, 0, 0},
-                new float[] {amount * r * gw, inv_amount + amount * g * gw, amount * b * gw, 0, 0},
-                new float[] {amount * r * bw, amount * g * bw, inv_amount + amount * b * bw, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
-        }
-
-        public static ColorMatrix Contrast(float percentage)
-        {
-            float perc = 1 + percentage / 100;
-
-            return new ColorMatrix(new[]{
-                new float[] {perc, 0, 0, 0, 0},
-                new float[] {0, perc, 0, 0, 0},
-                new float[] {0, 0, perc, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
-        }
-
-        public static ColorMatrix Grayscale()
-        {
-            return new ColorMatrix(new[]{
-                new float[] {rw, rw, rw, 0, 0},
-                new float[] {gw, gw, gw, 0, 0},
-                new float[] {bw, bw, bw, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
-        }
-
-        public static ColorMatrix Hue(float angle)
-        {
-            float a = angle * (float)(Math.PI / 180);
-            float c = (float)Math.Cos(a);
-            float s = (float)Math.Sin(a);
-
-            return new ColorMatrix(new[]{
-                new float[] {(rw + (c * (1 - rw))) + (s * -rw), (rw + (c * -rw)) + (s * 0.143f), (rw + (c * -rw)) + (s * -(1 - rw)), 0, 0},
-                new float[] {(gw + (c * -gw)) + (s * -gw), (gw + (c * (1 - gw))) + (s * 0.14f), (gw + (c * -gw)) + (s * gw), 0, 0},
-                new float[] {(bw + (c * -bw)) + (s * (1 - bw)), (bw + (c * -bw)) + (s * -0.283f), (bw + (c * (1 - bw))) + (s * bw), 0, 0},
                 new float[] {0, 0, 0, 1, 0},
                 new float[] {0, 0, 0, 0, 1}});
         }
@@ -172,14 +99,89 @@ namespace HelpersLib
                 new float[] {1, 1, 1, 0, 1}});
         }
 
-        public static ColorMatrix Saturation(float percentage)
+        /// <param name="value">1 = No change</param>
+        /// <param name="add">0 = No change</param>
+        public static ColorMatrix Alpha(float value, float add)
         {
-            float s = 1 + percentage / 100;
+            return new ColorMatrix(new[]{
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, value, 0},
+                new float[] {0, 0, 0, add, 1}});
+        }
+
+        /// <param name="add">0 = No change</param>
+        public static ColorMatrix Brightness(float add)
+        {
+            return new ColorMatrix(new[]{
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {add, add, add, 0, 1}});
+        }
+
+        /// <param name="value">1 = No change</param>
+        public static ColorMatrix Contrast(float value)
+        {
+            return new ColorMatrix(new[]{
+                new float[] {value, 0, 0, 0, 0},
+                new float[] {0, value, 0, 0, 0},
+                new float[] {0, 0, value, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}});
+        }
+
+        /// <param name="value">1 = No change</param>
+        public static ColorMatrix Grayscale(float value = 1)
+        {
+            return new ColorMatrix(new[]{
+                new float[] {rw * value, rw * value, rw * value, 0, 0},
+                new float[] {gw * value, gw * value, gw * value, 0, 0},
+                new float[] {bw * value, bw * value, bw * value, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}});
+        }
+
+        /// <param name="angle">0 = No change</param>
+        public static ColorMatrix Hue(float angle)
+        {
+            float a = angle * (float)(Math.PI / 180);
+            float c = (float)Math.Cos(a);
+            float s = (float)Math.Sin(a);
 
             return new ColorMatrix(new[]{
-                new float[] {(1.0f - s) * rw + s, (1.0f - s) * rw, (1.0f - s) * rw, 0, 0},
-                new float[] {(1.0f - s) * gw, (1.0f - s) * gw + s, (1.0f - s) * gw, 0, 0},
-                new float[] {(1.0f - s) * bw, (1.0f - s) * bw, (1.0f - s) * bw + s, 0, 0},
+                new float[] {(rw + (c * (1 - rw))) + (s * -rw), (rw + (c * -rw)) + (s * 0.143f), (rw + (c * -rw)) + (s * -(1 - rw)), 0, 0},
+                new float[] {(gw + (c * -gw)) + (s * -gw), (gw + (c * (1 - gw))) + (s * 0.14f), (gw + (c * -gw)) + (s * gw), 0, 0},
+                new float[] {(bw + (c * -bw)) + (s * (1 - bw)), (bw + (c * -bw)) + (s * -0.283f), (bw + (c * (1 - bw))) + (s * bw), 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}});
+        }
+
+        /// <param name="value">1 = No change</param>
+        public static ColorMatrix Saturation(float value)
+        {
+            return new ColorMatrix(new[]{
+                new float[] {(1.0f - value) * rw + value, (1.0f - value) * rw, (1.0f - value) * rw, 0, 0},
+                new float[] {(1.0f - value) * gw, (1.0f - value) * gw + value, (1.0f - value) * gw, 0, 0},
+                new float[] {(1.0f - value) * bw, (1.0f - value) * bw, (1.0f - value) * bw + value, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}});
+        }
+
+        /// <param name="value">0 = No change</param>
+        public static ColorMatrix Colorize(Color color, float value)
+        {
+            float r = (float)color.R / 255;
+            float g = (float)color.G / 255;
+            float b = (float)color.B / 255;
+            float inv_amount = 1 - value;
+
+            return new ColorMatrix(new[]{
+                new float[] {inv_amount + value * r * rw, value * g * rw, value * b * rw, 0, 0},
+                new float[] {value * r * gw, inv_amount + value * g * gw, value * b * gw, 0, 0},
+                new float[] {value * r * bw, value * g * bw, inv_amount + value * b * bw, 0, 0},
                 new float[] {0, 0, 0, 1, 0},
                 new float[] {0, 0, 0, 0, 1}});
         }

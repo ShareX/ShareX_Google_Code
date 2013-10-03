@@ -76,6 +76,12 @@
     <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ColorMatrixManager.cs" />
+    <Compile Include="Forms\ColorMatrixTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColorMatrixTestForm.Designer.cs">
+      <DependentUpon>ColorMatrixTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
@@ -277,6 +283,9 @@
     <Compile Include="WindowState.cs" />
     <Compile Include="XmlColor.cs" />
     <Compile Include="XmlFont.cs" />
+    <EmbeddedResource Include="Forms\ColorMatrixTestForm.resx">
+      <DependentUpon>ColorMatrixTestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </EmbeddedResource>

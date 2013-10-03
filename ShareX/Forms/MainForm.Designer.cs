@@ -105,6 +105,7 @@ namespace ShareX
             this.tsmiTestURLShortener = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTestColorMatrix = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lblSplitter2 = new System.Windows.Forms.Label();
             this.lblSplitter = new System.Windows.Forms.Label();
@@ -192,11 +193,11 @@ namespace ShareX
             this.tsmiCopyForumImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyForumLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
             this.tssCopy4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCopyFilePath = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUploadSelectedFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -611,7 +612,7 @@ namespace ShareX
             this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(121, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
             this.tsmiAbout.Text = "About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
@@ -621,7 +622,7 @@ namespace ShareX
             this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(121, 22);
+            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
             this.tsmiDonate.Text = "Donate...";
             this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
@@ -634,12 +635,13 @@ namespace ShareX
             this.tsmiTestFileUpload,
             this.tsmiTestURLShortener,
             this.tsmiTestUploaders,
-            this.tsmiTestShapeCapture});
+            this.tsmiTestShapeCapture,
+            this.tsmiTestColorMatrix});
             this.tsmiDebug.Image = global::ShareX.Properties.Resources.block;
             this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(121, 22);
+            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
             this.tsmiDebug.Text = "Debug";
             // 
             // tsmiShowDebugLog
@@ -697,6 +699,14 @@ namespace ShareX
             this.tsmiTestShapeCapture.Size = new System.Drawing.Size(182, 22);
             this.tsmiTestShapeCapture.Text = "Test shape capture...";
             this.tsmiTestShapeCapture.Click += new System.EventHandler(this.tsmiTestShapeCapture_Click);
+            // 
+            // tsmiTestColorMatrix
+            // 
+            this.tsmiTestColorMatrix.Image = global::ShareX.Properties.Resources.color;
+            this.tsmiTestColorMatrix.Name = "tsmiTestColorMatrix";
+            this.tsmiTestColorMatrix.Size = new System.Drawing.Size(182, 22);
+            this.tsmiTestColorMatrix.Text = "Test color matrix...";
+            this.tsmiTestColorMatrix.Click += new System.EventHandler(this.tsmiTestColorMatrix_Click);
             // 
             // scMain
             // 
@@ -1437,12 +1447,6 @@ namespace ShareX
             this.tssCopy4.Name = "tssCopy4";
             this.tssCopy4.Size = new System.Drawing.Size(230, 6);
             // 
-            // tssCopy5
-            // 
-            this.tssCopy5.Name = "tssCopy5";
-            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
-            this.tssCopy5.Visible = false;
-            // 
             // tsmiCopyFilePath
             // 
             this.tsmiCopyFilePath.Name = "tsmiCopyFilePath";
@@ -1470,6 +1474,12 @@ namespace ShareX
             this.tsmiCopyFolder.Size = new System.Drawing.Size(233, 22);
             this.tsmiCopyFolder.Text = "Folder";
             this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
+            // 
+            // tssCopy5
+            // 
+            this.tssCopy5.Name = "tssCopy5";
+            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
+            this.tssCopy5.Visible = false;
             // 
             // tsmiShowErrors
             // 
@@ -1729,5 +1739,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripSeparator tssTray3;
         private System.Windows.Forms.ToolStripMenuItem tsmiIndexFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayIndexFolder;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTestColorMatrix;
     }
 }
