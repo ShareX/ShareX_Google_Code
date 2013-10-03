@@ -135,8 +135,35 @@
             this.lblDropboxPath = new System.Windows.Forms.Label();
             this.btnDropboxOpenAuthorize = new System.Windows.Forms.Button();
             this.txtDropboxPath = new System.Windows.Forms.TextBox();
-            this.tpGoogleDrive = new System.Windows.Forms.TabPage();
-            this.oauth2GoogleDrive = new UploadersLib.GUI.OAuth2Control();
+            this.tpMega = new System.Windows.Forms.TabPage();
+            this.atcMegaAccountType = new UploadersLib.GUI.AccountTypeControl();
+            this.lblMegaStatus = new System.Windows.Forms.Label();
+            this.pnlMegaLogin = new System.Windows.Forms.Panel();
+            this.btnMegaRefreshFolders = new System.Windows.Forms.Button();
+            this.btnMegaRegister = new System.Windows.Forms.Button();
+            this.lblMegaFolder = new System.Windows.Forms.Label();
+            this.cbMegaFolder = new System.Windows.Forms.ComboBox();
+            this.lblMegaEmail = new System.Windows.Forms.Label();
+            this.txtMegaEmail = new System.Windows.Forms.TextBox();
+            this.lblMegaPassword = new System.Windows.Forms.Label();
+            this.txtMegaPassword = new System.Windows.Forms.TextBox();
+            this.btnMegaLogin = new System.Windows.Forms.Button();
+            this.lblMegaStatusTitle = new System.Windows.Forms.Label();
+            this.tpFTP = new System.Windows.Forms.TabPage();
+            this.tlpFtp = new System.Windows.Forms.TableLayoutPanel();
+            this.panelFtp = new System.Windows.Forms.Panel();
+            this.btnFtpClient = new System.Windows.Forms.Button();
+            this.btnFTPExport = new System.Windows.Forms.Button();
+            this.btnFTPImport = new System.Windows.Forms.Button();
+            this.btnFtpHelp = new System.Windows.Forms.Button();
+            this.ucFTPAccounts = new UploadersLib.AccountsControl();
+            this.gbFtpSettings = new System.Windows.Forms.GroupBox();
+            this.lblFtpFiles = new System.Windows.Forms.Label();
+            this.lblFtpText = new System.Windows.Forms.Label();
+            this.lblFtpImages = new System.Windows.Forms.Label();
+            this.cboFtpFiles = new System.Windows.Forms.ComboBox();
+            this.cboFtpText = new System.Windows.Forms.ComboBox();
+            this.cboFtpImages = new System.Windows.Forms.ComboBox();
             this.tpBox = new System.Windows.Forms.TabPage();
             this.txtBoxFolderID = new System.Windows.Forms.TextBox();
             this.lblBoxFolderID = new System.Windows.Forms.Label();
@@ -161,21 +188,6 @@
             this.btnMinusFolderRemove = new System.Windows.Forms.Button();
             this.cboMinusFolders = new System.Windows.Forms.ComboBox();
             this.lblMinusAuthStatus = new System.Windows.Forms.Label();
-            this.tpFTP = new System.Windows.Forms.TabPage();
-            this.tlpFtp = new System.Windows.Forms.TableLayoutPanel();
-            this.panelFtp = new System.Windows.Forms.Panel();
-            this.btnFtpClient = new System.Windows.Forms.Button();
-            this.btnFTPExport = new System.Windows.Forms.Button();
-            this.btnFTPImport = new System.Windows.Forms.Button();
-            this.btnFtpHelp = new System.Windows.Forms.Button();
-            this.ucFTPAccounts = new UploadersLib.AccountsControl();
-            this.gbFtpSettings = new System.Windows.Forms.GroupBox();
-            this.lblFtpFiles = new System.Windows.Forms.Label();
-            this.lblFtpText = new System.Windows.Forms.Label();
-            this.lblFtpImages = new System.Windows.Forms.Label();
-            this.cboFtpFiles = new System.Windows.Forms.ComboBox();
-            this.cboFtpText = new System.Windows.Forms.ComboBox();
-            this.cboFtpImages = new System.Windows.Forms.ComboBox();
             this.tpRapidShare = new System.Windows.Forms.TabPage();
             this.txtRapidShareFolderID = new System.Windows.Forms.TextBox();
             this.lblRapidShareFolderID = new System.Windows.Forms.Label();
@@ -205,6 +217,8 @@
             this.lblLocalhostrEmail = new System.Windows.Forms.Label();
             this.txtLocalhostrPassword = new System.Windows.Forms.TextBox();
             this.txtLocalhostrEmail = new System.Windows.Forms.TextBox();
+            this.tpGoogleDrive = new System.Windows.Forms.TabPage();
+            this.oauth2GoogleDrive = new UploadersLib.GUI.OAuth2Control();
             this.tpSharedFolder = new System.Windows.Forms.TabPage();
             this.tlpSharedFolders = new System.Windows.Forms.TableLayoutPanel();
             this.ucLocalhostAccounts = new UploadersLib.AccountsControl();
@@ -238,18 +252,6 @@
             this.txtJiraHost = new System.Windows.Forms.TextBox();
             this.lblJiraHost = new System.Windows.Forms.Label();
             this.oAuthJira = new UploadersLib.GUI.OAuth2Control();
-            this.tpMega = new System.Windows.Forms.TabPage();
-            this.atcMegaAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.lblMegaStatus = new System.Windows.Forms.Label();
-            this.pnlMegaLogin = new System.Windows.Forms.Panel();
-            this.lblMegaFolder = new System.Windows.Forms.Label();
-            this.cbMegaFolder = new System.Windows.Forms.ComboBox();
-            this.lblMegaEmail = new System.Windows.Forms.Label();
-            this.txtMegaEmail = new System.Windows.Forms.TextBox();
-            this.lblMegaPassword = new System.Windows.Forms.Label();
-            this.txtMegaPassword = new System.Windows.Forms.TextBox();
-            this.btnMegaLogin = new System.Windows.Forms.Button();
-            this.lblMegaStatusTitle = new System.Windows.Forms.Label();
             this.tpURLShorteners = new System.Windows.Forms.TabPage();
             this.tcURLShorteners = new System.Windows.Forms.TabControl();
             this.tpGoogleURLShortener = new System.Windows.Forms.TabPage();
@@ -318,7 +320,6 @@
             this.txtRapidSharePremiumUserName = new System.Windows.Forms.TextBox();
             this.ttHelpTip = new System.Windows.Forms.ToolTip(this.components);
             this.actRapidShareAccountType = new UploadersLib.GUI.AccountTypeControl();
-            this.btnMegaRegister = new System.Windows.Forms.Button();
             this.tcUploaders.SuspendLayout();
             this.tpImageUploaders.SuspendLayout();
             this.tcImageUploaders.SuspendLayout();
@@ -342,19 +343,21 @@
             this.tcFileUploaders.SuspendLayout();
             this.tpDropbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDropboxLogo)).BeginInit();
-            this.tpGoogleDrive.SuspendLayout();
-            this.tpBox.SuspendLayout();
-            this.tpMinus.SuspendLayout();
-            this.gbMinusUserPass.SuspendLayout();
-            this.gbMinusUpload.SuspendLayout();
+            this.tpMega.SuspendLayout();
+            this.pnlMegaLogin.SuspendLayout();
             this.tpFTP.SuspendLayout();
             this.tlpFtp.SuspendLayout();
             this.panelFtp.SuspendLayout();
             this.gbFtpSettings.SuspendLayout();
+            this.tpBox.SuspendLayout();
+            this.tpMinus.SuspendLayout();
+            this.gbMinusUserPass.SuspendLayout();
+            this.gbMinusUpload.SuspendLayout();
             this.tpRapidShare.SuspendLayout();
             this.tpSendSpace.SuspendLayout();
             this.tpGe_tt.SuspendLayout();
             this.tpHostr.SuspendLayout();
+            this.tpGoogleDrive.SuspendLayout();
             this.tpSharedFolder.SuspendLayout();
             this.tlpSharedFolders.SuspendLayout();
             this.gbSharedFolder.SuspendLayout();
@@ -362,8 +365,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudEmailSmtpPort)).BeginInit();
             this.tpJira.SuspendLayout();
             this.gpJiraServer.SuspendLayout();
-            this.tpMega.SuspendLayout();
-            this.pnlMegaLogin.SuspendLayout();
             this.tpURLShorteners.SuspendLayout();
             this.tcURLShorteners.SuspendLayout();
             this.tpGoogleURLShortener.SuspendLayout();
@@ -1497,28 +1498,313 @@
             this.txtDropboxPath.TabIndex = 4;
             this.txtDropboxPath.TextChanged += new System.EventHandler(this.txtDropboxPath_TextChanged);
             // 
-            // tpGoogleDrive
+            // tpMega
             // 
-            this.tpGoogleDrive.Controls.Add(this.oauth2GoogleDrive);
-            this.tpGoogleDrive.Location = new System.Drawing.Point(4, 22);
-            this.tpGoogleDrive.Name = "tpGoogleDrive";
-            this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGoogleDrive.Size = new System.Drawing.Size(804, 475);
-            this.tpGoogleDrive.TabIndex = 1;
-            this.tpGoogleDrive.Text = "Google Drive";
-            this.tpGoogleDrive.UseVisualStyleBackColor = true;
+            this.tpMega.Controls.Add(this.atcMegaAccountType);
+            this.tpMega.Controls.Add(this.lblMegaStatus);
+            this.tpMega.Controls.Add(this.pnlMegaLogin);
+            this.tpMega.Controls.Add(this.lblMegaStatusTitle);
+            this.tpMega.Location = new System.Drawing.Point(4, 22);
+            this.tpMega.Name = "tpMega";
+            this.tpMega.Size = new System.Drawing.Size(804, 475);
+            this.tpMega.TabIndex = 12;
+            this.tpMega.Text = "Mega";
+            this.tpMega.UseVisualStyleBackColor = true;
             // 
-            // oauth2GoogleDrive
+            // atcMegaAccountType
             // 
-            this.oauth2GoogleDrive.Location = new System.Drawing.Point(16, 16);
-            this.oauth2GoogleDrive.LoginStatus = false;
-            this.oauth2GoogleDrive.Name = "oauth2GoogleDrive";
-            this.oauth2GoogleDrive.Size = new System.Drawing.Size(328, 207);
-            this.oauth2GoogleDrive.Status = "Status: Login required.";
-            this.oauth2GoogleDrive.TabIndex = 0;
-            this.oauth2GoogleDrive.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2GoogleDrive_OpenButtonClicked);
-            this.oauth2GoogleDrive.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2GoogleDrive_CompleteButtonClicked);
-            this.oauth2GoogleDrive.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2GoogleDrive_RefreshButtonClicked);
+            this.atcMegaAccountType.Location = new System.Drawing.Point(16, 34);
+            this.atcMegaAccountType.Name = "atcMegaAccountType";
+            this.atcMegaAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
+            this.atcMegaAccountType.Size = new System.Drawing.Size(214, 29);
+            this.atcMegaAccountType.TabIndex = 14;
+            // 
+            // lblMegaStatus
+            // 
+            this.lblMegaStatus.AutoSize = true;
+            this.lblMegaStatus.Location = new System.Drawing.Point(70, 17);
+            this.lblMegaStatus.Name = "lblMegaStatus";
+            this.lblMegaStatus.Size = new System.Drawing.Size(186, 13);
+            this.lblMegaStatus.TabIndex = 13;
+            this.lblMegaStatus.Text = "CONFIGURED / NOT CONFIGURED";
+            // 
+            // pnlMegaLogin
+            // 
+            this.pnlMegaLogin.Controls.Add(this.btnMegaRefreshFolders);
+            this.pnlMegaLogin.Controls.Add(this.btnMegaRegister);
+            this.pnlMegaLogin.Controls.Add(this.lblMegaFolder);
+            this.pnlMegaLogin.Controls.Add(this.cbMegaFolder);
+            this.pnlMegaLogin.Controls.Add(this.lblMegaEmail);
+            this.pnlMegaLogin.Controls.Add(this.txtMegaEmail);
+            this.pnlMegaLogin.Controls.Add(this.lblMegaPassword);
+            this.pnlMegaLogin.Controls.Add(this.txtMegaPassword);
+            this.pnlMegaLogin.Controls.Add(this.btnMegaLogin);
+            this.pnlMegaLogin.Location = new System.Drawing.Point(12, 67);
+            this.pnlMegaLogin.Name = "pnlMegaLogin";
+            this.pnlMegaLogin.Size = new System.Drawing.Size(378, 226);
+            this.pnlMegaLogin.TabIndex = 11;
+            // 
+            // btnMegaRefreshFolders
+            // 
+            this.btnMegaRefreshFolders.Location = new System.Drawing.Point(152, 132);
+            this.btnMegaRefreshFolders.Name = "btnMegaRefreshFolders";
+            this.btnMegaRefreshFolders.Size = new System.Drawing.Size(96, 24);
+            this.btnMegaRefreshFolders.TabIndex = 16;
+            this.btnMegaRefreshFolders.Text = "Refresh folders";
+            this.btnMegaRefreshFolders.UseVisualStyleBackColor = true;
+            this.btnMegaRefreshFolders.Click += new System.EventHandler(this.btnMegaRefreshFolders_Click);
+            // 
+            // btnMegaRegister
+            // 
+            this.btnMegaRegister.Location = new System.Drawing.Point(264, 8);
+            this.btnMegaRegister.Name = "btnMegaRegister";
+            this.btnMegaRegister.Size = new System.Drawing.Size(96, 24);
+            this.btnMegaRegister.TabIndex = 15;
+            this.btnMegaRegister.Text = "Register...";
+            this.btnMegaRegister.UseVisualStyleBackColor = true;
+            this.btnMegaRegister.Click += new System.EventHandler(this.btnMegaRegister_Click);
+            // 
+            // lblMegaFolder
+            // 
+            this.lblMegaFolder.AutoSize = true;
+            this.lblMegaFolder.Location = new System.Drawing.Point(12, 109);
+            this.lblMegaFolder.Name = "lblMegaFolder";
+            this.lblMegaFolder.Size = new System.Drawing.Size(39, 13);
+            this.lblMegaFolder.TabIndex = 11;
+            this.lblMegaFolder.Text = "Folder:";
+            // 
+            // cbMegaFolder
+            // 
+            this.cbMegaFolder.DisplayMember = "DisplayName";
+            this.cbMegaFolder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMegaFolder.FormattingEnabled = true;
+            this.cbMegaFolder.Location = new System.Drawing.Point(72, 105);
+            this.cbMegaFolder.Name = "cbMegaFolder";
+            this.cbMegaFolder.Size = new System.Drawing.Size(176, 21);
+            this.cbMegaFolder.TabIndex = 10;
+            this.cbMegaFolder.ValueMember = "Node";
+            this.cbMegaFolder.SelectedIndexChanged += new System.EventHandler(this.cbMegaFolder_SelectedIndexChanged);
+            // 
+            // lblMegaEmail
+            // 
+            this.lblMegaEmail.AutoSize = true;
+            this.lblMegaEmail.Location = new System.Drawing.Point(12, 14);
+            this.lblMegaEmail.Name = "lblMegaEmail";
+            this.lblMegaEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblMegaEmail.TabIndex = 5;
+            this.lblMegaEmail.Text = "Email:";
+            // 
+            // txtMegaEmail
+            // 
+            this.txtMegaEmail.Location = new System.Drawing.Point(72, 10);
+            this.txtMegaEmail.Name = "txtMegaEmail";
+            this.txtMegaEmail.Size = new System.Drawing.Size(176, 20);
+            this.txtMegaEmail.TabIndex = 6;
+            // 
+            // lblMegaPassword
+            // 
+            this.lblMegaPassword.AutoSize = true;
+            this.lblMegaPassword.Location = new System.Drawing.Point(12, 38);
+            this.lblMegaPassword.Name = "lblMegaPassword";
+            this.lblMegaPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblMegaPassword.TabIndex = 7;
+            this.lblMegaPassword.Text = "Password:";
+            // 
+            // txtMegaPassword
+            // 
+            this.txtMegaPassword.Location = new System.Drawing.Point(72, 34);
+            this.txtMegaPassword.Name = "txtMegaPassword";
+            this.txtMegaPassword.PasswordChar = '*';
+            this.txtMegaPassword.Size = new System.Drawing.Size(176, 20);
+            this.txtMegaPassword.TabIndex = 8;
+            // 
+            // btnMegaLogin
+            // 
+            this.btnMegaLogin.Location = new System.Drawing.Point(168, 64);
+            this.btnMegaLogin.Name = "btnMegaLogin";
+            this.btnMegaLogin.Size = new System.Drawing.Size(80, 24);
+            this.btnMegaLogin.TabIndex = 9;
+            this.btnMegaLogin.Text = "Login";
+            this.btnMegaLogin.UseVisualStyleBackColor = true;
+            this.btnMegaLogin.Click += new System.EventHandler(this.btnMegaLogin_Click);
+            // 
+            // lblMegaStatusTitle
+            // 
+            this.lblMegaStatusTitle.AutoSize = true;
+            this.lblMegaStatusTitle.Location = new System.Drawing.Point(24, 17);
+            this.lblMegaStatusTitle.Name = "lblMegaStatusTitle";
+            this.lblMegaStatusTitle.Size = new System.Drawing.Size(43, 13);
+            this.lblMegaStatusTitle.TabIndex = 12;
+            this.lblMegaStatusTitle.Text = "Status: ";
+            // 
+            // tpFTP
+            // 
+            this.tpFTP.Controls.Add(this.tlpFtp);
+            this.tpFTP.Location = new System.Drawing.Point(4, 22);
+            this.tpFTP.Name = "tpFTP";
+            this.tpFTP.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFTP.Size = new System.Drawing.Size(804, 475);
+            this.tpFTP.TabIndex = 4;
+            this.tpFTP.Text = "FTP";
+            this.tpFTP.UseVisualStyleBackColor = true;
+            // 
+            // tlpFtp
+            // 
+            this.tlpFtp.ColumnCount = 1;
+            this.tlpFtp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFtp.Controls.Add(this.panelFtp, 0, 0);
+            this.tlpFtp.Controls.Add(this.gbFtpSettings, 0, 1);
+            this.tlpFtp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpFtp.Location = new System.Drawing.Point(3, 3);
+            this.tlpFtp.Name = "tlpFtp";
+            this.tlpFtp.RowCount = 2;
+            this.tlpFtp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tlpFtp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpFtp.Size = new System.Drawing.Size(798, 469);
+            this.tlpFtp.TabIndex = 0;
+            // 
+            // panelFtp
+            // 
+            this.panelFtp.Controls.Add(this.btnFtpClient);
+            this.panelFtp.Controls.Add(this.btnFTPExport);
+            this.panelFtp.Controls.Add(this.btnFTPImport);
+            this.panelFtp.Controls.Add(this.btnFtpHelp);
+            this.panelFtp.Controls.Add(this.ucFTPAccounts);
+            this.panelFtp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelFtp.Location = new System.Drawing.Point(3, 3);
+            this.panelFtp.Name = "panelFtp";
+            this.panelFtp.Size = new System.Drawing.Size(792, 345);
+            this.panelFtp.TabIndex = 0;
+            // 
+            // btnFtpClient
+            // 
+            this.btnFtpClient.Location = new System.Drawing.Point(376, 8);
+            this.btnFtpClient.Name = "btnFtpClient";
+            this.btnFtpClient.Size = new System.Drawing.Size(64, 24);
+            this.btnFtpClient.TabIndex = 2;
+            this.btnFtpClient.Text = "Client...";
+            this.btnFtpClient.UseVisualStyleBackColor = true;
+            this.btnFtpClient.Click += new System.EventHandler(this.btnFtpClient_Click);
+            // 
+            // btnFTPExport
+            // 
+            this.btnFTPExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFTPExport.AutoSize = true;
+            this.btnFTPExport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFTPExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnFTPExport.Location = new System.Drawing.Point(650, 8);
+            this.btnFTPExport.Name = "btnFTPExport";
+            this.btnFTPExport.Size = new System.Drawing.Size(127, 23);
+            this.btnFTPExport.TabIndex = 4;
+            this.btnFTPExport.Text = "Export FTP Accounts...";
+            this.btnFTPExport.UseVisualStyleBackColor = true;
+            this.btnFTPExport.Click += new System.EventHandler(this.btnFTPExport_Click);
+            // 
+            // btnFTPImport
+            // 
+            this.btnFTPImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFTPImport.AutoSize = true;
+            this.btnFTPImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFTPImport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnFTPImport.Location = new System.Drawing.Point(514, 8);
+            this.btnFTPImport.Name = "btnFTPImport";
+            this.btnFTPImport.Size = new System.Drawing.Size(126, 23);
+            this.btnFTPImport.TabIndex = 3;
+            this.btnFTPImport.Text = "Import FTP Accounts...";
+            this.btnFTPImport.UseVisualStyleBackColor = true;
+            this.btnFTPImport.Click += new System.EventHandler(this.btnFTPImport_Click);
+            // 
+            // btnFtpHelp
+            // 
+            this.btnFtpHelp.Location = new System.Drawing.Point(304, 8);
+            this.btnFtpHelp.Name = "btnFtpHelp";
+            this.btnFtpHelp.Size = new System.Drawing.Size(64, 24);
+            this.btnFtpHelp.TabIndex = 1;
+            this.btnFtpHelp.Text = "Help...";
+            this.btnFtpHelp.UseVisualStyleBackColor = true;
+            this.btnFtpHelp.Click += new System.EventHandler(this.btnFtpHelp_Click);
+            // 
+            // ucFTPAccounts
+            // 
+            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
+            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
+            this.ucFTPAccounts.Name = "ucFTPAccounts";
+            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
+            this.ucFTPAccounts.TabIndex = 0;
+            // 
+            // gbFtpSettings
+            // 
+            this.gbFtpSettings.Controls.Add(this.lblFtpFiles);
+            this.gbFtpSettings.Controls.Add(this.lblFtpText);
+            this.gbFtpSettings.Controls.Add(this.lblFtpImages);
+            this.gbFtpSettings.Controls.Add(this.cboFtpFiles);
+            this.gbFtpSettings.Controls.Add(this.cboFtpText);
+            this.gbFtpSettings.Controls.Add(this.cboFtpImages);
+            this.gbFtpSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbFtpSettings.Location = new System.Drawing.Point(3, 354);
+            this.gbFtpSettings.Name = "gbFtpSettings";
+            this.gbFtpSettings.Size = new System.Drawing.Size(792, 112);
+            this.gbFtpSettings.TabIndex = 1;
+            this.gbFtpSettings.TabStop = false;
+            this.gbFtpSettings.Text = "FTP Settings";
+            // 
+            // lblFtpFiles
+            // 
+            this.lblFtpFiles.AutoSize = true;
+            this.lblFtpFiles.Location = new System.Drawing.Point(29, 75);
+            this.lblFtpFiles.Name = "lblFtpFiles";
+            this.lblFtpFiles.Size = new System.Drawing.Size(28, 13);
+            this.lblFtpFiles.TabIndex = 4;
+            this.lblFtpFiles.Text = "Files";
+            // 
+            // lblFtpText
+            // 
+            this.lblFtpText.AutoSize = true;
+            this.lblFtpText.Location = new System.Drawing.Point(29, 49);
+            this.lblFtpText.Name = "lblFtpText";
+            this.lblFtpText.Size = new System.Drawing.Size(28, 13);
+            this.lblFtpText.TabIndex = 2;
+            this.lblFtpText.Text = "Text";
+            // 
+            // lblFtpImages
+            // 
+            this.lblFtpImages.AutoSize = true;
+            this.lblFtpImages.Location = new System.Drawing.Point(16, 24);
+            this.lblFtpImages.Name = "lblFtpImages";
+            this.lblFtpImages.Size = new System.Drawing.Size(41, 13);
+            this.lblFtpImages.TabIndex = 0;
+            this.lblFtpImages.Text = "Images";
+            // 
+            // cboFtpFiles
+            // 
+            this.cboFtpFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFtpFiles.FormattingEnabled = true;
+            this.cboFtpFiles.Location = new System.Drawing.Point(69, 69);
+            this.cboFtpFiles.Name = "cboFtpFiles";
+            this.cboFtpFiles.Size = new System.Drawing.Size(272, 21);
+            this.cboFtpFiles.TabIndex = 5;
+            this.cboFtpFiles.SelectedIndexChanged += new System.EventHandler(this.cboFtpFiles_SelectedIndexChanged);
+            // 
+            // cboFtpText
+            // 
+            this.cboFtpText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFtpText.FormattingEnabled = true;
+            this.cboFtpText.Location = new System.Drawing.Point(69, 45);
+            this.cboFtpText.Name = "cboFtpText";
+            this.cboFtpText.Size = new System.Drawing.Size(272, 21);
+            this.cboFtpText.TabIndex = 3;
+            this.cboFtpText.SelectedIndexChanged += new System.EventHandler(this.cboFtpText_SelectedIndexChanged);
+            // 
+            // cboFtpImages
+            // 
+            this.cboFtpImages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFtpImages.FormattingEnabled = true;
+            this.cboFtpImages.Location = new System.Drawing.Point(69, 21);
+            this.cboFtpImages.Name = "cboFtpImages";
+            this.cboFtpImages.Size = new System.Drawing.Size(272, 21);
+            this.cboFtpImages.TabIndex = 1;
+            this.cboFtpImages.SelectedIndexChanged += new System.EventHandler(this.cboFtpImages_SelectedIndexChanged);
             // 
             // tpBox
             // 
@@ -1770,175 +2056,6 @@
             this.lblMinusAuthStatus.Size = new System.Drawing.Size(798, 19);
             this.lblMinusAuthStatus.TabIndex = 2;
             this.lblMinusAuthStatus.Text = "Login status:";
-            // 
-            // tpFTP
-            // 
-            this.tpFTP.Controls.Add(this.tlpFtp);
-            this.tpFTP.Location = new System.Drawing.Point(4, 22);
-            this.tpFTP.Name = "tpFTP";
-            this.tpFTP.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFTP.Size = new System.Drawing.Size(804, 475);
-            this.tpFTP.TabIndex = 4;
-            this.tpFTP.Text = "FTP";
-            this.tpFTP.UseVisualStyleBackColor = true;
-            // 
-            // tlpFtp
-            // 
-            this.tlpFtp.ColumnCount = 1;
-            this.tlpFtp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFtp.Controls.Add(this.panelFtp, 0, 0);
-            this.tlpFtp.Controls.Add(this.gbFtpSettings, 0, 1);
-            this.tlpFtp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpFtp.Location = new System.Drawing.Point(3, 3);
-            this.tlpFtp.Name = "tlpFtp";
-            this.tlpFtp.RowCount = 2;
-            this.tlpFtp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tlpFtp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpFtp.Size = new System.Drawing.Size(798, 469);
-            this.tlpFtp.TabIndex = 0;
-            // 
-            // panelFtp
-            // 
-            this.panelFtp.Controls.Add(this.btnFtpClient);
-            this.panelFtp.Controls.Add(this.btnFTPExport);
-            this.panelFtp.Controls.Add(this.btnFTPImport);
-            this.panelFtp.Controls.Add(this.btnFtpHelp);
-            this.panelFtp.Controls.Add(this.ucFTPAccounts);
-            this.panelFtp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFtp.Location = new System.Drawing.Point(3, 3);
-            this.panelFtp.Name = "panelFtp";
-            this.panelFtp.Size = new System.Drawing.Size(792, 345);
-            this.panelFtp.TabIndex = 0;
-            // 
-            // btnFtpClient
-            // 
-            this.btnFtpClient.Location = new System.Drawing.Point(376, 8);
-            this.btnFtpClient.Name = "btnFtpClient";
-            this.btnFtpClient.Size = new System.Drawing.Size(64, 24);
-            this.btnFtpClient.TabIndex = 2;
-            this.btnFtpClient.Text = "Client...";
-            this.btnFtpClient.UseVisualStyleBackColor = true;
-            this.btnFtpClient.Click += new System.EventHandler(this.btnFtpClient_Click);
-            // 
-            // btnFTPExport
-            // 
-            this.btnFTPExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFTPExport.AutoSize = true;
-            this.btnFTPExport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnFTPExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFTPExport.Location = new System.Drawing.Point(650, 8);
-            this.btnFTPExport.Name = "btnFTPExport";
-            this.btnFTPExport.Size = new System.Drawing.Size(127, 23);
-            this.btnFTPExport.TabIndex = 4;
-            this.btnFTPExport.Text = "Export FTP Accounts...";
-            this.btnFTPExport.UseVisualStyleBackColor = true;
-            this.btnFTPExport.Click += new System.EventHandler(this.btnFTPExport_Click);
-            // 
-            // btnFTPImport
-            // 
-            this.btnFTPImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFTPImport.AutoSize = true;
-            this.btnFTPImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnFTPImport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnFTPImport.Location = new System.Drawing.Point(514, 8);
-            this.btnFTPImport.Name = "btnFTPImport";
-            this.btnFTPImport.Size = new System.Drawing.Size(126, 23);
-            this.btnFTPImport.TabIndex = 3;
-            this.btnFTPImport.Text = "Import FTP Accounts...";
-            this.btnFTPImport.UseVisualStyleBackColor = true;
-            this.btnFTPImport.Click += new System.EventHandler(this.btnFTPImport_Click);
-            // 
-            // btnFtpHelp
-            // 
-            this.btnFtpHelp.Location = new System.Drawing.Point(304, 8);
-            this.btnFtpHelp.Name = "btnFtpHelp";
-            this.btnFtpHelp.Size = new System.Drawing.Size(64, 24);
-            this.btnFtpHelp.TabIndex = 1;
-            this.btnFtpHelp.Text = "Help...";
-            this.btnFtpHelp.UseVisualStyleBackColor = true;
-            this.btnFtpHelp.Click += new System.EventHandler(this.btnFtpHelp_Click);
-            // 
-            // ucFTPAccounts
-            // 
-            this.ucFTPAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFTPAccounts.Location = new System.Drawing.Point(0, 0);
-            this.ucFTPAccounts.Margin = new System.Windows.Forms.Padding(4);
-            this.ucFTPAccounts.Name = "ucFTPAccounts";
-            this.ucFTPAccounts.Size = new System.Drawing.Size(792, 345);
-            this.ucFTPAccounts.TabIndex = 0;
-            // 
-            // gbFtpSettings
-            // 
-            this.gbFtpSettings.Controls.Add(this.lblFtpFiles);
-            this.gbFtpSettings.Controls.Add(this.lblFtpText);
-            this.gbFtpSettings.Controls.Add(this.lblFtpImages);
-            this.gbFtpSettings.Controls.Add(this.cboFtpFiles);
-            this.gbFtpSettings.Controls.Add(this.cboFtpText);
-            this.gbFtpSettings.Controls.Add(this.cboFtpImages);
-            this.gbFtpSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbFtpSettings.Location = new System.Drawing.Point(3, 354);
-            this.gbFtpSettings.Name = "gbFtpSettings";
-            this.gbFtpSettings.Size = new System.Drawing.Size(792, 112);
-            this.gbFtpSettings.TabIndex = 1;
-            this.gbFtpSettings.TabStop = false;
-            this.gbFtpSettings.Text = "FTP Settings";
-            // 
-            // lblFtpFiles
-            // 
-            this.lblFtpFiles.AutoSize = true;
-            this.lblFtpFiles.Location = new System.Drawing.Point(29, 75);
-            this.lblFtpFiles.Name = "lblFtpFiles";
-            this.lblFtpFiles.Size = new System.Drawing.Size(28, 13);
-            this.lblFtpFiles.TabIndex = 4;
-            this.lblFtpFiles.Text = "Files";
-            // 
-            // lblFtpText
-            // 
-            this.lblFtpText.AutoSize = true;
-            this.lblFtpText.Location = new System.Drawing.Point(29, 49);
-            this.lblFtpText.Name = "lblFtpText";
-            this.lblFtpText.Size = new System.Drawing.Size(28, 13);
-            this.lblFtpText.TabIndex = 2;
-            this.lblFtpText.Text = "Text";
-            // 
-            // lblFtpImages
-            // 
-            this.lblFtpImages.AutoSize = true;
-            this.lblFtpImages.Location = new System.Drawing.Point(16, 24);
-            this.lblFtpImages.Name = "lblFtpImages";
-            this.lblFtpImages.Size = new System.Drawing.Size(41, 13);
-            this.lblFtpImages.TabIndex = 0;
-            this.lblFtpImages.Text = "Images";
-            // 
-            // cboFtpFiles
-            // 
-            this.cboFtpFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFtpFiles.FormattingEnabled = true;
-            this.cboFtpFiles.Location = new System.Drawing.Point(69, 69);
-            this.cboFtpFiles.Name = "cboFtpFiles";
-            this.cboFtpFiles.Size = new System.Drawing.Size(272, 21);
-            this.cboFtpFiles.TabIndex = 5;
-            this.cboFtpFiles.SelectedIndexChanged += new System.EventHandler(this.cboFtpFiles_SelectedIndexChanged);
-            // 
-            // cboFtpText
-            // 
-            this.cboFtpText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFtpText.FormattingEnabled = true;
-            this.cboFtpText.Location = new System.Drawing.Point(69, 45);
-            this.cboFtpText.Name = "cboFtpText";
-            this.cboFtpText.Size = new System.Drawing.Size(272, 21);
-            this.cboFtpText.TabIndex = 3;
-            this.cboFtpText.SelectedIndexChanged += new System.EventHandler(this.cboFtpText_SelectedIndexChanged);
-            // 
-            // cboFtpImages
-            // 
-            this.cboFtpImages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFtpImages.FormattingEnabled = true;
-            this.cboFtpImages.Location = new System.Drawing.Point(69, 21);
-            this.cboFtpImages.Name = "cboFtpImages";
-            this.cboFtpImages.Size = new System.Drawing.Size(272, 21);
-            this.cboFtpImages.TabIndex = 1;
-            this.cboFtpImages.SelectedIndexChanged += new System.EventHandler(this.cboFtpImages_SelectedIndexChanged);
             // 
             // tpRapidShare
             // 
@@ -2226,6 +2343,29 @@
             this.txtLocalhostrEmail.Size = new System.Drawing.Size(168, 20);
             this.txtLocalhostrEmail.TabIndex = 1;
             this.txtLocalhostrEmail.TextChanged += new System.EventHandler(this.txtLocalhostrEmail_TextChanged);
+            // 
+            // tpGoogleDrive
+            // 
+            this.tpGoogleDrive.Controls.Add(this.oauth2GoogleDrive);
+            this.tpGoogleDrive.Location = new System.Drawing.Point(4, 22);
+            this.tpGoogleDrive.Name = "tpGoogleDrive";
+            this.tpGoogleDrive.Padding = new System.Windows.Forms.Padding(3);
+            this.tpGoogleDrive.Size = new System.Drawing.Size(804, 475);
+            this.tpGoogleDrive.TabIndex = 1;
+            this.tpGoogleDrive.Text = "Google Drive";
+            this.tpGoogleDrive.UseVisualStyleBackColor = true;
+            // 
+            // oauth2GoogleDrive
+            // 
+            this.oauth2GoogleDrive.Location = new System.Drawing.Point(16, 16);
+            this.oauth2GoogleDrive.LoginStatus = false;
+            this.oauth2GoogleDrive.Name = "oauth2GoogleDrive";
+            this.oauth2GoogleDrive.Size = new System.Drawing.Size(328, 207);
+            this.oauth2GoogleDrive.Status = "Status: Login required.";
+            this.oauth2GoogleDrive.TabIndex = 0;
+            this.oauth2GoogleDrive.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oauth2GoogleDrive_OpenButtonClicked);
+            this.oauth2GoogleDrive.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oauth2GoogleDrive_CompleteButtonClicked);
+            this.oauth2GoogleDrive.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oauth2GoogleDrive_RefreshButtonClicked);
             // 
             // tpSharedFolder
             // 
@@ -2585,124 +2725,6 @@
             this.oAuthJira.OpenButtonClicked += new UploadersLib.GUI.OAuth2Control.OpenButtonClickedEventHandler(this.oAuthJira_OpenButtonClicked);
             this.oAuthJira.CompleteButtonClicked += new UploadersLib.GUI.OAuth2Control.CompleteButtonClickedEventHandler(this.oAuthJira_CompleteButtonClicked);
             this.oAuthJira.RefreshButtonClicked += new UploadersLib.GUI.OAuth2Control.RefreshButtonClickedEventHandler(this.oAuthJira_RefreshButtonClicked);
-            // 
-            // tpMega
-            // 
-            this.tpMega.Controls.Add(this.atcMegaAccountType);
-            this.tpMega.Controls.Add(this.lblMegaStatus);
-            this.tpMega.Controls.Add(this.pnlMegaLogin);
-            this.tpMega.Controls.Add(this.lblMegaStatusTitle);
-            this.tpMega.Location = new System.Drawing.Point(4, 22);
-            this.tpMega.Name = "tpMega";
-            this.tpMega.Size = new System.Drawing.Size(804, 475);
-            this.tpMega.TabIndex = 12;
-            this.tpMega.Text = "Mega";
-            this.tpMega.UseVisualStyleBackColor = true;
-            // 
-            // atcMegaAccountType
-            // 
-            this.atcMegaAccountType.Location = new System.Drawing.Point(16, 34);
-            this.atcMegaAccountType.Name = "atcMegaAccountType";
-            this.atcMegaAccountType.SelectedAccountType = UploadersLib.AccountType.Anonymous;
-            this.atcMegaAccountType.Size = new System.Drawing.Size(214, 29);
-            this.atcMegaAccountType.TabIndex = 14;
-            // 
-            // lblMegaStatus
-            // 
-            this.lblMegaStatus.AutoSize = true;
-            this.lblMegaStatus.Location = new System.Drawing.Point(70, 17);
-            this.lblMegaStatus.Name = "lblMegaStatus";
-            this.lblMegaStatus.Size = new System.Drawing.Size(186, 13);
-            this.lblMegaStatus.TabIndex = 13;
-            this.lblMegaStatus.Text = "CONFIGURED / NOT CONFIGURED";
-            // 
-            // pnlMegaLogin
-            // 
-            this.pnlMegaLogin.Controls.Add(this.btnMegaRegister);
-            this.pnlMegaLogin.Controls.Add(this.lblMegaFolder);
-            this.pnlMegaLogin.Controls.Add(this.cbMegaFolder);
-            this.pnlMegaLogin.Controls.Add(this.lblMegaEmail);
-            this.pnlMegaLogin.Controls.Add(this.txtMegaEmail);
-            this.pnlMegaLogin.Controls.Add(this.lblMegaPassword);
-            this.pnlMegaLogin.Controls.Add(this.txtMegaPassword);
-            this.pnlMegaLogin.Controls.Add(this.btnMegaLogin);
-            this.pnlMegaLogin.Location = new System.Drawing.Point(12, 67);
-            this.pnlMegaLogin.Name = "pnlMegaLogin";
-            this.pnlMegaLogin.Size = new System.Drawing.Size(378, 226);
-            this.pnlMegaLogin.TabIndex = 11;
-            // 
-            // lblMegaFolder
-            // 
-            this.lblMegaFolder.AutoSize = true;
-            this.lblMegaFolder.Location = new System.Drawing.Point(12, 104);
-            this.lblMegaFolder.Name = "lblMegaFolder";
-            this.lblMegaFolder.Size = new System.Drawing.Size(39, 13);
-            this.lblMegaFolder.TabIndex = 11;
-            this.lblMegaFolder.Text = "Folder:";
-            // 
-            // cbMegaFolder
-            // 
-            this.cbMegaFolder.DisplayMember = "DisplayName";
-            this.cbMegaFolder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMegaFolder.FormattingEnabled = true;
-            this.cbMegaFolder.Location = new System.Drawing.Point(72, 100);
-            this.cbMegaFolder.Name = "cbMegaFolder";
-            this.cbMegaFolder.Size = new System.Drawing.Size(176, 21);
-            this.cbMegaFolder.TabIndex = 10;
-            this.cbMegaFolder.ValueMember = "Node";
-            this.cbMegaFolder.SelectedIndexChanged += new System.EventHandler(this.cbMegaFolder_SelectedIndexChanged);
-            // 
-            // lblMegaEmail
-            // 
-            this.lblMegaEmail.AutoSize = true;
-            this.lblMegaEmail.Location = new System.Drawing.Point(12, 14);
-            this.lblMegaEmail.Name = "lblMegaEmail";
-            this.lblMegaEmail.Size = new System.Drawing.Size(35, 13);
-            this.lblMegaEmail.TabIndex = 5;
-            this.lblMegaEmail.Text = "Email:";
-            // 
-            // txtMegaEmail
-            // 
-            this.txtMegaEmail.Location = new System.Drawing.Point(72, 10);
-            this.txtMegaEmail.Name = "txtMegaEmail";
-            this.txtMegaEmail.Size = new System.Drawing.Size(176, 20);
-            this.txtMegaEmail.TabIndex = 6;
-            // 
-            // lblMegaPassword
-            // 
-            this.lblMegaPassword.AutoSize = true;
-            this.lblMegaPassword.Location = new System.Drawing.Point(12, 38);
-            this.lblMegaPassword.Name = "lblMegaPassword";
-            this.lblMegaPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblMegaPassword.TabIndex = 7;
-            this.lblMegaPassword.Text = "Password:";
-            // 
-            // txtMegaPassword
-            // 
-            this.txtMegaPassword.Location = new System.Drawing.Point(72, 34);
-            this.txtMegaPassword.Name = "txtMegaPassword";
-            this.txtMegaPassword.PasswordChar = '*';
-            this.txtMegaPassword.Size = new System.Drawing.Size(176, 20);
-            this.txtMegaPassword.TabIndex = 8;
-            // 
-            // btnMegaLogin
-            // 
-            this.btnMegaLogin.Location = new System.Drawing.Point(168, 64);
-            this.btnMegaLogin.Name = "btnMegaLogin";
-            this.btnMegaLogin.Size = new System.Drawing.Size(80, 24);
-            this.btnMegaLogin.TabIndex = 9;
-            this.btnMegaLogin.Text = "Login";
-            this.btnMegaLogin.UseVisualStyleBackColor = true;
-            this.btnMegaLogin.Click += new System.EventHandler(this.btnMegaLogin_Click);
-            // 
-            // lblMegaStatusTitle
-            // 
-            this.lblMegaStatusTitle.AutoSize = true;
-            this.lblMegaStatusTitle.Location = new System.Drawing.Point(24, 17);
-            this.lblMegaStatusTitle.Name = "lblMegaStatusTitle";
-            this.lblMegaStatusTitle.Size = new System.Drawing.Size(43, 13);
-            this.lblMegaStatusTitle.TabIndex = 12;
-            this.lblMegaStatusTitle.Text = "Status: ";
             // 
             // tpURLShorteners
             // 
@@ -3398,16 +3420,6 @@
             this.actRapidShareAccountType.Size = new System.Drawing.Size(214, 29);
             this.actRapidShareAccountType.TabIndex = 16;
             // 
-            // btnMegaRegister
-            // 
-            this.btnMegaRegister.Location = new System.Drawing.Point(264, 8);
-            this.btnMegaRegister.Name = "btnMegaRegister";
-            this.btnMegaRegister.Size = new System.Drawing.Size(96, 24);
-            this.btnMegaRegister.TabIndex = 15;
-            this.btnMegaRegister.Text = "Register...";
-            this.btnMegaRegister.UseVisualStyleBackColor = true;
-            this.btnMegaRegister.Click += new System.EventHandler(this.btnMegaRegister_Click);
-            // 
             // UploadersConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3457,7 +3469,16 @@
             this.tpDropbox.ResumeLayout(false);
             this.tpDropbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDropboxLogo)).EndInit();
-            this.tpGoogleDrive.ResumeLayout(false);
+            this.tpMega.ResumeLayout(false);
+            this.tpMega.PerformLayout();
+            this.pnlMegaLogin.ResumeLayout(false);
+            this.pnlMegaLogin.PerformLayout();
+            this.tpFTP.ResumeLayout(false);
+            this.tlpFtp.ResumeLayout(false);
+            this.panelFtp.ResumeLayout(false);
+            this.panelFtp.PerformLayout();
+            this.gbFtpSettings.ResumeLayout(false);
+            this.gbFtpSettings.PerformLayout();
             this.tpBox.ResumeLayout(false);
             this.tpBox.PerformLayout();
             this.tpMinus.ResumeLayout(false);
@@ -3465,12 +3486,6 @@
             this.gbMinusUserPass.PerformLayout();
             this.gbMinusUpload.ResumeLayout(false);
             this.gbMinusUpload.PerformLayout();
-            this.tpFTP.ResumeLayout(false);
-            this.tlpFtp.ResumeLayout(false);
-            this.panelFtp.ResumeLayout(false);
-            this.panelFtp.PerformLayout();
-            this.gbFtpSettings.ResumeLayout(false);
-            this.gbFtpSettings.PerformLayout();
             this.tpRapidShare.ResumeLayout(false);
             this.tpRapidShare.PerformLayout();
             this.tpSendSpace.ResumeLayout(false);
@@ -3479,6 +3494,7 @@
             this.tpGe_tt.PerformLayout();
             this.tpHostr.ResumeLayout(false);
             this.tpHostr.PerformLayout();
+            this.tpGoogleDrive.ResumeLayout(false);
             this.tpSharedFolder.ResumeLayout(false);
             this.tlpSharedFolders.ResumeLayout(false);
             this.gbSharedFolder.ResumeLayout(false);
@@ -3490,10 +3506,6 @@
             this.tpJira.PerformLayout();
             this.gpJiraServer.ResumeLayout(false);
             this.gpJiraServer.PerformLayout();
-            this.tpMega.ResumeLayout(false);
-            this.tpMega.PerformLayout();
-            this.pnlMegaLogin.ResumeLayout(false);
-            this.pnlMegaLogin.PerformLayout();
             this.tpURLShorteners.ResumeLayout(false);
             this.tcURLShorteners.ResumeLayout(false);
             this.tpGoogleURLShortener.ResumeLayout(false);
@@ -3803,5 +3815,6 @@
         private System.Windows.Forms.Label lblMegaStatus;
         private GUI.AccountTypeControl atcMegaAccountType;
         private System.Windows.Forms.Button btnMegaRegister;
+        private System.Windows.Forms.Button btnMegaRefreshFolders;
     }
 }
