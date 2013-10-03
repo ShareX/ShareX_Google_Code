@@ -381,7 +381,7 @@ namespace UploadersLib
 
             // Mega
 
-            this.ConfigureMegaTab(false);
+            this.MegaConfigureTab(false);
 
             #endregion File uploaders
 

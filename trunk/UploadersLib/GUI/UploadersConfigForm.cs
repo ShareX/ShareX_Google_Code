@@ -1041,7 +1041,7 @@ namespace UploadersLib
 
         #region Mega
 
-        private void ConfigureMegaTab(bool tryLogin)
+        private void MegaConfigureTab(bool tryLogin)
         {
             Color OkColor = Color.Green;
             Color NokColor = Color.DarkRed;
@@ -1089,6 +1089,11 @@ namespace UploadersLib
                             cbMegaFolder.SelectedItem = Mega.DisplayNode.EmptyNode;
                         }
                     }
+                    else
+                    {
+                        cbMegaFolder.Items.Add("[Click refresh folders]");
+                        cbMegaFolder.SelectedIndex = 0;
+                    }
                 }
                 else
                 {
@@ -1107,7 +1112,8 @@ namespace UploadersLib
             Config.MegaParentNodeId = null;
             txtMegaEmail.Text = null;
             txtMegaPassword.Text = null;
-            this.ConfigureMegaTab(true);
+            cbMegaFolder.SelectedIndex = -1;
+            this.MegaConfigureTab(true);
         }
 
         private void btnMegaLogin_Click(object sender, EventArgs e)
@@ -1119,7 +1125,7 @@ namespace UploadersLib
 
             Config.MegaAuthInfos = MegaApiClient.GenerateAuthInfos(txtMegaEmail.Text, txtMegaPassword.Text);
 
-            this.ConfigureMegaTab(true);
+            this.MegaConfigureTab(true);
         }
 
         private void cbMegaFolder_SelectedIndexChanged(object sender, EventArgs e)
@@ -1134,6 +1140,11 @@ namespace UploadersLib
         private void btnMegaRegister_Click(object sender, EventArgs e)
         {
             Helpers.LoadBrowserAsync("https://mega.co.nz/#register");
+        }
+
+        private void btnMegaRefreshFolders_Click(object sender, EventArgs e)
+        {
+            this.MegaConfigureTab(true);
         }
 
         #endregion Mega
