@@ -43,7 +43,7 @@
             this.lblGregoire = new System.Windows.Forms.Label();
             this.pbGregoire = new System.Windows.Forms.PictureBox();
             this.lblCommitters = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbFR = new System.Windows.Forms.PictureBox();
             this.cLogo = new HelpersLib.Canvas();
             this.uclUpdate = new UpdateCheckerLib.UpdateCheckerLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbTR)).BeginInit();
@@ -52,7 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkSteamURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGregoire)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFR)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProductName
@@ -221,16 +221,16 @@
             this.lblCommitters.TabIndex = 25;
             this.lblCommitters.Text = "Committers:";
             // 
-            // pictureBox1
+            // pbFR
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::ShareX.Properties.Resources.fr;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 160);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 26;
-            this.pictureBox1.TabStop = false;
+            this.pbFR.BackColor = System.Drawing.Color.Transparent;
+            this.pbFR.Image = global::ShareX.Properties.Resources.fr;
+            this.pbFR.Location = new System.Drawing.Point(19, 160);
+            this.pbFR.Name = "pbFR";
+            this.pbFR.Size = new System.Drawing.Size(16, 16);
+            this.pbFR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbFR.TabIndex = 26;
+            this.pbFR.TabStop = false;
             // 
             // cLogo
             // 
@@ -257,7 +257,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(395, 350);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbFR);
             this.Controls.Add(this.lblCommitters);
             this.Controls.Add(this.pbGregoire);
             this.Controls.Add(this.lblGregoire);
@@ -287,7 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBerkSteamURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGregoire)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFR)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,6 +311,6 @@
         private System.Windows.Forms.Label lblGregoire;
         private System.Windows.Forms.PictureBox pbGregoire;
         private System.Windows.Forms.Label lblCommitters;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbFR;
     }
 }

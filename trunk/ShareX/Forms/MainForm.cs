@@ -530,8 +530,7 @@ namespace ShareX
 
         private void OpenAutoCapture()
         {
-            AutoCaptureForm autoCaptureForm = new AutoCaptureForm();
-            autoCaptureForm.Show();
+            new AutoCaptureForm().Show();
         }
 
         #region Form events
@@ -608,8 +607,7 @@ namespace ShareX
 
         private void tsmiShowDebugLog_Click(object sender, EventArgs e)
         {
-            DebugForm debugForm = new DebugForm(DebugHelper.Logger);
-            debugForm.Show();
+            new DebugForm(DebugHelper.Logger).Show();
         }
 
         private void tsmiTestImageUpload_Click(object sender, EventArgs e)
@@ -643,6 +641,11 @@ namespace ShareX
         private void tsmiTestShapeCapture_Click(object sender, EventArgs e)
         {
             new RegionCapturePreview(Program.DefaultTaskSettings.CaptureSettings.SurfaceOptions).Show();
+        }
+
+        private void tsmiTestColorMatrix_Click(object sender, EventArgs e)
+        {
+            new ColorMatrixTestForm().Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
@@ -708,17 +711,12 @@ namespace ShareX
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
         {
-            using (DialogColor colorForm = new DialogColor())
-            {
-                colorForm.ScreenPicker = true;
-                colorForm.ShowDialog();
-            }
+            new DialogColor() { ScreenPicker = true }.Show();
         }
 
         private void tsmiHashCheck_Click(object sender, EventArgs e)
         {
-            HashCheckForm hashCheckForm = new HashCheckForm();
-            hashCheckForm.Show();
+            new HashCheckForm().Show();
         }
 
         private void tsmiIndexFolder_Click(object sender, EventArgs e)

@@ -117,12 +117,12 @@ namespace ScreenCapture
                 SurfaceImage = Screenshot.CaptureFullscreen();
             }
 
-            using (Image darkSurfaceImage = ColorMatrixManager.Contrast(-20).Apply(SurfaceImage))
+            using (Image darkSurfaceImage = ColorMatrixManager.Contrast(0.8f).Apply(SurfaceImage))
             {
                 darkBackgroundBrush = new TextureBrush(darkSurfaceImage);
             }
 
-            using (Image lightSurfaceImage = ColorMatrixManager.Contrast(10).Apply(SurfaceImage))
+            using (Image lightSurfaceImage = ColorMatrixManager.Contrast(1.1f).Apply(SurfaceImage))
             {
                 lightBackgroundBrush = new TextureBrush(lightSurfaceImage);
             }
