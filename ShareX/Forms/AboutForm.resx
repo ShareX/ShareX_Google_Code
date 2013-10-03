@@ -117,15 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblCredits.Text" xml:space="preserve">
-    <value>Logo/Icon: Mopsy - http://mpql.net
-FTP Library: http://www.starksoft.com
+  <data name="rtbCredits.Text" xml:space="preserve">
+    <value>Logo &amp; Icon: Mopsy - http://mpql.net
+FTP Library: http://biko.codeplex.com
 Json.NET: http://json.codeplex.com
 SSH.NET: http://sshnet.codeplex.com
 Icons: http://p.yusukekamiyamane.com
-ImageListView: Özgür Özçıtak - http://code.google.com/p/imagelistview
+ImageListView: http://code.google.com/p/imagelistview
 AviWriter: https://code.google.com/p/aforge
 AsyncBridge: http://omermor.github.com/AsyncBridge
-Greenshot image editor: http://getgreenshot.org</value>
+Greenshot Image Editor: http://sourceforge.net/projects/greenshot
+
+</value>
   </data>
 </root>

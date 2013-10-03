@@ -23,11 +23,11 @@
 
 #endregion License Information (GPL v3)
 
-using System.Drawing;
 using CG.Web.MegaApiClient;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using UploadersLib.FileUploaders;
@@ -1131,7 +1131,12 @@ namespace UploadersLib
             }
         }
 
-        #endregion
+        private void btnMegaRegister_Click(object sender, EventArgs e)
+        {
+            Helpers.LoadBrowserAsync("https://mega.co.nz/#register");
+        }
+
+        #endregion Mega
 
         #endregion File Uploaders
 
