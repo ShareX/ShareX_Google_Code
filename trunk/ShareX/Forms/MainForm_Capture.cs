@@ -71,8 +71,14 @@ namespace ShareX
 
             switch (hotkeySetting.TaskSettings.Job)
             {
+                case HotkeyType.StopUploads:
+                    TaskManager.StopAllTasks();
+                    break;
                 case HotkeyType.ClipboardUpload:
                     UploadManager.ClipboardUpload(taskSettings);
+                    break;
+                case HotkeyType.ClipboardUploadWithContentViewer:
+                    UploadManager.ClipboardUploadWithContentViewer(taskSettings);
                     break;
                 case HotkeyType.FileUpload:
                     UploadManager.UploadFile(taskSettings);
@@ -86,11 +92,11 @@ namespace ShareX
                 case HotkeyType.ActiveMonitor:
                     CaptureScreenshot(CaptureType.ActiveMonitor, taskSettings, false);
                     break;
-                case HotkeyType.WindowRectangle:
-                    CaptureScreenshot(CaptureType.RectangleWindow, taskSettings, false);
-                    break;
                 case HotkeyType.RectangleRegion:
                     CaptureScreenshot(CaptureType.Rectangle, taskSettings, false);
+                    break;
+                case HotkeyType.WindowRectangle:
+                    CaptureScreenshot(CaptureType.RectangleWindow, taskSettings, false);
                     break;
                 case HotkeyType.RoundedRectangleRegion:
                     CaptureScreenshot(CaptureType.RoundedRectangle, taskSettings, false);

@@ -166,9 +166,22 @@ namespace ShareX
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
 
+            using (ClipboardContentViewer ccv = new ClipboardContentViewer())
+            {
+                if (ccv.ShowDialog() == DialogResult.OK && !ccv.IsClipboardEmpty)
+                {
+                    UploadManager.ClipboardUpload(taskSettings);
+                }
+            }
+        }
+
+        public static void ClipboardUploadMainWindow(TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
             if (Program.Settings.ShowClipboardContentViewer)
             {
-                using (ClipboardContentViewer ccv = new ClipboardContentViewer())
+                using (ClipboardContentViewer ccv = new ClipboardContentViewer(true))
                 {
                     if (ccv.ShowDialog() == DialogResult.OK && !ccv.IsClipboardEmpty)
                     {

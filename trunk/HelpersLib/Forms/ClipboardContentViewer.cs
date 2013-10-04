@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib.Properties;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -36,9 +37,11 @@ namespace HelpersLib
 
         public bool DontShowThisWindow { get; private set; }
 
-        public ClipboardContentViewer()
+        public ClipboardContentViewer(bool showCheckBox = false)
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
+            cbDontShowThisWindow.Visible = showCheckBox;
         }
 
         private void ClipboardContentViewer_Load(object sender, EventArgs e)
@@ -48,31 +51,21 @@ namespace HelpersLib
             if (Clipboard.ContainsImage())
             {
                 Image img = Clipboard.GetImage();
-
-                if (img.Width > pbClipboard.ClientSize.Width || img.Height > pbClipboard.ClientSize.Height)
-                {
-                    pbClipboard.SizeMode = PictureBoxSizeMode.Zoom;
-                }
-                else
-                {
-                    pbClipboard.SizeMode = PictureBoxSizeMode.CenterImage;
-                }
-
-                pbClipboard.Image = img;
-                lblQuestion.Text = string.Format("Content type: Bitmap (Image), Size: {0}x{1}", img.Width, img.Height);
+                pbClipboard.LoadImage(img);
+                lblQuestion.Text = string.Format("Clipboard content: Image (Size: {0}x{1})", img.Width, img.Height);
                 pbClipboard.Visible = true;
             }
             else if (Clipboard.ContainsText())
             {
                 string text = Clipboard.GetText();
-                lblQuestion.Text = "Content type: Text, Length: " + text.Length;
+                lblQuestion.Text = string.Format("Clipboard content: Text (Length: {0})", text.Length);
                 txtClipboard.Text = text;
                 txtClipboard.Visible = true;
             }
             else if (Clipboard.ContainsFileDropList())
             {
                 string[] files = Clipboard.GetFileDropList().OfType<string>().ToArray();
-                lblQuestion.Text = "Content type: File, Count: " + files.Length;
+                lblQuestion.Text = string.Format("Clipboard content: File (Count: {0})", files.Length);
                 lbClipboard.Items.AddRange(files);
                 lbClipboard.Visible = true;
             }
@@ -81,6 +74,11 @@ namespace HelpersLib
                 lblQuestion.Text = "Clipboard is empty or contains unknown data.";
                 IsClipboardEmpty = true;
             }
+        }
+
+        private void ClipboardContentViewer_Shown(object sender, EventArgs e)
+        {
+            this.ShowActivate();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

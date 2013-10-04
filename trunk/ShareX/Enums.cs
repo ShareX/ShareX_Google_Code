@@ -125,43 +125,47 @@ namespace ShareX
     {
         [Description("None")]
         None,
-        [Description("Clipboard Upload")]
+        [Description("Stop all active uploads")]
+        StopUploads,
+        [Description("Clipboard upload")]
         ClipboardUpload,
-        [Description("File Upload")]
+        [Description("Clipboard upload with content viewer")]
+        ClipboardUploadWithContentViewer,
+        [Description("File upload")]
         FileUpload,
-        [Description("Fullscreen")]
+        [Description("Capture entire screen")]
         PrintScreen,
-        [Description("Active Window")]
+        [Description("Capture active window")]
         ActiveWindow,
-        [Description("Active Monitor")]
+        [Description("Capture active monitor")]
         ActiveMonitor,
-        [Description("Window & Rectangle")]
-        WindowRectangle,
-        [Description("Rectangle Region")]
+        [Description("Capture rectangle region")]
         RectangleRegion,
-        [Description("Rounded Rectangle Region")]
+        [Description("Capture rectangle region with window")]
+        WindowRectangle,
+        [Description("Capture rounded rectangle region")]
         RoundedRectangleRegion,
-        [Description("Ellipse Region")]
+        [Description("Capture ellipse region")]
         EllipseRegion,
-        [Description("Triangle Region")]
+        [Description("Capture triangle region")]
         TriangleRegion,
-        [Description("Diamond Region")]
+        [Description("Capture diamond region")]
         DiamondRegion,
-        [Description("Polygon Region")]
+        [Description("Capture polygon region")]
         PolygonRegion,
-        [Description("Freehand Region")]
+        [Description("Capture freehand region")]
         FreeHandRegion,
-        [Description("Last Region")]
+        [Description("Capture last region")]
         LastRegion,
-        [Description("Screen Recorder")]
+        [Description("Screen recorder")]
         ScreenRecorder,
-        [Description("Auto Capture")]
+        [Description("Auto capture")]
         AutoCapture,
-        [Description("Screen Color Picker")]
+        [Description("Screen color picker")]
         ScreenColorPicker,
-        [Description("Hash Check")]
+        [Description("Hash check")]
         HashCheck,
-        [Description("Index Folder")]
+        [Description("Index folder")]
         IndexFolder
     }
 

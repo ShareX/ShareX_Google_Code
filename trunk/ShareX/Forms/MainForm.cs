@@ -607,7 +607,7 @@ namespace ShareX
 
         private void tsbClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadMainWindow();
         }
 
         private void tsbFileUpload_Click(object sender, EventArgs e)
@@ -829,7 +829,7 @@ namespace ShareX
                     uim.CopyURL();
                     break;
                 case Keys.Control | Keys.V:
-                    UploadManager.ClipboardUploadWithContentViewer();
+                    UploadManager.ClipboardUploadMainWindow();
                     break;
                 case Keys.Delete:
                     RemoveSelectedItems();
@@ -1026,7 +1026,7 @@ namespace ShareX
 
         private void tsmiClipboardUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.ClipboardUploadWithContentViewer();
+            UploadManager.ClipboardUploadMainWindow();
         }
 
         private void tsmiUploadFile_Click(object sender, EventArgs e)
