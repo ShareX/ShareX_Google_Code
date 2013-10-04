@@ -119,6 +119,15 @@ namespace ShareX
                 case HotkeyType.AutoCapture:
                     OpenAutoCapture();
                     break;
+                case HotkeyType.ScreenColorPicker:
+                    OpenScreenColorPicker();
+                    break;
+                case HotkeyType.HashCheck:
+                    OpenHashCheck();
+                    break;
+                case HotkeyType.IndexFolder:
+                    OpenIndexFolder();
+                    break;
             }
         }
 

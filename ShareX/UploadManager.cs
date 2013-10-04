@@ -92,6 +92,8 @@ namespace ShareX
 
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
+                ofd.Title = "ShareX - File upload";
+
                 if (!string.IsNullOrEmpty(Program.Settings.FileUploadDefaultDirectory) && Directory.Exists(Program.Settings.FileUploadDefaultDirectory))
                 {
                     ofd.InitialDirectory = Program.Settings.FileUploadDefaultDirectory;

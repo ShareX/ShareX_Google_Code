@@ -156,7 +156,13 @@ namespace ShareX
         [Description("Screen Recorder")]
         ScreenRecorder,
         [Description("Auto Capture")]
-        AutoCapture
+        AutoCapture,
+        [Description("Screen Color Picker")]
+        ScreenColorPicker,
+        [Description("Hash Check")]
+        HashCheck,
+        [Description("Index Folder")]
+        IndexFolder
     }
 
     public enum HotkeyStatus
