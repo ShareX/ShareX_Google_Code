@@ -533,6 +533,21 @@ namespace ShareX
             new AutoCaptureForm().Show();
         }
 
+        private void OpenScreenColorPicker()
+        {
+            new DialogColor() { ScreenPicker = true }.Show();
+        }
+
+        private void OpenHashCheck()
+        {
+            new HashCheckForm().Show();
+        }
+
+        private void OpenIndexFolder()
+        {
+            UploadManager.IndexFolder();
+        }
+
         #region Form events
 
         protected override void SetVisibleCore(bool value)
@@ -711,17 +726,17 @@ namespace ShareX
 
         private void tsmiCursorHelper_Click(object sender, EventArgs e)
         {
-            new DialogColor() { ScreenPicker = true }.Show();
+            OpenScreenColorPicker();
         }
 
         private void tsmiHashCheck_Click(object sender, EventArgs e)
         {
-            new HashCheckForm().Show();
+            OpenHashCheck();
         }
 
         private void tsmiIndexFolder_Click(object sender, EventArgs e)
         {
-            UploadManager.IndexFolder();
+            OpenIndexFolder();
         }
 
         private void tsbScreenshotsFolder_Click(object sender, EventArgs e)
