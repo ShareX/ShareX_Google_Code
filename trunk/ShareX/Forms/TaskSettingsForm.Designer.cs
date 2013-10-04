@@ -29,14 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnAfterCapture = new System.Windows.Forms.Button();
             this.cmsAfterCapture = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnAfterUpload = new System.Windows.Forms.Button();
-            this.btnImageUploaders = new System.Windows.Forms.Button();
-            this.btnTextUploaders = new System.Windows.Forms.Button();
-            this.btnFileUploaders = new System.Windows.Forms.Button();
-            this.btnURLShorteners = new System.Windows.Forms.Button();
-            this.btnSocialNetworkingServices = new System.Windows.Forms.Button();
             this.cmsAfterUpload = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsImageUploaders = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsTextUploaders = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -48,7 +41,6 @@
             this.cbUseDefaultDestinationSettings = new System.Windows.Forms.CheckBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
-            this.btnTask = new System.Windows.Forms.Button();
             this.cmsTask = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tcHotkeySettings = new System.Windows.Forms.TabControl();
             this.tpTask = new System.Windows.Forms.TabPage();
@@ -151,10 +143,6 @@
             this.tpActions = new System.Windows.Forms.TabPage();
             this.pActions = new System.Windows.Forms.Panel();
             this.btnActionsAdd = new System.Windows.Forms.Button();
-            this.lvActions = new HelpersLib.MyListView();
-            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnActionsEdit = new System.Windows.Forms.Button();
             this.btnActionsRemove = new System.Windows.Forms.Button();
             this.chkUseDefaultActions = new System.Windows.Forms.CheckBox();
@@ -186,6 +174,18 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
+            this.btnAfterCapture = new HelpersLib.MenuButton();
+            this.btnAfterUpload = new HelpersLib.MenuButton();
+            this.btnImageUploaders = new HelpersLib.MenuButton();
+            this.btnTextUploaders = new HelpersLib.MenuButton();
+            this.btnFileUploaders = new HelpersLib.MenuButton();
+            this.btnURLShorteners = new HelpersLib.MenuButton();
+            this.btnSocialNetworkingServices = new HelpersLib.MenuButton();
+            this.btnTask = new HelpersLib.MenuButton();
+            this.lvActions = new HelpersLib.MyListView();
+            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -230,94 +230,10 @@
             this.tpAdvanced.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAfterCapture
-            // 
-            this.btnAfterCapture.Location = new System.Drawing.Point(6, 93);
-            this.btnAfterCapture.Name = "btnAfterCapture";
-            this.btnAfterCapture.Size = new System.Drawing.Size(506, 23);
-            this.btnAfterCapture.TabIndex = 4;
-            this.btnAfterCapture.Text = "After capture...";
-            this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAfterCapture.UseMnemonic = false;
-            this.btnAfterCapture.UseVisualStyleBackColor = true;
-            this.btnAfterCapture.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAfterCapture_MouseClick);
-            // 
             // cmsAfterCapture
             // 
             this.cmsAfterCapture.Name = "cmsAfterCapture";
             this.cmsAfterCapture.Size = new System.Drawing.Size(61, 4);
-            // 
-            // btnAfterUpload
-            // 
-            this.btnAfterUpload.Location = new System.Drawing.Point(6, 149);
-            this.btnAfterUpload.Name = "btnAfterUpload";
-            this.btnAfterUpload.Size = new System.Drawing.Size(506, 23);
-            this.btnAfterUpload.TabIndex = 6;
-            this.btnAfterUpload.Text = "After upload...";
-            this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAfterUpload.UseMnemonic = false;
-            this.btnAfterUpload.UseVisualStyleBackColor = true;
-            this.btnAfterUpload.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnAfterUpload_MouseClick);
-            // 
-            // btnImageUploaders
-            // 
-            this.btnImageUploaders.Location = new System.Drawing.Point(6, 205);
-            this.btnImageUploaders.Name = "btnImageUploaders";
-            this.btnImageUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnImageUploaders.TabIndex = 8;
-            this.btnImageUploaders.Text = "Image uploaders";
-            this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImageUploaders.UseMnemonic = false;
-            this.btnImageUploaders.UseVisualStyleBackColor = true;
-            this.btnImageUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnImageUploaders_MouseClick);
-            // 
-            // btnTextUploaders
-            // 
-            this.btnTextUploaders.Location = new System.Drawing.Point(6, 229);
-            this.btnTextUploaders.Name = "btnTextUploaders";
-            this.btnTextUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnTextUploaders.TabIndex = 9;
-            this.btnTextUploaders.Text = "Text uploaders";
-            this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTextUploaders.UseMnemonic = false;
-            this.btnTextUploaders.UseVisualStyleBackColor = true;
-            this.btnTextUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnTextUploaders_MouseClick);
-            // 
-            // btnFileUploaders
-            // 
-            this.btnFileUploaders.Location = new System.Drawing.Point(6, 253);
-            this.btnFileUploaders.Name = "btnFileUploaders";
-            this.btnFileUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnFileUploaders.TabIndex = 10;
-            this.btnFileUploaders.Text = "File uploaders";
-            this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileUploaders.UseMnemonic = false;
-            this.btnFileUploaders.UseVisualStyleBackColor = true;
-            this.btnFileUploaders.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnFileUploaders_MouseClick);
-            // 
-            // btnURLShorteners
-            // 
-            this.btnURLShorteners.Location = new System.Drawing.Point(6, 277);
-            this.btnURLShorteners.Name = "btnURLShorteners";
-            this.btnURLShorteners.Size = new System.Drawing.Size(506, 23);
-            this.btnURLShorteners.TabIndex = 11;
-            this.btnURLShorteners.Text = "URL shorteners";
-            this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnURLShorteners.UseMnemonic = false;
-            this.btnURLShorteners.UseVisualStyleBackColor = true;
-            this.btnURLShorteners.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnURLShorteners_MouseClick);
-            // 
-            // btnSocialNetworkingServices
-            // 
-            this.btnSocialNetworkingServices.Location = new System.Drawing.Point(6, 301);
-            this.btnSocialNetworkingServices.Name = "btnSocialNetworkingServices";
-            this.btnSocialNetworkingServices.Size = new System.Drawing.Size(506, 23);
-            this.btnSocialNetworkingServices.TabIndex = 12;
-            this.btnSocialNetworkingServices.Text = "Social networking services";
-            this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSocialNetworkingServices.UseMnemonic = false;
-            this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
-            this.btnSocialNetworkingServices.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSocialNetworkingServices_MouseClick);
             // 
             // cmsAfterUpload
             // 
@@ -398,18 +314,6 @@
             this.tbDescription.Size = new System.Drawing.Size(434, 20);
             this.tbDescription.TabIndex = 1;
             this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
-            // 
-            // btnTask
-            // 
-            this.btnTask.Location = new System.Drawing.Point(6, 37);
-            this.btnTask.Name = "btnTask";
-            this.btnTask.Size = new System.Drawing.Size(506, 23);
-            this.btnTask.TabIndex = 2;
-            this.btnTask.Text = "Task...";
-            this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTask.UseMnemonic = false;
-            this.btnTask.UseVisualStyleBackColor = true;
-            this.btnTask.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnTask_MouseClick);
             // 
             // cmsTask
             // 
@@ -1735,38 +1639,6 @@
             this.btnActionsAdd.UseVisualStyleBackColor = true;
             this.btnActionsAdd.Click += new System.EventHandler(this.btnActionsAdd_Click);
             // 
-            // lvActions
-            // 
-            this.lvActions.CheckBoxes = true;
-            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chActionsName,
-            this.chActionsPath,
-            this.chActionsArgs});
-            this.lvActions.FullRowSelect = true;
-            this.lvActions.Location = new System.Drawing.Point(8, 40);
-            this.lvActions.MultiSelect = false;
-            this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(496, 280);
-            this.lvActions.TabIndex = 3;
-            this.lvActions.UseCompatibleStateImageBehavior = false;
-            this.lvActions.View = System.Windows.Forms.View.Details;
-            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
-            // 
-            // chActionsName
-            // 
-            this.chActionsName.Text = "Name";
-            this.chActionsName.Width = 100;
-            // 
-            // chActionsPath
-            // 
-            this.chActionsPath.Text = "Path";
-            this.chActionsPath.Width = 250;
-            // 
-            // chActionsArgs
-            // 
-            this.chActionsArgs.Text = "Args";
-            this.chActionsArgs.Width = 134;
-            // 
             // btnActionsEdit
             // 
             this.btnActionsEdit.Location = new System.Drawing.Point(88, 8);
@@ -2100,6 +1972,134 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
+            // btnAfterCapture
+            // 
+            this.btnAfterCapture.Location = new System.Drawing.Point(6, 93);
+            this.btnAfterCapture.Menu = this.cmsAfterCapture;
+            this.btnAfterCapture.Name = "btnAfterCapture";
+            this.btnAfterCapture.Size = new System.Drawing.Size(506, 23);
+            this.btnAfterCapture.TabIndex = 4;
+            this.btnAfterCapture.Text = "After capture...";
+            this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterCapture.UseMnemonic = false;
+            this.btnAfterCapture.UseVisualStyleBackColor = true;
+            // 
+            // btnAfterUpload
+            // 
+            this.btnAfterUpload.Location = new System.Drawing.Point(6, 149);
+            this.btnAfterUpload.Menu = this.cmsAfterUpload;
+            this.btnAfterUpload.Name = "btnAfterUpload";
+            this.btnAfterUpload.Size = new System.Drawing.Size(506, 23);
+            this.btnAfterUpload.TabIndex = 6;
+            this.btnAfterUpload.Text = "After upload...";
+            this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterUpload.UseMnemonic = false;
+            this.btnAfterUpload.UseVisualStyleBackColor = true;
+            // 
+            // btnImageUploaders
+            // 
+            this.btnImageUploaders.Location = new System.Drawing.Point(6, 205);
+            this.btnImageUploaders.Menu = this.cmsImageUploaders;
+            this.btnImageUploaders.Name = "btnImageUploaders";
+            this.btnImageUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnImageUploaders.TabIndex = 8;
+            this.btnImageUploaders.Text = "Image uploaders";
+            this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImageUploaders.UseMnemonic = false;
+            this.btnImageUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnTextUploaders
+            // 
+            this.btnTextUploaders.Location = new System.Drawing.Point(6, 229);
+            this.btnTextUploaders.Menu = this.cmsTextUploaders;
+            this.btnTextUploaders.Name = "btnTextUploaders";
+            this.btnTextUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnTextUploaders.TabIndex = 9;
+            this.btnTextUploaders.Text = "Text uploaders";
+            this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTextUploaders.UseMnemonic = false;
+            this.btnTextUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnFileUploaders
+            // 
+            this.btnFileUploaders.Location = new System.Drawing.Point(6, 253);
+            this.btnFileUploaders.Menu = this.cmsFileUploaders;
+            this.btnFileUploaders.Name = "btnFileUploaders";
+            this.btnFileUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnFileUploaders.TabIndex = 10;
+            this.btnFileUploaders.Text = "File uploaders";
+            this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFileUploaders.UseMnemonic = false;
+            this.btnFileUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnURLShorteners
+            // 
+            this.btnURLShorteners.Location = new System.Drawing.Point(6, 277);
+            this.btnURLShorteners.Menu = this.cmsURLShorteners;
+            this.btnURLShorteners.Name = "btnURLShorteners";
+            this.btnURLShorteners.Size = new System.Drawing.Size(506, 23);
+            this.btnURLShorteners.TabIndex = 11;
+            this.btnURLShorteners.Text = "URL shorteners";
+            this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnURLShorteners.UseMnemonic = false;
+            this.btnURLShorteners.UseVisualStyleBackColor = true;
+            // 
+            // btnSocialNetworkingServices
+            // 
+            this.btnSocialNetworkingServices.Location = new System.Drawing.Point(6, 301);
+            this.btnSocialNetworkingServices.Menu = this.cmsSocialNetworkingServices;
+            this.btnSocialNetworkingServices.Name = "btnSocialNetworkingServices";
+            this.btnSocialNetworkingServices.Size = new System.Drawing.Size(506, 23);
+            this.btnSocialNetworkingServices.TabIndex = 12;
+            this.btnSocialNetworkingServices.Text = "Social networking services";
+            this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSocialNetworkingServices.UseMnemonic = false;
+            this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
+            // 
+            // btnTask
+            // 
+            this.btnTask.Location = new System.Drawing.Point(6, 37);
+            this.btnTask.Menu = this.cmsTask;
+            this.btnTask.Name = "btnTask";
+            this.btnTask.Size = new System.Drawing.Size(506, 23);
+            this.btnTask.TabIndex = 2;
+            this.btnTask.Text = "Task...";
+            this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTask.UseMnemonic = false;
+            this.btnTask.UseVisualStyleBackColor = true;
+            // 
+            // lvActions
+            // 
+            this.lvActions.CheckBoxes = true;
+            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chActionsName,
+            this.chActionsPath,
+            this.chActionsArgs});
+            this.lvActions.FullRowSelect = true;
+            this.lvActions.Location = new System.Drawing.Point(8, 40);
+            this.lvActions.MultiSelect = false;
+            this.lvActions.Name = "lvActions";
+            this.lvActions.Size = new System.Drawing.Size(496, 280);
+            this.lvActions.TabIndex = 3;
+            this.lvActions.UseCompatibleStateImageBehavior = false;
+            this.lvActions.View = System.Windows.Forms.View.Details;
+            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
+            // 
+            // chActionsName
+            // 
+            this.chActionsName.Text = "Name";
+            this.chActionsName.Width = 100;
+            // 
+            // chActionsPath
+            // 
+            this.chActionsPath.Text = "Path";
+            this.chActionsPath.Width = 250;
+            // 
+            // chActionsArgs
+            // 
+            this.chActionsArgs.Text = "Args";
+            this.chActionsArgs.Width = 134;
+            // 
             // TaskSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2183,14 +2183,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAfterCapture;
+        private HelpersLib.MenuButton btnAfterCapture;
         private System.Windows.Forms.ContextMenuStrip cmsAfterCapture;
-        private System.Windows.Forms.Button btnAfterUpload;
-        private System.Windows.Forms.Button btnImageUploaders;
-        private System.Windows.Forms.Button btnTextUploaders;
-        private System.Windows.Forms.Button btnFileUploaders;
-        private System.Windows.Forms.Button btnURLShorteners;
-        private System.Windows.Forms.Button btnSocialNetworkingServices;
+        private HelpersLib.MenuButton btnAfterUpload;
+        private HelpersLib.MenuButton btnImageUploaders;
+        private HelpersLib.MenuButton btnTextUploaders;
+        private HelpersLib.MenuButton btnFileUploaders;
+        private HelpersLib.MenuButton btnURLShorteners;
+        private HelpersLib.MenuButton btnSocialNetworkingServices;
         private System.Windows.Forms.ContextMenuStrip cmsAfterUpload;
         private System.Windows.Forms.ContextMenuStrip cmsImageUploaders;
         private System.Windows.Forms.ContextMenuStrip cmsTextUploaders;
@@ -2202,7 +2202,7 @@
         private System.Windows.Forms.CheckBox cbUseDefaultDestinationSettings;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.TextBox tbDescription;
-        private System.Windows.Forms.Button btnTask;
+        private HelpersLib.MenuButton btnTask;
         private System.Windows.Forms.ContextMenuStrip cmsTask;
         private System.Windows.Forms.TabControl tcHotkeySettings;
         private System.Windows.Forms.TabPage tpImage;
