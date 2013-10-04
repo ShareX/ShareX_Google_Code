@@ -168,14 +168,9 @@ namespace ShareX
         {
             return new HotkeySettings[]
             {
-                new HotkeySettings(HotkeyType.ClipboardUpload, Keys.Control | Keys.PageUp),
-                new HotkeySettings(HotkeyType.FileUpload, Keys.Shift | Keys.PageUp),
                 new HotkeySettings(HotkeyType.PrintScreen, Keys.PrintScreen),
                 new HotkeySettings(HotkeyType.ActiveWindow, Keys.Alt | Keys.PrintScreen),
-                new HotkeySettings(HotkeyType.ActiveMonitor, Keys.Control | Keys.Alt | Keys.PrintScreen),
-                new HotkeySettings(HotkeyType.WindowRectangle, Keys.Shift | Keys.PrintScreen),
-                new HotkeySettings(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen),
-                new HotkeySettings(HotkeyType.ScreenRecorder, Keys.Shift | Keys.F11)
+                new HotkeySettings(HotkeyType.RectangleRegion, Keys.Control | Keys.PrintScreen)
             };
         }
     }
