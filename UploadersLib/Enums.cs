@@ -86,6 +86,10 @@ namespace UploadersLib
     {
         [Description("dropbox.com")]
         Dropbox,
+        [Description("mega.co.nz")]
+        Mega,
+        [Description("FTP Server")]
+        FTP,
         [Description("drive.google.com")]
         GoogleDrive,
         [Description("rapidshare.com")]
@@ -100,16 +104,12 @@ namespace UploadersLib
         Ge_tt,
         [Description("hostr.co")]
         Localhostr,
-        [Description("FTP Server")]
-        FTP,
         [Description("Shared Folder")]
         SharedFolder,
         [Description("Email")]
         Email,
         [Description("Jira")]
         Jira,
-        [Description("Mega.co.nz")]
-        Mega,
         [Description("Custom File Uploader")]
         CustomFileUploader
     }
