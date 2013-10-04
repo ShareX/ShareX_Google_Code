@@ -367,40 +367,16 @@ namespace ShareX
             TaskSettings.Description = tbDescription.Text;
         }
 
-        private void btnTask_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsTask.Show(btnTask, e.Location);
-            }
-        }
-
         private void cbUseDefaultAfterCaptureSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultAfterCaptureJob = cbUseDefaultAfterCaptureSettings.Checked;
             btnAfterCapture.Enabled = !TaskSettings.UseDefaultAfterCaptureJob;
         }
 
-        private void btnAfterCapture_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsAfterCapture.Show(btnAfterCapture, e.Location);
-            }
-        }
-
         private void cbUseDefaultAfterUploadSettings_CheckedChanged(object sender, EventArgs e)
         {
             TaskSettings.UseDefaultAfterUploadJob = cbUseDefaultAfterUploadSettings.Checked;
             btnAfterUpload.Enabled = !TaskSettings.UseDefaultAfterUploadJob;
-        }
-
-        private void btnAfterUpload_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsAfterUpload.Show(btnAfterUpload, e.Location);
-            }
         }
 
         private void cbUseDefaultDestinationSettings_CheckedChanged(object sender, EventArgs e)
@@ -411,46 +387,6 @@ namespace ShareX
             btnFileUploaders.Enabled = !TaskSettings.UseDefaultDestinations;
             btnURLShorteners.Enabled = !TaskSettings.UseDefaultDestinations;
             btnSocialNetworkingServices.Enabled = !TaskSettings.UseDefaultDestinations;
-        }
-
-        private void btnImageUploaders_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsImageUploaders.Show(btnImageUploaders, e.Location);
-            }
-        }
-
-        private void btnTextUploaders_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsTextUploaders.Show(btnTextUploaders, e.Location);
-            }
-        }
-
-        private void btnFileUploaders_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsFileUploaders.Show(btnFileUploaders, e.Location);
-            }
-        }
-
-        private void btnURLShorteners_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsURLShorteners.Show(btnURLShorteners, e.Location);
-            }
-        }
-
-        private void btnSocialNetworkingServices_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                cmsSocialNetworkingServices.Show(btnSocialNetworkingServices, e.Location);
-            }
         }
 
         #endregion Task
