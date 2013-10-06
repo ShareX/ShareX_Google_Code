@@ -56,12 +56,7 @@ namespace ShareX
             InitHotkeys();
 
 #if !DEBUG
-            if (Program.Settings.AutoCheckUpdate)
-            {
-                Thread updateThread = new Thread(CheckUpdate);
-                updateThread.IsBackground = true;
-                updateThread.Start();
-            }
+            AutoCheckUpdate();
 #endif
 
             IsReady = true;
@@ -422,6 +417,16 @@ namespace ShareX
                         DebugHelper.WriteLine("Update check failed.");
                         break;
                 }
+            }
+        }
+
+        private void AutoCheckUpdate()
+        {
+            if (Program.Settings.AutoCheckUpdate)
+            {
+                Thread updateThread = new Thread(CheckUpdate);
+                updateThread.IsBackground = true;
+                updateThread.Start();
             }
         }
 

@@ -99,10 +99,8 @@ namespace ScreenCapture
             this.FormBorderStyle = FormBorderStyle.None;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.Text = "ShareX - Region Capture";
-#if !DEBUG
             this.ShowInTaskbar = false;
             this.TopMost = true;
-#endif
             this.Shown += new EventHandler(Surface_Shown);
             this.KeyUp += new KeyEventHandler(Surface_KeyUp);
             this.MouseDoubleClick += new MouseEventHandler(Surface_MouseDoubleClick);
