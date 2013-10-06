@@ -128,10 +128,8 @@ namespace ScreenCapture
             this.FormBorderStyle = FormBorderStyle.None;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.Text = "ShareX - Rectangle Capture Light";
-#if !DEBUG
             this.ShowInTaskbar = false;
             this.TopMost = true;
-#endif
             this.Shown += RectangleLight_Shown;
             this.KeyUp += RectangleLight_KeyUp;
             this.MouseDown += RectangleLight_MouseDown;
