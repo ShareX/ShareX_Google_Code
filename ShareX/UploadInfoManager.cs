@@ -36,6 +36,28 @@ namespace ShareX
     public class UploadInfoManager
     {
         public UploadInfoStatus[] SelectedItems { get; private set; }
+
+        public UploadInfoStatus SelectedItem
+        {
+            get
+            {
+                if (IsItemSelected)
+                {
+                    return SelectedItems[0];
+                }
+
+                return null;
+            }
+        }
+
+        public bool IsItemSelected
+        {
+            get
+            {
+                return SelectedItems != null && SelectedItems.Length > 0;
+            }
+        }
+
         private ListView lv;
         private UploadInfoParser parser;
 
@@ -43,16 +65,6 @@ namespace ShareX
         {
             lv = listView;
             parser = new UploadInfoParser();
-        }
-
-        private UploadInfoStatus[] GetSelectedItems()
-        {
-            if (lv != null && lv.SelectedItems.Count > 0)
-            {
-                return lv.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && x.Info != null).Select(x => new UploadInfoStatus(x.Info)).ToArray();
-            }
-
-            return null;
         }
 
         private void CopyTexts(IEnumerable<string> texts)
@@ -68,64 +80,66 @@ namespace ShareX
             }
         }
 
-        public bool IsSelectedItemsValid()
+        public void RefreshSelectedItems()
         {
-            return SelectedItems != null && SelectedItems.Length > 0;
-        }
-
-        public bool RefreshSelectedItems()
-        {
-            SelectedItems = GetSelectedItems();
-            return SelectedItems != null;
+            if (lv != null && lv.SelectedItems != null && lv.SelectedItems.Count > 0)
+            {
+                SelectedItems = lv.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && x.Info != null).
+                    Select(x => new UploadInfoStatus(x.Info)).ToArray();
+            }
+            else
+            {
+                SelectedItems = null;
+            }
         }
 
         #region Open
 
         public void OpenURL()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsURLExist) Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.URL);
+            if (IsItemSelected && SelectedItem.IsURLExist) Helpers.LoadBrowserAsync(SelectedItem.Info.Result.URL);
         }
 
         public void OpenShortenedURL()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsShortenedURLExist) Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.ShortenedURL);
+            if (IsItemSelected && SelectedItem.IsShortenedURLExist) Helpers.LoadBrowserAsync(SelectedItem.Info.Result.ShortenedURL);
         }
 
         public void OpenThumbnailURL()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsThumbnailURLExist) Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.ThumbnailURL);
+            if (IsItemSelected && SelectedItem.IsThumbnailURLExist) Helpers.LoadBrowserAsync(SelectedItem.Info.Result.ThumbnailURL);
         }
 
         public void OpenDeletionURL()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsDeletionURLExist) Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.DeletionURL);
+            if (IsItemSelected && SelectedItem.IsDeletionURLExist) Helpers.LoadBrowserAsync(SelectedItem.Info.Result.DeletionURL);
         }
 
         public void OpenFile()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) Helpers.LoadBrowserAsync(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsFileExist) Helpers.LoadBrowserAsync(SelectedItem.Info.FilePath);
         }
 
         public void OpenFolder()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) Helpers.OpenFolderWithFile(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsFileExist) Helpers.OpenFolderWithFile(SelectedItem.Info.FilePath);
         }
 
         public void TryOpen()
         {
-            if (IsSelectedItemsValid())
+            if (IsItemSelected)
             {
-                if (SelectedItems[0].IsShortenedURLExist)
+                if (SelectedItem.IsShortenedURLExist)
                 {
-                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.ShortenedURL);
+                    Helpers.LoadBrowserAsync(SelectedItem.Info.Result.ShortenedURL);
                 }
-                else if (SelectedItems[0].IsURLExist)
+                else if (SelectedItem.IsURLExist)
                 {
-                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.Result.URL);
+                    Helpers.LoadBrowserAsync(SelectedItem.Info.Result.URL);
                 }
-                else if (SelectedItems[0].IsFileExist)
+                else if (SelectedItem.IsFileExist)
                 {
-                    Helpers.LoadBrowserAsync(SelectedItems[0].Info.FilePath);
+                    Helpers.LoadBrowserAsync(SelectedItem.Info.FilePath);
                 }
             }
         }
@@ -136,94 +150,94 @@ namespace ShareX
 
         public void CopyURL()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => x.Info.Result.URL));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => x.Info.Result.URL));
         }
 
         public void CopyShortenedURL()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsShortenedURLExist).Select(x => x.Info.Result.ShortenedURL));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsShortenedURLExist).Select(x => x.Info.Result.ShortenedURL));
         }
 
         public void CopyThumbnailURL()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsThumbnailURLExist).Select(x => x.Info.Result.ThumbnailURL));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsThumbnailURLExist).Select(x => x.Info.Result.ThumbnailURL));
         }
 
         public void CopyDeletionURL()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsDeletionURLExist).Select(x => x.Info.Result.DeletionURL));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsDeletionURLExist).Select(x => x.Info.Result.DeletionURL));
         }
 
         public void CopyFile()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) ClipboardHelpers.CopyFile(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsFileExist) ClipboardHelpers.CopyFile(SelectedItem.Info.FilePath);
         }
 
         public void CopyImage()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ClipboardHelpers.CopyImageFromFile(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsImageFile) ClipboardHelpers.CopyImageFromFile(SelectedItem.Info.FilePath);
         }
 
         public void CopyText()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsTextFile) ClipboardHelpers.CopyTextFromFile(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsTextFile) ClipboardHelpers.CopyTextFromFile(SelectedItem.Info.FilePath);
         }
 
         public void CopyHTMLLink()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLink)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLink)));
         }
 
         public void CopyHTMLImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLImage)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLImage)));
         }
 
         public void CopyHTMLLinkedImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
                 Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLinkedImage)));
         }
 
         public void CopyForumLink()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLink)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLink)));
         }
 
         public void CopyForumImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumImage)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL).Select(x => parser.Parse(x.Info, UploadInfoParser.ForumImage)));
         }
 
         public void CopyForumLinkedImage()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
                 Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLinkedImage)));
         }
 
         public void CopyFilePath()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => x.Info.FilePath));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => x.Info.FilePath));
         }
 
         public void CopyFileName()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetFileNameWithoutExtension(x.Info.FilePath)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetFileNameWithoutExtension(x.Info.FilePath)));
         }
 
         public void CopyFileNameWithExtension()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetFileName(x.Info.FilePath)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetFileName(x.Info.FilePath)));
         }
 
         public void CopyFolder()
         {
-            if (IsSelectedItemsValid()) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
+            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsFilePathValid).Select(x => Path.GetDirectoryName(x.Info.FilePath)));
         }
 
         public void CopyCustomFormat(string format)
         {
-            if (!string.IsNullOrEmpty(format) && IsSelectedItemsValid())
+            if (!string.IsNullOrEmpty(format) && IsItemSelected)
             {
                 CopyTexts(SelectedItems.Where(x => x.IsURLExist).Select(x => parser.Parse(x.Info, format)));
             }
@@ -235,14 +249,14 @@ namespace ShareX
 
         public void ShowImagePreview()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsImageFile) ImageViewer.ShowImage(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsImageFile) ImageViewer.ShowImage(SelectedItem.Info.FilePath);
         }
 
         public void ShowErrors()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].Info.Result != null && SelectedItems[0].Info.Result.IsError)
+            if (IsItemSelected && SelectedItem.Info.Result != null && SelectedItem.Info.Result.IsError)
             {
-                string errors = SelectedItems[0].Info.Result.ErrorsToString();
+                string errors = SelectedItem.Info.Result.ErrorsToString();
 
                 if (!string.IsNullOrEmpty(errors))
                 {
@@ -257,9 +271,9 @@ namespace ShareX
 
         public void ShowResponse()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].Info.Result != null && !string.IsNullOrEmpty(SelectedItems[0].Info.Result.Response))
+            if (IsItemSelected && SelectedItem.Info.Result != null && !string.IsNullOrEmpty(SelectedItem.Info.Result.Response))
             {
-                using (ResponseForm form = new ResponseForm(SelectedItems[0].Info.Result.Response))
+                using (ResponseForm form = new ResponseForm(SelectedItem.Info.Result.Response))
                 {
                     form.Icon = Resources.ShareXIcon;
                     form.ShowDialog();
@@ -269,7 +283,7 @@ namespace ShareX
 
         public void Upload()
         {
-            if (IsSelectedItemsValid() && SelectedItems[0].IsFileExist) UploadManager.UploadFile(SelectedItems[0].Info.FilePath);
+            if (IsItemSelected && SelectedItem.IsFileExist) UploadManager.UploadFile(SelectedItem.Info.FilePath);
         }
 
         #endregion Other
