@@ -28,6 +28,7 @@ using System.Collections.Specialized;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -194,7 +195,7 @@ namespace HelpersLib
             {
                 try
                 {
-                    string text = File.ReadAllText(path);
+                    string text = File.ReadAllText(path, Encoding.UTF8);
                     return CopyText(text);
                 }
                 catch (Exception e)

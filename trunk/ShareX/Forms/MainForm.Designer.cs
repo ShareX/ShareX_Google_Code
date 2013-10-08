@@ -106,8 +106,7 @@ namespace ShareX
             this.tsmiTestUploaders = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestColorMatrix = new System.Windows.Forms.ToolStripMenuItem();
-            this.scMain = new System.Windows.Forms.SplitContainer();
-            this.lblSplitter2 = new System.Windows.Forms.Label();
+            this.scMain = new HelpersLib.SplitContainerCustomSplitter();
             this.lblSplitter = new System.Windows.Forms.Label();
             this.lvUploads = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -119,7 +118,6 @@ namespace ShareX
             this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblSplitter3 = new System.Windows.Forms.Label();
             this.pbPreview = new HelpersLib.MyPictureBox();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -612,7 +610,7 @@ namespace ShareX
             this.tsmiAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(121, 22);
             this.tsmiAbout.Text = "About...";
             this.tsmiAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
@@ -622,7 +620,7 @@ namespace ShareX
             this.tsmiDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDonate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDonate.Name = "tsmiDonate";
-            this.tsmiDonate.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDonate.Size = new System.Drawing.Size(121, 22);
             this.tsmiDonate.Text = "Donate...";
             this.tsmiDonate.Click += new System.EventHandler(this.tsbDonate_Click);
             // 
@@ -641,7 +639,7 @@ namespace ShareX
             this.tsmiDebug.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsmiDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDebug.Name = "tsmiDebug";
-            this.tsmiDebug.Size = new System.Drawing.Size(152, 22);
+            this.tsmiDebug.Size = new System.Drawing.Size(121, 22);
             this.tsmiDebug.Text = "Debug";
             // 
             // tsmiShowDebugLog
@@ -717,28 +715,17 @@ namespace ShareX
             // 
             // scMain.Panel1
             // 
-            this.scMain.Panel1.Controls.Add(this.lblSplitter2);
             this.scMain.Panel1.Controls.Add(this.lblSplitter);
             this.scMain.Panel1.Controls.Add(this.lvUploads);
             // 
             // scMain.Panel2
             // 
-            this.scMain.Panel2.Controls.Add(this.lblSplitter3);
             this.scMain.Panel2.Controls.Add(this.pbPreview);
-            this.scMain.Panel2Collapsed = true;
             this.scMain.Size = new System.Drawing.Size(784, 392);
-            this.scMain.SplitterDistance = 500;
+            this.scMain.SplitterDistance = 400;
+            this.scMain.SplitterWidth = 6;
             this.scMain.TabIndex = 1;
             this.scMain.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scMain_SplitterMoved);
-            // 
-            // lblSplitter2
-            // 
-            this.lblSplitter2.BackColor = System.Drawing.Color.Black;
-            this.lblSplitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblSplitter2.Location = new System.Drawing.Point(783, 0);
-            this.lblSplitter2.Name = "lblSplitter2";
-            this.lblSplitter2.Size = new System.Drawing.Size(1, 392);
-            this.lblSplitter2.TabIndex = 2;
             // 
             // lblSplitter
             // 
@@ -770,7 +757,7 @@ namespace ShareX
             this.lvUploads.Location = new System.Drawing.Point(0, 0);
             this.lvUploads.Name = "lvUploads";
             this.lvUploads.ShowItemToolTips = true;
-            this.lvUploads.Size = new System.Drawing.Size(784, 392);
+            this.lvUploads.Size = new System.Drawing.Size(400, 392);
             this.lvUploads.TabIndex = 1;
             this.lvUploads.UseCompatibleStateImageBehavior = false;
             this.lvUploads.View = System.Windows.Forms.View.Details;
@@ -823,15 +810,6 @@ namespace ShareX
             this.chURL.Text = "URL";
             this.chURL.Width = 134;
             // 
-            // lblSplitter3
-            // 
-            this.lblSplitter3.BackColor = System.Drawing.Color.Black;
-            this.lblSplitter3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblSplitter3.Location = new System.Drawing.Point(0, 0);
-            this.lblSplitter3.Name = "lblSplitter3";
-            this.lblSplitter3.Size = new System.Drawing.Size(1, 100);
-            this.lblSplitter3.TabIndex = 0;
-            // 
             // pbPreview
             // 
             this.pbPreview.BackColor = System.Drawing.Color.White;
@@ -840,7 +818,7 @@ namespace ShareX
             this.pbPreview.FullscreenOnClick = true;
             this.pbPreview.Location = new System.Drawing.Point(0, 0);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(96, 100);
+            this.pbPreview.Size = new System.Drawing.Size(378, 392);
             this.pbPreview.TabIndex = 1;
             // 
             // niTray
@@ -1640,7 +1618,7 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayEllipse;
         private System.Windows.Forms.ToolStripMenuItem tsmiLastRegion;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayLastRegion;
-        private System.Windows.Forms.SplitContainer scMain;
+        private HelpersLib.SplitContainerCustomSplitter scMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDestinations;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageUploaders;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayTextUploaders;
@@ -1706,8 +1684,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayDonate;
         private System.Windows.Forms.ToolStripMenuItem tsmiHashCheck;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayHashCheck;
-        private System.Windows.Forms.Label lblSplitter2;
-        private System.Windows.Forms.Label lblSplitter3;
         private System.Windows.Forms.ToolStripMenuItem tsmiMonitor;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayMonitor;
         private System.Windows.Forms.ToolStripMenuItem tsmiClipboardUpload;

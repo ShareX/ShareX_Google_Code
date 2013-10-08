@@ -511,7 +511,6 @@ namespace ShareX
             }
 
             scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
-            lblSplitter2.Visible = !Program.Settings.IsPreviewCollapsed;
         }
 
         private void DoScreenRecorder(TaskSettings taskSettings = null)
