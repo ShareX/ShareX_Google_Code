@@ -157,18 +157,19 @@ namespace ShareX
             if (TaskSettings.CaptureSettings.SurfaceOptions == null) TaskSettings.CaptureSettings.SurfaceOptions = new SurfaceOptions();
             pgShapesCapture.SelectedObject = TaskSettings.CaptureSettings.SurfaceOptions;
 
-            // Capture / Screencast
-            nudFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
-            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            nudDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
+            // Capture / Screen recorder
+            cbScreenRecorderOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
+            cbScreenRecorderOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
+            nudScreenRecorderFPS.Value = TaskSettings.CaptureSettings.ScreenRecordFPS;
+            cbScreenRecorderFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudScreenRecorderDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+            nudScreenRecorderDuration.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordDuration;
+            nudScreenRecorderStartDelay.Value = (decimal)TaskSettings.CaptureSettings.ScreenRecordStartDelay;
 
-            cbFixedDuration.Checked = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-            cbOutput.Items.AddRange(Helpers.GetEnumDescriptions<ScreenRecordOutput>());
-            cbOutput.SelectedIndex = (int)TaskSettings.CaptureSettings.ScreenRecordOutput;
-            tbCommandLinePath.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLinePath;
-            tbCommandLineArgs.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs;
-            tbCommandLineOutputExtension.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension;
+            gbCommandLineEncoderSettings.Enabled = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
+            txtScreenRecorderCommandLinePath.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLinePath;
+            txtScreenRecorderCommandLineArgs.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs;
+            txtScreenRecorderCommandLineOutputExtension.Text = TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension;
 
             // Actions
             TaskHelpers.AddDefaultExternalPrograms(TaskSettings);
@@ -660,43 +661,56 @@ namespace ShareX
             Helpers.LoadBrowserAsync(Links.URL_WIKI_CapturingShapes);
         }
 
-        private void btnBrowseCommandLinePath_Click(object sender, EventArgs e)
-        {
-            Helpers.BrowseFile("ShareX - Choose encoder path", tbCommandLinePath, Program.StartupPath);
-            TaskSettings.CaptureSettings.ScreenRecordCommandLinePath = tbCommandLinePath.Text;
-        }
+        #region Screen recorder
 
-        private void tbCommandLineArgs_TextChanged(object sender, EventArgs e)
+        private void cbScreenRecorderOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs = tbCommandLineArgs.Text;
-        }
-
-        private void tbCommandLineOutputExtension_TextChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension = tbCommandLineOutputExtension.Text;
-        }
-
-        private void nudFPS_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordFPS = (int)nudFPS.Value;
-        }
-
-        private void nudDuration_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordDuration = (float)nudDuration.Value;
-        }
-
-        private void cbFixedDuration_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordFixedDuration = cbFixedDuration.Checked;
-            nudDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
-        }
-
-        private void cbOutput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbOutput.SelectedIndex;
+            TaskSettings.CaptureSettings.ScreenRecordOutput = (ScreenRecordOutput)cbScreenRecorderOutput.SelectedIndex;
             gbCommandLineEncoderSettings.Enabled = TaskSettings.CaptureSettings.ScreenRecordOutput == ScreenRecordOutput.AVICommandLine;
         }
+
+        private void nudScreenRecorderFPS_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordFPS = (int)nudScreenRecorderFPS.Value;
+        }
+
+        private void cbScreenRecorderFixedDuration_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordFixedDuration = cbScreenRecorderFixedDuration.Checked;
+            nudScreenRecorderDuration.Enabled = TaskSettings.CaptureSettings.ScreenRecordFixedDuration;
+        }
+
+        private void nudScreenRecorderDuration_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordDuration = (float)nudScreenRecorderDuration.Value;
+        }
+
+        private void nudScreenRecorderStartDelay_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordStartDelay = (float)nudScreenRecorderStartDelay.Value;
+        }
+
+        private void txtScreenRecorderCommandLinePath_TextChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordCommandLinePath = txtScreenRecorderCommandLinePath.Text;
+        }
+
+        private void btnScreenRecorderBrowseCommandLinePath_Click(object sender, EventArgs e)
+        {
+            Helpers.BrowseFile("ShareX - Choose encoder path", txtScreenRecorderCommandLinePath, Program.StartupPath);
+        }
+
+        private void txtScreenRecorderCommandLineArgs_TextChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordCommandLineArgs = txtScreenRecorderCommandLineArgs.Text;
+        }
+
+        private void txtScreenRecorderCommandLineOutputExtension_TextChanged(object sender, EventArgs e)
+        {
+            TaskSettings.CaptureSettings.ScreenRecordCommandLineOutputExtension = txtScreenRecorderCommandLineOutputExtension.Text;
+        }
+
+        #endregion Screen recorder
 
         #endregion Capture
 

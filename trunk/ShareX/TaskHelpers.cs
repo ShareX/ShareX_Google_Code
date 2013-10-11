@@ -178,7 +178,7 @@ namespace ShareX
 
         public static void ShowResultNotifications(string result, TaskSettings taskSettings)
         {
-            if (!string.IsNullOrEmpty(result))
+            if (!taskSettings.AdvancedSettings.DisableNotifications)
             {
                 if (taskSettings.GeneralSettings.TrayBalloonTipAfterUpload && Program.MainForm.niTray.Visible)
                 {
