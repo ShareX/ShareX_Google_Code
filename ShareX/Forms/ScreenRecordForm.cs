@@ -120,7 +120,13 @@ namespace ShareX
                         screenRecorder = new ScreenRecorder(TaskSettings.CaptureSettings.ScreenRecordFPS, duration, CaptureRectangle, path,
                             TaskSettings.CaptureSettings.ScreenRecordOutput);
 
-                        Thread.Sleep(1000);
+                        int delay = (int)(TaskSettings.CaptureSettings.ScreenRecordStartDelay * 1000);
+
+                        if (delay > 0)
+                        {
+                            Thread.Sleep(delay);
+                        }
+
                         screenRegionManager.ChangeColor();
 
                         this.InvokeSafe(() => TrayIcon.Icon = Resources.control_record.ToIcon());
@@ -173,13 +179,21 @@ namespace ShareX
                 }
             }
 
-            if (TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost))
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
-                UploadManager.UploadFile(path, TaskSettings);
-            }
-            else
-            {
-                TaskHelpers.ShowResultNotifications(path, TaskSettings);
+                if (TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.UploadImageToHost))
+                {
+                    UploadManager.UploadFile(path, TaskSettings);
+                }
+                else
+                {
+                    if (TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.CopyFilePathToClipboard))
+                    {
+                        ClipboardHelpers.CopyText(path);
+                    }
+
+                    TaskHelpers.ShowResultNotifications(path, TaskSettings);
+                }
             }
 
             IsRecording = false;
