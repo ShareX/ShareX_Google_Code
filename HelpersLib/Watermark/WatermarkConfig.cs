@@ -30,7 +30,6 @@ using System.Drawing.Drawing2D;
 
 namespace HelpersLib
 {
-    [Serializable]
     public class WatermarkConfig
     {
         public GradientData GradientData = new GradientData();

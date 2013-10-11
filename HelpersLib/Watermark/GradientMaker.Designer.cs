@@ -46,15 +46,15 @@
             // pbPreview
             // 
             this.pbPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbPreview.Location = new System.Drawing.Point(144, 6);
+            this.pbPreview.Location = new System.Drawing.Point(8, 6);
             this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(248, 48);
+            this.pbPreview.Size = new System.Drawing.Size(384, 50);
             this.pbPreview.TabIndex = 2;
             this.pbPreview.TabStop = false;
             // 
             // btnAddColor
             // 
-            this.btnAddColor.Location = new System.Drawing.Point(296, 368);
+            this.btnAddColor.Location = new System.Drawing.Point(296, 300);
             this.btnAddColor.Name = "btnAddColor";
             this.btnAddColor.Size = new System.Drawing.Size(96, 23);
             this.btnAddColor.TabIndex = 12;
@@ -65,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 371);
+            this.label3.Location = new System.Drawing.Point(8, 303);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 7;
@@ -74,7 +74,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(200, 371);
+            this.label4.Location = new System.Drawing.Point(200, 303);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 10;
@@ -82,21 +82,21 @@
             // 
             // txtColor
             // 
-            this.txtColor.Location = new System.Drawing.Point(48, 368);
+            this.txtColor.Location = new System.Drawing.Point(48, 300);
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(112, 20);
             this.txtColor.TabIndex = 8;
             // 
             // txtOffset
             // 
-            this.txtOffset.Location = new System.Drawing.Point(248, 368);
+            this.txtOffset.Location = new System.Drawing.Point(248, 300);
             this.txtOffset.Name = "txtOffset";
             this.txtOffset.Size = new System.Drawing.Size(40, 20);
             this.txtOffset.TabIndex = 11;
             // 
             // btnBrowseColor
             // 
-            this.btnBrowseColor.Location = new System.Drawing.Point(168, 368);
+            this.btnBrowseColor.Location = new System.Drawing.Point(168, 300);
             this.btnBrowseColor.Name = "btnBrowseColor";
             this.btnBrowseColor.Size = new System.Drawing.Size(24, 23);
             this.btnBrowseColor.TabIndex = 9;
@@ -110,7 +110,7 @@
             this.rtbCodes.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbCodes.Location = new System.Drawing.Point(8, 64);
             this.rtbCodes.Name = "rtbCodes";
-            this.rtbCodes.Size = new System.Drawing.Size(384, 296);
+            this.rtbCodes.Size = new System.Drawing.Size(384, 232);
             this.rtbCodes.TabIndex = 5;
             this.rtbCodes.Text = "";
             this.rtbCodes.SelectionChanged += new System.EventHandler(this.rtbCodes_SelectionChanged);
@@ -118,7 +118,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(240, 400);
+            this.btnOK.Location = new System.Drawing.Point(240, 332);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 23);
             this.btnOK.TabIndex = 14;
@@ -128,7 +128,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(320, 400);
+            this.btnCancel.Location = new System.Drawing.Point(320, 332);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 23);
             this.btnCancel.TabIndex = 15;
@@ -143,16 +143,16 @@
             this.cboGradientDirection.Items.AddRange(new object[] {
             "Vertical",
             "Horizontal"});
-            this.cboGradientDirection.Location = new System.Drawing.Point(8, 32);
+            this.cboGradientDirection.Location = new System.Drawing.Point(104, 332);
             this.cboGradientDirection.Name = "cboGradientDirection";
-            this.cboGradientDirection.Size = new System.Drawing.Size(120, 21);
+            this.cboGradientDirection.Size = new System.Drawing.Size(128, 21);
             this.cboGradientDirection.TabIndex = 3;
             this.cboGradientDirection.SelectedIndexChanged += new System.EventHandler(this.cboGradientDirection_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 13);
+            this.label1.Location = new System.Drawing.Point(8, 336);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 0;
@@ -162,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 432);
+            this.ClientSize = new System.Drawing.Size(401, 361);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboGradientDirection);
             this.Controls.Add(this.btnCancel);
@@ -177,7 +177,8 @@
             this.Controls.Add(this.pbPreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GradientMaker";
-            this.Text = "Gradient Maker";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ShareX - Gradient maker";
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
