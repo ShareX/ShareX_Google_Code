@@ -33,7 +33,7 @@ namespace HelpersLib
     [Serializable]
     public class WatermarkConfig
     {
-        public GradientMakerSettings GradientMakerOptions = new GradientMakerSettings();
+        public GradientData GradientData = new GradientData();
         public bool WatermarkAddReflection = false;
         public bool WatermarkAutoHide = true;
         public int WatermarkBackTrans = 225;

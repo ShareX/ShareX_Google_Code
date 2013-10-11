@@ -234,9 +234,9 @@ namespace ShareX
 
         public bool ImageEffectOnlyRegionCapture = true;
         public BorderType BorderType = BorderType.Outside;
-        public XmlColor BorderColor = Color.Black;
+        public XmlColor BorderColor = Color.FromArgb(50, 170, 255);
         public int BorderSize = 1;
-        public float ShadowDarkness = 0.6f;
+        public float ShadowDarkness = 0.4f;
         public int ShadowSize = 9;
         public Point ShadowOffset = new Point(0, 0);
 

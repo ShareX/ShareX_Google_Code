@@ -231,7 +231,7 @@ namespace HelpersLib
 
                         if (Config.WatermarkUseCustomGradient)
                         {
-                            backgroundBrush = GradientMaker.CreateGradientBrush(labelRectangle.Size, Config.GradientMakerOptions.GetBrushDataActive());
+                            backgroundBrush = GradientMaker.CreateGradientBrush(labelRectangle.Size, Config.GradientData);
                         }
                         else
                         {

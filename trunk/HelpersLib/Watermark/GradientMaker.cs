@@ -36,7 +36,8 @@ namespace HelpersLib
 {
     public partial class GradientMaker : Form
     {
-        public GradientMakerSettings Options;
+        public GradientData GradientData { get; private set; }
+
         private bool isEditable;
         private bool isEditing;
         private string lastData;
@@ -44,40 +45,29 @@ namespace HelpersLib
         public GradientMaker()
         {
             InitializeComponent();
+            Icon = Resources.ShareXIcon;
             cboGradientDirection.SelectedIndex = 0;
         }
 
-        public GradientMaker(GradientMakerSettings options)
+        public GradientMaker(GradientData brushData)
+            : this()
         {
-            InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            GradientData = brushData;
 
-            Options = options;
-            if (Options.BrushDataList.Count == 0)
+            if (brushData != null)
             {
-                this.Options.BrushDataList.Add(new BrushData());
-            }
-
-            foreach (BrushData bd in options.BrushDataList)
-            {
-                lbBrushData.Items.Add(bd);
-            }
-
-            if (options.BrushDataSelected < lbBrushData.Items.Count)
-            {
-                lbBrushData.SelectedIndex = options.BrushDataSelected;
-                UpdateGUI(options.GetBrushDataActive());
-                UpdatePreview(options.GetBrushDataActive());
+                UpdateGUI(brushData);
+                UpdatePreview(brushData);
             }
         }
 
-        private void UpdateGUI(BrushData bd)
+        private void UpdateGUI(GradientData bd)
         {
             rtbCodes.Text = bd.Data;
             cboGradientDirection.SelectedIndex = (int)bd.Direction;
         }
 
-        private void UpdatePreview(BrushData bd)
+        private void UpdatePreview(GradientData bd)
         {
             try
             {
@@ -118,7 +108,7 @@ namespace HelpersLib
             return new GradientStop(line.Substring(0, line.IndexOf('\t')), line.Remove(0, line.IndexOf('\t') + 1));
         }
 
-        public static LinearGradientBrush CreateGradientBrush(Size size, BrushData gradientData)
+        public static LinearGradientBrush CreateGradientBrush(Size size, GradientData gradientData)
         {
             IEnumerable<GradientStop> gradient = ParseGradientData(gradientData.Data);
 
@@ -126,10 +116,10 @@ namespace HelpersLib
             PointF endPoint = PointF.Empty;
             switch (gradientData.Direction)
             {
-                case BrushData.GradientDirection.Horizontal:
+                case GradientData.GradientDirection.Horizontal:
                     endPoint = new PointF(1, 0);
                     break;
-                case BrushData.GradientDirection.Vertical:
+                case GradientData.GradientDirection.Vertical:
                     endPoint = new PointF(0, 1);
                     break;
             }
@@ -199,7 +189,7 @@ namespace HelpersLib
                         isEditable = true;
                         if (rtbCodes.Text != lastData)
                         {
-                            UpdatePreview(Options.GetBrushDataActive());
+                            UpdatePreview(GradientData);
                             lastData = rtbCodes.Text;
                         }
                     }
@@ -212,30 +202,22 @@ namespace HelpersLib
             UpdatePreview(GetNewBrushData());
         }
 
+        private GradientData GetNewBrushData()
+        {
+            return new GradientData(rtbCodes.Text, (GradientData.GradientDirection)cboGradientDirection.SelectedIndex);
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
-            UpdateBrushData();
-            this.Options.BrushDataSelected = lbBrushData.SelectedIndex;
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void UpdateBrushData()
-        {
-            this.Options.BrushDataList[lbBrushData.SelectedIndex] = GetNewBrushData();
-        }
-
-        private BrushData GetNewBrushData()
-        {
-            BrushData bd = new BrushData(rtbCodes.Text, (BrushData.GradientDirection)cboGradientDirection.SelectedIndex);
-            bd.Name = txtName.Text;
-            return bd;
+            GradientData = GetNewBrushData();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void cboGradientDirection_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,123 +226,5 @@ namespace HelpersLib
         }
 
         #endregion Form events
-
-        private void lbBrushData_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbBrushData.SelectedIndex != -1)
-            {
-                this.Options.BrushDataSelected = lbBrushData.SelectedIndex;
-                UpdateGUI(Options.BrushDataList[lbBrushData.SelectedIndex]);
-                UpdatePreview(Options.BrushDataList[lbBrushData.SelectedIndex]);
-            }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            UpdateBrushData();
-        }
-
-        private void lbBrushData_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (lbBrushData.SelectedIndex > -1)
-            {
-                if (e.KeyCode == Keys.Delete && lbBrushData.Items.Count > 1)
-                {
-                    int sel = lbBrushData.SelectedIndex;
-                    lbBrushData.Items.RemoveAt(sel);
-                    this.Options.BrushDataList.RemoveAt(sel);
-                }
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            BrushData bd = new BrushData();
-            bd.Name = txtName.Text;
-            if (!ExistsBrushData(bd))
-            {
-                lbBrushData.Items.Add(bd);
-                this.Options.BrushDataList.Add(bd);
-            }
-            else
-            {
-                MessageBox.Show("Brush data with the same name already exists.\n\nPlease change the name and try saving again.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            lbBrushData.SelectedIndex = lbBrushData.Items.Count - 1;
-        }
-
-        private bool ExistsBrushData(BrushData bd)
-        {
-            foreach (BrushData oBd in this.Options.BrushDataList)
-            {
-                if (bd.Name == oBd.Name)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
-    [Serializable]
-    public class GradientMakerSettings
-    {
-        public List<BrushData> BrushDataList { get; set; }
-        public int BrushDataSelected { get; set; }
-
-        public GradientMakerSettings()
-        {
-            this.BrushDataList = new List<BrushData>();
-            this.BrushDataSelected = 0;
-        }
-
-        public BrushData GetBrushDataActive()
-        {
-            if (BrushDataList.Count > 0)
-            {
-                return this.BrushDataList[this.BrushDataSelected];
-            }
-
-            return new BrushData();
-        }
-    }
-
-    [Serializable]
-    public class BrushData
-    {
-        public string Name { get; set; }
-        public string Data { get; set; }
-        public GradientDirection Direction { get; set; }
-
-        public BrushData()
-        {
-            this.Name = "Gradient 1";
-            this.Data = "255,68,120,194\t0\n255,13,58,122\t0.5\n255,6,36,78\t0.5\n255,12,76,159\t1";
-            this.Direction = BrushData.GradientDirection.Vertical;
-        }
-
-        public BrushData(string data, GradientDirection direction)
-        {
-            this.Data = data;
-            this.Direction = direction;
-        }
-
-        public enum GradientDirection
-        {
-            /// <summary>
-            /// Specifies a gradient from top to bottom.
-            /// </summary>
-            Vertical,
-
-            /// <summary>
-            /// Specifies a gradient from left to right.
-            /// </summary>
-            Horizontal
-        }
-
-        public override string ToString()
-        {
-            return this.Name;
-        }
     }
 }

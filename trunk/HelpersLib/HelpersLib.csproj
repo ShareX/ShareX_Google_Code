@@ -271,6 +271,7 @@
     <Compile Include="UpdateChecker\UpdateChecker.cs" />
     <Compile Include="UpdateChecker\UpdateInfo.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="Watermark\GradientData.cs" />
     <Compile Include="Watermark\GradientMaker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MyPictureBox.resx">
       <DependentUpon>MyPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Watermark\GradientMaker.resx">
+      <DependentUpon>GradientMaker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Watermark\WatermarkUI.resx">
       <DependentUpon>WatermarkUI.cs</DependentUpon>

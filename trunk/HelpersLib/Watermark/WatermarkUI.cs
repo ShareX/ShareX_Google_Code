@@ -134,11 +134,11 @@ namespace HelpersLib
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
         {
-            using (GradientMaker gradient = new GradientMaker(Config.GradientMakerOptions))
+            using (GradientMaker gradientForm = new GradientMaker(Config.GradientData))
             {
-                if (gradient.ShowDialog() == DialogResult.OK)
+                if (gradientForm.ShowDialog() == DialogResult.OK)
                 {
-                    Config.GradientMakerOptions = gradient.Options;
+                    Config.GradientData = gradientForm.GradientData;
                     UpdatePreview();
                 }
             }
