@@ -30,6 +30,18 @@ using System.Text;
 
 namespace HelpersLib
 {
+    public enum GradientDirection
+    {
+        /// <summary>
+        /// Specifies a gradient from top to bottom.
+        /// </summary>
+        Vertical,
+        /// <summary>
+        /// Specifies a gradient from left to right.
+        /// </summary>
+        Horizontal
+    }
+
     public class GradientData
     {
         public string Data { get; set; }
@@ -45,18 +57,6 @@ namespace HelpersLib
         {
             Data = data;
             Direction = direction;
-        }
-
-        public enum GradientDirection
-        {
-            /// <summary>
-            /// Specifies a gradient from top to bottom.
-            /// </summary>
-            Vertical,
-            /// <summary>
-            /// Specifies a gradient from left to right.
-            /// </summary>
-            Horizontal
         }
     }
 }

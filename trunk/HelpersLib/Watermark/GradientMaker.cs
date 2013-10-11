@@ -49,29 +49,27 @@ namespace HelpersLib
             cboGradientDirection.SelectedIndex = 0;
         }
 
-        public GradientMaker(GradientData brushData)
+        public GradientMaker(GradientData gradientData)
             : this()
         {
-            GradientData = brushData;
+            GradientData = gradientData;
 
-            if (brushData != null)
+            if (GradientData != null)
             {
-                UpdateGUI(brushData);
-                UpdatePreview(brushData);
+                rtbCodes.Text = GradientData.Data;
+                cboGradientDirection.SelectedIndex = (int)GradientData.Direction;
+
+                UpdatePreview();
             }
         }
 
-        private void UpdateGUI(GradientData bd)
+        private void UpdatePreview()
         {
-            rtbCodes.Text = bd.Data;
-            cboGradientDirection.SelectedIndex = (int)bd.Direction;
-        }
+            GradientData = GetNewBrushData();
 
-        private void UpdatePreview(GradientData bd)
-        {
             try
             {
-                using (LinearGradientBrush brush = CreateGradientBrush(pbPreview.ClientSize, bd))
+                using (LinearGradientBrush brush = CreateGradientBrush(pbPreview.ClientSize, GradientData))
                 {
                     Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
                     using (Graphics g = Graphics.FromImage(bmp))
@@ -116,10 +114,10 @@ namespace HelpersLib
             PointF endPoint = PointF.Empty;
             switch (gradientData.Direction)
             {
-                case GradientData.GradientDirection.Horizontal:
+                case GradientDirection.Horizontal:
                     endPoint = new PointF(1, 0);
                     break;
-                case GradientData.GradientDirection.Vertical:
+                case GradientDirection.Vertical:
                     endPoint = new PointF(0, 1);
                     break;
             }
@@ -135,24 +133,41 @@ namespace HelpersLib
             return brush;
         }
 
+        private GradientData GetNewBrushData()
+        {
+            return new GradientData(rtbCodes.Text, (GradientDirection)cboGradientDirection.SelectedIndex);
+        }
+
         #region Form events
 
-        private void btnAddColor_Click(object sender, EventArgs e)
+        private void rtbCodes_SelectionChanged(object sender, EventArgs e)
         {
-            isEditing = true;
-            if (isEditable)
+            if (!isEditing)
             {
+                isEditable = false;
                 int firstcharindex = rtbCodes.GetFirstCharIndexOfCurrentLine();
                 int currentline = rtbCodes.GetLineFromCharIndex(firstcharindex);
                 if (rtbCodes.Lines.Length > currentline)
                 {
-                    rtbCodes.SelectionStart = firstcharindex;
-                    rtbCodes.SelectionLength = rtbCodes.Lines[currentline].Length;
+                    string line = rtbCodes.Lines[currentline];
+                    if (line.Contains('\t'))
+                    {
+                        txtColor.Text = line.Substring(0, line.IndexOf('\t'));
+                        txtOffset.Text = line.Remove(0, line.IndexOf('\t') + 1);
+                        isEditable = true;
+                        if (rtbCodes.Text != lastData)
+                        {
+                            UpdatePreview();
+                            lastData = rtbCodes.Text;
+                        }
+                    }
                 }
             }
+        }
 
-            rtbCodes.SelectedText = string.Format("{0}\t{1}", txtColor.Text, txtOffset.Text);
-            isEditing = false;
+        private void rtbCodes_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePreview();
         }
 
         private void btnBrowseColor_Click(object sender, EventArgs e)
@@ -172,39 +187,27 @@ namespace HelpersLib
             }
         }
 
-        private void rtbCodes_SelectionChanged(object sender, EventArgs e)
+        private void btnAddColor_Click(object sender, EventArgs e)
         {
-            if (!isEditing)
+            isEditing = true;
+            if (isEditable)
             {
-                isEditable = false;
                 int firstcharindex = rtbCodes.GetFirstCharIndexOfCurrentLine();
                 int currentline = rtbCodes.GetLineFromCharIndex(firstcharindex);
                 if (rtbCodes.Lines.Length > currentline)
                 {
-                    string line = rtbCodes.Lines[currentline];
-                    if (line.Contains('\t'))
-                    {
-                        txtColor.Text = line.Substring(0, line.IndexOf('\t'));
-                        txtOffset.Text = line.Remove(0, line.IndexOf('\t') + 1);
-                        isEditable = true;
-                        if (rtbCodes.Text != lastData)
-                        {
-                            UpdatePreview(GradientData);
-                            lastData = rtbCodes.Text;
-                        }
-                    }
+                    rtbCodes.SelectionStart = firstcharindex;
+                    rtbCodes.SelectionLength = rtbCodes.Lines[currentline].Length;
                 }
             }
+
+            rtbCodes.SelectedText = string.Format("{0}\t{1}", txtColor.Text, txtOffset.Text);
+            isEditing = false;
         }
 
-        private void rtbCodes_TextChanged(object sender, EventArgs e)
+        private void cboGradientDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePreview(GetNewBrushData());
-        }
-
-        private GradientData GetNewBrushData()
-        {
-            return new GradientData(rtbCodes.Text, (GradientData.GradientDirection)cboGradientDirection.SelectedIndex);
+            UpdatePreview();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -218,11 +221,6 @@ namespace HelpersLib
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void cboGradientDirection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreview(GetNewBrushData());
         }
 
         #endregion Form events
