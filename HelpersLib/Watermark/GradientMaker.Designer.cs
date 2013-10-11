@@ -40,10 +40,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.cboGradientDirection = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbBrushData = new System.Windows.Forms.ListBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +56,7 @@
             // 
             this.btnAddColor.Location = new System.Drawing.Point(296, 368);
             this.btnAddColor.Name = "btnAddColor";
-            this.btnAddColor.Size = new System.Drawing.Size(99, 23);
+            this.btnAddColor.Size = new System.Drawing.Size(96, 23);
             this.btnAddColor.TabIndex = 12;
             this.btnAddColor.Text = "Add / Update";
             this.btnAddColor.UseVisualStyleBackColor = true;
@@ -162,54 +158,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Gradient direction:";
             // 
-            // lbBrushData
-            // 
-            this.lbBrushData.FormattingEnabled = true;
-            this.lbBrushData.IntegralHeight = false;
-            this.lbBrushData.Location = new System.Drawing.Point(400, 64);
-            this.lbBrushData.Name = "lbBrushData";
-            this.lbBrushData.Size = new System.Drawing.Size(152, 296);
-            this.lbBrushData.TabIndex = 6;
-            this.lbBrushData.SelectedIndexChanged += new System.EventHandler(this.lbBrushData_SelectedIndexChanged);
-            this.lbBrushData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbBrushData_KeyDown);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(480, 8);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(72, 23);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "&Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(400, 34);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(152, 20);
-            this.txtName.TabIndex = 4;
-            this.txtName.Text = "Gradient 1";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(400, 8);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(72, 23);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "&Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // GradientMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(563, 432);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.lbBrushData);
+            this.ClientSize = new System.Drawing.Size(402, 432);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboGradientDirection);
             this.Controls.Add(this.btnCancel);
@@ -245,9 +198,5 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cboGradientDirection;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lbBrushData;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnAdd;
     }
 }
