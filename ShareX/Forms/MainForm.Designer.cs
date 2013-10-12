@@ -107,6 +107,50 @@ namespace ShareX
             this.tsmiTestShapeCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTestColorMatrix = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new HelpersLib.SplitContainerCustomSplitter();
+            this.lblDragAndDropTip = new System.Windows.Forms.Label();
+            this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiStopUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenShortenedURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenThumbnailURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenDeletionURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssOpen1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyShortenedURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyThumbnailURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyDeletionURL = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCopyFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyText = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCopyHTMLLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyHTMLImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyHTMLLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCopyForumLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyForumImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyForumLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCopyFilePath = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUploadSelectedFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiClearList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiHidePreview = new System.Windows.Forms.ToolStripMenuItem();
             this.lblSplitter = new System.Windows.Forms.Label();
             this.lvUploads = new HelpersLib.MyListView();
             this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -163,56 +207,13 @@ namespace ShareX
             this.tsmiTrayDonate = new System.Windows.Forms.ToolStripMenuItem();
             this.tssTray3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiStopUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenShortenedURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenThumbnailURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenDeletionURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssOpen1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyShortenedURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyThumbnailURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyDeletionURL = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyText = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyHTMLLink = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyHTMLImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyHTMLLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyForumLink = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyForumImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyForumLinkedImage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiCopyFilePath = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyFileName = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyFileNameWithExtension = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCopyFolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssCopy5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiShowErrors = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiShowResponse = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiUploadSelectedFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiClearList = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssUploadInfo1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFileUpload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiShowPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.ssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain.SuspendLayout();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
-            this.cmsTray.SuspendLayout();
             this.cmsUploadInfo.SuspendLayout();
+            this.cmsTray.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMain
@@ -715,6 +716,7 @@ namespace ShareX
             // 
             // scMain.Panel1
             // 
+            this.scMain.Panel1.Controls.Add(this.lblDragAndDropTip);
             this.scMain.Panel1.Controls.Add(this.lblSplitter);
             this.scMain.Panel1.Controls.Add(this.lvUploads);
             // 
@@ -726,6 +728,351 @@ namespace ShareX
             this.scMain.SplitterWidth = 6;
             this.scMain.TabIndex = 1;
             this.scMain.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scMain_SplitterMoved);
+            // 
+            // lblDragAndDropTip
+            // 
+            this.lblDragAndDropTip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDragAndDropTip.BackColor = System.Drawing.Color.White;
+            this.lblDragAndDropTip.ContextMenuStrip = this.cmsUploadInfo;
+            this.lblDragAndDropTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblDragAndDropTip.ForeColor = System.Drawing.Color.LightGray;
+            this.lblDragAndDropTip.Location = new System.Drawing.Point(8, 64);
+            this.lblDragAndDropTip.Name = "lblDragAndDropTip";
+            this.lblDragAndDropTip.Padding = new System.Windows.Forms.Padding(30, 20, 30, 30);
+            this.lblDragAndDropTip.Size = new System.Drawing.Size(384, 264);
+            this.lblDragAndDropTip.TabIndex = 2;
+            this.lblDragAndDropTip.Text = "You can drag and drop files to this window";
+            this.lblDragAndDropTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmsUploadInfo
+            // 
+            this.cmsUploadInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiStopUpload,
+            this.tsmiOpen,
+            this.tsmiCopy,
+            this.tsmiShowErrors,
+            this.tsmiShowResponse,
+            this.tsmiUploadSelectedFile,
+            this.tsmiClearList,
+            this.tssUploadInfo1,
+            this.tsmiClipboardUpload,
+            this.tsmiFileUpload,
+            this.tssUploadInfo2,
+            this.tsmiHideMenu,
+            this.tsmiHidePreview});
+            this.cmsUploadInfo.Name = "cmsHistory";
+            this.cmsUploadInfo.ShowImageMargin = false;
+            this.cmsUploadInfo.Size = new System.Drawing.Size(155, 258);
+            // 
+            // tsmiStopUpload
+            // 
+            this.tsmiStopUpload.Name = "tsmiStopUpload";
+            this.tsmiStopUpload.Size = new System.Drawing.Size(154, 22);
+            this.tsmiStopUpload.Text = "Stop upload";
+            this.tsmiStopUpload.Click += new System.EventHandler(this.tsmiStopUpload_Click);
+            // 
+            // tsmiOpen
+            // 
+            this.tsmiOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiOpenURL,
+            this.tsmiOpenShortenedURL,
+            this.tsmiOpenThumbnailURL,
+            this.tsmiOpenDeletionURL,
+            this.tssOpen1,
+            this.tsmiOpenFile,
+            this.tsmiOpenFolder});
+            this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.Size = new System.Drawing.Size(154, 22);
+            this.tsmiOpen.Text = "Open";
+            // 
+            // tsmiOpenURL
+            // 
+            this.tsmiOpenURL.Name = "tsmiOpenURL";
+            this.tsmiOpenURL.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenURL.Text = "URL";
+            this.tsmiOpenURL.Click += new System.EventHandler(this.tsmiOpenURL_Click);
+            // 
+            // tsmiOpenShortenedURL
+            // 
+            this.tsmiOpenShortenedURL.Name = "tsmiOpenShortenedURL";
+            this.tsmiOpenShortenedURL.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenShortenedURL.Text = "Shortened URL";
+            this.tsmiOpenShortenedURL.Click += new System.EventHandler(this.tsmiOpenShortenedURL_Click);
+            // 
+            // tsmiOpenThumbnailURL
+            // 
+            this.tsmiOpenThumbnailURL.Name = "tsmiOpenThumbnailURL";
+            this.tsmiOpenThumbnailURL.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenThumbnailURL.Text = "Thumbnail URL";
+            this.tsmiOpenThumbnailURL.Click += new System.EventHandler(this.tsmiOpenThumbnailURL_Click);
+            // 
+            // tsmiOpenDeletionURL
+            // 
+            this.tsmiOpenDeletionURL.Name = "tsmiOpenDeletionURL";
+            this.tsmiOpenDeletionURL.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenDeletionURL.Text = "Deletion URL";
+            this.tsmiOpenDeletionURL.Click += new System.EventHandler(this.tsmiOpenDeletionURL_Click);
+            // 
+            // tssOpen1
+            // 
+            this.tssOpen1.Name = "tssOpen1";
+            this.tssOpen1.Size = new System.Drawing.Size(153, 6);
+            // 
+            // tsmiOpenFile
+            // 
+            this.tsmiOpenFile.Name = "tsmiOpenFile";
+            this.tsmiOpenFile.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenFile.Text = "File";
+            this.tsmiOpenFile.Click += new System.EventHandler(this.tsmiOpenFile_Click);
+            // 
+            // tsmiOpenFolder
+            // 
+            this.tsmiOpenFolder.Name = "tsmiOpenFolder";
+            this.tsmiOpenFolder.Size = new System.Drawing.Size(156, 22);
+            this.tsmiOpenFolder.Text = "Folder";
+            this.tsmiOpenFolder.Click += new System.EventHandler(this.tsmiOpenFolder_Click);
+            // 
+            // tsmiCopy
+            // 
+            this.tsmiCopy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCopyURL,
+            this.tsmiCopyShortenedURL,
+            this.tsmiCopyThumbnailURL,
+            this.tsmiCopyDeletionURL,
+            this.tssCopy1,
+            this.tsmiCopyFile,
+            this.tsmiCopyImage,
+            this.tsmiCopyText,
+            this.tssCopy2,
+            this.tsmiCopyHTMLLink,
+            this.tsmiCopyHTMLImage,
+            this.tsmiCopyHTMLLinkedImage,
+            this.tssCopy3,
+            this.tsmiCopyForumLink,
+            this.tsmiCopyForumImage,
+            this.tsmiCopyForumLinkedImage,
+            this.tssCopy4,
+            this.tsmiCopyFilePath,
+            this.tsmiCopyFileName,
+            this.tsmiCopyFileNameWithExtension,
+            this.tsmiCopyFolder,
+            this.tssCopy5});
+            this.tsmiCopy.Name = "tsmiCopy";
+            this.tsmiCopy.Size = new System.Drawing.Size(154, 22);
+            this.tsmiCopy.Text = "Copy";
+            // 
+            // tsmiCopyURL
+            // 
+            this.tsmiCopyURL.Name = "tsmiCopyURL";
+            this.tsmiCopyURL.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyURL.Text = "URL";
+            this.tsmiCopyURL.Click += new System.EventHandler(this.tsmiCopyURL_Click);
+            // 
+            // tsmiCopyShortenedURL
+            // 
+            this.tsmiCopyShortenedURL.Name = "tsmiCopyShortenedURL";
+            this.tsmiCopyShortenedURL.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyShortenedURL.Text = "Shortened URL";
+            this.tsmiCopyShortenedURL.Click += new System.EventHandler(this.tsmiCopyShortenedURL_Click);
+            // 
+            // tsmiCopyThumbnailURL
+            // 
+            this.tsmiCopyThumbnailURL.Name = "tsmiCopyThumbnailURL";
+            this.tsmiCopyThumbnailURL.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyThumbnailURL.Text = "Thumbnail URL";
+            this.tsmiCopyThumbnailURL.Click += new System.EventHandler(this.tsmiCopyThumbnailURL_Click);
+            // 
+            // tsmiCopyDeletionURL
+            // 
+            this.tsmiCopyDeletionURL.Name = "tsmiCopyDeletionURL";
+            this.tsmiCopyDeletionURL.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyDeletionURL.Text = "Deletion URL";
+            this.tsmiCopyDeletionURL.Click += new System.EventHandler(this.tsmiCopyDeletionURL_Click);
+            // 
+            // tssCopy1
+            // 
+            this.tssCopy1.Name = "tssCopy1";
+            this.tssCopy1.Size = new System.Drawing.Size(230, 6);
+            // 
+            // tsmiCopyFile
+            // 
+            this.tsmiCopyFile.Name = "tsmiCopyFile";
+            this.tsmiCopyFile.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyFile.Text = "File";
+            this.tsmiCopyFile.Click += new System.EventHandler(this.tsmiCopyFile_Click);
+            // 
+            // tsmiCopyImage
+            // 
+            this.tsmiCopyImage.Name = "tsmiCopyImage";
+            this.tsmiCopyImage.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyImage.Text = "Image";
+            this.tsmiCopyImage.Click += new System.EventHandler(this.tsmiCopyImage_Click);
+            // 
+            // tsmiCopyText
+            // 
+            this.tsmiCopyText.Name = "tsmiCopyText";
+            this.tsmiCopyText.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyText.Text = "Text";
+            this.tsmiCopyText.Click += new System.EventHandler(this.tsmiCopyText_Click);
+            // 
+            // tssCopy2
+            // 
+            this.tssCopy2.Name = "tssCopy2";
+            this.tssCopy2.Size = new System.Drawing.Size(230, 6);
+            // 
+            // tsmiCopyHTMLLink
+            // 
+            this.tsmiCopyHTMLLink.Name = "tsmiCopyHTMLLink";
+            this.tsmiCopyHTMLLink.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyHTMLLink.Text = "HTML link";
+            this.tsmiCopyHTMLLink.Click += new System.EventHandler(this.tsmiCopyHTMLLink_Click);
+            // 
+            // tsmiCopyHTMLImage
+            // 
+            this.tsmiCopyHTMLImage.Name = "tsmiCopyHTMLImage";
+            this.tsmiCopyHTMLImage.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyHTMLImage.Text = "HTML image";
+            this.tsmiCopyHTMLImage.Click += new System.EventHandler(this.tsmiCopyHTMLImage_Click);
+            // 
+            // tsmiCopyHTMLLinkedImage
+            // 
+            this.tsmiCopyHTMLLinkedImage.Name = "tsmiCopyHTMLLinkedImage";
+            this.tsmiCopyHTMLLinkedImage.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyHTMLLinkedImage.Text = "HTML linked image";
+            this.tsmiCopyHTMLLinkedImage.Click += new System.EventHandler(this.tsmiCopyHTMLLinkedImage_Click);
+            // 
+            // tssCopy3
+            // 
+            this.tssCopy3.Name = "tssCopy3";
+            this.tssCopy3.Size = new System.Drawing.Size(230, 6);
+            // 
+            // tsmiCopyForumLink
+            // 
+            this.tsmiCopyForumLink.Name = "tsmiCopyForumLink";
+            this.tsmiCopyForumLink.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyForumLink.Text = "Forum (BBCode) link";
+            this.tsmiCopyForumLink.Click += new System.EventHandler(this.tsmiCopyForumLink_Click);
+            // 
+            // tsmiCopyForumImage
+            // 
+            this.tsmiCopyForumImage.Name = "tsmiCopyForumImage";
+            this.tsmiCopyForumImage.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyForumImage.Text = "Forum (BBCode) image";
+            this.tsmiCopyForumImage.Click += new System.EventHandler(this.tsmiCopyForumImage_Click);
+            // 
+            // tsmiCopyForumLinkedImage
+            // 
+            this.tsmiCopyForumLinkedImage.Name = "tsmiCopyForumLinkedImage";
+            this.tsmiCopyForumLinkedImage.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyForumLinkedImage.Text = "Forum (BBCode) linked image";
+            this.tsmiCopyForumLinkedImage.Click += new System.EventHandler(this.tsmiCopyForumLinkedImage_Click);
+            // 
+            // tssCopy4
+            // 
+            this.tssCopy4.Name = "tssCopy4";
+            this.tssCopy4.Size = new System.Drawing.Size(230, 6);
+            // 
+            // tsmiCopyFilePath
+            // 
+            this.tsmiCopyFilePath.Name = "tsmiCopyFilePath";
+            this.tsmiCopyFilePath.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyFilePath.Text = "File path";
+            this.tsmiCopyFilePath.Click += new System.EventHandler(this.tsmiCopyFilePath_Click);
+            // 
+            // tsmiCopyFileName
+            // 
+            this.tsmiCopyFileName.Name = "tsmiCopyFileName";
+            this.tsmiCopyFileName.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyFileName.Text = "File name";
+            this.tsmiCopyFileName.Click += new System.EventHandler(this.tsmiCopyFileName_Click);
+            // 
+            // tsmiCopyFileNameWithExtension
+            // 
+            this.tsmiCopyFileNameWithExtension.Name = "tsmiCopyFileNameWithExtension";
+            this.tsmiCopyFileNameWithExtension.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyFileNameWithExtension.Text = "File name with extension";
+            this.tsmiCopyFileNameWithExtension.Click += new System.EventHandler(this.tsmiCopyFileNameWithExtension_Click);
+            // 
+            // tsmiCopyFolder
+            // 
+            this.tsmiCopyFolder.Name = "tsmiCopyFolder";
+            this.tsmiCopyFolder.Size = new System.Drawing.Size(233, 22);
+            this.tsmiCopyFolder.Text = "Folder";
+            this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
+            // 
+            // tssCopy5
+            // 
+            this.tssCopy5.Name = "tssCopy5";
+            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
+            this.tssCopy5.Visible = false;
+            // 
+            // tsmiShowErrors
+            // 
+            this.tsmiShowErrors.Name = "tsmiShowErrors";
+            this.tsmiShowErrors.Size = new System.Drawing.Size(154, 22);
+            this.tsmiShowErrors.Text = "Show errors";
+            this.tsmiShowErrors.Click += new System.EventHandler(this.tsmiShowErrors_Click);
+            // 
+            // tsmiShowResponse
+            // 
+            this.tsmiShowResponse.Name = "tsmiShowResponse";
+            this.tsmiShowResponse.Size = new System.Drawing.Size(154, 22);
+            this.tsmiShowResponse.Text = "Show response";
+            this.tsmiShowResponse.Click += new System.EventHandler(this.tsmiShowResponse_Click);
+            // 
+            // tsmiUploadSelectedFile
+            // 
+            this.tsmiUploadSelectedFile.Name = "tsmiUploadSelectedFile";
+            this.tsmiUploadSelectedFile.Size = new System.Drawing.Size(154, 22);
+            this.tsmiUploadSelectedFile.Text = "Upload";
+            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
+            // 
+            // tsmiClearList
+            // 
+            this.tsmiClearList.Name = "tsmiClearList";
+            this.tsmiClearList.Size = new System.Drawing.Size(154, 22);
+            this.tsmiClearList.Text = "Clear list";
+            this.tsmiClearList.Click += new System.EventHandler(this.tsmiClearList_Click);
+            // 
+            // tssUploadInfo1
+            // 
+            this.tssUploadInfo1.Name = "tssUploadInfo1";
+            this.tssUploadInfo1.Size = new System.Drawing.Size(151, 6);
+            // 
+            // tsmiClipboardUpload
+            // 
+            this.tsmiClipboardUpload.Name = "tsmiClipboardUpload";
+            this.tsmiClipboardUpload.Size = new System.Drawing.Size(154, 22);
+            this.tsmiClipboardUpload.Text = "Clipboard upload...";
+            this.tsmiClipboardUpload.Click += new System.EventHandler(this.tsmiClipboardUpload_Click);
+            // 
+            // tsmiFileUpload
+            // 
+            this.tsmiFileUpload.Name = "tsmiFileUpload";
+            this.tsmiFileUpload.Size = new System.Drawing.Size(154, 22);
+            this.tsmiFileUpload.Text = "File upload...";
+            this.tsmiFileUpload.Click += new System.EventHandler(this.tsmiUploadFile_Click);
+            // 
+            // tssUploadInfo2
+            // 
+            this.tssUploadInfo2.Name = "tssUploadInfo2";
+            this.tssUploadInfo2.Size = new System.Drawing.Size(151, 6);
+            // 
+            // tsmiHideMenu
+            // 
+            this.tsmiHideMenu.Name = "tsmiHideMenu";
+            this.tsmiHideMenu.Size = new System.Drawing.Size(154, 22);
+            this.tsmiHideMenu.Text = "Hide menu";
+            this.tsmiHideMenu.Click += new System.EventHandler(this.tsmiHideMenu_Click);
+            // 
+            // tsmiHidePreview
+            // 
+            this.tsmiHidePreview.Name = "tsmiHidePreview";
+            this.tsmiHidePreview.Size = new System.Drawing.Size(154, 22);
+            this.tsmiHidePreview.Text = "Hide image preview";
+            this.tsmiHidePreview.Click += new System.EventHandler(this.tsmiHidePreview_Click);
             // 
             // lblSplitter
             // 
@@ -739,6 +1086,7 @@ namespace ShareX
             // lvUploads
             // 
             this.lvUploads.AutoFillColumn = true;
+            this.lvUploads.BackColor = System.Drawing.Color.White;
             this.lvUploads.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvUploads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chFilename,
@@ -1197,334 +1545,6 @@ namespace ShareX
             this.tsmiTrayExit.Text = "Exit";
             this.tsmiTrayExit.Click += new System.EventHandler(this.tsmiTrayExit_Click);
             // 
-            // cmsUploadInfo
-            // 
-            this.cmsUploadInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiStopUpload,
-            this.tsmiOpen,
-            this.tsmiCopy,
-            this.tsmiShowErrors,
-            this.tsmiShowResponse,
-            this.tsmiUploadSelectedFile,
-            this.tsmiClearList,
-            this.tssUploadInfo1,
-            this.tsmiClipboardUpload,
-            this.tsmiFileUpload,
-            this.tssUploadInfo2,
-            this.tsmiHideMenu,
-            this.tsmiShowPreview});
-            this.cmsUploadInfo.Name = "cmsHistory";
-            this.cmsUploadInfo.ShowImageMargin = false;
-            this.cmsUploadInfo.Size = new System.Drawing.Size(159, 258);
-            // 
-            // tsmiStopUpload
-            // 
-            this.tsmiStopUpload.Name = "tsmiStopUpload";
-            this.tsmiStopUpload.Size = new System.Drawing.Size(158, 22);
-            this.tsmiStopUpload.Text = "Stop upload";
-            this.tsmiStopUpload.Click += new System.EventHandler(this.tsmiStopUpload_Click);
-            // 
-            // tsmiOpen
-            // 
-            this.tsmiOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiOpenURL,
-            this.tsmiOpenShortenedURL,
-            this.tsmiOpenThumbnailURL,
-            this.tsmiOpenDeletionURL,
-            this.tssOpen1,
-            this.tsmiOpenFile,
-            this.tsmiOpenFolder});
-            this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(158, 22);
-            this.tsmiOpen.Text = "Open";
-            // 
-            // tsmiOpenURL
-            // 
-            this.tsmiOpenURL.Name = "tsmiOpenURL";
-            this.tsmiOpenURL.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenURL.Text = "URL";
-            this.tsmiOpenURL.Click += new System.EventHandler(this.tsmiOpenURL_Click);
-            // 
-            // tsmiOpenShortenedURL
-            // 
-            this.tsmiOpenShortenedURL.Name = "tsmiOpenShortenedURL";
-            this.tsmiOpenShortenedURL.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenShortenedURL.Text = "Shortened URL";
-            this.tsmiOpenShortenedURL.Click += new System.EventHandler(this.tsmiOpenShortenedURL_Click);
-            // 
-            // tsmiOpenThumbnailURL
-            // 
-            this.tsmiOpenThumbnailURL.Name = "tsmiOpenThumbnailURL";
-            this.tsmiOpenThumbnailURL.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenThumbnailURL.Text = "Thumbnail URL";
-            this.tsmiOpenThumbnailURL.Click += new System.EventHandler(this.tsmiOpenThumbnailURL_Click);
-            // 
-            // tsmiOpenDeletionURL
-            // 
-            this.tsmiOpenDeletionURL.Name = "tsmiOpenDeletionURL";
-            this.tsmiOpenDeletionURL.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenDeletionURL.Text = "Deletion URL";
-            this.tsmiOpenDeletionURL.Click += new System.EventHandler(this.tsmiOpenDeletionURL_Click);
-            // 
-            // tssOpen1
-            // 
-            this.tssOpen1.Name = "tssOpen1";
-            this.tssOpen1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // tsmiOpenFile
-            // 
-            this.tsmiOpenFile.Name = "tsmiOpenFile";
-            this.tsmiOpenFile.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenFile.Text = "File";
-            this.tsmiOpenFile.Click += new System.EventHandler(this.tsmiOpenFile_Click);
-            // 
-            // tsmiOpenFolder
-            // 
-            this.tsmiOpenFolder.Name = "tsmiOpenFolder";
-            this.tsmiOpenFolder.Size = new System.Drawing.Size(156, 22);
-            this.tsmiOpenFolder.Text = "Folder";
-            this.tsmiOpenFolder.Click += new System.EventHandler(this.tsmiOpenFolder_Click);
-            // 
-            // tsmiCopy
-            // 
-            this.tsmiCopy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCopyURL,
-            this.tsmiCopyShortenedURL,
-            this.tsmiCopyThumbnailURL,
-            this.tsmiCopyDeletionURL,
-            this.tssCopy1,
-            this.tsmiCopyFile,
-            this.tsmiCopyImage,
-            this.tsmiCopyText,
-            this.tssCopy2,
-            this.tsmiCopyHTMLLink,
-            this.tsmiCopyHTMLImage,
-            this.tsmiCopyHTMLLinkedImage,
-            this.tssCopy3,
-            this.tsmiCopyForumLink,
-            this.tsmiCopyForumImage,
-            this.tsmiCopyForumLinkedImage,
-            this.tssCopy4,
-            this.tsmiCopyFilePath,
-            this.tsmiCopyFileName,
-            this.tsmiCopyFileNameWithExtension,
-            this.tsmiCopyFolder,
-            this.tssCopy5});
-            this.tsmiCopy.Name = "tsmiCopy";
-            this.tsmiCopy.Size = new System.Drawing.Size(158, 22);
-            this.tsmiCopy.Text = "Copy";
-            // 
-            // tsmiCopyURL
-            // 
-            this.tsmiCopyURL.Name = "tsmiCopyURL";
-            this.tsmiCopyURL.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyURL.Text = "URL";
-            this.tsmiCopyURL.Click += new System.EventHandler(this.tsmiCopyURL_Click);
-            // 
-            // tsmiCopyShortenedURL
-            // 
-            this.tsmiCopyShortenedURL.Name = "tsmiCopyShortenedURL";
-            this.tsmiCopyShortenedURL.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyShortenedURL.Text = "Shortened URL";
-            this.tsmiCopyShortenedURL.Click += new System.EventHandler(this.tsmiCopyShortenedURL_Click);
-            // 
-            // tsmiCopyThumbnailURL
-            // 
-            this.tsmiCopyThumbnailURL.Name = "tsmiCopyThumbnailURL";
-            this.tsmiCopyThumbnailURL.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyThumbnailURL.Text = "Thumbnail URL";
-            this.tsmiCopyThumbnailURL.Click += new System.EventHandler(this.tsmiCopyThumbnailURL_Click);
-            // 
-            // tsmiCopyDeletionURL
-            // 
-            this.tsmiCopyDeletionURL.Name = "tsmiCopyDeletionURL";
-            this.tsmiCopyDeletionURL.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyDeletionURL.Text = "Deletion URL";
-            this.tsmiCopyDeletionURL.Click += new System.EventHandler(this.tsmiCopyDeletionURL_Click);
-            // 
-            // tssCopy1
-            // 
-            this.tssCopy1.Name = "tssCopy1";
-            this.tssCopy1.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmiCopyFile
-            // 
-            this.tsmiCopyFile.Name = "tsmiCopyFile";
-            this.tsmiCopyFile.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFile.Text = "File";
-            this.tsmiCopyFile.Click += new System.EventHandler(this.tsmiCopyFile_Click);
-            // 
-            // tsmiCopyImage
-            // 
-            this.tsmiCopyImage.Name = "tsmiCopyImage";
-            this.tsmiCopyImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyImage.Text = "Image";
-            this.tsmiCopyImage.Click += new System.EventHandler(this.tsmiCopyImage_Click);
-            // 
-            // tsmiCopyText
-            // 
-            this.tsmiCopyText.Name = "tsmiCopyText";
-            this.tsmiCopyText.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyText.Text = "Text";
-            this.tsmiCopyText.Click += new System.EventHandler(this.tsmiCopyText_Click);
-            // 
-            // tssCopy2
-            // 
-            this.tssCopy2.Name = "tssCopy2";
-            this.tssCopy2.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmiCopyHTMLLink
-            // 
-            this.tsmiCopyHTMLLink.Name = "tsmiCopyHTMLLink";
-            this.tsmiCopyHTMLLink.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyHTMLLink.Text = "HTML link";
-            this.tsmiCopyHTMLLink.Click += new System.EventHandler(this.tsmiCopyHTMLLink_Click);
-            // 
-            // tsmiCopyHTMLImage
-            // 
-            this.tsmiCopyHTMLImage.Name = "tsmiCopyHTMLImage";
-            this.tsmiCopyHTMLImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyHTMLImage.Text = "HTML image";
-            this.tsmiCopyHTMLImage.Click += new System.EventHandler(this.tsmiCopyHTMLImage_Click);
-            // 
-            // tsmiCopyHTMLLinkedImage
-            // 
-            this.tsmiCopyHTMLLinkedImage.Name = "tsmiCopyHTMLLinkedImage";
-            this.tsmiCopyHTMLLinkedImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyHTMLLinkedImage.Text = "HTML linked image";
-            this.tsmiCopyHTMLLinkedImage.Click += new System.EventHandler(this.tsmiCopyHTMLLinkedImage_Click);
-            // 
-            // tssCopy3
-            // 
-            this.tssCopy3.Name = "tssCopy3";
-            this.tssCopy3.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmiCopyForumLink
-            // 
-            this.tsmiCopyForumLink.Name = "tsmiCopyForumLink";
-            this.tsmiCopyForumLink.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyForumLink.Text = "Forum (BBCode) link";
-            this.tsmiCopyForumLink.Click += new System.EventHandler(this.tsmiCopyForumLink_Click);
-            // 
-            // tsmiCopyForumImage
-            // 
-            this.tsmiCopyForumImage.Name = "tsmiCopyForumImage";
-            this.tsmiCopyForumImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyForumImage.Text = "Forum (BBCode) image";
-            this.tsmiCopyForumImage.Click += new System.EventHandler(this.tsmiCopyForumImage_Click);
-            // 
-            // tsmiCopyForumLinkedImage
-            // 
-            this.tsmiCopyForumLinkedImage.Name = "tsmiCopyForumLinkedImage";
-            this.tsmiCopyForumLinkedImage.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyForumLinkedImage.Text = "Forum (BBCode) linked image";
-            this.tsmiCopyForumLinkedImage.Click += new System.EventHandler(this.tsmiCopyForumLinkedImage_Click);
-            // 
-            // tssCopy4
-            // 
-            this.tssCopy4.Name = "tssCopy4";
-            this.tssCopy4.Size = new System.Drawing.Size(230, 6);
-            // 
-            // tsmiCopyFilePath
-            // 
-            this.tsmiCopyFilePath.Name = "tsmiCopyFilePath";
-            this.tsmiCopyFilePath.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFilePath.Text = "File path";
-            this.tsmiCopyFilePath.Click += new System.EventHandler(this.tsmiCopyFilePath_Click);
-            // 
-            // tsmiCopyFileName
-            // 
-            this.tsmiCopyFileName.Name = "tsmiCopyFileName";
-            this.tsmiCopyFileName.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFileName.Text = "File name";
-            this.tsmiCopyFileName.Click += new System.EventHandler(this.tsmiCopyFileName_Click);
-            // 
-            // tsmiCopyFileNameWithExtension
-            // 
-            this.tsmiCopyFileNameWithExtension.Name = "tsmiCopyFileNameWithExtension";
-            this.tsmiCopyFileNameWithExtension.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFileNameWithExtension.Text = "File name with extension";
-            this.tsmiCopyFileNameWithExtension.Click += new System.EventHandler(this.tsmiCopyFileNameWithExtension_Click);
-            // 
-            // tsmiCopyFolder
-            // 
-            this.tsmiCopyFolder.Name = "tsmiCopyFolder";
-            this.tsmiCopyFolder.Size = new System.Drawing.Size(233, 22);
-            this.tsmiCopyFolder.Text = "Folder";
-            this.tsmiCopyFolder.Click += new System.EventHandler(this.tsmiCopyFolder_Click);
-            // 
-            // tssCopy5
-            // 
-            this.tssCopy5.Name = "tssCopy5";
-            this.tssCopy5.Size = new System.Drawing.Size(230, 6);
-            this.tssCopy5.Visible = false;
-            // 
-            // tsmiShowErrors
-            // 
-            this.tsmiShowErrors.Name = "tsmiShowErrors";
-            this.tsmiShowErrors.Size = new System.Drawing.Size(158, 22);
-            this.tsmiShowErrors.Text = "Show errors";
-            this.tsmiShowErrors.Click += new System.EventHandler(this.tsmiShowErrors_Click);
-            // 
-            // tsmiShowResponse
-            // 
-            this.tsmiShowResponse.Name = "tsmiShowResponse";
-            this.tsmiShowResponse.Size = new System.Drawing.Size(158, 22);
-            this.tsmiShowResponse.Text = "Show response";
-            this.tsmiShowResponse.Click += new System.EventHandler(this.tsmiShowResponse_Click);
-            // 
-            // tsmiUploadSelectedFile
-            // 
-            this.tsmiUploadSelectedFile.Name = "tsmiUploadSelectedFile";
-            this.tsmiUploadSelectedFile.Size = new System.Drawing.Size(158, 22);
-            this.tsmiUploadSelectedFile.Text = "Upload";
-            this.tsmiUploadSelectedFile.Click += new System.EventHandler(this.tsmiUploadSelectedFile_Click);
-            // 
-            // tsmiClearList
-            // 
-            this.tsmiClearList.Name = "tsmiClearList";
-            this.tsmiClearList.Size = new System.Drawing.Size(158, 22);
-            this.tsmiClearList.Text = "Clear list";
-            this.tsmiClearList.Click += new System.EventHandler(this.tsmiClearList_Click);
-            // 
-            // tssUploadInfo1
-            // 
-            this.tssUploadInfo1.Name = "tssUploadInfo1";
-            this.tssUploadInfo1.Size = new System.Drawing.Size(155, 6);
-            // 
-            // tsmiClipboardUpload
-            // 
-            this.tsmiClipboardUpload.Name = "tsmiClipboardUpload";
-            this.tsmiClipboardUpload.Size = new System.Drawing.Size(158, 22);
-            this.tsmiClipboardUpload.Text = "Clipboard upload...";
-            this.tsmiClipboardUpload.Click += new System.EventHandler(this.tsmiClipboardUpload_Click);
-            // 
-            // tsmiFileUpload
-            // 
-            this.tsmiFileUpload.Name = "tsmiFileUpload";
-            this.tsmiFileUpload.Size = new System.Drawing.Size(158, 22);
-            this.tsmiFileUpload.Text = "File upload...";
-            this.tsmiFileUpload.Click += new System.EventHandler(this.tsmiUploadFile_Click);
-            // 
-            // tssUploadInfo2
-            // 
-            this.tssUploadInfo2.Name = "tssUploadInfo2";
-            this.tssUploadInfo2.Size = new System.Drawing.Size(155, 6);
-            // 
-            // tsmiHideMenu
-            // 
-            this.tsmiHideMenu.Name = "tsmiHideMenu";
-            this.tsmiHideMenu.Size = new System.Drawing.Size(158, 22);
-            this.tsmiHideMenu.Text = "Hide menu";
-            this.tsmiHideMenu.Click += new System.EventHandler(this.tsmiHideMenu_Click);
-            // 
-            // tsmiShowPreview
-            // 
-            this.tsmiShowPreview.Name = "tsmiShowPreview";
-            this.tsmiShowPreview.Size = new System.Drawing.Size(158, 22);
-            this.tsmiShowPreview.Text = "Show image preview";
-            this.tsmiShowPreview.Click += new System.EventHandler(this.tsmiShowPreview_Click);
-            // 
             // ssToolStripMenuItem
             // 
             this.ssToolStripMenuItem.Name = "ssToolStripMenuItem";
@@ -1541,7 +1561,7 @@ namespace ShareX
             this.Controls.Add(this.tsMain);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(500, 430);
+            this.MinimumSize = new System.Drawing.Size(430, 430);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX";
@@ -1556,8 +1576,8 @@ namespace ShareX
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
             this.scMain.ResumeLayout(false);
-            this.cmsTray.ResumeLayout(false);
             this.cmsUploadInfo.ResumeLayout(false);
+            this.cmsTray.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1670,7 +1690,7 @@ namespace ShareX
         private System.Windows.Forms.Label lblSplitter;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayAfterUploadTasks;
         private System.Windows.Forms.ToolStripSeparator tssUploadInfo1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiShowPreview;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHidePreview;
         private System.Windows.Forms.ToolStripMenuItem tsmiUploadSelectedFile;
         private System.Windows.Forms.ToolStripButton tsbImageHistory;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageHistory;
@@ -1716,5 +1736,6 @@ namespace ShareX
         private System.Windows.Forms.ToolStripMenuItem tsmiIndexFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayIndexFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiTestColorMatrix;
+        public System.Windows.Forms.Label lblDragAndDropTip;
     }
 }

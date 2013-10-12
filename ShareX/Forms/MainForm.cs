@@ -495,22 +495,23 @@ namespace ShareX
                 tsmiHideMenu.Text = "Show menu";
             }
 
-            tsMain.Visible = Program.Settings.ShowMenu;
-            lblSplitter.Visible = Program.Settings.ShowMenu;
+            tsMain.Visible = lblSplitter.Visible = Program.Settings.ShowMenu;
+            Refresh();
         }
 
         private void UpdatePreviewSplitter()
         {
-            if (Program.Settings.IsPreviewCollapsed)
+            if (Program.Settings.ShowPreview)
             {
-                tsmiShowPreview.Text = "Show image preview";
+                tsmiHidePreview.Text = "Hide image preview";
             }
             else
             {
-                tsmiShowPreview.Text = "Hide image preview";
+                tsmiHidePreview.Text = "Show image preview";
             }
 
-            scMain.Panel2Collapsed = Program.Settings.IsPreviewCollapsed;
+            scMain.Panel2Collapsed = !Program.Settings.ShowPreview;
+            Refresh();
         }
 
         private void DoScreenRecorder(TaskSettings taskSettings = null)
@@ -794,7 +795,7 @@ namespace ShareX
             if (e.Button == MouseButtons.Right)
             {
                 UpdateControls();
-                cmsUploadInfo.Show(lvUploads, e.X + 1, e.Y + 1);
+                cmsUploadInfo.Show(lvUploads, e.Location);
             }
         }
 
@@ -1041,9 +1042,9 @@ namespace ShareX
             UpdateMenu();
         }
 
-        private void tsmiShowPreview_Click(object sender, EventArgs e)
+        private void tsmiHidePreview_Click(object sender, EventArgs e)
         {
-            Program.Settings.IsPreviewCollapsed = !Program.Settings.IsPreviewCollapsed;
+            Program.Settings.ShowPreview = !Program.Settings.ShowPreview;
             UpdatePreviewSplitter();
             UpdateControls();
         }
