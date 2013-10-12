@@ -167,7 +167,7 @@ namespace HelpersLib
 
                         if (Config.WatermarkAddReflection)
                         {
-                            using (Bitmap bmp = CreateReflection((Bitmap)img2, 50, 10, 150))
+                            using (Bitmap bmp = ImageHelpers.AddReflection((Bitmap)img2, 50, 10, 150))
                             {
                                 g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
                             }
@@ -260,7 +260,7 @@ namespace HelpersLib
 
                             if (Config.WatermarkAddReflection)
                             {
-                                using (Bitmap bmp2 = CreateReflection(bmp, 50, 10, 150))
+                                using (Bitmap bmp2 = ImageHelpers.AddReflection(bmp, 50, 10, 150))
                                 {
                                     gImg.DrawImage(bmp2, new Rectangle(labelPosition.X, labelPosition.Y + bmp.Height - 1, bmp2.Width, bmp2.Height));
                                 }
@@ -280,37 +280,6 @@ namespace HelpersLib
             }
 
             return img;
-        }
-
-        public static Bitmap CreateReflection(Image bmp, int percentage, int minAlpha, int maxAlpha)
-        {
-            Bitmap b = (Bitmap)bmp.Clone();
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
-
-            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(b, true, ImageLockMode.ReadWrite))
-            {
-                maxAlpha = maxAlpha.Between(0, 255);
-                minAlpha = minAlpha.Between(0, 255);
-                int alphaAdd = maxAlpha - minAlpha;
-
-                for (int y = 0; y < b.Height; ++y)
-                {
-                    for (int x = 0; x < b.Width; ++x)
-                    {
-                        ColorBgra color = unsafeBitmap.GetPixel(x, y);
-                        byte alpha = (byte)(minAlpha + (maxAlpha - (alphaAdd * (y + 1) / b.Height)));
-
-                        if (color.Alpha > alpha)
-                        {
-                            color.Alpha = alpha;
-                            unsafeBitmap.SetPixel(x, y, color);
-                        }
-                    }
-                }
-            }
-
-            return b;
         }
     }
 }
