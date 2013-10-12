@@ -43,7 +43,7 @@ namespace ShareX
         #region Main Form
 
         public bool ShowMenu = true;
-        public bool IsPreviewCollapsed = false;
+        public bool ShowPreview = true;
         public int PreviewSplitterDistance = 400;
 
         #endregion Main Form
