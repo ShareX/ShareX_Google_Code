@@ -86,6 +86,13 @@ namespace HelpersLib
             return null;
         }
 
+        public static Image ResizeImage(Image img, float percentage)
+        {
+            int width = (int)(percentage / 100 * img.Width);
+            int height = (int)(percentage / 100 * img.Height);
+            return ResizeImage(img, width, height);
+        }
+
         public static Image ResizeImage(Image img, int width, int height, bool highQualityScaling = true)
         {
             return ResizeImage(img, 0, 0, width, height, highQualityScaling);
@@ -210,6 +217,114 @@ namespace HelpersLib
             }
 
             return null;
+        }
+
+        private static Bitmap AddSkew(Bitmap bmp, int skew)
+        {
+            Bitmap result = new Bitmap(bmp.Width + skew, bmp.Height);
+
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                Point[] destinationPoints = { new Point(0, 0), new Point(bmp.Width, 0), new Point(skew, bmp.Height - 1) };
+                g.DrawImage(bmp, destinationPoints);
+            }
+
+            return result;
+        }
+
+        public static Image AddCanvas(Image img, int size)
+        {
+            Image bmp = new Bitmap(img.Width + size * 2, img.Height + size * 2);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(img, new Rectangle(size, size, img.Width, img.Height), new Rectangle(0, 0, img.Width, img.Height), GraphicsUnit.Pixel);
+            }
+
+            return bmp;
+        }
+
+        public static Image DrawReflection(Image img, int percentage, int transparency, int offset, bool skew, int skewSize)
+        {
+            Bitmap reflection = AddReflection(img, percentage, transparency);
+
+            if (skew)
+            {
+                reflection = AddSkew(reflection, skewSize);
+            }
+
+            Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height));
+                g.DrawImage(reflection, new Point(0, img.Height + offset));
+            }
+
+            return result;
+        }
+
+        private static Bitmap AddReflection(Image img, int percentage, int transparency)
+        {
+            Bitmap b = new Bitmap(img);
+            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * (float)percentage / 100)), PixelFormat.Format32bppArgb);
+            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+            byte alpha;
+            int nOffset = bmData.Stride - b.Width * 4;
+
+            unsafe
+            {
+                byte* p = (byte*)(void*)bmData.Scan0;
+
+                for (int y = 0; y < b.Height; ++y)
+                {
+                    for (int x = 0; x < b.Width; ++x)
+                    {
+                        alpha = (byte)(transparency - transparency * (y + 1) / b.Height);
+                        if (p[3] > alpha) p[3] = alpha;
+                        p += 4;
+                    }
+                    p += nOffset;
+                }
+            }
+
+            b.UnlockBits(bmData);
+
+            return b;
+        }
+
+        public static Bitmap AddReflection(Image bmp, int percentage, int minAlpha, int maxAlpha)
+        {
+            Bitmap b = (Bitmap)bmp.Clone();
+            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
+
+            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(b, true, ImageLockMode.ReadWrite))
+            {
+                maxAlpha = maxAlpha.Between(0, 255);
+                minAlpha = minAlpha.Between(0, 255);
+                int alphaAdd = maxAlpha - minAlpha;
+
+                for (int y = 0; y < b.Height; ++y)
+                {
+                    for (int x = 0; x < b.Width; ++x)
+                    {
+                        ColorBgra color = unsafeBitmap.GetPixel(x, y);
+                        byte alpha = (byte)(minAlpha + (maxAlpha - (alphaAdd * (y + 1) / b.Height)));
+
+                        if (color.Alpha > alpha)
+                        {
+                            color.Alpha = alpha;
+                            unsafeBitmap.SetPixel(x, y, color);
+                        }
+                    }
+                }
+            }
+
+            return b;
         }
 
         public static void FillImageBackground(Image img, Color color)
@@ -396,6 +511,49 @@ namespace HelpersLib
                     DebugHelper.WriteException(e);
                 }
             }
+        }
+
+        public static Bitmap RotateImage(Image img, float theta)
+        {
+            Matrix matrix = new Matrix();
+            matrix.Translate(img.Width / -2, img.Height / -2, MatrixOrder.Append);
+            matrix.RotateAt(theta, new Point(0, 0), MatrixOrder.Append);
+            using (GraphicsPath gp = new GraphicsPath())
+            {
+                gp.AddPolygon(new Point[] { new Point(0, 0), new Point(img.Width, 0), new Point(0, img.Height) });
+                gp.Transform(matrix);
+                PointF[] pts = gp.PathPoints;
+
+                Rectangle bbox = BoundingBox(img, matrix);
+                Bitmap bmpDest = new Bitmap(bbox.Width, bbox.Height);
+
+                using (Graphics gDest = Graphics.FromImage(bmpDest))
+                {
+                    Matrix mDest = new Matrix();
+                    mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
+                    gDest.Transform = mDest;
+                    gDest.CompositingQuality = CompositingQuality.HighQuality;
+                    gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    gDest.DrawImage(img, pts);
+                    return bmpDest;
+                }
+            }
+        }
+
+        private static Rectangle BoundingBox(Image img, Matrix matrix)
+        {
+            GraphicsUnit gu = new GraphicsUnit();
+            Rectangle rImg = Rectangle.Round(img.GetBounds(ref gu));
+
+            Point topLeft = new Point(rImg.Left, rImg.Top);
+            Point topRight = new Point(rImg.Right, rImg.Top);
+            Point bottomRight = new Point(rImg.Right, rImg.Bottom);
+            Point bottomLeft = new Point(rImg.Left, rImg.Bottom);
+            Point[] points = new Point[] { topLeft, topRight, bottomRight, bottomLeft };
+            GraphicsPath gp = new GraphicsPath(points,
+                new byte[] { (byte)PathPointType.Start, (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line });
+            gp.Transform(matrix);
+            return Rectangle.Round(gp.GetBounds());
         }
     }
 }

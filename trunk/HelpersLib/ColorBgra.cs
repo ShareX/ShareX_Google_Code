@@ -108,9 +108,14 @@ namespace HelpersLib
             return string.Format("B: {0}, G: {1}, R: {2}, A: {3}", Blue, Green, Red, Alpha);
         }
 
+        public static uint BgraToUInt32(uint b, uint g, uint r, uint a)
+        {
+            return b + (g << 8) + (r << 16) + (a << 24);
+        }
+
         public static uint BgraToUInt32(byte b, byte g, byte r, byte a)
         {
-            return (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24);
+            return BgraToUInt32((uint)b, (uint)g, (uint)r, (uint)a);
         }
     }
 }
