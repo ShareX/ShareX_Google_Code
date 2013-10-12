@@ -785,6 +785,15 @@ namespace ShareX
             Helpers.LoadBrowserAsync(Links.URL_DONATE);
         }
 
+        private void lblDragAndDropTip_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                UpdateControls();
+                cmsUploadInfo.Show(lblDragAndDropTip, e.X + 1, e.Y + 1);
+            }
+        }
+
         private void lvUploads_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateControls();
@@ -795,7 +804,7 @@ namespace ShareX
             if (e.Button == MouseButtons.Right)
             {
                 UpdateControls();
-                cmsUploadInfo.Show(lvUploads, e.Location);
+                cmsUploadInfo.Show(lvUploads, e.X + 1, e.Y + 1);
             }
         }
 

@@ -108,6 +108,18 @@ namespace ShareX
             this.tsmiTestColorMatrix = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new HelpersLib.SplitContainerCustomSplitter();
             this.lblDragAndDropTip = new System.Windows.Forms.Label();
+            this.lblSplitter = new System.Windows.Forms.Label();
+            this.lvUploads = new HelpersLib.MyListView();
+            this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chProgress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chSpeed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chElapsed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chRemaining = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pbPreview = new HelpersLib.MyPictureBox();
             this.cmsUploadInfo = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiStopUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,18 +163,6 @@ namespace ShareX
             this.tssUploadInfo2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiHideMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHidePreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblSplitter = new System.Windows.Forms.Label();
-            this.lvUploads = new HelpersLib.MyListView();
-            this.chFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chProgress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chSpeed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chElapsed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRemaining = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chUploaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chHost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pbPreview = new HelpersLib.MyPictureBox();
             this.niTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsTray = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTrayClipboardUpload = new System.Windows.Forms.ToolStripMenuItem();
@@ -735,16 +735,111 @@ namespace ShareX
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDragAndDropTip.BackColor = System.Drawing.Color.White;
-            this.lblDragAndDropTip.ContextMenuStrip = this.cmsUploadInfo;
             this.lblDragAndDropTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblDragAndDropTip.ForeColor = System.Drawing.Color.LightGray;
-            this.lblDragAndDropTip.Location = new System.Drawing.Point(8, 64);
+            this.lblDragAndDropTip.Location = new System.Drawing.Point(8, 92);
             this.lblDragAndDropTip.Name = "lblDragAndDropTip";
             this.lblDragAndDropTip.Padding = new System.Windows.Forms.Padding(30, 20, 30, 30);
-            this.lblDragAndDropTip.Size = new System.Drawing.Size(384, 264);
+            this.lblDragAndDropTip.Size = new System.Drawing.Size(384, 208);
             this.lblDragAndDropTip.TabIndex = 2;
             this.lblDragAndDropTip.Text = "You can drag and drop files to this window";
             this.lblDragAndDropTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDragAndDropTip.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblDragAndDropTip_MouseUp);
+            // 
+            // lblSplitter
+            // 
+            this.lblSplitter.BackColor = System.Drawing.Color.Black;
+            this.lblSplitter.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblSplitter.Location = new System.Drawing.Point(0, 0);
+            this.lblSplitter.Name = "lblSplitter";
+            this.lblSplitter.Size = new System.Drawing.Size(1, 392);
+            this.lblSplitter.TabIndex = 0;
+            // 
+            // lvUploads
+            // 
+            this.lvUploads.AutoFillColumn = true;
+            this.lvUploads.BackColor = System.Drawing.Color.White;
+            this.lvUploads.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvUploads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chFilename,
+            this.chStatus,
+            this.chProgress,
+            this.chSpeed,
+            this.chElapsed,
+            this.chRemaining,
+            this.chUploaderType,
+            this.chHost,
+            this.chURL});
+            this.lvUploads.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvUploads.FullRowSelect = true;
+            this.lvUploads.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvUploads.HideSelection = false;
+            this.lvUploads.Location = new System.Drawing.Point(0, 0);
+            this.lvUploads.Name = "lvUploads";
+            this.lvUploads.ShowItemToolTips = true;
+            this.lvUploads.Size = new System.Drawing.Size(400, 392);
+            this.lvUploads.TabIndex = 1;
+            this.lvUploads.UseCompatibleStateImageBehavior = false;
+            this.lvUploads.View = System.Windows.Forms.View.Details;
+            this.lvUploads.SelectedIndexChanged += new System.EventHandler(this.lvUploads_SelectedIndexChanged);
+            this.lvUploads.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvUploads_KeyDown);
+            this.lvUploads.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvUploads_MouseDoubleClick);
+            this.lvUploads.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvUploads_MouseUp);
+            // 
+            // chFilename
+            // 
+            this.chFilename.Text = "Filename";
+            this.chFilename.Width = 150;
+            // 
+            // chStatus
+            // 
+            this.chStatus.Text = "Status";
+            // 
+            // chProgress
+            // 
+            this.chProgress.Text = "Progress";
+            this.chProgress.Width = 120;
+            // 
+            // chSpeed
+            // 
+            this.chSpeed.Text = "Speed";
+            this.chSpeed.Width = 70;
+            // 
+            // chElapsed
+            // 
+            this.chElapsed.Text = "Elapsed";
+            this.chElapsed.Width = 50;
+            // 
+            // chRemaining
+            // 
+            this.chRemaining.Text = "Remaining";
+            this.chRemaining.Width = 50;
+            // 
+            // chUploaderType
+            // 
+            this.chUploaderType.Text = "Type";
+            this.chUploaderType.Width = 50;
+            // 
+            // chHost
+            // 
+            this.chHost.Text = "Host";
+            this.chHost.Width = 100;
+            // 
+            // chURL
+            // 
+            this.chURL.Text = "URL";
+            this.chURL.Width = 134;
+            // 
+            // pbPreview
+            // 
+            this.pbPreview.BackColor = System.Drawing.Color.White;
+            this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPreview.DrawCheckeredBackground = true;
+            this.pbPreview.FullscreenOnClick = true;
+            this.pbPreview.Location = new System.Drawing.Point(0, 0);
+            this.pbPreview.Name = "pbPreview";
+            this.pbPreview.Size = new System.Drawing.Size(378, 392);
+            this.pbPreview.TabIndex = 1;
             // 
             // cmsUploadInfo
             // 
@@ -1073,101 +1168,6 @@ namespace ShareX
             this.tsmiHidePreview.Size = new System.Drawing.Size(154, 22);
             this.tsmiHidePreview.Text = "Hide image preview";
             this.tsmiHidePreview.Click += new System.EventHandler(this.tsmiHidePreview_Click);
-            // 
-            // lblSplitter
-            // 
-            this.lblSplitter.BackColor = System.Drawing.Color.Black;
-            this.lblSplitter.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblSplitter.Location = new System.Drawing.Point(0, 0);
-            this.lblSplitter.Name = "lblSplitter";
-            this.lblSplitter.Size = new System.Drawing.Size(1, 392);
-            this.lblSplitter.TabIndex = 0;
-            // 
-            // lvUploads
-            // 
-            this.lvUploads.AutoFillColumn = true;
-            this.lvUploads.BackColor = System.Drawing.Color.White;
-            this.lvUploads.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvUploads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chFilename,
-            this.chStatus,
-            this.chProgress,
-            this.chSpeed,
-            this.chElapsed,
-            this.chRemaining,
-            this.chUploaderType,
-            this.chHost,
-            this.chURL});
-            this.lvUploads.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvUploads.FullRowSelect = true;
-            this.lvUploads.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvUploads.HideSelection = false;
-            this.lvUploads.Location = new System.Drawing.Point(0, 0);
-            this.lvUploads.Name = "lvUploads";
-            this.lvUploads.ShowItemToolTips = true;
-            this.lvUploads.Size = new System.Drawing.Size(400, 392);
-            this.lvUploads.TabIndex = 1;
-            this.lvUploads.UseCompatibleStateImageBehavior = false;
-            this.lvUploads.View = System.Windows.Forms.View.Details;
-            this.lvUploads.SelectedIndexChanged += new System.EventHandler(this.lvUploads_SelectedIndexChanged);
-            this.lvUploads.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvUploads_KeyDown);
-            this.lvUploads.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvUploads_MouseDoubleClick);
-            this.lvUploads.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvUploads_MouseUp);
-            // 
-            // chFilename
-            // 
-            this.chFilename.Text = "Filename";
-            this.chFilename.Width = 150;
-            // 
-            // chStatus
-            // 
-            this.chStatus.Text = "Status";
-            // 
-            // chProgress
-            // 
-            this.chProgress.Text = "Progress";
-            this.chProgress.Width = 120;
-            // 
-            // chSpeed
-            // 
-            this.chSpeed.Text = "Speed";
-            this.chSpeed.Width = 70;
-            // 
-            // chElapsed
-            // 
-            this.chElapsed.Text = "Elapsed";
-            this.chElapsed.Width = 50;
-            // 
-            // chRemaining
-            // 
-            this.chRemaining.Text = "Remaining";
-            this.chRemaining.Width = 50;
-            // 
-            // chUploaderType
-            // 
-            this.chUploaderType.Text = "Type";
-            this.chUploaderType.Width = 50;
-            // 
-            // chHost
-            // 
-            this.chHost.Text = "Host";
-            this.chHost.Width = 100;
-            // 
-            // chURL
-            // 
-            this.chURL.Text = "URL";
-            this.chURL.Width = 134;
-            // 
-            // pbPreview
-            // 
-            this.pbPreview.BackColor = System.Drawing.Color.White;
-            this.pbPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbPreview.DrawCheckeredBackground = true;
-            this.pbPreview.FullscreenOnClick = true;
-            this.pbPreview.Location = new System.Drawing.Point(0, 0);
-            this.pbPreview.Name = "pbPreview";
-            this.pbPreview.Size = new System.Drawing.Size(378, 392);
-            this.pbPreview.TabIndex = 1;
             // 
             // niTray
             // 
