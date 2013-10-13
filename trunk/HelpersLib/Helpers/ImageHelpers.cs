@@ -86,19 +86,12 @@ namespace HelpersLib
             return null;
         }
 
-        public static Image ResizeImage(Image img, float percentage)
+        public static Image ResizeImage(Image img, int width, int height)
         {
-            int width = (int)(percentage / 100 * img.Width);
-            int height = (int)(percentage / 100 * img.Height);
-            return ResizeImage(img, width, height);
+            return ResizeImage(img, 0, 0, width, height);
         }
 
-        public static Image ResizeImage(Image img, int width, int height, bool highQualityScaling = true)
-        {
-            return ResizeImage(img, 0, 0, width, height, highQualityScaling);
-        }
-
-        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool highQualityScaling = true)
+        public static Image ResizeImage(Image img, int x, int y, int width, int height)
         {
             if (img.Width == width && img.Height == height)
             {
@@ -110,10 +103,9 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                if (highQualityScaling)
-                {
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                }
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
 
                 g.DrawImage(img, x, y, width, height);
 
@@ -123,17 +115,41 @@ namespace HelpersLib
             return bmp;
         }
 
-        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
+        public static Image ResizeImagePercentage(Image img, float percentage)
         {
-            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage, highQualityScaling);
+            return ResizeImagePercentage(img, percentage, percentage);
         }
 
-        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
+        public static Image ResizeImagePercentage(Image img, float percentageWidth, float percentageHeight)
         {
-            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage, highQualityScaling);
+            int width = (int)(percentageWidth / 100 * img.Width);
+            int height = (int)(percentageHeight / 100 * img.Height);
+            return ResizeImage(img, width, height);
         }
 
-        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage, bool highQualityScaling = true)
+        public static Image ResizeImageWidth(Image img, int width, bool keepAspectRatio = true)
+        {
+            int height = keepAspectRatio ? width / img.Width * img.Height : img.Height;
+            return ResizeImage(img, width, height);
+        }
+
+        public static Image ResizeImageHeight(Image img, int height, bool keepAspectRatio = true)
+        {
+            int width = keepAspectRatio ? height / img.Height * img.Width : img.Width;
+            return ResizeImage(img, width, height);
+        }
+
+        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage)
+        {
+            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage);
+        }
+
+        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage)
+        {
+            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage);
+        }
+
+        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage)
         {
             double ratio;
             int newWidth, newHeight, newX, newY;
@@ -162,7 +178,7 @@ namespace HelpersLib
                 newY += (int)((height - (img.Height * ratio)) / 2);
             }
 
-            return ResizeImage(img, newX, newY, newWidth, newHeight, highQualityScaling);
+            return ResizeImage(img, newX, newY, newWidth, newHeight);
         }
 
         public static Image DrawBorder(Image img, BorderType borderType, Color borderColor, int borderSize)
@@ -236,6 +252,7 @@ namespace HelpersLib
         public static Image AddCanvas(Image img, int size)
         {
             Image bmp = new Bitmap(img.Width + size * 2, img.Height + size * 2);
+
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 g.CompositingQuality = CompositingQuality.HighQuality;
@@ -515,27 +532,31 @@ namespace HelpersLib
 
         public static Bitmap RotateImage(Image img, float theta)
         {
-            Matrix matrix = new Matrix();
-            matrix.Translate(img.Width / -2, img.Height / -2, MatrixOrder.Append);
-            matrix.RotateAt(theta, new Point(0, 0), MatrixOrder.Append);
-            using (GraphicsPath gp = new GraphicsPath())
+            using (Matrix matrix = new Matrix())
             {
-                gp.AddPolygon(new Point[] { new Point(0, 0), new Point(img.Width, 0), new Point(0, img.Height) });
-                gp.Transform(matrix);
-                PointF[] pts = gp.PathPoints;
-
-                Rectangle bbox = BoundingBox(img, matrix);
-                Bitmap bmpDest = new Bitmap(bbox.Width, bbox.Height);
-
-                using (Graphics gDest = Graphics.FromImage(bmpDest))
+                matrix.Translate(img.Width / -2, img.Height / -2, MatrixOrder.Append);
+                matrix.RotateAt(theta, new Point(0, 0), MatrixOrder.Append);
+                using (GraphicsPath gp = new GraphicsPath())
                 {
-                    Matrix mDest = new Matrix();
-                    mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
-                    gDest.Transform = mDest;
-                    gDest.CompositingQuality = CompositingQuality.HighQuality;
-                    gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    gDest.DrawImage(img, pts);
-                    return bmpDest;
+                    gp.AddPolygon(new Point[] { new Point(0, 0), new Point(img.Width, 0), new Point(0, img.Height) });
+                    gp.Transform(matrix);
+                    PointF[] pts = gp.PathPoints;
+
+                    Rectangle bbox = BoundingBox(img, matrix);
+                    Bitmap bmpDest = new Bitmap(bbox.Width, bbox.Height);
+
+                    using (Graphics gDest = Graphics.FromImage(bmpDest))
+                    {
+                        using (Matrix mDest = new Matrix())
+                        {
+                            mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
+                            gDest.Transform = mDest;
+                            gDest.CompositingQuality = CompositingQuality.HighQuality;
+                            gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            gDest.DrawImage(img, pts);
+                            return bmpDest;
+                        }
+                    }
                 }
             }
         }
@@ -550,10 +571,12 @@ namespace HelpersLib
             Point bottomRight = new Point(rImg.Right, rImg.Bottom);
             Point bottomLeft = new Point(rImg.Left, rImg.Bottom);
             Point[] points = new Point[] { topLeft, topRight, bottomRight, bottomLeft };
-            GraphicsPath gp = new GraphicsPath(points,
-                new byte[] { (byte)PathPointType.Start, (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line });
-            gp.Transform(matrix);
-            return Rectangle.Round(gp.GetBounds());
+            using (GraphicsPath gp = new GraphicsPath(points,
+                new byte[] { (byte)PathPointType.Start, (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line }))
+            {
+                gp.Transform(matrix);
+                return Rectangle.Round(gp.GetBounds());
+            }
         }
     }
 }

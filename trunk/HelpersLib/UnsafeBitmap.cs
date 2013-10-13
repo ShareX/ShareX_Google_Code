@@ -157,14 +157,9 @@ namespace HelpersLib
             return result;
         }
 
-        public ColorBgra* GetPointAddress(int x, int y)
+        public ColorBgra* GetPixelPointer(int x, int y)
         {
             return unchecked(x + (ColorBgra*)(((byte*)(void*)bitmapData.Scan0) + (y * bitmapData.Stride)));
-        }
-
-        public ColorBgra GetPoint(int x, int y)
-        {
-            return unchecked(*(x + (ColorBgra*)(((byte*)(void*)bitmapData.Scan0) + (y * bitmapData.Stride))));
         }
 
         public ColorBgra GetPixel(int i)
