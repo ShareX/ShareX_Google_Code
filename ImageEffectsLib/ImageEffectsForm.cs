@@ -150,7 +150,6 @@ namespace ImageEffectsLib
                 Type type = (Type)node.Tag;
                 AddEffect(type);
                 UpdatePreview();
-                Effects.Add((IImageEffect)Activator.CreateInstance(type));
             }
         }
 
@@ -216,6 +215,7 @@ namespace ImageEffectsLib
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            Effects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToList();
             DialogResult = DialogResult.OK;
             Close();
         }

@@ -69,23 +69,6 @@ namespace ShareX
             return imageData;
         }
 
-        public static Image ResizeImage(Image img, TaskSettings taskSettings)
-        {
-            switch (taskSettings.ImageSettings.ImageScaleType)
-            {
-                case ImageScaleType.Percentage:
-                    return ImageHelpers.ResizeImageByPercentage(img, taskSettings.ImageSettings.ImageScalePercentageWidth, taskSettings.ImageSettings.ImageScalePercentageHeight);
-                case ImageScaleType.Specific:
-                    return ImageHelpers.ResizeImage(img, taskSettings.ImageSettings.ImageScaleSpecificWidth, taskSettings.ImageSettings.ImageScaleSpecificHeight);
-                case ImageScaleType.Width:
-                    return ImageHelpers.ResizeImageByWidth(img, taskSettings.ImageSettings.ImageScaleToWidth, taskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio);
-                case ImageScaleType.Height:
-                    return ImageHelpers.ResizeImageByHeight(img, taskSettings.ImageSettings.ImageScaleToHeight, taskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio);
-            }
-
-            return img;
-        }
-
         public static MemoryStream SaveImage(Image img, EImageFormat imageFormat, TaskSettings taskSettings)
         {
             MemoryStream stream = new MemoryStream();
@@ -208,7 +191,7 @@ namespace ShareX
 
         public static Image AddImageEffects(Image img, TaskSettings taskSettings)
         {
-            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img))
+            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img, taskSettings.ImageSettings.ImageEffects))
             {
                 if (!taskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture || imageEffectsForm.ShowDialog() == DialogResult.OK)
                 {
