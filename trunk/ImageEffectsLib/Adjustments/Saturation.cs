@@ -24,13 +24,20 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
     public class Saturation : IImageEffect
     {
+        [DefaultValue(1f)]
         public float Value { get; set; }
+
+        public Saturation()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

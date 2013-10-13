@@ -32,9 +32,9 @@ namespace ImageEffectsLib
     public class Border : IImageEffect
     {
         [DefaultValue(BorderType.Outside)]
-        public BorderType BorderStyle { get; set; }
+        public BorderType Type { get; set; }
 
-        [DefaultValue(typeof(Color), "Black")]
+        [DefaultValue(typeof(Color), "50, 170, 255")]
         public Color Color { get; set; }
 
         [DefaultValue(1)]
@@ -47,7 +47,7 @@ namespace ImageEffectsLib
 
         public Image Apply(Image img)
         {
-            return ImageHelpers.DrawBorder(img, BorderStyle, Color, Size);
+            return ImageHelpers.DrawBorder(img, Type, Color, Size);
         }
     }
 }

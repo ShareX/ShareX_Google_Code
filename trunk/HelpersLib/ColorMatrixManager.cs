@@ -111,15 +111,15 @@ namespace HelpersLib
                 new float[] {0, 0, 0, add, 1}});
         }
 
-        /// <param name="add">0 = No change</param>
-        public static ColorMatrix Brightness(float add)
+        /// <param name="value">0 = No change</param>
+        public static ColorMatrix Brightness(float value)
         {
             return new ColorMatrix(new[]{
                 new float[] {1, 0, 0, 0, 0},
                 new float[] {0, 1, 0, 0, 0},
                 new float[] {0, 0, 1, 0, 0},
                 new float[] {0, 0, 0, 1, 0},
-                new float[] {add, add, add, 0, 1}});
+                new float[] {value, value, value, 0, 1}});
         }
 
         /// <param name="value">1 = No change</param>

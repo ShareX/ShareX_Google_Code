@@ -24,13 +24,17 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
     public class Alpha : IImageEffect
     {
+        [DefaultValue(1f)]
         public float Value { get; set; }
+
+        [DefaultValue(0f)]
         public float Addition { get; set; }
 
         public Alpha()

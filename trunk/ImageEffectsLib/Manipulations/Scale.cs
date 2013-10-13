@@ -31,8 +31,11 @@ namespace ImageEffectsLib
 {
     public class Scale : IImageEffect
     {
-        [DefaultValue(50)]
-        public float Percentage { get; set; }
+        [DefaultValue(100f), Description("Use 0 width for aspect ratio to height.")]
+        public float WidthPercentage { get; set; }
+
+        [DefaultValue(0f), Description("Use 0 height for keep aspect ratio to width.")]
+        public float HeightPercentage { get; set; }
 
         public Scale()
         {
@@ -41,7 +44,12 @@ namespace ImageEffectsLib
 
         public Image Apply(Image img)
         {
-            return ImageHelpers.ResizeImageByPercentage(img, Percentage);
+            if (WidthPercentage <= 0 && HeightPercentage <= 0) return img;
+
+            float widthPercentage = WidthPercentage <= 0 ? HeightPercentage : WidthPercentage;
+            float heightPercentage = HeightPercentage <= 0 ? WidthPercentage : HeightPercentage;
+
+            return ImageHelpers.ResizeImageByPercentage(img, widthPercentage, heightPercentage);
         }
     }
 }

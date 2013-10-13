@@ -31,8 +31,11 @@ namespace ImageEffectsLib
 {
     public class Resize : IImageEffect
     {
-        [DefaultValue(typeof(Size), "250, 250")]
-        public Size Size { get; set; }
+        [DefaultValue(250), Description("Use 0 width for aspect ratio to height.")]
+        public int Width { get; set; }
+
+        [DefaultValue(0), Description("Use 0 height for keep aspect ratio to width.")]
+        public int Height { get; set; }
 
         public Resize()
         {
@@ -41,7 +44,12 @@ namespace ImageEffectsLib
 
         public Image Apply(Image img)
         {
-            return ImageHelpers.ResizeImage(img, Size);
+            if (Width <= 0 && Height <= 0) return img;
+
+            int width = Width <= 0 ? (int)((float)Height / img.Height * img.Width) : Width;
+            int height = Height <= 0 ? (int)((float)Width / img.Width * img.Height) : Height;
+
+            return ImageHelpers.ResizeImage(img, width, height);
         }
     }
 }

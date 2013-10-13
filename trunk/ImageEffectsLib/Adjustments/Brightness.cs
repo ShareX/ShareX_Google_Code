@@ -24,13 +24,20 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
     public class Brightness : IImageEffect
     {
+        [DefaultValue(0f)]
         public float Value { get; set; }
+
+        public Brightness()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

@@ -24,13 +24,20 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
     public class Hue : IImageEffect
     {
+        [DefaultValue(0f)]
         public float Angle { get; set; }
+
+        public Hue()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

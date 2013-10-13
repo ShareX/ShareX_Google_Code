@@ -31,7 +31,7 @@ namespace ImageEffectsLib
 {
     public class Rotate : IImageEffect
     {
-        [DefaultValue(30), Description("Choose a value between 0 and 360")]
+        [DefaultValue(0f), Description("Choose a value between -360 and 360")]
         public float Angle { get; set; }
 
         public Rotate()
