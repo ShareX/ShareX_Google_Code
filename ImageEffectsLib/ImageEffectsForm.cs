@@ -36,9 +36,10 @@ namespace ImageEffectsLib
     public partial class ImageEffectsForm : Form
     {
         public Image DefaultImage { get; private set; }
-        public List<IImageEffect> Effects { get; private set; }
 
-        public ImageEffectsForm(Image img, List<IImageEffect> effects = null)
+        public List<ImageEffect> Effects { get; private set; }
+
+        public ImageEffectsForm(Image img, List<ImageEffect> effects = null)
         {
             InitializeComponent();
             DefaultImage = img;
@@ -46,21 +47,10 @@ namespace ImageEffectsLib
 
             if (effects != null)
             {
-                Effects = effects;
-                effects.ForEach(x => AddEffect(x));
-            }
-            else
-            {
-                Effects = new List<IImageEffect>();
+                AddEffects(effects.Copy());
             }
 
             UpdatePreview();
-        }
-
-        public ImageEffectsForm(string filePath)
-            : this(Helpers.GetImageFromFile(filePath))
-        {
-            Text += " - " + filePath;
         }
 
         private void AddAllEffectsToTreeView()
@@ -113,17 +103,22 @@ namespace ImageEffectsLib
             pbResult.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
-        public Image ExportImage()
+        private List<ImageEffect> GetImageEffects()
         {
-            List<IImageEffect> imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToList();
+            return lvEffects.Items.Cast<ListViewItem>().Where(x => x != null && x.Tag is ImageEffect).Select(x => (ImageEffect)x.Tag).ToList();
+        }
+
+        private Image ExportImage()
+        {
+            List<ImageEffect> imageEffects = GetImageEffects();
             return ExportImage(DefaultImage, imageEffects);
         }
 
-        public static Image ExportImage(Image img, List<IImageEffect> imageEffects)
+        public static Image ExportImage(Image img, List<ImageEffect> imageEffects)
         {
             Image tempImage = (Image)img.Clone();
 
-            foreach (IImageEffect imageEffect in imageEffects)
+            foreach (ImageEffect imageEffect in imageEffects)
             {
                 tempImage = imageEffect.Apply(tempImage);
             }
@@ -139,7 +134,7 @@ namespace ImageEffectsLib
             {
                 ListViewItem lvi = lvEffects.SelectedItems[0];
 
-                if (lvi.Tag is IImageEffect)
+                if (lvi.Tag is ImageEffect)
                 {
                     pgSettings.SelectedObject = lvi.Tag;
                 }
@@ -158,13 +153,13 @@ namespace ImageEffectsLib
             if (node != null && node.Tag is Type)
             {
                 Type type = (Type)node.Tag;
-                IImageEffect imageEffect = (IImageEffect)Activator.CreateInstance(type);
+                ImageEffect imageEffect = (ImageEffect)Activator.CreateInstance(type);
                 AddEffect(imageEffect);
                 UpdatePreview();
             }
         }
 
-        private void AddEffect(IImageEffect imageEffect)
+        private void AddEffect(ImageEffect imageEffect)
         {
             ListViewItem lvi = new ListViewItem(imageEffect.GetType().Name);
             lvi.Tag = imageEffect;
@@ -180,12 +175,19 @@ namespace ImageEffectsLib
             }
         }
 
+        private void AddEffects(List<ImageEffect> imageEffects)
+        {
+            foreach (ImageEffect imageEffect in imageEffects)
+            {
+                AddEffect(imageEffect);
+            }
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem lvi in lvEffects.SelectedItems)
             {
                 lvi.Remove();
-                Effects.Remove((IImageEffect)lvi.Tag);
             }
 
             UpdatePreview();
@@ -221,7 +223,7 @@ namespace ImageEffectsLib
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Effects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToList();
+            Effects = GetImageEffects();
             DialogResult = DialogResult.OK;
             Close();
         }

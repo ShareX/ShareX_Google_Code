@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Border : IImageEffect
+    public class Border : ImageEffect
     {
         [DefaultValue(BorderType.Outside)]
         public BorderType Type { get; set; }
@@ -45,7 +45,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ImageHelpers.DrawBorder(img, Type, Color, Size);
         }

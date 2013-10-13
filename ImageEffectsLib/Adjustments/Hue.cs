@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Hue : IImageEffect
+    public class Hue : ImageEffect
     {
         [DefaultValue(0f)]
         public float Angle { get; set; }
@@ -39,7 +39,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ColorMatrixManager.Hue(Angle).Apply(img);
         }

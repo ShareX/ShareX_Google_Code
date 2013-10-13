@@ -80,7 +80,7 @@
     <Compile Include="Adjustments\Inverse.cs" />
     <Compile Include="Adjustments\Saturation.cs" />
     <Compile Include="Manipulations\Scale.cs" />
-    <Compile Include="IImageEffect.cs" />
+    <Compile Include="ImageEffect.cs" />
     <Compile Include="ImageEffectsForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Gamma : IImageEffect
+    public class Gamma : ImageEffect
     {
         [DefaultValue(1f), Description("Min 0.1, Max 5.0")]
         public float Value { get; set; }
@@ -39,7 +39,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ColorMatrixManager.ChangeGamma(img, Value);
         }
