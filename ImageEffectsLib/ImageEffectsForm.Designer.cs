@@ -54,7 +54,7 @@
             this.tvEffects.ShowPlusMinus = false;
             this.tvEffects.ShowRootLines = false;
             this.tvEffects.Size = new System.Drawing.Size(232, 688);
-            this.tvEffects.TabIndex = 4;
+            this.tvEffects.TabIndex = 6;
             this.tvEffects.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvEffects_BeforeCollapse);
             this.tvEffects.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvEffects_MouseDoubleClick);
             // 
@@ -66,7 +66,7 @@
             this.pgSettings.Name = "pgSettings";
             this.pgSettings.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.pgSettings.Size = new System.Drawing.Size(448, 264);
-            this.pgSettings.TabIndex = 3;
+            this.pgSettings.TabIndex = 8;
             this.pgSettings.ToolbarVisible = false;
             this.pgSettings.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgSettings_PropertyValueChanged);
             // 
@@ -75,7 +75,7 @@
             this.btnAdd.Location = new System.Drawing.Point(8, 8);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(72, 24);
-            this.btnAdd.TabIndex = 1;
+            this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -91,7 +91,7 @@
             this.lvEffects.MultiSelect = false;
             this.lvEffects.Name = "lvEffects";
             this.lvEffects.Size = new System.Drawing.Size(232, 232);
-            this.lvEffects.TabIndex = 0;
+            this.lvEffects.TabIndex = 7;
             this.lvEffects.UseCompatibleStateImageBehavior = false;
             this.lvEffects.View = System.Windows.Forms.View.Details;
             this.lvEffects.SelectedIndexChanged += new System.EventHandler(this.lvEffects_SelectedIndexChanged);
@@ -105,7 +105,7 @@
             this.btnRemove.Location = new System.Drawing.Point(88, 8);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(72, 24);
-            this.btnRemove.TabIndex = 2;
+            this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -122,7 +122,7 @@
             this.pbResult.Location = new System.Drawing.Point(248, 280);
             this.pbResult.Name = "pbResult";
             this.pbResult.Size = new System.Drawing.Size(688, 448);
-            this.pbResult.TabIndex = 1;
+            this.pbResult.TabIndex = 11;
             // 
             // btnOK
             // 
@@ -130,7 +130,7 @@
             this.btnOK.Location = new System.Drawing.Point(784, 736);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 23);
-            this.btnOK.TabIndex = 7;
+            this.btnOK.TabIndex = 9;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -141,7 +141,7 @@
             this.btnCancel.Location = new System.Drawing.Point(864, 736);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 23);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -151,7 +151,7 @@
             this.btnClear.Location = new System.Drawing.Point(168, 8);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(72, 24);
-            this.btnClear.TabIndex = 9;
+            this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -162,7 +162,7 @@
             this.btnMoveUp.Location = new System.Drawing.Point(328, 8);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(24, 24);
-            this.btnMoveUp.TabIndex = 10;
+            this.btnMoveUp.TabIndex = 4;
             this.btnMoveUp.Text = "↑";
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
@@ -173,7 +173,7 @@
             this.btnMoveDown.Location = new System.Drawing.Point(360, 8);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(24, 24);
-            this.btnMoveDown.TabIndex = 11;
+            this.btnMoveDown.TabIndex = 5;
             this.btnMoveDown.Text = "↓";
             this.btnMoveDown.UseVisualStyleBackColor = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
@@ -183,7 +183,7 @@
             this.btnDuplicate.Location = new System.Drawing.Point(248, 8);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(72, 24);
-            this.btnDuplicate.TabIndex = 12;
+            this.btnDuplicate.TabIndex = 3;
             this.btnDuplicate.Text = "Duplicate";
             this.btnDuplicate.UseVisualStyleBackColor = true;
             this.btnDuplicate.Click += new System.EventHandler(this.btnDuplicate_Click);

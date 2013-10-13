@@ -230,6 +230,11 @@ namespace ShareX
         {
             if (img != null)
             {
+                if (taskSettings.ImageSettings.ImageEffectOnlyRegionCapture && !IsRegionCapture(captureType))
+                {
+                    taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.AddImageEffects);
+                }
+
                 if (taskSettings.GeneralSettings.ShowAfterCaptureTasksForm)
                 {
                     using (AfterCaptureForm afterCaptureForm = new AfterCaptureForm(img, taskSettings.AfterCaptureJob))
