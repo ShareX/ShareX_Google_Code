@@ -88,8 +88,6 @@ namespace ShareX
 
         public static void UploadFile(TaskSettings taskSettings = null)
         {
-            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
-
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Title = "ShareX - File upload";
@@ -112,6 +110,7 @@ namespace ShareX
                         Program.Settings.FileUploadDefaultDirectory = Path.GetDirectoryName(ofd.FileName);
                     }
 
+                    if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
                     UploadFile(ofd.FileNames, taskSettings);
                 }
             }

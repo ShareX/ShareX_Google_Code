@@ -80,6 +80,7 @@ namespace ImageEffectsLib
             string filters = "Filters";
 
             AddEffectToTreeView(filters, typeof(Shadow));
+            AddEffectToTreeView(filters, typeof(Monochrome));
             AddEffectToTreeView(filters, typeof(TornEdge));
 
             tvEffects.ExpandAll();
