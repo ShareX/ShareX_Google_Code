@@ -112,6 +112,7 @@ namespace ShareX
 
             // Image - Effects
             chkShowImageEffectsWindowAfterCapture.Checked = TaskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture;
+            cbImageEffectOnlyRegionCapture.Checked = TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture;
 
             // Capture
             cbShowCursor.Checked = TaskSettings.CaptureSettings.ShowCursor;
