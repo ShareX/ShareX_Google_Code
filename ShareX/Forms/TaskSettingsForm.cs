@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ImageEffectsLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
@@ -109,39 +110,8 @@ namespace ShareX
             nudUseImageFormat2After.Value = TaskSettings.ImageSettings.ImageSizeLimit;
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
 
-            // Image - Resize
-
-            switch (TaskSettings.ImageSettings.ImageScaleType)
-            {
-                case ImageScaleType.Percentage:
-                    rbImageScaleTypePercentage.Checked = true;
-                    break;
-                case ImageScaleType.Width:
-                    rbImageScaleTypeToWidth.Checked = true;
-                    break;
-                case ImageScaleType.Height:
-                    rbImageScaleTypeToHeight.Checked = true;
-                    break;
-                case ImageScaleType.Specific:
-                    rbImageScaleTypeSpecific.Checked = true;
-                    break;
-            }
-
-            nudImageScalePercentageWidth.Value = TaskSettings.ImageSettings.ImageScalePercentageWidth;
-            nudImageScalePercentageHeight.Value = TaskSettings.ImageSettings.ImageScalePercentageHeight;
-            nudImageScaleSpecificWidth.Value = TaskSettings.ImageSettings.ImageScaleSpecificWidth;
-            nudImageScaleSpecificHeight.Value = TaskSettings.ImageSettings.ImageScaleSpecificHeight;
-            nudImageScaleToWidth.Value = TaskSettings.ImageSettings.ImageScaleToWidth;
-            cbImageScaleToWidthKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio;
-            nudImageScaleToHeight.Value = TaskSettings.ImageSettings.ImageScaleToHeight;
-            cbImageScaleToHeightKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio;
-
             // Image - Effects
-            cbImageEffectOnlyRegionCapture.Checked = TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture;
-            btnBorderColor.BackColor = TaskSettings.ImageSettings.BorderColor;
-            nudBorderSize.Value = TaskSettings.ImageSettings.BorderSize;
-            nudImageShadowDarkness.Value = (decimal)TaskSettings.ImageSettings.ShadowDarkness;
-            nudImageShadowSize.Value = TaskSettings.ImageSettings.ShadowSize;
+            chkShowImageEffectsWindowAfterCapture.Checked = TaskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture;
 
             // Capture
             cbShowCursor.Checked = TaskSettings.CaptureSettings.ShowCursor;
@@ -465,105 +435,6 @@ namespace ShareX
             TaskSettings.ImageSettings.ImageSizeLimit = (int)nudUseImageFormat2After.Value;
         }
 
-        #region Resize
-
-        private void rbImageScaleTypePercentage_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeSpecific_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeToWidth_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void rbImageScaleTypeToHeight_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
-        private void CheckImageScaleType()
-        {
-            if (rbImageScaleTypePercentage.Checked)
-            {
-                TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Percentage;
-            }
-            else if (rbImageScaleTypeToWidth.Checked)
-            {
-                TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Width;
-            }
-            else if (rbImageScaleTypeToHeight.Checked)
-            {
-                TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Height;
-            }
-            else if (rbImageScaleTypeSpecific.Checked)
-            {
-                TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Specific;
-            }
-        }
-
-        private void nudImageScalePercentageWidth_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScalePercentageWidth = (int)nudImageScalePercentageWidth.Value;
-        }
-
-        private void nudImageScalePercentageHeight_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScalePercentageHeight = (int)nudImageScalePercentageHeight.Value;
-        }
-
-        private void nudImageScaleSpecificWidth_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
-        }
-
-        private void nudImageScaleSpecificHeight_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
-        }
-
-        private void nudImageScaleToWidth_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
-        }
-
-        private void cbImageScaleToWidthKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio = cbImageScaleToWidthKeepAspectRatio.Checked;
-        }
-
-        private void nudImageScaleToHeight_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
-        }
-
-        private void cbImageScaleToHeightKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio = cbImageScaleToHeightKeepAspectRatio.Checked;
-        }
-
-        #endregion Resize
-
-        private void nudImageShadowSize_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ShadowSize = (int)nudImageShadowSize.Value;
-        }
-
-        private void nudImageShadowDarkness_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ShadowDarkness = (float)nudImageShadowDarkness.Value;
-        }
-
-        private void cbImageEffectOnlyRectangleCapture_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
-        }
-
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
             using (WatermarkUI watermarkForm = new WatermarkUI(TaskSettings.ImageSettings.WatermarkConfig))
@@ -572,20 +443,21 @@ namespace ShareX
             }
         }
 
-        private void nudBorderSize_ValueChanged(object sender, EventArgs e)
+        private void cbImageEffectOnlyRegionCapture_CheckedChanged(object sender, EventArgs e)
         {
-            TaskSettings.ImageSettings.BorderSize = (int)nudBorderSize.Value;
+            TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture = cbImageEffectOnlyRegionCapture.Checked;
         }
 
-        private void btnBorderColor_Click(object sender, EventArgs e)
+        private void chkShowImageEffectsWindowAfterCapture_CheckedChanged(object sender, EventArgs e)
         {
-            using (DialogColor dColor = new DialogColor(TaskSettings.ImageSettings.BorderColor))
+            TaskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture = chkShowImageEffectsWindowAfterCapture.Checked;
+        }
+
+        private void btnImageEffects_Click(object sender, EventArgs e)
+        {
+            using (ImageEffectsForm dlg = new ImageEffectsForm(Resources.ShareXLogo, TaskSettings.ImageSettings.ImageEffects))
             {
-                if (dColor.ShowDialog() == DialogResult.OK)
-                {
-                    TaskSettings.ImageSettings.BorderColor = dColor.Color;
-                    btnBorderColor.BackColor = dColor.Color;
-                }
+                dlg.ShowDialog();
             }
         }
 

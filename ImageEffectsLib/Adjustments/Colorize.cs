@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
@@ -31,6 +32,8 @@ namespace ImageEffectsLib
     public class Colorize : IImageEffect
     {
         public Color Color { get; set; }
+
+        [DefaultValue(0.5), Description("Choose a value between 0 and 1.")]
         public float Value { get; set; }
 
         public Image Apply(Image img)

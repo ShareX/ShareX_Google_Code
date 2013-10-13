@@ -31,7 +31,7 @@ namespace ImageEffectsLib
 {
     public class Scale : IImageEffect
     {
-        [DefaultValue(100)]
+        [DefaultValue(50)]
         public float Percentage { get; set; }
 
         public Scale()

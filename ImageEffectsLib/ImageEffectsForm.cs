@@ -36,12 +36,15 @@ namespace ImageEffectsLib
     public partial class ImageEffectsForm : Form
     {
         public Image DefaultImage { get; private set; }
+        private List<IImageEffect> Effects = new List<IImageEffect>();
 
-        public ImageEffectsForm(Image img)
+        public ImageEffectsForm(Image img, List<IImageEffect> effects = null)
         {
             InitializeComponent();
             DefaultImage = img;
+            Effects = effects;
             AddAllEffectsToTreeView();
+            if (effects != null) effects.ForEach(x => AddEffect(x.GetType()));
             UpdatePreview();
         }
 
@@ -101,9 +104,12 @@ namespace ImageEffectsLib
             pbResult.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
-        public Image ExportImage()
+        public Image ExportImage(IImageEffect[] imageEffects = null)
         {
-            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToArray();
+            if (imageEffects == null)
+            {
+                imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToArray();
+            }
 
             Image tempImage = (Image)DefaultImage.Clone();
 
@@ -142,20 +148,25 @@ namespace ImageEffectsLib
             if (node != null && node.Tag is Type)
             {
                 Type type = (Type)node.Tag;
-                ListViewItem lvi = new ListViewItem(type.Name);
-                lvi.Tag = (IImageEffect)Activator.CreateInstance(type);
-
-                if (lvEffects.SelectedIndices.Count > 0)
-                {
-                    lvEffects.Items.Insert(lvEffects.SelectedIndices[lvEffects.SelectedIndices.Count - 1] + 1, lvi);
-                }
-                else
-                {
-                    lvEffects.Items.Add(lvi);
-                    lvEffects.Items[lvEffects.Items.Count - 1].Selected = true;
-                }
-
+                AddEffect(type);
                 UpdatePreview();
+                Effects.Add((IImageEffect)Activator.CreateInstance(type));
+            }
+        }
+
+        private void AddEffect(Type type)
+        {
+            ListViewItem lvi = new ListViewItem(type.Name);
+            lvi.Tag = (IImageEffect)Activator.CreateInstance(type);
+
+            if (lvEffects.SelectedIndices.Count > 0)
+            {
+                lvEffects.Items.Insert(lvEffects.SelectedIndices[lvEffects.SelectedIndices.Count - 1] + 1, lvi);
+            }
+            else
+            {
+                lvEffects.Items.Add(lvi);
+                lvEffects.Items[lvEffects.Items.Count - 1].Selected = true;
             }
         }
 
@@ -164,6 +175,7 @@ namespace ImageEffectsLib
             foreach (ListViewItem lvi in lvEffects.SelectedItems)
             {
                 lvi.Remove();
+                Effects.Remove((IImageEffect)lvi.Tag);
             }
 
             UpdatePreview();

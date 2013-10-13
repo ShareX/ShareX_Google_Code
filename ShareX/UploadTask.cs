@@ -354,7 +354,7 @@ namespace ShareX
         {
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddImageEffects))
             {
-                tempImage = TaskHelpers.AddImageEffects(tempImage);
+                tempImage = TaskHelpers.AddImageEffects(tempImage, Info.TaskSettings);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
