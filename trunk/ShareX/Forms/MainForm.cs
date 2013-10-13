@@ -341,6 +341,7 @@ namespace ShareX
 
             UpdateMenu();
             UpdateUploaderMenuNames();
+            RegisterMenuClosing();
 
             AfterSettingsJobs();
 
@@ -350,6 +351,14 @@ namespace ShareX
             }
 
             UpdatePreviewSplitter();
+        }
+
+        private void RegisterMenuClosing()
+        {
+            foreach (ToolStripMenuItem menuItem in new [] { tsmiImageUploaders, tsmiTextUploaders, tsmiFileUploaders, tsmiURLShorteners, tsmiSocialServices })
+            {
+                menuItem.DropDown.Closing += (sender, e) => e.Cancel = (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked);
+            }
         }
 
         private void AfterSettingsJobs()
