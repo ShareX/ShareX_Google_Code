@@ -352,25 +352,15 @@ namespace ShareX
 
         private void DoAfterCaptureJobs()
         {
-            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.ResizeImage))
+            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddImageEffects))
             {
-                tempImage = TaskHelpers.ResizeImage(tempImage, Info.TaskSettings);
+                tempImage = TaskHelpers.AddImageEffects(tempImage);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddWatermark) && Info.TaskSettings.ImageSettings.WatermarkConfig != null)
             {
                 WatermarkManager watermarkManager = new WatermarkManager(Info.TaskSettings.ImageSettings.WatermarkConfig);
                 watermarkManager.ApplyWatermark(tempImage);
-            }
-
-            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddBorder))
-            {
-                tempImage = ImageHelpers.DrawBorder(tempImage, Info.TaskSettings.ImageSettings.BorderType, Info.TaskSettings.ImageSettings.BorderColor, Info.TaskSettings.ImageSettings.BorderSize);
-            }
-
-            if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AddShadow))
-            {
-                tempImage = TaskHelpers.DrawShadow(Info.TaskSettings, tempImage);
             }
 
             if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.AnnotateImage))
