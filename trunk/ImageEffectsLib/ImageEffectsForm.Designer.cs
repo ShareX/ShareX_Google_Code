@@ -119,7 +119,7 @@
             this.pbResult.Name = "pbResult";
             this.pbResult.Size = new System.Drawing.Size(688, 448);
             this.pbResult.TabIndex = 1;
-            this.pbResult.Text = "Result";
+            this.pbResult.Text = "Preview";
             // 
             // btnOK
             // 

@@ -42,6 +42,7 @@ namespace ImageEffectsLib
             InitializeComponent();
             DefaultImage = img;
             AddAllEffectsToTreeView();
+            UpdatePreview();
         }
 
         public ImageEffectsForm(string filePath)
@@ -111,7 +112,7 @@ namespace ImageEffectsLib
                 tempImage = imageEffect.Apply(tempImage);
             }
 
-            return tempImage ?? DefaultImage;
+            return tempImage;
         }
 
         private void lvEffects_SelectedIndexChanged(object sender, EventArgs e)
@@ -204,11 +205,13 @@ namespace ImageEffectsLib
         private void btnOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }
