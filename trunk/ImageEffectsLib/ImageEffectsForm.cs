@@ -36,15 +36,24 @@ namespace ImageEffectsLib
     public partial class ImageEffectsForm : Form
     {
         public Image DefaultImage { get; private set; }
-        private List<IImageEffect> Effects = new List<IImageEffect>();
+        public List<IImageEffect> Effects { get; private set; }
 
         public ImageEffectsForm(Image img, List<IImageEffect> effects = null)
         {
             InitializeComponent();
             DefaultImage = img;
-            Effects = effects;
             AddAllEffectsToTreeView();
-            if (effects != null) effects.ForEach(x => AddEffect(x.GetType()));
+
+            if (effects != null)
+            {
+                Effects = effects;
+                effects.ForEach(x => AddEffect(x));
+            }
+            else
+            {
+                Effects = new List<IImageEffect>();
+            }
+
             UpdatePreview();
         }
 
@@ -104,14 +113,15 @@ namespace ImageEffectsLib
             pbResult.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
-        public Image ExportImage(IImageEffect[] imageEffects = null)
+        public Image ExportImage()
         {
-            if (imageEffects == null)
-            {
-                imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToArray();
-            }
+            List<IImageEffect> imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToList();
+            return ExportImage(DefaultImage, imageEffects);
+        }
 
-            Image tempImage = (Image)DefaultImage.Clone();
+        public static Image ExportImage(Image img, List<IImageEffect> imageEffects)
+        {
+            Image tempImage = (Image)img.Clone();
 
             foreach (IImageEffect imageEffect in imageEffects)
             {
@@ -148,15 +158,16 @@ namespace ImageEffectsLib
             if (node != null && node.Tag is Type)
             {
                 Type type = (Type)node.Tag;
-                AddEffect(type);
+                IImageEffect imageEffect = (IImageEffect)Activator.CreateInstance(type);
+                AddEffect(imageEffect);
                 UpdatePreview();
             }
         }
 
-        private void AddEffect(Type type)
+        private void AddEffect(IImageEffect imageEffect)
         {
-            ListViewItem lvi = new ListViewItem(type.Name);
-            lvi.Tag = (IImageEffect)Activator.CreateInstance(type);
+            ListViewItem lvi = new ListViewItem(imageEffect.GetType().Name);
+            lvi.Tag = imageEffect;
 
             if (lvEffects.SelectedIndices.Count > 0)
             {
@@ -198,11 +209,6 @@ namespace ImageEffectsLib
         private void tvEffects_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = true;
-        }
-
-        private void ImageEffectsGUI_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
         }
 
         private void tvEffects_MouseDoubleClick(object sender, MouseEventArgs e)

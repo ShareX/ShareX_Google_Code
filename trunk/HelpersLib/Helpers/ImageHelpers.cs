@@ -539,16 +539,14 @@ namespace HelpersLib
                     Bitmap bmpDest = new Bitmap(bbox.Width, bbox.Height);
 
                     using (Graphics gDest = Graphics.FromImage(bmpDest))
+                    using (Matrix mDest = new Matrix())
                     {
-                        using (Matrix mDest = new Matrix())
-                        {
-                            mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
-                            gDest.Transform = mDest;
-                            gDest.CompositingQuality = CompositingQuality.HighQuality;
-                            gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            gDest.DrawImage(img, pts);
-                            return bmpDest;
-                        }
+                        mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
+                        gDest.Transform = mDest;
+                        gDest.CompositingQuality = CompositingQuality.HighQuality;
+                        gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        gDest.DrawImage(img, pts);
+                        return bmpDest;
                     }
                 }
             }
