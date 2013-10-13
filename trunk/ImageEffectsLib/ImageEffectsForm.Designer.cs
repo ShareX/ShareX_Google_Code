@@ -39,6 +39,9 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnMoveUp = new System.Windows.Forms.Button();
+            this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnDuplicate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tvEffects
@@ -84,10 +87,10 @@
             this.lvEffects.FullRowSelect = true;
             this.lvEffects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvEffects.HideSelection = false;
-            this.lvEffects.Location = new System.Drawing.Point(248, 8);
+            this.lvEffects.Location = new System.Drawing.Point(248, 40);
             this.lvEffects.MultiSelect = false;
             this.lvEffects.Name = "lvEffects";
-            this.lvEffects.Size = new System.Drawing.Size(232, 264);
+            this.lvEffects.Size = new System.Drawing.Size(232, 232);
             this.lvEffects.TabIndex = 0;
             this.lvEffects.UseCompatibleStateImageBehavior = false;
             this.lvEffects.View = System.Windows.Forms.View.Details;
@@ -147,17 +150,52 @@
             // 
             this.btnClear.Location = new System.Drawing.Point(168, 8);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(72, 23);
+            this.btnClear.Size = new System.Drawing.Size(72, 24);
             this.btnClear.TabIndex = 9;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMoveUp.Location = new System.Drawing.Point(328, 8);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(24, 24);
+            this.btnMoveUp.TabIndex = 10;
+            this.btnMoveUp.Text = "↑";
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMoveDown.Location = new System.Drawing.Point(360, 8);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(24, 24);
+            this.btnMoveDown.TabIndex = 11;
+            this.btnMoveDown.Text = "↓";
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            // 
+            // btnDuplicate
+            // 
+            this.btnDuplicate.Location = new System.Drawing.Point(248, 8);
+            this.btnDuplicate.Name = "btnDuplicate";
+            this.btnDuplicate.Size = new System.Drawing.Size(72, 24);
+            this.btnDuplicate.TabIndex = 12;
+            this.btnDuplicate.Text = "Duplicate";
+            this.btnDuplicate.UseVisualStyleBackColor = true;
+            this.btnDuplicate.Click += new System.EventHandler(this.btnDuplicate_Click);
             // 
             // ImageEffectsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 766);
+            this.Controls.Add(this.btnDuplicate);
+            this.Controls.Add(this.btnMoveDown);
+            this.Controls.Add(this.btnMoveUp);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pbResult);
             this.Controls.Add(this.btnCancel);
@@ -171,7 +209,7 @@
             this.Name = "ImageEffectsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ShareX - Image Effects";
+            this.Text = "ShareX - Image effects";
             this.ResumeLayout(false);
 
         }
@@ -188,6 +226,9 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnMoveUp;
+        private System.Windows.Forms.Button btnMoveDown;
+        private System.Windows.Forms.Button btnDuplicate;
     }
 }
 

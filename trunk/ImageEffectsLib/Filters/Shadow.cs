@@ -36,7 +36,7 @@ namespace ImageEffectsLib
 {
     internal class Shadow : ImageEffect
     {
-        [DefaultValue(0.4f)]
+        [DefaultValue(0.5f)]
         public float Darkness { get; set; }
 
         [DefaultValue(9)]
