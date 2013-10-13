@@ -56,7 +56,7 @@ namespace ImageEffectsLib
 
         public override Image ApplyEffect(Image img)
         {
-            return ImageHelpers.ResizeImagePercentage(img, percentage);
+            return ImageHelpers.ResizeImageByPercentage(img, percentage);
         }
     }
 }

@@ -36,6 +36,101 @@ namespace HelpersLib
 {
     public static class ImageHelpers
     {
+        public static Image ResizeImage(Image img, int width, int height)
+        {
+            return ResizeImage(img, 0, 0, width, height);
+        }
+
+        public static Image ResizeImage(Image img, int x, int y, int width, int height)
+        {
+            if (img.Width == width && img.Height == height)
+            {
+                return img;
+            }
+
+            Bitmap bmp = new Bitmap(width, height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+
+                g.DrawImage(img, x, y, width, height);
+
+                img.Dispose();
+            }
+
+            return bmp;
+        }
+
+        public static Image ResizeImageByPercentage(Image img, float percentage)
+        {
+            return ResizeImageByPercentage(img, percentage, percentage);
+        }
+
+        public static Image ResizeImageByPercentage(Image img, float percentageWidth, float percentageHeight)
+        {
+            int width = (int)(percentageWidth / 100 * img.Width);
+            int height = (int)(percentageHeight / 100 * img.Height);
+            return ResizeImage(img, width, height);
+        }
+
+        public static Image ResizeImageByWidth(Image img, int width, bool keepAspectRatio = true)
+        {
+            int height = keepAspectRatio ? width / img.Width * img.Height : img.Height;
+            return ResizeImage(img, width, height);
+        }
+
+        public static Image ResizeImageByHeight(Image img, int height, bool keepAspectRatio = true)
+        {
+            int width = keepAspectRatio ? height / img.Height * img.Width : img.Width;
+            return ResizeImage(img, width, height);
+        }
+
+        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage)
+        {
+            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage);
+        }
+
+        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage)
+        {
+            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage);
+        }
+
+        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage)
+        {
+            double ratio;
+            int newWidth, newHeight, newX, newY;
+
+            if (!allowEnlarge && img.Width <= width && img.Height <= height)
+            {
+                ratio = 1.0;
+                newWidth = img.Width;
+                newHeight = img.Height;
+            }
+            else
+            {
+                double ratioX = (double)width / (double)img.Width;
+                double ratioY = (double)height / (double)img.Height;
+                ratio = ratioX < ratioY ? ratioX : ratioY;
+                newWidth = (int)(img.Width * ratio);
+                newHeight = (int)(img.Height * ratio);
+            }
+
+            newX = x;
+            newY = y;
+
+            if (centerImage)
+            {
+                newX += (int)((width - (img.Width * ratio)) / 2);
+                newY += (int)((height - (img.Height * ratio)) / 2);
+            }
+
+            return ResizeImage(img, newX, newY, newWidth, newHeight);
+        }
+
         public static Image CropImage(Image img, Rectangle rect)
         {
             if (img != null && rect.X >= 0 && rect.Y >= 0 && rect.Width > 0 && rect.Height > 0 &&
@@ -84,101 +179,6 @@ namespace HelpersLib
             }
 
             return null;
-        }
-
-        public static Image ResizeImage(Image img, int width, int height)
-        {
-            return ResizeImage(img, 0, 0, width, height);
-        }
-
-        public static Image ResizeImage(Image img, int x, int y, int width, int height)
-        {
-            if (img.Width == width && img.Height == height)
-            {
-                return img;
-            }
-
-            Bitmap bmp = new Bitmap(width, height);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
-
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-
-                g.DrawImage(img, x, y, width, height);
-
-                img.Dispose();
-            }
-
-            return bmp;
-        }
-
-        public static Image ResizeImagePercentage(Image img, float percentage)
-        {
-            return ResizeImagePercentage(img, percentage, percentage);
-        }
-
-        public static Image ResizeImagePercentage(Image img, float percentageWidth, float percentageHeight)
-        {
-            int width = (int)(percentageWidth / 100 * img.Width);
-            int height = (int)(percentageHeight / 100 * img.Height);
-            return ResizeImage(img, width, height);
-        }
-
-        public static Image ResizeImageWidth(Image img, int width, bool keepAspectRatio = true)
-        {
-            int height = keepAspectRatio ? width / img.Width * img.Height : img.Height;
-            return ResizeImage(img, width, height);
-        }
-
-        public static Image ResizeImageHeight(Image img, int height, bool keepAspectRatio = true)
-        {
-            int width = keepAspectRatio ? height / img.Height * img.Width : img.Width;
-            return ResizeImage(img, width, height);
-        }
-
-        public static Image ResizeImage(Image img, int width, int height, bool allowEnlarge, bool centerImage)
-        {
-            return ResizeImage(img, 0, 0, width, height, allowEnlarge, centerImage);
-        }
-
-        public static Image ResizeImage(Image img, Rectangle rect, bool allowEnlarge, bool centerImage)
-        {
-            return ResizeImage(img, rect.X, rect.Y, rect.Width, rect.Height, allowEnlarge, centerImage);
-        }
-
-        public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage)
-        {
-            double ratio;
-            int newWidth, newHeight, newX, newY;
-
-            if (!allowEnlarge && img.Width <= width && img.Height <= height)
-            {
-                ratio = 1.0;
-                newWidth = img.Width;
-                newHeight = img.Height;
-            }
-            else
-            {
-                double ratioX = (double)width / (double)img.Width;
-                double ratioY = (double)height / (double)img.Height;
-                ratio = ratioX < ratioY ? ratioX : ratioY;
-                newWidth = (int)(img.Width * ratio);
-                newHeight = (int)(img.Height * ratio);
-            }
-
-            newX = x;
-            newY = y;
-
-            if (centerImage)
-            {
-                newX += (int)((width - (img.Width * ratio)) / 2);
-                newY += (int)((height - (img.Height * ratio)) / 2);
-            }
-
-            return ResizeImage(img, newX, newY, newWidth, newHeight);
         }
 
         public static Image DrawBorder(Image img, BorderType borderType, Color borderColor, int borderSize)

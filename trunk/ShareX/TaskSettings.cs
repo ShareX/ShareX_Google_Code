@@ -216,15 +216,15 @@ namespace ShareX
 
         #region Image / Resize
 
-        public bool ImageKeepAspectRatio = false;
-        public bool ImageUseSmoothScaling = true;
         public ImageScaleType ImageScaleType = ImageScaleType.Percentage;
+        public int ImageScaleSpecificWidth = 100;
+        public int ImageScaleSpecificHeight = 100;
         public int ImageScalePercentageWidth = 100;
         public int ImageScalePercentageHeight = 100;
         public int ImageScaleToWidth = 100;
+        public bool ImageScaleToWidthKeepAspectRatio = true;
         public int ImageScaleToHeight = 100;
-        public int ImageScaleSpecificWidth = 100;
-        public int ImageScaleSpecificHeight = 100;
+        public bool ImageScaleToHeightKeepAspectRatio = true;
 
         #endregion Image / Resize
 
