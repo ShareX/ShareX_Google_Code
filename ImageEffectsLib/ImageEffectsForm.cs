@@ -59,7 +59,7 @@ namespace ImageEffectsLib
 
             AddEffectToTreeView(manipulations, typeof(Border));
             AddEffectToTreeView(manipulations, typeof(Canvas));
-            AddEffectToTreeView(manipulations, typeof(FillBackground));
+            AddEffectToTreeView(manipulations, typeof(Background));
             AddEffectToTreeView(manipulations, typeof(Reflection));
             AddEffectToTreeView(manipulations, typeof(Resize));
             AddEffectToTreeView(manipulations, typeof(Rotate));
@@ -80,6 +80,7 @@ namespace ImageEffectsLib
             string filters = "Filters";
 
             AddEffectToTreeView(filters, typeof(Shadow));
+            AddEffectToTreeView(filters, typeof(TornEdge));
 
             tvEffects.ExpandAll();
         }
