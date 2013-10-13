@@ -40,13 +40,7 @@ namespace ImageEffectsLib
         public ImageEffectsForm(Image img)
         {
             InitializeComponent();
-
             DefaultImage = img;
-
-            pbDefault.Image = DefaultImage;
-            pbDefaultZoom.Image = null;
-            lblDefault.Text = string.Format("Default ({0}x{1})", pbDefault.Image.Width, pbDefault.Image.Height);
-
             AddAllEffectsToTreeView();
         }
 
@@ -102,9 +96,8 @@ namespace ImageEffectsLib
         private void UpdatePreview()
         {
             Stopwatch timer = Stopwatch.StartNew();
-            pbPreview.Image = ExportImage();
-            lblPreview.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbPreview.Image.Width, pbPreview.Image.Height, timer.ElapsedMilliseconds);
-            pbPreviewZoom.Image = null;
+            pbResult.LoadImage(ExportImage());
+            pbResult.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
         public Image ExportImage()
@@ -175,14 +168,29 @@ namespace ImageEffectsLib
             UpdatePreview();
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvi in lvEffects.Items)
+            {
+                lvi.Remove();
+            }
+
+            UpdatePreview();
+        }
+
         private void pgSettings_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             UpdatePreview();
         }
 
+        private void tvEffects_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
         private void ImageEffectsGUI_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void tvEffects_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -191,6 +199,16 @@ namespace ImageEffectsLib
             {
                 AddSelectedEffect();
             }
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

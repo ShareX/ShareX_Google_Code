@@ -210,11 +210,15 @@ namespace ShareX
         {
             using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img))
             {
-                imageEffectsForm.ShowDialog();
-                Image result = imageEffectsForm.ExportImage();
-                img.Dispose();
-                return result;
+                if (imageEffectsForm.ShowDialog() == DialogResult.OK)
+                {
+                    Image result = imageEffectsForm.ExportImage();
+                    img.Dispose();
+                    return result;
+                }
             }
+
+            return img;
         }
 
         public static Image DrawShadow(TaskSettings taskSettings, Image img)
