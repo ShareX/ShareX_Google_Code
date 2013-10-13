@@ -266,6 +266,7 @@ namespace HelpersLib
             }
 
             Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
+
             using (Graphics g = Graphics.FromImage(result))
             {
                 g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height));

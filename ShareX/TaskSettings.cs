@@ -219,6 +219,7 @@ namespace ShareX
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
 
+        [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
         public List<ImageEffect> ImageEffects = new List<ImageEffect>();
 
         public bool ImageEffectOnlyRegionCapture = true;

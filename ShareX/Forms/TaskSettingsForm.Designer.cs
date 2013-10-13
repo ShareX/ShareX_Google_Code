@@ -77,6 +77,8 @@
             this.nudUseImageFormat2After = new System.Windows.Forms.NumericUpDown();
             this.lblUseImageFormat2After = new System.Windows.Forms.Label();
             this.tpEffects = new System.Windows.Forms.TabPage();
+            this.gbImageEffects = new System.Windows.Forms.GroupBox();
+            this.chkShowImageEffectsWindowAfterCapture = new System.Windows.Forms.CheckBox();
             this.cbImageEffectOnlyRegionCapture = new System.Windows.Forms.CheckBox();
             this.btnImageEffects = new System.Windows.Forms.Button();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
@@ -152,8 +154,6 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
-            this.chkShowImageEffectsWindowAfterCapture = new System.Windows.Forms.CheckBox();
-            this.gbImageEffects = new System.Windows.Forms.GroupBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -164,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageJPEGQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudUseImageFormat2After)).BeginInit();
             this.tpEffects.SuspendLayout();
+            this.gbImageEffects.SuspendLayout();
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
@@ -184,7 +185,6 @@
             this.tpUploadClipboard.SuspendLayout();
             this.tpIndexer.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
-            this.gbImageEffects.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAfterCapture
@@ -722,6 +722,29 @@
             this.tpEffects.Text = "Effects";
             this.tpEffects.UseVisualStyleBackColor = true;
             // 
+            // gbImageEffects
+            // 
+            this.gbImageEffects.Controls.Add(this.chkShowImageEffectsWindowAfterCapture);
+            this.gbImageEffects.Controls.Add(this.cbImageEffectOnlyRegionCapture);
+            this.gbImageEffects.Controls.Add(this.btnImageEffects);
+            this.gbImageEffects.Location = new System.Drawing.Point(16, 16);
+            this.gbImageEffects.Name = "gbImageEffects";
+            this.gbImageEffects.Size = new System.Drawing.Size(304, 112);
+            this.gbImageEffects.TabIndex = 5;
+            this.gbImageEffects.TabStop = false;
+            this.gbImageEffects.Text = "Image effects";
+            // 
+            // chkShowImageEffectsWindowAfterCapture
+            // 
+            this.chkShowImageEffectsWindowAfterCapture.AutoSize = true;
+            this.chkShowImageEffectsWindowAfterCapture.Location = new System.Drawing.Point(16, 56);
+            this.chkShowImageEffectsWindowAfterCapture.Name = "chkShowImageEffectsWindowAfterCapture";
+            this.chkShowImageEffectsWindowAfterCapture.Size = new System.Drawing.Size(221, 17);
+            this.chkShowImageEffectsWindowAfterCapture.TabIndex = 4;
+            this.chkShowImageEffectsWindowAfterCapture.Text = "Show image effects window after capture";
+            this.chkShowImageEffectsWindowAfterCapture.UseVisualStyleBackColor = true;
+            this.chkShowImageEffectsWindowAfterCapture.CheckedChanged += new System.EventHandler(this.chkShowImageEffectsWindowAfterCapture_CheckedChanged);
+            // 
             // cbImageEffectOnlyRegionCapture
             // 
             this.cbImageEffectOnlyRegionCapture.AutoSize = true;
@@ -737,9 +760,9 @@
             // 
             this.btnImageEffects.Location = new System.Drawing.Point(16, 24);
             this.btnImageEffects.Name = "btnImageEffects";
-            this.btnImageEffects.Size = new System.Drawing.Size(160, 23);
+            this.btnImageEffects.Size = new System.Drawing.Size(208, 23);
             this.btnImageEffects.TabIndex = 2;
-            this.btnImageEffects.Text = "Image Effects  configuration..";
+            this.btnImageEffects.Text = "Image Effects configuration...";
             this.btnImageEffects.UseVisualStyleBackColor = true;
             this.btnImageEffects.Click += new System.EventHandler(this.btnImageEffects_Click);
             // 
@@ -1596,29 +1619,6 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
-            // chkShowImageEffectsWindowAfterCapture
-            // 
-            this.chkShowImageEffectsWindowAfterCapture.AutoSize = true;
-            this.chkShowImageEffectsWindowAfterCapture.Location = new System.Drawing.Point(16, 56);
-            this.chkShowImageEffectsWindowAfterCapture.Name = "chkShowImageEffectsWindowAfterCapture";
-            this.chkShowImageEffectsWindowAfterCapture.Size = new System.Drawing.Size(221, 17);
-            this.chkShowImageEffectsWindowAfterCapture.TabIndex = 4;
-            this.chkShowImageEffectsWindowAfterCapture.Text = "Show image effects window after capture";
-            this.chkShowImageEffectsWindowAfterCapture.UseVisualStyleBackColor = true;
-            this.chkShowImageEffectsWindowAfterCapture.CheckedChanged += new System.EventHandler(this.chkShowImageEffectsWindowAfterCapture_CheckedChanged);
-            // 
-            // gbImageEffects
-            // 
-            this.gbImageEffects.Controls.Add(this.chkShowImageEffectsWindowAfterCapture);
-            this.gbImageEffects.Controls.Add(this.cbImageEffectOnlyRegionCapture);
-            this.gbImageEffects.Controls.Add(this.btnImageEffects);
-            this.gbImageEffects.Location = new System.Drawing.Point(16, 16);
-            this.gbImageEffects.Name = "gbImageEffects";
-            this.gbImageEffects.Size = new System.Drawing.Size(304, 112);
-            this.gbImageEffects.TabIndex = 5;
-            this.gbImageEffects.TabStop = false;
-            this.gbImageEffects.Text = "Image effects";
-            // 
             // TaskSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1648,6 +1648,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudImageJPEGQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudUseImageFormat2After)).EndInit();
             this.tpEffects.ResumeLayout(false);
+            this.gbImageEffects.ResumeLayout(false);
+            this.gbImageEffects.PerformLayout();
             this.tpCapture.ResumeLayout(false);
             this.tpCapture.PerformLayout();
             this.tcCapture.ResumeLayout(false);
@@ -1679,8 +1681,6 @@
             this.tpIndexer.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.tpAdvanced.PerformLayout();
-            this.gbImageEffects.ResumeLayout(false);
-            this.gbImageEffects.PerformLayout();
             this.ResumeLayout(false);
 
         }
