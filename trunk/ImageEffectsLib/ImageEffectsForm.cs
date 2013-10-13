@@ -44,8 +44,10 @@ namespace ImageEffectsLib
             DefaultImage = img;
 
             pbDefault.Image = DefaultImage;
-            pbDefaultZoom.Image = ImageHelpers.ResizeImage(pbDefault.Image, 8, 12);
-            lblDefault.Text = string.Format("Default image ({0}x{1})", pbDefault.Image.Width, pbDefault.Image.Height);
+            pbDefaultZoom.Image = null;
+            lblDefault.Text = string.Format("Default ({0}x{1})", pbDefault.Image.Width, pbDefault.Image.Height);
+
+            AddAllEffectsToTreeView();
         }
 
         public ImageEffectsForm(string filePath)
@@ -54,18 +56,61 @@ namespace ImageEffectsLib
             Text += " - " + filePath;
         }
 
-        private void UpdatePreview()
+        private void AddAllEffectsToTreeView()
         {
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-            pbPreview.Image = GetImageForExport();
-            lblPreview.Text = string.Format("Preview image ({0}x{1}) - {2} ms", pbPreview.Image.Width, pbPreview.Image.Height, timer.ElapsedMilliseconds);
-            pbPreviewZoom.Image = ImageHelpers.ResizeImage(pbPreview.Image, 8, 12);
+            string adjustments = "Adjustments";
+
+            AddEffectToTreeView(adjustments, typeof(Alpha));
+            AddEffectToTreeView(adjustments, typeof(Brightness));
+            AddEffectToTreeView(adjustments, typeof(Colorize));
+            AddEffectToTreeView(adjustments, typeof(Contrast));
+            AddEffectToTreeView(adjustments, typeof(Gamma));
+            AddEffectToTreeView(adjustments, typeof(Grayscale));
+            AddEffectToTreeView(adjustments, typeof(Hue));
+            AddEffectToTreeView(adjustments, typeof(Inverse));
+            AddEffectToTreeView(adjustments, typeof(Saturation));
+
+            string manipulations = "Manipulations";
+
+            AddEffectToTreeView(manipulations, typeof(Border));
+            AddEffectToTreeView(manipulations, typeof(Reflection));
+            AddEffectToTreeView(manipulations, typeof(Resize));
+            AddEffectToTreeView(manipulations, typeof(Rotate));
+            AddEffectToTreeView(manipulations, typeof(Scale));
+
+            tvEffects.ExpandAll();
         }
 
-        public Image GetImageForExport()
+        private void AddEffectToTreeView(string groupName, Type imageEffect)
         {
-            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().Where(x => x.Tag is IImageEffect).Select(x => (IImageEffect)x.Tag).ToArray();
+            TreeNode parentNode;
+            TreeNode[] treeNodes = tvEffects.Nodes.Find(groupName, false);
+
+            if (treeNodes != null && treeNodes.Length > 0)
+            {
+                parentNode = treeNodes[0];
+            }
+            else
+            {
+                parentNode = tvEffects.Nodes.Add(groupName, groupName);
+            }
+
+            TreeNode childNode = parentNode.Nodes.Add(imageEffect.Name);
+            childNode.Tag = imageEffect;
+        }
+
+        private void UpdatePreview()
+        {
+            Stopwatch timer = Stopwatch.StartNew();
+            pbPreview.Image = ExportImage();
+            lblPreview.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbPreview.Image.Width, pbPreview.Image.Height, timer.ElapsedMilliseconds);
+            pbPreviewZoom.Image = null;
+        }
+
+        public Image ExportImage()
+        {
+            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().OfType<IImageEffect>().ToArray();
+
             Image tempImage = (Image)DefaultImage.Clone();
 
             foreach (IImageEffect imageEffect in imageEffects)
@@ -83,6 +128,7 @@ namespace ImageEffectsLib
             if (lvEffects.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvEffects.SelectedItems[0];
+
                 if (lvi.Tag is IImageEffect)
                 {
                     pgSettings.SelectedObject = lvi.Tag;
@@ -94,11 +140,11 @@ namespace ImageEffectsLib
         {
             TreeNode node = tvEffects.SelectedNode;
 
-            if (node.Tag is IImageEffect)
+            if (node.Tag is Type)
             {
-                IImageEffect imageEffect = (IImageEffect)Activator.CreateInstance(node.Tag.GetType());
-                ListViewItem lvi = new ListViewItem(imageEffect.GetType().ToString());
-                lvi.Tag = imageEffect;
+                Type type = (Type)node.Tag;
+                ListViewItem lvi = new ListViewItem(type.Name);
+                lvi.Tag = (IImageEffect)Activator.CreateInstance(type);
 
                 if (lvEffects.SelectedIndices.Count > 0)
                 {
