@@ -34,6 +34,14 @@ namespace HelpersLib
 {
     public partial class MyPictureBox : UserControl
     {
+        public Image Image
+        {
+            get
+            {
+                return pbMain.Image;
+            }
+        }
+
         private string text;
 
         [EditorBrowsable(EditorBrowsableState.Always), Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Bindable(true)]
