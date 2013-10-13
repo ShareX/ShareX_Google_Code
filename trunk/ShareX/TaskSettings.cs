@@ -222,8 +222,8 @@ namespace ShareX
         [JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
         public List<ImageEffect> ImageEffects = new List<ImageEffect>();
 
-        public bool ImageEffectOnlyRegionCapture = true;
         public bool ShowImageEffectsWindowAfterCapture = false;
+        public bool ImageEffectOnlyRegionCapture = true;
 
         #endregion Image / Effects
     }

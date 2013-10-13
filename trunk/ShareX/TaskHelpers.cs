@@ -180,9 +180,10 @@ namespace ShareX
 
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    Image result = editor.GetImageForExport();
-                    img.Dispose();
-                    return result;
+                    using (img)
+                    {
+                        return editor.GetImageForExport();
+                    }
                 }
             }
 
@@ -202,9 +203,10 @@ namespace ShareX
                 }
             }
 
-            Image result = ImageEffectsForm.ExportImage(img, taskSettings.ImageSettings.ImageEffects);
-            img.Dispose();
-            return result;
+            using (img)
+            {
+                return ImageEffectsForm.ExportImage(img, taskSettings.ImageSettings.ImageEffects);
+            }
         }
 
         public static void AddDefaultExternalPrograms(TaskSettings taskSettings)
