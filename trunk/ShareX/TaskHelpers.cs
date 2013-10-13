@@ -206,13 +206,13 @@ namespace ShareX
             return img;
         }
 
-        public static Image AddImageEffects(Image img)
+        public static Image AddImageEffects(Image img, TaskSettings taskSettings)
         {
             using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img))
             {
-                if (imageEffectsForm.ShowDialog() == DialogResult.OK)
+                if (!taskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture || imageEffectsForm.ShowDialog() == DialogResult.OK)
                 {
-                    Image result = imageEffectsForm.ExportImage();
+                    Image result = imageEffectsForm.ExportImage(taskSettings.ImageSettings.ImageEffects.ToArray());
                     img.Dispose();
                     return result;
                 }

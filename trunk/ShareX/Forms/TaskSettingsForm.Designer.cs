@@ -44,6 +44,14 @@
             this.cmsTask = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tcHotkeySettings = new System.Windows.Forms.TabControl();
             this.tpTask = new System.Windows.Forms.TabPage();
+            this.btnAfterCapture = new HelpersLib.MenuButton();
+            this.btnAfterUpload = new HelpersLib.MenuButton();
+            this.btnImageUploaders = new HelpersLib.MenuButton();
+            this.btnTextUploaders = new HelpersLib.MenuButton();
+            this.btnFileUploaders = new HelpersLib.MenuButton();
+            this.btnURLShorteners = new HelpersLib.MenuButton();
+            this.btnSocialNetworkingServices = new HelpersLib.MenuButton();
+            this.btnTask = new HelpersLib.MenuButton();
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.panelGeneral = new System.Windows.Forms.Panel();
             this.chkShowAfterUploadForm = new System.Windows.Forms.CheckBox();
@@ -68,44 +76,10 @@
             this.lblImageFormat2 = new System.Windows.Forms.Label();
             this.nudUseImageFormat2After = new System.Windows.Forms.NumericUpDown();
             this.lblUseImageFormat2After = new System.Windows.Forms.Label();
-            this.tpResize = new System.Windows.Forms.TabPage();
-            this.cbImageScaleToHeightKeepAspectRatio = new System.Windows.Forms.CheckBox();
-            this.rbImageScaleTypePercentage = new System.Windows.Forms.RadioButton();
-            this.lblImageScaleToHeight2 = new System.Windows.Forms.Label();
-            this.rbImageScaleTypeToWidth = new System.Windows.Forms.RadioButton();
-            this.cbImageScaleToWidthKeepAspectRatio = new System.Windows.Forms.CheckBox();
-            this.lblImageScaleSpecificWidth2 = new System.Windows.Forms.Label();
-            this.rbImageScaleTypeToHeight = new System.Windows.Forms.RadioButton();
-            this.nudImageScaleSpecificWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblImageScaleSpecificHeight2 = new System.Windows.Forms.Label();
-            this.lblImageScaleSpecificWidth = new System.Windows.Forms.Label();
-            this.rbImageScaleTypeSpecific = new System.Windows.Forms.RadioButton();
-            this.lblImageScaleSpecificHeight = new System.Windows.Forms.Label();
-            this.lblImageScaleToWidth2 = new System.Windows.Forms.Label();
-            this.lblImageScaleToHeight = new System.Windows.Forms.Label();
-            this.lblImageScalePercentageWidth = new System.Windows.Forms.Label();
-            this.nudImageScaleSpecificHeight = new System.Windows.Forms.NumericUpDown();
-            this.lblImageScalePercentageHeight2 = new System.Windows.Forms.Label();
-            this.lblImageScaleToWidth = new System.Windows.Forms.Label();
-            this.nudImageScalePercentageWidth = new System.Windows.Forms.NumericUpDown();
-            this.nudImageScaleToWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblImageScalePercentageWidth2 = new System.Windows.Forms.Label();
-            this.nudImageScalePercentageHeight = new System.Windows.Forms.NumericUpDown();
-            this.lblImageScalePercentageHeight = new System.Windows.Forms.Label();
-            this.nudImageScaleToHeight = new System.Windows.Forms.NumericUpDown();
             this.tpEffects = new System.Windows.Forms.TabPage();
-            this.gbImageShadow = new System.Windows.Forms.GroupBox();
-            this.lblImageShadowSize = new System.Windows.Forms.Label();
-            this.lblImageShadowDarkness = new System.Windows.Forms.Label();
-            this.nudImageShadowSize = new System.Windows.Forms.NumericUpDown();
-            this.nudImageShadowDarkness = new System.Windows.Forms.NumericUpDown();
             this.cbImageEffectOnlyRegionCapture = new System.Windows.Forms.CheckBox();
+            this.btnImageEffects = new System.Windows.Forms.Button();
             this.btnWatermarkSettings = new System.Windows.Forms.Button();
-            this.gbBorder = new System.Windows.Forms.GroupBox();
-            this.nudBorderSize = new System.Windows.Forms.NumericUpDown();
-            this.btnBorderColor = new System.Windows.Forms.Button();
-            this.lblBorderSize = new System.Windows.Forms.Label();
-            this.lblBorderColor = new System.Windows.Forms.Label();
             this.chkUseDefaultImageSettings = new System.Windows.Forms.CheckBox();
             this.tpCapture = new System.Windows.Forms.TabPage();
             this.tcCapture = new System.Windows.Forms.TabControl();
@@ -143,6 +117,10 @@
             this.tpActions = new System.Windows.Forms.TabPage();
             this.pActions = new System.Windows.Forms.Panel();
             this.btnActionsAdd = new System.Windows.Forms.Button();
+            this.lvActions = new HelpersLib.MyListView();
+            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnActionsEdit = new System.Windows.Forms.Button();
             this.btnActionsRemove = new System.Windows.Forms.Button();
             this.chkUseDefaultActions = new System.Windows.Forms.CheckBox();
@@ -174,18 +152,8 @@
             this.tpAdvanced = new System.Windows.Forms.TabPage();
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkUseDefaultAdvancedSettings = new System.Windows.Forms.CheckBox();
-            this.btnAfterCapture = new HelpersLib.MenuButton();
-            this.btnAfterUpload = new HelpersLib.MenuButton();
-            this.btnImageUploaders = new HelpersLib.MenuButton();
-            this.btnTextUploaders = new HelpersLib.MenuButton();
-            this.btnFileUploaders = new HelpersLib.MenuButton();
-            this.btnURLShorteners = new HelpersLib.MenuButton();
-            this.btnSocialNetworkingServices = new HelpersLib.MenuButton();
-            this.btnTask = new HelpersLib.MenuButton();
-            this.lvActions = new HelpersLib.MyListView();
-            this.chActionsName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chActionsArgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chkShowImageEffectsWindowAfterCapture = new System.Windows.Forms.CheckBox();
+            this.gbImageEffects = new System.Windows.Forms.GroupBox();
             this.tcHotkeySettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.tpGeneral.SuspendLayout();
@@ -195,19 +163,7 @@
             this.tpQuality.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageJPEGQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudUseImageFormat2After)).BeginInit();
-            this.tpResize.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScalePercentageWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScalePercentageHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToHeight)).BeginInit();
             this.tpEffects.SuspendLayout();
-            this.gbImageShadow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowDarkness)).BeginInit();
-            this.gbBorder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).BeginInit();
             this.tpCapture.SuspendLayout();
             this.tcCapture.SuspendLayout();
             this.tpCaptureGeneral.SuspendLayout();
@@ -228,6 +184,7 @@
             this.tpUploadClipboard.SuspendLayout();
             this.tpIndexer.SuspendLayout();
             this.tpAdvanced.SuspendLayout();
+            this.gbImageEffects.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmsAfterCapture
@@ -361,6 +318,102 @@
             this.tpTask.Text = "Task";
             this.tpTask.UseVisualStyleBackColor = true;
             // 
+            // btnAfterCapture
+            // 
+            this.btnAfterCapture.Location = new System.Drawing.Point(6, 93);
+            this.btnAfterCapture.Menu = this.cmsAfterCapture;
+            this.btnAfterCapture.Name = "btnAfterCapture";
+            this.btnAfterCapture.Size = new System.Drawing.Size(506, 23);
+            this.btnAfterCapture.TabIndex = 4;
+            this.btnAfterCapture.Text = "After capture...";
+            this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterCapture.UseMnemonic = false;
+            this.btnAfterCapture.UseVisualStyleBackColor = true;
+            // 
+            // btnAfterUpload
+            // 
+            this.btnAfterUpload.Location = new System.Drawing.Point(6, 149);
+            this.btnAfterUpload.Menu = this.cmsAfterUpload;
+            this.btnAfterUpload.Name = "btnAfterUpload";
+            this.btnAfterUpload.Size = new System.Drawing.Size(506, 23);
+            this.btnAfterUpload.TabIndex = 6;
+            this.btnAfterUpload.Text = "After upload...";
+            this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAfterUpload.UseMnemonic = false;
+            this.btnAfterUpload.UseVisualStyleBackColor = true;
+            // 
+            // btnImageUploaders
+            // 
+            this.btnImageUploaders.Location = new System.Drawing.Point(6, 205);
+            this.btnImageUploaders.Menu = this.cmsImageUploaders;
+            this.btnImageUploaders.Name = "btnImageUploaders";
+            this.btnImageUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnImageUploaders.TabIndex = 8;
+            this.btnImageUploaders.Text = "Image uploaders";
+            this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImageUploaders.UseMnemonic = false;
+            this.btnImageUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnTextUploaders
+            // 
+            this.btnTextUploaders.Location = new System.Drawing.Point(6, 229);
+            this.btnTextUploaders.Menu = this.cmsTextUploaders;
+            this.btnTextUploaders.Name = "btnTextUploaders";
+            this.btnTextUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnTextUploaders.TabIndex = 9;
+            this.btnTextUploaders.Text = "Text uploaders";
+            this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTextUploaders.UseMnemonic = false;
+            this.btnTextUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnFileUploaders
+            // 
+            this.btnFileUploaders.Location = new System.Drawing.Point(6, 253);
+            this.btnFileUploaders.Menu = this.cmsFileUploaders;
+            this.btnFileUploaders.Name = "btnFileUploaders";
+            this.btnFileUploaders.Size = new System.Drawing.Size(506, 23);
+            this.btnFileUploaders.TabIndex = 10;
+            this.btnFileUploaders.Text = "File uploaders";
+            this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFileUploaders.UseMnemonic = false;
+            this.btnFileUploaders.UseVisualStyleBackColor = true;
+            // 
+            // btnURLShorteners
+            // 
+            this.btnURLShorteners.Location = new System.Drawing.Point(6, 277);
+            this.btnURLShorteners.Menu = this.cmsURLShorteners;
+            this.btnURLShorteners.Name = "btnURLShorteners";
+            this.btnURLShorteners.Size = new System.Drawing.Size(506, 23);
+            this.btnURLShorteners.TabIndex = 11;
+            this.btnURLShorteners.Text = "URL shorteners";
+            this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnURLShorteners.UseMnemonic = false;
+            this.btnURLShorteners.UseVisualStyleBackColor = true;
+            // 
+            // btnSocialNetworkingServices
+            // 
+            this.btnSocialNetworkingServices.Location = new System.Drawing.Point(6, 301);
+            this.btnSocialNetworkingServices.Menu = this.cmsSocialNetworkingServices;
+            this.btnSocialNetworkingServices.Name = "btnSocialNetworkingServices";
+            this.btnSocialNetworkingServices.Size = new System.Drawing.Size(506, 23);
+            this.btnSocialNetworkingServices.TabIndex = 12;
+            this.btnSocialNetworkingServices.Text = "Social networking services";
+            this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSocialNetworkingServices.UseMnemonic = false;
+            this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
+            // 
+            // btnTask
+            // 
+            this.btnTask.Location = new System.Drawing.Point(6, 37);
+            this.btnTask.Menu = this.cmsTask;
+            this.btnTask.Name = "btnTask";
+            this.btnTask.Size = new System.Drawing.Size(506, 23);
+            this.btnTask.TabIndex = 2;
+            this.btnTask.Text = "Task...";
+            this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTask.UseMnemonic = false;
+            this.btnTask.UseVisualStyleBackColor = true;
+            // 
             // tpGeneral
             // 
             this.tpGeneral.Controls.Add(this.panelGeneral);
@@ -484,7 +537,6 @@
             // tcImage
             // 
             this.tcImage.Controls.Add(this.tpQuality);
-            this.tcImage.Controls.Add(this.tpResize);
             this.tcImage.Controls.Add(this.tpEffects);
             this.tcImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcImage.Location = new System.Drawing.Point(3, 30);
@@ -658,350 +710,10 @@
             this.lblUseImageFormat2After.TabIndex = 7;
             this.lblUseImageFormat2After.Text = "Image size limit for use \"Image format 2\":";
             // 
-            // tpResize
-            // 
-            this.tpResize.Controls.Add(this.cbImageScaleToHeightKeepAspectRatio);
-            this.tpResize.Controls.Add(this.rbImageScaleTypePercentage);
-            this.tpResize.Controls.Add(this.lblImageScaleToHeight2);
-            this.tpResize.Controls.Add(this.rbImageScaleTypeToWidth);
-            this.tpResize.Controls.Add(this.cbImageScaleToWidthKeepAspectRatio);
-            this.tpResize.Controls.Add(this.lblImageScaleSpecificWidth2);
-            this.tpResize.Controls.Add(this.rbImageScaleTypeToHeight);
-            this.tpResize.Controls.Add(this.nudImageScaleSpecificWidth);
-            this.tpResize.Controls.Add(this.lblImageScaleSpecificHeight2);
-            this.tpResize.Controls.Add(this.lblImageScaleSpecificWidth);
-            this.tpResize.Controls.Add(this.rbImageScaleTypeSpecific);
-            this.tpResize.Controls.Add(this.lblImageScaleSpecificHeight);
-            this.tpResize.Controls.Add(this.lblImageScaleToWidth2);
-            this.tpResize.Controls.Add(this.lblImageScaleToHeight);
-            this.tpResize.Controls.Add(this.lblImageScalePercentageWidth);
-            this.tpResize.Controls.Add(this.nudImageScaleSpecificHeight);
-            this.tpResize.Controls.Add(this.lblImageScalePercentageHeight2);
-            this.tpResize.Controls.Add(this.lblImageScaleToWidth);
-            this.tpResize.Controls.Add(this.nudImageScalePercentageWidth);
-            this.tpResize.Controls.Add(this.nudImageScaleToWidth);
-            this.tpResize.Controls.Add(this.lblImageScalePercentageWidth2);
-            this.tpResize.Controls.Add(this.nudImageScalePercentageHeight);
-            this.tpResize.Controls.Add(this.lblImageScalePercentageHeight);
-            this.tpResize.Controls.Add(this.nudImageScaleToHeight);
-            this.tpResize.Location = new System.Drawing.Point(4, 22);
-            this.tpResize.Name = "tpResize";
-            this.tpResize.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResize.Size = new System.Drawing.Size(506, 301);
-            this.tpResize.TabIndex = 1;
-            this.tpResize.Text = "Resize";
-            this.tpResize.UseVisualStyleBackColor = true;
-            // 
-            // cbImageScaleToHeightKeepAspectRatio
-            // 
-            this.cbImageScaleToHeightKeepAspectRatio.AutoSize = true;
-            this.cbImageScaleToHeightKeepAspectRatio.Location = new System.Drawing.Point(227, 154);
-            this.cbImageScaleToHeightKeepAspectRatio.Name = "cbImageScaleToHeightKeepAspectRatio";
-            this.cbImageScaleToHeightKeepAspectRatio.Size = new System.Drawing.Size(109, 17);
-            this.cbImageScaleToHeightKeepAspectRatio.TabIndex = 22;
-            this.cbImageScaleToHeightKeepAspectRatio.Text = "Keep aspect ratio";
-            this.cbImageScaleToHeightKeepAspectRatio.UseVisualStyleBackColor = true;
-            this.cbImageScaleToHeightKeepAspectRatio.CheckedChanged += new System.EventHandler(this.cbImageScaleToHeightKeepAspectRatio_CheckedChanged);
-            // 
-            // rbImageScaleTypePercentage
-            // 
-            this.rbImageScaleTypePercentage.AutoSize = true;
-            this.rbImageScaleTypePercentage.Checked = true;
-            this.rbImageScaleTypePercentage.Location = new System.Drawing.Point(16, 16);
-            this.rbImageScaleTypePercentage.Name = "rbImageScaleTypePercentage";
-            this.rbImageScaleTypePercentage.Size = new System.Drawing.Size(123, 17);
-            this.rbImageScaleTypePercentage.TabIndex = 0;
-            this.rbImageScaleTypePercentage.TabStop = true;
-            this.rbImageScaleTypePercentage.Text = "Scale by percentage";
-            this.rbImageScaleTypePercentage.UseVisualStyleBackColor = true;
-            this.rbImageScaleTypePercentage.CheckedChanged += new System.EventHandler(this.rbImageScaleTypePercentage_CheckedChanged);
-            // 
-            // lblImageScaleToHeight2
-            // 
-            this.lblImageScaleToHeight2.AutoSize = true;
-            this.lblImageScaleToHeight2.Location = new System.Drawing.Point(336, 132);
-            this.lblImageScaleToHeight2.Name = "lblImageScaleToHeight2";
-            this.lblImageScaleToHeight2.Size = new System.Drawing.Size(33, 13);
-            this.lblImageScaleToHeight2.TabIndex = 14;
-            this.lblImageScaleToHeight2.Text = "pixels";
-            // 
-            // rbImageScaleTypeToWidth
-            // 
-            this.rbImageScaleTypeToWidth.AutoSize = true;
-            this.rbImageScaleTypeToWidth.Location = new System.Drawing.Point(208, 16);
-            this.rbImageScaleTypeToWidth.Name = "rbImageScaleTypeToWidth";
-            this.rbImageScaleTypeToWidth.Size = new System.Drawing.Size(92, 17);
-            this.rbImageScaleTypeToWidth.TabIndex = 7;
-            this.rbImageScaleTypeToWidth.Text = "Scale to width";
-            this.rbImageScaleTypeToWidth.UseVisualStyleBackColor = true;
-            this.rbImageScaleTypeToWidth.CheckedChanged += new System.EventHandler(this.rbImageScaleTypeToWidth_CheckedChanged);
-            // 
-            // cbImageScaleToWidthKeepAspectRatio
-            // 
-            this.cbImageScaleToWidthKeepAspectRatio.AutoSize = true;
-            this.cbImageScaleToWidthKeepAspectRatio.Location = new System.Drawing.Point(227, 66);
-            this.cbImageScaleToWidthKeepAspectRatio.Name = "cbImageScaleToWidthKeepAspectRatio";
-            this.cbImageScaleToWidthKeepAspectRatio.Size = new System.Drawing.Size(109, 17);
-            this.cbImageScaleToWidthKeepAspectRatio.TabIndex = 1;
-            this.cbImageScaleToWidthKeepAspectRatio.Text = "Keep aspect ratio";
-            this.cbImageScaleToWidthKeepAspectRatio.UseVisualStyleBackColor = true;
-            this.cbImageScaleToWidthKeepAspectRatio.CheckedChanged += new System.EventHandler(this.cbImageScaleToWidthKeepAspectRatio_CheckedChanged);
-            // 
-            // lblImageScaleSpecificWidth2
-            // 
-            this.lblImageScaleSpecificWidth2.AutoSize = true;
-            this.lblImageScaleSpecificWidth2.Location = new System.Drawing.Point(144, 132);
-            this.lblImageScaleSpecificWidth2.Name = "lblImageScaleSpecificWidth2";
-            this.lblImageScaleSpecificWidth2.Size = new System.Drawing.Size(33, 13);
-            this.lblImageScaleSpecificWidth2.TabIndex = 18;
-            this.lblImageScaleSpecificWidth2.Text = "pixels";
-            // 
-            // rbImageScaleTypeToHeight
-            // 
-            this.rbImageScaleTypeToHeight.AutoSize = true;
-            this.rbImageScaleTypeToHeight.Location = new System.Drawing.Point(208, 104);
-            this.rbImageScaleTypeToHeight.Name = "rbImageScaleTypeToHeight";
-            this.rbImageScaleTypeToHeight.Size = new System.Drawing.Size(96, 17);
-            this.rbImageScaleTypeToHeight.TabIndex = 11;
-            this.rbImageScaleTypeToHeight.Text = "Scale to height";
-            this.rbImageScaleTypeToHeight.UseVisualStyleBackColor = true;
-            this.rbImageScaleTypeToHeight.CheckedChanged += new System.EventHandler(this.rbImageScaleTypeToHeight_CheckedChanged);
-            // 
-            // nudImageScaleSpecificWidth
-            // 
-            this.nudImageScaleSpecificWidth.Location = new System.Drawing.Point(80, 128);
-            this.nudImageScaleSpecificWidth.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudImageScaleSpecificWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudImageScaleSpecificWidth.Name = "nudImageScaleSpecificWidth";
-            this.nudImageScaleSpecificWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScaleSpecificWidth.TabIndex = 17;
-            this.nudImageScaleSpecificWidth.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScaleSpecificWidth.ValueChanged += new System.EventHandler(this.nudImageScaleSpecificWidth_ValueChanged);
-            // 
-            // lblImageScaleSpecificHeight2
-            // 
-            this.lblImageScaleSpecificHeight2.AutoSize = true;
-            this.lblImageScaleSpecificHeight2.Location = new System.Drawing.Point(144, 156);
-            this.lblImageScaleSpecificHeight2.Name = "lblImageScaleSpecificHeight2";
-            this.lblImageScaleSpecificHeight2.Size = new System.Drawing.Size(33, 13);
-            this.lblImageScaleSpecificHeight2.TabIndex = 21;
-            this.lblImageScaleSpecificHeight2.Text = "pixels";
-            // 
-            // lblImageScaleSpecificWidth
-            // 
-            this.lblImageScaleSpecificWidth.AutoSize = true;
-            this.lblImageScaleSpecificWidth.Location = new System.Drawing.Point(32, 132);
-            this.lblImageScaleSpecificWidth.Name = "lblImageScaleSpecificWidth";
-            this.lblImageScaleSpecificWidth.Size = new System.Drawing.Size(38, 13);
-            this.lblImageScaleSpecificWidth.TabIndex = 16;
-            this.lblImageScaleSpecificWidth.Text = "Width:";
-            // 
-            // rbImageScaleTypeSpecific
-            // 
-            this.rbImageScaleTypeSpecific.AutoSize = true;
-            this.rbImageScaleTypeSpecific.Location = new System.Drawing.Point(16, 104);
-            this.rbImageScaleTypeSpecific.Name = "rbImageScaleTypeSpecific";
-            this.rbImageScaleTypeSpecific.Size = new System.Drawing.Size(84, 17);
-            this.rbImageScaleTypeSpecific.TabIndex = 15;
-            this.rbImageScaleTypeSpecific.Text = "Specific size";
-            this.rbImageScaleTypeSpecific.UseVisualStyleBackColor = true;
-            this.rbImageScaleTypeSpecific.CheckedChanged += new System.EventHandler(this.rbImageScaleTypeSpecific_CheckedChanged);
-            // 
-            // lblImageScaleSpecificHeight
-            // 
-            this.lblImageScaleSpecificHeight.AutoSize = true;
-            this.lblImageScaleSpecificHeight.Location = new System.Drawing.Point(32, 156);
-            this.lblImageScaleSpecificHeight.Name = "lblImageScaleSpecificHeight";
-            this.lblImageScaleSpecificHeight.Size = new System.Drawing.Size(41, 13);
-            this.lblImageScaleSpecificHeight.TabIndex = 19;
-            this.lblImageScaleSpecificHeight.Text = "Height:";
-            // 
-            // lblImageScaleToWidth2
-            // 
-            this.lblImageScaleToWidth2.AutoSize = true;
-            this.lblImageScaleToWidth2.Location = new System.Drawing.Point(336, 44);
-            this.lblImageScaleToWidth2.Name = "lblImageScaleToWidth2";
-            this.lblImageScaleToWidth2.Size = new System.Drawing.Size(33, 13);
-            this.lblImageScaleToWidth2.TabIndex = 10;
-            this.lblImageScaleToWidth2.Text = "pixels";
-            // 
-            // lblImageScaleToHeight
-            // 
-            this.lblImageScaleToHeight.AutoSize = true;
-            this.lblImageScaleToHeight.Location = new System.Drawing.Point(224, 132);
-            this.lblImageScaleToHeight.Name = "lblImageScaleToHeight";
-            this.lblImageScaleToHeight.Size = new System.Drawing.Size(41, 13);
-            this.lblImageScaleToHeight.TabIndex = 12;
-            this.lblImageScaleToHeight.Text = "Height:";
-            // 
-            // lblImageScalePercentageWidth
-            // 
-            this.lblImageScalePercentageWidth.AutoSize = true;
-            this.lblImageScalePercentageWidth.Location = new System.Drawing.Point(32, 44);
-            this.lblImageScalePercentageWidth.Name = "lblImageScalePercentageWidth";
-            this.lblImageScalePercentageWidth.Size = new System.Drawing.Size(38, 13);
-            this.lblImageScalePercentageWidth.TabIndex = 1;
-            this.lblImageScalePercentageWidth.Text = "Width:";
-            // 
-            // nudImageScaleSpecificHeight
-            // 
-            this.nudImageScaleSpecificHeight.Location = new System.Drawing.Point(80, 152);
-            this.nudImageScaleSpecificHeight.Name = "nudImageScaleSpecificHeight";
-            this.nudImageScaleSpecificHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScaleSpecificHeight.TabIndex = 20;
-            this.nudImageScaleSpecificHeight.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScaleSpecificHeight.ValueChanged += new System.EventHandler(this.nudImageScaleSpecificHeight_ValueChanged);
-            // 
-            // lblImageScalePercentageHeight2
-            // 
-            this.lblImageScalePercentageHeight2.AutoSize = true;
-            this.lblImageScalePercentageHeight2.Location = new System.Drawing.Point(144, 68);
-            this.lblImageScalePercentageHeight2.Name = "lblImageScalePercentageHeight2";
-            this.lblImageScalePercentageHeight2.Size = new System.Drawing.Size(15, 13);
-            this.lblImageScalePercentageHeight2.TabIndex = 6;
-            this.lblImageScalePercentageHeight2.Text = "%";
-            // 
-            // lblImageScaleToWidth
-            // 
-            this.lblImageScaleToWidth.AutoSize = true;
-            this.lblImageScaleToWidth.Location = new System.Drawing.Point(224, 44);
-            this.lblImageScaleToWidth.Name = "lblImageScaleToWidth";
-            this.lblImageScaleToWidth.Size = new System.Drawing.Size(38, 13);
-            this.lblImageScaleToWidth.TabIndex = 8;
-            this.lblImageScaleToWidth.Text = "Width:";
-            // 
-            // nudImageScalePercentageWidth
-            // 
-            this.nudImageScalePercentageWidth.Location = new System.Drawing.Point(80, 40);
-            this.nudImageScalePercentageWidth.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageWidth.Name = "nudImageScalePercentageWidth";
-            this.nudImageScalePercentageWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScalePercentageWidth.TabIndex = 2;
-            this.nudImageScalePercentageWidth.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageWidth.ValueChanged += new System.EventHandler(this.nudImageScalePercentageWidth_ValueChanged);
-            // 
-            // nudImageScaleToWidth
-            // 
-            this.nudImageScaleToWidth.Location = new System.Drawing.Point(272, 40);
-            this.nudImageScaleToWidth.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudImageScaleToWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudImageScaleToWidth.Name = "nudImageScaleToWidth";
-            this.nudImageScaleToWidth.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScaleToWidth.TabIndex = 9;
-            this.nudImageScaleToWidth.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScaleToWidth.ValueChanged += new System.EventHandler(this.nudImageScaleToWidth_ValueChanged);
-            // 
-            // lblImageScalePercentageWidth2
-            // 
-            this.lblImageScalePercentageWidth2.AutoSize = true;
-            this.lblImageScalePercentageWidth2.Location = new System.Drawing.Point(144, 44);
-            this.lblImageScalePercentageWidth2.Name = "lblImageScalePercentageWidth2";
-            this.lblImageScalePercentageWidth2.Size = new System.Drawing.Size(15, 13);
-            this.lblImageScalePercentageWidth2.TabIndex = 3;
-            this.lblImageScalePercentageWidth2.Text = "%";
-            // 
-            // nudImageScalePercentageHeight
-            // 
-            this.nudImageScalePercentageHeight.Location = new System.Drawing.Point(80, 64);
-            this.nudImageScalePercentageHeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageHeight.Name = "nudImageScalePercentageHeight";
-            this.nudImageScalePercentageHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScalePercentageHeight.TabIndex = 5;
-            this.nudImageScalePercentageHeight.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScalePercentageHeight.ValueChanged += new System.EventHandler(this.nudImageScalePercentageHeight_ValueChanged);
-            // 
-            // lblImageScalePercentageHeight
-            // 
-            this.lblImageScalePercentageHeight.AutoSize = true;
-            this.lblImageScalePercentageHeight.Location = new System.Drawing.Point(32, 68);
-            this.lblImageScalePercentageHeight.Name = "lblImageScalePercentageHeight";
-            this.lblImageScalePercentageHeight.Size = new System.Drawing.Size(41, 13);
-            this.lblImageScalePercentageHeight.TabIndex = 4;
-            this.lblImageScalePercentageHeight.Text = "Height:";
-            // 
-            // nudImageScaleToHeight
-            // 
-            this.nudImageScaleToHeight.Location = new System.Drawing.Point(272, 128);
-            this.nudImageScaleToHeight.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudImageScaleToHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudImageScaleToHeight.Name = "nudImageScaleToHeight";
-            this.nudImageScaleToHeight.Size = new System.Drawing.Size(56, 20);
-            this.nudImageScaleToHeight.TabIndex = 13;
-            this.nudImageScaleToHeight.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudImageScaleToHeight.ValueChanged += new System.EventHandler(this.nudImageScaleToHeight_ValueChanged);
-            // 
             // tpEffects
             // 
-            this.tpEffects.Controls.Add(this.gbImageShadow);
-            this.tpEffects.Controls.Add(this.cbImageEffectOnlyRegionCapture);
+            this.tpEffects.Controls.Add(this.gbImageEffects);
             this.tpEffects.Controls.Add(this.btnWatermarkSettings);
-            this.tpEffects.Controls.Add(this.gbBorder);
             this.tpEffects.Location = new System.Drawing.Point(4, 22);
             this.tpEffects.Name = "tpEffects";
             this.tpEffects.Padding = new System.Windows.Forms.Padding(3);
@@ -1010,171 +722,36 @@
             this.tpEffects.Text = "Effects";
             this.tpEffects.UseVisualStyleBackColor = true;
             // 
-            // gbImageShadow
-            // 
-            this.gbImageShadow.Controls.Add(this.lblImageShadowSize);
-            this.gbImageShadow.Controls.Add(this.lblImageShadowDarkness);
-            this.gbImageShadow.Controls.Add(this.nudImageShadowSize);
-            this.gbImageShadow.Controls.Add(this.nudImageShadowDarkness);
-            this.gbImageShadow.Location = new System.Drawing.Point(16, 152);
-            this.gbImageShadow.Name = "gbImageShadow";
-            this.gbImageShadow.Size = new System.Drawing.Size(472, 56);
-            this.gbImageShadow.TabIndex = 3;
-            this.gbImageShadow.TabStop = false;
-            this.gbImageShadow.Text = "Shadow";
-            // 
-            // lblImageShadowSize
-            // 
-            this.lblImageShadowSize.AutoSize = true;
-            this.lblImageShadowSize.Location = new System.Drawing.Point(152, 24);
-            this.lblImageShadowSize.Name = "lblImageShadowSize";
-            this.lblImageShadowSize.Size = new System.Drawing.Size(30, 13);
-            this.lblImageShadowSize.TabIndex = 2;
-            this.lblImageShadowSize.Text = "Size:";
-            // 
-            // lblImageShadowDarkness
-            // 
-            this.lblImageShadowDarkness.AutoSize = true;
-            this.lblImageShadowDarkness.Location = new System.Drawing.Point(16, 24);
-            this.lblImageShadowDarkness.Name = "lblImageShadowDarkness";
-            this.lblImageShadowDarkness.Size = new System.Drawing.Size(55, 13);
-            this.lblImageShadowDarkness.TabIndex = 0;
-            this.lblImageShadowDarkness.Text = "Darkness:";
-            // 
-            // nudImageShadowSize
-            // 
-            this.nudImageShadowSize.Location = new System.Drawing.Point(192, 20);
-            this.nudImageShadowSize.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.nudImageShadowSize.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.nudImageShadowSize.Name = "nudImageShadowSize";
-            this.nudImageShadowSize.Size = new System.Drawing.Size(56, 20);
-            this.nudImageShadowSize.TabIndex = 3;
-            this.nudImageShadowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudImageShadowSize.Value = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.nudImageShadowSize.ValueChanged += new System.EventHandler(this.nudImageShadowSize_ValueChanged);
-            // 
-            // nudImageShadowDarkness
-            // 
-            this.nudImageShadowDarkness.DecimalPlaces = 1;
-            this.nudImageShadowDarkness.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudImageShadowDarkness.Location = new System.Drawing.Point(80, 20);
-            this.nudImageShadowDarkness.Maximum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.nudImageShadowDarkness.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudImageShadowDarkness.Name = "nudImageShadowDarkness";
-            this.nudImageShadowDarkness.Size = new System.Drawing.Size(56, 20);
-            this.nudImageShadowDarkness.TabIndex = 1;
-            this.nudImageShadowDarkness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudImageShadowDarkness.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            65536});
-            this.nudImageShadowDarkness.ValueChanged += new System.EventHandler(this.nudImageShadowDarkness_ValueChanged);
-            // 
             // cbImageEffectOnlyRegionCapture
             // 
             this.cbImageEffectOnlyRegionCapture.AutoSize = true;
-            this.cbImageEffectOnlyRegionCapture.Location = new System.Drawing.Point(16, 56);
+            this.cbImageEffectOnlyRegionCapture.Location = new System.Drawing.Point(16, 80);
             this.cbImageEffectOnlyRegionCapture.Name = "cbImageEffectOnlyRegionCapture";
-            this.cbImageEffectOnlyRegionCapture.Size = new System.Drawing.Size(240, 17);
-            this.cbImageEffectOnlyRegionCapture.TabIndex = 1;
-            this.cbImageEffectOnlyRegionCapture.Text = "Only apply border && shadow to region capture";
+            this.cbImageEffectOnlyRegionCapture.Size = new System.Drawing.Size(193, 17);
+            this.cbImageEffectOnlyRegionCapture.TabIndex = 3;
+            this.cbImageEffectOnlyRegionCapture.Text = "Only apply effects to region capture";
             this.cbImageEffectOnlyRegionCapture.UseVisualStyleBackColor = true;
-            this.cbImageEffectOnlyRegionCapture.CheckedChanged += new System.EventHandler(this.cbImageEffectOnlyRectangleCapture_CheckedChanged);
+            this.cbImageEffectOnlyRegionCapture.CheckedChanged += new System.EventHandler(this.cbImageEffectOnlyRegionCapture_CheckedChanged);
+            // 
+            // btnImageEffects
+            // 
+            this.btnImageEffects.Location = new System.Drawing.Point(16, 24);
+            this.btnImageEffects.Name = "btnImageEffects";
+            this.btnImageEffects.Size = new System.Drawing.Size(160, 23);
+            this.btnImageEffects.TabIndex = 2;
+            this.btnImageEffects.Text = "Image Effects  configuration..";
+            this.btnImageEffects.UseVisualStyleBackColor = true;
+            this.btnImageEffects.Click += new System.EventHandler(this.btnImageEffects_Click);
             // 
             // btnWatermarkSettings
             // 
-            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 16);
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(32, 144);
             this.btnWatermarkSettings.Name = "btnWatermarkSettings";
             this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
             this.btnWatermarkSettings.TabIndex = 0;
-            this.btnWatermarkSettings.Text = "Watermark settings...";
+            this.btnWatermarkSettings.Text = "Watermark configuration...";
             this.btnWatermarkSettings.UseVisualStyleBackColor = true;
             this.btnWatermarkSettings.Click += new System.EventHandler(this.btnWatermarkSettings_Click);
-            // 
-            // gbBorder
-            // 
-            this.gbBorder.Controls.Add(this.nudBorderSize);
-            this.gbBorder.Controls.Add(this.btnBorderColor);
-            this.gbBorder.Controls.Add(this.lblBorderSize);
-            this.gbBorder.Controls.Add(this.lblBorderColor);
-            this.gbBorder.Location = new System.Drawing.Point(16, 88);
-            this.gbBorder.Name = "gbBorder";
-            this.gbBorder.Size = new System.Drawing.Size(472, 56);
-            this.gbBorder.TabIndex = 2;
-            this.gbBorder.TabStop = false;
-            this.gbBorder.Text = "Border";
-            // 
-            // nudBorderSize
-            // 
-            this.nudBorderSize.Location = new System.Drawing.Point(224, 20);
-            this.nudBorderSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudBorderSize.Name = "nudBorderSize";
-            this.nudBorderSize.Size = new System.Drawing.Size(56, 20);
-            this.nudBorderSize.TabIndex = 3;
-            this.nudBorderSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudBorderSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudBorderSize.ValueChanged += new System.EventHandler(this.nudBorderSize_ValueChanged);
-            // 
-            // btnBorderColor
-            // 
-            this.btnBorderColor.BackColor = System.Drawing.Color.Black;
-            this.btnBorderColor.Location = new System.Drawing.Point(88, 18);
-            this.btnBorderColor.Name = "btnBorderColor";
-            this.btnBorderColor.Size = new System.Drawing.Size(56, 24);
-            this.btnBorderColor.TabIndex = 1;
-            this.btnBorderColor.UseVisualStyleBackColor = false;
-            this.btnBorderColor.Click += new System.EventHandler(this.btnBorderColor_Click);
-            // 
-            // lblBorderSize
-            // 
-            this.lblBorderSize.AutoSize = true;
-            this.lblBorderSize.Location = new System.Drawing.Point(152, 24);
-            this.lblBorderSize.Name = "lblBorderSize";
-            this.lblBorderSize.Size = new System.Drawing.Size(62, 13);
-            this.lblBorderSize.TabIndex = 2;
-            this.lblBorderSize.Text = "Border size:";
-            // 
-            // lblBorderColor
-            // 
-            this.lblBorderColor.AutoSize = true;
-            this.lblBorderColor.Location = new System.Drawing.Point(16, 24);
-            this.lblBorderColor.Name = "lblBorderColor";
-            this.lblBorderColor.Size = new System.Drawing.Size(67, 13);
-            this.lblBorderColor.TabIndex = 0;
-            this.lblBorderColor.Text = "Border color:";
             // 
             // chkUseDefaultImageSettings
             // 
@@ -1654,6 +1231,38 @@
             this.btnActionsAdd.UseVisualStyleBackColor = true;
             this.btnActionsAdd.Click += new System.EventHandler(this.btnActionsAdd_Click);
             // 
+            // lvActions
+            // 
+            this.lvActions.CheckBoxes = true;
+            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chActionsName,
+            this.chActionsPath,
+            this.chActionsArgs});
+            this.lvActions.FullRowSelect = true;
+            this.lvActions.Location = new System.Drawing.Point(8, 40);
+            this.lvActions.MultiSelect = false;
+            this.lvActions.Name = "lvActions";
+            this.lvActions.Size = new System.Drawing.Size(496, 280);
+            this.lvActions.TabIndex = 3;
+            this.lvActions.UseCompatibleStateImageBehavior = false;
+            this.lvActions.View = System.Windows.Forms.View.Details;
+            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
+            // 
+            // chActionsName
+            // 
+            this.chActionsName.Text = "Name";
+            this.chActionsName.Width = 100;
+            // 
+            // chActionsPath
+            // 
+            this.chActionsPath.Text = "Path";
+            this.chActionsPath.Width = 250;
+            // 
+            // chActionsArgs
+            // 
+            this.chActionsArgs.Text = "Args";
+            this.chActionsArgs.Width = 134;
+            // 
             // btnActionsEdit
             // 
             this.btnActionsEdit.Location = new System.Drawing.Point(88, 8);
@@ -1987,133 +1596,28 @@
             this.chkUseDefaultAdvancedSettings.UseVisualStyleBackColor = true;
             this.chkUseDefaultAdvancedSettings.CheckedChanged += new System.EventHandler(this.chkUseDefaultAdvancedSettings_CheckedChanged);
             // 
-            // btnAfterCapture
+            // chkShowImageEffectsWindowAfterCapture
             // 
-            this.btnAfterCapture.Location = new System.Drawing.Point(6, 93);
-            this.btnAfterCapture.Menu = this.cmsAfterCapture;
-            this.btnAfterCapture.Name = "btnAfterCapture";
-            this.btnAfterCapture.Size = new System.Drawing.Size(506, 23);
-            this.btnAfterCapture.TabIndex = 4;
-            this.btnAfterCapture.Text = "After capture...";
-            this.btnAfterCapture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAfterCapture.UseMnemonic = false;
-            this.btnAfterCapture.UseVisualStyleBackColor = true;
+            this.chkShowImageEffectsWindowAfterCapture.AutoSize = true;
+            this.chkShowImageEffectsWindowAfterCapture.Location = new System.Drawing.Point(16, 56);
+            this.chkShowImageEffectsWindowAfterCapture.Name = "chkShowImageEffectsWindowAfterCapture";
+            this.chkShowImageEffectsWindowAfterCapture.Size = new System.Drawing.Size(221, 17);
+            this.chkShowImageEffectsWindowAfterCapture.TabIndex = 4;
+            this.chkShowImageEffectsWindowAfterCapture.Text = "Show image effects window after capture";
+            this.chkShowImageEffectsWindowAfterCapture.UseVisualStyleBackColor = true;
+            this.chkShowImageEffectsWindowAfterCapture.CheckedChanged += new System.EventHandler(this.chkShowImageEffectsWindowAfterCapture_CheckedChanged);
             // 
-            // btnAfterUpload
+            // gbImageEffects
             // 
-            this.btnAfterUpload.Location = new System.Drawing.Point(6, 149);
-            this.btnAfterUpload.Menu = this.cmsAfterUpload;
-            this.btnAfterUpload.Name = "btnAfterUpload";
-            this.btnAfterUpload.Size = new System.Drawing.Size(506, 23);
-            this.btnAfterUpload.TabIndex = 6;
-            this.btnAfterUpload.Text = "After upload...";
-            this.btnAfterUpload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAfterUpload.UseMnemonic = false;
-            this.btnAfterUpload.UseVisualStyleBackColor = true;
-            // 
-            // btnImageUploaders
-            // 
-            this.btnImageUploaders.Location = new System.Drawing.Point(6, 205);
-            this.btnImageUploaders.Menu = this.cmsImageUploaders;
-            this.btnImageUploaders.Name = "btnImageUploaders";
-            this.btnImageUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnImageUploaders.TabIndex = 8;
-            this.btnImageUploaders.Text = "Image uploaders";
-            this.btnImageUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImageUploaders.UseMnemonic = false;
-            this.btnImageUploaders.UseVisualStyleBackColor = true;
-            // 
-            // btnTextUploaders
-            // 
-            this.btnTextUploaders.Location = new System.Drawing.Point(6, 229);
-            this.btnTextUploaders.Menu = this.cmsTextUploaders;
-            this.btnTextUploaders.Name = "btnTextUploaders";
-            this.btnTextUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnTextUploaders.TabIndex = 9;
-            this.btnTextUploaders.Text = "Text uploaders";
-            this.btnTextUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTextUploaders.UseMnemonic = false;
-            this.btnTextUploaders.UseVisualStyleBackColor = true;
-            // 
-            // btnFileUploaders
-            // 
-            this.btnFileUploaders.Location = new System.Drawing.Point(6, 253);
-            this.btnFileUploaders.Menu = this.cmsFileUploaders;
-            this.btnFileUploaders.Name = "btnFileUploaders";
-            this.btnFileUploaders.Size = new System.Drawing.Size(506, 23);
-            this.btnFileUploaders.TabIndex = 10;
-            this.btnFileUploaders.Text = "File uploaders";
-            this.btnFileUploaders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFileUploaders.UseMnemonic = false;
-            this.btnFileUploaders.UseVisualStyleBackColor = true;
-            // 
-            // btnURLShorteners
-            // 
-            this.btnURLShorteners.Location = new System.Drawing.Point(6, 277);
-            this.btnURLShorteners.Menu = this.cmsURLShorteners;
-            this.btnURLShorteners.Name = "btnURLShorteners";
-            this.btnURLShorteners.Size = new System.Drawing.Size(506, 23);
-            this.btnURLShorteners.TabIndex = 11;
-            this.btnURLShorteners.Text = "URL shorteners";
-            this.btnURLShorteners.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnURLShorteners.UseMnemonic = false;
-            this.btnURLShorteners.UseVisualStyleBackColor = true;
-            // 
-            // btnSocialNetworkingServices
-            // 
-            this.btnSocialNetworkingServices.Location = new System.Drawing.Point(6, 301);
-            this.btnSocialNetworkingServices.Menu = this.cmsSocialNetworkingServices;
-            this.btnSocialNetworkingServices.Name = "btnSocialNetworkingServices";
-            this.btnSocialNetworkingServices.Size = new System.Drawing.Size(506, 23);
-            this.btnSocialNetworkingServices.TabIndex = 12;
-            this.btnSocialNetworkingServices.Text = "Social networking services";
-            this.btnSocialNetworkingServices.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSocialNetworkingServices.UseMnemonic = false;
-            this.btnSocialNetworkingServices.UseVisualStyleBackColor = true;
-            // 
-            // btnTask
-            // 
-            this.btnTask.Location = new System.Drawing.Point(6, 37);
-            this.btnTask.Menu = this.cmsTask;
-            this.btnTask.Name = "btnTask";
-            this.btnTask.Size = new System.Drawing.Size(506, 23);
-            this.btnTask.TabIndex = 2;
-            this.btnTask.Text = "Task...";
-            this.btnTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTask.UseMnemonic = false;
-            this.btnTask.UseVisualStyleBackColor = true;
-            // 
-            // lvActions
-            // 
-            this.lvActions.CheckBoxes = true;
-            this.lvActions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chActionsName,
-            this.chActionsPath,
-            this.chActionsArgs});
-            this.lvActions.FullRowSelect = true;
-            this.lvActions.Location = new System.Drawing.Point(8, 40);
-            this.lvActions.MultiSelect = false;
-            this.lvActions.Name = "lvActions";
-            this.lvActions.Size = new System.Drawing.Size(496, 280);
-            this.lvActions.TabIndex = 3;
-            this.lvActions.UseCompatibleStateImageBehavior = false;
-            this.lvActions.View = System.Windows.Forms.View.Details;
-            this.lvActions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvActions_ItemChecked);
-            // 
-            // chActionsName
-            // 
-            this.chActionsName.Text = "Name";
-            this.chActionsName.Width = 100;
-            // 
-            // chActionsPath
-            // 
-            this.chActionsPath.Text = "Path";
-            this.chActionsPath.Width = 250;
-            // 
-            // chActionsArgs
-            // 
-            this.chActionsArgs.Text = "Args";
-            this.chActionsArgs.Width = 134;
+            this.gbImageEffects.Controls.Add(this.chkShowImageEffectsWindowAfterCapture);
+            this.gbImageEffects.Controls.Add(this.cbImageEffectOnlyRegionCapture);
+            this.gbImageEffects.Controls.Add(this.btnImageEffects);
+            this.gbImageEffects.Location = new System.Drawing.Point(16, 16);
+            this.gbImageEffects.Name = "gbImageEffects";
+            this.gbImageEffects.Size = new System.Drawing.Size(304, 112);
+            this.gbImageEffects.TabIndex = 5;
+            this.gbImageEffects.TabStop = false;
+            this.gbImageEffects.Text = "Image effects";
             // 
             // TaskSettingsForm
             // 
@@ -2143,23 +1647,7 @@
             this.tpQuality.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudImageJPEGQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudUseImageFormat2After)).EndInit();
-            this.tpResize.ResumeLayout(false);
-            this.tpResize.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleSpecificHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScalePercentageWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScalePercentageHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageScaleToHeight)).EndInit();
             this.tpEffects.ResumeLayout(false);
-            this.tpEffects.PerformLayout();
-            this.gbImageShadow.ResumeLayout(false);
-            this.gbImageShadow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudImageShadowDarkness)).EndInit();
-            this.gbBorder.ResumeLayout(false);
-            this.gbBorder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBorderSize)).EndInit();
             this.tpCapture.ResumeLayout(false);
             this.tpCapture.PerformLayout();
             this.tcCapture.ResumeLayout(false);
@@ -2191,6 +1679,8 @@
             this.tpIndexer.PerformLayout();
             this.tpAdvanced.ResumeLayout(false);
             this.tpAdvanced.PerformLayout();
+            this.gbImageEffects.ResumeLayout(false);
+            this.gbImageEffects.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2235,43 +1725,8 @@
         private System.Windows.Forms.Label lblImageFormat2;
         private System.Windows.Forms.NumericUpDown nudUseImageFormat2After;
         private System.Windows.Forms.Label lblUseImageFormat2After;
-        private System.Windows.Forms.TabPage tpResize;
-        private System.Windows.Forms.CheckBox cbImageScaleToWidthKeepAspectRatio;
-        private System.Windows.Forms.RadioButton rbImageScaleTypePercentage;
-        private System.Windows.Forms.Label lblImageScaleToHeight2;
-        private System.Windows.Forms.RadioButton rbImageScaleTypeToWidth;
-        private System.Windows.Forms.Label lblImageScaleSpecificWidth2;
-        private System.Windows.Forms.RadioButton rbImageScaleTypeToHeight;
-        private System.Windows.Forms.Label lblImageScaleSpecificHeight2;
-        private System.Windows.Forms.RadioButton rbImageScaleTypeSpecific;
-        private System.Windows.Forms.Label lblImageScaleToWidth2;
-        private System.Windows.Forms.Label lblImageScalePercentageWidth;
-        private System.Windows.Forms.Label lblImageScalePercentageHeight2;
-        private System.Windows.Forms.NumericUpDown nudImageScalePercentageWidth;
-        private System.Windows.Forms.Label lblImageScalePercentageWidth2;
-        private System.Windows.Forms.Label lblImageScalePercentageHeight;
-        private System.Windows.Forms.NumericUpDown nudImageScaleToHeight;
-        private System.Windows.Forms.NumericUpDown nudImageScalePercentageHeight;
-        private System.Windows.Forms.NumericUpDown nudImageScaleToWidth;
-        private System.Windows.Forms.Label lblImageScaleToWidth;
-        private System.Windows.Forms.NumericUpDown nudImageScaleSpecificHeight;
-        private System.Windows.Forms.Label lblImageScaleToHeight;
-        private System.Windows.Forms.Label lblImageScaleSpecificHeight;
-        private System.Windows.Forms.Label lblImageScaleSpecificWidth;
-        private System.Windows.Forms.NumericUpDown nudImageScaleSpecificWidth;
         private System.Windows.Forms.TabPage tpEffects;
-        private System.Windows.Forms.GroupBox gbImageShadow;
-        private System.Windows.Forms.Label lblImageShadowSize;
-        private System.Windows.Forms.Label lblImageShadowDarkness;
-        private System.Windows.Forms.NumericUpDown nudImageShadowSize;
-        private System.Windows.Forms.NumericUpDown nudImageShadowDarkness;
-        private System.Windows.Forms.CheckBox cbImageEffectOnlyRegionCapture;
         private System.Windows.Forms.Button btnWatermarkSettings;
-        private System.Windows.Forms.GroupBox gbBorder;
-        private System.Windows.Forms.NumericUpDown nudBorderSize;
-        private System.Windows.Forms.Button btnBorderColor;
-        private System.Windows.Forms.Label lblBorderSize;
-        private System.Windows.Forms.Label lblBorderColor;
         private System.Windows.Forms.TabControl tcCapture;
         private System.Windows.Forms.TabPage tpCaptureGeneral;
         private System.Windows.Forms.CheckBox cbCaptureAutoHideTaskbar;
@@ -2353,7 +1808,10 @@
         private System.Windows.Forms.CheckBox chkUseDefaultIndexerSettings;
         private System.Windows.Forms.NumericUpDown nudScreenRecorderStartDelay;
         private System.Windows.Forms.Label lblScreenRecorderStartDelay;
-        private System.Windows.Forms.CheckBox cbImageScaleToHeightKeepAspectRatio;
+        private System.Windows.Forms.Button btnImageEffects;
+        private System.Windows.Forms.CheckBox cbImageEffectOnlyRegionCapture;
+        private System.Windows.Forms.GroupBox gbImageEffects;
+        private System.Windows.Forms.CheckBox chkShowImageEffectsWindowAfterCapture;
 
 
 

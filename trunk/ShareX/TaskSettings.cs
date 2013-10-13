@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ImageEffectsLib;
 using IndexerLib;
 using Newtonsoft.Json;
 using ScreenCapture;
@@ -231,8 +232,10 @@ namespace ShareX
         #region Image / Effects
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
+        public List<IImageEffect> ImageEffects = new List<IImageEffect>();
 
         public bool ImageEffectOnlyRegionCapture = true;
+        public bool ShowImageEffectsWindowAfterCapture = false;
         public BorderType BorderType = BorderType.Outside;
         public XmlColor BorderColor = Color.FromArgb(50, 170, 255);
         public int BorderSize = 1;

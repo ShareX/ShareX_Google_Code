@@ -24,13 +24,20 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
     public class Rotate : IImageEffect
     {
+        [DefaultValue(30), Description("Choose a value between 0 and 360")]
         public float Angle { get; set; }
+
+        public Rotate()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

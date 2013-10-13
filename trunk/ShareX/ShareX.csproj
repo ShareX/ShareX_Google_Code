@@ -447,6 +447,9 @@
     <None Include="Resources\folder-tree.png" />
     <None Include="Resources\fr.png" />
     <None Include="Resources\color.png" />
+    <Content Include="..\Docs\VersionHistory.txt">
+      <Link>VersionHistory.txt</Link>
+    </Content>
     <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

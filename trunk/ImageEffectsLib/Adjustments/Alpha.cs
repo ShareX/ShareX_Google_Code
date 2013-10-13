@@ -33,6 +33,11 @@ namespace ImageEffectsLib
         public float Value { get; set; }
         public float Addition { get; set; }
 
+        public Alpha()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
+
         public Image Apply(Image img)
         {
             return ColorMatrixManager.Alpha(Value, Addition).Apply(img);
