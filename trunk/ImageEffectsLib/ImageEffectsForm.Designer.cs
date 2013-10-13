@@ -60,6 +60,7 @@
             this.tvEffects.Name = "tvEffects";
             this.tvEffects.Size = new System.Drawing.Size(296, 492);
             this.tvEffects.TabIndex = 4;
+            this.tvEffects.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvEffects_MouseDoubleClick);
             // 
             // pbPreview
             // 
@@ -214,6 +215,7 @@
             this.Controls.Add(this.lvEffects);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ImageEffectsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Image Effects";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImageEffectsGUI_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();

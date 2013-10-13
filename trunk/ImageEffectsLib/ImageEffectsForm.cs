@@ -109,7 +109,7 @@ namespace ImageEffectsLib
 
         public Image ExportImage()
         {
-            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().OfType<IImageEffect>().ToArray();
+            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().Select(x => x.Tag).OfType<IImageEffect>().ToArray();
 
             Image tempImage = (Image)DefaultImage.Clone();
 
@@ -138,9 +138,14 @@ namespace ImageEffectsLib
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            AddSelectedEffect();
+        }
+
+        private void AddSelectedEffect()
+        {
             TreeNode node = tvEffects.SelectedNode;
 
-            if (node.Tag is Type)
+            if (node != null && node.Tag is Type)
             {
                 Type type = (Type)node.Tag;
                 ListViewItem lvi = new ListViewItem(type.Name);
@@ -155,9 +160,9 @@ namespace ImageEffectsLib
                     lvEffects.Items.Add(lvi);
                     lvEffects.Items[lvEffects.Items.Count - 1].Selected = true;
                 }
-            }
 
-            UpdatePreview();
+                UpdatePreview();
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -178,6 +183,14 @@ namespace ImageEffectsLib
         private void ImageEffectsGUI_FormClosed(object sender, FormClosedEventArgs e)
         {
             DialogResult = DialogResult.OK;
+        }
+
+        private void tvEffects_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                AddSelectedEffect();
+            }
         }
     }
 }
