@@ -28,50 +28,14 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Colorize : IPluginItem
+    public class Colorize : IImageEffect
     {
-        public override string Name { get { return "Colorize"; } }
+        public Color Color { get; set; }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Colorize"; } }
-
-        private Color color;
-
-        public Color Color
+        public Image Apply(Image img)
         {
-            get
-            {
-                return color;
-            }
-            set
-            {
-                color = value;
-                ChangePreviewText();
-            }
-        }
-
-        private float percentage;
-
-        public float Percentage
-        {
-            get
-            {
-                return percentage;
-            }
-            set
-            {
-                percentage = value;
-                ChangePreviewText();
-            }
-        }
-
-        private void ChangePreviewText()
-        {
-            OnPreviewTextChanged(string.Format("{0} {1}%", color.ToString(), percentage));
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Colorize(color, percentage).Apply(img);
+            return ColorMatrixManager.Colorize(Color, Value).Apply(img);
         }
     }
 }

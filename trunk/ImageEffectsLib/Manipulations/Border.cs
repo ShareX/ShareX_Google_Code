@@ -24,76 +24,30 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Border : IPluginItem
+    public class Border : IImageEffect
     {
-        public override string Name { get { return "Border"; } }
+        [DefaultValue(BorderType.Outside)]
+        public BorderType BorderStyle { get; set; }
 
-        public override string Description { get { return "Border"; } }
+        [DefaultValue(typeof(Color), "Black")]
+        public Color Color { get; set; }
 
-        private BorderType borderStyle;
-
-        public BorderType BorderStyle
-        {
-            get
-            {
-                return borderStyle;
-            }
-            set
-            {
-                borderStyle = value;
-                ChangePreviewText();
-            }
-        }
-
-        private Color color;
-
-        public Color Color
-        {
-            get
-            {
-                return color;
-            }
-            set
-            {
-                color = value;
-                ChangePreviewText();
-            }
-        }
-
-        private int size;
-
-        public int Size
-        {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                size = value;
-                ChangePreviewText();
-            }
-        }
-
-        private void ChangePreviewText()
-        {
-            OnPreviewTextChanged(string.Format("{0} {1}", color.ToString(), size));
-        }
+        [DefaultValue(1)]
+        public int Size { get; set; }
 
         public Border()
         {
-            borderStyle = BorderType.Outside;
-            color = Color.Black;
-            size = 1;
+            this.ApplyDefaultPropertyValues();
         }
 
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
-            return ImageHelpers.DrawBorder(img, borderStyle, color, size);
+            return ImageHelpers.DrawBorder(img, BorderStyle, Color, Size);
         }
     }
 }

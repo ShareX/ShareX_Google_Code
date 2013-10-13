@@ -1,6 +1,6 @@
 ﻿namespace ImageEffectsLib
 {
-    partial class ImageEffectsGUI
+    partial class ImageEffectsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageEffectsGUI));
-            this.tvPlugins = new System.Windows.Forms.TreeView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageEffectsForm));
+            this.tvEffects = new System.Windows.Forms.TreeView();
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.pgSettings = new System.Windows.Forms.PropertyGrid();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -37,29 +37,29 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRemove = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pbPreviewZoom = new System.Windows.Forms.PictureBox();
-            this.lblPreview = new System.Windows.Forms.Label();
             this.pbDefaultZoom = new System.Windows.Forms.PictureBox();
             this.lblDefault = new System.Windows.Forms.Label();
             this.pbDefault = new System.Windows.Forms.PictureBox();
+            this.pbPreviewZoom = new System.Windows.Forms.PictureBox();
+            this.lblPreview = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDefaultZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDefault)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewZoom)).BeginInit();
             this.SuspendLayout();
             // 
-            // tvPlugins
+            // tvEffects
             // 
-            this.tvPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tvEffects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.tvPlugins.HideSelection = false;
-            this.tvPlugins.Location = new System.Drawing.Point(8, 280);
-            this.tvPlugins.Name = "tvPlugins";
-            this.tvPlugins.Size = new System.Drawing.Size(296, 492);
-            this.tvPlugins.TabIndex = 4;
+            this.tvEffects.HideSelection = false;
+            this.tvEffects.Location = new System.Drawing.Point(8, 280);
+            this.tvEffects.Name = "tvEffects";
+            this.tvEffects.Size = new System.Drawing.Size(296, 492);
+            this.tvEffects.TabIndex = 4;
             // 
             // pbPreview
             // 
@@ -147,27 +147,6 @@
             this.splitContainer1.SplitterDistance = 474;
             this.splitContainer1.TabIndex = 5;
             // 
-            // pbPreviewZoom
-            // 
-            this.pbPreviewZoom.BackColor = System.Drawing.Color.DimGray;
-            this.pbPreviewZoom.Location = new System.Drawing.Point(376, 8);
-            this.pbPreviewZoom.Name = "pbPreviewZoom";
-            this.pbPreviewZoom.Size = new System.Drawing.Size(88, 88);
-            this.pbPreviewZoom.TabIndex = 3;
-            this.pbPreviewZoom.TabStop = false;
-            this.pbPreviewZoom.Visible = false;
-            // 
-            // lblPreview
-            // 
-            this.lblPreview.AutoSize = true;
-            this.lblPreview.BackColor = System.Drawing.Color.DimGray;
-            this.lblPreview.ForeColor = System.Drawing.Color.White;
-            this.lblPreview.Location = new System.Drawing.Point(8, 8);
-            this.lblPreview.Name = "lblPreview";
-            this.lblPreview.Size = new System.Drawing.Size(71, 13);
-            this.lblPreview.TabIndex = 0;
-            this.lblPreview.Text = "Edited image:";
-            // 
             // pbDefaultZoom
             // 
             this.pbDefaultZoom.BackColor = System.Drawing.Color.DimGray;
@@ -185,9 +164,9 @@
             this.lblDefault.ForeColor = System.Drawing.Color.White;
             this.lblDefault.Location = new System.Drawing.Point(5, 8);
             this.lblDefault.Name = "lblDefault";
-            this.lblDefault.Size = new System.Drawing.Size(75, 13);
+            this.lblDefault.Size = new System.Drawing.Size(44, 13);
             this.lblDefault.TabIndex = 0;
-            this.lblDefault.Text = "Default image:";
+            this.lblDefault.Text = "Default:";
             // 
             // pbDefault
             // 
@@ -201,7 +180,28 @@
             this.pbDefault.TabIndex = 0;
             this.pbDefault.TabStop = false;
             // 
-            // ImageEffectsGUI
+            // pbPreviewZoom
+            // 
+            this.pbPreviewZoom.BackColor = System.Drawing.Color.DimGray;
+            this.pbPreviewZoom.Location = new System.Drawing.Point(344, 8);
+            this.pbPreviewZoom.Name = "pbPreviewZoom";
+            this.pbPreviewZoom.Size = new System.Drawing.Size(88, 88);
+            this.pbPreviewZoom.TabIndex = 3;
+            this.pbPreviewZoom.TabStop = false;
+            this.pbPreviewZoom.Visible = false;
+            // 
+            // lblPreview
+            // 
+            this.lblPreview.AutoSize = true;
+            this.lblPreview.BackColor = System.Drawing.Color.DimGray;
+            this.lblPreview.ForeColor = System.Drawing.Color.White;
+            this.lblPreview.Location = new System.Drawing.Point(8, 8);
+            this.lblPreview.Name = "lblPreview";
+            this.lblPreview.Size = new System.Drawing.Size(40, 13);
+            this.lblPreview.TabIndex = 0;
+            this.lblPreview.Text = "Result:";
+            // 
+            // ImageEffectsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -210,11 +210,11 @@
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.pgSettings);
-            this.Controls.Add(this.tvPlugins);
+            this.Controls.Add(this.tvEffects);
             this.Controls.Add(this.lvEffects);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ImageEffectsGUI";
-            this.Text = "Image Effects Studio";
+            this.Name = "ImageEffectsForm";
+            this.Text = "ShareX - Image Effects";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImageEffectsGUI_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -222,16 +222,16 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDefaultZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDefault)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviewZoom)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView tvPlugins;
+        private System.Windows.Forms.TreeView tvEffects;
         public System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.PropertyGrid pgSettings;
         private System.Windows.Forms.Button btnAdd;

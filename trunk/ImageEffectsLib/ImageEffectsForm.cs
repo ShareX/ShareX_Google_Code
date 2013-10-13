@@ -33,27 +33,13 @@ using System.Windows.Forms;
 
 namespace ImageEffectsLib
 {
-    public partial class ImageEffectsGUI : Form
+    public partial class ImageEffectsForm : Form
     {
-        private List<IPluginItem> plugins;
-        public Image DefaultImage { get; set; }
+        public Image DefaultImage { get; private set; }
 
-        public ImageEffectsGUI(string filePath)
-            : this(Helpers.GetImageFromFile(filePath))
-        {
-            this.Text = string.Format("Image Effects - {0}", filePath);
-            plugins = new List<IPluginItem>()
-            {
-                new Alpha(), new Brightness(), new Colorize(), new Contrast(), new Gamma(), new Grayscale(), new Hue(), new Inverse(), new Saturation(),
-                new Shadow(),
-                new Border(), new Reflection(), new Resize(), new Rotate(), new Scale()
-            };
-        }
-
-        public ImageEffectsGUI(Image img)
+        public ImageEffectsForm(Image img)
         {
             InitializeComponent();
-            FillPluginsList();
 
             DefaultImage = img;
 
@@ -62,22 +48,10 @@ namespace ImageEffectsLib
             lblDefault.Text = string.Format("Default image ({0}x{1})", pbDefault.Image.Width, pbDefault.Image.Height);
         }
 
-        private void FillPluginsList()
+        public ImageEffectsForm(string filePath)
+            : this(Helpers.GetImageFromFile(filePath))
         {
-            TreeNode parentNode, childNode;
-            foreach (IPluginInterface plugin in plugins)
-            {
-                parentNode = tvPlugins.Nodes.Add(plugin.Name);
-                parentNode.Tag = plugin;
-
-                foreach (IPluginItem item in plugin.PluginItems)
-                {
-                    childNode = parentNode.Nodes.Add(item.Name);
-                    childNode.Tag = item;
-                }
-            }
-
-            tvPlugins.ExpandAll();
+            Text += " - " + filePath;
         }
 
         private void UpdatePreview()
@@ -91,9 +65,15 @@ namespace ImageEffectsLib
 
         public Image GetImageForExport()
         {
-            IPluginItem[] plugins = lvEffects.Items.Cast<ListViewItem>().Where(x => x.Tag is IPluginItem).Select(x => (IPluginItem)x.Tag).ToArray();
-            Image tempImage = PluginManager.ApplyEffects(plugins, DefaultImage);
-            return tempImage != null ? tempImage : DefaultImage;
+            IImageEffect[] imageEffects = lvEffects.Items.Cast<ListViewItem>().Where(x => x.Tag is IImageEffect).Select(x => (IImageEffect)x.Tag).ToArray();
+            Image tempImage = (Image)DefaultImage.Clone();
+
+            foreach (IImageEffect imageEffect in imageEffects)
+            {
+                tempImage = imageEffect.Apply(tempImage);
+            }
+
+            return tempImage ?? DefaultImage;
         }
 
         private void lvEffects_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,7 +83,7 @@ namespace ImageEffectsLib
             if (lvEffects.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvEffects.SelectedItems[0];
-                if (lvi.Tag is IPluginItem)
+                if (lvi.Tag is IImageEffect)
                 {
                     pgSettings.SelectedObject = lvi.Tag;
                 }
@@ -112,13 +92,13 @@ namespace ImageEffectsLib
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            TreeNode node = tvPlugins.SelectedNode;
-            if (node.Tag is IPluginItem)
+            TreeNode node = tvEffects.SelectedNode;
+
+            if (node.Tag is IImageEffect)
             {
-                IPluginItem pluginItem = (IPluginItem)Activator.CreateInstance(node.Tag.GetType());
-                ListViewItem lvi = new ListViewItem(pluginItem.Name);
-                lvi.Tag = pluginItem;
-                pluginItem.PreviewTextChanged += p => lvi.Text = string.Format("{0}: {1}", pluginItem.Name, p);
+                IImageEffect imageEffect = (IImageEffect)Activator.CreateInstance(node.Tag.GetType());
+                ListViewItem lvi = new ListViewItem(imageEffect.GetType().ToString());
+                lvi.Tag = imageEffect;
 
                 if (lvEffects.SelectedIndices.Count > 0)
                 {
@@ -151,7 +131,7 @@ namespace ImageEffectsLib
 
         private void ImageEffectsGUI_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
     }
 }

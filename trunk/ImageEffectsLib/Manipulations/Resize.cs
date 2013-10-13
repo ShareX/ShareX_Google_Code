@@ -24,39 +24,24 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Resize : IPluginItem
+    public class Resize : IImageEffect
     {
-        public override string Name { get { return "Resize"; } }
-
-        public override string Description { get { return "Resize"; } }
-
-        private Size size;
-
-        public Size Size
-        {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                size = value;
-                OnPreviewTextChanged(size.ToString());
-            }
-        }
+        [DefaultValue(typeof(Size), "250, 250")]
+        public Size Size { get; set; }
 
         public Resize()
         {
-            size = new Size(200, 200);
+            this.ApplyDefaultPropertyValues();
         }
 
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
-            return ImageHelpers.ResizeImage(img, size.Width, size.Height);
+            return ImageHelpers.ResizeImage(img, Size);
         }
     }
 }

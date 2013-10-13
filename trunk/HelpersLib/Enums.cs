@@ -183,7 +183,7 @@ namespace HelpersLib
 
     public enum BorderType
     {
-        Inside, Outside
+        Outside, Inside
     }
 
     public enum ScreenRecordOutput

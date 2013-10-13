@@ -29,31 +29,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Gamma : IPluginItem
+    public class Gamma : IImageEffect
     {
-        public override string Name { get { return "Gamma"; } }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Gamma"; } }
-
-        private float gammaValue;
-
-        [Description("Default value 0\nValue need to be between -100 to 10000")]
-        public float GammaValue
+        public Image Apply(Image img)
         {
-            get
-            {
-                return gammaValue;
-            }
-            set
-            {
-                gammaValue = value;
-                OnPreviewTextChanged(gammaValue + "%");
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.ChangeGamma(img, gammaValue);
+            return ColorMatrixManager.ChangeGamma(img, Value);
         }
     }
 }

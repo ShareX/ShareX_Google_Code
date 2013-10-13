@@ -24,39 +24,24 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Scale : IPluginItem
+    public class Scale : IImageEffect
     {
-        public override string Name { get { return "Scale"; } }
-
-        public override string Description { get { return "Scale"; } }
-
-        private float percentage;
-
-        public float Percentage
-        {
-            get
-            {
-                return percentage;
-            }
-            set
-            {
-                percentage = value.Between(1, 1000);
-                OnPreviewTextChanged(percentage + "%");
-            }
-        }
+        [DefaultValue(100)]
+        public float Percentage { get; set; }
 
         public Scale()
         {
-            percentage = 100;
+            this.ApplyDefaultPropertyValues();
         }
 
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
-            return ImageHelpers.ResizeImageByPercentage(img, percentage);
+            return ImageHelpers.ResizeImageByPercentage(img, Percentage);
         }
     }
 }

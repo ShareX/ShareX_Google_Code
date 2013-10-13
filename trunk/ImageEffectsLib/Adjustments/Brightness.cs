@@ -28,30 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Brightness : IPluginItem
+    public class Brightness : IImageEffect
     {
-        public override string Name { get { return "Brightness"; } }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Brightness"; } }
-
-        private float brightnessValue;
-
-        public float BrightnessValue
+        public Image Apply(Image img)
         {
-            get
-            {
-                return brightnessValue;
-            }
-            set
-            {
-                brightnessValue = value;
-                OnPreviewTextChanged(brightnessValue + "%");
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Brightness(BrightnessValue).Apply(img);
+            return ColorMatrixManager.Brightness(Value).Apply(img);
         }
     }
 }

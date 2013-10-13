@@ -28,30 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Hue : IPluginItem
+    public class Hue : IImageEffect
     {
-        public override string Name { get { return "Hue"; } }
+        public float Angle { get; set; }
 
-        public override string Description { get { return "Hue"; } }
-
-        private float angle;
-
-        public float Angle
+        public Image Apply(Image img)
         {
-            get
-            {
-                return angle;
-            }
-            set
-            {
-                angle = value;
-                OnPreviewTextChanged(angle.ToString());
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Hue(angle).Apply(img);
+            return ColorMatrixManager.Hue(Angle).Apply(img);
         }
     }
 }

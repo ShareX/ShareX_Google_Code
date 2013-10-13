@@ -28,50 +28,14 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Alpha : IPluginItem
+    public class Alpha : IImageEffect
     {
-        public override string Name { get { return "Alpha"; } }
+        public float Value { get; set; }
+        public float Addition { get; set; }
 
-        public override string Description { get { return "Alpha"; } }
-
-        private float percentage;
-
-        public float Percentage
+        public Image Apply(Image img)
         {
-            get
-            {
-                return percentage;
-            }
-            set
-            {
-                percentage = value;
-                ChangePreviewText();
-            }
-        }
-
-        private float addition;
-
-        public float Addition
-        {
-            get
-            {
-                return addition;
-            }
-            set
-            {
-                addition = value;
-                ChangePreviewText();
-            }
-        }
-
-        private void ChangePreviewText()
-        {
-            OnPreviewTextChanged(string.Format("{0}% {1}", percentage, addition));
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Alpha(percentage, addition).Apply(img);
+            return ColorMatrixManager.Alpha(Value, Addition).Apply(img);
         }
     }
 }

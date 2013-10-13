@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -331,6 +332,15 @@ namespace HelpersLib
             int place = (int)Math.Floor(Math.Log(size, 1024));
             double num = size / Math.Pow(1024, place);
             return num.ToString("0.00") + " " + (binary ? suf_binary[place] : suf_decimal[place]);
+        }
+
+        public static void ApplyDefaultPropertyValues(this object self)
+        {
+            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
+            {
+                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+                if (attr != null) prop.SetValue(self, attr.Value);
+            }
         }
     }
 }

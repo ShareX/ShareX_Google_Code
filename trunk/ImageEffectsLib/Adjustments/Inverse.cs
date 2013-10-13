@@ -28,13 +28,9 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Inverse : IPluginItem
+    public class Inverse : IImageEffect
     {
-        public override string Name { get { return "Inverse"; } }
-
-        public override string Description { get { return "Inverse"; } }
-
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
             return ColorMatrixManager.Inverse().Apply(img);
         }

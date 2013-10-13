@@ -29,99 +29,31 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Reflection : IPluginItem
+    public class Reflection : IImageEffect
     {
-        public override string Name { get { return "Reflection"; } }
+        [DefaultValue(20), Description("Reflection height size relative to screenshot height.\nValue need to be between 1 to 100.")]
+        public int Percentage { get; set; }
 
-        public override string Description { get { return "Draw reflection bottom of screenshots."; } }
+        [DefaultValue(255), Description("Reflection transparency start from this value to 0.\nValue need to be between 0 to 255.")]
+        public int Transparency { get; set; }
 
-        private int percentage;
+        [DefaultValue(0), Description("Reflection position will be start: Screenshot height + Offset")]
+        public int Offset { get; set; }
 
-        [Description("Reflection height size relative to screenshot height.\nValue need to be between 1 to 100.")]
-        public int Percentage
-        {
-            get
-            {
-                return percentage;
-            }
-            set
-            {
-                percentage = value.Between(1, 100);
-            }
-        }
+        [DefaultValue(true), Description("Adding skew to reflection from bottom left to bottom right.")]
+        public bool Skew { get; set; }
 
-        private int transparency;
-
-        [Description("Reflection transparency start from this value to 0.\nValue need to be between 0 to 255.")]
-        public int Transparency
-        {
-            get
-            {
-                return transparency;
-            }
-            set
-            {
-                transparency = value.Between(0, 255);
-            }
-        }
-
-        private int offset;
-
-        [Description("Reflection position will be start: Screenshot height + Offset")]
-        public int Offset
-        {
-            get
-            {
-                return offset;
-            }
-            set
-            {
-                offset = value;
-            }
-        }
-
-        private bool skew;
-
-        [Description("Adding skew to reflection from bottom left to bottom right.")]
-        public bool Skew
-        {
-            get
-            {
-                return skew;
-            }
-            set
-            {
-                skew = value;
-            }
-        }
-
-        private int skewSize;
-
-        [Description("How much pixel skew left to right.")]
-        public int SkewSize
-        {
-            get
-            {
-                return skewSize;
-            }
-            set
-            {
-                skewSize = value;
-            }
-        }
+        [DefaultValue(25), Description("How much pixel skew left to right.")]
+        public int SkewSize { get; set; }
 
         public Reflection()
         {
-            percentage = 20;
-            transparency = 255;
-            offset = 0;
-            skew = true;
-            skewSize = 25;
+            this.ApplyDefaultPropertyValues();
         }
 
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
-            return ImageHelpers.DrawReflection(img, percentage, transparency, offset, skew, skewSize);
+            return ImageHelpers.DrawReflection(img, Percentage, Transparency, Offset, Skew, SkewSize);
         }
     }
 }

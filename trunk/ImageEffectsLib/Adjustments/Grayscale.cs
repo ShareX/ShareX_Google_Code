@@ -28,15 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Grayscale : IPluginItem
+    public class Grayscale : IImageEffect
     {
-        public override string Name { get { return "Grayscale"; } }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Grayscale"; } }
-
-        public override Image ApplyEffect(Image img)
+        public Image Apply(Image img)
         {
-            return ColorMatrixManager.Grayscale().Apply(img);
+            return ColorMatrixManager.Grayscale(Value).Apply(img);
         }
     }
 }
