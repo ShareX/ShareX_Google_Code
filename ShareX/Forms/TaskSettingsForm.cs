@@ -110,8 +110,6 @@ namespace ShareX
             cbImageFormat2.SelectedIndex = (int)TaskSettings.ImageSettings.ImageFormat2;
 
             // Image - Resize
-            cbImageKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageKeepAspectRatio;
-            cbImageUseSmoothScaling.Checked = TaskSettings.ImageSettings.ImageUseSmoothScaling;
 
             switch (TaskSettings.ImageSettings.ImageScaleType)
             {
@@ -131,10 +129,12 @@ namespace ShareX
 
             nudImageScalePercentageWidth.Value = TaskSettings.ImageSettings.ImageScalePercentageWidth;
             nudImageScalePercentageHeight.Value = TaskSettings.ImageSettings.ImageScalePercentageHeight;
-            nudImageScaleToWidth.Value = TaskSettings.ImageSettings.ImageScaleToWidth;
-            nudImageScaleToHeight.Value = TaskSettings.ImageSettings.ImageScaleToHeight;
             nudImageScaleSpecificWidth.Value = TaskSettings.ImageSettings.ImageScaleSpecificWidth;
             nudImageScaleSpecificHeight.Value = TaskSettings.ImageSettings.ImageScaleSpecificHeight;
+            nudImageScaleToWidth.Value = TaskSettings.ImageSettings.ImageScaleToWidth;
+            cbImageScaleToWidthKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio;
+            nudImageScaleToHeight.Value = TaskSettings.ImageSettings.ImageScaleToHeight;
+            cbImageScaleToHeightKeepAspectRatio.Checked = TaskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio;
 
             // Image - Effects
             cbImageEffectOnlyRegionCapture.Checked = TaskSettings.ImageSettings.ImageEffectOnlyRegionCapture;
@@ -465,22 +465,14 @@ namespace ShareX
             TaskSettings.ImageSettings.ImageSizeLimit = (int)nudUseImageFormat2After.Value;
         }
 
-        private void cbImageUseSmoothScaling_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageUseSmoothScaling = cbImageUseSmoothScaling.Checked;
-        }
-
-        private void cbImageKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageKeepAspectRatio = cbImageKeepAspectRatio.Checked;
-
-            if (TaskSettings.ImageSettings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageHeight.Value = nudImageScalePercentageWidth.Value;
-            }
-        }
+        #region Resize
 
         private void rbImageScaleTypePercentage_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckImageScaleType();
+        }
+
+        private void rbImageScaleTypeSpecific_CheckedChanged(object sender, EventArgs e)
         {
             CheckImageScaleType();
         }
@@ -495,15 +487,8 @@ namespace ShareX
             CheckImageScaleType();
         }
 
-        private void rbImageScaleTypeSpecific_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckImageScaleType();
-        }
-
         private void CheckImageScaleType()
         {
-            bool aspectRatioEnabled = true;
-
             if (rbImageScaleTypePercentage.Checked)
             {
                 TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Percentage;
@@ -519,40 +504,22 @@ namespace ShareX
             else if (rbImageScaleTypeSpecific.Checked)
             {
                 TaskSettings.ImageSettings.ImageScaleType = ImageScaleType.Specific;
-                aspectRatioEnabled = false;
             }
-
-            cbImageKeepAspectRatio.Enabled = aspectRatioEnabled;
         }
 
         private void nudImageScalePercentageWidth_ValueChanged(object sender, EventArgs e)
         {
             TaskSettings.ImageSettings.ImageScalePercentageWidth = (int)nudImageScalePercentageWidth.Value;
-
-            if (TaskSettings.ImageSettings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageHeight.Value = TaskSettings.ImageSettings.ImageScalePercentageWidth;
-            }
-        }
-
-        private void nudImageScaleToHeight_ValueChanged(object sender, EventArgs e)
-        {
-            TaskSettings.ImageSettings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
         }
 
         private void nudImageScalePercentageHeight_ValueChanged(object sender, EventArgs e)
         {
             TaskSettings.ImageSettings.ImageScalePercentageHeight = (int)nudImageScalePercentageHeight.Value;
-
-            if (TaskSettings.ImageSettings.ImageKeepAspectRatio)
-            {
-                nudImageScalePercentageWidth.Value = TaskSettings.ImageSettings.ImageScalePercentageHeight;
-            }
         }
 
-        private void nudImageScaleToWidth_ValueChanged(object sender, EventArgs e)
+        private void nudImageScaleSpecificWidth_ValueChanged(object sender, EventArgs e)
         {
-            TaskSettings.ImageSettings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
+            TaskSettings.ImageSettings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
         }
 
         private void nudImageScaleSpecificHeight_ValueChanged(object sender, EventArgs e)
@@ -560,10 +527,27 @@ namespace ShareX
             TaskSettings.ImageSettings.ImageScaleSpecificHeight = (int)nudImageScaleSpecificHeight.Value;
         }
 
-        private void nudImageScaleSpecificWidth_ValueChanged(object sender, EventArgs e)
+        private void nudImageScaleToWidth_ValueChanged(object sender, EventArgs e)
         {
-            TaskSettings.ImageSettings.ImageScaleSpecificWidth = (int)nudImageScaleSpecificWidth.Value;
+            TaskSettings.ImageSettings.ImageScaleToWidth = (int)nudImageScaleToWidth.Value;
         }
+
+        private void cbImageScaleToWidthKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio = cbImageScaleToWidthKeepAspectRatio.Checked;
+        }
+
+        private void nudImageScaleToHeight_ValueChanged(object sender, EventArgs e)
+        {
+            TaskSettings.ImageSettings.ImageScaleToHeight = (int)nudImageScaleToHeight.Value;
+        }
+
+        private void cbImageScaleToHeightKeepAspectRatio_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio = cbImageScaleToHeightKeepAspectRatio.Checked;
+        }
+
+        #endregion Resize
 
         private void nudImageShadowSize_ValueChanged(object sender, EventArgs e)
         {

@@ -72,14 +72,14 @@ namespace ShareX
         {
             switch (taskSettings.ImageSettings.ImageScaleType)
             {
+                case ImageScaleType.Percentage:
+                    return ImageHelpers.ResizeImageByPercentage(img, taskSettings.ImageSettings.ImageScalePercentageWidth, taskSettings.ImageSettings.ImageScalePercentageHeight);
                 case ImageScaleType.Specific:
                     return ImageHelpers.ResizeImage(img, taskSettings.ImageSettings.ImageScaleSpecificWidth, taskSettings.ImageSettings.ImageScaleSpecificHeight);
-                case ImageScaleType.Percentage:
-                    return ImageHelpers.ResizeImagePercentage(img, taskSettings.ImageSettings.ImageScalePercentageWidth, taskSettings.ImageSettings.ImageScalePercentageHeight);
                 case ImageScaleType.Width:
-                    return ImageHelpers.ResizeImageWidth(img, taskSettings.ImageSettings.ImageScaleToWidth, taskSettings.ImageSettings.ImageKeepAspectRatio);
+                    return ImageHelpers.ResizeImageByWidth(img, taskSettings.ImageSettings.ImageScaleToWidth, taskSettings.ImageSettings.ImageScaleToWidthKeepAspectRatio);
                 case ImageScaleType.Height:
-                    return ImageHelpers.ResizeImageHeight(img, taskSettings.ImageSettings.ImageScaleToHeight, taskSettings.ImageSettings.ImageKeepAspectRatio);
+                    return ImageHelpers.ResizeImageByHeight(img, taskSettings.ImageSettings.ImageScaleToHeight, taskSettings.ImageSettings.ImageScaleToHeightKeepAspectRatio);
             }
 
             return img;
