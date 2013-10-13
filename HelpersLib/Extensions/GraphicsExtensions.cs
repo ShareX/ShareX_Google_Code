@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace HelpersLib
 {
@@ -57,6 +58,13 @@ namespace HelpersLib
                 // Left
                 g.DrawLine(pen, rect.X, rect.Y - crossSize, rect.X, rect.Bottom + crossSize);
             }
+        }
+
+        public static void SetHighQuality(this Graphics g)
+        {
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = SmoothingMode.HighQuality;
         }
     }
 }

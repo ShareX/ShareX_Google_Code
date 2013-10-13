@@ -28,7 +28,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Inverse : ImageEffect
+    internal class Inverse : ImageEffect
     {
         public override Image Apply(Image img)
         {

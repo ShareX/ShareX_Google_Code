@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Hue : ImageEffect
+    internal class Hue : ImageEffect
     {
         [DefaultValue(0f)]
         public float Angle { get; set; }

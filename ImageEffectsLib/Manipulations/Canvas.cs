@@ -24,24 +24,36 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 
 namespace ImageEffectsLib
 {
-    internal class Contrast : ImageEffect
+    internal class Canvas : ImageEffect
     {
-        [DefaultValue(1f)]
-        public float Value { get; set; }
+        [DefaultValue(5), Description("If (width = 0) then width = height")]
+        public int Width { get; set; }
 
-        public Contrast()
+        [DefaultValue(0), Description("If (height = 0) then height = width")]
+        public int Height { get; set; }
+
+        public Canvas()
         {
             this.ApplyDefaultPropertyValues();
         }
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Contrast(Value).Apply(img);
+            if (Width <= 0 && Height <= 0) return img;
+
+            int width = Width <= 0 ? Height : Width;
+            int height = Height <= 0 ? Width : Height;
+
+            return ImageHelpers.AddCanvas(img, width, height);
         }
     }
 }

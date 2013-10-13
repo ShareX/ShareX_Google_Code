@@ -115,7 +115,7 @@ namespace ShareX
 
         private void cLogo_Draw(Graphics g)
         {
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SetHighQuality();
 
             using (Matrix m = new Matrix())
             {

@@ -189,8 +189,7 @@ namespace HelpersLib
                 newY += (int)((rect.Height - (img.Height * ratio)) / 2);
             }
 
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.SetHighQuality();
             g.DrawImage(img, newX, newY, newWidth, newHeight);
         }
     }

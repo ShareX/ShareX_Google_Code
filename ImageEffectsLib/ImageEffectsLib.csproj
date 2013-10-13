@@ -80,6 +80,8 @@
     <Compile Include="Adjustments\Inverse.cs" />
     <Compile Include="Adjustments\Saturation.cs" />
     <Compile Include="Filters\Shadow.cs" />
+    <Compile Include="Manipulations\Canvas.cs" />
+    <Compile Include="Manipulations\FillBackground.cs" />
     <Compile Include="Manipulations\Scale.cs" />
     <Compile Include="ImageEffect.cs" />
     <Compile Include="ImageEffectsForm.cs">

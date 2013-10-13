@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Brightness : ImageEffect
+    internal class Brightness : ImageEffect
     {
         [DefaultValue(0f)]
         public float Value { get; set; }

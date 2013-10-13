@@ -58,10 +58,6 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-
                 g.DrawImage(img, x, y, width, height);
 
                 img.Dispose();
@@ -158,8 +154,7 @@ namespace HelpersLib
 
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.HighQuality;
+                    g.SetHighQuality();
 
                     using (Region region = new Region(gp))
                     {
@@ -231,6 +226,7 @@ namespace HelpersLib
         private static Bitmap AddSkew(Bitmap bmp, int skew)
         {
             Bitmap result = new Bitmap(bmp.Width + skew, bmp.Height);
+            bmp.SetResolution(bmp.HorizontalResolution, bmp.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(result))
             {
@@ -242,15 +238,16 @@ namespace HelpersLib
             return result;
         }
 
-        public static Image AddCanvas(Image img, int size)
+        public static Image AddCanvas(Image img, int width, int height)
         {
-            Image bmp = new Bitmap(img.Width + size * 2, img.Height + size * 2);
+            Bitmap bmp = new Bitmap(img.Width + width * 2, img.Height + height * 2);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (img)
             {
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.DrawImage(img, new Rectangle(size, size, img.Width, img.Height), new Rectangle(0, 0, img.Width, img.Height), GraphicsUnit.Pixel);
+                g.SetHighQuality();
+                g.DrawImageUnscaled(img, width, height);
             }
 
             return bmp;
@@ -346,11 +343,8 @@ namespace HelpersLib
 
                 using (Graphics g = Graphics.FromImage(bmp))
                 {
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-
                     g.Clear(color);
+                    g.SetHighQuality();
                     g.DrawImageUnscaled(tempImage, 0, 0);
                 }
             }
@@ -362,16 +356,11 @@ namespace HelpersLib
             bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (LinearGradientBrush brush = new LinearGradientBrush(new Point(0, 0), new Point(img.Width - 1, 0), color, color2))
             {
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-
-                using (LinearGradientBrush brush = new LinearGradientBrush(new Point(0, 0), new Point(img.Width - 1, 0), color, color2))
-                {
-                    g.FillRectangle(brush, 0, 0, img.Width, img.Height);
-                    g.DrawImageUnscaled(img, 0, 0);
-                }
+                g.SetHighQuality();
+                g.FillRectangle(brush, 0, 0, img.Width, img.Height);
+                g.DrawImageUnscaled(img, 0, 0);
             }
 
             return bmp;
@@ -383,8 +372,7 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.SetHighQuality();
 
                 Image checker = CreateCheckers(8, Color.LightGray, Color.White);
                 Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
@@ -402,8 +390,7 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.SetHighQuality();
 
                 Image checker = CreateCheckers(8, Color.LightGray, Color.White);
                 Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
@@ -544,8 +531,7 @@ namespace HelpersLib
                     {
                         mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
                         gDest.Transform = mDest;
-                        gDest.CompositingQuality = CompositingQuality.HighQuality;
-                        gDest.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        gDest.SetHighQuality();
                         gDest.DrawImage(img, pts);
                         return bmpDest;
                     }

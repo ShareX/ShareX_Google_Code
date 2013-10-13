@@ -72,6 +72,7 @@ namespace HelpersLib
                 using (LinearGradientBrush brush = CreateGradientBrush(pbPreview.ClientSize, GradientData))
                 {
                     Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
+
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
                         g.FillRectangle(brush, 0, 0, pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
