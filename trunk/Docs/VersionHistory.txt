@@ -1,4 +1,8 @@
-﻿Added mega.co.nz file uploader support
+﻿ShareX 8.3
+
+Added new After Capture task "Add image effects" in favour of resize, border and shadow
+Added hotkey support for Tools (screen color picker, hash check and index folder)
+Added mega.co.nz file uploader support
 
 ShareX 8.2 r655 – 2013-09-26
 

@@ -203,6 +203,15 @@ namespace ShareX
             return img;
         }
 
+        public static Image AddImageEffects(Image img)
+        {
+            using (ImageEffectsLib.ImageEffectsGUI dlg = new ImageEffectsLib.ImageEffectsGUI(img))
+            {
+                dlg.ShowDialog();
+                return dlg.GetImageForExport();
+            }
+        }
+
         public static Image DrawShadow(TaskSettings taskSettings, Image img)
         {
             Point offsetChange;
