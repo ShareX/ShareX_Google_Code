@@ -80,7 +80,6 @@ namespace ImageEffectsLib
             string filters = "Filters";
 
             AddEffectToTreeView(filters, typeof(Shadow));
-            AddEffectToTreeView(filters, typeof(Monochrome));
             AddEffectToTreeView(filters, typeof(TornEdge));
 
             tvEffects.ExpandAll();
@@ -126,9 +125,12 @@ namespace ImageEffectsLib
         {
             Image tempImage = (Image)img.Clone();
 
-            foreach (ImageEffect imageEffect in imageEffects)
+            if (imageEffects != null)
             {
-                tempImage = imageEffect.Apply(tempImage);
+                foreach (ImageEffect imageEffect in imageEffects)
+                {
+                    tempImage = imageEffect.Apply(tempImage);
+                }
             }
 
             return tempImage;
@@ -167,6 +169,19 @@ namespace ImageEffectsLib
             }
         }
 
+        private void RemoveSelectedEffects()
+        {
+            if (lvEffects.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in lvEffects.SelectedItems)
+                {
+                    lvi.Remove();
+                }
+
+                UpdatePreview();
+            }
+        }
+
         private void AddEffect(ImageEffect imageEffect)
         {
             ListViewItem lvi = new ListViewItem(imageEffect.GetType().Name);
@@ -182,8 +197,8 @@ namespace ImageEffectsLib
             }
 
             lvEffects.Focus();
-            lvi.Selected = true;
             lvi.EnsureVisible();
+            lvi.Selected = true;
         }
 
         private void AddEffects(List<ImageEffect> imageEffects)
@@ -196,12 +211,7 @@ namespace ImageEffectsLib
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem lvi in lvEffects.SelectedItems)
-            {
-                lvi.Remove();
-            }
-
-            UpdatePreview();
+            RemoveSelectedEffects();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -243,6 +253,40 @@ namespace ImageEffectsLib
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void btnMoveUp_Click(object sender, EventArgs e)
+        {
+            if (lvEffects.SelectedItems.Count > 0)
+            {
+                lvEffects.SelectedItems[0].MoveUp();
+                UpdatePreview();
+            }
+        }
+
+        private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+            if (lvEffects.SelectedItems.Count > 0)
+            {
+                lvEffects.SelectedItems[0].MoveDown();
+                UpdatePreview();
+            }
+        }
+
+        private void btnDuplicate_Click(object sender, EventArgs e)
+        {
+            if (lvEffects.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvEffects.SelectedItems[0];
+
+                if (lvi.Tag is ImageEffect)
+                {
+                    ImageEffect imageEffect = (ImageEffect)lvi.Tag;
+                    ImageEffect imageEffectClone = imageEffect.Copy();
+                    AddEffect(imageEffectClone);
+                    UpdatePreview();
+                }
+            }
         }
     }
 }

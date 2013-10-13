@@ -342,5 +342,57 @@ namespace HelpersLib
                 if (attr != null) prop.SetValue(self, attr.Value);
             }
         }
+
+        public static void MoveUp(this ListViewItem lvi)
+        {
+            ListView lv = lvi.ListView;
+
+            if (lv.Items.Count > 1)
+            {
+                int index = lvi.Index;
+
+                if (index == 0)
+                {
+                    index = lv.Items.Count - 1;
+                }
+                else
+                {
+                    index--;
+                }
+
+                lv.Items.Remove(lvi);
+                lv.Items.Insert(index, lvi);
+            }
+
+            lv.Focus();
+            lvi.EnsureVisible();
+            lvi.Selected = true;
+        }
+
+        public static void MoveDown(this ListViewItem lvi)
+        {
+            ListView lv = lvi.ListView;
+
+            if (lv.Items.Count > 1)
+            {
+                int index = lvi.Index;
+
+                if (index == lv.Items.Count - 1)
+                {
+                    index = 0;
+                }
+                else
+                {
+                    index++;
+                }
+
+                lv.Items.Remove(lvi);
+                lv.Items.Insert(index, lvi);
+            }
+
+            lv.Focus();
+            lvi.EnsureVisible();
+            lvi.Selected = true;
+        }
     }
 }
