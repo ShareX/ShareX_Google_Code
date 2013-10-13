@@ -224,9 +224,6 @@ namespace ShareX
 
         public bool ImageEffectOnlyRegionCapture = true;
         public bool ShowImageEffectsWindowAfterCapture = false;
-        public float ShadowDarkness = 0.4f;
-        public int ShadowSize = 9;
-        public Point ShadowOffset = new Point(0, 0);
 
         #endregion Image / Effects
     }

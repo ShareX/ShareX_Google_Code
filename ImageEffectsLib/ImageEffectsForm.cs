@@ -55,6 +55,14 @@ namespace ImageEffectsLib
 
         private void AddAllEffectsToTreeView()
         {
+            string manipulations = "Manipulations";
+
+            AddEffectToTreeView(manipulations, typeof(Border));
+            AddEffectToTreeView(manipulations, typeof(Reflection));
+            AddEffectToTreeView(manipulations, typeof(Resize));
+            AddEffectToTreeView(manipulations, typeof(Rotate));
+            AddEffectToTreeView(manipulations, typeof(Scale));
+
             string adjustments = "Adjustments";
 
             AddEffectToTreeView(adjustments, typeof(Alpha));
@@ -67,13 +75,9 @@ namespace ImageEffectsLib
             AddEffectToTreeView(adjustments, typeof(Inverse));
             AddEffectToTreeView(adjustments, typeof(Saturation));
 
-            string manipulations = "Manipulations";
+            string filters = "Filters";
 
-            AddEffectToTreeView(manipulations, typeof(Border));
-            AddEffectToTreeView(manipulations, typeof(Reflection));
-            AddEffectToTreeView(manipulations, typeof(Resize));
-            AddEffectToTreeView(manipulations, typeof(Rotate));
-            AddEffectToTreeView(manipulations, typeof(Scale));
+            AddEffectToTreeView(filters, typeof(Shadow));
 
             tvEffects.ExpandAll();
         }
@@ -100,7 +104,7 @@ namespace ImageEffectsLib
         {
             Stopwatch timer = Stopwatch.StartNew();
             pbResult.LoadImage(ExportImage());
-            pbResult.Text = string.Format("Preview ({0}x{1}) - {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
+            pbResult.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
         private List<ImageEffect> GetImageEffects()
@@ -171,8 +175,11 @@ namespace ImageEffectsLib
             else
             {
                 lvEffects.Items.Add(lvi);
-                lvEffects.Items[lvEffects.Items.Count - 1].Selected = true;
             }
+
+            lvEffects.Focus();
+            lvi.Selected = true;
+            lvi.EnsureVisible();
         }
 
         private void AddEffects(List<ImageEffect> imageEffects)

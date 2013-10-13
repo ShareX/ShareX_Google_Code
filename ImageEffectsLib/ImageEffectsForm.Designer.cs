@@ -85,6 +85,7 @@
             this.lvEffects.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvEffects.HideSelection = false;
             this.lvEffects.Location = new System.Drawing.Point(248, 8);
+            this.lvEffects.MultiSelect = false;
             this.lvEffects.Name = "lvEffects";
             this.lvEffects.Size = new System.Drawing.Size(232, 264);
             this.lvEffects.TabIndex = 0;
@@ -119,7 +120,6 @@
             this.pbResult.Name = "pbResult";
             this.pbResult.Size = new System.Drawing.Size(688, 448);
             this.pbResult.TabIndex = 1;
-            this.pbResult.Text = "Preview";
             // 
             // btnOK
             // 
