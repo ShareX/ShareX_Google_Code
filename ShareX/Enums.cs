@@ -89,11 +89,6 @@ namespace ShareX
         CopyURLToClipboard = 1 << 3
     }
 
-    public enum ImageScaleType
-    {
-        Percentage, Width, Height, Specific
-    }
-
     public enum AfterCaptureFormResult
     {
         Continue, Cancel, Copy

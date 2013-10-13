@@ -79,6 +79,7 @@
     <Compile Include="Adjustments\Hue.cs" />
     <Compile Include="Adjustments\Inverse.cs" />
     <Compile Include="Adjustments\Saturation.cs" />
+    <Compile Include="Manipulations\Scale.cs" />
     <Compile Include="IImageEffect.cs" />
     <Compile Include="ImageEffectsForm.cs">
       <SubType>Form</SubType>
@@ -90,7 +91,6 @@
     <Compile Include="Manipulations\Reflection.cs" />
     <Compile Include="Manipulations\Resize.cs" />
     <Compile Include="Manipulations\Rotate.cs" />
-    <Compile Include="Manipulations\Scale.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,13 @@ namespace ImageEffectsLib
 {
     public class Gamma : IImageEffect
     {
+        [DefaultValue(1f), Description("Min 0.1, Max 5.0")]
         public float Value { get; set; }
+
+        public Gamma()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

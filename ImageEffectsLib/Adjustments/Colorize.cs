@@ -31,10 +31,16 @@ namespace ImageEffectsLib
 {
     public class Colorize : IImageEffect
     {
+        [DefaultValue(typeof(Color), "Red")]
         public Color Color { get; set; }
 
-        [DefaultValue(0.5), Description("Choose a value between 0 and 1.")]
+        [DefaultValue(0f)]
         public float Value { get; set; }
+
+        public Colorize()
+        {
+            this.ApplyDefaultPropertyValues();
+        }
 
         public Image Apply(Image img)
         {

@@ -48,7 +48,7 @@ namespace HelpersLib
 
         public static Image ResizeImage(Image img, int x, int y, int width, int height)
         {
-            if (img.Width == width && img.Height == height)
+            if (width < 1 || height < 1 || (img.Width == width && img.Height == height))
             {
                 return img;
             }
@@ -79,18 +79,6 @@ namespace HelpersLib
         {
             int width = (int)(percentageWidth / 100 * img.Width);
             int height = (int)(percentageHeight / 100 * img.Height);
-            return ResizeImage(img, width, height);
-        }
-
-        public static Image ResizeImageByWidth(Image img, int width, bool keepAspectRatio = true)
-        {
-            int height = keepAspectRatio ? width / img.Width * img.Height : img.Height;
-            return ResizeImage(img, width, height);
-        }
-
-        public static Image ResizeImageByHeight(Image img, int height, bool keepAspectRatio = true)
-        {
-            int width = keepAspectRatio ? height / img.Height * img.Width : img.Width;
             return ResizeImage(img, width, height);
         }
 
