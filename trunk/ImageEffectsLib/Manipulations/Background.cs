@@ -29,12 +29,12 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    internal class FillBackground : ImageEffect
+    internal class Background : ImageEffect
     {
         [DefaultValue(typeof(Color), "White")]
         public Color Color { get; set; }
 
-        public FillBackground()
+        public Background()
         {
             this.ApplyDefaultPropertyValues();
         }
