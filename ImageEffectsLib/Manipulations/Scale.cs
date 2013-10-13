@@ -31,10 +31,10 @@ namespace ImageEffectsLib
 {
     public class Scale : IImageEffect
     {
-        [DefaultValue(100f), Description("Use 0 width for aspect ratio to height.")]
+        [DefaultValue(100f), Description("Use width percentage as 0 to maintain aspect ratio by automatically adjusting width.")]
         public float WidthPercentage { get; set; }
 
-        [DefaultValue(0f), Description("Use 0 height for keep aspect ratio to width.")]
+        [DefaultValue(0f), Description("Use height percentage as 0 to maintain aspect ratio by automatically adjusting height.")]
         public float HeightPercentage { get; set; }
 
         public Scale()

@@ -191,17 +191,20 @@ namespace ShareX
 
         public static Image AddImageEffects(Image img, TaskSettings taskSettings)
         {
-            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img, taskSettings.ImageSettings.ImageEffects))
+            if (taskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture)
             {
-                if (!taskSettings.ImageSettings.ShowImageEffectsWindowAfterCapture || imageEffectsForm.ShowDialog() == DialogResult.OK)
+                using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img, taskSettings.ImageSettings.ImageEffects))
                 {
-                    Image result = imageEffectsForm.ExportImage(taskSettings.ImageSettings.ImageEffects.ToArray());
-                    img.Dispose();
-                    return result;
+                    if (imageEffectsForm.ShowDialog() == DialogResult.OK)
+                    {
+                        taskSettings.ImageSettings.ImageEffects = imageEffectsForm.Effects;
+                    }
                 }
             }
 
-            return img;
+            Image result = ImageEffectsForm.ExportImage(img, taskSettings.ImageSettings.ImageEffects);
+            img.Dispose();
+            return result;
         }
 
         public static Image DrawShadow(TaskSettings taskSettings, Image img)

@@ -172,7 +172,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Image Effects";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ImageEffectsGUI_FormClosed);
             this.ResumeLayout(false);
 
         }

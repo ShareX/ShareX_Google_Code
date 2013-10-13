@@ -456,9 +456,12 @@ namespace ShareX
 
         private void btnImageEffects_Click(object sender, EventArgs e)
         {
-            using (ImageEffectsForm dlg = new ImageEffectsForm(Resources.ShareXLogo, TaskSettings.ImageSettings.ImageEffects))
+            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(Resources.ShareXLogo, TaskSettings.ImageSettings.ImageEffects))
             {
-                dlg.ShowDialog();
+                if (imageEffectsForm.ShowDialog() == DialogResult.OK)
+                {
+                    TaskSettings.ImageSettings.ImageEffects = imageEffectsForm.Effects;
+                }
             }
         }
 

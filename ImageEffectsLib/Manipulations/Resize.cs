@@ -31,10 +31,10 @@ namespace ImageEffectsLib
 {
     public class Resize : IImageEffect
     {
-        [DefaultValue(250), Description("Use 0 width for aspect ratio to height.")]
+        [DefaultValue(250), Description("Use width as 0 to automatically adjust width to maintain aspect ratio.")]
         public int Width { get; set; }
 
-        [DefaultValue(0), Description("Use 0 height for keep aspect ratio to width.")]
+        [DefaultValue(0), Description("Use height as 0 to automatically adjust height to maintain aspect ratio.")]
         public int Height { get; set; }
 
         public Resize()
