@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Brightness : IImageEffect
+    public class Brightness : ImageEffect
     {
         [DefaultValue(0f)]
         public float Value { get; set; }
@@ -39,7 +39,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ColorMatrixManager.Brightness(Value).Apply(img);
         }

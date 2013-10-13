@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Colorize : IImageEffect
+    public class Colorize : ImageEffect
     {
         [DefaultValue(typeof(Color), "Red")]
         public Color Color { get; set; }
@@ -42,7 +42,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ColorMatrixManager.Colorize(Color, Value).Apply(img);
         }

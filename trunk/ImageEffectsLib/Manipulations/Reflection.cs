@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Reflection : IImageEffect
+    public class Reflection : ImageEffect
     {
         [DefaultValue(20), Description("Reflection height size relative to screenshot height.\nValue need to be between 1 to 100.")]
         public int Percentage { get; set; }
@@ -51,7 +51,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ImageHelpers.DrawReflection(img, Percentage, Transparency, Offset, Skew, SkewSize);
         }

@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Scale : IImageEffect
+    public class Scale : ImageEffect
     {
         [DefaultValue(100f), Description("Use width percentage as 0 to maintain aspect ratio by automatically adjusting width.")]
         public float WidthPercentage { get; set; }
@@ -42,7 +42,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             if (WidthPercentage <= 0 && HeightPercentage <= 0) return img;
 

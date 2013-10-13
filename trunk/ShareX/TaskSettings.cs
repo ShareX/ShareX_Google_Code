@@ -218,7 +218,8 @@ namespace ShareX
         #region Image / Effects
 
         public WatermarkConfig WatermarkConfig = new WatermarkConfig();
-        public List<IImageEffect> ImageEffects = new List<IImageEffect>();
+
+        public List<ImageEffect> ImageEffects = new List<ImageEffect>();
 
         public bool ImageEffectOnlyRegionCapture = true;
         public bool ShowImageEffectsWindowAfterCapture = false;

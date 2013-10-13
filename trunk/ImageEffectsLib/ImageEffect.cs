@@ -31,8 +31,8 @@ using System.Text;
 
 namespace ImageEffectsLib
 {
-    public interface IImageEffect
+    public abstract class ImageEffect
     {
-        Image Apply(Image img);
+        public abstract Image Apply(Image img);
     }
 }

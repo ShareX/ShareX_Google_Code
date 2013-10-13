@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Rotate : IImageEffect
+    public class Rotate : ImageEffect
     {
         [DefaultValue(0f), Description("Choose a value between -360 and 360")]
         public float Angle { get; set; }
@@ -39,7 +39,7 @@ namespace ImageEffectsLib
             this.ApplyDefaultPropertyValues();
         }
 
-        public Image Apply(Image img)
+        public override Image Apply(Image img)
         {
             return ImageHelpers.RotateImage(img, Angle);
         }
