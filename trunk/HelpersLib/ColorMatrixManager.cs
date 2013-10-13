@@ -26,6 +26,7 @@
 using HelpersLib;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
 namespace HelpersLib
@@ -54,7 +55,13 @@ namespace HelpersLib
             using (Graphics g = Graphics.FromImage(bmp))
             using (ImageAttributes ia = new ImageAttributes())
             {
-                ia.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                ia.ClearColorMatrix();
+                ia.SetColorMatrix(matrix);
+
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.HighQuality;
+
                 g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
             }
 
@@ -77,16 +84,6 @@ namespace HelpersLib
             }
 
             return bmp;
-        }
-
-        public static ColorMatrix Identity()
-        {
-            return new ColorMatrix(new[]{
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
         }
 
         public static ColorMatrix Inverse()

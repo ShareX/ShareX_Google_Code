@@ -207,13 +207,6 @@ namespace ShareX
             return result;
         }
 
-        public static Image DrawShadow(TaskSettings taskSettings, Image img)
-        {
-            Point offsetChange;
-            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, taskSettings.ImageSettings.ShadowDarkness, taskSettings.ImageSettings.ShadowSize,
-                taskSettings.ImageSettings.ShadowOffset, out offsetChange, PixelFormat.Format32bppArgb);
-        }
-
         public static void AddDefaultExternalPrograms(TaskSettings taskSettings)
         {
             if (taskSettings.ExternalPrograms == null)
