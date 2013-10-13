@@ -58,6 +58,8 @@ namespace ImageEffectsLib
             string manipulations = "Manipulations";
 
             AddEffectToTreeView(manipulations, typeof(Border));
+            AddEffectToTreeView(manipulations, typeof(Canvas));
+            AddEffectToTreeView(manipulations, typeof(FillBackground));
             AddEffectToTreeView(manipulations, typeof(Reflection));
             AddEffectToTreeView(manipulations, typeof(Resize));
             AddEffectToTreeView(manipulations, typeof(Rotate));

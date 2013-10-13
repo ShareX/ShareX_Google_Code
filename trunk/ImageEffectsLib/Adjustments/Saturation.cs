@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Saturation : ImageEffect
+    internal class Saturation : ImageEffect
     {
         [DefaultValue(1f)]
         public float Value { get; set; }

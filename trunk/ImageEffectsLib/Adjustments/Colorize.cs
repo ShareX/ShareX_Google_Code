@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Colorize : ImageEffect
+    internal class Colorize : ImageEffect
     {
         [DefaultValue(typeof(Color), "Red")]
         public Color Color { get; set; }

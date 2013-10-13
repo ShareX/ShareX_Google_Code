@@ -29,19 +29,20 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    internal class Contrast : ImageEffect
+    internal class FillBackground : ImageEffect
     {
-        [DefaultValue(1f)]
-        public float Value { get; set; }
+        [DefaultValue(typeof(Color), "White")]
+        public Color Color { get; set; }
 
-        public Contrast()
+        public FillBackground()
         {
             this.ApplyDefaultPropertyValues();
         }
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Contrast(Value).Apply(img);
+            ImageHelpers.FillImageBackground(img, Color);
+            return img;
         }
     }
 }

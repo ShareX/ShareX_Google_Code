@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Alpha : ImageEffect
+    internal class Alpha : ImageEffect
     {
         [DefaultValue(1f)]
         public float Value { get; set; }

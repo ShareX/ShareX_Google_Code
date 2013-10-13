@@ -104,12 +104,13 @@ namespace HelpersLib
         private void DrawColors()
         {
             Bitmap bmp = new Bitmap(lblColorPreview.ClientSize.Width, lblColorPreview.ClientSize.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            int bmpHeight = bmp.Height;
-            if (oldColorExist) bmpHeight /= 2;
-            g.FillRectangle(new SolidBrush(NewColor), new Rectangle(0, 0, bmp.Width, bmpHeight));
-            if (oldColorExist) g.FillRectangle(new SolidBrush(OldColor),
-                new Rectangle(0, bmpHeight, bmp.Width, bmpHeight));
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                int bmpHeight = bmp.Height;
+                if (oldColorExist) bmpHeight /= 2;
+                g.FillRectangle(new SolidBrush(NewColor), new Rectangle(0, 0, bmp.Width, bmpHeight));
+                if (oldColorExist) g.FillRectangle(new SolidBrush(OldColor), new Rectangle(0, bmpHeight, bmp.Width, bmpHeight));
+            }
             lblColorPreview.Image = bmp;
         }
 

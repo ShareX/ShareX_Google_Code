@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Reflection : ImageEffect
+    internal class Reflection : ImageEffect
     {
         [DefaultValue(20), Description("Reflection height size relative to screenshot height.\nValue need to be between 1 to 100.")]
         public int Percentage { get; set; }

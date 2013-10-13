@@ -34,7 +34,7 @@ using System.Text;
 
 namespace ImageEffectsLib
 {
-    public class Shadow : ImageEffect
+    internal class Shadow : ImageEffect
     {
         [DefaultValue(0.4f)]
         public float Darkness { get; set; }

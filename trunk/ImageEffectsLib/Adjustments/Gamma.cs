@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Gamma : ImageEffect
+    internal class Gamma : ImageEffect
     {
         [DefaultValue(1f), Description("Min 0.1, Max 5.0")]
         public float Value { get; set; }

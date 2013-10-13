@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Rotate : ImageEffect
+    internal class Rotate : ImageEffect
     {
         [DefaultValue(0f), Description("Choose a value between -360 and 360")]
         public float Angle { get; set; }

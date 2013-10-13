@@ -29,7 +29,7 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Grayscale : ImageEffect
+    internal class Grayscale : ImageEffect
     {
         [DefaultValue(1f)]
         public float Value { get; set; }

@@ -58,10 +58,7 @@ namespace HelpersLib
                 ia.ClearColorMatrix();
                 ia.SetColorMatrix(matrix);
 
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-
+                g.SetHighQuality();
                 g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
             }
 
