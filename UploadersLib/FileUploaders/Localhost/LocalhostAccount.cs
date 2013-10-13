@@ -96,7 +96,7 @@ namespace UploadersLib
 
         public LocalhostAccount()
         {
-            Helpers.ApplyDefaultPropertyValues(this);
+            this.ApplyDefaultPropertyValues();
         }
 
         public LocalhostAccount(string name)

@@ -28,30 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Saturation : IPluginItem
+    public class Saturation : IImageEffect
     {
-        public override string Name { get { return "Saturation"; } }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Saturation"; } }
-
-        private float saturationValue;
-
-        public float SaturationValue
+        public Image Apply(Image img)
         {
-            get
-            {
-                return saturationValue;
-            }
-            set
-            {
-                saturationValue = value;
-                OnPreviewTextChanged(saturationValue + "%");
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Saturation(SaturationValue).Apply(img);
+            return ColorMatrixManager.Saturation(Value).Apply(img);
         }
     }
 }

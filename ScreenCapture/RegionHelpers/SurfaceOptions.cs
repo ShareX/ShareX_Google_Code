@@ -72,7 +72,7 @@ namespace ScreenCapture
 
         public SurfaceOptions()
         {
-            Helpers.ApplyDefaultPropertyValues(this);
+            this.ApplyDefaultPropertyValues();
         }
     }
 }

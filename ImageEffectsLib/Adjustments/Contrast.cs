@@ -28,30 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Contrast : IPluginItem
+    public class Contrast : IImageEffect
     {
-        public override string Name { get { return "Contrast"; } }
+        public float Value { get; set; }
 
-        public override string Description { get { return "Contrast"; } }
-
-        private float contrastValue;
-
-        public float ContrastValue
+        public Image Apply(Image img)
         {
-            get
-            {
-                return contrastValue;
-            }
-            set
-            {
-                contrastValue = value;
-                OnPreviewTextChanged(contrastValue + "%");
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ColorMatrixManager.Contrast(ContrastValue).Apply(img);
+            return ColorMatrixManager.Contrast(Value).Apply(img);
         }
     }
 }

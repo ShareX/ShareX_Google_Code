@@ -325,7 +325,7 @@ namespace ShareX
 
         public TaskSettingsAdvanced()
         {
-            Helpers.ApplyDefaultPropertyValues(this);
+            this.ApplyDefaultPropertyValues();
         }
     }
 }

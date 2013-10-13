@@ -41,6 +41,11 @@ namespace HelpersLib
             return ResizeImage(img, 0, 0, width, height);
         }
 
+        public static Image ResizeImage(Image img, Size size)
+        {
+            return ResizeImage(img, 0, 0, size.Width, size.Height);
+        }
+
         public static Image ResizeImage(Image img, int x, int y, int width, int height)
         {
             if (img.Width == width && img.Height == height)

@@ -65,7 +65,7 @@ namespace IndexerLib
 
         public IndexerSettings()
         {
-            Helpers.ApplyDefaultPropertyValues(this);
+            this.ApplyDefaultPropertyValues();
         }
     }
 }

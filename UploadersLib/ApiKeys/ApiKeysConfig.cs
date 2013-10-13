@@ -172,7 +172,7 @@ namespace UploadersLib
 
         public UploadersAPIKeys()
         {
-            Helpers.ApplyDefaultPropertyValues(this);
+            this.ApplyDefaultPropertyValues();
         }
     }
 }

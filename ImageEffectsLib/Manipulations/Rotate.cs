@@ -28,30 +28,13 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    public class Rotate : IPluginItem
+    public class Rotate : IImageEffect
     {
-        public override string Name { get { return "Rotate"; } }
+        public float Angle { get; set; }
 
-        public override string Description { get { return "Rotate"; } }
-
-        private float angle;
-
-        public float Angle
+        public Image Apply(Image img)
         {
-            get
-            {
-                return angle;
-            }
-            set
-            {
-                angle = value;
-                OnPreviewTextChanged(angle.ToString());
-            }
-        }
-
-        public override Image ApplyEffect(Image img)
-        {
-            return ImageHelpers.RotateImage(img, angle);
+            return ImageHelpers.RotateImage(img, Angle);
         }
     }
 }

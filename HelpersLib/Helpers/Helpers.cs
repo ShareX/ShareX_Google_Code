@@ -692,15 +692,6 @@ namespace HelpersLib
             }
         }
 
-        public static void ApplyDefaultPropertyValues(object self)
-        {
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(self))
-            {
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr != null) prop.SetValue(self, attr.Value);
-            }
-        }
-
         public static string GetUniqueID()
         {
             return Guid.NewGuid().ToString("N");
