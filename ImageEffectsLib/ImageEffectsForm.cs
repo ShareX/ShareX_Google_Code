@@ -60,6 +60,7 @@ namespace ImageEffectsLib
             AddEffectToTreeView(manipulations, typeof(Border));
             AddEffectToTreeView(manipulations, typeof(Canvas));
             AddEffectToTreeView(manipulations, typeof(Background));
+            AddEffectToTreeView(manipulations, typeof(Flip));
             AddEffectToTreeView(manipulations, typeof(Reflection));
             AddEffectToTreeView(manipulations, typeof(Resize));
             AddEffectToTreeView(manipulations, typeof(Rotate));
