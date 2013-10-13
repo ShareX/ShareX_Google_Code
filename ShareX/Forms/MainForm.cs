@@ -25,6 +25,7 @@
 
 using HelpersLib;
 using HistoryLib;
+using ImageEffectsLib;
 using ScreenCapture;
 using ShareX.Properties;
 using System;
@@ -660,9 +661,9 @@ namespace ShareX
             new RegionCapturePreview(Program.DefaultTaskSettings.CaptureSettings.SurfaceOptions).Show();
         }
 
-        private void tsmiTestColorMatrix_Click(object sender, EventArgs e)
+        private void tsmiTestImageEffects_Click(object sender, EventArgs e)
         {
-            new ColorMatrixTestForm().Show();
+            new ImageEffectsForm(Resources.ShareXLogo).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)
