@@ -150,7 +150,7 @@
             // pbDefaultZoom
             // 
             this.pbDefaultZoom.BackColor = System.Drawing.Color.DimGray;
-            this.pbDefaultZoom.Location = new System.Drawing.Point(360, 8);
+            this.pbDefaultZoom.Location = new System.Drawing.Point(376, 8);
             this.pbDefaultZoom.Name = "pbDefaultZoom";
             this.pbDefaultZoom.Size = new System.Drawing.Size(88, 88);
             this.pbDefaultZoom.TabIndex = 4;
@@ -183,7 +183,7 @@
             // pbPreviewZoom
             // 
             this.pbPreviewZoom.BackColor = System.Drawing.Color.DimGray;
-            this.pbPreviewZoom.Location = new System.Drawing.Point(344, 8);
+            this.pbPreviewZoom.Location = new System.Drawing.Point(360, 8);
             this.pbPreviewZoom.Name = "pbPreviewZoom";
             this.pbPreviewZoom.Size = new System.Drawing.Size(88, 88);
             this.pbPreviewZoom.TabIndex = 3;

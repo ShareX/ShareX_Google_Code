@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ImageEffectsLib;
 using ScreenCapture;
 using System.Collections.Generic;
 using System.Drawing;
@@ -196,7 +197,9 @@ namespace ShareX
 
                 if (editor.ShowDialog() == DialogResult.OK)
                 {
-                    return editor.GetImageForExport();
+                    Image result = editor.GetImageForExport();
+                    img.Dispose();
+                    return result;
                 }
             }
 
@@ -205,10 +208,12 @@ namespace ShareX
 
         public static Image AddImageEffects(Image img)
         {
-            using (ImageEffectsLib.ImageEffectsGUI dlg = new ImageEffectsLib.ImageEffectsGUI(img))
+            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(img))
             {
-                dlg.ShowDialog();
-                return dlg.GetImageForExport();
+                imageEffectsForm.ShowDialog();
+                Image result = imageEffectsForm.ExportImage();
+                img.Dispose();
+                return result;
             }
         }
 
