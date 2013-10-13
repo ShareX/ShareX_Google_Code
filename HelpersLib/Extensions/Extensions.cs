@@ -207,6 +207,7 @@ namespace HelpersLib
 
         public static void SaveJPG(this Image img, Stream stream, int quality)
         {
+            quality = quality.Between(0, 100);
             EncoderParameters encoderParameters = new EncoderParameters(1);
             encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
             img.Save(stream, ImageFormat.Jpeg.GetCodecInfo(), encoderParameters);

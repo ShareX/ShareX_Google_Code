@@ -141,7 +141,7 @@ namespace ImageEffectsLib
                         long gSum = 0;
                         long rSum = 0;
 
-                        ColorBgra* dstPtr = dst.GetPointAddress(rect.Left, y);
+                        ColorBgra* dstPtr = dst.GetPixelPointer(rect.Left, y);
 
                         for (int wx = 0; wx < wlen; ++wx)
                         {
@@ -161,7 +161,7 @@ namespace ImageEffectsLib
 
                                     if (srcY >= 0 && srcY < src.Height)
                                     {
-                                        ColorBgra c = src.GetPoint(srcX, srcY);
+                                        ColorBgra c = src.GetPixel(srcX, srcY);
                                         int wp = w[wy];
 
                                         waSums[wx] += wp;
@@ -254,7 +254,7 @@ namespace ImageEffectsLib
 
                                     if (srcY >= 0 && srcY < src.Height)
                                     {
-                                        ColorBgra c = src.GetPoint(srcX, srcY);
+                                        ColorBgra c = src.GetPixel(srcX, srcY);
                                         int wp = w[wy];
 
                                         waSums[wx] += wp;

@@ -70,31 +70,16 @@ namespace ShareX
 
         public static Image ResizeImage(Image img, TaskSettings taskSettings)
         {
-            float width = 0, height = 0;
-
             switch (taskSettings.ImageSettings.ImageScaleType)
             {
-                case ImageScaleType.Percentage:
-                    width = img.Width * (taskSettings.ImageSettings.ImageScalePercentageWidth / 100f);
-                    height = img.Height * (taskSettings.ImageSettings.ImageScalePercentageHeight / 100f);
-                    break;
-                case ImageScaleType.Width:
-                    width = taskSettings.ImageSettings.ImageScaleToWidth;
-                    height = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Height * (width / img.Width) : img.Height;
-                    break;
-                case ImageScaleType.Height:
-                    height = taskSettings.ImageSettings.ImageScaleToHeight;
-                    width = taskSettings.ImageSettings.ImageKeepAspectRatio ? img.Width * (height / img.Height) : img.Width;
-                    break;
                 case ImageScaleType.Specific:
-                    width = taskSettings.ImageSettings.ImageScaleSpecificWidth;
-                    height = taskSettings.ImageSettings.ImageScaleSpecificHeight;
-                    break;
-            }
-
-            if (width > 0 && height > 0)
-            {
-                return ImageHelpers.ResizeImage(img, (int)width, (int)height, taskSettings.ImageSettings.ImageUseSmoothScaling);
+                    return ImageHelpers.ResizeImage(img, taskSettings.ImageSettings.ImageScaleSpecificWidth, taskSettings.ImageSettings.ImageScaleSpecificHeight);
+                case ImageScaleType.Percentage:
+                    return ImageHelpers.ResizeImagePercentage(img, taskSettings.ImageSettings.ImageScalePercentageWidth, taskSettings.ImageSettings.ImageScalePercentageHeight);
+                case ImageScaleType.Width:
+                    return ImageHelpers.ResizeImageWidth(img, taskSettings.ImageSettings.ImageScaleToWidth, taskSettings.ImageSettings.ImageKeepAspectRatio);
+                case ImageScaleType.Height:
+                    return ImageHelpers.ResizeImageHeight(img, taskSettings.ImageSettings.ImageScaleToHeight, taskSettings.ImageSettings.ImageKeepAspectRatio);
             }
 
             return img;
