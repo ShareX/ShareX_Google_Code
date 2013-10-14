@@ -762,15 +762,15 @@
             this.btnImageEffects.Name = "btnImageEffects";
             this.btnImageEffects.Size = new System.Drawing.Size(208, 23);
             this.btnImageEffects.TabIndex = 2;
-            this.btnImageEffects.Text = "Image Effects configuration...";
+            this.btnImageEffects.Text = "Image effects configuration...";
             this.btnImageEffects.UseVisualStyleBackColor = true;
             this.btnImageEffects.Click += new System.EventHandler(this.btnImageEffects_Click);
             // 
             // btnWatermarkSettings
             // 
-            this.btnWatermarkSettings.Location = new System.Drawing.Point(32, 144);
+            this.btnWatermarkSettings.Location = new System.Drawing.Point(16, 144);
             this.btnWatermarkSettings.Name = "btnWatermarkSettings";
-            this.btnWatermarkSettings.Size = new System.Drawing.Size(160, 23);
+            this.btnWatermarkSettings.Size = new System.Drawing.Size(208, 23);
             this.btnWatermarkSettings.TabIndex = 0;
             this.btnWatermarkSettings.Text = "Watermark configuration...";
             this.btnWatermarkSettings.UseVisualStyleBackColor = true;

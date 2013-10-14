@@ -216,9 +216,6 @@
             // 
             // tcWatermark
             // 
-            this.tcWatermark.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tcWatermark.Controls.Add(this.tpWatermarkText);
             this.tcWatermark.Controls.Add(this.tpWatermarkImage);
             this.tcWatermark.Location = new System.Drawing.Point(304, 8);
@@ -628,11 +625,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 426);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(792, 424);
             this.Controls.Add(this.pbWatermarkShow);
             this.Controls.Add(this.gbWatermarkGeneral);
             this.Controls.Add(this.tcWatermark);
-            this.MinimumSize = new System.Drawing.Size(808, 464);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WatermarkUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WatermarkUI";

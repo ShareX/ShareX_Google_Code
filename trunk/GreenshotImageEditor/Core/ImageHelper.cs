@@ -853,64 +853,52 @@ namespace GreenshotPlugin.Core
         /// <returns>Bitmap with the shadow, is bigger than the sourceBitmap!!</returns>
         public static Bitmap CreateShadow(Image sourceBitmap, float darkness, int shadowSize, Point shadowOffset, out Point offset, PixelFormat targetPixelformat)
         {
-            // Create a new "clean" image
             offset = shadowOffset;
-            offset.X += shadowSize; // - 1;
-            offset.Y += shadowSize; // - 1;
-            Bitmap returnImage = CreateEmpty(sourceBitmap.Width + (shadowSize * 2), sourceBitmap.Height + (shadowSize * 2), targetPixelformat, Color.Empty, sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
-            // Make sure the shadow is odd, there is no reason for an even blur!
-            if ((shadowSize & 1) == 0)
+            offset.X += shadowSize;
+            offset.Y += shadowSize;
+
+            Bitmap resultImage = null;
+
+            using (Bitmap shadowImage = CreateEmpty(sourceBitmap.Width + (shadowSize * 2), sourceBitmap.Height + (shadowSize * 2), targetPixelformat, Color.Empty,
+                sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution))
             {
-                shadowSize++;
-            }
-            bool canUseGDIBlur = GDIplus.isBlurPossible(shadowSize);
-            // Create "mask" for the shadow
-            ColorMatrix maskMatrix = new ColorMatrix();
-            maskMatrix.Matrix00 = 0;
-            maskMatrix.Matrix11 = 0;
-            maskMatrix.Matrix22 = 0;
-            if (canUseGDIBlur)
-            {
-                maskMatrix.Matrix33 = darkness + 0.1f;
-            }
-            else
-            {
+                ColorMatrix maskMatrix = new ColorMatrix();
+                maskMatrix.Matrix00 = 0;
+                maskMatrix.Matrix11 = 0;
+                maskMatrix.Matrix22 = 0;
                 maskMatrix.Matrix33 = darkness;
-            }
-            Rectangle shadowRectangle = new Rectangle(new Point(shadowSize, shadowSize), sourceBitmap.Size);
-            ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, returnImage, shadowRectangle, maskMatrix);
 
-            // blur "shadow", apply to whole new image
-            if (canUseGDIBlur)
-            {
-                // Use GDI Blur
-                Rectangle newImageRectangle = new Rectangle(0, 0, returnImage.Width, returnImage.Height);
-                GDIplus.ApplyBlur(returnImage, newImageRectangle, shadowSize, false);
-            }
-            else
-            {
-                // try normal software blur
-                //returnImage = CreateBlur(returnImage, newImageRectangle, true, shadowSize, 1d, false, newImageRectangle);
-                ApplyBoxBlur(returnImage, shadowSize);
-            }
+                Rectangle shadowRectangle = new Rectangle(new Point(shadowSize, shadowSize), sourceBitmap.Size);
 
-            // Draw the original image over the shadow
-            using (Graphics graphics = Graphics.FromImage(returnImage))
-            {
-                // Make sure we draw with the best quality!
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                // draw original with a TextureBrush so we have nice antialiasing!
-                using (Brush textureBrush = new TextureBrush(sourceBitmap, WrapMode.Clamp))
+                ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, shadowImage, shadowRectangle, maskMatrix);
+
+                if (GDIplus.isBlurPossible(shadowSize))
                 {
-                    // We need to do a translate-tranform otherwise the image is wrapped
-                    graphics.TranslateTransform(offset.X, offset.Y);
-                    graphics.FillRectangle(textureBrush, 0, 0, sourceBitmap.Width, sourceBitmap.Height);
+                    Rectangle newImageRectangle = new Rectangle(0, 0, shadowImage.Width, shadowImage.Height);
+                    GDIplus.ApplyBlur(shadowImage, newImageRectangle, shadowSize, false);
+                }
+                else
+                {
+                    ApplyBoxBlur(shadowImage, shadowSize);
+                }
+
+                resultImage = CreateEmpty(shadowImage.Width + Math.Abs(shadowOffset.X), shadowImage.Height + Math.Abs(shadowOffset.Y), targetPixelformat, Color.Empty,
+                    sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
+
+                using (Graphics graphics = Graphics.FromImage(resultImage))
+                {
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                    graphics.DrawImage(shadowImage, Math.Max(0, shadowOffset.X), Math.Max(0, shadowOffset.Y), shadowImage.Width, shadowImage.Height);
+
+                    graphics.DrawImage(sourceBitmap, Math.Max(shadowSize, -shadowOffset.X + shadowSize), Math.Max(shadowSize, -shadowOffset.Y + shadowSize),
+                        sourceBitmap.Width, sourceBitmap.Height);
                 }
             }
-            return returnImage;
+
+            return resultImage;
         }
 
         /// <summary>
