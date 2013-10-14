@@ -36,10 +36,10 @@ namespace ImageEffectsLib
 {
     internal class Shadow : ImageEffect
     {
-        [DefaultValue(0.5f)]
+        [DefaultValue(0.5f), Description("Choose a value between 0.1 and 1.0")]
         public float Darkness { get; set; }
 
-        [DefaultValue(9)]
+        [DefaultValue(10)]
         public int Size { get; set; }
 
         [DefaultValue(typeof(Point), "0, 0")]
@@ -52,8 +52,16 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            Point offsetChange;
-            return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Darkness, Size, Offset, out offsetChange, PixelFormat.Format32bppArgb);
+            if (Darkness <= 0f || Size <= 0)
+            {
+                return img;
+            }
+
+            using (img)
+            {
+                Point offsetChange;
+                return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Darkness, Size, Offset, out offsetChange, PixelFormat.Format32bppArgb);
+            }
         }
     }
 }

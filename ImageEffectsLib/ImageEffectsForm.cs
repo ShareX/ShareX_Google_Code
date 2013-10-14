@@ -57,9 +57,9 @@ namespace ImageEffectsLib
         {
             string manipulations = "Manipulations";
 
+            AddEffectToTreeView(manipulations, typeof(Background));
             AddEffectToTreeView(manipulations, typeof(Border));
             AddEffectToTreeView(manipulations, typeof(Canvas));
-            AddEffectToTreeView(manipulations, typeof(Background));
             AddEffectToTreeView(manipulations, typeof(Flip));
             AddEffectToTreeView(manipulations, typeof(Reflection));
             AddEffectToTreeView(manipulations, typeof(Resize));
@@ -80,6 +80,7 @@ namespace ImageEffectsLib
 
             string filters = "Filters";
 
+            AddEffectToTreeView(filters, typeof(Blur));
             AddEffectToTreeView(filters, typeof(Shadow));
             AddEffectToTreeView(filters, typeof(TornEdge));
 

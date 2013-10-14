@@ -184,7 +184,7 @@ namespace GreenshotPlugin.UnmanagedHelpers
         /// </summary>
         /// <param name="radius"></param>
         /// <returns></returns>
-        public static bool isBlurPossible(int radius)
+        public static bool IsBlurPossible(int radius)
         {
             if (Environment.OSVersion.Version.Major < 6)
             {
@@ -207,7 +207,7 @@ namespace GreenshotPlugin.UnmanagedHelpers
         /// <returns>false if there is no GDI+ available or an exception occured</returns>
         public static bool ApplyBlur(Bitmap destinationBitmap, Rectangle area, int radius, bool expandEdges)
         {
-            if (!isBlurPossible(radius))
+            if (!IsBlurPossible(radius))
             {
                 return false;
             }
@@ -277,7 +277,7 @@ namespace GreenshotPlugin.UnmanagedHelpers
         /// <returns>false if there is no GDI+ available or an exception occured</returns>
         public static bool DrawWithBlur(Graphics graphics, Bitmap image, Rectangle source, Matrix transform, ImageAttributes imageAttributes, int radius, bool expandEdges)
         {
-            if (!isBlurPossible(radius))
+            if (!IsBlurPossible(radius))
             {
                 return false;
             }
