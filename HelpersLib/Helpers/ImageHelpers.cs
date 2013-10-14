@@ -193,7 +193,7 @@ namespace HelpersLib
 
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
-                        g.DrawImageUnscaled(img, borderSize, borderSize);
+                        g.DrawImage(img, borderSize, borderSize);
                         g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width + borderSize * 2, img.Height + borderSize * 2));
                     }
 
@@ -230,7 +230,7 @@ namespace HelpersLib
 
             using (Graphics g = Graphics.FromImage(result))
             {
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SetHighQuality();
                 Point[] destinationPoints = { new Point(0, 0), new Point(bmp.Width, 0), new Point(skew, bmp.Height - 1) };
                 g.DrawImage(bmp, destinationPoints);
             }
@@ -247,81 +247,63 @@ namespace HelpersLib
             using (img)
             {
                 g.SetHighQuality();
-                g.DrawImageUnscaled(img, width, height);
+                g.DrawImage(img, width, height);
             }
 
             return bmp;
         }
 
-        public static Image DrawReflection(Image img, int percentage, int transparency, int offset, bool skew, int skewSize)
+        public static Image DrawReflection(Image img, int percentage, int maxAlpha, int minAlpha, int offset, bool skew, int skewSize)
         {
-            Bitmap reflection = AddReflection(img, percentage, transparency);
-
-            if (skew)
+            using (img)
             {
-                reflection = AddSkew(reflection, skewSize);
-            }
+                Bitmap reflection = AddReflection(img, percentage, maxAlpha, minAlpha);
 
-            Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
-
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height));
-                g.DrawImage(reflection, new Point(0, img.Height + offset));
-            }
-
-            return result;
-        }
-
-        private static Bitmap AddReflection(Image img, int percentage, int transparency)
-        {
-            Bitmap b = new Bitmap(img);
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * (float)percentage / 100)), PixelFormat.Format32bppArgb);
-            BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
-            byte alpha;
-            int nOffset = bmData.Stride - b.Width * 4;
-
-            unsafe
-            {
-                byte* p = (byte*)(void*)bmData.Scan0;
-
-                for (int y = 0; y < b.Height; ++y)
+                if (skew)
                 {
-                    for (int x = 0; x < b.Width; ++x)
-                    {
-                        alpha = (byte)(transparency - transparency * (y + 1) / b.Height);
-                        if (p[3] > alpha) p[3] = alpha;
-                        p += 4;
-                    }
-                    p += nOffset;
+                    Bitmap reflectionWithSkew = AddSkew(reflection, skewSize);
+                    reflection.Dispose();
+                    reflection = reflectionWithSkew;
                 }
+
+                Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
+
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    g.SetHighQuality();
+                    g.DrawImage(img, 0, 0, img.Width, img.Height);
+                    g.DrawImage(reflection, 0, img.Height + offset, reflection.Width, reflection.Height);
+                }
+
+                return result;
             }
-
-            b.UnlockBits(bmData);
-
-            return b;
         }
 
-        public static Bitmap AddReflection(Image bmp, int percentage, int minAlpha, int maxAlpha)
+        public static Bitmap AddReflection(Image bmp, int percentage, int maxAlpha, int minAlpha)
         {
-            Bitmap b = (Bitmap)bmp.Clone();
-            b.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            b = b.Clone(new Rectangle(0, 0, b.Width, (int)(b.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
+            percentage = percentage.Between(1, 100);
+            maxAlpha = maxAlpha.Between(0, 255);
+            minAlpha = minAlpha.Between(0, 255);
 
-            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(b, true, ImageLockMode.ReadWrite))
+            Bitmap reflection;
+
+            using (Bitmap bitmapRotate = (Bitmap)bmp.Clone())
             {
-                maxAlpha = maxAlpha.Between(0, 255);
-                minAlpha = minAlpha.Between(0, 255);
-                int alphaAdd = maxAlpha - minAlpha;
+                bitmapRotate.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                reflection = bitmapRotate.Clone(new Rectangle(0, 0, bitmapRotate.Width, (int)(bitmapRotate.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
+            }
 
-                for (int y = 0; y < b.Height; ++y)
+            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(reflection, true, ImageLockMode.ReadWrite))
+            {
+                int alphaAdd = maxAlpha - minAlpha;
+                float reflectionHeight = reflection.Height - 1;
+
+                for (int y = 0; y < reflection.Height; ++y)
                 {
-                    for (int x = 0; x < b.Width; ++x)
+                    for (int x = 0; x < reflection.Width; ++x)
                     {
                         ColorBgra color = unsafeBitmap.GetPixel(x, y);
-                        byte alpha = (byte)(minAlpha + (maxAlpha - (alphaAdd * (y + 1) / b.Height)));
+                        byte alpha = (byte)(maxAlpha - (alphaAdd * (y / reflectionHeight)));
 
                         if (color.Alpha > alpha)
                         {
@@ -332,7 +314,7 @@ namespace HelpersLib
                 }
             }
 
-            return b;
+            return reflection;
         }
 
         public static void FillImageBackground(Image img, Color color)
@@ -345,7 +327,7 @@ namespace HelpersLib
                 {
                     g.Clear(color);
                     g.SetHighQuality();
-                    g.DrawImageUnscaled(tempImage, 0, 0);
+                    g.DrawImage(tempImage, 0, 0);
                 }
             }
         }
@@ -360,7 +342,7 @@ namespace HelpersLib
             {
                 g.SetHighQuality();
                 g.FillRectangle(brush, 0, 0, img.Width, img.Height);
-                g.DrawImageUnscaled(img, 0, 0);
+                g.DrawImage(img, 0, 0);
             }
 
             return bmp;
@@ -396,7 +378,7 @@ namespace HelpersLib
                 Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
 
                 g.FillRectangle(checkerBrush, new Rectangle(0, 0, bmp.Width, bmp.Height));
-                g.DrawImageUnscaled(img, 0, 0);
+                g.DrawImage(img, 0, 0);
             }
 
             return bmp;
@@ -511,50 +493,77 @@ namespace HelpersLib
             }
         }
 
-        public static Bitmap RotateImage(Image img, float theta)
+        /// <summary>
+        /// Method to rotate an Image object. The result can be one of three cases:
+        /// - upsizeOk = true: output image will be larger than the input and no clipping occurs
+        /// - upsizeOk = false & clipOk = true: output same size as input, clipping occurs
+        /// - upsizeOk = false & clipOk = false: output same size as input, image reduced, no clipping
+        ///
+        /// Note that this method always returns a new Bitmap object, even if rotation is zero - in
+        /// which case the returned object is a clone of the input object.
+        /// </summary>
+        /// <param name="inputImage">input Image object, is not modified</param>
+        /// <param name="angleDegrees">angle of rotation, in degrees</param>
+        /// <param name="upsizeOk">see comments above</param>
+        /// <param name="clipOk">see comments above, not used if upsizeOk = true</param>
+        /// <returns>new Bitmap object, may be larger than input image</returns>
+        public static Bitmap RotateImage(Image inputImage, float angleDegrees, bool upsize, bool clip)
         {
-            using (Matrix matrix = new Matrix())
+            // Test for zero rotation and return a clone of the input image
+            if (angleDegrees == 0f)
+                return (Bitmap)inputImage.Clone();
+
+            // Set up old and new image dimensions, assuming upsizing not wanted and clipping OK
+            int oldWidth = inputImage.Width;
+            int oldHeight = inputImage.Height;
+            int newWidth = oldWidth;
+            int newHeight = oldHeight;
+            float scaleFactor = 1f;
+
+            // If upsizing wanted or clipping not OK calculate the size of the resulting bitmap
+            if (upsize || !clip)
             {
-                matrix.Translate(img.Width / -2, img.Height / -2, MatrixOrder.Append);
-                matrix.RotateAt(theta, new Point(0, 0), MatrixOrder.Append);
-                using (GraphicsPath gp = new GraphicsPath())
-                {
-                    gp.AddPolygon(new Point[] { new Point(0, 0), new Point(img.Width, 0), new Point(0, img.Height) });
-                    gp.Transform(matrix);
-                    PointF[] pts = gp.PathPoints;
+                double angleRadians = angleDegrees * Math.PI / 180d;
 
-                    Rectangle bbox = BoundingBox(img, matrix);
-                    Bitmap bmpDest = new Bitmap(bbox.Width, bbox.Height);
-
-                    using (Graphics gDest = Graphics.FromImage(bmpDest))
-                    using (Matrix mDest = new Matrix())
-                    {
-                        mDest.Translate(bmpDest.Width / 2, bmpDest.Height / 2, MatrixOrder.Append);
-                        gDest.Transform = mDest;
-                        gDest.SetHighQuality();
-                        gDest.DrawImage(img, pts);
-                        return bmpDest;
-                    }
-                }
+                double cos = Math.Abs(Math.Cos(angleRadians));
+                double sin = Math.Abs(Math.Sin(angleRadians));
+                newWidth = (int)Math.Round(oldWidth * cos + oldHeight * sin);
+                newHeight = (int)Math.Round(oldWidth * sin + oldHeight * cos);
             }
-        }
 
-        private static Rectangle BoundingBox(Image img, Matrix matrix)
-        {
-            GraphicsUnit gu = new GraphicsUnit();
-            Rectangle rImg = Rectangle.Round(img.GetBounds(ref gu));
-
-            Point topLeft = new Point(rImg.Left, rImg.Top);
-            Point topRight = new Point(rImg.Right, rImg.Top);
-            Point bottomRight = new Point(rImg.Right, rImg.Bottom);
-            Point bottomLeft = new Point(rImg.Left, rImg.Bottom);
-            Point[] points = new Point[] { topLeft, topRight, bottomRight, bottomLeft };
-            using (GraphicsPath gp = new GraphicsPath(points,
-                new byte[] { (byte)PathPointType.Start, (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line }))
+            // If upsizing not wanted and clipping not OK need a scaling factor
+            if (!upsize && !clip)
             {
-                gp.Transform(matrix);
-                return Rectangle.Round(gp.GetBounds());
+                scaleFactor = Math.Min((float)oldWidth / newWidth, (float)oldHeight / newHeight);
+                newWidth = oldWidth;
+                newHeight = oldHeight;
             }
+
+            // Create the new bitmap object.
+            Bitmap newBitmap = new Bitmap(newWidth, newHeight, PixelFormat.Format32bppArgb);
+            newBitmap.SetResolution(inputImage.HorizontalResolution, inputImage.VerticalResolution);
+
+            // Create the Graphics object that does the work
+            using (Graphics graphicsObject = Graphics.FromImage(newBitmap))
+            {
+                graphicsObject.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphicsObject.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                graphicsObject.SmoothingMode = SmoothingMode.HighQuality;
+
+                // Set up the built-in transformation matrix to do the rotation and maybe scaling
+                graphicsObject.TranslateTransform(newWidth / 2f, newHeight / 2f);
+
+                if (scaleFactor != 1f)
+                    graphicsObject.ScaleTransform(scaleFactor, scaleFactor);
+
+                graphicsObject.RotateTransform(angleDegrees);
+                graphicsObject.TranslateTransform(-oldWidth / 2f, -oldHeight / 2f);
+
+                // Draw the result
+                graphicsObject.DrawImage(inputImage, 0, 0);
+            }
+
+            return newBitmap;
         }
     }
 }

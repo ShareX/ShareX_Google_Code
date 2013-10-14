@@ -34,13 +34,16 @@ namespace ImageEffectsLib
         [DefaultValue(20), Description("Reflection height size relative to screenshot height.\nValue need to be between 1 to 100.")]
         public int Percentage { get; set; }
 
-        [DefaultValue(255), Description("Reflection transparency start from this value to 0.\nValue need to be between 0 to 255.")]
-        public int Transparency { get; set; }
+        [DefaultValue(255), Description("Reflection transparency start from this value to MinAlpha.\nValue need to be between 0 to 255.")]
+        public int MaxAlpha { get; set; }
 
-        [DefaultValue(0), Description("Reflection position will be start: Screenshot height + Offset")]
+        [DefaultValue(0), Description("Reflection transparency start from MaxAlpha to this value.\nValue need to be between 0 to 255.")]
+        public int MinAlpha { get; set; }
+
+        [DefaultValue(0), Description("Reflection start position will be: Screenshot height + Offset")]
         public int Offset { get; set; }
 
-        [DefaultValue(true), Description("Adding skew to reflection from bottom left to bottom right.")]
+        [DefaultValue(false), Description("Adding skew to reflection from bottom left to bottom right.")]
         public bool Skew { get; set; }
 
         [DefaultValue(25), Description("How much pixel skew left to right.")]
@@ -53,7 +56,7 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ImageHelpers.DrawReflection(img, Percentage, Transparency, Offset, Skew, SkewSize);
+            return ImageHelpers.DrawReflection(img, Percentage, MaxAlpha, MinAlpha, Offset, Skew, SkewSize);
         }
     }
 }
