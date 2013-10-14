@@ -31,8 +31,14 @@ namespace ImageEffectsLib
 {
     internal class Rotate : ImageEffect
     {
-        [DefaultValue(0f), Description("Choose a value between -360 and 360")]
+        [DefaultValue(0f), Description("Choose a value between -360 and 360.")]
         public float Angle { get; set; }
+
+        [DefaultValue(true), Description("If true, output image will be larger than the input and no clipping will occur.")]
+        public bool Upsize { get; set; }
+
+        [DefaultValue(false), Description("Upsize must be false for this setting to work. If true, clipping will occur or else image size will be reduced.")]
+        public bool Clip { get; set; }
 
         public Rotate()
         {
@@ -41,7 +47,7 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ImageHelpers.RotateImage(img, Angle);
+            return ImageHelpers.RotateImage(img, Angle, Upsize, Clip);
         }
     }
 }

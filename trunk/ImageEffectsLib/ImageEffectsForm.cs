@@ -108,7 +108,7 @@ namespace ImageEffectsLib
         {
             Stopwatch timer = Stopwatch.StartNew();
             pbResult.LoadImage(ExportImage());
-            pbResult.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
+            lblStatus.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
         private List<ImageEffect> GetImageEffects()

@@ -35,13 +35,14 @@
             this.lvEffects = new System.Windows.Forms.ListView();
             this.chEffect = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRemove = new System.Windows.Forms.Button();
-            this.pbResult = new HelpersLib.MyPictureBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnDuplicate = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.pbResult = new HelpersLib.MyPictureBox();
             this.SuspendLayout();
             // 
             // tvEffects
@@ -110,20 +111,6 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // pbResult
-            // 
-            this.pbResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbResult.BackColor = System.Drawing.Color.White;
-            this.pbResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbResult.DrawCheckeredBackground = true;
-            this.pbResult.FullscreenOnClick = true;
-            this.pbResult.Location = new System.Drawing.Point(248, 280);
-            this.pbResult.Name = "pbResult";
-            this.pbResult.Size = new System.Drawing.Size(688, 448);
-            this.pbResult.TabIndex = 11;
-            // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -188,11 +175,36 @@
             this.btnDuplicate.UseVisualStyleBackColor = true;
             this.btnDuplicate.Click += new System.EventHandler(this.btnDuplicate_Click);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblStatus.Location = new System.Drawing.Point(8, 740);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(45, 16);
+            this.lblStatus.TabIndex = 12;
+            this.lblStatus.Text = "Status";
+            // 
+            // pbResult
+            // 
+            this.pbResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbResult.BackColor = System.Drawing.Color.White;
+            this.pbResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbResult.DrawCheckeredBackground = true;
+            this.pbResult.FullscreenOnClick = true;
+            this.pbResult.Location = new System.Drawing.Point(248, 280);
+            this.pbResult.Name = "pbResult";
+            this.pbResult.Size = new System.Drawing.Size(688, 448);
+            this.pbResult.TabIndex = 11;
+            // 
             // ImageEffectsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 766);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnDuplicate);
             this.Controls.Add(this.btnMoveDown);
             this.Controls.Add(this.btnMoveUp);
@@ -211,6 +223,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Image effects";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -229,6 +242,7 @@
         private System.Windows.Forms.Button btnMoveUp;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnDuplicate;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

@@ -167,7 +167,7 @@ namespace HelpersLib
 
                         if (Config.WatermarkAddReflection)
                         {
-                            using (Bitmap bmp = ImageHelpers.AddReflection((Bitmap)img2, 50, 10, 150))
+                            using (Bitmap bmp = ImageHelpers.AddReflection((Bitmap)img2, 50, 150, 10))
                             {
                                 g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
                             }
@@ -260,7 +260,7 @@ namespace HelpersLib
 
                             if (Config.WatermarkAddReflection)
                             {
-                                using (Bitmap bmp2 = ImageHelpers.AddReflection(bmp, 50, 10, 150))
+                                using (Bitmap bmp2 = ImageHelpers.AddReflection(bmp, 50, 150, 10))
                                 {
                                     gImg.DrawImage(bmp2, new Rectangle(labelPosition.X, labelPosition.Y + bmp.Height - 1, bmp2.Width, bmp2.Height));
                                 }
