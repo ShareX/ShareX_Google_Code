@@ -869,18 +869,9 @@ namespace GreenshotPlugin.Core
                 maskMatrix.Matrix33 = darkness;
 
                 Rectangle shadowRectangle = new Rectangle(new Point(shadowSize, shadowSize), sourceBitmap.Size);
-
                 ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, shadowImage, shadowRectangle, maskMatrix);
 
-                if (GDIplus.isBlurPossible(shadowSize))
-                {
-                    Rectangle newImageRectangle = new Rectangle(0, 0, shadowImage.Width, shadowImage.Height);
-                    GDIplus.ApplyBlur(shadowImage, newImageRectangle, shadowSize, false);
-                }
-                else
-                {
-                    ApplyBoxBlur(shadowImage, shadowSize);
-                }
+                DrawBlur(shadowImage, shadowSize);
 
                 resultImage = CreateEmpty(shadowImage.Width + Math.Abs(shadowOffset.X), shadowImage.Height + Math.Abs(shadowOffset.Y), targetPixelformat, Color.Empty,
                     sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
@@ -892,13 +883,24 @@ namespace GreenshotPlugin.Core
                     graphics.SmoothingMode = SmoothingMode.HighQuality;
 
                     graphics.DrawImage(shadowImage, Math.Max(0, shadowOffset.X), Math.Max(0, shadowOffset.Y), shadowImage.Width, shadowImage.Height);
-
                     graphics.DrawImage(sourceBitmap, Math.Max(shadowSize, -shadowOffset.X + shadowSize), Math.Max(shadowSize, -shadowOffset.Y + shadowSize),
                         sourceBitmap.Width, sourceBitmap.Height);
                 }
             }
 
             return resultImage;
+        }
+
+        public static void DrawBlur(Bitmap sourceBitmap, int blurRadius)
+        {
+            if (GDIplus.IsBlurPossible(blurRadius))
+            {
+                GDIplus.ApplyBlur(sourceBitmap, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height), blurRadius, false);
+            }
+            else
+            {
+                ApplyBoxBlur(sourceBitmap, blurRadius);
+            }
         }
 
         /// <summary>

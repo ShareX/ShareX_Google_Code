@@ -34,28 +34,25 @@ using System.Text;
 
 namespace ImageEffectsLib
 {
-    internal class TornEdge : ImageEffect
+    internal class Blur : ImageEffect
     {
-        [DefaultValue(12)]
-        public int ToothHeight { get; set; }
+        [DefaultValue(10)]
+        public int Radius { get; set; }
 
-        [DefaultValue(20)]
-        public int HorizontalToothRange { get; set; }
-
-        [DefaultValue(20)]
-        public int VerticalToothRange { get; set; }
-
-        public TornEdge()
+        public Blur()
         {
             this.ApplyDefaultPropertyValues();
         }
 
         public override Image Apply(Image img)
         {
-            using (img)
+            if (Radius <= 0)
             {
-                return GreenshotPlugin.Core.ImageHelper.CreateTornEdge(img, ToothHeight, HorizontalToothRange, VerticalToothRange);
+                return img;
             }
+
+            GreenshotPlugin.Core.ImageHelper.DrawBlur((Bitmap)img, Radius);
+            return img;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Greenshot.Drawing.Filters
                 graphics.SetClip(applyRect);
                 graphics.ExcludeClip(rect);
             }
-            if (GDIplus.isBlurPossible(blurRadius))
+            if (GDIplus.IsBlurPossible(blurRadius))
             {
                 GDIplus.DrawWithBlur(graphics, applyBitmap, applyRect, null, null, blurRadius, false);
             }
