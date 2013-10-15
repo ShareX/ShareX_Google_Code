@@ -51,6 +51,10 @@ namespace ImageEffectsLib
             }
 
             UpdatePreview();
+
+#if DEBUG
+            btnTest.Visible = true;
+#endif
         }
 
         private void AddAllEffectsToTreeView()
@@ -140,26 +144,6 @@ namespace ImageEffectsLib
             return tempImage;
         }
 
-        private void lvEffects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            pgSettings.SelectedObject = null;
-
-            if (lvEffects.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvEffects.SelectedItems[0];
-
-                if (lvi.Tag is ImageEffect)
-                {
-                    pgSettings.SelectedObject = lvi.Tag;
-                }
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            AddSelectedEffect();
-        }
-
         private void AddSelectedEffect()
         {
             TreeNode node = tvEffects.SelectedNode;
@@ -184,6 +168,16 @@ namespace ImageEffectsLib
 
                 UpdatePreview();
             }
+        }
+
+        private void ClearEffects()
+        {
+            foreach (ListViewItem lvi in lvEffects.Items)
+            {
+                lvi.Remove();
+            }
+
+            UpdatePreview();
         }
 
         private void AddEffect(ImageEffect imageEffect)
@@ -213,25 +207,7 @@ namespace ImageEffectsLib
             }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            RemoveSelectedEffects();
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            foreach (ListViewItem lvi in lvEffects.Items)
-            {
-                lvi.Remove();
-            }
-
-            UpdatePreview();
-        }
-
-        private void pgSettings_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
-        {
-            UpdatePreview();
-        }
+        #region Form events
 
         private void tvEffects_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
@@ -246,17 +222,35 @@ namespace ImageEffectsLib
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            Effects = GetImageEffects();
-            DialogResult = DialogResult.OK;
-            Close();
+            AddSelectedEffect();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            RemoveSelectedEffects();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearEffects();
+        }
+
+        private void btnDuplicate_Click(object sender, EventArgs e)
+        {
+            if (lvEffects.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvEffects.SelectedItems[0];
+
+                if (lvi.Tag is ImageEffect)
+                {
+                    ImageEffect imageEffect = (ImageEffect)lvi.Tag;
+                    ImageEffect imageEffectClone = imageEffect.Copy();
+                    AddEffect(imageEffectClone);
+                    UpdatePreview();
+                }
+            }
         }
 
         private void btnMoveUp_Click(object sender, EventArgs e)
@@ -277,18 +271,17 @@ namespace ImageEffectsLib
             }
         }
 
-        private void btnDuplicate_Click(object sender, EventArgs e)
+        private void lvEffects_SelectedIndexChanged(object sender, EventArgs e)
         {
+            pgSettings.SelectedObject = null;
+
             if (lvEffects.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvEffects.SelectedItems[0];
 
                 if (lvi.Tag is ImageEffect)
                 {
-                    ImageEffect imageEffect = (ImageEffect)lvi.Tag;
-                    ImageEffect imageEffectClone = imageEffect.Copy();
-                    AddEffect(imageEffectClone);
-                    UpdatePreview();
+                    pgSettings.SelectedObject = lvi.Tag;
                 }
             }
         }
@@ -297,11 +290,42 @@ namespace ImageEffectsLib
         {
             switch (e.KeyData)
             {
+                case Keys.Delete:
+                    RemoveSelectedEffects();
+                    e.SuppressKeyPress = true;
+                    break;
                 case Keys.F5:
                     UpdatePreview();
                     e.SuppressKeyPress = true;
                     break;
             }
         }
+
+        private void pgSettings_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            UpdatePreview();
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            AddEffect(new Background { Color = Color.Black });
+            AddEffect(new Border { Size = 3 });
+            UpdatePreview();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Effects = GetImageEffects();
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        #endregion Form events
     }
 }

@@ -43,6 +43,7 @@
             this.btnDuplicate = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbResult = new HelpersLib.MyPictureBox();
+            this.btnTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tvEffects
@@ -201,11 +202,24 @@
             this.pbResult.Size = new System.Drawing.Size(688, 448);
             this.pbResult.TabIndex = 11;
             // 
+            // btnTest
+            // 
+            this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTest.Location = new System.Drawing.Point(704, 736);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(72, 23);
+            this.btnTest.TabIndex = 13;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // ImageEffectsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 766);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnDuplicate);
             this.Controls.Add(this.btnMoveDown);
@@ -245,6 +259,7 @@
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnTest;
     }
 }
 
