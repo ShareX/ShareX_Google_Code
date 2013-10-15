@@ -58,6 +58,7 @@ namespace ImageEffectsLib
             string manipulations = "Manipulations";
 
             AddEffectToTreeView(manipulations, typeof(Background));
+            AddEffectToTreeView(manipulations, typeof(BackgroundGradient));
             AddEffectToTreeView(manipulations, typeof(Border));
             AddEffectToTreeView(manipulations, typeof(Canvas));
             AddEffectToTreeView(manipulations, typeof(Flip));
@@ -65,6 +66,7 @@ namespace ImageEffectsLib
             AddEffectToTreeView(manipulations, typeof(Resize));
             AddEffectToTreeView(manipulations, typeof(Rotate));
             AddEffectToTreeView(manipulations, typeof(Scale));
+            AddEffectToTreeView(manipulations, typeof(Skew));
 
             string adjustments = "Adjustments";
 
@@ -288,6 +290,17 @@ namespace ImageEffectsLib
                     AddEffect(imageEffectClone);
                     UpdatePreview();
                 }
+            }
+        }
+
+        private void lvEffects_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.F5:
+                    UpdatePreview();
+                    e.SuppressKeyPress = true;
+                    break;
             }
         }
     }

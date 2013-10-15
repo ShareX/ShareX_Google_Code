@@ -394,5 +394,12 @@ namespace HelpersLib
             lvi.EnsureVisible();
             lvi.Selected = true;
         }
+
+        public static Bitmap CreateEmptyBitmap(this Image img, int widthOffset = 0, int heightOffset = 0)
+        {
+            Bitmap bmp = new Bitmap(img.Width + widthOffset, img.Height + heightOffset, img.PixelFormat);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            return bmp;
+        }
     }
 }

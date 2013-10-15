@@ -26,22 +26,29 @@
 using HelpersLib;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace ImageEffectsLib
 {
-    internal class Background : ImageEffect
+    internal class BackgroundGradient : ImageEffect
     {
         [DefaultValue(typeof(Color), "White")]
-        public Color Color { get; set; }
+        public Color FromColor { get; set; }
 
-        public Background()
+        [DefaultValue(typeof(Color), "Black")]
+        public Color ToColor { get; set; }
+
+        [DefaultValue(LinearGradientMode.ForwardDiagonal)]
+        public LinearGradientMode GradientType { get; set; }
+
+        public BackgroundGradient()
         {
             this.ApplyDefaultPropertyValues();
         }
 
         public override Image Apply(Image img)
         {
-            return ImageHelpers.FillImageBackground(img, Color);
+            return ImageHelpers.FillImageBackground(img, FromColor, ToColor, GradientType);
         }
     }
 }
