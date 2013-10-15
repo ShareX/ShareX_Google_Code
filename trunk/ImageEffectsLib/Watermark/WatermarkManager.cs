@@ -127,15 +127,15 @@ namespace ImageEffectsLib
             {
                 case WatermarkType.TEXT:
                     NameParser parser = new NameParser(NameParserType.Text) { Picture = img };
-                    return DrawWatermark(img, parser.Parse(Config.WatermarkText));
+                    return DrawWatermarkText(img, parser.Parse(Config.WatermarkText));
                 case WatermarkType.IMAGE:
-                    return DrawImageWatermark(img, Config.WatermarkImageLocation);
+                    return DrawWatermarkImage(img, Config.WatermarkImageLocation);
             }
 
             return img;
         }
 
-        private Image DrawImageWatermark(Image img, string imgPath)
+        private Image DrawWatermarkImage(Image img, string imgPath)
         {
             Image img2 = null;
 
@@ -193,7 +193,7 @@ namespace ImageEffectsLib
             return img;
         }
 
-        private Image DrawWatermark(Image img, string drawText)
+        private Image DrawWatermarkText(Image img, string drawText)
         {
             if (!string.IsNullOrEmpty(drawText))
             {
