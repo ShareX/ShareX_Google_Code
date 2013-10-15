@@ -232,7 +232,7 @@ namespace ImageEffectsLib
 
                         if (Config.WatermarkUseCustomGradient)
                         {
-                            backgroundBrush = GradientMaker.CreateGradientBrush(labelRectangle.Size, Config.GradientData);
+                            backgroundBrush = GradientMaker.CreateGradientBrush(labelRectangle.Size, Config.WatermarkGradient);
                         }
                         else
                         {

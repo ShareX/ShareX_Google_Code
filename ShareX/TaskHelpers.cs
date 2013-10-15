@@ -205,7 +205,7 @@ namespace ShareX
 
             using (img)
             {
-                return ImageEffectsForm.ExportImage(img, taskSettings.ImageSettings.ImageEffects);
+                return ImageEffectManager.ApplyEffects(img, taskSettings.ImageSettings.ImageEffects);
             }
         }
 

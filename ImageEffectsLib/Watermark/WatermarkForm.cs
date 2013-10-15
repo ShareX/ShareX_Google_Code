@@ -33,13 +33,13 @@ using System.Windows.Forms;
 
 namespace ImageEffectsLib
 {
-    public partial class WatermarkUI : Form
+    public partial class WatermarkForm : Form
     {
         public WatermarkConfig Config { get; set; }
 
         private ContextMenuStrip codesMenu;
 
-        public WatermarkUI(WatermarkConfig config = null)
+        public WatermarkForm(WatermarkConfig config = null)
         {
             InitializeComponent();
 
@@ -55,8 +55,6 @@ namespace ImageEffectsLib
 
         private void WatermarkUI_Load(object sender, EventArgs e)
         {
-            Text = Application.ProductName + " - Watermark settings";
-
             if (cboWatermarkType.Items.Count == 0)
             {
                 cboWatermarkType.Items.AddRange(Helpers.GetEnumDescriptions<WatermarkType>());
@@ -134,11 +132,11 @@ namespace ImageEffectsLib
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
         {
-            using (GradientMaker gradientForm = new GradientMaker(Config.GradientData) { Icon = this.Icon })
+            using (GradientMaker gradientForm = new GradientMaker(Config.WatermarkGradient) { Icon = this.Icon })
             {
                 if (gradientForm.ShowDialog() == DialogResult.OK)
                 {
-                    Config.GradientData = gradientForm.GradientData;
+                    Config.WatermarkGradient = gradientForm.GradientData;
                     UpdatePreview();
                 }
             }

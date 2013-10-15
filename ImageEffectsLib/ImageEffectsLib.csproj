@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adjustments\Alpha.cs" />
+    <Compile Include="ImageEffectManager.cs" />
     <Compile Include="Manipulations\BackgroundGradient.cs" />
     <Compile Include="Adjustments\Brightness.cs" />
     <Compile Include="Adjustments\Colorize.cs" />
@@ -110,11 +111,11 @@
     <Compile Include="Watermark\GradientStop.cs" />
     <Compile Include="Watermark\WatermarkConfig.cs" />
     <Compile Include="Watermark\WatermarkManager.cs" />
-    <Compile Include="Watermark\WatermarkUI.cs">
+    <Compile Include="Watermark\WatermarkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Watermark\WatermarkUI.Designer.cs">
-      <DependentUpon>WatermarkUI.cs</DependentUpon>
+    <Compile Include="Watermark\WatermarkForm.Designer.cs">
+      <DependentUpon>WatermarkForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +152,8 @@
     <EmbeddedResource Include="Watermark\GradientMaker.resx">
       <DependentUpon>GradientMaker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Watermark\WatermarkUI.resx">
-      <DependentUpon>WatermarkUI.cs</DependentUpon>
+    <EmbeddedResource Include="Watermark\WatermarkForm.resx">
+      <DependentUpon>WatermarkForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
