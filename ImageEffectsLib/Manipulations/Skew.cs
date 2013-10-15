@@ -24,24 +24,37 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Text;
 
 namespace ImageEffectsLib
 {
-    internal class Background : ImageEffect
+    internal class Skew : ImageEffect
     {
-        [DefaultValue(typeof(Color), "White")]
-        public Color Color { get; set; }
+        [DefaultValue(0), Description("How much pixel skew left to right.")]
+        public int Horizontally { get; set; }
 
-        public Background()
+        [DefaultValue(0), Description("How much pixel skew top to bottom.")]
+        public int Vertically { get; set; }
+
+        public Skew()
         {
             this.ApplyDefaultPropertyValues();
         }
 
         public override Image Apply(Image img)
         {
-            return ImageHelpers.FillImageBackground(img, Color);
+            if (Horizontally == 0 && Vertically == 0)
+            {
+                return img;
+            }
+
+            return ImageHelpers.AddSkew(img, Horizontally, Vertically);
         }
     }
 }

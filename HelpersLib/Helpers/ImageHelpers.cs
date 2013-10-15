@@ -53,14 +53,12 @@ namespace HelpersLib
                 return img;
             }
 
-            Bitmap bmp = new Bitmap(width, height);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap bmp = img.CreateEmptyBitmap();
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (img)
             {
                 g.DrawImage(img, x, y, width, height);
-
-                img.Dispose();
             }
 
             return bmp;
@@ -223,16 +221,20 @@ namespace HelpersLib
             return null;
         }
 
-        private static Bitmap AddSkew(Bitmap bmp, int skew)
+        public static Bitmap AddSkew(Image img, int x, int y)
         {
-            Bitmap result = new Bitmap(bmp.Width + skew, bmp.Height);
-            bmp.SetResolution(bmp.HorizontalResolution, bmp.VerticalResolution);
+            Bitmap result = img.CreateEmptyBitmap(Math.Abs(x), Math.Abs(y));
 
             using (Graphics g = Graphics.FromImage(result))
+            using (img)
             {
                 g.SetHighQuality();
-                Point[] destinationPoints = { new Point(0, 0), new Point(bmp.Width, 0), new Point(skew, bmp.Height - 1) };
-                g.DrawImage(bmp, destinationPoints);
+                int startX = -Math.Min(0, x);
+                int startY = -Math.Min(0, y);
+                int endX = Math.Max(0, x);
+                int endY = Math.Max(0, y);
+                Point[] destinationPoints = { new Point(startX, startY), new Point(startX + img.Width - 1, endY), new Point(endX, startY + img.Height - 1) };
+                g.DrawImage(img, destinationPoints);
             }
 
             return result;
@@ -255,28 +257,24 @@ namespace HelpersLib
 
         public static Image DrawReflection(Image img, int percentage, int maxAlpha, int minAlpha, int offset, bool skew, int skewSize)
         {
-            using (img)
+            Bitmap reflection = AddReflection(img, percentage, maxAlpha, minAlpha);
+
+            if (skew)
             {
-                Bitmap reflection = AddReflection(img, percentage, maxAlpha, minAlpha);
-
-                if (skew)
-                {
-                    Bitmap reflectionWithSkew = AddSkew(reflection, skewSize);
-                    reflection.Dispose();
-                    reflection = reflectionWithSkew;
-                }
-
-                Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
-
-                using (Graphics g = Graphics.FromImage(result))
-                {
-                    g.SetHighQuality();
-                    g.DrawImage(img, 0, 0, img.Width, img.Height);
-                    g.DrawImage(reflection, 0, img.Height + offset, reflection.Width, reflection.Height);
-                }
-
-                return result;
+                reflection = AddSkew(reflection, skewSize, 0);
             }
+
+            Bitmap result = new Bitmap(reflection.Width, img.Height + reflection.Height + offset);
+
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.SetHighQuality();
+                g.DrawImage(img, 0, 0, img.Width, img.Height);
+                g.DrawImage(reflection, 0, img.Height + offset, reflection.Width, reflection.Height);
+                img.Dispose();
+            }
+
+            return result;
         }
 
         public static Bitmap AddReflection(Image bmp, int percentage, int maxAlpha, int minAlpha)
@@ -317,35 +315,35 @@ namespace HelpersLib
             return reflection;
         }
 
-        public static void FillImageBackground(Image img, Color color)
+        public static Bitmap FillImageBackground(Image img, Color color)
         {
-            using (Image tempImage = (Image)img.Clone())
-            {
-                Bitmap bmp = (Bitmap)img;
+            Bitmap result = img.CreateEmptyBitmap();
 
-                using (Graphics g = Graphics.FromImage(bmp))
-                {
-                    g.Clear(color);
-                    g.SetHighQuality();
-                    g.DrawImage(tempImage, 0, 0);
-                }
+            using (Graphics g = Graphics.FromImage(result))
+            using (img)
+            {
+                g.Clear(color);
+                g.SetHighQuality();
+                g.DrawImage(img, 0, 0, result.Width, result.Height);
             }
+
+            return result;
         }
 
-        public static Image FillImageBackground(Image img, Color color, Color color2)
+        public static Bitmap FillImageBackground(Image img, Color fromColor, Color toColor, LinearGradientMode gradientType)
         {
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap result = img.CreateEmptyBitmap();
 
-            using (Graphics g = Graphics.FromImage(bmp))
-            using (LinearGradientBrush brush = new LinearGradientBrush(new Point(0, 0), new Point(img.Width - 1, 0), color, color2))
+            using (Graphics g = Graphics.FromImage(result))
+            using (LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, result.Width, result.Height), fromColor, toColor, gradientType))
+            using (img)
             {
+                g.FillRectangle(brush, 0, 0, result.Width, result.Height);
                 g.SetHighQuality();
-                g.FillRectangle(brush, 0, 0, img.Width, img.Height);
-                g.DrawImage(img, 0, 0);
+                g.DrawImage(img, 0, 0, result.Width, result.Height);
             }
 
-            return bmp;
+            return result;
         }
 
         public static Image CreateCheckers(int width, int height)
