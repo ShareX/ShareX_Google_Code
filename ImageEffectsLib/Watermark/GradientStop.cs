@@ -23,11 +23,12 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Globalization;
 
-namespace HelpersLib
+namespace ImageEffectsLib
 {
     public class GradientStop
     {
