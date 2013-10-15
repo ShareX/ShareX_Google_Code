@@ -23,12 +23,13 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace HelpersLib
+namespace ImageEffectsLib
 {
     public class WatermarkConfig
     {

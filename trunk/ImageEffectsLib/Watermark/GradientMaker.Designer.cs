@@ -1,4 +1,4 @@
-﻿namespace HelpersLib
+﻿namespace ImageEffectsLib
 {
     partial class GradientMaker
     {

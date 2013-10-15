@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using HelpersLib.Properties;
 using System;
 using System.Drawing;
@@ -30,7 +31,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
-namespace HelpersLib
+namespace ImageEffectsLib
 {
     public partial class WatermarkUI : Form
     {
@@ -41,7 +42,6 @@ namespace HelpersLib
         public WatermarkUI(WatermarkConfig config = null)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
 
             if (config == null)
             {
@@ -134,7 +134,7 @@ namespace HelpersLib
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
         {
-            using (GradientMaker gradientForm = new GradientMaker(Config.GradientData))
+            using (GradientMaker gradientForm = new GradientMaker(Config.GradientData) { Icon = this.Icon })
             {
                 if (gradientForm.ShowDialog() == DialogResult.OK)
                 {

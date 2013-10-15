@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -31,7 +32,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace HelpersLib
+namespace ImageEffectsLib
 {
     public class WatermarkManager
     {

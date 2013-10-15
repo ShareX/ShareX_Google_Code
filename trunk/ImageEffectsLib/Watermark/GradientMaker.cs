@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using HelpersLib;
 using HelpersLib.Properties;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace HelpersLib
+namespace ImageEffectsLib
 {
     public partial class GradientMaker : Form
     {
@@ -45,7 +46,6 @@ namespace HelpersLib
         public GradientMaker()
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
             cboGradientDirection.SelectedIndex = 0;
         }
 
