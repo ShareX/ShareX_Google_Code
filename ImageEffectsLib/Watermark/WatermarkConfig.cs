@@ -41,7 +41,7 @@ namespace ImageEffectsLib
         TOP_RIGHT,
         [Description("Center - Left")]
         LEFT,
-        [Description("Centered")]
+        [Description("Center")]
         CENTER,
         [Description("Center - Right")]
         RIGHT,

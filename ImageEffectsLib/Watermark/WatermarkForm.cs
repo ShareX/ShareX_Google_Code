@@ -36,7 +36,7 @@ namespace ImageEffectsLib
     public partial class WatermarkForm : Form
     {
         public WatermarkConfig Config { get; set; }
-
+        private bool IsGuiReady = false;
         private ContextMenuStrip codesMenu;
 
         public WatermarkForm(WatermarkConfig config = null)
@@ -94,6 +94,7 @@ namespace ImageEffectsLib
             cbWatermarkUseBorder.Checked = Config.WatermarkUseBorder;
             nudWatermarkImageScale.Value = Config.WatermarkImageScale;
 
+            IsGuiReady = true;
             UpdatePreview();
         }
 
@@ -126,8 +127,11 @@ namespace ImageEffectsLib
 
         private void UpdatePreview()
         {
-            Bitmap bmp = new Bitmap(pbWatermarkShow.ClientSize.Width, pbWatermarkShow.ClientSize.Height);
-            pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
+            if (IsGuiReady)
+            {
+                Bitmap bmp = new Bitmap(pbWatermarkShow.ClientSize.Width, pbWatermarkShow.ClientSize.Height);
+                pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
+            }
         }
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
