@@ -46,6 +46,7 @@ namespace ImageEffectsLib
         public GradientMaker()
         {
             InitializeComponent();
+            cboGradientDirection.Items.AddRange(Enum.GetNames(typeof(LinearGradientMode)));
             cboGradientDirection.SelectedIndex = 0;
         }
 
@@ -57,7 +58,7 @@ namespace ImageEffectsLib
             if (GradientData != null)
             {
                 rtbCodes.Text = GradientData.Data;
-                cboGradientDirection.SelectedIndex = (int)GradientData.Direction;
+                cboGradientDirection.SelectedIndex = (int)GradientData.Type;
 
                 UpdatePreview();
             }
@@ -67,23 +68,26 @@ namespace ImageEffectsLib
         {
             GradientData = GetNewBrushData();
 
-            try
+            if (GradientData != null && !string.IsNullOrEmpty(GradientData.Data))
             {
-                using (LinearGradientBrush brush = CreateGradientBrush(pbPreview.ClientSize, GradientData))
+                try
                 {
-                    Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
-
-                    using (Graphics g = Graphics.FromImage(bmp))
+                    using (LinearGradientBrush brush = CreateGradientBrush(pbPreview.ClientSize, GradientData))
                     {
-                        g.FillRectangle(brush, 0, 0, pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
-                    }
+                        Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
 
-                    pbPreview.Image = bmp;
+                        using (Graphics g = Graphics.FromImage(bmp))
+                        {
+                            g.FillRectangle(brush, 0, 0, pbPreview.ClientSize.Width, pbPreview.ClientSize.Height);
+                        }
+
+                        pbPreview.Image = bmp;
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.ToString());
+                }
             }
         }
 
@@ -110,23 +114,9 @@ namespace ImageEffectsLib
         public static LinearGradientBrush CreateGradientBrush(Size size, GradientData gradientData)
         {
             IEnumerable<GradientStop> gradient = ParseGradientData(gradientData.Data);
-
-            PointF startPoint = new PointF(0, 0);
-            PointF endPoint = PointF.Empty;
-            switch (gradientData.Direction)
-            {
-                case GradientDirection.Horizontal:
-                    endPoint = new PointF(1, 0);
-                    break;
-                case GradientDirection.Vertical:
-                    endPoint = new PointF(0, 1);
-                    break;
-            }
-
-            Point start = new Point((int)(size.Width * startPoint.X), (int)(size.Height * startPoint.Y));
-            Point end = new Point((int)(size.Width * endPoint.X), (int)(size.Height * endPoint.Y));
-            LinearGradientBrush brush = new LinearGradientBrush(start, end, Color.Black, Color.Black);
             gradient = gradient.OrderBy(x => x.Offset);
+
+            LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, size.Width, size.Height), Color.Black, Color.Black, gradientData.Type);
             ColorBlend blend = new ColorBlend();
             blend.Colors = gradient.Select(x => x.Color).ToArray();
             blend.Positions = gradient.Select(x => x.Offset).ToArray();
@@ -136,7 +126,7 @@ namespace ImageEffectsLib
 
         private GradientData GetNewBrushData()
         {
-            return new GradientData(rtbCodes.Text, (GradientDirection)cboGradientDirection.SelectedIndex);
+            return new GradientData(rtbCodes.Text, (LinearGradientMode)cboGradientDirection.SelectedIndex);
         }
 
         #region Form events

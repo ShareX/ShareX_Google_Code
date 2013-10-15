@@ -126,22 +126,7 @@ namespace ImageEffectsLib
         private Image ExportImage()
         {
             List<ImageEffect> imageEffects = GetImageEffects();
-            return ExportImage(DefaultImage, imageEffects);
-        }
-
-        public static Image ExportImage(Image img, List<ImageEffect> imageEffects)
-        {
-            Image tempImage = (Image)img.Clone();
-
-            if (imageEffects != null)
-            {
-                foreach (ImageEffect imageEffect in imageEffects)
-                {
-                    tempImage = imageEffect.Apply(tempImage);
-                }
-            }
-
-            return tempImage;
+            return ImageEffectManager.ApplyEffects(DefaultImage, imageEffects);
         }
 
         private void AddSelectedEffect()

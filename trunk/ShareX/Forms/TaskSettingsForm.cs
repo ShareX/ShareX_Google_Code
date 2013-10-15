@@ -438,7 +438,7 @@ namespace ShareX
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
-            using (WatermarkUI watermarkForm = new WatermarkUI(TaskSettings.ImageSettings.WatermarkConfig) { Icon = this.Icon })
+            using (WatermarkForm watermarkForm = new WatermarkForm(TaskSettings.ImageSettings.WatermarkConfig) { Icon = this.Icon })
             {
                 watermarkForm.ShowDialog();
             }

@@ -31,33 +31,6 @@ using System.Drawing.Drawing2D;
 
 namespace ImageEffectsLib
 {
-    public class WatermarkConfig
-    {
-        public GradientData GradientData = new GradientData();
-        public bool WatermarkAddReflection = false;
-        public bool WatermarkAutoHide = true;
-        public int WatermarkBackTrans = 225;
-        public XmlColor WatermarkBorderArgb = Color.Black;
-        public int WatermarkCornerRadius = 4;
-
-        public XmlFont WatermarkFont = new XmlFont("Arial", 8);
-        public XmlColor WatermarkFontArgb = Color.White;
-        public int WatermarkFontTrans = 255;
-        public XmlColor WatermarkGradient1Argb = Color.FromArgb(85, 85, 85);
-        public XmlColor WatermarkGradient2Argb = Color.Black;
-        public LinearGradientMode WatermarkGradientType = LinearGradientMode.Vertical;
-
-        public string WatermarkImageLocation = "";
-        public int WatermarkImageScale = 100;
-        public WatermarkType WatermarkMode = WatermarkType.TEXT;
-        public int WatermarkOffset = 5;
-        public WatermarkPositionType WatermarkPositionMode = WatermarkPositionType.BOTTOM_RIGHT;
-
-        public string WatermarkText = "%h:%mi";
-        public bool WatermarkUseBorder = false;
-        public bool WatermarkUseCustomGradient = false;
-    }
-
     public enum WatermarkPositionType
     {
         [Description("Top - Left")]
@@ -86,5 +59,32 @@ namespace ImageEffectsLib
         TEXT,
         [Description("Image")]
         IMAGE
+    }
+
+    public class WatermarkConfig
+    {
+        public WatermarkType WatermarkMode = WatermarkType.TEXT;
+        public WatermarkPositionType WatermarkPositionMode = WatermarkPositionType.BOTTOM_RIGHT;
+        public int WatermarkOffset = 5;
+        public bool WatermarkAddReflection = false;
+        public bool WatermarkAutoHide = true;
+
+        public string WatermarkText = "%h:%mi";
+        public XmlFont WatermarkFont = new XmlFont("Arial", 8);
+        public XmlColor WatermarkFontArgb = Color.White;
+        public int WatermarkFontTrans = 255;
+
+        public int WatermarkCornerRadius = 4;
+        public XmlColor WatermarkGradient1Argb = Color.FromArgb(85, 85, 85);
+        public XmlColor WatermarkGradient2Argb = Color.Black;
+        public XmlColor WatermarkBorderArgb = Color.Black;
+        public int WatermarkBackTrans = 225;
+        public LinearGradientMode WatermarkGradientType = LinearGradientMode.Vertical;
+        public bool WatermarkUseCustomGradient = false;
+        public GradientData WatermarkGradient = new GradientData();
+
+        public string WatermarkImageLocation = "";
+        public bool WatermarkUseBorder = false;
+        public int WatermarkImageScale = 100;
     }
 }

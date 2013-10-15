@@ -1,6 +1,6 @@
 ﻿namespace ImageEffectsLib
 {
-    partial class WatermarkUI
+    partial class WatermarkForm
     {
         /// <summary>
         /// Required designer variable.
@@ -295,7 +295,7 @@
             // 
             this.trackWatermarkBackgroundTrans.AutoSize = false;
             this.trackWatermarkBackgroundTrans.BackColor = System.Drawing.SystemColors.Window;
-            this.trackWatermarkBackgroundTrans.Location = new System.Drawing.Point(152, 54);
+            this.trackWatermarkBackgroundTrans.Location = new System.Drawing.Point(144, 51);
             this.trackWatermarkBackgroundTrans.Maximum = 255;
             this.trackWatermarkBackgroundTrans.Name = "trackWatermarkBackgroundTrans";
             this.trackWatermarkBackgroundTrans.Size = new System.Drawing.Size(200, 24);
@@ -372,7 +372,7 @@
             // nudWatermarkBackTrans
             // 
             this.nudWatermarkBackTrans.BackColor = System.Drawing.SystemColors.Window;
-            this.nudWatermarkBackTrans.Location = new System.Drawing.Point(352, 54);
+            this.nudWatermarkBackTrans.Location = new System.Drawing.Point(352, 53);
             this.nudWatermarkBackTrans.Maximum = new decimal(new int[] {
             255,
             0,
@@ -400,7 +400,7 @@
             this.btnSelectGradient.Name = "btnSelectGradient";
             this.btnSelectGradient.Size = new System.Drawing.Size(112, 23);
             this.btnSelectGradient.TabIndex = 5;
-            this.btnSelectGradient.Text = "Gradient Maker...";
+            this.btnSelectGradient.Text = "Gradient maker...";
             this.btnSelectGradient.UseVisualStyleBackColor = true;
             this.btnSelectGradient.Click += new System.EventHandler(this.btnSelectGradient_Click);
             // 
@@ -461,7 +461,7 @@
             // 
             this.trackWatermarkFontTrans.AutoSize = false;
             this.trackWatermarkFontTrans.BackColor = System.Drawing.SystemColors.Window;
-            this.trackWatermarkFontTrans.Location = new System.Drawing.Point(152, 85);
+            this.trackWatermarkFontTrans.Location = new System.Drawing.Point(104, 82);
             this.trackWatermarkFontTrans.Maximum = 255;
             this.trackWatermarkFontTrans.Name = "trackWatermarkFontTrans";
             this.trackWatermarkFontTrans.Size = new System.Drawing.Size(200, 24);
@@ -483,7 +483,7 @@
             // nudWatermarkFontTrans
             // 
             this.nudWatermarkFontTrans.BackColor = System.Drawing.SystemColors.Window;
-            this.nudWatermarkFontTrans.Location = new System.Drawing.Point(360, 85);
+            this.nudWatermarkFontTrans.Location = new System.Drawing.Point(304, 84);
             this.nudWatermarkFontTrans.Maximum = new decimal(new int[] {
             255,
             0,
@@ -511,7 +511,7 @@
             this.btnWatermarkFont.Name = "btnWatermarkFont";
             this.btnWatermarkFont.Size = new System.Drawing.Size(88, 24);
             this.btnWatermarkFont.TabIndex = 2;
-            this.btnWatermarkFont.Text = "Change Font...";
+            this.btnWatermarkFont.Text = "Change font...";
             this.btnWatermarkFont.UseVisualStyleBackColor = true;
             this.btnWatermarkFont.Click += new System.EventHandler(this.btnWatermarkFont_Click);
             // 
@@ -586,6 +586,7 @@
             this.nudWatermarkImageScale.Name = "nudWatermarkImageScale";
             this.nudWatermarkImageScale.Size = new System.Drawing.Size(56, 20);
             this.nudWatermarkImageScale.TabIndex = 4;
+            this.nudWatermarkImageScale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudWatermarkImageScale.ValueChanged += new System.EventHandler(this.nudWatermarkImageScale_ValueChanged);
             // 
             // cbWatermarkUseBorder
@@ -621,7 +622,7 @@
             this.txtWatermarkImageLocation.TabIndex = 0;
             this.txtWatermarkImageLocation.TextChanged += new System.EventHandler(this.txtWatermarkImageLocation_TextChanged);
             // 
-            // WatermarkUI
+            // WatermarkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -631,9 +632,9 @@
             this.Controls.Add(this.gbWatermarkGeneral);
             this.Controls.Add(this.tcWatermark);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "WatermarkUI";
+            this.Name = "WatermarkForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WatermarkUI";
+            this.Text = "ShareX - Watermark settings";
             this.Load += new System.EventHandler(this.WatermarkUI_Load);
             this.Resize += new System.EventHandler(this.WatermarkUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbWatermarkShow)).EndInit();

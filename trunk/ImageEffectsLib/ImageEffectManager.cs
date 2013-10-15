@@ -25,27 +25,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
 namespace ImageEffectsLib
 {
-    public class GradientData
+    public static class ImageEffectManager
     {
-        public string Data { get; set; }
-        public LinearGradientMode Type { get; set; }
-
-        public GradientData()
+        public static Image ApplyEffects(Image img, List<ImageEffect> imageEffects)
         {
-            Data = "255,68,120,194\t0\n255,13,58,122\t0.5\n255,6,36,78\t0.5\n255,12,76,159\t1";
-            Type = LinearGradientMode.Vertical;
-        }
+            Image result = (Image)img.Clone();
 
-        public GradientData(string data, LinearGradientMode type)
-        {
-            Data = data;
-            Type = type;
+            if (imageEffects != null && imageEffects.Count > 0)
+            {
+                foreach (ImageEffect imageEffect in imageEffects)
+                {
+                    result = imageEffect.Apply(result);
+                }
+            }
+
+            return result;
         }
     }
 }
