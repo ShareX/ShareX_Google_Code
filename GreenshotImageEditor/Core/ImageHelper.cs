@@ -20,6 +20,7 @@
  */
 
 using Greenshot.Core;
+using Greenshot.Helpers;
 using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Collections.Generic;
@@ -900,6 +901,68 @@ namespace GreenshotPlugin.Core
             else
             {
                 ApplyBoxBlur(sourceBitmap, blurRadius);
+            }
+        }
+
+        public static Bitmap Pixelate(Bitmap sourceBitmap, int pixelSize)
+        {
+            using (sourceBitmap)
+            {
+                Bitmap result = CreateEmpty(sourceBitmap.Width, sourceBitmap.Height, PixelFormat.Format32bppArgb, Color.Empty,
+                    sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
+
+                using (IFastBitmap dest = FastBitmap.Create(result))
+                {
+                    Pixelate(sourceBitmap, pixelSize, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height), dest);
+                }
+
+                return result;
+            }
+        }
+
+        public static void Pixelate(Bitmap sourceBitmap, int pixelSize, Rectangle rect, IFastBitmap dest)
+        {
+            pixelSize = Math.Min(pixelSize, rect.Width);
+            pixelSize = Math.Min(pixelSize, rect.Height);
+
+            using (IFastBitmap src = FastBitmap.Create(sourceBitmap, rect))
+            {
+                List<Color> colors = new List<Color>();
+                int halbPixelSize = pixelSize / 2;
+                for (int y = src.Top - halbPixelSize; y < src.Bottom + halbPixelSize; y = y + pixelSize)
+                {
+                    for (int x = src.Left - halbPixelSize; x <= src.Right + halbPixelSize; x = x + pixelSize)
+                    {
+                        colors.Clear();
+                        for (int yy = y; yy < y + pixelSize; yy++)
+                        {
+                            if (yy >= src.Top && yy < src.Bottom)
+                            {
+                                for (int xx = x; xx < x + pixelSize; xx++)
+                                {
+                                    if (xx >= src.Left && xx < src.Right)
+                                    {
+                                        colors.Add(src.GetColorAt(xx, yy));
+                                    }
+                                }
+                            }
+                        }
+                        Color currentAvgColor = Colors.Mix(colors);
+                        for (int yy = y; yy <= y + pixelSize; yy++)
+                        {
+                            if (yy >= src.Top && yy < src.Bottom)
+                            {
+                                for (int xx = x; xx <= x + pixelSize; xx++)
+                                {
+                                    if (xx >= src.Left && xx < src.Right)
+                                    {
+                                        dest.SetColorAt(xx, yy, currentAvgColor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

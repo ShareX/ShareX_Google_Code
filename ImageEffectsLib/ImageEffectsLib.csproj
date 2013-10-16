@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adjustments\Alpha.cs" />
+    <Compile Include="Filters\Pixelate.cs" />
     <Compile Include="ImageEffectManager.cs" />
     <Compile Include="Manipulations\BackgroundGradient.cs" />
     <Compile Include="Adjustments\Brightness.cs" />
