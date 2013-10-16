@@ -87,6 +87,7 @@ namespace ImageEffectsLib
             string filters = "Filters";
 
             AddEffectToTreeView(filters, typeof(Blur));
+            AddEffectToTreeView(filters, typeof(Pixelate));
             AddEffectToTreeView(filters, typeof(Shadow));
             AddEffectToTreeView(filters, typeof(TornEdge));
 
