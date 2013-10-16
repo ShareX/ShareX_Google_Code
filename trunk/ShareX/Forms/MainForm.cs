@@ -355,9 +355,11 @@ namespace ShareX
 
         private void RegisterMenuClosing()
         {
-            foreach (ToolStripMenuItem menuItem in new [] { tsmiImageUploaders, tsmiTextUploaders, tsmiFileUploaders, tsmiURLShorteners, tsmiSocialServices })
+            foreach (ToolStripDropDownItem dropDownItem in new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsddbAfterUploadTasks, tsmiImageUploaders, tsmiTextUploaders,
+                tsmiFileUploaders, tsmiURLShorteners, tsmiSocialServices, tsmiTrayAfterCaptureTasks, tsmiTrayAfterUploadTasks, tsmiTrayImageUploaders, tsmiTrayTextUploaders,
+                tsmiTrayFileUploaders, tsmiTrayURLShorteners, tsmiTraySocialServices })
             {
-                menuItem.DropDown.Closing += (sender, e) => e.Cancel = (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked);
+                dropDownItem.DropDown.Closing += (sender, e) => e.Cancel = (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked);
             }
         }
 

@@ -129,39 +129,6 @@ namespace HelpersLib
             return true;
         }
 
-        public static Bitmap Zoom(UnsafeBitmap unsafeBitmap, Point position, int horizontalPixelCount, int verticalPixelCount, int zoomSize)
-        {
-            unsafeBitmap.Lock(ImageLockMode.ReadOnly);
-
-            Bitmap result = new Bitmap(horizontalPixelCount * zoomSize, verticalPixelCount * zoomSize);
-
-            using (UnsafeBitmap unsafeResult = new UnsafeBitmap(result, true, ImageLockMode.WriteOnly))
-            {
-                for (int y = 0; y < verticalPixelCount; y++)
-                {
-                    for (int x = 0; x < horizontalPixelCount; x++)
-                    {
-                        ColorBgra color = unsafeBitmap.GetPixel(position.X + x, position.Y + y);
-
-                        for (int y2 = y * zoomSize; y2 < y * zoomSize + zoomSize; y2++)
-                        {
-                            for (int x2 = x * zoomSize; x2 < x * zoomSize + zoomSize; x2++)
-                            {
-                                unsafeResult.SetPixel(x2, y2, color);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public ColorBgra* GetPixelPointer(int x, int y)
-        {
-            return unchecked(x + (ColorBgra*)(((byte*)(void*)bitmapData.Scan0) + (y * bitmapData.Stride)));
-        }
-
         public ColorBgra GetPixel(int i)
         {
             return Pointer[i];
