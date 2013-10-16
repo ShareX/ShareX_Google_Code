@@ -1,6 +1,4 @@
-﻿using GreenshotPlugin.Controls;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -21,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using GreenshotPlugin.Controls;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;

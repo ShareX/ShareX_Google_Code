@@ -1,7 +1,3 @@
-using Greenshot.IniFile;
-using Greenshot.Plugin;
-using GreenshotPlugin.Core;
-
 /*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
@@ -22,6 +18,10 @@ using GreenshotPlugin.Core;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+using Greenshot.IniFile;
+using Greenshot.Plugin;
+using GreenshotPlugin.Core;
 
 namespace GreenshotPlugin.Controls
 {

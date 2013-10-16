@@ -1,5 +1,3 @@
-using Microsoft.Win32.SafeHandles;
-
 /*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
@@ -21,6 +19,7 @@ using Microsoft.Win32.SafeHandles;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

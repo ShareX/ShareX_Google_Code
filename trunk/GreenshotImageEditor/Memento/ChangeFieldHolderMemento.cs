@@ -1,8 +1,4 @@
-﻿using Greenshot.Configuration;
-using Greenshot.Drawing.Fields;
-using Greenshot.Plugin.Drawing;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -23,6 +19,9 @@ using Greenshot.Plugin.Drawing;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Configuration;
+using Greenshot.Drawing.Fields;
+using Greenshot.Plugin.Drawing;
 using System;
 
 namespace Greenshot.Memento

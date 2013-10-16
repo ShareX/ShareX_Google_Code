@@ -1,6 +1,3 @@
-using Greenshot.Forms;
-using GreenshotPlugin.UnmanagedHelpers;
-
 /*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
@@ -22,6 +19,8 @@ using GreenshotPlugin.UnmanagedHelpers;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Forms;
+using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

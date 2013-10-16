@@ -1,7 +1,4 @@
-﻿using Greenshot.Configuration;
-using Greenshot.Drawing;
-
-/*
+﻿/*
  * Greenshot - a free and open source screenshot tool
  * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
  *
@@ -22,6 +19,8 @@ using Greenshot.Drawing;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Greenshot.Configuration;
+using Greenshot.Drawing;
 using System;
 using System.Drawing;
 
