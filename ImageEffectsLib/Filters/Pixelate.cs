@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using GreenshotPlugin.Core;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace ImageEffectsLib
                 return img;
             }
 
-            return GreenshotPlugin.Core.ImageHelper.Pixelate((Bitmap)img, Size);
+            return ImageHelper.Pixelate((Bitmap)img, Size);
         }
     }
 }

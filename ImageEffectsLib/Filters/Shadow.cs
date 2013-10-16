@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using GreenshotPlugin.Core;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace ImageEffectsLib
             using (img)
             {
                 Point offsetChange;
-                return GreenshotPlugin.Core.ImageHelper.CreateShadow(img, Darkness, Size, Offset, out offsetChange, PixelFormat.Format32bppArgb);
+                return ImageHelper.CreateShadow(img, Darkness, Size, Offset, out offsetChange, PixelFormat.Format32bppArgb);
             }
         }
     }
