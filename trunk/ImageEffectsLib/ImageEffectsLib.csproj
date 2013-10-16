@@ -98,7 +98,7 @@
       <DependentUpon>ImageEffectsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Manipulations\Border.cs" />
-    <Compile Include="Manipulations\Reflection.cs" />
+    <Compile Include="Filters\Reflection.cs" />
     <Compile Include="Manipulations\Resize.cs" />
     <Compile Include="Manipulations\Rotate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

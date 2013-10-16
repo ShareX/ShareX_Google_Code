@@ -59,57 +59,26 @@ namespace ImageEffectsLib
 
         private void AddAllEffectsToTreeView()
         {
-            string manipulations = "Manipulations";
+            AddEffectToTreeView("Manipulations", typeof(Background), typeof(BackgroundGradient), typeof(Border), typeof(Canvas), typeof(Flip),
+                typeof(Resize), typeof(Rotate), typeof(Scale), typeof(Skew));
 
-            AddEffectToTreeView(manipulations, typeof(Background));
-            AddEffectToTreeView(manipulations, typeof(BackgroundGradient));
-            AddEffectToTreeView(manipulations, typeof(Border));
-            AddEffectToTreeView(manipulations, typeof(Canvas));
-            AddEffectToTreeView(manipulations, typeof(Flip));
-            AddEffectToTreeView(manipulations, typeof(Reflection));
-            AddEffectToTreeView(manipulations, typeof(Resize));
-            AddEffectToTreeView(manipulations, typeof(Rotate));
-            AddEffectToTreeView(manipulations, typeof(Scale));
-            AddEffectToTreeView(manipulations, typeof(Skew));
+            AddEffectToTreeView("Adjustments", typeof(Alpha), typeof(Brightness), typeof(Colorize), typeof(Contrast), typeof(Gamma), typeof(Grayscale),
+                typeof(Hue), typeof(Inverse), typeof(Saturation));
 
-            string adjustments = "Adjustments";
-
-            AddEffectToTreeView(adjustments, typeof(Alpha));
-            AddEffectToTreeView(adjustments, typeof(Brightness));
-            AddEffectToTreeView(adjustments, typeof(Colorize));
-            AddEffectToTreeView(adjustments, typeof(Contrast));
-            AddEffectToTreeView(adjustments, typeof(Gamma));
-            AddEffectToTreeView(adjustments, typeof(Grayscale));
-            AddEffectToTreeView(adjustments, typeof(Hue));
-            AddEffectToTreeView(adjustments, typeof(Inverse));
-            AddEffectToTreeView(adjustments, typeof(Saturation));
-
-            string filters = "Filters";
-
-            AddEffectToTreeView(filters, typeof(Blur));
-            AddEffectToTreeView(filters, typeof(Pixelate));
-            AddEffectToTreeView(filters, typeof(Shadow));
-            AddEffectToTreeView(filters, typeof(TornEdge));
+            AddEffectToTreeView("Filters", typeof(Blur), typeof(Pixelate), typeof(Reflection), typeof(Shadow), typeof(TornEdge));
 
             tvEffects.ExpandAll();
         }
 
-        private void AddEffectToTreeView(string groupName, Type imageEffect)
+        private void AddEffectToTreeView(string groupName, params Type[] imageEffects)
         {
-            TreeNode parentNode;
-            TreeNode[] treeNodes = tvEffects.Nodes.Find(groupName, false);
+            TreeNode parentNode = tvEffects.Nodes.Add(groupName, groupName);
 
-            if (treeNodes != null && treeNodes.Length > 0)
+            foreach (Type imageEffect in imageEffects)
             {
-                parentNode = treeNodes[0];
+                TreeNode childNode = parentNode.Nodes.Add(imageEffect.Name);
+                childNode.Tag = imageEffect;
             }
-            else
-            {
-                parentNode = tvEffects.Nodes.Add(groupName, groupName);
-            }
-
-            TreeNode childNode = parentNode.Nodes.Add(imageEffect.Name);
-            childNode.Tag = imageEffect;
         }
 
         private void UpdatePreview()
