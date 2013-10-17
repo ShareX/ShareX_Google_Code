@@ -36,7 +36,7 @@ namespace ImageEffectsLib
 {
     internal class Shadow : ImageEffect
     {
-        [DefaultValue(0.5f), Description("Choose a value between 0.1 and 1.0")]
+        [DefaultValue(0.6f), Description("Choose a value between 0.1 and 1.0")]
         public float Opacity { get; set; }
 
         [DefaultValue(10)]

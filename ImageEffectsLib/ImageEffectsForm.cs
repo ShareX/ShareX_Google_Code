@@ -53,6 +53,7 @@ namespace ImageEffectsLib
             UpdatePreview();
 
 #if DEBUG
+            btnRefresh.Visible = true;
             btnTest.Visible = true;
 #endif
         }
@@ -62,8 +63,8 @@ namespace ImageEffectsLib
             AddEffectToTreeView("Manipulations", typeof(Background), typeof(BackgroundGradient), typeof(Border), typeof(Canvas), typeof(Flip),
                 typeof(Resize), typeof(Rotate), typeof(Scale), typeof(Skew));
 
-            AddEffectToTreeView("Adjustments", typeof(Alpha), typeof(Brightness), typeof(Colorize), typeof(ColorMatrix), typeof(Contrast), typeof(Gamma),
-                typeof(Grayscale), typeof(Hue), typeof(Inverse), typeof(Saturation));
+            AddEffectToTreeView("Adjustments", typeof(Alpha), typeof(Brightness), typeof(Colorize), typeof(Contrast), typeof(Gamma), typeof(Grayscale),
+                typeof(Hue), typeof(Inverse), typeof(Matrix), typeof(Saturation));
 
             AddEffectToTreeView("Filters", typeof(Blur), typeof(Pixelate), typeof(Reflection), typeof(Shadow), typeof(TornEdge));
 
@@ -226,6 +227,11 @@ namespace ImageEffectsLib
             }
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            UpdatePreview();
+        }
+
         private void lvEffects_SelectedIndexChanged(object sender, EventArgs e)
         {
             pgSettings.SelectedObject = null;
@@ -264,7 +270,7 @@ namespace ImageEffectsLib
         private void btnTest_Click(object sender, EventArgs e)
         {
             AddEffect(new Background { Color = Color.Black });
-            AddEffect(new Border { Size = 3 });
+            AddEffect(new Border());
             UpdatePreview();
         }
 
