@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using GreenshotPlugin.Core;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -52,7 +51,7 @@ namespace ImageEffectsLib
                 return img;
             }
 
-            ImageHelper.DrawBlur((Bitmap)img, Radius);
+            ImageHelpers.Blur((Bitmap)img, Radius);
             return img;
         }
     }

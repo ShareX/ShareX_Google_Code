@@ -164,30 +164,9 @@ namespace ShareX
 
         public static Image AnnotateImage(Image img)
         {
-            if (!Greenshot.IniFile.IniConfig.isInitialized)
-            {
-                Greenshot.IniFile.IniConfig.AllowSave = !Program.IsSandbox;
-                Greenshot.IniFile.IniConfig.Init(Program.PersonalPath);
-            }
-
-            using (Image cloneImage = (Image)img.Clone())
-            using (Greenshot.Plugin.ICapture capture = new GreenshotPlugin.Core.Capture() { Image = cloneImage })
-            using (Greenshot.Drawing.Surface surface = new Greenshot.Drawing.Surface(capture))
-            using (Greenshot.ImageEditorForm editor = new Greenshot.ImageEditorForm(surface, true))
-            {
-                editor.ClipboardCopyRequested += x => Program.MainForm.InvokeSafe(() => ClipboardHelpers.CopyImage(x));
-                editor.ImageUploadRequested += x => Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(x));
-
-                if (editor.ShowDialog() == DialogResult.OK)
-                {
-                    using (img)
-                    {
-                        return editor.GetImageForExport();
-                    }
-                }
-            }
-
-            return img;
+            return ImageHelpers.AnnotateImage(img, !Program.IsSandbox, Program.PersonalPath,
+                x => Program.MainForm.InvokeSafe(() => ClipboardHelpers.CopyImage(x)),
+                x => Program.MainForm.InvokeSafe(() => UploadManager.RunImageTask(x)));
         }
 
         public static Image AddImageEffects(Image img, TaskSettings taskSettings)

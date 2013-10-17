@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using GreenshotPlugin.Core;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -55,7 +54,7 @@ namespace ImageEffectsLib
         {
             using (img)
             {
-                return ImageHelper.CreateTornEdge(img, ToothHeight, HorizontalToothRange, VerticalToothRange);
+                return ImageHelpers.CreateTornEdge(img, ToothHeight, HorizontalToothRange, VerticalToothRange);
             }
         }
     }

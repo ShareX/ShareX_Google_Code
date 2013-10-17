@@ -23,6 +23,37 @@
 
 #endregion License Information (GPL v3)
 
+#region License Information (Greenshot)
+
+/*
+ * Greenshot - a free and open source screenshot tool
+ * Copyright (C) 2007-2013  Thomas Braun, Jens Klingen, Robin Krom
+ *
+ * For more information see: http://getgreenshot.org/
+ * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 1 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#endregion License Information (Greenshot)
+
+using Greenshot;
+using Greenshot.Drawing;
+using Greenshot.IniFile;
+using Greenshot.Plugin;
+using GreenshotPlugin.Core;
+using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,6 +62,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 
 namespace HelpersLib
 {
@@ -562,6 +594,231 @@ namespace HelpersLib
             }
 
             return newBitmap;
+        }
+
+        public static Image AnnotateImage(Image img)
+        {
+            return AnnotateImage(img, false, null, null, null);
+        }
+
+        public static Image AnnotateImage(Image img, bool allowSave, string configPath, Action<Image> clipboardCopyRequested, Action<Image> imageUploadRequested)
+        {
+            if (!IniConfig.isInitialized)
+            {
+                IniConfig.AllowSave = allowSave;
+                IniConfig.Init(configPath);
+            }
+
+            using (Image cloneImage = (Image)img.Clone())
+            using (ICapture capture = new Capture() { Image = cloneImage })
+            using (Surface surface = new Surface(capture))
+            using (ImageEditorForm editor = new ImageEditorForm(surface, true))
+            {
+                editor.ClipboardCopyRequested += clipboardCopyRequested;
+                editor.ImageUploadRequested += imageUploadRequested;
+
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    using (img)
+                    {
+                        return editor.GetImageForExport();
+                    }
+                }
+            }
+
+            return img;
+        }
+
+        public static Bitmap AddShadow(Image sourceImage, float opacity, int size)
+        {
+            return AddShadow(sourceImage, opacity, size, 1, Color.Black, new Point(0, 0));
+        }
+
+        public static Bitmap AddShadow(Image sourceImage, float opacity, int size, float darkness, Color color, Point offset)
+        {
+            Image shadowImage = null;
+
+            try
+            {
+                shadowImage = sourceImage.CreateEmptyBitmap(size * 2, size * 2);
+
+                ColorMatrix maskMatrix = new ColorMatrix();
+                maskMatrix.Matrix00 = 0;
+                maskMatrix.Matrix11 = 0;
+                maskMatrix.Matrix22 = 0;
+                maskMatrix.Matrix33 = opacity;
+                maskMatrix.Matrix40 = ((float)color.R).Remap(0, 255, 0, 1);
+                maskMatrix.Matrix41 = ((float)color.G).Remap(0, 255, 0, 1);
+                maskMatrix.Matrix42 = ((float)color.B).Remap(0, 255, 0, 1);
+
+                Rectangle shadowRectangle = new Rectangle(size, size, sourceImage.Width, sourceImage.Height);
+                maskMatrix.Apply(sourceImage, shadowImage, shadowRectangle);
+
+                Blur((Bitmap)shadowImage, size);
+
+                if (darkness > 1)
+                {
+                    ColorMatrix alphaMatrix = new ColorMatrix();
+                    alphaMatrix.Matrix33 = darkness;
+
+                    Image shadowImage2 = alphaMatrix.Apply(shadowImage);
+                    shadowImage.Dispose();
+                    shadowImage = shadowImage2;
+                }
+
+                Bitmap result = shadowImage.CreateEmptyBitmap(Math.Abs(offset.X), Math.Abs(offset.Y));
+
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    g.SetHighQuality();
+                    g.DrawImage(shadowImage, Math.Max(0, offset.X), Math.Max(0, offset.Y), shadowImage.Width, shadowImage.Height);
+                    g.DrawImage(sourceImage, Math.Max(size, -offset.X + size), Math.Max(size, -offset.Y + size), sourceImage.Width, sourceImage.Height);
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (sourceImage != null) sourceImage.Dispose();
+                if (shadowImage != null) shadowImage.Dispose();
+            }
+        }
+
+        public static void Blur(Bitmap sourceImage, int radius)
+        {
+            if (GDIplus.IsBlurPossible(radius))
+            {
+                GDIplus.ApplyBlur(sourceImage, new Rectangle(0, 0, sourceImage.Width, sourceImage.Height), radius, false);
+            }
+            else
+            {
+                ImageHelper.ApplyBoxBlur(sourceImage, radius);
+            }
+        }
+
+        public static Bitmap Pixelate(Bitmap sourceImage, int pixelSize)
+        {
+            pixelSize = Math.Min(pixelSize, sourceImage.Width);
+            pixelSize = Math.Min(pixelSize, sourceImage.Height);
+
+            Bitmap result = sourceImage.CreateEmptyBitmap();
+
+            using (IFastBitmap src = FastBitmap.Create(sourceImage, new Rectangle(0, 0, sourceImage.Width, sourceImage.Height)))
+            using (IFastBitmap dest = FastBitmap.Create(result))
+            {
+                List<Color> colors = new List<Color>();
+                int halbPixelSize = pixelSize / 2;
+                for (int y = src.Top - halbPixelSize; y < src.Bottom + halbPixelSize; y = y + pixelSize)
+                {
+                    for (int x = src.Left - halbPixelSize; x <= src.Right + halbPixelSize; x = x + pixelSize)
+                    {
+                        colors.Clear();
+                        for (int yy = y; yy < y + pixelSize; yy++)
+                        {
+                            if (yy >= src.Top && yy < src.Bottom)
+                            {
+                                for (int xx = x; xx < x + pixelSize; xx++)
+                                {
+                                    if (xx >= src.Left && xx < src.Right)
+                                    {
+                                        colors.Add(src.GetColorAt(xx, yy));
+                                    }
+                                }
+                            }
+                        }
+                        Color currentAvgColor = ColorHelpers.Mix(colors);
+                        for (int yy = y; yy <= y + pixelSize; yy++)
+                        {
+                            if (yy >= src.Top && yy < src.Bottom)
+                            {
+                                for (int xx = x; xx <= x + pixelSize; xx++)
+                                {
+                                    if (xx >= src.Left && xx < src.Right)
+                                    {
+                                        dest.SetColorAt(xx, yy, currentAvgColor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static Image CreateTornEdge(Image sourceImage, int toothHeight, int horizontalToothRange, int verticalToothRange)
+        {
+            Image result = sourceImage.CreateEmptyBitmap();
+
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                Random random = new Random();
+                int horizontalRegions = (int)(sourceImage.Width / horizontalToothRange);
+                int verticalRegions = (int)(sourceImage.Height / verticalToothRange);
+
+                // Start
+                Point previousEndingPoint = new Point(horizontalToothRange, random.Next(1, toothHeight));
+                Point newEndingPoint;
+
+                // Top
+                for (int i = 0; i < horizontalRegions; i++)
+                {
+                    int x = (int)previousEndingPoint.X + horizontalToothRange;
+                    int y = random.Next(1, toothHeight);
+                    newEndingPoint = new Point(x, y);
+                    path.AddLine(previousEndingPoint, newEndingPoint);
+                    previousEndingPoint = newEndingPoint;
+                }
+
+                // Right
+                for (int i = 0; i < verticalRegions; i++)
+                {
+                    int x = sourceImage.Width - random.Next(1, toothHeight);
+                    int y = (int)previousEndingPoint.Y + verticalToothRange;
+                    newEndingPoint = new Point(x, y);
+                    path.AddLine(previousEndingPoint, newEndingPoint);
+                    previousEndingPoint = newEndingPoint;
+                }
+
+                // Bottom
+                for (int i = 0; i < horizontalRegions; i++)
+                {
+                    int x = (int)previousEndingPoint.X - horizontalToothRange;
+                    int y = sourceImage.Height - random.Next(1, toothHeight);
+                    newEndingPoint = new Point(x, y);
+                    path.AddLine(previousEndingPoint, newEndingPoint);
+                    previousEndingPoint = newEndingPoint;
+                }
+
+                // Left
+                for (int i = 0; i < verticalRegions; i++)
+                {
+                    int x = random.Next(1, toothHeight);
+                    int y = (int)previousEndingPoint.Y - verticalToothRange;
+                    newEndingPoint = new Point(x, y);
+                    path.AddLine(previousEndingPoint, newEndingPoint);
+                    previousEndingPoint = newEndingPoint;
+                }
+                path.CloseFigure();
+
+                // Draw the created figure with the original image by using a TextureBrush so we have anti-aliasing
+                using (Graphics graphics = Graphics.FromImage(result))
+                {
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                    using (Brush brush = new TextureBrush(sourceImage))
+                    {
+                        // Imporant note: If the target wouldn't be at 0,0 we need to translate-transform!!
+                        graphics.FillPath(brush, path);
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

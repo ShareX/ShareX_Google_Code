@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adjustments\Alpha.cs" />
+    <Compile Include="Adjustments\ColorMatrix.cs" />
     <Compile Include="Filters\Pixelate.cs" />
     <Compile Include="ImageEffectManager.cs" />
     <Compile Include="Manipulations\BackgroundGradient.cs" />
@@ -137,10 +138,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">
-      <Project>{cd642bf4-d815-4d67-a0b5-c69f0b8231af}</Project>
-      <Name>GreenshotImageEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HelpersLib\HelpersLib.csproj">
       <Project>{327750e1-9fb7-4cc3-8aea-9bc42180cad3}</Project>
       <Name>HelpersLib</Name>

@@ -854,116 +854,64 @@ namespace GreenshotPlugin.Core
         /// <returns>Bitmap with the shadow, is bigger than the sourceBitmap!!</returns>
         public static Bitmap CreateShadow(Image sourceBitmap, float darkness, int shadowSize, Point shadowOffset, out Point offset, PixelFormat targetPixelformat)
         {
+            // Create a new "clean" image
             offset = shadowOffset;
-            offset.X += shadowSize;
-            offset.Y += shadowSize;
-
-            Bitmap resultImage = null;
-
-            using (Bitmap shadowImage = CreateEmpty(sourceBitmap.Width + (shadowSize * 2), sourceBitmap.Height + (shadowSize * 2), targetPixelformat, Color.Empty,
-                sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution))
+            offset.X += shadowSize - 1;
+            offset.Y += shadowSize - 1;
+            Bitmap returnImage = CreateEmpty(sourceBitmap.Width + (shadowSize * 2), sourceBitmap.Height + (shadowSize * 2), targetPixelformat, Color.Empty, sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
+            // Make sure the shadow is odd, there is no reason for an even blur!
+            if ((shadowSize & 1) == 0)
             {
-                ColorMatrix maskMatrix = new ColorMatrix();
-                maskMatrix.Matrix00 = 0;
-                maskMatrix.Matrix11 = 0;
-                maskMatrix.Matrix22 = 0;
-                maskMatrix.Matrix33 = darkness;
-
-                Rectangle shadowRectangle = new Rectangle(new Point(shadowSize, shadowSize), sourceBitmap.Size);
-                ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, shadowImage, shadowRectangle, maskMatrix);
-
-                DrawBlur(shadowImage, shadowSize);
-
-                resultImage = CreateEmpty(shadowImage.Width + Math.Abs(shadowOffset.X), shadowImage.Height + Math.Abs(shadowOffset.Y), targetPixelformat, Color.Empty,
-                    sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
-
-                using (Graphics graphics = Graphics.FromImage(resultImage))
-                {
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    graphics.SmoothingMode = SmoothingMode.HighQuality;
-
-                    graphics.DrawImage(shadowImage, Math.Max(0, shadowOffset.X), Math.Max(0, shadowOffset.Y), shadowImage.Width, shadowImage.Height);
-                    graphics.DrawImage(sourceBitmap, Math.Max(shadowSize, -shadowOffset.X + shadowSize), Math.Max(shadowSize, -shadowOffset.Y + shadowSize),
-                        sourceBitmap.Width, sourceBitmap.Height);
-                }
+                shadowSize++;
             }
-
-            return resultImage;
-        }
-
-        public static void DrawBlur(Bitmap sourceBitmap, int blurRadius)
-        {
-            if (GDIplus.IsBlurPossible(blurRadius))
+            bool useGDIBlur = GDIplus.IsBlurPossible(shadowSize);
+            // Create "mask" for the shadow
+            ColorMatrix maskMatrix = new ColorMatrix();
+            maskMatrix.Matrix00 = 0;
+            maskMatrix.Matrix11 = 0;
+            maskMatrix.Matrix22 = 0;
+            if (useGDIBlur)
             {
-                GDIplus.ApplyBlur(sourceBitmap, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height), blurRadius, false);
+                maskMatrix.Matrix33 = darkness + 0.1f;
             }
             else
             {
-                ApplyBoxBlur(sourceBitmap, blurRadius);
+                maskMatrix.Matrix33 = darkness;
             }
-        }
+            Rectangle shadowRectangle = new Rectangle(new Point(shadowSize, shadowSize), sourceBitmap.Size);
+            ApplyColorMatrix((Bitmap)sourceBitmap, Rectangle.Empty, returnImage, shadowRectangle, maskMatrix);
 
-        public static Bitmap Pixelate(Bitmap sourceBitmap, int pixelSize)
-        {
-            using (sourceBitmap)
+            // blur "shadow", apply to whole new image
+            if (useGDIBlur)
             {
-                Bitmap result = CreateEmpty(sourceBitmap.Width, sourceBitmap.Height, PixelFormat.Format32bppArgb, Color.Empty,
-                    sourceBitmap.HorizontalResolution, sourceBitmap.VerticalResolution);
-
-                using (IFastBitmap dest = FastBitmap.Create(result))
-                {
-                    Pixelate(sourceBitmap, pixelSize, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height), dest);
-                }
-
-                return result;
+                // Use GDI Blur
+                Rectangle newImageRectangle = new Rectangle(0, 0, returnImage.Width, returnImage.Height);
+                GDIplus.ApplyBlur(returnImage, newImageRectangle, shadowSize + 1, false);
             }
-        }
-
-        public static void Pixelate(Bitmap sourceBitmap, int pixelSize, Rectangle rect, IFastBitmap dest)
-        {
-            pixelSize = Math.Min(pixelSize, rect.Width);
-            pixelSize = Math.Min(pixelSize, rect.Height);
-
-            using (IFastBitmap src = FastBitmap.Create(sourceBitmap, rect))
+            else
             {
-                List<Color> colors = new List<Color>();
-                int halbPixelSize = pixelSize / 2;
-                for (int y = src.Top - halbPixelSize; y < src.Bottom + halbPixelSize; y = y + pixelSize)
+                // try normal software blur
+                //returnImage = CreateBlur(returnImage, newImageRectangle, true, shadowSize, 1d, false, newImageRectangle);
+                ApplyBoxBlur(returnImage, shadowSize);
+            }
+
+            // Draw the original image over the shadow
+            using (Graphics graphics = Graphics.FromImage(returnImage))
+            {
+                // Make sure we draw with the best quality!
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                // draw original with a TextureBrush so we have nice antialiasing!
+                using (Brush textureBrush = new TextureBrush(sourceBitmap, WrapMode.Clamp))
                 {
-                    for (int x = src.Left - halbPixelSize; x <= src.Right + halbPixelSize; x = x + pixelSize)
-                    {
-                        colors.Clear();
-                        for (int yy = y; yy < y + pixelSize; yy++)
-                        {
-                            if (yy >= src.Top && yy < src.Bottom)
-                            {
-                                for (int xx = x; xx < x + pixelSize; xx++)
-                                {
-                                    if (xx >= src.Left && xx < src.Right)
-                                    {
-                                        colors.Add(src.GetColorAt(xx, yy));
-                                    }
-                                }
-                            }
-                        }
-                        Color currentAvgColor = Colors.Mix(colors);
-                        for (int yy = y; yy <= y + pixelSize; yy++)
-                        {
-                            if (yy >= src.Top && yy < src.Bottom)
-                            {
-                                for (int xx = x; xx <= x + pixelSize; xx++)
-                                {
-                                    if (xx >= src.Left && xx < src.Right)
-                                    {
-                                        dest.SetColorAt(xx, yy, currentAvgColor);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    // We need to do a translate-tranform otherwise the image is wrapped
+                    graphics.TranslateTransform(offset.X, offset.Y);
+                    graphics.FillRectangle(textureBrush, 0, 0, sourceBitmap.Width, sourceBitmap.Height);
                 }
             }
+            return returnImage;
         }
 
         /// <summary>

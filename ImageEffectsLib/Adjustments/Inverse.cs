@@ -32,7 +32,10 @@ namespace ImageEffectsLib
     {
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Inverse().Apply(img);
+            using (img)
+            {
+                return ColorMatrixManager.Inverse().Apply(img);
+            }
         }
     }
 }

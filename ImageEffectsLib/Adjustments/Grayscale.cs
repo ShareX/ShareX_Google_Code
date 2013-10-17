@@ -41,7 +41,10 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Grayscale(Value).Apply(img);
+            using (img)
+            {
+                return ColorMatrixManager.Grayscale(Value).Apply(img);
+            }
         }
     }
 }

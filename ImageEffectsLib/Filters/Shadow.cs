@@ -23,7 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using GreenshotPlugin.Core;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -38,10 +37,16 @@ namespace ImageEffectsLib
     internal class Shadow : ImageEffect
     {
         [DefaultValue(0.5f), Description("Choose a value between 0.1 and 1.0")]
-        public float Darkness { get; set; }
+        public float Opacity { get; set; }
 
         [DefaultValue(10)]
         public int Size { get; set; }
+
+        [DefaultValue(0.0f)]
+        public float Darkness { get; set; }
+
+        [DefaultValue(typeof(Color), "Black")]
+        public Color Color { get; set; }
 
         [DefaultValue(typeof(Point), "0, 0")]
         public Point Offset { get; set; }
@@ -53,16 +58,14 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            if (Darkness <= 0f || Size <= 0)
+            if (Opacity <= 0f || Size <= 0)
             {
                 return img;
             }
 
-            using (img)
-            {
-                Point offsetChange;
-                return ImageHelper.CreateShadow(img, Darkness, Size, Offset, out offsetChange, PixelFormat.Format32bppArgb);
-            }
+            float darkness = Darkness + 1;
+
+            return ImageHelpers.AddShadow(img, Opacity, Size, darkness, Color, Offset);
         }
     }
 }

@@ -41,7 +41,10 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Contrast(Value).Apply(img);
+            using (img)
+            {
+                return ColorMatrixManager.Contrast(Value).Apply(img);
+            }
         }
     }
 }
