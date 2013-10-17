@@ -44,6 +44,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbResult = new HelpersLib.MyPictureBox();
             this.btnTest = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tvEffects
@@ -118,7 +119,7 @@
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Location = new System.Drawing.Point(784, 736);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(72, 23);
+            this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 9;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Location = new System.Drawing.Point(864, 736);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(72, 23);
+            this.btnCancel.Size = new System.Drawing.Size(72, 24);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -150,7 +151,7 @@
             this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnMoveUp.Location = new System.Drawing.Point(328, 8);
             this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(24, 24);
+            this.btnMoveUp.Size = new System.Drawing.Size(32, 24);
             this.btnMoveUp.TabIndex = 4;
             this.btnMoveUp.Text = "↑";
             this.btnMoveUp.UseVisualStyleBackColor = true;
@@ -159,9 +160,9 @@
             // btnMoveDown
             // 
             this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnMoveDown.Location = new System.Drawing.Point(360, 8);
+            this.btnMoveDown.Location = new System.Drawing.Point(368, 8);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(24, 24);
+            this.btnMoveDown.Size = new System.Drawing.Size(32, 24);
             this.btnMoveDown.TabIndex = 5;
             this.btnMoveDown.Text = "↓";
             this.btnMoveDown.UseVisualStyleBackColor = true;
@@ -207,18 +208,30 @@
             this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTest.Location = new System.Drawing.Point(704, 736);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(72, 23);
+            this.btnTest.Size = new System.Drawing.Size(72, 24);
             this.btnTest.TabIndex = 13;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Visible = false;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(408, 8);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(72, 24);
+            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Visible = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // ImageEffectsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 766);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnDuplicate);
@@ -260,6 +273,7 @@
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
