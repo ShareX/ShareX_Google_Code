@@ -44,9 +44,8 @@ namespace Greenshot
     /// </summary>
     public partial class ImageEditorForm : BaseForm, IImageEditor
     {
-        public delegate void ImageEventHandler(Image img);
-        public event ImageEventHandler ClipboardCopyRequested;
-        public event ImageEventHandler ImageUploadRequested;
+        public event Action<Image> ClipboardCopyRequested;
+        public event Action<Image> ImageUploadRequested;
 
         private static EditorConfiguration editorConfiguration = IniConfig.GetIniSection<EditorConfiguration>();
         private static List<string> ignoreDestinations = new List<string>() { };

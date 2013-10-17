@@ -41,7 +41,10 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Hue(Angle).Apply(img);
+            using (img)
+            {
+                return ColorMatrixManager.Hue(Angle).Apply(img);
+            }
         }
     }
 }

@@ -336,6 +336,12 @@
   <ItemGroup>
     <None Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">
+      <Project>{cd642bf4-d815-4d67-a0b5-c69f0b8231af}</Project>
+      <Name>GreenshotImageEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

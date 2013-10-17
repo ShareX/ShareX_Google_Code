@@ -49,20 +49,23 @@ namespace HelpersLib
 
         public static Image Apply(this ColorMatrix matrix, Image img)
         {
-            Bitmap bmp = new Bitmap(img.Width, img.Height, img.PixelFormat);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap dest = img.CreateEmptyBitmap();
+            Rectangle destRect = new Rectangle(0, 0, dest.Width, dest.Height);
+            return Apply(matrix, img, dest, destRect);
+        }
 
-            using (Graphics g = Graphics.FromImage(bmp))
+        public static Image Apply(this ColorMatrix matrix, Image src, Image dest, Rectangle destRect)
+        {
+            using (Graphics g = Graphics.FromImage(dest))
             using (ImageAttributes ia = new ImageAttributes())
             {
                 ia.ClearColorMatrix();
-                ia.SetColorMatrix(matrix);
-
+                ia.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 g.SetHighQuality();
-                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+                g.DrawImage(src, destRect, 0, 0, src.Width, src.Height, GraphicsUnit.Pixel, ia);
             }
 
-            return bmp;
+            return dest;
         }
 
         /// <param name="value">1 = No change (Min 0.1, Max 5.0)</param>
@@ -70,13 +73,14 @@ namespace HelpersLib
         {
             value = value.Between(0.1f, 5.0f);
 
-            Bitmap bmp = new Bitmap(img.Width, img.Height, img.PixelFormat);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap bmp = img.CreateEmptyBitmap();
 
             using (Graphics g = Graphics.FromImage(bmp))
             using (ImageAttributes ia = new ImageAttributes())
             {
+                ia.ClearColorMatrix();
                 ia.SetGamma(value, ColorAdjustType.Bitmap);
+                g.SetHighQuality();
                 g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
             }
 

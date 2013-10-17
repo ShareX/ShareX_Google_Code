@@ -29,22 +29,19 @@ using System.Drawing;
 
 namespace ImageEffectsLib
 {
-    internal class Gamma : ImageEffect
+    internal class ColorMatrix : ImageEffect
     {
-        [DefaultValue(1f), Description("Min 0.1, Max 5.0")]
-        public float Value { get; set; }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public System.Drawing.Imaging.ColorMatrix Matrix { get; set; }
 
-        public Gamma()
+        public ColorMatrix()
         {
-            this.ApplyDefaultPropertyValues();
+            Matrix = new System.Drawing.Imaging.ColorMatrix();
         }
 
         public override Image Apply(Image img)
         {
-            using (img)
-            {
-                return ColorMatrixManager.ChangeGamma(img, Value);
-            }
+            return Matrix.Apply(img);
         }
     }
 }

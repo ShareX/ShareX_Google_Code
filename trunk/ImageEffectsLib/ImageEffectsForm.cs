@@ -62,8 +62,8 @@ namespace ImageEffectsLib
             AddEffectToTreeView("Manipulations", typeof(Background), typeof(BackgroundGradient), typeof(Border), typeof(Canvas), typeof(Flip),
                 typeof(Resize), typeof(Rotate), typeof(Scale), typeof(Skew));
 
-            AddEffectToTreeView("Adjustments", typeof(Alpha), typeof(Brightness), typeof(Colorize), typeof(Contrast), typeof(Gamma), typeof(Grayscale),
-                typeof(Hue), typeof(Inverse), typeof(Saturation));
+            AddEffectToTreeView("Adjustments", typeof(Alpha), typeof(Brightness), typeof(Colorize), typeof(ColorMatrix), typeof(Contrast), typeof(Gamma),
+                typeof(Grayscale), typeof(Hue), typeof(Inverse), typeof(Saturation));
 
             AddEffectToTreeView("Filters", typeof(Blur), typeof(Pixelate), typeof(Reflection), typeof(Shadow), typeof(TornEdge));
 

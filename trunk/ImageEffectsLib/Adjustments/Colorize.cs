@@ -44,7 +44,10 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            return ColorMatrixManager.Colorize(Color, Value).Apply(img);
+            using (img)
+            {
+                return ColorMatrixManager.Colorize(Color, Value).Apply(img);
+            }
         }
     }
 }
