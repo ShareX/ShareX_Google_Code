@@ -244,7 +244,7 @@ namespace ScreenCapture
                     y = mousePos.Y - offsetY - magnifier.Height;
                 }
 
-                g.DrawImage(magnifier, new Point(x, y));
+                g.DrawImage(magnifier, x, y, magnifier.Width, magnifier.Height);
             }
         }
 

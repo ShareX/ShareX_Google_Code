@@ -85,11 +85,13 @@ namespace HelpersLib
                 return img;
             }
 
-            Bitmap bmp = img.CreateEmptyBitmap();
+            Bitmap bmp = new Bitmap(x + width, y + height, img.PixelFormat);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
 
             using (Graphics g = Graphics.FromImage(bmp))
             using (img)
             {
+                g.SetHighQuality();
                 g.DrawImage(img, x, y, width, height);
             }
 
@@ -213,21 +215,18 @@ namespace HelpersLib
                     {
                         g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width, img.Height));
                     }
-
-                    return img;
                 }
                 else
                 {
-                    bmp = new Bitmap(img.Width + borderSize * 2, img.Height + borderSize * 2);
-                    bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+                    bmp = img.CreateEmptyBitmap(borderSize * 2, borderSize * 2);
 
                     using (Graphics g = Graphics.FromImage(bmp))
+                    using (img)
                     {
-                        g.DrawImage(img, borderSize, borderSize);
+                        g.SetHighQuality();
+                        g.DrawImage(img, borderSize, borderSize, img.Width, img.Height);
                         g.DrawRectangleProper(borderPen, new Rectangle(0, 0, img.Width + borderSize * 2, img.Height + borderSize * 2));
                     }
-
-                    img.Dispose();
                 }
             }
 
@@ -274,14 +273,13 @@ namespace HelpersLib
 
         public static Image AddCanvas(Image img, int width, int height)
         {
-            Bitmap bmp = new Bitmap(img.Width + width * 2, img.Height + height * 2);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap bmp = img.CreateEmptyBitmap(width * 2, height * 2);
 
             using (Graphics g = Graphics.FromImage(bmp))
             using (img)
             {
                 g.SetHighQuality();
-                g.DrawImage(img, width, height);
+                g.DrawImage(img, width, height, img.Width, img.Height);
             }
 
             return bmp;
@@ -585,7 +583,7 @@ namespace HelpersLib
                 graphicsObject.TranslateTransform(-oldWidth / 2f, -oldHeight / 2f);
 
                 // Draw the result
-                graphicsObject.DrawImage(inputImage, 0, 0);
+                graphicsObject.DrawImage(inputImage, 0, 0, inputImage.Width, inputImage.Height);
             }
 
             return newBitmap;
