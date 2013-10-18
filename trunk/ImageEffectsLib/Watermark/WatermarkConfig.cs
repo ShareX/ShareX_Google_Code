@@ -72,13 +72,11 @@ namespace ImageEffectsLib
         public string WatermarkText = "%h:%mi";
         public XmlFont WatermarkFont = new XmlFont("Arial", 8);
         public XmlColor WatermarkFontArgb = Color.White;
-        public int WatermarkFontTrans = 255;
 
         public int WatermarkCornerRadius = 4;
         public XmlColor WatermarkGradient1Argb = Color.FromArgb(85, 85, 85);
         public XmlColor WatermarkGradient2Argb = Color.Black;
         public XmlColor WatermarkBorderArgb = Color.Black;
-        public int WatermarkBackTrans = 225;
         public LinearGradientMode WatermarkGradientType = LinearGradientMode.Vertical;
         public bool WatermarkUseCustomGradient = false;
         public GradientData WatermarkGradient = new GradientData();

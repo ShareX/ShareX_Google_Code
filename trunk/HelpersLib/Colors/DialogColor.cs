@@ -34,9 +34,10 @@ namespace HelpersLib
     public partial class DialogColor : Form
     {
         public Color Color;
+        public bool ScreenPicker;
+
         private MyColor NewColor = Color.Red;
         private MyColor OldColor;
-        public bool ScreenPicker;
         private bool oldColorExist;
         private bool dialogChanged;
 
@@ -55,18 +56,18 @@ namespace HelpersLib
             InitializeComponent();
             Icon = Resources.ShareXIcon;
 
-            foreach (Control cntrl in this.Controls)
+            foreach (Control control in Controls)
             {
-                if (cntrl is NumericUpDown || cntrl is TextBox)
+                if (control is NumericUpDown || control is TextBox)
                 {
-                    cntrl.DoubleClick += new EventHandler(CopyToClipboard);
+                    control.DoubleClick += new EventHandler(CopyToClipboard);
                 }
             }
 
             if (currentColor.IsEmpty)
             {
                 colorPicker.DrawCrosshair = lblOld.Visible = oldColorExist;
-                DrawColors();
+                DrawPreviewColors();
             }
             else
             {
@@ -79,12 +80,13 @@ namespace HelpersLib
             oldColorExist = true;
             colorPicker.DrawCrosshair = lblOld.Visible = oldColorExist;
             colorPicker.Color = NewColor = OldColor = currentColor;
-            DrawColors();
+            nudAlpha.Value = currentColor.A;
+            DrawPreviewColors();
         }
 
         private void UpdateControls(MyColor color)
         {
-            DrawColors();
+            DrawPreviewColors();
             dialogChanged = true;
             nudHue.Value = (decimal)Math.Round(color.HSB.Hue360);
             nudSaturation.Value = (decimal)Math.Round(color.HSB.Saturation100);
@@ -101,24 +103,53 @@ namespace HelpersLib
             dialogChanged = false;
         }
 
-        private void DrawColors()
+        private void DrawPreviewColors()
         {
             Bitmap bmp = new Bitmap(lblColorPreview.ClientSize.Width, lblColorPreview.ClientSize.Height);
+
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 int bmpHeight = bmp.Height;
-                if (oldColorExist) bmpHeight /= 2;
-                g.FillRectangle(new SolidBrush(NewColor), new Rectangle(0, 0, bmp.Width, bmpHeight));
-                if (oldColorExist) g.FillRectangle(new SolidBrush(OldColor), new Rectangle(0, bmpHeight, bmp.Width, bmpHeight));
+
+                if (oldColorExist)
+                {
+                    bmpHeight /= 2;
+
+                    using (SolidBrush oldColorBrush = new SolidBrush(OldColor))
+                    {
+                        g.FillRectangle(oldColorBrush, new Rectangle(0, bmpHeight, bmp.Width, bmpHeight));
+                    }
+                }
+
+                using (SolidBrush newColorBrush = new SolidBrush(NewColor))
+                {
+                    g.FillRectangle(newColorBrush, new Rectangle(0, 0, bmp.Width, bmpHeight));
+                }
             }
+
+            if (lblColorPreview.Image != null) lblColorPreview.Image.Dispose();
             lblColorPreview.Image = bmp;
         }
 
         private void UpdateColor(int x, int y)
         {
+            nudX.Value = x;
+            nudY.Value = y;
             colorPicker.Color = CaptureHelpers.GetPixelColor(x, y);
-            txtX.Text = x.ToString();
-            txtY.Text = y.ToString();
+        }
+
+        private void UpdateColorPickerButtonText()
+        {
+            if (colorTimer.Enabled)
+            {
+                btnColorPicker.Text = "Stop screen color picker";
+            }
+            else
+            {
+                btnColorPicker.Text = "Start screen color picker";
+            }
+
+            lblScreenColorPickerTip.Visible = colorTimer.Enabled;
         }
 
         #region Events
@@ -127,14 +158,16 @@ namespace HelpersLib
         {
             if (ScreenPicker)
             {
-                this.Location = new Point(10, 10);
+                Location = new Point(0, 0);
+                ClientSize = new Size(ClientSize.Width, pScreenColorPicker.Location.Y + pScreenColorPicker.Height);
+                pScreenColorPicker.Visible = true;
                 colorPicker.DrawCrosshair = true;
                 colorTimer.Start();
+                UpdateColorPickerButtonText();
             }
             else
             {
-                this.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - (this.Width / 2),
-                                Screen.PrimaryScreen.Bounds.Height / 2 - (this.Height / 2));
+                Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - (Width / 2), Screen.PrimaryScreen.Bounds.Height / 2 - (Height / 2));
             }
         }
 
@@ -160,13 +193,17 @@ namespace HelpersLib
         {
             if (e.KeyCode == Keys.ControlKey && !txtHex.Focused)
             {
+                btnColorPicker.Focus();
                 colorTimer.Enabled = !colorTimer.Enabled;
+                UpdateColorPickerButtonText();
+                e.SuppressKeyPress = true;
             }
         }
 
         private void btnColorPicker_Click(object sender, EventArgs e)
         {
             colorTimer.Enabled = !colorTimer.Enabled;
+            UpdateColorPickerButtonText();
         }
 
         private void colorTimer_Tick(object sender, EventArgs e)
@@ -177,15 +214,15 @@ namespace HelpersLib
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.Color = Color.FromArgb((int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value);
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            Color = Color.FromArgb((int)nudAlpha.Value, (int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void rbHue_CheckedChanged(object sender, EventArgs e)
@@ -226,14 +263,6 @@ namespace HelpersLib
             }
         }
 
-        private void DialogColor_HelpButtonClicked(object sender, CancelEventArgs e)
-        {
-            MessageBox.Show("Press \"Control\" button for start or stop screen color picker.\r\nIf you double " +
-                "click on any of TextBox or NumericUpDown controls value or text will be copied to clipboard automatically.",
-                "Color Dialog");
-            e.Cancel = true;
-        }
-
         private void RGB_ValueChanged(object sender, EventArgs e)
         {
             if (!dialogChanged)
@@ -254,8 +283,7 @@ namespace HelpersLib
         {
             if (!dialogChanged)
             {
-                colorPicker.Color = new CMYK((int)nudCyan.Value, (int)nudMagenta.Value, (int)nudYellow.Value,
-                    (int)nudKey.Value).ToColor();
+                colorPicker.Color = new CMYK((int)nudCyan.Value, (int)nudMagenta.Value, (int)nudYellow.Value, (int)nudKey.Value).ToColor();
             }
         }
 
@@ -281,16 +309,6 @@ namespace HelpersLib
                 }
             }
             catch { }
-        }
-
-        private void btnUpdateColor_Click(object sender, EventArgs e)
-        {
-            int x, y;
-
-            if (int.TryParse(txtX.Text, out x) && int.TryParse(txtY.Text, out y))
-            {
-                UpdateColor(x, y);
-            }
         }
 
         #endregion Events

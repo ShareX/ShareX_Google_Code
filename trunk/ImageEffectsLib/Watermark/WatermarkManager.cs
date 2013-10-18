@@ -220,8 +220,6 @@ namespace ImageEffectsLib
                     }
 
                     Rectangle labelRectangle = new Rectangle(Point.Empty, labelSize);
-                    int backTrans = (int)Config.WatermarkBackTrans;
-                    int fontTrans = (int)Config.WatermarkFontTrans;
                     Color fontColor = Config.WatermarkFontArgb;
 
                     using (Bitmap bmp = new Bitmap(labelRectangle.Width + 1, labelRectangle.Height + 1))
@@ -236,19 +234,18 @@ namespace ImageEffectsLib
                         }
                         else
                         {
-                            backgroundBrush = new LinearGradientBrush(labelRectangle, Color.FromArgb(backTrans, Config.WatermarkGradient1Argb),
-                                Color.FromArgb(backTrans, Config.WatermarkGradient2Argb), Config.WatermarkGradientType);
+                            backgroundBrush = new LinearGradientBrush(labelRectangle, Config.WatermarkGradient1Argb, Config.WatermarkGradient2Argb, Config.WatermarkGradientType);
                         }
 
                         using (GraphicsPath gPath = new GraphicsPath())
-                        using (Pen borderPen = new Pen(Color.FromArgb(backTrans, Config.WatermarkBorderArgb)))
+                        using (Pen borderPen = new Pen(Config.WatermarkBorderArgb))
                         {
                             gPath.AddRoundedRectangle(labelRectangle, (float)Config.WatermarkCornerRadius);
                             g.FillPath(backgroundBrush, gPath);
                             g.DrawPath(borderPen, gPath);
                         }
 
-                        using (Brush textBrush = new SolidBrush(Color.FromArgb(fontTrans, fontColor)))
+                        using (Brush textBrush = new SolidBrush(fontColor))
                         using (StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
                         {
                             g.DrawString(drawText, font, textBrush, bmp.Width / 2, bmp.Height / 2, sf);

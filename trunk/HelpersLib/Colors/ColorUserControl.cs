@@ -50,7 +50,7 @@ namespace HelpersLib
         protected Point lastPos;
         protected Timer mouseMoveTimer;
 
-        public MyColor SetColor
+        public MyColor SelectedColor
         {
             get
             {
@@ -108,7 +108,7 @@ namespace HelpersLib
             width = this.ClientRectangle.Width;
             height = this.ClientRectangle.Height;
             bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-            SetColor = Color.Red;
+            SelectedColor = Color.Red;
             DrawStyle = DrawStyle.Hue;
 
             mouseMoveTimer = new Timer();
@@ -206,7 +206,7 @@ namespace HelpersLib
         {
             if (ColorChanged != null)
             {
-                ColorChanged(this, new ColorEventArgs(SetColor, DrawStyle, updateControl));
+                ColorChanged(this, new ColorEventArgs(SelectedColor, DrawStyle, updateControl));
             }
         }
 
@@ -240,28 +240,28 @@ namespace HelpersLib
             switch (DrawStyle)
             {
                 case DrawStyle.Hue:
-                    lastPos.X = Round((width - 1) * SetColor.HSB.Saturation);
-                    lastPos.Y = Round((height - 1) * (1.0 - SetColor.HSB.Brightness));
+                    lastPos.X = Round((width - 1) * SelectedColor.HSB.Saturation);
+                    lastPos.Y = Round((height - 1) * (1.0 - SelectedColor.HSB.Brightness));
                     break;
                 case DrawStyle.Saturation:
-                    lastPos.X = Round((width - 1) * SetColor.HSB.Hue);
-                    lastPos.Y = Round((height - 1) * (1.0 - SetColor.HSB.Brightness));
+                    lastPos.X = Round((width - 1) * SelectedColor.HSB.Hue);
+                    lastPos.Y = Round((height - 1) * (1.0 - SelectedColor.HSB.Brightness));
                     break;
                 case DrawStyle.Brightness:
-                    lastPos.X = Round((width - 1) * SetColor.HSB.Hue);
-                    lastPos.Y = Round((height - 1) * (1.0 - SetColor.HSB.Saturation));
+                    lastPos.X = Round((width - 1) * SelectedColor.HSB.Hue);
+                    lastPos.Y = Round((height - 1) * (1.0 - SelectedColor.HSB.Saturation));
                     break;
                 case DrawStyle.Red:
-                    lastPos.X = Round((width - 1) * (double)SetColor.RGB.Blue / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SetColor.RGB.Green / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Blue / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Green / 255));
                     break;
                 case DrawStyle.Green:
-                    lastPos.X = Round((width - 1) * (double)SetColor.RGB.Blue / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SetColor.RGB.Red / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Blue / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Red / 255));
                     break;
                 case DrawStyle.Blue:
-                    lastPos.X = Round((width - 1) * (double)SetColor.RGB.Red / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SetColor.RGB.Green / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Red / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Green / 255));
                     break;
             }
 
@@ -310,22 +310,22 @@ namespace HelpersLib
             switch (DrawStyle)
             {
                 case DrawStyle.Hue:
-                    lastPos.Y = (height - 1) - Round((height - 1) * SetColor.HSB.Hue);
+                    lastPos.Y = (height - 1) - Round((height - 1) * SelectedColor.HSB.Hue);
                     break;
                 case DrawStyle.Saturation:
-                    lastPos.Y = (height - 1) - Round((height - 1) * SetColor.HSB.Saturation);
+                    lastPos.Y = (height - 1) - Round((height - 1) * SelectedColor.HSB.Saturation);
                     break;
                 case DrawStyle.Brightness:
-                    lastPos.Y = (height - 1) - Round((height - 1) * SetColor.HSB.Brightness);
+                    lastPos.Y = (height - 1) - Round((height - 1) * SelectedColor.HSB.Brightness);
                     break;
                 case DrawStyle.Red:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SetColor.RGB.Red / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Red / 255);
                     break;
                 case DrawStyle.Green:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SetColor.RGB.Green / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Green / 255);
                     break;
                 case DrawStyle.Blue:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SetColor.RGB.Blue / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Blue / 255);
                     break;
             }
             lastPos = GetPoint(lastPos);

@@ -74,7 +74,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB color = new HSB(SetColor.HSB.Hue, 0.0, SetColor.HSB.Brightness);
+                HSB color = new HSB(SelectedColor.HSB.Hue, 0.0, SelectedColor.HSB.Brightness);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -93,7 +93,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB color = new HSB(SetColor.HSB.Hue, SetColor.HSB.Saturation, 0.0);
+                HSB color = new HSB(SelectedColor.HSB.Hue, SelectedColor.HSB.Saturation, 0.0);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -112,7 +112,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(0, SetColor.RGB.Green, SetColor.RGB.Blue);
+                RGB color = new RGB(0, SelectedColor.RGB.Green, SelectedColor.RGB.Blue);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -131,7 +131,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(SetColor.RGB.Red, 0, SetColor.RGB.Blue);
+                RGB color = new RGB(SelectedColor.RGB.Red, 0, SelectedColor.RGB.Blue);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -150,7 +150,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(SetColor.RGB.Red, SetColor.RGB.Green, 0);
+                RGB color = new RGB(SelectedColor.RGB.Red, SelectedColor.RGB.Green, 0);
 
                 for (int y = 0; y < height; y++)
                 {

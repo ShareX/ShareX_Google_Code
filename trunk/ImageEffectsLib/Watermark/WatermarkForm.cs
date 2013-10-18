@@ -74,14 +74,10 @@ namespace ImageEffectsLib
             txtWatermarkText.Text = Config.WatermarkText;
             pbWatermarkFontColor.BackColor = Config.WatermarkFontArgb;
             lblWatermarkFont.Text = FontToString();
-            nudWatermarkFontTrans.Value = Config.WatermarkFontTrans;
-            trackWatermarkFontTrans.Value = (int)Config.WatermarkFontTrans;
             nudWatermarkCornerRadius.Value = Config.WatermarkCornerRadius;
             pbWatermarkGradient1.BackColor = Config.WatermarkGradient1Argb;
             pbWatermarkGradient2.BackColor = Config.WatermarkGradient2Argb;
             pbWatermarkBorderColor.BackColor = Config.WatermarkBorderArgb;
-            nudWatermarkBackTrans.Value = Config.WatermarkBackTrans;
-            trackWatermarkBackgroundTrans.Value = (int)Config.WatermarkBackTrans;
             if (cbWatermarkGradientType.Items.Count == 0)
             {
                 cbWatermarkGradientType.Items.AddRange(Enum.GetNames(typeof(LinearGradientMode)));
@@ -110,7 +106,7 @@ namespace ImageEffectsLib
 
         private string FontToString(Font font, Color color)
         {
-            return "Name: " + font.Name + " - Size: " + font.Size + " - Style: " + font.Style + " - Color: " + color.R + "," + color.G + "," + color.B;
+            return string.Format("{0} - {1} - {2} - {3},{4},{5}", font.Name, font.Size, font.Style, color.R, color.G, color.B);
         }
 
         private void SelectColor(Control pb, ref XmlColor color)
@@ -129,8 +125,12 @@ namespace ImageEffectsLib
         {
             if (IsGuiReady)
             {
-                Bitmap bmp = new Bitmap(pbWatermarkShow.ClientSize.Width, pbWatermarkShow.ClientSize.Height);
-                pbWatermarkShow.Image = new WatermarkManager(Config).ApplyWatermark(bmp);
+                using (Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height))
+                {
+                    new WatermarkManager(Config).ApplyWatermark(bmp);
+                    if (pbPreview.Image != null) pbPreview.Image.Dispose();
+                    pbPreview.LoadImage(bmp);
+                }
             }
         }
 
@@ -177,7 +177,6 @@ namespace ImageEffectsLib
         private void cbUseCustomGradient_CheckedChanged(object sender, EventArgs e)
         {
             Config.WatermarkUseCustomGradient = cboUseCustomGradient.Checked;
-            gbGradientMakerBasic.Enabled = !cboUseCustomGradient.Checked;
             UpdatePreview();
         }
 
@@ -211,22 +210,10 @@ namespace ImageEffectsLib
             UpdatePreview();
         }
 
-        private void nudWatermarkBackTrans_ValueChanged(object sender, EventArgs e)
-        {
-            Config.WatermarkBackTrans = (int)nudWatermarkBackTrans.Value;
-            trackWatermarkBackgroundTrans.Value = (int)nudWatermarkBackTrans.Value;
-        }
-
         private void nudWatermarkCornerRadius_ValueChanged(object sender, EventArgs e)
         {
             Config.WatermarkCornerRadius = (int)nudWatermarkCornerRadius.Value;
             UpdatePreview();
-        }
-
-        private void nudWatermarkFontTrans_ValueChanged(object sender, EventArgs e)
-        {
-            Config.WatermarkFontTrans = (int)nudWatermarkFontTrans.Value;
-            trackWatermarkFontTrans.Value = (int)nudWatermarkFontTrans.Value;
         }
 
         private void nudWatermarkImageScale_ValueChanged(object sender, EventArgs e)
@@ -263,20 +250,6 @@ namespace ImageEffectsLib
         private void pbWatermarkGradient2_Click(object sender, EventArgs e)
         {
             SelectColor((PictureBox)sender, ref Config.WatermarkGradient2Argb);
-            UpdatePreview();
-        }
-
-        private void trackWatermarkBackgroundTrans_Scroll(object sender, EventArgs e)
-        {
-            Config.WatermarkBackTrans = trackWatermarkBackgroundTrans.Value;
-            nudWatermarkBackTrans.Value = Config.WatermarkBackTrans;
-            UpdatePreview();
-        }
-
-        private void trackWatermarkFontTrans_Scroll(object sender, EventArgs e)
-        {
-            Config.WatermarkFontTrans = trackWatermarkFontTrans.Value;
-            nudWatermarkFontTrans.Value = Config.WatermarkFontTrans;
             UpdatePreview();
         }
 
