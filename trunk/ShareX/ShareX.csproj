@@ -447,6 +447,7 @@
     <Content Include="..\Docs\VersionHistory.txt">
       <Link>VersionHistory.txt</Link>
     </Content>
+    <None Include="Resources\image-saturation.png" />
     <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

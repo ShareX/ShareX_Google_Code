@@ -73,16 +73,6 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap application__pencil {
-            get {
-                object obj = ResourceManager.GetObject("application--pencil", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap application_block {
             get {
                 object obj = ResourceManager.GetObject("application_block", resourceCulture);
@@ -135,7 +125,17 @@ namespace ShareX.Properties {
         /// </summary>
         public static System.Drawing.Bitmap application_monitor {
             get {
-                object obj = ResourceManager.GetObject("application-monitor", resourceCulture);
+                object obj = ResourceManager.GetObject("application_monitor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap application_pencil {
+            get {
+                object obj = ResourceManager.GetObject("application_pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -282,16 +282,6 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap cursor_question {
-            get {
-                object obj = ResourceManager.GetObject("cursor_question", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap Diamond {
             get {
                 object obj = ResourceManager.GetObject("Diamond", resourceCulture);
@@ -374,7 +364,7 @@ namespace ShareX.Properties {
         /// </summary>
         public static System.Drawing.Bitmap folder_tree {
             get {
-                object obj = ResourceManager.GetObject("folder-tree", resourceCulture);
+                object obj = ResourceManager.GetObject("folder_tree", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -422,9 +412,9 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap globe__pencil {
+        public static System.Drawing.Bitmap globe_pencil {
             get {
-                object obj = ResourceManager.GetObject("globe--pencil", resourceCulture);
+                object obj = ResourceManager.GetObject("globe_pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -502,9 +492,19 @@ namespace ShareX.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap keyboard__pencil {
+        public static System.Drawing.Bitmap image_saturation {
             get {
-                object obj = ResourceManager.GetObject("keyboard--pencil", resourceCulture);
+                object obj = ResourceManager.GetObject("image_saturation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap keyboard_pencil {
+            get {
+                object obj = ResourceManager.GetObject("keyboard_pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

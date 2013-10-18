@@ -481,7 +481,7 @@ namespace ShareX
             // 
             // tsbApplicationSettings
             // 
-            this.tsbApplicationSettings.Image = global::ShareX.Properties.Resources.application__pencil;
+            this.tsbApplicationSettings.Image = global::ShareX.Properties.Resources.application_pencil;
             this.tsbApplicationSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsbApplicationSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbApplicationSettings.Name = "tsbApplicationSettings";
@@ -501,7 +501,7 @@ namespace ShareX
             // 
             // tsbHotkeySettings
             // 
-            this.tsbHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard__pencil;
+            this.tsbHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard_pencil;
             this.tsbHotkeySettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsbHotkeySettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHotkeySettings.Name = "tsbHotkeySettings";
@@ -511,7 +511,7 @@ namespace ShareX
             // 
             // tsbDestinationSettings
             // 
-            this.tsbDestinationSettings.Image = global::ShareX.Properties.Resources.globe__pencil;
+            this.tsbDestinationSettings.Image = global::ShareX.Properties.Resources.globe_pencil;
             this.tsbDestinationSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsbDestinationSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDestinationSettings.Name = "tsbDestinationSettings";
@@ -540,7 +540,7 @@ namespace ShareX
             // 
             // tsmiScreenColorPicker
             // 
-            this.tsmiScreenColorPicker.Image = global::ShareX.Properties.Resources.cursor_question;
+            this.tsmiScreenColorPicker.Image = global::ShareX.Properties.Resources.color;
             this.tsmiScreenColorPicker.Name = "tsmiScreenColorPicker";
             this.tsmiScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiScreenColorPicker.Text = "Screen color picker...";
@@ -556,7 +556,7 @@ namespace ShareX
             // 
             // tsmiIndexFolder
             // 
-            this.tsmiIndexFolder.Image = global::ShareX.Properties.Resources.folder_tree;
+            this.tsmiIndexFolder.Image = ((System.Drawing.Image)(resources.GetObject("tsmiIndexFolder.Image")));
             this.tsmiIndexFolder.Name = "tsmiIndexFolder";
             this.tsmiIndexFolder.Size = new System.Drawing.Size(183, 22);
             this.tsmiIndexFolder.Text = "Index folder...";
@@ -645,7 +645,7 @@ namespace ShareX
             // 
             // tsmiShowDebugLog
             // 
-            this.tsmiShowDebugLog.Image = global::ShareX.Properties.Resources.application_monitor;
+            this.tsmiShowDebugLog.Image = ((System.Drawing.Image)(resources.GetObject("tsmiShowDebugLog.Image")));
             this.tsmiShowDebugLog.Name = "tsmiShowDebugLog";
             this.tsmiShowDebugLog.Size = new System.Drawing.Size(182, 22);
             this.tsmiShowDebugLog.Text = "Debug log...";
@@ -701,7 +701,7 @@ namespace ShareX
             // 
             // tsmiTestImageEffects
             // 
-            this.tsmiTestImageEffects.Image = global::ShareX.Properties.Resources.color;
+            this.tsmiTestImageEffects.Image = global::ShareX.Properties.Resources.image_saturation;
             this.tsmiTestImageEffects.Name = "tsmiTestImageEffects";
             this.tsmiTestImageEffects.Size = new System.Drawing.Size(182, 22);
             this.tsmiTestImageEffects.Text = "Test image effects...";
@@ -1422,7 +1422,7 @@ namespace ShareX
             // 
             // tsmiTrayApplicationSettings
             // 
-            this.tsmiTrayApplicationSettings.Image = global::ShareX.Properties.Resources.application__pencil;
+            this.tsmiTrayApplicationSettings.Image = global::ShareX.Properties.Resources.application_pencil;
             this.tsmiTrayApplicationSettings.Name = "tsmiTrayApplicationSettings";
             this.tsmiTrayApplicationSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayApplicationSettings.Text = "Application settings...";
@@ -1438,7 +1438,7 @@ namespace ShareX
             // 
             // tsmiTrayHotkeySettings
             // 
-            this.tsmiTrayHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard__pencil;
+            this.tsmiTrayHotkeySettings.Image = global::ShareX.Properties.Resources.keyboard_pencil;
             this.tsmiTrayHotkeySettings.Name = "tsmiTrayHotkeySettings";
             this.tsmiTrayHotkeySettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayHotkeySettings.Text = "Hotkey settings...";
@@ -1446,7 +1446,7 @@ namespace ShareX
             // 
             // tsmiTrayDestinationSettings
             // 
-            this.tsmiTrayDestinationSettings.Image = global::ShareX.Properties.Resources.globe__pencil;
+            this.tsmiTrayDestinationSettings.Image = global::ShareX.Properties.Resources.globe_pencil;
             this.tsmiTrayDestinationSettings.Name = "tsmiTrayDestinationSettings";
             this.tsmiTrayDestinationSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmiTrayDestinationSettings.Text = "Destination settings...";
@@ -1470,7 +1470,7 @@ namespace ShareX
             // 
             // tsmiTrayScreenColorPicker
             // 
-            this.tsmiTrayScreenColorPicker.Image = global::ShareX.Properties.Resources.cursor_question;
+            this.tsmiTrayScreenColorPicker.Image = global::ShareX.Properties.Resources.color;
             this.tsmiTrayScreenColorPicker.Name = "tsmiTrayScreenColorPicker";
             this.tsmiTrayScreenColorPicker.Size = new System.Drawing.Size(183, 22);
             this.tsmiTrayScreenColorPicker.Text = "Screen color picker...";
@@ -1486,7 +1486,7 @@ namespace ShareX
             // 
             // tsmiTrayIndexFolder
             // 
-            this.tsmiTrayIndexFolder.Image = global::ShareX.Properties.Resources.folder_tree;
+            this.tsmiTrayIndexFolder.Image = ((System.Drawing.Image)(resources.GetObject("tsmiTrayIndexFolder.Image")));
             this.tsmiTrayIndexFolder.Name = "tsmiTrayIndexFolder";
             this.tsmiTrayIndexFolder.Size = new System.Drawing.Size(183, 22);
             this.tsmiTrayIndexFolder.Text = "Index folder...";
