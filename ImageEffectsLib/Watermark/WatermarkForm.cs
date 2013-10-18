@@ -106,7 +106,7 @@ namespace ImageEffectsLib
 
         private string FontToString(Font font, Color color)
         {
-            return string.Format("{0} - {1} - {2} - {3},{4},{5}", font.Name, font.Size, font.Style, color.R, color.G, color.B);
+            return string.Format("{0} - {1} - {2} - {3},{4},{5},{6}", font.Name, font.Size, font.Style, color.R, color.G, color.B, color.A);
         }
 
         private void SelectColor(Control pb, ref XmlColor color)

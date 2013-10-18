@@ -173,6 +173,7 @@
             this.Controls.Add(this.btnAddColor);
             this.Controls.Add(this.pbPreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "GradientMaker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Gradient maker";
