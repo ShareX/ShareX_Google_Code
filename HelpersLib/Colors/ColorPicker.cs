@@ -46,8 +46,8 @@ namespace HelpersLib
                 if (mColor != value)
                 {
                     mColor = value;
-                    colorBox.SetColor = value;
-                    colorSlider.SetColor = value;
+                    colorBox.SelectedColor = value;
+                    colorSlider.SelectedColor = value;
                 }
             }
         }
@@ -114,14 +114,14 @@ namespace HelpersLib
         private void colorBox_ColorChanged(object sender, ColorEventArgs e)
         {
             ColorBox = e.Color;
-            if (e.UpdateControl) colorSlider.SetColor = ColorBox;
+            if (e.UpdateControl) colorSlider.SelectedColor = ColorBox;
             ThrowEvent();
         }
 
         private void colorSlider_ColorChanged(object sender, ColorEventArgs e)
         {
             ColorSlider = e.Color;
-            if (e.UpdateControl) colorBox.SetColor = ColorSlider;
+            if (e.UpdateControl) colorBox.SelectedColor = ColorSlider;
             ThrowEvent();
         }
 

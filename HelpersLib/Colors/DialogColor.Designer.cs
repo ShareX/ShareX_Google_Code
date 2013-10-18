@@ -67,12 +67,15 @@
             this.lblKeyPerc = new System.Windows.Forms.Label();
             this.btnColorPicker = new System.Windows.Forms.Button();
             this.colorTimer = new System.Windows.Forms.Timer(this.components);
-            this.txtX = new System.Windows.Forms.TextBox();
-            this.txtY = new System.Windows.Forms.TextBox();
             this.lblX = new System.Windows.Forms.Label();
             this.lblY = new System.Windows.Forms.Label();
+            this.nudAlpha = new System.Windows.Forms.NumericUpDown();
+            this.lblAlpha = new System.Windows.Forms.Label();
+            this.nudX = new System.Windows.Forms.NumericUpDown();
+            this.nudY = new System.Windows.Forms.NumericUpDown();
+            this.lblScreenColorPickerTip = new System.Windows.Forms.Label();
+            this.pScreenColorPicker = new System.Windows.Forms.Panel();
             this.colorPicker = new HelpersLib.ColorPicker();
-            this.btnUpdateColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagenta)).BeginInit();
@@ -83,14 +86,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaturation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudY)).BeginInit();
+            this.pScreenColorPicker.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(544, 232);
+            this.btnCancel.Location = new System.Drawing.Point(536, 240);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 32);
+            this.btnCancel.Size = new System.Drawing.Size(64, 24);
             this.btnCancel.TabIndex = 41;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -98,9 +105,9 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(480, 232);
+            this.btnOK.Location = new System.Drawing.Point(464, 240);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(56, 32);
+            this.btnOK.Size = new System.Drawing.Size(64, 24);
             this.btnOK.TabIndex = 40;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -109,7 +116,7 @@
             // lblOld
             // 
             this.lblOld.AutoSize = true;
-            this.lblOld.Location = new System.Drawing.Point(304, 240);
+            this.lblOld.Location = new System.Drawing.Point(312, 240);
             this.lblOld.Name = "lblOld";
             this.lblOld.Size = new System.Drawing.Size(26, 13);
             this.lblOld.TabIndex = 33;
@@ -118,7 +125,7 @@
             // lblNew
             // 
             this.lblNew.AutoSize = true;
-            this.lblNew.Location = new System.Drawing.Point(304, 208);
+            this.lblNew.Location = new System.Drawing.Point(312, 216);
             this.lblNew.Name = "lblNew";
             this.lblNew.Size = new System.Drawing.Size(32, 13);
             this.lblNew.TabIndex = 32;
@@ -126,10 +133,10 @@
             // 
             // txtHex
             // 
-            this.txtHex.Location = new System.Drawing.Point(524, 141);
+            this.txtHex.Location = new System.Drawing.Point(528, 172);
             this.txtHex.MaxLength = 7;
             this.txtHex.Name = "txtHex";
-            this.txtHex.Size = new System.Drawing.Size(64, 20);
+            this.txtHex.Size = new System.Drawing.Size(72, 20);
             this.txtHex.TabIndex = 27;
             this.txtHex.Text = "#FFFFFF";
             this.txtHex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -138,7 +145,7 @@
             // lblHex
             // 
             this.lblHex.AutoSize = true;
-            this.lblHex.Location = new System.Drawing.Point(468, 145);
+            this.lblHex.Location = new System.Drawing.Point(472, 176);
             this.lblHex.Name = "lblHex";
             this.lblHex.Size = new System.Drawing.Size(29, 13);
             this.lblHex.TabIndex = 26;
@@ -146,7 +153,7 @@
             // 
             // nudKey
             // 
-            this.nudKey.Location = new System.Drawing.Point(524, 109);
+            this.nudKey.Location = new System.Drawing.Point(528, 109);
             this.nudKey.Name = "nudKey";
             this.nudKey.Size = new System.Drawing.Size(48, 20);
             this.nudKey.TabIndex = 23;
@@ -160,7 +167,7 @@
             // 
             // nudYellow
             // 
-            this.nudYellow.Location = new System.Drawing.Point(524, 77);
+            this.nudYellow.Location = new System.Drawing.Point(528, 77);
             this.nudYellow.Name = "nudYellow";
             this.nudYellow.Size = new System.Drawing.Size(48, 20);
             this.nudYellow.TabIndex = 18;
@@ -174,7 +181,7 @@
             // 
             // nudMagenta
             // 
-            this.nudMagenta.Location = new System.Drawing.Point(524, 45);
+            this.nudMagenta.Location = new System.Drawing.Point(528, 45);
             this.nudMagenta.Name = "nudMagenta";
             this.nudMagenta.Size = new System.Drawing.Size(48, 20);
             this.nudMagenta.TabIndex = 11;
@@ -188,7 +195,7 @@
             // 
             // nudCyan
             // 
-            this.nudCyan.Location = new System.Drawing.Point(524, 13);
+            this.nudCyan.Location = new System.Drawing.Point(528, 13);
             this.nudCyan.Name = "nudCyan";
             this.nudCyan.Size = new System.Drawing.Size(48, 20);
             this.nudCyan.TabIndex = 6;
@@ -203,7 +210,7 @@
             // lblKey
             // 
             this.lblKey.AutoSize = true;
-            this.lblKey.Location = new System.Drawing.Point(468, 113);
+            this.lblKey.Location = new System.Drawing.Point(472, 113);
             this.lblKey.Name = "lblKey";
             this.lblKey.Size = new System.Drawing.Size(28, 13);
             this.lblKey.TabIndex = 22;
@@ -212,7 +219,7 @@
             // lblYellow
             // 
             this.lblYellow.AutoSize = true;
-            this.lblYellow.Location = new System.Drawing.Point(468, 81);
+            this.lblYellow.Location = new System.Drawing.Point(472, 81);
             this.lblYellow.Name = "lblYellow";
             this.lblYellow.Size = new System.Drawing.Size(41, 13);
             this.lblYellow.TabIndex = 17;
@@ -221,7 +228,7 @@
             // lblMagenta
             // 
             this.lblMagenta.AutoSize = true;
-            this.lblMagenta.Location = new System.Drawing.Point(468, 49);
+            this.lblMagenta.Location = new System.Drawing.Point(472, 49);
             this.lblMagenta.Name = "lblMagenta";
             this.lblMagenta.Size = new System.Drawing.Size(52, 13);
             this.lblMagenta.TabIndex = 10;
@@ -230,7 +237,7 @@
             // lblCyan
             // 
             this.lblCyan.AutoSize = true;
-            this.lblCyan.Location = new System.Drawing.Point(468, 17);
+            this.lblCyan.Location = new System.Drawing.Point(472, 17);
             this.lblCyan.Name = "lblCyan";
             this.lblCyan.Size = new System.Drawing.Size(34, 13);
             this.lblCyan.TabIndex = 5;
@@ -240,7 +247,7 @@
             // 
             this.lblHue.AutoSize = true;
             this.lblHue.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblHue.Location = new System.Drawing.Point(436, 16);
+            this.lblHue.Location = new System.Drawing.Point(444, 17);
             this.lblHue.Name = "lblHue";
             this.lblHue.Size = new System.Drawing.Size(13, 13);
             this.lblHue.TabIndex = 3;
@@ -250,7 +257,7 @@
             // 
             this.lblBrightnessPerc.AutoSize = true;
             this.lblBrightnessPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblBrightnessPerc.Location = new System.Drawing.Point(436, 80);
+            this.lblBrightnessPerc.Location = new System.Drawing.Point(444, 81);
             this.lblBrightnessPerc.Name = "lblBrightnessPerc";
             this.lblBrightnessPerc.Size = new System.Drawing.Size(19, 13);
             this.lblBrightnessPerc.TabIndex = 15;
@@ -260,7 +267,7 @@
             // 
             this.lblSaturationPerc.AutoSize = true;
             this.lblSaturationPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblSaturationPerc.Location = new System.Drawing.Point(436, 48);
+            this.lblSaturationPerc.Location = new System.Drawing.Point(444, 49);
             this.lblSaturationPerc.Name = "lblSaturationPerc";
             this.lblSaturationPerc.Size = new System.Drawing.Size(19, 13);
             this.lblSaturationPerc.TabIndex = 9;
@@ -268,7 +275,7 @@
             // 
             // nudBlue
             // 
-            this.nudBlue.Location = new System.Drawing.Point(384, 173);
+            this.nudBlue.Location = new System.Drawing.Point(392, 173);
             this.nudBlue.Maximum = new decimal(new int[] {
             255,
             0,
@@ -287,7 +294,7 @@
             // 
             // nudGreen
             // 
-            this.nudGreen.Location = new System.Drawing.Point(384, 141);
+            this.nudGreen.Location = new System.Drawing.Point(392, 141);
             this.nudGreen.Maximum = new decimal(new int[] {
             255,
             0,
@@ -306,7 +313,7 @@
             // 
             // nudRed
             // 
-            this.nudRed.Location = new System.Drawing.Point(384, 109);
+            this.nudRed.Location = new System.Drawing.Point(392, 109);
             this.nudRed.Maximum = new decimal(new int[] {
             255,
             0,
@@ -325,7 +332,7 @@
             // 
             // nudBrightness
             // 
-            this.nudBrightness.Location = new System.Drawing.Point(384, 77);
+            this.nudBrightness.Location = new System.Drawing.Point(392, 77);
             this.nudBrightness.Name = "nudBrightness";
             this.nudBrightness.Size = new System.Drawing.Size(48, 20);
             this.nudBrightness.TabIndex = 14;
@@ -339,7 +346,7 @@
             // 
             // nudSaturation
             // 
-            this.nudSaturation.Location = new System.Drawing.Point(384, 45);
+            this.nudSaturation.Location = new System.Drawing.Point(392, 45);
             this.nudSaturation.Name = "nudSaturation";
             this.nudSaturation.Size = new System.Drawing.Size(48, 20);
             this.nudSaturation.TabIndex = 8;
@@ -353,7 +360,7 @@
             // 
             // nudHue
             // 
-            this.nudHue.Location = new System.Drawing.Point(384, 13);
+            this.nudHue.Location = new System.Drawing.Point(392, 13);
             this.nudHue.Maximum = new decimal(new int[] {
             360,
             0,
@@ -372,7 +379,7 @@
             // 
             // rbBlue
             // 
-            this.rbBlue.Location = new System.Drawing.Point(304, 173);
+            this.rbBlue.Location = new System.Drawing.Point(312, 173);
             this.rbBlue.Name = "rbBlue";
             this.rbBlue.Size = new System.Drawing.Size(77, 20);
             this.rbBlue.TabIndex = 28;
@@ -382,7 +389,7 @@
             // 
             // rbGreen
             // 
-            this.rbGreen.Location = new System.Drawing.Point(304, 141);
+            this.rbGreen.Location = new System.Drawing.Point(312, 141);
             this.rbGreen.Name = "rbGreen";
             this.rbGreen.Size = new System.Drawing.Size(77, 20);
             this.rbGreen.TabIndex = 24;
@@ -392,7 +399,7 @@
             // 
             // rbRed
             // 
-            this.rbRed.Location = new System.Drawing.Point(304, 109);
+            this.rbRed.Location = new System.Drawing.Point(312, 109);
             this.rbRed.Name = "rbRed";
             this.rbRed.Size = new System.Drawing.Size(77, 20);
             this.rbRed.TabIndex = 19;
@@ -402,7 +409,7 @@
             // 
             // rbBrightness
             // 
-            this.rbBrightness.Location = new System.Drawing.Point(304, 77);
+            this.rbBrightness.Location = new System.Drawing.Point(312, 77);
             this.rbBrightness.Name = "rbBrightness";
             this.rbBrightness.Size = new System.Drawing.Size(77, 20);
             this.rbBrightness.TabIndex = 13;
@@ -412,7 +419,7 @@
             // 
             // rbSaturation
             // 
-            this.rbSaturation.Location = new System.Drawing.Point(304, 45);
+            this.rbSaturation.Location = new System.Drawing.Point(312, 45);
             this.rbSaturation.Name = "rbSaturation";
             this.rbSaturation.Size = new System.Drawing.Size(77, 20);
             this.rbSaturation.TabIndex = 7;
@@ -423,7 +430,7 @@
             // rbHue
             // 
             this.rbHue.Checked = true;
-            this.rbHue.Location = new System.Drawing.Point(304, 13);
+            this.rbHue.Location = new System.Drawing.Point(312, 13);
             this.rbHue.Name = "rbHue";
             this.rbHue.Size = new System.Drawing.Size(77, 20);
             this.rbHue.TabIndex = 1;
@@ -436,16 +443,16 @@
             // 
             this.lblColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblColorPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblColorPreview.Location = new System.Drawing.Point(344, 200);
+            this.lblColorPreview.Location = new System.Drawing.Point(352, 208);
             this.lblColorPreview.Name = "lblColorPreview";
-            this.lblColorPreview.Size = new System.Drawing.Size(64, 64);
+            this.lblColorPreview.Size = new System.Drawing.Size(88, 56);
             this.lblColorPreview.TabIndex = 34;
             this.lblColorPreview.Click += new System.EventHandler(this.lblColorPreview_Click);
             // 
             // lblDecimal
             // 
             this.lblDecimal.AutoSize = true;
-            this.lblDecimal.Location = new System.Drawing.Point(468, 177);
+            this.lblDecimal.Location = new System.Drawing.Point(472, 208);
             this.lblDecimal.Name = "lblDecimal";
             this.lblDecimal.Size = new System.Drawing.Size(48, 13);
             this.lblDecimal.TabIndex = 30;
@@ -453,9 +460,9 @@
             // 
             // txtDecimal
             // 
-            this.txtDecimal.Location = new System.Drawing.Point(524, 173);
+            this.txtDecimal.Location = new System.Drawing.Point(528, 204);
             this.txtDecimal.Name = "txtDecimal";
-            this.txtDecimal.Size = new System.Drawing.Size(64, 20);
+            this.txtDecimal.Size = new System.Drawing.Size(72, 20);
             this.txtDecimal.TabIndex = 31;
             this.txtDecimal.Text = "12345678";
             this.txtDecimal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -465,7 +472,7 @@
             // 
             this.lblCyanPerc.AutoSize = true;
             this.lblCyanPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblCyanPerc.Location = new System.Drawing.Point(576, 16);
+            this.lblCyanPerc.Location = new System.Drawing.Point(584, 17);
             this.lblCyanPerc.Name = "lblCyanPerc";
             this.lblCyanPerc.Size = new System.Drawing.Size(19, 13);
             this.lblCyanPerc.TabIndex = 4;
@@ -475,7 +482,7 @@
             // 
             this.lblMagentaPerc.AutoSize = true;
             this.lblMagentaPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblMagentaPerc.Location = new System.Drawing.Point(576, 48);
+            this.lblMagentaPerc.Location = new System.Drawing.Point(584, 49);
             this.lblMagentaPerc.Name = "lblMagentaPerc";
             this.lblMagentaPerc.Size = new System.Drawing.Size(19, 13);
             this.lblMagentaPerc.TabIndex = 12;
@@ -485,7 +492,7 @@
             // 
             this.lblYellowPerc.AutoSize = true;
             this.lblYellowPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblYellowPerc.Location = new System.Drawing.Point(576, 80);
+            this.lblYellowPerc.Location = new System.Drawing.Point(584, 81);
             this.lblYellowPerc.Name = "lblYellowPerc";
             this.lblYellowPerc.Size = new System.Drawing.Size(19, 13);
             this.lblYellowPerc.TabIndex = 16;
@@ -495,7 +502,7 @@
             // 
             this.lblKeyPerc.AutoSize = true;
             this.lblKeyPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblKeyPerc.Location = new System.Drawing.Point(576, 112);
+            this.lblKeyPerc.Location = new System.Drawing.Point(584, 113);
             this.lblKeyPerc.Name = "lblKeyPerc";
             this.lblKeyPerc.Size = new System.Drawing.Size(19, 13);
             this.lblKeyPerc.TabIndex = 21;
@@ -503,11 +510,11 @@
             // 
             // btnColorPicker
             // 
-            this.btnColorPicker.Location = new System.Drawing.Point(416, 232);
+            this.btnColorPicker.Location = new System.Drawing.Point(200, 5);
             this.btnColorPicker.Name = "btnColorPicker";
-            this.btnColorPicker.Size = new System.Drawing.Size(56, 32);
+            this.btnColorPicker.Size = new System.Drawing.Size(184, 24);
             this.btnColorPicker.TabIndex = 39;
-            this.btnColorPicker.Text = "Cursor";
+            this.btnColorPicker.Text = "Start screen color picker";
             this.btnColorPicker.UseVisualStyleBackColor = true;
             this.btnColorPicker.Click += new System.EventHandler(this.btnColorPicker_Click);
             // 
@@ -515,26 +522,10 @@
             // 
             this.colorTimer.Tick += new System.EventHandler(this.colorTimer_Tick);
             // 
-            // txtX
-            // 
-            this.txtX.Location = new System.Drawing.Point(456, 203);
-            this.txtX.Name = "txtX";
-            this.txtX.Size = new System.Drawing.Size(40, 20);
-            this.txtX.TabIndex = 36;
-            this.txtX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtY
-            // 
-            this.txtY.Location = new System.Drawing.Point(528, 203);
-            this.txtY.Name = "txtY";
-            this.txtY.Size = new System.Drawing.Size(40, 20);
-            this.txtY.TabIndex = 38;
-            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // lblX
             // 
             this.lblX.AutoSize = true;
-            this.lblX.Location = new System.Drawing.Point(432, 207);
+            this.lblX.Location = new System.Drawing.Point(8, 11);
             this.lblX.Name = "lblX";
             this.lblX.Size = new System.Drawing.Size(17, 13);
             this.lblX.TabIndex = 35;
@@ -543,11 +534,109 @@
             // lblY
             // 
             this.lblY.AutoSize = true;
-            this.lblY.Location = new System.Drawing.Point(504, 207);
+            this.lblY.Location = new System.Drawing.Point(104, 11);
             this.lblY.Name = "lblY";
             this.lblY.Size = new System.Drawing.Size(17, 13);
             this.lblY.TabIndex = 37;
             this.lblY.Text = "Y:";
+            // 
+            // nudAlpha
+            // 
+            this.nudAlpha.Location = new System.Drawing.Point(528, 141);
+            this.nudAlpha.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudAlpha.Name = "nudAlpha";
+            this.nudAlpha.Size = new System.Drawing.Size(48, 20);
+            this.nudAlpha.TabIndex = 43;
+            this.nudAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudAlpha.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // lblAlpha
+            // 
+            this.lblAlpha.AutoSize = true;
+            this.lblAlpha.Location = new System.Drawing.Point(472, 145);
+            this.lblAlpha.Name = "lblAlpha";
+            this.lblAlpha.Size = new System.Drawing.Size(37, 13);
+            this.lblAlpha.TabIndex = 44;
+            this.lblAlpha.Text = "Alpha:";
+            // 
+            // nudX
+            // 
+            this.nudX.Location = new System.Drawing.Point(128, 7);
+            this.nudX.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.nudX.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.nudX.Name = "nudX";
+            this.nudX.Size = new System.Drawing.Size(64, 20);
+            this.nudX.TabIndex = 45;
+            this.nudX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudX.Value = new decimal(new int[] {
+            1680,
+            0,
+            0,
+            0});
+            // 
+            // nudY
+            // 
+            this.nudY.Location = new System.Drawing.Point(32, 7);
+            this.nudY.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.nudY.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.nudY.Name = "nudY";
+            this.nudY.Size = new System.Drawing.Size(64, 20);
+            this.nudY.TabIndex = 46;
+            this.nudY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudY.Value = new decimal(new int[] {
+            1050,
+            0,
+            0,
+            0});
+            // 
+            // lblScreenColorPickerTip
+            // 
+            this.lblScreenColorPickerTip.AutoSize = true;
+            this.lblScreenColorPickerTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblScreenColorPickerTip.Location = new System.Drawing.Point(392, 1);
+            this.lblScreenColorPickerTip.Name = "lblScreenColorPickerTip";
+            this.lblScreenColorPickerTip.Size = new System.Drawing.Size(208, 32);
+            this.lblScreenColorPickerTip.TabIndex = 47;
+            this.lblScreenColorPickerTip.Text = "Press Ctrl when this window active\r\nto stop screen color picker.";
+            this.lblScreenColorPickerTip.Visible = false;
+            // 
+            // pScreenColorPicker
+            // 
+            this.pScreenColorPicker.Controls.Add(this.lblScreenColorPickerTip);
+            this.pScreenColorPicker.Controls.Add(this.btnColorPicker);
+            this.pScreenColorPicker.Controls.Add(this.nudY);
+            this.pScreenColorPicker.Controls.Add(this.lblY);
+            this.pScreenColorPicker.Controls.Add(this.nudX);
+            this.pScreenColorPicker.Controls.Add(this.lblX);
+            this.pScreenColorPicker.Location = new System.Drawing.Point(0, 272);
+            this.pScreenColorPicker.Name = "pScreenColorPicker";
+            this.pScreenColorPicker.Size = new System.Drawing.Size(608, 38);
+            this.pScreenColorPicker.TabIndex = 48;
+            this.pScreenColorPicker.Visible = false;
             // 
             // colorPicker
             // 
@@ -559,27 +648,15 @@
             this.colorPicker.TabIndex = 0;
             this.colorPicker.ColorChanged += new HelpersLib.ColorEventHandler(this.colorPicker_ColorChanged);
             // 
-            // btnUpdateColor
-            // 
-            this.btnUpdateColor.Location = new System.Drawing.Point(576, 202);
-            this.btnUpdateColor.Name = "btnUpdateColor";
-            this.btnUpdateColor.Size = new System.Drawing.Size(24, 23);
-            this.btnUpdateColor.TabIndex = 42;
-            this.btnUpdateColor.Text = "U";
-            this.btnUpdateColor.UseVisualStyleBackColor = true;
-            this.btnUpdateColor.Click += new System.EventHandler(this.btnUpdateColor_Click);
-            // 
             // DialogColor
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(608, 274);
-            this.Controls.Add(this.btnUpdateColor);
-            this.Controls.Add(this.lblY);
-            this.Controls.Add(this.lblX);
-            this.Controls.Add(this.txtY);
-            this.Controls.Add(this.txtX);
-            this.Controls.Add(this.btnColorPicker);
+            this.ClientSize = new System.Drawing.Size(609, 272);
+            this.Controls.Add(this.pScreenColorPicker);
+            this.Controls.Add(this.lblAlpha);
+            this.Controls.Add(this.nudAlpha);
             this.Controls.Add(this.lblKeyPerc);
             this.Controls.Add(this.lblYellowPerc);
             this.Controls.Add(this.lblMagentaPerc);
@@ -618,15 +695,12 @@
             this.Controls.Add(this.rbHue);
             this.Controls.Add(this.lblColorPreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.HelpButton = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Screen color picker (Press Ctrl for pause or resume)";
+            this.Text = "Color picker";
             this.TopMost = true;
-            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.DialogColor_HelpButtonClicked);
             this.Load += new System.EventHandler(this.DialogColor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorDialog_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).EndInit();
@@ -639,6 +713,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaturation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudY)).EndInit();
+            this.pScreenColorPicker.ResumeLayout(false);
+            this.pScreenColorPicker.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -685,10 +764,13 @@
         private System.Windows.Forms.Label lblKeyPerc;
         private System.Windows.Forms.Button btnColorPicker;
         private System.Windows.Forms.Timer colorTimer;
-        private System.Windows.Forms.TextBox txtX;
-        private System.Windows.Forms.TextBox txtY;
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Label lblY;
-        private System.Windows.Forms.Button btnUpdateColor;
+        private System.Windows.Forms.NumericUpDown nudAlpha;
+        private System.Windows.Forms.Label lblAlpha;
+        private System.Windows.Forms.NumericUpDown nudX;
+        private System.Windows.Forms.NumericUpDown nudY;
+        private System.Windows.Forms.Label lblScreenColorPickerTip;
+        private System.Windows.Forms.Panel pScreenColorPicker;
     }
 }
