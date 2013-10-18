@@ -391,7 +391,7 @@
             // lblWatermarkImageScale
             // 
             this.lblWatermarkImageScale.AutoSize = true;
-            this.lblWatermarkImageScale.Location = new System.Drawing.Point(16, 84);
+            this.lblWatermarkImageScale.Location = new System.Drawing.Point(16, 56);
             this.lblWatermarkImageScale.Name = "lblWatermarkImageScale";
             this.lblWatermarkImageScale.Size = new System.Drawing.Size(117, 13);
             this.lblWatermarkImageScale.TabIndex = 3;
@@ -404,7 +404,7 @@
             0,
             0,
             0});
-            this.nudWatermarkImageScale.Location = new System.Drawing.Point(136, 80);
+            this.nudWatermarkImageScale.Location = new System.Drawing.Point(136, 52);
             this.nudWatermarkImageScale.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -419,7 +419,7 @@
             // cbWatermarkUseBorder
             // 
             this.cbWatermarkUseBorder.AutoSize = true;
-            this.cbWatermarkUseBorder.Location = new System.Drawing.Point(18, 56);
+            this.cbWatermarkUseBorder.Location = new System.Drawing.Point(18, 80);
             this.cbWatermarkUseBorder.Name = "cbWatermarkUseBorder";
             this.cbWatermarkUseBorder.Size = new System.Drawing.Size(78, 17);
             this.cbWatermarkUseBorder.TabIndex = 2;

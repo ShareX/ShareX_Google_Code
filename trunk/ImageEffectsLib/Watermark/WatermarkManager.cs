@@ -141,7 +141,7 @@ namespace ImageEffectsLib
 
             try
             {
-                if (img != null && !string.IsNullOrEmpty(imgPath) && File.Exists(imgPath))
+                if (img != null && !string.IsNullOrEmpty(imgPath) && File.Exists(imgPath) && Config.WatermarkImageScale > 0)
                 {
                     img2 = Helpers.GetImageFromFile(imgPath);
 
@@ -163,8 +163,8 @@ namespace ImageEffectsLib
 
                     using (Graphics g = Graphics.FromImage(img))
                     {
-                        g.SmoothingMode = SmoothingMode.HighQuality;
-                        g.DrawImage(img2, imgPos);
+                        g.SetHighQuality();
+                        g.DrawImage(img2, imgPos.X, imgPos.Y, img2.Width, img2.Height);
 
                         if (Config.WatermarkAddReflection)
                         {
@@ -195,13 +195,8 @@ namespace ImageEffectsLib
 
         private Image DrawWatermarkText(Image img, string drawText)
         {
-            if (!string.IsNullOrEmpty(drawText))
+            if (!string.IsNullOrEmpty(drawText) && Config.WatermarkFont.Size > 0)
             {
-                if (Config.WatermarkFont.Size == 0)
-                {
-                    ShowFontDialog(Config);
-                }
-
                 Font font = null;
                 Brush backgroundBrush = null;
 
@@ -254,7 +249,7 @@ namespace ImageEffectsLib
                         using (Graphics gImg = Graphics.FromImage(img))
                         {
                             gImg.SmoothingMode = SmoothingMode.HighQuality;
-                            gImg.DrawImage(bmp, labelPosition);
+                            gImg.DrawImage(bmp, labelPosition.X, labelPosition.Y, bmp.Width, bmp.Height);
 
                             if (Config.WatermarkAddReflection)
                             {
