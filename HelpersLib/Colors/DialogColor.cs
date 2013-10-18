@@ -91,21 +91,21 @@ namespace HelpersLib
             nudHue.Value = (decimal)Math.Round(color.HSB.Hue360);
             nudSaturation.Value = (decimal)Math.Round(color.HSB.Saturation100);
             nudBrightness.Value = (decimal)Math.Round(color.HSB.Brightness100);
-            nudRed.Value = color.RGB.Red;
-            nudGreen.Value = color.RGB.Green;
-            nudBlue.Value = color.RGB.Blue;
+            nudRed.Value = color.RGBA.Red;
+            nudGreen.Value = color.RGBA.Green;
+            nudBlue.Value = color.RGBA.Blue;
             nudCyan.Value = (decimal)Math.Round(color.CMYK.Cyan100);
             nudMagenta.Value = (decimal)Math.Round(color.CMYK.Magenta100);
             nudYellow.Value = (decimal)Math.Round(color.CMYK.Yellow100);
             nudKey.Value = (decimal)Math.Round(color.CMYK.Key100);
-            txtHex.Text = MyColors.ColorToHex(color);
-            txtDecimal.Text = MyColors.ColorToDecimal(color).ToString();
+            txtHex.Text = ColorHelpers.ColorToHex(color);
+            txtDecimal.Text = ColorHelpers.ColorToDecimal(color).ToString();
             dialogChanged = false;
         }
 
         private void DrawPreviewColors()
         {
-            Bitmap bmp = new Bitmap(lblColorPreview.ClientSize.Width, lblColorPreview.ClientSize.Height);
+            Bitmap bmp = new Bitmap(pbColorPreview.ClientSize.Width, pbColorPreview.ClientSize.Height);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
@@ -127,8 +127,10 @@ namespace HelpersLib
                 }
             }
 
-            if (lblColorPreview.Image != null) lblColorPreview.Image.Dispose();
-            lblColorPreview.Image = bmp;
+            using (bmp)
+            {
+                pbColorPreview.LoadImage(bmp);
+            }
         }
 
         private void UpdateColor(int x, int y)
@@ -267,7 +269,7 @@ namespace HelpersLib
         {
             if (!dialogChanged)
             {
-                colorPicker.Color = new RGB((int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value).ToColor();
+                colorPicker.Color = new RGBA((int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value, (int)nudAlpha.Value).ToColor();
             }
         }
 
@@ -275,7 +277,7 @@ namespace HelpersLib
         {
             if (!dialogChanged)
             {
-                colorPicker.Color = new HSB((int)nudHue.Value, (int)nudSaturation.Value, (int)nudBrightness.Value).ToColor();
+                colorPicker.Color = new HSB((int)nudHue.Value, (int)nudSaturation.Value, (int)nudBrightness.Value, (int)nudAlpha.Value).ToColor();
             }
         }
 
@@ -283,7 +285,7 @@ namespace HelpersLib
         {
             if (!dialogChanged)
             {
-                colorPicker.Color = new CMYK((int)nudCyan.Value, (int)nudMagenta.Value, (int)nudYellow.Value, (int)nudKey.Value).ToColor();
+                colorPicker.Color = new CMYK((int)nudCyan.Value, (int)nudMagenta.Value, (int)nudYellow.Value, (int)nudKey.Value, (int)nudAlpha.Value).ToColor();
             }
         }
 
@@ -293,7 +295,7 @@ namespace HelpersLib
             {
                 if (!dialogChanged)
                 {
-                    colorPicker.Color = MyColors.HexToColor(txtHex.Text);
+                    colorPicker.Color = ColorHelpers.HexToColor(txtHex.Text);
                 }
             }
             catch { }
@@ -305,7 +307,7 @@ namespace HelpersLib
             {
                 if (!dialogChanged)
                 {
-                    colorPicker.Color = MyColors.DecimalToColor(Convert.ToInt32(txtDecimal.Text));
+                    colorPicker.Color = ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text));
                 }
             }
             catch { }

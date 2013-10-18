@@ -43,7 +43,7 @@ namespace ImageEffectsLib
 
         public GradientStop(string color, string offset)
         {
-            Color = MyColors.ParseColor(color);
+            Color = ColorHelpers.ParseColor(color);
 
             if (Color == null)
             {

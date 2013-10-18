@@ -167,7 +167,7 @@ namespace ImageEffectsLib
             {
                 if (!string.IsNullOrEmpty(txtColor.Text))
                 {
-                    colorPicker.SetCurrentColor(MyColors.ParseColor(txtColor.Text));
+                    colorPicker.SetCurrentColor(ColorHelpers.ParseColor(txtColor.Text));
                 }
 
                 if (colorPicker.ShowDialog() == DialogResult.OK)

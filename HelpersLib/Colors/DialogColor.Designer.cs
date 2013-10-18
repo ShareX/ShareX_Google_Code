@@ -58,7 +58,6 @@
             this.rbBrightness = new System.Windows.Forms.RadioButton();
             this.rbSaturation = new System.Windows.Forms.RadioButton();
             this.rbHue = new System.Windows.Forms.RadioButton();
-            this.lblColorPreview = new System.Windows.Forms.Label();
             this.lblDecimal = new System.Windows.Forms.Label();
             this.txtDecimal = new System.Windows.Forms.TextBox();
             this.lblCyanPerc = new System.Windows.Forms.Label();
@@ -76,6 +75,7 @@
             this.lblScreenColorPickerTip = new System.Windows.Forms.Label();
             this.pScreenColorPicker = new System.Windows.Forms.Panel();
             this.colorPicker = new HelpersLib.ColorPicker();
+            this.pbColorPreview = new HelpersLib.MyPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagenta)).BeginInit();
@@ -439,16 +439,6 @@
             this.rbHue.UseVisualStyleBackColor = true;
             this.rbHue.CheckedChanged += new System.EventHandler(this.rbHue_CheckedChanged);
             // 
-            // lblColorPreview
-            // 
-            this.lblColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblColorPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblColorPreview.Location = new System.Drawing.Point(352, 208);
-            this.lblColorPreview.Name = "lblColorPreview";
-            this.lblColorPreview.Size = new System.Drawing.Size(88, 56);
-            this.lblColorPreview.TabIndex = 34;
-            this.lblColorPreview.Click += new System.EventHandler(this.lblColorPreview_Click);
-            // 
             // lblDecimal
             // 
             this.lblDecimal.AutoSize = true;
@@ -557,6 +547,7 @@
             0,
             0,
             0});
+            this.nudAlpha.ValueChanged += new System.EventHandler(this.RGB_ValueChanged);
             // 
             // lblAlpha
             // 
@@ -648,12 +639,22 @@
             this.colorPicker.TabIndex = 0;
             this.colorPicker.ColorChanged += new HelpersLib.ColorEventHandler(this.colorPicker_ColorChanged);
             // 
+            // pbColorPreview
+            // 
+            this.pbColorPreview.BackColor = System.Drawing.Color.White;
+            this.pbColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbColorPreview.DrawCheckeredBackground = true;
+            this.pbColorPreview.Location = new System.Drawing.Point(360, 208);
+            this.pbColorPreview.Name = "pbColorPreview";
+            this.pbColorPreview.Size = new System.Drawing.Size(80, 56);
+            this.pbColorPreview.TabIndex = 49;
+            // 
             // DialogColor
             // 
-            this.AcceptButton = this.btnOK;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(609, 272);
+            this.ClientSize = new System.Drawing.Size(609, 273);
+            this.Controls.Add(this.pbColorPreview);
             this.Controls.Add(this.pScreenColorPicker);
             this.Controls.Add(this.lblAlpha);
             this.Controls.Add(this.nudAlpha);
@@ -693,13 +694,12 @@
             this.Controls.Add(this.rbBrightness);
             this.Controls.Add(this.rbSaturation);
             this.Controls.Add(this.rbHue);
-            this.Controls.Add(this.lblColorPreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Color picker";
+            this.Text = "Color picker - You can double click any field to copy its value";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.DialogColor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorDialog_KeyDown);
@@ -754,7 +754,6 @@
         private System.Windows.Forms.RadioButton rbBrightness;
         private System.Windows.Forms.RadioButton rbSaturation;
         private System.Windows.Forms.RadioButton rbHue;
-        private System.Windows.Forms.Label lblColorPreview;
         private ColorPicker colorPicker;
         private System.Windows.Forms.Label lblDecimal;
         private System.Windows.Forms.TextBox txtDecimal;
@@ -772,5 +771,6 @@
         private System.Windows.Forms.NumericUpDown nudY;
         private System.Windows.Forms.Label lblScreenColorPickerTip;
         private System.Windows.Forms.Panel pScreenColorPicker;
+        private MyPictureBox pbColorPreview;
     }
 }

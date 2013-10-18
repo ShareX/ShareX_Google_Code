@@ -383,12 +383,10 @@ namespace HelpersLib
             Bitmap bmp = new Bitmap(width, height);
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (Image checker = CreateCheckers(8, Color.LightGray, Color.White))
+            using (Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile))
             {
                 g.SetHighQuality();
-
-                Image checker = CreateCheckers(8, Color.LightGray, Color.White);
-                Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
-
                 g.FillRectangle(checkerBrush, new Rectangle(0, 0, bmp.Width, bmp.Height));
             }
 
@@ -397,18 +395,16 @@ namespace HelpersLib
 
         public static Image DrawCheckers(Image img)
         {
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
-            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+            Bitmap bmp = img.CreateEmptyBitmap();
 
             using (Graphics g = Graphics.FromImage(bmp))
+            using (Image checker = CreateCheckers(8, Color.LightGray, Color.White))
+            using (Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile))
+            using (img)
             {
                 g.SetHighQuality();
-
-                Image checker = CreateCheckers(8, Color.LightGray, Color.White);
-                Brush checkerBrush = new TextureBrush(checker, WrapMode.Tile);
-
                 g.FillRectangle(checkerBrush, new Rectangle(0, 0, bmp.Width, bmp.Height));
-                g.DrawImage(img, 0, 0);
+                g.DrawImage(img, 0, 0, img.Width, img.Height);
             }
 
             return bmp;
@@ -424,7 +420,6 @@ namespace HelpersLib
             {
                 g.FillRectangle(brush1, 0, 0, size, size);
                 g.FillRectangle(brush1, size, size, size, size);
-
                 g.FillRectangle(brush2, size, 0, size, size);
                 g.FillRectangle(brush2, 0, size, size, size);
             }

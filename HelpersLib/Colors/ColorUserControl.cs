@@ -175,9 +175,24 @@ namespace HelpersLib
         private void EventPaint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            if (!mouseDown) DrawColors();
+
+            if (!mouseDown)
+            {
+                if (SelectedColor.IsTransparent)
+                {
+                    if (bmp != null) bmp.Dispose();
+                    bmp = (Bitmap)ImageHelpers.CreateCheckers(width, height);
+                }
+
+                DrawColors();
+            }
+
             g.DrawImage(bmp, ClientRectangle);
-            if (drawCrosshair) DrawCrosshair(g);
+
+            if (drawCrosshair)
+            {
+                DrawCrosshair(g);
+            }
         }
 
         private void MouseMoveTimer_Tick(object sender, EventArgs e)
@@ -252,16 +267,16 @@ namespace HelpersLib
                     lastPos.Y = Round((height - 1) * (1.0 - SelectedColor.HSB.Saturation));
                     break;
                 case DrawStyle.Red:
-                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Blue / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Green / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGBA.Blue / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGBA.Green / 255));
                     break;
                 case DrawStyle.Green:
-                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Blue / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Red / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGBA.Blue / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGBA.Red / 255));
                     break;
                 case DrawStyle.Blue:
-                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGB.Red / 255);
-                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGB.Green / 255));
+                    lastPos.X = Round((width - 1) * (double)SelectedColor.RGBA.Red / 255);
+                    lastPos.Y = Round((height - 1) * (1.0 - (double)SelectedColor.RGBA.Green / 255));
                     break;
             }
 
@@ -288,18 +303,18 @@ namespace HelpersLib
                     mSetColor.HSBUpdate();
                     break;
                 case DrawStyle.Red:
-                    mSetColor.RGB.Blue = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGB.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    mSetColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
+                    mSetColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
                     mSetColor.RGBUpdate();
                     break;
                 case DrawStyle.Green:
-                    mSetColor.RGB.Blue = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGB.Red = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    mSetColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
+                    mSetColor.RGBA.Red = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
                     mSetColor.RGBUpdate();
                     break;
                 case DrawStyle.Blue:
-                    mSetColor.RGB.Red = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGB.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    mSetColor.RGBA.Red = Round(255 * (double)lastPos.X / (width - 1));
+                    mSetColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
                     mSetColor.RGBUpdate();
                     break;
             }
@@ -319,13 +334,13 @@ namespace HelpersLib
                     lastPos.Y = (height - 1) - Round((height - 1) * SelectedColor.HSB.Brightness);
                     break;
                 case DrawStyle.Red:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Red / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGBA.Red / 255);
                     break;
                 case DrawStyle.Green:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Green / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGBA.Green / 255);
                     break;
                 case DrawStyle.Blue:
-                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGB.Blue / 255);
+                    lastPos.Y = (height - 1) - Round((height - 1) * (double)SelectedColor.RGBA.Blue / 255);
                     break;
             }
             lastPos = GetPoint(lastPos);
@@ -348,15 +363,15 @@ namespace HelpersLib
                     mSetColor.HSBUpdate();
                     break;
                 case DrawStyle.Red:
-                    mSetColor.RGB.Red = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    mSetColor.RGBA.Red = 255 - Round(255 * (double)lastPos.Y / (height - 1));
                     mSetColor.RGBUpdate();
                     break;
                 case DrawStyle.Green:
-                    mSetColor.RGB.Green = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    mSetColor.RGBA.Green = 255 - Round(255 * (double)lastPos.Y / (height - 1));
                     mSetColor.RGBUpdate();
                     break;
                 case DrawStyle.Blue:
-                    mSetColor.RGB.Blue = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    mSetColor.RGBA.Blue = 255 - Round(255 * (double)lastPos.Y / (height - 1));
                     mSetColor.RGBUpdate();
                     break;
             }
@@ -391,11 +406,6 @@ namespace HelpersLib
             {
                 GetSliderColor();
             }
-        }
-
-        protected MyColor GetPointColor(int x, int y)
-        {
-            return new MyColor(bmp.GetPixel(x, y));
         }
 
         protected Point GetPoint(Point point)
