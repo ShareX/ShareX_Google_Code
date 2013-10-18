@@ -61,22 +61,12 @@ namespace HelpersLib
     {
         public static double CheckColor(double number)
         {
-            return GetBetween(number, 0, 1);
+            return number.Between(0, 1);
         }
 
         public static int CheckColor(int number)
         {
-            return GetBetween(number, 0, 255);
-        }
-
-        public static int GetBetween(int number, int min, int max)
-        {
-            return Math.Max(Math.Min(number, max), min);
-        }
-
-        public static double GetBetween(double value, double min, double max)
-        {
-            return Math.Max(Math.Min(value, max), min);
+            return number.Between(0, 255);
         }
 
         public static int Round(double val)
@@ -103,6 +93,7 @@ namespace HelpersLib
             int g = 0;
             int b = 0;
             int count = 0;
+
             foreach (Color color in colors)
             {
                 if (!color.Equals(Color.Empty))
@@ -114,10 +105,12 @@ namespace HelpersLib
                     count++;
                 }
             }
+
             if (count == 0)
             {
                 return Color.Empty;
             }
+
             return Color.FromArgb(a / count, r / count, g / count, b / count);
         }
     }

@@ -34,12 +34,10 @@ namespace HelpersLib
             Initialize();
         }
 
-        #region Protected Override Methods
-
         protected override void Initialize()
         {
-            this.Name = "ColorSlider";
-            this.Size = new Size(30, 260);
+            Name = "ColorSlider";
+            Size = new Size(30, 260);
             base.Initialize();
         }
 
@@ -47,90 +45,123 @@ namespace HelpersLib
         {
             int rectOffset = 3;
             int rectSize = 4;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(rectOffset, lastPos.Y - rectSize,
-                width - rectOffset * 2, rectSize * 2 + 1));
-            g.DrawRectangle(new Pen(Color.White), new Rectangle(rectOffset + 1, lastPos.Y - rectSize + 1,
-                width - rectOffset * 2 - 2, rectSize * 2 - 1));
+
+            g.DrawRectangle(Pens.Black, new Rectangle(rectOffset, lastPos.Y - rectSize, width - rectOffset * 2, rectSize * 2 + 1));
+            g.DrawRectangle(Pens.White, new Rectangle(rectOffset + 1, lastPos.Y - rectSize + 1, width - rectOffset * 2 - 2, rectSize * 2 - 1));
         }
 
-        // Hue = 360 -> 0
+        // Y = Hue 360 -> 0
         protected override void DrawHue()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            HSB color = new HSB(0.0, 1.0, 1.0);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Hue = 1.0 - (double)i / (height - 1);
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                HSB color = new HSB(0.0, 1.0, 1.0);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Hue = 1.0 - (double)y / (height - 1);
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
 
-        // Saturation = 100 -> 0
+        // Y = Saturation 100 -> 0
         protected override void DrawSaturation()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            HSB color = new HSB(SetColor.HSB.Hue, 0.0, SetColor.HSB.Brightness);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Saturation = 1.0 - (double)i / (height - 1);
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                HSB color = new HSB(SetColor.HSB.Hue, 0.0, SetColor.HSB.Brightness);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Saturation = 1.0 - (double)y / (height - 1);
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
 
-        // Brightness = 100 -> 0
+        // Y = Brightness 100 -> 0
         protected override void DrawBrightness()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            HSB color = new HSB(SetColor.HSB.Hue, SetColor.HSB.Saturation, 0.0);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Brightness = 1.0 - (double)i / (height - 1);
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                HSB color = new HSB(SetColor.HSB.Hue, SetColor.HSB.Saturation, 0.0);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Brightness = 1.0 - (double)y / (height - 1);
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
 
-        // Red = 255 -> 0
+        // Y = Red 255 -> 0
         protected override void DrawRed()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            RGB color = new RGB(0, SetColor.RGB.Green, SetColor.RGB.Blue);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Red = 255 - Round(255 * (double)i / (height - 1));
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                RGB color = new RGB(0, SetColor.RGB.Green, SetColor.RGB.Blue);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Red = 255 - Round(255 * (double)y / (height - 1));
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
 
-        // Green = 255 -> 0
+        // Y = Green 255 -> 0
         protected override void DrawGreen()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            RGB color = new RGB(SetColor.RGB.Red, 0, SetColor.RGB.Blue);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Green = 255 - Round(255 * (double)i / (height - 1));
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                RGB color = new RGB(SetColor.RGB.Red, 0, SetColor.RGB.Blue);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Green = 255 - Round(255 * (double)y / (height - 1));
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
 
-        // Blue = 255 -> 0
+        // Y = Blue 255 -> 0
         protected override void DrawBlue()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            RGB color = new RGB(SetColor.RGB.Red, SetColor.RGB.Green, 0);
-
-            for (int i = 0; i < height; i++)
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                color.Blue = 255 - Round(255 * (double)i / (height - 1));
-                g.DrawLine(new Pen(color), 0, i, width, i);
+                RGB color = new RGB(SetColor.RGB.Red, SetColor.RGB.Green, 0);
+
+                for (int y = 0; y < height; y++)
+                {
+                    color.Blue = 255 - Round(255 * (double)y / (height - 1));
+
+                    using (Pen pen = new Pen(color))
+                    {
+                        g.DrawLine(pen, 0, y, width, y);
+                    }
+                }
             }
         }
-
-        #endregion Protected Override Methods
     }
 }

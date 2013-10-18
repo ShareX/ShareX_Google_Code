@@ -63,6 +63,13 @@ namespace HelpersLib
             return num;
         }
 
+        public static double Between(this double num, double min, double max)
+        {
+            if (num <= min) return min;
+            if (num >= max) return max;
+            return num;
+        }
+
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             if (source == null) throw new ArgumentNullException("source");

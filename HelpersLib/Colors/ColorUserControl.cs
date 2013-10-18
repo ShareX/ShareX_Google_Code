@@ -25,13 +25,15 @@
 
 using HelpersLib.Properties;
 using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public class ColorUserControl : UserControl
+    public abstract class ColorUserControl : UserControl
     {
         #region Variables
 
@@ -96,30 +98,30 @@ namespace HelpersLib
 
         #region Component Designer generated code
 
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         protected virtual void Initialize()
         {
-            this.SuspendLayout();
+            SuspendLayout();
 
-            this.DoubleBuffered = true;
-            this.width = this.ClientRectangle.Width;
-            this.height = this.ClientRectangle.Height;
-            this.bmp = new Bitmap(width, height);
-            this.SetColor = Color.Red;
-            this.DrawStyle = DrawStyle.Hue;
+            DoubleBuffered = true;
+            width = this.ClientRectangle.Width;
+            height = this.ClientRectangle.Height;
+            bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+            SetColor = Color.Red;
+            DrawStyle = DrawStyle.Hue;
 
             mouseMoveTimer = new Timer();
             mouseMoveTimer.Interval = 10;
             mouseMoveTimer.Tick += new EventHandler(MouseMoveTimer_Tick);
 
-            this.ClientSizeChanged += new System.EventHandler(this.EventClientSizeChanged);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EventMouseDown);
-            this.MouseEnter += new EventHandler(this.EventMouseEnter);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.EventMouseUp);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.EventPaint);
+            ClientSizeChanged += new EventHandler(EventClientSizeChanged);
+            MouseDown += new MouseEventHandler(EventMouseDown);
+            MouseEnter += new EventHandler(EventMouseEnter);
+            MouseUp += new MouseEventHandler(EventMouseUp);
+            Paint += new PaintEventHandler(EventPaint);
 
-            this.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,6 +129,7 @@ namespace HelpersLib
             if (disposing && (components != null))
             {
                 components.Dispose();
+                if (bmp != null) bmp.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -137,9 +140,10 @@ namespace HelpersLib
 
         private void EventClientSizeChanged(object sender, EventArgs e)
         {
-            this.width = this.ClientRectangle.Width;
-            this.height = this.ClientRectangle.Height;
-            this.bmp = new Bitmap(width, height);
+            width = ClientRectangle.Width;
+            height = ClientRectangle.Height;
+            if (bmp != null) bmp.Dispose();
+            bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
             DrawColors();
         }
 
@@ -148,7 +152,6 @@ namespace HelpersLib
             drawCrosshair = true;
             mouseDown = true;
             mouseMoveTimer.Start();
-
             //EventMouseMove(this, e);
         }
 
@@ -171,9 +174,10 @@ namespace HelpersLib
 
         private void EventPaint(object sender, PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
             if (!mouseDown) DrawColors();
-            e.Graphics.DrawImage(bmp, this.ClientRectangle);
-            if (drawCrosshair) DrawCrosshair(e.Graphics);
+            g.DrawImage(bmp, ClientRectangle);
+            if (drawCrosshair) DrawCrosshair(g);
         }
 
         private void MouseMoveTimer_Tick(object sender, EventArgs e)
@@ -260,6 +264,7 @@ namespace HelpersLib
                     lastPos.Y = Round((height - 1) * (1.0 - (double)SetColor.RGB.Green / 255));
                     break;
             }
+
             lastPos = GetPoint(lastPos);
         }
 
@@ -357,15 +362,23 @@ namespace HelpersLib
             }
         }
 
+        protected abstract void DrawCrosshair(Graphics g);
+
+        protected abstract void DrawHue();
+
+        protected abstract void DrawSaturation();
+
+        protected abstract void DrawBrightness();
+
+        protected abstract void DrawRed();
+
+        protected abstract void DrawGreen();
+
+        protected abstract void DrawBlue();
+
         #endregion Protected Methods
 
         #region Protected Helpers
-
-        protected void DrawEllipse(Graphics g, int size, Color color)
-        {
-            g.DrawEllipse(new Pen(color), new Rectangle(new Point(lastPos.X - size, lastPos.Y - size),
-                new Size(size * 2, size * 2)));
-        }
 
         protected void GetPointColor(Point point)
         {
@@ -387,12 +400,7 @@ namespace HelpersLib
 
         protected Point GetPoint(Point point)
         {
-            return new Point(GetBetween(point.X, 0, width - 1), GetBetween(point.Y, 0, height - 1));
-        }
-
-        protected int GetBetween(int value, int min, int max)
-        {
-            return Math.Max(Math.Min(value, max), min);
+            return new Point(point.X.Between(0, width - 1), point.Y.Between(0, height - 1));
         }
 
         protected int Round(double val)
@@ -408,37 +416,5 @@ namespace HelpersLib
         }
 
         #endregion Protected Helpers
-
-        #region Protected Virtual Members
-
-        protected virtual void DrawCrosshair(Graphics g)
-        {
-        }
-
-        protected virtual void DrawHue()
-        {
-        }
-
-        protected virtual void DrawSaturation()
-        {
-        }
-
-        protected virtual void DrawBrightness()
-        {
-        }
-
-        protected virtual void DrawRed()
-        {
-        }
-
-        protected virtual void DrawGreen()
-        {
-        }
-
-        protected virtual void DrawBlue()
-        {
-        }
-
-        #endregion Protected Virtual Members
     }
 }
