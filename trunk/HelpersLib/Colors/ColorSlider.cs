@@ -55,7 +55,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB color = new HSB(0.0, 1.0, 1.0);
+                HSB color = new HSB(0.0, 1.0, 1.0, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -74,7 +74,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB color = new HSB(SelectedColor.HSB.Hue, 0.0, SelectedColor.HSB.Brightness);
+                HSB color = new HSB(SelectedColor.HSB.Hue, 0.0, SelectedColor.HSB.Brightness, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -93,7 +93,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB color = new HSB(SelectedColor.HSB.Hue, SelectedColor.HSB.Saturation, 0.0);
+                HSB color = new HSB(SelectedColor.HSB.Hue, SelectedColor.HSB.Saturation, 0.0, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -112,7 +112,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(0, SelectedColor.RGB.Green, SelectedColor.RGB.Blue);
+                RGBA color = new RGBA(0, SelectedColor.RGBA.Green, SelectedColor.RGBA.Blue, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -131,7 +131,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(SelectedColor.RGB.Red, 0, SelectedColor.RGB.Blue);
+                RGBA color = new RGBA(SelectedColor.RGBA.Red, 0, SelectedColor.RGBA.Blue, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -150,7 +150,7 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB color = new RGB(SelectedColor.RGB.Red, SelectedColor.RGB.Green, 0);
+                RGBA color = new RGBA(SelectedColor.RGBA.Red, SelectedColor.RGBA.Green, 0, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {

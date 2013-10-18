@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace HelpersLib
 {
@@ -50,11 +51,6 @@ namespace HelpersLib
         public MyColor Color;
         public DrawStyle DrawStyle;
         public bool UpdateControl;
-    }
-
-    public enum DrawStyle
-    {
-        Hue, Saturation, Brightness, Red, Green, Blue
     }
 
     public static class ColorHelpers
@@ -112,6 +108,132 @@ namespace HelpersLib
             }
 
             return Color.FromArgb(a / count, r / count, g / count, b / count);
+        }
+
+        public static Color ParseColor(string color)
+        {
+            if (color.StartsWith("#"))
+            {
+                return ColorHelpers.HexToColor(color);
+            }
+            else if (color.Contains(','))
+            {
+                int[] colors = color.Split(',').Select(x => int.Parse(x)).ToArray();
+
+                if (colors.Length == 3)
+                {
+                    return Color.FromArgb(colors[0], colors[1], colors[2]);
+                }
+                if (colors.Length == 4)
+                {
+                    return Color.FromArgb(colors[0], colors[1], colors[2], colors[3]);
+                }
+            }
+
+            return Color.FromName(color);
+        }
+
+        public static string ColorToHex(Color color)
+        {
+            return string.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+        }
+
+        public static int ColorToDecimal(Color color)
+        {
+            return HexToDecimal(ColorToHex(color));
+        }
+
+        public static Color HexToColor(string hex)
+        {
+            if (hex.StartsWith("#"))
+            {
+                hex = hex.Substring(1);
+            }
+
+            string a = string.Empty;
+
+            if (hex.Length == 8)
+            {
+                a = hex.Substring(0, 2);
+                hex = hex.Substring(2);
+            }
+
+            string r = hex.Substring(0, 2);
+            string g = hex.Substring(2, 2);
+            string b = hex.Substring(4, 2);
+
+            if (string.IsNullOrEmpty(a))
+            {
+                return Color.FromArgb(HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
+            }
+            else
+            {
+                return Color.FromArgb(HexToDecimal(a), HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
+            }
+        }
+
+        public static int HexToDecimal(string hex)
+        {
+            //return int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+            return Convert.ToInt32(hex, 16);
+        }
+
+        public static string DecimalToHex(int dec)
+        {
+            return dec.ToString("X6");
+        }
+
+        public static Color DecimalToColor(int dec)
+        {
+            return Color.FromArgb(dec & 0xFF, (dec & 0xff00) / 256, dec / 65536);
+        }
+
+        public static Color SetHue(Color c, double Hue)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Hue = Hue;
+            return hsb.ToColor();
+        }
+
+        public static Color ModifyHue(Color c, double Hue)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Hue *= Hue;
+            return hsb.ToColor();
+        }
+
+        public static Color SetSaturation(Color c, double Saturation)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Saturation = Saturation;
+            return hsb.ToColor();
+        }
+
+        public static Color ModifySaturation(Color c, double Saturation)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Saturation *= Saturation;
+            return hsb.ToColor();
+        }
+
+        public static Color SetBrightness(Color c, double brightness)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Brightness = brightness;
+            return hsb.ToColor();
+        }
+
+        public static Color ModifyBrightness(Color c, double brightness)
+        {
+            HSB hsb = RGBA.ToHSB(c);
+            hsb.Brightness *= brightness;
+            return hsb.ToColor();
+        }
+
+        public static Color RandomColor()
+        {
+            Random rand = new Random();
+            return Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
         }
     }
 }

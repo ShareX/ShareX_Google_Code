@@ -128,7 +128,6 @@ namespace ImageEffectsLib
                 using (Bitmap bmp = new Bitmap(pbPreview.ClientSize.Width, pbPreview.ClientSize.Height))
                 {
                     new WatermarkManager(Config).ApplyWatermark(bmp);
-                    if (pbPreview.Image != null) pbPreview.Image.Dispose();
                     pbPreview.LoadImage(bmp);
                 }
             }

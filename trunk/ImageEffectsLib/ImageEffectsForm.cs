@@ -85,7 +85,12 @@ namespace ImageEffectsLib
         private void UpdatePreview()
         {
             Stopwatch timer = Stopwatch.StartNew();
-            pbResult.LoadImage(ExportImage());
+
+            using (Image preview = ApplyEffects())
+            {
+                pbResult.LoadImage(preview);
+            }
+
             lblStatus.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
@@ -94,7 +99,7 @@ namespace ImageEffectsLib
             return lvEffects.Items.Cast<ListViewItem>().Where(x => x != null && x.Tag is ImageEffect).Select(x => (ImageEffect)x.Tag).ToList();
         }
 
-        private Image ExportImage()
+        private Image ApplyEffects()
         {
             List<ImageEffect> imageEffects = GetImageEffects();
             return ImageEffectManager.ApplyEffects(DefaultImage, imageEffects);

@@ -50,9 +50,12 @@ namespace HelpersLib
 
             if (Clipboard.ContainsImage())
             {
-                Image img = Clipboard.GetImage();
-                pbClipboard.LoadImage(img);
-                lblQuestion.Text = string.Format("Clipboard content: Image (Size: {0}x{1})", img.Width, img.Height);
+                using (Image img = Clipboard.GetImage())
+                {
+                    pbClipboard.LoadImage(img);
+                    lblQuestion.Text = string.Format("Clipboard content: Image (Size: {0}x{1})", img.Width, img.Height);
+                }
+
                 pbClipboard.Visible = true;
             }
             else if (Clipboard.ContainsText())

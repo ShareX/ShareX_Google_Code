@@ -33,15 +33,23 @@ namespace HelpersLib
 
     public struct MyColor
     {
-        public RGB RGB;
+        public RGBA RGBA;
         public HSB HSB;
         public CMYK CMYK;
 
+        public bool IsTransparent
+        {
+            get
+            {
+                return RGBA.Alpha < 255;
+            }
+        }
+
         public MyColor(Color color)
         {
-            this.RGB = color;
-            this.HSB = color;
-            this.CMYK = color;
+            RGBA = color;
+            HSB = color;
+            CMYK = color;
         }
 
         public static implicit operator MyColor(Color color)
@@ -51,12 +59,12 @@ namespace HelpersLib
 
         public static implicit operator Color(MyColor color)
         {
-            return color.RGB;
+            return color.RGBA;
         }
 
         public static bool operator ==(MyColor left, MyColor right)
         {
-            return (left.RGB == right.RGB) && (left.HSB == right.HSB) && (left.CMYK == right.CMYK);
+            return (left.RGBA == right.RGBA) && (left.HSB == right.HSB) && (left.CMYK == right.CMYK);
         }
 
         public static bool operator !=(MyColor left, MyColor right)
@@ -66,25 +74,25 @@ namespace HelpersLib
 
         public void RGBUpdate()
         {
-            this.HSB = this.RGB;
-            this.CMYK = this.RGB;
+            HSB = RGBA;
+            CMYK = RGBA;
         }
 
         public void HSBUpdate()
         {
-            this.RGB = this.HSB;
-            this.CMYK = this.HSB;
+            RGBA = HSB;
+            CMYK = HSB;
         }
 
         public void CMYKUpdate()
         {
-            this.RGB = this.CMYK;
-            this.HSB = this.CMYK;
+            RGBA = CMYK;
+            HSB = CMYK;
         }
 
         public override string ToString()
         {
-            return String.Format("{0}\r\n{1}\r\n{2}", RGB, HSB, CMYK);
+            return String.Format("{0}\r\n{1}\r\n{2}", RGBA, HSB, CMYK);
         }
 
         public override int GetHashCode()
@@ -98,11 +106,9 @@ namespace HelpersLib
         }
     }
 
-    public struct RGB
+    public struct RGBA
     {
-        private int red;
-        private int green;
-        private int blue;
+        private int red, green, blue, alpha;
 
         public int Red
         {
@@ -122,62 +128,64 @@ namespace HelpersLib
             set { blue = ColorHelpers.CheckColor(value); }
         }
 
-        public RGB(int red, int green, int blue)
+        public int Alpha
+        {
+            get { return alpha; }
+            set { alpha = ColorHelpers.CheckColor(value); }
+        }
+
+        public RGBA(int red, int green, int blue, int alpha = 255)
             : this()
         {
-            this.Red = red;
-            this.Green = green;
-            this.Blue = blue;
+            Red = red;
+            Green = green;
+            Blue = blue;
+            Alpha = alpha;
         }
 
-        public RGB(Color color)
+        public RGBA(Color color)
+            : this(color.R, color.G, color.B, color.A)
         {
-            this = new RGB(color.R, color.G, color.B);
         }
 
-        public static implicit operator RGB(Color color)
+        public static implicit operator RGBA(Color color)
         {
-            return new RGB(color.R, color.G, color.B);
+            return new RGBA(color);
         }
 
-        public static implicit operator Color(RGB color)
+        public static implicit operator Color(RGBA color)
         {
             return color.ToColor();
         }
 
-        public static implicit operator HSB(RGB color)
+        public static implicit operator HSB(RGBA color)
         {
             return color.ToHSB();
         }
 
-        public static implicit operator CMYK(RGB color)
+        public static implicit operator CMYK(RGBA color)
         {
             return color.ToCMYK();
         }
 
-        public static bool operator ==(RGB left, RGB right)
+        public static bool operator ==(RGBA left, RGBA right)
         {
-            return (left.Red == right.Red) && (left.Green == right.Green) && (left.Blue == right.Blue);
+            return (left.Red == right.Red) && (left.Green == right.Green) && (left.Blue == right.Blue) && (left.Alpha == right.Alpha);
         }
 
-        public static bool operator !=(RGB left, RGB right)
+        public static bool operator !=(RGBA left, RGBA right)
         {
             return !(left == right);
         }
 
         public override string ToString()
         {
-            return String.Format("Red: {0}, Green: {1}, Blue: {2}", Red, Green, Blue);
-        }
-
-        public static Color ToColor(int red, int green, int blue)
-        {
-            return Color.FromArgb(red, green, blue);
+            return String.Format("Red: {0}, Green: {1}, Blue: {2}, Alpha: {3}", Red, Green, Blue, Alpha);
         }
 
         public Color ToColor()
         {
-            return ToColor(Red, Green, Blue);
+            return Color.FromArgb(Alpha, Red, Green, Blue);
         }
 
         public static HSB ToHSB(Color color)
@@ -211,6 +219,8 @@ namespace HelpersLib
             else if (Max == color.B) hsb.Hue = (240 + q * (color.R - color.G)) / 360;
             else hsb.Hue = 0.0;
 
+            hsb.Alpha = color.A;
+
             return hsb;
         }
 
@@ -241,6 +251,8 @@ namespace HelpersLib
                 cmyk.Key = low;
             }
 
+            cmyk.Alpha = color.A;
+
             return cmyk;
         }
 
@@ -265,6 +277,7 @@ namespace HelpersLib
         private double hue;
         private double saturation;
         private double brightness;
+        private int alpha;
 
         public double Hue
         {
@@ -302,30 +315,38 @@ namespace HelpersLib
             set { brightness = ColorHelpers.CheckColor(value / 100); }
         }
 
-        public HSB(double hue, double saturation, double brightness)
-            : this()
+        public int Alpha
         {
-            this.Hue = hue;
-            this.Saturation = saturation;
-            this.Brightness = brightness;
+            get { return alpha; }
+            set { alpha = ColorHelpers.CheckColor(value); }
         }
 
-        public HSB(int hue, int saturation, int brightness)
+        public HSB(double hue, double saturation, double brightness, int alpha = 255)
             : this()
         {
-            this.Hue360 = hue;
-            this.Saturation100 = saturation;
-            this.Brightness100 = brightness;
+            Hue = hue;
+            Saturation = saturation;
+            Brightness = brightness;
+            Alpha = alpha;
+        }
+
+        public HSB(int hue, int saturation, int brightness, int alpha = 255)
+            : this()
+        {
+            Hue360 = hue;
+            Saturation100 = saturation;
+            Brightness100 = brightness;
+            Alpha = alpha;
         }
 
         public HSB(Color color)
         {
-            this = RGB.ToHSB(color);
+            this = RGBA.ToHSB(color);
         }
 
         public static implicit operator HSB(Color color)
         {
-            return RGB.ToHSB(color);
+            return RGBA.ToHSB(color);
         }
 
         public static implicit operator Color(HSB color)
@@ -333,7 +354,7 @@ namespace HelpersLib
             return color.ToColor();
         }
 
-        public static implicit operator RGB(HSB color)
+        public static implicit operator RGBA(HSB color)
         {
             return color.ToColor();
         }
@@ -356,13 +377,12 @@ namespace HelpersLib
         public override string ToString()
         {
             return String.Format("Hue: {0}, Saturation: {1}, Brightness: {2}", ColorHelpers.Round(Hue360),
-              ColorHelpers.Round(Saturation100), ColorHelpers.Round(Brightness100));
+                ColorHelpers.Round(Saturation100), ColorHelpers.Round(Brightness100));
         }
 
         public static Color ToColor(HSB hsb)
         {
             int Mid;
-
             int Max = ColorHelpers.Round(hsb.Brightness * 255);
             int Min = ColorHelpers.Round((1.0 - hsb.Saturation) * (hsb.Brightness / 1.0) * 255);
             double q = (double)(Max - Min) / 255;
@@ -370,32 +390,32 @@ namespace HelpersLib
             if (hsb.Hue >= 0 && hsb.Hue <= (double)1 / 6)
             {
                 Mid = ColorHelpers.Round(((hsb.Hue - 0) * q) * 1530 + Min);
-                return Color.FromArgb(Max, Mid, Min);
+                return Color.FromArgb(hsb.Alpha, Max, Mid, Min);
             }
             if (hsb.Hue <= (double)1 / 3)
             {
                 Mid = ColorHelpers.Round(-((hsb.Hue - (double)1 / 6) * q) * 1530 + Max);
-                return Color.FromArgb(Mid, Max, Min);
+                return Color.FromArgb(hsb.Alpha, Mid, Max, Min);
             }
             if (hsb.Hue <= 0.5)
             {
                 Mid = ColorHelpers.Round(((hsb.Hue - (double)1 / 3) * q) * 1530 + Min);
-                return Color.FromArgb(Min, Max, Mid);
+                return Color.FromArgb(hsb.Alpha, Min, Max, Mid);
             }
             if (hsb.Hue <= (double)2 / 3)
             {
                 Mid = ColorHelpers.Round(-((hsb.Hue - 0.5) * q) * 1530 + Max);
-                return Color.FromArgb(Min, Mid, Max);
+                return Color.FromArgb(hsb.Alpha, Min, Mid, Max);
             }
             if (hsb.Hue <= (double)5 / 6)
             {
                 Mid = ColorHelpers.Round(((hsb.Hue - (double)2 / 3) * q) * 1530 + Min);
-                return Color.FromArgb(Mid, Min, Max);
+                return Color.FromArgb(hsb.Alpha, Mid, Min, Max);
             }
             if (hsb.Hue <= 1.0)
             {
                 Mid = ColorHelpers.Round(-((hsb.Hue - (double)5 / 6) * q) * 1530 + Max);
-                return Color.FromArgb(Max, Min, Mid);
+                return Color.FromArgb(hsb.Alpha, Max, Min, Mid);
             }
             return Color.FromArgb(0, 0, 0);
         }
@@ -427,6 +447,7 @@ namespace HelpersLib
         private double magenta;
         private double yellow;
         private double key;
+        private int alpha;
 
         public double Cyan
         {
@@ -476,32 +497,40 @@ namespace HelpersLib
             set { key = ColorHelpers.CheckColor(value / 100); }
         }
 
-        public CMYK(double cyan, double magenta, double yellow, double key)
-            : this()
+        public int Alpha
         {
-            this.Cyan = cyan;
-            this.Magenta = magenta;
-            this.Yellow = yellow;
-            this.Key = key;
+            get { return alpha; }
+            set { alpha = ColorHelpers.CheckColor(value); }
         }
 
-        public CMYK(int cyan, int magenta, int yellow, int key)
+        public CMYK(double cyan, double magenta, double yellow, double key, int alpha = 255)
             : this()
         {
-            this.Cyan100 = cyan;
-            this.Magenta100 = magenta;
-            this.Yellow100 = yellow;
-            this.Key100 = key;
+            Cyan = cyan;
+            Magenta = magenta;
+            Yellow = yellow;
+            Key = key;
+            Alpha = alpha;
+        }
+
+        public CMYK(int cyan, int magenta, int yellow, int key, int alpha = 255)
+            : this()
+        {
+            Cyan100 = cyan;
+            Magenta100 = magenta;
+            Yellow100 = yellow;
+            Key100 = key;
+            Alpha = alpha;
         }
 
         public CMYK(Color color)
         {
-            this = RGB.ToCMYK(color);
+            this = RGBA.ToCMYK(color);
         }
 
         public static implicit operator CMYK(Color color)
         {
-            return RGB.ToCMYK(color);
+            return RGBA.ToCMYK(color);
         }
 
         public static implicit operator Color(CMYK color)
@@ -509,7 +538,7 @@ namespace HelpersLib
             return color.ToColor();
         }
 
-        public static implicit operator RGB(CMYK color)
+        public static implicit operator RGBA(CMYK color)
         {
             return color.ToColor();
         }
@@ -521,8 +550,7 @@ namespace HelpersLib
 
         public static bool operator ==(CMYK left, CMYK right)
         {
-            return (left.Cyan == right.Cyan) && (left.Magenta == right.Magenta) && (left.Yellow == right.Yellow) &&
-                (left.Key == right.Key);
+            return (left.Cyan == right.Cyan) && (left.Magenta == right.Magenta) && (left.Yellow == right.Yellow) && (left.Key == right.Key);
         }
 
         public static bool operator !=(CMYK left, CMYK right)
@@ -542,7 +570,7 @@ namespace HelpersLib
             int green = ColorHelpers.Round(255 - (255 * cmyk.Magenta));
             int blue = ColorHelpers.Round(255 - (255 * cmyk.Yellow));
 
-            return Color.FromArgb(red, green, blue);
+            return Color.FromArgb(cmyk.Alpha, red, green, blue);
         }
 
         public static Color ToColor(double cyan, double magenta, double yellow, double key)
@@ -567,133 +595,4 @@ namespace HelpersLib
     }
 
     #endregion Public Structs
-
-    public static class MyColors
-    {
-        public static Color ParseColor(string color)
-        {
-            if (color.StartsWith("#"))
-            {
-                return MyColors.HexToColor(color);
-            }
-            else if (color.Contains(','))
-            {
-                int[] colors = color.Split(',').Select(x => int.Parse(x)).ToArray();
-
-                if (colors.Length == 3)
-                {
-                    return Color.FromArgb(colors[0], colors[1], colors[2]);
-                }
-                if (colors.Length == 4)
-                {
-                    return Color.FromArgb(colors[0], colors[1], colors[2], colors[3]);
-                }
-            }
-
-            return Color.FromName(color);
-        }
-
-        public static string ColorToHex(Color color)
-        {
-            return string.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
-        }
-
-        public static int ColorToDecimal(Color color)
-        {
-            return HexToDecimal(ColorToHex(color));
-        }
-
-        public static Color HexToColor(string hex)
-        {
-            if (hex.StartsWith("#"))
-            {
-                hex = hex.Substring(1);
-            }
-
-            string a = string.Empty;
-
-            if (hex.Length == 8)
-            {
-                a = hex.Substring(0, 2);
-                hex = hex.Substring(2);
-            }
-
-            string r = hex.Substring(0, 2);
-            string g = hex.Substring(2, 2);
-            string b = hex.Substring(4, 2);
-
-            if (string.IsNullOrEmpty(a))
-            {
-                return Color.FromArgb(HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
-            }
-            else
-            {
-                return Color.FromArgb(HexToDecimal(a), HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
-            }
-        }
-
-        public static int HexToDecimal(string hex)
-        {
-            //return int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-            return Convert.ToInt32(hex, 16);
-        }
-
-        public static string DecimalToHex(int dec)
-        {
-            return dec.ToString("X6");
-        }
-
-        public static Color DecimalToColor(int dec)
-        {
-            return Color.FromArgb(dec & 0xFF, (dec & 0xff00) / 256, dec / 65536);
-        }
-
-        public static Color SetHue(Color c, double Hue)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Hue = Hue;
-            return hsb.ToColor();
-        }
-
-        public static Color ModifyHue(Color c, double Hue)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Hue *= Hue;
-            return hsb.ToColor();
-        }
-
-        public static Color SetSaturation(Color c, double Saturation)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Saturation = Saturation;
-            return hsb.ToColor();
-        }
-
-        public static Color ModifySaturation(Color c, double Saturation)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Saturation *= Saturation;
-            return hsb.ToColor();
-        }
-
-        public static Color SetBrightness(Color c, double brightness)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Brightness = brightness;
-            return hsb.ToColor();
-        }
-
-        public static Color ModifyBrightness(Color c, double brightness)
-        {
-            HSB hsb = RGB.ToHSB(c);
-            hsb.Brightness *= brightness;
-            return hsb.ToColor();
-        }
-
-        public static Color RandomColor()
-        {
-            Random rand = new Random();
-            return Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
-        }
-    }
 }

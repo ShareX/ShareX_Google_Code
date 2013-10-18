@@ -40,6 +40,10 @@ namespace HelpersLib
             {
                 return pbMain.Image;
             }
+            private set
+            {
+                pbMain.Image = value;
+            }
         }
 
         private string text;
@@ -149,7 +153,8 @@ namespace HelpersLib
 
         public void LoadImage(Image img)
         {
-            pbMain.Image = (Image)img.Clone();
+            Reset();
+            Image = (Image)img.Clone();
             AutoSetSizeMode();
             isReady = true;
         }
@@ -183,9 +188,13 @@ namespace HelpersLib
 
         public void Reset()
         {
-            pbMain.Image = null;
+            if (Image != null)
+            {
+                Image.Dispose();
+                Image = null;
+            }
 
-            if (FullscreenOnClick)
+            if (FullscreenOnClick && Cursor != Cursors.Default)
             {
                 Cursor = Cursors.Default;
             }
@@ -220,9 +229,9 @@ namespace HelpersLib
 
         private void AutoSetSizeMode()
         {
-            if (pbMain.Image != null)
+            if (Image != null)
             {
-                if (pbMain.Image.Width > pbMain.ClientSize.Width || pbMain.Image.Height > pbMain.ClientSize.Height)
+                if (Image.Width > pbMain.ClientSize.Width || Image.Height > pbMain.ClientSize.Height)
                 {
                     pbMain.SizeMode = PictureBoxSizeMode.Zoom;
                 }
@@ -240,9 +249,9 @@ namespace HelpersLib
 
         private void MyPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FullscreenOnClick && e.Button == MouseButtons.Left && isReady && pbMain.Image != null)
+            if (FullscreenOnClick && e.Button == MouseButtons.Left && isReady && Image != null)
             {
-                ImageViewer.ShowImage(pbMain.Image);
+                ImageViewer.ShowImage(Image);
             }
         }
     }

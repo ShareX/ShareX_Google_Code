@@ -228,4 +228,9 @@ namespace HelpersLib
     {
         Image, Text
     }
+
+    public enum DrawStyle
+    {
+        Hue, Saturation, Brightness, Red, Green, Blue
+    }
 }

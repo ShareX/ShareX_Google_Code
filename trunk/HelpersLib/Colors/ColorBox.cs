@@ -59,8 +59,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB start = new HSB(SelectedColor.HSB.Hue, 0.0, 0.0);
-                HSB end = new HSB(SelectedColor.HSB.Hue, 1.0, 0.0);
+                HSB start = new HSB(SelectedColor.HSB.Hue, 0.0, 0.0, SelectedColor.RGBA.Alpha);
+                HSB end = new HSB(SelectedColor.HSB.Hue, 1.0, 0.0, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -80,8 +80,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB start = new HSB(0.0, SelectedColor.HSB.Saturation, 1.0);
-                HSB end = new HSB(0.0, SelectedColor.HSB.Saturation, 0.0);
+                HSB start = new HSB(0.0, SelectedColor.HSB.Saturation, 1.0, SelectedColor.RGBA.Alpha);
+                HSB end = new HSB(0.0, SelectedColor.HSB.Saturation, 0.0, SelectedColor.RGBA.Alpha);
 
                 for (int x = 0; x < width; x++)
                 {
@@ -101,8 +101,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                HSB start = new HSB(0.0, 1.0, SelectedColor.HSB.Brightness);
-                HSB end = new HSB(0.0, 0.0, SelectedColor.HSB.Brightness);
+                HSB start = new HSB(0.0, 1.0, SelectedColor.HSB.Brightness, SelectedColor.RGBA.Alpha);
+                HSB end = new HSB(0.0, 0.0, SelectedColor.HSB.Brightness, SelectedColor.RGBA.Alpha);
 
                 for (int x = 0; x < width; x++)
                 {
@@ -122,8 +122,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB start = new RGB(SelectedColor.RGB.Red, 0, 0);
-                RGB end = new RGB(SelectedColor.RGB.Red, 0, 255);
+                RGBA start = new RGBA(SelectedColor.RGBA.Red, 0, 0, SelectedColor.RGBA.Alpha);
+                RGBA end = new RGBA(SelectedColor.RGBA.Red, 0, 255, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -143,8 +143,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB start = new RGB(0, SelectedColor.RGB.Green, 0);
-                RGB end = new RGB(0, SelectedColor.RGB.Green, 255);
+                RGBA start = new RGBA(0, SelectedColor.RGBA.Green, 0, SelectedColor.RGBA.Alpha);
+                RGBA end = new RGBA(0, SelectedColor.RGBA.Green, 255, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -164,8 +164,8 @@ namespace HelpersLib
         {
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                RGB start = new RGB(0, 0, SelectedColor.RGB.Blue);
-                RGB end = new RGB(255, 0, SelectedColor.RGB.Blue);
+                RGBA start = new RGBA(0, 0, SelectedColor.RGBA.Blue, SelectedColor.RGBA.Alpha);
+                RGBA end = new RGBA(255, 0, SelectedColor.RGBA.Blue, SelectedColor.RGBA.Alpha);
 
                 for (int y = 0; y < height; y++)
                 {
