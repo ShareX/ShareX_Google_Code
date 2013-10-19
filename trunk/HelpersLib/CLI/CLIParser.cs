@@ -38,7 +38,7 @@ namespace HelpersLib.CLI
 
             List<string> commands = new List<string>();
 
-            string command = null;
+            string command;
 
             for (index = 0; index < input.Length; index++)
             {

@@ -114,12 +114,11 @@ namespace UploadersLib.FileUploaders
         private static byte[] ExportPublicKey(PublicKey key)
         {
             // From: http://pstaev.blogspot.fr/2010/08/convert-rsa-public-key-from-xml-to-pem.html
-            List<byte> binaryPublicKey = new List<byte>();
 
             byte[] oid = { 0x30, 0xD, 0x6, 0x9, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0xD, 0x1, 0x1, 0x1, 0x5, 0x0 }; // Object ID for RSA
 
             //Transform the public key to PEM Base64 Format
-            binaryPublicKey = key.EncodedKeyValue.RawData.ToList();
+            List<byte> binaryPublicKey = key.EncodedKeyValue.RawData.ToList();
             binaryPublicKey.Insert(0, 0x0); // Add NULL value
 
             CalculateAndAppendLength(ref binaryPublicKey);

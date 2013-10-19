@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System.Linq;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -68,13 +69,7 @@ namespace ShareX
 
         private HotkeySelectionControl FindSelectionControl(HotkeySettings hotkeySetting)
         {
-            foreach (Control control in flpHotkeys.Controls)
-            {
-                HotkeySelectionControl hsc = (HotkeySelectionControl)control;
-                if (hsc.Setting == hotkeySetting) return hsc;
-            }
-
-            return null;
+            return flpHotkeys.Controls.Cast<HotkeySelectionControl>().FirstOrDefault(hsc => hsc.Setting == hotkeySetting);
         }
 
         private void control_SelectedChanged(object sender, EventArgs e)

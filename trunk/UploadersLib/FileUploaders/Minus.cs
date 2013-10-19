@@ -105,7 +105,7 @@ namespace UploadersLib.FileUploaders
 
         private string GetActiveUserFolderURL(MinusScope scope)
         {
-            MinusUser user = Config.MinusUser != null ? Config.MinusUser : Config.MinusUser = GetActiveUser(scope);
+            MinusUser user = Config.MinusUser ?? (Config.MinusUser = GetActiveUser(scope));
             return URL_API + "/users/" + user.slug + "/folders?bearer_token=" + Config.GetToken(scope).access_token;
         }
 
@@ -143,9 +143,9 @@ namespace UploadersLib.FileUploaders
             if (mflr.results != null && mflr.results.Length > 0)
             {
                 Config.FolderList.Clear();
-                for (int i = 0; i < mflr.results.Length; i++)
+                foreach (MinusFolder minusFolder in mflr.results)
                 {
-                    Config.FolderList.Add(mflr.results[i]);
+                    Config.FolderList.Add(minusFolder);
                 }
             }
             else

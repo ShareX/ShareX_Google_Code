@@ -36,7 +36,7 @@ namespace IndexerLib
         protected IndexerSettings config = null;
         protected StringBuilder sbContent = new StringBuilder();
 
-        public Indexer(IndexerSettings indexerSettings)
+        protected Indexer(IndexerSettings indexerSettings)
         {
             config = indexerSettings;
         }

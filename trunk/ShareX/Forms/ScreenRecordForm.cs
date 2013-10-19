@@ -26,7 +26,6 @@
 using HelpersLib;
 using ScreenCapture;
 using ShareX.Properties;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;

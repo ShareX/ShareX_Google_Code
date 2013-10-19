@@ -111,7 +111,7 @@ namespace HelpersLib
         /// <returns>True if the user presses OK else false</returns>
         public bool ShowDialog(IntPtr hWndOwner)
         {
-            bool flag = false;
+            bool flag;
 
             if (Helpers.IsWindowsVistaOrGreater())
             {

@@ -31,7 +31,7 @@ namespace ScreenCapture
 {
     public static class InputManager
     {
-        private static MouseState mouseState;
+        private static MouseState mouseState = new MouseState();
         private static MouseState oldMouseState;
 
         public static void Update()

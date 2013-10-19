@@ -131,8 +131,7 @@ namespace UploadersLib
             }
 
             fileName = HttpUtility.UrlEncode(fileName).Replace("+", "%20");
-            string path = string.Empty;
-            string httppath = string.Empty;
+            string httppath;
             string lHttpHomePath = GetHttpHomePath();
             if (string.IsNullOrEmpty(lHttpHomePath))
             {
@@ -158,7 +157,8 @@ namespace UploadersLib
             {
                 httppath = lHttpHomePath.Replace("%host", LocalhostRoot).TrimStart('@');
             }
-            path = Helpers.CombineURL(Port == 80 ? httppath : string.Format("{0}:{1}", httppath, Port), lFolderPath, fileName);
+
+            string path = Helpers.CombineURL(Port == 80 ? httppath : string.Format("{0}:{1}", httppath, Port), lFolderPath, fileName);
 
             if (!path.StartsWith(RemoteProtocol.GetDescription()))
             {

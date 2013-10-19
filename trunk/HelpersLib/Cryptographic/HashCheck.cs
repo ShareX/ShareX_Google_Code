@@ -107,7 +107,7 @@ namespace HelpersLib
             using (HashAlgorithm hash = GetHashAlgorithm(HashType))
             using (CryptoStream cs = new CryptoStream(stream, hash, CryptoStreamMode.Read))
             {
-                long bytesRead = 0, totalRead = 0;
+                long bytesRead, totalRead = 0;
                 byte[] buffer = new byte[8192];
                 Stopwatch timer = Stopwatch.StartNew();
 

@@ -163,9 +163,9 @@ namespace UploadersLib
 
                 Rectangle lviBounds = item.GetBounds(ItemBoundsPortion.Entire);
                 int subItemX = lviBounds.Left;
-                for (int i = 0; i < order.Length; i++)
+                foreach (int t in order)
                 {
-                    ColumnHeader h = Columns[order[i]];
+                    ColumnHeader h = Columns[t];
                     if (x < subItemX + h.Width)
                     {
                         return h.Index;
@@ -187,7 +187,6 @@ namespace UploadersLib
         {
             int[] order = GetColumnOrder();
 
-            Rectangle subItemRect = Rectangle.Empty;
             if (SubItem >= order.Length)
                 throw new IndexOutOfRangeException("SubItem " + SubItem + " out of range");
 
@@ -206,7 +205,7 @@ namespace UploadersLib
                     break;
                 subItemX += col.Width;
             }
-            subItemRect = new Rectangle(subItemX, lviBounds.Top, Columns[order[i]].Width, lviBounds.Height);
+            Rectangle subItemRect = new Rectangle(subItemX, lviBounds.Top, Columns[order[i]].Width, lviBounds.Height);
             return subItemRect;
         }
 

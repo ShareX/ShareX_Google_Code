@@ -164,7 +164,7 @@ namespace UploadersLib
                 filename = Path.GetFileNameWithoutExtension(filename);
             }
 
-            string path = string.Empty;
+            string path;
 
             HttpHomePath = FTPHelpers.RemovePrefixes(HttpHomePath);
             NameParser nameParser = new NameParser(NameParserType.URL);

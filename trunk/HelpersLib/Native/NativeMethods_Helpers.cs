@@ -82,7 +82,7 @@ namespace HelpersLib
 
         private static Icon GetSmallApplicationIcon(IntPtr handle)
         {
-            IntPtr iconHandle = IntPtr.Zero;
+            IntPtr iconHandle;
 
             SendMessageTimeout(handle, (int)WindowsMessages.GETICON, ICON_SMALL2, 0, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out iconHandle);
 
@@ -111,7 +111,7 @@ namespace HelpersLib
 
         private static Icon GetBigApplicationIcon(IntPtr handle)
         {
-            IntPtr iconHandle = IntPtr.Zero;
+            IntPtr iconHandle;
 
             SendMessageTimeout(handle, (int)WindowsMessages.GETICON, ICON_BIG, 0, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, 1000, out iconHandle);
 
@@ -237,7 +237,7 @@ namespace HelpersLib
 
         public static Rectangle MaximizedWindowFix(IntPtr handle, Rectangle windowRect)
         {
-            Size size = Size.Empty;
+            Size size;
 
             if (GetBorderSize(handle, out size))
             {

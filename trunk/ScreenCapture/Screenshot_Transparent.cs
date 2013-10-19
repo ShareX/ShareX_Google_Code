@@ -423,7 +423,7 @@ namespace ScreenCapture
 
         #region Not in use
 
-        private static byte[,] windows7Corner = new byte[12, 2]
+        private static byte[,] windows7Corner = new byte[,]
         {
             { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 },
             { 0, 1 }, { 1, 1 }, { 2, 1 },
@@ -432,7 +432,7 @@ namespace ScreenCapture
             { 0, 4 }
         };
 
-        private static byte[,] windowsVistaCorner = new byte[8, 2]
+        private static byte[,] windowsVistaCorner = new byte[,]
         {
             { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 },
             { 0, 1 }, { 1, 1 },

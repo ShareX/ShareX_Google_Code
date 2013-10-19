@@ -44,7 +44,7 @@ namespace HelpersLib
         /// only call the 'QuantizeImage' function. If two passes are required, the code will call 'InitialQuantizeImage'
         /// and then 'QuantizeImage'.
         /// </remarks>
-        public Quantizer(bool singlePass)
+        protected Quantizer(bool singlePass)
         {
             _singlePass = singlePass;
             _pixelSize = Marshal.SizeOf(typeof(Color32));
