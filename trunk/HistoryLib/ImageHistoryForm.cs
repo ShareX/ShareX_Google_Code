@@ -32,6 +32,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using View = Manina.Windows.Forms.View;
 
 namespace HistoryLib
 {
@@ -50,7 +51,7 @@ namespace HistoryLib
             {
                 if (value.IsBetween(0, 3))
                 {
-                    ilvImages.View = (Manina.Windows.Forms.View)value;
+                    ilvImages.View = (View)value;
                 }
             }
         }
@@ -84,7 +85,7 @@ namespace HistoryLib
             tsbQuickList.Checked = MaxItemCount > -1;
 
             him = new HistoryItemManager();
-            him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
+            him.GetHistoryItems += him_GetHistoryItems;
         }
 
         private void RefreshHistoryItems()
@@ -121,7 +122,7 @@ namespace HistoryLib
 
         private HistoryItem[] him_GetHistoryItems()
         {
-            return ilvImages.SelectedItems.Cast<ImageListViewItem>().Select(x => x.Tag as HistoryItem).ToArray();
+            return ilvImages.SelectedItems.Select(x => x.Tag as HistoryItem).ToArray();
         }
 
         #region Form events
@@ -166,19 +167,19 @@ namespace HistoryLib
         private void tsmiViewModeThumbnails_Click(object sender, EventArgs e)
         {
             tsmiViewModeThumbnails.RadioCheck();
-            ilvImages.View = Manina.Windows.Forms.View.Thumbnails;
+            ilvImages.View = View.Thumbnails;
         }
 
         private void tsmiViewModeGallery_Click(object sender, EventArgs e)
         {
             tsmiViewModeGallery.RadioCheck();
-            ilvImages.View = Manina.Windows.Forms.View.Gallery;
+            ilvImages.View = View.Gallery;
         }
 
         private void tsmiViewModePane_Click(object sender, EventArgs e)
         {
             tsmiViewModePane.RadioCheck();
-            ilvImages.View = Manina.Windows.Forms.View.Pane;
+            ilvImages.View = View.Pane;
         }
 
         private void tsmiThumbnailSize75_Click(object sender, EventArgs e)

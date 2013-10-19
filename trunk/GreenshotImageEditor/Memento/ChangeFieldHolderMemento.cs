@@ -39,7 +39,7 @@ namespace Greenshot.Memento
         {
             this.drawableContainer = drawableContainer;
             this.fieldToBeChanged = fieldToBeChanged;
-            this.oldValue = fieldToBeChanged.Value;
+            oldValue = fieldToBeChanged.Value;
         }
 
         public void Dispose()

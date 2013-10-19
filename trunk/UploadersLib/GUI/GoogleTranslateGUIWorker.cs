@@ -34,9 +34,9 @@ namespace UploadersLib
         public BackgroundWorker CreateWorker()
         {
             BackgroundWorker bwApp = new BackgroundWorker { WorkerReportsProgress = true };
-            bwApp.DoWork += new DoWorkEventHandler(BwApp_DoWork);
-            bwApp.ProgressChanged += new ProgressChangedEventHandler(bwApp_ProgressChanged);
-            bwApp.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bwApp_RunWorkerCompleted);
+            bwApp.DoWork += BwApp_DoWork;
+            bwApp.ProgressChanged += bwApp_ProgressChanged;
+            bwApp.RunWorkerCompleted += bwApp_RunWorkerCompleted;
             return bwApp;
         }
 

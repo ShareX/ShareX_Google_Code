@@ -46,21 +46,21 @@ namespace HistoryLib.CustomControls
 
         public ObjectListView()
         {
-            this.SetObjectType = ObjectType.Properties;
-            this.MultiSelect = false;
-            this.Columns.Add("Name", 125);
-            this.Columns.Add("Value", 300);
+            SetObjectType = ObjectType.Properties;
+            MultiSelect = false;
+            Columns.Add("Name", 125);
+            Columns.Add("Value", 300);
             ContextMenu contextMenu = new ContextMenu();
-            contextMenu.MenuItems.Add("Copy name").Click += new EventHandler(PropertyListView_Click_Name);
-            contextMenu.MenuItems.Add("Copy value").Click += new EventHandler(PropertyListView_Click_Value);
-            this.ContextMenu = contextMenu;
+            contextMenu.MenuItems.Add("Copy name").Click += PropertyListView_Click_Name;
+            contextMenu.MenuItems.Add("Copy value").Click += PropertyListView_Click_Value;
+            ContextMenu = contextMenu;
         }
 
         private void PropertyListView_Click_Name(object sender, EventArgs e)
         {
-            if (this.SelectedItems.Count > 0)
+            if (SelectedItems.Count > 0)
             {
-                string text = this.SelectedItems[0].Text;
+                string text = SelectedItems[0].Text;
                 if (!string.IsNullOrEmpty(text))
                 {
                     ClipboardHelpers.CopyText(text);
@@ -70,9 +70,9 @@ namespace HistoryLib.CustomControls
 
         private void PropertyListView_Click_Value(object sender, EventArgs e)
         {
-            if (this.SelectedItems.Count > 0)
+            if (SelectedItems.Count > 0)
             {
-                string text = this.SelectedItems[0].SubItems[1].Text;
+                string text = SelectedItems[0].SubItems[1].Text;
                 if (!string.IsNullOrEmpty(text))
                 {
                     ClipboardHelpers.CopyText(text);
@@ -82,7 +82,7 @@ namespace HistoryLib.CustomControls
 
         public void SelectObject(object obj)
         {
-            this.Items.Clear();
+            Items.Clear();
 
             if (obj != null)
             {
@@ -122,7 +122,7 @@ namespace HistoryLib.CustomControls
                 lvi.SubItems.Add(obj.ToString());
             }
 
-            this.Items.Add(lvi);
+            Items.Add(lvi);
         }
     }
 }

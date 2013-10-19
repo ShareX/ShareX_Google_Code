@@ -43,15 +43,15 @@ namespace UploadersLib
         public UserPassBox(string title, string userName, string password)
         {
             InitializeComponent();
-            this.Text = title;
-            this.txtUserName.Text = userName;
-            this.txtPassword.Text = password;
+            Text = title;
+            txtUserName.Text = userName;
+            txtPassword.Text = password;
         }
 
         public UserPassBox(string q, string fullName, string userName, string password)
             : this(q, userName, password)
         {
-            this.txtFullName.Text = fullName;
+            txtFullName.Text = fullName;
             txtFullName.Enabled = true;
         }
 
@@ -66,21 +66,21 @@ namespace UploadersLib
         {
             if (!string.IsNullOrEmpty(txtUserName.Text))
             {
-                this.UserName = txtUserName.Text;
-                this.Password = txtPassword.Text;
-                this.Email = txtEmail.Text;
-                this.FullName = txtFullName.Text;
-                this.DialogResult = DialogResult.OK;
-                this.Hide();
-                this.Close();
+                UserName = txtUserName.Text;
+                Password = txtPassword.Text;
+                Email = txtEmail.Text;
+                FullName = txtFullName.Text;
+                DialogResult = DialogResult.OK;
+                Hide();
+                Close();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Hide();
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Hide();
+            Close();
         }
 
         private void InputBox_Shown(object sender, EventArgs e)

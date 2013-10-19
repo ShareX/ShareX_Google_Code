@@ -445,7 +445,7 @@ namespace Greenshot.IniFile
             if (section.IsDirty)
             {
                 LOG.DebugFormat("Section {0} is marked dirty, saving!", sectionName);
-                IniConfig.Save();
+                Save();
             }
             return section;
         }

@@ -810,8 +810,8 @@ namespace UploadersLib
             {
                 ucFTPAccounts.btnTest.Enabled = false;
                 BackgroundWorker bw = new BackgroundWorker();
-                bw.DoWork += new DoWorkEventHandler(bw_DoWorkTestFTPAccount);
-                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompletedTestFTPAccount);
+                bw.DoWork += bw_DoWorkTestFTPAccount;
+                bw.RunWorkerCompleted += bw_RunWorkerCompletedTestFTPAccount;
                 bw.RunWorkerAsync(acc);
             }
         }
@@ -830,7 +830,7 @@ namespace UploadersLib
         {
             if (CheckFTPAccounts())
             {
-                new FTPClientForm((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]).Show();
+                new FTPClientForm(Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex]).Show();
             }
         }
 
@@ -924,7 +924,7 @@ namespace UploadersLib
 
             if (silent)
             {
-                DebugHelper.WriteLine(string.Format("Tested {0} sub-folder path in {1}", sfp, account.ToString()));
+                DebugHelper.WriteLine(string.Format("Tested {0} sub-folder path in {1}", sfp, account));
             }
             else
             {
@@ -1341,7 +1341,7 @@ namespace UploadersLib
             {
                 if ((type != CustomUploaderType.URL && !string.IsNullOrEmpty(result.URL)) || (type == CustomUploaderType.URL && !string.IsNullOrEmpty(result.ShortenedURL)))
                 {
-                    txtCustomUploaderLog.AppendText("URL: " + result.ToString() + Environment.NewLine);
+                    txtCustomUploaderLog.AppendText("URL: " + result + Environment.NewLine);
                 }
                 else if (result.IsError)
                 {

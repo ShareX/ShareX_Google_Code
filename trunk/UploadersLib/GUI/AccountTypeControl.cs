@@ -51,7 +51,7 @@ namespace UploadersLib.GUI
         public AccountTypeControl()
         {
             InitializeComponent();
-            cbAccountType.SelectedIndexChanged += new EventHandler(cbAccountType_SelectedIndexChanged);
+            cbAccountType.SelectedIndexChanged += cbAccountType_SelectedIndexChanged;
         }
 
         private void cbAccountType_SelectedIndexChanged(object sender, EventArgs e)

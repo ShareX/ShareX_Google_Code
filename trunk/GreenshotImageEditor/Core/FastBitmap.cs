@@ -463,11 +463,11 @@ namespace GreenshotPlugin.Core
                 this.area = bitmapArea;
             }
             // As the lock takes care that only the specified area is made available we need to calculate the offset
-            this.Left = area.Left;
-            this.Top = area.Top;
+            Left = area.Left;
+            Top = area.Top;
             // Default cliping is done to the area without invert
-            this.Clip = this.area;
-            this.InvertClip = false;
+            Clip = this.area;
+            InvertClip = false;
             // Always lock, so we don't need to do this ourselves
             Lock();
         }
@@ -716,7 +716,7 @@ namespace GreenshotPlugin.Core
                 Unlock();
             }
 
-            graphics.DrawImage(this.bitmap, destinationRect, area, GraphicsUnit.Pixel);
+            graphics.DrawImage(bitmap, destinationRect, area, GraphicsUnit.Pixel);
         }
 
         /// <summary>

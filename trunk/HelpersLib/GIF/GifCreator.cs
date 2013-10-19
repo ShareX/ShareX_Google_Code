@@ -31,14 +31,14 @@ namespace HelpersLib
 {
     public class GifCreator : IDisposable
     {
-        private byte[] signature, graphicControlExtensionBlock, loopBlock;
+        private byte[] graphicControlExtensionBlock, loopBlock;
         private MemoryStream gifStream;
         private BinaryWriter binaryWriter;
         private int frameNum;
 
         public GifCreator(int delay, int repeat = 0)
         {
-            signature = new byte[] { (byte)'G', (byte)'I', (byte)'F', (byte)'8', (byte)'9', (byte)'a' };
+            byte[] signature = new byte[] { (byte)'G', (byte)'I', (byte)'F', (byte)'8', (byte)'9', (byte)'a' };
             graphicControlExtensionBlock = CreateGraphicControlExtensionBlock(delay);
             loopBlock = CreateLoopBlock(repeat);
             gifStream = new MemoryStream();
@@ -90,8 +90,8 @@ namespace HelpersLib
             buffer[1] = 0xF9; // Graphic control extension
             buffer[2] = 0x04; // Size of block
             buffer[3] = 0x09; // Flags: reserved, disposal method, user input, transparent color
-            buffer[4] = (byte)((int)(delay / 10) % 0x100); // Delay time low byte
-            buffer[5] = (byte)((int)(delay / 10) / 0x100); // Delay time high byte
+            buffer[4] = (byte)(delay / 10 % 0x100); // Delay time low byte
+            buffer[5] = (byte)(delay / 10 / 0x100); // Delay time high byte
             buffer[6] = 0xFF; // Transparent color index
             buffer[7] = 0x00; // Block terminator
             return buffer;

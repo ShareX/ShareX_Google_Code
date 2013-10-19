@@ -87,17 +87,17 @@ namespace ScreenCapture
                         Thread.Sleep(10);
                         Application.DoEvents();
 
-                        whiteBackground = (Bitmap)Screenshot.CaptureRectangleNative(rect);
+                        whiteBackground = (Bitmap)CaptureRectangleNative(rect);
 
                         form.BackColor = Color.Black;
                         Application.DoEvents();
 
-                        blackBackground = (Bitmap)Screenshot.CaptureRectangleNative(rect);
+                        blackBackground = (Bitmap)CaptureRectangleNative(rect);
 
                         form.BackColor = Color.White;
                         Application.DoEvents();
 
-                        whiteBackground2 = (Bitmap)Screenshot.CaptureRectangleNative(rect);
+                        whiteBackground2 = (Bitmap)CaptureRectangleNative(rect);
 
                         form.Close();
                     }
@@ -357,7 +357,7 @@ namespace ScreenCapture
             int sizeLimit = 10;
             int alphaLimit = 200;
 
-            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(bitmap, true, ImageLockMode.ReadWrite))
+            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(bitmap, true))
             {
                 for (int i = 0; i < sizeLimit; i++)
                 {

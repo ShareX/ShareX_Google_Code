@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.Windows.Forms;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.ComponentModel;
@@ -171,7 +172,7 @@ namespace GreenshotPlugin.UnmanagedHelpers
         public static extern bool ShowScrollBar(IntPtr hwnd, ScrollBarDirection scrollBar, bool show);
 
         [DllImport("user32", SetLastError = true)]
-        public static extern int SetScrollPos(IntPtr hWnd, System.Windows.Forms.Orientation nBar, int nPos, bool bRedraw);
+        public static extern int SetScrollPos(IntPtr hWnd, Orientation nBar, int nPos, bool bRedraw);
 
         [DllImport("user32", SetLastError = true, EntryPoint = "PostMessageA")]
         public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
@@ -369,13 +370,13 @@ namespace GreenshotPlugin.UnmanagedHelpers
         public SafeIconHandle(IntPtr hIcon)
             : base(true)
         {
-            this.SetHandle(hIcon);
+            SetHandle(hIcon);
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         protected override bool ReleaseHandle()
         {
-            return User32.DestroyIcon(this.handle);
+            return User32.DestroyIcon(handle);
         }
     }
 

@@ -41,9 +41,9 @@ namespace HelpersLib
 
     public static class TaskbarManager
     {
-        [ComImportAttribute()]
-        [GuidAttribute("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
-        [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport]
+        [Guid("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         private interface ITaskbarList4
         {
             // ITaskbarList
@@ -74,9 +74,9 @@ namespace HelpersLib
             void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus tbpFlags);
         }
 
-        [GuidAttribute("56FDF344-FD6D-11d0-958A-006097C9A090")]
-        [ClassInterfaceAttribute(ClassInterfaceType.None)]
-        [ComImportAttribute()]
+        [Guid("56FDF344-FD6D-11d0-958A-006097C9A090")]
+        [ClassInterface(ClassInterfaceType.None)]
+        [ComImport]
         private class CTaskbarList { }
 
         private static object _syncLock = new object();
@@ -140,10 +140,7 @@ namespace HelpersLib
 
         public static void SetProgressValue(Form form, int currentValue, int maximumValue = 100)
         {
-            form.InvokeSafe(() =>
-            {
-                SetProgressValue(form.Handle, currentValue, maximumValue);
-            });
+            form.InvokeSafe(() => SetProgressValue(form.Handle, currentValue, maximumValue));
         }
 
         public static void SetProgressValue(IntPtr hwnd, int currentValue, int maximumValue = 100)
@@ -162,10 +159,7 @@ namespace HelpersLib
 
         public static void SetProgressState(Form form, TaskbarProgressBarStatus state)
         {
-            form.InvokeSafe(() =>
-            {
-                SetProgressState(form.Handle, state);
-            });
+            form.InvokeSafe(() => SetProgressState(form.Handle, state));
         }
 
         public static void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus state)

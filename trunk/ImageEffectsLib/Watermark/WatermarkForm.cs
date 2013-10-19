@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using HelpersLib.Properties;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -36,7 +35,7 @@ namespace ImageEffectsLib
     public partial class WatermarkForm : Form
     {
         public WatermarkConfig Config { get; set; }
-        private bool IsGuiReady = false;
+        private bool IsGuiReady;
         private ContextMenuStrip codesMenu;
 
         public WatermarkForm(WatermarkConfig config = null)
@@ -135,7 +134,7 @@ namespace ImageEffectsLib
 
         private void btnSelectGradient_Click(object sender, EventArgs e)
         {
-            using (GradientMaker gradientForm = new GradientMaker(Config.WatermarkGradient) { Icon = this.Icon })
+            using (GradientMaker gradientForm = new GradientMaker(Config.WatermarkGradient) { Icon = Icon })
             {
                 if (gradientForm.ShowDialog() == DialogResult.OK)
                 {

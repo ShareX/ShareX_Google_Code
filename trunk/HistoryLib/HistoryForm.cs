@@ -52,7 +52,7 @@ namespace HistoryLib
             MaxItemCount = maxItemCount;
 
             him = new HistoryItemManager();
-            him.GetHistoryItems += new HistoryItemManager.GetHistoryItemsEventHandler(him_GetHistoryItems);
+            him.GetHistoryItems += him_GetHistoryItems;
 
             pbThumbnail.Reset();
             cbFilenameFilterMethod.SelectedIndex = 0; // Contains

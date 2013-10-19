@@ -65,7 +65,7 @@ namespace HelpersLib
         protected override byte[] HashFinal()
         {
             byte[] hashBuffer = uintToBigEndianBytes(~hash);
-            this.HashValue = hashBuffer;
+            HashValue = hashBuffer;
             return hashBuffer;
         }
 

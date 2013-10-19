@@ -25,7 +25,7 @@ namespace GreenshotPlugin.Core
 {
     public static class EnumerationExtensions
     {
-        public static bool Has<T>(this System.Enum type, T value)
+        public static bool Has<T>(this Enum type, T value)
         {
             Type underlyingType = Enum.GetUnderlyingType(value.GetType());
             try
@@ -45,7 +45,7 @@ namespace GreenshotPlugin.Core
             return false;
         }
 
-        public static bool Is<T>(this System.Enum type, T value)
+        public static bool Is<T>(this Enum type, T value)
         {
             Type underlyingType = Enum.GetUnderlyingType(value.GetType());
             try
@@ -71,7 +71,7 @@ namespace GreenshotPlugin.Core
         /// <param name="type"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T Add<T>(this System.Enum type, T value)
+        public static T Add<T>(this Enum type, T value)
         {
             Type underlyingType = Enum.GetUnderlyingType(value.GetType());
             try
@@ -98,7 +98,7 @@ namespace GreenshotPlugin.Core
         /// <param name="type"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T Remove<T>(this System.Enum type, T value)
+        public static T Remove<T>(this Enum type, T value)
         {
             Type underlyingType = Enum.GetUnderlyingType(value.GetType());
             try

@@ -39,7 +39,7 @@ namespace ScreenCapture
         {
             Angle = TriangleAngle.Top;
 
-            KeyDown += new KeyEventHandler(TriangleRegion_KeyDown);
+            KeyDown += TriangleRegion_KeyDown;
         }
 
         private void TriangleRegion_KeyDown(object sender, KeyEventArgs e)

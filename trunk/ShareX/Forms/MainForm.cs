@@ -91,10 +91,10 @@ namespace ShareX
 
             ImageList il = new ImageList();
             il.ColorDepth = ColorDepth.Depth32Bit;
-            il.Images.Add(Properties.Resources.navigation_090_button);
-            il.Images.Add(Properties.Resources.cross_button);
-            il.Images.Add(Properties.Resources.tick_button);
-            il.Images.Add(Properties.Resources.navigation_000_button);
+            il.Images.Add(Resources.navigation_090_button);
+            il.Images.Add(Resources.cross_button);
+            il.Images.Add(Resources.tick_button);
+            il.Images.Add(Resources.navigation_000_button);
             lvUploads.SmallImageList = il;
 
             TaskManager.ListViewControl = lvUploads;
@@ -488,12 +488,12 @@ namespace ShareX
 
         private void RemoveSelectedItems()
         {
-            lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+            lvUploads.SelectedItems.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(TaskManager.Remove);
         }
 
         private void RemoveAllItems()
         {
-            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(x => TaskManager.Remove(x));
+            lvUploads.Items.Cast<ListViewItem>().Select(x => x.Tag as UploadTask).Where(x => x != null && !x.IsWorking).ForEach(TaskManager.Remove);
         }
 
         private void UpdateMenu()
@@ -549,7 +549,7 @@ namespace ShareX
 
         private void OpenScreenColorPicker()
         {
-            new DialogColor() { ScreenPicker = true }.Show();
+            new DialogColor { ScreenPicker = true }.Show();
         }
 
         private void OpenHashCheck()

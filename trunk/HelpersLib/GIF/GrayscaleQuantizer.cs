@@ -77,8 +77,6 @@ namespace HelpersLib
         /// <returns>The quantized value</returns>
         protected override byte QuantizePixel(Color32 pixel)
         {
-            byte colorIndex = 0;
-
             double luminance = (pixel.Red * 0.299) + (pixel.Green * 0.587) + (pixel.Blue * 0.114);
 
             // Gray scale is an intensity map from black to white.
@@ -87,7 +85,7 @@ namespace HelpersLib
             // Also, constrain the index choices by the number of
             // colors to do, and then set that pixel's index to the
             // byte value.
-            colorIndex = (byte)(luminance + 0.5);
+            byte colorIndex = (byte)(luminance + 0.5);
 
             return colorIndex;
         }

@@ -71,7 +71,7 @@ namespace HelpersLib
             }
         }
 
-        private bool drawCheckeredBackground = false;
+        private bool drawCheckeredBackground;
 
         [DefaultValue(false)]
         public bool DrawCheckeredBackground
@@ -87,20 +87,8 @@ namespace HelpersLib
             }
         }
 
-        private bool fullscreenOnClick = false;
-
         [DefaultValue(false)]
-        public bool FullscreenOnClick
-        {
-            get
-            {
-                return fullscreenOnClick;
-            }
-            set
-            {
-                fullscreenOnClick = value;
-            }
-        }
+        public bool FullscreenOnClick { get; set; }
 
         public new event MouseEventHandler MouseDown
         {
@@ -121,11 +109,12 @@ namespace HelpersLib
 
         public MyPictureBox()
         {
+            FullscreenOnClick = false;
             InitializeComponent();
             Text = string.Empty;
             pbMain.InitialImage = Resources.Loading;
-            pbMain.LoadProgressChanged += new ProgressChangedEventHandler(pbMain_LoadProgressChanged);
-            pbMain.LoadCompleted += new AsyncCompletedEventHandler(pbMain_LoadCompleted);
+            pbMain.LoadProgressChanged += pbMain_LoadProgressChanged;
+            pbMain.LoadCompleted += pbMain_LoadCompleted;
             pbMain.Resize += pbMain_Resize;
             MouseDown += MyPictureBox_MouseDown;
         }

@@ -50,7 +50,7 @@ namespace UploadersLib.FileUploaders
 
             using (ftpClient = new FTP(Account, BufferSize))
             {
-                ftpClient.ProgressChanged += new Uploader.ProgressEventHandler(x => OnProgressChanged(x));
+                ftpClient.ProgressChanged += OnProgressChanged;
 
                 try
                 {

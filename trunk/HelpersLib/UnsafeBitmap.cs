@@ -82,7 +82,7 @@ namespace HelpersLib
 
         public static bool operator ==(UnsafeBitmap bmp1, UnsafeBitmap bmp2)
         {
-            return object.ReferenceEquals(bmp1, bmp2) || bmp1.Equals(bmp2);
+            return ReferenceEquals(bmp1, bmp2) || bmp1.Equals(bmp2);
         }
 
         public static bool operator !=(UnsafeBitmap bmp1, UnsafeBitmap bmp2)

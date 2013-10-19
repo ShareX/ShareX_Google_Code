@@ -47,10 +47,10 @@ namespace Greenshot.Drawing.Fields
 
         public AbstractFieldHolderWithChildren()
         {
-            fieldChangedEventHandler = new FieldChangedEventHandler(OnFieldChanged);
+            fieldChangedEventHandler = OnFieldChanged;
         }
 
-        [OnDeserializedAttribute()]
+        [OnDeserialized()]
         private void OnDeserialized(StreamingContext context)
         {
             // listen to changing properties

@@ -53,17 +53,17 @@ namespace HelpersLib.CLI
 
                 CLICommand lastCommand = null;
 
-                for (int i = 0; i < commands.Count; i++)
+                foreach (string cmd in commands)
                 {
-                    if (commands[i][0] == '-')
+                    if (cmd[0] == '-')
                     {
-                        string command = commands[i].Substring(1);
+                        string command = cmd.Substring(1);
                         lastCommand = new CLICommand(command);
                         Commands.Add(lastCommand);
                     }
                     else if (lastCommand != null && string.IsNullOrEmpty(lastCommand.Parameter))
                     {
-                        lastCommand.Parameter = commands[i];
+                        lastCommand.Parameter = cmd;
                     }
                     else
                     {

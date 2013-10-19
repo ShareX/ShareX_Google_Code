@@ -28,7 +28,7 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public partial class InputBox : Form
+    public class InputBox : Form
     {
         public string Question { get; set; }
         public string InputText { get; set; }

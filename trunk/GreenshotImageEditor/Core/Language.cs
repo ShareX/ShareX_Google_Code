@@ -654,9 +654,9 @@ namespace GreenshotPlugin.Core
         {
             string typename = key.GetType().Name;
             string enumKey = typename + "." + key.ToString();
-            if (Language.hasKey(enumKey))
+            if (hasKey(enumKey))
             {
-                return Language.GetString(enumKey);
+                return GetString(enumKey);
             }
             return key.ToString();
         }

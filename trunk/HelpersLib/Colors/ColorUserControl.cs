@@ -197,7 +197,7 @@ namespace HelpersLib
 
         private void MouseMoveTimer_Tick(object sender, EventArgs e)
         {
-            Point mousePosition = GetPoint(this.PointToClient(MousePosition));
+            Point mousePosition = GetPoint(PointToClient(MousePosition));
             if (mouseDown && lastPos != mousePosition)
             {
                 GetPointColor(mousePosition);

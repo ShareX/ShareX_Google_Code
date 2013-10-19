@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using System;
 using System.Windows.Forms;
 using UploadersLib.Properties;
 
@@ -51,7 +52,7 @@ namespace UploadersLib
             }
         }
 
-        private void ResponseForm_Resize(object sender, System.EventArgs e)
+        private void ResponseForm_Resize(object sender, EventArgs e)
         {
             Refresh();
         }

@@ -65,8 +65,8 @@ namespace HelpersLib
             buf3[1] = 0xF9; // Graphic control extension
             buf3[2] = 0x04; // Size of block
             buf3[3] = 0x09; // Flags: reserved, disposal method, user input, transparent color
-            buf3[4] = (byte)((int)(delay / 10) % 0x100); // Delay time low byte
-            buf3[5] = (byte)((int)(delay / 10) / 0x100); // Delay time high byte
+            buf3[4] = (byte)(delay / 10 % 0x100); // Delay time low byte
+            buf3[5] = (byte)(delay / 10 / 0x100); // Delay time high byte
             buf3[6] = 0xFF; // Transparent color index
             buf3[7] = 0x00; // Block terminator
 

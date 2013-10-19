@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
@@ -31,7 +32,7 @@ namespace UploadersLib.HelperClasses
 {
     internal class KeyFileNameEditor : FileNameEditor
     {
-        public override object EditValue(System.ComponentModel.ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             if (context == null || provider == null)
             {

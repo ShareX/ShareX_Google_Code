@@ -58,7 +58,7 @@ namespace Greenshot.Drawing.Fields
         {
         }
 
-        [OnDeserializedAttribute()]
+        [OnDeserialized()]
         private void OnDeserialized(StreamingContext context)
         {
             fieldsByType = new Dictionary<FieldType, Field>();

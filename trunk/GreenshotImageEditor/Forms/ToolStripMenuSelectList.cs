@@ -146,7 +146,7 @@ namespace Greenshot.Forms
             }
         }
 
-        private void ItemCheckStateChanged(object sender, System.EventArgs e)
+        private void ItemCheckStateChanged(object sender, EventArgs e)
         {
             if (updateInProgress)
             {
@@ -179,7 +179,7 @@ namespace Greenshot.Forms
             newItem.Text = label;
             newItem.Image = image;
             newItem.CheckOnClick = true;
-            newItem.CheckStateChanged += new System.EventHandler(this.ItemCheckStateChanged);
+            newItem.CheckStateChanged += ItemCheckStateChanged;
             newItem.Data = data;
             if (isChecked)
             {
@@ -191,7 +191,7 @@ namespace Greenshot.Forms
                 }
                 newItem.Checked = isChecked;
             }
-            this.DropDownItems.Add(newItem);
+            DropDownItems.Add(newItem);
         }
 
         /// <summary>
@@ -269,7 +269,7 @@ namespace Greenshot.Forms
         }
     }
 
-    public class ItemCheckedChangedEventArgs : System.EventArgs
+    public class ItemCheckedChangedEventArgs : EventArgs
     {
         public ToolStripMenuSelectListItem Item;
 

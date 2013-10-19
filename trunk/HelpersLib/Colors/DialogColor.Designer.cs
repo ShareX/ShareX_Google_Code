@@ -648,6 +648,7 @@
             this.pbColorPreview.Name = "pbColorPreview";
             this.pbColorPreview.Size = new System.Drawing.Size(80, 56);
             this.pbColorPreview.TabIndex = 49;
+            this.pbColorPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbColorPreview_MouseClick);
             // 
             // DialogColor
             // 

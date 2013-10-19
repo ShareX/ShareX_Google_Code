@@ -24,7 +24,6 @@
 #endregion License Information (GPL v3)
 
 using System;
-using System.Collections.Specialized;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -107,10 +106,8 @@ namespace HelpersLib
             {
                 return CopyImageAlternative(img);
             }
-            else
-            {
-                return CopyImageDefault(img);
-            }
+
+            return CopyImageDefault(img);
         }
 
         private static bool CopyImageDefault(Image img)

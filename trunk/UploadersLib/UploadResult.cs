@@ -99,10 +99,10 @@ namespace UploadersLib.HelperClasses
         public string ToSummaryString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("URL: " + this.URL);
-            sb.AppendLine("Thumbnail URL: " + this.ThumbnailURL);
-            sb.AppendLine("Shortened URL: " + this.ShortenedURL);
-            sb.AppendLine("Deletion URL: " + this.DeletionURL);
+            sb.AppendLine("URL: " + URL);
+            sb.AppendLine("Thumbnail URL: " + ThumbnailURL);
+            sb.AppendLine("Shortened URL: " + ShortenedURL);
+            sb.AppendLine("Deletion URL: " + DeletionURL);
             return sb.ToString();
         }
     }

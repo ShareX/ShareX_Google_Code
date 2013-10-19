@@ -31,7 +31,6 @@ namespace HelpersLib
     public class NoFocusBorderButton : Button
     {
         public NoFocusBorderButton()
-            : base()
         {
             FlatAppearance.BorderSize = 0;
             FlatAppearance.BorderColor = Color.Black;

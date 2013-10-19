@@ -51,7 +51,7 @@ namespace IndexerLib
         public bool AddEmptyLineAfterFolders { get; set; }
 
         [Category("Indexer / HTML"), DefaultValue("IndexerDefault.css"), Description("Cascading Style Sheet file path.")]
-        [EditorAttribute(typeof(CssFileNameEditor), typeof(UITypeEditor))]
+        [Editor(typeof(CssFileNameEditor), typeof(UITypeEditor))]
         public string CssFilePath { get; set; }
 
         [Category("Indexer / HTML"), DefaultValue(false), Description("Add W3C validation icons. The W3C validation icons may be used on documents that successfully passed validation for a specific technology, using the W3C validation services.")]
@@ -60,7 +60,7 @@ namespace IndexerLib
         [Category("Indexer / XML"), DefaultValue(true), Description("Folder/File information (name, size etc.) will be written as attribute.")]
         public bool UseAttribute { get; set; }
 
-        [JsonIgnore()]
+        [JsonIgnore]
         public bool BinaryUnits;
 
         public IndexerSettings()

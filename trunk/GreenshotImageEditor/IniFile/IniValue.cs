@@ -43,14 +43,14 @@ namespace Greenshot.IniFile
         {
             this.containingIniSection = containingIniSection;
             this.propertyInfo = propertyInfo;
-            this.attributes = iniPropertyAttribute;
+            attributes = iniPropertyAttribute;
         }
 
         public IniValue(IniSection containingIniSection, FieldInfo fieldInfo, IniPropertyAttribute iniPropertyAttribute)
         {
             this.containingIniSection = containingIniSection;
             this.fieldInfo = fieldInfo;
-            this.attributes = iniPropertyAttribute;
+            attributes = iniPropertyAttribute;
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Greenshot.IniFile
                         {
                             LOG.WarnFormat("Problem '{0}' while converting {1} to type {2} trying fallback...", ex1.Message, propertyValue, valueType.FullName);
                             newValue = ConvertStringToValueType(valueType, defaultValue, attributes.Separator);
-                            this.ContainingIniSection.IsDirty = true;
+                            ContainingIniSection.IsDirty = true;
                             LOG.InfoFormat("Used default value {0} for property {1}", defaultValue, propertyName);
                         }
                         catch (Exception ex2)

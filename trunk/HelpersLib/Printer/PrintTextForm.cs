@@ -66,7 +66,7 @@ namespace HelpersLib
 
         private void LoadSettings()
         {
-            Font font = (Font)printSettings.TextFont;
+            Font font = printSettings.TextFont;
             lblFont.Text = "Name: " + font.Name + ", Size: " + font.Size;
         }
 

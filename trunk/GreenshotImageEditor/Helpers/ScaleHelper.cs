@@ -316,10 +316,10 @@ namespace Greenshot.Helpers
 
         public static void Scale(Rectangle boundsBeforeResize, int gripperPosition, int cursorX, int cursorY, ref RectangleF boundsAfterResize, IDoubleProcessor angleRoundBehavior)
         {
-            ScaleHelper.ScaleOptions opts = ScaleHelper.GetScaleOptions();
+            ScaleOptions opts = GetScaleOptions();
 
-            bool rationalScale = (opts & ScaleHelper.ScaleOptions.Rational) == ScaleHelper.ScaleOptions.Rational;
-            bool centeredScale = (opts & ScaleHelper.ScaleOptions.Centered) == ScaleHelper.ScaleOptions.Centered;
+            bool rationalScale = (opts & ScaleOptions.Rational) == ScaleOptions.Rational;
+            bool centeredScale = (opts & ScaleOptions.Centered) == ScaleOptions.Centered;
 
             if (rationalScale)
             {
@@ -348,7 +348,7 @@ namespace Greenshot.Helpers
         }
 
         /// <returns>the current ScaleOptions depending on modifier keys held down</returns>
-        public static ScaleHelper.ScaleOptions GetScaleOptions()
+        public static ScaleOptions GetScaleOptions()
         {
             bool anchorAtCenter = (Control.ModifierKeys & Keys.Control) != 0;
             bool maintainAspectRatio = ((Control.ModifierKeys & Keys.Shift) != 0);
@@ -402,7 +402,7 @@ namespace Greenshot.Helpers
 
             public double Process(double angle)
             {
-                return this.fixedAngle;
+                return fixedAngle;
             }
         }
 

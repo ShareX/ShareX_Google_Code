@@ -49,7 +49,7 @@ namespace ShareX
                     Program.HotkeySettingsResetEvent.WaitOne();
                 }
 
-                this.Invoke(new MethodInvoker(() =>
+                Invoke(new MethodInvoker(() =>
                 {
                     Program.HotkeyManager = new HotkeyManager(this, Program.HotkeysConfig.Hotkeys);
                     Program.HotkeyManager.HotkeyTrigger += HandleHotkeys;
@@ -63,7 +63,7 @@ namespace ShareX
 
         private void HandleHotkeys(HotkeySettings hotkeySetting)
         {
-            DebugHelper.WriteLine("Hotkey triggered: " + hotkeySetting.ToString());
+            DebugHelper.WriteLine("Hotkey triggered: " + hotkeySetting);
 
             if (hotkeySetting.TaskSettings.Job == HotkeyType.None) return;
 
@@ -270,7 +270,7 @@ namespace ShareX
         {
             DoCapture(() =>
             {
-                Image img = null;
+                Image img;
                 string activeWindowTitle = NativeMethods.GetForegroundWindowText();
 
                 if (taskSettings.CaptureSettings.CaptureTransparent && !taskSettings.CaptureSettings.CaptureClientArea)
@@ -282,7 +282,7 @@ namespace ShareX
                     img = Screenshot.CaptureActiveWindow();
                 }
 
-                img.Tag = new ImageTag() { ActiveWindowTitle = activeWindowTitle };
+                img.Tag = new ImageTag { ActiveWindowTitle = activeWindowTitle };
 
                 return img;
             }, CaptureType.ActiveWindow, taskSettings, autoHideForm);
@@ -292,7 +292,7 @@ namespace ShareX
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
 
-            autoHideForm = autoHideForm && handle != this.Handle;
+            autoHideForm = autoHideForm && handle != Handle;
 
             DoCapture(() =>
             {
@@ -308,10 +308,8 @@ namespace ShareX
                 {
                     return Screenshot.CaptureWindowTransparent(handle);
                 }
-                else
-                {
-                    return Screenshot.CaptureWindow(handle);
-                }
+
+                return Screenshot.CaptureWindow(handle);
             }, CaptureType.Window, taskSettings, autoHideForm);
         }
 
@@ -328,10 +326,8 @@ namespace ShareX
                         CaptureLightRectangle(taskSettings, autoHideForm);
                         return;
                     }
-                    else
-                    {
-                        surface = new RectangleRegion();
-                    }
+
+                    surface = new RectangleRegion();
                     break;
                 case CaptureType.RectangleWindow:
                     RectangleRegion rectangleRegion = new RectangleRegion();
@@ -429,10 +425,8 @@ namespace ShareX
         {
             tsmiWindow.DropDownItems.Clear();
 
-            List<WindowInfo> windows = null;
-
             WindowsList windowsList = new WindowsList();
-            windows = await TaskEx.Run(() => windowsList.GetVisibleWindowsList());
+            List<WindowInfo> windows = await TaskEx.Run(() => windowsList.GetVisibleWindowsList());
 
             if (windows != null)
             {

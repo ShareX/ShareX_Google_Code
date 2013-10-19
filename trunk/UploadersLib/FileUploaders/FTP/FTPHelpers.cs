@@ -197,8 +197,8 @@ namespace UploadersLib
 
         public void SetSize(string size)
         {
-            this.Size = long.Parse(size);
-            this.SizeString = this.Size.ToString("N0");
+            Size = long.Parse(size);
+            SizeString = Size.ToString("N0");
         }
 
         public void SetDateTime(string year, string month, string day)
@@ -209,11 +209,11 @@ namespace UploadersLib
             {
                 time = year;
                 year = FastDateTime.Now.Year.ToString();
-                this.TimeInfo = true;
+                TimeInfo = true;
             }
 
-            this.DateTime = DateTime.Parse(string.Format("{0}/{1}/{2} {3}", year, month, day, time));
-            this.DateTime = this.DateTime.ToLocalTime();
+            DateTime = DateTime.Parse(string.Format("{0}/{1}/{2} {3}", year, month, day, time));
+            DateTime = DateTime.ToLocalTime();
         }
     }
 }

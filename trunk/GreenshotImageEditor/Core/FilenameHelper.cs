@@ -119,7 +119,7 @@ namespace GreenshotPlugin.Core
             {
                 pattern = "greenshot ${capturetime}";
             }
-            return FilenameHelper.GetFilenameFromPattern(pattern, format, captureDetails);
+            return GetFilenameFromPattern(pattern, format, captureDetails);
         }
 
         /// <summary>
@@ -478,10 +478,10 @@ namespace GreenshotPlugin.Core
             }
 
             return VAR_REGEXP.Replace(pattern,
-                new MatchEvaluator(delegate(Match m)
-            {
-                return MatchVarEvaluator(m, null, processVars, userVars, machineVars, filenameSafeMode);
-            })
+                delegate(Match m)
+                {
+                    return MatchVarEvaluator(m, null, processVars, userVars, machineVars, filenameSafeMode);
+                }
             );
         }
 
@@ -527,10 +527,10 @@ namespace GreenshotPlugin.Core
             try
             {
                 return VAR_REGEXP.Replace(pattern,
-                    new MatchEvaluator(delegate(Match m)
-                {
-                    return MatchVarEvaluator(m, captureDetails, processVars, userVars, machineVars, filenameSafeMode);
-                })
+                    delegate(Match m)
+                    {
+                        return MatchVarEvaluator(m, captureDetails, processVars, userVars, machineVars, filenameSafeMode);
+                    }
                 );
             }
             catch (Exception e)

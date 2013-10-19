@@ -47,7 +47,7 @@ namespace ScreenCapture
         public List<WindowInfo> GetWindowsList()
         {
             windows = new List<WindowInfo>();
-            NativeMethods.EnumWindowsProc ewp = new NativeMethods.EnumWindowsProc(EvalWindow);
+            NativeMethods.EnumWindowsProc ewp = EvalWindow;
             NativeMethods.EnumWindows(ewp, IntPtr.Zero);
             return windows;
         }
@@ -94,7 +94,7 @@ namespace ScreenCapture
 
             if (IncludeChildWindows)
             {
-                NativeMethods.EnumWindowsProc ewp = new NativeMethods.EnumWindowsProc(EvalWindow);
+                NativeMethods.EnumWindowsProc ewp = EvalWindow;
                 NativeMethods.EnumChildWindows(hWnd, ewp, IntPtr.Zero);
             }
 

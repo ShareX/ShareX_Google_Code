@@ -44,7 +44,7 @@ namespace Greenshot.IniFile
             {
                 if (iniSectionAttribute == null)
                 {
-                    iniSectionAttribute = GetIniSectionAttribute(this.GetType());
+                    iniSectionAttribute = GetIniSectionAttribute(GetType());
                 }
                 return iniSectionAttribute;
             }
@@ -133,7 +133,7 @@ namespace Greenshot.IniFile
         /// <param name="properties"></param>
         public void Fill(Dictionary<string, string> properties)
         {
-            Type iniSectionType = this.GetType();
+            Type iniSectionType = GetType();
 
             // Iterate over the members and create IniValueContainers
             foreach (FieldInfo fieldInfo in iniSectionType.GetFields())

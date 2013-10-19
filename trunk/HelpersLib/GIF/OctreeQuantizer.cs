@@ -244,7 +244,7 @@ namespace HelpersLib
             /// <summary>
             /// Mask used when getting the appropriate pixels for a given node
             /// </summary>
-            private static int[] mask = new int[8] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
+            private static int[] mask = new int[] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
 
             /// <summary>
             /// The root of the octree
@@ -299,13 +299,13 @@ namespace HelpersLib
                     if (_leaf)
                     {
                         octree.Leaves++;
-                        _nextReducible = null;
+                        NextReducible = null;
                         _children = null;
                     }
                     else
                     {
                         // Otherwise add this to the reducible nodes
-                        _nextReducible = octree.ReducibleNodes[level];
+                        NextReducible = octree.ReducibleNodes[level];
                         octree.ReducibleNodes[level] = this;
                         _children = new OctreeNode[8];
                     }
@@ -352,11 +352,7 @@ namespace HelpersLib
                 /// <summary>
                 /// Get/Set the next reducible node
                 /// </summary>
-                public OctreeNode NextReducible
-                {
-                    get { return _nextReducible; }
-                    set { _nextReducible = value; }
-                }
+                public OctreeNode NextReducible { get; set; }
 
                 /// <summary>
                 /// Return the child nodes
@@ -485,11 +481,6 @@ namespace HelpersLib
                 /// Pointers to any child nodes
                 /// </summary>
                 private OctreeNode[] _children;
-
-                /// <summary>
-                /// Pointer to next reducible node
-                /// </summary>
-                private OctreeNode _nextReducible;
 
                 /// <summary>
                 /// The index of this node in the palette

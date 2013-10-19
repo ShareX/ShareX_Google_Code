@@ -11,9 +11,6 @@ a:link, a:visited {
     color: #0066FF;
 }
 
-a:hover, a:active {
-}
-
 ul {
     margin: 0px 0px 10px 0px;
     padding-left: 30px;

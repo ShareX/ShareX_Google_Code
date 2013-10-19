@@ -44,7 +44,7 @@ namespace UploadersLib.GUI
 
         public string IssueId
         {
-            get { return this.txtIssueId.Text; }
+            get { return txtIssueId.Text; }
         }
 
         public JiraUpload(string issuePrefix, GetSummaryHandler getSummary)
@@ -54,41 +54,41 @@ namespace UploadersLib.GUI
             {
                 throw new ArgumentNullException("getSummary");
             }
-            this._issuePrefix = issuePrefix;
-            this._getSummary = getSummary;
+            _issuePrefix = issuePrefix;
+            _getSummary = getSummary;
         }
 
         private void JiraUpload_Load(object sender, EventArgs e)
         {
-            this.txtIssueId.Text = this._issuePrefix;
-            this.txtIssueId.SelectionStart = this.txtIssueId.Text.Length;
+            txtIssueId.Text = _issuePrefix;
+            txtIssueId.SelectionStart = txtIssueId.Text.Length;
 
-            this.ValidateIssueId(txtIssueId.Text);
+            ValidateIssueId(txtIssueId.Text);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.ValidateIssueId(((TextBox)sender).Text);
+            ValidateIssueId(((TextBox)sender).Text);
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void ValidateIssueId(string issueId)
         {
-            var res = this._getSummary(issueId);
-            this.btnUpload.Enabled = (res != null);
+            var res = _getSummary(issueId);
+            btnUpload.Enabled = (res != null);
 
-            this.lblSummary.Text = res ?? "Issue not found";
-            this.lblSummary.Enabled = res != null;
+            lblSummary.Text = res ?? "Issue not found";
+            lblSummary.Enabled = res != null;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

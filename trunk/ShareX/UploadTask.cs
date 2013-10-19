@@ -639,21 +639,21 @@ namespace ShareX
                     PastebinSettings settings = Program.UploadersConfig.PastebinSettings;
                     if (string.IsNullOrEmpty(settings.TextFormat))
                     {
-                        settings.TextFormat = this.Info.TaskSettings.AdvancedSettings.TextFormat;
+                        settings.TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat;
                     }
                     textUploader = new Pastebin(ApiKeys.PastebinKey, settings);
                     break;
                 case TextDestination.PastebinCA:
-                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
+                    textUploader = new Pastebin_ca(ApiKeys.PastebinCaKey, new PastebinCaSettings { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Paste2:
-                    textUploader = new Paste2(new Paste2Settings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
+                    textUploader = new Paste2(new Paste2Settings { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Slexy:
-                    textUploader = new Slexy(new SlexySettings() { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
+                    textUploader = new Slexy(new SlexySettings { TextFormat = Info.TaskSettings.AdvancedSettings.TextFormat });
                     break;
                 case TextDestination.Pastee:
-                    textUploader = new Pastee() { Lexer = Info.TaskSettings.AdvancedSettings.TextFormat };
+                    textUploader = new Pastee { Lexer = Info.TaskSettings.AdvancedSettings.TextFormat };
                     break;
                 case TextDestination.Paste_ee:
                     textUploader = new Paste_ee(Program.UploadersConfig.Paste_eeUserAPIKey);
@@ -869,7 +869,7 @@ namespace ShareX
         {
             uploader = currentUploader;
             uploader.BufferSize = (int)Math.Pow(2, Program.Settings.BufferSizePower) * 1024;
-            uploader.ProgressChanged += new Uploader.ProgressEventHandler(uploader_ProgressChanged);
+            uploader.ProgressChanged += uploader_ProgressChanged;
         }
 
         private void uploader_ProgressChanged(ProgressManager progress)

@@ -96,7 +96,7 @@ namespace ScreenCapture
             }
 
             timer = new Timer { Interval = 10 };
-            timer.Tick += new EventHandler(timer_Tick);
+            timer.Tick += timer_Tick;
             timer.Start();
         }
 
@@ -120,21 +120,21 @@ namespace ScreenCapture
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            this.AutoScaleDimensions = new SizeF(6F, 13F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Bounds = ScreenRectangle;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.Text = "ShareX - Rectangle Capture Light";
-            this.ShowInTaskbar = false;
-            this.TopMost = true;
-            this.Shown += RectangleLight_Shown;
-            this.KeyUp += RectangleLight_KeyUp;
-            this.MouseDown += RectangleLight_MouseDown;
-            this.MouseUp += RectangleLight_MouseUp;
-            this.ResumeLayout(false);
+            SuspendLayout();
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleMode = AutoScaleMode.Font;
+            StartPosition = FormStartPosition.Manual;
+            Bounds = ScreenRectangle;
+            FormBorderStyle = FormBorderStyle.None;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            Text = "ShareX - Rectangle Capture Light";
+            ShowInTaskbar = false;
+            TopMost = true;
+            Shown += RectangleLight_Shown;
+            KeyUp += RectangleLight_KeyUp;
+            MouseDown += RectangleLight_MouseDown;
+            MouseUp += RectangleLight_MouseUp;
+            ResumeLayout(false);
         }
 
         private void RectangleLight_Shown(object sender, EventArgs e)

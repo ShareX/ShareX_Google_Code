@@ -47,9 +47,9 @@ namespace HelpersLib
         public HashCheck()
         {
             bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(CheckThread);
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.DoWork += CheckThread;
+            bw.ProgressChanged += bw_ProgressChanged;
+            bw.RunWorkerCompleted += bw_RunWorkerCompleted;
             bw.WorkerReportsProgress = true;
             bw.WorkerSupportsCancellation = true;
         }

@@ -92,7 +92,7 @@ namespace HelpersLib
 
             for (int i = 0; i + 8 <= binary.Length; i += 8)
             {
-                stream.WriteByte(TranslatorHelper.BinaryToByte(binary.Substring(i, 8)));
+                stream.WriteByte(BinaryToByte(binary.Substring(i, 8)));
             }
 
             return Encoding.UTF8.GetString(stream.ToArray());
@@ -153,7 +153,7 @@ namespace HelpersLib
 
             for (int i = 0; i + 2 <= hex.Length; i += 2)
             {
-                stream.WriteByte(TranslatorHelper.HexadecimalToByte(hex.Substring(i, 2)));
+                stream.WriteByte(HexadecimalToByte(hex.Substring(i, 2)));
             }
 
             return Encoding.UTF8.GetString(stream.ToArray());
@@ -179,10 +179,10 @@ namespace HelpersLib
 
             MemoryStream stream = new MemoryStream();
 
-            for (int i = 0; i < numbers.Length; i++)
+            foreach (string number in numbers)
             {
                 byte b;
-                if (byte.TryParse(numbers[i], out b))
+                if (byte.TryParse(number, out b))
                 {
                     stream.WriteByte(b);
                 }

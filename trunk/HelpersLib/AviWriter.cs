@@ -81,7 +81,7 @@ namespace HelpersLib
         // length of one line
         private int stride;
         // quality
-        private int quality = 0;
+        private int quality;
         // frame rate
         private int rate = 25;
         // current position

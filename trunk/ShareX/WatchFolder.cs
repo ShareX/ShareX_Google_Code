@@ -50,17 +50,12 @@ namespace ShareX
 
             if (!string.IsNullOrEmpty(Settings.FolderPath) && Directory.Exists(Settings.FolderPath))
             {
-                context = SynchronizationContext.Current;
-
-                if (context == null)
-                {
-                    context = new SynchronizationContext();
-                }
+                context = SynchronizationContext.Current ?? new SynchronizationContext();
 
                 fileWatcher = new FileSystemWatcher(Settings.FolderPath);
                 if (!string.IsNullOrEmpty(Settings.Filter)) fileWatcher.Filter = Settings.Filter;
                 fileWatcher.IncludeSubdirectories = Settings.IncludeSubdirectories;
-                fileWatcher.Created += new FileSystemEventHandler(fileWatcher_Created);
+                fileWatcher.Created += fileWatcher_Created;
                 fileWatcher.EnableRaisingEvents = true;
             }
         }

@@ -96,11 +96,12 @@ namespace HelpersLib
 
         public static EDataType FindDataType(string filePath)
         {
-            if (Helpers.IsImageFile(filePath))
+            if (IsImageFile(filePath))
             {
                 return EDataType.Image;
             }
-            else if (Helpers.IsTextFile(filePath))
+
+            if (IsTextFile(filePath))
             {
                 return EDataType.Text;
             }
@@ -215,11 +216,13 @@ namespace HelpersLib
             {
                 return string.Empty;
             }
-            else if (url1Empty)
+
+            if (url1Empty)
             {
                 return url2;
             }
-            else if (url2Empty)
+
+            if (url2Empty)
             {
                 return url1;
             }
@@ -239,7 +242,7 @@ namespace HelpersLib
 
         public static string CombineURL(params string[] urls)
         {
-            return urls.Aggregate((current, arg) => CombineURL(current, arg));
+            return urls.Aggregate(CombineURL);
         }
 
         public static string GetMimeType(string fileName)
@@ -668,7 +671,7 @@ namespace HelpersLib
 
                 if (!File.Exists(newFilepath))
                 {
-                    Helpers.CreateDirectoryIfNotExist(newFilepath);
+                    CreateDirectoryIfNotExist(newFilepath);
                     File.Copy(filepath, newFilepath, false);
                 }
             }
@@ -686,7 +689,7 @@ namespace HelpersLib
 
                 if (!File.Exists(newFilepath))
                 {
-                    Helpers.CreateDirectoryIfNotExist(newFilepath);
+                    CreateDirectoryIfNotExist(newFilepath);
                     File.Copy(filepath, newFilepath, false);
                 }
             }

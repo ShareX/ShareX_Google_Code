@@ -38,12 +38,7 @@ namespace HelpersLib
 
         public ThreadWorker()
         {
-            context = SynchronizationContext.Current;
-
-            if (context == null)
-            {
-                context = new SynchronizationContext();
-            }
+            context = SynchronizationContext.Current ?? new SynchronizationContext();
         }
 
         public void Start(ApartmentState state = ApartmentState.MTA)

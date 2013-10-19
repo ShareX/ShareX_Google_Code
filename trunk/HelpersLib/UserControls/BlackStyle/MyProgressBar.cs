@@ -100,7 +100,7 @@ namespace HelpersLib
         {
             get
             {
-                return this.value;
+                return value;
             }
             set
             {

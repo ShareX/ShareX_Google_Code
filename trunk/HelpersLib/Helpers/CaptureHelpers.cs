@@ -25,11 +25,7 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -299,7 +295,7 @@ namespace HelpersLib
 
             if (handle.ToInt32() > 0)
             {
-                return CaptureHelpers.GetWindowRectangle(handle);
+                return GetWindowRectangle(handle);
             }
 
             return Rectangle.Empty;

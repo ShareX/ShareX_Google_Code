@@ -58,7 +58,7 @@ namespace Greenshot.Drawing
         {
             using (Brush cropBrush = new SolidBrush(Color.FromArgb(100, 150, 150, 100)))
             {
-                Rectangle cropRectangle = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+                Rectangle cropRectangle = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
                 Rectangle selectionRect = new Rectangle(cropRectangle.Left - 1, cropRectangle.Top - 1, cropRectangle.Width + 1, cropRectangle.Height + 1);
 
                 DrawSelectionBorder(g, selectionRect);

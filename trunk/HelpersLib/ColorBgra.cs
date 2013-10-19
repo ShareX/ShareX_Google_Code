@@ -115,7 +115,7 @@ namespace HelpersLib
 
         public static uint BgraToUInt32(byte b, byte g, byte r, byte a)
         {
-            return (uint)b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24);
+            return b + ((uint)g << 8) + ((uint)r << 16) + ((uint)a << 24);
         }
     }
 }

@@ -94,7 +94,7 @@ namespace UploadersLib.ImageUploaders
         {
             string action = "userauth", tpid = TinyPicID, tpk = TinyPicKey;
 
-            Dictionary<string, string> args = new Dictionary<string, string>()
+            Dictionary<string, string> args = new Dictionary<string, string>
             {
                 { "action", action },
                 { "tpid", tpid },
@@ -164,10 +164,9 @@ namespace UploadersLib.ImageUploaders
                         int code;
                         if (int.TryParse(errorcode, out code))
                         {
-                            this.Errors.Add(GetErrorMessage(code));
+                            Errors.Add(GetErrorMessage(code));
                         }
                     }
-                    result = false;
                 }
             }
 

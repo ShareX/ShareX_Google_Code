@@ -51,7 +51,7 @@ namespace HelpersLib
 
             timer = new Timer();
             timer.Interval = Interval;
-            timer.Tick += new EventHandler(timer_Tick);
+            timer.Tick += timer_Tick;
             timer.Start();
         }
 

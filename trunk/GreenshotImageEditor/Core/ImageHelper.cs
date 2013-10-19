@@ -20,7 +20,6 @@
  */
 
 using Greenshot.Core;
-using Greenshot.Helpers;
 using GreenshotPlugin.UnmanagedHelpers;
 using System;
 using System.Collections.Generic;
@@ -81,7 +80,7 @@ namespace GreenshotPlugin.Core
             }
 
             Bitmap bmp = new Bitmap(thumbWidth, thumbHeight);
-            using (Graphics graphics = System.Drawing.Graphics.FromImage(bmp))
+            using (Graphics graphics = Graphics.FromImage(bmp))
             {
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -317,7 +316,7 @@ namespace GreenshotPlugin.Core
                         using (MemoryStream destStream = new MemoryStream())
                         {
                             destStream.Write(srcBuf, iImageOffset, iImageSize);
-                            destStream.Seek(0, System.IO.SeekOrigin.Begin);
+                            destStream.Seek(0, SeekOrigin.Begin);
                             bmpPngExtracted = new Bitmap(destStream); // This is PNG! :)
                         }
                         break;
@@ -921,7 +920,7 @@ namespace GreenshotPlugin.Core
         /// <returns>Negative bitmap</returns>
         public static Bitmap CreateNegative(Image sourceImage)
         {
-            Bitmap clone = (Bitmap)ImageHelper.Clone(sourceImage);
+            Bitmap clone = (Bitmap)Clone(sourceImage);
             ColorMatrix invertMatrix = new ColorMatrix(new float[][] {
 				new float[] {-1, 0, 0, 0, 0},
 				new float[] {0, -1, 0, 0, 0},
@@ -1122,7 +1121,7 @@ namespace GreenshotPlugin.Core
         /// <returns>Bitmap with grayscale</returns>
         public static Image CreateGrayscale(Image sourceImage)
         {
-            Bitmap clone = (Bitmap)ImageHelper.Clone(sourceImage);
+            Bitmap clone = (Bitmap)Clone(sourceImage);
             ColorMatrix grayscaleMatrix = new ColorMatrix(new float[][] {
 				new float[] {.3f, .3f, .3f, 0, 0},
 				new float[] {.59f, .59f, .59f, 0, 0},
@@ -1464,7 +1463,7 @@ namespace GreenshotPlugin.Core
                     nPercentW = nPercentH;
                     if (canvasUseNewSize)
                     {
-                        destX = Math.Max(0, System.Convert.ToInt32((newWidth - (sourceImage.Width * nPercentW)) / 2));
+                        destX = Math.Max(0, Convert.ToInt32((newWidth - (sourceImage.Width * nPercentW)) / 2));
                     }
                 }
                 else if (nPercentH == 1)
@@ -1472,7 +1471,7 @@ namespace GreenshotPlugin.Core
                     nPercentH = nPercentW;
                     if (canvasUseNewSize)
                     {
-                        destY = Math.Max(0, System.Convert.ToInt32((newHeight - (sourceImage.Height * nPercentH)) / 2));
+                        destY = Math.Max(0, Convert.ToInt32((newHeight - (sourceImage.Height * nPercentH)) / 2));
                     }
                 }
                 else if (nPercentH != 0 && nPercentH < nPercentW)
@@ -1480,7 +1479,7 @@ namespace GreenshotPlugin.Core
                     nPercentW = nPercentH;
                     if (canvasUseNewSize)
                     {
-                        destX = Math.Max(0, System.Convert.ToInt32((newWidth - (sourceImage.Width * nPercentW)) / 2));
+                        destX = Math.Max(0, Convert.ToInt32((newWidth - (sourceImage.Width * nPercentW)) / 2));
                     }
                 }
                 else
@@ -1488,7 +1487,7 @@ namespace GreenshotPlugin.Core
                     nPercentH = nPercentW;
                     if (canvasUseNewSize)
                     {
-                        destY = Math.Max(0, System.Convert.ToInt32((newHeight - (sourceImage.Height * nPercentH)) / 2));
+                        destY = Math.Max(0, Convert.ToInt32((newHeight - (sourceImage.Height * nPercentH)) / 2));
                     }
                 }
             }

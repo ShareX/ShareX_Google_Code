@@ -83,19 +83,19 @@ namespace Greenshot.Drawing
             if (shadow)
             {
                 CheckShadow(shadow);
-                this.Width = shadowBitmap.Width;
-                this.Height = shadowBitmap.Height;
-                this.Left = this.Left - this.shadowOffset.X;
-                this.Top = this.Top - this.shadowOffset.Y;
+                Width = shadowBitmap.Width;
+                Height = shadowBitmap.Height;
+                Left = Left - shadowOffset.X;
+                Top = Top - shadowOffset.Y;
             }
             else
             {
-                this.Width = image.Width;
-                this.Height = image.Height;
+                Width = image.Width;
+                Height = image.Height;
                 if (shadowBitmap != null)
                 {
-                    this.Left = this.Left + this.shadowOffset.X;
-                    this.Top = this.Top + this.shadowOffset.Y;
+                    Left = Left + shadowOffset.X;
+                    Top = Top + shadowOffset.Y;
                 }
             }
         }
@@ -118,8 +118,8 @@ namespace Greenshot.Drawing
                 {
                     Width = shadowBitmap.Width;
                     Height = shadowBitmap.Height;
-                    this.Left = this.Left - this.shadowOffset.X;
-                    this.Top = this.Top - this.shadowOffset.Y;
+                    Left = Left - shadowOffset.X;
+                    Top = Top - shadowOffset.Y;
                 }
             }
             get { return image; }

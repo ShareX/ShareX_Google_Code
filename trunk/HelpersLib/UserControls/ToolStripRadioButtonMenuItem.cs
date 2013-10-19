@@ -33,7 +33,6 @@ namespace HelpersLib
     public class ToolStripRadioButtonMenuItem : ToolStripMenuItem
     {
         public ToolStripRadioButtonMenuItem()
-            : base()
         {
             Initialize();
         }
@@ -82,7 +81,7 @@ namespace HelpersLib
             : base(text, image, onClick)
         {
             Initialize();
-            this.ShortcutKeys = shortcutKeys;
+            ShortcutKeys = shortcutKeys;
         }
 
         // Called by all constructors to initialize CheckOnClick.
@@ -189,7 +188,7 @@ namespace HelpersLib
                 e.Graphics, imageLocation, buttonState);
         }
 
-        private bool mouseHoverState = false;
+        private bool mouseHoverState;
 
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -207,7 +206,7 @@ namespace HelpersLib
             base.OnMouseLeave(e);
         }
 
-        private bool mouseDownState = false;
+        private bool mouseDownState;
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -260,7 +259,7 @@ namespace HelpersLib
             if (ownerMenuItem != null && ownerMenuItem.CheckOnClick)
             {
                 ownerMenuItem.CheckedChanged +=
-                new EventHandler(OwnerMenuItem_CheckedChanged);
+                OwnerMenuItem_CheckedChanged;
             }
             base.OnOwnerChanged(e);
         }

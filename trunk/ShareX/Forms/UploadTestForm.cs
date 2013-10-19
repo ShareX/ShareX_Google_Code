@@ -211,8 +211,8 @@ namespace ShareX
 
             BackgroundWorker bw = new BackgroundWorker();
             bw.WorkerReportsProgress = true;
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            bw.DoWork += bw_DoWork;
+            bw.ProgressChanged += bw_ProgressChanged;
             bw.RunWorkerCompleted += (x, x2) => Testing = false;
             bw.RunWorkerAsync(uploaders);
         }
@@ -273,7 +273,7 @@ namespace ShareX
                                     if (!info.Result.IsError && !string.IsNullOrEmpty(info.Result.ToString()))
                                     {
                                         lvi.BackColor = Color.LightGreen;
-                                        lvi.SubItems[1].Text = "Success: " + info.Result.ToString();
+                                        lvi.SubItems[1].Text = "Success: " + info.Result;
                                     }
                                     else
                                     {
@@ -316,7 +316,7 @@ namespace ShareX
 
                     if (task != null && task.Info != null && task.Info.Result != null && !string.IsNullOrEmpty(task.Info.Result.ToString()))
                     {
-                        urls.Add(string.Format("{0}: {1}", lvi.Text, task.Info.Result.ToString()));
+                        urls.Add(string.Format("{0}: {1}", lvi.Text, task.Info.Result));
                     }
                 }
 

@@ -36,13 +36,13 @@ namespace HelpersLib
 
         public ImageViewer(Image image)
         {
-            this.screenshot = (Image)image.Clone();
+            screenshot = (Image)image.Clone();
             InitializeComponent();
         }
 
         public ImageViewer(string path)
         {
-            this.screenshot = Helpers.GetImageFromFile(path);
+            screenshot = Helpers.GetImageFromFile(path);
             InitializeComponent();
         }
 
@@ -85,7 +85,7 @@ namespace HelpersLib
         {
             if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
             {
-                this.Close();
+                Close();
             }
         }
 

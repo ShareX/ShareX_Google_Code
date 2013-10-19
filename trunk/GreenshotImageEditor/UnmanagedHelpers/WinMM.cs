@@ -30,9 +30,9 @@ namespace GreenshotPlugin.UnmanagedHelpers
     public class WinMM
     {
         [DllImport("winmm.dll", SetLastError = true)]
-        public static extern bool PlaySound(byte[] ptrToSound, System.UIntPtr hmod, uint fdwSound);
+        public static extern bool PlaySound(byte[] ptrToSound, UIntPtr hmod, uint fdwSound);
 
         [DllImport("winmm.dll", SetLastError = true)]
-        public static extern bool PlaySound(IntPtr ptrToSound, System.UIntPtr hmod, uint fdwSound);
+        public static extern bool PlaySound(IntPtr ptrToSound, UIntPtr hmod, uint fdwSound);
     }
 }

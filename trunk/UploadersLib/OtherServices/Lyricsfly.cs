@@ -111,22 +111,22 @@ namespace UploadersLib.OtherServices
                                 }
                                 break;
                             case "204": // NO CONTENT
-                                this.Errors.Add("Parameter query returned no results. All parameters checked ok.");
+                                Errors.Add("Parameter query returned no results. All parameters checked ok.");
                                 break;
                             case "400": // MISSING KEY
-                                this.Errors.Add("Parameter “i” missing. Authorization failed.");
+                                Errors.Add("Parameter “i” missing. Authorization failed.");
                                 break;
                             case "401": // UNAUTHORIZED
-                                this.Errors.Add("Parameter “i” invalid. Authorization failed.");
+                                Errors.Add("Parameter “i” invalid. Authorization failed.");
                                 break;
                             case "402": // LIMITED TIME
-                                this.Errors.Add("Query request too soon. Limit query requests. Time of delay is shown in <delay> tag in milliseconds.");
+                                Errors.Add("Query request too soon. Limit query requests. Time of delay is shown in <delay> tag in milliseconds.");
                                 break;
                             case "406": // QUERY TOO SHORT
-                                this.Errors.Add("Query request string is too short. All other parameters checked ok.");
+                                Errors.Add("Query request string is too short. All other parameters checked ok.");
                                 break;
                             default:
-                                this.Errors.Add("Unknown status.");
+                                Errors.Add("Unknown status.");
                                 break;
                         }
                     }

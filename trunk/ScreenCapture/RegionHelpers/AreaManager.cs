@@ -41,7 +41,7 @@ namespace ScreenCapture
             get
             {
                 List<Rectangle> areas = new List<Rectangle>();
-                areas.AddRange(Areas.Where(x => IsAreaValid(x)));
+                areas.AddRange(Areas.Where(IsAreaValid));
                 return areas;
             }
         }
@@ -107,10 +107,10 @@ namespace ScreenCapture
             Areas = new List<Rectangle>();
             SelectedAreaIndex = -1;
 
-            surface.MouseDown += new MouseEventHandler(surface_MouseDown);
-            surface.MouseUp += new MouseEventHandler(surface_MouseUp);
-            surface.KeyDown += new KeyEventHandler(surface_KeyDown);
-            surface.KeyUp += new KeyEventHandler(surface_KeyUp);
+            surface.MouseDown += surface_MouseDown;
+            surface.MouseUp += surface_MouseUp;
+            surface.KeyDown += surface_KeyDown;
+            surface.KeyUp += surface_KeyUp;
         }
 
         private void surface_KeyDown(object sender, KeyEventArgs e)

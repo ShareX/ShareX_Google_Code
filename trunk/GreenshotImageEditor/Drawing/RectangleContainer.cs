@@ -68,10 +68,10 @@ namespace Greenshot.Drawing
                     {
                         shadowPen.Width = lineVisible ? lineThickness : 1;
                         Rectangle shadowRect = GuiRectangle.GetGuiRectangle(
-                            this.Left + currentStep,
-                            this.Top + currentStep,
-                            this.Width,
-                            this.Height);
+                            Left + currentStep,
+                            Top + currentStep,
+                            Width,
+                            Height);
                         graphics.DrawRectangle(shadowPen, shadowRect);
                         currentStep++;
                         alpha = alpha - (basealpha / steps);
@@ -79,7 +79,7 @@ namespace Greenshot.Drawing
                 }
             }
 
-            Rectangle rect = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+            Rectangle rect = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
 
             if (Colors.IsVisible(fillColor))
             {
@@ -101,7 +101,7 @@ namespace Greenshot.Drawing
 
         public override bool ClickableAt(int x, int y)
         {
-            Rectangle rect = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+            Rectangle rect = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
             int lineThickness = GetFieldValueAsInt(FieldType.LINE_THICKNESS) + 10;
             Color fillColor = GetFieldValueAsColor(FieldType.FILL_COLOR);
 

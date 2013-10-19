@@ -107,8 +107,8 @@ namespace HelpersLib
         {
             InitializeComponent();
             DrawStyle = DrawStyle.Hue;
-            colorBox.ColorChanged += new ColorEventHandler(colorBox_ColorChanged);
-            colorSlider.ColorChanged += new ColorEventHandler(colorSlider_ColorChanged);
+            colorBox.ColorChanged += colorBox_ColorChanged;
+            colorSlider.ColorChanged += colorSlider_ColorChanged;
         }
 
         private void colorBox_ColorChanged(object sender, ColorEventArgs e)
@@ -129,7 +129,7 @@ namespace HelpersLib
         {
             if (ColorChanged != null)
             {
-                ColorChanged(this, new ColorEventArgs(this.Color, this.DrawStyle));
+                ColorChanged(this, new ColorEventArgs(Color, DrawStyle));
             }
         }
 

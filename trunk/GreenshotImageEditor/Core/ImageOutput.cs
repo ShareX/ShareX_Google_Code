@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.Runtime.InteropServices;
+using System.Text;
 using Greenshot.IniFile;
 using Greenshot.Plugin;
 using GreenshotPlugin.Controls;
@@ -29,6 +31,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace GreenshotPlugin.Core
 {
@@ -39,7 +42,7 @@ namespace GreenshotPlugin.Core
     {
         private static CoreConfiguration conf = IniConfig.GetIniSection<CoreConfiguration>();
         private static readonly int PROPERTY_TAG_SOFTWARE_USED = 0x0131;
-        private static Cache<string, string> tmpFileCache = new Cache<string, string>(10 * 60 * 60, new Cache<string, string>.CacheObjectExpired(RemoveExpiredTmpFile));
+        private static Cache<string, string> tmpFileCache = new Cache<string, string>(10 * 60 * 60, RemoveExpiredTmpFile);
 
         /// <summary>
         /// Creates a PropertyItem (Metadata) to store with the image.
@@ -61,7 +64,7 @@ namespace GreenshotPlugin.Core
                 // Set the ID
                 propertyItem.Id = id;
                 // Set the text
-                byte[] byteString = System.Text.ASCIIEncoding.ASCII.GetBytes(text + " ");
+                byte[] byteString = ASCIIEncoding.ASCII.GetBytes(text + " ");
                 // Set Zero byte for String end.
                 byteString[byteString.Length - 1] = 0;
                 propertyItem.Value = byteString;
@@ -224,7 +227,7 @@ namespace GreenshotPlugin.Core
                         {
                             writer.Write(bytesWritten);
                             Version v = Assembly.GetExecutingAssembly().GetName().Version;
-                            byte[] marker = System.Text.Encoding.ASCII.GetBytes(String.Format("Greenshot{0:00}.{1:00}", v.Major, v.Minor));
+                            byte[] marker = Encoding.ASCII.GetBytes(String.Format("Greenshot{0:00}.{1:00}", v.Major, v.Minor));
                             writer.Write(marker);
                             tmpStream.WriteTo(stream);
                         }
@@ -508,11 +511,11 @@ namespace GreenshotPlugin.Core
                             qualityDialog.ShowDialog();
                         }
                         // TODO: For now we always overwrite, should be changed
-                        ImageOutput.Save(surface, fileNameWithExtension, true, outputSettings, conf.OutputFileCopyPathToClipboard);
+                        Save(surface, fileNameWithExtension, true, outputSettings, conf.OutputFileCopyPathToClipboard);
                         returnValue = fileNameWithExtension;
                         IniConfig.Save();
                     }
-                    catch (System.Runtime.InteropServices.ExternalException)
+                    catch (ExternalException)
                     {
                         MessageBox.Show(Language.GetFormattedString("error_nowriteaccess", saveImageFileDialog.FileName).Replace(@"\\", @"\"), Language.GetString("error"));
                     }
@@ -551,7 +554,7 @@ namespace GreenshotPlugin.Core
             // This is done for e.g. bugs #2974608, #2963943, #2816163, #2795317, #2789218
             try
             {
-                ImageOutput.Save(surface, tmpFile, true, outputSettings, false);
+                Save(surface, tmpFile, true, outputSettings, false);
                 tmpFileCache.Add(tmpFile, tmpFile);
             }
             catch (Exception e)
@@ -559,7 +562,7 @@ namespace GreenshotPlugin.Core
                 // Show the problem
                 MessageBox.Show(e.Message, "Error");
                 // when save failed we present a SaveWithDialog
-                tmpFile = ImageOutput.SaveWithDialog(surface, captureDetails);
+                tmpFile = SaveWithDialog(surface, captureDetails);
             }
             return tmpFile;
         }
@@ -583,7 +586,7 @@ namespace GreenshotPlugin.Core
 
             try
             {
-                ImageOutput.Save(surface, tmpPath, true, outputSettings, false);
+                Save(surface, tmpPath, true, outputSettings, false);
                 tmpFileCache.Add(tmpPath, tmpPath);
             }
             catch (Exception)
