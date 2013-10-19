@@ -104,8 +104,9 @@ namespace HelpersLib
             }
         }
 
-        private bool isReady;
-        private bool isLoadLocal;
+        private static readonly object ImageLoadLock = new object();
+
+        private bool isImageLoading;
 
         public MyPictureBox()
         {
@@ -131,56 +132,83 @@ namespace HelpersLib
             {
                 if (pbMain.BackgroundImage == null || pbMain.BackgroundImage.Size != pbMain.ClientSize)
                 {
+                    if (pbMain.BackgroundImage != null) pbMain.BackgroundImage.Dispose();
                     pbMain.BackgroundImage = ImageHelpers.CreateCheckers(8, Color.LightGray, Color.White);
                 }
             }
             else
             {
+                if (pbMain.BackgroundImage != null) pbMain.BackgroundImage.Dispose();
                 pbMain.BackgroundImage = null;
             }
         }
 
         public void LoadImage(Image img)
         {
-            Reset();
-            Image = (Image)img.Clone();
-            AutoSetSizeMode();
-            isReady = true;
+            lock (ImageLoadLock)
+            {
+                if (!isImageLoading)
+                {
+                    Reset();
+                    Image = (Image)img.Clone();
+                    AutoSetSizeMode();
+                }
+            }
         }
 
         public void LoadImageFromFile(string filePath)
         {
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            lock (ImageLoadLock)
             {
-                Text = "Loading local image...";
-                isLoadLocal = true;
-                LoadImage(filePath);
+                if (!isImageLoading)
+                {
+                    Reset();
+                    Image = Helpers.GetImageFromFile(filePath);
+                    AutoSetSizeMode();
+                }
             }
         }
 
-        public void LoadImageFromURL(string url)
+        public void LoadImageFromFileAsync(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                LoadImageAsync(filePath);
+            }
+        }
+
+        public void LoadImageFromURLAsync(string url)
         {
             if (!string.IsNullOrEmpty(url))
             {
-                Text = "Downloading image from URL...";
-                isLoadLocal = false;
-                LoadImage(url);
+                LoadImageAsync(url);
             }
         }
 
-        private void LoadImage(string path)
+        private void LoadImageAsync(string path)
         {
-            isReady = false;
-            lblStatus.Visible = true;
-            pbMain.LoadAsync(path);
+            lock (ImageLoadLock)
+            {
+                if (!isImageLoading)
+                {
+                    Reset();
+                    Text = "Loading image...";
+                    lblStatus.Visible = true;
+                    isImageLoading = true;
+                    pbMain.LoadAsync(path);
+                }
+            }
         }
 
         public void Reset()
         {
-            if (Image != null)
+            if (!isImageLoading)
             {
-                Image.Dispose();
-                Image = null;
+                if (Image != null)
+                {
+                    Image.Dispose();
+                    Image = null;
+                }
             }
 
             if (FullscreenOnClick && Cursor != Cursors.Default)
@@ -191,28 +219,16 @@ namespace HelpersLib
 
         private void pbMain_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            AutoSetSizeMode();
             lblStatus.Visible = false;
-            isReady = true;
+            AutoSetSizeMode();
+            isImageLoading = false;
         }
 
         private void pbMain_LoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage < 100)
             {
-                string status;
-
-                if (isLoadLocal)
-                {
-                    status = "Loading local image - ";
-                }
-                else
-                {
-                    status = "Downloading image from URL - ";
-                }
-
-                status += e.ProgressPercentage + "%";
-                Text = status;
+                Text = string.Format("Loading image: {0}%", e.ProgressPercentage);
             }
         }
 
@@ -238,7 +254,7 @@ namespace HelpersLib
 
         private void MyPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FullscreenOnClick && e.Button == MouseButtons.Left && isReady && Image != null)
+            if (e.Button == MouseButtons.Left && FullscreenOnClick && !isImageLoading && Image != null)
             {
                 ImageViewer.ShowImage(Image);
             }

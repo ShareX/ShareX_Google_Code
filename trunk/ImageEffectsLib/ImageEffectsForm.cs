@@ -89,9 +89,8 @@ namespace ImageEffectsLib
             using (Image preview = ApplyEffects())
             {
                 pbResult.LoadImage(preview);
+                lblStatus.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", preview.Width, preview.Height, timer.ElapsedMilliseconds);
             }
-
-            lblStatus.Text = string.Format("Width: {0}, Height: {1}, Render time: {2} ms", pbResult.Image.Width, pbResult.Image.Height, timer.ElapsedMilliseconds);
         }
 
         private List<ImageEffect> GetImageEffects()

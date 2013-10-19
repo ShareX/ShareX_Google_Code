@@ -57,11 +57,11 @@ namespace ShareX
             {
                 if (isFileExist)
                 {
-                    pbPreview.LoadImageFromFile(info.FilePath);
+                    pbPreview.LoadImageFromFileAsync(info.FilePath);
                 }
                 else
                 {
-                    pbPreview.LoadImageFromURL(info.Result.URL);
+                    pbPreview.LoadImageFromURLAsync(info.Result.URL);
                 }
             }
 
