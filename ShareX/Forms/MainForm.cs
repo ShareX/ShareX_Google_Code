@@ -355,9 +355,12 @@ namespace ShareX
 
         private void RegisterMenuClosing()
         {
-            foreach (ToolStripDropDownItem dropDownItem in new ToolStripDropDownItem[] { tsddbAfterCaptureTasks, tsddbAfterUploadTasks, tsmiImageUploaders, tsmiTextUploaders,
+            foreach (ToolStripDropDownItem dropDownItem in new ToolStripDropDownItem[]
+            {
+                tsddbAfterCaptureTasks, tsddbAfterUploadTasks, tsmiImageUploaders, tsmiTextUploaders,
                 tsmiFileUploaders, tsmiURLShorteners, tsmiSocialServices, tsmiTrayAfterCaptureTasks, tsmiTrayAfterUploadTasks, tsmiTrayImageUploaders, tsmiTrayTextUploaders,
-                tsmiTrayFileUploaders, tsmiTrayURLShorteners, tsmiTraySocialServices })
+                tsmiTrayFileUploaders, tsmiTrayURLShorteners, tsmiTraySocialServices
+            })
             {
                 dropDownItem.DropDown.Closing += (sender, e) => e.Cancel = (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked);
             }
@@ -837,7 +840,8 @@ namespace ShareX
         {
             switch (e.KeyData)
             {
-                default: return;
+                default:
+                    return;
                 case Keys.Enter:
                     uim.TryOpen();
                     break;

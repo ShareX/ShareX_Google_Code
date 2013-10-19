@@ -94,8 +94,8 @@ namespace ShareX
             get
             {
                 return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && UseDefaultGeneralSettings &&
-                    UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions &&
-                   UseDefaultIndexerSettings && UseDefaultAdvancedSettings && !WatchFolderEnabled;
+                       UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions &&
+                       UseDefaultIndexerSettings && UseDefaultAdvancedSettings && !WatchFolderEnabled;
             }
         }
 
@@ -282,7 +282,7 @@ namespace ShareX
         public bool ProcessImagesDuringFileUpload { get; set; }
 
         [Category("After upload"), DefaultValue(""),
-        Description("Clipboard content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%mo-%d etc.")]
+         Description("Clipboard content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%mo-%d etc.")]
         public string ClipboardContentFormat { get; set; }
 
         [Category("After upload"), DefaultValue(""), Description("Balloon tip content format after uploading. Supported variables: $result, $url, $shorturl, $thumbnailurl, $deletionurl, $filepath, $filename, $filenamenoext, $folderpath, $foldername, $uploadtime and other variables such as %y-%mo-%d etc.")]

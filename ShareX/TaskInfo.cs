@@ -106,7 +106,10 @@ namespace ShareX
 
         public TimeSpan UploadDuration
         {
-            get { return UploadTime - StartTime; }
+            get
+            {
+                return UploadTime - StartTime;
+            }
         }
 
         public UploadResult Result { get; set; }

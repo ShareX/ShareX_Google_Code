@@ -44,7 +44,11 @@ namespace ShareX
 
     public enum TaskJob
     {
-        DataUpload, FileUpload, ImageJob, TextUpload, ShortenURL
+        DataUpload,
+        FileUpload,
+        ImageJob,
+        TextUpload,
+        ShortenURL
     }
 
     [Flags]
@@ -91,7 +95,9 @@ namespace ShareX
 
     public enum AfterCaptureFormResult
     {
-        Continue, Cancel, Copy
+        Continue,
+        Cancel,
+        Copy
     }
 
     public enum CaptureType
@@ -162,6 +168,8 @@ namespace ShareX
 
     public enum HotkeyStatus
     {
-        Registered, Failed, NotConfigured
+        Registered,
+        Failed,
+        NotConfigured
     }
 }

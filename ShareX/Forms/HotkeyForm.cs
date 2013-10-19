@@ -34,6 +34,7 @@ namespace ShareX
         public int HotkeyRepeatLimit { get; set; }
 
         public delegate void HotkeyEventHandler(ushort id, Keys key, Modifiers modifier);
+
         public event HotkeyEventHandler HotkeyPress;
 
         private Stopwatch repeatLimitTimer;

@@ -38,6 +38,7 @@ namespace ShareX
         public TaskSettings TaskSettings { get; set; }
 
         public delegate void FileWatcherTriggerEventHandler(string path);
+
         public event FileWatcherTriggerEventHandler FileWatcherTrigger;
 
         private SynchronizationContext context;
