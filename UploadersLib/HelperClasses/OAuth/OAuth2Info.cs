@@ -40,7 +40,7 @@ namespace UploadersLib.HelperClasses
         public static bool CheckOAuth(OAuth2Info oauth)
         {
             return oauth != null && !string.IsNullOrEmpty(oauth.Client_ID) && !string.IsNullOrEmpty(oauth.Client_Secret) &&
-                oauth.Token != null && !string.IsNullOrEmpty(oauth.Token.access_token);
+                   oauth.Token != null && !string.IsNullOrEmpty(oauth.Token.access_token);
         }
     }
 }

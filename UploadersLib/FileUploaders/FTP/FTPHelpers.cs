@@ -35,7 +35,8 @@ namespace UploadersLib
     {
         public enum SlashType
         {
-            Prefix, Suffix
+            Prefix,
+            Suffix
         }
 
         public static string AddSlash(string url, SlashType slashType)

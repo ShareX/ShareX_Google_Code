@@ -37,6 +37,7 @@ namespace UploadersLib.HelperClasses
         public string ShortenedURL { get; set; }
 
         private bool isSuccess;
+
         public bool IsSuccess
         {
             get
@@ -55,7 +56,10 @@ namespace UploadersLib.HelperClasses
 
         public bool IsError
         {
-            get { return Errors != null && Errors.Count > 0; }
+            get
+            {
+                return Errors != null && Errors.Count > 0;
+            }
         }
 
         public UploadResult()

@@ -146,9 +146,9 @@ namespace HistoryLib
                 DateTime toDate = dtpFilterTo.Value.Date;
 
                 result = from hi in result
-                         let date = FastDateTime.ToLocalTime(hi.DateTimeUtc).Date
-                         where date >= fromDate && date <= toDate
-                         select hi;
+                    let date = FastDateTime.ToLocalTime(hi.DateTimeUtc).Date
+                    where date >= fromDate && date <= toDate
+                    select hi;
             }
 
             return result.ToArray();
@@ -207,10 +207,11 @@ namespace HistoryLib
             }
 
             var types = from hi in historyItems
-                        group hi by hi.Type into t
-                        let count = t.Count()
-                        orderby t.Key
-                        select string.Format(", {0}: {1}", t.Key, count);
+                group hi by hi.Type
+                into t
+                let count = t.Count()
+                orderby t.Key
+                select string.Format(", {0}: {1}", t.Key, count);
 
             foreach (string type in types)
             {
@@ -309,7 +310,8 @@ namespace HistoryLib
         {
             switch (e.KeyData)
             {
-                default: return;
+                default:
+                    return;
                 case Keys.Enter:
                     him.TryOpen();
                     break;

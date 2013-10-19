@@ -32,6 +32,7 @@ namespace HistoryLib
     public partial class HistoryItemManager
     {
         public delegate HistoryItem[] GetHistoryItemsEventHandler();
+
         public event GetHistoryItemsEventHandler GetHistoryItems;
 
         public HistoryItem HistoryItem { get; private set; }

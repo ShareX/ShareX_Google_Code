@@ -32,7 +32,11 @@ namespace HistoryLib.CustomControls
 {
     public class ObjectListView : MyListView
     {
-        public enum ObjectType { Fields, Properties }
+        public enum ObjectType
+        {
+            Fields,
+            Properties
+        }
 
         public ObjectType SetObjectType { get; set; }
 

@@ -62,32 +62,50 @@ namespace ScreenCapture
 
         public static Point MousePosition
         {
-            get { return mouseState.Position; }
+            get
+            {
+                return mouseState.Position;
+            }
         }
 
         public static Point PreviousMousePosition
         {
-            get { return oldMouseState.Position; }
+            get
+            {
+                return oldMouseState.Position;
+            }
         }
 
         public static Point MousePosition0Based
         {
-            get { return mouseState.ZeroBasedPosition; }
+            get
+            {
+                return mouseState.ZeroBasedPosition;
+            }
         }
 
         public static Point PreviousMousePosition0Based
         {
-            get { return oldMouseState.ZeroBasedPosition; }
+            get
+            {
+                return oldMouseState.ZeroBasedPosition;
+            }
         }
 
         public static Point MouseVelocity
         {
-            get { return new Point(MousePosition0Based.X - PreviousMousePosition0Based.X, MousePosition0Based.Y - PreviousMousePosition0Based.Y); }
+            get
+            {
+                return new Point(MousePosition0Based.X - PreviousMousePosition0Based.X, MousePosition0Based.Y - PreviousMousePosition0Based.Y);
+            }
         }
 
         public static bool IsMouseMoved
         {
-            get { return MouseVelocity.X != 0 || MouseVelocity.Y != 0; }
+            get
+            {
+                return MouseVelocity.X != 0 || MouseVelocity.Y != 0;
+            }
         }
     }
 }

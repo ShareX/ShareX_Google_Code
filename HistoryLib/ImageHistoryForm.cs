@@ -105,7 +105,7 @@ namespace HistoryLib
         private HistoryItem[] GetHistoryItems()
         {
             IEnumerable<HistoryItem> tempHistoryItems = history.GetHistoryItems().Where(x => !string.IsNullOrEmpty(x.Filepath) &&
-                Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath));
+                                                                                             Helpers.IsImageFile(x.Filepath) && File.Exists(x.Filepath));
 
             if (MaxItemCount > -1)
             {
@@ -230,7 +230,8 @@ namespace HistoryLib
         {
             switch (e.KeyData)
             {
-                default: return;
+                default:
+                    return;
                 case Keys.Enter:
                     him.OpenURL();
                     break;

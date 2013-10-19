@@ -42,13 +42,13 @@ namespace UploadersLib.TextUploaders
             if (!string.IsNullOrEmpty(text) && !string.IsNullOrEmpty(fileName))
             {
                 var gistUploadObject = new
+                {
+                    @public = true,
+                    files = new Dictionary<string, object>
                     {
-                        @public = true,
-                        files = new Dictionary<string, object>
-                            {
-                                { fileName, new { content = text } }
-                            }
-                    };
+                        { fileName, new { content = text } }
+                    }
+                };
 
                 string argsJson = JsonConvert.SerializeObject(gistUploadObject);
 

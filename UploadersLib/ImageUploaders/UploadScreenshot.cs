@@ -68,7 +68,7 @@ namespace UploadersLib.ImageUploaders
                     {
                         case "1":
                             errorMessage = "The MD5 sum that you provided did not match the MD5 sum that we calculated for the uploaded image file." +
-                                " There may of been a network interruption during upload. Suggest that you try the upload again.";
+                                           " There may of been a network interruption during upload. Suggest that you try the upload again.";
                             break;
                         case "2":
                             errorMessage = "The apiKey that you provided does not exist or has been banned. Please contact us for more information.";

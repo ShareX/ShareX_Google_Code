@@ -50,7 +50,7 @@ namespace UploadersLib.FileUploaders
         private const string PathBrowseIssue = "/browse/{0}";
         private const string PathIssueAttachments = PathApi + "/issue/{0}/attachments";
 
-        private readonly static X509Certificate2 _jiraCertificate;
+        private static readonly X509Certificate2 _jiraCertificate;
 
         private readonly Uri _jiraHost;
         private readonly string _jiraIssuePrefix;
@@ -78,7 +78,10 @@ namespace UploadersLib.FileUploaders
 
         internal static string PrivateKey
         {
-            get { return _jiraCertificate.PrivateKey.ToXmlString(true); }
+            get
+            {
+                return _jiraCertificate.PrivateKey.ToXmlString(true);
+            }
         }
 
         internal static string PublicKey
@@ -100,11 +103,11 @@ namespace UploadersLib.FileUploaders
                 }
 
                 return string.Join(Environment.NewLine, new[]
-                    {
-                        "-----BEGIN PUBLIC KEY-----",
-                        sb.ToString(),
-                        "-----END PUBLIC KEY-----"
-                    });
+                {
+                    "-----BEGIN PUBLIC KEY-----",
+                    sb.ToString(),
+                    "-----END PUBLIC KEY-----"
+                });
             }
         }
 

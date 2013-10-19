@@ -160,7 +160,9 @@ namespace UploadersLib
 
     public enum ProxyMethod
     {
-        None, Manual, Automatic
+        None,
+        Manual,
+        Automatic
     }
 
     public enum ProxyType
@@ -217,12 +219,15 @@ namespace UploadersLib
 
     public enum URLType
     {
-        URL, ThumbnailURL, DeletionURL
+        URL,
+        ThumbnailURL,
+        DeletionURL
     }
 
     public enum Privacy
     {
-        Public, Private
+        Public,
+        Private
     }
 
     public enum AccountType
@@ -289,12 +294,16 @@ namespace UploadersLib
 
     public enum CustomUploaderType
     {
-        Image, Text, File, URL
+        Image,
+        Text,
+        File,
+        URL
     }
 
     public enum CustomUploaderRequestType
     {
-        POST, GET
+        POST,
+        GET
     }
 
     public enum FtpSecurityProtocol

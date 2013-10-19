@@ -28,9 +28,6 @@ using System.Drawing;
 
 namespace HelpersLib
 {
-
-    #region Public Structs
-
     public struct MyColor
     {
         public RGBA RGBA;
@@ -721,6 +718,4 @@ namespace HelpersLib
             return base.Equals(obj);
         }
     }
-
-    #endregion Public Structs
 }

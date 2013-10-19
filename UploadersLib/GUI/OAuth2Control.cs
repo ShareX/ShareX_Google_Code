@@ -31,12 +31,15 @@ namespace UploadersLib.GUI
     public partial class OAuth2Control : UserControl
     {
         public delegate void OpenButtonClickedEventHandler();
+
         public event OpenButtonClickedEventHandler OpenButtonClicked;
 
         public delegate void CompleteButtonClickedEventHandler(string code);
+
         public event CompleteButtonClickedEventHandler CompleteButtonClicked;
 
         public delegate void RefreshButtonClickedEventHandler();
+
         public event RefreshButtonClickedEventHandler RefreshButtonClicked;
 
         public string Status

@@ -36,7 +36,7 @@ namespace UploadersLib
     public class IconListManager
     {
         private Hashtable _extensionList = new Hashtable();
-        private ArrayList _imageLists = new ArrayList();			//will hold ImageList objects
+        private ArrayList _imageLists = new ArrayList(); //will hold ImageList objects
         private IconReader.IconSize _iconSize;
         private bool ManageBothSizes; //flag, used to determine whether to create two ImageLists.
 
@@ -98,12 +98,12 @@ namespace UploadersLib
             //return back its index
             if (_extensionList.ContainsKey(extension.ToUpper()))
             {
-                return (int)_extensionList[extension.ToUpper()];		//return existing index
+                return (int)_extensionList[extension.ToUpper()]; //return existing index
             }
 
             // It's not already been added, so add it and record its position.
 
-            int pos = ((ImageList)_imageLists[0]).Images.Count;		//store current count -- new item's index
+            int pos = ((ImageList)_imageLists[0]).Images.Count; //store current count -- new item's index
 
             if (ManageBothSizes)
             {
@@ -114,10 +114,10 @@ namespace UploadersLib
             else
             {
                 //only doing one size, so use IconSize as specified in _iconSize.
-                ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, _iconSize, false));	//add to image list
+                ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, _iconSize, false)); //add to image list
             }
 
-            AddExtension(extension.ToUpper(), pos);	// add to hash table
+            AddExtension(extension.ToUpper(), pos); // add to hash table
 
             return pos;
         }
@@ -129,10 +129,10 @@ namespace UploadersLib
         {
             foreach (ImageList imageList in _imageLists)
             {
-                imageList.Images.Clear();	//clear current imagelist.
+                imageList.Images.Clear(); //clear current imagelist.
             }
 
-            _extensionList.Clear();			//empty hashtable of entries too.
+            _extensionList.Clear(); //empty hashtable of entries too.
         }
     }
 }

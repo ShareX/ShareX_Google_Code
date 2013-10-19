@@ -123,11 +123,11 @@ namespace UploadersLib.TextUploaders
         public string TextFormat { get; set; }
 
         [Description("This sets the expiration date of your paste\r\nN = Never, 10M = 10 Minutes, 1H = 1 Hour, 1D = 1 Day, 1W = 1 Week, 2W = 2 Weeks, 1M = 1 Month"),
-        DefaultValue("N")]
+         DefaultValue("N")]
         public string ExpireTime { get; set; }
 
         [Description("This makes a paste public or private\r\n0 = Public, 1 = Unlisted, 2 = Private (only allowed in combination with api_user_key, as you have to be logged into your account to access the paste)"),
-        DefaultValue("1")]
+         DefaultValue("1")]
         public string Privacy { get; set; }
 
         [Description("This is the username of the user you want to login")]

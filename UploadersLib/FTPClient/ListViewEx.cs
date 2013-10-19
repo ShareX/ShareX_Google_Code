@@ -53,7 +53,7 @@ namespace UploadersLib
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wPar, IntPtr lPar);
 
         [DllImport("user32.dll", CharSet = CharSet.Ansi)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int len, ref	int[] order);
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int len, ref int[] order);
 
         // ListView messages
         private const int LVM_FIRST = 0x1000;
@@ -132,7 +132,7 @@ namespace UploadersLib
             IntPtr lPar = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)) * Columns.Count);
 
             IntPtr res = SendMessage(Handle, LVM_GETCOLUMNORDERARRAY, new IntPtr(Columns.Count), lPar);
-            if (res.ToInt32() == 0)	// Something went wrong
+            if (res.ToInt32() == 0) // Something went wrong
             {
                 Marshal.FreeHGlobal(lPar);
                 return null;
@@ -210,11 +210,11 @@ namespace UploadersLib
             return subItemRect;
         }
 
-        protected override void WndProc(ref	Message msg)
+        protected override void WndProc(ref Message msg)
         {
             switch (msg.Msg)
             {
-                // Look	for	WM_VSCROLL,WM_HSCROLL or WM_SIZE messages.
+                    // Look	for	WM_VSCROLL,WM_HSCROLL or WM_SIZE messages.
                 case WM_VSCROLL:
                 case WM_HSCROLL:
                 case WM_SIZE:
@@ -366,16 +366,16 @@ namespace UploadersLib
             switch (e.KeyChar)
             {
                 case (char)(int)Keys.Escape:
-                    {
-                        EndEditing(false);
-                        break;
-                    }
+                {
+                    EndEditing(false);
+                    break;
+                }
 
                 case (char)(int)Keys.Enter:
-                    {
-                        EndEditing(true);
-                        break;
-                    }
+                {
+                    EndEditing(true);
+                    break;
+                }
             }
         }
 
@@ -389,13 +389,13 @@ namespace UploadersLib
                 return;
 
             SubItemEndEditingEventArgs e = new SubItemEndEditingEventArgs(
-                _editItem,		// The item being edited
-                _editSubItem,	// The subitem index being edited
+                _editItem, // The item being edited
+                _editSubItem, // The subitem index being edited
                 AcceptChanges ?
-                    _editingControl.Text :	// Use editControl text if changes are accepted
-                    _editItem.SubItems[_editSubItem].Text,	// or the original subitem's text, if changes are discarded
-                !AcceptChanges	// Cancel?
-            );
+                    _editingControl.Text : // Use editControl text if changes are accepted
+                    _editItem.SubItems[_editSubItem].Text, // or the original subitem's text, if changes are discarded
+                !AcceptChanges // Cancel?
+                );
 
             OnSubItemEndEditing(e);
 
@@ -421,6 +421,7 @@ namespace UploadersLib
     /// Event Handler for SubItem events
     /// </summary>
     public delegate void SubItemEventHandler(object sender, SubItemEventArgs e);
+
     /// <summary>
     /// Event Handler for SubItemEndEditing events
     /// </summary>
@@ -439,13 +440,21 @@ namespace UploadersLib
 
         private int _subItemIndex = -1;
         private ListViewItem _item;
+
         public int SubItem
         {
-            get { return _subItemIndex; }
+            get
+            {
+                return _subItemIndex;
+            }
         }
+
         public ListViewItem Item
         {
-            get { return _item; }
+            get
+            {
+                return _item;
+            }
         }
     }
 
@@ -466,13 +475,26 @@ namespace UploadersLib
 
         public string DisplayText
         {
-            get { return _text; }
-            set { _text = value; }
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _text = value;
+            }
         }
+
         public bool Cancel
         {
-            get { return _cancel; }
-            set { _cancel = value; }
+            get
+            {
+                return _cancel;
+            }
+            set
+            {
+                _cancel = value;
+            }
         }
     }
 }

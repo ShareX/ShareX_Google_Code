@@ -88,6 +88,7 @@ namespace UploadersLib.FileUploaders
         {
             [JsonProperty("150x")]
             public string direct_150x { get; set; }
+
             [JsonProperty("930x")]
             public string direct_930x { get; set; }
         }
