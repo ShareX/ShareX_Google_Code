@@ -110,7 +110,7 @@ namespace HelpersLib
 
         public static Point GetCursorPosition()
         {
-            POINT point = new POINT();
+            POINT point;
 
             if (NativeMethods.GetCursorPos(out point))
             {

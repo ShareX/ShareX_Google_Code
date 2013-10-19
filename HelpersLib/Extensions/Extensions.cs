@@ -188,10 +188,10 @@ namespace HelpersLib
 
             if (array != null)
             {
-                for (int i = 0; i < array.Length; i++)
+                foreach (T t in array)
                 {
                     if (sb.Length > 0 && !string.IsNullOrEmpty(separator)) sb.Append(separator);
-                    sb.Append(array[i].ToString());
+                    sb.Append(t);
                 }
             }
 

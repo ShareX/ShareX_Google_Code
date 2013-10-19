@@ -115,7 +115,7 @@ namespace HelpersLib
             int lastws = -1;
 
             // next character
-            int c = Eos;
+            int c;
 
             for (;;)
             {

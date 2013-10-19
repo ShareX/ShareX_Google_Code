@@ -141,7 +141,7 @@ namespace UploadersLib
         {
             using (HttpWebResponse response = GetResponseUsingPost(url, stream, CreateBoundary(), contentType, cookies, headers))
             {
-                return ResponseToString(response, ResponseType.Text);
+                return ResponseToString(response);
             }
         }
 

@@ -166,7 +166,6 @@ namespace UploadersLib.HelperClasses
                     if (str[i] == '?')
                     {
                         conditional = str.Substring(0, i);
-                        continue;
                     }
                 }
                 else if (string.IsNullOrEmpty(cTrue))

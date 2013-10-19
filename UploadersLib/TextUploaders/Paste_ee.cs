@@ -60,7 +60,7 @@ namespace UploadersLib.TextUploaders
                 arguments.Add("format", "simple");
                 arguments.Add("return", "link");
 
-                ur.Response = SendPostRequest("http://paste.ee/api", arguments, ResponseType.Text);
+                ur.Response = SendPostRequest("http://paste.ee/api", arguments);
 
                 if (!string.IsNullOrEmpty(ur.Response) && ur.Response.StartsWith("error"))
                 {

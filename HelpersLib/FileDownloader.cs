@@ -140,7 +140,7 @@ namespace HelpersLib
                     long speedTest = 0;
 
                     byte[] buffer = new byte[(int)Math.Min(bufferSize, FileSize)];
-                    int bytesRead = 0;
+                    int bytesRead;
 
                     ThrowEvent(DownloadStarted);
 

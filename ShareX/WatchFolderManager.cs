@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShareX
 {
@@ -52,15 +53,7 @@ namespace ShareX
 
         private WatchFolder FindWatchFolder(WatchFolderSettings watchFolderSetting)
         {
-            foreach (WatchFolder watchFolder in WatchFolders)
-            {
-                if (watchFolder.Settings == watchFolderSetting)
-                {
-                    return watchFolder;
-                }
-            }
-
-            return null;
+            return WatchFolders.FirstOrDefault(watchFolder => watchFolder.Settings == watchFolderSetting);
         }
 
         private bool IsExist(WatchFolderSettings watchFolderSetting)

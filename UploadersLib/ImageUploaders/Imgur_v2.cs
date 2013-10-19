@@ -76,7 +76,7 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            UploadResult ur = null;
+            UploadResult ur;
 
             switch (UploadMethod)
             {
