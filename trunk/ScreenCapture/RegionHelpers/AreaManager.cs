@@ -87,7 +87,15 @@ namespace ScreenCapture
         public ResizeManager ResizeManager { get; private set; }
         public bool IsCreating { get; private set; }
         public bool IsMoving { get; private set; }
-        public bool IsResizing { get { return ResizeManager.IsResizing; } }
+
+        public bool IsResizing
+        {
+            get
+            {
+                return ResizeManager.IsResizing;
+            }
+        }
+
         public List<Rectangle> Windows { get; set; }
         public bool WindowCaptureMode { get; set; }
         public int MinimumSize { get; set; }

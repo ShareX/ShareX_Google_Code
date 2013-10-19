@@ -44,6 +44,7 @@ namespace UploadersLib
         public static string UserAgent = string.Format("{0} {1}", Application.ProductName, Application.ProductVersion);
 
         public delegate void ProgressEventHandler(ProgressManager progress);
+
         public event ProgressEventHandler ProgressChanged;
 
         public List<string> Errors { get; private set; }
@@ -582,7 +583,9 @@ namespace UploadersLib
                             str.AppendLine(response);
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 str.AppendLine();

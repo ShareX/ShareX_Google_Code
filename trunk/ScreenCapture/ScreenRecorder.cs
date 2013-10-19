@@ -89,6 +89,7 @@ namespace ScreenCapture
         public ScreenRecordOutput OutputType { get; private set; }
 
         public delegate void ProgressEventHandler(int progress);
+
         public event ProgressEventHandler EncodingProgressChanged;
 
         private int fps, delay, frameCount;

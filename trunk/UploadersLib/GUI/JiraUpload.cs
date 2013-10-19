@@ -44,7 +44,10 @@ namespace UploadersLib.GUI
 
         public string IssueId
         {
-            get { return txtIssueId.Text; }
+            get
+            {
+                return txtIssueId.Text;
+            }
         }
 
         public JiraUpload(string issuePrefix, GetSummaryHandler getSummary)

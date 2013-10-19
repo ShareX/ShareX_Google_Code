@@ -524,7 +524,9 @@ namespace UploadersLib.FileUploaders
                             }
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                     elapsed = (int)(FastDateTime.Now - time).TotalMilliseconds;
                     if (elapsed < interval)
                     {

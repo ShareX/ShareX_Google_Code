@@ -62,10 +62,14 @@ namespace UploadersLib
         }
 
         public TwitterMsg(OAuthInfo oauth)
-            : this(oauth, "Update Twitter status") { }
+            : this(oauth, "Update Twitter status")
+        {
+        }
 
         public TwitterMsg(string title)
-            : this(null, title) { }
+            : this(null, title)
+        {
+        }
 
         private void btnOK_Click(object sender, EventArgs e)
         {

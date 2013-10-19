@@ -98,9 +98,9 @@ namespace UploadersLib.HelperClasses
         public static bool CheckOAuth(OAuthInfo oauth)
         {
             return oauth != null && !string.IsNullOrEmpty(oauth.ConsumerKey) &&
-                ((!string.IsNullOrEmpty(oauth.ConsumerSecret) && oauth.SignatureMethod == OAuthInfoSignatureMethod.HMAC_SHA1)
-                || oauth.ConsumerPrivateKey != null && oauth.SignatureMethod == OAuthInfoSignatureMethod.RSA_SHA1)
-                && !string.IsNullOrEmpty(oauth.UserToken) && !string.IsNullOrEmpty(oauth.UserSecret);
+                   ((!string.IsNullOrEmpty(oauth.ConsumerSecret) && oauth.SignatureMethod == OAuthInfoSignatureMethod.HMAC_SHA1)
+                    || oauth.ConsumerPrivateKey != null && oauth.SignatureMethod == OAuthInfoSignatureMethod.RSA_SHA1)
+                   && !string.IsNullOrEmpty(oauth.UserToken) && !string.IsNullOrEmpty(oauth.UserSecret);
         }
 
         public override string ToString()

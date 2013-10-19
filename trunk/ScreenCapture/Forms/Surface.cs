@@ -194,7 +194,7 @@ namespace ScreenCapture
             Close();
         }
 
-        protected virtual new void Update()
+        protected new virtual void Update()
         {
             InputManager.Update();
 

@@ -108,10 +108,12 @@ namespace HistoryLib
             //
             // cmsHistory
             //
-            cmsHistory.Items.AddRange(new ToolStripItem[] {
-            tsmiOpen,
-            tsmiCopy,
-            tsmiShow});
+            cmsHistory.Items.AddRange(new ToolStripItem[]
+            {
+                tsmiOpen,
+                tsmiCopy,
+                tsmiShow
+            });
             cmsHistory.Name = "cmsHistory";
             cmsHistory.ShowImageMargin = false;
             cmsHistory.Size = new Size(128, 92);
@@ -119,14 +121,16 @@ namespace HistoryLib
             //
             // tsmiOpen
             //
-            tsmiOpen.DropDownItems.AddRange(new ToolStripItem[] {
-            tsmiOpenURL,
-            tsmiOpenShortenedURL,
-            tsmiOpenThumbnailURL,
-            tsmiOpenDeletionURL,
-            tssOpen1,
-            tsmiOpenFile,
-            tsmiOpenFolder});
+            tsmiOpen.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                tsmiOpenURL,
+                tsmiOpenShortenedURL,
+                tsmiOpenThumbnailURL,
+                tsmiOpenDeletionURL,
+                tssOpen1,
+                tsmiOpenFile,
+                tsmiOpenFolder
+            });
             tsmiOpen.Name = "tsmiOpen";
             tsmiOpen.Size = new Size(127, 22);
             tsmiOpen.Text = "Open";
@@ -180,28 +184,30 @@ namespace HistoryLib
             //
             // tsmiCopy
             //
-            tsmiCopy.DropDownItems.AddRange(new ToolStripItem[] {
-            tsmiCopyURL,
-            tsmiCopyShortenedURL,
-            tsmiCopyThumbnailURL,
-            tsmiCopyDeletionURL,
-            tssCopy1,
-            tsmiCopyFile,
-            tsmiCopyImage,
-            tsmiCopyText,
-            tssCopy2,
-            tsmiCopyHTMLLink,
-            tsmiCopyHTMLImage,
-            tsmiCopyHTMLLinkedImage,
-            tssCopy3,
-            tsmiCopyForumLink,
-            tsmiCopyForumImage,
-            tsmiCopyForumLinkedImage,
-            tssCopy4,
-            tsmiCopyFilePath,
-            tsmiCopyFileName,
-            tsmiCopyFileNameWithExtension,
-            tsmiCopyFolder});
+            tsmiCopy.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                tsmiCopyURL,
+                tsmiCopyShortenedURL,
+                tsmiCopyThumbnailURL,
+                tsmiCopyDeletionURL,
+                tssCopy1,
+                tsmiCopyFile,
+                tsmiCopyImage,
+                tsmiCopyText,
+                tssCopy2,
+                tsmiCopyHTMLLink,
+                tsmiCopyHTMLImage,
+                tsmiCopyHTMLLinkedImage,
+                tssCopy3,
+                tsmiCopyForumLink,
+                tsmiCopyForumImage,
+                tsmiCopyForumLinkedImage,
+                tssCopy4,
+                tsmiCopyFilePath,
+                tsmiCopyFileName,
+                tsmiCopyFileNameWithExtension,
+                tsmiCopyFolder
+            });
             tsmiCopy.Name = "tsmiCopy";
             tsmiCopy.Size = new Size(127, 22);
             tsmiCopy.Text = "Copy";
@@ -347,9 +353,11 @@ namespace HistoryLib
             //
             // tsmiShow
             //
-            tsmiShow.DropDownItems.AddRange(new ToolStripItem[] {
-            tsmiShowImagePreview,
-            tsmiShowMoreInfo});
+            tsmiShow.DropDownItems.AddRange(new ToolStripItem[]
+            {
+                tsmiShowImagePreview,
+                tsmiShowMoreInfo
+            });
             tsmiShow.Name = "tsmiShow";
             tsmiShow.Size = new Size(127, 22);
             tsmiShow.Text = "Show";

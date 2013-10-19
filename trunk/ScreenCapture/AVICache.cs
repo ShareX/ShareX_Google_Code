@@ -84,7 +84,9 @@ namespace ScreenCapture
                                     position++;
                                 }
                             }
-                            catch (InvalidOperationException) { }
+                            catch (InvalidOperationException)
+                            {
+                            }
                             finally
                             {
                                 if (img != null) img.Dispose();
