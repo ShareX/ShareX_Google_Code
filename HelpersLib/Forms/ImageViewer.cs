@@ -34,23 +34,21 @@ namespace HelpersLib
     {
         private Image screenshot;
 
-        public ImageViewer(Image image)
+        private ImageViewer(Image image)
         {
-            screenshot = (Image)image.Clone();
-            InitializeComponent();
-        }
-
-        public ImageViewer(string path)
-        {
-            screenshot = Helpers.GetImageFromFile(path);
+            screenshot = image;
             InitializeComponent();
         }
 
         public static void ShowImage(Image img)
         {
-            using (ImageViewer viewer = new ImageViewer(img))
+            if (img != null)
             {
-                viewer.ShowDialog();
+                using (Image tempImage = (Image)img.Clone())
+                using (ImageViewer viewer = new ImageViewer(tempImage))
+                {
+                    viewer.ShowDialog();
+                }
             }
         }
 
@@ -59,16 +57,16 @@ namespace HelpersLib
             if (!string.IsNullOrEmpty(filepath) && File.Exists(filepath))
             {
                 using (Image img = Helpers.GetImageFromFile(filepath))
+                using (ImageViewer viewer = new ImageViewer(img))
                 {
-                    ShowImage(img);
+                    viewer.ShowDialog();
                 }
             }
         }
 
         private void ShowScreenshot_Shown(object sender, EventArgs e)
         {
-            BringToFront();
-            Activate();
+            this.ShowActivate();
         }
 
         private void ShowScreenshot_Deactivate(object sender, EventArgs e)
@@ -102,14 +100,16 @@ namespace HelpersLib
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (screenshot != null)
-            {
-                screenshot.Dispose();
-            }
             if (disposing && (components != null))
             {
                 components.Dispose();
+
+                if (screenshot != null)
+                {
+                    screenshot.Dispose();
+                }
             }
+
             base.Dispose(disposing);
         }
 
@@ -137,7 +137,7 @@ namespace HelpersLib
             this.Bounds = CaptureHelpers.GetScreenBounds();
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Text = "Image Viewer";
+            this.Text = "ShareX - Image viewer";
             this.WindowState = FormWindowState.Maximized;
             this.Controls.Add(this.pbPreview);
 

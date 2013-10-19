@@ -296,11 +296,11 @@ namespace ShareX
                 {
                     if (uim.SelectedItem.IsImageFile)
                     {
-                        pbPreview.LoadImageFromFile(uim.SelectedItem.Info.FilePath);
+                        pbPreview.LoadImageFromFileAsync(uim.SelectedItem.Info.FilePath);
                     }
                     else if (uim.SelectedItem.IsImageURL)
                     {
-                        pbPreview.LoadImageFromURL(uim.SelectedItem.Info.Result.URL);
+                        pbPreview.LoadImageFromURLAsync(uim.SelectedItem.Info.Result.URL);
                     }
                 }
             }
