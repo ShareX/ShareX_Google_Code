@@ -627,7 +627,10 @@ namespace HelpersLib
 
                 e.Result = WaitWhile(check, interval, timeout);
             };
-            bw.RunWorkerCompleted += (sender, e) => { if ((bool)e.Result) onSuccess(); };
+            bw.RunWorkerCompleted += (sender, e) =>
+            {
+                if ((bool)e.Result) onSuccess();
+            };
             bw.RunWorkerAsync();
         }
 

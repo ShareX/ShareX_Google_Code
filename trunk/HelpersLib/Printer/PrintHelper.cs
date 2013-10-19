@@ -42,7 +42,7 @@ namespace HelpersLib
             get
             {
                 return Settings != null && ((PrintType == PrintType.Image && Image != null) ||
-                    (PrintType == PrintType.Text && !string.IsNullOrEmpty(Text) && Settings.TextFont != null));
+                                            (PrintType == PrintType.Text && !string.IsNullOrEmpty(Text) && Settings.TextFont != null));
             }
         }
 
@@ -139,7 +139,7 @@ namespace HelpersLib
             Image img;
 
             if (Settings.AutoRotateImage && ((rect.Width > rect.Height && Image.Width < Image.Height) ||
-                (rect.Width < rect.Height && Image.Width > Image.Height)))
+                                             (rect.Width < rect.Height && Image.Width > Image.Height)))
             {
                 img = (Image)Image.Clone();
                 img.RotateFlip(RotateFlipType.Rotate90FlipNone);

@@ -80,8 +80,8 @@ namespace HelpersLib
         public override int GetHashCode()
         {
             return Left ^ ((Top << 13) | (Top >> 0x13))
-              ^ ((Width << 0x1a) | (Width >> 6))
-              ^ ((Height << 7) | (Height >> 0x19));
+                   ^ ((Width << 0x1a) | (Width >> 6))
+                   ^ ((Height << 7) | (Height >> 0x19));
         }
 
         public static implicit operator Rectangle(RECT rect)
@@ -161,7 +161,7 @@ namespace HelpersLib
         public ushort wCreatorVersion;
 
         public WINDOWINFO(Boolean? filler)
-            : this()   // Allows automatic initialization of "cbSize" with "new WINDOWINFO(null/true/false)".
+            : this() // Allows automatic initialization of "cbSize" with "new WINDOWINFO(null/true/false)".
         {
             cbSize = (UInt32)(Marshal.SizeOf(typeof(WINDOWINFO)));
         }
@@ -235,20 +235,20 @@ namespace HelpersLib
     [StructLayout(LayoutKind.Sequential)]
     public struct CursorInfo
     {
-        public Int32 cbSize;        // Specifies the size, in bytes, of the structure.
-        public Int32 flags;         // Specifies the cursor state. This parameter can be one of the following values:
-        public IntPtr hCursor;      // Handle to the cursor.
-        public Point ptScreenPos;   // A POINT structure that receives the screen coordinates of the cursor.
+        public Int32 cbSize; // Specifies the size, in bytes, of the structure.
+        public Int32 flags; // Specifies the cursor state. This parameter can be one of the following values:
+        public IntPtr hCursor; // Handle to the cursor.
+        public Point ptScreenPos; // A POINT structure that receives the screen coordinates of the cursor.
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct IconInfo
     {
-        public bool fIcon;         // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies
-        public Int32 xHotspot;     // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot
-        public Int32 yHotspot;     // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot
-        public IntPtr hbmMask;     // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon,
-        public IntPtr hbmColor;    // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this
+        public bool fIcon; // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies
+        public Int32 xHotspot; // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot
+        public Int32 yHotspot; // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot
+        public IntPtr hbmMask; // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon,
+        public IntPtr hbmColor; // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this
     }
 
     /// <summary>

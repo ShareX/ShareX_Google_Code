@@ -34,15 +34,36 @@ namespace HelpersLib
 
         // http://en.wikipedia.org/wiki/Binary_numeral_system
         public string[] Binary { get; private set; }
-        public string BinaryText { get { return Binary.Join(); } }
+
+        public string BinaryText
+        {
+            get
+            {
+                return Binary.Join();
+            }
+        }
 
         // http://en.wikipedia.org/wiki/Hexadecimal
         public string[] Hexadecimal { get; private set; }
-        public string HexadecimalText { get { return Hexadecimal.Join().ToUpperInvariant(); } }
+
+        public string HexadecimalText
+        {
+            get
+            {
+                return Hexadecimal.Join().ToUpperInvariant();
+            }
+        }
 
         // http://en.wikipedia.org/wiki/ASCII
         public byte[] ASCII { get; private set; }
-        public string ASCIIText { get { return ASCII.Join(); } }
+
+        public string ASCIIText
+        {
+            get
+            {
+                return ASCII.Join();
+            }
+        }
 
         // http://en.wikipedia.org/wiki/Base64
         public string Base64 { get; private set; }

@@ -169,12 +169,12 @@ namespace HelpersLib
             }
 
             sb.Replace(ReplacementVariables.h.ToPrefixString(), hour)
-                 .Replace(ReplacementVariables.mi.ToPrefixString(), Helpers.AddZeroes(dt.Minute))
-                 .Replace(ReplacementVariables.s.ToPrefixString(), Helpers.AddZeroes(dt.Second))
-                 .Replace(ReplacementVariables.ms.ToPrefixString(), Helpers.AddZeroes(dt.Millisecond, 3))
-                 .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
-                 .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
-                 .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
+                .Replace(ReplacementVariables.mi.ToPrefixString(), Helpers.AddZeroes(dt.Minute))
+                .Replace(ReplacementVariables.s.ToPrefixString(), Helpers.AddZeroes(dt.Second))
+                .Replace(ReplacementVariables.ms.ToPrefixString(), Helpers.AddZeroes(dt.Millisecond, 3))
+                .Replace(ReplacementVariables.w2.ToPrefixString(), CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
+                .Replace(ReplacementVariables.w.ToPrefixString(), CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek))
+                .Replace(ReplacementVariables.pm.ToPrefixString(), (dt.Hour >= 12 ? "PM" : "AM"));
 
             sb.Replace(ReplacementVariables.unix.ToPrefixString(), DateTime.UtcNow.ToUnix().ToString());
 

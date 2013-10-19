@@ -52,7 +52,7 @@ namespace UpdateCheckerLib
             get
             {
                 return CurrentVersion != null && LatestVersion != null && !string.IsNullOrEmpty(URL) &&
-                    (ForceUpdate || Helpers.CheckVersion(LatestVersion, CurrentVersion));
+                       (ForceUpdate || Helpers.CheckVersion(LatestVersion, CurrentVersion));
             }
         }
 

@@ -54,7 +54,10 @@ namespace HelpersLib
 
         public MyColor ColorBox
         {
-            get { return mColorBox; }
+            get
+            {
+                return mColorBox;
+            }
             private set
             {
                 mColorBox = value;
@@ -64,7 +67,10 @@ namespace HelpersLib
 
         public MyColor ColorSlider
         {
-            get { return mColorSlider; }
+            get
+            {
+                return mColorSlider;
+            }
             private set
             {
                 mColorSlider = value;
@@ -75,7 +81,9 @@ namespace HelpersLib
         public DrawStyle DrawStyle
         {
             get
-            { return mDrawStyle; }
+            {
+                return mDrawStyle;
+            }
             set
             {
                 colorBox.DrawStyle = value;

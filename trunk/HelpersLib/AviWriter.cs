@@ -101,7 +101,10 @@ namespace HelpersLib
         /// method.</para></remarks>
         public int Width
         {
-            get { return (buffer != IntPtr.Zero) ? width : 0; }
+            get
+            {
+                return (buffer != IntPtr.Zero) ? width : 0;
+            }
         }
 
         /// <summary>
@@ -113,7 +116,10 @@ namespace HelpersLib
         /// method.</para></remarks>
         public int Height
         {
-            get { return (buffer != IntPtr.Zero) ? height : 0; }
+            get
+            {
+                return (buffer != IntPtr.Zero) ? height : 0;
+            }
         }
 
         /// <summary>
@@ -124,7 +130,10 @@ namespace HelpersLib
         /// to the amount of frames added using <see cref="AddFrame"/> method.</para></remarks>
         public int Position
         {
-            get { return position; }
+            get
+            {
+                return position;
+            }
         }
 
         /// <summary>
@@ -139,8 +148,14 @@ namespace HelpersLib
         /// <para>Default frame rate is set to <b>25</b>.</para></remarks>
         public int FrameRate
         {
-            get { return rate; }
-            set { rate = value; }
+            get
+            {
+                return rate;
+            }
+            set
+            {
+                rate = value;
+            }
         }
 
         /// <summary>
@@ -155,8 +170,14 @@ namespace HelpersLib
         /// <para>Default video codec is set <b>"DIB "</b>, which means no compression.</para></remarks>
         public string Codec
         {
-            get { return codec; }
-            set { codec = value; }
+            get
+            {
+                return codec;
+            }
+            set
+            {
+                codec = value;
+            }
         }
 
         /// <summary>
@@ -171,8 +192,14 @@ namespace HelpersLib
         /// <para>Default value is set to <b>-1</b> - default compression quality of the codec.</para></remarks>
         public int Quality
         {
-            get { return quality; }
-            set { quality = value; }
+            get
+            {
+                return quality;
+            }
+            set
+            {
+                quality = value;
+            }
         }
 
         /// <summary>

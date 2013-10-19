@@ -165,8 +165,8 @@ namespace HelpersLib
             Color targetColor = GetPixelColor(x, y);
 
             return targetColor.R.IsBetween(color.R - variation, color.R + variation) &&
-                targetColor.G.IsBetween(color.G - variation, color.G + variation) &&
-                targetColor.B.IsBetween(color.B - variation, color.B + variation);
+                   targetColor.G.IsBetween(color.G - variation, color.G + variation) &&
+                   targetColor.B.IsBetween(color.B - variation, color.B + variation);
         }
 
         public static Rectangle CreateRectangle(int x, int y, int x2, int y2)

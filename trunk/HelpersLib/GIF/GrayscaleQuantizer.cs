@@ -52,8 +52,8 @@ namespace HelpersLib
             // purposes, use a grayscale.
             for (uint i = 0; i < nColors; i++)
             {
-                uint Alpha = 0xFF;                      // Colors are opaque.
-                uint Intensity = Convert.ToUInt32(i * 0xFF / (nColors - 1));    // Even distribution.
+                uint Alpha = 0xFF; // Colors are opaque.
+                uint Intensity = Convert.ToUInt32(i * 0xFF / (nColors - 1)); // Even distribution.
 
                 // The GIF encoder makes the first entry in the palette
                 // that has a ZERO alpha the transparent color in the GIF.

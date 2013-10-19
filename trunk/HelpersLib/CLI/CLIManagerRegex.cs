@@ -30,7 +30,12 @@ using System.Text.RegularExpressions;
 
 namespace HelpersLib.CLI
 {
-    public enum ActionInput { None, Text, Number }
+    public enum ActionInput
+    {
+        None,
+        Text,
+        Number
+    }
 
     public class CLIManagerRegex
     {
