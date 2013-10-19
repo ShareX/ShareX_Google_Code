@@ -60,10 +60,10 @@ namespace HelpersLib
 
             DoubleBuffered = true;
             SetStyle(ControlStyles.UserPaint |
-              ControlStyles.AllPaintingInWmPaint |
-              ControlStyles.ResizeRedraw |
-              ControlStyles.OptimizedDoubleBuffer |
-              ControlStyles.SupportsTransparentBackColor, true);
+                     ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.SupportsTransparentBackColor, true);
 
             Prepare();
         }

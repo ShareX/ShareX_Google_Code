@@ -32,7 +32,8 @@ namespace HelpersLib
     public enum ImageFileExtensions
     {
         [Description("Joint Photographic Experts Group")]
-        jpg, jpeg,
+        jpg,
+        jpeg,
         [Description("Portable Network Graphic")]
         png,
         [Description("CompuServe's Graphics Interchange Format")]
@@ -42,31 +43,38 @@ namespace HelpersLib
         [Description("File format used for icons in Microsoft Windows")]
         ico,
         [Description("Tagged Image File Format")]
-        tif, tiff
+        tif,
+        tiff
     }
 
     public enum TextFileExtensions
     {
         [Description("ASCII or Unicode plaintext")]
-        txt, log,
+        txt,
+        log,
         [Description("ASCII or extended ASCII text file")]
         nfo,
         [Description("C source")]
         c,
         [Description("C++ source")]
-        cpp, cc, cxx,
+        cpp,
+        cc,
+        cxx,
         [Description("C/C++ header file")]
         h,
         [Description("C++ header file")]
-        hpp, hxx,
+        hpp,
+        hxx,
         [Description("C# source")]
         cs,
         [Description("Visual Basic.NET source")]
         vb,
         [Description("HyperText Markup Language")]
-        html, htm,
+        html,
+        htm,
         [Description("eXtensible HyperText Markup Language")]
-        xhtml, xht,
+        xhtml,
+        xht,
         [Description("eXtensible Markup Language")]
         xml,
         [Description("Cascading Style Sheets")]
@@ -92,47 +100,70 @@ namespace HelpersLib
     public enum VideoFileExtensions
     {
         [Description("MPEG-4 Video File")]
-        mp4, m4v
+        mp4,
+        m4v
     }
 
     public enum EncryptionStrength
     {
-        Low = 128, Medium = 192, High = 256
+        Low = 128,
+        Medium = 192,
+        High = 256
     }
 
     public enum EDataType
     {
-        Default, File, Image, Text, URL
+        Default,
+        File,
+        Image,
+        Text,
+        URL
     }
 
     public enum EInputType
     {
-        None, Clipboard, FileSystem, Screenshot
+        None,
+        Clipboard,
+        FileSystem,
+        Screenshot
     }
 
     public enum GIFQuality
     {
-        Default, Bit8, Bit4, Grayscale
+        Default,
+        Bit8,
+        Bit4,
+        Grayscale
     }
 
     public enum EImageFormat
     {
-        PNG, JPEG, GIF, BMP, TIFF
+        PNG,
+        JPEG,
+        GIF,
+        BMP,
+        TIFF
     }
 
     public enum AnimatedImageFormat
     {
-        PNG, GIF
+        PNG,
+        GIF
     }
 
     public enum TaskStatus
     {
-        InQueue, Preparing, Working, Stopping, Completed
+        InQueue,
+        Preparing,
+        Working,
+        Stopping,
+        Completed
     }
 
     public enum TaskProgress
     {
-        ReportStarted, ReportProgress
+        ReportStarted,
+        ReportProgress
     }
 
     public enum WindowButtonAction
@@ -149,7 +180,10 @@ namespace HelpersLib
 
     public enum TriangleAngle
     {
-        Top, Right, Bottom, Left
+        Top,
+        Right,
+        Bottom,
+        Left
     }
 
     public enum HashType
@@ -183,7 +217,8 @@ namespace HelpersLib
 
     public enum BorderType
     {
-        Outside, Inside
+        Outside,
+        Inside
     }
 
     public enum ScreenRecordOutput
@@ -198,12 +233,17 @@ namespace HelpersLib
 
     public enum DownloaderFormStatus
     {
-        Waiting, DownloadStarted, DownloadCompleted, InstallStarted
+        Waiting,
+        DownloadStarted,
+        DownloadCompleted,
+        InstallStarted
     }
 
     public enum InstallType
     {
-        Default, Silent, VerySilent
+        Default,
+        Silent,
+        VerySilent
     }
 
     public enum ReleaseChannelType
@@ -226,11 +266,17 @@ namespace HelpersLib
 
     public enum PrintType
     {
-        Image, Text
+        Image,
+        Text
     }
 
     public enum DrawStyle
     {
-        Hue, Saturation, Brightness, Red, Green, Blue
+        Hue,
+        Saturation,
+        Brightness,
+        Red,
+        Green,
+        Blue
     }
 }

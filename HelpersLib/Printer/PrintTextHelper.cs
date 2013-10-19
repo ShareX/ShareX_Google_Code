@@ -42,14 +42,26 @@ namespace HelpersLib
 
         public string Text
         {
-            get { return text; }
-            set { text = value; }
+            get
+            {
+                return text;
+            }
+            set
+            {
+                text = value;
+            }
         }
 
         public Font Font
         {
-            get { return font; }
-            set { font = value; }
+            get
+            {
+                return font;
+            }
+            set
+            {
+                font = value;
+            }
         }
 
         public void BeginPrint()
@@ -105,7 +117,7 @@ namespace HelpersLib
             // next character
             int c = Eos;
 
-            for (; ; )
+            for (;;)
             {
                 // get next character
                 c = NextChar();

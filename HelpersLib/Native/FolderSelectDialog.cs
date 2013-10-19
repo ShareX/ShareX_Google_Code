@@ -184,7 +184,10 @@ namespace HelpersLib
         /// </summary>
         public IntPtr Handle
         {
-            get { return _hwnd; }
+            get
+            {
+                return _hwnd;
+            }
         }
 
         private IntPtr _hwnd;
@@ -215,7 +218,8 @@ namespace HelpersLib
         /// <param name="ns">The namespace containing types to be used</param>
         public Reflector(string ns)
             : this(ns, ns)
-        { }
+        {
+        }
 
         /// <summary>
         /// Constructor
@@ -277,7 +281,9 @@ namespace HelpersLib
                 {
                     return ci.Invoke(parameters);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return null;

@@ -97,8 +97,8 @@ namespace HelpersLib
                         int blueDistance = paletteColor.B - blue;
 
                         int distance = (redDistance * redDistance) +
-                                           (greenDistance * greenDistance) +
-                                           (blueDistance * blueDistance);
+                                       (greenDistance * greenDistance) +
+                                       (blueDistance * blueDistance);
 
                         if (distance < leastDistance)
                         {

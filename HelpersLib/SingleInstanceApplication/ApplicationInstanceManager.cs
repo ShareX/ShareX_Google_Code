@@ -97,7 +97,10 @@ namespace SingleInstanceApplication
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(InstanceProxy), uri, WellKnownObjectMode.Singleton);
 
             Process process = Process.GetCurrentProcess();
-            process.Exited += delegate { ChannelServices.UnregisterChannel(serverChannel); };
+            process.Exited += delegate
+            {
+                ChannelServices.UnregisterChannel(serverChannel);
+            };
         }
 
         private static void WaitOrTimerCallback(object state, bool timedOut)

@@ -88,57 +88,67 @@ namespace HelpersLib
 
         public static ColorMatrix Inverse()
         {
-            return new ColorMatrix(new[]{
-                new float[] {-1, 0, 0, 0, 0},
-                new float[] {0, -1, 0, 0, 0},
-                new float[] {0, 0, -1, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {1, 1, 1, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { -1, 0, 0, 0, 0 },
+                new float[] { 0, -1, 0, 0, 0 },
+                new float[] { 0, 0, -1, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 1, 1, 1, 0, 1 }
+            });
         }
 
         /// <param name="value">1 = No change</param>
         /// <param name="add">0 = No change</param>
         public static ColorMatrix Alpha(float value, float add)
         {
-            return new ColorMatrix(new[]{
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, value, 0},
-                new float[] {0, 0, 0, add, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { 1, 0, 0, 0, 0 },
+                new float[] { 0, 1, 0, 0, 0 },
+                new float[] { 0, 0, 1, 0, 0 },
+                new float[] { 0, 0, 0, value, 0 },
+                new float[] { 0, 0, 0, add, 1 }
+            });
         }
 
         /// <param name="value">0 = No change</param>
         public static ColorMatrix Brightness(float value)
         {
-            return new ColorMatrix(new[]{
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {value, value, value, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { 1, 0, 0, 0, 0 },
+                new float[] { 0, 1, 0, 0, 0 },
+                new float[] { 0, 0, 1, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { value, value, value, 0, 1 }
+            });
         }
 
         /// <param name="value">1 = No change</param>
         public static ColorMatrix Contrast(float value)
         {
-            return new ColorMatrix(new[]{
-                new float[] {value, 0, 0, 0, 0},
-                new float[] {0, value, 0, 0, 0},
-                new float[] {0, 0, value, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { value, 0, 0, 0, 0 },
+                new float[] { 0, value, 0, 0, 0 },
+                new float[] { 0, 0, value, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 }
+            });
         }
 
         /// <param name="value">1 = No change</param>
         public static ColorMatrix Grayscale(float value = 1)
         {
-            return new ColorMatrix(new[]{
-                new float[] {rw * value, rw * value, rw * value, 0, 0},
-                new float[] {gw * value, gw * value, gw * value, 0, 0},
-                new float[] {bw * value, bw * value, bw * value, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { rw * value, rw * value, rw * value, 0, 0 },
+                new float[] { gw * value, gw * value, gw * value, 0, 0 },
+                new float[] { bw * value, bw * value, bw * value, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 }
+            });
         }
 
         /// <param name="angle">0 = No change</param>
@@ -148,23 +158,27 @@ namespace HelpersLib
             float c = (float)Math.Cos(a);
             float s = (float)Math.Sin(a);
 
-            return new ColorMatrix(new[]{
-                new float[] {(rw + (c * (1 - rw))) + (s * -rw), (rw + (c * -rw)) + (s * 0.143f), (rw + (c * -rw)) + (s * -(1 - rw)), 0, 0},
-                new float[] {(gw + (c * -gw)) + (s * -gw), (gw + (c * (1 - gw))) + (s * 0.14f), (gw + (c * -gw)) + (s * gw), 0, 0},
-                new float[] {(bw + (c * -bw)) + (s * (1 - bw)), (bw + (c * -bw)) + (s * -0.283f), (bw + (c * (1 - bw))) + (s * bw), 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { (rw + (c * (1 - rw))) + (s * -rw), (rw + (c * -rw)) + (s * 0.143f), (rw + (c * -rw)) + (s * -(1 - rw)), 0, 0 },
+                new float[] { (gw + (c * -gw)) + (s * -gw), (gw + (c * (1 - gw))) + (s * 0.14f), (gw + (c * -gw)) + (s * gw), 0, 0 },
+                new float[] { (bw + (c * -bw)) + (s * (1 - bw)), (bw + (c * -bw)) + (s * -0.283f), (bw + (c * (1 - bw))) + (s * bw), 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 }
+            });
         }
 
         /// <param name="value">1 = No change</param>
         public static ColorMatrix Saturation(float value)
         {
-            return new ColorMatrix(new[]{
-                new float[] {(1.0f - value) * rw + value, (1.0f - value) * rw, (1.0f - value) * rw, 0, 0},
-                new float[] {(1.0f - value) * gw, (1.0f - value) * gw + value, (1.0f - value) * gw, 0, 0},
-                new float[] {(1.0f - value) * bw, (1.0f - value) * bw, (1.0f - value) * bw + value, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { (1.0f - value) * rw + value, (1.0f - value) * rw, (1.0f - value) * rw, 0, 0 },
+                new float[] { (1.0f - value) * gw, (1.0f - value) * gw + value, (1.0f - value) * gw, 0, 0 },
+                new float[] { (1.0f - value) * bw, (1.0f - value) * bw, (1.0f - value) * bw + value, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 }
+            });
         }
 
         /// <param name="color"></param>
@@ -176,12 +190,14 @@ namespace HelpersLib
             float b = (float)color.B / 255;
             float inv_amount = 1 - value;
 
-            return new ColorMatrix(new[]{
-                new float[] {inv_amount + value * r * rw, value * g * rw, value * b * rw, 0, 0},
-                new float[] {value * r * gw, inv_amount + value * g * gw, value * b * gw, 0, 0},
-                new float[] {value * r * bw, value * g * bw, inv_amount + value * b * bw, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {0, 0, 0, 0, 1}});
+            return new ColorMatrix(new[]
+            {
+                new float[] { inv_amount + value * r * rw, value * g * rw, value * b * rw, 0, 0 },
+                new float[] { value * r * gw, inv_amount + value * g * gw, value * b * gw, 0, 0 },
+                new float[] { value * r * bw, value * g * bw, inv_amount + value * b * bw, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 }
+            });
         }
     }
 }

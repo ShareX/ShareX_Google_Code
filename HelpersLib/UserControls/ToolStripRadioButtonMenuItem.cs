@@ -161,8 +161,8 @@ namespace HelpersLib
 
             // Calculate the position at which to display the RadioButton.
             Int32 offset = (ContentRectangle.Height -
-            RadioButtonRenderer.GetGlyphSize(
-                e.Graphics, buttonState).Height) / 2;
+                            RadioButtonRenderer.GetGlyphSize(
+                                e.Graphics, buttonState).Height) / 2;
             Point imageLocation = new Point(
                 ContentRectangle.Location.X + 4,
                 ContentRectangle.Location.Y + offset);
@@ -179,7 +179,7 @@ namespace HelpersLib
                 glyphSize.Height--;
                 glyphSize.Width--;
                 Rectangle backgroundRectangle =
-                new Rectangle(imageLocation, glyphSize);
+                    new Rectangle(imageLocation, glyphSize);
                 e.Graphics.FillEllipse(
                     SystemBrushes.Control, backgroundRectangle);
             }
@@ -231,12 +231,12 @@ namespace HelpersLib
             get
             {
                 ToolStripMenuItem ownerMenuItem =
-                OwnerItem as ToolStripMenuItem;
+                    OwnerItem as ToolStripMenuItem;
 
                 // Use the base value in design mode to prevent the designer
                 // from setting the base value to the calculated value.
                 if (!DesignMode &&
-                ownerMenuItem != null && ownerMenuItem.CheckOnClick)
+                    ownerMenuItem != null && ownerMenuItem.CheckOnClick)
                 {
                     return base.Enabled && ownerMenuItem.Checked;
                 }
@@ -255,11 +255,11 @@ namespace HelpersLib
         protected override void OnOwnerChanged(EventArgs e)
         {
             ToolStripMenuItem ownerMenuItem =
-            OwnerItem as ToolStripMenuItem;
+                OwnerItem as ToolStripMenuItem;
             if (ownerMenuItem != null && ownerMenuItem.CheckOnClick)
             {
                 ownerMenuItem.CheckedChanged +=
-                OwnerMenuItem_CheckedChanged;
+                    OwnerMenuItem_CheckedChanged;
             }
             base.OnOwnerChanged(e);
         }

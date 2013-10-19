@@ -79,7 +79,7 @@ namespace HelpersLib
         /// <returns>The quantized value</returns>
         protected override byte QuantizePixel(Color32 pixel)
         {
-            byte paletteIndex = (byte)_maxColors;	// The color at [_maxColors] is set to transparent
+            byte paletteIndex = (byte)_maxColors; // The color at [_maxColors] is set to transparent
 
             // Get the palette index if this non-transparent
             if (pixel.Alpha > 0)
@@ -191,8 +191,14 @@ namespace HelpersLib
             /// </summary>
             public int Leaves
             {
-                get { return _leafCount; }
-                set { _leafCount = value; }
+                get
+                {
+                    return _leafCount;
+                }
+                set
+                {
+                    _leafCount = value;
+                }
             }
 
             /// <summary>
@@ -200,7 +206,10 @@ namespace HelpersLib
             /// </summary>
             protected OctreeNode[] ReducibleNodes
             {
-                get { return _reducibleNodes; }
+                get
+                {
+                    return _reducibleNodes;
+                }
             }
 
             /// <summary>
@@ -332,8 +341,8 @@ namespace HelpersLib
                         // Go to the next level down in the tree
                         int shift = 7 - level;
                         int index = ((pixel.Red & mask[level]) >> (shift - 2)) |
-                            ((pixel.Green & mask[level]) >> (shift - 1)) |
-                            ((pixel.Blue & mask[level]) >> (shift));
+                                    ((pixel.Green & mask[level]) >> (shift - 1)) |
+                                    ((pixel.Blue & mask[level]) >> (shift));
 
                         OctreeNode child = _children[index];
 
@@ -359,7 +368,10 @@ namespace HelpersLib
                 /// </summary>
                 public OctreeNode[] Children
                 {
-                    get { return _children; }
+                    get
+                    {
+                        return _children;
+                    }
                 }
 
                 /// <summary>
@@ -429,8 +441,8 @@ namespace HelpersLib
                     {
                         int shift = 7 - level;
                         int index = ((pixel.Red & mask[level]) >> (shift - 2)) |
-                            ((pixel.Green & mask[level]) >> (shift - 1)) |
-                            ((pixel.Blue & mask[level]) >> (shift));
+                                    ((pixel.Green & mask[level]) >> (shift - 1)) |
+                                    ((pixel.Blue & mask[level]) >> (shift));
 
                         if (null != _children[index])
                             paletteIndex = _children[index].GetPaletteIndex(pixel, level + 1);

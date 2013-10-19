@@ -28,6 +28,7 @@ using System.Drawing;
 
 namespace HelpersLib
 {
+
     #region Public Structs
 
     public struct MyColor
@@ -111,26 +112,50 @@ namespace HelpersLib
 
         public int Red
         {
-            get { return red; }
-            set { red = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return red;
+            }
+            set
+            {
+                red = ColorHelpers.CheckColor(value);
+            }
         }
 
         public int Green
         {
-            get { return green; }
-            set { green = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return green;
+            }
+            set
+            {
+                green = ColorHelpers.CheckColor(value);
+            }
         }
 
         public int Blue
         {
-            get { return blue; }
-            set { blue = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return blue;
+            }
+            set
+            {
+                blue = ColorHelpers.CheckColor(value);
+            }
         }
 
         public int Alpha
         {
-            get { return alpha; }
-            set { alpha = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return alpha;
+            }
+            set
+            {
+                alpha = ColorHelpers.CheckColor(value);
+            }
         }
 
         public RGBA(int red, int green, int blue, int alpha = 255)
@@ -193,8 +218,16 @@ namespace HelpersLib
 
             int Max, Min;
 
-            if (color.R > color.G) { Max = color.R; Min = color.G; }
-            else { Max = color.G; Min = color.R; }
+            if (color.R > color.G)
+            {
+                Max = color.R;
+                Min = color.G;
+            }
+            else
+            {
+                Max = color.G;
+                Min = color.R;
+            }
             if (color.B > Max) Max = color.B;
             else if (color.B < Min) Min = color.B;
 
@@ -280,44 +313,86 @@ namespace HelpersLib
 
         public double Hue
         {
-            get { return hue; }
-            set { hue = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return hue;
+            }
+            set
+            {
+                hue = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Hue360
         {
-            get { return hue * 360; }
-            set { hue = ColorHelpers.CheckColor(value / 360); }
+            get
+            {
+                return hue * 360;
+            }
+            set
+            {
+                hue = ColorHelpers.CheckColor(value / 360);
+            }
         }
 
         public double Saturation
         {
-            get { return saturation; }
-            set { saturation = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return saturation;
+            }
+            set
+            {
+                saturation = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Saturation100
         {
-            get { return saturation * 100; }
-            set { saturation = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return saturation * 100;
+            }
+            set
+            {
+                saturation = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public double Brightness
         {
-            get { return brightness; }
-            set { brightness = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return brightness;
+            }
+            set
+            {
+                brightness = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Brightness100
         {
-            get { return brightness * 100; }
-            set { brightness = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return brightness * 100;
+            }
+            set
+            {
+                brightness = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public int Alpha
         {
-            get { return alpha; }
-            set { alpha = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return alpha;
+            }
+            set
+            {
+                alpha = ColorHelpers.CheckColor(value);
+            }
         }
 
         public HSB(double hue, double saturation, double brightness, int alpha = 255)
@@ -450,56 +525,110 @@ namespace HelpersLib
 
         public double Cyan
         {
-            get { return cyan; }
-            set { cyan = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return cyan;
+            }
+            set
+            {
+                cyan = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Cyan100
         {
-            get { return cyan * 100; }
-            set { cyan = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return cyan * 100;
+            }
+            set
+            {
+                cyan = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public double Magenta
         {
-            get { return magenta; }
-            set { magenta = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return magenta;
+            }
+            set
+            {
+                magenta = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Magenta100
         {
-            get { return magenta * 100; }
-            set { magenta = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return magenta * 100;
+            }
+            set
+            {
+                magenta = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public double Yellow
         {
-            get { return yellow; }
-            set { yellow = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return yellow;
+            }
+            set
+            {
+                yellow = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Yellow100
         {
-            get { return yellow * 100; }
-            set { yellow = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return yellow * 100;
+            }
+            set
+            {
+                yellow = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public double Key
         {
-            get { return key; }
-            set { key = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return key;
+            }
+            set
+            {
+                key = ColorHelpers.CheckColor(value);
+            }
         }
 
         public double Key100
         {
-            get { return key * 100; }
-            set { key = ColorHelpers.CheckColor(value / 100); }
+            get
+            {
+                return key * 100;
+            }
+            set
+            {
+                key = ColorHelpers.CheckColor(value / 100);
+            }
         }
 
         public int Alpha
         {
-            get { return alpha; }
-            set { alpha = ColorHelpers.CheckColor(value); }
+            get
+            {
+                return alpha;
+            }
+            set
+            {
+                alpha = ColorHelpers.CheckColor(value);
+            }
         }
 
         public CMYK(double cyan, double magenta, double yellow, double key, int alpha = 255)
@@ -560,7 +689,7 @@ namespace HelpersLib
         public override string ToString()
         {
             return String.Format("Cyan: {0}, Magenta: {1}, Yellow: {2}, Key: {3}", ColorHelpers.Round(Cyan100),
-              ColorHelpers.Round(Magenta100), ColorHelpers.Round(Yellow100), ColorHelpers.Round(Key100));
+                ColorHelpers.Round(Magenta100), ColorHelpers.Round(Yellow100), ColorHelpers.Round(Key100));
         }
 
         public static Color ToColor(CMYK cmyk)

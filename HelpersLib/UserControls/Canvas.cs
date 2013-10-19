@@ -32,6 +32,7 @@ namespace HelpersLib
     public class Canvas : UserControl
     {
         public delegate void DrawEventHandler(Graphics g);
+
         public event DrawEventHandler Draw;
 
         public int Interval { get; set; }

@@ -134,7 +134,7 @@ namespace HelpersLib
                 {
                     InitialQuantizePixel(new Color32(pSourcePixel));
                     pSourcePixel = (IntPtr)((Int32)pSourcePixel + _pixelSize);
-                }	// Now I have the pixel, call the FirstPassQuantize function...
+                } // Now I have the pixel, call the FirstPassQuantize function...
 
                 // Add the stride to the source row
                 pSourceRow = (IntPtr)((long)pSourceRow + sourceData.Stride);
@@ -190,7 +190,8 @@ namespace HelpersLib
                         // Check if this is the same as the last pixel. If so use that value
                         // rather than calculating it again. This is an inexpensive optimisation.
                         if (Marshal.ReadInt32(pPreviousPixel) != Marshal.ReadInt32(pSourcePixel))
-                        {                            // Quantize the pixel
+                        {
+                            // Quantize the pixel
                             pixelValue = QuantizePixel(new Color32(pSourcePixel));
 
                             // And setup the previous pointer
@@ -298,7 +299,10 @@ namespace HelpersLib
             /// </summary>
             public Color Color
             {
-                get { return Color.FromArgb(Alpha, Red, Green, Blue); }
+                get
+                {
+                    return Color.FromArgb(Alpha, Red, Green, Blue);
+                }
             }
         }
     }

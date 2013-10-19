@@ -77,11 +77,14 @@ namespace HelpersLib
         [Guid("56FDF344-FD6D-11d0-958A-006097C9A090")]
         [ClassInterface(ClassInterfaceType.None)]
         [ComImport]
-        private class CTaskbarList { }
+        private class CTaskbarList
+        {
+        }
 
         private static object _syncLock = new object();
 
         private static ITaskbarList4 _taskbarList;
+
         private static ITaskbarList4 TaskbarList
         {
             get
@@ -103,6 +106,7 @@ namespace HelpersLib
         }
 
         private static IntPtr _mainWindowHandle;
+
         private static IntPtr MainWindowHandle
         {
             get

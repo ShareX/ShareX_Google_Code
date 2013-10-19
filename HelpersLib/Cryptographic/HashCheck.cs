@@ -37,9 +37,11 @@ namespace HelpersLib
         public bool IsWorking { get; private set; }
 
         public delegate void ProgressChanged(float progress);
+
         public event ProgressChanged FileCheckProgressChanged;
 
         public delegate void Completed(string result, bool cancelled);
+
         public event Completed FileCheckCompleted;
 
         private BackgroundWorker bw;

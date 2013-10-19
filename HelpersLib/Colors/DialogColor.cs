@@ -289,7 +289,9 @@ namespace HelpersLib
                     colorPicker.Color = ColorHelpers.HexToColor(txtHex.Text);
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void txtDecimal_TextChanged(object sender, EventArgs e)
@@ -301,7 +303,9 @@ namespace HelpersLib
                     colorPicker.Color = ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text));
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void pbColorPreview_MouseClick(object sender, MouseEventArgs e)

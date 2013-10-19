@@ -35,7 +35,12 @@ using System.Xml.Serialization;
 
 namespace HelpersLib
 {
-    public enum SerializationType { Binary, Xml, Json }
+    public enum SerializationType
+    {
+        Binary,
+        Xml,
+        Json
+    }
 
     public static class SettingsHelper
     {
