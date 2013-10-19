@@ -39,6 +39,7 @@ namespace ShareX
         public HotkeySettings Setting { get; set; }
 
         private bool selected;
+
         public bool Selected
         {
             get

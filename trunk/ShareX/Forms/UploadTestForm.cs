@@ -39,12 +39,20 @@ namespace ShareX
 {
     public partial class UploadTestForm : Form
     {
-        public enum UploadStatus { Uploading, Uploaded }
+        public enum UploadStatus
+        {
+            Uploading,
+            Uploaded
+        }
 
         private bool isTesting;
+
         public bool Testing
         {
-            get { return isTesting; }
+            get
+            {
+                return isTesting;
+            }
             set
             {
                 isTesting = value;

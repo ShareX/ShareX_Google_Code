@@ -36,6 +36,7 @@ namespace ShareX
         public bool IgnoreHotkeys { get; set; }
 
         public delegate void HotkeyTriggerEventHandler(HotkeySettings hotkeySetting);
+
         public HotkeyTriggerEventHandler HotkeyTrigger;
 
         private HotkeyForm hotkeyForm;

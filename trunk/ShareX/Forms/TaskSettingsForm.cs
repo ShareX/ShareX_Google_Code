@@ -55,7 +55,7 @@ namespace ShareX
                 Text = Application.ProductName + " - Task settings";
                 tcHotkeySettings.TabPages.Remove(tpTask);
                 chkUseDefaultGeneralSettings.Visible = chkUseDefaultImageSettings.Visible = chkUseDefaultCaptureSettings.Visible = chkUseDefaultActions.Visible =
-                       chkUseDefaultUploadSettings.Visible = chkUseDefaultIndexerSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
+                    chkUseDefaultUploadSettings.Visible = chkUseDefaultIndexerSettings.Visible = chkUseDefaultAdvancedSettings.Visible = false;
                 panelGeneral.BorderStyle = BorderStyle.None;
             }
             else

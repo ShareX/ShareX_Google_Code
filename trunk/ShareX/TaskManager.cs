@@ -47,8 +47,11 @@ namespace ShareX
         }
 
         private static readonly List<UploadTask> Tasks = new List<UploadTask>();
-        private static readonly Icon[] trayIcons = new Icon[] { Resources.sharex_16px_0, Resources.sharex_16px_1, Resources.sharex_16px_2, Resources.sharex_16px_3,
-            Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6 };
+        private static readonly Icon[] trayIcons = new Icon[]
+        {
+            Resources.sharex_16px_0, Resources.sharex_16px_1, Resources.sharex_16px_2, Resources.sharex_16px_3,
+            Resources.sharex_16px_4, Resources.sharex_16px_5, Resources.sharex_16px_6
+        };
 
         public static void Start(UploadTask task)
         {

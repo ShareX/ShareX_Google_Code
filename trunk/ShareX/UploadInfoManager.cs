@@ -195,8 +195,9 @@ namespace ShareX
 
         public void CopyHTMLLinkedImage()
         {
-            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
-                Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLinkedImage)));
+            if (IsItemSelected)
+                CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
+                    Select(x => parser.Parse(x.Info, UploadInfoParser.HTMLLinkedImage)));
         }
 
         public void CopyForumLink()
@@ -211,8 +212,9 @@ namespace ShareX
 
         public void CopyForumLinkedImage()
         {
-            if (IsItemSelected) CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
-                Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLinkedImage)));
+            if (IsItemSelected)
+                CopyTexts(SelectedItems.Where(x => x.IsImageURL && x.IsThumbnailURLExist).
+                    Select(x => parser.Parse(x.Info, UploadInfoParser.ForumLinkedImage)));
         }
 
         public void CopyFilePath()
