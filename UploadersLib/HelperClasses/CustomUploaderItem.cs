@@ -205,10 +205,8 @@ namespace UploadersLib.HelperClasses
                         {
                             return match.Groups[groupNumber].Value;
                         }
-                        else
-                        {
-                            return match.Groups[group].Value;
-                        }
+
+                        return match.Groups[@group].Value;
                     }
 
                     return match.Value;

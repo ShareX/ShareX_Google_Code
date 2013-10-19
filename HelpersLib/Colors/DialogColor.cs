@@ -25,7 +25,6 @@
 
 using HelpersLib.Properties;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -60,7 +59,7 @@ namespace HelpersLib
             {
                 if (control is NumericUpDown || control is TextBox)
                 {
-                    control.DoubleClick += new EventHandler(CopyToClipboard);
+                    control.DoubleClick += CopyToClipboard;
                 }
             }
 
@@ -257,14 +256,6 @@ namespace HelpersLib
             if (rbBlue.Checked) colorPicker.DrawStyle = DrawStyle.Blue;
         }
 
-        private void lblColorPreview_Click(object sender, EventArgs e)
-        {
-            if (oldColorExist)
-            {
-                colorPicker.Color = OldColor;
-            }
-        }
-
         private void RGB_ValueChanged(object sender, EventArgs e)
         {
             if (!dialogChanged)
@@ -311,6 +302,14 @@ namespace HelpersLib
                 }
             }
             catch { }
+        }
+
+        private void pbColorPreview_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && oldColorExist)
+            {
+                colorPicker.Color = OldColor;
+            }
         }
 
         #endregion Events

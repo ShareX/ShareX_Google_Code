@@ -56,7 +56,7 @@ namespace ShareX
             }
         }
 
-        private ScreenRecorder screenRecorder = null;
+        private ScreenRecorder screenRecorder;
 
         private ScreenRecordForm()
         {
@@ -72,7 +72,7 @@ namespace ShareX
             }
         }
 
-        private void SelectRegion(TaskSettings taskSettings)
+        private void SelectRegion()
         {
             Rectangle rect;
             if (TaskHelpers.SelectRegion(out rect) && !rect.IsEmpty)
@@ -83,7 +83,7 @@ namespace ShareX
 
         public async void StartRecording(TaskSettings TaskSettings)
         {
-            SelectRegion(TaskSettings);
+            SelectRegion();
             Screenshot.CaptureCursor = TaskSettings.CaptureSettings.ShowCursor;
 
             if (IsRecording || CaptureRectangle.IsEmpty || screenRecorder != null)
@@ -141,8 +141,6 @@ namespace ShareX
 
                     await TaskEx.Run(() =>
                     {
-                        Stopwatch timer = Stopwatch.StartNew();
-
                         switch (TaskSettings.CaptureSettings.ScreenRecordOutput)
                         {
                             case ScreenRecordOutput.GIF:

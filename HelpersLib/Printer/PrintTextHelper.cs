@@ -36,9 +36,9 @@ namespace HelpersLib
         private const int NewLine = -2;
 
         private string text = "";
-        private Font font = null;
-        private int offset = 0;
-        private int page = 0;
+        private Font font;
+        private int offset;
+        private int page;
 
         public string Text
         {
@@ -205,7 +205,7 @@ namespace HelpersLib
 
         private int NextChar()
         {
-            if (offset >= this.text.Length)
+            if (offset >= text.Length)
                 return -1;
 
             if (NextCharIsNewLine())
@@ -214,7 +214,7 @@ namespace HelpersLib
                 return -2;
             }
 
-            return (int)text[offset++];
+            return text[offset++];
         }
     }
 }

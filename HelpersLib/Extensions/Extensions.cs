@@ -33,6 +33,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace HelpersLib
 {
@@ -217,7 +218,7 @@ namespace HelpersLib
         {
             quality = quality.Between(0, 100);
             EncoderParameters encoderParameters = new EncoderParameters(1);
-            encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, quality);
             img.Save(stream, ImageFormat.Jpeg.GetCodecInfo(), encoderParameters);
         }
 
@@ -238,8 +239,8 @@ namespace HelpersLib
                     case GIFQuality.Bit4:
                         quantizer = new OctreeQuantizer(15, 4);
                         break;
-                    case GIFQuality.Bit8:
                     default:
+                    case GIFQuality.Bit8:
                         quantizer = new OctreeQuantizer(255, 4);
                         break;
                 }

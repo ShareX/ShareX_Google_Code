@@ -38,7 +38,7 @@ namespace UploadersLib
 
         private void ApiKeysUI_Load(object sender, EventArgs e)
         {
-            this.Text = Application.ProductName + " - API configurator";
+            Text = Application.ProductName + " - API configurator";
         }
     }
 }

@@ -43,7 +43,6 @@ namespace UploadersLib.HelperClasses
                 if (search > 0)
                 {
                     i = search;
-                    continue;
                 }
             }
             return link;
@@ -84,7 +83,8 @@ namespace UploadersLib.HelperClasses
                         return i;
                     }
                 }
-                new Exception("Started with \" but not closed with \"");
+
+                throw new Exception("Started with \" but not closed with \"");
             }
             return 0;
         }
@@ -110,7 +110,8 @@ namespace UploadersLib.HelperClasses
                         return i;
                     }
                 }
-                new Exception("Something wrong (CheckRegexp)");
+
+                throw new Exception("Something wrong (CheckRegexp)");
             }
             return 0;
         }
@@ -140,7 +141,8 @@ namespace UploadersLib.HelperClasses
                         return i;
                     }
                 }
-                new Exception("Started with \"(\" but not closed with \")\"");
+
+                throw new Exception("Started with \"(\" but not closed with \")\"");
             }
             return 0;
         }

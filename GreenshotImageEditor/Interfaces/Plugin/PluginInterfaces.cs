@@ -30,7 +30,7 @@ using System.Windows.Forms;
 namespace Greenshot.Plugin
 {
     [Serializable]
-    [AttributeUsageAttribute(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
     sealed public class PluginAttribute : Attribute, IComparable
     {
         public string Name
@@ -67,8 +67,8 @@ namespace Greenshot.Plugin
 
         public PluginAttribute(string entryType, bool configurable)
         {
-            this.EntryType = entryType;
-            this.Configurable = configurable;
+            EntryType = entryType;
+            Configurable = configurable;
         }
 
         public int CompareTo(object obj)

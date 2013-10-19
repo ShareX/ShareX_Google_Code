@@ -35,11 +35,11 @@ namespace Greenshot.Drawing
         public ObfuscateContainer(Surface parent)
             : base(parent)
         {
-            AddField(GetType(), FieldType.PREPARED_FILTER_OBFUSCATE, FilterContainer.PreparedFilter.PIXELIZE);
+            AddField(GetType(), FieldType.PREPARED_FILTER_OBFUSCATE, PreparedFilter.PIXELIZE);
             init();
         }
 
-        [OnDeserializedAttribute()]
+        [OnDeserialized()]
         private void OnDeserialized(StreamingContext context)
         {
             init();

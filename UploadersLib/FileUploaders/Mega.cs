@@ -51,16 +51,16 @@ namespace UploadersLib.FileUploaders
         public Mega(MegaApiClient.AuthInfos authInfos, string parentNodeId)
         {
             AllowReportProgress = false;
-            this._megaClient = new MegaApiClient(this);
-            this._authInfos = authInfos;
-            this._parentNodeId = parentNodeId;
+            _megaClient = new MegaApiClient(this);
+            _authInfos = authInfos;
+            _parentNodeId = parentNodeId;
         }
 
         public bool TryLogin()
         {
             try
             {
-                this.Login();
+                Login();
                 return true;
             }
             catch (ApiException)
@@ -71,19 +71,19 @@ namespace UploadersLib.FileUploaders
 
         private void Login()
         {
-            if (this._authInfos == null)
+            if (_authInfos == null)
             {
-                this._megaClient.LoginAnonymous();
+                _megaClient.LoginAnonymous();
             }
             else
             {
-                this._megaClient.Login(this._authInfos);
+                _megaClient.Login(_authInfos);
             }
         }
 
         internal IEnumerable<DisplayNode> GetDisplayNodes()
         {
-            IEnumerable<Node> nodes = this._megaClient.GetNodes().Where(n => n.Type == NodeType.Directory || n.Type == NodeType.Root).ToArray();
+            IEnumerable<Node> nodes = _megaClient.GetNodes().Where(n => n.Type == NodeType.Directory || n.Type == NodeType.Root).ToArray();
             List<DisplayNode> displayNodes = new List<DisplayNode>();
 
             foreach (Node node in nodes)
@@ -99,25 +99,23 @@ namespace UploadersLib.FileUploaders
 
         public Node GetParentNode()
         {
-            if (this._authInfos == null || this._parentNodeId == null)
+            if (_authInfos == null || _parentNodeId == null)
             {
-                return this._megaClient.GetNodes().SingleOrDefault(n => n.Type == NodeType.Root);
+                return _megaClient.GetNodes().SingleOrDefault(n => n.Type == NodeType.Root);
             }
-            else
-            {
-                return this._megaClient.GetNodes().SingleOrDefault(n => n.Id == this._parentNodeId);
-            }
+
+            return _megaClient.GetNodes().SingleOrDefault(n => n.Id == _parentNodeId);
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            this.Login();
+            Login();
 
-            Node createdNode = this._megaClient.Upload(stream, fileName, this.GetParentNode());
+            Node createdNode = _megaClient.Upload(stream, fileName, GetParentNode());
 
             UploadResult res = new UploadResult();
             res.IsURLExpected = true;
-            res.URL = this._megaClient.GetDownloadLink(createdNode).ToString();
+            res.URL = _megaClient.GetDownloadLink(createdNode).ToString();
 
             return res;
         }
@@ -126,7 +124,7 @@ namespace UploadersLib.FileUploaders
 
         public string PostRequestJson(Uri url, string jsonData)
         {
-            return this.SendPostRequestJSON(url.ToString(), jsonData);
+            return SendPostRequestJSON(url.ToString(), jsonData);
         }
 
         public string PostRequestRaw(Uri url, Stream dataStream)
@@ -134,7 +132,7 @@ namespace UploadersLib.FileUploaders
             try
             {
                 AllowReportProgress = true;
-                return this.SendPostRequestStream(url.ToString(), dataStream, "application/octet-stream");
+                return SendPostRequestStream(url.ToString(), dataStream, "application/octet-stream");
             }
             finally
             {
@@ -155,13 +153,13 @@ namespace UploadersLib.FileUploaders
 
             private DisplayNode()
             {
-                this.DisplayName = "[Select a folder]";
+                DisplayName = "[Select a folder]";
             }
 
             public DisplayNode(Node node, IEnumerable<Node> nodes)
             {
-                this.Node = node;
-                this.DisplayName = this.GenerateDisplayName(node, nodes);
+                Node = node;
+                DisplayName = GenerateDisplayName(node, nodes);
             }
 
             public Node Node { get; private set; }

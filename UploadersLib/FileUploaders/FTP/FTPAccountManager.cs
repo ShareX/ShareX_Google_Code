@@ -34,12 +34,12 @@ namespace UploadersLib
 
         public FTPAccountManager()
         {
-            this.FTPAccounts = new List<FTPAccount>();
+            FTPAccounts = new List<FTPAccount>();
         }
 
         public FTPAccountManager(List<FTPAccount> accounts)
         {
-            this.FTPAccounts = accounts;
+            FTPAccounts = accounts;
         }
 
         public void Save(string filePath)

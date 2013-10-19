@@ -72,7 +72,7 @@ namespace HelpersLib
             button1.TabIndex = 0;
             button1.Click += (sender, e) =>
             {
-                this.DialogResult = button1Result;
+                DialogResult = button1Result;
                 Close();
             };
 
@@ -85,7 +85,7 @@ namespace HelpersLib
             button2.TabIndex = 1;
             button2.Click += (sender, e) =>
             {
-                this.DialogResult = button2Result;
+                DialogResult = button2Result;
                 Close();
             };
 

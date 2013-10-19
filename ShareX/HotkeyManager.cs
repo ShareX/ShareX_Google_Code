@@ -91,11 +91,11 @@ namespace ShareX
 
                 if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Registered)
                 {
-                    DebugHelper.WriteLine("Hotkey registered: " + hotkeySetting.ToString());
+                    DebugHelper.WriteLine("Hotkey registered: " + hotkeySetting);
                 }
                 else if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Failed)
                 {
-                    DebugHelper.WriteLine("Hotkey register failed: " + hotkeySetting.ToString());
+                    DebugHelper.WriteLine("Hotkey register failed: " + hotkeySetting);
                 }
             }
 
@@ -121,11 +121,11 @@ namespace ShareX
 
                 if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.NotConfigured)
                 {
-                    DebugHelper.WriteLine("Hotkey unregistered: " + hotkeySetting.ToString());
+                    DebugHelper.WriteLine("Hotkey unregistered: " + hotkeySetting);
                 }
                 else if (hotkeySetting.HotkeyInfo.Status == HotkeyStatus.Failed)
                 {
-                    DebugHelper.WriteLine("Hotkey unregister failed: " + hotkeySetting.ToString());
+                    DebugHelper.WriteLine("Hotkey unregister failed: " + hotkeySetting);
                 }
             }
 

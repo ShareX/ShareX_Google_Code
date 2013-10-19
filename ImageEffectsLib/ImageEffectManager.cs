@@ -23,11 +23,9 @@
 
 #endregion License Information (GPL v3)
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace ImageEffectsLib
 {
@@ -39,10 +37,7 @@ namespace ImageEffectsLib
 
             if (imageEffects != null && imageEffects.Count > 0)
             {
-                foreach (ImageEffect imageEffect in imageEffects)
-                {
-                    result = imageEffect.Apply(result);
-                }
+                result = imageEffects.Aggregate(result, (current, imageEffect) => imageEffect.Apply(current));
             }
 
             return result;

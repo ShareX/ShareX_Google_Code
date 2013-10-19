@@ -202,7 +202,7 @@ namespace GreenshotPlugin.Core
                         try
                         {
                             // Default Bitmap PixelFormat is Format32bppArgb
-                            this.image = new Bitmap(value);
+                            image = new Bitmap(value);
                         }
                         finally
                         {
@@ -298,7 +298,7 @@ namespace GreenshotPlugin.Core
         public Capture(Image newImage)
             : this()
         {
-            this.Image = newImage;
+            Image = newImage;
         }
 
         /// <summary>

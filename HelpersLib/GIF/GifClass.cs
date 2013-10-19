@@ -82,8 +82,6 @@ namespace HelpersLib
                     case GIFBlockType.Extension:
                         ThrowAwayExtensionBlock(dataList);
                         break;
-                    default:
-                        break;
                 }
 
                 blockType = GetTypeOfNextBlock(dataList);
@@ -99,7 +97,7 @@ namespace HelpersLib
 
             gifData.RemoveRange(0, 6);
 
-            List<char> chars = m_GifSignature.ConvertAll<char>(new Converter<byte, char>(ByteToChar));
+            List<char> chars = m_GifSignature.ConvertAll(ByteToChar);
 
             string s = new string(chars.ToArray());
 

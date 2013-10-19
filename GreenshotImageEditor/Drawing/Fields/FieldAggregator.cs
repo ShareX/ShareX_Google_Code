@@ -60,7 +60,7 @@ namespace Greenshot.Drawing.Fields
         public override void AddField(Field field)
         {
             base.AddField(field);
-            field.PropertyChanged += new PropertyChangedEventHandler(OwnPropertyChanged);
+            field.PropertyChanged += OwnPropertyChanged;
         }
 
         public void BindElements(DrawableContainerList dcs)

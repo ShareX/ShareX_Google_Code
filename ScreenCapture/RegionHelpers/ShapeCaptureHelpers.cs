@@ -49,16 +49,7 @@ namespace ScreenCapture
 
                     if (options.DrawBorder)
                     {
-                        GraphicsPath gpOutline;
-
-                        if (regionDrawPath != null)
-                        {
-                            gpOutline = regionDrawPath;
-                        }
-                        else
-                        {
-                            gpOutline = regionFillPath;
-                        }
+                        GraphicsPath gpOutline = regionDrawPath ?? regionFillPath;
 
                         using (GraphicsPath gp2 = (GraphicsPath)gpOutline.Clone())
                         {

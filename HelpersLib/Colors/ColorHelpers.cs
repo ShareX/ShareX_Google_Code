@@ -36,16 +36,16 @@ namespace HelpersLib
     {
         public ColorEventArgs(MyColor color, DrawStyle drawStyle, bool updateControl)
         {
-            this.Color = color;
-            this.DrawStyle = drawStyle;
-            this.UpdateControl = updateControl;
+            Color = color;
+            DrawStyle = drawStyle;
+            UpdateControl = updateControl;
         }
 
         public ColorEventArgs(MyColor color, DrawStyle drawStyle)
         {
-            this.Color = color;
-            this.DrawStyle = drawStyle;
-            this.UpdateControl = true;
+            Color = color;
+            DrawStyle = drawStyle;
+            UpdateControl = true;
         }
 
         public MyColor Color;
@@ -114,11 +114,12 @@ namespace HelpersLib
         {
             if (color.StartsWith("#"))
             {
-                return ColorHelpers.HexToColor(color);
+                return HexToColor(color);
             }
-            else if (color.Contains(','))
+
+            if (color.Contains(','))
             {
-                int[] colors = color.Split(',').Select(x => int.Parse(x)).ToArray();
+                int[] colors = color.Split(',').Select(int.Parse).ToArray();
 
                 if (colors.Length == 3)
                 {
@@ -166,10 +167,8 @@ namespace HelpersLib
             {
                 return Color.FromArgb(HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
             }
-            else
-            {
-                return Color.FromArgb(HexToDecimal(a), HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
-            }
+
+            return Color.FromArgb(HexToDecimal(a), HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
         }
 
         public static int HexToDecimal(string hex)

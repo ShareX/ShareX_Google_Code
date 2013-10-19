@@ -99,19 +99,19 @@ namespace GreenshotPlugin.Controls
         /// </summary>
         protected AnimatingForm()
         {
-            this.Load += delegate
+            Load += delegate
             {
                 if (EnableAnimation)
                 {
                     timer = new Timer();
                     timer.Interval = 1000 / VRefresh;
-                    timer.Tick += new EventHandler(timer_Tick);
+                    timer.Tick += timer_Tick;
                     timer.Start();
                 }
             };
 
             // Unregister at close
-            this.FormClosing += delegate
+            FormClosing += delegate
             {
                 if (timer != null)
                 {

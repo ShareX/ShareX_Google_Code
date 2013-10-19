@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections;
+using System.IO;
 using System.Windows.Forms;
 
 namespace UploadersLib
@@ -35,9 +36,9 @@ namespace UploadersLib
     public class IconListManager
     {
         private Hashtable _extensionList = new Hashtable();
-        private System.Collections.ArrayList _imageLists = new ArrayList();			//will hold ImageList objects
+        private ArrayList _imageLists = new ArrayList();			//will hold ImageList objects
         private IconReader.IconSize _iconSize;
-        private bool ManageBothSizes = false; //flag, used to determine whether to create two ImageLists.
+        private bool ManageBothSizes; //flag, used to determine whether to create two ImageLists.
 
         /// <summary>
         /// Creates an instance of <c>IconListManager</c> that will add icons to a single <c>ImageList</c> using the
@@ -45,7 +46,7 @@ namespace UploadersLib
         /// </summary>
         /// <param name="imageList"><c>ImageList</c> to add icons to.</param>
         /// <param name="iconSize">Size to use (either 32 or 16 pixels).</param>
-        public IconListManager(System.Windows.Forms.ImageList imageList, IconReader.IconSize iconSize)
+        public IconListManager(ImageList imageList, IconReader.IconSize iconSize)
         {
             // Initialise the members of the class that will hold the image list we're
             // targeting, as well as the icon size (32 or 16)
@@ -59,7 +60,7 @@ namespace UploadersLib
         /// </summary>
         /// <param name="smallImageList">The <c>ImageList</c> that will hold small icons.</param>
         /// <param name="largeImageList">The <c>ImageList</c> that will hold large icons.</param>
-        public IconListManager(System.Windows.Forms.ImageList smallImageList, System.Windows.Forms.ImageList largeImageList)
+        public IconListManager(ImageList smallImageList, ImageList largeImageList)
         {
             //add both our image lists
             _imageLists.Add(smallImageList);
@@ -87,7 +88,7 @@ namespace UploadersLib
         public int AddFileIcon(string filePath)
         {
             // Check if the file exists, otherwise, throw exception.
-            if (!System.IO.File.Exists(filePath)) throw new System.IO.FileNotFoundException("File does not exist");
+            if (!File.Exists(filePath)) throw new FileNotFoundException("File does not exist");
 
             // Split it down so we can get the extension
             string[] splitPath = filePath.Split(new Char[] { '.' });
@@ -99,27 +100,26 @@ namespace UploadersLib
             {
                 return (int)_extensionList[extension.ToUpper()];		//return existing index
             }
+
+            // It's not already been added, so add it and record its position.
+
+            int pos = ((ImageList)_imageLists[0]).Images.Count;		//store current count -- new item's index
+
+            if (ManageBothSizes)
+            {
+                //managing two lists, so add it to small first, then large
+                ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, IconReader.IconSize.Small, false));
+                ((ImageList)_imageLists[1]).Images.Add(IconReader.GetFileIcon(filePath, IconReader.IconSize.Large, false));
+            }
             else
             {
-                // It's not already been added, so add it and record its position.
-
-                int pos = ((ImageList)_imageLists[0]).Images.Count;		//store current count -- new item's index
-
-                if (ManageBothSizes == true)
-                {
-                    //managing two lists, so add it to small first, then large
-                    ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, IconReader.IconSize.Small, false));
-                    ((ImageList)_imageLists[1]).Images.Add(IconReader.GetFileIcon(filePath, IconReader.IconSize.Large, false));
-                }
-                else
-                {
-                    //only doing one size, so use IconSize as specified in _iconSize.
-                    ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, _iconSize, false));	//add to image list
-                }
-
-                AddExtension(extension.ToUpper(), pos);	// add to hash table
-                return pos;
+                //only doing one size, so use IconSize as specified in _iconSize.
+                ((ImageList)_imageLists[0]).Images.Add(IconReader.GetFileIcon(filePath, _iconSize, false));	//add to image list
             }
+
+            AddExtension(extension.ToUpper(), pos);	// add to hash table
+
+            return pos;
         }
 
         /// <summary>

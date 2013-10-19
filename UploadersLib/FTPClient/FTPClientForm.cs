@@ -53,17 +53,17 @@ namespace UploadersLib
             Icon = Resources.ShareXIcon;
 
             lblStatus.Text = string.Empty;
-            lvFTPList.SubItemEndEditing += new SubItemEndEditingEventHandler(lvFTPList_SubItemEndEditing);
+            lvFTPList.SubItemEndEditing += lvFTPList_SubItemEndEditing;
 
-            this.Account = account;
+            Account = account;
 
             FTPAdapter = new FTP(account);
-            FTPAdapter.Client.ClientRequest += new EventHandler<FtpRequestEventArgs>(Client_ClientRequest);
-            FTPAdapter.Client.ServerResponse += new EventHandler<FtpResponseEventArgs>(Client_ServerResponse);
-            FTPAdapter.Client.OpenAsyncCompleted += new EventHandler<OpenAsyncCompletedEventArgs>(Client_OpenAsyncCompleted);
+            FTPAdapter.Client.ClientRequest += Client_ClientRequest;
+            FTPAdapter.Client.ServerResponse += Client_ServerResponse;
+            FTPAdapter.Client.OpenAsyncCompleted += Client_OpenAsyncCompleted;
 
             pgAccount.SelectedObject = FTPAdapter.Account;
-            this.Text = "FTP Client - " + account.Name;
+            Text = "FTP Client - " + account.Name;
             lblConnecting.Text = "Connecting to " + account.FTPAddress;
 
             FTPAdapter.Client.OpenAsync(account.Username, account.Password);
@@ -231,7 +231,8 @@ namespace UploadersLib
                         FTPNavigateBack();
                         return;
                     }
-                    else if (checkDirectory.ItemType == FtpItemType.Directory)
+
+                    if (checkDirectory.ItemType == FtpItemType.Directory)
                     {
                         LoadDirectory(checkDirectory.FullPath);
                         return;
@@ -287,7 +288,7 @@ namespace UploadersLib
             using (InputBox ib = new InputBox { Text = "Create directory", Question = "Please enter the name of the directory which should be created:" })
             {
                 ib.ShowDialog();
-                this.BringToFront();
+                BringToFront();
                 if (ib.DialogResult == DialogResult.OK)
                 {
                     FTPAdapter.MakeDirectory(Helpers.CombineURL(currentDirectory, ib.InputText));
@@ -561,7 +562,7 @@ namespace UploadersLib
 
         private void FTPClient_Resize(object sender, EventArgs e)
         {
-            this.Refresh();
+            Refresh();
         }
 
         private void Client_OpenAsyncCompleted(object sender, OpenAsyncCompletedEventArgs e)

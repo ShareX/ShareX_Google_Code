@@ -174,7 +174,7 @@ namespace UploadersLib.FileUploaders
             args.Add("name", name);
             args.Add("is_public", is_public.ToString().ToLower());
 
-            MinusFolder dir = null;
+            MinusFolder dir;
 
             string response = SendPostRequestURLEncoded(GetActiveUserFolderURL(MinusScope.upload_new), args);
             if (!string.IsNullOrEmpty(response))

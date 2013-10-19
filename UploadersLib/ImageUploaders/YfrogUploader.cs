@@ -62,7 +62,7 @@ namespace UploadersLib.ImageUploaders
 
         public YfrogOptions(string devKey)
         {
-            this.DeveloperKey = devKey;
+            DeveloperKey = devKey;
         }
     }
 
@@ -80,7 +80,7 @@ namespace UploadersLib.ImageUploaders
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            switch (this.Options.UploadType)
+            switch (Options.UploadType)
             {
                 case YfrogUploadType.UPLOAD_IMAGE_ONLY:
                     return Upload(stream, fileName, "");
@@ -101,8 +101,8 @@ namespace UploadersLib.ImageUploaders
 
             Dictionary<string, string> arguments = new Dictionary<string, string>();
 
-            arguments.Add("username", this.Options.Username);
-            arguments.Add("password", this.Options.Password);
+            arguments.Add("username", Options.Username);
+            arguments.Add("password", Options.Password);
 
             if (!string.IsNullOrEmpty(msg))
             {
@@ -113,12 +113,12 @@ namespace UploadersLib.ImageUploaders
             {
                 url = UploadLink;
             }
-            if (!string.IsNullOrEmpty(this.Options.Source))
+            if (!string.IsNullOrEmpty(Options.Source))
             {
-                arguments.Add("source", this.Options.Source);
+                arguments.Add("source", Options.Source);
             }
 
-            arguments.Add("key", this.Options.DeveloperKey);
+            arguments.Add("key", Options.DeveloperKey);
 
             UploadResult result = UploadData(stream, url, fileName, "media", arguments);
 
@@ -137,19 +137,17 @@ namespace UploadersLib.ImageUploaders
                     switch (xele.GetAttributeFirstValue("status", "stat"))
                     {
                         case "ok":
-                            string statusid, userid, mediaid, mediaurl;
-                            statusid = xele.GetElementValue("statusid");
-                            userid = xele.GetElementValue("userid");
-                            mediaid = xele.GetElementValue("mediaid");
-                            mediaurl = xele.GetElementValue("mediaurl");
-                            if (this.Options.ShowFull) mediaurl = mediaurl + "/full";
+                            string statusid = xele.GetElementValue("statusid");
+                            string userid = xele.GetElementValue("userid");
+                            string mediaid = xele.GetElementValue("mediaid");
+                            string mediaurl = xele.GetElementValue("mediaurl");
+                            if (Options.ShowFull) mediaurl = mediaurl + "/full";
                             result.URL = mediaurl;
                             result.ThumbnailURL = mediaurl + ".th.jpg";
                             break;
                         case "fail":
-                            string code, msg;
-                            code = xele.Element("err").Attribute("code").Value;
-                            msg = xele.Element("err").Attribute("msg").Value;
+                            string code = xele.Element("err").Attribute("code").Value;
+                            string msg = xele.Element("err").Attribute("msg").Value;
                             Errors.Add(msg);
                             break;
                     }

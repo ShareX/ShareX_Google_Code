@@ -396,7 +396,7 @@ namespace GreenshotPlugin.Core
                     if ("intellij idea".Equals(NoGDICaptureForProduct[0]))
                     {
                         NoGDICaptureForProduct[0] = "intellij,idea";
-                        this.IsDirty = true;
+                        IsDirty = true;
                     }
                 }
                 for (int i = 0; i < NoGDICaptureForProduct.Count; i++)
@@ -412,7 +412,7 @@ namespace GreenshotPlugin.Core
                     if ("citrix ica client".Equals(NoDWMCaptureForProduct[0]))
                     {
                         NoDWMCaptureForProduct[0] = "citrix,ica,client";
-                        this.IsDirty = true;
+                        IsDirty = true;
                     }
                 }
                 for (int i = 0; i < NoDWMCaptureForProduct.Count; i++)

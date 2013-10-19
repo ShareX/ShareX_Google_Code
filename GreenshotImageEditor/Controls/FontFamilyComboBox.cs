@@ -51,7 +51,7 @@ namespace Greenshot.Controls
         {
             ComboBox.DataSource = FontFamily.Families;
             ComboBox.DisplayMember = "Name";
-            this.SelectedIndexChanged += new EventHandler(BindableToolStripComboBox_SelectedIndexChanged);
+            SelectedIndexChanged += BindableToolStripComboBox_SelectedIndexChanged;
         }
 
         private void BindableToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)

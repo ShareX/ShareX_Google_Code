@@ -27,7 +27,6 @@ using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Windows.Forms;
@@ -145,7 +144,7 @@ namespace ImageEffectsLib
                 {
                     img2 = Helpers.GetImageFromFile(imgPath);
 
-                    int offset = (int)Config.WatermarkOffset;
+                    int offset = Config.WatermarkOffset;
                     int width = (int)(Config.WatermarkImageScale / 100f * img2.Width);
                     int height = (int)(Config.WatermarkImageScale / 100f * img2.Height);
 
@@ -168,7 +167,7 @@ namespace ImageEffectsLib
 
                         if (Config.WatermarkAddReflection)
                         {
-                            using (Bitmap bmp = ImageHelpers.AddReflection((Bitmap)img2, 50, 150, 10))
+                            using (Bitmap bmp = ImageHelpers.AddReflection(img2, 50, 150, 10))
                             {
                                 g.DrawImage(bmp, new Rectangle(imgPos.X, imgPos.Y + img2.Height - 1, bmp.Width, bmp.Height));
                             }
@@ -202,7 +201,7 @@ namespace ImageEffectsLib
 
                 try
                 {
-                    int offset = (int)Config.WatermarkOffset;
+                    int offset = Config.WatermarkOffset;
 
                     font = Config.WatermarkFont;
                     Size textSize = TextRenderer.MeasureText(drawText, font);
@@ -235,7 +234,7 @@ namespace ImageEffectsLib
                         using (GraphicsPath gPath = new GraphicsPath())
                         using (Pen borderPen = new Pen(Config.WatermarkBorderArgb))
                         {
-                            gPath.AddRoundedRectangle(labelRectangle, (float)Config.WatermarkCornerRadius);
+                            gPath.AddRoundedRectangle(labelRectangle, Config.WatermarkCornerRadius);
                             g.FillPath(backgroundBrush, gPath);
                             g.DrawPath(borderPen, gPath);
                         }
@@ -243,7 +242,7 @@ namespace ImageEffectsLib
                         using (Brush textBrush = new SolidBrush(fontColor))
                         using (StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
                         {
-                            g.DrawString(drawText, font, textBrush, bmp.Width / 2, bmp.Height / 2, sf);
+                            g.DrawString(drawText, font, textBrush, bmp.Width / 2f, bmp.Height / 2f, sf);
                         }
 
                         using (Graphics gImg = Graphics.FromImage(img))

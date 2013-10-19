@@ -38,7 +38,7 @@ namespace HelpersLib
     public class FolderSelectDialog : IDisposable
     {
         // Wrapped dialog
-        private OpenFileDialog ofd = null;
+        private OpenFileDialog ofd;
 
         /// <summary>
         /// Default constructor
@@ -145,8 +145,8 @@ namespace HelpersLib
             {
                 using (FolderBrowserDialog fbd = new FolderBrowserDialog())
                 {
-                    fbd.Description = this.Title;
-                    fbd.SelectedPath = this.InitialDirectory;
+                    fbd.Description = Title;
+                    fbd.SelectedPath = InitialDirectory;
                     if (fbd.ShowDialog(new WindowWrapper(hWndOwner)) != DialogResult.OK) return false;
                     ofd.FileName = fbd.SelectedPath;
                     flag = true;

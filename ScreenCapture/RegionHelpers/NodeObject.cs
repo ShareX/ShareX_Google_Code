@@ -46,13 +46,8 @@ namespace ScreenCapture
 
         public float NodeSize { get; set; }
 
-        private Pen borderPen;
-        private Brush backgroundBrush;
-
-        public NodeObject(Pen borderPen, Brush backgroundBrush, float x = 0, float y = 0)
+        public NodeObject(float x = 0, float y = 0)
         {
-            this.borderPen = borderPen;
-            this.backgroundBrush = backgroundBrush;
             NodeSize = 13;
             Position = new PointF(x, y);
         }

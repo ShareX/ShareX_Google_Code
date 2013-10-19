@@ -72,7 +72,7 @@ namespace Greenshot.Drawing
             }
         }
 
-        [OnDeserializedAttribute()]
+        [OnDeserialized()]
         private void OnDeserialized(StreamingContext context)
         {
             InitGrippers();
@@ -300,7 +300,7 @@ namespace Greenshot.Drawing
 
         public override void ShowGrippers()
         {
-            this.ResumeLayout();
+            ResumeLayout();
         }
 
         public override bool ClickableAt(int x, int y)

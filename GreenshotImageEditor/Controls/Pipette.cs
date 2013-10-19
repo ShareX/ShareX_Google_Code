@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.ComponentModel;
 using Greenshot.Forms;
 using GreenshotPlugin.UnmanagedHelpers;
 using System;
@@ -45,7 +46,7 @@ namespace Greenshot.Controls
         {
             BorderStyle = BorderStyle.FixedSingle;
             dragging = false;
-            _image = (Bitmap)new System.ComponentModel.ComponentResourceManager(typeof(ColorDialog)).GetObject("pipette.Image");
+            _image = (Bitmap)new ComponentResourceManager(typeof(ColorDialog)).GetObject("pipette.Image");
             Image = _image;
             _cursor = CreateCursor((Bitmap)_image, 1, 14);
             movableShowColorForm = new MovableShowColorForm();
@@ -112,7 +113,7 @@ namespace Greenshot.Controls
         {
             if (e.Button == MouseButtons.Left)
             {
-                User32.SetCapture(this.Handle);
+                User32.SetCapture(Handle);
                 movableShowColorForm.MoveTo(PointToScreen(new Point(e.X, e.Y)));
             }
             base.OnMouseDown(e);
@@ -154,7 +155,7 @@ namespace Greenshot.Controls
         /// <param name="e"></param>
         protected override void OnMouseCaptureChanged(EventArgs e)
         {
-            if (this.Capture)
+            if (Capture)
             {
                 dragging = true;
                 Image = null;

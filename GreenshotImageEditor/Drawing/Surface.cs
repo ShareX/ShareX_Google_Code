@@ -22,6 +22,7 @@
 using Greenshot.Configuration;
 using Greenshot.Core;
 using Greenshot.Drawing.Fields;
+using Greenshot.Helpers;
 using Greenshot.IniFile;
 using Greenshot.Memento;
 using Greenshot.Plugin;
@@ -410,23 +411,23 @@ namespace Greenshot.Drawing
         {
             Count++;
             LOG.Debug("Creating surface!");
-            this.MouseDown += new MouseEventHandler(SurfaceMouseDown);
-            this.MouseUp += new MouseEventHandler(SurfaceMouseUp);
-            this.MouseMove += new MouseEventHandler(SurfaceMouseMove);
-            this.MouseDoubleClick += new MouseEventHandler(SurfaceDoubleClick);
-            this.Paint += new PaintEventHandler(SurfacePaint);
-            this.AllowDrop = true;
-            this.DragDrop += new DragEventHandler(OnDragDrop);
-            this.DragEnter += new DragEventHandler(OnDragEnter);
+            MouseDown += SurfaceMouseDown;
+            MouseUp += SurfaceMouseUp;
+            MouseMove += SurfaceMouseMove;
+            MouseDoubleClick += SurfaceDoubleClick;
+            Paint += SurfacePaint;
+            AllowDrop = true;
+            DragDrop += OnDragDrop;
+            DragEnter += OnDragEnter;
             // bind selected & elements to this, otherwise they can't inform of modifications
-            this.selectedElements.Parent = this;
-            this.elements.Parent = this;
+            selectedElements.Parent = this;
+            elements.Parent = this;
             // Make sure we are visible
-            this.Visible = true;
-            this.TabStop = false;
+            Visible = true;
+            TabStop = false;
             // Enable double buffering
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw | ControlStyles.ContainerControl | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw | ControlStyles.ContainerControl | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
         }
 
         /// <summary>
@@ -870,7 +871,7 @@ namespace Greenshot.Drawing
         private void OnDragDrop(object sender, DragEventArgs e)
         {
             List<string> filenames = ClipboardHelper.GetImageFilenames(e.Data);
-            Point mouse = this.PointToClient(new Point(e.X, e.Y));
+            Point mouse = PointToClient(new Point(e.X, e.Y));
 
             foreach (Image image in ClipboardHelper.GetImages(e.Data))
             {
@@ -979,7 +980,7 @@ namespace Greenshot.Drawing
         /// <returns>true if this is possible</returns>
         public bool isCropPossible(ref Rectangle cropRectangle)
         {
-            cropRectangle = Helpers.GuiRectangle.GetGuiRectangle(cropRectangle.Left, cropRectangle.Top, cropRectangle.Width, cropRectangle.Height);
+            cropRectangle = GuiRectangle.GetGuiRectangle(cropRectangle.Left, cropRectangle.Top, cropRectangle.Width, cropRectangle.Height);
             if (cropRectangle.Left < 0)
             {
                 cropRectangle = new Rectangle(0, cropRectangle.Top, cropRectangle.Width + cropRectangle.Left, cropRectangle.Height);
@@ -1184,7 +1185,7 @@ namespace Greenshot.Drawing
             {
                 // check whether an existing element was clicked
                 IDrawableContainer element = elements.ClickableElementAt(currentMouse.X, currentMouse.Y);
-                bool shiftModifier = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+                bool shiftModifier = (ModifierKeys & Keys.Shift) == Keys.Shift;
                 if (element != null)
                 {
                     element.Invalidate();
@@ -1412,7 +1413,7 @@ namespace Greenshot.Drawing
             else
             {
                 Graphics targetGraphics = e.Graphics;
-                targetGraphics.Clear(this.BackColor);
+                targetGraphics.Clear(BackColor);
                 //base.OnPaintBackground(e);
             }
         }
@@ -1751,7 +1752,7 @@ namespace Greenshot.Drawing
         {
             if (selectedElements.Count > 0)
             {
-                bool shiftModifier = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+                bool shiftModifier = (ModifierKeys & Keys.Shift) == Keys.Shift;
                 int px = shiftModifier ? 10 : 1;
                 Point moveBy = Point.Empty;
 

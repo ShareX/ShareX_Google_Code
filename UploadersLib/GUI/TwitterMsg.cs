@@ -110,7 +110,7 @@ namespace UploadersLib
         {
             if (lbUsers.SelectedItem != null)
             {
-                txtTweet.Text = txtTweet.Text.Insert(txtTweet.SelectionStart, "@" + lbUsers.SelectedItem.ToString() + " ");
+                txtTweet.Text = txtTweet.Text.Insert(txtTweet.SelectionStart, "@" + lbUsers.SelectedItem + " ");
                 txtTweet.SelectionStart = txtTweet.Text.Length;
                 txtTweet.Focus();
             }
@@ -118,7 +118,7 @@ namespace UploadersLib
 
         private void TwitterMsg_Load(object sender, EventArgs e)
         {
-            foreach (string user in this.Config.Addressees)
+            foreach (string user in Config.Addressees)
             {
                 lbUsers.Items.Add(user);
             }
@@ -169,7 +169,7 @@ namespace UploadersLib
 
         public void AddUser(string user)
         {
-            if (!string.IsNullOrEmpty(user) && !this.Addressees.Contains(user))
+            if (!string.IsNullOrEmpty(user) && !Addressees.Contains(user))
             {
                 Addressees.Add(user);
             }

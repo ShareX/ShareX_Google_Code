@@ -24,9 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using ShareX;
 using System.IO;
-using UploadersLib.HelperClasses;
 
 namespace ShareX
 {
@@ -45,7 +43,7 @@ namespace ShareX
         {
             if (info != null && !string.IsNullOrEmpty(pattern))
             {
-                pattern = base.Parse(pattern);
+                pattern = Parse(pattern);
 
                 if (info.Result != null)
                 {

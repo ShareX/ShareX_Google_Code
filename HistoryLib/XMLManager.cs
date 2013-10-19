@@ -67,7 +67,7 @@ namespace HistoryLib
                         {
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "HistoryItem")
                             {
-                                XElement element = XElement.ReadFrom(reader) as XElement;
+                                XElement element = XNode.ReadFrom(reader) as XElement;
 
                                 if (element != null)
                                 {

@@ -32,9 +32,7 @@ namespace ImageEffectsLib
 {
     internal class Matrix : ImageEffect
     {
-        // Red = (Red * Rr) + (Green * Rg) + (Blue * Rb) + (Alpha * Ra) + Ro
-
-        [DefaultValue(1f)]
+        [DefaultValue(1f), Description("Red = (Red * Rr) + (Green * Rg) + (Blue * Rb) + (Alpha * Ra) + Ro")]
         public float Rr { get; set; }
         [DefaultValue(0f)]
         public float Rg { get; set; }

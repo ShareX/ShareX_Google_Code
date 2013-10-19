@@ -37,7 +37,7 @@ namespace HelpersLib
 
         private readonly object loggerLock = new object();
         private StringBuilder sbMessages = new StringBuilder(4096);
-        private int lastSaveIndex = 0;
+        private int lastSaveIndex;
 
         protected void OnMessageAdded(string message)
         {

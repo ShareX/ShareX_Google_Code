@@ -82,8 +82,8 @@ namespace UploadersLib
                 }
             }
 
-            Client.TransferProgress += new EventHandler<TransferProgressEventArgs>(OnTransferProgressChanged);
-            Client.ConnectionClosed += new EventHandler<ConnectionClosedEventArgs>(Client_ConnectionClosed);
+            Client.TransferProgress += OnTransferProgressChanged;
+            Client.ConnectionClosed += Client_ConnectionClosed;
         }
 
         private void OnTransferProgressChanged(object sender, TransferProgressEventArgs e)
@@ -277,10 +277,8 @@ namespace UploadersLib
                         Client.ChangeDirectory(remotePath);
                         return true;
                     }
-                    else
-                    {
-                        throw e;
-                    }
+
+                    throw e;
                 }
             }
 

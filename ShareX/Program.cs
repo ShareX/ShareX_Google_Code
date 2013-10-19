@@ -240,8 +240,8 @@ namespace ShareX
         [STAThread]
         private static void Main(string[] args)
         {
-            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             StartTimer = Stopwatch.StartNew();
 

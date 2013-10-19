@@ -139,12 +139,12 @@ namespace GreenshotPlugin.UnmanagedHelpers
 
         public static void EnableComposition()
         {
-            DWM.DwmEnableComposition(DWM.DWM_EC_ENABLECOMPOSITION);
+            DwmEnableComposition(DWM_EC_ENABLECOMPOSITION);
         }
 
         public static void DisableComposition()
         {
-            DWM.DwmEnableComposition(DWM.DWM_EC_DISABLECOMPOSITION);
+            DwmEnableComposition(DWM_EC_DISABLECOMPOSITION);
         }
 
         // Key to ColorizationColor for DWM
@@ -166,7 +166,7 @@ namespace GreenshotPlugin.UnmanagedHelpers
             if (Environment.OSVersion.Version.Major >= 6)
             {
                 bool dwmEnabled;
-                DWM.DwmIsCompositionEnabled(out dwmEnabled);
+                DwmIsCompositionEnabled(out dwmEnabled);
                 return dwmEnabled;
             }
             return false;

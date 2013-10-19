@@ -43,7 +43,7 @@ namespace Greenshot.Drawing.Fields
             }
             set
             {
-                if (!object.Equals(myValue, value))
+                if (!Equals(myValue, value))
                 {
                     myValue = value;
                     if (PropertyChanged != null)
@@ -122,12 +122,12 @@ namespace Greenshot.Drawing.Fields
             {
                 return false;
             }
-            return this.FieldType == other.FieldType && object.Equals(this.Scope, other.Scope);
+            return FieldType == other.FieldType && Equals(Scope, other.Scope);
         }
 
         public override string ToString()
         {
-            return string.Format("[Field FieldType={1} Value={0} Scope={2}]", this.myValue, this.FieldType, this.Scope);
+            return string.Format("[Field FieldType={1} Value={0} Scope={2}]", myValue, FieldType, Scope);
         }
     }
 
@@ -145,7 +145,7 @@ namespace Greenshot.Drawing.Fields
 
         public FieldChangedEventArgs(Field field)
         {
-            this.Field = field;
+            Field = field;
         }
     }
 }

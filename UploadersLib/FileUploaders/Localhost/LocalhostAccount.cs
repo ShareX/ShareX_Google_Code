@@ -39,7 +39,7 @@ namespace UploadersLib
         public string Name { get; set; }
 
         [Category("Localhost"), Description(@"Root folder, e.g. C:\Inetpub\wwwroot")]
-        [EditorAttribute(typeof(FolderNameEditor), typeof(UITypeEditor))]
+        [Editor(typeof(FolderNameEditor), typeof(UITypeEditor))]
         public string LocalhostRoot { get; set; }
 
         [Category("Localhost"), Description("Port Number"), DefaultValue(80)]
@@ -65,7 +65,7 @@ namespace UploadersLib
         {
             get
             {
-                if (string.IsNullOrEmpty(this.LocalhostRoot))
+                if (string.IsNullOrEmpty(LocalhostRoot))
                 {
                     return string.Empty;
                 }
@@ -102,7 +102,7 @@ namespace UploadersLib
         public LocalhostAccount(string name)
             : this()
         {
-            this.Name = name;
+            Name = name;
         }
 
         public string GetSubFolderPath()
@@ -125,7 +125,7 @@ namespace UploadersLib
 
         public string GetUriPath(string fileName, bool customPath)
         {
-            if (string.IsNullOrEmpty(this.LocalhostRoot))
+            if (string.IsNullOrEmpty(LocalhostRoot))
             {
                 return string.Empty;
             }
@@ -143,7 +143,7 @@ namespace UploadersLib
                 RemoteProtocol = BrowserProtocol.Http;
             }
 
-            string lFolderPath = this.GetSubFolderPath();
+            string lFolderPath = GetSubFolderPath();
 
             if (lHttpHomePath.StartsWith("@") || customPath)
             {
@@ -156,9 +156,9 @@ namespace UploadersLib
             }
             else
             {
-                httppath = lHttpHomePath.Replace("%host", this.LocalhostRoot).TrimStart('@');
+                httppath = lHttpHomePath.Replace("%host", LocalhostRoot).TrimStart('@');
             }
-            path = Helpers.CombineURL(this.Port == 80 ? httppath : string.Format("{0}:{1}", httppath, this.Port), lFolderPath, fileName);
+            path = Helpers.CombineURL(Port == 80 ? httppath : string.Format("{0}:{1}", httppath, Port), lFolderPath, fileName);
 
             if (!path.StartsWith(RemoteProtocol.GetDescription()))
             {
@@ -174,24 +174,24 @@ namespace UploadersLib
             {
                 return string.Empty;
             }
-            return Path.Combine(Path.Combine(LocalhostRoot, this.GetSubFolderPath()), fileName);
+            return Path.Combine(Path.Combine(LocalhostRoot, GetSubFolderPath()), fileName);
         }
 
         public string GetLocalhostUri(string fileName)
         {
-            string LocalhostAddress = this.LocalUri;
+            string LocalhostAddress = LocalUri;
 
             if (string.IsNullOrEmpty(LocalhostAddress))
             {
                 return string.Empty;
             }
 
-            return Helpers.CombineURL(LocalhostAddress, this.GetSubFolderPath(), fileName);
+            return Helpers.CombineURL(LocalhostAddress, GetSubFolderPath(), fileName);
         }
 
         public override string ToString()
         {
-            return string.Format("{0} - {1}:{2}", this.Name, this.LocalhostRoot, this.Port);
+            return string.Format("{0} - {1}:{2}", Name, LocalhostRoot, Port);
         }
     }
 }

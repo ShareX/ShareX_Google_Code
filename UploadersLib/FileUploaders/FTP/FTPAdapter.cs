@@ -42,8 +42,8 @@ namespace UploadersLib
 
         public FTPOptions(FTPAccount acc, IWebProxy proxy)
         {
-            this.Account = acc;
-            this.ProxySettings = proxy;
+            Account = acc;
+            ProxySettings = proxy;
         }
 
         public FTPAccount Account { get; set; }
@@ -65,7 +65,7 @@ namespace UploadersLib
 
         public FTPAdapter(FTPOptions options)
         {
-            this.Options = options;
+            Options = options;
         }
 
         private void OnProgressChanged(ProgressManager progress)
@@ -137,8 +137,8 @@ namespace UploadersLib
         public void AsyncUpload(Stream stream, string url)
         {
             BackgroundWorker bw = new BackgroundWorker { WorkerReportsProgress = true };
-            bw.DoWork += new DoWorkEventHandler(bw_AsyncUploadDoWork);
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_AsyncUploadProgressChanged);
+            bw.DoWork += bw_AsyncUploadDoWork;
+            bw.ProgressChanged += bw_AsyncUploadProgressChanged;
             AsyncUploadHelper upload = new AsyncUploadHelper { BackgroundWorker = bw, Stream = stream, URL = url };
             bw.RunWorkerAsync(upload);
         }
@@ -150,11 +150,11 @@ namespace UploadersLib
                 AsyncUploadHelper upload = (AsyncUploadHelper)e.Argument;
 
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(upload.URL);
-                request.Proxy = this.Options.ProxySettings;
+                request.Proxy = Options.ProxySettings;
                 request.Method = WebRequestMethods.Ftp.UploadFile;
-                request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+                request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
                 request.KeepAlive = false;
-                request.UsePassive = !this.Options.Account.IsActive;
+                request.UsePassive = !Options.Account.IsActive;
 
                 using (upload.Stream)
                 using (Stream requestStream = request.GetRequestStream())
@@ -205,11 +205,11 @@ namespace UploadersLib
             try
             {
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-                request.Proxy = this.Options.ProxySettings;
+                request.Proxy = Options.ProxySettings;
                 request.Method = WebRequestMethods.Ftp.DownloadFile;
-                request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+                request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
                 request.KeepAlive = false;
-                request.UsePassive = !this.Options.Account.IsActive;
+                request.UsePassive = !Options.Account.IsActive;
 
                 using (FileStream fileStream = new FileStream(savePath, FileMode.Create))
                 using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
@@ -244,9 +244,9 @@ namespace UploadersLib
             if (filename == "." || filename == "..") return;
 
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.DeleteFile;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
 
             request.GetResponse();
@@ -275,9 +275,9 @@ namespace UploadersLib
             }
 
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.RemoveDirectory;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
 
             request.GetResponse();
@@ -288,10 +288,10 @@ namespace UploadersLib
         public void Rename(string url, string newFileName)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.Rename;
             request.RenameTo = newFileName;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
 
             request.GetResponse();
@@ -302,9 +302,9 @@ namespace UploadersLib
         public long GetFileSize(string url)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.GetFileSize;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
 
             using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
@@ -322,12 +322,12 @@ namespace UploadersLib
             url = FTPHelpers.AddSlash(url, FTPHelpers.SlashType.Suffix);
 
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.ListDirectory;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
             request.Timeout = 10000;
-            request.UsePassive = !this.Options.Account.IsActive;
+            request.UsePassive = !Options.Account.IsActive;
 
             using (WebResponse response = request.GetResponse())
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -348,11 +348,11 @@ namespace UploadersLib
             List<FTPLineResult> result = new List<FTPLineResult>();
 
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
-            request.Proxy = this.Options.ProxySettings;
+            request.Proxy = Options.ProxySettings;
             request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+            request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
             request.KeepAlive = false;
-            request.UsePassive = !this.Options.Account.IsActive;
+            request.UsePassive = !Options.Account.IsActive;
 
             using (WebResponse response = request.GetResponse())
             using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -375,7 +375,7 @@ namespace UploadersLib
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
 
                 request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                request.Credentials = new NetworkCredential(this.Options.Account.Username, this.Options.Account.Password);
+                request.Credentials = new NetworkCredential(Options.Account.Username, Options.Account.Password);
                 request.KeepAlive = false;
 
                 request.GetResponse();

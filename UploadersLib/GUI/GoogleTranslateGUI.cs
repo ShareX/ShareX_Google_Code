@@ -35,7 +35,7 @@ namespace UploadersLib
         public GoogleTranslateGUI(GoogleTranslatorConfig config)
         {
             InitializeComponent();
-            this.Config = config;
+            Config = config;
         }
 
         private void btnTranslate_Click(object sender, EventArgs e)

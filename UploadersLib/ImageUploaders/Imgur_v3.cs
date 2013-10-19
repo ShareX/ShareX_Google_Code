@@ -138,10 +138,8 @@ namespace UploadersLib.ImageUploaders
                         {
                             return albums.data;
                         }
-                        else
-                        {
-                            Errors.Add("Imgur albums failed. Status code: " + albums.status);
-                        }
+
+                        Errors.Add("Imgur albums failed. Status code: " + albums.status);
                     }
                 }
             }

@@ -43,7 +43,7 @@ namespace ScreenCapture
             Radius = 25;
             RadiusIncrement = 3;
 
-            KeyDown += new KeyEventHandler(RoundedRectangleRegion_KeyDown);
+            KeyDown += RoundedRectangleRegion_KeyDown;
         }
 
         private void RoundedRectangleRegion_KeyDown(object sender, KeyEventArgs e)

@@ -35,7 +35,7 @@ namespace SingleInstanceApplication
 {
     public static class ApplicationInstanceManager
     {
-        [DebuggerStepThrough()]
+        [DebuggerStepThrough]
         public static bool CreateSingleInstance(string name, EventHandler<InstanceCallbackEventArgs> callback)
         {
             string eventName = string.Format("{0}-{1}", Environment.MachineName, name);

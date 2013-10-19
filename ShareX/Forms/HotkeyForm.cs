@@ -67,7 +67,7 @@ namespace ShareX
                     }
                 }
 
-                if (!NativeMethods.RegisterHotKey(Handle, (int)hotkeyInfo.ID, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
+                if (!NativeMethods.RegisterHotKey(Handle, hotkeyInfo.ID, (uint)hotkeyInfo.ModifiersEnum, (uint)hotkeyInfo.KeyCode))
                 {
                     NativeMethods.GlobalDeleteAtom(hotkeyInfo.ID);
                     DebugHelper.WriteLine("Unable to register hotkey: " + hotkeyInfo);

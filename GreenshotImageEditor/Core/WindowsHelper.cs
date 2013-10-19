@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using Greenshot.IniFile;
 using Greenshot.Interop;
 using Greenshot.Plugin;
@@ -62,7 +63,7 @@ namespace GreenshotPlugin.Core
         {
             get
             {
-                return this.items;
+                return items;
             }
         }
 
@@ -99,9 +100,9 @@ namespace GreenshotPlugin.Core
         /// <param name="classname">Window Classname to copy, use null to copy all</param>
         public WindowsEnumerator GetWindows(IntPtr hWndParent, string classname)
         {
-            this.items = new List<WindowDetails>();
+            items = new List<WindowDetails>();
             List<WindowDetails> windows = new List<WindowDetails>();
-            User32.EnumChildWindows(hWndParent, new EnumWindowsProc(this.WindowEnum), 0);
+            User32.EnumChildWindows(hWndParent, WindowEnum, 0);
 
             bool hasParent = !IntPtr.Zero.Equals(hWndParent);
             string parentText = null;
@@ -138,7 +139,7 @@ namespace GreenshotPlugin.Core
         /// <returns>1 to continue enumeration, 0 to stop</returns>
         private int WindowEnum(IntPtr hWnd, int lParam)
         {
-            if (this.OnWindowEnum(hWnd))
+            if (OnWindowEnum(hWnd))
             {
                 return 1;
             }
@@ -189,7 +190,7 @@ namespace GreenshotPlugin.Core
     /// Provides details about a Window returned by the
     /// enumeration
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1049:TypesThatOwnNativeResourcesShouldBeDisposable")]
+    [SuppressMessage("Microsoft.Design", "CA1049:TypesThatOwnNativeResourcesShouldBeDisposable")]
     public class WindowDetails : IEquatable<WindowDetails>
     {
         private const string METRO_WINDOWS_CLASS = "Windows.UI.Core.CoreWindow";
@@ -287,22 +288,22 @@ namespace GreenshotPlugin.Core
 
         public override bool Equals(object right)
         {
-            return this.Equals(right as WindowDetails);
+            return Equals(right as WindowDetails);
         }
 
         public bool Equals(WindowDetails other)
         {
-            if (Object.ReferenceEquals(other, null))
+            if (ReferenceEquals(other, null))
             {
                 return false;
             }
 
-            if (Object.ReferenceEquals(this, other))
+            if (ReferenceEquals(this, other))
             {
                 return true;
             }
 
-            if (this.GetType() != other.GetType())
+            if (GetType() != other.GetType())
             {
                 return false;
             }
@@ -352,7 +353,7 @@ namespace GreenshotPlugin.Core
             {
                 try
                 {
-                    using (Icon appIcon = GetAppIcon(this.Handle))
+                    using (Icon appIcon = GetAppIcon(Handle))
                     {
                         if (appIcon != null)
                         {
@@ -722,7 +723,7 @@ namespace GreenshotPlugin.Core
         {
             get
             {
-                return this.hWnd;
+                return hWnd;
             }
         }
 
@@ -741,7 +742,7 @@ namespace GreenshotPlugin.Core
                 if (text == null)
                 {
                     StringBuilder title = new StringBuilder(260, 260);
-                    User32.GetWindowText(this.hWnd, title, title.Capacity);
+                    User32.GetWindowText(hWnd, title, title.Capacity);
                     text = title.ToString();
                 }
                 return text;
@@ -758,7 +759,7 @@ namespace GreenshotPlugin.Core
             {
                 if (className == null)
                 {
-                    className = GetClassName(this.hWnd);
+                    className = GetClassName(hWnd);
                 }
                 return className;
             }
@@ -775,17 +776,17 @@ namespace GreenshotPlugin.Core
                 {
                     return !Visible;
                 }
-                return User32.IsIconic(this.hWnd) || Location.X <= -32000;
+                return User32.IsIconic(hWnd) || Location.X <= -32000;
             }
             set
             {
                 if (value)
                 {
-                    User32.SendMessage(this.hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MINIMIZE, IntPtr.Zero);
+                    User32.SendMessage(hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MINIMIZE, IntPtr.Zero);
                 }
                 else
                 {
-                    User32.SendMessage(this.hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_RESTORE, IntPtr.Zero);
+                    User32.SendMessage(hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_RESTORE, IntPtr.Zero);
                 }
             }
         }
@@ -815,17 +816,17 @@ namespace GreenshotPlugin.Core
                     }
                     return false;
                 }
-                return User32.IsZoomed(this.hWnd);
+                return User32.IsZoomed(hWnd);
             }
             set
             {
                 if (value)
                 {
-                    User32.SendMessage(this.hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MAXIMIZE, IntPtr.Zero);
+                    User32.SendMessage(hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MAXIMIZE, IntPtr.Zero);
                 }
                 else
                 {
-                    User32.SendMessage(this.hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MINIMIZE, IntPtr.Zero);
+                    User32.SendMessage(hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_MINIMIZE, IntPtr.Zero);
                 }
             }
         }
@@ -889,7 +890,7 @@ namespace GreenshotPlugin.Core
                 {
                     return IsAppLauncherVisible;
                 }
-                return User32.IsWindowVisible(this.hWnd);
+                return User32.IsWindowVisible(hWnd);
             }
         }
 
@@ -1045,10 +1046,10 @@ namespace GreenshotPlugin.Core
         {
             if (Iconic)
             {
-                User32.SendMessage(this.hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_RESTORE, IntPtr.Zero);
+                User32.SendMessage(hWnd, (int)WindowsMessages.WM_SYSCOMMAND, (IntPtr)User32.SC_RESTORE, IntPtr.Zero);
             }
-            User32.BringWindowToTop(this.hWnd);
-            User32.SetForegroundWindow(this.hWnd);
+            User32.BringWindowToTop(hWnd);
+            User32.SetForegroundWindow(hWnd);
             // Make sure windows has time to perform the action
             while (Iconic)
             {
@@ -1063,11 +1064,11 @@ namespace GreenshotPlugin.Core
         {
             get
             {
-                return (WindowStyleFlags)User32.GetWindowLongWrapper(this.hWnd, (int)WindowLongIndex.GWL_STYLE);
+                return (WindowStyleFlags)User32.GetWindowLongWrapper(hWnd, (int)WindowLongIndex.GWL_STYLE);
             }
             set
             {
-                User32.SetWindowLongWrapper(this.hWnd, (int)WindowLongIndex.GWL_STYLE, (uint)value);
+                User32.SetWindowLongWrapper(hWnd, (int)WindowLongIndex.GWL_STYLE, (uint)value);
             }
         }
 
@@ -1079,12 +1080,12 @@ namespace GreenshotPlugin.Core
             get
             {
                 WindowPlacement placement = WindowPlacement.Default;
-                User32.GetWindowPlacement(this.Handle, ref placement);
+                User32.GetWindowPlacement(Handle, ref placement);
                 return placement;
             }
             set
             {
-                User32.SetWindowPlacement(this.Handle, ref value);
+                User32.SetWindowPlacement(Handle, ref value);
             }
         }
 
@@ -1095,11 +1096,11 @@ namespace GreenshotPlugin.Core
         {
             get
             {
-                return (ExtendedWindowStyleFlags)User32.GetWindowLongWrapper(this.hWnd, (int)WindowLongIndex.GWL_EXSTYLE);
+                return (ExtendedWindowStyleFlags)User32.GetWindowLongWrapper(hWnd, (int)WindowLongIndex.GWL_EXSTYLE);
             }
             set
             {
-                User32.SetWindowLongWrapper(this.hWnd, (int)WindowLongIndex.GWL_EXSTYLE, (uint)value);
+                User32.SetWindowLongWrapper(hWnd, (int)WindowLongIndex.GWL_EXSTYLE, (uint)value);
             }
         }
 
@@ -1247,7 +1248,7 @@ namespace GreenshotPlugin.Core
                     // Check if we make a transparent capture
                     if (windowCaptureMode == WindowCaptureMode.AeroTransparent)
                     {
-                        frozen = this.FreezeWindow();
+                        frozen = FreezeWindow();
                         // Use white, later black to capture transparent
                         tempForm.BackColor = Color.White;
                         // Make sure everything is visible
@@ -1319,7 +1320,7 @@ namespace GreenshotPlugin.Core
                         if (!(Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor >= 2))
                         {
                             // Only if the Inivalue is set, not maximized and it's not a tool window.
-                            if (conf.WindowCaptureRemoveCorners && !Maximised && (this.ExtendedWindowStyle & ExtendedWindowStyleFlags.WS_EX_TOOLWINDOW) == 0)
+                            if (conf.WindowCaptureRemoveCorners && !Maximised && (ExtendedWindowStyle & ExtendedWindowStyleFlags.WS_EX_TOOLWINDOW) == 0)
                             {
                                 // Remove corners
                                 if (!Image.IsAlphaPixelFormat(capturedBitmap.PixelFormat))
@@ -1339,7 +1340,7 @@ namespace GreenshotPlugin.Core
                     // Make sure to ALWAYS unfreeze!!
                     if (frozen)
                     {
-                        this.UnfreezeWindow();
+                        UnfreezeWindow();
                     }
                 }
 
@@ -1538,7 +1539,7 @@ namespace GreenshotPlugin.Core
         /// </summary>
         public void ToForeground()
         {
-            ToForeground(this.Handle);
+            ToForeground(Handle);
         }
 
         /// <summary>
@@ -1587,7 +1588,7 @@ namespace GreenshotPlugin.Core
         /// </summary>
         private bool FreezeWindow()
         {
-            Process proc = Process.GetProcessById(this.ProcessId.ToInt32());
+            Process proc = Process.GetProcessById(ProcessId.ToInt32());
             string processName = proc.ProcessName;
             if (!CanFreezeOrUnfreeze(processName))
             {
@@ -1622,7 +1623,7 @@ namespace GreenshotPlugin.Core
         /// </summary>
         public void UnfreezeWindow()
         {
-            Process proc = Process.GetProcessById(this.ProcessId.ToInt32());
+            Process proc = Process.GetProcessById(ProcessId.ToInt32());
 
             string processName = proc.ProcessName;
             if (!CanFreezeOrUnfreeze(processName))
@@ -1707,7 +1708,7 @@ namespace GreenshotPlugin.Core
                 }
                 return null;
             }
-            if (!HasParent && this.Maximised)
+            if (!HasParent && Maximised)
             {
                 LOG.Debug("Correcting for maximalization");
                 Size borderSize = Size.Empty;
@@ -1739,14 +1740,14 @@ namespace GreenshotPlugin.Core
             {
                 if (ignoreHandles.Contains(hWnd))
                 {
-                    return WindowDetails.GetDesktopWindow();
+                    return GetDesktopWindow();
                 }
 
                 WindowDetails activeWindow = new WindowDetails(hWnd);
                 // Invisible Windows should not be active
                 if (!activeWindow.Visible)
                 {
-                    return WindowDetails.GetDesktopWindow();
+                    return GetDesktopWindow();
                 }
                 return activeWindow;
             }
@@ -1845,7 +1846,7 @@ namespace GreenshotPlugin.Core
             List<WindowDetails> windows = new List<WindowDetails>();
             Rectangle screenBounds = WindowCapture.GetScreenBounds();
             List<WindowDetails> allWindows = GetMetroApps();
-            allWindows.AddRange(WindowDetails.GetAllWindows());
+            allWindows.AddRange(GetAllWindows());
             foreach (WindowDetails window in allWindows)
             {
                 // Ignore windows without title
@@ -1930,7 +1931,7 @@ namespace GreenshotPlugin.Core
         {
             List<WindowDetails> windows = new List<WindowDetails>();
             var possibleTopLevelWindows = GetMetroApps();
-            possibleTopLevelWindows.AddRange(WindowDetails.GetAllWindows());
+            possibleTopLevelWindows.AddRange(GetAllWindows());
             foreach (WindowDetails window in possibleTopLevelWindows)
             {
                 // Ignore windows without title
@@ -1979,7 +1980,7 @@ namespace GreenshotPlugin.Core
         public static WindowDetails GetLinkedWindow(WindowDetails windowToLinkTo)
         {
             IntPtr processIdSelectedWindow = windowToLinkTo.ProcessId;
-            foreach (WindowDetails window in WindowDetails.GetAllWindows())
+            foreach (WindowDetails window in GetAllWindows())
             {
                 // Ignore windows without title
                 if (window.Text.Length == 0)
@@ -2023,7 +2024,7 @@ namespace GreenshotPlugin.Core
         /// <param name="oldWindows">List<WindowDetails> with old windows</param>
         public static void ActiveNewerWindows(List<WindowDetails> oldWindows)
         {
-            List<WindowDetails> windowsAfter = WindowDetails.GetVisibleWindows();
+            List<WindowDetails> windowsAfter = GetVisibleWindows();
             foreach (WindowDetails window in windowsAfter)
             {
                 if (!oldWindows.Contains(window))

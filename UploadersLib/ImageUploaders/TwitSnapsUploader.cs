@@ -78,9 +78,8 @@ namespace UploadersLib.ImageUploaders
             if (result.IsSuccess)
             {
                 XDocument xd = XDocument.Parse(result.Response);
-                XElement xe;
 
-                xe = xd.Element("image");
+                XElement xe = xd.Element("image");
 
                 if (xe != null)
                 {

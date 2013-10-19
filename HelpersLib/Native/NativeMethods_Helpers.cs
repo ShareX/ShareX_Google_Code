@@ -130,16 +130,7 @@ namespace HelpersLib
 
         public static Icon GetApplicationIcon(IntPtr handle)
         {
-            Icon icon = null;
-
-            icon = GetSmallApplicationIcon(handle);
-
-            if (icon == null)
-            {
-                icon = GetBigApplicationIcon(handle);
-            }
-
-            return icon;
+            return GetSmallApplicationIcon(handle) ?? GetBigApplicationIcon(handle);
         }
 
         public static string GetForegroundWindowText()
@@ -196,7 +187,7 @@ namespace HelpersLib
 
         public static bool GetWindowRegion(IntPtr hWnd, out Region region)
         {
-            IntPtr hRgn = NativeMethods.CreateRectRgn(0, 0, 0, 0);
+            IntPtr hRgn = CreateRectRgn(0, 0, 0, 0);
             RegionType regionType = (RegionType)GetWindowRgn(hWnd, hRgn);
             region = Region.FromHrgn(hRgn);
             return regionType != RegionType.ERROR && regionType != RegionType.NULLREGION;
@@ -211,7 +202,7 @@ namespace HelpersLib
         {
             RECT rect;
             int result = DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(RECT)));
-            rectangle = (Rectangle)rect;
+            rectangle = rect;
             return result == 0;
         }
 
@@ -232,7 +223,7 @@ namespace HelpersLib
         {
             RECT rect;
             GetWindowRect(handle, out rect);
-            return (Rectangle)rect;
+            return rect;
         }
 
         public static Rectangle GetClientRect(IntPtr handle)
@@ -264,9 +255,9 @@ namespace HelpersLib
 
         public static void ActivateWindowRepeat(IntPtr handle, int count)
         {
-            for (int i = 0; NativeMethods.GetForegroundWindow() != handle && i < count; i++)
+            for (int i = 0; GetForegroundWindow() != handle && i < count; i++)
             {
-                NativeMethods.BringWindowToTop(handle);
+                BringWindowToTop(handle);
                 Thread.Sleep(1);
                 Application.DoEvents();
             }
@@ -275,37 +266,37 @@ namespace HelpersLib
         public static Rectangle GetTaskbarRectangle()
         {
             APPBARDATA abd = APPBARDATA.NewAPPBARDATA();
-            IntPtr retval = SHAppBarMessage((uint)ABMsg.ABM_GETTASKBARPOS, ref abd);
-            return (Rectangle)abd.rc;
+            SHAppBarMessage((uint)ABMsg.ABM_GETTASKBARPOS, ref abd);
+            return abd.rc;
         }
 
         public static bool SetTaskbarVisibilityIfIntersect(bool visible, Rectangle rect)
         {
             bool result = false;
 
-            IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
+            IntPtr taskbarHandle = FindWindow("Shell_TrayWnd", null);
 
             if (taskbarHandle != IntPtr.Zero)
             {
-                Rectangle taskbarRect = NativeMethods.GetWindowRect(taskbarHandle);
+                Rectangle taskbarRect = GetWindowRect(taskbarHandle);
 
                 if (rect.IntersectsWith(taskbarRect))
                 {
-                    NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                    ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
                     result = true;
                 }
 
                 if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
                 {
-                    IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+                    IntPtr startHandle = FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
 
                     if (startHandle != IntPtr.Zero)
                     {
-                        Rectangle startRect = NativeMethods.GetWindowRect(startHandle);
+                        Rectangle startRect = GetWindowRect(startHandle);
 
                         if (rect.IntersectsWith(startRect))
                         {
-                            NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                            ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
                             result = true;
                         }
                     }
@@ -317,19 +308,19 @@ namespace HelpersLib
 
         public static bool SetTaskbarVisibility(bool visible)
         {
-            IntPtr taskbarHandle = NativeMethods.FindWindow("Shell_TrayWnd", null);
+            IntPtr taskbarHandle = FindWindow("Shell_TrayWnd", null);
 
             if (taskbarHandle != IntPtr.Zero)
             {
-                NativeMethods.ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                ShowWindow(taskbarHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
 
                 if (Helpers.IsWindowsVista() || Helpers.IsWindows7())
                 {
-                    IntPtr startHandle = NativeMethods.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+                    IntPtr startHandle = FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
 
                     if (startHandle != IntPtr.Zero)
                     {
-                        NativeMethods.ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
+                        ShowWindow(startHandle, visible ? (int)WindowShowStyle.Show : (int)WindowShowStyle.Hide);
                     }
                 }
 
@@ -393,11 +384,9 @@ namespace HelpersLib
         {
             IntPtr[] streams = new IntPtr[1];
             IntPtr[] infPtrs = new IntPtr[1];
-            IntPtr mem;
-            int ret;
 
             // alloc unmanaged memory
-            mem = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AVICOMPRESSOPTIONS)));
+            IntPtr mem = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(AVICOMPRESSOPTIONS)));
 
             // copy from managed structure to unmanaged memory
             Marshal.StructureToPtr(options, mem, false);
@@ -406,7 +395,7 @@ namespace HelpersLib
             infPtrs[0] = mem;
 
             // show dialog with a list of available compresors and configuration
-            ret = AVISaveOptions(IntPtr.Zero, 0, 1, streams, infPtrs);
+            int ret = AVISaveOptions(IntPtr.Zero, 0, 1, streams, infPtrs);
 
             // copy from unmanaged memory to managed structure
             options = (AVICOMPRESSOPTIONS)Marshal.PtrToStructure(mem, typeof(AVICOMPRESSOPTIONS));
@@ -434,10 +423,10 @@ namespace HelpersLib
         public static int mmioFOURCC(string str)
         {
             return (
-                ((int)(byte)(str[0])) |
-                ((int)(byte)(str[1]) << 8) |
-                ((int)(byte)(str[2]) << 16) |
-                ((int)(byte)(str[3]) << 24));
+                (byte)(str[0]) |
+                ((byte)(str[1]) << 8) |
+                ((byte)(str[2]) << 16) |
+                ((byte)(str[3]) << 24));
         }
 
         /// <summary>

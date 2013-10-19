@@ -87,7 +87,7 @@ namespace UploadersLib.FileUploaders
                 packet.ErrorCode = error.Attribute("code").Value;
                 packet.ErrorText = error.Attribute("text").Value;
 
-                base.Errors.Add(string.Format("Code: {0}, Method: {1}\r\nText: {2}", packet.ErrorCode, packet.Method, packet.ErrorText));
+                Errors.Add(string.Format("Code: {0}, Method: {1}\r\nText: {2}", packet.ErrorCode, packet.Method, packet.ErrorText));
             }
 
             return packet;
@@ -500,7 +500,7 @@ namespace UploadersLib.FileUploaders
                 url = progressURL;
                 this.sendSpace = sendSpace;
                 bw = new BackgroundWorker { WorkerSupportsCancellation = true };
-                bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+                bw.DoWork += bw_DoWork;
                 bw.RunWorkerAsync();
             }
 

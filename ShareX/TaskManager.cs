@@ -55,9 +55,9 @@ namespace ShareX
             Tasks.Add(task);
             UpdateDragAndDropTip();
             task.StatusChanged += task_StatusChanged;
-            task.UploadStarted += new UploadTask.TaskEventHandler(task_UploadStarted);
-            task.UploadProgressChanged += new UploadTask.TaskEventHandler(task_UploadProgressChanged);
-            task.UploadCompleted += new UploadTask.TaskEventHandler(task_UploadCompleted);
+            task.UploadStarted += task_UploadStarted;
+            task.UploadProgressChanged += task_UploadProgressChanged;
+            task.UploadCompleted += task_UploadCompleted;
             CreateListViewItem(task);
             StartTasks();
         }
@@ -364,7 +364,7 @@ namespace ShareX
 
             if (Program.MainForm.niTray.Visible)
             {
-                Icon icon = null;
+                Icon icon;
 
                 if (isWorkingTasks)
                 {

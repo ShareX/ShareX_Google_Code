@@ -55,7 +55,7 @@ namespace ShareX
             for (int i = 1; i < enums.Length; i++)
             {
                 ListViewItem lvi = new ListViewItem(enums[i].GetDescription());
-                lvi.Checked = AfterCaptureTasks.HasFlag(1 << (i - 1));
+                lvi.Checked = afterCaptureTasks.HasFlag(1 << (i - 1));
                 lvi.Tag = enums[i];
                 lvAfterCaptureTasks.Items.Add(lvi);
             }

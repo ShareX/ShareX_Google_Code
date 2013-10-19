@@ -93,7 +93,7 @@ namespace UploadersLib.HelperClasses
 
             if (smoothTimer.ElapsedMilliseconds > smoothTime)
             {
-                averageSpeed.Enqueue((double)speedTest / smoothTimer.Elapsed.TotalSeconds);
+                averageSpeed.Enqueue(speedTest / smoothTimer.Elapsed.TotalSeconds);
 
                 Speed = averageSpeed.Average();
 

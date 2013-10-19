@@ -28,11 +28,11 @@ using System.Windows.Forms;
 
 namespace HelpersLib
 {
-    public partial class TrayForm : Form
+    public class TrayForm : Form
     {
         protected NotifyIcon TrayIcon = null;
 
-        private IContainer components = null;
+        private IContainer components;
 
         public TrayForm()
         {

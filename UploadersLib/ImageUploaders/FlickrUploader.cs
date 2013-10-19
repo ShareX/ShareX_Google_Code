@@ -55,8 +55,8 @@ namespace UploadersLib.ImageUploaders
         public FlickrUploader(string key, string secret, FlickrAuthInfo auth, FlickrSettings settings)
             : this(key, secret)
         {
-            this.Auth = auth;
-            this.Settings = settings;
+            Auth = auth;
+            Settings = settings;
         }
 
         #region Auth
@@ -75,9 +75,9 @@ namespace UploadersLib.ImageUploaders
 
             string response = SendPostRequest(API_URL, args);
 
-            this.Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
+            Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
 
-            return this.Auth;
+            return Auth;
         }
 
         /// <summary>
@@ -103,10 +103,8 @@ namespace UploadersLib.ImageUploaders
                 {
                     throw new Exception("getFrob failed.");
                 }
-                else
-                {
-                    throw new Exception(errorMessage);
-                }
+
+                throw new Exception(errorMessage);
             }
 
             Frob = eFrob.Value;
@@ -127,9 +125,9 @@ namespace UploadersLib.ImageUploaders
 
             string response = SendPostRequest(API_URL, args);
 
-            this.Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
+            Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
 
-            return this.Auth;
+            return Auth;
         }
 
         /// <summary>
@@ -147,14 +145,14 @@ namespace UploadersLib.ImageUploaders
 
             string response = SendPostRequest(API_URL, args);
 
-            this.Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
+            Auth = new FlickrAuthInfo(ParseResponse(response, "auth"));
 
-            return this.Auth;
+            return Auth;
         }
 
         public FlickrAuthInfo GetToken()
         {
-            return GetToken(this.Frob);
+            return GetToken(Frob);
         }
 
         public string GetAuthLink()
@@ -169,7 +167,7 @@ namespace UploadersLib.ImageUploaders
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("api_key", API_Key);
                 args.Add("perms", perm.ToString().ToLowerInvariant());
-                args.Add("frob", this.Frob);
+                args.Add("frob", Frob);
                 args.Add("api_sig", GetAPISig(args));
 
                 return string.Format("{0}?{1}", API_Auth_URL, string.Join("&", args.Select(x => x.Key + "=" + x.Value).ToArray()));
@@ -185,7 +183,7 @@ namespace UploadersLib.ImageUploaders
 
         public string GetPhotosLink()
         {
-            return GetPhotosLink(this.Auth.UserID);
+            return GetPhotosLink(Auth.UserID);
         }
 
         #endregion Auth
@@ -211,12 +209,11 @@ namespace UploadersLib.ImageUploaders
                         case "ok":
                             return xele.Element(field);
                         case "fail":
-                            string code, msg;
                             XElement err = xele.Element("err");
-                            code = err.GetAttributeValue("code");
-                            msg = err.GetAttributeValue("msg");
+                            string code = err.GetAttributeValue("code");
+                            string msg = err.GetAttributeValue("msg");
                             // throw new Exception(string.Format("Code: {0}, Message: {1}", code, msg));
-                            this.Errors.Add(msg);
+                            Errors.Add(msg);
                             break;
                     }
                 }
@@ -231,7 +228,7 @@ namespace UploadersLib.ImageUploaders
         {
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("api_key", API_Key);
-            args.Add("auth_token", this.Auth.Token);
+            args.Add("auth_token", Auth.Token);
 
             if (!string.IsNullOrEmpty(Settings.Title)) args.Add("title", Settings.Title);
             if (!string.IsNullOrEmpty(Settings.Description)) args.Add("description", Settings.Description);

@@ -76,10 +76,8 @@ namespace HelpersLib
             {
                 return Create(shortcutPath, Application.ExecutablePath, arguments);
             }
-            else
-            {
-                return Delete(shortcutPath);
-            }
+
+            return Delete(shortcutPath);
         }
 
         public static bool CheckShortcut(Environment.SpecialFolder specialFolder)

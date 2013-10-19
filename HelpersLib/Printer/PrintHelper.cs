@@ -25,7 +25,6 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 
@@ -71,8 +70,8 @@ namespace HelpersLib
         private void InitPrint()
         {
             printDocument = new PrintDocument();
-            printDocument.BeginPrint += new PrintEventHandler(printDocument_BeginPrint);
-            printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
+            printDocument.BeginPrint += printDocument_BeginPrint;
+            printDocument.PrintPage += printDocument_PrintPage;
             printDialog = new PrintDialog();
             printDialog.Document = printDocument;
             printDialog.UseEXDialog = true;
@@ -163,7 +162,7 @@ namespace HelpersLib
         private void DrawAutoScaledImage(Graphics g, Image img, Rectangle rect, bool allowEnlarge = false, bool centerImage = false)
         {
             double ratio;
-            int newWidth, newHeight, newX, newY;
+            int newWidth, newHeight;
 
             if (!allowEnlarge && img.Width <= rect.Width && img.Height <= rect.Height)
             {
@@ -173,15 +172,15 @@ namespace HelpersLib
             }
             else
             {
-                double ratioX = (double)rect.Width / (double)img.Width;
-                double ratioY = (double)rect.Height / (double)img.Height;
+                double ratioX = (double)rect.Width / img.Width;
+                double ratioY = (double)rect.Height / img.Height;
                 ratio = ratioX < ratioY ? ratioX : ratioY;
                 newWidth = (int)(img.Width * ratio);
                 newHeight = (int)(img.Height * ratio);
             }
 
-            newX = rect.X;
-            newY = rect.Y;
+            int newX = rect.X;
+            int newY = rect.Y;
 
             if (centerImage)
             {

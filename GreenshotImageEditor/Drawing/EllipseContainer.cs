@@ -75,7 +75,7 @@ namespace Greenshot.Drawing
                 }
             }
             //draw the original shape
-            Rectangle rect = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+            Rectangle rect = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
             if (Colors.IsVisible(fillColor))
             {
                 using (Brush brush = new SolidBrush(fillColor))
@@ -102,7 +102,7 @@ namespace Greenshot.Drawing
 
         public override bool ClickableAt(int x, int y)
         {
-            Rectangle rect = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+            Rectangle rect = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
             int lineThickness = GetFieldValueAsInt(FieldType.LINE_THICKNESS) + 10;
             Color fillColor = GetFieldValueAsColor(FieldType.FILL_COLOR);
 

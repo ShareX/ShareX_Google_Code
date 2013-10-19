@@ -43,7 +43,7 @@ namespace ScreenCapture
         {
             nodes = new List<NodeObject>();
 
-            MouseDown += new MouseEventHandler(PolygonRegionSurface_MouseDown);
+            MouseDown += PolygonRegionSurface_MouseDown;
         }
 
         private void PolygonRegionSurface_MouseDown(object sender, MouseEventArgs e)
@@ -146,13 +146,12 @@ namespace ScreenCapture
             base.Draw(g);
         }
 
-        private NodeObject CreateNode()
+        private void CreateNode()
         {
-            NodeObject newNode = new NodeObject(borderPen, nodeBackgroundBrush);
+            NodeObject newNode = new NodeObject();
             ActivateNode(newNode);
             nodes.Add(newNode);
             DrawableObjects.Add(newNode);
-            return newNode;
         }
 
         private void ActivateNode(NodeObject node)

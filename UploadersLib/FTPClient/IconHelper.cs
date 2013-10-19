@@ -79,7 +79,7 @@ namespace UploadersLib
         {
             uint flags = Shell32.SHGFI_ICON | Shell32.SHGFI_USEFILEATTRIBUTES;
 
-            if (true == linkOverlay) flags += Shell32.SHGFI_LINKOVERLAY;
+            if (linkOverlay) flags += Shell32.SHGFI_LINKOVERLAY;
 
             if (IconSize.Small == size)
             {

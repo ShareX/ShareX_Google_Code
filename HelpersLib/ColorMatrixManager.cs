@@ -23,10 +23,8 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
 namespace HelpersLib
@@ -68,6 +66,7 @@ namespace HelpersLib
             return dest;
         }
 
+        /// <param name="img"></param>
         /// <param name="value">1 = No change (Min 0.1, Max 5.0)</param>
         public static Image ChangeGamma(Image img, float value)
         {
@@ -168,6 +167,7 @@ namespace HelpersLib
                 new float[] {0, 0, 0, 0, 1}});
         }
 
+        /// <param name="color"></param>
         /// <param name="value">0 = No change</param>
         public static ColorMatrix Colorize(Color color, float value)
         {

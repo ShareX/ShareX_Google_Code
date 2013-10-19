@@ -30,7 +30,6 @@ using Newtonsoft.Json;
 using ScreenCapture;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using UploadersLib;
 
 namespace ShareX
@@ -79,10 +78,6 @@ namespace ShareX
 
         [JsonIgnore]
         public TaskSettings TaskSettingsReference { get; private set; }
-
-        public TaskSettings()
-        {
-        }
 
         public override string ToString()
         {

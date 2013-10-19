@@ -77,11 +77,11 @@ namespace ShareX
                     taskSettings.WatchFolderList.Add(watchFolderSetting);
                 }
 
-                WatchFolder watchFolder = new WatchFolder() { Settings = watchFolderSetting, TaskSettings = taskSettings };
+                WatchFolder watchFolder = new WatchFolder { Settings = watchFolderSetting, TaskSettings = taskSettings };
                 watchFolder.FileWatcherTrigger += path =>
                 {
                     TaskSettings taskSettingsCopy = TaskSettings.GetSafeTaskSettings(taskSettings);
-                    UploadManager.UploadFile(path, taskSettings);
+                    UploadManager.UploadFile(path, taskSettingsCopy);
                 };
                 WatchFolders.Add(watchFolder);
 

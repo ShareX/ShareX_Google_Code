@@ -23,10 +23,6 @@
 
 #endregion License Information (GPL v3)
 
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using CG.Web.MegaApiClient;
 using HelpersLib;
 using System;
 using System.Collections.Generic;
@@ -381,7 +377,7 @@ namespace UploadersLib
 
             // Mega
 
-            this.MegaConfigureTab(false);
+            MegaConfigureTab(false);
 
             #endregion File uploaders
 
@@ -418,31 +414,31 @@ namespace UploadersLib
         {
             // FTP
 
-            ucFTPAccounts.btnAdd.Click += new EventHandler(FTPAccountAddButton_Click);
-            ucFTPAccounts.btnRemove.Click += new EventHandler(FTPAccountRemoveButton_Click);
-            ucFTPAccounts.btnTest.Click += new EventHandler(FTPAccountTestButton_Click);
+            ucFTPAccounts.btnAdd.Click += FTPAccountAddButton_Click;
+            ucFTPAccounts.btnRemove.Click += FTPAccountRemoveButton_Click;
+            ucFTPAccounts.btnTest.Click += FTPAccountTestButton_Click;
             ucFTPAccounts.btnClone.Visible = true;
-            ucFTPAccounts.btnClone.Click += new EventHandler(FTPAccountCloneButton_Click);
-            ucFTPAccounts.AccountsList.SelectedIndexChanged += new EventHandler(FTPAccountsList_SelectedIndexChanged);
-            ucFTPAccounts.SettingsGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(FtpAccountSettingsGrid_PropertyValueChanged);
+            ucFTPAccounts.btnClone.Click += FTPAccountCloneButton_Click;
+            ucFTPAccounts.AccountsList.SelectedIndexChanged += FTPAccountsList_SelectedIndexChanged;
+            ucFTPAccounts.SettingsGrid.PropertyValueChanged += FtpAccountSettingsGrid_PropertyValueChanged;
 
             // Localhost
 
-            ucLocalhostAccounts.btnAdd.Click += new EventHandler(LocalhostAccountAddButton_Click);
-            ucLocalhostAccounts.btnRemove.Click += new EventHandler(LocalhostAccountRemoveButton_Click);
+            ucLocalhostAccounts.btnAdd.Click += LocalhostAccountAddButton_Click;
+            ucLocalhostAccounts.btnRemove.Click += LocalhostAccountRemoveButton_Click;
             ucLocalhostAccounts.btnTest.Visible = false;
-            ucLocalhostAccounts.AccountsList.SelectedIndexChanged += new EventHandler(LocalhostAccountsList_SelectedIndexChanged);
-            ucLocalhostAccounts.SettingsGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(SettingsGrid_LocalhostPropertyValueChanged);
+            ucLocalhostAccounts.AccountsList.SelectedIndexChanged += LocalhostAccountsList_SelectedIndexChanged;
+            ucLocalhostAccounts.SettingsGrid.PropertyValueChanged += SettingsGrid_LocalhostPropertyValueChanged;
 
             // Twitter
 
             ucTwitterAccounts.btnAdd.Text = "Add";
-            ucTwitterAccounts.btnAdd.Click += new EventHandler(TwitterAccountAddButton_Click);
-            ucTwitterAccounts.btnRemove.Click += new EventHandler(TwitterAccountRemoveButton_Click);
+            ucTwitterAccounts.btnAdd.Click += TwitterAccountAddButton_Click;
+            ucTwitterAccounts.btnRemove.Click += TwitterAccountRemoveButton_Click;
             ucTwitterAccounts.btnTest.Text = "Authorize";
-            ucTwitterAccounts.btnTest.Click += new EventHandler(TwitterAccountAuthButton_Click);
+            ucTwitterAccounts.btnTest.Click += TwitterAccountAuthButton_Click;
             ucTwitterAccounts.SettingsGrid.PropertySort = PropertySort.NoSort;
-            ucTwitterAccounts.AccountsList.SelectedIndexChanged += new EventHandler(TwitterAccountList_SelectedIndexChanged);
+            ucTwitterAccounts.AccountsList.SelectedIndexChanged += TwitterAccountList_SelectedIndexChanged;
         }
 
         #region Localhost
@@ -572,7 +568,7 @@ namespace UploadersLib
         {
             if (CheckFTPAccounts())
             {
-                TestFTPAccount((FTPAccount)Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex], false);
+                TestFTPAccount(Config.FTPAccountList[ucFTPAccounts.AccountsList.SelectedIndex], false);
             }
         }
 

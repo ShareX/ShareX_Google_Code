@@ -78,7 +78,7 @@ namespace UploadersLib.HelperClasses
         public OAuthInfo(string consumerKey)
             : this()
         {
-            this.ConsumerKey = consumerKey;
+            ConsumerKey = consumerKey;
         }
 
         public OAuthInfo(string consumerKey, string consumerSecret)

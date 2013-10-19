@@ -68,7 +68,7 @@ namespace HelpersLib
 
                 if (WhitespaceChars.Contains(currentChar)) // Whitespace
                 {
-                    CheckIdentifier(tokens, currentToken);
+                    CheckIdentifier(currentToken);
 
                     if (KeepWhitespace)
                     {
@@ -82,14 +82,14 @@ namespace HelpersLib
                 }
                 else if (SymbolChars.Contains(currentChar)) // Symbol
                 {
-                    CheckIdentifier(tokens, currentToken);
+                    CheckIdentifier(currentToken);
 
                     currentToken = new Token(TokenType.Symbol, currentChar.ToString(), i);
                     tokens.Add(currentToken);
                 }
                 else if (LiteralDelimiters.Contains(currentChar)) // Literal
                 {
-                    CheckIdentifier(tokens, currentToken);
+                    CheckIdentifier(currentToken);
 
                     currentToken = new Token(TokenType.Literal, currentChar.ToString(), i);
                     tokens.Add(currentToken);
@@ -126,7 +126,7 @@ namespace HelpersLib
 
                     if (i + 1 >= text.Length) // EOF
                     {
-                        CheckIdentifier(tokens, currentToken);
+                        CheckIdentifier(currentToken);
                     }
                 }
             }
@@ -165,7 +165,7 @@ namespace HelpersLib
             return string.Empty;
         }
 
-        private void CheckIdentifier(List<Token> tokens, Token token)
+        private void CheckIdentifier(Token token)
         {
             if (token != null && token.Type == TokenType.Identifier)
             {
@@ -232,10 +232,8 @@ namespace HelpersLib
                                 result.Status = true;
                                 break;
                             }
-                            else
-                            {
-                                depth--;
-                            }
+
+                            depth--;
                         }
                     }
                     else

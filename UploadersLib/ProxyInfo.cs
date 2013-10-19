@@ -59,7 +59,8 @@ namespace UploadersLib
             {
                 return !string.IsNullOrEmpty(Host) && Port > 0;
             }
-            else if (ProxyMethod == ProxyMethod.Automatic)
+
+            if (ProxyMethod == ProxyMethod.Automatic)
             {
                 WebProxy systemProxy = Helpers.GetDefaultWebProxy();
 

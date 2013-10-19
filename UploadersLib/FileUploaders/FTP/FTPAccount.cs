@@ -75,7 +75,7 @@ namespace UploadersLib
         {
             get
             {
-                if (string.IsNullOrEmpty(this.Host))
+                if (string.IsNullOrEmpty(Host))
                 {
                     return string.Empty;
                 }
@@ -105,7 +105,7 @@ namespace UploadersLib
         }
 
         [Category("FTPS"), Description("Certification Location")]
-        [EditorAttribute(typeof(CertFileNameEditor), typeof(UITypeEditor))]
+        [Editor(typeof(CertFileNameEditor), typeof(UITypeEditor))]
         public string FtpsCertLocation { get; set; }
 
         [Category("FTPS"), Description("Security Protocol"), DefaultValue(FtpSecurityProtocol.Ssl2Explicit)]
@@ -115,7 +115,7 @@ namespace UploadersLib
         public string Passphrase { get; set; }
 
         [Category("SFTP"), Description("Key Location")]
-        [EditorAttribute(typeof(KeyFileNameEditor), typeof(UITypeEditor))]
+        [Editor(typeof(KeyFileNameEditor), typeof(UITypeEditor))]
         public string Keypath { get; set; }
 
         public FTPAccount()

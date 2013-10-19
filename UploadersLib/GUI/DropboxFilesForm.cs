@@ -112,7 +112,7 @@ namespace UploadersLib.Forms
             {
                 string parentFolder = currentPath.Remove(currentPath.LastIndexOf('/'));
 
-                DropboxContentInfo content = new DropboxContentInfo() { Icon = "folder", Is_dir = true, Path = parentFolder };
+                DropboxContentInfo content = new DropboxContentInfo { Icon = "folder", Is_dir = true, Path = parentFolder };
 
                 ListViewItem lvi = new ListViewItem("..");
                 lvi.ImageKey = ilm.AddImage(content.Icon);
@@ -136,7 +136,7 @@ namespace UploadersLib.Forms
             }
         }
 
-        private void tsbSelectFolder_Click(object sender, System.EventArgs e)
+        private void tsbSelectFolder_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
         }
@@ -155,7 +155,7 @@ namespace UploadersLib.Forms
             }
         }
 
-        private void tsmiDownloadFile_Click(object sender, System.EventArgs e)
+        private void tsmiDownloadFile_Click(object sender, EventArgs e)
         {
             if (lvDropboxFiles.SelectedItems.Count > 0)
             {

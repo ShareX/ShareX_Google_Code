@@ -51,7 +51,7 @@ namespace UploadersLib.GUI
             }
         }
 
-        private bool loginStatus = false;
+        private bool loginStatus;
 
         public bool LoginStatus
         {

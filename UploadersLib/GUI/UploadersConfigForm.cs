@@ -1024,12 +1024,12 @@ namespace UploadersLib
 
         private void oAuthJira_OpenButtonClicked()
         {
-            this.JiraAuthOpen();
+            JiraAuthOpen();
         }
 
         private void oAuthJira_CompleteButtonClicked(string code)
         {
-            this.JiraAuthComplete(code);
+            JiraAuthComplete(code);
         }
 
         private void oAuthJira_RefreshButtonClicked()
@@ -1083,11 +1083,7 @@ namespace UploadersLib
                     {
                         Mega.DisplayNode[] nodes = mega.GetDisplayNodes().ToArray();
                         cbMegaFolder.Items.AddRange(nodes);
-                        cbMegaFolder.SelectedItem = nodes.FirstOrDefault(n => n.Node != null && n.Node.Id == Config.MegaParentNodeId);
-                        if (cbMegaFolder.SelectedItem == null)
-                        {
-                            cbMegaFolder.SelectedItem = Mega.DisplayNode.EmptyNode;
-                        }
+                        cbMegaFolder.SelectedItem = nodes.FirstOrDefault(n => n.Node != null && n.Node.Id == Config.MegaParentNodeId) ?? Mega.DisplayNode.EmptyNode;
                     }
                     else
                     {
@@ -1113,7 +1109,7 @@ namespace UploadersLib
             txtMegaEmail.Text = null;
             txtMegaPassword.Text = null;
             cbMegaFolder.SelectedIndex = -1;
-            this.MegaConfigureTab(true);
+            MegaConfigureTab(true);
         }
 
         private void btnMegaLogin_Click(object sender, EventArgs e)
@@ -1125,7 +1121,7 @@ namespace UploadersLib
 
             Config.MegaAuthInfos = MegaApiClient.GenerateAuthInfos(txtMegaEmail.Text, txtMegaPassword.Text);
 
-            this.MegaConfigureTab(true);
+            MegaConfigureTab(true);
         }
 
         private void cbMegaFolder_SelectedIndexChanged(object sender, EventArgs e)
@@ -1144,7 +1140,7 @@ namespace UploadersLib
 
         private void btnMegaRefreshFolders_Click(object sender, EventArgs e)
         {
-            this.MegaConfigureTab(true);
+            MegaConfigureTab(true);
         }
 
         #endregion Mega

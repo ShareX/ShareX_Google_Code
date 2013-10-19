@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -74,7 +75,7 @@ namespace UploadersLib
         ///	<summary>
         ///	Required designer variable.
         ///	</summary>
-        private System.ComponentModel.Container components = null;
+        private Container components;
 
         public event SubItemEventHandler SubItemClicked;
         public event SubItemEventHandler SubItemBeginEditing;
@@ -82,12 +83,13 @@ namespace UploadersLib
 
         public ListViewEx()
         {
+            DoubleClickActivation = false;
             // This	call is	required by	the	Windows.Forms Form Designer.
             InitializeComponent();
 
-            base.FullRowSelect = true;
-            base.View = View.Details;
-            base.AllowColumnReorder = true;
+            FullRowSelect = true;
+            View = View.Details;
+            AllowColumnReorder = true;
         }
 
         ///	<summary>
@@ -111,20 +113,15 @@ namespace UploadersLib
         ///	</summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            components = new Container();
         }
 
         #endregion Component	Designer generated code
 
-        private bool _doubleClickActivation = false;
         /// <summary>
         /// Is a double click required to start editing a cell?
         /// </summary>
-        public bool DoubleClickActivation
-        {
-            get { return _doubleClickActivation; }
-            set { _doubleClickActivation = value; }
-        }
+        public bool DoubleClickActivation { get; set; }
 
         /// <summary>
         /// Retrieve the order in which columns appear
@@ -158,19 +155,17 @@ namespace UploadersLib
         /// <returns>SubItem index</returns>
         public int GetSubItemAt(int x, int y, out ListViewItem item)
         {
-            item = this.GetItemAt(x, y);
+            item = GetItemAt(x, y);
 
             if (item != null)
             {
                 int[] order = GetColumnOrder();
-                Rectangle lviBounds;
-                int subItemX;
 
-                lviBounds = item.GetBounds(ItemBoundsPortion.Entire);
-                subItemX = lviBounds.Left;
+                Rectangle lviBounds = item.GetBounds(ItemBoundsPortion.Entire);
+                int subItemX = lviBounds.Left;
                 for (int i = 0; i < order.Length; i++)
                 {
-                    ColumnHeader h = this.Columns[order[i]];
+                    ColumnHeader h = Columns[order[i]];
                     if (x < subItemX + h.Width)
                     {
                         return h.Index;
@@ -206,12 +201,12 @@ namespace UploadersLib
             int i;
             for (i = 0; i < order.Length; i++)
             {
-                col = this.Columns[order[i]];
+                col = Columns[order[i]];
                 if (col.Index == SubItem)
                     break;
                 subItemX += col.Width;
             }
-            subItemRect = new Rectangle(subItemX, lviBounds.Top, this.Columns[order[i]].Width, lviBounds.Height);
+            subItemRect = new Rectangle(subItemX, lviBounds.Top, Columns[order[i]].Width, lviBounds.Height);
             return subItemRect;
         }
 
@@ -262,7 +257,7 @@ namespace UploadersLib
                 return;
             }
 
-            Point pt = this.PointToClient(Cursor.Position);
+            Point pt = PointToClient(Cursor.Position);
 
             EditSubitemAt(pt);
         }
@@ -328,10 +323,10 @@ namespace UploadersLib
                 rcSubItem.Width += rcSubItem.X;
                 rcSubItem.X = 0;
             }
-            if (rcSubItem.X + rcSubItem.Width > this.Width)
+            if (rcSubItem.X + rcSubItem.Width > Width)
             {
                 // Right edge of SubItem not visible - adjust rectangle width
-                rcSubItem.Width = this.Width - rcSubItem.Left;
+                rcSubItem.Width = Width - rcSubItem.Left;
             }
 
             // Subitem bounds are relative to the location of the ListView!
@@ -340,7 +335,7 @@ namespace UploadersLib
             // In case the editing control and the listview are on different parents,
             // account for different origins
             Point origin = new Point(0, 0);
-            Point lvOrigin = this.Parent.PointToScreen(origin);
+            Point lvOrigin = Parent.PointToScreen(origin);
             Point ctlOrigin = c.Parent.PointToScreen(origin);
 
             rcSubItem.Offset(lvOrigin.X - ctlOrigin.X, lvOrigin.Y - ctlOrigin.Y);
@@ -353,8 +348,8 @@ namespace UploadersLib
             c.Focus();
 
             _editingControl = c;
-            _editingControl.Leave += new EventHandler(_editControl_Leave);
-            _editingControl.KeyPress += new KeyPressEventHandler(_editControl_KeyPress);
+            _editingControl.Leave += _editControl_Leave;
+            _editingControl.KeyPress += _editControl_KeyPress;
 
             _editItem = Item;
             _editSubItem = SubItem;
@@ -409,8 +404,8 @@ namespace UploadersLib
                 _editItem.SubItems[_editSubItem].Text = e.DisplayText;
             }
 
-            _editingControl.Leave -= new EventHandler(_editControl_Leave);
-            _editingControl.KeyPress -= new KeyPressEventHandler(_editControl_KeyPress);
+            _editingControl.Leave -= _editControl_Leave;
+            _editingControl.KeyPress -= _editControl_KeyPress;
 
             _editingControl.Visible = false;
 
@@ -443,7 +438,7 @@ namespace UploadersLib
         }
 
         private int _subItemIndex = -1;
-        private ListViewItem _item = null;
+        private ListViewItem _item;
         public int SubItem
         {
             get { return _subItemIndex; }

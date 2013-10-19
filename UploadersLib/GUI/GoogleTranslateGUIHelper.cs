@@ -79,7 +79,7 @@ namespace UploadersLib
             if (Config.GoogleTargetLanguage2 == "?")
             {
                 lblToLanguage.BorderStyle = BorderStyle.FixedSingle;
-                MessageBox.Show("Drag n drop 'To:' label to this button for be able to set button language.", this.Text,
+                MessageBox.Show("Drag n drop 'To:' label to this button for be able to set button language.", Text,
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 lblToLanguage.BorderStyle = BorderStyle.None;
             }

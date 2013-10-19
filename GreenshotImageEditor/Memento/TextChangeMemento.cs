@@ -36,7 +36,7 @@ namespace Greenshot.Memento
         public TextChangeMemento(TextContainer textContainer)
         {
             this.textContainer = textContainer;
-            this.oldText = textContainer.Text;
+            oldText = textContainer.Text;
         }
 
         public void Dispose()

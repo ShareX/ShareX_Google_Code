@@ -111,7 +111,7 @@ namespace ShareX
         private int step = 10;
         private int direction = speed;
         private Color lineColor = Color.Black;
-        private bool isPaused = false;
+        private bool isPaused;
 
         private void cLogo_Draw(Graphics g)
         {

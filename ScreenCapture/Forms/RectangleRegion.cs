@@ -43,8 +43,8 @@ namespace ScreenCapture
             : base(backgroundImage)
         {
             AreaManager = new AreaManager(this);
-            KeyDown += new KeyEventHandler(RectangleRegion_KeyDown);
-            MouseWheel += new MouseEventHandler(RectangleRegion_MouseWheel);
+            KeyDown += RectangleRegion_KeyDown;
+            MouseWheel += RectangleRegion_MouseWheel;
         }
 
         private void RectangleRegion_KeyDown(object sender, KeyEventArgs e)
@@ -149,7 +149,7 @@ namespace ScreenCapture
 
                 if (AreaManager.IsCurrentHoverAreaValid)
                 {
-                    using (GraphicsPath hoverDrawPath = new GraphicsPath() { FillMode = FillMode.Winding })
+                    using (GraphicsPath hoverDrawPath = new GraphicsPath { FillMode = FillMode.Winding })
                     {
                         AddShapePath(hoverDrawPath, AreaManager.CurrentHoverArea.SizeOffset(-1));
 
@@ -264,7 +264,7 @@ namespace ScreenCapture
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.PixelOffsetMode = PixelOffsetMode.Half;
 
-                g.DrawImage(SurfaceImage, new Rectangle(Point.Empty, new Size(width, height)),
+                g.DrawImage(img, new Rectangle(Point.Empty, new Size(width, height)),
                     new Rectangle(position.X - horizontalPixelCount / 2, position.Y - verticalPixelCount / 2, horizontalPixelCount, verticalPixelCount), GraphicsUnit.Pixel);
 
                 g.PixelOffsetMode = PixelOffsetMode.None;
@@ -277,16 +277,16 @@ namespace ScreenCapture
                     g.FillRectangle(crosshairBrush, new Rectangle((width - pixelSize) / 2, (height + pixelSize) / 2, pixelSize, (height - pixelSize) / 2)); // Bottom
                 }
 
-                using (Pen borderPen = new Pen(Color.FromArgb(75, Color.Black)))
+                using (Pen pen = new Pen(Color.FromArgb(75, Color.Black)))
                 {
                     for (int x = 1; x < horizontalPixelCount; x++)
                     {
-                        g.DrawLine(borderPen, new Point(x * pixelSize, 0), new Point(x * pixelSize, height));
+                        g.DrawLine(pen, new Point(x * pixelSize, 0), new Point(x * pixelSize, height));
                     }
 
                     for (int y = 1; y < verticalPixelCount; y++)
                     {
-                        g.DrawLine(borderPen, new Point(0, y * pixelSize), new Point(width, y * pixelSize));
+                        g.DrawLine(pen, new Point(0, y * pixelSize), new Point(width, y * pixelSize));
                     }
                 }
 
@@ -299,8 +299,8 @@ namespace ScreenCapture
 
         public void UpdateRegionPath()
         {
-            regionFillPath = new GraphicsPath() { FillMode = FillMode.Winding };
-            regionDrawPath = new GraphicsPath() { FillMode = FillMode.Winding };
+            regionFillPath = new GraphicsPath { FillMode = FillMode.Winding };
+            regionDrawPath = new GraphicsPath { FillMode = FillMode.Winding };
 
             foreach (Rectangle area in AreaManager.GetValidAreas)
             {

@@ -60,7 +60,7 @@ namespace ShareX
             }
             else
             {
-                Text = Application.ProductName + " - Task settings for " + TaskSettings.ToString();
+                Text = Application.ProductName + " - Task settings for " + TaskSettings;
                 tbDescription.Text = TaskSettings.Description;
                 cbUseDefaultAfterCaptureSettings.Checked = TaskSettings.UseDefaultAfterCaptureJob;
                 cbUseDefaultAfterUploadSettings.Checked = TaskSettings.UseDefaultAfterUploadJob;
@@ -438,7 +438,7 @@ namespace ShareX
 
         private void btnWatermarkSettings_Click(object sender, EventArgs e)
         {
-            using (WatermarkForm watermarkForm = new WatermarkForm(TaskSettings.ImageSettings.WatermarkConfig) { Icon = this.Icon })
+            using (WatermarkForm watermarkForm = new WatermarkForm(TaskSettings.ImageSettings.WatermarkConfig) { Icon = Icon })
             {
                 watermarkForm.ShowDialog();
             }

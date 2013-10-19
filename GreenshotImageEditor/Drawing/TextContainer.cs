@@ -98,7 +98,7 @@ namespace Greenshot.Drawing
             stringFormat.Trimming = StringTrimming.EllipsisWord;
         }
 
-        [OnDeserializedAttribute]
+        [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
             stringFormat = new StringFormat();
@@ -132,8 +132,8 @@ namespace Greenshot.Drawing
         private void Init()
         {
             CreateTextBox();
-            this.PropertyChanged += new PropertyChangedEventHandler(TextContainer_PropertyChanged);
-            this.FieldChanged += new FieldChangedEventHandler(TextContainer_FieldChanged);
+            PropertyChanged += TextContainer_PropertyChanged;
+            FieldChanged += TextContainer_FieldChanged;
         }
 
         public void FitToText()
@@ -197,8 +197,8 @@ namespace Greenshot.Drawing
             textBox.AcceptsTab = true;
             textBox.AcceptsReturn = true;
             textBox.DataBindings.Add("Text", this, "Text", false, DataSourceUpdateMode.OnPropertyChanged);
-            textBox.LostFocus += new EventHandler(textBox_LostFocus);
-            textBox.KeyDown += new KeyEventHandler(textBox_KeyDown);
+            textBox.LostFocus += textBox_LostFocus;
+            textBox.KeyDown += textBox_KeyDown;
             textBox.BorderStyle = BorderStyle.FixedSingle;
             textBox.Visible = false;
         }
@@ -277,10 +277,10 @@ namespace Greenshot.Drawing
 
         private void UpdateTextBoxPosition()
         {
-            textBox.Left = this.Left;
-            textBox.Top = this.Top;
-            textBox.Width = this.Width;
-            textBox.Height = this.Height;
+            textBox.Left = Left;
+            textBox.Top = Top;
+            textBox.Width = Width;
+            textBox.Height = Height;
         }
 
         public override void ApplyBounds(RectangleF newBounds)
@@ -324,7 +324,7 @@ namespace Greenshot.Drawing
             graphics.PixelOffsetMode = PixelOffsetMode.None;
             graphics.TextRenderingHint = TextRenderingHint.SystemDefault;
 
-            Rectangle rect = GuiRectangle.GetGuiRectangle(this.Left, this.Top, this.Width, this.Height);
+            Rectangle rect = GuiRectangle.GetGuiRectangle(Left, Top, Width, Height);
             if (Selected && rm == RenderMode.EDIT)
             {
                 DrawSelectionBorder(graphics, rect);

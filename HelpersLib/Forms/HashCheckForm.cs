@@ -43,8 +43,8 @@ namespace HelpersLib
             cbHashType.SelectedIndex = (int)HashType.SHA1;
 
             hashCheck = new HashCheck();
-            hashCheck.FileCheckProgressChanged += new HashCheck.ProgressChanged(fileCheck_FileCheckProgressChanged);
-            hashCheck.FileCheckCompleted += new HashCheck.Completed(fileCheck_FileCheckCompleted);
+            hashCheck.FileCheckProgressChanged += fileCheck_FileCheckProgressChanged;
+            hashCheck.FileCheckCompleted += fileCheck_FileCheckCompleted;
         }
 
         private void btnFilePathBrowse_Click(object sender, EventArgs e)

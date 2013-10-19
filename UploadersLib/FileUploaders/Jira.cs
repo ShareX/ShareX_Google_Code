@@ -132,8 +132,7 @@ namespace UploadersLib.FileUploaders
 
         private static void CalculateAndAppendLength(ref List<byte> binaryData)
         {
-            int len;
-            len = binaryData.Count;
+            int len = binaryData.Count;
             if (len <= byte.MaxValue)
             {
                 binaryData.Insert(0, Convert.ToByte(len));
@@ -151,11 +150,11 @@ namespace UploadersLib.FileUploaders
 
         public Jira(string jiraHost, OAuthInfo oauth, string jiraIssuePrefix = null)
         {
-            this._jiraHost = new Uri(jiraHost);
-            this.AuthInfo = oauth;
-            this._jiraIssuePrefix = jiraIssuePrefix;
+            _jiraHost = new Uri(jiraHost);
+            AuthInfo = oauth;
+            _jiraIssuePrefix = jiraIssuePrefix;
 
-            this.InitUris();
+            InitUris();
         }
 
         public OAuthInfo AuthInfo { get; set; }
@@ -165,13 +164,13 @@ namespace UploadersLib.FileUploaders
             Dictionary<string, string> args = new Dictionary<string, string>();
             args[OAuthManager.ParameterCallback] = "oob"; // Request activation code to validate authentication
 
-            string url = OAuthManager.GenerateQuery(this._jiraRequestToken.ToString(), args, HttpMethod.Post, this.AuthInfo);
+            string url = OAuthManager.GenerateQuery(_jiraRequestToken.ToString(), args, HttpMethod.Post, AuthInfo);
 
             string response = SendRequest(HttpMethod.Post, url);
 
             if (!string.IsNullOrEmpty(response))
             {
-                return OAuthManager.GetAuthorizationURL(response, this.AuthInfo, this._jiraAuthorize.ToString());
+                return OAuthManager.GetAuthorizationURL(response, AuthInfo, _jiraAuthorize.ToString());
             }
 
             return null;
@@ -181,14 +180,14 @@ namespace UploadersLib.FileUploaders
         {
             AuthInfo.AuthVerifier = verificationCode;
 
-            NameValueCollection nv = GetAccessTokenEx(this._jiraAccessToken.ToString(), this.AuthInfo, HttpMethod.Post);
+            NameValueCollection nv = GetAccessTokenEx(_jiraAccessToken.ToString(), AuthInfo, HttpMethod.Post);
 
             return nv != null;
         }
 
         public override UploadResult Upload(Stream stream, string fileName)
         {
-            using (JiraUpload up = new JiraUpload(this._jiraIssuePrefix, this.GetSummary))
+            using (JiraUpload up = new JiraUpload(_jiraIssuePrefix, GetSummary))
             {
                 if (up.ShowDialog() == DialogResult.Cancel)
                 {
@@ -199,13 +198,13 @@ namespace UploadersLib.FileUploaders
                     };
                 }
 
-                Uri uri = new Uri(this._jiraHost, string.Format(PathIssueAttachments, up.IssueId));
-                string query = OAuthManager.GenerateQuery(uri.ToString(), null, HttpMethod.Post, this.AuthInfo);
+                Uri uri = new Uri(_jiraHost, string.Format(PathIssueAttachments, up.IssueId));
+                string query = OAuthManager.GenerateQuery(uri.ToString(), null, HttpMethod.Post, AuthInfo);
 
                 NameValueCollection headers = new NameValueCollection();
                 headers.Set("X-Atlassian-Token", "nocheck");
 
-                UploadResult res = this.UploadData(stream, query, fileName, "file", null, null, headers);
+                UploadResult res = UploadData(stream, query, fileName, "file", null, null, headers);
                 if (res.Response.Contains("errorMessages"))
                 {
                     res.Errors.Add(res.Response);
@@ -216,7 +215,7 @@ namespace UploadersLib.FileUploaders
                     var anonType = new[] { new { thumbnail = "" } };
                     var anonObject = JsonConvert.DeserializeAnonymousType(res.Response, anonType);
                     res.ThumbnailURL = anonObject[0].thumbnail;
-                    res.URL = new Uri(this._jiraHost, string.Format(PathBrowseIssue, up.IssueId)).ToString();
+                    res.URL = new Uri(_jiraHost, string.Format(PathBrowseIssue, up.IssueId)).ToString();
                 }
 
                 return res;
@@ -229,30 +228,28 @@ namespace UploadersLib.FileUploaders
             args["jql"] = string.Format("issueKey='{0}'", issueId);
             args["maxResults"] = "10";
             args["fields"] = "summary";
-            string query = OAuthManager.GenerateQuery(this._jiraPathSearch.ToString(), args, HttpMethod.Get, this.AuthInfo);
+            string query = OAuthManager.GenerateQuery(_jiraPathSearch.ToString(), args, HttpMethod.Get, AuthInfo);
 
-            string response = this.SendGetRequest(query);
+            string response = SendGetRequest(query);
             if (!string.IsNullOrEmpty(response))
             {
                 var anonType = new { issues = new[] { new { key = "", fields = new { summary = "" } } } };
                 var res = JsonConvert.DeserializeAnonymousType(response, anonType);
                 return res.issues[0].fields.summary;
             }
-            else
-            {
-                // This query can returns error so we have to remove last error from errors list
-                this.Errors.RemoveAt(this.Errors.Count - 1);
-            }
+
+            // This query can returns error so we have to remove last error from errors list
+            Errors.RemoveAt(Errors.Count - 1);
 
             return null;
         }
 
         private void InitUris()
         {
-            this._jiraRequestToken = new Uri(this._jiraHost, PathRequestToken);
-            this._jiraAuthorize = new Uri(this._jiraHost, PathAuthorize);
-            this._jiraAccessToken = new Uri(this._jiraHost, PathAccessToken);
-            this._jiraPathSearch = new Uri(this._jiraHost, PathSearch);
+            _jiraRequestToken = new Uri(_jiraHost, PathRequestToken);
+            _jiraAuthorize = new Uri(_jiraHost, PathAuthorize);
+            _jiraAccessToken = new Uri(_jiraHost, PathAccessToken);
+            _jiraPathSearch = new Uri(_jiraHost, PathSearch);
         }
     }
 }

@@ -44,9 +44,9 @@ namespace ScreenCapture
             {
                 visible = value;
 
-                for (int i = 0; i < nodes.Length; i++)
+                foreach (NodeObject node in nodes)
                 {
-                    nodes[i].Visible = visible;
+                    node.Visible = visible;
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace ScreenCapture
             MinMoveSpeed = surface.Config.MinMoveSpeed;
             MaxMoveSpeed = surface.Config.MaxMoveSpeed;
 
-            surface.KeyDown += new KeyEventHandler(surface_KeyDown);
+            surface.KeyDown += surface_KeyDown;
 
             nodes = new NodeObject[8];
 

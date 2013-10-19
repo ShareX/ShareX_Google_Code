@@ -31,7 +31,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -91,20 +90,20 @@ namespace ScreenCapture
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            this.AutoScaleDimensions = new SizeF(6F, 13F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Bounds = ScreenRectangle;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-            this.Text = "ShareX - Region Capture";
-            this.ShowInTaskbar = false;
-            this.TopMost = true;
-            this.Shown += new EventHandler(Surface_Shown);
-            this.KeyUp += new KeyEventHandler(Surface_KeyUp);
-            this.MouseDoubleClick += new MouseEventHandler(Surface_MouseDoubleClick);
-            this.ResumeLayout(false);
+            SuspendLayout();
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleMode = AutoScaleMode.Font;
+            StartPosition = FormStartPosition.Manual;
+            Bounds = ScreenRectangle;
+            FormBorderStyle = FormBorderStyle.None;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            Text = "ShareX - Region Capture";
+            ShowInTaskbar = false;
+            TopMost = true;
+            Shown += Surface_Shown;
+            KeyUp += Surface_KeyUp;
+            MouseDoubleClick += Surface_MouseDoubleClick;
+            ResumeLayout(false);
         }
 
         /// <summary>Must be called before show form</summary>
@@ -297,11 +296,10 @@ namespace ScreenCapture
 
             if (nodes.Count() > 1)
             {
-                int left, top, right, bottom;
-                left = (int)nodes.Min(x => x.Position.X);
-                top = (int)nodes.Min(x => x.Position.Y);
-                right = (int)nodes.Max(x => x.Position.X);
-                bottom = (int)nodes.Max(x => x.Position.Y);
+                int left = (int)nodes.Min(x => x.Position.X);
+                int top = (int)nodes.Min(x => x.Position.Y);
+                int right = (int)nodes.Max(x => x.Position.X);
+                int bottom = (int)nodes.Max(x => x.Position.Y);
 
                 return CaptureHelpers.CreateRectangle(new Point(left, top), new Point(right, bottom));
             }
@@ -311,7 +309,7 @@ namespace ScreenCapture
 
         public NodeObject MakeNode()
         {
-            NodeObject node = new NodeObject(borderPen, nodeBackgroundBrush);
+            NodeObject node = new NodeObject();
             DrawableObjects.Add(node);
             return node;
         }

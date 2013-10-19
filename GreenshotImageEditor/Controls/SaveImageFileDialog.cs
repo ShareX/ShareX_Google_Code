@@ -159,7 +159,7 @@ namespace GreenshotPlugin.Controls
             {
                 string fn = saveFileDialog.FileName;
                 // if the filename contains a valid extension, which is the same like the selected filter item's extension, the filename is okay
-                if (fn.EndsWith(Extension, System.StringComparison.CurrentCultureIgnoreCase)) return fn;
+                if (fn.EndsWith(Extension, StringComparison.CurrentCultureIgnoreCase)) return fn;
                 // otherwise we just add the selected filter item's extension
                 else return fn + "." + Extension;
             }
@@ -183,7 +183,7 @@ namespace GreenshotPlugin.Controls
             {
                 for (int i = 0; i < filterOptions.Length; i++)
                 {
-                    if (value.Equals(filterOptions[i].Extension, System.StringComparison.CurrentCultureIgnoreCase))
+                    if (value.Equals(filterOptions[i].Extension, StringComparison.CurrentCultureIgnoreCase))
                     {
                         saveFileDialog.FilterIndex = i + 1;
                     }

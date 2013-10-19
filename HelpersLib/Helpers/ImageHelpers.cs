@@ -59,7 +59,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -123,7 +122,7 @@ namespace HelpersLib
         public static Image ResizeImage(Image img, int x, int y, int width, int height, bool allowEnlarge, bool centerImage)
         {
             double ratio;
-            int newWidth, newHeight, newX, newY;
+            int newWidth, newHeight;
 
             if (!allowEnlarge && img.Width <= width && img.Height <= height)
             {
@@ -133,15 +132,15 @@ namespace HelpersLib
             }
             else
             {
-                double ratioX = (double)width / (double)img.Width;
-                double ratioY = (double)height / (double)img.Height;
+                double ratioX = (double)width / img.Width;
+                double ratioY = (double)height / img.Height;
                 ratio = ratioX < ratioY ? ratioX : ratioY;
                 newWidth = (int)(img.Width * ratio);
                 newHeight = (int)(img.Height * ratio);
             }
 
-            newX = x;
-            newY = y;
+            int newX = x;
+            int newY = y;
 
             if (centerImage)
             {
@@ -203,7 +202,7 @@ namespace HelpersLib
 
         public static Image DrawBorder(Image img, BorderType borderType, Color borderColor, int borderSize)
         {
-            Bitmap bmp = null;
+            Bitmap bmp;
 
             using (Pen borderPen = new Pen(borderColor, borderSize) { Alignment = PenAlignment.Inset })
             {
@@ -307,7 +306,7 @@ namespace HelpersLib
             return result;
         }
 
-        public static Bitmap AddReflection(Image bmp, int percentage, int maxAlpha, int minAlpha)
+        public static Bitmap AddReflection(Image img, int percentage, int maxAlpha, int minAlpha)
         {
             percentage = percentage.Between(1, 100);
             maxAlpha = maxAlpha.Between(0, 255);
@@ -315,13 +314,13 @@ namespace HelpersLib
 
             Bitmap reflection;
 
-            using (Bitmap bitmapRotate = (Bitmap)bmp.Clone())
+            using (Bitmap bitmapRotate = (Bitmap)img.Clone())
             {
                 bitmapRotate.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 reflection = bitmapRotate.Clone(new Rectangle(0, 0, bitmapRotate.Width, (int)(bitmapRotate.Height * ((float)percentage / 100))), PixelFormat.Format32bppArgb);
             }
 
-            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(reflection, true, ImageLockMode.ReadWrite))
+            using (UnsafeBitmap unsafeBitmap = new UnsafeBitmap(reflection, true))
             {
                 int alphaAdd = maxAlpha - minAlpha;
                 float reflectionHeight = reflection.Height - 1;
@@ -473,7 +472,7 @@ namespace HelpersLib
 
         public static bool AddMetadata(Image img, int id, string text)
         {
-            PropertyItem pi = null;
+            PropertyItem pi;
 
             try
             {
@@ -527,8 +526,8 @@ namespace HelpersLib
         /// </summary>
         /// <param name="inputImage">input Image object, is not modified</param>
         /// <param name="angleDegrees">angle of rotation, in degrees</param>
-        /// <param name="upsizeOk">see comments above</param>
-        /// <param name="clipOk">see comments above, not used if upsizeOk = true</param>
+        /// <param name="upsize">see comments above</param>
+        /// <param name="clip">see comments above, not used if upsizeOk = true</param>
         /// <returns>new Bitmap object, may be larger than input image</returns>
         public static Bitmap RotateImage(Image inputImage, float angleDegrees, bool upsize, bool clip)
         {
@@ -603,7 +602,7 @@ namespace HelpersLib
             }
 
             using (Image cloneImage = (Image)img.Clone())
-            using (ICapture capture = new Capture() { Image = cloneImage })
+            using (ICapture capture = new Capture { Image = cloneImage })
             using (Surface surface = new Surface(capture))
             using (ImageEditorForm editor = new ImageEditorForm(surface, true))
             {
@@ -747,8 +746,8 @@ namespace HelpersLib
             using (GraphicsPath path = new GraphicsPath())
             {
                 Random random = new Random();
-                int horizontalRegions = (int)(sourceImage.Width / horizontalToothRange);
-                int verticalRegions = (int)(sourceImage.Height / verticalToothRange);
+                int horizontalRegions = sourceImage.Width / horizontalToothRange;
+                int verticalRegions = sourceImage.Height / verticalToothRange;
 
                 // Start
                 Point previousEndingPoint = new Point(horizontalToothRange, random.Next(1, toothHeight));
@@ -757,7 +756,7 @@ namespace HelpersLib
                 // Top
                 for (int i = 0; i < horizontalRegions; i++)
                 {
-                    int x = (int)previousEndingPoint.X + horizontalToothRange;
+                    int x = previousEndingPoint.X + horizontalToothRange;
                     int y = random.Next(1, toothHeight);
                     newEndingPoint = new Point(x, y);
                     path.AddLine(previousEndingPoint, newEndingPoint);
@@ -768,7 +767,7 @@ namespace HelpersLib
                 for (int i = 0; i < verticalRegions; i++)
                 {
                     int x = sourceImage.Width - random.Next(1, toothHeight);
-                    int y = (int)previousEndingPoint.Y + verticalToothRange;
+                    int y = previousEndingPoint.Y + verticalToothRange;
                     newEndingPoint = new Point(x, y);
                     path.AddLine(previousEndingPoint, newEndingPoint);
                     previousEndingPoint = newEndingPoint;
@@ -777,7 +776,7 @@ namespace HelpersLib
                 // Bottom
                 for (int i = 0; i < horizontalRegions; i++)
                 {
-                    int x = (int)previousEndingPoint.X - horizontalToothRange;
+                    int x = previousEndingPoint.X - horizontalToothRange;
                     int y = sourceImage.Height - random.Next(1, toothHeight);
                     newEndingPoint = new Point(x, y);
                     path.AddLine(previousEndingPoint, newEndingPoint);
@@ -788,7 +787,7 @@ namespace HelpersLib
                 for (int i = 0; i < verticalRegions; i++)
                 {
                     int x = random.Next(1, toothHeight);
-                    int y = (int)previousEndingPoint.Y - verticalToothRange;
+                    int y = previousEndingPoint.Y - verticalToothRange;
                     newEndingPoint = new Point(x, y);
                     path.AddLine(previousEndingPoint, newEndingPoint);
                     previousEndingPoint = newEndingPoint;

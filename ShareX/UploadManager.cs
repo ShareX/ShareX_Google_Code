@@ -139,7 +139,7 @@ namespace ShareX
                 taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
                 taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Add(AfterCaptureTasks.UploadImageToHost);
 
-                UploadManager.RunImageTask(img, taskSettings);
+                RunImageTask(img, taskSettings);
             }
             else if (Clipboard.ContainsFileDropList())
             {
@@ -169,7 +169,7 @@ namespace ShareX
             {
                 if (ccv.ShowDialog() == DialogResult.OK && !ccv.IsClipboardEmpty)
                 {
-                    UploadManager.ClipboardUpload(taskSettings);
+                    ClipboardUpload(taskSettings);
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace ShareX
                 {
                     if (ccv.ShowDialog() == DialogResult.OK && !ccv.IsClipboardEmpty)
                     {
-                        UploadManager.ClipboardUpload(taskSettings);
+                        ClipboardUpload(taskSettings);
                     }
 
                     Program.Settings.ShowClipboardContentViewer = !ccv.DontShowThisWindow;
@@ -192,7 +192,7 @@ namespace ShareX
             }
             else
             {
-                UploadManager.ClipboardUpload(taskSettings);
+                ClipboardUpload(taskSettings);
             }
         }
 

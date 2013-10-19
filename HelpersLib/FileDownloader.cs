@@ -77,9 +77,9 @@ namespace HelpersLib
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

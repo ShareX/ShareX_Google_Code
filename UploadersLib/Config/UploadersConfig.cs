@@ -224,19 +224,23 @@ namespace UploadersLib
             {
                 return IsActive((ImageDestination)destination);
             }
-            else if (destination is TextDestination)
+
+            if (destination is TextDestination)
             {
                 return IsActive((TextDestination)destination);
             }
-            else if (destination is FileDestination)
+
+            if (destination is FileDestination)
             {
                 return IsActive((FileDestination)destination);
             }
-            else if (destination is UrlShortenerType)
+
+            if (destination is UrlShortenerType)
             {
                 return IsActive((UrlShortenerType)destination);
             }
-            else if (destination is SocialNetworkingService)
+
+            if (destination is SocialNetworkingService)
             {
                 return IsActive((SocialNetworkingService)destination);
             }
