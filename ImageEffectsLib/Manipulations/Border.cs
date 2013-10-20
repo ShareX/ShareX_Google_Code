@@ -34,7 +34,7 @@ namespace ImageEffectsLib
         [DefaultValue(BorderType.Outside)]
         public BorderType Type { get; set; }
 
-        [DefaultValue(typeof(Color), "50, 170, 255")]
+        [DefaultValue(typeof(Color), "DodgerBlue")]
         public Color Color { get; set; }
 
         [DefaultValue(1)]

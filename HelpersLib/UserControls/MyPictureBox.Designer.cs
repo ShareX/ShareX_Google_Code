@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbMain = new System.Windows.Forms.PictureBox();
+            this.cmsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiCopyImage = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
+            this.cmsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStatus
@@ -56,6 +60,21 @@
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             // 
+            // cmsMenu
+            // 
+            this.cmsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCopyImage});
+            this.cmsMenu.Name = "cmsMenu";
+            this.cmsMenu.ShowImageMargin = false;
+            this.cmsMenu.Size = new System.Drawing.Size(128, 48);
+            // 
+            // tsmiCopyImage
+            // 
+            this.tsmiCopyImage.Name = "tsmiCopyImage";
+            this.tsmiCopyImage.Size = new System.Drawing.Size(127, 22);
+            this.tsmiCopyImage.Text = "Copy image";
+            this.tsmiCopyImage.Click += new System.EventHandler(this.tsmiCopyImage_Click);
+            // 
             // MyPictureBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -65,6 +84,7 @@
             this.Controls.Add(this.pbMain);
             this.Name = "MyPictureBox";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
+            this.cmsMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -73,5 +93,7 @@
 
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox pbMain;
+        private System.Windows.Forms.ContextMenuStrip cmsMenu;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopyImage;
     }
 }

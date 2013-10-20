@@ -90,6 +90,9 @@ namespace HelpersLib
         [DefaultValue(false)]
         public bool FullscreenOnClick { get; set; }
 
+        [DefaultValue(true)]
+        public bool EnableRightClickMenu { get; set; }
+
         public new event MouseEventHandler MouseDown
         {
             add
@@ -104,19 +107,20 @@ namespace HelpersLib
             }
         }
 
-        private static readonly object ImageLoadLock = new object();
+        private readonly object ImageLoadLock = new object();
 
         private bool isImageLoading;
 
         public MyPictureBox()
         {
-            FullscreenOnClick = false;
             InitializeComponent();
+            EnableRightClickMenu = true;
             Text = string.Empty;
             pbMain.InitialImage = Resources.Loading;
             pbMain.LoadProgressChanged += pbMain_LoadProgressChanged;
             pbMain.LoadCompleted += pbMain_LoadCompleted;
             pbMain.Resize += pbMain_Resize;
+            pbMain.MouseUp += MyPictureBox_MouseUp;
             MouseDown += MyPictureBox_MouseDown;
         }
 
@@ -149,9 +153,11 @@ namespace HelpersLib
             {
                 if (!isImageLoading)
                 {
+                    isImageLoading = true;
                     Reset();
                     Image = (Image)img.Clone();
                     AutoSetSizeMode();
+                    isImageLoading = false;
                 }
             }
         }
@@ -162,9 +168,11 @@ namespace HelpersLib
             {
                 if (!isImageLoading)
                 {
+                    isImageLoading = true;
                     Reset();
                     Image = Helpers.GetImageFromFile(filePath);
                     AutoSetSizeMode();
+                    isImageLoading = false;
                 }
             }
         }
@@ -191,10 +199,10 @@ namespace HelpersLib
             {
                 if (!isImageLoading)
                 {
+                    isImageLoading = true;
                     Reset();
                     Text = "Loading image...";
                     lblStatus.Visible = true;
-                    isImageLoading = true;
                     pbMain.LoadAsync(path);
                 }
             }
@@ -257,6 +265,22 @@ namespace HelpersLib
             if (e.Button == MouseButtons.Left && FullscreenOnClick && !isImageLoading && Image != null)
             {
                 ImageViewer.ShowImage(Image);
+            }
+        }
+
+        private void MyPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && EnableRightClickMenu && !isImageLoading && Image != null)
+            {
+                cmsMenu.Show(pbMain, e.X + 1, e.Y + 1);
+            }
+        }
+
+        private void tsmiCopyImage_Click(object sender, EventArgs e)
+        {
+            if (!isImageLoading && Image != null)
+            {
+                ClipboardHelpers.CopyImage(Image);
             }
         }
     }
