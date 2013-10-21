@@ -34,23 +34,21 @@ namespace HelpersLib
 
     public class ColorEventArgs : EventArgs
     {
-        public ColorEventArgs(MyColor color, DrawStyle drawStyle, bool updateControl)
+        public ColorEventArgs(MyColor color, ColorType colorType)
         {
             Color = color;
-            DrawStyle = drawStyle;
-            UpdateControl = updateControl;
+            ColorType = colorType;
         }
 
         public ColorEventArgs(MyColor color, DrawStyle drawStyle)
         {
             Color = color;
             DrawStyle = drawStyle;
-            UpdateControl = true;
         }
 
         public MyColor Color;
+        public ColorType ColorType;
         public DrawStyle DrawStyle;
-        public bool UpdateControl;
     }
 
     public static class ColorHelpers
@@ -75,11 +73,6 @@ namespace HelpersLib
                 ret_val += 1;
 
             return ret_val;
-        }
-
-        public static string ToShortString(double number)
-        {
-            return number.ToString("0.####");
         }
 
         public static Color Mix(List<Color> colors)

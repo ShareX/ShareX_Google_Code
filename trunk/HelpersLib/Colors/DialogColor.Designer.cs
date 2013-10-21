@@ -74,8 +74,8 @@
             this.nudY = new System.Windows.Forms.NumericUpDown();
             this.lblScreenColorPickerTip = new System.Windows.Forms.Label();
             this.pScreenColorPicker = new System.Windows.Forms.Panel();
-            this.colorPicker = new HelpersLib.ColorPicker();
             this.pbColorPreview = new HelpersLib.MyPictureBox();
+            this.colorPicker = new HelpersLib.ColorPicker();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagenta)).BeginInit();
@@ -153,9 +153,10 @@
             // 
             // nudKey
             // 
+            this.nudKey.DecimalPlaces = 1;
             this.nudKey.Location = new System.Drawing.Point(528, 109);
             this.nudKey.Name = "nudKey";
-            this.nudKey.Size = new System.Drawing.Size(48, 20);
+            this.nudKey.Size = new System.Drawing.Size(56, 20);
             this.nudKey.TabIndex = 23;
             this.nudKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudKey.Value = new decimal(new int[] {
@@ -167,9 +168,10 @@
             // 
             // nudYellow
             // 
+            this.nudYellow.DecimalPlaces = 1;
             this.nudYellow.Location = new System.Drawing.Point(528, 77);
             this.nudYellow.Name = "nudYellow";
-            this.nudYellow.Size = new System.Drawing.Size(48, 20);
+            this.nudYellow.Size = new System.Drawing.Size(56, 20);
             this.nudYellow.TabIndex = 18;
             this.nudYellow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudYellow.Value = new decimal(new int[] {
@@ -181,9 +183,10 @@
             // 
             // nudMagenta
             // 
+            this.nudMagenta.DecimalPlaces = 1;
             this.nudMagenta.Location = new System.Drawing.Point(528, 45);
             this.nudMagenta.Name = "nudMagenta";
-            this.nudMagenta.Size = new System.Drawing.Size(48, 20);
+            this.nudMagenta.Size = new System.Drawing.Size(56, 20);
             this.nudMagenta.TabIndex = 11;
             this.nudMagenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudMagenta.Value = new decimal(new int[] {
@@ -195,9 +198,10 @@
             // 
             // nudCyan
             // 
+            this.nudCyan.DecimalPlaces = 1;
             this.nudCyan.Location = new System.Drawing.Point(528, 13);
             this.nudCyan.Name = "nudCyan";
-            this.nudCyan.Size = new System.Drawing.Size(48, 20);
+            this.nudCyan.Size = new System.Drawing.Size(56, 20);
             this.nudCyan.TabIndex = 6;
             this.nudCyan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudCyan.Value = new decimal(new int[] {
@@ -462,7 +466,7 @@
             // 
             this.lblCyanPerc.AutoSize = true;
             this.lblCyanPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblCyanPerc.Location = new System.Drawing.Point(584, 17);
+            this.lblCyanPerc.Location = new System.Drawing.Point(586, 17);
             this.lblCyanPerc.Name = "lblCyanPerc";
             this.lblCyanPerc.Size = new System.Drawing.Size(19, 13);
             this.lblCyanPerc.TabIndex = 4;
@@ -472,7 +476,7 @@
             // 
             this.lblMagentaPerc.AutoSize = true;
             this.lblMagentaPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblMagentaPerc.Location = new System.Drawing.Point(584, 49);
+            this.lblMagentaPerc.Location = new System.Drawing.Point(586, 49);
             this.lblMagentaPerc.Name = "lblMagentaPerc";
             this.lblMagentaPerc.Size = new System.Drawing.Size(19, 13);
             this.lblMagentaPerc.TabIndex = 12;
@@ -482,7 +486,7 @@
             // 
             this.lblYellowPerc.AutoSize = true;
             this.lblYellowPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblYellowPerc.Location = new System.Drawing.Point(584, 81);
+            this.lblYellowPerc.Location = new System.Drawing.Point(586, 81);
             this.lblYellowPerc.Name = "lblYellowPerc";
             this.lblYellowPerc.Size = new System.Drawing.Size(19, 13);
             this.lblYellowPerc.TabIndex = 16;
@@ -492,7 +496,7 @@
             // 
             this.lblKeyPerc.AutoSize = true;
             this.lblKeyPerc.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblKeyPerc.Location = new System.Drawing.Point(584, 113);
+            this.lblKeyPerc.Location = new System.Drawing.Point(586, 113);
             this.lblKeyPerc.Name = "lblKeyPerc";
             this.lblKeyPerc.Size = new System.Drawing.Size(19, 13);
             this.lblKeyPerc.TabIndex = 21;
@@ -629,16 +633,6 @@
             this.pScreenColorPicker.TabIndex = 48;
             this.pScreenColorPicker.Visible = false;
             // 
-            // colorPicker
-            // 
-            this.colorPicker.AutoSize = true;
-            this.colorPicker.DrawStyle = HelpersLib.DrawStyle.Hue;
-            this.colorPicker.Location = new System.Drawing.Point(8, 8);
-            this.colorPicker.Name = "colorPicker";
-            this.colorPicker.Size = new System.Drawing.Size(293, 263);
-            this.colorPicker.TabIndex = 0;
-            this.colorPicker.ColorChanged += new HelpersLib.ColorEventHandler(this.colorPicker_ColorChanged);
-            // 
             // pbColorPreview
             // 
             this.pbColorPreview.BackColor = System.Drawing.Color.White;
@@ -649,6 +643,16 @@
             this.pbColorPreview.Size = new System.Drawing.Size(80, 56);
             this.pbColorPreview.TabIndex = 49;
             this.pbColorPreview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbColorPreview_MouseClick);
+            // 
+            // colorPicker
+            // 
+            this.colorPicker.AutoSize = true;
+            this.colorPicker.DrawStyle = HelpersLib.DrawStyle.Hue;
+            this.colorPicker.Location = new System.Drawing.Point(8, 8);
+            this.colorPicker.Name = "colorPicker";
+            this.colorPicker.Size = new System.Drawing.Size(293, 263);
+            this.colorPicker.TabIndex = 0;
+            this.colorPicker.ColorChanged += new HelpersLib.ColorEventHandler(this.colorPicker_ColorChanged);
             // 
             // DialogColor
             // 
@@ -695,12 +699,13 @@
             this.Controls.Add(this.rbBrightness);
             this.Controls.Add(this.rbSaturation);
             this.Controls.Add(this.rbHue);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Color picker - You can double click any field to copy its value";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ShareX - Color picker (You can double click any field to copy its value)";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.DialogColor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorDialog_KeyDown);

@@ -25,6 +25,7 @@
 
 using HelpersLib.Properties;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -38,7 +39,7 @@ namespace HelpersLib
         private MyColor NewColor = Color.Red;
         private MyColor OldColor;
         private bool oldColorExist;
-        private bool dialogChanged;
+        private bool controlChangingColor;
 
         public DialogColor()
             : this(Color.Empty)
@@ -78,28 +79,50 @@ namespace HelpersLib
         {
             oldColorExist = true;
             colorPicker.DrawCrosshair = lblOld.Visible = oldColorExist;
-            colorPicker.Color = NewColor = OldColor = currentColor;
+            NewColor = OldColor = currentColor;
+            colorPicker.ChangeColor(currentColor);
             nudAlpha.Value = currentColor.A;
             DrawPreviewColors();
         }
 
-        private void UpdateControls(MyColor color)
+        private void UpdateControls(MyColor color, ColorType type)
         {
             DrawPreviewColors();
-            dialogChanged = true;
-            nudHue.Value = (decimal)Math.Round(color.HSB.Hue360);
-            nudSaturation.Value = (decimal)Math.Round(color.HSB.Saturation100);
-            nudBrightness.Value = (decimal)Math.Round(color.HSB.Brightness100);
-            nudRed.Value = color.RGBA.Red;
-            nudGreen.Value = color.RGBA.Green;
-            nudBlue.Value = color.RGBA.Blue;
-            nudCyan.Value = (decimal)Math.Round(color.CMYK.Cyan100);
-            nudMagenta.Value = (decimal)Math.Round(color.CMYK.Magenta100);
-            nudYellow.Value = (decimal)Math.Round(color.CMYK.Yellow100);
-            nudKey.Value = (decimal)Math.Round(color.CMYK.Key100);
-            txtHex.Text = ColorHelpers.ColorToHex(color);
-            txtDecimal.Text = ColorHelpers.ColorToDecimal(color).ToString();
-            dialogChanged = false;
+            controlChangingColor = true;
+
+            if (type != ColorType.HSB)
+            {
+                nudHue.Value = (decimal)Math.Round(color.HSB.Hue360);
+                nudSaturation.Value = (decimal)Math.Round(color.HSB.Saturation100);
+                nudBrightness.Value = (decimal)Math.Round(color.HSB.Brightness100);
+            }
+
+            if (type != ColorType.RGBA)
+            {
+                nudRed.Value = color.RGBA.Red;
+                nudGreen.Value = color.RGBA.Green;
+                nudBlue.Value = color.RGBA.Blue;
+            }
+
+            if (type != ColorType.CMYK)
+            {
+                nudCyan.Value = (decimal)color.CMYK.Cyan100;
+                nudMagenta.Value = (decimal)color.CMYK.Magenta100;
+                nudYellow.Value = (decimal)color.CMYK.Yellow100;
+                nudKey.Value = (decimal)color.CMYK.Key100;
+            }
+
+            if (type != ColorType.Hex)
+            {
+                txtHex.Text = ColorHelpers.ColorToHex(color);
+            }
+
+            if (type != ColorType.Decimal)
+            {
+                txtDecimal.Text = ColorHelpers.ColorToDecimal(color).ToString();
+            }
+
+            controlChangingColor = false;
         }
 
         private void DrawPreviewColors()
@@ -136,7 +159,7 @@ namespace HelpersLib
         {
             nudX.Value = x;
             nudY.Value = y;
-            colorPicker.Color = CaptureHelpers.GetPixelColor(x, y);
+            colorPicker.ChangeColor(CaptureHelpers.GetPixelColor(x, y));
         }
 
         private void UpdateColorPickerButtonText()
@@ -159,16 +182,13 @@ namespace HelpersLib
         {
             if (ScreenPicker)
             {
+                StartPosition = FormStartPosition.Manual;
                 Location = new Point(0, 0);
                 ClientSize = new Size(ClientSize.Width, pScreenColorPicker.Location.Y + pScreenColorPicker.Height);
                 pScreenColorPicker.Visible = true;
                 colorPicker.DrawCrosshair = true;
                 colorTimer.Start();
                 UpdateColorPickerButtonText();
-            }
-            else
-            {
-                Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - (Width / 2), Screen.PrimaryScreen.Bounds.Height / 2 - (Height / 2));
             }
         }
 
@@ -187,7 +207,7 @@ namespace HelpersLib
         private void colorPicker_ColorChanged(object sender, ColorEventArgs e)
         {
             NewColor = e.Color;
-            UpdateControls(NewColor);
+            UpdateControls(NewColor, e.ColorType);
         }
 
         private void ColorDialog_KeyDown(object sender, KeyEventArgs e)
@@ -258,25 +278,26 @@ namespace HelpersLib
 
         private void RGB_ValueChanged(object sender, EventArgs e)
         {
-            if (!dialogChanged)
+            if (!controlChangingColor)
             {
-                colorPicker.Color = new RGBA((int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value, (int)nudAlpha.Value).ToColor();
+                colorPicker.ChangeColor(Color.FromArgb((int)nudAlpha.Value, (int)nudRed.Value, (int)nudGreen.Value, (int)nudBlue.Value), ColorType.RGBA);
             }
         }
 
         private void HSB_ValueChanged(object sender, EventArgs e)
         {
-            if (!dialogChanged)
+            if (!controlChangingColor)
             {
-                colorPicker.Color = new HSB((int)nudHue.Value, (int)nudSaturation.Value, (int)nudBrightness.Value, (int)nudAlpha.Value).ToColor();
+                colorPicker.ChangeColor(new HSB((int)nudHue.Value, (int)nudSaturation.Value, (int)nudBrightness.Value, (int)nudAlpha.Value).ToColor(), ColorType.HSB);
             }
         }
 
         private void CMYK_ValueChanged(object sender, EventArgs e)
         {
-            if (!dialogChanged)
+            if (!controlChangingColor)
             {
-                colorPicker.Color = new CMYK((int)nudCyan.Value, (int)nudMagenta.Value, (int)nudYellow.Value, (int)nudKey.Value, (int)nudAlpha.Value).ToColor();
+                colorPicker.ChangeColor(new CMYK((double)nudCyan.Value / 100, (double)nudMagenta.Value / 100, (double)nudYellow.Value / 100,
+                    (double)nudKey.Value / 100, (int)nudAlpha.Value).ToColor(), ColorType.CMYK);
             }
         }
 
@@ -284,9 +305,9 @@ namespace HelpersLib
         {
             try
             {
-                if (!dialogChanged)
+                if (!controlChangingColor)
                 {
-                    colorPicker.Color = ColorHelpers.HexToColor(txtHex.Text);
+                    colorPicker.ChangeColor(ColorHelpers.HexToColor(txtHex.Text), ColorType.Hex);
                 }
             }
             catch
@@ -298,9 +319,9 @@ namespace HelpersLib
         {
             try
             {
-                if (!dialogChanged)
+                if (!controlChangingColor)
                 {
-                    colorPicker.Color = ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text));
+                    colorPicker.ChangeColor(ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text)), ColorType.Decimal);
                 }
             }
             catch
@@ -312,7 +333,7 @@ namespace HelpersLib
         {
             if (e.Button == MouseButtons.Left && oldColorExist)
             {
-                colorPicker.Color = OldColor;
+                colorPicker.ChangeColor(OldColor);
             }
         }
 

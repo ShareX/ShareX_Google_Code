@@ -279,4 +279,9 @@ namespace HelpersLib
         Green,
         Blue
     }
+
+    public enum ColorType
+    {
+        None, RGBA, HSB, CMYK, Hex, Decimal
+    }
 }
