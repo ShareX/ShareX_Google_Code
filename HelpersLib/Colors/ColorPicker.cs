@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace HelpersLib
@@ -31,64 +32,43 @@ namespace HelpersLib
     [DefaultEvent("ColorChanged")]
     public class ColorPicker : UserControl
     {
-        #region Variables
-
         public event ColorEventHandler ColorChanged;
 
-        public MyColor Color
+        private MyColor selectedColor;
+
+        public MyColor SelectedColor
         {
             get
             {
-                return mColor;
+                return selectedColor;
             }
-            set
+            private set
             {
-                if (mColor != value)
+                if (selectedColor != value)
                 {
-                    mColor = value;
-                    colorBox.SelectedColor = value;
-                    colorSlider.SelectedColor = value;
+                    selectedColor = value;
+                    colorBox.SelectedColor = selectedColor;
+                    colorSlider.SelectedColor = selectedColor;
                 }
             }
         }
 
-        public MyColor ColorBox
-        {
-            get
-            {
-                return mColorBox;
-            }
-            private set
-            {
-                mColorBox = value;
-                mColor = value;
-            }
-        }
-
-        public MyColor ColorSlider
-        {
-            get
-            {
-                return mColorSlider;
-            }
-            private set
-            {
-                mColorSlider = value;
-                mColor = value;
-            }
-        }
+        private DrawStyle drawStyle;
 
         public DrawStyle DrawStyle
         {
             get
             {
-                return mDrawStyle;
+                return drawStyle;
             }
             set
             {
-                colorBox.DrawStyle = value;
-                colorSlider.DrawStyle = value;
-                mDrawStyle = value;
+                if (drawStyle != value)
+                {
+                    drawStyle = value;
+                    colorBox.DrawStyle = value;
+                    colorSlider.DrawStyle = value;
+                }
             }
         }
 
@@ -104,13 +84,6 @@ namespace HelpersLib
         private ColorBox colorBox;
         private ColorSlider colorSlider;
 
-        private MyColor mColor;
-        private MyColor mColorBox;
-        private MyColor mColorSlider;
-        private DrawStyle mDrawStyle;
-
-        #endregion Variables
-
         public ColorPicker()
         {
             InitializeComponent();
@@ -121,23 +94,29 @@ namespace HelpersLib
 
         private void colorBox_ColorChanged(object sender, ColorEventArgs e)
         {
-            ColorBox = e.Color;
-            if (e.UpdateControl) colorSlider.SelectedColor = ColorBox;
-            ThrowEvent();
+            selectedColor = e.Color;
+            colorSlider.SelectedColor = SelectedColor;
+            OnColorChanged();
         }
 
         private void colorSlider_ColorChanged(object sender, ColorEventArgs e)
         {
-            ColorSlider = e.Color;
-            if (e.UpdateControl) colorBox.SelectedColor = ColorSlider;
-            ThrowEvent();
+            selectedColor = e.Color;
+            colorBox.SelectedColor = SelectedColor;
+            OnColorChanged();
         }
 
-        private void ThrowEvent()
+        public void ChangeColor(Color color, ColorType colorType = ColorType.None)
+        {
+            SelectedColor = color;
+            OnColorChanged(colorType);
+        }
+
+        private void OnColorChanged(ColorType colorType = ColorType.None)
         {
             if (ColorChanged != null)
             {
-                ColorChanged(this, new ColorEventArgs(Color, DrawStyle));
+                ColorChanged(this, new ColorEventArgs(SelectedColor, colorType));
             }
         }
 

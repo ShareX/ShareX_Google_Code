@@ -49,6 +49,7 @@
             this.pbPreview.BackColor = System.Drawing.Color.White;
             this.pbPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbPreview.DrawCheckeredBackground = true;
+            this.pbPreview.EnableRightClickMenu = true;
             this.pbPreview.FullscreenOnClick = true;
             this.pbPreview.Location = new System.Drawing.Point(392, 8);
             this.pbPreview.Name = "pbPreview";

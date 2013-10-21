@@ -260,29 +260,21 @@ namespace HelpersLib
 
         public static CMYK ToCMYK(Color color)
         {
-            CMYK cmyk = new CMYK();
-            double low = 1.0;
-
-            cmyk.Cyan = (double)(255 - color.R) / 255;
-            if (low > cmyk.Cyan)
-                low = cmyk.Cyan;
-
-            cmyk.Magenta = (double)(255 - color.G) / 255;
-            if (low > cmyk.Magenta)
-                low = cmyk.Magenta;
-
-            cmyk.Yellow = (double)(255 - color.B) / 255;
-            if (low > cmyk.Yellow)
-                low = cmyk.Yellow;
-
-            if (low > 0.0)
+            if (color.R == 0 && color.G == 0 && color.B == 0)
             {
-                cmyk.Key = low;
+                return new CMYK(0, 0, 0, 1, color.A);
             }
 
-            cmyk.Alpha = color.A;
+            double c = 1 - (color.R / 255d);
+            double m = 1 - (color.G / 255d);
+            double y = 1 - (color.B / 255d);
+            double k = Math.Min(c, Math.Min(m, y));
 
-            return cmyk;
+            c = (c - k) / (1 - k);
+            m = (m - k) / (1 - k);
+            y = (y - k) / (1 - k);
+
+            return new CMYK(c, m, y, k, color.A);
         }
 
         public CMYK ToCMYK()
@@ -685,17 +677,26 @@ namespace HelpersLib
 
         public override string ToString()
         {
-            return String.Format("Cyan: {0}, Magenta: {1}, Yellow: {2}, Key: {3}", ColorHelpers.Round(Cyan100),
-                ColorHelpers.Round(Magenta100), ColorHelpers.Round(Yellow100), ColorHelpers.Round(Key100));
+            return String.Format("Cyan: {0}, Magenta: {1}, Yellow: {2}, Key: {3}", Cyan100.ToString("0.0"), Magenta100.ToString("0.0"),
+                Yellow100.ToString("0.0"), Key100.ToString("0.0"));
         }
 
         public static Color ToColor(CMYK cmyk)
         {
-            int red = ColorHelpers.Round(255 - (255 * cmyk.Cyan));
-            int green = ColorHelpers.Round(255 - (255 * cmyk.Magenta));
-            int blue = ColorHelpers.Round(255 - (255 * cmyk.Yellow));
+            if (cmyk.Cyan == 0 && cmyk.Magenta == 0 && cmyk.Yellow == 0 && cmyk.Key == 1)
+            {
+                return Color.FromArgb(cmyk.Alpha, 0, 0, 0);
+            }
 
-            return Color.FromArgb(cmyk.Alpha, red, green, blue);
+            double c = cmyk.Cyan * (1 - cmyk.Key) + cmyk.Key;
+            double m = cmyk.Magenta * (1 - cmyk.Key) + cmyk.Key;
+            double y = cmyk.Yellow * (1 - cmyk.Key) + cmyk.Key;
+
+            int r = (int)Math.Round((1 - c) * 255);
+            int g = (int)Math.Round((1 - m) * 255);
+            int b = (int)Math.Round((1 - y) * 255);
+
+            return Color.FromArgb(cmyk.Alpha, r, g, b);
         }
 
         public static Color ToColor(double cyan, double magenta, double yellow, double key)

@@ -90,7 +90,7 @@ namespace HelpersLib
         [DefaultValue(false)]
         public bool FullscreenOnClick { get; set; }
 
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool EnableRightClickMenu { get; set; }
 
         public new event MouseEventHandler MouseDown
@@ -114,7 +114,6 @@ namespace HelpersLib
         public MyPictureBox()
         {
             InitializeComponent();
-            EnableRightClickMenu = true;
             Text = string.Empty;
             pbMain.InitialImage = Resources.Loading;
             pbMain.LoadProgressChanged += pbMain_LoadProgressChanged;

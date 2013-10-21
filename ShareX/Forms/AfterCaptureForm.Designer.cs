@@ -86,6 +86,7 @@
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbImage.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbImage.DrawCheckeredBackground = true;
+            this.pbImage.EnableRightClickMenu = true;
             this.pbImage.FullscreenOnClick = true;
             this.pbImage.Location = new System.Drawing.Point(272, 8);
             this.pbImage.Name = "pbImage";
@@ -107,7 +108,7 @@
             this.AcceptButton = this.btnContinue;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 305);
+            this.ClientSize = new System.Drawing.Size(656, 306);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnContinue);

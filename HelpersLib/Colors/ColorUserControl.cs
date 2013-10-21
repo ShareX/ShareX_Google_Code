@@ -35,8 +35,6 @@ namespace HelpersLib
 {
     public abstract class ColorUserControl : UserControl
     {
-        #region Variables
-
         public event ColorEventHandler ColorChanged;
 
         public bool drawCrosshair;
@@ -44,8 +42,8 @@ namespace HelpersLib
         protected Bitmap bmp;
         protected int width;
         protected int height;
-        protected DrawStyle mDrawStyle;
-        protected MyColor mSetColor;
+        protected DrawStyle drawStyle;
+        protected MyColor selectedColor;
         protected bool mouseDown;
         protected Point lastPos;
         protected Timer mouseMoveTimer;
@@ -54,11 +52,12 @@ namespace HelpersLib
         {
             get
             {
-                return mSetColor;
+                return selectedColor;
             }
             set
             {
-                mSetColor = value;
+                selectedColor = value;
+
                 if (this is ColorBox)
                 {
                     SetBoxMarker();
@@ -67,9 +66,8 @@ namespace HelpersLib
                 {
                     SetSliderMarker();
                 }
+
                 Refresh();
-                //GetPointColor(lastPos);
-                ThrowEvent(false);
             }
         }
 
@@ -77,11 +75,12 @@ namespace HelpersLib
         {
             get
             {
-                return mDrawStyle;
+                return drawStyle;
             }
             set
             {
-                mDrawStyle = value;
+                drawStyle = value;
+
                 if (this is ColorBox)
                 {
                     SetBoxMarker();
@@ -90,11 +89,10 @@ namespace HelpersLib
                 {
                     SetSliderMarker();
                 }
+
                 Refresh();
             }
         }
-
-        #endregion Variables
 
         #region Component Designer generated code
 
@@ -152,7 +150,6 @@ namespace HelpersLib
             drawCrosshair = true;
             mouseDown = true;
             mouseMoveTimer.Start();
-            //EventMouseMove(this, e);
         }
 
         private void EventMouseEnter(object sender, EventArgs e)
@@ -198,13 +195,12 @@ namespace HelpersLib
         private void MouseMoveTimer_Tick(object sender, EventArgs e)
         {
             Point mousePosition = GetPoint(PointToClient(MousePosition));
+
             if (mouseDown && lastPos != mousePosition)
             {
                 GetPointColor(mousePosition);
-                ThrowEvent();
+                OnColorChanged();
                 Refresh();
-                //Console.WriteLine(width + "-" + this.ClientRectangle.Width + "-" +
-                //this.DisplayRectangle.Width + "-" + (this.Size.Width - width).ToString());
             }
         }
 
@@ -212,16 +208,11 @@ namespace HelpersLib
 
         #region Protected Methods
 
-        protected void ThrowEvent()
-        {
-            ThrowEvent(true);
-        }
-
-        protected void ThrowEvent(bool updateControl)
+        protected void OnColorChanged()
         {
             if (ColorChanged != null)
             {
-                ColorChanged(this, new ColorEventArgs(SelectedColor, DrawStyle, updateControl));
+                ColorChanged(this, new ColorEventArgs(SelectedColor, DrawStyle));
             }
         }
 
@@ -288,34 +279,34 @@ namespace HelpersLib
             switch (DrawStyle)
             {
                 case DrawStyle.Hue:
-                    mSetColor.HSB.Saturation = (double)lastPos.X / (width - 1);
-                    mSetColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Saturation = (double)lastPos.X / (width - 1);
+                    selectedColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Saturation:
-                    mSetColor.HSB.Hue = (double)lastPos.X / (width - 1);
-                    mSetColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Hue = (double)lastPos.X / (width - 1);
+                    selectedColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Brightness:
-                    mSetColor.HSB.Hue = (double)lastPos.X / (width - 1);
-                    mSetColor.HSB.Saturation = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Hue = (double)lastPos.X / (width - 1);
+                    selectedColor.HSB.Saturation = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Red:
-                    mSetColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
+                    selectedColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    selectedColor.RGBUpdate();
                     break;
                 case DrawStyle.Green:
-                    mSetColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGBA.Red = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
+                    selectedColor.RGBA.Red = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    selectedColor.RGBUpdate();
                     break;
                 case DrawStyle.Blue:
-                    mSetColor.RGBA.Red = Round(255 * (double)lastPos.X / (width - 1));
-                    mSetColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Red = Round(255 * (double)lastPos.X / (width - 1));
+                    selectedColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
+                    selectedColor.RGBUpdate();
                     break;
             }
         }
@@ -351,28 +342,28 @@ namespace HelpersLib
             switch (DrawStyle)
             {
                 case DrawStyle.Hue:
-                    mSetColor.HSB.Hue = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Hue = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Saturation:
-                    mSetColor.HSB.Saturation = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Saturation = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Brightness:
-                    mSetColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
-                    mSetColor.HSBUpdate();
+                    selectedColor.HSB.Brightness = 1.0 - (double)lastPos.Y / (height - 1);
+                    selectedColor.HSBUpdate();
                     break;
                 case DrawStyle.Red:
-                    mSetColor.RGBA.Red = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Red = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    selectedColor.RGBUpdate();
                     break;
                 case DrawStyle.Green:
-                    mSetColor.RGBA.Green = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Green = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    selectedColor.RGBUpdate();
                     break;
                 case DrawStyle.Blue:
-                    mSetColor.RGBA.Blue = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    mSetColor.RGBUpdate();
+                    selectedColor.RGBA.Blue = 255 - Round(255 * (double)lastPos.Y / (height - 1));
+                    selectedColor.RGBUpdate();
                     break;
             }
         }
