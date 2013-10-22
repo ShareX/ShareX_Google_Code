@@ -34,7 +34,6 @@ namespace HelpersLib
     public partial class DialogColor : Form
     {
         public Color Color;
-        public bool ScreenPicker;
 
         private MyColor NewColor = Color.Red;
         private MyColor OldColor;
@@ -155,42 +154,7 @@ namespace HelpersLib
             }
         }
 
-        private void UpdateColor(int x, int y)
-        {
-            nudX.Value = x;
-            nudY.Value = y;
-            colorPicker.ChangeColor(CaptureHelpers.GetPixelColor(x, y));
-        }
-
-        private void UpdateColorPickerButtonText()
-        {
-            if (colorTimer.Enabled)
-            {
-                btnColorPicker.Text = "Stop screen color picker";
-            }
-            else
-            {
-                btnColorPicker.Text = "Start screen color picker";
-            }
-
-            lblScreenColorPickerTip.Visible = colorTimer.Enabled;
-        }
-
         #region Events
-
-        private void DialogColor_Load(object sender, EventArgs e)
-        {
-            if (ScreenPicker)
-            {
-                StartPosition = FormStartPosition.Manual;
-                Location = new Point(0, 0);
-                ClientSize = new Size(ClientSize.Width, pScreenColorPicker.Location.Y + pScreenColorPicker.Height);
-                pScreenColorPicker.Visible = true;
-                colorPicker.DrawCrosshair = true;
-                colorTimer.Start();
-                UpdateColorPickerButtonText();
-            }
-        }
 
         private void CopyToClipboard(object sender, EventArgs e)
         {
@@ -208,29 +172,6 @@ namespace HelpersLib
         {
             NewColor = e.Color;
             UpdateControls(NewColor, e.ColorType);
-        }
-
-        private void ColorDialog_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.ControlKey && !txtHex.Focused)
-            {
-                btnColorPicker.Focus();
-                colorTimer.Enabled = !colorTimer.Enabled;
-                UpdateColorPickerButtonText();
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        private void btnColorPicker_Click(object sender, EventArgs e)
-        {
-            colorTimer.Enabled = !colorTimer.Enabled;
-            UpdateColorPickerButtonText();
-        }
-
-        private void colorTimer_Tick(object sender, EventArgs e)
-        {
-            Point position = CaptureHelpers.GetCursorPosition();
-            UpdateColor(position.X, position.Y);
         }
 
         private void btnOK_Click(object sender, EventArgs e)

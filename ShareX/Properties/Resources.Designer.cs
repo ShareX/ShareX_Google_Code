@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace ShareX.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -632,6 +635,16 @@ namespace ShareX.Properties {
         public static System.Drawing.Bitmap pencil {
             get {
                 object obj = ResourceManager.GetObject("pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap pipette {
+            get {
+                object obj = ResourceManager.GetObject("pipette", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -36,6 +36,10 @@ namespace ScreenCapture
     {
         public AreaManager AreaManager { get; private set; }
 
+        // For screen color picker
+        public bool OneClickMode { get; set; }
+        public Point OneClickPosition { get; set; }
+
         private int magnifierPixelCount = 15;
         private int magnifierPixelSize = 10;
 
@@ -44,7 +48,17 @@ namespace ScreenCapture
         {
             AreaManager = new AreaManager(this);
             KeyDown += RectangleRegion_KeyDown;
+            MouseDown += RectangleRegion_MouseDown;
             MouseWheel += RectangleRegion_MouseWheel;
+        }
+
+        private void RectangleRegion_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (OneClickMode)
+            {
+                OneClickPosition = e.Location;
+                Close(SurfaceResult.Region);
+            }
         }
 
         private void RectangleRegion_KeyDown(object sender, KeyEventArgs e)

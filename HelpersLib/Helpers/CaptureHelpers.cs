@@ -289,18 +289,6 @@ namespace HelpersLib
             return rect;
         }
 
-        public static Rectangle GetActiveWindowRectangle(bool maximizeFix = true)
-        {
-            IntPtr handle = NativeMethods.GetForegroundWindow();
-
-            if (handle.ToInt32() > 0)
-            {
-                return GetWindowRectangle(handle);
-            }
-
-            return Rectangle.Empty;
-        }
-
         public static Rectangle EvenRectangleSize(Rectangle rect)
         {
             rect.Width += rect.Width & 1;

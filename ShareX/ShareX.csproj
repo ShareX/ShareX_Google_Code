@@ -118,6 +118,12 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums.cs" />
+    <Compile Include="Forms\ScreenColorPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenColorPicker.Designer.cs">
+      <DependentUpon>ScreenColorPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ScreenRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExternalProgramForm.resx">
       <DependentUpon>ExternalProgramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenColorPicker.resx">
+      <DependentUpon>ScreenColorPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScreenRegionForm.resx">
       <DependentUpon>ScreenRegionForm.cs</DependentUpon>
@@ -371,7 +380,6 @@
     <None Include="Resources\application-task.png" />
     <None Include="Resources\steam.ico" />
     <None Include="Resources\camcorder-image.png" />
-    <None Include="Resources\cursor-question.png" />
     <None Include="Resources\toolbox.png" />
     <None Include="Resources\application-icon-large.png" />
     <None Include="Resources\upload-cloud.png" />
@@ -448,6 +456,7 @@
       <Link>VersionHistory.txt</Link>
     </Content>
     <None Include="Resources\image-saturation.png" />
+    <None Include="Resources\pipette.png" />
     <Content Include="Resources\ShareXIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
