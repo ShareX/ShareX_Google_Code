@@ -552,7 +552,7 @@ namespace ShareX
 
         private void OpenScreenColorPicker()
         {
-            new DialogColor { ScreenPicker = true }.Show();
+            new ScreenColorPicker().Show();
         }
 
         private void OpenHashCheck()

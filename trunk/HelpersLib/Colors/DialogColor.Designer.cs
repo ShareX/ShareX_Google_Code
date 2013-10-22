@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lblOld = new System.Windows.Forms.Label();
@@ -64,16 +63,8 @@
             this.lblMagentaPerc = new System.Windows.Forms.Label();
             this.lblYellowPerc = new System.Windows.Forms.Label();
             this.lblKeyPerc = new System.Windows.Forms.Label();
-            this.btnColorPicker = new System.Windows.Forms.Button();
-            this.colorTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblX = new System.Windows.Forms.Label();
-            this.lblY = new System.Windows.Forms.Label();
             this.nudAlpha = new System.Windows.Forms.NumericUpDown();
             this.lblAlpha = new System.Windows.Forms.Label();
-            this.nudX = new System.Windows.Forms.NumericUpDown();
-            this.nudY = new System.Windows.Forms.NumericUpDown();
-            this.lblScreenColorPickerTip = new System.Windows.Forms.Label();
-            this.pScreenColorPicker = new System.Windows.Forms.Panel();
             this.pbColorPreview = new HelpersLib.MyPictureBox();
             this.colorPicker = new HelpersLib.ColorPicker();
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).BeginInit();
@@ -87,9 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSaturation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAlpha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudY)).BeginInit();
-            this.pScreenColorPicker.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -502,38 +490,6 @@
             this.lblKeyPerc.TabIndex = 21;
             this.lblKeyPerc.Text = "%";
             // 
-            // btnColorPicker
-            // 
-            this.btnColorPicker.Location = new System.Drawing.Point(200, 5);
-            this.btnColorPicker.Name = "btnColorPicker";
-            this.btnColorPicker.Size = new System.Drawing.Size(184, 24);
-            this.btnColorPicker.TabIndex = 39;
-            this.btnColorPicker.Text = "Start screen color picker";
-            this.btnColorPicker.UseVisualStyleBackColor = true;
-            this.btnColorPicker.Click += new System.EventHandler(this.btnColorPicker_Click);
-            // 
-            // colorTimer
-            // 
-            this.colorTimer.Tick += new System.EventHandler(this.colorTimer_Tick);
-            // 
-            // lblX
-            // 
-            this.lblX.AutoSize = true;
-            this.lblX.Location = new System.Drawing.Point(8, 11);
-            this.lblX.Name = "lblX";
-            this.lblX.Size = new System.Drawing.Size(17, 13);
-            this.lblX.TabIndex = 35;
-            this.lblX.Text = "X:";
-            // 
-            // lblY
-            // 
-            this.lblY.AutoSize = true;
-            this.lblY.Location = new System.Drawing.Point(104, 11);
-            this.lblY.Name = "lblY";
-            this.lblY.Size = new System.Drawing.Size(17, 13);
-            this.lblY.TabIndex = 37;
-            this.lblY.Text = "Y:";
-            // 
             // nudAlpha
             // 
             this.nudAlpha.Location = new System.Drawing.Point(528, 141);
@@ -562,77 +518,6 @@
             this.lblAlpha.TabIndex = 44;
             this.lblAlpha.Text = "Alpha:";
             // 
-            // nudX
-            // 
-            this.nudX.Location = new System.Drawing.Point(128, 7);
-            this.nudX.Maximum = new decimal(new int[] {
-            32767,
-            0,
-            0,
-            0});
-            this.nudX.Minimum = new decimal(new int[] {
-            32768,
-            0,
-            0,
-            -2147483648});
-            this.nudX.Name = "nudX";
-            this.nudX.Size = new System.Drawing.Size(64, 20);
-            this.nudX.TabIndex = 45;
-            this.nudX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudX.Value = new decimal(new int[] {
-            1680,
-            0,
-            0,
-            0});
-            // 
-            // nudY
-            // 
-            this.nudY.Location = new System.Drawing.Point(32, 7);
-            this.nudY.Maximum = new decimal(new int[] {
-            32767,
-            0,
-            0,
-            0});
-            this.nudY.Minimum = new decimal(new int[] {
-            32768,
-            0,
-            0,
-            -2147483648});
-            this.nudY.Name = "nudY";
-            this.nudY.Size = new System.Drawing.Size(64, 20);
-            this.nudY.TabIndex = 46;
-            this.nudY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudY.Value = new decimal(new int[] {
-            1050,
-            0,
-            0,
-            0});
-            // 
-            // lblScreenColorPickerTip
-            // 
-            this.lblScreenColorPickerTip.AutoSize = true;
-            this.lblScreenColorPickerTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblScreenColorPickerTip.Location = new System.Drawing.Point(392, 1);
-            this.lblScreenColorPickerTip.Name = "lblScreenColorPickerTip";
-            this.lblScreenColorPickerTip.Size = new System.Drawing.Size(208, 32);
-            this.lblScreenColorPickerTip.TabIndex = 47;
-            this.lblScreenColorPickerTip.Text = "Press Ctrl when this window active\r\nto stop screen color picker.";
-            this.lblScreenColorPickerTip.Visible = false;
-            // 
-            // pScreenColorPicker
-            // 
-            this.pScreenColorPicker.Controls.Add(this.lblScreenColorPickerTip);
-            this.pScreenColorPicker.Controls.Add(this.btnColorPicker);
-            this.pScreenColorPicker.Controls.Add(this.nudY);
-            this.pScreenColorPicker.Controls.Add(this.lblY);
-            this.pScreenColorPicker.Controls.Add(this.nudX);
-            this.pScreenColorPicker.Controls.Add(this.lblX);
-            this.pScreenColorPicker.Location = new System.Drawing.Point(0, 272);
-            this.pScreenColorPicker.Name = "pScreenColorPicker";
-            this.pScreenColorPicker.Size = new System.Drawing.Size(608, 38);
-            this.pScreenColorPicker.TabIndex = 48;
-            this.pScreenColorPicker.Visible = false;
-            // 
             // pbColorPreview
             // 
             this.pbColorPreview.BackColor = System.Drawing.Color.White;
@@ -660,7 +545,6 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(609, 273);
             this.Controls.Add(this.pbColorPreview);
-            this.Controls.Add(this.pScreenColorPicker);
             this.Controls.Add(this.lblAlpha);
             this.Controls.Add(this.nudAlpha);
             this.Controls.Add(this.lblKeyPerc);
@@ -700,15 +584,12 @@
             this.Controls.Add(this.rbSaturation);
             this.Controls.Add(this.rbHue);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShareX - Color picker (You can double click any field to copy its value)";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.DialogColor_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ColorDialog_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagenta)).EndInit();
@@ -720,10 +601,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSaturation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAlpha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudY)).EndInit();
-            this.pScreenColorPicker.ResumeLayout(false);
-            this.pScreenColorPicker.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -735,7 +612,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblOld;
         private System.Windows.Forms.Label lblNew;
-        private System.Windows.Forms.TextBox txtHex;
         private System.Windows.Forms.Label lblHex;
         private System.Windows.Forms.NumericUpDown nudKey;
         private System.Windows.Forms.NumericUpDown nudYellow;
@@ -760,23 +636,16 @@
         private System.Windows.Forms.RadioButton rbBrightness;
         private System.Windows.Forms.RadioButton rbSaturation;
         private System.Windows.Forms.RadioButton rbHue;
-        private ColorPicker colorPicker;
         private System.Windows.Forms.Label lblDecimal;
         private System.Windows.Forms.TextBox txtDecimal;
         private System.Windows.Forms.Label lblCyanPerc;
         private System.Windows.Forms.Label lblMagentaPerc;
         private System.Windows.Forms.Label lblYellowPerc;
         private System.Windows.Forms.Label lblKeyPerc;
-        private System.Windows.Forms.Button btnColorPicker;
-        private System.Windows.Forms.Timer colorTimer;
-        private System.Windows.Forms.Label lblX;
-        private System.Windows.Forms.Label lblY;
         private System.Windows.Forms.NumericUpDown nudAlpha;
         private System.Windows.Forms.Label lblAlpha;
-        private System.Windows.Forms.NumericUpDown nudX;
-        private System.Windows.Forms.NumericUpDown nudY;
-        private System.Windows.Forms.Label lblScreenColorPickerTip;
-        private System.Windows.Forms.Panel pScreenColorPicker;
         private MyPictureBox pbColorPreview;
+        protected ColorPicker colorPicker;
+        protected System.Windows.Forms.TextBox txtHex;
     }
 }

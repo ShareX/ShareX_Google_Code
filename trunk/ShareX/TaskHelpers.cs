@@ -255,5 +255,33 @@ namespace ShareX
             rect = Rectangle.Empty;
             return false;
         }
+
+        public static PointInfo SelectPointColor()
+        {
+            using (Image fullscreen = Screenshot.CaptureFullscreen())
+            using (RectangleRegion surface = new RectangleRegion(fullscreen))
+            {
+                surface.AreaManager.WindowCaptureMode = true;
+                surface.OneClickMode = true;
+                surface.Prepare();
+                surface.ShowDialog();
+
+                if (surface.Result == SurfaceResult.Region)
+                {
+                    PointInfo pointInfo = new PointInfo();
+                    pointInfo.Position = surface.OneClickPosition;
+                    pointInfo.Color = ((Bitmap)fullscreen).GetPixel(pointInfo.Position.X, pointInfo.Position.Y);
+                    return pointInfo;
+                }
+            }
+
+            return null;
+        }
+    }
+
+    public class PointInfo
+    {
+        public Point Position { get; set; }
+        public Color Color { get; set; }
     }
 }
