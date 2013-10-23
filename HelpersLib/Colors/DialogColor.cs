@@ -101,6 +101,7 @@ namespace HelpersLib
                 nudRed.Value = color.RGBA.Red;
                 nudGreen.Value = color.RGBA.Green;
                 nudBlue.Value = color.RGBA.Blue;
+                nudAlpha.Value = color.RGBA.Alpha;
             }
 
             if (type != ColorType.CMYK)
@@ -118,7 +119,7 @@ namespace HelpersLib
 
             if (type != ColorType.Decimal)
             {
-                txtDecimal.Text = ColorHelpers.ColorToDecimal(color).ToString();
+                txtDecimal.Text = ColorHelpers.ColorToIntRGB(color).ToString();
             }
 
             controlChangingColor = false;
@@ -262,7 +263,7 @@ namespace HelpersLib
             {
                 if (!controlChangingColor)
                 {
-                    colorPicker.ChangeColor(ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text)), ColorType.Decimal);
+                    colorPicker.ChangeColor(ColorHelpers.IntRGBToColor(Convert.ToInt32(txtDecimal.Text)), ColorType.Decimal);
                 }
             }
             catch

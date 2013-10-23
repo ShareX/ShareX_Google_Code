@@ -89,7 +89,19 @@ namespace HelpersLib
 
         public override string ToString()
         {
-            return String.Format("{0}\r\n{1}\r\n{2}", RGBA, HSB, CMYK);
+            return String.Format(
+@"RGBA (Red, Green, Blue, Alpha) = {0}, {1}, {2}, {3}
+HSB (Hue, Saturation, Brightness) = {4}°, {5}%, {6}%
+CMYK (Cyan, Magenta, Yellow, Key) = {7}%, {8}%, {9}%, {10}%
+Hex (RGB, RGBA, ARGB) = #{11}, #{12}, #{13}
+Decimal (RGB, RGBA, ARGB) = {14}, {15}, {16}",
+                RGBA.Red, RGBA.Green, RGBA.Blue, RGBA.Alpha,
+                Math.Round(HSB.Hue360, 1), Math.Round(HSB.Saturation100, 1), (int)Math.Round(HSB.Brightness100, 1),
+                Math.Round(CMYK.Cyan100, 1), Math.Round(CMYK.Magenta100, 1), Math.Round(CMYK.Yellow100, 1), Math.Round(CMYK.Key100, 1),
+                string.Format("{0:X2}{1:X2}{2:X2}", RGBA.Red, RGBA.Green, RGBA.Blue),
+                string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", RGBA.Red, RGBA.Green, RGBA.Blue, RGBA.Alpha),
+                string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", RGBA.Alpha, RGBA.Red, RGBA.Green, RGBA.Blue),
+                ColorHelpers.ColorToIntRGB(RGBA), ColorHelpers.ColorToIntRGBA(RGBA), ColorHelpers.ColorToIntARGB(RGBA));
         }
 
         public override int GetHashCode()

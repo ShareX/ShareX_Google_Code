@@ -91,11 +91,11 @@ namespace ScreenCapture
             {
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-                    if (Config.MagnifierPixelSize > 3) Config.MagnifierPixelSize--;
+                    if (Config.MagnifierPixelSize > 1) Config.MagnifierPixelSize--;
                 }
                 else
                 {
-                    if (Config.MagnifierPixelCount > 3) Config.MagnifierPixelCount -= 2;
+                    if (Config.MagnifierPixelCount > 1) Config.MagnifierPixelCount -= 2;
                 }
             }
         }
@@ -263,9 +263,9 @@ namespace ScreenCapture
         {
             horizontalPixelCount = (horizontalPixelCount | 1).Between(1, 101);
             verticalPixelCount = (verticalPixelCount | 1).Between(1, 101);
-            pixelSize = pixelSize.Between(1, 100);
+            pixelSize = pixelSize.Between(1, 1000);
 
-            if (horizontalPixelCount * pixelSize > 1000)
+            if (horizontalPixelCount * pixelSize > 1000 || verticalPixelCount * pixelSize > 1000)
             {
                 horizontalPixelCount = verticalPixelCount = 15;
                 pixelSize = 10;
