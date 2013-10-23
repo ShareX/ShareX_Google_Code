@@ -24,7 +24,9 @@
 #endregion License Information (GPL v3)
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 
@@ -132,52 +134,74 @@ namespace HelpersLib
             return string.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
         }
 
-        public static int ColorToDecimal(Color color)
-        {
-            return HexToDecimal(ColorToHex(color));
-        }
-
         public static Color HexToColor(string hex)
         {
-            if (hex.StartsWith("#"))
+            if (string.IsNullOrEmpty(hex))
             {
-                hex = hex.Substring(1);
+                return Color.Empty;
             }
 
-            string a = string.Empty;
-
-            if (hex.Length == 8)
+            if (hex[0] == '#')
             {
-                a = hex.Substring(0, 2);
-                hex = hex.Substring(2);
+                hex = hex.Remove(0, 1);
             }
 
-            string r = hex.Substring(0, 2);
-            string g = hex.Substring(2, 2);
-            string b = hex.Substring(4, 2);
-
-            if (string.IsNullOrEmpty(a))
+            if (hex.Length != 8 && hex.Length != 6)
             {
-                return Color.FromArgb(HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
+                return Color.Empty;
             }
 
-            return Color.FromArgb(HexToDecimal(a), HexToDecimal(r), HexToDecimal(g), HexToDecimal(b));
+            if (hex.Length == 6)
+            {
+                hex += "FF";
+            }
+
+            int r = HexToDecimal(hex.Substring(0, 2));
+            int g = HexToDecimal(hex.Substring(2, 2));
+            int b = HexToDecimal(hex.Substring(4, 2));
+            int a = HexToDecimal(hex.Substring(6, 2));
+
+            return Color.FromArgb(a, r, g, b);
         }
 
         public static int HexToDecimal(string hex)
         {
-            //return int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
             return Convert.ToInt32(hex, 16);
         }
 
-        public static string DecimalToHex(int dec)
+        public static string IntRGBToHex(int dec)
         {
             return dec.ToString("X6");
         }
 
-        public static Color DecimalToColor(int dec)
+        public static int ColorToIntRGB(Color color)
         {
-            return Color.FromArgb(dec & 0xFF, (dec & 0xff00) / 256, dec / 65536);
+            return color.R << 16 | color.G << 8 | color.B;
+        }
+
+        public static int ColorToIntRGBA(Color color)
+        {
+            return color.R << 24 | color.G << 16 | color.B << 8 | color.A;
+        }
+
+        public static int ColorToIntARGB(Color color)
+        {
+            return color.A << 24 | color.R << 16 | color.G << 8 | color.B;
+        }
+
+        public static Color IntRGBToColor(int dec)
+        {
+            return Color.FromArgb((dec >> 16) & 0xFF, (dec >> 8) & 0xFF, dec & 0xFF);
+        }
+
+        public static Color IntRGBAToColor(int dec)
+        {
+            return Color.FromArgb(dec & 0xFF, (dec >> 24) & 0xFF, (dec >> 16) & 0xFF, (dec >> 8) & 0xFF);
+        }
+
+        public static Color IntARGBToColor(int dec)
+        {
+            return Color.FromArgb((dec >> 24) & 0xFF, (dec >> 16) & 0xFF, (dec >> 8) & 0xFF, dec & 0xFF);
         }
 
         public static Color SetHue(Color c, double Hue)

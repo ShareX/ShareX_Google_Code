@@ -111,6 +111,12 @@ namespace ShareX
             }
         }
 
+        private void btnCopyAll_Click(object sender, EventArgs e)
+        {
+            string colors = colorPicker.SelectedColor.ToString();
+            ClipboardHelpers.CopyText(colors);
+        }
+
         private void colorTimer_Tick(object sender, EventArgs e)
         {
             Point position = CaptureHelpers.GetCursorPosition();
