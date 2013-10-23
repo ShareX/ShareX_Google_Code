@@ -40,13 +40,17 @@ namespace ScreenCapture
         public bool OneClickMode { get; set; }
         public Point OneClickPosition { get; set; }
 
-        private int magnifierPixelCount = 15;
-        private int magnifierPixelSize = 10;
+        public int MagnifierPixelCount { get; set; }
+        public int MagnifierPixelSize { get; set; }
 
         public RectangleRegion(Image backgroundImage = null)
             : base(backgroundImage)
         {
             AreaManager = new AreaManager(this);
+
+            MagnifierPixelCount = 15;
+            MagnifierPixelSize = 10;
+
             KeyDown += RectangleRegion_KeyDown;
             MouseDown += RectangleRegion_MouseDown;
             MouseWheel += RectangleRegion_MouseWheel;
@@ -54,7 +58,7 @@ namespace ScreenCapture
 
         private void RectangleRegion_MouseDown(object sender, MouseEventArgs e)
         {
-            if (OneClickMode)
+            if (OneClickMode && e.Button == MouseButtons.Left)
             {
                 OneClickPosition = e.Location;
                 Close(SurfaceResult.Region);
@@ -83,22 +87,22 @@ namespace ScreenCapture
             {
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-                    if (magnifierPixelSize < 30) magnifierPixelSize++;
+                    if (MagnifierPixelSize < 30) MagnifierPixelSize++;
                 }
                 else
                 {
-                    if (magnifierPixelCount < 35) magnifierPixelCount += 2;
+                    if (MagnifierPixelCount < 35) MagnifierPixelCount += 2;
                 }
             }
             else if (e.Delta < 0)
             {
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
-                    if (magnifierPixelSize > 3) magnifierPixelSize--;
+                    if (MagnifierPixelSize > 3) MagnifierPixelSize--;
                 }
                 else
                 {
-                    if (magnifierPixelCount > 3) magnifierPixelCount -= 2;
+                    if (MagnifierPixelCount > 3) MagnifierPixelCount -= 2;
                 }
             }
         }
@@ -242,7 +246,7 @@ namespace ScreenCapture
             Point mousePos = InputManager.MousePosition0Based;
             int offsetX = 10, offsetY = 50;
 
-            using (Bitmap magnifier = Magnifier(SurfaceImage, mousePos, magnifierPixelCount, magnifierPixelCount, magnifierPixelSize))
+            using (Bitmap magnifier = Magnifier(SurfaceImage, mousePos, MagnifierPixelCount, MagnifierPixelCount, MagnifierPixelSize))
             {
                 int x = mousePos.X + offsetX;
 

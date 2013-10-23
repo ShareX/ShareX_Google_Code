@@ -148,7 +148,6 @@
             this.Controls.Add(this.lblX);
             this.KeyPreview = true;
             this.Name = "ScreenColorPicker";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ShareX - Screen color picker (You can double click any field to copy its value)";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScreenColorPicker_KeyDown);
             this.Controls.SetChildIndex(this.txtHex, 0);

@@ -25,13 +25,10 @@
 
 using HelpersLib;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ShareX
 {
@@ -42,7 +39,6 @@ namespace ShareX
         public ScreenColorPicker()
         {
             InitializeComponent();
-            Location = CaptureHelpers.GetActiveScreenBounds().Location;
             colorPicker.DrawCrosshair = true;
             colorTimer.Tick += colorTimer_Tick;
             colorTimer.Start();
@@ -83,15 +79,24 @@ namespace ShareX
 
         private void btnPipette_Click(object sender, EventArgs e)
         {
-            colorTimer.Enabled = false;
-            UpdateColorPickerButtonText();
-            Refresh();
-
-            PointInfo pointInfo = TaskHelpers.SelectPointColor();
-
-            if (pointInfo != null)
+            try
             {
-                UpdateColor(pointInfo.Position.X, pointInfo.Position.Y, pointInfo.Color);
+                colorTimer.Enabled = false;
+                UpdateColorPickerButtonText();
+
+                Hide();
+                Thread.Sleep(100);
+
+                PointInfo pointInfo = TaskHelpers.SelectPointColor();
+
+                if (pointInfo != null)
+                {
+                    UpdateColor(pointInfo.Position.X, pointInfo.Position.Y, pointInfo.Color);
+                }
+            }
+            finally
+            {
+                this.ShowActivate();
             }
         }
 
