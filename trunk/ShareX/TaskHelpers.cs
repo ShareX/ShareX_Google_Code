@@ -261,7 +261,6 @@ namespace ShareX
             using (Image fullscreen = Screenshot.CaptureFullscreen())
             using (RectangleRegion surface = new RectangleRegion(fullscreen))
             {
-                surface.AreaManager.WindowCaptureMode = true;
                 surface.OneClickMode = true;
                 surface.Prepare();
                 surface.ShowDialog();
@@ -269,8 +268,8 @@ namespace ShareX
                 if (surface.Result == SurfaceResult.Region)
                 {
                     PointInfo pointInfo = new PointInfo();
-                    pointInfo.Position = surface.OneClickPosition;
-                    pointInfo.Color = ((Bitmap)fullscreen).GetPixel(pointInfo.Position.X, pointInfo.Position.Y);
+                    pointInfo.Position = CaptureHelpers.ClientToScreen(surface.OneClickPosition);
+                    pointInfo.Color = ((Bitmap)fullscreen).GetPixel(surface.OneClickPosition.X, surface.OneClickPosition.Y);
                     return pointInfo;
                 }
             }
