@@ -550,9 +550,11 @@ namespace ShareX
             new AutoCaptureForm().Show();
         }
 
-        private void OpenScreenColorPicker()
+        private void OpenScreenColorPicker(TaskSettings taskSettings = null)
         {
-            new ScreenColorPicker().Show();
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            new ScreenColorPicker(taskSettings).Show();
         }
 
         private void OpenHashCheck()

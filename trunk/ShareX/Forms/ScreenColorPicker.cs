@@ -24,6 +24,7 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
+using ScreenCapture;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -35,9 +36,19 @@ namespace ShareX
     public partial class ScreenColorPicker : DialogColor
     {
         private Timer colorTimer = new Timer { Interval = 10 };
+        private SurfaceOptions surfaceOptions;
 
-        public ScreenColorPicker()
+        public ScreenColorPicker(TaskSettings taskSettings)
         {
+            if (taskSettings != null)
+            {
+                surfaceOptions = taskSettings.CaptureSettings.SurfaceOptions;
+            }
+            else
+            {
+                surfaceOptions = new SurfaceOptions();
+            }
+
             InitializeComponent();
             colorPicker.DrawCrosshair = true;
             colorTimer.Tick += colorTimer_Tick;
@@ -87,7 +98,7 @@ namespace ShareX
                 Hide();
                 Thread.Sleep(100);
 
-                PointInfo pointInfo = TaskHelpers.SelectPointColor();
+                PointInfo pointInfo = TaskHelpers.SelectPointColor(surfaceOptions);
 
                 if (pointInfo != null)
                 {

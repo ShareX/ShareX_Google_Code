@@ -256,11 +256,20 @@ namespace ShareX
             return false;
         }
 
-        public static PointInfo SelectPointColor()
+        public static PointInfo SelectPointColor(SurfaceOptions surfaceOptions = null)
         {
             using (Image fullscreen = Screenshot.CaptureFullscreen())
             using (RectangleRegion surface = new RectangleRegion(fullscreen))
             {
+                if (surfaceOptions != null)
+                {
+                    surface.Config = new SurfaceOptions
+                    {
+                        MagnifierPixelCount = surfaceOptions.MagnifierPixelCount,
+                        MagnifierPixelSize = surfaceOptions.MagnifierPixelSize
+                    };
+                }
+
                 surface.OneClickMode = true;
                 surface.Prepare();
                 surface.ShowDialog();
