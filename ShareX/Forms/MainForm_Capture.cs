@@ -126,7 +126,7 @@ namespace ShareX
                     OpenAutoCapture();
                     break;
                 case HotkeyType.ScreenColorPicker:
-                    OpenScreenColorPicker();
+                    OpenScreenColorPicker(taskSettings);
                     break;
                 case HotkeyType.HashCheck:
                     OpenHashCheck();

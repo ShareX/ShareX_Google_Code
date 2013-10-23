@@ -70,6 +70,12 @@ namespace ScreenCapture
         [DefaultValue(typeof(Size), "250, 250"), Description("Fixed shape size.")]
         public Size FixedSize { get; set; }
 
+        [DefaultValue(15), Description("Number of pixels will be in magnifier. Must be odd number like 11, 13, 15 etc.")]
+        public int MagnifierPixelCount { get; set; }
+
+        [DefaultValue(10), Description("Size of pixels in magnifier. So magnifier size will be PixelCount * PixelSize.")]
+        public int MagnifierPixelSize { get; set; }
+
         public SurfaceOptions()
         {
             this.ApplyDefaultPropertyValues();
