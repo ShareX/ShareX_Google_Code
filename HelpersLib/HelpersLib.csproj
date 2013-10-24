@@ -76,6 +76,11 @@
     <Compile Include="AviWriter.cs" />
     <Compile Include="ClipboardFormat.cs" />
     <Compile Include="ColorMatrixManager.cs" />
+    <Compile Include="Colors\CMYK.cs" />
+    <Compile Include="Colors\ColorEventHandler.cs" />
+    <Compile Include="Colors\HSB.cs" />
+    <Compile Include="Colors\MyColor.cs" />
+    <Compile Include="Colors\RGBA.cs" />
     <Compile Include="Helpers\ClipboardHelpers.cs" />
     <Compile Include="ColorBgra.cs" />
     <Compile Include="Cryptographic\Crc32.cs" />
@@ -119,7 +124,7 @@
     <Compile Include="Colors\ColorBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Colors\ColorHelpers.cs" />
+    <Compile Include="Helpers\ColorHelpers.cs" />
     <Compile Include="Colors\ColorPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,7 +140,6 @@
     <Compile Include="Colors\DialogColor.Designer.cs">
       <DependentUpon>DialogColor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Colors\MyColors.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
     <Compile Include="Extensions\GraphicsPathExtensions.cs" />

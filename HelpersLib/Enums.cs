@@ -284,4 +284,9 @@ namespace HelpersLib
     {
         None, RGBA, HSB, CMYK, Hex, Decimal
     }
+
+    public enum ColorFormat
+    {
+        RGB, RGBA, ARGB
+    }
 }
