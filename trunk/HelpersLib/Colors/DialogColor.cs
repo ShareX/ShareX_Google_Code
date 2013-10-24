@@ -33,7 +33,7 @@ namespace HelpersLib
 {
     public partial class DialogColor : Form
     {
-        public Color Color;
+        public Color Color { get; private set; }
 
         private MyColor NewColor = Color.Red;
         private MyColor OldColor;
@@ -119,7 +119,7 @@ namespace HelpersLib
 
             if (type != ColorType.Decimal)
             {
-                txtDecimal.Text = ColorHelpers.ColorToIntRGB(color).ToString();
+                txtDecimal.Text = ColorHelpers.ColorToDecimal(color).ToString();
             }
 
             controlChangingColor = false;
@@ -263,7 +263,7 @@ namespace HelpersLib
             {
                 if (!controlChangingColor)
                 {
-                    colorPicker.ChangeColor(ColorHelpers.IntRGBToColor(Convert.ToInt32(txtDecimal.Text)), ColorType.Decimal);
+                    colorPicker.ChangeColor(ColorHelpers.DecimalToColor(Convert.ToInt32(txtDecimal.Text)), ColorType.Decimal);
                 }
             }
             catch

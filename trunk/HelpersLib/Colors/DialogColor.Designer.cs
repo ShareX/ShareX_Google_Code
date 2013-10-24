@@ -126,7 +126,7 @@
             this.txtHex.Name = "txtHex";
             this.txtHex.Size = new System.Drawing.Size(72, 20);
             this.txtHex.TabIndex = 27;
-            this.txtHex.Text = "#FF00FF00";
+            this.txtHex.Text = "FF00FF00";
             this.txtHex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHex.TextChanged += new System.EventHandler(this.txtHex_TextChanged);
             // 
@@ -135,9 +135,9 @@
             this.lblHex.AutoSize = true;
             this.lblHex.Location = new System.Drawing.Point(472, 177);
             this.lblHex.Name = "lblHex";
-            this.lblHex.Size = new System.Drawing.Size(29, 13);
+            this.lblHex.Size = new System.Drawing.Size(54, 13);
             this.lblHex.TabIndex = 26;
-            this.lblHex.Text = "Hex:";
+            this.lblHex.Text = "Hex:      #";
             // 
             // nudKey
             // 

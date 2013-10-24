@@ -296,17 +296,17 @@ namespace HelpersLib
                 case DrawStyle.Red:
                     selectedColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
                     selectedColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
                 case DrawStyle.Green:
                     selectedColor.RGBA.Blue = Round(255 * (double)lastPos.X / (width - 1));
                     selectedColor.RGBA.Red = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
                 case DrawStyle.Blue:
                     selectedColor.RGBA.Red = Round(255 * (double)lastPos.X / (width - 1));
                     selectedColor.RGBA.Green = Round(255 * (1.0 - (double)lastPos.Y / (height - 1)));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
             }
         }
@@ -355,15 +355,15 @@ namespace HelpersLib
                     break;
                 case DrawStyle.Red:
                     selectedColor.RGBA.Red = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
                 case DrawStyle.Green:
                     selectedColor.RGBA.Green = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
                 case DrawStyle.Blue:
                     selectedColor.RGBA.Blue = 255 - Round(255 * (double)lastPos.Y / (height - 1));
-                    selectedColor.RGBUpdate();
+                    selectedColor.RGBAUpdate();
                     break;
             }
         }

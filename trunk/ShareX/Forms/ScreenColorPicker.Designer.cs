@@ -54,7 +54,7 @@
             // 
             this.lblScreenColorPickerTip.AutoSize = true;
             this.lblScreenColorPickerTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblScreenColorPickerTip.Location = new System.Drawing.Point(408, 271);
+            this.lblScreenColorPickerTip.Location = new System.Drawing.Point(408, 270);
             this.lblScreenColorPickerTip.Name = "lblScreenColorPickerTip";
             this.lblScreenColorPickerTip.Size = new System.Drawing.Size(193, 30);
             this.lblScreenColorPickerTip.TabIndex = 55;
