@@ -32,17 +32,17 @@ namespace HelpersLib
 {
     public static class ColorHelpers
     {
-        public static double CheckColor(double number)
+        public static double ValidColor(double number)
         {
             return number.Between(0, 1);
         }
 
-        public static int CheckColor(int number)
+        public static int ValidColor(int number)
         {
             return number.Between(0, 255);
         }
 
-        public static byte CheckColor(byte number)
+        public static byte ValidColor(byte number)
         {
             return number.Between(0, 255);
         }

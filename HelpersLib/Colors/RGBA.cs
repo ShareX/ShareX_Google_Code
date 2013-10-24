@@ -40,7 +40,7 @@ namespace HelpersLib
             }
             set
             {
-                red = ColorHelpers.CheckColor(value);
+                red = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -52,7 +52,7 @@ namespace HelpersLib
             }
             set
             {
-                green = ColorHelpers.CheckColor(value);
+                green = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -64,7 +64,7 @@ namespace HelpersLib
             }
             set
             {
-                blue = ColorHelpers.CheckColor(value);
+                blue = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -76,7 +76,7 @@ namespace HelpersLib
             }
             set
             {
-                alpha = ColorHelpers.CheckColor(value);
+                alpha = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -134,24 +134,24 @@ namespace HelpersLib
             return Color.FromArgb(Alpha, Red, Green, Blue);
         }
 
-        public static HSB ToHSB(Color color)
+        public string ToHex(ColorFormat format = ColorFormat.RGB)
         {
-            return ColorHelpers.ColorToHSB(color);
+            return ColorHelpers.ColorToHex(this, format);
+        }
+
+        public int ToDecimal(ColorFormat format = ColorFormat.RGB)
+        {
+            return ColorHelpers.ColorToDecimal(this, format);
         }
 
         public HSB ToHSB()
         {
-            return ToHSB(this);
-        }
-
-        public static CMYK ToCMYK(Color color)
-        {
-            return ColorHelpers.ColorToCMYK(color);
+            return ColorHelpers.ColorToHSB(this);
         }
 
         public CMYK ToCMYK()
         {
-            return ToCMYK(this);
+            return ColorHelpers.ColorToCMYK(this);
         }
 
         public override int GetHashCode()
