@@ -54,6 +54,33 @@ namespace ShareX
             colorTimer.Tick += colorTimer_Tick;
             colorTimer.Start();
             UpdateColorPickerButtonText();
+
+            foreach (Control control in Controls)
+            {
+                if (control is NumericUpDown || control is TextBox)
+                {
+                    control.DoubleClick += CopyToClipboard;
+                }
+            }
+        }
+
+        private void CopyToClipboard(object sender, EventArgs e)
+        {
+            string text = string.Empty;
+
+            if (sender is NumericUpDown)
+            {
+                text = ((NumericUpDown)sender).Value.ToString();
+            }
+            else if (sender is TextBox)
+            {
+                text = ((TextBox)sender).Text;
+            }
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                ClipboardHelpers.CopyText(text);
+            }
         }
 
         private void UpdateColor(int x, int y)
@@ -63,8 +90,8 @@ namespace ShareX
 
         private void UpdateColor(int x, int y, Color color)
         {
-            nudX.Value = x;
-            nudY.Value = y;
+            txtX.Text = x.ToString();
+            txtY.Text = y.ToString();
             colorPicker.ChangeColor(color);
         }
 
@@ -114,6 +141,7 @@ namespace ShareX
         private void btnCopyAll_Click(object sender, EventArgs e)
         {
             string colors = colorPicker.SelectedColor.ToString();
+            colors += string.Format("\r\nCursor position (X, Y) = {0}, {1}", txtX.Text, txtY.Text);
             ClipboardHelpers.CopyText(colors);
         }
 

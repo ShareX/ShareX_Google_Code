@@ -521,7 +521,7 @@
             // pbColorPreview
             // 
             this.pbColorPreview.BackColor = System.Drawing.Color.White;
-            this.pbColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbColorPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbColorPreview.DrawCheckeredBackground = true;
             this.pbColorPreview.Location = new System.Drawing.Point(360, 208);
             this.pbColorPreview.Name = "pbColorPreview";
@@ -588,7 +588,7 @@
             this.Name = "DialogColor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ShareX - Color picker (You can double click any field to copy its value)";
+            this.Text = "ShareX - Color picker";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.nudKey)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYellow)).EndInit();

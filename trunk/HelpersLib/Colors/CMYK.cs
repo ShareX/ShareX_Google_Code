@@ -44,7 +44,7 @@ namespace HelpersLib
             }
             set
             {
-                cyan = ColorHelpers.CheckColor(value);
+                cyan = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -56,7 +56,7 @@ namespace HelpersLib
             }
             set
             {
-                cyan = ColorHelpers.CheckColor(value / 100);
+                cyan = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -68,7 +68,7 @@ namespace HelpersLib
             }
             set
             {
-                magenta = ColorHelpers.CheckColor(value);
+                magenta = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -80,7 +80,7 @@ namespace HelpersLib
             }
             set
             {
-                magenta = ColorHelpers.CheckColor(value / 100);
+                magenta = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -92,7 +92,7 @@ namespace HelpersLib
             }
             set
             {
-                yellow = ColorHelpers.CheckColor(value);
+                yellow = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -104,7 +104,7 @@ namespace HelpersLib
             }
             set
             {
-                yellow = ColorHelpers.CheckColor(value / 100);
+                yellow = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -116,7 +116,7 @@ namespace HelpersLib
             }
             set
             {
-                key = ColorHelpers.CheckColor(value);
+                key = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -128,7 +128,7 @@ namespace HelpersLib
             }
             set
             {
-                key = ColorHelpers.CheckColor(value / 100);
+                key = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -140,7 +140,7 @@ namespace HelpersLib
             }
             set
             {
-                alpha = ColorHelpers.CheckColor(value);
+                alpha = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -166,12 +166,12 @@ namespace HelpersLib
 
         public CMYK(Color color)
         {
-            this = RGBA.ToCMYK(color);
+            this = ColorHelpers.ColorToCMYK(color);
         }
 
         public static implicit operator CMYK(Color color)
         {
-            return RGBA.ToCMYK(color);
+            return ColorHelpers.ColorToCMYK(color);
         }
 
         public static implicit operator Color(CMYK color)
@@ -204,19 +204,9 @@ namespace HelpersLib
             return String.Format("Cyan: {0:0.0}%, Magenta: {1:0.0}%, Yellow: {2:0.0}%, Key: {3:0.0}%", Cyan100, Magenta100, Yellow100, Key100);
         }
 
-        public static Color ToColor(CMYK cmyk)
-        {
-            return ColorHelpers.CMYKToColor(cmyk);
-        }
-
-        public static Color ToColor(double cyan, double magenta, double yellow, double key)
-        {
-            return ToColor(new CMYK(cyan, magenta, yellow, key));
-        }
-
         public Color ToColor()
         {
-            return ToColor(this);
+            return ColorHelpers.CMYKToColor(this);
         }
 
         public override int GetHashCode()

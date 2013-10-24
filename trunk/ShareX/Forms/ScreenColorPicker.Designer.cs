@@ -31,21 +31,19 @@
             this.btnPipette = new System.Windows.Forms.Button();
             this.lblScreenColorPickerTip = new System.Windows.Forms.Label();
             this.btnColorPicker = new System.Windows.Forms.Button();
-            this.nudX = new System.Windows.Forms.NumericUpDown();
             this.lblY = new System.Windows.Forms.Label();
-            this.nudY = new System.Windows.Forms.NumericUpDown();
             this.lblX = new System.Windows.Forms.Label();
             this.btnCopyAll = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.nudX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudY)).BeginInit();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.txtY = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnPipette
             // 
             this.btnPipette.Image = global::ShareX.Properties.Resources.pipette;
-            this.btnPipette.Location = new System.Drawing.Point(344, 274);
+            this.btnPipette.Location = new System.Drawing.Point(296, 274);
             this.btnPipette.Name = "btnPipette";
-            this.btnPipette.Size = new System.Drawing.Size(24, 24);
+            this.btnPipette.Size = new System.Drawing.Size(32, 24);
             this.btnPipette.TabIndex = 56;
             this.btnPipette.UseVisualStyleBackColor = true;
             this.btnPipette.Click += new System.EventHandler(this.btnPipette_Click);
@@ -63,68 +61,22 @@
             // 
             // btnColorPicker
             // 
-            this.btnColorPicker.Location = new System.Drawing.Point(200, 274);
+            this.btnColorPicker.Location = new System.Drawing.Point(152, 274);
             this.btnColorPicker.Name = "btnColorPicker";
-            this.btnColorPicker.Size = new System.Drawing.Size(136, 24);
+            this.btnColorPicker.Size = new System.Drawing.Size(144, 24);
             this.btnColorPicker.TabIndex = 52;
             this.btnColorPicker.Text = "Start screen color picker";
             this.btnColorPicker.UseVisualStyleBackColor = true;
             this.btnColorPicker.Click += new System.EventHandler(this.btnColorPicker_Click);
             // 
-            // nudX
-            // 
-            this.nudX.Location = new System.Drawing.Point(32, 276);
-            this.nudX.Maximum = new decimal(new int[] {
-            32767,
-            0,
-            0,
-            0});
-            this.nudX.Minimum = new decimal(new int[] {
-            32768,
-            0,
-            0,
-            -2147483648});
-            this.nudX.Name = "nudX";
-            this.nudX.Size = new System.Drawing.Size(64, 20);
-            this.nudX.TabIndex = 54;
-            this.nudX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudX.Value = new decimal(new int[] {
-            1680,
-            0,
-            0,
-            0});
-            // 
             // lblY
             // 
             this.lblY.AutoSize = true;
-            this.lblY.Location = new System.Drawing.Point(104, 280);
+            this.lblY.Location = new System.Drawing.Point(80, 280);
             this.lblY.Name = "lblY";
             this.lblY.Size = new System.Drawing.Size(17, 13);
             this.lblY.TabIndex = 51;
             this.lblY.Text = "Y:";
-            // 
-            // nudY
-            // 
-            this.nudY.Location = new System.Drawing.Point(128, 276);
-            this.nudY.Maximum = new decimal(new int[] {
-            32767,
-            0,
-            0,
-            0});
-            this.nudY.Minimum = new decimal(new int[] {
-            32768,
-            0,
-            0,
-            -2147483648});
-            this.nudY.Name = "nudY";
-            this.nudY.Size = new System.Drawing.Size(64, 20);
-            this.nudY.TabIndex = 53;
-            this.nudY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudY.Value = new decimal(new int[] {
-            1050,
-            0,
-            0,
-            0});
             // 
             // lblX
             // 
@@ -137,26 +89,47 @@
             // 
             // btnCopyAll
             // 
-            this.btnCopyAll.Image = global::ShareX.Properties.Resources.document_copy;
-            this.btnCopyAll.Location = new System.Drawing.Point(376, 274);
+            this.btnCopyAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCopyAll.Location = new System.Drawing.Point(336, 274);
             this.btnCopyAll.Name = "btnCopyAll";
-            this.btnCopyAll.Size = new System.Drawing.Size(24, 24);
+            this.btnCopyAll.Size = new System.Drawing.Size(64, 24);
             this.btnCopyAll.TabIndex = 57;
+            this.btnCopyAll.Text = "Copy all";
             this.btnCopyAll.UseVisualStyleBackColor = true;
             this.btnCopyAll.Click += new System.EventHandler(this.btnCopyAll_Click);
+            // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(25, 276);
+            this.txtX.Name = "txtX";
+            this.txtX.ReadOnly = true;
+            this.txtX.Size = new System.Drawing.Size(48, 20);
+            this.txtX.TabIndex = 58;
+            this.txtX.Text = "1680";
+            this.txtX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(97, 276);
+            this.txtY.Name = "txtY";
+            this.txtY.ReadOnly = true;
+            this.txtY.Size = new System.Drawing.Size(48, 20);
+            this.txtY.TabIndex = 59;
+            this.txtY.Text = "1050";
+            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ScreenColorPicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 305);
+            this.Controls.Add(this.txtY);
+            this.Controls.Add(this.txtX);
             this.Controls.Add(this.btnCopyAll);
             this.Controls.Add(this.btnPipette);
             this.Controls.Add(this.lblScreenColorPickerTip);
             this.Controls.Add(this.btnColorPicker);
-            this.Controls.Add(this.nudX);
             this.Controls.Add(this.lblY);
-            this.Controls.Add(this.nudY);
             this.Controls.Add(this.lblX);
             this.KeyPreview = true;
             this.Name = "ScreenColorPicker";
@@ -165,15 +138,13 @@
             this.Controls.SetChildIndex(this.txtHex, 0);
             this.Controls.SetChildIndex(this.colorPicker, 0);
             this.Controls.SetChildIndex(this.lblX, 0);
-            this.Controls.SetChildIndex(this.nudY, 0);
             this.Controls.SetChildIndex(this.lblY, 0);
-            this.Controls.SetChildIndex(this.nudX, 0);
             this.Controls.SetChildIndex(this.btnColorPicker, 0);
             this.Controls.SetChildIndex(this.lblScreenColorPickerTip, 0);
             this.Controls.SetChildIndex(this.btnPipette, 0);
             this.Controls.SetChildIndex(this.btnCopyAll, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.nudX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudY)).EndInit();
+            this.Controls.SetChildIndex(this.txtX, 0);
+            this.Controls.SetChildIndex(this.txtY, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,10 +155,10 @@
         private System.Windows.Forms.Button btnPipette;
         private System.Windows.Forms.Label lblScreenColorPickerTip;
         private System.Windows.Forms.Button btnColorPicker;
-        private System.Windows.Forms.NumericUpDown nudX;
         private System.Windows.Forms.Label lblY;
-        private System.Windows.Forms.NumericUpDown nudY;
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Button btnCopyAll;
+        private System.Windows.Forms.TextBox txtX;
+        private System.Windows.Forms.TextBox txtY;
     }
 }

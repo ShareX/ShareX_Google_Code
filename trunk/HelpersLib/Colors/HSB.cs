@@ -43,7 +43,7 @@ namespace HelpersLib
             }
             set
             {
-                hue = ColorHelpers.CheckColor(value);
+                hue = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -55,7 +55,7 @@ namespace HelpersLib
             }
             set
             {
-                hue = ColorHelpers.CheckColor(value / 360);
+                hue = ColorHelpers.ValidColor(value / 360);
             }
         }
 
@@ -67,7 +67,7 @@ namespace HelpersLib
             }
             set
             {
-                saturation = ColorHelpers.CheckColor(value);
+                saturation = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -79,7 +79,7 @@ namespace HelpersLib
             }
             set
             {
-                saturation = ColorHelpers.CheckColor(value / 100);
+                saturation = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -91,7 +91,7 @@ namespace HelpersLib
             }
             set
             {
-                brightness = ColorHelpers.CheckColor(value);
+                brightness = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -103,7 +103,7 @@ namespace HelpersLib
             }
             set
             {
-                brightness = ColorHelpers.CheckColor(value / 100);
+                brightness = ColorHelpers.ValidColor(value / 100);
             }
         }
 
@@ -115,7 +115,7 @@ namespace HelpersLib
             }
             set
             {
-                alpha = ColorHelpers.CheckColor(value);
+                alpha = ColorHelpers.ValidColor(value);
             }
         }
 
@@ -139,12 +139,12 @@ namespace HelpersLib
 
         public HSB(Color color)
         {
-            this = RGBA.ToHSB(color);
+            this = ColorHelpers.ColorToHSB(color);
         }
 
         public static implicit operator HSB(Color color)
         {
-            return RGBA.ToHSB(color);
+            return ColorHelpers.ColorToHSB(color);
         }
 
         public static implicit operator Color(HSB color)
@@ -177,19 +177,9 @@ namespace HelpersLib
             return String.Format("Hue: {0:0.0}°, Saturation: {1:0.0}%, Brightness: {2:0.0}%", Hue360, Saturation100, Brightness100);
         }
 
-        public static Color ToColor(HSB hsb)
-        {
-            return ColorHelpers.HSBToColor(hsb);
-        }
-
-        public static Color ToColor(double hue, double saturation, double brightness)
-        {
-            return ToColor(new HSB(hue, saturation, brightness));
-        }
-
         public Color ToColor()
         {
-            return ToColor(this);
+            return ColorHelpers.HSBToColor(this);
         }
 
         public override int GetHashCode()

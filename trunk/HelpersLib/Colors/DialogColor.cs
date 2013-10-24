@@ -55,14 +55,6 @@ namespace HelpersLib
             InitializeComponent();
             Icon = Resources.ShareXIcon;
 
-            foreach (Control control in Controls)
-            {
-                if (control is NumericUpDown || control is TextBox)
-                {
-                    control.DoubleClick += CopyToClipboard;
-                }
-            }
-
             if (currentColor.IsEmpty)
             {
                 colorPicker.DrawCrosshair = lblOld.Visible = oldColorExist;
@@ -156,18 +148,6 @@ namespace HelpersLib
         }
 
         #region Events
-
-        private void CopyToClipboard(object sender, EventArgs e)
-        {
-            if (sender is NumericUpDown)
-            {
-                ClipboardHelpers.CopyText(((NumericUpDown)sender).Value.ToString());
-            }
-            else if (sender is TextBox)
-            {
-                ClipboardHelpers.CopyText(((TextBox)sender).Text);
-            }
-        }
 
         private void colorPicker_ColorChanged(object sender, ColorEventArgs e)
         {
