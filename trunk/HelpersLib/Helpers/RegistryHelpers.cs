@@ -33,17 +33,22 @@ namespace HelpersLib
     public static class RegistryHelpers
     {
         private static readonly string WindowsStartupRun = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        private static readonly string ApplicationName = "ShareX";
         private static readonly string ApplicationPath = string.Format("\"{0}\"", Application.ExecutablePath);
         private static readonly string StartupPath = ApplicationPath + " -silent";
 
-        private static readonly string ShellExtMenuFiles = @"Software\Classes\*\shell\" + Application.ProductName;
+        private static readonly string ShellExtMenuFiles = @"Software\Classes\*\shell\" + ApplicationName;
         private static readonly string ShellExtMenuFilesCmd = ShellExtMenuFiles + @"\command";
 
-        private static readonly string ShellExtMenuFolders = @"Software\Classes\Folder\shell\" + Application.ProductName;
+        private static readonly string ShellExtMenuDirectory = @"Software\Classes\Directory\shell\" + ApplicationName;
+        private static readonly string ShellExtMenuDirectoryCmd = ShellExtMenuDirectory + @"\command";
+
+        private static readonly string ShellExtMenuFolders = @"Software\Classes\Folder\shell\" + ApplicationName;
         private static readonly string ShellExtMenuFoldersCmd = ShellExtMenuFolders + @"\command";
 
-        private static readonly string ShellExtDesc = "Upload using " + Application.ProductName;
-        private static readonly string ShellExtPath = string.Format("{0} \"%1\"", ApplicationPath);
+        private static readonly string ShellExtDesc = "Upload using " + ApplicationName;
+        private static readonly string ShellExtIcon = ApplicationPath + ",0";
+        private static readonly string ShellExtPath = ApplicationPath + " \"%1\"";
 
         public static bool CheckStartWithWindows()
         {
@@ -88,7 +93,7 @@ namespace HelpersLib
         {
             try
             {
-                return CheckRegistry(ShellExtMenuFilesCmd) && CheckRegistry(ShellExtMenuFoldersCmd);
+                return CheckRegistry(ShellExtMenuFilesCmd) && CheckRegistry(ShellExtMenuDirectoryCmd);
             }
             catch (Exception e)
             {
@@ -98,12 +103,13 @@ namespace HelpersLib
             return false;
         }
 
-        public static void SetShellContextMenu(bool shellContextMenu)
+        public static void SetShellContextMenu(bool register)
         {
             try
             {
-                if (shellContextMenu)
+                if (register)
                 {
+                    UnregisterShellContextMenu();
                     RegisterShellContextMenu();
                 }
                 else
@@ -120,15 +126,20 @@ namespace HelpersLib
         public static void RegisterShellContextMenu()
         {
             CreateRegistryKey(ShellExtMenuFiles, ShellExtDesc);
+            AddRegistryValue(ShellExtMenuFiles, "Icon", ShellExtIcon);
             CreateRegistryKey(ShellExtMenuFilesCmd, ShellExtPath);
-            CreateRegistryKey(ShellExtMenuFolders, ShellExtDesc);
-            CreateRegistryKey(ShellExtMenuFoldersCmd, ShellExtPath);
+
+            CreateRegistryKey(ShellExtMenuDirectory, ShellExtDesc);
+            AddRegistryValue(ShellExtMenuDirectory, "Icon", ShellExtIcon);
+            CreateRegistryKey(ShellExtMenuDirectoryCmd, ShellExtPath);
         }
 
         public static void UnregisterShellContextMenu()
         {
             RemoveRegistryKey(ShellExtMenuFilesCmd);
             RemoveRegistryKey(ShellExtMenuFiles);
+            RemoveRegistryKey(ShellExtMenuDirectoryCmd);
+            RemoveRegistryKey(ShellExtMenuDirectory);
             RemoveRegistryKey(ShellExtMenuFoldersCmd);
             RemoveRegistryKey(ShellExtMenuFolders);
         }
@@ -199,6 +210,17 @@ namespace HelpersLib
                 if (rk != null)
                 {
                     Registry.CurrentUser.DeleteSubKey(path);
+                }
+            }
+        }
+
+        private static void AddRegistryValue(string path, string name, string value)
+        {
+            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(path, true))
+            {
+                if (rk != null)
+                {
+                    rk.SetValue(name, value);
                 }
             }
         }
