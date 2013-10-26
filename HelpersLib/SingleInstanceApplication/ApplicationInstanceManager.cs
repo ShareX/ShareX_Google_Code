@@ -71,7 +71,15 @@ namespace SingleInstanceApplication
 
         public static bool CreateSingleInstance(EventHandler<InstanceCallbackEventArgs> callback)
         {
-            return CreateSingleInstance(Application.ProductName, callback);
+            try
+            {
+                return CreateSingleInstance(Application.ProductName, callback);
+            }
+            catch
+            {
+            }
+
+            return true;
         }
 
         private static void UpdateRemoteObject(string uri)
