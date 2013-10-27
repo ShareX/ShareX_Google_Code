@@ -646,7 +646,10 @@ namespace HelpersLib
                 Rectangle shadowRectangle = new Rectangle(size, size, sourceImage.Width, sourceImage.Height);
                 maskMatrix.Apply(sourceImage, shadowImage, shadowRectangle);
 
-                Blur((Bitmap)shadowImage, size);
+                if (size > 0)
+                {
+                    Blur((Bitmap)shadowImage, size);
+                }
 
                 if (darkness > 1)
                 {
