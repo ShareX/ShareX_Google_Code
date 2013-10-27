@@ -60,6 +60,9 @@ namespace ShareX
             cbSendToMenu.Checked = ShortcutHelpers.CheckShortcut(Environment.SpecialFolder.SendTo);
             cbShellContextMenu.Checked = RegistryHelpers.CheckShellContextMenu();
             cbCheckUpdates.Checked = Program.Settings.AutoCheckUpdate;
+            cbTrayIconProgressEnabled.Checked = Program.Settings.TrayIconProgressEnabled;
+            cbTaskbarProgressEnabled.Enabled = TaskbarManager.IsPlatformSupported;
+            cbTaskbarProgressEnabled.Checked = Program.Settings.TaskbarProgressEnabled;
 
             // Paths
             cbUseCustomUploadersConfigPath.Checked = Program.Settings.UseCustomUploadersConfigPath;
@@ -173,6 +176,21 @@ namespace ShareX
         private void cbCheckUpdates_CheckedChanged(object sender, EventArgs e)
         {
             Program.Settings.AutoCheckUpdate = cbCheckUpdates.Checked;
+        }
+
+        private void cbTrayIconProgressEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.TrayIconProgressEnabled = cbTrayIconProgressEnabled.Checked;
+        }
+
+        private void cbTaskbarProgressEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.TaskbarProgressEnabled = cbTaskbarProgressEnabled.Checked;
+
+            if (loaded)
+            {
+                TaskbarManager.Enabled = Program.Settings.TaskbarProgressEnabled;
+            }
         }
 
         #endregion General

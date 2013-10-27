@@ -351,6 +351,8 @@ namespace ShareX
             }
 
             UpdatePreviewSplitter();
+
+            TaskbarManager.Enabled = Program.Settings.TaskbarProgressEnabled;
         }
 
         private void RegisterMenuClosing()

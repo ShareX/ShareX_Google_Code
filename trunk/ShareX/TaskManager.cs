@@ -362,7 +362,7 @@ namespace ShareX
                 }
             }
 
-            if (Program.MainForm.niTray.Visible)
+            if (Program.Settings.TrayIconProgressEnabled && Program.MainForm.niTray.Visible)
             {
                 Icon icon = null;
 
@@ -376,13 +376,10 @@ namespace ShareX
                         lastIconStatus = progress;
                     }
                 }
-                else
+                else if (lastIconStatus != -1)
                 {
-                    if (lastIconStatus != -1)
-                    {
-                        icon = Resources.ShareX_Icon;
-                        lastIconStatus = -1;
-                    }
+                    icon = Resources.ShareX_Icon;
+                    lastIconStatus = -1;
                 }
 
                 if (icon != null)
