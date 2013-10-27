@@ -52,7 +52,7 @@ namespace ShareX
         private void LoadSettings()
         {
             Text = Program.Title + " - Settings";
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             // General
             cbShowTray.Checked = Program.Settings.ShowTray;

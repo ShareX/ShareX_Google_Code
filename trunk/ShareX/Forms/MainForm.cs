@@ -77,7 +77,7 @@ namespace ShareX
             InitializeComponent();
 
             Text = Program.Title;
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             AddMultiEnumItems<AfterCaptureTasks>(x => Program.DefaultTaskSettings.AfterCaptureJob = Program.DefaultTaskSettings.AfterCaptureJob.Swap(x),
                 tsddbAfterCaptureTasks, tsmiTrayAfterCaptureTasks);
@@ -334,7 +334,7 @@ namespace ShareX
 
         private void LoadSettings()
         {
-            niTray.Icon = Resources.sharex_16px_6;
+            niTray.Icon = Resources.ShareX_Icon;
             niTray.Visible = Program.Settings.ShowTray;
 
             UpdateMainFormSettings();
@@ -646,7 +646,7 @@ namespace ShareX
 
         private void tsmiTestImageUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.RunImageTask(Resources.ShareXLogo);
+            UploadManager.RunImageTask(Resources.ShareX_Logo);
         }
 
         private void tsmiTestTextUpload_Click(object sender, EventArgs e)
@@ -656,7 +656,7 @@ namespace ShareX
 
         private void tsmiTestFileUpload_Click(object sender, EventArgs e)
         {
-            UploadManager.UploadImage(Resources.ShareXLogo, ImageDestination.FileUploader);
+            UploadManager.UploadImage(Resources.ShareX_Logo, ImageDestination.FileUploader);
         }
 
         private void tsmiTestURLShortener_Click(object sender, EventArgs e)
@@ -679,7 +679,7 @@ namespace ShareX
 
         private void tsmiTestImageEffects_Click(object sender, EventArgs e)
         {
-            new ImageEffectsForm(Resources.ShareXLogo).Show();
+            new ImageEffectsForm(Resources.ShareX_Logo).Show();
         }
 
         private void tsmiScreenRecorderGIF_Click(object sender, EventArgs e)

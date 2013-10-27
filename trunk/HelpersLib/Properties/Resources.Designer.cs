@@ -83,9 +83,9 @@ namespace HelpersLib.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon ShareXIcon {
+        internal static System.Drawing.Icon ShareX_Icon {
             get {
-                object obj = ResourceManager.GetObject("ShareXIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("ShareX_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
