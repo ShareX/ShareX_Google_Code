@@ -54,6 +54,8 @@ namespace ShareX
 
         public bool ShowTray = true;
         public bool AutoCheckUpdate = true;
+        public bool TrayIconProgressEnabled = true;
+        public bool TaskbarProgressEnabled = true;
 
         #endregion General
 

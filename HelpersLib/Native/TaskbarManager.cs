@@ -41,9 +41,7 @@ namespace HelpersLib
 
     public static class TaskbarManager
     {
-        [ComImport]
-        [Guid("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
-        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [ComImport, Guid("c43dc798-95d1-4bea-9030-bb99e2983a1a"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         private interface ITaskbarList4
         {
             // ITaskbarList
@@ -74,14 +72,12 @@ namespace HelpersLib
             void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus tbpFlags);
         }
 
-        [Guid("56FDF344-FD6D-11d0-958A-006097C9A090")]
-        [ClassInterface(ClassInterfaceType.None)]
-        [ComImport]
+        [ComImport, Guid("56FDF344-FD6D-11d0-958A-006097C9A090"), ClassInterface(ClassInterfaceType.None)]
         private class CTaskbarList
         {
         }
 
-        private static object _syncLock = new object();
+        private static readonly object _syncLock = new object();
 
         private static ITaskbarList4 _taskbarList;
 
@@ -129,11 +125,22 @@ namespace HelpersLib
             }
         }
 
+        public static bool Enabled { get; set; }
+
         public static bool IsPlatformSupported
         {
             get
             {
                 return Helpers.IsWindows7OrGreater();
+            }
+        }
+
+        public static void SetProgressValue(IntPtr hwnd, int currentValue, int maximumValue = 100)
+        {
+            if (Enabled && IsPlatformSupported && hwnd != IntPtr.Zero)
+            {
+                currentValue = currentValue.Between(0, maximumValue);
+                TaskbarList.SetProgressValue(hwnd, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
             }
         }
 
@@ -147,12 +154,11 @@ namespace HelpersLib
             form.InvokeSafe(() => SetProgressValue(form.Handle, currentValue, maximumValue));
         }
 
-        public static void SetProgressValue(IntPtr hwnd, int currentValue, int maximumValue = 100)
+        public static void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus state)
         {
-            if (IsPlatformSupported && hwnd != IntPtr.Zero)
+            if (Enabled && IsPlatformSupported && hwnd != IntPtr.Zero)
             {
-                currentValue = currentValue.Between(0, maximumValue);
-                TaskbarList.SetProgressValue(hwnd, Convert.ToUInt32(currentValue), Convert.ToUInt32(maximumValue));
+                TaskbarList.SetProgressState(hwnd, state);
             }
         }
 
@@ -164,14 +170,6 @@ namespace HelpersLib
         public static void SetProgressState(Form form, TaskbarProgressBarStatus state)
         {
             form.InvokeSafe(() => SetProgressState(form.Handle, state));
-        }
-
-        public static void SetProgressState(IntPtr hwnd, TaskbarProgressBarStatus state)
-        {
-            if (IsPlatformSupported && hwnd != IntPtr.Zero)
-            {
-                TaskbarList.SetProgressState(hwnd, state);
-            }
         }
     }
 }
