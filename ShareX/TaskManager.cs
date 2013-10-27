@@ -48,6 +48,8 @@ namespace ShareX
 
         private static readonly List<UploadTask> Tasks = new List<UploadTask>();
 
+        private static int lastIconStatus = -1;
+
         public static void Start(UploadTask task)
         {
             Tasks.Add(task);
@@ -360,27 +362,38 @@ namespace ShareX
                 }
             }
 
-            // TODO: Add tray icon progress
-
-            /*if (Program.MainForm.niTray.Visible)
+            if (Program.MainForm.niTray.Visible)
             {
-                Icon icon;
+                Icon icon = null;
 
                 if (isWorkingTasks)
                 {
-                    int index = (int)(averageProgress / 100 * (trayIcons.Length - 1));
-                    icon = trayIcons.ReturnIfValidIndex(index) ?? trayIcons.Last();
+                    int progress = ((int)averageProgress).Between(0, 99);
+
+                    if (lastIconStatus != progress)
+                    {
+                        icon = TaskHelpers.GetProgressIcon(progress);
+                        lastIconStatus = progress;
+                    }
                 }
                 else
                 {
-                    icon = trayIcons.Last();
+                    if (lastIconStatus != -1)
+                    {
+                        icon = Resources.ShareX_Icon;
+                        lastIconStatus = -1;
+                    }
                 }
 
-                if (Program.MainForm.niTray.Icon != icon)
+                if (icon != null)
                 {
-                    Program.MainForm.niTray.Icon = icon;
+                    using (Icon oldIcon = Program.MainForm.niTray.Icon)
+                    {
+                        Program.MainForm.niTray.Icon = icon;
+                        NativeMethods.DestroyIcon(oldIcon.Handle);
+                    }
                 }
-            }*/
+            }
 
             string title;
 
@@ -394,10 +407,7 @@ namespace ShareX
                 title = Program.Title;
             }
 
-            if (Program.MainForm.Text != title)
-            {
-                Program.MainForm.Text = title;
-            }
+            Program.MainForm.Text = title;
 
             if (!IsBusy)
             {
