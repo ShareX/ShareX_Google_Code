@@ -50,7 +50,7 @@ namespace UploadersLib
         public FTPClientForm(FTPAccount account)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             lblStatus.Text = string.Empty;
             lvFTPList.SubItemEndEditing += lvFTPList_SubItemEndEditing;

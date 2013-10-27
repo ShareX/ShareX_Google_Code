@@ -341,16 +341,13 @@
     <None Include="Resources\crosshair.cur" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ShareXIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GreenshotImageEditor\GreenshotImageEditor.csproj">
       <Project>{cd642bf4-d815-4d67-a0b5-c69f0b8231af}</Project>
       <Name>GreenshotImageEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pipette.png" />
+    <None Include="Resources\ShareX_Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

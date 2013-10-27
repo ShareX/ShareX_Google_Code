@@ -47,7 +47,7 @@ namespace ShareX
         public AfterUploadForm(TaskInfo info)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
             Info = info;
             if (Info.TaskSettings.AdvancedSettings.AutoCloseAfterUploadForm) tmrClose.Start();
 

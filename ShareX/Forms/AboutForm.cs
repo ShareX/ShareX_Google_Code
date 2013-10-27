@@ -41,7 +41,7 @@ namespace ShareX
         {
             InitializeComponent();
             Text = Program.FullTitle;
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
             lblProductName.Text = Program.FullTitle;
             rtbCredits.Text += Program.AssemblyCopyright;
 

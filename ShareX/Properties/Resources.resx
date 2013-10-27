@@ -130,9 +130,6 @@
   <data name="hammer_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hammer--pencil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sharex_16px_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-3.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="camcorder__pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\camcorder--pencil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,9 +169,6 @@
   <data name="folder_open_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-open-image.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sharex_16px_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-2.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="layers_ungroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\layers-ungroup.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -195,9 +189,6 @@
   </data>
   <data name="image_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image-export.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sharex_16px_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-5.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="au" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\au.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,9 +226,6 @@
   <data name="application_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application-blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShareXIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sharexicon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="layer_shape_round" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\layer-shape-round.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -246,9 +234,6 @@
   </data>
   <data name="document_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sharex_16px_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-4.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="address_book_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\address-book-blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -264,9 +249,6 @@
   </data>
   <data name="globe_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\globe--pencil.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ShareXLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShareXLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_block" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application-block.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,9 +283,6 @@
   <data name="color" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\color.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sharex_16px_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-6.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="drive_globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\drive-globe.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -316,14 +295,8 @@
   <data name="question_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\question-button.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sharex_16px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-1.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="folder_tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-tree.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sharex_16px_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sharex-16px-0.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="globe_share" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\globe-share.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -357,5 +330,11 @@
   </data>
   <data name="pipette" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pipette.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShareX_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShareX_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShareX_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShareX_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -75,7 +75,7 @@ namespace HistoryLib
         public ImageHistoryForm(string historyPath, int viewMode, Size thumbnailSize, int maxItemCount = -1)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;

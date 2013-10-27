@@ -46,7 +46,7 @@ namespace ShareX
         public AutoCaptureForm()
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
             niTray.Icon = Resources.clock_plus.ToIcon();
 
             timer = new Timer();

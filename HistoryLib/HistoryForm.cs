@@ -46,7 +46,7 @@ namespace HistoryLib
         public HistoryForm(string historyPath, int maxItemCount = -1)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             HistoryPath = historyPath;
             MaxItemCount = maxItemCount;

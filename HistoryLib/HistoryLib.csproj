@@ -115,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="History.ico" />
-    <None Include="Resources\ShareXIcon.ico" />
+    <None Include="Resources\ShareX_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HelpersLib\HelpersLib.csproj">

@@ -69,11 +69,11 @@ namespace ShareX
         public UploadTestForm()
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             if (TestImage == null)
             {
-                TestImage = Resources.ShareXLogo;
+                TestImage = Resources.ShareX_Logo;
             }
 
             if (string.IsNullOrEmpty(TestText))

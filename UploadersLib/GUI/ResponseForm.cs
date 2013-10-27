@@ -38,7 +38,7 @@ namespace UploadersLib
         public ResponseForm(string response)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
             Response = response;
             txtSource.Text = Response;
         }

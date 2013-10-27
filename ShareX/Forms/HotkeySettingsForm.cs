@@ -33,7 +33,7 @@ namespace ShareX
         public HotkeySettingsForm()
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
 
             if (Program.HotkeyManager != null)
             {

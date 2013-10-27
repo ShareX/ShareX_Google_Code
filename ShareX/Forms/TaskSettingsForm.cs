@@ -46,7 +46,7 @@ namespace ShareX
         public TaskSettingsForm(TaskSettings hotkeySetting, bool isDefault = false)
         {
             InitializeComponent();
-            Icon = Resources.ShareXIcon;
+            Icon = Resources.ShareX_Icon;
             TaskSettings = hotkeySetting;
             IsDefault = isDefault;
 
@@ -456,7 +456,7 @@ namespace ShareX
 
         private void btnImageEffects_Click(object sender, EventArgs e)
         {
-            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(Resources.ShareXLogo, TaskSettings.ImageSettings.ImageEffects))
+            using (ImageEffectsForm imageEffectsForm = new ImageEffectsForm(Resources.ShareX_Logo, TaskSettings.ImageSettings.ImageEffects))
             {
                 if (imageEffectsForm.ShowDialog() == DialogResult.OK)
                 {
