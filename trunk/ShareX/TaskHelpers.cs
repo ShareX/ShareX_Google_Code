@@ -28,7 +28,9 @@ using ImageEffectsLib;
 using ScreenCapture;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Media;
 using System.Windows.Forms;
@@ -284,6 +286,36 @@ namespace ShareX
             }
 
             return null;
+        }
+
+        public static Icon GetProgressIcon(int percentage)
+        {
+            using (Bitmap bmp = new Bitmap(16, 16))
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                g.FillRectangle(Brushes.Black, 0, 0, 16, 16);
+
+                int width = (int)(16 * (percentage / 100f));
+                if (width > 0)
+                {
+                    using (Brush brush = new LinearGradientBrush(new Rectangle(0, 0, width, 16), Color.SteelBlue, Color.MediumBlue, LinearGradientMode.Vertical))
+                    {
+                        g.FillRectangle(brush, 0, 0, width, 16);
+                    }
+                }
+
+                using (StringFormat sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                {
+                    g.DrawString(percentage.ToString(), new XmlFont("Arial", 7, FontStyle.Bold), Brushes.White, 8, 8, sf);
+                }
+
+                g.DrawRectangle(Pens.WhiteSmoke, 0, 0, 15, 15);
+
+                return Icon.FromHandle(bmp.GetHicon());
+            }
         }
     }
 
