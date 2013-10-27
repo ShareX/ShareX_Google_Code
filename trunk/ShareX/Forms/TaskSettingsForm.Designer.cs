@@ -96,7 +96,6 @@
             this.cbShowCursor = new System.Windows.Forms.CheckBox();
             this.cbCaptureTransparent = new System.Windows.Forms.CheckBox();
             this.tpCaptureShape = new System.Windows.Forms.TabPage();
-            this.btnOpenCapturingShapesWiki = new System.Windows.Forms.Button();
             this.pgShapesCapture = new System.Windows.Forms.PropertyGrid();
             this.tpScreenRecorder = new System.Windows.Forms.TabPage();
             this.nudScreenRecorderDuration = new System.Windows.Forms.NumericUpDown();
@@ -950,7 +949,6 @@
             // 
             // tpCaptureShape
             // 
-            this.tpCaptureShape.Controls.Add(this.btnOpenCapturingShapesWiki);
             this.tpCaptureShape.Controls.Add(this.pgShapesCapture);
             this.tpCaptureShape.Location = new System.Drawing.Point(4, 22);
             this.tpCaptureShape.Name = "tpCaptureShape";
@@ -959,17 +957,6 @@
             this.tpCaptureShape.TabIndex = 1;
             this.tpCaptureShape.Text = "Shape capture";
             this.tpCaptureShape.UseVisualStyleBackColor = true;
-            // 
-            // btnOpenCapturingShapesWiki
-            // 
-            this.btnOpenCapturingShapesWiki.Location = new System.Drawing.Point(408, 264);
-            this.btnOpenCapturingShapesWiki.Name = "btnOpenCapturingShapesWiki";
-            this.btnOpenCapturingShapesWiki.Size = new System.Drawing.Size(88, 24);
-            this.btnOpenCapturingShapesWiki.TabIndex = 0;
-            this.btnOpenCapturingShapesWiki.Text = "Tips && tricks...";
-            this.btnOpenCapturingShapesWiki.UseVisualStyleBackColor = true;
-            this.btnOpenCapturingShapesWiki.Visible = false;
-            this.btnOpenCapturingShapesWiki.Click += new System.EventHandler(this.btnOpenCapturingShapesWiki_Click);
             // 
             // pgShapesCapture
             // 
@@ -1739,7 +1726,6 @@
         private System.Windows.Forms.CheckBox cbShowCursor;
         private System.Windows.Forms.CheckBox cbCaptureTransparent;
         private System.Windows.Forms.TabPage tpCaptureShape;
-        private System.Windows.Forms.Button btnOpenCapturingShapesWiki;
         private System.Windows.Forms.TabPage tpScreenRecorder;
         private System.Windows.Forms.TabPage tpTask;
         private System.Windows.Forms.TabPage tpActions;

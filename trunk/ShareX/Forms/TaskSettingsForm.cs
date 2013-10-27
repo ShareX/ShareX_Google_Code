@@ -516,11 +516,6 @@ namespace ShareX
             cbCaptureShadow.Enabled = TaskSettings.CaptureSettings.CaptureTransparent;
         }
 
-        private void btnOpenCapturingShapesWiki_Click(object sender, EventArgs e)
-        {
-            Helpers.LoadBrowserAsync(Links.URL_WIKI_CapturingShapes);
-        }
-
         #region Screen recorder
 
         private void cbScreenRecorderOutput_SelectedIndexChanged(object sender, EventArgs e)

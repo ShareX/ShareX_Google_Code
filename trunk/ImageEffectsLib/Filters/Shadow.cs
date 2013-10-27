@@ -53,14 +53,12 @@ namespace ImageEffectsLib
 
         public override Image Apply(Image img)
         {
-            if (Opacity <= 0f || Size <= 0)
+            if (Opacity <= 0f)
             {
                 return img;
             }
 
-            float darkness = Darkness + 1;
-
-            return ImageHelpers.AddShadow(img, Opacity, Size, darkness, Color, Offset);
+            return ImageHelpers.AddShadow(img, Opacity, Size, Darkness + 1, Color, Offset);
         }
     }
 }
