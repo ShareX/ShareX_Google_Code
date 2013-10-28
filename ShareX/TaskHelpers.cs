@@ -293,15 +293,15 @@ namespace ShareX
             using (Bitmap bmp = new Bitmap(16, 16))
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.SmoothingMode = SmoothingMode.HighQuality;
                 g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                g.FillRectangle(Brushes.Black, 0, 0, 16, 16);
+                g.Clear(Color.Black);
 
                 int width = (int)(16 * (percentage / 100f));
+
                 if (width > 0)
                 {
-                    using (Brush brush = new LinearGradientBrush(new Rectangle(0, 0, width, 16), Color.SteelBlue, Color.MediumBlue, LinearGradientMode.Vertical))
+                    using (Brush brush = new LinearGradientBrush(new Rectangle(0, 0, width, 16), Color.DarkBlue, Color.DodgerBlue, LinearGradientMode.Vertical))
                     {
                         g.FillRectangle(brush, 0, 0, width, 16);
                     }

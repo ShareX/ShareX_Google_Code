@@ -362,35 +362,8 @@ namespace ShareX
                 }
             }
 
-            if (Program.Settings.TrayIconProgressEnabled && Program.MainForm.niTray.Visible)
-            {
-                Icon icon = null;
-
-                if (isWorkingTasks)
-                {
-                    int progress = ((int)averageProgress).Between(0, 99);
-
-                    if (lastIconStatus != progress)
-                    {
-                        icon = TaskHelpers.GetProgressIcon(progress);
-                        lastIconStatus = progress;
-                    }
-                }
-                else if (lastIconStatus != -1)
-                {
-                    icon = Resources.ShareX_Icon;
-                    lastIconStatus = -1;
-                }
-
-                if (icon != null)
-                {
-                    using (Icon oldIcon = Program.MainForm.niTray.Icon)
-                    {
-                        Program.MainForm.niTray.Icon = icon;
-                        NativeMethods.DestroyIcon(oldIcon.Handle);
-                    }
-                }
-            }
+            int progress = isWorkingTasks ? ((int)averageProgress).Between(0, 99) : -1;
+            UpdateTrayIcon(progress);
 
             string title;
 
@@ -409,6 +382,31 @@ namespace ShareX
             if (!IsBusy)
             {
                 TaskbarManager.SetProgressState(Program.MainForm, TaskbarProgressBarStatus.NoProgress);
+            }
+        }
+
+        public static void UpdateTrayIcon(int progress = -1)
+        {
+            if (Program.Settings.TrayIconProgressEnabled && Program.MainForm.niTray.Visible && lastIconStatus != progress)
+            {
+                Icon icon;
+
+                if (progress >= 0)
+                {
+                    icon = TaskHelpers.GetProgressIcon(progress);
+                }
+                else
+                {
+                    icon = Resources.ShareX_Icon;
+                }
+
+                using (Icon oldIcon = Program.MainForm.niTray.Icon)
+                {
+                    Program.MainForm.niTray.Icon = icon;
+                    oldIcon.DisposeHandle();
+                }
+
+                lastIconStatus = progress;
             }
         }
     }

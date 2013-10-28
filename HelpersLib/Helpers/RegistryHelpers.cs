@@ -46,7 +46,7 @@ namespace HelpersLib
         private static readonly string ShellExtMenuFolders = @"Software\Classes\Folder\shell\" + ApplicationName;
         private static readonly string ShellExtMenuFoldersCmd = ShellExtMenuFolders + @"\command";
 
-        private static readonly string ShellExtDesc = "Upload using " + ApplicationName;
+        private static readonly string ShellExtDesc = "Upload with " + ApplicationName;
         private static readonly string ShellExtIcon = ApplicationPath + ",0";
         private static readonly string ShellExtPath = ApplicationPath + " \"%1\"";
 
