@@ -9,13 +9,12 @@
     <projectUrl>http://omermor.github.com/AsyncBridge/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Adds the new C#5 async features for .NET 3.5 projects</description>
+    <releaseNotes />
     <copyright>Copyright 2012</copyright>
+    <language />
     <tags>async bridge C# C#5 .NET40</tags>
     <dependencies>
       <dependency id="TaskParallelLibrary" version="1.0.2856.0" />
     </dependencies>
-    <references>
-      <reference file="AsyncBridge.Net35.dll" />
-    </references>
   </metadata>
 </package>
