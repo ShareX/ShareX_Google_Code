@@ -18,8 +18,5 @@
     <summary>A complete and official Microsoft backport of the Task Parallel Library (TPL) for .NET 3.5.</summary>
     <releaseNotes>This backport was shipped with the Reactive Extensions (Rx) library up until v1.0.2856.0. It can be downloaded from http://www.microsoft.com/download/en/details.aspx?id=24940 .</releaseNotes>
     <tags>tpl plinq pfx task parallel extensions .net35 backport</tags>
-    <references>
-      <reference file="System.Threading.dll" />
-    </references>
   </metadata>
 </package>
