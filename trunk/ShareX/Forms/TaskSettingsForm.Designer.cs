@@ -1587,6 +1587,7 @@
             this.pgTaskSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pgTaskSettings.Location = new System.Drawing.Point(3, 30);
             this.pgTaskSettings.Name = "pgTaskSettings";
+            this.pgTaskSettings.PropertySort = System.Windows.Forms.PropertySort.Categorized;
             this.pgTaskSettings.Size = new System.Drawing.Size(514, 327);
             this.pgTaskSettings.TabIndex = 1;
             this.pgTaskSettings.ToolbarVisible = false;

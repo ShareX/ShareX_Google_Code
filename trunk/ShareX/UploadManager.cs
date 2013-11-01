@@ -136,8 +136,10 @@ namespace ShareX
             {
                 Image img = Clipboard.GetImage();
 
-                taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Remove(AfterCaptureTasks.CopyImageToClipboard);
-                taskSettings.AfterCaptureJob = taskSettings.AfterCaptureJob.Add(AfterCaptureTasks.UploadImageToHost);
+                if (!taskSettings.AdvancedSettings.ProcessImagesDuringClipboardUpload)
+                {
+                    taskSettings.AfterCaptureJob = AfterCaptureTasks.UploadImageToHost;
+                }
 
                 RunImageTask(img, taskSettings);
             }

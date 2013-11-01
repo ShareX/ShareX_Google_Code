@@ -41,11 +41,6 @@ namespace Greenshot.IniFile
         private static object iniLock = new object();
 
         /// <summary>
-        /// This is used to monitor the greenshot.ini changes
-        /// </summary>
-        private static FileSystemWatcher watcher;
-
-        /// <summary>
         /// As the ini implementation is kept someone generic, for reusing, this holds the name of the application
         /// </summary>
         private static string applicationName = null;
@@ -71,16 +66,6 @@ namespace Greenshot.IniFile
         /// A Dictionary with the fixed-properties for a section stored by section name
         /// </summary>
         private static Dictionary<string, Dictionary<string, string>> fixedProperties = null;
-
-        /// <summary>
-        /// The IniChanged event, which can be registed
-        /// </summary>
-        public static event FileSystemEventHandler IniChanged;
-
-        /// <summary>
-        /// Stores if we checked for portable
-        /// </summary>
-        private static bool portableCheckMade = false;
 
         /// <summary>
         /// Is the configuration portable (meaning we don't store it in the AppData directory)
