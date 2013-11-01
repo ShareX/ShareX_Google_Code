@@ -91,7 +91,8 @@ namespace ShareX
 
             for (int i = 0; i < MaxBufferSizePower; i++)
             {
-                cbBufferSize.Items.Add(Math.Pow(2, i).ToString("N0") + " KiB");
+                string size = ((long)(Math.Pow(2, i) * 1024)).ToSizeString(Program.Settings.BinaryUnits, 0);
+                cbBufferSize.Items.Add(size);
             }
 
             cbBufferSize.SelectedIndex = Program.Settings.BufferSizePower.Between(0, MaxBufferSizePower);

@@ -48,7 +48,6 @@ namespace GreenshotPlugin.Core
         private static List<string> unsupportedLanguageGroups = new List<string>();
         private static IDictionary<string, string> resources = new Dictionary<string, string>();
         private static string currentLanguage = null;
-        private static CoreConfiguration coreConfig = null;
 
         public static event LanguageChangedHandler LanguageChanged;
 

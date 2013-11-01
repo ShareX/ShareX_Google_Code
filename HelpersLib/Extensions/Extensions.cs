@@ -339,14 +339,27 @@ namespace HelpersLib
             }
         }
 
-        public static string ToSizeString(this long size, bool binary = false)
+        private static readonly string[] Suffix_Decimal = new[] { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+        private static readonly string[] Suffix_Binary = new[] { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
+
+        public static string ToSizeString(this long size, bool binary = false, int decimalPlaces = 2)
         {
-            string[] suf_decimal = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
-            string[] suf_binary = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
             if (size < 1024) return Math.Max(size, 0) + " B";
             int place = (int)Math.Floor(Math.Log(size, 1024));
             double num = size / Math.Pow(1024, place);
-            return num.ToString("0.00") + " " + (binary ? suf_binary[place] : suf_decimal[place]);
+            return string.Format("{0} {1}", num.ToDecimalString(decimalPlaces.Between(0, 3)), binary ? Suffix_Binary[place] : Suffix_Decimal[place]);
+        }
+
+        public static string ToDecimalString(this double number, int decimalPlaces)
+        {
+            string format = "0";
+
+            if (decimalPlaces > 0)
+            {
+                format += "." + new string('0', decimalPlaces);
+            }
+
+            return number.ToString(format);
         }
 
         public static void ApplyDefaultPropertyValues(this object self)
