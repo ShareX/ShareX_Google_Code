@@ -465,75 +465,84 @@ namespace ShareX
 
         private void DoAfterUploadJobs()
         {
-            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
+            try
             {
-                UploadResult result = ShortenURL(Info.Result.URL);
-
-                if (result != null)
+                if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.UseURLShortener) || Info.Job == TaskJob.ShortenURL)
                 {
-                    Info.Result.ShortenedURL = result.ShortenedURL;
-                }
-            }
+                    UploadResult result = ShortenURL(Info.Result.URL);
 
-            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
-            {
-                OAuthInfo twitterOAuth = Program.UploadersConfig.TwitterOAuthInfoList.ReturnIfValidIndex(Program.UploadersConfig.TwitterSelectedAccount);
-
-                if (twitterOAuth != null)
-                {
-                    using (TwitterMsg twitter = new TwitterMsg(twitterOAuth))
+                    if (result != null)
                     {
-                        twitter.Message = Info.Result.ToString();
-                        twitter.Config = Program.UploadersConfig.TwitterClientConfig;
-                        twitter.ShowDialog();
+                        Info.Result.ShortenedURL = result.ShortenedURL;
                     }
                 }
-            }
 
-            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.SendURLWithEmail))
-            {
-                using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
-                    Program.UploadersConfig.EmailDefaultSubject, Info.Result.ToString()))
+                if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.ShareURLToSocialNetworkingService))
                 {
-                    emailForm.Icon = Resources.ShareX_Icon;
+                    OAuthInfo twitterOAuth = Program.UploadersConfig.TwitterOAuthInfoList.ReturnIfValidIndex(Program.UploadersConfig.TwitterSelectedAccount);
 
-                    if (emailForm.ShowDialog() == DialogResult.OK)
+                    if (twitterOAuth != null)
                     {
-                        if (Program.UploadersConfig.EmailRememberLastTo)
+                        using (TwitterMsg twitter = new TwitterMsg(twitterOAuth))
                         {
-                            Program.UploadersConfig.EmailLastTo = emailForm.ToEmail;
+                            twitter.Message = Info.Result.ToString();
+                            twitter.Config = Program.UploadersConfig.TwitterClientConfig;
+                            twitter.ShowDialog();
                         }
+                    }
+                }
 
-                        Email email = new Email
+                if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.SendURLWithEmail))
+                {
+                    using (EmailForm emailForm = new EmailForm(Program.UploadersConfig.EmailRememberLastTo ? Program.UploadersConfig.EmailLastTo : string.Empty,
+                        Program.UploadersConfig.EmailDefaultSubject, Info.Result.ToString()))
+                    {
+                        emailForm.Icon = Resources.ShareX_Icon;
+
+                        if (emailForm.ShowDialog() == DialogResult.OK)
                         {
-                            SmtpServer = Program.UploadersConfig.EmailSmtpServer,
-                            SmtpPort = Program.UploadersConfig.EmailSmtpPort,
-                            FromEmail = Program.UploadersConfig.EmailFrom,
-                            Password = Program.UploadersConfig.EmailPassword
-                        };
+                            if (Program.UploadersConfig.EmailRememberLastTo)
+                            {
+                                Program.UploadersConfig.EmailLastTo = emailForm.ToEmail;
+                            }
 
-                        email.Send(emailForm.ToEmail, emailForm.Subject, emailForm.Body);
+                            Email email = new Email
+                            {
+                                SmtpServer = Program.UploadersConfig.EmailSmtpServer,
+                                SmtpPort = Program.UploadersConfig.EmailSmtpPort,
+                                FromEmail = Program.UploadersConfig.EmailFrom,
+                                Password = Program.UploadersConfig.EmailPassword
+                            };
+
+                            email.Send(emailForm.ToEmail, emailForm.Subject, emailForm.Body);
+                        }
+                    }
+                }
+
+                if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+                {
+                    string txt;
+
+                    if (!string.IsNullOrEmpty(Info.TaskSettings.AdvancedSettings.ClipboardContentFormat))
+                    {
+                        txt = new UploadInfoParser().Parse(Info, Info.TaskSettings.AdvancedSettings.ClipboardContentFormat);
+                    }
+                    else
+                    {
+                        txt = Info.Result.ToString();
+                    }
+
+                    if (!string.IsNullOrEmpty(txt))
+                    {
+                        ClipboardHelpers.CopyText(txt);
                     }
                 }
             }
-
-            if (Info.TaskSettings.AfterUploadJob.HasFlag(AfterUploadTasks.CopyURLToClipboard))
+            catch (Exception e)
             {
-                string txt;
-
-                if (!string.IsNullOrEmpty(Info.TaskSettings.AdvancedSettings.ClipboardContentFormat))
-                {
-                    txt = new UploadInfoParser().Parse(Info, Info.TaskSettings.AdvancedSettings.ClipboardContentFormat);
-                }
-                else
-                {
-                    txt = Info.Result.ToString();
-                }
-
-                if (!string.IsNullOrEmpty(txt))
-                {
-                    ClipboardHelpers.CopyText(txt);
-                }
+                DebugHelper.WriteException(e);
+                if (Info.Result == null) Info.Result = new UploadResult();
+                Info.Result.Errors.Add(e.ToString());
             }
         }
 
@@ -835,9 +844,9 @@ namespace ShareX
                 case UrlShortenerType.Jmp:
                     urlShortener = new JmpURLShortener(ApiKeys.BitlyLogin, ApiKeys.BitlyKey);
                     break;
-                    /*case UrlShortenerType.THREELY:
-                    urlShortener = new ThreelyURLShortener(Program.ThreelyKey);
-                    break;*/
+                /*case UrlShortenerType.THREELY:
+                urlShortener = new ThreelyURLShortener(Program.ThreelyKey);
+                break;*/
                 case UrlShortenerType.TINYURL:
                     urlShortener = new TinyURLShortener();
                     break;
