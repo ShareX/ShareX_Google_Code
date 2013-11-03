@@ -1,5 +1,7 @@
-﻿ShareX 8.3 r700 - 2013-10-15
+﻿ShareX 8.3 r747 - 2013-11-02
 
+Tray icon can now report progress percentage
+Color picker improvements
 Added new After Capture task "Add image effects" in favour of resize, border and shadow
 Added hotkey support for Tools (screen color picker, hash check and index folder) and to stop uploading
 Added mega.co.nz file uploader support
