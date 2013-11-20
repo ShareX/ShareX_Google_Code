@@ -2,9 +2,9 @@
 <Update>
   <ShareX>
     <Stable>
-      <Version>8.3.0.747</Version>
-      <URL>https://sharex.googlecode.com/files/ShareX-8.3.0.747-setup.exe</URL>
-      <Date>2013-11-02</Date>
+      <Version>8.4.0</Version>
+      <URL>https://github.com/ShareX/ShareX/releases/download/v8.4.0/ShareX-8.4.0-setup.exe</URL>
+      <Date>2013-11-20</Date>
       <Summary></Summary>
     </Stable>
   </ShareX>
