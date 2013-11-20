@@ -1,2 +1,2 @@
 #labels Phase-Support
-=We have a new website. Please visit [http://getsharex.com getsharex.com] for future updates. Please also note that we have moved to GitHub since Google Code will be disabling Downloads section in January 2014.= 
+=We have a new website. Please visit [http://getsharex.com getsharex.com] for future updates. We have also moved to [https://github.com/ShareX/ShareX GitHub] since Google Code will be [http://google-opensource.blogspot.com/2013/05/a-change-to-google-code-download-service.html disabling downloads section] in January 2014.=
